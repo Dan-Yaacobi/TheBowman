@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8cod48iqt17m"]
+
+[ext_resource type="Script" path="res://Weapons/0_BasicBow/BasicArrow/basic_arrow.gd" id="1_c8afm"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_ifcpi"]
+[ext_resource type="Texture2D" uid="uid://13hl8wfok5ff" path="res://Weapons/0_BasicBow/BasicArrow/basic_arrow.png" id="2_qxbe8"]
+
+[sub_resource type="Resource" id="Resource_mjy66"]
+script = ExtResource("2_ifcpi")
+speed = 250
+damage = 1
+pushback_power = 10
+scale = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
+size = Vector2(4, 7)
+
+[sub_resource type="Curve" id="Curve_8js4e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BasicArrow" type="Area2D"]
+rotation = 3.14159
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_c8afm")
+data = SubResource("Resource_mjy66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -0.5)
+shape = SubResource("RectangleShape2D_m802n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qxbe8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(-8, 6.99382e-07)
+amount = 75
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_8js4e")
+color = Color(0.643137, 0.152941, 0, 0.45098)

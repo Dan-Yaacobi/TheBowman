@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bveontxtvavqy"]
+
+[ext_resource type="Script" path="res://Weapons/2_RedBow/RedArrow/red_arrow.gd" id="1_fivdu"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_4xnbl"]
+[ext_resource type="Texture2D" uid="uid://csyni8vff87o7" path="res://Weapons/2_RedBow/RedArrow/red_arrow.png" id="2_hvotj"]
+
+[sub_resource type="Resource" id="Resource_yrxfd"]
+script = ExtResource("2_4xnbl")
+speed = 330
+damage = 3
+pushback_power = 15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvgyh"]
+size = Vector2(7, 7)
+
+[sub_resource type="Curve" id="Curve_22a7h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="RedArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_fivdu")
+data = SubResource("Resource_yrxfd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hvotj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.5, -0.5)
+shape = SubResource("RectangleShape2D_nvgyh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(9, 0)
+amount = 75
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_22a7h")
+color = Color(0.878431, 0.133333, 0.133333, 1)

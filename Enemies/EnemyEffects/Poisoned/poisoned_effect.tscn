@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnqx58hrgjg7y"]
+
+[sub_resource type="Curve" id="Curve_yfyxj"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="PoisonedEffect" type="CPUParticles2D"]
+z_index = 1
+position = Vector2(0, -2)
+emitting = false
+amount = 50
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, -5)
+scale_amount_curve = SubResource("Curve_yfyxj")
+color = Color(0.421875, 0.75, 0.1875, 1)

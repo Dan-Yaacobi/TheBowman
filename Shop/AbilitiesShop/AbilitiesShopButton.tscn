@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfgep2k6nhruw"]
+
+[ext_resource type="Script" path="res://Shop/AbilitiesShop/abilities_shop_button.gd" id="1_vmbe3"]
+[ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/buy_ability_upgrade.gd" id="2_phf2u"]
+[ext_resource type="Script" path="res://Shop/AbilitiesShop/abilities_shop_button_data.gd" id="2_x6x54"]
+[ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="3_l4umy"]
+
+[sub_resource type="Resource" id="Resource_tbb41"]
+script = ExtResource("2_phf2u")
+
+[sub_resource type="Resource" id="Resource_mo64q"]
+script = ExtResource("2_x6x54")
+buy_action = SubResource("Resource_tbb41")
+ability = ""
+price = 0
+label_color = Color(0, 0, 0, 1)
+
+[node name="AbilitiesShopButton" type="Node2D"]
+position = Vector2(22, 6)
+script = ExtResource("1_vmbe3")
+data = SubResource("Resource_mo64q")
+
+[node name="PriceLabel" type="Label" parent="."]
+offset_left = -5.0
+offset_top = 47.0
+offset_right = 1408.0
+offset_bottom = 389.0
+scale = Vector2(0.03, 0.03)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.75, 0.6, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5, 0.4, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Cost: 0"
+
+[node name="CurrentStat" type="Label" parent="."]
+offset_left = -16.0
+offset_top = 11.0
+offset_right = 1393.0
+offset_bottom = 353.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_colors/font_outline_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Current:"
+
+[node name="BuyingStat" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -6.0
+offset_right = 1416.0
+offset_bottom = 336.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.734152, 0, 0.160317, 1)
+theme_override_colors/font_shadow_color = Color(0.561606, 0, 0.113774, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Upgrade HP"
+
+[node name="ButtonShootClick" parent="." instance=ExtResource("3_l4umy")]
+offset_left = -15.0
+offset_top = 29.0
+offset_right = 1026.0
+offset_bottom = 379.0
+text = "Upgrade"

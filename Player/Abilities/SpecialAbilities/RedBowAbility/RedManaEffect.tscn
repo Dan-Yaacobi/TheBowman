@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dusndd3kytyd0"]
+
+[sub_resource type="Curve" id="Curve_4oeob"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="RedManaEffect" type="CPUParticles2D"]
+z_index = 1
+position = Vector2(0, -8)
+amount = 100
+lifetime = 3.0
+speed_scale = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 2)
+gravity = Vector2(0, -10)
+scale_amount_curve = SubResource("Curve_4oeob")
+color = Color(1, 0, 0, 1)

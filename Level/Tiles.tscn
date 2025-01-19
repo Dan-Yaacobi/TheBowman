@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0aswr8q0lpei"]
+
+[ext_resource type="Texture2D" uid="uid://q1gds10qi7jt" path="res://Level/Tiles/square3.png" id="1_tvyi6"]
+[ext_resource type="Texture2D" uid="uid://5asfwp6u80lb" path="res://Level/Tiles/lightblueBlock.png" id="2_0uda3"]
+[ext_resource type="Script" path="res://Level/tiles_control.gd" id="3_lp3fy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ruaxp"]
+texture = ExtResource("1_tvyi6")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u2hu4"]
+texture = ExtResource("2_0uda3")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xixx6"]
+physics_layer_0/collision_layer = 16
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Ground"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_ruaxp")
+sources/1 = SubResource("TileSetAtlasSource_u2hu4")
+
+[node name="Tiles" type="TileMapLayer"]
+z_index = -2
+tile_set = SubResource("TileSet_xixx6")
+script = ExtResource("3_lp3fy")

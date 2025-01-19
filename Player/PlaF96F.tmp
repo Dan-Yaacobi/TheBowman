@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://cesvb1a1eu8yq"]
+
+[ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
+[ext_resource type="PackedScene" uid="uid://bug4e8v5lnb0m" path="res://Player/Hand/Hand.tscn" id="2_alpnv"]
+[ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
+[ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
+[ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
+[ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
+size = Vector2(10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
+size = Vector2(3, 2)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4bii6")
+gravity = 75
+
+[node name="Body" parent="." instance=ExtResource("1_1adnh")]
+
+[node name="Hand" parent="." instance=ExtResource("2_alpnv")]
+position = Vector2(0, 1)
+rotation = -0.00872665
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
+
+[node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
+
+[node name="Idle" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("5_kcllr")
+
+[node name="Walking" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("6_vo15m")
+move_speed = 75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_0mb5q")
+
+[node name="JumpReset" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
+position = Vector2(0.5, 8)
+shape = SubResource("RectangleShape2D_7fpcy")
+debug_color = Color(0, 0.648432, 0.180981, 0.42)
+
+[node name="Jump" parent="." instance=ExtResource("7_kkejo")]
+jump_power = 50
+max_jumps = 3
+
+[node name="Shoot" parent="." instance=ExtResource("8_gtm6s")]

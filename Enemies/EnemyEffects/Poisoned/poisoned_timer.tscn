@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bgljgw8yswhld"]
+
+[node name="PoisonedTimer" type="Timer"]
+wait_time = 0.5

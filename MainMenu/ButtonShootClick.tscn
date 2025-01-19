@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjekrlb1r8icx"]
+
+[ext_resource type="Script" path="res://MainMenu/button.gd" id="1_8rjli"]
+[ext_resource type="Script" path="res://MainMenu/ButtonData/button_data.gd" id="2_86cyb"]
+
+[sub_resource type="Resource" id="Resource_s8r5q"]
+script = ExtResource("2_86cyb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77nl6"]
+resource_local_to_scene = true
+size = Vector2(47, 43)
+
+[node name="ButtonShootClick" type="Button"]
+offset_right = 47.0
+offset_bottom = 43.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 250
+script = ExtResource("1_8rjli")
+button_data = SubResource("Resource_s8r5q")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(23.5, 21.5)
+shape = SubResource("RectangleShape2D_77nl6")

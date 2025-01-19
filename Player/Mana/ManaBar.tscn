@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://caekf50aq824k"]
+
+[ext_resource type="Script" path="res://Player/Mana/mana_bar.gd" id="1_npwg5"]
+
+[node name="ManaBar" type="ProgressBar"]
+offset_right = 234.0
+offset_bottom = 13.0
+value = 50.0
+show_percentage = false
+script = ExtResource("1_npwg5")
+mana_rate = 1.0
+shoot_cost = 15
+bar_color = Color(0, 0, 1, 1)
+
+[node name="Regenerate" type="Timer" parent="."]
+wait_time = 0.05

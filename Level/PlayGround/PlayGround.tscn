@@ -1,0 +1,156 @@
+[gd_scene load_steps=27 format=3 uid="uid://cdu6hjoweee6s"]
+
+[ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
+[ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
+[ext_resource type="Script" path="res://00 Globals/enemies.gd" id="2_lmkum"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_spawn_data.gd" id="2_r03de"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_sm034"]
+[ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/DemoEnemy/DemoEnemyBoss.tscn" id="3_c8kbf"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/DemoEnemy/DemoEnemy2.tscn" id="3_qp6b5"]
+[ext_resource type="PackedScene" uid="uid://bwkebvyfvvrv8" path="res://Enemies/DemoEnemy/DemoEnemyGold.tscn" id="4_kxj81"]
+[ext_resource type="PackedScene" uid="uid://dqnds5n75tnpw" path="res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn" id="4_udil8"]
+[ext_resource type="PackedScene" uid="uid://c35yjtl5a8xob" path="res://Enemies/DemoEnemy/DemoEnemy3.tscn" id="5_xd300"]
+[ext_resource type="PackedScene" uid="uid://chrv1m4hnlhef" path="res://Enemies/DemoEnemy/DemoEnemy4.tscn" id="6_nhbj7"]
+[ext_resource type="Script" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
+[ext_resource type="PackedScene" uid="uid://dmt8clw634d1e" path="res://Enemies/DemoEnemy/DemoEnemy5.tscn" id="8_70wg7"]
+[ext_resource type="Script" path="res://MainGame/current_money.gd" id="10_qool0"]
+[ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
+
+[sub_resource type="Resource" id="Resource_j0euw"]
+script = ExtResource("2_r03de")
+enemy_name = "RedBoss"
+enemy = ExtResource("3_c8kbf")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_rmdxp"]
+script = ExtResource("2_r03de")
+enemy_name = "BlueBoss"
+enemy = ExtResource("4_udil8")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_t37vg"]
+script = ExtResource("2_r03de")
+enemy_name = "Red"
+enemy = ExtResource("2_a863k")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_iqbqy"]
+script = ExtResource("2_r03de")
+enemy_name = "Blue"
+enemy = ExtResource("3_qp6b5")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_tq2gr"]
+script = ExtResource("2_r03de")
+enemy_name = "Green"
+enemy = ExtResource("5_xd300")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_ti0k8"]
+script = ExtResource("2_r03de")
+enemy_name = "Purple"
+enemy = ExtResource("6_nhbj7")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_2sy38"]
+script = ExtResource("2_r03de")
+enemy_name = "Orange"
+enemy = ExtResource("8_70wg7")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_17qqw"]
+script = ExtResource("2_r03de")
+enemy_name = "Gold"
+enemy = ExtResource("4_kxj81")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_s07r2"]
+script = ExtResource("2_lmkum")
+enemies_array = Array[ExtResource("2_r03de")]([SubResource("Resource_t37vg"), SubResource("Resource_iqbqy"), SubResource("Resource_tq2gr"), SubResource("Resource_ti0k8"), SubResource("Resource_2sy38")])
+boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp")])
+rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
+spawn_time = 3.0
+
+[sub_resource type="Resource" id="Resource_bnwpa"]
+script = ExtResource("7_wvqgp")
+current_wave = 5
+enemies_spawn = Array[int]([100, 0, 0])
+total_enemies = 10
+spawn_time = 3.0
+double_spawn_chance = 10.0
+boss_wave = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
+size = Vector2(10949, 278)
+
+[node name="PlayGround" type="Node2D"]
+script = ExtResource("1_fq8oi")
+enemies = SubResource("Resource_s07r2")
+wave_data = SubResource("Resource_bnwpa")
+
+[node name="Tiles" parent="." instance=ExtResource("2_sm034")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="SummonTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+offset_left = -26.0
+offset_top = 14.0
+offset_right = 1521.0
+offset_bottom = 287.0
+scale = Vector2(0.05, 0.05)
+
+[node name="Label" type="Label" parent="HFlowContainer"]
+z_index = -1
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 200
+text = "Current Wave: 1"
+
+[node name="FallingDeath" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+position = Vector2(0, 268)
+shape = SubResource("RectangleShape2D_lvsqu")
+debug_color = Color(1, 0, 0.2, 0.419608)
+
+[node name="CurrentMoney" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -63.0
+offset_right = 1125.0
+offset_bottom = 142.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.76, 0.608, 0, 1)
+theme_override_colors/font_outline_color = Color(0.54, 0.432, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 150
+text = "Money:"
+script = ExtResource("10_qool0")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")
+
+[node name="Background2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+position = Vector2(307, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")
+
+[node name="Background3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+position = Vector2(-307, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")

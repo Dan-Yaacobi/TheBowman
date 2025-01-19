@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://smcagm1ag48m"]
+
+[ext_resource type="Script" path="res://Weapons/1_BlueBow/BlueArrow/blue_arrow.gd" id="1_ywm3k"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_servu"]
+[ext_resource type="Texture2D" uid="uid://dm0vsd2r42wvw" path="res://Weapons/1_BlueBow/BlueArrow/blue_arrow2.png" id="3_shgpu"]
+
+[sub_resource type="Resource" id="Resource_cmefu"]
+script = ExtResource("2_servu")
+speed = 300
+damage = 2
+pushback_power = 12
+scale = 0.0
+
+[sub_resource type="Curve" id="Curve_17625"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmc22"]
+size = Vector2(5, 7)
+
+[node name="BlueArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_ywm3k")
+data = SubResource("Resource_cmefu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_shgpu")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(9, 0)
+amount = 75
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_17625")
+color = Color(0.356863, 0.431373, 0.882353, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.5, -0.5)
+shape = SubResource("RectangleShape2D_lmc22")

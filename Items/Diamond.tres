@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://d2y7btr0r5s71"]
+
+[ext_resource type="Script" path="res://Items/item_data.gd" id="1_1b2ih"]
+[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="1_m8a1o"]
+[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="1_tbwsr"]
+[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="2_4wljt"]
+[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="3_tnx1c"]
+
+[sub_resource type="Resource" id="Resource_tsgmg"]
+script = ExtResource("2_4wljt")
+sparkle_color = "6ec7db"
+sparkle_scene = ExtResource("3_tnx1c")
+
+[resource]
+script = ExtResource("1_1b2ih")
+image = ExtResource("1_m8a1o")
+image_size = 0.3
+value = 5
+effects = Array[ExtResource("1_tbwsr")]([SubResource("Resource_tsgmg")])

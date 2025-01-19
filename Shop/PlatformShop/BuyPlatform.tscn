@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0k67q0yyup4t"]
+
+[ext_resource type="Script" path="res://Shop/PlatformShop/buy_platform.gd" id="1_or1dh"]
+[ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="1_sltrq"]
+
+[node name="BuyPlatform" type="Node2D"]
+position = Vector2(24, 4)
+script = ExtResource("1_or1dh")
+
+[node name="ButtonShootClick" parent="." instance=ExtResource("1_sltrq")]
+offset_left = 1.0
+offset_top = 14.0
+offset_right = 467.0
+offset_bottom = 364.0
+theme_override_constants/outline_size = 70
+text = "Buy"
+
+[node name="Platform" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 16.0
+offset_bottom = 19.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Left Platform"
+
+[node name="Price" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 33.0
+offset_right = 671.0
+offset_bottom = 375.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.75, 0.6, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5, 0.4, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Price:"

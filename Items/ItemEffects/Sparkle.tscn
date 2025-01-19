@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhog4fnjuftnx"]
+
+[sub_resource type="Curve" id="Curve_v7je0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jmip5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Sparkle" type="CPUParticles2D"]
+z_index = -1
+amount = 25
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_v7je0")
+color = Color(1, 0.896, 0.48, 1)
+color_ramp = SubResource("Gradient_jmip5")

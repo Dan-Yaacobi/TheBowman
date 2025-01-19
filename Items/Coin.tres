@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b1ax10wl1o1p0"]
+
+[ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="1_eoh78"]
+[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="1_ypqd0"]
+[ext_resource type="Script" path="res://Items/item_data.gd" id="1_yq7io"]
+[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="2_if4nh"]
+[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="3_jlksa"]
+
+[sub_resource type="Resource" id="Resource_nx0cb"]
+script = ExtResource("2_if4nh")
+sparkle_color = "ffcc00"
+sparkle_scene = ExtResource("3_jlksa")
+
+[resource]
+script = ExtResource("1_yq7io")
+image = ExtResource("1_eoh78")
+image_size = 0.3
+value = 1
+effects = Array[ExtResource("1_ypqd0")]([SubResource("Resource_nx0cb")])

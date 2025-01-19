@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://clubhhuu1gip3"]
+
+[ext_resource type="Script" path="res://Shop/PlatformShop/platform_shop.gd" id="1_e8pwv"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_oixod"]
+[ext_resource type="PackedScene" uid="uid://d0k67q0yyup4t" path="res://Shop/PlatformShop/BuyPlatform.tscn" id="3_nrl40"]
+[ext_resource type="Script" path="res://Shop/PlatformShop/buy_platform_action.gd" id="4_vs1kd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hl5w"]
+size = Vector2(2545, 12)
+
+[sub_resource type="Resource" id="Resource_dianm"]
+script = ExtResource("4_vs1kd")
+
+[sub_resource type="Resource" id="Resource_oyplm"]
+script = ExtResource("4_vs1kd")
+
+[node name="PlatformShop" type="Node2D"]
+script = ExtResource("1_e8pwv")
+
+[node name="Tiles" parent="." instance=ExtResource("2_oixod")]
+
+[node name="CurrentMoney" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -71.0
+offset_right = 1081.0
+offset_bottom = 271.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.75, 0.6, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5, 0.4, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Money: 0"
+
+[node name="Fall" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fall"]
+position = Vector2(-0.5, 158)
+shape = SubResource("RectangleShape2D_0hl5w")
+debug_color = Color(0.9612, 0.176432, 0.233953, 0.42)
+
+[node name="BuyLeftPlatform" parent="." instance=ExtResource("3_nrl40")]
+position = Vector2(-85, -50)
+button_action = SubResource("Resource_dianm")
+side = "Left"
+price = 1
+
+[node name="BuyRightPlatform" parent="." instance=ExtResource("3_nrl40")]
+position = Vector2(50, -50)
+button_action = SubResource("Resource_oyplm")
+side = "Right"

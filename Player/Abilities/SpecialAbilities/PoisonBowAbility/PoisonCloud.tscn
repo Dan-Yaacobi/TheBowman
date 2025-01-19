@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://b15cqm8hlwgog"]
+
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/poison_cloud.gd" id="1_ygj8s"]
+
+[sub_resource type="Curve" id="Curve_yr32b"]
+max_value = 50.0
+_data = [Vector2(0, 35.7143), 0.0, 0.0, 0, 0, Vector2(1, 50), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_38kyw"]
+max_value = 50.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 50), 43.7637, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_sxk83"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.146893, 1.81319), 0.0, 0.0, 0, 0, Vector2(0.271186, 6.48352), 0.0, 0.0, 0, 0, Vector2(0.497175, 2.1978), 0.0, 0.0, 0, 0, Vector2(0.655367, 7.69231), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Gradient" id="Gradient_67lwf"]
+offsets = PackedFloat32Array(0.00671141, 1)
+colors = PackedColorArray(0.2475, 0.44, 0.11, 0.654902, 0.5874, 0.88, 0.3784, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkjx2"]
+radius = 45.0
+
+[node name="PoisonCloud" type="CPUParticles2D"]
+position = Vector2(57, 33)
+emitting = false
+amount = 200
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, 0)
+orbit_velocity_max = 0.05
+linear_accel_curve = SubResource("Curve_yr32b")
+radial_accel_curve = SubResource("Curve_38kyw")
+tangential_accel_min = 5.0
+tangential_accel_max = 10.0
+scale_amount_curve = SubResource("Curve_sxk83")
+color_ramp = SubResource("Gradient_67lwf")
+script = ExtResource("1_ygj8s")
+poison_dmg = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kkjx2")

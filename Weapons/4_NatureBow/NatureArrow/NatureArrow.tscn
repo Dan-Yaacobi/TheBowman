@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddcxl8d6d0fhx"]
+
+[ext_resource type="Script" path="res://Weapons/4_NatureBow/NatureArrow/nature_arrow.gd" id="1_xffs3"]
+[ext_resource type="Texture2D" uid="uid://llbljwk1adbb" path="res://Weapons/4_NatureBow/NatureArrow/Poison_arrow.png" id="2_3gjiq"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_a5r3o"]
+
+[sub_resource type="Resource" id="Resource_k1eep"]
+script = ExtResource("2_a5r3o")
+speed = 450
+damage = 7
+pushback_power = 25
+scale = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgar8"]
+size = Vector2(8, 3)
+
+[sub_resource type="Curve" id="Curve_homi5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="NatureArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_xffs3")
+data = SubResource("Resource_k1eep")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3gjiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_kgar8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(7, -1)
+amount = 120
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_homi5")
+color = Color(0.415686, 0.745098, 0.188235, 1)

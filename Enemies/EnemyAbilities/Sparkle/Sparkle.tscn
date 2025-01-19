@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://com6hf5n5kdon"]
+
+[sub_resource type="Gradient" id="Gradient_82n74"]
+offsets = PackedFloat32Array(0.00413223, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="Sparkle" type="CPUParticles2D"]
+z_index = -1
+amount = 75
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 0)
+tangential_accel_min = -5.0
+tangential_accel_max = 5.0
+color = Color(1, 0.8, 0, 1)
+color_ramp = SubResource("Gradient_82n74")

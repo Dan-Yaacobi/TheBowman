@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1fm0qxy7apsj"]
+
+[ext_resource type="Script" path="res://Level/torrent.gd" id="1_1px5y"]
+[ext_resource type="Texture2D" uid="uid://dcjp2ecr2yn2x" path="res://Level/Sprites/torrent.png" id="2_yahof"]
+
+[node name="Torrent" type="Node2D"]
+script = ExtResource("1_1px5y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yahof")

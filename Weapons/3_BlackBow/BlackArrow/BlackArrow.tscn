@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://d15f8jk6g0f6x"]
+
+[ext_resource type="Script" path="res://Weapons/3_BlackBow/BlackArrow/black_arrow.gd" id="1_3s3np"]
+[ext_resource type="Texture2D" uid="uid://1b3brkoeut61" path="res://Weapons/3_BlackBow/BlackArrow/black_arrow.png" id="2_4xll8"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_u8lgh"]
+
+[sub_resource type="Resource" id="Resource_3jej6"]
+script = ExtResource("2_u8lgh")
+speed = 400
+damage = 5
+pushback_power = 20
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7nje"]
+radius = 3.0
+
+[sub_resource type="Curve" id="Curve_kler2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BlackArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_3s3np")
+data = SubResource("Resource_3jej6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -1)
+shape = SubResource("CircleShape2D_f7nje")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4xll8")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(7, -1)
+amount = 75
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_kler2")
+color = Color(0, 0, 0, 0.45098)

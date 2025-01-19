@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://utxa65f3hxv5"]
+
+[ext_resource type="Script" path="res://Weapons/4_NatureBow/nature_bow.gd" id="1_n0w2m"]
+[ext_resource type="PackedScene" uid="uid://ddcxl8d6d0fhx" path="res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn" id="2_v57es"]
+[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="3_t7400"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/poison_bow_ability.gd" id="4_yem2j"]
+
+[sub_resource type="Resource" id="Resource_4cf4c"]
+script = ExtResource("4_yem2j")
+name = ""
+
+[sub_resource type="Resource" id="Resource_bknu7"]
+script = ExtResource("3_t7400")
+sprite_frame = 4
+special_ability = SubResource("Resource_4cf4c")
+mana_rate = 2.0
+shoot_cost = 8
+arrow = ExtResource("2_v57es")
+special_ability_cooldown = 1.0
+spcl_ablty_cost_mltplr = 2
+
+[node name="NatureBow" type="Node2D"]
+script = ExtResource("1_n0w2m")
+weapon_data = SubResource("Resource_bknu7")

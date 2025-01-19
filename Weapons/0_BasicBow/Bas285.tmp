@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc4lu6kenryfn"]
+
+[ext_resource type="Script" path="res://Weapons/BasicBow/basic_bow.gd" id="1_foym6"]
+
+[node name="BasicBow" type="Node2D"]
+script = ExtResource("1_foym6")
+arrow_speed = 150

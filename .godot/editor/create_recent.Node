@@ -1,0 +1,14 @@
+CollisionShape2D
+Area2D
+Label
+Node2D
+AbilitiesShopButton
+Sprite2D
+MainButton
+CPUParticles2D
+Timer
+AnimationPlayer
+VisibleOnScreenNotifier2D
+Weapon
+ProgressBar
+TextureButton

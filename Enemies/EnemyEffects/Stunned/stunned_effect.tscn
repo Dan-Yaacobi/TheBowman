@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://f3gi3n3nq0ia"]
+
+[sub_resource type="Curve" id="Curve_a7t45"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="StunnedEffect" type="CPUParticles2D"]
+position = Vector2(0, -8)
+amount = 15
+explosiveness = 0.5
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(5, 0)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_a7t45")
+color = Color(0.966667, 1, 0, 1)

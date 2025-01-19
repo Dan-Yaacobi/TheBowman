@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://fugmx8l75yct"]
+
+[ext_resource type="Script" path="res://Weapons/5_ThunderBow/ThunderArrow/thunder_arrow.gd" id="1_5fhpf"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_10w1w"]
+[ext_resource type="Texture2D" uid="uid://dagqb8f1y4ak" path="res://Weapons/5_ThunderBow/ThunderArrow/electric_arrow.png" id="2_ema4l"]
+
+[sub_resource type="Resource" id="Resource_0gub2"]
+script = ExtResource("2_10w1w")
+speed = 450
+damage = 10
+pushback_power = 20
+scale = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqbd4"]
+size = Vector2(14, 4)
+
+[sub_resource type="Curve" id="Curve_np4a2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_63t8e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r5e7k"]
+resource_name = "Shoot"
+length = 0.2
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jbskf"]
+_data = {
+"RESET": SubResource("Animation_63t8e"),
+"Shoot": SubResource("Animation_r5e7k")
+}
+
+[node name="ThunderArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_5fhpf")
+data = SubResource("Resource_0gub2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dqbd4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, 0)
+amount = 100
+randomness = 1.0
+lifetime_randomness = 1.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_np4a2")
+color = Color(1, 0.8, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ema4l")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_jbskf")
+}
