@@ -136,9 +136,9 @@ text = "Current Money:"
 script = ExtResource("8_ftbyc")
 
 [node name="HowToPlay" type="Label" parent="."]
-offset_left = 121.0
+offset_left = 113.0
 offset_top = 19.0
-offset_right = 3471.0
+offset_right = 4307.0
 offset_bottom = 2196.0
 scale = Vector2(0.04, 0.04)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -152,10 +152,11 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "How To Play:
 A ,D: Move
-W: Jump (Can Double Jump)
+SpaceBar: Jump (Can Double Jump)
+Mouse: Shoot
 R: special ability
-Spacebar: Summon
-Mouse: Shoot"
+W: Summon
+"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
 offset_left = 299.0

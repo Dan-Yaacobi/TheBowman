@@ -21,7 +21,7 @@ res://Level/Tiles.tscn::2de834d1543f04bd7e67dde08394ba86::1736030333::res://.god
 res://Level/torrent.tscn::f85ac4fb4e3d23532e5f73bd73bf830b::1734528731::res://.godot/exported/133200997/export-c9c20fb0c709a2f49bf2e952c5eecd19-torrent.scn
 res://MainGame/Game.tscn::84c4b5bd1ac39b03c06668f12d3381bb::1737287968::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
 res://MainMenu/ButtonShootClick.tscn::33dc24f7ba84184119dd9f1d1f4b3537::1737142165::res://.godot/exported/133200997/export-24b0b019d54cfcbe60dab6c435d546d2-ButtonShootClick.scn
-res://MainMenu/MainMenu.tscn::38055876df0eefd70ea47f0ca8ba6ff4::1737287968::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
+res://MainMenu/MainMenu.tscn::7a1d1c8ff82d4cf4347f69385109c46a::1737290816::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
 res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_particles.tscn::044489649374e8ac9dc7863d41993080::1735218725::res://.godot/exported/133200997/export-53e20b62ed6fe22cf71eeb0a78f464f5-basic_bow_particles.scn
 res://Player/Abilities/SpecialAbilities/BlueBowAbility/JumpEffect.tscn::4958040bed67705cc0be8ea03cbe07b8::1735936618::res://.godot/exported/133200997/export-31c64d39c8f70ca484c0b4c0162ef2ce-JumpEffect.scn
 res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn::3eb67ea6d0936fcf77231f8c8fecdbdd::1737148898::res://.godot/exported/133200997/export-4753a66693b91c3cb4b9919667b19ffb-PoisonCloud.scn
