@@ -1,3 +1,4 @@
 res://Player/Player.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
+res://Level/PlayGround/PlayGround.tscn
