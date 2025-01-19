@@ -16,12 +16,12 @@ res://Items/Coin.tres::2e2733ac2b1836ad6037e71ff8df5196::1737284099::res://.godo
 res://Items/Diamond.tres::c4afe2a3efb250f8e1db97103fc763fe::1737284099::res://.godot/exported/133200997/export-d68491598d933e0a520e13828b8f3875-Diamond.res
 res://Items/ItemPickUp.tscn::89ed947b911d823e37f51521191aee6c::1735213151::res://.godot/exported/133200997/export-5ae46435b1b63586e649e575b5427bd0-ItemPickUp.scn
 res://Level/ChangeScene/ChangeScene.tscn::c77d205918fa1598a535c8d07da29cf1::1735649222::res://.godot/exported/133200997/export-f08527b6c9084167e4521962901cb079-ChangeScene.scn
-res://Level/PlayGround/PlayGround.tscn::93b2a695827f747d72a0fd31f07d12f4::1737284420::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
+res://Level/PlayGround/PlayGround.tscn::93b2a695827f747d72a0fd31f07d12f4::1737287968::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
 res://Level/Tiles.tscn::2de834d1543f04bd7e67dde08394ba86::1736030333::res://.godot/exported/133200997/export-7dd1420a976f4534020ca5638c4abe6a-Tiles.scn
 res://Level/torrent.tscn::f85ac4fb4e3d23532e5f73bd73bf830b::1734528731::res://.godot/exported/133200997/export-c9c20fb0c709a2f49bf2e952c5eecd19-torrent.scn
-res://MainGame/Game.tscn::84c4b5bd1ac39b03c06668f12d3381bb::1737281320::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
+res://MainGame/Game.tscn::84c4b5bd1ac39b03c06668f12d3381bb::1737287968::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
 res://MainMenu/ButtonShootClick.tscn::33dc24f7ba84184119dd9f1d1f4b3537::1737142165::res://.godot/exported/133200997/export-24b0b019d54cfcbe60dab6c435d546d2-ButtonShootClick.scn
-res://MainMenu/MainMenu.tscn::1811259d47066cc0531a41b3e26e008d::1737279703::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
+res://MainMenu/MainMenu.tscn::38055876df0eefd70ea47f0ca8ba6ff4::1737287968::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
 res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_particles.tscn::044489649374e8ac9dc7863d41993080::1735218725::res://.godot/exported/133200997/export-53e20b62ed6fe22cf71eeb0a78f464f5-basic_bow_particles.scn
 res://Player/Abilities/SpecialAbilities/BlueBowAbility/JumpEffect.tscn::4958040bed67705cc0be8ea03cbe07b8::1735936618::res://.godot/exported/133200997/export-31c64d39c8f70ca484c0b4c0162ef2ce-JumpEffect.scn
 res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn::3eb67ea6d0936fcf77231f8c8fecdbdd::1737148898::res://.godot/exported/133200997/export-4753a66693b91c3cb4b9919667b19ffb-PoisonCloud.scn
@@ -34,7 +34,7 @@ res://Player/Mana/ManaBar.tscn::e81e5da33990404d487ef45bb5c0c6da::1736101167::re
 res://Player/Player Actions/Jump/Jump.tscn::0ac479ee1c08ac2113df1670ca62bb44::1734533967::res://.godot/exported/133200997/export-fec1536713ca7da36d6707f147f74554-Jump.scn
 res://Player/Player Actions/Shoot/Shoot.tscn::c8fa2498cb309cf4b2d946f1151800ec::1735915499::res://.godot/exported/133200997/export-b504db0c3c2c9e1ad54fcc20c246eaa7-Shoot.scn
 res://Player/States/PlayerStateMachine.tscn::3e27c2a08780ff05f16878985461c19e::1734449150::res://.godot/exported/133200997/export-78068f79b8e3ba168e6f72469afed863-PlayerStateMachine.scn
-res://Player/Player.tscn::f1ead52bcf5829f56facc7bc7df70ccb::1737284099::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
+res://Player/Player.tscn::9a411ae6aa877cb179241d29b6813b33::1737287968::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
 res://PlayerData/PlayerStats.tres::9b4634a44b48098d3edf44d194868186::1735904430::res://.godot/exported/133200997/export-8fb5315e12567ae4e160e1d84f120afd-PlayerStats.res
 res://Shop/AbilitiesShop/AbilitiesShop.tscn::44e31d8e4136a9198bccc5e116c2861a::1737279703::res://.godot/exported/133200997/export-51683065a65fd7f140250a56328c4097-AbilitiesShop.scn
 res://Shop/AbilitiesShop/AbilitiesShopButton.tscn::d8bface69a80800e7340e3bb8e2080fb::1737279704::res://.godot/exported/133200997/export-01497330158b607902c6acc13a84c390-AbilitiesShopButton.scn
@@ -56,3 +56,4 @@ res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn::20244ed935a02029636e5eac
 res://Weapons/4_NatureBow/NatureBow.tscn::260eb783c4d68f245377f00182f091e2::1737148898::res://.godot/exported/133200997/export-3513e86194ea52f57d06e6b5fb788ef1-NatureBow.scn
 res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn::b3b921e0940c59b76d810bbf289245b6::1736155316::res://.godot/exported/133200997/export-2d6adfdaa74cffbcd75afee3a567f015-ThunderArrow.scn
 res://Weapons/5_ThunderBow/ThunderBow.tscn::8b4012e6fdd1a4aefb770f879c41a692::1736155316::res://.godot/exported/133200997/export-5987927524b6f75830fc779735822c8f-ThunderBow.scn
+res://HealthBar/HealthBar.tscn::3630839a898f4fbca0376ede9a3edc9b::1733252865::res://.godot/exported/133200997/export-ff366640997bc299e9392e98f5680f59-HealthBar.scn

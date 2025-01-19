@@ -2,3 +2,11 @@ res://Player/Player.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Level/PlayGround/PlayGround.tscn
+res://MainMenu/MainMenu.tscn
+res://MainMenu/main_menu.gd
+res://MainGame/Game.tscn
+res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd
+res://MainMenu/ButtonData/ButtonActions/add_money_action.gd
+res://Player/player.gd
+res://Player/HealthBar/health_bar.gd
+res://MainMenu/button.gd

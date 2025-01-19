@@ -31,7 +31,7 @@ func set_player_camera(_player: Player) -> void:
 
 func set_scene(_player: Player) -> void:
 	if _player != null:
-		_player.global_position = Vector2(40,104)
+		_player.global_position = Vector2(185,104)
 		if not _player.money_changed.is_connected(update_money_label):
 			_player.money_changed.connect(update_money_label)
 		menu_tile_limit = tiles.get_used_rect()

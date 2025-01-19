@@ -20,6 +20,7 @@ signal money_changed
 
 @onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
 @onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
+@onready var health_bar: HealthBar = $HealthBar
 
 @export var gravity: int
 @export var stats: PlayerStats
@@ -45,6 +46,7 @@ func _ready() -> void:
 	death_animation_timer.timeout.connect(reset)
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	unlimited_mana_timer.timeout.connect(end_unlimited_mana)
+	health_bar.init_health(stats.max_hp)
 	
 func _process(delta: float) -> void:
 	direction = Input.get_axis("Left","Right")
@@ -70,11 +72,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				stats.special_ability.activate_special_ability(self)
 				special_ability_available = false
 				special_ability_cooldown.start()
-				
-	if event.is_action_pressed("GodMode") and self.get_parent() is MainMenu:
-		stats.money += 10000
-		money_changed.emit(stats.money)
-		
+
 func start_unlimited_mana() -> void:
 	unlimited_mana_timer.start()
 	mana_bar.change_color(Color.RED)
@@ -139,6 +137,7 @@ func init_bow() -> void:
 func hit_player(damage: int) -> void:
 	stats.hp -= damage
 	damaged_particles.emitting = true
+	health_bar._set_health(stats.hp)
 	if stats.hp <= 0:
 		dead()
 
@@ -167,6 +166,7 @@ func dead() -> void:
 	hand.visible = false
 	collision_shape.set_deferred("disabled", true)
 	death_animation_timer.start()
+	health_bar._set_health(stats.max_hp)
 	
 func reset() -> void:
 	body.change_animation("Idle")

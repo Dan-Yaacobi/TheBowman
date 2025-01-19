@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cnhbrpo4htp2y"]
+[gd_scene load_steps=20 format=4 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_tpybg"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/reset_wave.gd" id="4_u2f2c"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="5_emg15"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="8_ftbyc"]
+[ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd" id="9_xr3g3"]
+[ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/add_money_action.gd" id="10_aa3ac"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -24,6 +26,20 @@ size = Vector2(8, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2shqy"]
 size = Vector2(36, 32)
+
+[sub_resource type="Resource" id="Resource_bvb62"]
+script = ExtResource("9_xr3g3")
+
+[sub_resource type="Resource" id="Resource_etkyy"]
+script = ExtResource("4_7hy75")
+button_action = SubResource("Resource_bvb62")
+
+[sub_resource type="Resource" id="Resource_ssi0y"]
+script = ExtResource("10_aa3ac")
+
+[sub_resource type="Resource" id="Resource_ctujf"]
+script = ExtResource("4_7hy75")
+button_action = SubResource("Resource_ssi0y")
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_4xjwr")
@@ -141,22 +157,52 @@ R: special ability
 Spacebar: Summon
 Mouse: Shoot"
 
-[node name="MoneyCheat" type="Label" parent="."]
-offset_left = 17.0
-offset_top = 26.0
-offset_right = 3367.0
-offset_bottom = 1836.0
+[node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
+offset_left = 299.0
+offset_top = 47.0
+offset_right = 1607.0
+offset_bottom = 397.0
+scale = Vector2(0.025, 0.025)
+tooltip_text = "For Testing Purposes"
+action_mode = 0
+text = "Next Wave"
+button_data = SubResource("Resource_etkyy")
+
+[node name="ButtonShootClick2" parent="." instance=ExtResource("3_0uxqg")]
+offset_left = 20.0
+offset_top = 29.0
+offset_right = 1390.0
+offset_bottom = 379.0
+scale = Vector2(0.02, 0.02)
+tooltip_text = "For Testing Purposes"
+text = "Add Money"
+button_data = SubResource("Resource_ctujf")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 69.0
+offset_right = 605.0
+offset_bottom = 411.0
 scale = Vector2(0.025, 0.025)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
-theme_override_colors/font_outline_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_constants/line_spacing = -70
-theme_override_constants/shadow_offset_x = 5
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
-text = "Click M to add money
-for testing purposes
+text = "Shop"
 
-(only works in this map)"
+[node name="Label2" type="Label" parent="."]
+offset_left = 352.0
+offset_top = 69.0
+offset_right = 957.0
+offset_bottom = 411.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 50
+theme_override_font_sizes/font_size = 250
+text = "Fight"

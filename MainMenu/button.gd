@@ -11,21 +11,21 @@ var player: Player
 
 func _ready() -> void:
 	update_collision_size()
-	pressed.connect(button_action_activate)
+	pressed.connect(_button_action)
 	area_2d.area_entered.connect(shoot_click)
 
 func _set(property, value):
 	if property == "text":
 		property = value
 		update_collision_size()
+
 	if property == "size":
 		property = value
 		update_collision_size()
 
-func button_action_activate() -> void:
+func _button_action() -> void:
 	if button_data.button_action != null:
 		button_data.button_action.button_pressed_action(self,get_parent().get_parent())
-		#clicked.emit()
 
 func shoot_click(_area) -> void:
 	return
