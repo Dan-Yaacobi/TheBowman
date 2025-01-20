@@ -73,7 +73,7 @@ spawn_time = 3.0
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
 script = ExtResource("7_wvqgp")
-current_wave = 16
+current_wave = 1
 enemies_spawn = Array[int]([100, 0, 0])
 total_enemies = 10
 spawn_time = 2.0
