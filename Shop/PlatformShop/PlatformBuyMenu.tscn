@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwa52hqimfbqp"]
+
+[ext_resource type="Script" path="res://Shop/PlatformShop/platform_buy_menu.gd" id="1_ee7tx"]
+
+[node name="PlatformBuyMenu" type="Node2D"]
+script = ExtResource("1_ee7tx")
+
+[node name="PriceLabel" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 7.0
+offset_right = 672.0
+offset_bottom = 349.0
+scale = Vector2(0.015, 0.015)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.75, 0.6, 0, 1)
+theme_override_colors/font_outline_color = Color(0.5, 0.4, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "price: 50"
+
+[node name="BuyButton" type="Button" parent="."]
+offset_left = 4.0
+offset_right = 470.0
+offset_bottom = 350.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 250
+text = "Buy"

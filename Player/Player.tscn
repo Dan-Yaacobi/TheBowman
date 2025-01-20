@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=22 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="14_gy5xr"]
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
-[ext_resource type="Script" path="res://HealthBar/health_bar.gd" id="16_6ip8u"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -39,7 +38,7 @@ shoot_abilities = Array[ExtResource("4_qie87")]([])
 size = Vector2(10, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(3, 2)
+size = Vector2(10, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
 size = Vector2(10, 15)
@@ -55,7 +54,7 @@ colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 17
 script = ExtResource("1_4bii6")
-gravity = 100
+gravity = 150
 stats = SubResource("Resource_sedti")
 
 [node name="Body" parent="." instance=ExtResource("1_1adnh")]
@@ -65,7 +64,7 @@ position = Vector2(0, 1)
 rotation = -0.00872665
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(4.5, 4.5)
 
 [node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
 
@@ -80,10 +79,11 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="."]
+position = Vector2(1, 4)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
-position = Vector2(0.5, 8)
+position = Vector2(-1, 4)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
@@ -155,4 +155,3 @@ offset_left = -9.0
 offset_top = -12.0
 offset_right = 23.0
 offset_bottom = -8.0
-script = ExtResource("16_6ip8u")

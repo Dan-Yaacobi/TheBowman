@@ -25,8 +25,9 @@ func _process(delta: float) -> void:
 		summon_timer.start()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("SkipTimer"):
-		summon_enemy()
+	if player != null:
+		if event.is_action_pressed("SkipTimer") and player.get_parent() == self:
+			summon_enemy()
 
 func init_enemy(_position: Vector2, scene: PackedScene, _player: Player) -> Enemy:
 	var new_enemy: Enemy = scene.instantiate()

@@ -35,6 +35,8 @@ var special_ability_available: bool = true
 var regular_mana_cost: int = 1
 var unlimited_mana_effect: CPUParticles2D
 
+var dropping_down: bool = false
+
 func _ready() -> void:
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
@@ -73,6 +75,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				special_ability_available = false
 				special_ability_cooldown.start()
 
+	if event.is_action_pressed("DropDown"):
+		if velocity.y != 0:
+			dropping_down = true
+		
+func drop_down() -> void:
+	if velocity.y == 0:
+		dropping_down = false
+	velocity.y += 30
+	
 func start_unlimited_mana() -> void:
 	unlimited_mana_timer.start()
 	mana_bar.change_color(Color.RED)
@@ -95,7 +106,9 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	move_and_slide()
 	special_ability_indictaor()
-	
+	if dropping_down:
+		drop_down()
+		
 func update_animation(_animation_name: String) -> void:
 	body.change_animation(_animation_name)
 
@@ -166,6 +179,7 @@ func dead() -> void:
 	hand.visible = false
 	collision_shape.set_deferred("disabled", true)
 	death_animation_timer.start()
+
 	health_bar._set_health(stats.max_hp)
 	
 func reset() -> void:

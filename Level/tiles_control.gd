@@ -10,6 +10,8 @@ var left_tiles: Array[Vector2i] = [Vector2i.ZERO]
 var right_most_tile_index: int = 1
 var left_most_tile_index: int = 1
 
+var base_cells: Array[Vector2i] = [Vector2i(1,0),Vector2i.ZERO,Vector2i(-1,0)]
+
 func _ready() -> void:
 	pass
 
@@ -53,7 +55,19 @@ func remove_left_tile() -> void:
 	set_cell(left_tiles.pop_back(),-1)
 	left_most_tile_index -= 1
 	pass
+	
+func add_tile_at(coordinates: Vector2,color: int) -> void:
+	set_cell(coordinates,color,Vector2(0,0))
+	pass
 
+func reset_tiles() -> int:
+	var count_none_basic_cells: int = 0
+	for cell in get_used_cells():
+		if not cell in base_cells:
+			set_cell(cell,-1)
+			count_none_basic_cells += 1
+	return count_none_basic_cells
+		
 #func _unhandled_input(event: InputEvent) -> void:
 #
 	#if event.is_action_pressed("temp3"):

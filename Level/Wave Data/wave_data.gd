@@ -11,6 +11,6 @@ func calc_total_enemies() -> void:
 	total_enemies = 5 * current_wave
 
 func spawn_time_update() -> void:
-	spawn_time = 3 - current_wave*0.1
+	spawn_time -= current_wave*0.01
 	if spawn_time <= 1:
 		spawn_time = 1

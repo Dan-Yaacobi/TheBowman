@@ -17,3 +17,6 @@ class_name EnemyData extends Resource
 
 @export var enemy_scene: PackedScene
 @export var boss: bool = false
+@export var shooter: bool = false
+@export var shooter_chance: int = 0
+@export var bullet: PackedScene

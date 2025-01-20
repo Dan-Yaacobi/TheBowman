@@ -20,6 +20,10 @@ func calculate_direction_to_cursor() -> void:
 	var player_pos = global_position
 	hand_direction = Vector2(mouse_pos[0] - player_pos[0],
 	 mouse_pos[1] - player_pos[1])
+	if mouse_pos.x > player_pos.x:
+		player.update_direction(false)
+	else:
+		player.update_direction(true)
 
 func set_hand_direction() -> void:
 	rotation = hand_direction.angle() - PI/2

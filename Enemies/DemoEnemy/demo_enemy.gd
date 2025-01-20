@@ -11,6 +11,8 @@ var current_direction: directions
 
 var max_hp: int
 var boss_phase_II: bool = false
+var shoot_height: int = 0
+var shoot_cooldown: float = 0
 
 func _ready() -> void:
 	if stats.boss:
@@ -19,7 +21,11 @@ func _ready() -> void:
 		max_hp = stats.hp
 		stats.knockback *= 1.2
 		stats.move_speed *= 3
-		
+	else:
+		var shooter_random = randi_range(1,100)
+		if shooter_random <= stats.shooter_chance:
+			stats.shooter = true
+		shoot_height = randi_range(50,80)
 	animation_player.play("Move")
 	hit_box.area_entered.connect(hit)
 	hurt_box.body_entered.connect(player_hit)
@@ -33,17 +39,7 @@ func _physics_process(delta: float) -> void:
 		if not boss_phase_II and stats.hp < max_hp/2:
 			boss_upgrade()
 			boss_phase_II = true
-
-	direction = calculate_direction_to_player()
-	
-	if change_direction():
-		initial_speed()
-		
-	if velocity == Vector2.ZERO:
-		initial_speed()
-		
-	activate_debuffs()
-	
+			
 	if poisoned_state and poisoned_timer != null:
 		if poisoned_timer.is_stopped():
 			poisoned_timer.start()
@@ -52,11 +48,43 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		if stunned_timer.is_stopped():
 			stunned_timer.start()
+			
+	direction = calculate_direction_to_player()
+	
+	if stats.shooter:
+		initial_speed()
+		if abs(global_position.y - player.global_position.y) > shoot_height:
+			velocity  += calculate_direction_to_player() * stats.move_speed * delta
+		else:
+			velocity = Vector2.ZERO
+			shoot_cooldown -= delta
+			if shoot_cooldown <= 0:
+				shoot()
+		pass
 
-	velocity  += calculate_direction_to_player() * stats.move_speed * delta
+	else:
+		if change_direction():
+			initial_speed()
+			
+		if velocity == Vector2.ZERO:
+			initial_speed()
+			
+		activate_debuffs()
+		velocity  += calculate_direction_to_player() * stats.move_speed * delta
 	move_and_slide()
 	pass
+	
+func shoot() -> void:
+	if stats.bullet != null and not stunned_state:
+		var new_bullet: EnemyBullet = stats.bullet.instantiate()
+		shoot_cooldown = new_bullet.data.fire_cooldown
+		new_bullet.direction = calculate_direction_to_player()
+		new_bullet.global_position = global_position
+		new_bullet.data.knockback = stats.knockback
+		new_bullet.data.move_speed = stats.move_speed * 2
+		get_parent().add_child(new_bullet)
 
+	
 func change_direction() -> bool:
 	if not stats.sharp_movement:
 		return false

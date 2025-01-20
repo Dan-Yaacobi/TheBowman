@@ -34,8 +34,8 @@ func jumping_flip() -> void:
 func reset_jumps(_var1,_var2,_var3,_var4) -> void:
 	if _var2 is TileMapLayer:
 		jump_flip = false
-		if jumps == 0:
-			set_jumps()
+		#if jumps == 0:
+		set_jumps()
 
 func set_jumps() -> void:
 	jumps = player.stats.max_jumps

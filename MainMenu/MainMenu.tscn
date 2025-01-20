@@ -136,15 +136,14 @@ text = "Current Money:"
 script = ExtResource("8_ftbyc")
 
 [node name="HowToPlay" type="Label" parent="."]
-offset_left = 113.0
-offset_top = 19.0
-offset_right = 4307.0
-offset_bottom = 2196.0
+offset_left = 129.0
+offset_top = 14.0
+offset_right = 4323.0
+offset_bottom = 2558.0
 scale = Vector2(0.04, 0.04)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
 theme_override_colors/font_outline_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_constants/line_spacing = 25
 theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 35
@@ -152,6 +151,7 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "How To Play:
 A ,D: Move
+S: Slam Down
 SpaceBar: Jump (Can Double Jump)
 Mouse: Shoot
 R: special ability

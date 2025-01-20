@@ -73,15 +73,15 @@ spawn_time = 3.0
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
 script = ExtResource("7_wvqgp")
-current_wave = 1
+current_wave = 16
 enemies_spawn = Array[int]([100, 0, 0])
 total_enemies = 10
-spawn_time = 3.0
+spawn_time = 2.0
 double_spawn_chance = 10.0
 boss_wave = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
-size = Vector2(10949, 278)
+size = Vector2(10949, 44)
 
 [node name="PlayGround" type="Node2D"]
 script = ExtResource("1_fq8oi")
@@ -116,7 +116,7 @@ text = "Current Wave: 1"
 [node name="FallingDeath" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
-position = Vector2(0, 268)
+position = Vector2(0, 150)
 shape = SubResource("RectangleShape2D_lvsqu")
 debug_color = Color(1, 0, 0.2, 0.419608)
 

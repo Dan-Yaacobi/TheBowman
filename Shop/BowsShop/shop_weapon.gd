@@ -5,6 +5,7 @@ class_name ShopWeapon extends Node2D
 @onready var label: Label = $Label
 @onready var buy_button: MainButton = $ButtonShootClick
 @onready var new_bow_buy_effect: CPUParticles2D = $NewBowBuyEffect
+@onready var special_ability_label: Label = $SpecialAbilityLabel
 
 @export var data: ShopWeaponData
 
@@ -20,8 +21,11 @@ func set_shop_weapon() -> void:
 	buy_button.button_data.button_action = data.button_click_action
 	if not buy_button.clicked.is_connected(change_to_switch_button):
 		buy_button.clicked.connect(change_to_switch_button)
-	buy_button.tooltip_text = "Special Ability: " + data.special_ability
-	
+	#buy_button.tooltip_text = "Special Ability: " + data.special_ability
+	special_ability_label.text = "Special Ability: " + data.special_ability
+	special_ability_label.add_theme_color_override("font_color", data.name_color)
+	special_ability_label.add_theme_color_override("font_shadow_color", data.name_color.darkened(0.2))
+	special_ability_label.add_theme_color_override("font_outline_color", Color.BLACK)
 func change_button_color(_can_buy: bool) -> void:
 	if _can_buy:
 		buy_button.add_theme_color_override("font_color",Color.WHITE)

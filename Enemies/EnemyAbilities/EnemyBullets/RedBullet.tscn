@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b35crep84od1i"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_57jy3"]
+[ext_resource type="Texture2D" uid="uid://dupiic4jfudox" path="res://Enemies/Sprites/red enemy bullet.png" id="1_kiafu"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_imlbk"]
+
+[sub_resource type="Resource" id="Resource_xam82"]
+script = ExtResource("2_imlbk")
+texture = ExtResource("1_kiafu")
+damage = 1
+knockback = 0
+fire_cooldown = 2.0
+move_speed = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ob05t"]
+radius = 3.0
+
+[node name="RedBullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_57jy3")
+data = SubResource("Resource_xam82")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kiafu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ob05t")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

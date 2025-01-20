@@ -34,13 +34,14 @@ script = ExtResource("1_ohfgj")
 data = SubResource("Resource_6ah8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 5)
 texture = ExtResource("2_txt7c")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 30.0
-offset_top = 13.0
+offset_top = 16.0
 offset_right = 347.0
-offset_bottom = 150.0
+offset_bottom = 153.0
 scale = Vector2(0.025, 0.025)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.42, 0.336, 0, 1)
@@ -65,9 +66,9 @@ text = "Name:"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("2_r1lb1")]
 offset_left = 30.0
-offset_top = 3.0
+offset_top = 6.0
 offset_right = 496.0
-offset_bottom = 353.0
+offset_bottom = 356.0
 scale = Vector2(0.025, 0.025)
 text = "Buy"
 
@@ -96,3 +97,15 @@ tangential_accel_max = 20.0
 scale_amount_curve = SubResource("Curve_lhkgh")
 color_ramp = SubResource("Gradient_w5cbj")
 hue_variation_curve = SubResource("Curve_5tewp")
+
+[node name="SpecialAbilityLabel" type="Label" parent="."]
+offset_left = -8.0
+offset_top = 1.0
+offset_right = 1734.0
+offset_bottom = 343.0
+scale = Vector2(0.01, 0.01)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 55
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Special Ability:"
