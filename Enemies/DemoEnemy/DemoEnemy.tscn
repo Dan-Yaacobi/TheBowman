@@ -27,6 +27,7 @@ boss = false
 shooter = false
 shooter_chance = 50
 bullet = ExtResource("2_olou7")
+shoot_speed = 0.0
 
 [sub_resource type="Resource" id="Resource_kuvca"]
 script = ExtResource("5_b4mrk")

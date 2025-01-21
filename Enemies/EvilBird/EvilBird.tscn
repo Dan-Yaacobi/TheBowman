@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdtin5d5lhmfi"]
+
+[ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
+[ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="2_p70mv"]
+
+[sub_resource type="Animation" id="Animation_sngn8"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_jqhj0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]
+_data = {
+"Move": SubResource("Animation_sngn8"),
+"RESET": SubResource("Animation_jqhj0")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f410j"]
+radius = 6.04759
+
+[node name="EvilBird" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_jdshu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_p70mv")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_jiyox")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f410j")

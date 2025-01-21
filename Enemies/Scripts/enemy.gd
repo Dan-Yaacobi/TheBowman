@@ -18,6 +18,7 @@ var poisoned_state: bool = false
 var stunned_state: bool = false
 var poisoned_damage: int = 0
 var temp_move_speed: int
+var no_drops: bool = false
 
 func _ready() -> void:
 	pass
@@ -64,14 +65,18 @@ func player_hit(body: CharacterBody2D) -> void:
 		push_back(-direction,stats.move_speed)
 
 func drop_item() -> void:
-	for drop in item_drops:
-		if drop.drop_chance():
-			var item = ITEM_PICK_UP.instantiate()
-			item.assign_item(drop.item_data)
-			item.global_position = global_position
-			item.inititalize(player)
-			get_parent().call_deferred("add_child", item)
+	if not no_drops:
+		for drop in item_drops:
+			if drop.drop_chance():
+				var item = ITEM_PICK_UP.instantiate()
+				item.assign_item(drop.item_data)
+				item.global_position = global_position
+				item.inititalize(player)
+				get_parent().call_deferred("add_child", item)
 
+func disable_drops() -> void:
+	no_drops = true
+	
 func activate_debuffs() -> void:
 	for debuff in stats.debuffs:
 		debuff.activate_enemy_effect(self)

@@ -11,7 +11,7 @@ var current_direction: directions
 
 var max_hp: int
 var boss_phase_II: bool = false
-var shoot_height: int = 0
+var shoot_height: int = 80
 var shoot_cooldown: float = 0
 
 func _ready() -> void:
@@ -21,6 +21,7 @@ func _ready() -> void:
 		max_hp = stats.hp
 		stats.knockback *= 1.2
 		stats.move_speed *= 3
+		
 	else:
 		var shooter_random = randi_range(1,100)
 		if shooter_random <= stats.shooter_chance:
@@ -51,7 +52,7 @@ func _physics_process(delta: float) -> void:
 			
 	direction = calculate_direction_to_player()
 	
-	if stats.shooter:
+	if stats.shooter and not stunned_state:
 		initial_speed()
 		if abs(global_position.y - player.global_position.y) > shoot_height:
 			velocity  += calculate_direction_to_player() * stats.move_speed * delta
@@ -69,21 +70,30 @@ func _physics_process(delta: float) -> void:
 		if velocity == Vector2.ZERO:
 			initial_speed()
 			
-		activate_debuffs()
+		
 		velocity  += calculate_direction_to_player() * stats.move_speed * delta
+	activate_debuffs()
 	move_and_slide()
 	pass
 	
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
-		shoot_cooldown = new_bullet.data.fire_cooldown
+		if stats.boss:
+			new_bullet.scale *= 2
+		if stats.shoot_speed != 0:
+			shoot_cooldown = min(new_bullet.data.fire_cooldown,stats.shoot_speed)
+		else:
+			shoot_cooldown = new_bullet.data.fire_cooldown
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.move_speed = stats.move_speed * 2
 		get_parent().add_child(new_bullet)
 
+func activate_shooter() -> void:
+	
+	pass
 	
 func change_direction() -> bool:
 	if not stats.sharp_movement:

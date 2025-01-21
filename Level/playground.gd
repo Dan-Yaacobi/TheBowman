@@ -15,6 +15,7 @@ signal wave_reset
 var player: Player
 var enemies_killed: int
 var summoned_enemies: Array[Enemy]
+var summon_count: int = 0
 
 func _ready() -> void:
 	summon_timer.timeout.connect(summon_enemy)
@@ -51,12 +52,20 @@ func summon_enemy() -> void:
 			
 func summon() -> void:
 	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
+		
 		var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
 		var demo_enemy: Enemy = init_enemy(enemy_position,enemies.get_enemy(wave_data.current_wave),player)
+		
+		if wave_data.current_wave % 10 == 0:
+			if summon_count == 1:
+				demo_enemy.stats.shooter = true
+			else:
+				demo_enemy.disable_drops()
 		add_child(demo_enemy)
 		
 		summoned_enemies.append(demo_enemy)
 		demo_enemy.died.connect(killed_enemy)
+		summon_count += 1
 
 func killed_enemy(_enemy) -> void:
 	_enemy.died.disconnect(killed_enemy)
@@ -69,6 +78,7 @@ func update_label() -> void:
 
 func new_wave_difficulty() -> void:
 	update_label()
+	summon_count = 0
 	wave_data.spawn_time_update()
 	wave_data.calc_total_enemies()
 	wave_data.enemies_spawn = level_logic.calculate_logic(wave_data.current_wave,enemies.enemies_array.size())
@@ -87,6 +97,7 @@ func new_wave_difficulty() -> void:
 		update_label()
 	else:
 		wave_data.boss_wave = false
+		
 func death(b) -> void:
 	if b is Player:
 		b.dead()

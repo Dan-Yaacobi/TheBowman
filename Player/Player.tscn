@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="2_ohurx"]
 [ext_resource type="Script" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="4_qie87"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
-[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="5_ebqdd"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="5_3583o"]
 [ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
@@ -30,7 +30,7 @@ mana_rate = 0.5
 shoot_cost = 10
 money = 0
 weapon_name = "Basic Bow"
-weapon_scene = ExtResource("5_ebqdd")
+weapon_scene = ExtResource("5_3583o")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 

@@ -7,7 +7,7 @@ class_name PoisonCloud extends CPUParticles2D
 const Poisoned = preload("res://Enemies/EnemyEffects/Poisoned/poisoned.gd")
 
 func _ready() -> void:
-	collision_shape.shape.radius = 10
+	collision_shape.shape.radius = 30
 	area.body_entered.connect(poison_damage)
 	
 func poison_damage(_body) -> void:
@@ -19,7 +19,7 @@ func poison_damage(_body) -> void:
 
 func _physics_process(delta: float) -> void:
 	if emitting == true:
-		if collision_shape.shape.radius < 45:
+		if collision_shape.shape.radius < 75:
 			collision_shape.shape.radius += 15*delta
-	else:
-		queue_free()
+		else:
+			queue_free()

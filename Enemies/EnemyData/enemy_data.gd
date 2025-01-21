@@ -20,3 +20,4 @@ class_name EnemyData extends Resource
 @export var shooter: bool = false
 @export var shooter_chance: int = 0
 @export var bullet: PackedScene
+@export var shoot_speed: float

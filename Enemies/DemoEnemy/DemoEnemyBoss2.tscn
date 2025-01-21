@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqnds5n75tnpw"]
+[gd_scene load_steps=25 format=3 uid="uid://dqnds5n75tnpw"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_4v026"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_hw8mg"]
+[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_xsge2"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_wobgw"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_gg0mn"]
 [ext_resource type="Texture2D" uid="uid://sthkilqtufuk" path="res://Enemies/DemoEnemy/BlueTarget.png" id="5_i2aqu"]
@@ -28,6 +29,10 @@ initial_ability = Array[ExtResource("2_hw8mg")]([])
 special_ability = Array[ExtResource("2_hw8mg")]([])
 debuffs = Array[ExtResource("3_wobgw")]([])
 boss = true
+shooter = false
+shooter_chance = 0
+bullet = ExtResource("2_xsge2")
+shoot_speed = 1.0
 
 [sub_resource type="Resource" id="Resource_kuvca"]
 script = ExtResource("6_w8cww")
