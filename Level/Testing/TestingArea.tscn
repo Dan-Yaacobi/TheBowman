@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=4 uid="uid://faeqy5pfi8yk"]
+
+[ext_resource type="Script" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_u5lkp"]
+[ext_resource type="PackedScene" uid="uid://cesvb1a1eu8yq" path="res://Player/Player.tscn" id="2_7l2ag"]
+
+[node name="TestingArea" type="Node2D"]
+script = ExtResource("1_e8ewn")
+
+[node name="Player" parent="." instance=ExtResource("2_7l2ag")]
+position = Vector2(0, -9)
+
+[node name="Tiles" parent="." instance=ExtResource("1_u5lkp")]
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAD9/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAA=")

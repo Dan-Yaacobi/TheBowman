@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://csj1af2xyiwas"]
+
+[sub_resource type="Curve" id="Curve_qr3yf"]
+max_value = 3.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1e-05, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="HitParticles" type="CPUParticles2D"]
+emitting = false
+amount = 5
+lifetime = 0.5
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, 50)
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+angle_max = 90.0
+scale_amount_curve = SubResource("Curve_qr3yf")

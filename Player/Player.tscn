@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=25 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="2_ohurx"]
 [ext_resource type="Script" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="4_qie87"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
-[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="5_3583o"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="5_g86fe"]
 [ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="14_gy5xr"]
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
+[ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -30,7 +31,7 @@ mana_rate = 0.5
 shoot_cost = 10
 money = 0
 weapon_name = "Basic Bow"
-weapon_scene = ExtResource("5_3583o")
+weapon_scene = ExtResource("5_g86fe")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 
@@ -39,6 +40,11 @@ size = Vector2(10, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
 size = Vector2(10, 1)
+
+[sub_resource type="Curve" id="Curve_g8oqh"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
 size = Vector2(10, 15)
@@ -50,6 +56,11 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_u4yfg"]
 colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_cqixw"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 17
@@ -88,6 +99,19 @@ shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
 [node name="JumpAction" parent="." instance=ExtResource("7_kkejo")]
+
+[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction"]
+position = Vector2(0, 11)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 3)
+gravity = Vector2(0, 50)
+scale_amount_curve = SubResource("Curve_g8oqh")
+color = Color(0.831239, 0.712185, 0.672638, 1)
 
 [node name="ShootAction" parent="." instance=ExtResource("8_gtm6s")]
 
@@ -155,3 +179,20 @@ offset_left = -9.0
 offset_top = -12.0
 offset_right = 23.0
 offset_bottom = -8.0
+
+[node name="ComboActivated" type="Node2D" parent="."]
+script = ExtResource("16_j4os2")
+
+[node name="ComboTimer" type="Timer" parent="ComboActivated"]
+wait_time = 5.0
+
+[node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated"]
+z_index = -1
+position = Vector2(0, -1)
+emitting = false
+amount = 200
+emission_shape = 2
+emission_sphere_radius = 7.0
+gravity = Vector2(0, -50)
+scale_amount_curve = SubResource("Curve_cqixw")
+color = Color(0.673333, 0.04, 0.8, 1)

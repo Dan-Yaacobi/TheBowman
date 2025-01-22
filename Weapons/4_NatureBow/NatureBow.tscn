@@ -14,10 +14,11 @@ script = ExtResource("3_t7400")
 sprite_frame = 4
 special_ability = SubResource("Resource_4cf4c")
 mana_rate = 2.0
-shoot_cost = 8
+shoot_cost = 12
 arrow = ExtResource("2_v57es")
-special_ability_cooldown = 1.0
+special_ability_cooldown = 5.0
 spcl_ablty_cost_mltplr = 2
+combo_buff_activated = false
 
 [node name="NatureBow" type="Node2D"]
 script = ExtResource("1_n0w2m")

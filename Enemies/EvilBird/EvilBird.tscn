@@ -1,7 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdtin5d5lhmfi"]
+[gd_scene load_steps=28 format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
+[ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_idach"]
 [ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="2_p70mv"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
+[ext_resource type="Script" path="res://Items/drop_data.gd" id="7_qgn5p"]
+[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
+[ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="9_prxv3"]
+[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="9_s8nod"]
+[ext_resource type="Script" path="res://Items/item_data.gd" id="10_0bpxa"]
+[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_a4bmo"]
+[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_2scv3"]
+
+[sub_resource type="Resource" id="Resource_jvrjh"]
+resource_local_to_scene = true
+script = ExtResource("4_armh2")
+hp = 8
+move_speed = 50
+knockback = 200
+skin = ExtResource("2_p70mv")
+coins_dropped = 0
+sharp_movement = false
+touch_damage = 2
+death_ability = Array[ExtResource("2_1cl26")]([])
+initial_ability = Array[ExtResource("2_1cl26")]([])
+special_ability = Array[ExtResource("2_1cl26")]([])
+debuffs = Array[ExtResource("3_duj8d")]([])
+boss = false
+shooter = false
+shooter_chance = 0
+bullet = ExtResource("2_idach")
+shoot_speed = 3.0
+
+[sub_resource type="Resource" id="Resource_x2nk2"]
+script = ExtResource("9_s8nod")
+sparkle_color = "ffcc00"
+sparkle_scene = ExtResource("10_a4bmo")
+
+[sub_resource type="Resource" id="Resource_ag1v1"]
+script = ExtResource("10_0bpxa")
+image = ExtResource("9_prxv3")
+image_size = 0.3
+value = 1
+effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_x2nk2")])
+
+[sub_resource type="Resource" id="Resource_mcgos"]
+script = ExtResource("7_qgn5p")
+item_data = SubResource("Resource_ag1v1")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_amrel"]
+script = ExtResource("9_s8nod")
+sparkle_color = "6ec7db"
+sparkle_scene = ExtResource("10_a4bmo")
+
+[sub_resource type="Resource" id="Resource_msidu"]
+script = ExtResource("10_0bpxa")
+image = ExtResource("11_2scv3")
+image_size = 0.3
+value = 5
+effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_amrel")])
+
+[sub_resource type="Resource" id="Resource_yfwxr"]
+script = ExtResource("7_qgn5p")
+item_data = SubResource("Resource_msidu")
+probability = 20.0
 
 [sub_resource type="Animation" id="Animation_sngn8"]
 resource_name = "Move"
@@ -23,14 +88,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:position")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5)]
+"values": [Vector2(0, 0), Vector2(0, -4)]
 }
 
 [sub_resource type="Animation" id="Animation_jqhj0"]
@@ -50,7 +115,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:position")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -59,9 +124,51 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qmrug"]
+resource_name = "Damaged"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]
 _data = {
+"Damaged": SubResource("Animation_qmrug"),
 "Move": SubResource("Animation_sngn8"),
 "RESET": SubResource("Animation_jqhj0")
 }
@@ -69,10 +176,18 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_f410j"]
 radius = 6.04759
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yaqk4"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hcbfx"]
+radius = 6.0
+
 [node name="EvilBird" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jdshu")
+stats = SubResource("Resource_jvrjh")
+item_drops = Array[ExtResource("7_qgn5p")]([SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_yfwxr")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_p70mv")
@@ -85,3 +200,18 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f410j")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_yaqk4")
+debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_hcbfx")
+debug_color = Color(1, 0, 0.0166664, 0.419608)

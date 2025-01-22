@@ -1,7 +1,14 @@
 class_name Weapon extends Node2D
 
+signal combo_loss
+signal combo_gained
+
 static var player: Player
+
 @export var weapon_data: WeaponData
+
+var base_damage: int = 0
+var regular_attack: bool = true
 
 func shoot() -> void:
 	var mouse_pos = player.get_global_mouse_position()
@@ -12,6 +19,7 @@ func shoot() -> void:
 		var arrow = instance_arrow(weapon_data.arrow,global_position)
 		arrow.direction = player.get_shoot_direction()
 		arrow.rotate(set_arrow_rotation())
+		arrow.regular_shot = regular_attack
 		player.get_parent().call_deferred("add_child",arrow)
 		
 func set_arrow_rotation() -> float:
@@ -26,7 +34,26 @@ func init_weapon(_player: Player, _weapon: Weapon) -> void:
 	pass
 
 func instance_arrow(ARROW: PackedScene, the_position) -> Arrow:
-	var arrow: Arrow = ARROW.instantiate()
-	arrow.global_position = the_position
-	arrow.z_index = -1
-	return arrow
+	if ARROW != null:
+		var arrow: Arrow = ARROW.instantiate()
+		if base_damage == 0:
+			base_damage = arrow.data.damage
+			
+		if weapon_data.combo_buff_activated:
+			arrow.data.damage = base_damage * 2
+		else:
+			arrow.data.damage = base_damage
+		arrow.arrow_missed.connect(missed)
+		arrow.arrow_hit.connect(hit)
+		arrow.global_position = the_position
+		arrow.z_index = -1
+		return arrow
+	return null
+
+func missed() -> void:
+	combo_loss.emit()
+	pass
+
+func hit() -> void:
+	combo_gained.emit()
+	pass

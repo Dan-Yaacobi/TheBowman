@@ -1,5 +1,7 @@
 class_name Game extends Node2D
 
+@onready var game_music: AudioStreamPlayer2D = $GameMusic
+
 @onready var platform_shop: PlatformShop = $PlatformShop
 @onready var abilities_shop: AbilitiesShop = $AbilitiesShop
 @onready var bows_shop: BowsShop = $BowsShop
@@ -9,12 +11,19 @@ class_name Game extends Node2D
 @onready var scenes_dic: Dictionary = {"Menu" : main_menu, "PlayGround": play_ground,
 "Shop": shop, "BowsShop": bows_shop, "AbilitiesShop": abilities_shop,"PlatformShop":platform_shop}
 
+@export var music_on: bool = true :
+	set(val):
+		music_on = val
+		music_on_off()
+	
+
 const PLAYER = preload("res://Player/Player.tscn")
 
 var player: Player
 var last_scene: Node
 
 func _ready() -> void:
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	player = PLAYER.instantiate()
 	player.died.connect(change_scene)
 	add_child(player)
@@ -30,7 +39,7 @@ func _ready() -> void:
 	last_scene = main_menu
 
 	for child in get_children():
-		if child != last_scene:
+		if child != last_scene and not child is AudioStreamPlayer2D:
 			child.call_deferred("exit_scene",player)
 
 func change_scene(new_scene: String) -> void:
@@ -44,3 +53,11 @@ func get_playground() -> PlayGround:
 		if child is PlayGround:
 			return child
 	return
+
+func music_on_off() -> void:
+	print("changed")
+	if music_on:
+		game_music.play()
+	else:
+		game_music.stop()
+	pass

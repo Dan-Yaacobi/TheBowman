@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cnhbrpo4htp2y"]
+[gd_scene load_steps=21 format=4 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_tpybg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="8_ftbyc"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd" id="9_xr3g3"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/add_money_action.gd" id="10_aa3ac"]
+[ext_resource type="Script" path="res://MainMenu/music_button.gd" id="11_rwkms"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -207,3 +208,17 @@ theme_override_constants/outline_size = 50
 theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
 text = "Fight"
+
+[node name="MusicButton" type="Button" parent="."]
+visible = false
+offset_left = 97.0
+offset_top = 17.0
+offset_right = 810.0
+offset_bottom = 367.0
+scale = Vector2(0.025, 0.025)
+focus_mode = 0
+theme_override_font_sizes/font_size = 250
+disabled = true
+toggle_mode = true
+text = "Music"
+script = ExtResource("11_rwkms")

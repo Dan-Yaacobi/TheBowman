@@ -7,6 +7,8 @@ signal wave_reset
 @onready var falling_death: Area2D = $FallingDeath
 @onready var tiles: TilesControl = $Tiles
 @onready var current_money: CurrentMoney = $CurrentMoney
+@onready var combo_counter: Label = $ComboCounter
+@onready var combo_animation: AnimationPlayer = $ComboCounter/ComboAnimation
 
 @export var enemies: Enemies
 @export var wave_data: WaveData
@@ -81,10 +83,16 @@ func new_wave_difficulty() -> void:
 	summon_count = 0
 	wave_data.spawn_time_update()
 	wave_data.calc_total_enemies()
-	wave_data.enemies_spawn = level_logic.calculate_logic(wave_data.current_wave,enemies.enemies_array.size())
-	wave_data.double_spawn_chance += 1
-	for i in wave_data.enemies_spawn.size():
-		enemies.enemies_array[i].spawn_chance = wave_data.enemies_spawn[i]
+	wave_data.targets_spawn = level_logic.calculate_logic_targets(wave_data.current_wave,enemies.target_enemies.size())
+	wave_data.bird_spawn = level_logic.calculate_logic_birds(wave_data.current_wave,enemies.bird_enemies.size())
+	wave_data.double_spawn_chance += 0.2
+	
+	for i in wave_data.targets_spawn.size():
+		enemies.target_enemies[i].spawn_chance = wave_data.targets_spawn[i]
+		
+	for i in wave_data.bird_spawn.size():
+		enemies.bird_enemies[i].spawn_chance = wave_data.bird_spawn[i]
+		
 	enemies.spawn_time = wave_data.spawn_time
 	
 	if wave_data.current_wave % 10 == 0:
@@ -105,6 +113,10 @@ func death(b) -> void:
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
+		if not player.combo.is_connected(update_combo):
+			player.combo.connect(update_combo)
+		player.combo_counter = 0
+		
 		visible = true
 		tiles.collision_enabled = true
 		_player.global_position = Vector2(0,-8)
@@ -121,7 +133,20 @@ func set_scene(_player: Player) -> void:
 
 func update_money(amount) -> void:
 	current_money.update_current_money(amount)
-	
+
+func update_combo(amount: int) -> void:
+	combo_counter.text = "Combo: " + str(amount)
+	if amount == 0:
+		combo_animation.play("Lost")
+	elif amount > 0:
+		if amount >= 10:
+			if amount >= 25:
+				combo_animation.play("Gained25")
+			else:
+				combo_animation.play("Gained10")
+		else:
+			combo_animation.play("Gained")
+
 func exit_scene(_player) -> void:
 	falling_death.body_entered.disconnect(death)
 	summon_timer.timeout.disconnect(summon_enemy)

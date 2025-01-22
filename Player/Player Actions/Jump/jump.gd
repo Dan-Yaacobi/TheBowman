@@ -1,6 +1,7 @@
 class_name JumpAction extends Node2D
 
 @onready var player: Player = $".."
+@onready var jump_particles: CPUParticles2D = $JumpParticles
 
 var jumps: int = 1
 var jump_flip: bool = false
@@ -17,7 +18,8 @@ func jump() -> void:
 		player.velocity.y = 0
 		player.velocity.y -= player.stats.jump_height
 		jumps -= 1
-		
+		jump_particles.restart()
+
 		var flip_jump_random: int = randi_range(0,jump_flip_chance)
 		if flip_jump_random == 0:
 			jump_flip = true

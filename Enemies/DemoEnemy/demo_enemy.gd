@@ -1,6 +1,6 @@
 class_name DemoEnemy extends Enemy
 
-@onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
+#@onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
 @onready var hit_box: Area2D = $HitBox
@@ -13,15 +13,17 @@ var max_hp: int
 var boss_phase_II: bool = false
 var shoot_height: int = 80
 var shoot_cooldown: float = 0
+var stopped: bool = false
 
 func _ready() -> void:
+	animation_player = $Sprite2D/AnimationPlayer
 	if stats.boss:
 		scale *= 5
 		stats.hp *= 20
 		max_hp = stats.hp
 		stats.knockback *= 1.2
 		stats.move_speed *= 3
-		
+	
 	else:
 		var shooter_random = randi_range(1,100)
 		if shooter_random <= stats.shooter_chance:
@@ -34,6 +36,7 @@ func _ready() -> void:
 	change_direction()
 	for ability in stats.initial_ability:
 		ability.activate_ability(self)
+	
 	
 func _physics_process(delta: float) -> void:
 	if stats.boss:
@@ -66,11 +69,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		if change_direction():
 			initial_speed()
-			
 		if velocity == Vector2.ZERO:
 			initial_speed()
-			
-		
 		velocity  += calculate_direction_to_player() * stats.move_speed * delta
 	activate_debuffs()
 	move_and_slide()
@@ -91,10 +91,6 @@ func shoot() -> void:
 		new_bullet.data.move_speed = stats.move_speed * 2
 		get_parent().add_child(new_bullet)
 
-func activate_shooter() -> void:
-	
-	pass
-	
 func change_direction() -> bool:
 	if not stats.sharp_movement:
 		return false

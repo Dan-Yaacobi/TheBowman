@@ -22,3 +22,5 @@ script = ExtResource("1_iteqa")
 [node name="AbilitiesShop" parent="." instance=ExtResource("6_onhyr")]
 
 [node name="PlatformShop" parent="." instance=ExtResource("7_8hn01")]
+
+[node name="GameMusic" type="AudioStreamPlayer2D" parent="."]

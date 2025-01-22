@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal died
 signal money_changed
+signal combo(amount: int)
 
 @onready var hand: Hand = $Hand
 @onready var body: Body = $Body
@@ -17,6 +18,8 @@ signal money_changed
 @onready var death_animation_timer: Timer = $DeathAnimationTimer
 @onready var special_ability_cooldown: Timer = $SpecialAbilityCooldown
 @onready var unlimited_mana_timer: Timer = $UnlimitedManaTimer
+@onready var combo_timer: Timer = $ComboActivated/ComboTimer
+@onready var combo_effect: CPUParticles2D = $ComboActivated/ComboEffect
 
 @onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
 @onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
@@ -37,6 +40,9 @@ var unlimited_mana_effect: CPUParticles2D
 
 var dropping_down: bool = false
 
+var combo_counter: int = 48
+var combo_buff: bool = false
+
 func _ready() -> void:
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
@@ -49,6 +55,7 @@ func _ready() -> void:
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	unlimited_mana_timer.timeout.connect(end_unlimited_mana)
 	health_bar.init_health(stats.max_hp)
+	combo_timer.timeout.connect(end_combo_buff)
 	
 func _process(delta: float) -> void:
 	direction = Input.get_axis("Left","Right")
@@ -63,6 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("shoot",true):
 		if mana_bar.use_mana(regular_mana_cost):
+			current_weapon.regular_attack = true
 			var mouse_pos = get_global_mouse_position()
 			shoot_action.shoot(mouse_pos)
 			for ability in stats.shoot_abilities:
@@ -72,13 +80,50 @@ func _unhandled_input(event: InputEvent) -> void:
 		if stats.special_ability != null:
 			if special_ability_available and mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
 				stats.special_ability.activate_special_ability(self)
+				current_weapon.regular_attack = false
 				special_ability_available = false
 				special_ability_cooldown.start()
 
 	if event.is_action_pressed("DropDown"):
 		if velocity.y != 0:
 			dropping_down = true
-		
+
+func combo_lost() -> void:
+	combo_counter = 0
+	combo.emit(combo_counter)
+	pass
+	
+func combo_gained() -> void:
+	combo_counter += 1
+	if combo_counter %25 == 0:
+		combo_bonus_activate()
+	combo.emit(combo_counter)
+	pass
+
+func combo_bonus_activate() -> void:
+	combo_buff = true
+	combo_timer.start()
+	combo_effect.emitting = true
+	stats.knockback_resistance += 5
+	stats.max_jumps += 3
+	current_weapon.weapon_data.special_ability_cooldown /= 2
+	current_weapon.weapon_data.combo_buff_activated = true
+	current_weapon.weapon_data.mana_rate *= 3
+	mana_bar.change_color(Color.PURPLE)
+	health_bar._set_health(stats.max_hp)
+	pass
+	
+func end_combo_buff() -> void:
+	if combo_buff:
+		combo_buff = false
+		combo_effect.emitting = false
+		current_weapon.weapon_data.combo_buff_activated = false
+		current_weapon.weapon_data.special_ability_cooldown *= 2
+		current_weapon.weapon_data.mana_rate /= 3
+		mana_bar.regular_color()
+		stats.knockback_resistance -= 5
+		stats.max_jumps -= 3
+	
 func drop_down() -> void:
 	if velocity.y == 0:
 		dropping_down = false
@@ -137,6 +182,9 @@ func init_bow() -> void:
 		#new_bow_buy_effect.emitting = true
 		#
 	current_weapon = stats.weapon_scene.instantiate()
+	current_weapon.combo_loss.connect(combo_lost)
+	current_weapon.combo_gained.connect(combo_gained)
+	
 	stats.special_ability = current_weapon.weapon_data.special_ability
 	hand.sprite.frame = current_weapon.weapon_data.sprite_frame
 	current_weapon.init_weapon(self,current_weapon)
@@ -179,7 +227,7 @@ func dead() -> void:
 	hand.visible = false
 	collision_shape.set_deferred("disabled", true)
 	death_animation_timer.start()
-
+	await get_tree().create_timer(death_animation_timer.wait_time).timeout
 	health_bar._set_health(stats.max_hp)
 	
 func reset() -> void:
