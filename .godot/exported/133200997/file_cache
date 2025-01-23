@@ -2,7 +2,7 @@ res://Enemies/DemoEnemy/DemoEnemy2.tscn::15e4805853fd80b1090369562faf6a45::17375
 res://Enemies/DemoEnemy/DemoEnemy3.tscn::c20b746496e0a35437542a17b1e66f2f::1737586489::res://.godot/exported/133200997/export-cf935259902ade3e5998ffbc368d6133-DemoEnemy3.scn
 res://Enemies/DemoEnemy/DemoEnemy4.tscn::4a248998005ceb63859649c6daa86d67::1737586528::res://.godot/exported/133200997/export-7f56a84d65437230a1bf45eb4b7e3220-DemoEnemy4.scn
 res://Enemies/DemoEnemy/DemoEnemy5.tscn::6d2adac2349cef15d953c828feec7a64::1737586526::res://.godot/exported/133200997/export-539a7b4f2621d9ec96d70f1d69ad92b9-DemoEnemy5.scn
-res://Enemies/DemoEnemy/DemoEnemy.tscn::2dec712d7593d4045358e885d838ec1a::1737622853::res://.godot/exported/133200997/export-b6e2b3eed7d26487a23a908bff384b52-DemoEnemy.scn
+res://Enemies/DemoEnemy/DemoEnemy.tscn::2dec712d7593d4045358e885d838ec1a::1737624127::res://.godot/exported/133200997/export-b6e2b3eed7d26487a23a908bff384b52-DemoEnemy.scn
 res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn::2c222372dd85d8c6c0fc7df0c0252582::1737586525::res://.godot/exported/133200997/export-a6b565c93fb5da7981f88136853f8f4f-DemoEnemyBoss2.scn
 res://Enemies/DemoEnemy/DemoEnemyBoss.tscn::c601b0fb99d759788ab8849b6688d839::1737586523::res://.godot/exported/133200997/export-a497c4817cc285e0e6fda390eb29bb63-DemoEnemyBoss.scn
 res://Enemies/DemoEnemy/DemoEnemyGold.tscn::7733413b4f142aeee50517aaa71e0720::1737586651::res://.godot/exported/133200997/export-9be0d6d889db1749095592098fb9741a-DemoEnemyGold.scn
@@ -16,10 +16,10 @@ res://Items/Coin.tres::2e2733ac2b1836ad6037e71ff8df5196::1737583048::res://.godo
 res://Items/Diamond.tres::c4afe2a3efb250f8e1db97103fc763fe::1737583048::res://.godot/exported/133200997/export-d68491598d933e0a520e13828b8f3875-Diamond.res
 res://Items/ItemPickUp.tscn::89ed947b911d823e37f51521191aee6c::1735213151::res://.godot/exported/133200997/export-5ae46435b1b63586e649e575b5427bd0-ItemPickUp.scn
 res://Level/ChangeScene/ChangeScene.tscn::c77d205918fa1598a535c8d07da29cf1::1735649222::res://.godot/exported/133200997/export-f08527b6c9084167e4521962901cb079-ChangeScene.scn
-res://Level/PlayGround/PlayGround.tscn::8d9b271b7b17482374daefc0f09d6580::1737622853::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
+res://Level/PlayGround/PlayGround.tscn::8d9b271b7b17482374daefc0f09d6580::1737624127::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
 res://Level/Tiles.tscn::2de834d1543f04bd7e67dde08394ba86::1736030333::res://.godot/exported/133200997/export-7dd1420a976f4534020ca5638c4abe6a-Tiles.scn
 res://Level/torrent.tscn::f85ac4fb4e3d23532e5f73bd73bf830b::1734528731::res://.godot/exported/133200997/export-c9c20fb0c709a2f49bf2e952c5eecd19-torrent.scn
-res://MainGame/Game.tscn::fbff6dae43d00c84fce60d834f3ac4ed::1737622853::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
+res://MainGame/Game.tscn::fbff6dae43d00c84fce60d834f3ac4ed::1737624126::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
 res://MainMenu/ButtonShootClick.tscn::71c22ea50d2acd80f4baf878cc490143::1737443203::res://.godot/exported/133200997/export-24b0b019d54cfcbe60dab6c435d546d2-ButtonShootClick.scn
 res://MainMenu/MainMenu.tscn::a509b87c8506205fc16df6e037a788a7::1737586318::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
 res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_particles.tscn::044489649374e8ac9dc7863d41993080::1735218725::res://.godot/exported/133200997/export-53e20b62ed6fe22cf71eeb0a78f464f5-basic_bow_particles.scn
@@ -34,7 +34,7 @@ res://Player/Mana/ManaBar.tscn::e81e5da33990404d487ef45bb5c0c6da::1736101167::re
 res://Player/Player Actions/Jump/Jump.tscn::0ac479ee1c08ac2113df1670ca62bb44::1737364401::res://.godot/exported/133200997/export-fec1536713ca7da36d6707f147f74554-Jump.scn
 res://Player/Player Actions/Shoot/Shoot.tscn::c8fa2498cb309cf4b2d946f1151800ec::1735915499::res://.godot/exported/133200997/export-b504db0c3c2c9e1ad54fcc20c246eaa7-Shoot.scn
 res://Player/States/PlayerStateMachine.tscn::3e27c2a08780ff05f16878985461c19e::1734449150::res://.godot/exported/133200997/export-78068f79b8e3ba168e6f72469afed863-PlayerStateMachine.scn
-res://Player/Player.tscn::97f83dd27da2d425bac513f1f2f127fb::1737622853::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
+res://Player/Player.tscn::c129ba9d3b0eb81f77c5c5343a2ead5e::1737624126::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
 res://PlayerData/PlayerStats.tres::9b4634a44b48098d3edf44d194868186::1735904430::res://.godot/exported/133200997/export-8fb5315e12567ae4e160e1d84f120afd-PlayerStats.res
 res://Shop/AbilitiesShop/AbilitiesShop.tscn::44e31d8e4136a9198bccc5e116c2861a::1737279703::res://.godot/exported/133200997/export-51683065a65fd7f140250a56328c4097-AbilitiesShop.scn
 res://Shop/AbilitiesShop/AbilitiesShopButton.tscn::d8bface69a80800e7340e3bb8e2080fb::1737279704::res://.godot/exported/133200997/export-01497330158b607902c6acc13a84c390-AbilitiesShopButton.scn
@@ -58,16 +58,16 @@ res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn::2f66867f3328ebd7a3b9b
 res://Weapons/5_ThunderBow/ThunderBow.tscn::8b4012e6fdd1a4aefb770f879c41a692::1736155316::res://.godot/exported/133200997/export-5987927524b6f75830fc779735822c8f-ThunderBow.scn
 res://HealthBar/HealthBar.tscn::3630839a898f4fbca0376ede9a3edc9b::1733252865::res://.godot/exported/133200997/export-ff366640997bc299e9392e98f5680f59-HealthBar.scn
 res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn::052c6107abc243945dcf5fd8832d20a0::1737489713::res://.godot/exported/133200997/export-81ff85b496bc1fb84e3df80e2f4bf8da-BlueBullet.scn
-res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn::655bcae533e66f96869b7970ebd33375::1737364401::res://.godot/exported/133200997/export-b7ecac70551cd2e54aecdbec5a64f4b9-RedBullet.scn
+res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn::655bcae533e66f96869b7970ebd33375::1737624127::res://.godot/exported/133200997/export-b7ecac70551cd2e54aecdbec5a64f4b9-RedBullet.scn
 res://Level/Animations/TransitionAnimation.tscn::70b8aa9570bd5226a8de09714cbdd096::1737461016::res://.godot/exported/133200997/export-c4978beba7db5619a510b203c74761ba-TransitionAnimation.scn
 res://Shop/PlatformShop/PlatformButton.tscn::f6bd3c2096ad7bb31836e70e24f103b2::1737443203::res://.godot/exported/133200997/export-34d77e800b2cd584605060680aebbcce-PlatformButton.scn
 res://Shop/PlatformShop/PlatformBuyMenu.tscn::2d8d8e061626703075be5d0918284bda::1737443203::res://.godot/exported/133200997/export-1ff08d38ca59644b457fcb8ddb01b101-PlatformBuyMenu.scn
-res://Enemies/EvilBird/EvilBird.tscn::45538b4f9e7a6421922c7e4eae2b98bb::1737622877::res://.godot/exported/133200997/export-38b05785e9c129bcec9a980cc08fb560-EvilBird.scn
+res://Enemies/EvilBird/EvilBird.tscn::45538b4f9e7a6421922c7e4eae2b98bb::1737624127::res://.godot/exported/133200997/export-38b05785e9c129bcec9a980cc08fb560-EvilBird.scn
 res://Enemies/Cloud/CloudEnemy.tscn::4d6a085815ecb2190c5477be6f58fc8e::1737566129::res://.godot/exported/133200997/export-80907b79528cd84314f312f64027792f-CloudEnemy.scn
 res://Enemies/EnemyAbilities/DeathAbility/DeathParticles.tscn::2aa4fba00be24e8a3fa7c9f840950143::1737586665::res://.godot/exported/133200997/export-fc4dea130840c0c1d87cb8fb13f315da-DeathParticles.scn
 res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn::29b643c22f89550bd689a932c58e7d9f::1737489713::res://.godot/exported/133200997/export-a85a8776d508678d8e92976eff69c467-BirdBullet.scn
-res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn::5e1b29a362d9c395821ea8262173afd7::1737622853::res://.godot/exported/133200997/export-2dbec18a6d8d6a88b23d6928a39abd9d-HitParticles.scn
+res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn::5e1b29a362d9c395821ea8262173afd7::1737624126::res://.godot/exported/133200997/export-2dbec18a6d8d6a88b23d6928a39abd9d-HitParticles.scn
 res://Enemies/EvilBird/BlueBird.tscn::9b266b619bb9726ca55a65cf1b2777ee::1737586653::res://.godot/exported/133200997/export-c423a1a5f000f2c440352bdb2c462a31-BlueBird.scn
-res://Enemies/FlyingApple/FlyingApple.tscn::c9a377d838a7aea809e8494f45904cfe::1737622853::res://.godot/exported/133200997/export-da50fd53d3ee9be533ee742606f7d50e-FlyingApple.scn
+res://Enemies/FlyingApple/FlyingApple.tscn::c9a377d838a7aea809e8494f45904cfe::1737624127::res://.godot/exported/133200997/export-da50fd53d3ee9be533ee742606f7d50e-FlyingApple.scn
 res://Enemies/Snake/Snake.tscn::d221dee440019eb9ec4e3782251bca12::1737587328::res://.godot/exported/133200997/export-c1a089e0b5ec61c03858be81c259ecf8-Snake.scn
 res://Level/Testing/TestingArea.tscn::f5c11fee316218c75ec6d84cbbfe130c::1737566129::res://.godot/exported/133200997/export-8e93965c38d98f26ff4401f02b4dad7f-TestingArea.scn

@@ -7,7 +7,7 @@ class_name EnemyBullet extends Area2D
 
 var direction: Vector2 = Vector2.ZERO
 
-func _ready() -> void:
+func _ready() -> void: 
 	sprite.texture = data.texture
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	body_entered.connect(hit_player)

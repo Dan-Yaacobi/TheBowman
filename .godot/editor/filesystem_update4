@@ -24,3 +24,5 @@ res://Enemies/DemoEnemy/DemoEnemyGold.tscn
 res://Enemies/EvilBird/BlueBird.tscn
 res://Enemies/EvilBird/EvilBird.tscn
 res://Enemies/Snake/Snake.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd
+res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn
