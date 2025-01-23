@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bwkebvyfvvrv8"]
+[gd_scene load_steps=30 format=3 uid="uid://bwkebvyfvvrv8"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_bgvmc"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_c6grr"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_3xxva"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_816bn"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="3_n13rq"]
 [ext_resource type="Texture2D" uid="uid://dwuuy2nm7bq0n" path="res://Enemies/DemoEnemy/GoldTarget.png" id="4_i4tgo"]
@@ -11,6 +12,9 @@
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="6_n3luf"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="7_o2pbp"]
 
+[sub_resource type="Resource" id="Resource_itsxy"]
+script = ExtResource("3_3xxva")
+
 [sub_resource type="Resource" id="Resource_t0u4o"]
 script = ExtResource("5_5wkjt")
 sparkle_color = "ffcc00"
@@ -19,17 +23,21 @@ sparkle_scene = ExtResource("5_id6ps")
 [sub_resource type="Resource" id="Resource_venkp"]
 resource_local_to_scene = true
 script = ExtResource("3_n13rq")
-hp = 10
+hp = 20
 move_speed = 50
 knockback = 180
 skin = ExtResource("4_i4tgo")
 coins_dropped = 0
 sharp_movement = true
 touch_damage = 0
-death_ability = Array[ExtResource("2_c6grr")]([])
+death_ability = Array[ExtResource("2_c6grr")]([SubResource("Resource_itsxy")])
 initial_ability = Array[ExtResource("2_c6grr")]([SubResource("Resource_t0u4o")])
 special_ability = Array[ExtResource("2_c6grr")]([])
 debuffs = Array[ExtResource("3_816bn")]([])
+boss = false
+shooter = false
+shooter_chance = 0
+shoot_speed = 0.0
 
 [sub_resource type="Resource" id="Resource_g5qpi"]
 script = ExtResource("5_aig3r")

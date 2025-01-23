@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://c35yjtl5a8xob"]
+[gd_scene load_steps=30 format=3 uid="uid://c35yjtl5a8xob"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_ry7kp"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_x0dd5"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_0keyp"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_r5unr"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_6pjf2"]
 [ext_resource type="Texture2D" uid="uid://dytyw504160mf" path="res://Enemies/DemoEnemy/green_target.png" id="5_70l7o"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="6_njgt5"]
@@ -12,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_kl7ae"]
 [ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_08ry8"]
 [ext_resource type="Script" path="res://Items/item_data.gd" id="12_1hwtl"]
+
+[sub_resource type="Resource" id="Resource_1u0xx"]
+script = ExtResource("3_r5unr")
 
 [sub_resource type="Resource" id="Resource_15jtt"]
 resource_local_to_scene = true
@@ -23,7 +27,7 @@ skin = ExtResource("5_70l7o")
 coins_dropped = 0
 sharp_movement = true
 touch_damage = 1
-death_ability = Array[ExtResource("2_x0dd5")]([])
+death_ability = Array[ExtResource("2_x0dd5")]([SubResource("Resource_1u0xx")])
 initial_ability = Array[ExtResource("2_x0dd5")]([])
 special_ability = Array[ExtResource("2_x0dd5")]([])
 debuffs = Array[ExtResource("3_0keyp")]([])

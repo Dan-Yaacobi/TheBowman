@@ -290,12 +290,14 @@ text = "Money:"
 script = ExtResource("10_qool0")
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.588235)
 z_index = -3
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("15_p7ivi")
 
 [node name="Background2" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.588235)
 z_index = -3
 position = Vector2(307, 0)
@@ -303,6 +305,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("15_p7ivi")
 
 [node name="Background3" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.588235)
 z_index = -3
 position = Vector2(-307, 0)

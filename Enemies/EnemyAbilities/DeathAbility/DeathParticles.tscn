@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cifl4doilti3x"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/death_particles.gd" id="1_u35a3"]
+
+[sub_resource type="Curve" id="Curve_8aufp"]
+max_value = 8.0
+_data = [Vector2(0, 8), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_51tqk"]
+colors = PackedColorArray(0.473976, 0.473976, 0.473976, 1, 1, 1, 1, 0)
+
+[node name="DeathParticles" type="CPUParticles2D"]
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, -200)
+angle_max = 90.0
+scale_amount_curve = SubResource("Curve_8aufp")
+color = Color(0.485703, 0.485704, 0.485703, 1)
+color_ramp = SubResource("Gradient_51tqk")
+script = ExtResource("1_u35a3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdtin5d5lhmfi"]
+[gd_scene load_steps=30 format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="2_p70mv"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="7_qgn5p"]
 [ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
 [ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="9_prxv3"]
@@ -13,6 +14,9 @@
 [ext_resource type="Script" path="res://Items/item_data.gd" id="10_0bpxa"]
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_a4bmo"]
 [ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_2scv3"]
+
+[sub_resource type="Resource" id="Resource_w50ih"]
+script = ExtResource("4_w0v01")
 
 [sub_resource type="Resource" id="Resource_jvrjh"]
 resource_local_to_scene = true
@@ -24,7 +28,7 @@ skin = ExtResource("2_p70mv")
 coins_dropped = 0
 sharp_movement = false
 touch_damage = 2
-death_ability = Array[ExtResource("2_1cl26")]([])
+death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
 initial_ability = Array[ExtResource("2_1cl26")]([])
 special_ability = Array[ExtResource("2_1cl26")]([])
 debuffs = Array[ExtResource("3_duj8d")]([])
@@ -67,6 +71,35 @@ effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_amrel")])
 script = ExtResource("7_qgn5p")
 item_data = SubResource("Resource_msidu")
 probability = 20.0
+
+[sub_resource type="Animation" id="Animation_qmrug"]
+resource_name = "Damaged"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_sngn8"]
 resource_name = "Move"
@@ -135,35 +168,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_qmrug"]
-resource_name = "Damaged"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]

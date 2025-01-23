@@ -23,7 +23,7 @@ hp = 5
 max_hp = 5
 move_speed = 75
 max_jumps = 2
-jump_height = 70
+jump_height = 90
 knockback_resistance = 3
 menu_speed = 150
 in_menu = false
@@ -131,7 +131,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="DamagedParticles" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 20
+amount = 5
 lifetime = 0.7
 one_shot = true
 explosiveness = 1.0

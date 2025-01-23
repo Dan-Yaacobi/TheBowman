@@ -50,10 +50,10 @@ tile_map_data = PackedByteArray("AAATAAAAAAAAAAAAAAASAAAAAAAAAAAAAAARAAAAAAAAAAA
 script = null
 
 [node name="ButtonShootClick3" parent="." instance=ExtResource("3_0uxqg")]
-offset_left = 275.0
-offset_top = 18.0
-offset_right = 1797.0
-offset_bottom = 368.0
+offset_left = 354.0
+offset_top = 15.0
+offset_right = 1876.0
+offset_bottom = 365.0
 tooltip_text = "CANNOT BE UNDONE!"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.00999999, 0.00999999, 1)
@@ -106,10 +106,10 @@ shape = SubResource("RectangleShape2D_kh562")
 debug_color = Color(0.371579, 0.608447, 0.265125, 0.42)
 
 [node name="CurrentWaves" type="Label" parent="."]
-offset_left = 298.0
-offset_top = 37.0
-offset_right = 1679.0
-offset_bottom = 310.0
+offset_left = 355.0
+offset_top = 35.0
+offset_right = 1736.0
+offset_bottom = 308.0
 scale = Vector2(0.025, 0.025)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
@@ -152,18 +152,18 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "How To Play:
 A ,D: Move
+W: Summon
 S: Slam Down
 SpaceBar: Jump (Can Double Jump)
-Mouse: Shoot
-R: special ability
-W: Summon
+Left Mouse: Shoot
+Right Mouse: special ability
 "
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
-offset_left = 299.0
-offset_top = 47.0
-offset_right = 1607.0
-offset_bottom = 397.0
+offset_left = 355.0
+offset_top = 45.0
+offset_right = 1663.0
+offset_bottom = 395.0
 scale = Vector2(0.025, 0.025)
 tooltip_text = "For Testing Purposes"
 action_mode = 0

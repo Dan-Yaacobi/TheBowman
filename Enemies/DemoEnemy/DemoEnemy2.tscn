@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cn76h3jplsrfn"]
+[gd_scene load_steps=23 format=3 uid="uid://cn76h3jplsrfn"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_t5j42"]
 [ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_b0juv"]
@@ -6,9 +6,13 @@
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="3_duv7u"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_e70ef"]
 [ext_resource type="Texture2D" uid="uid://sthkilqtufuk" path="res://Enemies/DemoEnemy/BlueTarget.png" id="4_bb7l3"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_eldsg"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="6_8bfgm"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="7_0mc1a"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="9_8b8lc"]
+
+[sub_resource type="Resource" id="Resource_fth6d"]
+script = ExtResource("4_eldsg")
 
 [sub_resource type="Resource" id="Resource_venkp"]
 resource_local_to_scene = true
@@ -20,7 +24,7 @@ skin = ExtResource("4_bb7l3")
 coins_dropped = 0
 sharp_movement = true
 touch_damage = 1
-death_ability = Array[ExtResource("2_fb18l")]([])
+death_ability = Array[ExtResource("2_fb18l")]([SubResource("Resource_fth6d")])
 initial_ability = Array[ExtResource("2_fb18l")]([])
 special_ability = Array[ExtResource("2_fb18l")]([])
 debuffs = Array[ExtResource("3_e70ef")]([])

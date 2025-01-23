@@ -25,6 +25,7 @@ var added_hit_effect: bool = false
 var hit_particle_effect: CPUParticles2D
 
 var animation_player: AnimationPlayer
+
 func _ready() -> void:
 	pass
 	
@@ -39,46 +40,64 @@ func calculate_direction_to_player() -> Vector2:
 
 func hit(_arrow: Area2D) -> void:
 	if _arrow is Arrow and _arrow != null:
-		if not added_hit_effect:
-			added_hit_effect = true
-			hit_particle_effect = HIT_PARTICLES.instantiate()
-			#hit_particle_effect.gravity = _arrow.direction * 150
-			add_child(hit_particle_effect)
-			
-		if hit_particle_effect != null:
-			hit_particle_effect.restart()
+		take_hit_effect()
 		push_back(_arrow.direction,_arrow.data.pushback_power)
 		take_damage(_arrow.data.damage)
 		_arrow.hit()
 		_arrow.clear_shot()
-
+		
+func take_hit_effect() -> void:
+	if not added_hit_effect:
+		added_hit_effect = true
+		hit_particle_effect = HIT_PARTICLES.instantiate()
+		add_child(hit_particle_effect)
+		
+	if hit_particle_effect != null:
+		hit_particle_effect.restart()
+		
 func take_damage(_dmg: int) -> void:
 	stats.hp -= _dmg
-	animation_player.play("Damaged")
+	update_animation("Damaged")
+	if stats.shooter:
+		stats.shooter = false
+		if not animation_player.animation_finished.is_connected(shooter_damaged_animation_finished):
+			animation_player.animation_finished.connect(shooter_damaged_animation_finished)
+	else:
+		if not animation_player.animation_finished.is_connected(regular_damaged_animation_finished):
+			animation_player.animation_finished.connect(regular_damaged_animation_finished)
+			
 	if stats.hp <= 0:
 		activate_death_ability()
 		enemy_died()
 		drop_item()
+
+func shooter_damaged_animation_finished(anim_name: String) -> void:
+	if anim_name == "Damaged":
+		stats.shooter = true
+		update_animation("Move")
 		
+func regular_damaged_animation_finished(anim_name: String) -> void:
+	if anim_name == "Damaged":
+		update_animation("Move")
 	
 func activate_death_ability() -> void:
 	if stats.death_ability.size() > 0:
 		for ability in stats.death_ability:
-			ability.activate_ability(self)
+			if ability != null:
+				ability.activate_ability(self)
 
 func enemy_died() -> void:
 	died.emit(self)
 	queue_free()
 	
 func push_back(_direction: Vector2, power: int) -> void:
-	velocity = Vector2.ZERO
-	velocity += _direction * power
+	velocity = _direction * power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		body.hit_player(stats.touch_damage)
 		body.set_pushback_values(direction,stats.knockback)
-		push_back(-direction,stats.move_speed)
+		push_back(-direction,stats.move_speed*2)
 
 func drop_item() -> void:
 	if not no_drops:
@@ -117,3 +136,7 @@ func stun_release() -> void:
 	stunned_state = false
 	stunned_effect.emitting = false
 	stats.move_speed = temp_move_speed
+
+func update_animation(_animation: String) -> void:
+	animation_player.play(_animation)
+	pass

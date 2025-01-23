@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	activate_debuffs()
 	move_and_slide()
 	pass
-	
+
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()

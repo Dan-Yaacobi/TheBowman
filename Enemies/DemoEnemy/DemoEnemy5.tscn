@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://dmt8clw634d1e"]
+[gd_scene load_steps=31 format=3 uid="uid://dmt8clw634d1e"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_vd5cf"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_3vtpi"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_55kjd"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_g517e"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_y6yk0"]
 [ext_resource type="Texture2D" uid="uid://x3g6u8kac3xy" path="res://Enemies/DemoEnemy/orange_enemy.png" id="5_2coy4"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="6_rko6c"]
@@ -12,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_rntf0"]
 [ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_duwnq"]
 [ext_resource type="Script" path="res://Items/item_data.gd" id="12_hfo8n"]
+
+[sub_resource type="Resource" id="Resource_nkakj"]
+script = ExtResource("3_g517e")
 
 [sub_resource type="Resource" id="Resource_15jtt"]
 resource_local_to_scene = true
@@ -23,7 +27,7 @@ skin = ExtResource("5_2coy4")
 coins_dropped = 0
 sharp_movement = true
 touch_damage = 1
-death_ability = Array[ExtResource("2_3vtpi")]([])
+death_ability = Array[ExtResource("2_3vtpi")]([SubResource("Resource_nkakj")])
 initial_ability = Array[ExtResource("2_3vtpi")]([])
 special_ability = Array[ExtResource("2_3vtpi")]([])
 debuffs = Array[ExtResource("3_55kjd")]([])
@@ -73,6 +77,35 @@ probability = 50.0
 script = ExtResource("6_rko6c")
 item_data = SubResource("Resource_clsfr")
 probability = 25.0
+
+[sub_resource type="Animation" id="Animation_7qmi8"]
+resource_name = "Damaged"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_rwjqo"]
 resource_name = "Move"
@@ -141,35 +174,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_7qmi8"]
-resource_name = "Damaged"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]

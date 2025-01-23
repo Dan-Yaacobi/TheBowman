@@ -86,29 +86,11 @@ offset_left = 32.0
 offset_right = 48.0
 offset_bottom = 16.0
 
-[node name="PlatformButton15" parent="." instance=ExtResource("5_adtye")]
-offset_left = 32.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 32.0
-
-[node name="PlatformButton16" parent="." instance=ExtResource("5_adtye")]
-offset_left = 48.0
-offset_top = 16.0
-offset_right = 64.0
-offset_bottom = 32.0
-
 [node name="PlatformButton17" parent="." instance=ExtResource("5_adtye")]
 offset_left = 48.0
 offset_top = 32.0
 offset_right = 64.0
 offset_bottom = 48.0
-
-[node name="PlatformButton18" parent="." instance=ExtResource("5_adtye")]
-offset_left = 64.0
-offset_top = 16.0
-offset_right = 80.0
-offset_bottom = 32.0
 
 [node name="PlatformButton19" parent="." instance=ExtResource("5_adtye")]
 offset_left = 64.0
@@ -121,24 +103,6 @@ offset_left = 32.0
 offset_top = 32.0
 offset_right = 48.0
 offset_bottom = 48.0
-
-[node name="PlatformButton21" parent="." instance=ExtResource("5_adtye")]
-offset_left = -32.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 32.0
-
-[node name="PlatformButton22" parent="." instance=ExtResource("5_adtye")]
-offset_left = -48.0
-offset_top = 16.0
-offset_right = -32.0
-offset_bottom = 32.0
-
-[node name="PlatformButton23" parent="." instance=ExtResource("5_adtye")]
-offset_left = -64.0
-offset_top = 16.0
-offset_right = -48.0
-offset_bottom = 32.0
 
 [node name="PlatformButton24" parent="." instance=ExtResource("5_adtye")]
 offset_left = -64.0
@@ -158,35 +122,15 @@ offset_top = 32.0
 offset_right = -16.0
 offset_bottom = 48.0
 
-[node name="PlatformButton10" parent="." instance=ExtResource("5_adtye")]
-offset_left = 32.0
-offset_top = -16.0
-offset_right = 48.0
-
-[node name="PlatformButton13" parent="." instance=ExtResource("5_adtye")]
-offset_left = 64.0
-offset_top = -16.0
-offset_right = 80.0
-
 [node name="PlatformButton14" parent="." instance=ExtResource("5_adtye")]
 offset_left = 64.0
 offset_right = 80.0
 offset_bottom = 16.0
 
-[node name="PlatformButton11" parent="." instance=ExtResource("5_adtye")]
-offset_left = 48.0
-offset_top = -16.0
-offset_right = 64.0
-
 [node name="PlatformButton12" parent="." instance=ExtResource("5_adtye")]
 offset_left = 48.0
 offset_right = 64.0
 offset_bottom = 16.0
-
-[node name="PlatformButton2" parent="." instance=ExtResource("5_adtye")]
-offset_left = -32.0
-offset_top = -16.0
-offset_right = -16.0
 
 [node name="PlatformButton3" parent="." instance=ExtResource("5_adtye")]
 offset_left = -32.0
@@ -198,31 +142,10 @@ offset_left = -48.0
 offset_right = -32.0
 offset_bottom = 16.0
 
-[node name="PlatformButton5" parent="." instance=ExtResource("5_adtye")]
-offset_left = -48.0
-offset_top = -16.0
-offset_right = -32.0
-
-[node name="PlatformButton6" parent="." instance=ExtResource("5_adtye")]
-offset_left = -64.0
-offset_top = -16.0
-offset_right = -48.0
-
-[node name="PlatformButton28" parent="." instance=ExtResource("5_adtye")]
-offset_left = -80.0
-offset_top = -16.0
-offset_right = -64.0
-
 [node name="PlatformButton29" parent="." instance=ExtResource("5_adtye")]
 offset_left = -80.0
 offset_right = -64.0
 offset_bottom = 16.0
-
-[node name="PlatformButton30" parent="." instance=ExtResource("5_adtye")]
-offset_left = -80.0
-offset_top = 16.0
-offset_right = -64.0
-offset_bottom = 32.0
 
 [node name="PlatformButton31" parent="." instance=ExtResource("5_adtye")]
 offset_left = -80.0
@@ -230,21 +153,10 @@ offset_top = 32.0
 offset_right = -64.0
 offset_bottom = 48.0
 
-[node name="PlatformButton53" parent="." instance=ExtResource("5_adtye")]
-offset_left = 96.0
-offset_top = -16.0
-offset_right = 112.0
-
 [node name="PlatformButton54" parent="." instance=ExtResource("5_adtye")]
 offset_left = 96.0
 offset_right = 112.0
 offset_bottom = 16.0
-
-[node name="PlatformButton55" parent="." instance=ExtResource("5_adtye")]
-offset_left = 96.0
-offset_top = 16.0
-offset_right = 112.0
-offset_bottom = 32.0
 
 [node name="PlatformButton56" parent="." instance=ExtResource("5_adtye")]
 offset_left = 96.0
@@ -258,37 +170,15 @@ offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 48.0
 
-[node name="PlatformButton58" parent="." instance=ExtResource("5_adtye")]
-offset_left = 112.0
-offset_top = 16.0
-offset_right = 128.0
-offset_bottom = 32.0
-
 [node name="PlatformButton59" parent="." instance=ExtResource("5_adtye")]
 offset_left = 112.0
 offset_right = 128.0
 offset_bottom = 16.0
 
-[node name="PlatformButton60" parent="." instance=ExtResource("5_adtye")]
-offset_left = 112.0
-offset_top = -16.0
-offset_right = 128.0
-
-[node name="PlatformButton38" parent="." instance=ExtResource("5_adtye")]
-offset_left = 80.0
-offset_top = -16.0
-offset_right = 96.0
-
 [node name="PlatformButton39" parent="." instance=ExtResource("5_adtye")]
 offset_left = 80.0
 offset_right = 96.0
 offset_bottom = 16.0
-
-[node name="PlatformButton40" parent="." instance=ExtResource("5_adtye")]
-offset_left = 80.0
-offset_top = 16.0
-offset_right = 96.0
-offset_bottom = 32.0
 
 [node name="PlatformButton41" parent="." instance=ExtResource("5_adtye")]
 offset_left = 80.0
@@ -301,29 +191,11 @@ offset_left = 128.0
 offset_right = 144.0
 offset_bottom = 16.0
 
-[node name="PlatformButton32" parent="." instance=ExtResource("5_adtye")]
-offset_left = 128.0
-offset_top = 16.0
-offset_right = 144.0
-offset_bottom = 32.0
-
-[node name="PlatformButton33" parent="." instance=ExtResource("5_adtye")]
-offset_left = 144.0
-offset_top = 16.0
-offset_right = 160.0
-offset_bottom = 32.0
-
 [node name="PlatformButton34" parent="." instance=ExtResource("5_adtye")]
 offset_left = 144.0
 offset_top = 32.0
 offset_right = 160.0
 offset_bottom = 48.0
-
-[node name="PlatformButton35" parent="." instance=ExtResource("5_adtye")]
-offset_left = 160.0
-offset_top = 16.0
-offset_right = 176.0
-offset_bottom = 32.0
 
 [node name="PlatformButton36" parent="." instance=ExtResource("5_adtye")]
 offset_left = 160.0
@@ -337,46 +209,20 @@ offset_top = 32.0
 offset_right = 144.0
 offset_bottom = 48.0
 
-[node name="PlatformButton42" parent="." instance=ExtResource("5_adtye")]
-offset_left = 128.0
-offset_top = -16.0
-offset_right = 144.0
-
-[node name="PlatformButton51" parent="." instance=ExtResource("5_adtye")]
-offset_left = 160.0
-offset_top = -16.0
-offset_right = 176.0
-
 [node name="PlatformButton52" parent="." instance=ExtResource("5_adtye")]
 offset_left = 160.0
 offset_right = 176.0
 offset_bottom = 16.0
-
-[node name="PlatformButton61" parent="." instance=ExtResource("5_adtye")]
-offset_left = 144.0
-offset_top = -16.0
-offset_right = 160.0
 
 [node name="PlatformButton62" parent="." instance=ExtResource("5_adtye")]
 offset_left = 144.0
 offset_right = 160.0
 offset_bottom = 16.0
 
-[node name="PlatformButton63" parent="." instance=ExtResource("5_adtye")]
-offset_left = 192.0
-offset_top = -16.0
-offset_right = 208.0
-
 [node name="PlatformButton64" parent="." instance=ExtResource("5_adtye")]
 offset_left = 192.0
 offset_right = 208.0
 offset_bottom = 16.0
-
-[node name="PlatformButton65" parent="." instance=ExtResource("5_adtye")]
-offset_left = 192.0
-offset_top = 16.0
-offset_right = 208.0
-offset_bottom = 32.0
 
 [node name="PlatformButton66" parent="." instance=ExtResource("5_adtye")]
 offset_left = 192.0
@@ -390,37 +236,15 @@ offset_top = 32.0
 offset_right = 224.0
 offset_bottom = 48.0
 
-[node name="PlatformButton68" parent="." instance=ExtResource("5_adtye")]
-offset_left = 208.0
-offset_top = 16.0
-offset_right = 224.0
-offset_bottom = 32.0
-
 [node name="PlatformButton69" parent="." instance=ExtResource("5_adtye")]
 offset_left = 208.0
 offset_right = 224.0
 offset_bottom = 16.0
 
-[node name="PlatformButton70" parent="." instance=ExtResource("5_adtye")]
-offset_left = 208.0
-offset_top = -16.0
-offset_right = 224.0
-
-[node name="PlatformButton71" parent="." instance=ExtResource("5_adtye")]
-offset_left = 176.0
-offset_top = -16.0
-offset_right = 192.0
-
 [node name="PlatformButton72" parent="." instance=ExtResource("5_adtye")]
 offset_left = 176.0
 offset_right = 192.0
 offset_bottom = 16.0
-
-[node name="PlatformButton73" parent="." instance=ExtResource("5_adtye")]
-offset_left = 176.0
-offset_top = 16.0
-offset_right = 192.0
-offset_bottom = 32.0
 
 [node name="PlatformButton74" parent="." instance=ExtResource("5_adtye")]
 offset_left = 176.0
@@ -430,176 +254,302 @@ offset_bottom = 48.0
 
 [node name="PlatformButton99" parent="." instance=ExtResource("5_adtye")]
 offset_left = 48.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 64.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton100" parent="." instance=ExtResource("5_adtye")]
 offset_left = 64.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 80.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton101" parent="." instance=ExtResource("5_adtye")]
 offset_left = 32.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 48.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton102" parent="." instance=ExtResource("5_adtye")]
 offset_left = 96.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 112.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton103" parent="." instance=ExtResource("5_adtye")]
 offset_left = 112.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 128.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton104" parent="." instance=ExtResource("5_adtye")]
 offset_left = 80.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 96.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton105" parent="." instance=ExtResource("5_adtye")]
 offset_left = 144.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 160.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton106" parent="." instance=ExtResource("5_adtye")]
 offset_left = 160.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 176.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton107" parent="." instance=ExtResource("5_adtye")]
 offset_left = 128.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 144.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton108" parent="." instance=ExtResource("5_adtye")]
 offset_left = 192.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 208.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton109" parent="." instance=ExtResource("5_adtye")]
 offset_left = 208.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 224.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton110" parent="." instance=ExtResource("5_adtye")]
 offset_left = 176.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 192.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton111" parent="." instance=ExtResource("5_adtye")]
 offset_left = -192.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -176.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton112" parent="." instance=ExtResource("5_adtye")]
 offset_left = -176.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -160.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton113" parent="." instance=ExtResource("5_adtye")]
 offset_left = -208.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -192.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton114" parent="." instance=ExtResource("5_adtye")]
 offset_left = -144.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -128.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton115" parent="." instance=ExtResource("5_adtye")]
 offset_left = -128.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -112.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton116" parent="." instance=ExtResource("5_adtye")]
 offset_left = -160.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -144.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton117" parent="." instance=ExtResource("5_adtye")]
 offset_left = -96.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -80.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton118" parent="." instance=ExtResource("5_adtye")]
 offset_left = -80.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -64.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton119" parent="." instance=ExtResource("5_adtye")]
 offset_left = -112.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -96.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton120" parent="." instance=ExtResource("5_adtye")]
 offset_left = -48.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -32.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton121" parent="." instance=ExtResource("5_adtye")]
 offset_left = -32.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -16.0
-offset_bottom = 64.0
+offset_bottom = 80.0
 
 [node name="PlatformButton122" parent="." instance=ExtResource("5_adtye")]
 offset_left = -64.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = -48.0
-offset_bottom = 64.0
+offset_bottom = 80.0
+
+[node name="PlatformButton123" parent="." instance=ExtResource("5_adtye")]
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 64.0
+offset_bottom = 112.0
+
+[node name="PlatformButton124" parent="." instance=ExtResource("5_adtye")]
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 80.0
+offset_bottom = 112.0
+
+[node name="PlatformButton125" parent="." instance=ExtResource("5_adtye")]
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 48.0
+offset_bottom = 112.0
+
+[node name="PlatformButton126" parent="." instance=ExtResource("5_adtye")]
+offset_left = 96.0
+offset_top = 96.0
+offset_right = 112.0
+offset_bottom = 112.0
+
+[node name="PlatformButton127" parent="." instance=ExtResource("5_adtye")]
+offset_left = 112.0
+offset_top = 96.0
+offset_right = 128.0
+offset_bottom = 112.0
+
+[node name="PlatformButton128" parent="." instance=ExtResource("5_adtye")]
+offset_left = 80.0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 112.0
+
+[node name="PlatformButton129" parent="." instance=ExtResource("5_adtye")]
+offset_left = 144.0
+offset_top = 96.0
+offset_right = 160.0
+offset_bottom = 112.0
+
+[node name="PlatformButton130" parent="." instance=ExtResource("5_adtye")]
+offset_left = 160.0
+offset_top = 96.0
+offset_right = 176.0
+offset_bottom = 112.0
+
+[node name="PlatformButton131" parent="." instance=ExtResource("5_adtye")]
+offset_left = 128.0
+offset_top = 96.0
+offset_right = 144.0
+offset_bottom = 112.0
+
+[node name="PlatformButton132" parent="." instance=ExtResource("5_adtye")]
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 208.0
+offset_bottom = 112.0
+
+[node name="PlatformButton133" parent="." instance=ExtResource("5_adtye")]
+offset_left = 208.0
+offset_top = 96.0
+offset_right = 224.0
+offset_bottom = 112.0
+
+[node name="PlatformButton134" parent="." instance=ExtResource("5_adtye")]
+offset_left = 176.0
+offset_top = 96.0
+offset_right = 192.0
+offset_bottom = 112.0
+
+[node name="PlatformButton135" parent="." instance=ExtResource("5_adtye")]
+offset_left = -192.0
+offset_top = 96.0
+offset_right = -176.0
+offset_bottom = 112.0
+
+[node name="PlatformButton136" parent="." instance=ExtResource("5_adtye")]
+offset_left = -176.0
+offset_top = 96.0
+offset_right = -160.0
+offset_bottom = 112.0
+
+[node name="PlatformButton137" parent="." instance=ExtResource("5_adtye")]
+offset_left = -208.0
+offset_top = 96.0
+offset_right = -192.0
+offset_bottom = 112.0
+
+[node name="PlatformButton138" parent="." instance=ExtResource("5_adtye")]
+offset_left = -144.0
+offset_top = 96.0
+offset_right = -128.0
+offset_bottom = 112.0
+
+[node name="PlatformButton139" parent="." instance=ExtResource("5_adtye")]
+offset_left = -128.0
+offset_top = 96.0
+offset_right = -112.0
+offset_bottom = 112.0
+
+[node name="PlatformButton140" parent="." instance=ExtResource("5_adtye")]
+offset_left = -160.0
+offset_top = 96.0
+offset_right = -144.0
+offset_bottom = 112.0
+
+[node name="PlatformButton141" parent="." instance=ExtResource("5_adtye")]
+offset_left = -96.0
+offset_top = 96.0
+offset_right = -80.0
+offset_bottom = 112.0
+
+[node name="PlatformButton142" parent="." instance=ExtResource("5_adtye")]
+offset_left = -80.0
+offset_top = 96.0
+offset_right = -64.0
+offset_bottom = 112.0
+
+[node name="PlatformButton143" parent="." instance=ExtResource("5_adtye")]
+offset_left = -112.0
+offset_top = 96.0
+offset_right = -96.0
+offset_bottom = 112.0
+
+[node name="PlatformButton144" parent="." instance=ExtResource("5_adtye")]
+offset_left = -48.0
+offset_top = 96.0
+offset_right = -32.0
+offset_bottom = 112.0
+
+[node name="PlatformButton145" parent="." instance=ExtResource("5_adtye")]
+offset_left = -32.0
+offset_top = 96.0
+offset_right = -16.0
+offset_bottom = 112.0
+
+[node name="PlatformButton146" parent="." instance=ExtResource("5_adtye")]
+offset_left = -64.0
+offset_top = 96.0
+offset_right = -48.0
+offset_bottom = 112.0
 
 [node name="PlatformButton75" parent="." instance=ExtResource("5_adtye")]
 offset_left = -208.0
 offset_right = -192.0
 offset_bottom = 16.0
 
-[node name="PlatformButton76" parent="." instance=ExtResource("5_adtye")]
-offset_left = -208.0
-offset_top = 16.0
-offset_right = -192.0
-offset_bottom = 32.0
-
-[node name="PlatformButton77" parent="." instance=ExtResource("5_adtye")]
-offset_left = -192.0
-offset_top = 16.0
-offset_right = -176.0
-offset_bottom = 32.0
-
 [node name="PlatformButton78" parent="." instance=ExtResource("5_adtye")]
 offset_left = -192.0
 offset_top = 32.0
 offset_right = -176.0
 offset_bottom = 48.0
-
-[node name="PlatformButton79" parent="." instance=ExtResource("5_adtye")]
-offset_left = -176.0
-offset_top = 16.0
-offset_right = -160.0
-offset_bottom = 32.0
 
 [node name="PlatformButton80" parent="." instance=ExtResource("5_adtye")]
 offset_left = -176.0
@@ -613,46 +563,20 @@ offset_top = 32.0
 offset_right = -192.0
 offset_bottom = 48.0
 
-[node name="PlatformButton82" parent="." instance=ExtResource("5_adtye")]
-offset_left = -208.0
-offset_top = -16.0
-offset_right = -192.0
-
-[node name="PlatformButton83" parent="." instance=ExtResource("5_adtye")]
-offset_left = -176.0
-offset_top = -16.0
-offset_right = -160.0
-
 [node name="PlatformButton84" parent="." instance=ExtResource("5_adtye")]
 offset_left = -176.0
 offset_right = -160.0
 offset_bottom = 16.0
-
-[node name="PlatformButton85" parent="." instance=ExtResource("5_adtye")]
-offset_left = -192.0
-offset_top = -16.0
-offset_right = -176.0
 
 [node name="PlatformButton86" parent="." instance=ExtResource("5_adtye")]
 offset_left = -192.0
 offset_right = -176.0
 offset_bottom = 16.0
 
-[node name="PlatformButton87" parent="." instance=ExtResource("5_adtye")]
-offset_left = -144.0
-offset_top = -16.0
-offset_right = -128.0
-
 [node name="PlatformButton88" parent="." instance=ExtResource("5_adtye")]
 offset_left = -144.0
 offset_right = -128.0
 offset_bottom = 16.0
-
-[node name="PlatformButton89" parent="." instance=ExtResource("5_adtye")]
-offset_left = -144.0
-offset_top = 16.0
-offset_right = -128.0
-offset_bottom = 32.0
 
 [node name="PlatformButton90" parent="." instance=ExtResource("5_adtye")]
 offset_left = -144.0
@@ -666,37 +590,15 @@ offset_top = 32.0
 offset_right = -112.0
 offset_bottom = 48.0
 
-[node name="PlatformButton92" parent="." instance=ExtResource("5_adtye")]
-offset_left = -128.0
-offset_top = 16.0
-offset_right = -112.0
-offset_bottom = 32.0
-
 [node name="PlatformButton93" parent="." instance=ExtResource("5_adtye")]
 offset_left = -128.0
 offset_right = -112.0
 offset_bottom = 16.0
 
-[node name="PlatformButton94" parent="." instance=ExtResource("5_adtye")]
-offset_left = -128.0
-offset_top = -16.0
-offset_right = -112.0
-
-[node name="PlatformButton95" parent="." instance=ExtResource("5_adtye")]
-offset_left = -160.0
-offset_top = -16.0
-offset_right = -144.0
-
 [node name="PlatformButton96" parent="." instance=ExtResource("5_adtye")]
 offset_left = -160.0
 offset_right = -144.0
 offset_bottom = 16.0
-
-[node name="PlatformButton97" parent="." instance=ExtResource("5_adtye")]
-offset_left = -160.0
-offset_top = 16.0
-offset_right = -144.0
-offset_bottom = 32.0
 
 [node name="PlatformButton98" parent="." instance=ExtResource("5_adtye")]
 offset_left = -160.0
@@ -709,21 +611,10 @@ offset_left = -64.0
 offset_right = -48.0
 offset_bottom = 16.0
 
-[node name="PlatformButton43" parent="." instance=ExtResource("5_adtye")]
-offset_left = -96.0
-offset_top = -16.0
-offset_right = -80.0
-
 [node name="PlatformButton44" parent="." instance=ExtResource("5_adtye")]
 offset_left = -96.0
 offset_right = -80.0
 offset_bottom = 16.0
-
-[node name="PlatformButton45" parent="." instance=ExtResource("5_adtye")]
-offset_left = -96.0
-offset_top = 16.0
-offset_right = -80.0
-offset_bottom = 32.0
 
 [node name="PlatformButton46" parent="." instance=ExtResource("5_adtye")]
 offset_left = -96.0
@@ -737,18 +628,7 @@ offset_top = 32.0
 offset_right = -96.0
 offset_bottom = 48.0
 
-[node name="PlatformButton48" parent="." instance=ExtResource("5_adtye")]
-offset_left = -112.0
-offset_top = 16.0
-offset_right = -96.0
-offset_bottom = 32.0
-
 [node name="PlatformButton49" parent="." instance=ExtResource("5_adtye")]
 offset_left = -112.0
 offset_right = -96.0
 offset_bottom = 16.0
-
-[node name="PlatformButton50" parent="." instance=ExtResource("5_adtye")]
-offset_left = -112.0
-offset_top = -16.0
-offset_right = -96.0
