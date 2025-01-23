@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0d7ncfefiyk"]
+
+[ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="1_txf7g"]
+[ext_resource type="Texture2D" uid="uid://bxubmxoxqclqy" path="res://Player/HealthBar/Healthbar.png" id="2_4wx0s"]
+[ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="3_rygiy"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_left = -32.0
+offset_top = -10.0
+offset_right = 32.0
+offset_bottom = 22.0
+value = 100.0
+texture_under = ExtResource("1_txf7g")
+texture_progress = ExtResource("2_4wx0s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 12)
+texture = ExtResource("3_rygiy")

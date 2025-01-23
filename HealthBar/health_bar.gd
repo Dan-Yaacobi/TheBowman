@@ -1,4 +1,4 @@
-class_name HealthBar extends ProgressBar
+class_name HealthBar extends TextureProgressBar
 
 var health: int = 0: set = _set_health
 

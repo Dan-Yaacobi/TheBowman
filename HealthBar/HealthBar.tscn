@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2cmn2xqaux53"]
+[gd_scene load_steps=5 format=3 uid="uid://c2cmn2xqaux53"]
 
 [ext_resource type="Script" path="res://HealthBar/health_bar.gd" id="1_k2pjd"]
+[ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="1_oavdx"]
+[ext_resource type="Texture2D" uid="uid://bxubmxoxqclqy" path="res://Player/HealthBar/Healthbar.png" id="2_8ok61"]
+[ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="4_tiuin"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6cgud"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubb8u"]
-
-[node name="HealthBar" type="ProgressBar"]
-modulate = Color(1, 0, 0, 1)
-offset_left = -8.0
-offset_top = -11.0
-offset_right = 24.0
-offset_bottom = -7.0
-scale = Vector2(0.5, 0.5)
-theme_override_styles/background = SubResource("StyleBoxEmpty_6cgud")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ubb8u")
+[node name="HealthBar" type="TextureProgressBar"]
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 39.0
+offset_bottom = 20.0
 value = 50.0
-show_percentage = false
+texture_under = ExtResource("1_oavdx")
+texture_progress = ExtResource("2_8ok61")
 script = ExtResource("1_k2pjd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 12)
+texture = ExtResource("4_tiuin")

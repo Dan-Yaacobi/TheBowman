@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal died
 signal money_changed
 signal combo(amount: int)
+signal took_hit
 
 @onready var hand: Hand = $Hand
 @onready var body: Body = $Body
@@ -62,31 +63,31 @@ func _process(delta: float) -> void:
 	#print("current scene is: ", get_parent(), " position ", global_position)
 	
 func _unhandled_input(event: InputEvent) -> void:
-	
-	if event.is_action_pressed("Jump"):
-		jump_action.jump()
-		for ability in stats.jump_abilities:
-			ability.activate_ability()
-
-	if event.is_action_pressed("shoot",true):
-		if mana_bar.use_mana(regular_mana_cost):
-			current_weapon.regular_attack = true
-			var mouse_pos = get_global_mouse_position()
-			shoot_action.shoot(mouse_pos)
-			for ability in stats.shoot_abilities:
+	if stats.hp > 0:
+		if event.is_action_pressed("Jump"):
+			jump_action.jump()
+			for ability in stats.jump_abilities:
 				ability.activate_ability()
 
-	if event.is_action_pressed("special ability"):
-		if stats.special_ability != null:
-			if special_ability_available and mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
-				stats.special_ability.activate_special_ability(self)
-				current_weapon.regular_attack = false
-				special_ability_available = false
-				special_ability_cooldown.start()
+		if event.is_action_pressed("shoot",true):
+			if mana_bar.use_mana(regular_mana_cost):
+				current_weapon.regular_attack = true
+				var mouse_pos = get_global_mouse_position()
+				shoot_action.shoot(mouse_pos)
+				for ability in stats.shoot_abilities:
+					ability.activate_ability()
 
-	if event.is_action_pressed("DropDown"):
-		if velocity.y != 0:
-			dropping_down = true
+		if event.is_action_pressed("special ability"):
+			if stats.special_ability != null:
+				if special_ability_available and mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
+					stats.special_ability.activate_special_ability(self)
+					current_weapon.regular_attack = false
+					special_ability_available = false
+					special_ability_cooldown.start()
+
+		if event.is_action_pressed("DropDown"):
+			if velocity.y != 0:
+				dropping_down = true
 
 func combo_lost() -> void:
 	combo_counter = 0
@@ -196,6 +197,7 @@ func init_bow() -> void:
 
 	
 func hit_player(damage: int) -> void:
+	took_hit.emit()
 	stats.hp -= damage
 	damaged_particles.emitting = true
 	health_bar._set_health(stats.hp)
@@ -223,19 +225,21 @@ func collect_money(amount: int) -> void:
 	money_changed.emit(stats.money)
 
 func dead() -> void:
+	get_parent().kill_all_enemies()
+	velocity = Vector2.ZERO
 	body.change_animation("Dead")
 	hand.visible = false
 	collision_shape.set_deferred("disabled", true)
 	death_animation_timer.start()
-	await get_tree().create_timer(death_animation_timer.wait_time).timeout
-	health_bar._set_health(stats.max_hp)
 	
 func reset() -> void:
-	body.change_animation("Idle")
 	collision_shape.set_deferred("disabled", false)
 	stats.hp = stats.max_hp
+	health_bar._set_health(stats.max_hp)
 	died.emit("Menu")
 	hand.visible = true
+	body.reset_animations()
+	body.change_animation("Idle")
 	
 func set_camera(tile_limit: Rect2i,tile_size: int) -> void:
 	camera.limit_top = tile_limit.position[0] * tile_size

@@ -1,4 +1,4 @@
-class_name ManaBar extends ProgressBar
+class_name ManaBar extends TextureProgressBar
 
 @onready var regenrate_timer: Timer = $Regenerate
 

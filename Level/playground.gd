@@ -1,8 +1,9 @@
 class_name PlayGround extends Node2D
 
 signal wave_reset
+signal new_wave
 
-@onready var label: Label = $HFlowContainer/Label
+@onready var label: Label = $WaveSign/WaveBackground/Label
 @onready var summon_timer: Timer = $SummonTimer
 @onready var falling_death: Area2D = $FallingDeath
 @onready var tiles: TilesControl = $Tiles
@@ -76,9 +77,10 @@ func killed_enemy(_enemy) -> void:
 	update_label()
 	
 func update_label() -> void:
-	label.text = "Current Wave: " + str(wave_data.current_wave) + "\n" + " Enemies Left: " + str(wave_data.total_enemies - enemies_killed)
+	label.text = "Wave: " + str(wave_data.current_wave)# + "\n" + " Enemies Left: " + str(wave_data.total_enemies - enemies_killed)
 
 func new_wave_difficulty() -> void:
+	new_wave.emit()
 	update_label()
 	summon_count = 0
 	wave_data.spawn_time_update()
@@ -158,8 +160,14 @@ func exit_scene(_player) -> void:
 	pass
 
 func kill_all_enemies() -> void:
+	
 	for enemy in summoned_enemies:
-		enemy.free()
+		enemy.queue_free()
+		
+	for child in get_children():
+		if child is EnemyBullet:
+			child.queue_free()
+			
 	summoned_enemies.clear()
 	pass
 

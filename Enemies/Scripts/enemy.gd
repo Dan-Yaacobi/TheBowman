@@ -73,8 +73,11 @@ func take_damage(_dmg: int) -> void:
 
 func shooter_damaged_animation_finished(anim_name: String) -> void:
 	if anim_name == "Damaged":
-		stats.shooter = true
 		update_animation("Move")
+		await get_tree().create_timer(0.5).timeout
+		
+		stats.shooter = true
+		
 		
 func regular_damaged_animation_finished(anim_name: String) -> void:
 	if anim_name == "Damaged":
@@ -95,9 +98,10 @@ func push_back(_direction: Vector2, power: int) -> void:
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
-		body.hit_player(stats.touch_damage)
-		body.set_pushback_values(direction,stats.knockback)
-		push_back(-direction,stats.move_speed*2)
+		if body.stats.hp > 0:
+			body.hit_player(stats.touch_damage)
+			body.set_pushback_values(direction,stats.knockback)
+			push_back(-direction,stats.move_speed*2)
 
 func drop_item() -> void:
 	if not no_drops:

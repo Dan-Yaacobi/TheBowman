@@ -1,16 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://caekf50aq824k"]
+[gd_scene load_steps=5 format=3 uid="uid://caekf50aq824k"]
 
 [ext_resource type="Script" path="res://Player/Mana/mana_bar.gd" id="1_npwg5"]
+[ext_resource type="Texture2D" uid="uid://dn7qabuyhugoj" path="res://Player/Mana/HealthBar Under.png" id="1_p2ux4"]
+[ext_resource type="Texture2D" uid="uid://cops1x4crvsax" path="res://Player/Mana/ManaBar.png" id="2_6d5y6"]
+[ext_resource type="Texture2D" uid="uid://cod57hbywmhhn" path="res://Player/Mana/Quiver.png" id="4_hd7k8"]
 
-[node name="ManaBar" type="ProgressBar"]
-offset_right = 234.0
-offset_bottom = 13.0
+[node name="ManaBar" type="TextureProgressBar"]
+offset_right = 64.0
+offset_bottom = 32.0
 value = 50.0
-show_percentage = false
+texture_under = ExtResource("1_p2ux4")
+texture_progress = ExtResource("2_6d5y6")
 script = ExtResource("1_npwg5")
 mana_rate = 1.0
 shoot_cost = 15
-bar_color = Color(0, 0, 1, 1)
 
 [node name="Regenerate" type="Timer" parent="."]
 wait_time = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 13)
+texture = ExtResource("4_hd7k8")

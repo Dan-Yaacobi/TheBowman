@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=26 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
+[ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="14_gy5xr"]
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
@@ -29,7 +30,7 @@ menu_speed = 150
 in_menu = false
 mana_rate = 0.5
 shoot_cost = 10
-money = 10
+money = 0
 weapon_name = "Basic Bow"
 weapon_scene = ExtResource("5_g86fe")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
@@ -69,13 +70,21 @@ gravity = 150
 stats = SubResource("Resource_sedti")
 
 [node name="Body" parent="." instance=ExtResource("1_1adnh")]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Hand" parent="." instance=ExtResource("2_alpnv")]
 position = Vector2(0, 1)
 rotation = -0.00872665
+collision_layer = 0
+collision_mask = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4.5, 4.5)
+position_smoothing_enabled = true
+script = ExtResource("8_qvxki")
+random_strength = 5.0
+shake_fade = 10.0
 
 [node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
 
@@ -117,17 +126,19 @@ color = Color(0.831239, 0.712185, 0.672638, 1)
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 4
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]
-offset_left = -55.0
-offset_top = 48.0
-offset_right = 179.0
-offset_bottom = 61.0
-scale = Vector2(0.5, 0.5)
+offset_left = 64.0
+offset_top = 17.0
+offset_right = 298.0
+offset_bottom = 49.0
+bar_color = Color(1, 1, 1, 1)
 
 [node name="DamagedParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -155,7 +166,7 @@ one_shot = true
 wait_time = 3.0
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="."]
-position = Vector2(72, 51)
+position = Vector2(96, 45)
 texture = ExtResource("14_gy5xr")
 
 [node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
@@ -175,10 +186,10 @@ text = "0
 "
 
 [node name="HealthBar" parent="." instance=ExtResource("15_wqrs0")]
-offset_left = -9.0
-offset_top = -12.0
-offset_right = 23.0
-offset_bottom = -8.0
+offset_left = -107.0
+offset_top = 15.0
+offset_right = -43.0
+offset_bottom = 47.0
 
 [node name="ComboActivated" type="Node2D" parent="."]
 script = ExtResource("16_j4os2")

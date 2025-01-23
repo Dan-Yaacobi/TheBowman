@@ -152,7 +152,6 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "How To Play:
 A ,D: Move
-W: Summon
 S: Slam Down
 SpaceBar: Jump (Can Double Jump)
 Left Mouse: Shoot

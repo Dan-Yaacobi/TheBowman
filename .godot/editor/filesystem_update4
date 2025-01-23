@@ -26,3 +26,21 @@ res://Enemies/EvilBird/EvilBird.tscn
 res://Enemies/Snake/Snake.tscn
 res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd
 res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn
+res://Player/Body/body.gd
+res://Player/player.gd
+res://Player/Body/Body.tscn
+res://Player/Player Actions/Jump/jump.gd
+res://Level/playground.gd
+res://Player/Mana/ManaBar.tscn
+res://Player/Mana/HealthBar.tscn
+res://Player/HealthBar/HealthBar.tscn
+res://HealthBar/HealthBar.tscn
+res://HealthBar/health_bar.gd
+res://Player/Mana/mana_bar.gd
+res://Player/camera_2d.gd
+res://Player/Player Actions/Jump/Jump.tscn
+res://Player/Hand/Hand.tscn
+res://Player/Hand/hand.gd
+res://Weapons/0_BasicBow/BasicBow.tscn
+res://Level/PlayGround/wave_background.gd
+res://Level/PlayGround/wave_sign.gd

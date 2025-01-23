@@ -15,6 +15,7 @@ func _physics_process(delta: float) -> void:
 
 func jump() -> void:
 	if jumps > 0:
+		player.update_animation("Jump")
 		player.velocity.y = 0
 		player.velocity.y -= player.stats.jump_height
 		jumps -= 1
@@ -35,9 +36,10 @@ func jumping_flip() -> void:
 		
 func reset_jumps(_var1,_var2,_var3,_var4) -> void:
 	if _var2 is TileMapLayer:
-		jump_flip = false
-		#if jumps == 0:
-		set_jumps()
+		if player.stats.hp > 0:
+			jump_flip = false
+			#if jumps == 0:
+			set_jumps()
 
 func set_jumps() -> void:
 	jumps = player.stats.max_jumps
