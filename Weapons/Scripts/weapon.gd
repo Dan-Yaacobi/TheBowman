@@ -2,7 +2,7 @@ class_name Weapon extends Node2D
 
 signal combo_loss
 signal combo_gained
-
+signal arrow_hit_sound
 static var player: Player
 
 @export var weapon_data: WeaponData
@@ -36,6 +36,7 @@ func init_weapon(_player: Player, _weapon: Weapon) -> void:
 func instance_arrow(ARROW: PackedScene, the_position) -> Arrow:
 	if ARROW != null:
 		var arrow: Arrow = ARROW.instantiate()
+		arrow.arrow_hit_sound.connect(emit_hit_sound)
 		if base_damage == 0:
 			base_damage = arrow.data.damage
 			
@@ -49,6 +50,9 @@ func instance_arrow(ARROW: PackedScene, the_position) -> Arrow:
 		arrow.z_index = -1
 		return arrow
 	return null
+
+func emit_hit_sound() -> void:
+	arrow_hit_sound.emit()
 
 func missed() -> void:
 	combo_loss.emit()

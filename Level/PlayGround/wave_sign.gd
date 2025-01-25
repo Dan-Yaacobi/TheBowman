@@ -8,6 +8,10 @@ class_name WaveSign extends RigidBody2D
 func _ready() -> void:
 	play_ground.new_wave.connect(push_sign)
 	
+	
+func test(b) -> void:
+	print(b)
+	
 func push_sign() -> void:
 	pass
 	

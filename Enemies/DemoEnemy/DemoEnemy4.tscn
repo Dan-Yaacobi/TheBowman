@@ -190,6 +190,7 @@ radius = 7.0
 [node name="DemoEnemy4" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 17
+motion_mode = 1
 script = ExtResource("1_r4876")
 stats = SubResource("Resource_15jtt")
 item_drops = Array[ExtResource("6_nux1r")]([SubResource("Resource_g5qpi"), SubResource("Resource_o2p5c"), SubResource("Resource_6egon"), SubResource("Resource_by4vd"), SubResource("Resource_01nao")])

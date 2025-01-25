@@ -19,6 +19,7 @@ func get_angle(_arrow_number: int) -> int:
 
 func instance_special_arrow(ARROW: PackedScene, _the_position,_rotation_angle,_direction) -> Arrow:
 	var arrow: Arrow = ARROW.instantiate()
+	arrow.arrow_hit_sound.connect(player.current_weapon.emit_hit_sound)
 	arrow.global_position = _the_position
 	arrow.z_index = -1
 	arrow.rotate(_rotation_angle)

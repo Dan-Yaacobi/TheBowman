@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bebh86kswi26y"]
+[gd_scene load_steps=4 format=3 uid="uid://bebh86kswi26y"]
 
 [ext_resource type="Script" path="res://Player/Player Actions/Shoot/shoot.gd" id="1_1f4sy"]
-[ext_resource type="AudioStream" uid="uid://dgv53g1mj8cwx" path="res://Audio/Player/arrow_shot.mp3" id="2_bspsb"]
+[ext_resource type="AudioStream" uid="uid://32moefoiwsry" path="res://Audio/Player/arrow_shot-shorter.mp3" id="2_76a0s"]
+[ext_resource type="AudioStream" uid="uid://de0bwrmr7d6ev" path="res://Audio/Player/arrow_hit.mp3" id="3_35qs0"]
 
 [node name="Shoot" type="Node2D"]
 script = ExtResource("1_1f4sy")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_bspsb")
+[node name="ArrowShot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_76a0s")
+volume_db = 8.602
+
+[node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_35qs0")
+volume_db = -24.24
+pitch_scale = 0.49

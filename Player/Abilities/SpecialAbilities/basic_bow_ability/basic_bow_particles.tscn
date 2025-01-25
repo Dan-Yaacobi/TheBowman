@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gs4t11tfn0xp"]
+[gd_scene load_steps=4 format=3 uid="uid://gs4t11tfn0xp"]
+
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_particles.gd" id="1_osi1f"]
+[ext_resource type="AudioStream" uid="uid://cf3t4u2gc6q15" path="res://Audio/Player/fart.mp3" id="2_yubmd"]
 
 [sub_resource type="Curve" id="Curve_s3rl4"]
 max_value = 5.0
@@ -18,3 +21,9 @@ emission_sphere_radius = 5.0
 gravity = Vector2(-100, 100)
 scale_amount_curve = SubResource("Curve_s3rl4")
 color = Color(0.2652, 0.51, 0.1836, 0.596078)
+script = ExtResource("1_osi1f")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_yubmd")
+volume_db = -10.948
+autoplay = true

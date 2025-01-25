@@ -9,6 +9,7 @@ script = ExtResource("2_u8lgh")
 speed = 400
 damage = 5
 pushback_power = 20
+scale = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7nje"]
 radius = 3.0

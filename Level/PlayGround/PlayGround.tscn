@@ -90,8 +90,8 @@ radius = 4.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_romlk"]
 size = Vector2(58, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gxdir"]
-radius = 4.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bice2"]
+size = Vector2(58, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
 size = Vector2(10949, 44)
@@ -266,8 +266,8 @@ shape = SubResource("CircleShape2D_4hl8g")
 debug_color = Color(0.821622, 0.00173155, 0.96307, 0.42)
 
 [node name="WaveSign" type="RigidBody2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 2
 mass = 0.5
 script = ExtResource("14_db0ww")
 
@@ -293,6 +293,8 @@ text = "Wave: 1"
 
 [node name="RigidBody2D" type="RigidBody2D" parent="WaveSign/WaveBackground"]
 position = Vector2(-1, 9)
+collision_layer = 4
+collision_mask = 2
 mass = 2.0
 constant_force = Vector2(1, 0)
 
@@ -301,8 +303,8 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_romlk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSign"]
-position = Vector2(8, 8)
-shape = SubResource("CircleShape2D_gxdir")
+position = Vector2(9, 28.5)
+shape = SubResource("RectangleShape2D_bice2")
 
 [node name="SummonTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -376,6 +378,7 @@ libraries = {
 position = Vector2(8, 8)
 node_a = NodePath("../SignHolder")
 node_b = NodePath("../WaveSign")
+motor_enabled = true
 
 [node name="Button" type="Button" parent="."]
 offset_left = -24.0
@@ -385,3 +388,5 @@ offset_bottom = 302.0
 scale = Vector2(0.05, 0.05)
 theme_override_font_sizes/font_size = 250
 text = "Next Wave"
+
+[node name="Upgrades" type="Node2D" parent="."]

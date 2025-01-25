@@ -15,4 +15,3 @@ func activate_special_ability(_player: Player) -> void:
 	particles.emitting = true
 	_player.add_child(particles)
 	_player.velocity.x += side * push_distance
-	print("Fart")

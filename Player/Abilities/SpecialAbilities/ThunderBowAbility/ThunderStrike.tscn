@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://22oc6i4nljji"]
+[gd_scene load_steps=6 format=3 uid="uid://22oc6i4nljji"]
 
 [ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/ThunderBowAbility/thunder_strike.gd" id="1_myu1g"]
+[ext_resource type="AudioStream" uid="uid://bndhi0n2ycg2q" path="res://Audio/Player/thunder_strike.mp3" id="2_f12im"]
 
 [sub_resource type="Curve" id="Curve_mlycp"]
 max_value = 5.0
@@ -41,3 +42,7 @@ shape = SubResource("CircleShape2D_n4my3")
 
 [node name="MonitoringTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_f12im")
+volume_db = -14.857

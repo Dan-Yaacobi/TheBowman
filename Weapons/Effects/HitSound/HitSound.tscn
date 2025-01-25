@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bomaal61jofg4"]
+
+[ext_resource type="AudioStream" uid="uid://bxdpnks41gia8" path="res://Audio/Player/arrow_hit_target.mp3" id="1_7f1cb"]
+
+[node name="HitSound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_7f1cb")

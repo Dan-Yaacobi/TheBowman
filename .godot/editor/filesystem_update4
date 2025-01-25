@@ -1,11 +1,19 @@
-res://Player/Player Actions/Shoot/Shoot.tscn
+res://Level/PlayGround/Upgrades/HpUpgrade.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
-res://Player/Player Actions/Shoot/shoot.gd
 res://MainGame/Game.tscn
 res://Player/Player.tscn
-res://MainMenu/MainMenu.tscn
-res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
-res://Weapons/Effects/WallHitEffect.tscn
-res://Weapons/Scripts/arrow.gd
-res://Weapons/Effects/wall_hit_effect.gd
+res://Level/PlayGround/PlayGround.tscn
+res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn
+res://Player/Upgrades/upgrade.gd
+res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_ability.gd
+res://Player/Upgrades/hp.gd
+res://Level/PlayGround/Upgrades/upgrade_data.gd
+res://Enemies/DemoEnemy/DemoEnemy.tscn
+res://Enemies/DemoEnemy/DemoEnemy2.tscn
+res://Enemies/DemoEnemy/DemoEnemy3.tscn
+res://Enemies/DemoEnemy/DemoEnemy4.tscn
+res://Enemies/DemoEnemy/DemoEnemy5.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss.tscn
+res://Enemies/DemoEnemy/DemoEnemyGold.tscn

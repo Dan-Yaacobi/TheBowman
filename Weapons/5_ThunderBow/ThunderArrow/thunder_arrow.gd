@@ -13,4 +13,4 @@ func _ready() -> void:
 func missed() -> void:
 	if regular_shot:
 		arrow_missed.emit()
-	clear_shot()
+	queue_free()

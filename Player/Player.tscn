@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=30 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
 [ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
 [ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
+[ext_resource type="Script" path="res://Player/Upgrades/hp.gd" id="19_65xll"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -239,3 +240,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_whdv5")
+
+[node name="Upgrades" type="Node2D" parent="."]
+
+[node name="HP" type="Node2D" parent="Upgrades"]
+script = ExtResource("19_65xll")

@@ -18,6 +18,7 @@ shoot_cost = 12
 arrow = ExtResource("2_5xibf")
 special_ability_cooldown = 3.0
 spcl_ablty_cost_mltplr = 3
+combo_buff_activated = false
 
 [node name="BlackBow" type="Node2D"]
 script = ExtResource("1_t23ek")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjafbvkr7l5xk"]
 
-[ext_resource type="Script" path="res://Weapons/Effects/wall_hit_effect.gd" id="1_v37rm"]
+[ext_resource type="Script" path="res://Weapons/Effects/WallHitEffect/wall_hit_effect.gd" id="1_v37rm"]
 
 [sub_resource type="Curve" id="Curve_tsdr3"]
 max_value = 3.0
@@ -8,7 +8,7 @@ _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_qocl8"]
-colors = PackedColorArray(0.529412, 0.529412, 0.529412, 1, 1, 1, 1, 0)
+colors = PackedColorArray(0.82, 0.82, 0.82, 1, 1, 1, 1, 0)
 
 [node name="WallHitEffect" type="CPUParticles2D"]
 emitting = false
@@ -22,6 +22,5 @@ radial_accel_min = 25.0
 radial_accel_max = 25.0
 angle_max = 90.0
 scale_amount_curve = SubResource("Curve_tsdr3")
-color = Color(0.53, 0.53, 0.53, 1)
 color_ramp = SubResource("Gradient_qocl8")
 script = ExtResource("1_v37rm")

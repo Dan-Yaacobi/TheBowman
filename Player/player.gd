@@ -126,7 +126,7 @@ func end_combo_buff() -> void:
 		mana_bar.regular_color()
 		stats.knockback_resistance -= 5
 		stats.max_jumps -= 3
-	
+
 func drop_down() -> void:
 	if velocity.y == 0:
 		dropping_down = false
@@ -185,6 +185,7 @@ func init_bow() -> void:
 		#new_bow_buy_effect.emitting = true
 		#
 	current_weapon = stats.weapon_scene.instantiate()
+	current_weapon.arrow_hit_sound.connect(shoot_action.arrow_hit_sound)
 	current_weapon.combo_loss.connect(combo_lost)
 	current_weapon.combo_gained.connect(combo_gained)
 	

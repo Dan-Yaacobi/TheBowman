@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cifl4doilti3x"]
+[gd_scene load_steps=5 format=3 uid="uid://cifl4doilti3x"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/death_particles.gd" id="1_u35a3"]
+[ext_resource type="AudioStream" uid="uid://bynspn631rmvd" path="res://Audio/Player/death whoosh.mp3" id="2_lsei1"]
 
 [sub_resource type="Curve" id="Curve_8aufp"]
 max_value = 8.0
@@ -24,3 +25,8 @@ scale_amount_curve = SubResource("Curve_8aufp")
 color = Color(0.485703, 0.485704, 0.485703, 1)
 color_ramp = SubResource("Gradient_51tqk")
 script = ExtResource("1_u35a3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_lsei1")
+volume_db = -23.698
+pitch_scale = 2.08
