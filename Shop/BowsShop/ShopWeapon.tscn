@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpkc7rbbp36vu"]
+[gd_scene load_steps=10 format=3 uid="uid://bpkc7rbbp36vu"]
 
 [ext_resource type="Script" path="res://Shop/BowsShop/shop_weapon.gd" id="1_ohfgj"]
 [ext_resource type="Script" path="res://Shop/BowsShop/shop_weapon_data.gd" id="2_de5vr"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="2_r1lb1"]
 [ext_resource type="Texture2D" uid="uid://wepteipa4kag" path="res://Shop/BowsShop/Sprites/Bow_1.png" id="2_txt7c"]
+[ext_resource type="Texture2D" uid="uid://b36pvyfukpxjr" path="res://Shop/BowsShop/Sprites/BowFrame.png" id="5_pjnw0"]
 
 [sub_resource type="Resource" id="Resource_6ah8a"]
 script = ExtResource("2_de5vr")
@@ -34,14 +35,14 @@ script = ExtResource("1_ohfgj")
 data = SubResource("Resource_6ah8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 2)
 texture = ExtResource("2_txt7c")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 30.0
-offset_top = 16.0
-offset_right = 347.0
-offset_bottom = 153.0
+offset_left = 42.0
+offset_top = 15.0
+offset_right = 359.0
+offset_bottom = 152.0
 scale = Vector2(0.025, 0.025)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.42, 0.336, 0, 1)
@@ -65,9 +66,9 @@ theme_override_font_sizes/font_size = 100
 text = "Name:"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("2_r1lb1")]
-offset_left = 30.0
+offset_left = 40.0
 offset_top = 6.0
-offset_right = 496.0
+offset_right = 506.0
 offset_bottom = 356.0
 scale = Vector2(0.025, 0.025)
 text = "Buy"
@@ -100,12 +101,27 @@ hue_variation_curve = SubResource("Curve_5tewp")
 
 [node name="SpecialAbilityLabel" type="Label" parent="."]
 offset_left = -8.0
-offset_top = 1.0
+offset_top = 12.0
 offset_right = 1734.0
-offset_bottom = 343.0
+offset_bottom = 354.0
 scale = Vector2(0.01, 0.01)
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 55
 theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "Special Ability:"
+
+[node name="Damage" type="Label" parent="."]
+visible = false
+offset_left = -6.0
+offset_top = 16.0
+offset_right = 1266.0
+offset_bottom = 358.0
+scale = Vector2(0.01, 0.01)
+theme_override_font_sizes/font_size = 250
+text = "Damage: 0"
+
+[node name="Frame" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_pjnw0")

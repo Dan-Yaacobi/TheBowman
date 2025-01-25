@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://do3cqgiesj6ik"]
 
-[ext_resource type="Texture2D" uid="uid://q1gds10qi7jt" path="res://Level/Tiles/square3.png" id="1_lcbhr"]
+[ext_resource type="Texture2D" uid="uid://brv8tbu3hns8m" path="res://Level/Tiles/Wood Square Opaque.png" id="1_k1n0n"]
 [ext_resource type="Script" path="res://Shop/PlatformShop/platform_button.gd" id="1_pbs2m"]
-[ext_resource type="Texture2D" uid="uid://pau5n8sa3vnk" path="res://Level/Tiles/square3_opaque.png" id="1_pt0rk"]
+[ext_resource type="Texture2D" uid="uid://nu0yse0m3b1b" path="res://Level/Tiles/Wood Square.png" id="2_8lahh"]
 [ext_resource type="PackedScene" uid="uid://dwa52hqimfbqp" path="res://Shop/PlatformShop/PlatformBuyMenu.tscn" id="4_crl00"]
 
 [node name="PlatformButton" type="TextureButton"]
 focus_mode = 0
 toggle_mode = true
-texture_normal = ExtResource("1_pt0rk")
-texture_pressed = ExtResource("1_lcbhr")
+texture_normal = ExtResource("1_k1n0n")
+texture_pressed = ExtResource("2_8lahh")
 script = ExtResource("1_pbs2m")
 price = 50
 

@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://wepteipa4kag" path="res://Shop/BowsShop/Sprites/Bow_1.png" id="4_1e7f4"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/buy_bow_button.gd" id="4_aus3d"]
 [ext_resource type="Texture2D" uid="uid://b3tmin4b1qqw4" path="res://Shop/BowsShop/Sprites/Bow_2.png" id="6_p58kp"]
-[ext_resource type="Texture2D" uid="uid://bh84i6y0mmcf3" path="res://MainMenu/Sprites/BigDoor.png" id="7_e60oa"]
 [ext_resource type="PackedScene" uid="uid://b5yjt3rxeprfj" path="res://Weapons/1_BlueBow/BlueBow.tscn" id="7_gdy8u"]
 [ext_resource type="Texture2D" uid="uid://74kklgf4stgy" path="res://Shop/BowsShop/Sprites/Bow_3.png" id="8_6p2fp"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="8_vnfog"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://utxa65f3hxv5" path="res://Weapons/4_NatureBow/NatureBow.tscn" id="13_fdnd6"]
 [ext_resource type="Texture2D" uid="uid://bmjpkuar4f4kc" path="res://Shop/BowsShop/Sprites/Bow_5.png" id="14_i3fme"]
 [ext_resource type="PackedScene" uid="uid://bwxh1irybhfs4" path="res://Weapons/5_ThunderBow/ThunderBow.tscn" id="15_e6rfv"]
+[ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="16_5tpjh"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="18_m8yn8"]
 
 [sub_resource type="Resource" id="Resource_4bi3o"]
@@ -28,7 +28,7 @@ texture = ExtResource("4_1e7f4")
 name = "Blue Bow"
 name_color = Color(0, 0.462745, 1, 1)
 name_shadow_color = Color(0, 0, 1, 1)
-price = 25
+price = 50
 special_ability = "RapidFire"
 block_coordinate = Vector2(11, 9)
 bought = false
@@ -38,14 +38,14 @@ weapon_scene = ExtResource("7_gdy8u")
 [sub_resource type="Resource" id="Resource_qtlra"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_5f1n0"]
+[sub_resource type="Resource" id="Resource_oqi18"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("6_p58kp")
 name = "Red Bow"
 name_color = Color(0.76, 0.266, 0.266, 1)
 name_shadow_color = Color(0.521162, 0.159423, 0.162428, 1)
-price = 100
+price = 300
 special_ability = "Temporary Infinite Mana"
 block_coordinate = Vector2(21, 9)
 bought = false
@@ -61,7 +61,7 @@ texture = ExtResource("8_6p2fp")
 name = "Black Bow"
 name_color = Color(0.266575, 0.266575, 0.266575, 1)
 name_shadow_color = Color(0, 0, 0, 1)
-price = 250
+price = 1000
 special_ability = "Fire arrows around you"
 block_coordinate = Vector2(31, 9)
 bought = false
@@ -74,7 +74,7 @@ texture = ExtResource("12_3lnwp")
 name = "Poison Ivy"
 name_color = Color(0.292793, 0.74, 0.1924, 1)
 name_shadow_color = Color(0.142865, 0.373991, 0.0921751, 1)
-price = 1000
+price = 2500
 special_ability = "Summon Poison Cloud"
 block_coordinate = Vector2(41, 9)
 bought = false
@@ -87,7 +87,7 @@ texture = ExtResource("14_i3fme")
 name = "Zeus"
 name_color = Color(0.99, 0.8514, 0.297, 1)
 name_shadow_color = Color(0.45218, 0.376682, 0.0293868, 1)
-price = 2500
+price = 4000
 special_ability = "Stuns nearby enemies"
 block_coordinate = Vector2(51, 9)
 bought = false
@@ -117,7 +117,7 @@ data = SubResource("Resource_ychf5")
 [node name="ShopWeapon2" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(212, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_5f1n0")
+data = SubResource("Resource_oqi18")
 
 [node name="ShopWeapon3" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(372, 109)
@@ -137,7 +137,7 @@ data = SubResource("Resource_23uti")
 [node name="LeftDoor" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(24, 144)
-texture = ExtResource("7_e60oa")
+texture = ExtResource("16_5tpjh")
 hframes = 2
 vframes = 2
 frame = 2
@@ -157,10 +157,10 @@ shape = SubResource("RectangleShape2D_64mxg")
 debug_color = Color(0.371579, 0.608447, 0.265125, 0.42)
 
 [node name="CurrentMoney" type="Label" parent="."]
-offset_left = 37.0
-offset_top = 83.0
-offset_right = 1170.0
-offset_bottom = 288.0
+offset_left = 34.0
+offset_top = 67.0
+offset_right = 1167.0
+offset_bottom = 272.0
 scale = Vector2(0.05, 0.05)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.63, 0.504, 0, 1)

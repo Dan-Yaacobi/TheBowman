@@ -27,7 +27,7 @@ knockback = 200
 skin = ExtResource("2_p70mv")
 coins_dropped = 0
 sharp_movement = false
-touch_damage = 2
+touch_damage = 1
 death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
 initial_ability = Array[ExtResource("2_1cl26")]([])
 special_ability = Array[ExtResource("2_1cl26")]([])
@@ -74,11 +74,11 @@ probability = 20.0
 
 [sub_resource type="Animation" id="Animation_qmrug"]
 resource_name = "Damaged"
-length = 0.6
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true

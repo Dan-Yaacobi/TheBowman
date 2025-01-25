@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://Shop/shop.gd" id="1_olmr6"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="2_qj66g"]
 [ext_resource type="Script" path="res://Shop/BowsShop/go_to_shop_action.gd" id="4_equfb"]
-[ext_resource type="Texture2D" uid="uid://bh84i6y0mmcf3" path="res://MainMenu/Sprites/BigDoor.png" id="4_ijlil"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/button_data.gd" id="4_wuv3j"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="5_5dwf0"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/go_abilities_shop_action.gd" id="6_l74bn"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/go_to_platform_shop.gd" id="7_l5wgc"]
+[ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="8_a1yjt"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="9_xklby"]
 
 [sub_resource type="Resource" id="Resource_pmkci"]
@@ -88,7 +88,7 @@ text = "Shop"
 
 [node name="Door" type="Sprite2D" parent="."]
 position = Vector2(312, 96)
-texture = ExtResource("4_ijlil")
+texture = ExtResource("8_a1yjt")
 hframes = 2
 vframes = 2
 script = ExtResource("5_5dwf0")

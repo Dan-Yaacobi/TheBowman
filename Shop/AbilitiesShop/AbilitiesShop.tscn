@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Shop/AbilitiesShop/abilities_shop.gd" id="1_7eeu5"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_751ka"]
-[ext_resource type="Texture2D" uid="uid://bh84i6y0mmcf3" path="res://MainMenu/Sprites/BigDoor.png" id="3_k6u5v"]
+[ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="3_ymfd2"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="4_i8ekb"]
 [ext_resource type="PackedScene" uid="uid://cfgep2k6nhruw" path="res://Shop/AbilitiesShop/AbilitiesShopButton.tscn" id="5_ftx5i"]
 [ext_resource type="Script" path="res://Shop/AbilitiesShop/abilities_shop_button_data.gd" id="6_siify"]
@@ -63,7 +63,7 @@ script = null
 [node name="LeftDoor" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(56, 160)
-texture = ExtResource("3_k6u5v")
+texture = ExtResource("3_ymfd2")
 hframes = 2
 vframes = 2
 frame = 2

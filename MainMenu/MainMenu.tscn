@@ -1,16 +1,17 @@
-[gd_scene load_steps=21 format=4 uid="uid://cnhbrpo4htp2y"]
+[gd_scene load_steps=22 format=4 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_tpybg"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="3_0uxqg"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/button_data.gd" id="4_7hy75"]
-[ext_resource type="Texture2D" uid="uid://bh84i6y0mmcf3" path="res://MainMenu/Sprites/BigDoor.png" id="4_ekgw3"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/reset_wave.gd" id="4_u2f2c"]
 [ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="5_emg15"]
+[ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="6_p5fwk"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="8_ftbyc"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd" id="9_xr3g3"]
 [ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/add_money_action.gd" id="10_aa3ac"]
 [ext_resource type="Script" path="res://MainMenu/music_button.gd" id="11_rwkms"]
+[ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -65,7 +66,7 @@ button_data = SubResource("Resource_fjbbq")
 [node name="LeftDoor" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(8, 96)
-texture = ExtResource("4_ekgw3")
+texture = ExtResource("6_p5fwk")
 hframes = 2
 vframes = 2
 frame = 2
@@ -87,7 +88,7 @@ debug_color = Color(0.371579, 0.608447, 0.265125, 0.42)
 [node name="RightDoor" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(360, 96)
-texture = ExtResource("4_ekgw3")
+texture = ExtResource("6_p5fwk")
 hframes = 2
 vframes = 2
 script = ExtResource("5_emg15")
@@ -155,8 +156,7 @@ A ,D: Move
 S: Slam Down
 SpaceBar: Jump (Can Double Jump)
 Left Mouse: Shoot
-Right Mouse: special ability
-"
+Right Mouse: Special Ability"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
 offset_left = 355.0
@@ -194,11 +194,11 @@ theme_override_font_sizes/font_size = 250
 text = "Shop"
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 352.0
-offset_top = 69.0
-offset_right = 957.0
-offset_bottom = 411.0
-scale = Vector2(0.025, 0.025)
+offset_left = 310.0
+offset_top = 91.0
+offset_right = 915.0
+offset_bottom = 433.0
+scale = Vector2(0.02, 0.02)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -221,3 +221,8 @@ disabled = true
 toggle_mode = true
 text = "Music"
 script = ExtResource("11_rwkms")
+
+[node name="ArrowSign" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(315, 96)
+texture = ExtResource("12_a6mvh")

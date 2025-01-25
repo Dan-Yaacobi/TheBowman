@@ -1,46 +1,11 @@
-res://MainMenu/MainMenu.tscn
+res://Player/Player Actions/Shoot/Shoot.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
+res://Player/Player Actions/Shoot/shoot.gd
 res://MainGame/Game.tscn
 res://Player/Player.tscn
-res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn
-res://Enemies/DemoEnemy/DemoEnemy.tscn
-res://Level/PlayGround/PlayGround.tscn
-res://Enemies/FlyingApple/FlyingApple.tscn
-res://Enemies/EnemyAbilities/DeathAbility/DeathParticles.tscn
-res://Enemies/EnemyAbilities/DeathAbility/dead.gd
-res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd
-res://Enemies/EnemyAbilities/DeathAbility/death_particles.gd
-res://Enemies/Scripts/enemy.gd
-res://Enemies/DemoEnemy/demo_enemy.gd
-res://Shop/PlatformShop/PlatformShop.tscn
-res://Enemies/DemoEnemy/DemoEnemy2.tscn
-res://Enemies/DemoEnemy/DemoEnemy3.tscn
-res://Enemies/DemoEnemy/DemoEnemyBoss.tscn
-res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn
-res://Enemies/DemoEnemy/DemoEnemy5.tscn
-res://Enemies/DemoEnemy/DemoEnemy4.tscn
-res://Enemies/DemoEnemy/DemoEnemyGold.tscn
-res://Enemies/EvilBird/BlueBird.tscn
-res://Enemies/EvilBird/EvilBird.tscn
-res://Enemies/Snake/Snake.tscn
-res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd
-res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn
-res://Player/Body/body.gd
-res://Player/player.gd
-res://Player/Body/Body.tscn
-res://Player/Player Actions/Jump/jump.gd
-res://Level/playground.gd
-res://Player/Mana/ManaBar.tscn
-res://Player/Mana/HealthBar.tscn
-res://Player/HealthBar/HealthBar.tscn
-res://HealthBar/HealthBar.tscn
-res://HealthBar/health_bar.gd
-res://Player/Mana/mana_bar.gd
-res://Player/camera_2d.gd
-res://Player/Player Actions/Jump/Jump.tscn
-res://Player/Hand/Hand.tscn
-res://Player/Hand/hand.gd
-res://Weapons/0_BasicBow/BasicBow.tscn
-res://Level/PlayGround/wave_background.gd
-res://Level/PlayGround/wave_sign.gd
+res://MainMenu/MainMenu.tscn
+res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
+res://Weapons/Effects/WallHitEffect.tscn
+res://Weapons/Scripts/arrow.gd
+res://Weapons/Effects/wall_hit_effect.gd

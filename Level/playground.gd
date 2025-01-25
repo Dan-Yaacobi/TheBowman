@@ -10,6 +10,7 @@ signal new_wave
 @onready var current_money: CurrentMoney = $CurrentMoney
 @onready var combo_counter: Label = $ComboCounter
 @onready var combo_animation: AnimationPlayer = $ComboCounter/ComboAnimation
+@onready var next_wave_button: Button = $Button
 
 @export var enemies: Enemies
 @export var wave_data: WaveData
@@ -20,9 +21,14 @@ var enemies_killed: int
 var summoned_enemies: Array[Enemy]
 var summon_count: int = 0
 
+var stop_waves: bool = false
+
 func _ready() -> void:
 	summon_timer.timeout.connect(summon_enemy)
 	falling_death.body_entered.connect(death)
+	next_wave_button.pressed.connect(new_wave_difficulty)
+	next_wave_button.disabled = true
+	next_wave_button.visible = false
 	
 func _process(delta: float) -> void:
 	if summon_timer.is_stopped():
@@ -40,7 +46,7 @@ func init_enemy(_position: Vector2, scene: PackedScene, _player: Player) -> Enem
 	return new_enemy
 
 func summon_enemy() -> void:
-	if player != null:
+	if player != null and not stop_waves:
 		if not wave_data.boss_wave:
 			var try_double_summon: float = randf_range(0,100)
 			if try_double_summon <= wave_data.double_spawn_chance:
@@ -50,9 +56,10 @@ func summon_enemy() -> void:
 		if enemies_killed >= wave_data.total_enemies:
 			enemies_killed = 0
 			wave_data.current_wave += 1
-			new_wave_difficulty()
+			between_waves()
+			#new_wave_difficulty()
 			update_label()
-			
+
 func summon() -> void:
 	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
 		
@@ -79,7 +86,16 @@ func killed_enemy(_enemy) -> void:
 func update_label() -> void:
 	label.text = "Wave: " + str(wave_data.current_wave)# + "\n" + " Enemies Left: " + str(wave_data.total_enemies - enemies_killed)
 
+func between_waves() -> void:
+	stop_waves = true
+	next_wave_button.disabled = false
+	next_wave_button.visible = true
+	pass
+	
 func new_wave_difficulty() -> void:
+	stop_waves = false
+	next_wave_button.disabled = true
+	next_wave_button.visible = false
 	new_wave.emit()
 	update_label()
 	summon_count = 0
@@ -107,7 +123,7 @@ func new_wave_difficulty() -> void:
 		update_label()
 	else:
 		wave_data.boss_wave = false
-		
+
 func death(b) -> void:
 	if b is Player:
 		b.dead()

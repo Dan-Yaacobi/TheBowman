@@ -376,3 +376,12 @@ libraries = {
 position = Vector2(8, 8)
 node_a = NodePath("../SignHolder")
 node_b = NodePath("../WaveSign")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -24.0
+offset_top = -48.0
+offset_right = 1284.0
+offset_bottom = 302.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 250
+text = "Next Wave"

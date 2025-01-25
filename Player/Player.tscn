@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=29 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="14_gy5xr"]
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
 [ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
+[ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -62,6 +63,14 @@ colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
 max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_0mjqs"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_whdv5"]
+radius = 49.0408
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 17
@@ -134,10 +143,10 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]
-offset_left = 64.0
-offset_top = 17.0
-offset_right = 298.0
-offset_bottom = 49.0
+offset_left = 104.0
+offset_top = -73.0
+offset_right = 338.0
+offset_bottom = -41.0
 bar_color = Color(1, 1, 1, 1)
 
 [node name="DamagedParticles" type="CPUParticles2D" parent="."]
@@ -166,7 +175,7 @@ one_shot = true
 wait_time = 3.0
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="."]
-position = Vector2(96, 45)
+position = Vector2(135, -45)
 texture = ExtResource("14_gy5xr")
 
 [node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
@@ -184,18 +193,19 @@ theme_override_constants/shadow_outline_size = 30
 theme_override_font_sizes/font_size = 250
 text = "0
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" parent="." instance=ExtResource("15_wqrs0")]
-offset_left = -107.0
-offset_top = 15.0
-offset_right = -43.0
-offset_bottom = 47.0
+offset_left = -166.0
+offset_top = -73.0
+offset_right = -102.0
+offset_bottom = -41.0
 
 [node name="ComboActivated" type="Node2D" parent="."]
 script = ExtResource("16_j4os2")
 
 [node name="ComboTimer" type="Timer" parent="ComboActivated"]
-wait_time = 5.0
+wait_time = 8.0
 
 [node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated"]
 z_index = -1
@@ -207,3 +217,25 @@ emission_sphere_radius = 7.0
 gravity = Vector2(0, -50)
 scale_amount_curve = SubResource("Curve_cqixw")
 color = Color(0.673333, 0.04, 0.8, 1)
+
+[node name="ComboActivatedEffect" type="CPUParticles2D" parent="ComboActivated"]
+emitting = false
+amount = 500
+one_shot = true
+explosiveness = 1.0
+emission_shape = 2
+emission_sphere_radius = 10.0
+gravity = Vector2(0, -100)
+radial_accel_min = 250.0
+radial_accel_max = 250.0
+scale_amount_curve = SubResource("Curve_0mjqs")
+color = Color(0.67451, 0.0392157, 0.8, 1)
+script = ExtResource("18_n3ww0")
+
+[node name="Area2D" type="Area2D" parent="ComboActivated/ComboActivatedEffect"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_whdv5")

@@ -21,6 +21,7 @@ signal took_hit
 @onready var unlimited_mana_timer: Timer = $UnlimitedManaTimer
 @onready var combo_timer: Timer = $ComboActivated/ComboTimer
 @onready var combo_effect: CPUParticles2D = $ComboActivated/ComboEffect
+@onready var combo_activated_effect: CPUParticles2D = $ComboActivated/ComboActivatedEffect
 
 @onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
 @onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
@@ -102,6 +103,7 @@ func combo_gained() -> void:
 	pass
 
 func combo_bonus_activate() -> void:
+	combo_activated_effect.emitting = true
 	combo_buff = true
 	combo_timer.start()
 	combo_effect.emitting = true

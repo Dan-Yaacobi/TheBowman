@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bebh86kswi26y"]
+[gd_scene load_steps=3 format=3 uid="uid://bebh86kswi26y"]
 
 [ext_resource type="Script" path="res://Player/Player Actions/Shoot/shoot.gd" id="1_1f4sy"]
+[ext_resource type="AudioStream" uid="uid://dgv53g1mj8cwx" path="res://Audio/Player/arrow_shot.mp3" id="2_bspsb"]
 
 [node name="Shoot" type="Node2D"]
 script = ExtResource("1_1f4sy")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bspsb")

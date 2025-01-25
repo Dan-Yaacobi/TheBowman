@@ -11,6 +11,7 @@ func shoot() -> void:
 		arrow.direction = player.get_shoot_direction()
 		var offset: Vector2 = Vector2(randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 		arrow2.direction = player.get_shoot_direction() + offset
+		arrow2.regular_shot = false
 		arrow.rotate(set_arrow_rotation())
 		arrow2.rotate(set_arrow_rotation())
 		player.get_parent().call_deferred("add_child",arrow)
