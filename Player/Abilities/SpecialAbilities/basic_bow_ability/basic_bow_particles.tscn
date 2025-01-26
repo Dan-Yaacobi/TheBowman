@@ -26,4 +26,3 @@ script = ExtResource("1_osi1f")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_yubmd")
 volume_db = -10.948
-autoplay = true
