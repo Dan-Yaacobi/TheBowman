@@ -60,10 +60,13 @@ func decide_stat_to_upgrade() -> void:
 		player.stats.max_hp += stats_update[current_stat]
 		stats[current_stat] = player.stats.max_hp
 		player.stats.hp = player.stats.max_hp
+		player.health_bar.init_health(player.stats.max_hp)
+		
 	elif current_stat == "JUMP":
 		player.stats.max_jumps += stats_update[current_stat]
 		stats[current_stat] = player.stats.max_jumps
 		player.jump_action.set_jumps()
+		
 	elif current_stat == "Knockback Resistance":
 		player.stats.knockback_resistance += stats_update[current_stat]
 		stats[current_stat] = player.stats.knockback_resistance

@@ -1,0 +1,433 @@
+[gd_scene load_steps=44 format=3 uid="uid://cdu6hjoweee6s"]
+
+[ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
+[ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
+[ext_resource type="Script" path="res://00 Globals/enemies.gd" id="2_lmkum"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_spawn_data.gd" id="2_r03de"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_sm034"]
+[ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/DemoEnemy/DemoEnemyBoss.tscn" id="3_c8kbf"]
+[ext_resource type="PackedScene" uid="uid://cdtin5d5lhmfi" path="res://Enemies/EvilBird/EvilBird.tscn" id="3_evq3g"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/DemoEnemy/DemoEnemy2.tscn" id="3_qp6b5"]
+[ext_resource type="PackedScene" uid="uid://bc36788hmae5b" path="res://Enemies/EvilBird/BlueBird.tscn" id="4_cffcb"]
+[ext_resource type="PackedScene" uid="uid://bwkebvyfvvrv8" path="res://Enemies/DemoEnemy/DemoEnemyGold.tscn" id="4_kxj81"]
+[ext_resource type="PackedScene" uid="uid://dqnds5n75tnpw" path="res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn" id="4_udil8"]
+[ext_resource type="PackedScene" uid="uid://c35yjtl5a8xob" path="res://Enemies/DemoEnemy/DemoEnemy3.tscn" id="5_xd300"]
+[ext_resource type="Script" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
+[ext_resource type="Script" path="res://MainGame/current_money.gd" id="10_qool0"]
+[ext_resource type="Script" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
+[ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
+[ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
+[ext_resource type="Script" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
+[ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
+[ext_resource type="Script" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
+[ext_resource type="PackedScene" uid="uid://dl6d04pvp0ux" path="res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn" id="21_imgkr"]
+[ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
+[ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
+
+[sub_resource type="Resource" id="Resource_k715f"]
+script = ExtResource("2_r03de")
+enemy_name = "RedBird"
+enemy = ExtResource("3_evq3g")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_450uo"]
+script = ExtResource("2_r03de")
+enemy_name = "BlueBird"
+enemy = ExtResource("4_cffcb")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_j0euw"]
+script = ExtResource("2_r03de")
+enemy_name = "RedBoss"
+enemy = ExtResource("3_c8kbf")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_rmdxp"]
+script = ExtResource("2_r03de")
+enemy_name = "BlueBoss"
+enemy = ExtResource("4_udil8")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_17qqw"]
+script = ExtResource("2_r03de")
+enemy_name = "Gold"
+enemy = ExtResource("4_kxj81")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_cy7u7"]
+script = ExtResource("2_r03de")
+enemy_name = "RedTarget"
+enemy = ExtResource("2_a863k")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_s46cd"]
+script = ExtResource("2_r03de")
+enemy_name = "BlueTarget"
+enemy = ExtResource("3_qp6b5")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_a0m40"]
+script = ExtResource("2_r03de")
+enemy_name = "GreenTarget"
+enemy = ExtResource("5_xd300")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_s07r2"]
+script = ExtResource("2_lmkum")
+target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40")])
+bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), SubResource("Resource_450uo")])
+boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp")])
+rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
+spawn_time = 2.0
+
+[sub_resource type="Resource" id="Resource_bnwpa"]
+script = ExtResource("7_wvqgp")
+current_wave = 1
+targets_spawn = Array[int]([0, 0, 0])
+bird_spawn = Array[int]([0, 0])
+total_enemies = 10
+spawn_time = 2.0
+double_spawn_chance = 10.0
+boss_wave = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hl8g"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_romlk"]
+size = Vector2(58, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bice2"]
+size = Vector2(58, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
+size = Vector2(10949, 44)
+
+[sub_resource type="Animation" id="Animation_xyp2j"]
+resource_name = "Gained"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.025), Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.25, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_klfvc"]
+resource_name = "Gained10"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.025), Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1e6g1"]
+resource_name = "Gained25"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.025), Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0.67451, 0.0392157, 0.8, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tq3ew"]
+resource_name = "Lost"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.025), Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_06wjn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r47hq"]
+_data = {
+"Gained": SubResource("Animation_xyp2j"),
+"Gained10": SubResource("Animation_klfvc"),
+"Gained25": SubResource("Animation_1e6g1"),
+"Lost": SubResource("Animation_tq3ew"),
+"RESET": SubResource("Animation_06wjn")
+}
+
+[node name="PlayGround" type="Node2D"]
+script = ExtResource("1_fq8oi")
+enemies = SubResource("Resource_s07r2")
+wave_data = SubResource("Resource_bnwpa")
+
+[node name="Tiles" parent="." instance=ExtResource("2_sm034")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="SignHolder" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SignHolder"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_4hl8g")
+debug_color = Color(0.821622, 0.00173155, 0.96307, 0.42)
+
+[node name="WaveSign" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+mass = 0.5
+script = ExtResource("14_db0ww")
+
+[node name="WaveBackground" type="Sprite2D" parent="WaveSign"]
+z_index = -1
+position = Vector2(9, 19)
+texture = ExtResource("14_ggsjl")
+
+[node name="Label" type="Label" parent="WaveSign/WaveBackground"]
+offset_left = -15.0
+offset_top = 3.0
+offset_right = 734.0
+offset_bottom = 276.0
+scale = Vector2(0.04, 0.04)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 200
+text = "Wave: 1"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="WaveSign/WaveBackground"]
+position = Vector2(-1, 9)
+collision_layer = 4
+collision_mask = 2
+mass = 2.0
+constant_force = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSign/WaveBackground/RigidBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_romlk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSign"]
+position = Vector2(9, 28.5)
+shape = SubResource("RectangleShape2D_bice2")
+
+[node name="SummonTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="FallingDeath" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_lvsqu")
+debug_color = Color(1, 0, 0.2, 0.419608)
+
+[node name="CurrentMoney" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -63.0
+offset_right = 1125.0
+offset_bottom = 142.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.76, 0.608, 0, 1)
+theme_override_colors/font_outline_color = Color(0.54, 0.432, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 150
+text = "Money:"
+script = ExtResource("10_qool0")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")
+
+[node name="Background2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+position = Vector2(307, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")
+
+[node name="Background3" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -3
+position = Vector2(-307, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("15_p7ivi")
+
+[node name="ComboCounter" type="Label" parent="."]
+offset_left = -557.0
+offset_top = -245.0
+offset_right = 578.0
+offset_bottom = 97.0
+scale = Vector2(0.05, 0.05)
+pivot_offset = Vector2(567, 171)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Combo: 0"
+
+[node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
+libraries = {
+"": SubResource("AnimationLibrary_r47hq")
+}
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(8, 8)
+node_a = NodePath("../SignHolder")
+node_b = NodePath("../WaveSign")
+motor_enabled = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = -24.0
+offset_top = -48.0
+offset_right = 1284.0
+offset_bottom = 302.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 250
+text = "Next Wave"
+
+[node name="UpgradeButtons" type="Node2D" parent="."]
+visible = false
+script = ExtResource("18_487cb")
+
+[node name="UpgradeButton" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = -22.0
+offset_top = -26.0
+offset_right = -6.0
+offset_bottom = -10.0
+
+[node name="UpgradeButton2" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 24.0
+offset_top = -26.0
+offset_right = 40.0
+offset_bottom = -10.0
+
+[node name="UpgradeButton3" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 1.0
+offset_top = -26.0
+offset_right = 17.0
+offset_bottom = -10.0
+
+[node name="Upgrades" type="Node2D" parent="UpgradeButtons"]
+script = ExtResource("20_8lbxg")
+
+[node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("21_imgkr")]
+
+[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("22_67mw3")]
+
+[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("23_v6ol2")]
+
+[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]

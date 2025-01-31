@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bstmllbqxch1v"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/knockback_resistance.gd" id="1_yad02"]
+
+[node name="KnockbackResistanceUpgrade" type="Node2D"]
+script = ExtResource("1_yad02")
+color = Color(1, 1, 1, 1)

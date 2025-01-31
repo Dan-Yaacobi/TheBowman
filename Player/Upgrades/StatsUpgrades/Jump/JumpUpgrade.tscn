@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyahpo86ugywm"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/StatsUpgrades/Jump/jump_upgrade.gd" id="1_mso6b"]
+[ext_resource type="Texture2D" uid="uid://ciwhropp7jqo2" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade1.png" id="2_0n44y"]
+[ext_resource type="Texture2D" uid="uid://db5fmw3n22vrm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade2.png" id="3_svkv4"]
+[ext_resource type="Texture2D" uid="uid://css2piyk3yuji" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade3.png" id="4_ururr"]
+
+[node name="JumpUpgrade" type="Node2D"]
+script = ExtResource("1_mso6b")
+amount = 1
+normal_texture = ExtResource("2_0n44y")
+pressed_texture = ExtResource("3_svkv4")
+hover_texture = ExtResource("4_ururr")
+color = Color(1, 1, 1, 1)
+tool_tip = "Increase your jumps by 1"

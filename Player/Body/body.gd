@@ -13,9 +13,9 @@ func change_animation(_animation: String) -> void:
 	animation_player.stop()
 	animation_player.play(_animation)
 	current_animation = _animation
-	if last_animation == "Walk" and current_animation == "Jump":
-		await animation_player.animation_finished
-		change_animation("Walk") 
+	#if last_animation == "Walk" and current_animation == "Jump":
+		#await animation_player.animation_finished
+		#change_animation("Walk") 
 	
 	
 func change_side(_side: bool) -> void:

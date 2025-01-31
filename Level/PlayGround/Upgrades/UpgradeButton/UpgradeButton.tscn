@@ -1,12 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dolo7tiosewrq"]
+[gd_scene load_steps=5 format=3 uid="uid://dolo7tiosewrq"]
 
 [ext_resource type="Script" path="res://Level/PlayGround/Upgrades/UpgradeButton/upgrade_button.gd" id="1_2vqur"]
+[ext_resource type="Texture2D" uid="uid://cn2o73jy6m0vr" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade1.png" id="1_eguwg"]
+[ext_resource type="Texture2D" uid="uid://b7rbpkpruimy5" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade2.png" id="2_fxa2q"]
+[ext_resource type="Texture2D" uid="uid://1m7q1nk3wlxg" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade3.png" id="3_dqh0b"]
 
 [node name="UpgradeButton" type="TextureButton"]
 focus_mode = 0
+texture_normal = ExtResource("1_eguwg")
+texture_pressed = ExtResource("2_fxa2q")
+texture_hover = ExtResource("3_dqh0b")
 script = ExtResource("1_2vqur")
 
-[node name="Label" type="Label" parent="."]
+[node name="CurrentStat" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, 8)
+amount = 500
+emission_shape = 3
+emission_rect_extents = Vector2(9, 9)
+gravity = Vector2(0, 0)
+radial_accel_min = 10.0
+radial_accel_max = 10.0

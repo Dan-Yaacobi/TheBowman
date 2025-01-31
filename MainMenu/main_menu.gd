@@ -47,6 +47,7 @@ func exit_scene(_player) -> void:
 	disable_doors()
 	visible = false
 	tiles.collision_enabled = false
+	#_player.stats.move_speed /= 2
 
 func disable_doors() -> void:
 	for child in get_children():

@@ -1,6 +1,8 @@
 class_name PlayerIdleState extends State
 
 @onready var walking: PlayerWalkingState = $"../Walking"
+@onready var slam: PlayerSlamState = $"../Slam"
+@onready var dead: PlayerDeadState = $"../Dead"
 
 func _ready() -> void:
 	pass
@@ -17,6 +19,8 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> State:
+	if player.stats.hp <= 0:
+		return dead
 	if player.direction != 0.0:
 		return walking
 	player.velocity.x = 0
@@ -28,4 +32,6 @@ func Physics(_delta: float) -> State:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> State:
+	if _event.is_action_pressed("DropDown"):
+		return slam
 	return null

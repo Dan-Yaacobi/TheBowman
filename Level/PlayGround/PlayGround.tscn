@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=50 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -17,6 +17,18 @@
 [ext_resource type="Script" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
 [ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
+[ext_resource type="Script" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
+[ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
+[ext_resource type="Script" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
+[ext_resource type="PackedScene" uid="uid://dl6d04pvp0ux" path="res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn" id="21_imgkr"]
+[ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
+[ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
+[ext_resource type="PackedScene" uid="uid://bstmllbqxch1v" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn" id="24_mi85c"]
+[ext_resource type="Texture2D" uid="uid://bwdbudjf3cqo3" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade1.png" id="25_iq6ym"]
+[ext_resource type="Texture2D" uid="uid://b3ut6ryyuxs1k" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUPgrade2.png" id="26_wdchw"]
+[ext_resource type="Texture2D" uid="uid://c51w7jyujbqty" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png" id="27_oorb6"]
+[ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="28_8kany"]
+[ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="29_y7ifn"]
 
 [sub_resource type="Resource" id="Resource_k715f"]
 script = ExtResource("2_r03de")
@@ -318,9 +330,9 @@ debug_color = Color(1, 0, 0.2, 0.419608)
 
 [node name="CurrentMoney" type="Label" parent="."]
 offset_left = -8.0
-offset_top = -63.0
+offset_top = -66.0
 offset_right = 1125.0
-offset_bottom = 142.0
+offset_bottom = 139.0
 scale = Vector2(0.05, 0.05)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.76, 0.608, 0, 1)
@@ -389,4 +401,56 @@ scale = Vector2(0.05, 0.05)
 theme_override_font_sizes/font_size = 250
 text = "Next Wave"
 
-[node name="Upgrades" type="Node2D" parent="."]
+[node name="UpgradeButtons" type="Node2D" parent="."]
+script = ExtResource("18_487cb")
+bucket_upgrade_chance = 15
+
+[node name="UpgradeButton" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = -36.0
+offset_top = -48.0
+offset_right = -20.0
+offset_bottom = -32.0
+
+[node name="UpgradeButton2" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 40.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = -32.0
+
+[node name="UpgradeButton3" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 2.0
+offset_top = -48.0
+offset_right = 18.0
+offset_bottom = -32.0
+
+[node name="Upgrades" type="Node2D" parent="UpgradeButtons"]
+script = ExtResource("20_8lbxg")
+
+[node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("21_imgkr")]
+
+[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("22_67mw3")]
+
+[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("23_v6ol2")]
+
+[node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("24_mi85c")]
+amount = 1
+normal_texture = ExtResource("25_iq6ym")
+pressed_texture = ExtResource("26_wdchw")
+hover_texture = ExtResource("27_oorb6")
+tool_tip = "Increase your knockback resistance"
+
+[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("28_8kany")]
+bucket = 2
+is_ability = true
+
+[node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="ArrowExplosionUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("29_y7ifn")]
+color = Color(0.68103, 0.1222, 0.94, 1)
+tool_tip = "Arrows explode on hit"
+bucket = 3
+is_ability = true

@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcckxg4f2bjrf"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/move_speed_upgrade.gd" id="1_q6sdt"]
+[ext_resource type="Texture2D" uid="uid://cn2o73jy6m0vr" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade1.png" id="2_1c2x7"]
+[ext_resource type="Texture2D" uid="uid://b7rbpkpruimy5" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade2.png" id="3_5x7ox"]
+[ext_resource type="Texture2D" uid="uid://1m7q1nk3wlxg" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/SpeedUpgrade3.png" id="4_78xpy"]
+
+[node name="MoveSpeedUpgrade" type="Node2D"]
+script = ExtResource("1_q6sdt")
+amount = 10
+normal_texture = ExtResource("2_1c2x7")
+pressed_texture = ExtResource("3_5x7ox")
+hover_texture = ExtResource("4_78xpy")
+color = Color(1, 1, 1, 1)
+tool_tip = "Increase Movement speed by 10"

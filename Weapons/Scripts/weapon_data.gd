@@ -8,3 +8,8 @@ class_name WeaponData extends Resource
 @export var special_ability_cooldown: float
 @export var spcl_ablty_cost_mltplr: int
 @export var combo_buff_activated: bool = false
+
+
+@export_category("Special Abilities")
+@export var can_pierce: bool = false
+@export var arrows_explode: bool = false

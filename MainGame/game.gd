@@ -15,7 +15,6 @@ class_name Game extends Node2D
 	set(val):
 		music_on = val
 		music_on_off()
-	
 
 const PLAYER = preload("res://Player/Player.tscn")
 

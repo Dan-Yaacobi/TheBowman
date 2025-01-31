@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd20amjiex1ob"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/Abilities/Pierce/pierce_ability.gd" id="1_vk0c4"]
+
+[node name="PierceAbility" type="Node2D"]
+script = ExtResource("1_vk0c4")

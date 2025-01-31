@@ -12,6 +12,13 @@ signal new_wave
 @onready var combo_animation: AnimationPlayer = $ComboCounter/ComboAnimation
 @onready var next_wave_button: Button = $Button
 
+@onready var upgrade_buttons: Node2D = $UpgradeButtons
+
+@onready var upgrade_button_1: UpgradeButton = $UpgradeButtons/UpgradeButton
+@onready var upgrade_button_2: UpgradeButton = $UpgradeButtons/UpgradeButton2
+@onready var upgrade_button_3: UpgradeButton = $UpgradeButtons/UpgradeButton3
+@onready var upgrades: UpgradeBuckets = $UpgradeButtons/Upgrades
+
 @export var enemies: Enemies
 @export var wave_data: WaveData
 @export var level_logic: LevelDifficultyLogic = LevelDifficultyLogic.new()
@@ -29,6 +36,11 @@ func _ready() -> void:
 	next_wave_button.pressed.connect(new_wave_difficulty)
 	next_wave_button.disabled = true
 	next_wave_button.visible = false
+	
+	upgrade_button_1.pressed.connect(new_wave_difficulty)
+	upgrade_button_2.pressed.connect(new_wave_difficulty)
+	upgrade_button_3.pressed.connect(new_wave_difficulty)
+	upgrade_buttons.disable()
 	
 func _process(delta: float) -> void:
 	if summon_timer.is_stopped():
@@ -88,14 +100,25 @@ func update_label() -> void:
 
 func between_waves() -> void:
 	stop_waves = true
-	next_wave_button.disabled = false
-	next_wave_button.visible = true
+	
+	#if wave_data.current_wave % 3 == 0 or (wave_data.current_wave - 1) % 5 == 0:
+	if 1 > 0:
+		upgrade_buttons.get_upgrades(wave_data.current_wave)
+		upgrade_buttons.enable()
+	else:
+		
+		next_wave_button.disabled = false
+		next_wave_button.visible = true
+	
 	pass
 	
 func new_wave_difficulty() -> void:
+	
+	upgrade_buttons.disable()
 	stop_waves = false
 	next_wave_button.disabled = true
 	next_wave_button.visible = false
+	
 	new_wave.emit()
 	update_label()
 	summon_count = 0
@@ -126,11 +149,14 @@ func new_wave_difficulty() -> void:
 
 func death(b) -> void:
 	if b is Player:
-		b.dead()
+		b.stats.hp = 0
 
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
+		upgrade_buttons.player = _player
+		upgrades.big_reset()
+		wave_data.current_wave = 1
 		if not player.combo.is_connected(update_combo):
 			player.combo.connect(update_combo)
 		player.combo_counter = 0
