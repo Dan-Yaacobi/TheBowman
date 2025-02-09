@@ -58,8 +58,10 @@ func stop_slamming() -> void:
 func hit_enemy(b) -> void:
 	if b is Enemy:
 		if not b.stats.boss:
-			b.take_damage(100)
+			b.take_damage(1)
 		hit_somthing = true
+		player.velocity = Vector2(0,-50)
+		player.jump_action.jumps += 1
 	pass
 	
 func hit_ground(_v1,_v2,_v3,_v4) -> void:

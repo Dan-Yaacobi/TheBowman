@@ -1,0 +1,286 @@
+[gd_scene load_steps=25 format=3 uid="uid://d1p3p0fkf2rwl"]
+
+[ext_resource type="Script" path="res://Enemies/Spider/spider.gd" id="1_7135b"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_3um86"]
+[ext_resource type="Texture2D" uid="uid://chhklq8k7ecbr" path="res://Enemies/Spider/Sprites/SpiderWalking.png" id="2_44sm3"]
+[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_rnln2"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_sbwv3"]
+[ext_resource type="Texture2D" uid="uid://dnqqaaj0yfhfy" path="res://Enemies/Spider/Sprites/SpiderDrop.png" id="3_x2dl3"]
+[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_mob8f"]
+[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_soewm"]
+[ext_resource type="Script" path="res://Enemies/Spider/spider_dropping_state.gd" id="5_lrwbi"]
+[ext_resource type="Script" path="res://Enemies/Spider/spider_walking_state.gd" id="6_cg4nc"]
+
+[sub_resource type="Resource" id="Resource_fqrf0"]
+script = ExtResource("3_rnln2")
+
+[sub_resource type="Resource" id="Resource_4bgit"]
+resource_local_to_scene = true
+script = ExtResource("4_soewm")
+hp = 45
+move_speed = 50
+knockback = 150
+coins_dropped = 0
+sharp_movement = false
+touch_damage = 3
+death_ability = Array[ExtResource("2_3um86")]([SubResource("Resource_fqrf0")])
+initial_ability = Array[ExtResource("2_3um86")]([])
+special_ability = Array[ExtResource("2_3um86")]([])
+debuffs = Array[ExtResource("3_sbwv3")]([])
+boss = false
+shooter = false
+shooter_chance = 0
+shoot_speed = 0.0
+
+[sub_resource type="Animation" id="Animation_a04px"]
+resource_name = "Damaged"
+length = 0.42
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_02pi1"]
+resource_name = "Move"
+length = 0.42
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_hmuq7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pb0a5"]
+_data = {
+"Damaged": SubResource("Animation_a04px"),
+"Move": SubResource("Animation_02pi1"),
+"RESET": SubResource("Animation_hmuq7")
+}
+
+[sub_resource type="Animation" id="Animation_o3yy2"]
+resource_name = "Damaged"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x5445"]
+resource_name = "Move"
+length = 0.5
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_8qn1x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ly8t0"]
+_data = {
+"Damaged": SubResource("Animation_o3yy2"),
+"Move": SubResource("Animation_x5445"),
+"RESET": SubResource("Animation_8qn1x")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dgku"]
+size = Vector2(20, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2d2x"]
+size = Vector2(23.5, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjjq4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t84w8"]
+size = Vector2(22, 10)
+
+[node name="Spider" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_7135b")
+gravity = 100
+stats = SubResource("Resource_4bgit")
+
+[node name="WalkingSprite" type="Sprite2D" parent="."]
+position = Vector2(1, 4)
+texture = ExtResource("2_44sm3")
+vframes = 4
+
+[node name="WalkingAnimation" type="AnimationPlayer" parent="WalkingSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_pb0a5")
+}
+
+[node name="DroppingSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_x2dl3")
+hframes = 3
+
+[node name="DroppingAnimation" type="AnimationPlayer" parent="DroppingSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_ly8t0")
+}
+autoplay = "Move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_2dgku")
+
+[node name="GroundDetector" type="Area2D" parent="."]
+position = Vector2(-1, 5)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2(0.75, 3)
+shape = SubResource("RectangleShape2D_s2d2x")
+debug_color = Color(0.658856, 0.513023, 0.130291, 0.42)
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("4_mob8f")
+
+[node name="Dropping" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("5_lrwbi")
+
+[node name="Walking" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("6_cg4nc")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_fjjq4")
+debug_color = Color(0.954369, 0, 0.548779, 0.42)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_t84w8")
+debug_color = Color(0.567316, 0.523189, 0.530331, 0.42)
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+position = Vector2(-10, 3)
+target_position = Vector2(0, 45)
+collision_mask = 16
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+position = Vector2(10, 3)
+target_position = Vector2(0, 45)
+collision_mask = 16
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

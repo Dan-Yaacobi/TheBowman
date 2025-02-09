@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2sbisfgqj8am"]
+
+[ext_resource type="Script" path="res://Player/Abilities/MegaShot/particles.gd" id="1_1jaek"]
+
+[sub_resource type="Curve" id="Curve_h6ll1"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MegaShotEffect" type="CPUParticles2D"]
+amount = 100
+lifetime = 2.0
+speed_scale = 2.0
+emission_shape = 2
+emission_sphere_radius = 100.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_h6ll1")
+script = ExtResource("1_1jaek")

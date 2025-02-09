@@ -36,6 +36,7 @@ func set_scene(_player: Player) -> void:
 			_player.money_changed.connect(update_money_label)
 		menu_tile_limit = tiles.get_used_rect()
 		_player.stats.in_menu = true
+		_player.stats.hp = _player.stats.max_hp
 		set_player_camera(_player)
 		visible = true
 		tiles.collision_enabled = true

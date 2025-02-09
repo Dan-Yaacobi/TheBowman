@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=36 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="6_ae18a"]
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
-[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_4w33k"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_5oa7d"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
 [ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
 [ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 [ext_resource type="Script" path="res://Player/upgrades.gd" id="20_mgkdb"]
+[ext_resource type="PackedScene" uid="uid://c2sbisfgqj8am" path="res://Player/Abilities/MegaShot/particles.tscn" id="24_pagyw"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -36,17 +37,20 @@ menu_speed = 150
 in_menu = false
 mana_rate = 0.0
 shoot_cost = 0
+reset_upgrades = false
+max_minions = 3
 money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
-weapon_scene = ExtResource("7_4w33k")
+weapon_scene = ExtResource("7_5oa7d")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 arrow_abilities = Array[ExtResource("2_jhcyx")]([])
 slam_abilities = Array[ExtResource("6_ae18a")]([])
+can_mega_shot = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
-size = Vector2(10, 1)
+size = Vector2(10, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
 size = Vector2(10, 15)
@@ -60,7 +64,7 @@ _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
-size = Vector2(10, 15)
+size = Vector2(10, 14)
 
 [sub_resource type="Curve" id="Curve_wqenp"]
 max_value = 4.0
@@ -121,7 +125,7 @@ script = ExtResource("14_nepur")
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
-position = Vector2(0, 8.5)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_6nowa")
 debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
 
@@ -164,7 +168,6 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]
@@ -262,8 +265,18 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
+visible = false
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_whdv5")
 
 [node name="Upgrades" type="Node2D" parent="."]
 script = ExtResource("20_mgkdb")
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="MegaShotEffect" parent="." instance=ExtResource("24_pagyw")]
+position = Vector2(1, 4)
+emitting = false
+emission_sphere_radius = 10.0
+color = Color(0.5, 0, 0, 1)

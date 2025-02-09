@@ -9,6 +9,7 @@ var shake_strength: float = 0.0
 
 func _ready() -> void:
 	player.took_hit.connect(apply_shake)
+	player.critical_hit.connect(apply_shake)
 	pass
 	
 func _physics_process(delta: float) -> void:

@@ -6,6 +6,7 @@ func button_pressed_action(_button: Button,game_node: Node) -> void:
 			if child is Player:
 				if _button.get_parent().data.bought:
 					child.change_to_new_bow(_button.get_parent().data.weapon_scene)
+				
 					
 				elif game_node.check_if_can_buy():
 					_button.get_parent().data.bought = true

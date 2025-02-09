@@ -22,7 +22,8 @@ func Enter() -> void:
 #what happens when the player exits this state
 func Exit() -> void:
 	player.hand.visible = true
-	player.reset_to_base_stats()
+	if player.stats.reset_upgrades:
+		player.reset_to_base_stats()
 	player.died.emit("Menu")
 	pass
 	

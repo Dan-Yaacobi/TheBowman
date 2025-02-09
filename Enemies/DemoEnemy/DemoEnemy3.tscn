@@ -193,7 +193,7 @@ collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_ry7kp")
 stats = SubResource("Resource_15jtt")
-item_drops = Array[ExtResource("6_njgt5")]([SubResource("Resource_g5qpi"), SubResource("Resource_o2p5c"), SubResource("Resource_6egon"), SubResource("Resource_by4vd"), SubResource("Resource_01nao")])
+item_drops = Array[ExtResource("6_njgt5")]([SubResource("Resource_g5qpi"), SubResource("Resource_o2p5c"), SubResource("Resource_6egon"), SubResource("Resource_by4vd"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 hframes = 2

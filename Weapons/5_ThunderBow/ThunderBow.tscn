@@ -19,7 +19,12 @@ arrow = ExtResource("2_lmb8w")
 special_ability_cooldown = 5.0
 spcl_ablty_cost_mltplr = 2
 combo_buff_activated = false
+shots = 2
 can_pierce = false
+arrows_explode = false
+crit_arrows = false
+can_stun = false
+can_leech = false
 
 [node name="ThunderBow" type="Node2D"]
 script = ExtResource("1_1a34y")

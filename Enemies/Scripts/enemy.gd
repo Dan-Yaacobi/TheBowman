@@ -7,8 +7,9 @@ static var player: Player
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
+const STUN_ARROW_EFFECT = preload("res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn")
 
-signal died
+signal died(enemy: Enemy)
 
 var poisoned_timer: Timer
 var stunned_timer: Timer
@@ -25,6 +26,7 @@ var added_hit_effect: bool = false
 var hit_particle_effect: CPUParticles2D
 
 var animation_player: AnimationPlayer
+var no_push_back: bool = false
 
 func _ready() -> void:
 	pass
@@ -41,11 +43,27 @@ func calculate_direction_to_player() -> Vector2:
 func hit(_arrow: Area2D) -> void:
 	if _arrow is Arrow and _arrow != null:
 		take_hit_effect()
-		push_back(_arrow.direction,_arrow.data.pushback_power)
-		take_damage(_arrow.data.damage)
-		_arrow.hit()
+		if not no_push_back:
+			push_back(_arrow.direction,_arrow.data.pushback_power)
+		_arrow.hit(self)
 		_arrow.clear_shot()
+		if _arrow.crit:
+			take_damage(_arrow.data.damage * 2)
+		else:
+			take_damage(_arrow.data.damage)
+		if _arrow.stun:
+			apply_stun(_arrow.stun_duration)
+		_arrow.reset_specials()
 		
+func apply_stun(stun_duration) -> void:
+	if not stats.boss:
+		var stun: EnemyEffect = Stunned.new()
+		stun.set_stun_duration(stun_duration)
+		self.stats.debuffs.append(stun)
+		var stun_effect = STUN_ARROW_EFFECT.instantiate()
+		stun_effect.global_position = global_position
+		get_parent().call_deferred("add_child", stun_effect)
+	
 func take_hit_effect() -> void:
 	if not added_hit_effect:
 		added_hit_effect = true
@@ -77,8 +95,8 @@ func shooter_damaged_animation_finished(anim_name: String) -> void:
 		await get_tree().create_timer(0.5).timeout
 		
 		stats.shooter = true
-		
-		
+
+
 func regular_damaged_animation_finished(anim_name: String) -> void:
 	if anim_name == "Damaged":
 		update_animation("Move")
@@ -94,7 +112,8 @@ func enemy_died() -> void:
 	queue_free()
 	
 func push_back(_direction: Vector2, power: int) -> void:
-	velocity = _direction * power
+	if not stunned_state:
+		velocity = _direction * power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
@@ -130,10 +149,11 @@ func poisoned(_damage: int) -> void:
 	stats.move_speed /= 3
 	poisoned_timer.timeout.connect(take_poisoned_damage)
 
-func stunned() -> void:
+func stunned(duration: float) -> void:
 	stunned_state = true
 	temp_move_speed = stats.move_speed
 	stats.move_speed = 0
+	stunned_timer.wait_time = duration
 	stunned_timer.timeout.connect(stun_release)
 	
 func stun_release() -> void:

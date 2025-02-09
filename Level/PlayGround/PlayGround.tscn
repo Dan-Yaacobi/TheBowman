@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=76 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -11,9 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://bc36788hmae5b" path="res://Enemies/EvilBird/BlueBird.tscn" id="4_cffcb"]
 [ext_resource type="PackedScene" uid="uid://bwkebvyfvvrv8" path="res://Enemies/DemoEnemy/DemoEnemyGold.tscn" id="4_kxj81"]
 [ext_resource type="PackedScene" uid="uid://dqnds5n75tnpw" path="res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn" id="4_udil8"]
+[ext_resource type="PackedScene" uid="uid://c87lkba7dkiy0" path="res://Enemies/EvilBird/GreenBird.tscn" id="5_vhu6f"]
 [ext_resource type="PackedScene" uid="uid://c35yjtl5a8xob" path="res://Enemies/DemoEnemy/DemoEnemy3.tscn" id="5_xd300"]
+[ext_resource type="PackedScene" uid="uid://w2mgep2ljr3" path="res://Enemies/EvilBird/PurpleBird.tscn" id="6_qyrkq"]
 [ext_resource type="Script" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
+[ext_resource type="PackedScene" uid="uid://d1p3p0fkf2rwl" path="res://Enemies/Spider/Spider.tscn" id="9_ph66v"]
+[ext_resource type="PackedScene" uid="uid://kn3ngqcl2eex" path="res://Enemies/Spider/PoisonSpider.tscn" id="10_olg81"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="10_qool0"]
+[ext_resource type="PackedScene" uid="uid://chrv1m4hnlhef" path="res://Enemies/DemoEnemy/DemoEnemy4.tscn" id="14_c77lc"]
 [ext_resource type="Script" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
 [ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
@@ -29,6 +34,22 @@
 [ext_resource type="Texture2D" uid="uid://c51w7jyujbqty" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png" id="27_oorb6"]
 [ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="28_8kany"]
 [ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="29_y7ifn"]
+[ext_resource type="PackedScene" uid="uid://bsy8tg0ac6f0n" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn" id="34_ah7gd"]
+[ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="35_johw3"]
+[ext_resource type="Texture2D" uid="uid://baxits5aihfo2" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade2.png" id="36_772sc"]
+[ext_resource type="Texture2D" uid="uid://1ngc042hp5jv" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade3.png" id="37_31pi7"]
+[ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="38_3abtr"]
+[ext_resource type="Texture2D" uid="uid://d36766n7g2188" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png" id="39_14wyh"]
+[ext_resource type="Texture2D" uid="uid://311160wwg7qn" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade2.png" id="40_abgki"]
+[ext_resource type="Texture2D" uid="uid://dm15coovb1qa6" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade3.png" id="41_13v1j"]
+[ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="42_iqpx2"]
+[ext_resource type="Texture2D" uid="uid://casb2wdmiukgh" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade1.png" id="43_r1mi8"]
+[ext_resource type="Texture2D" uid="uid://dlhy1roops8t1" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade2.png" id="44_awenb"]
+[ext_resource type="Texture2D" uid="uid://4d8srn1jmgrv" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade3.png" id="45_t6bp6"]
+[ext_resource type="PackedScene" uid="uid://cx83vnegoifdc" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade.tscn" id="47_0q4rn"]
+[ext_resource type="Texture2D" uid="uid://dl1x6pllgiuh" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade1.png" id="48_rx7hp"]
+[ext_resource type="Texture2D" uid="uid://w30o53qdvwap" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade2.png" id="49_h6vmv"]
+[ext_resource type="Texture2D" uid="uid://dt260q61a543b" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade3.png" id="50_siq3f"]
 
 [sub_resource type="Resource" id="Resource_k715f"]
 script = ExtResource("2_r03de")
@@ -40,6 +61,18 @@ spawn_chance = 100
 script = ExtResource("2_r03de")
 enemy_name = "BlueBird"
 enemy = ExtResource("4_cffcb")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_0rgrq"]
+script = ExtResource("2_r03de")
+enemy_name = "GreenBird"
+enemy = ExtResource("5_vhu6f")
+spawn_chance = 0
+
+[sub_resource type="Resource" id="Resource_mirdq"]
+script = ExtResource("2_r03de")
+enemy_name = "PurpleBird"
+enemy = ExtResource("6_qyrkq")
 spawn_chance = 0
 
 [sub_resource type="Resource" id="Resource_j0euw"]
@@ -60,6 +93,18 @@ enemy_name = "Gold"
 enemy = ExtResource("4_kxj81")
 spawn_chance = 100
 
+[sub_resource type="Resource" id="Resource_lqffn"]
+script = ExtResource("2_r03de")
+enemy_name = "Spider"
+enemy = ExtResource("9_ph66v")
+spawn_chance = 100
+
+[sub_resource type="Resource" id="Resource_tftof"]
+script = ExtResource("2_r03de")
+enemy_name = "PoisonSpider"
+enemy = ExtResource("10_olg81")
+spawn_chance = 0
+
 [sub_resource type="Resource" id="Resource_cy7u7"]
 script = ExtResource("2_r03de")
 enemy_name = "RedTarget"
@@ -78,12 +123,19 @@ enemy_name = "GreenTarget"
 enemy = ExtResource("5_xd300")
 spawn_chance = 0
 
+[sub_resource type="Resource" id="Resource_tm3r1"]
+script = ExtResource("2_r03de")
+enemy_name = "PurpleTarget"
+enemy = ExtResource("14_c77lc")
+spawn_chance = 0
+
 [sub_resource type="Resource" id="Resource_s07r2"]
 script = ExtResource("2_lmkum")
-target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40")])
-bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), SubResource("Resource_450uo")])
+target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40"), SubResource("Resource_tm3r1")])
+bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), SubResource("Resource_450uo"), SubResource("Resource_0rgrq"), SubResource("Resource_mirdq")])
 boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp")])
 rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
+spiders = Array[ExtResource("2_r03de")]([SubResource("Resource_lqffn"), SubResource("Resource_tftof")])
 spawn_time = 2.0
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
@@ -92,7 +144,8 @@ current_wave = 1
 targets_spawn = Array[int]([0, 0, 0])
 bird_spawn = Array[int]([0, 0])
 total_enemies = 10
-spawn_time = 2.0
+spawn_time = 1.0
+base_spawn_time = 1.5
 double_spawn_chance = 10.0
 boss_wave = false
 
@@ -443,7 +496,33 @@ tool_tip = "Increase your knockback resistance"
 
 [node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
-[node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("28_8kany")]
+[node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("34_ah7gd")]
+normal_texture = ExtResource("35_johw3")
+pressed_texture = ExtResource("36_772sc")
+hover_texture = ExtResource("37_31pi7")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can stun"
+tool_tip2 = "Increase stun chance"
+bucket = 2
+is_ability = true
+
+[node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("38_3abtr")]
+normal_texture = ExtResource("39_14wyh")
+pressed_texture = ExtResource("40_abgki")
+hover_texture = ExtResource("41_13v1j")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can leech life"
+tool_tip2 = "Increase leech chance"
+bucket = 2
+is_ability = true
+
+[node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("42_iqpx2")]
+normal_texture = ExtResource("43_r1mi8")
+pressed_texture = ExtResource("44_awenb")
+hover_texture = ExtResource("45_t6bp6")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can crit"
+tool_tip2 = "Increase crit chance"
 bucket = 2
 is_ability = true
 
@@ -454,3 +533,21 @@ color = Color(0.68103, 0.1222, 0.94, 1)
 tool_tip = "Arrows explode on hit"
 bucket = 3
 is_ability = true
+can_choose_once = true
+
+[node name="ChargeMegaUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("47_0q4rn")]
+normal_texture = ExtResource("48_rx7hp")
+pressed_texture = ExtResource("49_h6vmv")
+hover_texture = ExtResource("50_siq3f")
+color = Color(0.682353, 0.121569, 0.941176, 1)
+tool_tip = "Hold hoot to charge MEGA ARROW"
+bucket = 3
+is_ability = true
+can_choose_once = true
+
+[node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("28_8kany")]
+color = Color(0.682353, 0.121569, 0.941176, 1)
+tool_tip = "Arrows can pierce enemies"
+bucket = 3
+is_ability = true
+can_choose_once = true

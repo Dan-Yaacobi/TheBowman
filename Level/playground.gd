@@ -23,6 +23,7 @@ signal new_wave
 @export var wave_data: WaveData
 @export var level_logic: LevelDifficultyLogic = LevelDifficultyLogic.new()
 
+
 var player: Player
 var enemies_killed: int
 var summoned_enemies: Array[Enemy]
@@ -77,8 +78,10 @@ func summon() -> void:
 		
 		var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
 		var demo_enemy: Enemy = init_enemy(enemy_position,enemies.get_enemy(wave_data.current_wave),player)
-		
+		if demo_enemy is Spider:
+			demo_enemy.global_position.x = player.global_position.x
 		if wave_data.current_wave % 10 == 0:
+			wave_data.spawn_time = 0.1
 			if summon_count == 1:
 				demo_enemy.stats.shooter = true
 			else:
@@ -155,8 +158,7 @@ func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
 		upgrade_buttons.player = _player
-		upgrades.big_reset()
-		wave_data.current_wave = 1
+		#upgrades.big_reset()
 		if not player.combo.is_connected(update_combo):
 			player.combo.connect(update_combo)
 		player.combo_counter = 0
@@ -199,7 +201,7 @@ func exit_scene(_player) -> void:
 	kill_all_enemies()
 	enemies_killed = 0
 	wave_reset.emit(wave_data.current_wave)
-	pass
+	_player.reset_minions()
 
 func kill_all_enemies() -> void:
 	

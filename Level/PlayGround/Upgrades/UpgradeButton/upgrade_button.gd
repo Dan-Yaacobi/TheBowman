@@ -16,7 +16,10 @@ func set_button_upgrade(upgrade_node: PlayerUpgrade, _player: Player) -> void:
 		texture_normal = upgrade_node.normal_texture
 		texture_pressed = upgrade_node.pressed_texture
 		texture_hover = upgrade_node.hover_texture
-		tooltip_text = upgrade_node.tool_tip + "\n" 
+		if upgrade_node.ability_chosen:
+			tooltip_text = upgrade_node.tool_tip2 + "\n"
+		else:
+			tooltip_text = upgrade_node.tool_tip + "\n" 
 		if not upgrade_node.is_ability:
 			tooltip_text += "Current: " + node.get_current(player)
 		if not pressed.is_connected(upgrade):

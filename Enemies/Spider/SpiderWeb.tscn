@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgl1shlilo58i"]
+
+[ext_resource type="Script" path="res://Enemies/Spider/spider_web.gd" id="1_n2qky"]
+
+[node name="SpiderWeb" type="Line2D"]
+z_index = -1
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("1_n2qky")

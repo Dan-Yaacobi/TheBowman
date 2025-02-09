@@ -14,6 +14,7 @@ func _ready() -> void:
 	monitoring_timer.start()
 	audio_stream_player_2d.play()
 	audio_stream_player_2d.finished.connect(queue_free)
+	
 func thunder_hit(body) -> void:
 	if body is Enemy and body != null:
 		var stun: EnemyEffect = Stunned.new()

@@ -1,0 +1,151 @@
+[gd_scene load_steps=17 format=3 uid="uid://c1fushoasmqi6"]
+
+[ext_resource type="Texture2D" uid="uid://compcme560lgl" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.png" id="1_1p35t"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd" id="1_ov3k5"]
+[ext_resource type="PackedScene" uid="uid://dsi8du20scawg" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/ArmProjectile.tscn" id="2_emja4"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/Companions/companion_data.gd" id="2_fbugj"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/Companions/companion_state_machine.gd" id="3_0keuw"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_moving_state.gd" id="4_f6ypt"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_summoned_state.gd" id="4_gof0u"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_attack_state.gd" id="5_nw88t"]
+[ext_resource type="AudioStream" uid="uid://g8g8amkgna1r" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Soundeffects/bone_break.mp3" id="8_3np6m"]
+
+[sub_resource type="Resource" id="Resource_5e6n1"]
+resource_local_to_scene = true
+script = ExtResource("2_fbugj")
+move_speed = 1000
+summon_duration = 0.0
+projectile = ExtResource("2_emja4")
+
+[sub_resource type="Animation" id="Animation_tnjcx"]
+resource_name = "Attack"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_5jyyw"]
+resource_name = "Move"
+length = 0.2
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 8, 10]
+}
+
+[sub_resource type="Animation" id="Animation_agcmi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hwft1"]
+resource_name = "Summon"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_agm4k"]
+_data = {
+"Attack": SubResource("Animation_tnjcx"),
+"Move": SubResource("Animation_5jyyw"),
+"RESET": SubResource("Animation_agcmi"),
+"Summon": SubResource("Animation_hwft1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5jcl"]
+resource_local_to_scene = true
+size = Vector2(8, 13)
+
+[node name="Skeleton" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_ov3k5")
+data = SubResource("Resource_5e6n1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1p35t")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_agm4k")
+}
+autoplay = "Summon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_a5jcl")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+polygon = PackedVector2Array(87, -44, 0, -79, -81, -46, -70, 4, 0, 6, 84, 4)
+
+[node name="CompanionStateMachine" type="Node2D" parent="."]
+script = ExtResource("3_0keuw")
+
+[node name="Summoned" type="Node2D" parent="CompanionStateMachine"]
+script = ExtResource("4_gof0u")
+
+[node name="Moving" type="Node2D" parent="CompanionStateMachine"]
+script = ExtResource("4_f6ypt")
+
+[node name="Attacking" type="Node2D" parent="CompanionStateMachine"]
+script = ExtResource("5_nw88t")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-3, 7)
+target_position = Vector2(0, 11)
+collision_mask = 16
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(4, 7)
+target_position = Vector2(0, 11)
+collision_mask = 16
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_3np6m")
+pitch_scale = 1.8

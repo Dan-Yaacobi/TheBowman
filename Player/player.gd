@@ -4,6 +4,7 @@ signal died
 signal money_changed
 signal combo(amount: int)
 signal took_hit
+signal critical_hit
 
 @onready var hand: Hand = $Hand
 @onready var body: Body = $Body
@@ -22,8 +23,10 @@ signal took_hit
 @onready var combo_timer: Timer = $ComboActivated/ComboTimer
 @onready var combo_effect: CPUParticles2D = $ComboActivated/ComboEffect
 @onready var combo_activated_effect: CPUParticles2D = $ComboActivated/ComboActivatedEffect
+@onready var charge_timer: Timer = $ChargeTimer
 
 @onready var upgrades: Upgrades = $Upgrades
+@onready var mega_shot_effect: CPUParticles2D = $MegaShotEffect
 
 @onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
 @onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
@@ -31,6 +34,8 @@ signal took_hit
 
 @export var gravity: int
 @export var stats: PlayerStats
+
+const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
 
 var direction: float
 var direction_side: bool = false
@@ -49,8 +54,9 @@ var combo_buff: bool = false
 
 var base_stats: PlayerStats
 var bonus_stats: PlayerStats
+var current_minions: Array[Companion] = []
 
-
+var mega_shot_activated: bool = false
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
@@ -58,6 +64,7 @@ func _ready() -> void:
 	stats.hp = stats.max_hp
 	init_bow()
 	
+	charge_timer.timeout.connect(activate_mega_shot)
 	mana_bar.set_mana_bar_stats(current_weapon.weapon_data.mana_rate,current_weapon.weapon_data.shoot_cost)
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	unlimited_mana_timer.timeout.connect(end_unlimited_mana)
@@ -66,7 +73,7 @@ func _ready() -> void:
 	init_base_stats()
 	init_bonus_stats()
 	reset_to_base_stats()
-
+	mega_shot_effect.stop()
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
 		if key == stat:
@@ -103,26 +110,63 @@ func _process(delta: float) -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if stats.hp > 0:
+
 		if event.is_action_pressed("Jump"):
 			jump_action.jump()
 			for ability in stats.jump_abilities:
 				ability.activate_ability(self)
-
-		if event.is_action_pressed("shoot",true):
-			if mana_bar.use_mana(regular_mana_cost):
-				current_weapon.regular_attack = true
-				var mouse_pos = get_global_mouse_position()
-				for ability in stats.shoot_abilities:
-					ability.activate_ability(self)
-				shoot_action.shoot(mouse_pos)
+				
+		if not stats.can_mega_shot:
+			if event.is_action_pressed("shoot",true):
+				shoot()
+				
+		else:
+			if event.is_action_pressed("shoot",true):
+				shoot()
+				
+				if charge_timer.wait_time > 0:
+					mega_shot_effect.start(charge_timer.wait_time)
+					if charge_timer.is_stopped():
+						charge_timer.start()
+			if event.is_action_released("shoot",true):
+				mega_shot_effect.stop()
+				charge_timer.stop()
+				if mega_shot_activated:
+					mega_shot()
 
 		if event.is_action_pressed("special ability"):
-			if current_weapon.weapon_data.special_ability != null:
-				if special_ability_available and mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
-					current_weapon.weapon_data.special_ability.activate_special_ability(self)
-					current_weapon.regular_attack = false
-					special_ability_available = false
-					special_ability_cooldown.start()
+			special_ability()
+
+func special_ability() -> void:
+	if current_weapon.weapon_data.special_ability != null:
+		if special_ability_available and current_weapon.weapon_data.special_ability.can_use(self):
+			if mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
+				current_weapon.weapon_data.special_ability.activate_special_ability(self)
+				current_weapon.regular_attack = false
+				special_ability_available = false
+				special_ability_cooldown.start()
+
+func activate_mega_shot() -> void:
+	mega_shot_activated = true
+	
+func deactivate_mega_shot() -> void:
+	mega_shot_activated = false
+	
+func mega_shot() -> void:
+	var mouse_pos = get_global_mouse_position()
+	for ability in stats.shoot_abilities:
+		ability.activate_ability(self)
+	shoot_action.mega_shot(mouse_pos)
+	deactivate_mega_shot()
+	pass
+	
+func shoot() -> void:
+	if mana_bar.use_mana(regular_mana_cost):
+		current_weapon.regular_attack = true
+		var mouse_pos = get_global_mouse_position()
+		for ability in stats.shoot_abilities:
+			ability.activate_ability(self)
+		shoot_action.shoot(mouse_pos)
 
 func combo_lost() -> void:
 	combo_counter = 0
@@ -213,11 +257,13 @@ func init_bow() -> void:
 	#if current_weapon != null:
 		#new_bow_buy_effect.emitting = true
 		#
+	
 	current_weapon = stats.weapon_scene.instantiate()
 	current_weapon.arrow_hit_sound.connect(shoot_action.arrow_hit_sound)
 	current_weapon.combo_loss.connect(combo_lost)
 	current_weapon.combo_gained.connect(combo_gained)
-	
+	current_weapon.critical_hit.connect(emit_crit)
+	current_weapon.leeched.connect(leech_heal)
 	hand.sprite.frame = current_weapon.weapon_data.sprite_frame
 	current_weapon.init_weapon(self,current_weapon)
 	
@@ -226,15 +272,36 @@ func init_bow() -> void:
 	else:
 		special_ability_cooldown.wait_time = current_weapon.weapon_data.special_ability_cooldown
 
+func can_summon() -> bool:
+	return current_minions.size() < stats.max_minions
+
+func reset_minions() -> void:
+	for minion in current_minions:
+		minion.queue_free()
+		current_minions.erase(minion)
+		
+func emit_crit() -> void:
+	critical_hit.emit()
 	
 func hit_player(damage: int) -> void:
 	took_hit.emit()
-	stats.hp -= damage
 	damaged_particles.emitting = true
+	stats.hp -= damage
 	health_bar._set_health(stats.hp)
-	#if stats.hp <= 0:
-		#dead()
+	
+func heal(amount: int) -> void:
+	if amount < 0:
+		if stats.hp - amount > stats.max_hp:
+			return
+	stats.hp -= amount
+	health_bar._set_health(stats.hp)
 
+func leech_heal(amount: int,enemy_position: Vector2) -> void:
+	var health_gain_effect: HealthGainEffect = HEALTH_GAIN_EFFECT.instantiate()
+	health_gain_effect.set_positions(self,enemy_position)
+	health_gain_effect.heal_amount = amount
+	get_parent().call_deferred("add_child", health_gain_effect)
+	
 func pushed_back(_direction: Vector2, _power: int) -> void:
 	if knockback_power["power"] < stats.knockback_resistance:
 		return

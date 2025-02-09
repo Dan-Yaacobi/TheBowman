@@ -13,7 +13,7 @@ func activate_enemy_effect(_enemy: Enemy) -> void:
 		_enemy.add_child(stunned_effect)
 		_enemy.stunned_timer = stunned_timer
 		_enemy.stunned_effect = stunned_effect
-		_enemy.stunned()
+		_enemy.stunned(duration)
 
 func set_stun_duration(_duration) -> void:
 	duration = _duration

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cumh3li424lli"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/Abilities/LeechLife/leech_upgrade.gd" id="1_se6j1"]
+
+[node name="LeechUpgrade" type="Node2D"]
+script = ExtResource("1_se6j1")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bonqi5f4mf1dw"]
+
+[ext_resource type="Script" path="res://Player/Upgrades/Abilities/StunUpgrade/stun_ability.gd" id="1_1bgdb"]
+
+[node name="StunAbility" type="Node2D"]
+script = ExtResource("1_1bgdb")

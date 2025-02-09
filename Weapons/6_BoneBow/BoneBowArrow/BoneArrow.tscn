@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccoj0xf4s6mlo"]
+
+[ext_resource type="Script" path="res://Weapons/6_BoneBow/BoneBowArrow/bone_arrow.gd" id="1_c2bp7"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_lpier"]
+[ext_resource type="Texture2D" uid="uid://4fe8d6ioqmxq" path="res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.png" id="3_rs2u5"]
+
+[sub_resource type="Resource" id="Resource_alqiq"]
+script = ExtResource("2_lpier")
+speed = 500
+damage = 10
+pushback_power = 25
+scale = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbnhy"]
+size = Vector2(15, 3)
+
+[sub_resource type="Curve" id="Curve_d5mht"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BoneArrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_c2bp7")
+data = SubResource("Resource_alqiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_pbnhy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_rs2u5")
+flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, 0)
+amount = 100
+randomness = 1.0
+lifetime_randomness = 1.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_d5mht")
+color = Color(0.65, 0.65, 0.65, 1)

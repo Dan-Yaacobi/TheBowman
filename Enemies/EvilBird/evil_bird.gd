@@ -63,11 +63,11 @@ func fly_and_shoot(delta) -> void:
 		shoot()
 		
 	if fly_direction == 1:
-		if global_position.x > right_end_pos:
+		if global_position.x > right_end_pos + player.global_position.x:
 			fly_direction *= -1
 			sprite.flip_h = not sprite.flip_h
 	elif fly_direction == -1:
-		if global_position.x < left_end_pos:
+		if global_position.x < left_end_pos + player.global_position.x:
 			fly_direction *= -1
 			sprite.flip_h = not sprite.flip_h
 	

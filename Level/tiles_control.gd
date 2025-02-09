@@ -1,6 +1,6 @@
 class_name TilesControl extends TileMapLayer
 
-const TORRENT = preload("res://Level/torrent.tscn")
+const TORRENT = preload("res://Level/Torrents/torrent.tscn")
 var right_torrents: Array[Torrent]
 var left_torrents: Array[Torrent]
 

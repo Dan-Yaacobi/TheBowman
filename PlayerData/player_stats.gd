@@ -14,6 +14,8 @@ var player: Player
 @export var in_menu: bool
 @export var mana_rate: float
 @export var shoot_cost: int
+@export var reset_upgrades: bool = false
+@export var max_minions: int 
 
 
 @export_category("Player Items")
@@ -28,7 +30,7 @@ var player: Player
 @export var shoot_abilities: Array[ShootAbility]
 @export var arrow_abilities: Array[ArrowAbility]
 @export var slam_abilities: Array[SlamAbility]
-
+@export var can_mega_shot: bool = false
 func add_jump_ability(ability: JumpAbility) -> void:
 	if ability != null:
 		jump_abilities.append(ability)

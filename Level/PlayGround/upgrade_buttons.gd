@@ -39,8 +39,9 @@ func get_upgrades(current_wave: int) -> void:
 
 func remove_chosen_ability_from_bucket(upgrade: PlayerUpgrade) -> void:
 	if upgrade.is_ability:
-		upgrades.used_buckets[upgrade.bucket].erase(upgrade)
-		upgrades.abilities_bucket[upgrade.bucket].append(upgrade)
+		if upgrade.can_choose_once == true:
+			upgrades.used_buckets[upgrade.bucket].erase(upgrade)
+			upgrades.abilities_bucket[upgrade.bucket].append(upgrade)
 	upgrades.refill_buckets()	
 
 
