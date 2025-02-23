@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=40 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="6_ae18a"]
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
-[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_5oa7d"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_ksgj4"]
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
 [ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
@@ -24,6 +24,10 @@
 [ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 [ext_resource type="Script" path="res://Player/upgrades.gd" id="20_mgkdb"]
 [ext_resource type="PackedScene" uid="uid://c2sbisfgqj8am" path="res://Player/Abilities/MegaShot/particles.tscn" id="24_pagyw"]
+[ext_resource type="Script" path="res://Player/BuffDisplay/buff_display_control.gd" id="25_qwhxq"]
+[ext_resource type="Script" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
+[ext_resource type="Script" path="res://Player/flow_container.gd" id="26_qrkkr"]
+[ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="27_cjoqp"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -42,12 +46,15 @@ max_minions = 3
 money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
-weapon_scene = ExtResource("7_5oa7d")
+weapon_scene = ExtResource("7_ksgj4")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 arrow_abilities = Array[ExtResource("2_jhcyx")]([])
 slam_abilities = Array[ExtResource("6_ae18a")]([])
 can_mega_shot = false
+crit_chance = 10
+stun_chance = 10
+leech_chance = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(10, 2)
@@ -280,3 +287,56 @@ position = Vector2(1, 4)
 emitting = false
 emission_sphere_radius = 10.0
 color = Color(0.5, 0, 0, 1)
+
+[node name="TotalBuffs" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 110.0
+offset_top = -71.0
+offset_right = 110.0
+offset_bottom = -71.0
+script = ExtResource("25_qwhxq")
+
+[node name="FlowContainer" type="FlowContainer" parent="TotalBuffs"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = 119.0
+offset_right = -75.0
+offset_bottom = 127.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 1
+vertical = true
+script = ExtResource("26_qrkkr")
+
+[node name="Buff" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff2" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff3" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff4" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff5" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff6" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff7" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff8" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="BuffTooltipControl" type="Node2D" parent="."]
+script = ExtResource("26_8kdbo")

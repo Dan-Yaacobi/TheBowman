@@ -19,7 +19,7 @@ func _ready() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
 	if stats.boss:
 		scale *= 5
-		stats.hp *= 20
+		stats.hp *= 22
 		max_hp = stats.hp
 		stats.knockback *= 1.2
 		stats.move_speed *= 3
@@ -88,7 +88,7 @@ func shoot() -> void:
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
-		new_bullet.data.move_speed = stats.move_speed * 2
+		new_bullet.data.move_speed = stats.move_speed * 3
 		get_parent().add_child(new_bullet)
 
 func change_direction() -> bool:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdtin5d5lhmfi"]
+[gd_scene load_steps=35 format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="7_qgn5p"]
 [ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
+[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="9_gwqcn"]
 [ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="9_prxv3"]
 [ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="9_s8nod"]
 [ext_resource type="Script" path="res://Items/item_data.gd" id="10_0bpxa"]
@@ -25,7 +26,7 @@ hp = 8
 move_speed = 50
 knockback = 200
 skin = ExtResource("2_p70mv")
-coins_dropped = 0
+coins_dropped = 10
 sharp_movement = false
 touch_damage = 1
 death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
@@ -37,6 +38,11 @@ shooter = false
 shooter_chance = 0
 bullet = ExtResource("2_idach")
 shoot_speed = 3.0
+
+[sub_resource type="Resource" id="Resource_rjwp8"]
+script = ExtResource("7_qgn5p")
+item_data = ExtResource("9_gwqcn")
+probability = 100.0
 
 [sub_resource type="Resource" id="Resource_x2nk2"]
 script = ExtResource("9_s8nod")
@@ -51,9 +57,25 @@ value = 1
 effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_x2nk2")])
 
 [sub_resource type="Resource" id="Resource_mcgos"]
+resource_local_to_scene = true
 script = ExtResource("7_qgn5p")
 item_data = SubResource("Resource_ag1v1")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_xj4sr"]
+script = ExtResource("7_qgn5p")
+item_data = ExtResource("9_gwqcn")
 probability = 50.0
+
+[sub_resource type="Resource" id="Resource_qk1wn"]
+script = ExtResource("7_qgn5p")
+item_data = ExtResource("9_gwqcn")
+probability = 25.0
+
+[sub_resource type="Resource" id="Resource_rbs8a"]
+script = ExtResource("7_qgn5p")
+item_data = ExtResource("9_gwqcn")
+probability = 10.0
 
 [sub_resource type="Resource" id="Resource_amrel"]
 script = ExtResource("9_s8nod")
@@ -70,7 +92,7 @@ effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_amrel")])
 [sub_resource type="Resource" id="Resource_yfwxr"]
 script = ExtResource("7_qgn5p")
 item_data = SubResource("Resource_msidu")
-probability = 20.0
+probability = 25.0
 
 [sub_resource type="Animation" id="Animation_qmrug"]
 resource_name = "Damaged"
@@ -178,7 +200,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f410j"]
-radius = 6.04759
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yaqk4"]
 radius = 6.0
@@ -191,7 +213,7 @@ collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jdshu")
 stats = SubResource("Resource_jvrjh")
-item_drops = Array[ExtResource("7_qgn5p")]([SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_yfwxr")])
+item_drops = Array[ExtResource("7_qgn5p")]([SubResource("Resource_rjwp8"), SubResource("Resource_mcgos"), SubResource("Resource_xj4sr"), SubResource("Resource_qk1wn"), SubResource("Resource_rbs8a"), SubResource("Resource_yfwxr")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_p70mv")

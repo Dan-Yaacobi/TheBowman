@@ -24,10 +24,10 @@ func set_button_upgrade(upgrade_node: PlayerUpgrade, _player: Player) -> void:
 			tooltip_text += "Current: " + node.get_current(player)
 		if not pressed.is_connected(upgrade):
 			pressed.connect(upgrade)
-		#current_stat.text = "Current: " + node.get_current(player)
 
 func upgrade() -> void:
 	upgrade_chosen.emit(node)
 	node.upgrade(player)
 	player.stats.upgrd_points += 1
+	player.add_display_buff(node)
 	pass

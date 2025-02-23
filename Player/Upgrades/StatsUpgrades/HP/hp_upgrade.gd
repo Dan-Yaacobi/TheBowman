@@ -10,3 +10,6 @@ func get_current(_player: Player) -> String:
 	if _player != null:
 		return str(_player.stats.max_hp)
 	return ""
+
+func get_buff_tooltip(_player: Player) -> String:
+	return "HP: " + str(_player.stats.max_hp)

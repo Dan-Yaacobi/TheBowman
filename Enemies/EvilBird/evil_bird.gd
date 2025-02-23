@@ -5,6 +5,9 @@ class_name EvilBird extends Enemy
 @onready var hurt_box: Area2D = $HurtBox
 @onready var sprite: Sprite2D = $Sprite2D
 
+enum directions{TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT}
+
+var current_direction: directions
 var shooting_state: bool = false
 
 var left_end_pos: int
@@ -22,6 +25,7 @@ func _ready() -> void:
 		ability.activate_ability(self)
 	left_end_pos = -randi_range(30,60)
 	right_end_pos = randi_range(30,60)
+	stats.sharp_movement = true
 	#shoot_speed = stats.shoot_speed
 
 	
@@ -43,9 +47,13 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false
 		velocity += calculate_direction_to_player() * stats.move_speed * delta
 		shooting_state = check_if_reached_height()
+		if change_direction():
+			initial_speed()
 	else:
 		fly_and_shoot(delta)
-
+		
+	if player.global_position.y < global_position.y:
+		shooting_state = false
 	activate_debuffs()
 	move_and_slide()
 
@@ -83,3 +91,30 @@ func shoot() -> void:
 		new_bullet.data.knockback = self.stats.knockback / 2
 		get_parent().add_child(new_bullet)
 	pass
+	
+func change_direction() -> bool:
+	if not stats.sharp_movement:
+		return false
+	var turn: bool = false
+	if global_position.x > player.global_position.x:
+		if global_position.y > player.global_position.y:
+			if current_direction != directions.BOTTOM_RIGHT:
+				turn = true
+				current_direction = directions.BOTTOM_RIGHT
+		else:
+			if current_direction != directions.TOP_RIGHT:
+				turn = true
+				current_direction = directions.TOP_RIGHT
+	else:
+		if global_position.y > player.global_position.y:
+			if current_direction != directions.BOTTOM_LEFT:
+				turn = true
+				current_direction = directions.BOTTOM_LEFT
+		else:
+			if current_direction != directions.TOP_LEFT:
+				turn = true
+				current_direction = directions.TOP_LEFT
+	return turn
+	
+func initial_speed() -> void:
+	velocity = calculate_direction_to_player() * stats.move_speed

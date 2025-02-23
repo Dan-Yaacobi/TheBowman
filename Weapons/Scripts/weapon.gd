@@ -20,8 +20,6 @@ func shoot(_offset: bool,mega: bool) -> void:
 	var offset: Vector2 = Vector2.ZERO
 	if _offset:
 		offset = Vector2(randf_range(-0.2,0.2),randf_range(-0.2,0.2))
-
-		
 	if not (mouse_pos.x > player.global_position.x - 5 and mouse_pos.x < player.global_position.x + 5 and mouse_pos.y > player.global_position.y - 5 and mouse_pos.y < player.global_position.y + 5):
 		var arrow = instance_arrow(weapon_data.arrow,global_position)
 		if weapon_data.can_pierce:
@@ -32,16 +30,16 @@ func shoot(_offset: bool,mega: bool) -> void:
 			
 		if weapon_data.crit_arrows:
 			arrow.can_crit = true
-			arrow.crit_chance = weapon_data.crit_chance
+			arrow.crit_chance = player.stats.crit_chance
 			arrow.crit_hit.connect(crit)
 			
 		if weapon_data.can_stun:
 			arrow.can_stun = true
-			arrow.stun_chance = weapon_data.stun_chance
+			arrow.stun_chance = player.stats.stun_chance
 			
 		if weapon_data.can_leech:
 			arrow.can_leechlife = true
-			arrow.leech_chance = weapon_data.leech_chance
+			arrow.leech_chance = player.stats.leech_chance
 			arrow.leeched.connect(leech)
 			
 		if mega:
@@ -49,6 +47,7 @@ func shoot(_offset: bool,mega: bool) -> void:
 			arrow.scale *= 5
 			arrow.data.damage *= 5
 		arrow.direction = player.get_shoot_direction() + offset
+		arrow.global_position += arrow.direction*10
 		arrow.rotate(set_arrow_rotation())
 		arrow.regular_shot = regular_attack
 		player.get_parent().call_deferred("add_child",arrow)

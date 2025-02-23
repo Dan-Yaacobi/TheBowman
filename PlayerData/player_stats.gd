@@ -2,7 +2,6 @@ class_name PlayerStats extends Resource
 
 var player: Player
 
-
 @export_category("Player Stats")
 @export var hp: int
 @export var max_hp: int
@@ -18,6 +17,7 @@ var player: Player
 @export var max_minions: int 
 
 
+
 @export_category("Player Items")
 @export var money: int
 @export var upgrd_points: int
@@ -25,12 +25,22 @@ var player: Player
 @export var weapon_scene: PackedScene
 
 
+
 @export_category("Abilities")
 @export var jump_abilities: Array[JumpAbility]
 @export var shoot_abilities: Array[ShootAbility]
 @export var arrow_abilities: Array[ArrowAbility]
 @export var slam_abilities: Array[SlamAbility]
+
+
+
+@export_category("Upgrade values")
 @export var can_mega_shot: bool = false
+@export var crit_chance: int = 10
+@export var stun_chance: int = 10
+@export var leech_chance: int = 10
+
+
 func add_jump_ability(ability: JumpAbility) -> void:
 	if ability != null:
 		jump_abilities.append(ability)

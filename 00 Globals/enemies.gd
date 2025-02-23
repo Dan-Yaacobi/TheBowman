@@ -10,7 +10,7 @@ class_name Enemies extends Resource
 
 func get_enemy(current_wave : int) -> PackedScene:
 
-	if current_wave <= 20:
+	if current_wave <= 30:
 		if current_wave % 5 == 0:
 			return boss_enemies[(current_wave - 5) / 10].enemy
 			
@@ -23,7 +23,13 @@ func get_enemy(current_wave : int) -> PackedScene:
 		var spider_spawn_chance: int = randi_range(0,100)
 		if spider_spawn_chance <= 15:
 			return get_spider(current_wave)
-			
+	
+	#if current_wave > 20:
+		#var special_spawn_int: int = randi_range(1,100)
+		#var chance: int = 5
+		#if special_spawn_int <= chance:
+			#return get_special_enemy(current_wave)
+		
 	var spawn_int: int = randi_range(1,100)
 	var chance_sum: int = 0
 	
@@ -34,12 +40,11 @@ func get_enemy(current_wave : int) -> PackedScene:
 		return enemy.enemy
 	return null
 	
-	
-func get_special_enemy(chance: int) -> PackedScene:
-	var special_spawn_int: int = randi_range(1,100)
-	if special_spawn_int <= chance:
-		return rare_enemies[0].enemy
-	return null
+func get_special_enemy(current_wave) -> PackedScene:
+	var index: int = current_wave / 20 - 1
+	if index > rare_enemies.size() - 1:
+		index = rare_enemies.size() - 1
+	return rare_enemies[index].enemy
 
 func get_spider(current_wave: int) -> PackedScene:
 	var spawn_int: int = randi_range(1,100)
@@ -52,7 +57,6 @@ func get_spider(current_wave: int) -> PackedScene:
 		return enemy.enemy
 	return null
 
-	
 func summon_bird(current_wave: int) -> PackedScene:
 	var spawn_int: int = randi_range(1,100)
 	var chance_sum: int = 0

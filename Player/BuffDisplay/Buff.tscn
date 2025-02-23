@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://duv405amm7ir"]
+
+[ext_resource type="Script" path="res://Player/BuffDisplay/buff.gd" id="1_8wu54"]
+[ext_resource type="Texture2D" uid="uid://d36766n7g2188" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png" id="1_55ncm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6sxi"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Buff" type="TextureRect"]
+custom_minimum_size = Vector2(8, 8)
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_55ncm")
+expand_mode = 1
+script = ExtResource("1_8wu54")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k6sxi")
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 428.0
+offset_bottom = 341.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 250
+text = "0
+
+"

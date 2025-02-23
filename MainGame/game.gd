@@ -1,7 +1,6 @@
 class_name Game extends Node2D
 
 @onready var game_music: AudioStreamPlayer2D = $GameMusic
-
 @onready var platform_shop: PlatformShop = $PlatformShop
 @onready var abilities_shop: AbilitiesShop = $AbilitiesShop
 @onready var bows_shop: BowsShop = $BowsShop
@@ -32,11 +31,13 @@ func _ready() -> void:
 	shop.changed_scene.connect(change_scene)
 	bows_shop.changed_scene.connect(change_scene)
 	abilities_shop.changed_scene.connect(change_scene)
+	player.back_to_menu.connect(change_scene)
 	
 	player.reparent(main_menu)
 	main_menu.set_scene(player)
 	last_scene = main_menu
-
+	main_menu.playground = play_ground
+	
 	for child in get_children():
 		if child != last_scene and not child is AudioStreamPlayer2D:
 			child.call_deferred("exit_scene",player)

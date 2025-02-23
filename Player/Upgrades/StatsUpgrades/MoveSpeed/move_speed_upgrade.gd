@@ -10,3 +10,6 @@ func get_current(_player: Player) -> String:
 	if _player != null:
 		return str(_player.stats.move_speed)
 	return ""
+
+func get_buff_tooltip(_player: Player) -> String:
+	return "Move Speed: " + str(_player.stats.move_speed)

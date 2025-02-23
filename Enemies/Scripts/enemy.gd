@@ -28,9 +28,11 @@ var hit_particle_effect: CPUParticles2D
 var animation_player: AnimationPlayer
 var no_push_back: bool = false
 
+var hard_mode: bool = false
+
 func _ready() -> void:
 	pass
-	
+
 func get_player(_player: Player) -> void:
 	if _player != null:
 		player = _player
@@ -76,7 +78,7 @@ func take_hit_effect() -> void:
 func take_damage(_dmg: int) -> void:
 	stats.hp -= _dmg
 	update_animation("Damaged")
-	if stats.shooter:
+	if stats.shooter and not stats.boss:
 		stats.shooter = false
 		if not animation_player.animation_finished.is_connected(shooter_damaged_animation_finished):
 			animation_player.animation_finished.connect(shooter_damaged_animation_finished)
@@ -113,24 +115,33 @@ func enemy_died() -> void:
 	
 func push_back(_direction: Vector2, power: int) -> void:
 	if not stunned_state:
-		velocity = _direction * power
+		if not (stats.boss and stats.shooter):
+			velocity = _direction * power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0:
 			body.hit_player(stats.touch_damage)
 			body.set_pushback_values(direction,stats.knockback)
-			push_back(-direction,stats.move_speed*2)
+			if stats.boss:
+				push_back(-direction,stats.move_speed/2)
+			else:
+				push_back(-direction,stats.move_speed)
 
 func drop_item() -> void:
 	if not no_drops:
 		for drop in item_drops:
 			if drop.drop_chance():
-				var item = ITEM_PICK_UP.instantiate()
-				item.assign_item(drop.item_data)
-				item.global_position = global_position
-				item.inititalize(player)
-				get_parent().call_deferred("add_child", item)
+				spawn_drop(drop)
+				if hard_mode:
+					spawn_drop(drop)
+
+func spawn_drop(drop) -> void:
+	var item = ITEM_PICK_UP.instantiate()
+	item.assign_item(drop.item_data)
+	item.global_position = global_position
+	item.inititalize(player)
+	get_parent().call_deferred("add_child", item)
 
 func disable_drops() -> void:
 	no_drops = true

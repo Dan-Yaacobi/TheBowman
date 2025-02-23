@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b61wuscixbakq"]
+
+[ext_resource type="Script" path="res://Weapons/7_BubbleGumBow/BubbleGum/bubble_gum.gd" id="1_rn83j"]
+[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_82ih7"]
+[ext_resource type="Texture2D" uid="uid://bdwt8rah0u4ff" path="res://Weapons/7_BubbleGumBow/BubbleGum/BigBubbleGum.png" id="2_x5502"]
+
+[sub_resource type="Resource" id="Resource_oitll"]
+script = ExtResource("2_82ih7")
+speed = 525
+damage = 10
+pushback_power = 30
+scale = 0.3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do4uc"]
+radius = 7.0
+
+[sub_resource type="Curve" id="Curve_bv0vq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BubbleGum" type="Area2D"]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_rn83j")
+data = SubResource("Resource_oitll")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_do4uc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_x5502")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, 0)
+amount = 100
+randomness = 1.0
+lifetime_randomness = 1.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_bv0vq")
+color = Color(0.984314, 0.560784, 0.85098, 1)

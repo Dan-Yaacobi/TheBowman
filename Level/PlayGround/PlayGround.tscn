@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=80 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c35yjtl5a8xob" path="res://Enemies/DemoEnemy/DemoEnemy3.tscn" id="5_xd300"]
 [ext_resource type="PackedScene" uid="uid://w2mgep2ljr3" path="res://Enemies/EvilBird/PurpleBird.tscn" id="6_qyrkq"]
 [ext_resource type="Script" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
+[ext_resource type="PackedScene" uid="uid://bj5hoh4kid73x" path="res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn" id="9_f4cq7"]
 [ext_resource type="PackedScene" uid="uid://d1p3p0fkf2rwl" path="res://Enemies/Spider/Spider.tscn" id="9_ph66v"]
 [ext_resource type="PackedScene" uid="uid://kn3ngqcl2eex" path="res://Enemies/Spider/PoisonSpider.tscn" id="10_olg81"]
 [ext_resource type="Script" path="res://MainGame/current_money.gd" id="10_qool0"]
@@ -22,6 +23,7 @@
 [ext_resource type="Script" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
 [ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
+[ext_resource type="PackedScene" uid="uid://dmt8clw634d1e" path="res://Enemies/DemoEnemy/DemoEnemy5.tscn" id="17_n8jhk"]
 [ext_resource type="Script" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
 [ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
 [ext_resource type="Script" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
@@ -87,6 +89,12 @@ enemy_name = "BlueBoss"
 enemy = ExtResource("4_udil8")
 spawn_chance = 100
 
+[sub_resource type="Resource" id="Resource_njak4"]
+script = ExtResource("2_r03de")
+enemy_name = "GreenBoss"
+enemy = ExtResource("9_f4cq7")
+spawn_chance = 0
+
 [sub_resource type="Resource" id="Resource_17qqw"]
 script = ExtResource("2_r03de")
 enemy_name = "Gold"
@@ -129,11 +137,17 @@ enemy_name = "PurpleTarget"
 enemy = ExtResource("14_c77lc")
 spawn_chance = 0
 
+[sub_resource type="Resource" id="Resource_75nly"]
+script = ExtResource("2_r03de")
+enemy_name = "OrangeTarget"
+enemy = ExtResource("17_n8jhk")
+spawn_chance = 0
+
 [sub_resource type="Resource" id="Resource_s07r2"]
 script = ExtResource("2_lmkum")
-target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40"), SubResource("Resource_tm3r1")])
+target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40"), SubResource("Resource_tm3r1"), SubResource("Resource_75nly")])
 bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), SubResource("Resource_450uo"), SubResource("Resource_0rgrq"), SubResource("Resource_mirdq")])
-boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp")])
+boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp"), SubResource("Resource_njak4")])
 rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
 spiders = Array[ExtResource("2_r03de")]([SubResource("Resource_lqffn"), SubResource("Resource_tftof")])
 spawn_time = 2.0
@@ -148,6 +162,7 @@ spawn_time = 1.0
 base_spawn_time = 1.5
 double_spawn_chance = 10.0
 boss_wave = false
+hard_mode_money = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4hl8g"]
 radius = 4.0
@@ -484,8 +499,7 @@ script = ExtResource("20_8lbxg")
 [node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("21_imgkr")]
 
 [node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("22_67mw3")]
-
-[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("23_v6ol2")]
+ID = 1
 
 [node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("24_mi85c")]
 amount = 1
@@ -493,6 +507,7 @@ normal_texture = ExtResource("25_iq6ym")
 pressed_texture = ExtResource("26_wdchw")
 hover_texture = ExtResource("27_oorb6")
 tool_tip = "Increase your knockback resistance"
+ID = 3
 
 [node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
@@ -503,6 +518,7 @@ hover_texture = ExtResource("37_31pi7")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can stun"
 tool_tip2 = "Increase stun chance"
+ID = 10
 bucket = 2
 is_ability = true
 
@@ -513,6 +529,7 @@ hover_texture = ExtResource("41_13v1j")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can leech life"
 tool_tip2 = "Increase leech chance"
+ID = 11
 bucket = 2
 is_ability = true
 
@@ -523,14 +540,21 @@ hover_texture = ExtResource("45_t6bp6")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can crit"
 tool_tip2 = "Increase crit chance"
+ID = 12
 bucket = 2
 is_ability = true
+
+[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("23_v6ol2")]
+color = Color(0.188235, 0.890196, 0.34902, 1)
+ID = 2
+bucket = 2
 
 [node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
 [node name="ArrowExplosionUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("29_y7ifn")]
 color = Color(0.68103, 0.1222, 0.94, 1)
 tool_tip = "Arrows explode on hit"
+ID = 100
 bucket = 3
 is_ability = true
 can_choose_once = true
@@ -541,6 +565,7 @@ pressed_texture = ExtResource("49_h6vmv")
 hover_texture = ExtResource("50_siq3f")
 color = Color(0.682353, 0.121569, 0.941176, 1)
 tool_tip = "Hold hoot to charge MEGA ARROW"
+ID = 101
 bucket = 3
 is_ability = true
 can_choose_once = true
@@ -548,6 +573,7 @@ can_choose_once = true
 [node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("28_8kany")]
 color = Color(0.682353, 0.121569, 0.941176, 1)
 tool_tip = "Arrows can pierce enemies"
+ID = 102
 bucket = 3
 is_ability = true
 can_choose_once = true

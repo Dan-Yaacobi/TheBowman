@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://c35yjtl5a8xob"]
+[gd_scene load_steps=24 format=3 uid="uid://c35yjtl5a8xob"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_ry7kp"]
+[ext_resource type="PackedScene" uid="uid://dok5esyet0y5n" path="res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn" id="2_55fox"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_x0dd5"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_0keyp"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_r5unr"]
@@ -8,11 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dytyw504160mf" path="res://Enemies/DemoEnemy/green_target.png" id="5_70l7o"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="6_njgt5"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="7_oj3xw"]
-[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_15cjq"]
-[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="9_ov0kd"]
-[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_kl7ae"]
-[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_08ry8"]
-[ext_resource type="Script" path="res://Items/item_data.gd" id="12_1hwtl"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_humn1"]
 
 [sub_resource type="Resource" id="Resource_1u0xx"]
 script = ExtResource("3_r5unr")
@@ -24,7 +21,7 @@ hp = 15
 move_speed = 30
 knockback = 170
 skin = ExtResource("5_70l7o")
-coins_dropped = 0
+coins_dropped = 12
 sharp_movement = true
 touch_damage = 1
 death_ability = Array[ExtResource("2_x0dd5")]([SubResource("Resource_1u0xx")])
@@ -33,45 +30,29 @@ special_ability = Array[ExtResource("2_x0dd5")]([])
 debuffs = Array[ExtResource("3_0keyp")]([])
 boss = false
 shooter = false
-shooter_chance = 0
+shooter_chance = 25
+bullet = ExtResource("2_55fox")
 shoot_speed = 0.0
 
-[sub_resource type="Resource" id="Resource_g5qpi"]
+[sub_resource type="Resource" id="Resource_e57w5"]
 script = ExtResource("6_njgt5")
 item_data = ExtResource("7_oj3xw")
-probability = 75.0
+probability = 100.0
 
-[sub_resource type="Resource" id="Resource_o2p5c"]
+[sub_resource type="Resource" id="Resource_ldutr"]
 script = ExtResource("6_njgt5")
 item_data = ExtResource("7_oj3xw")
-probability = 45.0
+probability = 100.0
 
-[sub_resource type="Resource" id="Resource_6egon"]
+[sub_resource type="Resource" id="Resource_rapgc"]
 script = ExtResource("6_njgt5")
-item_data = ExtResource("7_oj3xw")
-probability = 30.0
+item_data = ExtResource("9_humn1")
+probability = 100.0
 
-[sub_resource type="Resource" id="Resource_by4vd"]
+[sub_resource type="Resource" id="Resource_a4jxv"]
 script = ExtResource("6_njgt5")
-item_data = ExtResource("7_oj3xw")
-probability = 20.0
-
-[sub_resource type="Resource" id="Resource_mbm0q"]
-script = ExtResource("9_ov0kd")
-sparkle_color = "6ec7db"
-sparkle_scene = ExtResource("10_kl7ae")
-
-[sub_resource type="Resource" id="Resource_clsfr"]
-script = ExtResource("12_1hwtl")
-image = ExtResource("11_08ry8")
-image_size = 0.3
-value = 5
-effects = Array[ExtResource("8_15cjq")]([SubResource("Resource_mbm0q")])
-
-[sub_resource type="Resource" id="Resource_01nao"]
-script = ExtResource("6_njgt5")
-item_data = SubResource("Resource_clsfr")
-probability = 15.0
+item_data = ExtResource("9_humn1")
+probability = 25.0
 
 [sub_resource type="Animation" id="Animation_bjyv2"]
 resource_name = "Damaged"
@@ -193,7 +174,7 @@ collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_ry7kp")
 stats = SubResource("Resource_15jtt")
-item_drops = Array[ExtResource("6_njgt5")]([SubResource("Resource_g5qpi"), SubResource("Resource_o2p5c"), SubResource("Resource_6egon"), SubResource("Resource_by4vd"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao"), SubResource("Resource_01nao")])
+item_drops = Array[ExtResource("6_njgt5")]([SubResource("Resource_e57w5"), SubResource("Resource_ldutr"), SubResource("Resource_rapgc"), SubResource("Resource_a4jxv")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 hframes = 2

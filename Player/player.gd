@@ -5,6 +5,7 @@ signal money_changed
 signal combo(amount: int)
 signal took_hit
 signal critical_hit
+signal back_to_menu(scene: String)
 
 @onready var hand: Hand = $Hand
 @onready var body: Body = $Body
@@ -32,6 +33,8 @@ signal critical_hit
 @onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
 @onready var health_bar: HealthBar = $HealthBar
 
+@onready var total_buffs: TotalBuffs = $TotalBuffs
+
 @export var gravity: int
 @export var stats: PlayerStats
 
@@ -57,6 +60,7 @@ var bonus_stats: PlayerStats
 var current_minions: Array[Companion] = []
 
 var mega_shot_activated: bool = false
+
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
@@ -74,6 +78,7 @@ func _ready() -> void:
 	init_bonus_stats()
 	reset_to_base_stats()
 	mega_shot_effect.stop()
+	
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
 		if key == stat:
@@ -81,7 +86,20 @@ func upgrade_stat(stat: String, amount) -> void:
 
 func add_ability(ability_type_name: String, ability) -> void:
 	upgrades.call_deferred(upgrades.new_abilities_dict[ability_type_name],ability)
+
+func add_display_buff(buff: PlayerUpgrade) -> void:
+	if buff != null:
+		total_buffs.add_display_buff(buff)
+		
+func hide_buffs() -> void:
+	total_buffs.visible = false
 	
+func show_buffs() -> void:
+	total_buffs.visible = true
+
+func get_buff_tooltip(id: int) -> String:
+	
+	return ""
 func reset_to_base_stats() -> void:
 	base_stats.money = stats.money
 	base_stats.upgrd_points = stats.upgrd_points
@@ -106,11 +124,17 @@ func init_bonus_stats() -> void:
 	bonus_stats = stats.duplicate()
 	
 func _process(delta: float) -> void:
-	direction = Input.get_axis("Left","Right")
+	if stats.hp > 0:
+		direction = Input.get_axis("Left","Right")
+	else:
+		direction = 0
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if stats.hp > 0:
-
+		
+		if event.is_action_pressed("Menu"):
+			back_to_menu.emit("Menu")
+				
 		if event.is_action_pressed("Jump"):
 			jump_action.jump()
 			for ability in stats.jump_abilities:
@@ -129,14 +153,17 @@ func _unhandled_input(event: InputEvent) -> void:
 					if charge_timer.is_stopped():
 						charge_timer.start()
 			if event.is_action_released("shoot",true):
-				mega_shot_effect.stop()
-				charge_timer.stop()
+				mega_shot_stop()
 				if mega_shot_activated:
 					mega_shot()
 
 		if event.is_action_pressed("special ability"):
 			special_ability()
-
+			
+func mega_shot_stop() -> void:
+	mega_shot_effect.stop()
+	charge_timer.stop()
+	
 func special_ability() -> void:
 	if current_weapon.weapon_data.special_ability != null:
 		if special_ability_available and current_weapon.weapon_data.special_ability.can_use(self):
@@ -151,6 +178,7 @@ func activate_mega_shot() -> void:
 	
 func deactivate_mega_shot() -> void:
 	mega_shot_activated = false
+	mega_shot_stop()
 	
 func mega_shot() -> void:
 	var mouse_pos = get_global_mouse_position()

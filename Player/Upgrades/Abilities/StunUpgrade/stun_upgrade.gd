@@ -12,9 +12,13 @@ func upgrade(_player: Player) -> void:
 			upgrade2(_player)
 
 func upgrade2(_player: Player) -> void:
-	_player.current_weapon.weapon_data.stun_chance += 5
+	_player.stats.stun_chance += 5
+	#_player.current_weapon.weapon_data.stun_chance += 5
 	
 func get_current(_player: Player) -> String:
 	if _player != null:
 		return "none"
 	return ""
+
+func get_buff_tooltip(_player: Player) -> String:
+	return "Stun Chance: " + str(_player.stats.stun_chance) + "%"

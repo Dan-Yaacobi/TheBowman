@@ -1,0 +1,342 @@
+[gd_scene load_steps=40 format=3 uid="uid://cesvb1a1eu8yq"]
+
+[ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
+[ext_resource type="Script" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
+[ext_resource type="PackedScene" uid="uid://bug4e8v5lnb0m" path="res://Player/Hand/Hand.tscn" id="2_alpnv"]
+[ext_resource type="Script" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_jhcyx"]
+[ext_resource type="Script" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="2_ohurx"]
+[ext_resource type="Script" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="4_qie87"]
+[ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
+[ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
+[ext_resource type="Script" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="6_ae18a"]
+[ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_5oa7d"]
+[ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
+[ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
+[ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
+[ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="14_gy5xr"]
+[ext_resource type="Script" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
+[ext_resource type="Script" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
+[ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
+[ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
+[ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
+[ext_resource type="Script" path="res://Player/upgrades.gd" id="20_mgkdb"]
+[ext_resource type="PackedScene" uid="uid://c2sbisfgqj8am" path="res://Player/Abilities/MegaShot/particles.tscn" id="24_pagyw"]
+[ext_resource type="Script" path="res://Player/BuffDisplay/buff_display_control.gd" id="25_qwhxq"]
+[ext_resource type="Script" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
+[ext_resource type="Script" path="res://Player/flow_container.gd" id="26_qrkkr"]
+[ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="27_cjoqp"]
+
+[sub_resource type="Resource" id="Resource_sedti"]
+script = ExtResource("2_2aet8")
+hp = 5
+max_hp = 5
+move_speed = 75
+max_jumps = 2
+jump_height = 90
+knockback_resistance = 3
+menu_speed = 150
+in_menu = false
+mana_rate = 0.0
+shoot_cost = 0
+reset_upgrades = false
+max_minions = 3
+money = 0
+upgrd_points = 0
+weapon_name = "Basic Bow"
+weapon_scene = ExtResource("7_5oa7d")
+jump_abilities = Array[ExtResource("2_ohurx")]([])
+shoot_abilities = Array[ExtResource("4_qie87")]([])
+arrow_abilities = Array[ExtResource("2_jhcyx")]([])
+slam_abilities = Array[ExtResource("6_ae18a")]([])
+can_mega_shot = false
+crit_chance = 10
+stun_chance = 10
+leech_chance = 10
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
+size = Vector2(10, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
+size = Vector2(10, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
+size = Vector2(10, 1)
+
+[sub_resource type="Curve" id="Curve_g8oqh"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
+size = Vector2(10, 14)
+
+[sub_resource type="Curve" id="Curve_wqenp"]
+max_value = 4.0
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_u4yfg"]
+colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_cqixw"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0mjqs"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_whdv5"]
+radius = 49.0408
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 17
+script = ExtResource("1_4bii6")
+gravity = 150
+stats = SubResource("Resource_sedti")
+
+[node name="Body" parent="." instance=ExtResource("1_1adnh")]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Hand" parent="." instance=ExtResource("2_alpnv")]
+position = Vector2(0, 1)
+rotation = -0.00872665
+collision_layer = 0
+collision_mask = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4.5, 4.5)
+position_smoothing_enabled = true
+script = ExtResource("8_qvxki")
+random_strength = 5.0
+shake_fade = 10.0
+
+[node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
+
+[node name="Idle" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("5_kcllr")
+
+[node name="Walking" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("6_vo15m")
+
+[node name="Slam" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("14_nepur")
+
+[node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam"]
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_6nowa")
+debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
+
+[node name="Dead" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("15_qho0y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_0mb5q")
+
+[node name="JumpReset" type="Area2D" parent="."]
+position = Vector2(1, 4)
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
+position = Vector2(-1, 4)
+shape = SubResource("RectangleShape2D_7fpcy")
+debug_color = Color(0, 0.648432, 0.180981, 0.42)
+
+[node name="JumpAction" parent="." instance=ExtResource("7_kkejo")]
+
+[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction"]
+position = Vector2(0, 11)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 3)
+gravity = Vector2(0, 50)
+scale_amount_curve = SubResource("Curve_g8oqh")
+color = Color(0.831239, 0.712185, 0.672638, 1)
+
+[node name="ShootAction" parent="." instance=ExtResource("8_gtm6s")]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_4o0d0")
+
+[node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]
+offset_left = -30.0
+offset_top = 65.0
+offset_right = 204.0
+offset_bottom = 97.0
+bar_color = Color(1, 1, 1, 1)
+
+[node name="DamagedParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 20)
+linear_accel_min = 20.0
+linear_accel_max = 20.0
+radial_accel_min = 20.0
+radial_accel_max = 50.0
+scale_amount_curve = SubResource("Curve_wqenp")
+color_ramp = SubResource("Gradient_u4yfg")
+
+[node name="DeathAnimationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpecialAbilityCooldown" type="Timer" parent="."]
+
+[node name="UnlimitedManaTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="SpecialAbilityCD" type="Sprite2D" parent="."]
+position = Vector2(44, 81)
+texture = ExtResource("14_gy5xr")
+
+[node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
+offset_left = 8.0
+offset_top = -10.0
+offset_right = 151.0
+offset_bottom = 332.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 25
+theme_override_constants/shadow_outline_size = 30
+theme_override_font_sizes/font_size = 250
+text = "0
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" parent="." instance=ExtResource("15_wqrs0")]
+offset_left = -30.0
+offset_top = 51.0
+offset_right = 34.0
+offset_bottom = 83.0
+
+[node name="ComboActivated" type="Node2D" parent="."]
+script = ExtResource("16_j4os2")
+
+[node name="ComboTimer" type="Timer" parent="ComboActivated"]
+wait_time = 8.0
+
+[node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated"]
+z_index = -1
+position = Vector2(0, -1)
+emitting = false
+amount = 200
+emission_shape = 2
+emission_sphere_radius = 7.0
+gravity = Vector2(0, -50)
+scale_amount_curve = SubResource("Curve_cqixw")
+color = Color(0.673333, 0.04, 0.8, 1)
+
+[node name="ComboActivatedEffect" type="CPUParticles2D" parent="ComboActivated"]
+emitting = false
+amount = 500
+one_shot = true
+explosiveness = 1.0
+emission_shape = 2
+emission_sphere_radius = 10.0
+gravity = Vector2(0, -100)
+radial_accel_min = 250.0
+radial_accel_max = 250.0
+scale_amount_curve = SubResource("Curve_0mjqs")
+color = Color(0.67451, 0.0392157, 0.8, 1)
+script = ExtResource("18_n3ww0")
+
+[node name="Area2D" type="Area2D" parent="ComboActivated/ComboActivatedEffect"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_whdv5")
+
+[node name="Upgrades" type="Node2D" parent="."]
+script = ExtResource("20_mgkdb")
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="MegaShotEffect" parent="." instance=ExtResource("24_pagyw")]
+position = Vector2(1, 4)
+emitting = false
+emission_sphere_radius = 10.0
+color = Color(0.5, 0, 0, 1)
+
+[node name="TotalBuffs" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 110.0
+offset_top = -71.0
+offset_right = 110.0
+offset_bottom = -71.0
+script = ExtResource("25_qwhxq")
+
+[node name="FlowContainer" type="FlowContainer" parent="TotalBuffs"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = 119.0
+offset_right = -75.0
+offset_bottom = 127.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 1
+vertical = true
+script = ExtResource("26_qrkkr")
+
+[node name="Buff" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff2" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff3" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff4" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff5" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff6" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff7" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="Buff8" parent="TotalBuffs/FlowContainer" instance=ExtResource("27_cjoqp")]
+layout_mode = 2
+
+[node name="BuffTooltipControl" type="Node2D" parent="."]
+script = ExtResource("26_8kdbo")

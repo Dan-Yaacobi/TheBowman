@@ -12,7 +12,7 @@ pushback_power = 25
 scale = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbnhy"]
-size = Vector2(15, 3)
+size = Vector2(4, 7)
 
 [sub_resource type="Curve" id="Curve_d5mht"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -25,7 +25,7 @@ script = ExtResource("1_c2bp7")
 data = SubResource("Resource_alqiq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
+position = Vector2(-5, 0.5)
 shape = SubResource("RectangleShape2D_pbnhy")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

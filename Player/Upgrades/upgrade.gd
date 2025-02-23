@@ -15,6 +15,7 @@ signal chosen
 
 
 @export_category("")
+@export var ID: int
 @export var bucket: int = 1
 @export var is_ability: bool = false
 @export var ability_chosen: bool = false
@@ -27,4 +28,7 @@ func upgrade2(_player: Player) -> void:
 	pass
 	
 func get_current(_player: Player) -> String:
+	return ""
+
+func get_buff_tooltip(_player: Player) -> String:
 	return ""

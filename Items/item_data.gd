@@ -8,6 +8,3 @@ class_name ItemData extends Resource
 func activate_abilities(_item) -> void:
 	for effect in effects:
 		effect.activate_ability(self)
-
-	
-	

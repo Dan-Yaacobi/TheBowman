@@ -11,3 +11,5 @@ func get_current(_player: Player) -> String:
 		return str(_player.stats.max_jumps)
 	return ""
 	
+func get_buff_tooltip(_player: Player) -> String:
+	return "Jumps: " + str(_player.stats.max_jumps)

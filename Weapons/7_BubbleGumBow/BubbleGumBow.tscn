@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy483h11yxme"]
+
+[ext_resource type="Script" path="res://Weapons/7_BubbleGumBow/bubble_gum_bow.gd" id="1_vhi0b"]
+[ext_resource type="PackedScene" uid="uid://b61wuscixbakq" path="res://Weapons/7_BubbleGumBow/BubbleGum/BubbleGum.tscn" id="2_t4mef"]
+[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="3_f06x2"]
+[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/special_ability.gd" id="4_upret"]
+
+[sub_resource type="Resource" id="Resource_a107e"]
+script = ExtResource("4_upret")
+name = ""
+
+[sub_resource type="Resource" id="Resource_yvbdx"]
+script = ExtResource("3_f06x2")
+sprite_frame = 7
+special_ability = SubResource("Resource_a107e")
+mana_rate = 2.5
+shoot_cost = 15
+arrow = ExtResource("2_t4mef")
+special_ability_cooldown = 0.0
+spcl_ablty_cost_mltplr = 0
+combo_buff_activated = false
+shots = 3
+can_pierce = false
+arrows_explode = false
+crit_arrows = false
+crit_chance = 10
+can_stun = false
+stun_chance = 10
+can_leech = false
+leech_chance = 10
+
+[node name="BubbleGumBow" type="Node2D"]
+script = ExtResource("1_vhi0b")
+weapon_data = SubResource("Resource_yvbdx")

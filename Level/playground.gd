@@ -23,13 +23,12 @@ signal new_wave
 @export var wave_data: WaveData
 @export var level_logic: LevelDifficultyLogic = LevelDifficultyLogic.new()
 
-
 var player: Player
 var enemies_killed: int
 var summoned_enemies: Array[Enemy]
 var summon_count: int = 0
-
 var stop_waves: bool = false
+var hard_mode: bool = false
 
 func _ready() -> void:
 	summon_timer.timeout.connect(summon_enemy)
@@ -103,17 +102,20 @@ func update_label() -> void:
 
 func between_waves() -> void:
 	stop_waves = true
+	for child in get_children():
+		if child is EnemyBullet:
+			child.queue_free()
+	player.mana_bar.set_value_to_max()
+	player.can_use_special_ability()
 	
 	#if wave_data.current_wave % 3 == 0 or (wave_data.current_wave - 1) % 5 == 0:
 	if 1 > 0:
 		upgrade_buttons.get_upgrades(wave_data.current_wave)
 		upgrade_buttons.enable()
 	else:
-		
 		next_wave_button.disabled = false
 		next_wave_button.visible = true
-	
-	pass
+
 	
 func new_wave_difficulty() -> void:
 	
@@ -125,7 +127,7 @@ func new_wave_difficulty() -> void:
 	new_wave.emit()
 	update_label()
 	summon_count = 0
-	wave_data.spawn_time_update()
+	wave_data.spawn_time_update(hard_mode)
 	wave_data.calc_total_enemies()
 	wave_data.targets_spawn = level_logic.calculate_logic_targets(wave_data.current_wave,enemies.target_enemies.size())
 	wave_data.bird_spawn = level_logic.calculate_logic_birds(wave_data.current_wave,enemies.bird_enemies.size())
@@ -162,7 +164,7 @@ func set_scene(_player: Player) -> void:
 		if not player.combo.is_connected(update_combo):
 			player.combo.connect(update_combo)
 		player.combo_counter = 0
-		
+		_player.show_buffs()
 		visible = true
 		tiles.collision_enabled = true
 		_player.global_position = Vector2(0,-8)
@@ -176,7 +178,8 @@ func set_scene(_player: Player) -> void:
 		if not player.money_changed.is_connected(update_money):
 			player.money_changed.connect(update_money)
 		update_money(player.stats.money)
-
+		_player.mana_bar.set_value_to_max()
+		
 func update_money(amount) -> void:
 	current_money.update_current_money(amount)
 
@@ -193,7 +196,7 @@ func update_combo(amount: int) -> void:
 		else:
 			combo_animation.play("Gained")
 
-func exit_scene(_player) -> void:
+func exit_scene(_player: Player) -> void:
 	falling_death.body_entered.disconnect(death)
 	summon_timer.timeout.disconnect(summon_enemy)
 	visible = false
@@ -201,8 +204,11 @@ func exit_scene(_player) -> void:
 	kill_all_enemies()
 	enemies_killed = 0
 	wave_reset.emit(wave_data.current_wave)
+	_player.end_combo_buff()
+	_player.combo_lost()
 	_player.reset_minions()
-
+	_player.hide_buffs()
+	_player.deactivate_mega_shot()
 func kill_all_enemies() -> void:
 	
 	for enemy in summoned_enemies:
@@ -217,4 +223,6 @@ func kill_all_enemies() -> void:
 
 func change_wave(wave_num: int) -> void:
 	wave_data.current_wave = wave_num
+	if wave_num == 1:
+		player.reset_to_base_stats()
 	wave_reset.emit(wave_num)

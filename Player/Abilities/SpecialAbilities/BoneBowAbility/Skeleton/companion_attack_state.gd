@@ -49,7 +49,7 @@ func shoot(v) -> void:
 	var arm: SkeletonArm = companion.data.projectile.instantiate()
 	arm.global_position = companion.global_position
 	arm.direction = attack_direction
-	arm.damage = randi_range(3,10)
+	arm.damage = randi_range(5,10)
 	companion.get_parent().add_child(arm)
 	companion.update_animation("Attack")
 	pass

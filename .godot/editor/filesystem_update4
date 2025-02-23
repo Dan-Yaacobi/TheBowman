@@ -1,0 +1,20 @@
+res://MainGame/Game.tscn
+res://Items/Coin.tres
+res://Items/Diamond.tres
+res://Items/RedDiamond.tres
+res://Level/PlayGround/PlayGround.tscn
+res://Level/Testing/TestingArea.tscn
+res://Player/Player.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn
+res://Enemies/DemoEnemy/DemoEnemy3.tscn
+res://Enemies/DemoEnemy/DemoEnemy2.tscn
+res://Enemies/DemoEnemy/DemoEnemy4.tscn
+res://Enemies/DemoEnemy/DemoEnemy.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn
+res://Enemies/DemoEnemy/DemoEnemyGold.tscn
+res://00 Globals/enemies.gd
+res://Level/playground.gd
+res://Player/player.gd

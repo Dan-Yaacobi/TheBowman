@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c87lkba7dkiy0"]
+[gd_scene load_steps=26 format=3 uid="uid://c87lkba7dkiy0"]
 
 [ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_noh5m"]
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_83e84"]
@@ -8,12 +8,8 @@
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="6_mfogs"]
 [ext_resource type="Texture2D" uid="uid://iwpmijl2w7hi" path="res://Enemies/EvilBird/Sprites/Green Bird.png" id="7_pc8p7"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="8_32eg5"]
-[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="9_qhtg8"]
-[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="10_nsykc"]
-[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="11_4kenv"]
-[ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="12_d34b5"]
-[ext_resource type="Script" path="res://Items/item_data.gd" id="13_ry3lo"]
-[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="14_gxmkl"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_1uvvm"]
+[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="10_mmgg2"]
 [ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="15_wva0u"]
 
 [sub_resource type="Resource" id="Resource_ivvup"]
@@ -26,7 +22,7 @@ hp = 40
 move_speed = 100
 knockback = 250
 skin = ExtResource("7_pc8p7")
-coins_dropped = 0
+coins_dropped = 30
 sharp_movement = false
 touch_damage = 2
 death_ability = Array[ExtResource("3_gph1j")]([SubResource("Resource_ivvup")])
@@ -37,40 +33,31 @@ boss = false
 shooter = false
 shooter_chance = 0
 bullet = ExtResource("2_83e84")
-shoot_speed = 2.0
+shoot_speed = 1.5
 
-[sub_resource type="Resource" id="Resource_x2nk2"]
-script = ExtResource("10_nsykc")
-sparkle_color = "ffcc00"
-sparkle_scene = ExtResource("11_4kenv")
-
-[sub_resource type="Resource" id="Resource_ag1v1"]
-script = ExtResource("13_ry3lo")
-image = ExtResource("12_d34b5")
-image_size = 0.3
-value = 1
-effects = Array[ExtResource("9_qhtg8")]([SubResource("Resource_x2nk2")])
-
-[sub_resource type="Resource" id="Resource_mcgos"]
+[sub_resource type="Resource" id="Resource_urj0j"]
 script = ExtResource("8_32eg5")
-item_data = SubResource("Resource_ag1v1")
+item_data = ExtResource("9_1uvvm")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_8rkpa"]
+script = ExtResource("8_32eg5")
+item_data = ExtResource("9_1uvvm")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_v8lsc"]
+script = ExtResource("8_32eg5")
+item_data = ExtResource("9_1uvvm")
 probability = 50.0
 
-[sub_resource type="Resource" id="Resource_amrel"]
-script = ExtResource("10_nsykc")
-sparkle_color = "6ec7db"
-sparkle_scene = ExtResource("11_4kenv")
-
-[sub_resource type="Resource" id="Resource_msidu"]
-script = ExtResource("13_ry3lo")
-image = ExtResource("14_gxmkl")
-image_size = 0.3
-value = 5
-effects = Array[ExtResource("9_qhtg8")]([SubResource("Resource_amrel")])
-
-[sub_resource type="Resource" id="Resource_yfwxr"]
+[sub_resource type="Resource" id="Resource_6gtum"]
 script = ExtResource("8_32eg5")
-item_data = SubResource("Resource_msidu")
+item_data = ExtResource("9_1uvvm")
+probability = 30.0
+
+[sub_resource type="Resource" id="Resource_ieqr0"]
+script = ExtResource("8_32eg5")
+item_data = ExtResource("10_mmgg2")
 probability = 20.0
 
 [sub_resource type="Animation" id="Animation_15h76"]
@@ -192,7 +179,7 @@ collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_noh5m")
 stats = SubResource("Resource_vv3hm")
-item_drops = Array[ExtResource("8_32eg5")]([SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_mcgos"), SubResource("Resource_yfwxr"), SubResource("Resource_yfwxr"), SubResource("Resource_yfwxr"), SubResource("Resource_yfwxr"), SubResource("Resource_yfwxr"), SubResource("Resource_yfwxr")])
+item_drops = Array[ExtResource("8_32eg5")]([SubResource("Resource_urj0j"), SubResource("Resource_8rkpa"), SubResource("Resource_v8lsc"), SubResource("Resource_6gtum"), SubResource("Resource_ieqr0")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("15_wva0u")

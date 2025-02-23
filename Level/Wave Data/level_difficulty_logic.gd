@@ -1,6 +1,6 @@
 class_name LevelDifficultyLogic extends Resource
 
-@export var max_level: int = 30
+@export var max_level: int = 40
 @export var max_level_birds: int = 20
 @export var spawn_gap: int = 10
 

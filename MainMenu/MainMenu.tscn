@@ -52,15 +52,14 @@ script = null
 
 [node name="ButtonShootClick3" parent="." instance=ExtResource("3_0uxqg")]
 offset_left = 354.0
-offset_top = 15.0
-offset_right = 1876.0
-offset_bottom = 365.0
+offset_top = 16.0
+offset_right = 1374.0
+offset_bottom = 366.0
 tooltip_text = "CANNOT BE UNDONE!"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.00999999, 0.00999999, 1)
 theme_override_constants/outline_size = 75
-text = "Reset Waves
-"
+text = "Reset"
 button_data = SubResource("Resource_fjbbq")
 
 [node name="LeftDoor" type="Sprite2D" parent="."]
@@ -156,7 +155,8 @@ A ,D: Move
 S: Slam Down
 SpaceBar: Jump (Can Double Jump)
 Left Mouse: Shoot
-Right Mouse: Special Ability"
+Right Mouse: Special Ability
+M: Back to Menu"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
 offset_left = 355.0
@@ -226,3 +226,27 @@ theme_override_constants/outline_size = 50
 theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
 text = "Fight"
+
+[node name="HardMode" type="Button" parent="."]
+visible = false
+offset_left = 372.0
+offset_top = 98.0
+offset_right = 1724.0
+offset_bottom = 448.0
+scale = Vector2(0.03, 0.03)
+focus_mode = 0
+theme_override_font_sizes/font_size = 250
+disabled = true
+text = "Hard Mode"
+
+[node name="NormalMode" type="Button" parent="."]
+visible = false
+offset_left = 372.0
+offset_top = 83.0
+offset_right = 2038.0
+offset_bottom = 433.0
+scale = Vector2(0.03, 0.03)
+focus_mode = 0
+theme_override_font_sizes/font_size = 250
+disabled = true
+text = "Normal Mode"

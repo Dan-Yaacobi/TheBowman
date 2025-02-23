@@ -5,19 +5,34 @@ class_name MainMenu extends Node2D
 @onready var wave_label: Label = $CurrentWaves
 @onready var current_money: CurrentMoney = $CurrentMoney
 @onready var tiles: TileMapLayer = $Tiles
+@onready var hard_mode_button: Button = $HardMode
+@onready var normal_mode_button: Button = $NormalMode
 
 var menu_tile_limit: Rect2i
 var tile_size: int = 16
+var playground: PlayGround
+
+var hard_mode: bool = false
 
 signal changed_scene
 
 func _ready() -> void:
+	hard_mode_button.pressed.connect(activate_hard_mode)
+	normal_mode_button.pressed.connect(activate_normal_mode)
 	enter_fight.body_entered.connect(start_fight)
 	enter_shop.body_entered.connect(shop)
 	var game = get_parent()
 	if game is Game:
 		game.get_playground().wave_reset.connect(update_wave_label)
 
+func activate_hard_mode() -> void:
+	hard_mode = true
+	playground.hard_mode = hard_mode
+	
+func activate_normal_mode() -> void:
+	hard_mode = false
+	playground.hard_mode = hard_mode
+	
 func start_fight(b) -> void:
 	if b is Player:
 		changed_scene.emit("PlayGround")
@@ -31,6 +46,7 @@ func set_player_camera(_player: Player) -> void:
 
 func set_scene(_player: Player) -> void:
 	if _player != null:
+		
 		_player.global_position = Vector2(185,104)
 		if not _player.money_changed.is_connected(update_money_label):
 			_player.money_changed.connect(update_money_label)
