@@ -25,13 +25,16 @@ func get_upgrades(current_wave: int) -> void:
 		current_button_bucket = 1
 		var next_bucket = randi_range(0,100)
 		
-		if (current_wave - 1) % 5 == 0:
-			if boss_upgrade_boost:
-				current_button_bucket += 1
-				boss_upgrade_boost = false
-				
-		if next_bucket <= bucket_upgrade_chance:
+		if boss_upgrade_boost:
 			current_button_bucket += 1
+			if next_bucket <= bucket_upgrade_chance*2:
+				current_button_bucket += 1
+				
+			boss_upgrade_boost = false
+				
+		else:
+			if next_bucket <= bucket_upgrade_chance:
+				current_button_bucket += 1
 			
 		upgrade_buttons[current_button_set_up].set_button_upgrade(upgrades.get_bucket_upgrade(current_button_bucket),player)
 		current_button_set_up += 1

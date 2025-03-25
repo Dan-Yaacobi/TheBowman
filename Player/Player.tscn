@@ -53,7 +53,7 @@ arrow_abilities = Array[ExtResource("2_jhcyx")]([])
 slam_abilities = Array[ExtResource("6_ae18a")]([])
 can_mega_shot = false
 crit_chance = 10
-stun_chance = 100
+stun_chance = 10
 leech_chance = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
