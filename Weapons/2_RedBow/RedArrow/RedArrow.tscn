@@ -7,8 +7,9 @@
 [sub_resource type="Resource" id="Resource_yrxfd"]
 script = ExtResource("2_4xnbl")
 speed = 330
-damage = 3
+damage = 4
 pushback_power = 15
+scale = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvgyh"]
 size = Vector2(7, 7)

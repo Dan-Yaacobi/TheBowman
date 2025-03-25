@@ -16,8 +16,10 @@ var shoot_cooldown: float = 0
 var stopped: bool = false
 
 func _ready() -> void:
+	
 	animation_player = $Sprite2D/AnimationPlayer
 	if stats.boss:
+		self.took_damage.connect(teleport)
 		scale *= 5
 		stats.hp *= 22
 		max_hp = stats.hp
@@ -39,10 +41,15 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
+	direction = calculate_direction_to_player()
+	
 	if stats.boss:
 		if not boss_phase_II and stats.hp < max_hp/2:
 			boss_upgrade()
 			boss_phase_II = true
+		elif boss_phase_II:
+			if stats.hp < max_hp/4:
+				stats.teleport_chance *= 2
 			
 	if poisoned_state and poisoned_timer != null:
 		if poisoned_timer.is_stopped():
@@ -53,7 +60,6 @@ func _physics_process(delta: float) -> void:
 		if stunned_timer.is_stopped():
 			stunned_timer.start()
 			
-	direction = calculate_direction_to_player()
 	
 	if stats.shooter and not stunned_state:
 		initial_speed()
@@ -75,7 +81,16 @@ func _physics_process(delta: float) -> void:
 	activate_debuffs()
 	move_and_slide()
 	pass
+	
+func teleport() -> void:
+	if boss_phase_II and randi_range(1,100) < stats.teleport_chance:
+		var offset: int = 1
+		if global_position.x > 0:
+			offset = -1
+		global_position.x  += 40 * offset
+		velocity = Vector2.ZERO
 
+	
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()

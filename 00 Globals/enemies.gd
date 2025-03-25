@@ -14,7 +14,7 @@ func get_enemy(current_wave : int) -> PackedScene:
 		if current_wave % 5 == 0:
 			return boss_enemies[(current_wave - 5) / 10].enemy
 			
-	if current_wave > 5:
+	if current_wave > 6:
 		var bird_spawn_int: int = randi_range(0,100)
 		if bird_spawn_int <= 25 or (current_wave + 1) % 5 == 0:
 			return summon_bird(current_wave)

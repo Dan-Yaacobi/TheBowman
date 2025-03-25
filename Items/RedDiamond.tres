@@ -15,5 +15,5 @@ sparkle_scene = ExtResource("3_v3q1v")
 script = ExtResource("5_k1y8t")
 image = ExtResource("4_k5v8l")
 image_size = 0.3
-value = 10
+value = 7
 effects = Array[ExtResource("1_kq4bl")]([SubResource("Resource_tsgmg")])

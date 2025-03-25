@@ -33,6 +33,7 @@ initial_ability = Array[ExtResource("2_hw8mg")]([])
 special_ability = Array[ExtResource("2_hw8mg")]([])
 debuffs = Array[ExtResource("3_wobgw")]([])
 boss = true
+teleport_chance = 7
 shooter = false
 shooter_chance = 0
 bullet = ExtResource("2_xsge2")

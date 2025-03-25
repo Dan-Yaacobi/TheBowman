@@ -25,6 +25,7 @@ func _ready() -> void:
 	timer.timeout.connect(start_moving)
 	timer.start()
 	spawn_offset()
+	
 func spawn_offset() -> void:
 	global_position += Vector2(randi_range(-20,20),randi_range(-20,20))
 
@@ -35,7 +36,6 @@ func _physics_process(delta: float) -> void:
 	if moving:
 		global_position += calculate_direction_to_player() * move_speed * delta
 		move_speed *= 1.05
-
 
 func random_direction() -> Vector2:
 	var dirc: Vector2

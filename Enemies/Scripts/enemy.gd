@@ -10,7 +10,7 @@ const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.
 const STUN_ARROW_EFFECT = preload("res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn")
 
 signal died(enemy: Enemy)
-
+signal took_damage
 var poisoned_timer: Timer
 var stunned_timer: Timer
 var stunned_effect: CPUParticles2D
@@ -77,6 +77,7 @@ func take_hit_effect() -> void:
 		
 func take_damage(_dmg: int) -> void:
 	stats.hp -= _dmg
+	took_damage.emit()
 	update_animation("Damaged")
 	if stats.shooter and not stats.boss:
 		stats.shooter = false
@@ -133,8 +134,6 @@ func drop_item() -> void:
 		for drop in item_drops:
 			if drop.drop_chance():
 				spawn_drop(drop)
-				if hard_mode:
-					spawn_drop(drop)
 
 func spawn_drop(drop) -> void:
 	var item = ITEM_PICK_UP.instantiate()
