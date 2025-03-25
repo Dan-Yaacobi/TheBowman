@@ -131,6 +131,7 @@ func new_wave_difficulty() -> void:
 	wave_data.calc_total_enemies()
 	wave_data.targets_spawn = level_logic.calculate_logic_targets(wave_data.current_wave,enemies.target_enemies.size())
 	wave_data.bird_spawn = level_logic.calculate_logic_birds(wave_data.current_wave,enemies.bird_enemies.size())
+	wave_data.spider_spawn = level_logic.calculate_logic_spiders(wave_data.current_wave,enemies.spiders.size())
 	wave_data.double_spawn_chance += 0.2
 	
 	for i in wave_data.targets_spawn.size():
@@ -138,6 +139,9 @@ func new_wave_difficulty() -> void:
 		
 	for i in wave_data.bird_spawn.size():
 		enemies.bird_enemies[i].spawn_chance = wave_data.bird_spawn[i]
+	
+	for i in wave_data.spider_spawn.size():
+		enemies.spiders[i].spawn_chance = wave_data.spider_spawn[i]
 		
 	enemies.spawn_time = wave_data.spawn_time
 	

@@ -26,3 +26,6 @@ res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn
 res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn
 res://Weapons/2_RedBow/RedArrow/RedArrow.tscn
 res://Weapons/2_RedBow/RedBow.tscn
+res://Level/Wave Data/wave_data.gd
+res://Enemies/Spider/PoisonSpider.tscn
+res://Enemies/Spider/Spider.tscn

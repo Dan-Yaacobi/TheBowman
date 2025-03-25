@@ -49,7 +49,6 @@ func get_special_enemy(current_wave) -> PackedScene:
 func get_spider(current_wave: int) -> PackedScene:
 	var spawn_int: int = randi_range(1,100)
 	var chance_sum: int = 0
-	
 	for enemy in spiders:
 		chance_sum += enemy.spawn_chance
 		if spawn_int > chance_sum:

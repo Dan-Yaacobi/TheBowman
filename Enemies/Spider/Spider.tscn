@@ -31,6 +31,7 @@ initial_ability = Array[ExtResource("2_3um86")]([])
 special_ability = Array[ExtResource("2_3um86")]([])
 debuffs = Array[ExtResource("3_sbwv3")]([])
 boss = false
+teleport_chance = 0
 shooter = false
 shooter_chance = 0
 shoot_speed = 0.0
