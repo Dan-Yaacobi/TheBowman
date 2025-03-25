@@ -6,6 +6,8 @@ var duration: float = 3.0
 
 func activate_enemy_effect(_enemy: Enemy) -> void:
 	if _enemy != null:
+		if _enemy.stunned_state:
+			return
 		var stunned_timer: Timer = STUNNED_TIMER.instantiate()
 		var stunned_effect: CPUParticles2D = STUNNED_EFFECT.instantiate()
 		stunned_timer.wait_time = duration

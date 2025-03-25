@@ -29,3 +29,4 @@ res://Weapons/2_RedBow/RedBow.tscn
 res://Level/Wave Data/wave_data.gd
 res://Enemies/Spider/PoisonSpider.tscn
 res://Enemies/Spider/Spider.tscn
+res://Enemies/EnemyEffects/Stunned/stunned.gd
