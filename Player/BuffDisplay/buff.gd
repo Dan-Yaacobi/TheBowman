@@ -17,10 +17,11 @@ func set_buff(_texture: Texture, id: int, tooltip: String) -> void:
 	scale *= 0.5
 
 func add_buff(_amount: int,buff_node: PlayerUpgrade, player: Player) -> void:
+	set_tooltip(buff_node.get_buff_tooltip(player))
 	amount += _amount
 	panel.size = Vector2(3 + 3 * int(log(amount)/log(10)),5)
 	amount_label.text = str(amount)
-	set_tooltip(buff_node.get_buff_tooltip(player))
+	
 
 func set_tooltip(_text: String) -> void:
 	tooltip_text = _text

@@ -103,6 +103,7 @@ func get_buff_tooltip(id: int) -> String:
 func reset_to_base_stats() -> void:
 	base_stats.money = stats.money
 	base_stats.upgrd_points = stats.upgrd_points
+	
 	for ability in stats.jump_abilities:
 		ability.deactivate_ability(self)
 	for ability in stats.shoot_abilities:
@@ -112,6 +113,7 @@ func reset_to_base_stats() -> void:
 	for ability in stats.slam_abilities:
 		ability.deactivate_ability(self)
 	stats = base_stats.duplicate()
+	stats.menu_speed = base_stats.move_speed * 2
 	
 func init_base_stats() -> void:
 	stats.menu_speed = stats.move_speed * 2

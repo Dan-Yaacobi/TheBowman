@@ -1,33 +1,21 @@
-res://Items/ItemPickUp.tscn
+res://MainGame/Game.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
-res://Items/item_pick_up.gd
-res://Enemies/DemoEnemy/DemoEnemy3.tscn
-res://Enemies/Scripts/enemy.gd
-res://Items/item_data.gd
-res://MainGame/Game.tscn
 res://Level/PlayGround/PlayGround.tscn
 res://Level/Testing/TestingArea.tscn
 res://Player/Player.tscn
 res://Weapons/7_BubbleGumBow/BubbleGumBow.tscn
-res://Enemies/DemoEnemy/DemoEnemy4.tscn
-res://Enemies/DemoEnemy/DemoEnemy2.tscn
-res://Level/Wave Data/level_difficulty_logic.gd
-res://Level/playground.gd
 res://Enemies/DemoEnemy/DemoEnemyBoss.tscn
-res://Enemies/DemoEnemy/demo_enemy.gd
-res://Enemies/EnemyData/enemy_data.gd
-res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn
 res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn
-res://00 Globals/enemies.gd
-res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn
-res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn
-res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn
-res://Weapons/2_RedBow/RedArrow/RedArrow.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn
 res://Weapons/2_RedBow/RedBow.tscn
-res://Level/Wave Data/wave_data.gd
 res://Enemies/Spider/PoisonSpider.tscn
 res://Enemies/Spider/Spider.tscn
-res://Enemies/EnemyEffects/Stunned/stunned.gd
-res://Level/PlayGround/upgrade_buttons.gd
+res://MainGame/game.gd
+res://Player/player.gd
+res://Level/playground.gd
+res://Player/BuffDisplay/buff.gd
+res://Player/BuffDisplay/buff_display_control.gd
+res://Player/Upgrades/StatsUpgrades/HP/hp_upgrade.gd
+res://Level/PlayGround/Upgrades/UpgradeButton/upgrade_button.gd

@@ -39,7 +39,7 @@ func _ready() -> void:
 	main_menu.playground = play_ground
 	
 	for child in get_children():
-		if child != last_scene and not child is AudioStreamPlayer2D:
+		if child != last_scene and child.has_method("exit_scene"):
 			child.call_deferred("exit_scene",player)
 
 func change_scene(new_scene: String) -> void:

@@ -213,6 +213,7 @@ func exit_scene(_player: Player) -> void:
 	_player.reset_minions()
 	_player.hide_buffs()
 	_player.deactivate_mega_shot()
+	
 func kill_all_enemies() -> void:
 	
 	for enemy in summoned_enemies:
@@ -226,7 +227,8 @@ func kill_all_enemies() -> void:
 	pass
 
 func change_wave(wave_num: int) -> void:
-	wave_data.current_wave = wave_num
-	if wave_num == 1:
-		player.reset_to_base_stats()
-	wave_reset.emit(wave_num)
+		wave_data.current_wave = wave_num
+		#if wave_num == 1:
+			#if player != null:
+				#player.reset_to_base_stats()
+		wave_reset.emit(wave_num)
