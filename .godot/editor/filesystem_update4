@@ -19,3 +19,5 @@ res://Player/BuffDisplay/buff.gd
 res://Player/BuffDisplay/buff_display_control.gd
 res://Player/Upgrades/StatsUpgrades/HP/hp_upgrade.gd
 res://Level/PlayGround/Upgrades/UpgradeButton/upgrade_button.gd
+res://Enemies/11_HellEnemies/EvilWizard/EvilWizard.tscn
+res://Level/PlayGround/upgrade_buttons.gd

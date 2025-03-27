@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="6_ae18a"]
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
-[ext_resource type="PackedScene" uid="uid://jej20pf43m2p" path="res://Weapons/3_BlackBow/BlackBow.tscn" id="7_tlep0"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_ksgj4"]
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
 [ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
@@ -46,7 +46,7 @@ max_minions = 3
 money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
-weapon_scene = ExtResource("7_tlep0")
+weapon_scene = ExtResource("7_ksgj4")
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 arrow_abilities = Array[ExtResource("2_jhcyx")]([])

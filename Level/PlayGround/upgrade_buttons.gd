@@ -9,7 +9,7 @@ var current_button_set_up: int = 0
 
 var player: Player
 var boss_upgrade_boost: bool = false
-
+var success_boost: float = 1.0
 func _ready() -> void:
 	for child in get_children():
 		if child is UpgradeButton:
@@ -31,10 +31,14 @@ func get_upgrades(current_wave: int) -> void:
 				current_button_bucket += 1
 				
 			boss_upgrade_boost = false
-				
+		
 		else:
-			if next_bucket <= bucket_upgrade_chance:
+			if next_bucket <= bucket_upgrade_chance * success_boost:
 				current_button_bucket += 1
+				success_boost = 1
+			else:
+				success_boost +=0.04
+			
 			
 		upgrade_buttons[current_button_set_up].set_button_upgrade(upgrades.get_bucket_upgrade(current_button_bucket),player)
 		current_button_set_up += 1
