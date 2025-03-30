@@ -5,11 +5,15 @@ class_name Enemies extends Resource
 @export var boss_enemies: Array[EnemySpawnData]
 @export var rare_enemies: Array[EnemySpawnData]
 @export var spiders: Array[EnemySpawnData]
-
 @export var spawn_time: float
 
-func get_enemy(current_wave : int) -> PackedScene:
+const SPIDER_BOSS = preload("res://Enemies/Spider/SpiderBoss/SpiderBoss.tscn")
 
+func get_enemy(current_wave : int) -> PackedScene:
+	
+	if current_wave == 35:
+		return SPIDER_BOSS
+		
 	if current_wave <= 30:
 		if current_wave % 5 == 0:
 			return boss_enemies[(current_wave - 5) / 10].enemy

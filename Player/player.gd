@@ -34,6 +34,7 @@ signal back_to_menu(scene: String)
 @onready var health_bar: HealthBar = $HealthBar
 
 @onready var total_buffs: TotalBuffs = $TotalBuffs
+@onready var slow: Slow = $Debuffs/Slow
 
 @export var gravity: int
 @export var stats: PlayerStats
@@ -132,8 +133,11 @@ func _process(delta: float) -> void:
 		direction = 0
 	
 func _unhandled_input(event: InputEvent) -> void:
+	
 	if stats.hp > 0:
-		
+		if event.is_action_pressed("test"):
+			pass
+
 		if event.is_action_pressed("Menu"):
 			back_to_menu.emit("Menu")
 				
@@ -368,3 +372,6 @@ func special_ability_indictaor() -> void:
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+	
+func slow_player(slow_time: float,effect: Node2D) -> void:
+	slow.slow_player(slow_time,effect)

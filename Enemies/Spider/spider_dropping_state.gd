@@ -26,8 +26,8 @@ func Enter() -> void:
 	enemy.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	walking = false
 	ground_detector.body_shape_entered.connect(start_walking)
+
 	web = SPIDER_WEB.instantiate()
-	
 	web.set_line(Vector2(enemy.initial_x,initial_y),enemy.global_position)
 	get_parent().get_parent().add_child(web)
 	enemy.update_animation("Move")

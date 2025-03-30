@@ -52,10 +52,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			summon_enemy()
 
 func init_enemy(_position: Vector2, scene: PackedScene, _player: Player) -> Enemy:
-	var new_enemy: Enemy = scene.instantiate()
-	new_enemy.get_player(_player)
-	new_enemy.global_position = _position
-	return new_enemy
+	if scene != null:
+		var new_enemy: Enemy = scene.instantiate()
+		new_enemy.get_player(_player)
+		new_enemy.global_position = _position
+		return new_enemy
+	else:
+		return null
 
 func summon_enemy() -> void:
 	if player != null and not stop_waves:
@@ -77,20 +80,28 @@ func summon() -> void:
 		
 		var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
 		var demo_enemy: Enemy = init_enemy(enemy_position,enemies.get_enemy(wave_data.current_wave),player)
-		if demo_enemy is Spider:
-			demo_enemy.global_position.x = player.global_position.x
-		if wave_data.current_wave % 10 == 0:
-			wave_data.spawn_time = 0.1
-			if summon_count == 1:
-				demo_enemy.stats.shooter = true
-			else:
-				demo_enemy.disable_drops()
-		add_child(demo_enemy)
+		if demo_enemy != null:
+			if demo_enemy is Spider:
+				demo_enemy.global_position.x = player.global_position.x
+				
+			if wave_data.current_wave % 10 == 0:
+				wave_data.spawn_time = 0.1
+				if summon_count == 1:
+					demo_enemy.stats.shooter = true
+				else:
+					demo_enemy.disable_drops()
+			add_child(demo_enemy)
+			
+			summoned_enemies.append(demo_enemy)
+			demo_enemy.died.connect(killed_enemy)
+			summon_count += 1
 		
-		summoned_enemies.append(demo_enemy)
-		demo_enemy.died.connect(killed_enemy)
-		summon_count += 1
-
+func summon_spider() -> void:
+	var spider_enemy: Enemy = init_enemy(Vector2.ZERO,enemies.spiders[0].enemy,player)
+	spider_enemy.global_position.x = player.global_position.x
+	spider_enemy.global_position.y = -100
+	add_child(spider_enemy)
+	
 func killed_enemy(_enemy) -> void:
 	_enemy.died.disconnect(killed_enemy)
 	summoned_enemies.erase(_enemy)

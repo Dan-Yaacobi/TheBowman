@@ -156,7 +156,7 @@ spawn_time = 2.0
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
 script = ExtResource("7_wvqgp")
-current_wave = 1
+current_wave = 35
 targets_spawn = Array[int]([0, 0, 0])
 bird_spawn = Array[int]([0, 0])
 spider_spawn = Array[int]([])

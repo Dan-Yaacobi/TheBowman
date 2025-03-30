@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=41 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -28,13 +28,14 @@
 [ext_resource type="Script" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
 [ext_resource type="Script" path="res://Player/flow_container.gd" id="26_qrkkr"]
 [ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="27_cjoqp"]
+[ext_resource type="Script" path="res://Player/slow.gd" id="29_b4moh"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
 hp = 5
 max_hp = 5
 move_speed = 75
-max_jumps = 2
+max_jumps = 10
 jump_height = 90
 knockback_resistance = 3
 menu_speed = 150
@@ -340,3 +341,11 @@ layout_mode = 2
 
 [node name="BuffTooltipControl" type="Node2D" parent="."]
 script = ExtResource("26_8kdbo")
+
+[node name="Debuffs" type="Node2D" parent="."]
+
+[node name="Slow" type="Node2D" parent="Debuffs"]
+script = ExtResource("29_b4moh")
+
+[node name="Timer" type="Timer" parent="Debuffs/Slow"]
+wait_time = 1.5

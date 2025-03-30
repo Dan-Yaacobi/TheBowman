@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmtl86stch1ww"]
+
+[ext_resource type="Texture2D" uid="uid://thwjuku6pbie" path="res://Enemies/Spider/Sprites/SpiderWeb.png" id="1_7jd14"]
+[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/web_slow_effect.gd" id="2_v2fkt"]
+
+[sub_resource type="Animation" id="Animation_whlyo"]
+resource_name = "effect"
+length = 0.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.898039), Color(1, 1, 1, 0.317647)]
+}
+
+[sub_resource type="Animation" id="Animation_1hosn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.517647)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_167ly"]
+_data = {
+"RESET": SubResource("Animation_1hosn"),
+"effect": SubResource("Animation_whlyo")
+}
+
+[node name="WebSlowEffect" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.517647)
+z_index = 1
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7jd14")
+script = ExtResource("2_v2fkt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_167ly")
+}
