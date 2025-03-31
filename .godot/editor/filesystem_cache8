@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1743340899
-export_presets.cfg::TextFile::-1::1743086654::0::1::::<><>::
+::res://::1743419075
+export_presets.cfg::TextFile::-1::1743341065::0::1::::<><>::
 icon.svg::CompressedTexture2D::4266016548506147734::1734361784::1743168382::1::::<><>::
 README.md::TextFile::-1::1737192917::0::1::::<><>::
 ::res://00 Globals/::1743264854
@@ -18,10 +18,10 @@ fart.mp3::AudioStreamMP3::5182794666029087722::1737810593::1743168381::1::::<><>
 small_thunder_strike.mp3::AudioStreamMP3::3117366548321397240::1738796260::1743168381::1::::<><>::
 thunder_strike.mp3::AudioStreamMP3::3305509423975431790::1737808920::1743168380::1::::<><>::
 wood destruction.mp3::AudioStreamMP3::8856393150164343181::1737811104::1743168380::1::::<><>::
-::res://docs/::1743168384
-index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1743086658::1743168384::1::::<><>::
-index.icon.png::CompressedTexture2D::5242730578329901994::1743086658::1743168384::1::::<><>::
-index.png::CompressedTexture2D::8419645050844991133::1743086658::1743168384::1::::<><>::
+::res://docs/::1743341066
+index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1743341066::1743419085::1::::<><>::
+index.icon.png::CompressedTexture2D::5242730578329901994::1743341066::1743419085::1::::<><>::
+index.png::CompressedTexture2D::8419645050844991133::1743341066::1743419085::1::::<><>::
 ::res://Enemies/::1742998004
 ::res://Enemies/11_HellEnemies/::1742998039
 ::res://Enemies/11_HellEnemies/EvilWizard/::1743086300
@@ -138,14 +138,14 @@ red enemy bullet.png::CompressedTexture2D::8594504762706637263::1737321674::1743
 ::res://HealthBar/::1739309390
 HealthBar.tscn::PackedScene::6672822174743893204::1739309390::0::1::::<><>::res://HealthBar/health_bar.gd<>uid://b4myl3t06uac5::::res://Player/HealthBar/HealthBar Under.png<>uid://bxubmxoxqclqy::::res://Player/HealthBar/Healthbar.png<>uid://x12v3yoxmaxf::::res://Player/HealthBar/Heart.png
 health_bar.gd::GDScript::-1::1737638910::0::1::::HealthBar<>TextureProgressBar<>::
-::res://Items/::1743255889
-Coin.tres::Resource/ItemData::4212774887361665007::1743255889::0::1::::<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/item_data.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
-Diamond.tres::Resource/ItemData::9105851650331176066::1743255889::0::1::::<><>::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+::res://Items/::1743341054
+Coin.tres::Resource/ItemData::4212774887361665007::1743341054::0::1::::<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/item_data.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+Diamond.tres::Resource/ItemData::9105851650331176066::1743341054::0::1::::<><>::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
 drop_data.gd::GDScript::-1::1739218339::0::1::::DropData<>Resource<>::
 ItemPickUp.tscn::PackedScene::5228580237706944200::1742908764::0::1::::<><>::res://Items/item_pick_up.gd
 item_data.gd::GDScript::-1::1742908876::0::1::::ItemData<>Resource<>::
 item_pick_up.gd::GDScript::-1::1742909268::0::1::::ItemPickUp<>Node2D<>::
-RedDiamond.tres::Resource/ItemData::8918969258150987886::1743255889::0::1::::<><>::res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>res://Items/item_data.gd
+RedDiamond.tres::Resource/ItemData::8918969258150987886::1743341054::0::1::::<><>::res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>res://Items/item_data.gd
 ::res://Items/ItemEffects/::1735216752
 item_effect.gd::GDScript::-1::1734865504::0::1::::ItemEffect<>Resource<>::
 sparkle.gd::GDScript::-1::1735216750::0::1::::Sparkle<>ItemEffect<>::
@@ -243,14 +243,14 @@ Arrow Sign.png::CompressedTexture2D::7137849029635834164::1737668472::1743168385
 BigDoor on Wood.png::CompressedTexture2D::7273422938011403964::1737664960::1743168385::1::::<><>::
 BigDoor.png::CompressedTexture2D::2947643800636323214::1735341227::1743168384::1::::<><>::
 Door.png::CompressedTexture2D::3567221850596995906::1734632734::1743168384::1::::<><>::
-::res://Player/::1743264858
+::res://Player/::1743341054
 buff_tooltip_control.gd::GDScript::-1::1739306444::0::1::::BuffTooltipControl<>Node2D<>::
 camera_2d.gd::GDScript::-1::1738775363::0::1::::<>Camera2D<>::
 combo_activated.gd::GDScript::-1::1737503302::0::1::::ComboActivated<>Node2D<>::
 combo_activated_effect.gd::GDScript::-1::1737664506::0::1::::ComboActivatedEffect<>CPUParticles2D<>::
 flow_container.gd::GDScript::-1::1739307140::0::1::::<>FlowContainer<>::
 player.gd::GDScript::-1::1743170631::0::1::::Player<>CharacterBody2D<>::
-Player.tscn::PackedScene::5092033750948003428::1743264858::0::1::::<><>::uid://b7mbeynvkpc26::::res://Player/Body/Body.tscn<>res://Player/player.gd<>res://PlayerData/player_stats.gd<>uid://bug4e8v5lnb0m::::res://Player/Hand/Hand.tscn<>res://Player/Abilities/ArrowAbilities/arrow_ability.gd<>res://Player/Abilities/JumpAbilities/jump_ability.gd<>res://Player/Abilities/ShootAbilities/shoot_ability.gd<>uid://b42wwmoixjwrj::::res://Player/States/PlayerStateMachine.tscn<>res://Player/States/player_idle_state.gd<>res://Player/Abilities/SlamAbilities/slam_ability.gd<>res://Player/States/player_walking_state.gd<>uid://cd1qmsp2wywey::::res://Player/Player Actions/Jump/Jump.tscn<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn<>uid://bebh86kswi26y::::res://Player/Player Actions/Shoot/Shoot.tscn<>res://Player/camera_2d.gd<>uid://caekf50aq824k::::res://Player/Mana/ManaBar.tscn<>uid://dp4648msdak81::::res://Player/Abilities/SpecialAbilities/SpecialAbility.png<>res://Player/States/player_slam_state.gd<>res://Player/States/player_dead_state.gd<>uid://c2cmn2xqaux53::::res://HealthBar/HealthBar.tscn<>res://Player/combo_activated.gd<>res://Player/combo_activated_effect.gd<>res://Player/upgrades.gd<>uid://c2sbisfgqj8am::::res://Player/Abilities/MegaShot/particles.tscn<>res://Player/BuffDisplay/buff_display_control.gd<>res://Player/buff_tooltip_control.gd<>res://Player/flow_container.gd<>uid://duv405amm7ir::::res://Player/BuffDisplay/Buff.tscn<>res://Player/slow.gd
+Player.tscn::PackedScene::5092033750948003428::1743341054::0::1::::<><>::uid://b7mbeynvkpc26::::res://Player/Body/Body.tscn<>res://Player/player.gd<>res://PlayerData/player_stats.gd<>uid://bug4e8v5lnb0m::::res://Player/Hand/Hand.tscn<>res://Player/Abilities/ArrowAbilities/arrow_ability.gd<>res://Player/Abilities/JumpAbilities/jump_ability.gd<>res://Player/Abilities/ShootAbilities/shoot_ability.gd<>uid://b42wwmoixjwrj::::res://Player/States/PlayerStateMachine.tscn<>res://Player/States/player_idle_state.gd<>res://Player/Abilities/SlamAbilities/slam_ability.gd<>res://Player/States/player_walking_state.gd<>uid://cd1qmsp2wywey::::res://Player/Player Actions/Jump/Jump.tscn<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn<>uid://bebh86kswi26y::::res://Player/Player Actions/Shoot/Shoot.tscn<>res://Player/camera_2d.gd<>uid://caekf50aq824k::::res://Player/Mana/ManaBar.tscn<>uid://dp4648msdak81::::res://Player/Abilities/SpecialAbilities/SpecialAbility.png<>res://Player/States/player_slam_state.gd<>res://Player/States/player_dead_state.gd<>uid://c2cmn2xqaux53::::res://HealthBar/HealthBar.tscn<>res://Player/combo_activated.gd<>res://Player/combo_activated_effect.gd<>res://Player/upgrades.gd<>uid://c2sbisfgqj8am::::res://Player/Abilities/MegaShot/particles.tscn<>res://Player/BuffDisplay/buff_display_control.gd<>res://Player/buff_tooltip_control.gd<>res://Player/flow_container.gd<>uid://duv405amm7ir::::res://Player/BuffDisplay/Buff.tscn<>res://Player/slow.gd
 slow.gd::GDScript::-1::1743170631::0::1::::Slow<>Node2D<>::
 total_buffs.gd::GDScript::-1::1739203725::0::1::::<>Control<>::
 upgrades.gd::GDScript::-1::1738355519::0::1::::Upgrades<>Node2D<>::
