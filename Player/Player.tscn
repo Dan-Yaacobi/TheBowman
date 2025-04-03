@@ -53,9 +53,9 @@ shoot_abilities = Array[ExtResource("4_qie87")]([])
 arrow_abilities = Array[ExtResource("2_jhcyx")]([])
 slam_abilities = Array[ExtResource("6_ae18a")]([])
 can_mega_shot = false
-crit_chance = 10
-stun_chance = 10
-leech_chance = 10
+crit_chance = 5
+stun_chance = 5
+leech_chance = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(10, 2)

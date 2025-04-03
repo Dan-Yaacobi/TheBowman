@@ -12,7 +12,7 @@ func upgrade(_player: Player) -> void:
 			upgrade2(_player)
 
 func upgrade2(_player: Player) -> void:
-	_player.stats.leech_chance += 5
+	_player.stats.leech_chance += randi_range(1,5)
 	#_player.current_weapon.weapon_data.leech_chance += 5
 
 func get_current(_player: Player) -> String:

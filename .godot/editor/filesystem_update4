@@ -1,0 +1,12 @@
+res://MainGame/Game.tscn
+res://Items/Coin.tres
+res://Items/Diamond.tres
+res://Items/RedDiamond.tres
+res://Enemies/DemoEnemy/demo_enemy_boss.gd
+res://Level/PlayGround/PlayGround.tscn
+res://Level/Testing/TestingArea.tscn
+res://Player/Player.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss.tscn
+res://Enemies/DemoEnemy/DemoEnemyBoss2.tscn
+res://Enemies/DemoEnemy/boss_roam_state.gd
+res://Enemies/DemoEnemy/boss_slam_state.gd

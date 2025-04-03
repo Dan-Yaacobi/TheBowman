@@ -1,65 +1,35 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2eppdxet4q8c"]
+[gd_scene load_steps=23 format=3 uid="uid://c2eppdxet4q8c"]
 
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_pagmy"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy_boss.gd" id="1_007ct"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_ns1qc"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_4vwgm"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_j8k5h"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
 [ext_resource type="Texture2D" uid="uid://cdv26x6vef1no" path="res://Enemies/DemoEnemy/target_enemy.png" id="5_lucat"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="6_s700d"]
-[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="7_ayrxu"]
-[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_436ws"]
-[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="9_lqg0f"]
-[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_37k2o"]
-[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_wynob"]
-[ext_resource type="Script" path="res://Items/item_data.gd" id="12_ryobh"]
+[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_roam_state.gd" id="16_ikffo"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_setslam_state.gd" id="17_p45i5"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_slam_state.gd" id="18_52sys"]
 
-[sub_resource type="Resource" id="Resource_y5nbl"]
-script = ExtResource("4_j8k5h")
-
-[sub_resource type="Resource" id="Resource_venkp"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_c5f3p"]
 script = ExtResource("4_uh2fb")
-hp = 3
-move_speed = 15
+hp = 100
+move_speed = 35
 knockback = 100
 skin = ExtResource("5_lucat")
 coins_dropped = 0
-sharp_movement = true
-touch_damage = 1
-death_ability = Array[ExtResource("2_g7uw7")]([SubResource("Resource_y5nbl")])
+sharp_movement = false
+touch_damage = 2
+death_ability = Array[ExtResource("2_g7uw7")]([])
 initial_ability = Array[ExtResource("2_g7uw7")]([])
 special_ability = Array[ExtResource("2_g7uw7")]([])
 debuffs = Array[ExtResource("3_4vwgm")]([])
 boss = true
-teleport_chance = 5
-shooter = false
+teleport_chance = 0
+shooter = true
 shooter_chance = 0
 bullet = ExtResource("2_ns1qc")
-shoot_speed = 1.5
-
-[sub_resource type="Resource" id="Resource_kuvca"]
-script = ExtResource("6_s700d")
-item_data = ExtResource("7_ayrxu")
-probability = 100.0
-
-[sub_resource type="Resource" id="Resource_ynw16"]
-script = ExtResource("9_lqg0f")
-sparkle_color = "6ec7db"
-sparkle_scene = ExtResource("10_37k2o")
-
-[sub_resource type="Resource" id="Resource_lsoqp"]
-script = ExtResource("12_ryobh")
-image = ExtResource("11_wynob")
-image_size = 0.3
-value = 5
-effects = Array[ExtResource("8_436ws")]([SubResource("Resource_ynw16")])
-
-[sub_resource type="Resource" id="Resource_amvuj"]
-script = ExtResource("6_s700d")
-item_data = SubResource("Resource_lsoqp")
-probability = 100.0
+shoot_speed = 3.0
 
 [sub_resource type="Animation" id="Animation_k0qd3"]
 resource_name = "Damaged"
@@ -175,15 +145,31 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_emnjt"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smg2o"]
+size = Vector2(12, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nptp6"]
+size = Vector2(8, 11)
+
+[sub_resource type="Curve" id="Curve_fkhtr"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3801e"]
+max_value = 3.0
+_data = [Vector2(0.0301724, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="DemoEnemyBoss" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 17
+collision_mask = 16
 motion_mode = 1
-script = ExtResource("1_pagmy")
-stats = SubResource("Resource_venkp")
-item_drops = Array[ExtResource("6_s700d")]([SubResource("Resource_kuvca"), SubResource("Resource_kuvca"), SubResource("Resource_kuvca"), SubResource("Resource_kuvca"), SubResource("Resource_kuvca"), SubResource("Resource_amvuj"), SubResource("Resource_amvuj"), SubResource("Resource_amvuj")])
+script = ExtResource("1_007ct")
+stats = SubResource("Resource_c5f3p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_lucat")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
@@ -208,3 +194,66 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")
 debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
+
+[node name="GroundDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_smg2o")
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("15_und3f")
+
+[node name="Roam" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("16_ikffo")
+
+[node name="SetSlam" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("17_p45i5")
+
+[node name="Slam" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("18_52sys")
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="SlamTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="RoofDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofDetector"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_nptp6")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="SlamParticles" type="CPUParticles2D" parent="."]
+modulate = Color(0.75, 0.0225, 0.0225, 1)
+z_index = -1
+emitting = false
+amount = 20
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+gravity = Vector2(0, -100)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_curve = SubResource("Curve_fkhtr")
+
+[node name="SlamHitParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 5)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(10, 1)
+gravity = Vector2(0, -25)
+linear_accel_min = 50.0
+linear_accel_max = 100.0
+radial_accel_min = 50.0
+radial_accel_max = 100.0
+scale_amount_curve = SubResource("Curve_3801e")
+color = Color(0.64, 0, 0, 1)

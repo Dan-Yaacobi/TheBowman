@@ -140,3 +140,8 @@ func boss_upgrade() -> void:
 		var player_x = player.global_position.x
 		global_position = player.global_position + Vector2(randi_range(player_x - 100, player_x + 100),-100)
 		initial_speed()
+
+func circular_movement(center: Vector2, radius: int, left: bool) -> void:
+	
+	pass
+	

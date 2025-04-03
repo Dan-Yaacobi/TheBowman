@@ -12,7 +12,7 @@ func upgrade(_player: Player) -> void:
 			upgrade2(_player)
 
 func upgrade2(_player: Player) -> void:
-	_player.stats.stun_chance += 5
+	_player.stats.stun_chance += randi_range(1,5)
 	#_player.current_weapon.weapon_data.stun_chance += 5
 	
 func get_current(_player: Player) -> String:
