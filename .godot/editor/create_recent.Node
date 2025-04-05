@@ -1,9 +1,10 @@
-CPUParticles2D
-VisibleOnScreenNotifier2D
-CollisionShape2D
-Area2D
 Timer
 Node2D
+CPUParticles2D
+CollisionShape2D
+Area2D
+Node
+VisibleOnScreenNotifier2D
 AnimationPlayer
 Sprite2D
 CharacterBody2D
@@ -11,4 +12,3 @@ Button
 Panel
 Label
 TextureRect
-FlowContainer

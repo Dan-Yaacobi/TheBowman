@@ -2,7 +2,6 @@ class_name BossSlamState extends EnemyState
 
 @onready var ground_detector: Area2D = $"../../GroundDetector"
 @onready var roam: BossRoamState = $"../Roam"
-@onready var hurt_box: Area2D = $"../../HurtBox"
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $"../../VisibleOnScreenNotifier2D"
 @onready var slam_particles: CPUParticles2D = $"../../SlamParticles"
 @onready var slam_hit_particles: CPUParticles2D = $"../../SlamHitParticles"
@@ -12,7 +11,6 @@ var slam_done: bool = false
 
 func init() -> void:
 	ground_detector.body_shape_entered.connect(finished)
-	hurt_box.body_entered.connect(hit)
 	visible_on_screen_notifier.screen_exited.connect(tp_back)
 	pass
 

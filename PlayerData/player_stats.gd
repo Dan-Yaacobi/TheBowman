@@ -15,7 +15,7 @@ var player: Player
 @export var shoot_cost: int
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
-
+@export var dash_distance: int
 
 
 @export_category("Player Items")

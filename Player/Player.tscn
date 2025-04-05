@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=42 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="15_wqrs0"]
 [ext_resource type="Script" path="res://Player/combo_activated.gd" id="16_j4os2"]
+[ext_resource type="Script" path="res://Player/dash_state.gd" id="16_lcihm"]
 [ext_resource type="Script" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 [ext_resource type="Script" path="res://Player/upgrades.gd" id="20_mgkdb"]
 [ext_resource type="PackedScene" uid="uid://c2sbisfgqj8am" path="res://Player/Abilities/MegaShot/particles.tscn" id="24_pagyw"]
@@ -44,6 +45,7 @@ mana_rate = 0.0
 shoot_cost = 0
 reset_upgrades = false
 max_minions = 3
+dash_distance = 50
 money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
@@ -139,6 +141,9 @@ debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
 
 [node name="Dead" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource("15_qho0y")
+
+[node name="Dash" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("16_lcihm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

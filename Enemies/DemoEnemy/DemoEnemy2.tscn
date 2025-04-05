@@ -29,6 +29,7 @@ initial_ability = Array[ExtResource("2_fb18l")]([])
 special_ability = Array[ExtResource("2_fb18l")]([])
 debuffs = Array[ExtResource("3_e70ef")]([])
 boss = false
+teleport_chance = 0
 shooter = false
 shooter_chance = 30
 bullet = ExtResource("2_b0juv")

@@ -172,5 +172,6 @@ func stun_release() -> void:
 	stats.move_speed = temp_move_speed
 
 func update_animation(_animation: String) -> void:
-	animation_player.play(_animation)
+	if animation_player != null:
+		animation_player.play(_animation)
 	pass

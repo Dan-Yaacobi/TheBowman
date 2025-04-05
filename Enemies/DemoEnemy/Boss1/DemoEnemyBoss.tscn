@@ -1,15 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://c2eppdxet4q8c"]
+[gd_scene load_steps=36 format=3 uid="uid://c2eppdxet4q8c"]
 
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy_boss.gd" id="1_007ct"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd" id="1_007ct"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_ns1qc"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_4vwgm"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
 [ext_resource type="Texture2D" uid="uid://cdv26x6vef1no" path="res://Enemies/DemoEnemy/target_enemy.png" id="5_lucat"]
+[ext_resource type="Script" path="res://Items/drop_data.gd" id="7_o3eph"]
+[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="8_showg"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_46lb5"]
 [ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_roam_state.gd" id="16_ikffo"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_setslam_state.gd" id="17_p45i5"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/boss_slam_state.gd" id="18_52sys"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd" id="16_ikffo"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_setslam_state.gd" id="17_p45i5"]
+[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd" id="18_52sys"]
 
 [sub_resource type="Resource" id="Resource_c5f3p"]
 script = ExtResource("4_uh2fb")
@@ -30,6 +33,56 @@ shooter = true
 shooter_chance = 0
 bullet = ExtResource("2_ns1qc")
 shoot_speed = 3.0
+
+[sub_resource type="Resource" id="Resource_1phje"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("8_showg")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_ggc8h"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("8_showg")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_0hlqk"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("8_showg")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_ii32q"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("8_showg")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_hgyxh"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("8_showg")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_4e1yg"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("9_46lb5")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_k1iwl"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("9_46lb5")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_npax2"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("9_46lb5")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_7pirm"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("9_46lb5")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_kun8h"]
+script = ExtResource("7_o3eph")
+item_data = ExtResource("9_46lb5")
+probability = 50.0
 
 [sub_resource type="Animation" id="Animation_k0qd3"]
 resource_name = "Damaged"
@@ -167,6 +220,7 @@ collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_007ct")
 stats = SubResource("Resource_c5f3p")
+item_drops = Array[ExtResource("7_o3eph")]([SubResource("Resource_1phje"), SubResource("Resource_ggc8h"), SubResource("Resource_0hlqk"), SubResource("Resource_ii32q"), SubResource("Resource_hgyxh"), SubResource("Resource_4e1yg"), SubResource("Resource_k1iwl"), SubResource("Resource_npax2"), SubResource("Resource_7pirm"), SubResource("Resource_kun8h")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("5_lucat")

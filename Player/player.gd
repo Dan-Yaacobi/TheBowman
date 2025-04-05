@@ -9,7 +9,7 @@ signal back_to_menu(scene: String)
 
 @onready var hand: Hand = $Hand
 @onready var body: Body = $Body
-@onready var player_state_machine: Node2D = $PlayerStateMachine
+@onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
 @onready var jump_reset: Area2D = $JumpReset
 @onready var jump_action: JumpAction = $JumpAction
 @onready var shoot_action: ShootAction = $ShootAction
@@ -35,6 +35,7 @@ signal back_to_menu(scene: String)
 
 @onready var total_buffs: TotalBuffs = $TotalBuffs
 @onready var slow: Slow = $Debuffs/Slow
+@onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
 
 @export var gravity: int
 @export var stats: PlayerStats
@@ -63,12 +64,12 @@ var current_minions: Array[Companion] = []
 var mega_shot_activated: bool = false
 
 func _ready() -> void:
+	
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	stats.hp = stats.max_hp
 	init_bow()
-	
 	charge_timer.timeout.connect(activate_mega_shot)
 	mana_bar.set_mana_bar_stats(current_weapon.weapon_data.mana_rate,current_weapon.weapon_data.shoot_cost)
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
@@ -135,6 +136,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if stats.hp > 0:
+
 		if event.is_action_pressed("test"):
 			pass
 
