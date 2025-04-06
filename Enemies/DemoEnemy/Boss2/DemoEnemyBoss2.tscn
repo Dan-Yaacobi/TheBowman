@@ -17,8 +17,8 @@
 [sub_resource type="Resource" id="Resource_ppi36"]
 resource_local_to_scene = true
 script = ExtResource("5_nqxg8")
-hp = 200
-move_speed = 25
+hp = 350
+move_speed = 40
 knockback = 150
 skin = ExtResource("6_5wfrj")
 coins_dropped = 0

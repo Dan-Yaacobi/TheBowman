@@ -39,5 +39,5 @@ func summon() -> void:
 		[1,-1].pick_random() * randi_range(30,50),
 		[1,-1].pick_random() * randi_range(30,50))
 	get_parent().add_child(new_summon)
+	get_parent().summoned_enemies.append(new_summon)
 	pass
-	

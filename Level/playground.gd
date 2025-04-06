@@ -226,9 +226,9 @@ func exit_scene(_player: Player) -> void:
 	_player.deactivate_mega_shot()
 	
 func kill_all_enemies() -> void:
-	
 	for enemy in summoned_enemies:
-		enemy.queue_free()
+		if is_instance_valid(enemy):
+			enemy.queue_free()
 		
 	for child in get_children():
 		if child is EnemyBullet:

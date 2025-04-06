@@ -7,3 +7,6 @@ res://Level/Testing/TestingArea.tscn
 res://Player/Player.tscn
 res://Enemies/DemoEnemy/Boss1/DemoEnemyBoss.tscn
 res://Enemies/DemoEnemy/Boss2/DemoEnemyBoss2.tscn
+res://Level/playground.gd
+res://Enemies/DemoEnemy/Boss2/demo_enemy_boss_2.gd
+res://Enemies/DemoEnemy/Boss2/bullet_explosion.gd
