@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd" id="18_52sys"]
 
 [sub_resource type="Resource" id="Resource_c5f3p"]
+resource_local_to_scene = true
 script = ExtResource("4_uh2fb")
 hp = 100
 move_speed = 35

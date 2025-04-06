@@ -47,7 +47,7 @@ func change_scene(new_scene: String) -> void:
 	scenes_dic.get(new_scene).call_deferred("set_scene", player)
 	player.call_deferred("reparent",scenes_dic.get(new_scene))
 	last_scene = scenes_dic.get(new_scene)
-	player.player_state_machine.ChangeState(player.idle_state)
+	#player.player_state_machine.ChangeState(player.idle_state)
 
 func get_playground() -> PlayGround:
 	for child in get_children():
