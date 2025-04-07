@@ -302,6 +302,7 @@ func init_bow() -> void:
 	current_weapon.leeched.connect(leech_heal)
 	hand.sprite.frame = current_weapon.weapon_data.sprite_frame
 	current_weapon.init_weapon(self,current_weapon)
+	mana_bar.set_mana_bar_stats(current_weapon.weapon_data.mana_rate,current_weapon.weapon_data.shoot_cost)
 	
 	if current_weapon.weapon_data.special_ability_cooldown <= 0:
 		special_ability_cooldown.wait_time = 1

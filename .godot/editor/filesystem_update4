@@ -13,3 +13,8 @@ res://Player/Abilities/ShootAbilities/ArrowExplode/ArrowExplode.tscn
 res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd
 res://Weapons/Scripts/arrow.gd
 res://Player/Abilities/ShootAbilities/ArrowExplode/arrow_explode.gd
+res://Player/Mana/mana_bar.gd
+res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn
+res://Player/player.gd
+res://Weapons/5_ThunderBow/ThunderBow.tscn
+res://Weapons/6_BoneBow/BoneBow.tscn

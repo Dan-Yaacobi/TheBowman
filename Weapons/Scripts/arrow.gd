@@ -8,6 +8,7 @@ signal leeched(amount: int, enemy_position: Vector2)
 
 @export var data: ArrowData
 @export var explosion_chance: int = 20
+
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 
@@ -59,7 +60,7 @@ func hit(enemy: Enemy) -> void:
 		arrow_hit.emit()
 
 func explosion() -> void:
-	if 1:
+	if can_explode:
 		var try: int = randi_range(1,100)
 		if try < explosion_chance:
 			var explosion = ARROW_EXPLODE.instantiate()
