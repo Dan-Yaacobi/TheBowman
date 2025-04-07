@@ -6,7 +6,7 @@ class_name BossSlamState extends EnemyState
 @onready var slam_particles: CPUParticles2D = $"../../SlamParticles"
 @onready var slam_hit_particles: CPUParticles2D = $"../../SlamHitParticles"
 
-var slam_speed_modifier: int = 12
+var slam_speed_modifier: int = 8
 var slam_done: bool = false
 
 func init() -> void:
@@ -24,7 +24,7 @@ func Enter() -> void:
 #what happens when the player exits this state
 func Exit() -> void:
 	slam_particles.emitting = false
-	enemy.velocity = Vector2(0,-enemy.stats.move_speed/2)
+	enemy.velocity = Vector2([1,-1].pick_random()*5,-enemy.stats.move_speed/4)
 	pass
 	
 #what happens during process update in this state

@@ -5,8 +5,9 @@ signal arrow_hit
 signal arrow_hit_sound
 signal crit_hit
 signal leeched(amount: int, enemy_position: Vector2)
-@export var data: ArrowData
 
+@export var data: ArrowData
+@export var explosion_chance: int = 20
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 
@@ -58,12 +59,14 @@ func hit(enemy: Enemy) -> void:
 		arrow_hit.emit()
 
 func explosion() -> void:
-	if can_explode:
-		var explosion = ARROW_EXPLODE.instantiate()
-		explosion.damage = data.damage
-		explosion.global_position = global_position
-		get_parent().call_deferred("add_child",explosion)
-		explosion.call_deferred("start")
+	if 1:
+		var try: int = randi_range(1,100)
+		if try < explosion_chance:
+			var explosion = ARROW_EXPLODE.instantiate()
+			explosion.damage = data.damage
+			explosion.global_position = global_position
+			get_parent().call_deferred("add_child",explosion)
+			explosion.call_deferred("start")
 		
 func missed() -> void:
 	if regular_shot and not succesfuly_hit:
@@ -78,6 +81,7 @@ func clear_shot() -> void:
 func wall_clear_shot() -> void:
 	arrow_hit_sound.emit()
 	queue_free()
+	
 func _physics_process(delta: float) -> void:
 	global_position += direction * delta * data.speed
 

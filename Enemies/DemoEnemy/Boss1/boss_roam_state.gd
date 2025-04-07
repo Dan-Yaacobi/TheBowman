@@ -58,7 +58,7 @@ func Physics(_delta: float) -> EnemyState:
 func set_roam_boundries() -> void:
 	roam_left_max = enemy.player.global_position.x - randi_range(10,40)
 	roam_right_max = enemy.player.global_position.x + randi_range(10,40)
-	roam_top_max = enemy.player.global_position.y - randi_range(75,90)
+	roam_top_max = enemy.player.global_position.y - randi_range(70,80)
 	roam_bottom_max = enemy.player.global_position.y - randi_range(40,60)
 	pass
 

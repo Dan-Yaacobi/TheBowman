@@ -3,6 +3,7 @@ class_name ArrowExplosionParticles extends CPUParticles2D
 @onready var area: Area2D = $Area2D
 
 @export var damage: int = 1
+@export var explosion_chance: int = 20
 
 func _ready() -> void:
 	rotate(randf_range(0,1))
@@ -13,6 +14,7 @@ func _ready() -> void:
 func hit_enemy(b) -> void:
 	if b is Enemy:
 		b.take_damage(damage)
+
 
 func start() -> void:
 	area.monitoring = true

@@ -12,7 +12,7 @@ func init() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	enemy.velocity = Vector2.ZERO
-	slam_height = randi_range(100,150)
+	slam_height = randi_range(60,80)
 	target_slam_position = Vector2(enemy.player.global_position.x , enemy.player.global_position.y - slam_height)
 	set_slam_direction = (target_slam_position - enemy.global_position).normalized()
 	enemy.velocity = set_slam_direction*enemy.stats.move_speed * 3
