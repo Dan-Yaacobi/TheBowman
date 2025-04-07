@@ -18,3 +18,15 @@ res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn
 res://Player/player.gd
 res://Weapons/5_ThunderBow/ThunderBow.tscn
 res://Weapons/6_BoneBow/BoneBow.tscn
+res://Weapons/0_BasicBow/BasicBow.tscn
+res://Weapons/1_BlueBow/BlueBow.tscn
+res://Weapons/2_RedBow/RedBow.tscn
+res://Weapons/3_BlackBow/BlackBow.tscn
+res://Weapons/4_NatureBow/NatureBow.tscn
+res://Weapons/7_BubbleGumBow/BubbleGumBow.tscn
+res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn
+res://Player/Upgrades/StatsUpgrades/Mana/ManaCost/ManaCostUpgrade.tscn
+res://Player/Upgrades/StatsUpgrades/Mana/ManaRate/ManaRateUpgrade.tscn
+res://Level/playground.gd
+res://Enemies/DemoEnemy/Boss2/demo_enemy_boss_2.gd
+res://Enemies/DemoEnemy/Boss2/roam_state.gd

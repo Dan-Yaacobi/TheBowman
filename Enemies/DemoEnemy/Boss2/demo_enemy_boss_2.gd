@@ -23,6 +23,7 @@ func shoot(_direction = null) -> void:
 	if stats.bullet != null and not stunned_state:
 		if _direction == null:
 			_direction = calculate_direction_to_player()
+			
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
 		new_bullet.scale *= 1.5
 		new_bullet.direction = _direction #calculate_direction_to_player()
