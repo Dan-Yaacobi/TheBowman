@@ -20,6 +20,7 @@ special_ability_cooldown = 5.0
 spcl_ablty_cost_mltplr = 2
 combo_buff_activated = false
 shots = 1
+damage = 8
 can_pierce = false
 arrows_explode = false
 crit_arrows = false

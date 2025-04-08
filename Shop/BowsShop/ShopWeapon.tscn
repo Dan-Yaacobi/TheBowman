@@ -116,17 +116,31 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 250
 text = "Special Ability:"
 
-[node name="Damage" type="Label" parent="."]
-visible = false
-offset_left = -6.0
-offset_top = 16.0
-offset_right = 1266.0
-offset_bottom = 358.0
-scale = Vector2(0.01, 0.01)
-theme_override_font_sizes/font_size = 250
-text = "Damage: 0"
-
 [node name="Frame" type="Sprite2D" parent="."]
 z_index = -1
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_pjnw0")
+
+[node name="WeaponDamage" type="Label" parent="."]
+offset_left = -8.0
+offset_top = 15.0
+offset_right = 1264.0
+offset_bottom = 357.0
+scale = Vector2(0.01, 0.01)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 55
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Damage: 1"
+
+[node name="ArrowsPerShot" type="Label" parent="."]
+offset_left = -8.0
+offset_top = 18.0
+offset_right = 1264.0
+offset_bottom = 360.0
+scale = Vector2(0.01, 0.01)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 55
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Arrows Per Shot: 1"

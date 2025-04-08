@@ -9,6 +9,8 @@ class_name WeaponData extends Resource
 @export var spcl_ablty_cost_mltplr: int
 @export var combo_buff_activated: bool = false
 @export var shots: int = 1
+@export var damage: int = 0
+
 
 @export_category("Special Abilities")
 @export var can_pierce: bool = false

@@ -1,3 +1,4 @@
+Label
 Node2D
 Timer
 CPUParticles2D
@@ -10,5 +11,4 @@ Sprite2D
 CharacterBody2D
 Button
 Panel
-Label
 TextureRect

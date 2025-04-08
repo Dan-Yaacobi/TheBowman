@@ -6,7 +6,8 @@ class_name ShopWeapon extends Node2D
 @onready var buy_button: MainButton = $ButtonShootClick
 @onready var new_bow_buy_effect: CPUParticles2D = $NewBowBuyEffect
 @onready var special_ability_label: Label = $SpecialAbilityLabel
-@onready var damage_label: Label = $Damage
+@onready var damage_label: Label = $WeaponDamage
+@onready var arrows_per_shot: Label = $ArrowsPerShot
 
 @export var data: ShopWeaponData
 
@@ -19,6 +20,8 @@ func set_shop_weapon() -> void:
 		name_label.add_theme_color_override("font_color", data.name_color)
 		name_label.add_theme_color_override("font_shadow_color", data.name_shadow_color)
 		label.text = "Price: " + str(data.price)
+		update_damage_label(data.get_damage())
+		update_arrows_per_shot_label(data.get_arrows_per_shot())
 	buy_button.button_data.button_action = data.button_click_action
 	if not buy_button.clicked.is_connected(change_to_switch_button):
 		buy_button.clicked.connect(change_to_switch_button)
@@ -48,5 +51,13 @@ func change_to_switch_button() -> void:
 	label.visible = false
 
 func update_damage_label(amount: int) -> void:
+	damage_label.add_theme_color_override("font_color", data.name_color)
+	damage_label.add_theme_color_override("font_shadow_color", data.name_shadow_color)
 	damage_label.text = "Damage: " + str(amount)
+	pass
+
+func update_arrows_per_shot_label(amount: int) -> void:
+	arrows_per_shot.add_theme_color_override("font_color", data.name_color)
+	arrows_per_shot.add_theme_color_override("font_shadow_color", data.name_shadow_color)
+	arrows_per_shot.text = "Arrows Per Shot: " + str(amount)
 	pass

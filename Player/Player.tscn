@@ -60,7 +60,7 @@ stun_chance = 5
 leech_chance = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
-size = Vector2(10, 2)
+size = Vector2(18, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
 size = Vector2(10, 15)
@@ -132,6 +132,7 @@ script = ExtResource("6_vo15m")
 script = ExtResource("14_nepur")
 
 [node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam"]
+position = Vector2(0, 1)
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
