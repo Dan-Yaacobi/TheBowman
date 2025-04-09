@@ -36,6 +36,7 @@ signal back_to_menu(scene: String)
 @onready var total_buffs: TotalBuffs = $TotalBuffs
 @onready var slow: Slow = $Debuffs/Slow
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
+@onready var invincibility_timer: Timer = $InvincibilityTimer
 
 @export var gravity: int
 @export var stats: PlayerStats
@@ -62,6 +63,7 @@ var bonus_stats: PlayerStats
 var current_minions: Array[Companion] = []
 
 var mega_shot_activated: bool = false
+var invincible: bool = false
 
 func _ready() -> void:
 	
@@ -80,6 +82,7 @@ func _ready() -> void:
 	init_bonus_stats()
 	reset_to_base_stats()
 	mega_shot_effect.stop()
+	invincibility_timer.timeout.connect(invincibility_over)
 	
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
@@ -319,12 +322,26 @@ func reset_minions() -> void:
 		
 func emit_crit() -> void:
 	critical_hit.emit()
-	
+
 func hit_player(damage: int) -> void:
-	took_hit.emit()
-	damaged_particles.emitting = true
-	stats.hp -= damage
-	health_bar._set_health(stats.hp)
+	if not invincible:
+		set_collision_layer_value(1,false)
+		hit_box.set_collision_mask_value(3,false)
+		modulate.a = 0.5
+		invincible = true
+		invincibility_timer.start()
+		took_hit.emit()
+		damaged_particles.emitting = true
+		stats.hp -= damage
+		health_bar._set_health(stats.hp)
+		hit_box.monitoring = false
+
+func invincibility_over() -> void:
+	invincible = false
+	set_collision_layer_value(1,true)
+	hit_box.set_collision_mask_value(3,true)
+	self.modulate.a = 1
+	hit_box.monitoring = true
 	
 func heal(amount: int) -> void:
 	if amount < 0:

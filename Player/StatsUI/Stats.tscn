@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://3xwv37h0m6j3"]
+
+[ext_resource type="Texture2D" uid="uid://bw7rt6ta1ne5q" path="res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade1.png" id="1_qeehy"]
+
+[node name="Stats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="ItemList" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 1102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 200
+item_count = 4
+fixed_icon_size = Vector2i(220, 220)
+item_0/text = "HP: 5"
+item_0/icon = ExtResource("1_qeehy")
+item_0/selectable = false
+item_1/text = "asdf"
+item_2/text = "asdf"
+item_3/text = "asdf"
+
+[node name="MenuBar" type="MenuBar" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

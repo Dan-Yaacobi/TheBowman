@@ -355,3 +355,5 @@ script = ExtResource("29_b4moh")
 
 [node name="Timer" type="Timer" parent="Debuffs/Slow"]
 wait_time = 1.5
+
+[node name="InvincibilityTimer" type="Timer" parent="."]

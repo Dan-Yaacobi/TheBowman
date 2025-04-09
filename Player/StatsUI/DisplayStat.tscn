@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://buq165pi858es"]
+
+[ext_resource type="Script" path="res://Player/StatsUI/display_stat.gd" id="1_r6ky4"]
+[ext_resource type="Texture2D" uid="uid://bw7rt6ta1ne5q" path="res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade1.png" id="2_dr74a"]
+
+[node name="DisplayStat" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_r6ky4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 1276.0
+offset_bottom = 273.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 200
+text = "Stat_Name: 1"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 3)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_dr74a")
