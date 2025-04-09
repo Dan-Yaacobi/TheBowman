@@ -16,6 +16,7 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	enemy.update_animation("Slam")
 	slam_particles.emitting = true
 	slam_done = false
 	enemy.velocity = Vector2.ZERO

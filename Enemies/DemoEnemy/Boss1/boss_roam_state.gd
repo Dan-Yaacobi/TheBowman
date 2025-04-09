@@ -28,13 +28,14 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	enemy.update_animation("Move")
+	
 	enemy.set_collision_mask_value(5,true)
 	shoot_timer.start()
 	slam_timer.start()
 	moving_up = [true,false].pick_random()
 	moving_right = [true,false].pick_random()
 	slam = false
+	enemy.update_animation("Move")
 	pass
 	
 #what happens when the player exits this state

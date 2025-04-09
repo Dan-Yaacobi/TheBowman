@@ -20,5 +20,6 @@ func _physics_process(delta: float) -> void:
 		area.monitoring = false
 		
 func detect_enemy(b) -> void:
-	if b is Enemy:
-		b.take_damage(player.current_weapon.weapon_data.damage)
+	return
+	#if b is Enemy:
+		#b.take_damage(player.current_weapon.weapon_data.damage)

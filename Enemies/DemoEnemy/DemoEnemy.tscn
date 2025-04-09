@@ -1,7 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cyv1v6g5srjk1"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_7uoph"]
-[ext_resource type="Texture2D" uid="uid://cdv26x6vef1no" path="res://Enemies/DemoEnemy/target_enemy.png" id="2_f75id"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nqjsy"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_olou7"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_7f1kl"]
@@ -9,6 +8,7 @@
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_6q55h"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="5_b4mrk"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="6_21mn1"]
+[ext_resource type="Texture2D" uid="uid://dv2p6vmbmhpgb" path="res://Enemies/Sprites/Flying Apple.png" id="7_n1x5s"]
 
 [sub_resource type="Resource" id="Resource_t1xp5"]
 resource_local_to_scene = true
@@ -20,7 +20,7 @@ script = ExtResource("3_vmfyd")
 hp = 3
 move_speed = 15
 knockback = 100
-skin = ExtResource("2_f75id")
+skin = ExtResource("7_n1x5s")
 coins_dropped = 1
 sharp_movement = false
 touch_damage = 1
@@ -29,6 +29,7 @@ initial_ability = Array[ExtResource("2_nqjsy")]([])
 special_ability = Array[ExtResource("2_nqjsy")]([])
 debuffs = Array[ExtResource("3_7f1kl")]([])
 boss = false
+teleport_chance = 0
 shooter = false
 shooter_chance = 50
 bullet = ExtResource("2_olou7")
@@ -70,8 +71,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_rwjqo"]
 resource_name = "Move"
-length = 0.4
-loop_mode = 2
+length = 1.15
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -80,22 +81,34 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("..:position")
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -5), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_wrm4u"]
@@ -115,26 +128,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
@@ -154,6 +167,7 @@ radius = 7.0
 radius = 6.0
 
 [node name="DemoEnemy" type="CharacterBody2D"]
+scale = Vector2(0.65, 0.65)
 collision_layer = 4
 collision_mask = 17
 motion_mode = 1
@@ -162,7 +176,8 @@ stats = SubResource("Resource_venkp")
 item_drops = Array[ExtResource("5_b4mrk")]([SubResource("Resource_kuvca")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-hframes = 2
+texture = ExtResource("7_n1x5s")
+vframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

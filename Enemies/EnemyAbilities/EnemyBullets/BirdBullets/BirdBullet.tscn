@@ -1,23 +1,23 @@
 [gd_scene load_steps=10 format=3 uid="uid://dq8jw2t0m3aks"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/bird_bullet.gd" id="1_882qa"]
-[ext_resource type="Texture2D" uid="uid://bovvkud3i6sqw" path="res://Enemies/EvilBird/Sprites/Bomb Egg.png" id="2_gjfmx"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_pjoay"]
+[ext_resource type="Texture2D" uid="uid://cf1ypxn3drbpd" path="res://Enemies/EvilBird/Sprites/Egg.png" id="4_qwvqa"]
 [ext_resource type="Texture2D" uid="uid://d1cx73j10b7eg" path="res://Enemies/EvilBird/Sprites/Feather.png" id="4_xvdir"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/explosion.gd" id="5_gtfsv"]
 
 [sub_resource type="Resource" id="Resource_1gxwb"]
 script = ExtResource("2_pjoay")
-texture = ExtResource("2_gjfmx")
+texture = ExtResource("4_qwvqa")
 damage = 0
 knockback = 0
 fire_cooldown = 0.0
 move_speed = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6ofq"]
-size = Vector2(7, 7)
+size = Vector2(8, 9)
 
-[sub_resource type="Curve" id="Curve_yhxai"]
+[sub_resource type="Curve" id="Curve_vaeie"]
 max_value = 0.5
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -32,19 +32,18 @@ script = ExtResource("1_882qa")
 data = SubResource("Resource_1gxwb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_r6ofq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_gjfmx")
+texture = ExtResource("4_qwvqa")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 250
 one_shot = true
-speed_scale = 1.5
+speed_scale = 3.0
 explosiveness = 1.0
 texture = ExtResource("4_xvdir")
 emission_shape = 2
@@ -53,9 +52,7 @@ gravity = Vector2(0, 0)
 radial_accel_min = 10.0
 radial_accel_max = 50.0
 angle_max = 360.0
-scale_amount_min = 0.5
-scale_amount_max = 0.5
-scale_amount_curve = SubResource("Curve_yhxai")
+scale_amount_curve = SubResource("Curve_vaeie")
 script = ExtResource("5_gtfsv")
 
 [node name="ExplosionDetector" type="Area2D" parent="Explosion"]

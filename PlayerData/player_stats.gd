@@ -2,7 +2,7 @@ class_name PlayerStats extends Resource
 
 var player: Player
 
-@export_category("Player Stats")
+@export_subgroup("Player Stats")
 @export var hp: int
 @export var max_hp: int
 @export var move_speed: int
@@ -17,9 +17,12 @@ var player: Player
 @export var max_minions: int 
 @export var dash_distance: int
 @export var invinc_duration: int
+@export var max_combo: int
+@export var combo_to_activate: int
+@export var combo_duration: float
 
 
-@export_category("Player Items")
+@export_subgroup("Player Items")
 @export var money: int
 @export var upgrd_points: int
 @export var weapon_name: String
@@ -27,7 +30,7 @@ var player: Player
 
 
 
-@export_category("Abilities")
+@export_subgroup("Abilities")
 @export var jump_abilities: Array[JumpAbility]
 @export var shoot_abilities: Array[ShootAbility]
 @export var arrow_abilities: Array[ArrowAbility]
@@ -35,7 +38,7 @@ var player: Player
 
 
 
-@export_category("Upgrade values")
+@export_subgroup("Upgrade values")
 @export var can_mega_shot: bool = false
 @export var crit_chance: int = 10
 @export var stun_chance: int = 10

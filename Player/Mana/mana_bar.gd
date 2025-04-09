@@ -22,6 +22,7 @@ func set_mana_bar_stats(_mana_rate: float, _shoot_cost: int) -> void:
 	pass
 
 func use_mana(_cost_multiplier) -> bool:
+	
 	if value >= shoot_cost * _cost_multiplier:
 		value -= shoot_cost * _cost_multiplier
 		return true

@@ -214,7 +214,10 @@ func combo_lost() -> void:
 	
 func combo_gained() -> void:
 	combo_counter += 1
-	if combo_counter %25 == 0:
+	if stats.max_combo < combo_counter:
+		stats.max_combo = combo_counter
+		
+	if combo_counter %stats.combo_to_activate == 0:
 		combo_bonus_activate()
 	combo.emit(combo_counter)
 	pass
@@ -222,15 +225,12 @@ func combo_gained() -> void:
 func combo_bonus_activate() -> void:
 	combo_activated_effect.emitting = true
 	combo_buff = true
+	combo_timer.wait_time = stats.combo_duration
 	combo_timer.start()
 	combo_effect.emitting = true
-	stats.knockback_resistance += 5
-	stats.max_jumps += 3
-	current_weapon.weapon_data.special_ability_cooldown /= 2
 	current_weapon.weapon_data.combo_buff_activated = true
-	current_weapon.weapon_data.mana_rate *= 3
-	mana_bar.change_color(Color.PURPLE)
 	health_bar._set_health(stats.max_hp)
+	start_unlimited_mana(Color.PURPLE)
 	pass
 	
 func end_combo_buff() -> void:
@@ -238,22 +238,21 @@ func end_combo_buff() -> void:
 		combo_buff = false
 		combo_effect.emitting = false
 		current_weapon.weapon_data.combo_buff_activated = false
-		current_weapon.weapon_data.special_ability_cooldown *= 2
-		current_weapon.weapon_data.mana_rate /= 3
 		mana_bar.regular_color()
-		stats.knockback_resistance -= 5
-		stats.max_jumps -= 3
+		end_unlimited_mana()
 
-func start_unlimited_mana() -> void:
+func start_unlimited_mana(color: Color) -> void:
 	unlimited_mana_timer.start()
-	mana_bar.change_color(Color.RED)
+	mana_bar.change_color(color)
 	regular_mana_cost = 0
-	unlimited_mana_effect.emitting = true
+	if unlimited_mana_effect != null:
+		unlimited_mana_effect.emitting = true
 	
 func end_unlimited_mana() -> void:
 	mana_bar.regular_color()
 	regular_mana_cost = 1
-	unlimited_mana_effect.emitting = false
+	if unlimited_mana_effect != null:
+		unlimited_mana_effect.emitting = false
 	pass
 
 func can_use_special_ability() -> void:

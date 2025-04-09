@@ -1,3 +1,4 @@
+CPUParticles2D
 Timer
 MenuBar
 ItemList
@@ -10,5 +11,4 @@ Label
 Control
 BoxContainer
 Node2D
-CPUParticles2D
 CollisionShape2D

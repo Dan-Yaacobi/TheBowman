@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	global_position += direction * data.move_speed * delta
-	rotation += randf_range(0.5,10)
+	rotation += randf_range(0.02,0.04)
 	pass
 
 func hit_player(b) -> void:

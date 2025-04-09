@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cthdk84eucyrk"]
+
+[sub_resource type="Curve" id="Curve_8puyd"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="ComboArrowEffect" type="CPUParticles2D"]
+amount = 70
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, -20)
+linear_accel_min = 25.0
+linear_accel_max = 25.0
+angle_max = 180.0
+scale_amount_curve = SubResource("Curve_8puyd")
+color = Color(0.67451, 0.0392157, 0.8, 1)

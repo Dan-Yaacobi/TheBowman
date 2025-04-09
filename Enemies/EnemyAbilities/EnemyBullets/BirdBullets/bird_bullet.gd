@@ -5,6 +5,7 @@ class_name BirdBullet extends EnemyBullet
 
 func _ready() -> void:
 	sprite.texture = data.texture
+	scale *= 0.75
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	
 	body_entered.connect(hit_player)

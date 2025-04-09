@@ -8,7 +8,7 @@ signal leeched(amount: int,enemy_position: Vector2)
 static var player: Player
 
 @export var weapon_data: WeaponData
-
+const COMBO_ARROW_EFFECT = preload("res://Weapons/Effects/ComboArrowEffect/ComboArrowEffect.tscn")
 var regular_attack: bool = true
 
 func shoot(_offset: bool,mega: bool) -> void:
@@ -20,7 +20,9 @@ func shoot(_offset: bool,mega: bool) -> void:
 	if _offset:
 		offset = Vector2(randf_range(-0.2,0.2),randf_range(-0.2,0.2))
 	if not (mouse_pos.x > player.global_position.x - 5 and mouse_pos.x < player.global_position.x + 5 and mouse_pos.y > player.global_position.y - 5 and mouse_pos.y < player.global_position.y + 5):
-		var arrow = instance_arrow(weapon_data.arrow,global_position)
+		
+		var arrow = instance_arrow(weapon_data.arrow,global_position,offset)
+		
 		if weapon_data.can_pierce:
 			arrow.can_pierce = true
 			
@@ -45,7 +47,7 @@ func shoot(_offset: bool,mega: bool) -> void:
 			arrow.can_pierce = true
 			arrow.scale *= 5
 			arrow.data.damage *= 5
-		arrow.direction = player.get_shoot_direction() + offset
+		
 		arrow.global_position += arrow.direction*10
 		arrow.rotate(set_arrow_rotation())
 		arrow.regular_shot = regular_attack
@@ -63,17 +65,20 @@ func init_weapon(_player: Player, _weapon: Weapon) -> void:
 	
 	pass
 
-func instance_arrow(ARROW: PackedScene, the_position) -> Arrow:
+func instance_arrow(ARROW: PackedScene, the_position, _offset) -> Arrow:
 	if ARROW != null:
 		var arrow: Arrow = ARROW.instantiate()
 		arrow.arrow_hit_sound.connect(emit_hit_sound)
 		arrow.data.damage = weapon_data.damage
+		arrow.direction = player.get_shoot_direction() + _offset
 		
 		if weapon_data.combo_buff_activated:
+			var combo_effect: CPUParticles2D = COMBO_ARROW_EFFECT.instantiate()
+			combo_effect.gravity = -arrow.direction
+			arrow.add_child(combo_effect)
 			arrow.data.damage = weapon_data.damage * 2
 		else:
 			arrow.data.damage = weapon_data.damage
-			
 		arrow.arrow_missed.connect(missed)
 		arrow.arrow_hit.connect(hit)
 		arrow.global_position = the_position
