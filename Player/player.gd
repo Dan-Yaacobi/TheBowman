@@ -329,6 +329,7 @@ func hit_player(damage: int) -> void:
 		hit_box.set_collision_mask_value(3,false)
 		modulate.a = 0.5
 		invincible = true
+		invincibility_timer.wait_time = stats.invinc_duration
 		invincibility_timer.start()
 		took_hit.emit()
 		damaged_particles.emitting = true

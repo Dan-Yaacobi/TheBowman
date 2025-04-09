@@ -14,3 +14,5 @@ res://Player/StatsUI/Stats.tscn
 res://Player/StatsUI/DisplayStat.tscn
 res://Player/Body/Body.tscn
 res://Enemies/Scripts/enemy.gd
+res://PlayerData/player_stats.gd
+res://Player/combo_activated_effect.gd

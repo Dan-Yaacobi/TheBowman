@@ -16,6 +16,7 @@ var player: Player
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
 @export var dash_distance: int
+@export var invinc_duration: int
 
 
 @export_category("Player Items")

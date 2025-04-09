@@ -21,4 +21,4 @@ func _physics_process(delta: float) -> void:
 		
 func detect_enemy(b) -> void:
 	if b is Enemy:
-		b.take_damage(player.current_weapon.base_damage)
+		b.take_damage(player.current_weapon.weapon_data.damage)

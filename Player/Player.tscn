@@ -46,6 +46,7 @@ shoot_cost = 0
 reset_upgrades = false
 max_minions = 3
 dash_distance = 50
+invinc_duration = 1
 money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
