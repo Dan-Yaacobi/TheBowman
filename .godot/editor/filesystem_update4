@@ -44,3 +44,4 @@ res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd
 res://Enemies/DemoEnemy/DemoEnemy3.tscn
 res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn
 res://Enemies/Test/TestEnemy.tscn
+res://Player/Hand/Hand.tscn

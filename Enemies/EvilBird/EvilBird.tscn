@@ -201,8 +201,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82j1c"]
-radius = 5.0
-height = 15.0
+radius = 3.60461
+height = 12.7801
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpa61"]
 radius = 4.99705
