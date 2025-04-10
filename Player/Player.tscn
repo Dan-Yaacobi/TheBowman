@@ -41,7 +41,7 @@ jump_height = 90
 knockback_resistance = 3
 menu_speed = 150
 in_menu = false
-mana_rate = 0.0
+boost_mana_rate = 0.0
 shoot_cost = 0
 reset_upgrades = false
 max_minions = 3
@@ -102,6 +102,7 @@ point_count = 2
 radius = 49.0408
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
 gravity = 150

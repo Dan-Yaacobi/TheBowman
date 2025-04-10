@@ -1,13 +1,13 @@
 class_name DemoEnemy extends Enemy
 
-#@onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
-
 @onready var hit_box: Area2D = $HitBox
 @onready var hurt_box: Area2D = $HurtBox
 
 enum directions{TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT}
+
 var current_direction: directions
+var wings_animation: AnimationPlayer
 
 var max_hp: int
 var boss_phase_II: bool = false
@@ -16,16 +16,16 @@ var shoot_cooldown: float = 0
 var stopped: bool = false
 
 func _ready() -> void:
-	
+	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
+	wings_animation.play("Fly")
+	
 	if stats.boss:
-		self.took_damage.connect(teleport)
 		scale *= 5
 		stats.hp *= 22
 		max_hp = stats.hp
 		stats.knockback *= 1.2
 		stats.move_speed *= 3
-	
 	else:
 		var shooter_random = randi_range(1,100)
 		if shooter_random <= stats.shooter_chance:
@@ -47,10 +47,7 @@ func _physics_process(delta: float) -> void:
 		if not boss_phase_II and stats.hp < max_hp/2:
 			boss_upgrade()
 			boss_phase_II = true
-		elif boss_phase_II:
-			if stats.hp < max_hp/4:
-				stats.teleport_chance *= 2
-			
+
 	if poisoned_state and poisoned_timer != null:
 		if poisoned_timer.is_stopped():
 			poisoned_timer.start()
@@ -82,20 +79,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	pass
 	
-func teleport() -> void:
-	if boss_phase_II and randi_range(1,100) < stats.teleport_chance:
-		var offset: int = 1
-		if global_position.x > 0:
-			offset = -1
-		global_position.x  += 40 * offset
-		velocity = Vector2.ZERO
-
-	
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
-		if stats.boss:
-			new_bullet.scale *= 2
 		if stats.shoot_speed != 0:
 			shoot_cooldown = min(new_bullet.data.fire_cooldown,stats.shoot_speed)
 		else:
@@ -140,8 +126,3 @@ func boss_upgrade() -> void:
 		var player_x = player.global_position.x
 		global_position = player.global_position + Vector2(randi_range(player_x - 100, player_x + 100),-100)
 		initial_speed()
-
-func circular_movement(center: Vector2, radius: int, left: bool) -> void:
-	
-	pass
-	

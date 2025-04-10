@@ -12,6 +12,7 @@ func _ready() -> void:
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	body_entered.connect(hit_player)
 	body_shape_entered.connect(hit_wall)
+
 	
 func _physics_process(delta: float) -> void:
 	global_position += direction * data.move_speed * delta

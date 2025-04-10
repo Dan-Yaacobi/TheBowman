@@ -91,6 +91,7 @@ Dash={
 2d_physics/layer_4="Objects"
 2d_physics/layer_5="Wall"
 2d_physics/layer_6="Buttons"
+2d_physics/layer_7="PlayerPickup"
 
 [rendering]
 

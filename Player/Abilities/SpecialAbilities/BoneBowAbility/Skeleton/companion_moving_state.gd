@@ -15,6 +15,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+
 	companion.update_animation("Move")
 	pass
 	

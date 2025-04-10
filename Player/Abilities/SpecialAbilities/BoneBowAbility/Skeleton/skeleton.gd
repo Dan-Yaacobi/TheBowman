@@ -15,7 +15,7 @@ func _ready() -> void:
 	area.body_exited.connect(unfocus_enemy)
 	companion_state_machine = $CompanionStateMachine
 	companion_state_machine.Initialize(self)
-	
+	data.move_speed = randi_range(800,1500)
 	pass
 	
 func _physics_process(delta: float) -> void:

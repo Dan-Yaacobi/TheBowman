@@ -1,14 +1,15 @@
-[gd_scene load_steps=37 format=3 uid="uid://c2eppdxet4q8c"]
+[gd_scene load_steps=41 format=3 uid="uid://c2eppdxet4q8c"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd" id="1_007ct"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_ns1qc"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_4vwgm"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
-[ext_resource type="Texture2D" uid="uid://dv2p6vmbmhpgb" path="res://Enemies/Sprites/Flying Apple.png" id="6_s4bdb"]
+[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="6_gbtff"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="7_o3eph"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="8_showg"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_46lb5"]
+[ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="10_88q2y"]
 [ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd" id="16_ikffo"]
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_setslam_state.gd" id="17_p45i5"]
@@ -20,7 +21,7 @@ script = ExtResource("4_uh2fb")
 hp = 120
 move_speed = 35
 knockback = 100
-skin = ExtResource("6_s4bdb")
+skin = ExtResource("6_gbtff")
 coins_dropped = 0
 sharp_movement = false
 touch_damage = 2
@@ -114,10 +115,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -171,10 +172,47 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_h7q3l"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
+_data = {
+"Damaged": SubResource("Animation_k0qd3"),
+"Move": SubResource("Animation_rwjqo"),
+"RESET": SubResource("Animation_wrm4u")
+}
+
+[sub_resource type="Animation" id="Animation_f1xcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hsnyq"]
+resource_name = "Fly"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_goyeu"]
 resource_name = "Slam"
-length = 0.5
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -188,12 +226,11 @@ tracks/0/keys = {
 "values": [3]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
 _data = {
-"Damaged": SubResource("Animation_k0qd3"),
-"Move": SubResource("Animation_rwjqo"),
-"RESET": SubResource("Animation_wrm4u"),
-"Slam": SubResource("Animation_h7q3l")
+"Fly": SubResource("Animation_hsnyq"),
+"RESET": SubResource("Animation_f1xcn"),
+"Slam": SubResource("Animation_goyeu")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
@@ -230,12 +267,20 @@ stats = SubResource("Resource_c5f3p")
 item_drops = Array[ExtResource("7_o3eph")]([SubResource("Resource_1phje"), SubResource("Resource_ggc8h"), SubResource("Resource_0hlqk"), SubResource("Resource_ii32q"), SubResource("Resource_hgyxh"), SubResource("Resource_4e1yg"), SubResource("Resource_k1iwl"), SubResource("Resource_npax2"), SubResource("Resource_7pirm"), SubResource("Resource_kun8h")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("6_s4bdb")
-vframes = 6
+texture = ExtResource("6_gbtff")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_o35pa")
+}
+
+[node name="Wings" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("10_88q2y")
+vframes = 6
+
+[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
+libraries = {
+"": SubResource("AnimationLibrary_qgtth")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

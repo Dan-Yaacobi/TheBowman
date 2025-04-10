@@ -5,12 +5,14 @@ class_name DemoEnemyBoss2 extends Enemy
 @onready var pre_ability_location: Area2D = $PreAbilityLocation
 @onready var hit_box: Area2D = $HitBox
 @onready var hurt_box: Area2D = $HurtBox
+@onready var wings_animation: AnimationPlayer = $Sprite2D/Wings/WingsAnimation
 
 const MINI_ENEMY = preload("res://Enemies/DemoEnemy/DemoEnemy2.tscn")
 
 func _ready() -> void:
 	enemy_state_machine.Initialize(self)
 	animation_player = $Sprite2D/AnimationPlayer
+	wings_animation.play("Fly")
 	scale *= 3
 	pre_ability_location.reparent(get_parent())
 	hit_box.area_entered.connect(hit)

@@ -32,3 +32,12 @@ res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd
 res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd
 res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn
 res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/bird_bullet.gd
+res://Items/ItemPickUp.tscn
+res://Enemies/DemoEnemy/demo_enemy.gd
+res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd
+res://Enemies/DemoEnemy/Boss2/demo_enemy_boss_2.gd
+res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn
+res://Level/Testing/testing_area.gd
+res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.tscn
+res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_moving_state.gd
+res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd

@@ -11,7 +11,7 @@ var player: Player
 @export var knockback_resistance: int
 @export var menu_speed: int
 @export var in_menu: bool
-@export var mana_rate: float
+@export var boost_mana_rate: float
 @export var shoot_cost: int
 @export var reset_upgrades: bool = false
 @export var max_minions: int 

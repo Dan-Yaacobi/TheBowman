@@ -177,7 +177,7 @@ size = Vector2(58, 12)
 size = Vector2(58, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
-size = Vector2(10949, 341)
+size = Vector2(10949, 680)
 
 [sub_resource type="Animation" id="Animation_xyp2j"]
 resource_name = "Gained"
@@ -396,7 +396,7 @@ wait_time = 3.0
 position = Vector2(3, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
-position = Vector2(-3, 297.5)
+position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_lvsqu")
 debug_color = Color(1, 0, 0.2, 0.419608)
 

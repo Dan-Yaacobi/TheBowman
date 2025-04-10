@@ -5,9 +5,11 @@ class_name DemoEnemyBoss extends Enemy
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var hurt_box: Area2D = $HurtBox
 @onready var hit_box: Area2D = $HitBox
+@onready var wings_animation: AnimationPlayer = $Sprite2D/Wings/WingsAnimation
 
 func _ready() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
+	wings_animation.play("Fly")
 	scale *= 3
 	enemy_state_machine.Initialize(self)
 	hit_box.area_entered.connect(hit)
