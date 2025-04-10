@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c35yjtl5a8xob"]
+[gd_scene load_steps=29 format=3 uid="uid://c35yjtl5a8xob"]
 
 [ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_ry7kp"]
 [ext_resource type="PackedScene" uid="uid://dok5esyet0y5n" path="res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn" id="2_55fox"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_0keyp"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_r5unr"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_6pjf2"]
-[ext_resource type="Texture2D" uid="uid://dytyw504160mf" path="res://Enemies/DemoEnemy/green_target.png" id="5_70l7o"]
 [ext_resource type="Script" path="res://Items/drop_data.gd" id="6_njgt5"]
+[ext_resource type="Texture2D" uid="uid://bvla6jdht1gip" path="res://Enemies/Sprites/Green Apple.png" id="7_fe54d"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="7_oj3xw"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_humn1"]
+[ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_aww3q"]
 
 [sub_resource type="Resource" id="Resource_1u0xx"]
 script = ExtResource("3_r5unr")
@@ -20,7 +21,7 @@ script = ExtResource("4_6pjf2")
 hp = 15
 move_speed = 30
 knockback = 170
-skin = ExtResource("5_70l7o")
+skin = ExtResource("7_fe54d")
 coins_dropped = 12
 sharp_movement = true
 touch_damage = 1
@@ -29,6 +30,7 @@ initial_ability = Array[ExtResource("2_x0dd5")]([])
 special_ability = Array[ExtResource("2_x0dd5")]([])
 debuffs = Array[ExtResource("3_0keyp")]([])
 boss = false
+teleport_chance = 0
 shooter = false
 shooter_chance = 25
 bullet = ExtResource("2_55fox")
@@ -61,6 +63,24 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rwjqo"]
+resource_name = "Move"
+length = 1.15
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -72,42 +92,12 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_rwjqo"]
-resource_name = "Move"
-length = 0.4
-loop_mode = 2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
 tracks/1/enabled = false
 tracks/1/path = NodePath("..:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.65),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, -5), Vector2(0, 0)]
@@ -159,6 +149,60 @@ _data = {
 "RESET": SubResource("Animation_wrm4u")
 }
 
+[sub_resource type="Animation" id="Animation_f1xcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hsnyq"]
+resource_name = "Fly"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_goyeu"]
+resource_name = "Slam"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
+_data = {
+"Fly": SubResource("Animation_hsnyq"),
+"RESET": SubResource("Animation_f1xcn"),
+"Slam": SubResource("Animation_goyeu")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
 radius = 6.0
 
@@ -177,11 +221,20 @@ stats = SubResource("Resource_15jtt")
 item_drops = Array[ExtResource("6_njgt5")]([SubResource("Resource_e57w5"), SubResource("Resource_ldutr"), SubResource("Resource_rapgc"), SubResource("Resource_a4jxv")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-hframes = 2
+texture = ExtResource("7_fe54d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_o35pa")
+}
+
+[node name="Wings" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("11_aww3q")
+vframes = 6
+
+[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
+libraries = {
+"": SubResource("AnimationLibrary_qgtth")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://dok5esyet0y5n"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_64c6y"]
-[ext_resource type="Texture2D" uid="uid://bl6farfwp6au6" path="res://Enemies/Sprites/GreenBullet.png" id="1_ixktv"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_dtisv"]
+[ext_resource type="Texture2D" uid="uid://b408l3yp6fyja" path="res://Enemies/Sprites/Green Apple Seed.png" id="3_vo312"]
 
 [sub_resource type="Resource" id="Resource_0p4i6"]
 script = ExtResource("2_dtisv")
-texture = ExtResource("1_ixktv")
+texture = ExtResource("3_vo312")
 damage = 3
 knockback = 0
 fire_cooldown = 1.5
@@ -16,6 +16,7 @@ move_speed = 0
 radius = 6.0
 
 [node name="GreenBullet" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_64c6y")
@@ -25,5 +26,6 @@ data = SubResource("Resource_0p4i6")
 shape = SubResource("CircleShape2D_rntf4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_vo312")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

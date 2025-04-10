@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_idach"]
-[ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="2_p70mv"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
 [ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
 [ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
@@ -15,6 +14,7 @@
 [ext_resource type="Script" path="res://Items/item_data.gd" id="10_0bpxa"]
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_a4bmo"]
 [ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_2scv3"]
+[ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="16_rhfyp"]
 
 [sub_resource type="Resource" id="Resource_w50ih"]
 script = ExtResource("4_w0v01")
@@ -25,7 +25,7 @@ script = ExtResource("4_armh2")
 hp = 8
 move_speed = 50
 knockback = 200
-skin = ExtResource("2_p70mv")
+skin = ExtResource("16_rhfyp")
 coins_dropped = 10
 sharp_movement = false
 touch_damage = 1
@@ -126,8 +126,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_sngn8"]
 resource_name = "Move"
-length = 0.6
-loop_mode = 2
+length = 0.75
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -136,10 +136,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,10 +148,10 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -4)]
+"values": [Vector2(0, 0), Vector2(0, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_jqhj0"]
@@ -200,14 +200,17 @@ _data = {
 "RESET": SubResource("Animation_jqhj0")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f410j"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82j1c"]
 radius = 5.0
+height = 15.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yaqk4"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpa61"]
+radius = 4.99705
+height = 15.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hcbfx"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vrf4a"]
+radius = 5.0
+height = 15.0
 
 [node name="EvilBird" type="CharacterBody2D"]
 collision_layer = 4
@@ -217,8 +220,9 @@ stats = SubResource("Resource_jvrjh")
 item_drops = Array[ExtResource("7_qgn5p")]([SubResource("Resource_rjwp8"), SubResource("Resource_mcgos"), SubResource("Resource_xj4sr"), SubResource("Resource_qk1wn"), SubResource("Resource_rbs8a"), SubResource("Resource_yfwxr")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_p70mv")
-hframes = 4
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("16_rhfyp")
+hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -226,19 +230,22 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_f410j")
+rotation = 2.18166
+shape = SubResource("CapsuleShape2D_82j1c")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_yaqk4")
+rotation = 2.18166
+shape = SubResource("CapsuleShape2D_wpa61")
 debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_hcbfx")
+rotation = 2.18166
+shape = SubResource("CapsuleShape2D_vrf4a")
 debug_color = Color(1, 0, 0.0166664, 0.419608)

@@ -41,3 +41,6 @@ res://Level/Testing/testing_area.gd
 res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.tscn
 res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_moving_state.gd
 res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd
+res://Enemies/DemoEnemy/DemoEnemy3.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn
+res://Enemies/Test/TestEnemy.tscn
