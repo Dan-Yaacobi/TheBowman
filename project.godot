@@ -96,4 +96,4 @@ Dash={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.956863, 0.639216, 0.352941, 1)
+environment/defaults/default_clear_color=Color(0.391265, 0.771958, 0.94784, 1)

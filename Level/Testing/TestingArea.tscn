@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://faeqy5pfi8yk"]
+[gd_scene load_steps=8 format=4 uid="uid://faeqy5pfi8yk"]
 
 [ext_resource type="Script" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_u5lkp"]
 [ext_resource type="PackedScene" uid="uid://cesvb1a1eu8yq" path="res://Player/Player.tscn" id="2_7l2ag"]
 [ext_resource type="Texture2D" uid="uid://clbn7aipnnhq8" path="res://Level/Tiles/Gold Wood Square.png" id="4_o1u76"]
+[ext_resource type="PackedScene" uid="uid://c5o8b833xdeaf" path="res://Objects/FallingObjects/Objects/TreasureChest/TreasureChest.tscn" id="5_uhtuh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mix7l"]
 texture = ExtResource("4_o1u76")
@@ -24,3 +25,6 @@ tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAA
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(8, 6)
 tile_set = SubResource("TileSet_7ue5y")
+
+[node name="TreasureChest" parent="." instance=ExtResource("5_uhtuh")]
+position = Vector2(114, -119)

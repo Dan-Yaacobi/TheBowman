@@ -22,6 +22,8 @@ signal new_wave
 @export var enemies: Enemies
 @export var wave_data: WaveData
 @export var level_logic: LevelDifficultyLogic = LevelDifficultyLogic.new()
+@export var summon_objects: SummonObjects
+@export_custom(PROPERTY_HINT_NONE,"suffix:%") var summon_object_chance: int
 
 var player: Player
 var enemies_killed: int
@@ -29,6 +31,8 @@ var summoned_enemies: Array[Enemy]
 var summon_count: int = 0
 var stop_waves: bool = false
 var hard_mode: bool = false
+var can_summon_object: bool = false
+var summoned_an_object: bool = false
 
 func _ready() -> void:
 	summon_timer.timeout.connect(summon_enemy)
@@ -63,6 +67,8 @@ func init_enemy(_position: Vector2, scene: PackedScene, _player: Player) -> Enem
 func summon_enemy() -> void:
 	if player != null and not stop_waves:
 		if not wave_data.boss_wave:
+			if wave_data.current_wave > 5:
+				try_to_summon_object()
 			var try_double_summon: float = randf_range(0,100)
 			if try_double_summon <= wave_data.double_spawn_chance:
 				summon()
@@ -74,7 +80,15 @@ func summon_enemy() -> void:
 			between_waves()
 			#new_wave_difficulty()
 			update_label()
-
+			
+func try_to_summon_object() -> void:
+	if can_summon_object:
+		var try_summon_object: int = randi_range(1,100)
+		if try_summon_object < summon_object_chance:
+			summon_object()
+			can_summon_object = false
+					
+	pass
 func summon() -> void:
 	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
 		
@@ -112,6 +126,8 @@ func update_label() -> void:
 	label.text = "Wave: " + str(wave_data.current_wave)# + "\n" + " Enemies Left: " + str(wave_data.total_enemies - enemies_killed)
 
 func between_waves() -> void:
+	if wave_data.boss_wave:
+		summon_object()
 	stop_waves = true
 	for child in get_children():
 		if child is EnemyBullet:
@@ -129,7 +145,7 @@ func between_waves() -> void:
 
 	
 func new_wave_difficulty() -> void:
-	
+	can_summon_object = true
 	upgrade_buttons.disable()
 	stop_waves = false
 	next_wave_button.disabled = true
@@ -168,7 +184,9 @@ func new_wave_difficulty() -> void:
 		wave_data.boss_wave = false
 
 func death(b) -> void:
-	if b is Player:
+	if b is FallingObject:
+		b.queue_free()
+	elif b is Player:
 		b.stats.hp = 0
 
 func set_scene(_player: Player) -> void:
@@ -243,3 +261,11 @@ func change_wave(wave_num: int) -> void:
 			#if player != null:
 				#player.reset_to_base_stats()
 		wave_reset.emit(wave_num)
+
+func summon_object() -> void:
+	var new_object: FallingObject  = summon_objects.get_object(player)
+	var summon_position: Vector2 = Vector2.ZERO
+	if not wave_data.boss_wave:
+		summon_position = player.global_position + Vector2([1,-1].pick_random() * 50, - 100)
+	new_object.global_position = summon_position
+	add_child(new_object)

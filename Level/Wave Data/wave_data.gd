@@ -11,6 +11,7 @@ class_name WaveData extends Resource
 @export var boss_wave: bool = false
 @export var hard_mode_money: int = 2
 
+
 func calc_total_enemies() -> void:
 	total_enemies = 5 + current_wave
 

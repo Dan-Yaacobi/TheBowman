@@ -1,0 +1,210 @@
+[gd_scene load_steps=27 format=3 uid="uid://c5o8b833xdeaf"]
+
+[ext_resource type="Script" path="res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd" id="1_d3xib"]
+[ext_resource type="Script" path="res://Items/drop_data.gd" id="2_sn45b"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="3_mk6tc"]
+[ext_resource type="Script" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="3_ugdmx"]
+[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="4_ip0xq"]
+[ext_resource type="Texture2D" uid="uid://c4oftynas7wmn" path="res://Objects/FallingObjects/Sprites/TreasureChest.png" id="4_qrrt5"]
+[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="5_40hub"]
+[ext_resource type="AudioStream" uid="uid://bqo76ftmuvx6c" path="res://Objects/FallingObjects/Objects/TreasureChest/TreasureSound.mp3" id="5_e14l5"]
+
+[sub_resource type="Resource" id="Resource_unsoy"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("3_mk6tc")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_34f6k"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("3_mk6tc")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_83x02"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("4_ip0xq")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_ipauh"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("4_ip0xq")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_rr0iv"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("4_ip0xq")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_tjq0x"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("4_ip0xq")
+probability = 100.0
+
+[sub_resource type="Resource" id="Resource_x1iiq"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("5_40hub")
+probability = 10.0
+
+[sub_resource type="Resource" id="Resource_sskci"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("5_40hub")
+probability = 10.0
+
+[sub_resource type="Resource" id="Resource_7nb0p"]
+script = ExtResource("2_sn45b")
+item_data = ExtResource("3_mk6tc")
+probability = 50.0
+
+[sub_resource type="Resource" id="Resource_rr4i1"]
+resource_local_to_scene = true
+script = ExtResource("3_ugdmx")
+drops = Array[ExtResource("2_sn45b")]([SubResource("Resource_unsoy"), SubResource("Resource_34f6k"), SubResource("Resource_83x02"), SubResource("Resource_ipauh"), SubResource("Resource_rr0iv"), SubResource("Resource_tjq0x"), SubResource("Resource_x1iiq"), SubResource("Resource_sskci"), SubResource("Resource_7nb0p")])
+hits_to_destory = 5
+mass = 100.0
+
+[sub_resource type="Animation" id="Animation_h0s70"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4pgoo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gxbjr"]
+resource_name = "Destroyed"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xggia"]
+_data = {
+"Destroyed": SubResource("Animation_gxbjr"),
+"Idle": SubResource("Animation_h0s70"),
+"RESET": SubResource("Animation_4pgoo")
+}
+
+[sub_resource type="Curve" id="Curve_t7gy6"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0yllh"]
+colors = PackedColorArray(1, 0.717647, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hrq1"]
+size = Vector2(15, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmy8c"]
+size = Vector2(15, 14)
+
+[node name="TreasureChest" type="RigidBody2D"]
+z_index = -1
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("1_d3xib")
+data = SubResource("Resource_rr4i1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_qrrt5")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xggia")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -2
+amount = 30
+emission_shape = 1
+emission_sphere_radius = 13.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_t7gy6")
+color = Color(1, 0.8045, 0.31, 1)
+color_ramp = SubResource("Gradient_0yllh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_5hrq1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_cmy8c")
+debug_color = Color(0.979401, 0, 0.388345, 0.42)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_e14l5")
+volume_db = -13.546
+pitch_scale = 0.8

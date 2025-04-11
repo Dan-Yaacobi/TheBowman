@@ -1,5 +1,5 @@
 class_name Game extends Node2D
-
+const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var game_music: AudioStreamPlayer2D = $GameMusic
 @onready var platform_shop: PlatformShop = $PlatformShop
 @onready var abilities_shop: AbilitiesShop = $AbilitiesShop
@@ -9,6 +9,7 @@ class_name Game extends Node2D
 @onready var play_ground: PlayGround = $PlayGround
 @onready var scenes_dic: Dictionary = {"Menu" : main_menu, "PlayGround": play_ground,
 "Shop": shop, "BowsShop": bows_shop, "AbilitiesShop": abilities_shop,"PlatformShop":platform_shop}
+@onready var cloud_timer: Timer = $CloudTimer
 
 @export var music_on: bool = true :
 	set(val):
@@ -21,6 +22,7 @@ var player: Player
 var last_scene: Node
 
 func _ready() -> void:
+	cloud_timer.timeout.connect(summon_cloud)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	player = PLAYER.instantiate()
 	player.died.connect(change_scene)
@@ -37,7 +39,7 @@ func _ready() -> void:
 	main_menu.set_scene(player)
 	last_scene = main_menu
 	main_menu.playground = play_ground
-	
+	cloud_timer.start()
 	for child in get_children():
 		if child != last_scene and child.has_method("exit_scene"):
 			child.call_deferred("exit_scene",player)
@@ -55,6 +57,13 @@ func get_playground() -> PlayGround:
 			return child
 	return
 
+func summon_cloud() -> void:
+	var new_cloud: Cloud = CLOUD.instantiate()
+	new_cloud.global_position = player.global_position + Vector2([1,-1].pick_random() * 500,randf_range(-20,-100))
+	add_child(new_cloud)
+	cloud_timer.wait_time = randf_range(1,5)
+	pass
+	
 func music_on_off() -> void:
 	print("changed")
 	if music_on:

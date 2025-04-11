@@ -3,8 +3,11 @@ extends Node2D
 @onready var player: Player = $Player
 const DEMO_ENEMY_2 = preload("res://Enemies/DemoEnemy/DemoEnemy2.tscn")
 const DEMO_ENEMY_BOSS_2 = preload("res://Enemies/DemoEnemy/Boss2/DemoEnemyBoss2.tscn")
-func _ready() -> void:
+@onready var treasure_chest: TreasureChest = $TreasureChest
 
+func _ready() -> void:
+	treasure_chest.set_player(player)
+	return
 	var enemy: DemoEnemy = DEMO_ENEMY_2.instantiate()
 	enemy.stats.shooter = true
 	enemy.get_player(player)
