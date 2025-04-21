@@ -4,7 +4,7 @@ class_name LevelDifficultyLogic extends Resource
 @export var max_level_birds: int = 28
 @export var max_level_spiders = 30
 @export var spawn_gap: int = 10
-@export var birds_level: int = 7
+@export var birds_level: int = 6
 
 func calculate_logic_targets(x: int, array_size: int) -> Array[int]:
 	if x > max_level:

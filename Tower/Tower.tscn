@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3b0oqm1t2e4u"]
+
+[ext_resource type="Script" path="res://Tower/Scripts/tower.gd" id="1_hlvis"]
+[ext_resource type="Texture2D" uid="uid://dr7jdvqa56tnm" path="res://Tower/Sprites/WoodTower.png" id="1_xeeax"]
+[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="2_ak20b"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_dcpbp"]
+[ext_resource type="Texture2D" uid="uid://bsxu54nt67xg8" path="res://Tower/Sprites/TowerShooter.png" id="5_x2xov"]
+[ext_resource type="Script" path="res://Tower/shooter_hand.gd" id="6_37m8r"]
+[ext_resource type="Texture2D" uid="uid://dxvy1afyixc12" path="res://Player/Hand/Bows2.png" id="7_qocvw"]
+[ext_resource type="Script" path="res://Tower/tower_arrows.gd" id="8_7wolq"]
+
+[sub_resource type="Resource" id="Resource_a33rr"]
+resource_local_to_scene = true
+script = ExtResource("2_ak20b")
+level = 1
+damage = 0
+damage_timer = 1.0
+range = 1.0
+cost_to_upgrade = 0
+position = Vector2(0, 0)
+arrow = ExtResource("2_dcpbp")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l7ilc"]
+radius = 61.131
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t7otc"]
+radius = 13.0
+height = 40.0
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_hlvis")
+data = SubResource("Resource_a33rr")
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_xeeax")
+
+[node name="TowerShooterSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("5_x2xov")
+
+[node name="ShooterHand" type="Node2D" parent="TowerShooterSprite"]
+position = Vector2(0, 2)
+script = ExtResource("6_37m8r")
+
+[node name="ShooterHandSprite" type="Sprite2D" parent="TowerShooterSprite/ShooterHand"]
+position = Vector2(3.8147e-06, 3)
+texture = ExtResource("7_qocvw")
+hframes = 6
+vframes = 2
+
+[node name="ShootRange" type="Area2D" parent="."]
+position = Vector2(0, -13)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootRange"]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_l7ilc")
+
+[node name="BlindSpot" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlindSpot"]
+visible = false
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_t7otc")
+debug_color = Color(0.935289, 1.60757e-05, 0.63702, 0.42)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="SwitchTargetTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="TowerArrows" type="Node2D" parent="."]
+script = ExtResource("8_7wolq")

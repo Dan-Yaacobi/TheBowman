@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=43 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4bii6"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="7_ksgj4"]
+[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="7_mhpv8"]
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
 [ext_resource type="Script" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="13_yhb7f"]
@@ -54,6 +55,7 @@ money = 0
 upgrd_points = 0
 weapon_name = "Basic Bow"
 weapon_scene = ExtResource("7_ksgj4")
+towers = Array[ExtResource("7_mhpv8")]([])
 jump_abilities = Array[ExtResource("2_ohurx")]([])
 shoot_abilities = Array[ExtResource("4_qie87")]([])
 arrow_abilities = Array[ExtResource("2_jhcyx")]([])
@@ -67,7 +69,7 @@ leech_chance = 5
 size = Vector2(18, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
-size = Vector2(10, 15)
+size = Vector2(7, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
 size = Vector2(8, 1.75)
@@ -78,7 +80,7 @@ _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
-size = Vector2(10, 14)
+size = Vector2(7, 14)
 
 [sub_resource type="Curve" id="Curve_wqenp"]
 max_value = 4.0
@@ -151,7 +153,7 @@ script = ExtResource("15_qho0y")
 script = ExtResource("16_lcihm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="."]
@@ -186,6 +188,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]

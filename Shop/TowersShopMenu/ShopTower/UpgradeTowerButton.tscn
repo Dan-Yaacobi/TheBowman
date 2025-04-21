@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://5ja4joi88e24"]
+
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/ShopTower/upgrade_tower_button.gd" id="1_qnfpk"]
+[ext_resource type="Texture2D" uid="uid://datomsdah0edm" path="res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange.png" id="2_p1vti"]
+[ext_resource type="Texture2D" uid="uid://dt4bidyhh6viy" path="res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange2.png" id="3_vl0hl"]
+[ext_resource type="Texture2D" uid="uid://bl37dc7ydtll5" path="res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange3.png" id="4_kminq"]
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/ShopTower/tower_upgrade_button.gd" id="5_wnfox"]
+
+[node name="UpgradeTowerButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qnfpk")
+
+[node name="UpgradeButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 628.0
+offset_bottom = 213.0
+texture_normal = ExtResource("2_p1vti")
+texture_pressed = ExtResource("3_vl0hl")
+texture_hover = ExtResource("4_kminq")
+script = ExtResource("5_wnfox")
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 1055.0
+offset_bottom = 335.0
+scale = Vector2(0.02, 0.02)
+theme_override_colors/font_color = Color(1, 0.866667, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.42, 0.364, 0, 1)
+theme_override_colors/font_outline_color = Color(0.74, 0.641333, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 55
+theme_override_font_sizes/font_size = 250
+text = "cost: 100"

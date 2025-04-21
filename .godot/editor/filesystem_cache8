@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1744378512
-export_presets.cfg::TextFile::-1::1744310430::0::1::::<><>::
+::res://::1745270356
+export_presets.cfg::TextFile::-1::1744389233::0::1::::<><>::
 icon.svg::CompressedTexture2D::4266016548506147734::1734361784::1743168382::1::::<><>::
 README.md::TextFile::-1::1737192917::0::1::::<><>::
 ::res://00 Globals/::1743264854
@@ -18,10 +18,10 @@ fart.mp3::AudioStreamMP3::5182794666029087722::1737810593::1743168381::1::::<><>
 small_thunder_strike.mp3::AudioStreamMP3::3117366548321397240::1738796260::1743168381::1::::<><>::
 thunder_strike.mp3::AudioStreamMP3::3305509423975431790::1737808920::1743168380::1::::<><>::
 wood destruction.mp3::AudioStreamMP3::8856393150164343181::1737811104::1743168380::1::::<><>::
-::res://docs/::1744331630
-index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1744310431::1744331630::1::::<><>::
-index.icon.png::CompressedTexture2D::5242730578329901994::1744310431::1744331630::1::::<><>::
-index.png::CompressedTexture2D::8419645050844991133::1744310431::1744331630::1::::<><>::
+::res://docs/::1744389465
+index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1744389245::1744389465::1::::<><>::
+index.icon.png::CompressedTexture2D::5242730578329901994::1744389245::1744389465::1::::<><>::
+index.png::CompressedTexture2D::8419645050844991133::1744389245::1744389465::1::::<><>::
 ::res://Enemies/::1744273869
 ::res://Enemies/11_HellEnemies/::1742998039
 ::res://Enemies/11_HellEnemies/EvilWizard/::1743086300
@@ -32,13 +32,13 @@ Wizard.png::CompressedTexture2D::8034895382612775874::1743083788::1743168384::1:
 CloudEnemy.tscn::PackedScene::9054782476396986163::1737569729::0::1::::<><>::uid://bp8epu764ng7s::::res://Enemies/Cloud/Sprites/Cloud Enemy.png
 ::res://Enemies/Cloud/Sprites/::1743168384
 Cloud Enemy.png::CompressedTexture2D::3507648560375713794::1737550870::1743168384::1::::<><>::
-::res://Enemies/DemoEnemy/::1744331767
+::res://Enemies/DemoEnemy/::1744713380
 BlueTarget.png::CompressedTexture2D::1303065677632932310::1734823169::1743168384::1::::<><>::
-DemoEnemy2.tscn::PackedScene::5753252635397632731::1744331767::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png<>res://Items/drop_data.gd<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png
+DemoEnemy2.tscn::PackedScene::5753252635397632731::1744713380::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png<>res://Items/drop_data.gd<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png
 DemoEnemy3.tscn::PackedScene::6801534618145329473::1744331767::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>uid://dok5esyet0y5n::::res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Items/drop_data.gd<>uid://bvla6jdht1gip::::res://Enemies/Sprites/Green Apple.png<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png
 DemoEnemy4.tscn::PackedScene::5300579857576458737::1742908764::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://btbqb85nuddao::::res://Enemies/DemoEnemy/purple_target.png<>res://Items/drop_data.gd<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/item_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://d0coedohrill3::::res://Items/RedDiamond.tres
 DemoEnemy5.tscn::PackedScene::8042759197601539084::1739313975::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://x3g6u8kac3xy::::res://Enemies/DemoEnemy/orange_enemy.png<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/item_data.gd<>uid://d0coedohrill3::::res://Items/RedDiamond.tres
-DemoEnemy.tscn::PackedScene::6502343329898642170::1744229020::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>res://Enemies/EnemyData/enemy_ability.gd<>uid://b35crep84od1i::::res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Items/drop_data.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://mppvwjsxg31l::::res://Enemies/Sprites/RedApple.png<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png
+DemoEnemy.tscn::PackedScene::6502343329898642170::1744713380::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>res://Enemies/EnemyData/enemy_ability.gd<>uid://b35crep84od1i::::res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Items/drop_data.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://mppvwjsxg31l::::res://Enemies/Sprites/RedApple.png<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png
 DemoEnemyBoss3.tscn::PackedScene::3080502042049199463::1743086300::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>uid://dok5esyet0y5n::::res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://dytyw504160mf::::res://Enemies/DemoEnemy/green_target.png<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://d0coedohrill3::::res://Items/RedDiamond.tres
 DemoEnemyGold.tscn::PackedScene::3951464815357126983::1740313572::0::1::::<><>::res://Enemies/DemoEnemy/demo_enemy.gd<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://dwuuy2nm7bq0n::::res://Enemies/DemoEnemy/GoldTarget.png<>res://Enemies/EnemyAbilities/Sparkle/sparkle.gd<>res://Items/drop_data.gd<>uid://com6hf5n5kdon::::res://Enemies/EnemyAbilities/Sparkle/Sparkle.tscn<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres
 demo_enemy.gd::GDScript::-1::1744228535::0::1::::DemoEnemy<>Enemy<>::
@@ -53,11 +53,11 @@ boss_setslam_state.gd::GDScript::-1::1744019116::0::1::::BossSetSlamState<>Enemy
 boss_slam_state.gd::GDScript::-1::1744227387::0::1::::BossSlamState<>EnemyState<>::
 DemoEnemyBoss.tscn::PackedScene::6677135391738229500::1744229021::0::1::::<><>::res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd<>res://Enemies/EnemyData/enemy_ability.gd<>uid://b35crep84od1i::::res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://mppvwjsxg31l::::res://Enemies/Sprites/RedApple.png<>res://Items/drop_data.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png<>res://Enemies/Scripts/enemy_state_machine.gd<>res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd<>res://Enemies/DemoEnemy/Boss1/boss_setslam_state.gd<>res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd
 demo_enemy_boss.gd::GDScript::-1::1744227689::0::1::::DemoEnemyBoss<>Enemy<>::
-::res://Enemies/DemoEnemy/Boss2/::1744229021
+::res://Enemies/DemoEnemy/Boss2/::1744732485
 ability_activate_state.gd::GDScript::-1::1743856935::0::1::::Boss2AbilityActivateState<>EnemyState<>::
 boss2_ability.gd::GDScript::-1::1743719578::0::1::::Boss2Ability<>Node2D<>::
 bullet_explosion.gd::GDScript::-1::1743948696::0::1::::BulletExplosion<>Boss2Ability<>::
-DemoEnemyBoss2.tscn::PackedScene::8309336352636933632::1744229021::0::1::::<><>::res://Enemies/DemoEnemy/Boss2/demo_enemy_boss_2.gd<>res://Enemies/Scripts/enemy_state_machine.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>res://Enemies/DemoEnemy/Boss2/roam_state.gd<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/DemoEnemy/Boss2/pre_ability_state.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/DemoEnemy/Boss2/ability_activate_state.gd<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png<>res://Enemies/DemoEnemy/Boss2/rapid_fire.gd<>res://Enemies/DemoEnemy/Boss2/summon.gd<>res://Enemies/DemoEnemy/Boss2/bullet_explosion.gd
+DemoEnemyBoss2.tscn::PackedScene::8309336352636933632::1744732485::0::1::::<><>::res://Enemies/DemoEnemy/Boss2/demo_enemy_boss_2.gd<>res://Enemies/Scripts/enemy_state_machine.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>res://Enemies/DemoEnemy/Boss2/roam_state.gd<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/DemoEnemy/Boss2/pre_ability_state.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/DemoEnemy/Boss2/ability_activate_state.gd<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png<>uid://0b800144sjhx::::res://Enemies/Sprites/AppleWings.png<>res://Enemies/DemoEnemy/Boss2/rapid_fire.gd<>res://Enemies/DemoEnemy/Boss2/summon.gd<>res://Enemies/DemoEnemy/Boss2/bullet_explosion.gd
 demo_enemy_boss_2.gd::GDScript::-1::1744227689::0::1::::DemoEnemyBoss2<>Enemy<>::
 pre_ability_state.gd::GDScript::-1::1743859123::0::1::::Boss2PreAbility<>EnemyState<>::
 rapid_fire.gd::GDScript::-1::1743863730::0::1::::RapidFire<>Boss2Ability<>::
@@ -86,7 +86,10 @@ enemy_ability.gd::GDScript::-1::1735216580::0::1::::EnemyAbility<>Resource<>::
 enemy_data.gd::GDScript::-1::1742910422::0::1::::EnemyData<>Resource<>::
 enemy_effect.gd::GDScript::-1::1735994108::0::1::::EnemyEffect<>Resource<>::
 enemy_spawn_data.gd::GDScript::-1::1734881170::0::1::::EnemySpawnData<>Resource<>::
-::res://Enemies/EnemyEffects/::1737570720
+::res://Enemies/EnemyEffects/::1745013873
+::res://Enemies/EnemyEffects/Burned/::1745243032
+BurnedEffect.tscn::PackedScene::7173517322541345198::1745243032::0::1::::<><>::uid://cqvpi1p6st1pm::::res://Enemies/EnemyEffects/Burned/flame.png
+flame.png::CompressedTexture2D::5940141229885211210::1745013856::1745013920::1::::<><>::
 ::res://Enemies/EnemyEffects/EnemyHit/::1737664253
 HitParticles.tscn::PackedScene::6056398899873147722::1737664253::0::1::::<><>::
 ::res://Enemies/EnemyEffects/Poisoned/::1737152262
@@ -97,14 +100,15 @@ poisoned_timer.tscn::PackedScene::2830820276121906725::1736011074::0::1::::<><>:
 stunned.gd::GDScript::-1::1742915726::0::1::::Stunned<>EnemyEffect<>::
 stunned_effect.tscn::PackedScene::409126875638157316::1736033933::0::1::::<><>::
 stunned_timer.tscn::PackedScene::1085292701386944091::1736011074::0::1::::<><>::
-::res://Enemies/EvilBird/::1744331767
-BlueBird.tscn::PackedScene::2586542104846746733::1739311254::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://77jle6pbhxk4::::res://Enemies/EvilBird/Sprites/Blue Bird.png<>uid://kuudngn3o5bo::::res://Enemies/EvilBird/Sprites/Evil Bird Red.png<>res://Items/drop_data.gd<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/item_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres
-EvilBird.tscn::PackedScene::5023141608603299530::1744331767::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>res://Enemies/EnemyData/enemy_ability.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Items/drop_data.gd<>res://Items/ItemEffects/item_effect.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/sparkle.gd<>res://Items/item_data.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>uid://ckbu41ee0pbv7::::res://Enemies/EvilBird/Sprites/EvilRedBird.png
+::res://Enemies/EvilBird/::1744731639
+BlueBird.tscn::PackedScene::2586542104846746733::1744731639::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Items/drop_data.gd<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/item_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://cl46kareymfb2::::res://Enemies/EvilBird/Sprites/BlueEvilBird.png
+EvilBird.tscn::PackedScene::5023141608603299530::1744731575::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>res://Enemies/EnemyData/enemy_ability.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Items/drop_data.gd<>res://Items/ItemEffects/item_effect.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/sparkle.gd<>res://Items/item_data.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>uid://ckbu41ee0pbv7::::res://Enemies/EvilBird/Sprites/EvilRedBird.png
 evil_bird.gd::GDScript::-1::1739315111::0::1::::EvilBird<>Enemy<>::
 GreenBird.tscn::PackedScene::7155819094412359529::1739313836::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://iwpmijl2w7hi::::res://Enemies/EvilBird/Sprites/Green Bird.png<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://d0coedohrill3::::res://Items/RedDiamond.tres<>uid://kuudngn3o5bo::::res://Enemies/EvilBird/Sprites/Evil Bird Red.png
 PurpleBird.tscn::PackedScene::47077420958242666::1739313977::0::1::::<><>::res://Enemies/EvilBird/evil_bird.gd<>uid://dq8jw2t0m3aks::::res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn<>res://Enemies/EnemyData/enemy_ability.gd<>res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>res://Enemies/EnemyData/enemy_effect.gd<>res://Enemies/EnemyData/enemy_data.gd<>uid://63q6nq8rfm04::::res://Enemies/EvilBird/Sprites/Purple bird.png<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>uid://d0coedohrill3::::res://Items/RedDiamond.tres<>uid://kuudngn3o5bo::::res://Enemies/EvilBird/Sprites/Evil Bird Red.png
-::res://Enemies/EvilBird/Sprites/::1744275174
+::res://Enemies/EvilBird/Sprites/::1744731327
 Blue Bird.png::CompressedTexture2D::2312669439880308405::1737490858::1743168384::1::::<><>::
+BlueEvilBird.png::CompressedTexture2D::5606685713463067505::1744731302::1744731327::1::::<><>::
 Bomb Egg.png::CompressedTexture2D::3413710398633492918::1737466914::1743168383::1::::<><>::
 Egg.png::CompressedTexture2D::5178944631313268221::1744223273::1744223291::1::::<><>::
 Evil Bird Red.png::CompressedTexture2D::744396381399604600::1737463130::1743168383::1::::<><>::
@@ -165,14 +169,14 @@ TestEnemy.tscn::PackedScene::7563339166265074896::1744331767::0::1::::<><>::uid:
 ::res://HealthBar/::1739309390
 HealthBar.tscn::PackedScene::6672822174743893204::1739309390::0::1::::<><>::res://HealthBar/health_bar.gd<>uid://b4myl3t06uac5::::res://Player/HealthBar/HealthBar Under.png<>uid://bxubmxoxqclqy::::res://Player/HealthBar/Healthbar.png<>uid://x12v3yoxmaxf::::res://Player/HealthBar/Heart.png
 health_bar.gd::GDScript::-1::1737638910::0::1::::HealthBar<>TextureProgressBar<>::
-::res://Items/::1744373037
-Coin.tres::Resource/ItemData::4212774887361665007::1744373037::0::1::::<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/item_data.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
-Diamond.tres::Resource/ItemData::9105851650331176066::1744373037::0::1::::<><>::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+::res://Items/::1745269461
+Coin.tres::Resource/ItemData::4212774887361665007::1745269461::0::1::::<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/item_data.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+Diamond.tres::Resource/ItemData::9105851650331176066::1745269460::0::1::::<><>::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
 drop_data.gd::GDScript::-1::1739218339::0::1::::DropData<>Resource<>::
 ItemPickUp.tscn::PackedScene::5228580237706944200::1744224549::0::1::::<><>::res://Items/item_pick_up.gd
 item_data.gd::GDScript::-1::1742908876::0::1::::ItemData<>Resource<>::
 item_pick_up.gd::GDScript::-1::1742909268::0::1::::ItemPickUp<>Node2D<>::
-RedDiamond.tres::Resource/ItemData::8918969258150987886::1744373037::0::1::::<><>::res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>res://Items/item_data.gd
+RedDiamond.tres::Resource/ItemData::8918969258150987886::1745269461::0::1::::<><>::res://Items/ItemEffects/item_effect.gd<>res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>res://Items/item_data.gd
 ::res://Items/ItemEffects/::1735216752
 item_effect.gd::GDScript::-1::1734865504::0::1::::ItemEffect<>Resource<>::
 sparkle.gd::GDScript::-1::1735216750::0::1::::Sparkle<>ItemEffect<>::
@@ -182,17 +186,17 @@ Sparkle.tscn::PackedScene::2907060250831077989::1735216752::0::1::::<><>::
 Coin.png::CompressedTexture2D::4717150137500257309::1734858950::1743168383::1::::<><>::
 Daimond.png::CompressedTexture2D::5488096112878026914::1734858972::1743168385::1::::<><>::
 RedDiamond.png::CompressedTexture2D::4826724222670665402::1739310614::1743168385::1::::<><>::
-::res://Level/::1744383059
-playground.gd::GDScript::-1::1744383059::0::1::::PlayGround<>Node2D<>::
+::res://Level/::1744706844
+playground.gd::GDScript::-1::1744706844::0::1::::PlayGround<>Node2D<>::
 Tiles.tscn::PackedScene::8915116280002140020::1737664252::0::1::::<><>::uid://clbn7aipnnhq8::::res://Level/Tiles/Gold Wood Square.png<>uid://q1gds10qi7jt::::res://Level/Tiles/square3.png<>uid://nu0yse0m3b1b::::res://Level/Tiles/Wood Square.png<>uid://5asfwp6u80lb::::res://Level/Tiles/lightblueBlock.png<>res://Level/tiles_control.gd
-tiles_control.gd::GDScript::-1::1738597128::0::1::::TilesControl<>TileMapLayer<>::
+tiles_control.gd::GDScript::-1::1744621407::0::1::::TilesControl<>TileMapLayer<>::
 ::res://Level/Animations/::1737464616
 TransitionAnimation.tscn::PackedScene::8400604925934212028::1737464616::0::1::::<><>::
 ::res://Level/ChangeScene/::1735652822
 ChangeScene.tscn::PackedScene::7537624417047989746::1735652822::0::1::::<><>::res://Level/ChangeScene/change_scene.gd
 change_scene.gd::GDScript::-1::1735636066::0::1::::ChangeScene<>Area2D<>::
-::res://Level/PlayGround/::1744383845
-PlayGround.tscn::PackedScene::5026590676057090144::1744383845::0::1::::<><>::res://Level/playground.gd<>uid://cyv1v6g5srjk1::::res://Enemies/DemoEnemy/DemoEnemy.tscn<>res://00 Globals/enemies.gd<>res://Enemies/EnemyData/enemy_spawn_data.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://c2eppdxet4q8c::::res://Enemies/DemoEnemy/Boss1/DemoEnemyBoss.tscn<>uid://cdtin5d5lhmfi::::res://Enemies/EvilBird/EvilBird.tscn<>uid://cn76h3jplsrfn::::res://Enemies/DemoEnemy/DemoEnemy2.tscn<>uid://bc36788hmae5b::::res://Enemies/EvilBird/BlueBird.tscn<>uid://bwkebvyfvvrv8::::res://Enemies/DemoEnemy/DemoEnemyGold.tscn<>uid://dqnds5n75tnpw::::res://Enemies/DemoEnemy/Boss2/DemoEnemyBoss2.tscn<>uid://c87lkba7dkiy0::::res://Enemies/EvilBird/GreenBird.tscn<>uid://c35yjtl5a8xob::::res://Enemies/DemoEnemy/DemoEnemy3.tscn<>uid://w2mgep2ljr3::::res://Enemies/EvilBird/PurpleBird.tscn<>res://Level/Wave Data/wave_data.gd<>uid://bj5hoh4kid73x::::res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn<>uid://d1p3p0fkf2rwl::::res://Enemies/Spider/Spider.tscn<>uid://kn3ngqcl2eex::::res://Enemies/Spider/PoisonSpider.tscn<>res://MainGame/current_money.gd<>uid://chrv1m4hnlhef::::res://Enemies/DemoEnemy/DemoEnemy4.tscn<>res://Level/PlayGround/wave_sign.gd<>uid://crjern11csy0x::::res://Level/Sprites/Wave Background.png<>uid://bd2ay8wp2mqjm::::res://Level/Sprites/Mountain Background_1.jpeg<>uid://dmt8clw634d1e::::res://Enemies/DemoEnemy/DemoEnemy5.tscn<>res://Level/PlayGround/upgrade_buttons.gd<>uid://dolo7tiosewrq::::res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn<>res://Level/PlayGround/upgrades.gd<>res://Objects/FallingObjects/Scripts/summon_objects.gd<>uid://dl6d04pvp0ux::::res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn<>uid://dcckxg4f2bjrf::::res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn<>uid://cyahpo86ugywm::::res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn<>uid://bstmllbqxch1v::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn<>uid://bwdbudjf3cqo3::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade1.png<>uid://b3ut6ryyuxs1k::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUPgrade2.png<>uid://c51w7jyujbqty::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png<>uid://bfn30j741tfxs::::res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn<>uid://1p55dgoihewu::::res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn<>uid://bsy8tg0ac6f0n::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn<>uid://c86vyty6mwq30::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png<>uid://baxits5aihfo2::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade2.png<>uid://1ngc042hp5jv::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade3.png<>uid://cumh3li424lli::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn<>uid://d36766n7g2188::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png<>uid://311160wwg7qn::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade2.png<>uid://dm15coovb1qa6::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade3.png<>uid://7e7tcn7orna5::::res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn<>uid://casb2wdmiukgh::::res://Player/Upgrades/Abilities/Crit/CritUpgrade1.png<>uid://dlhy1roops8t1::::res://Player/Upgrades/Abilities/Crit/CritUpgrade2.png<>uid://4d8srn1jmgrv::::res://Player/Upgrades/Abilities/Crit/CritUpgrade3.png<>uid://cx83vnegoifdc::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade.tscn<>uid://dl1x6pllgiuh::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade1.png<>uid://w30o53qdvwap::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade2.png<>uid://dt260q61a543b::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade3.png<>uid://dq7w8miom00o8::::res://MainGame/background.png<>uid://bwc1wj320gh8j::::res://MainGame/ground.png
+::res://Level/PlayGround/::1745270305
+PlayGround.tscn::PackedScene::5026590676057090144::1745270305::0::1::::<><>::res://Level/playground.gd<>uid://cyv1v6g5srjk1::::res://Enemies/DemoEnemy/DemoEnemy.tscn<>res://00 Globals/enemies.gd<>res://Enemies/EnemyData/enemy_spawn_data.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://c2eppdxet4q8c::::res://Enemies/DemoEnemy/Boss1/DemoEnemyBoss.tscn<>uid://cdtin5d5lhmfi::::res://Enemies/EvilBird/EvilBird.tscn<>uid://cn76h3jplsrfn::::res://Enemies/DemoEnemy/DemoEnemy2.tscn<>uid://bc36788hmae5b::::res://Enemies/EvilBird/BlueBird.tscn<>uid://bwkebvyfvvrv8::::res://Enemies/DemoEnemy/DemoEnemyGold.tscn<>uid://dqnds5n75tnpw::::res://Enemies/DemoEnemy/Boss2/DemoEnemyBoss2.tscn<>uid://c87lkba7dkiy0::::res://Enemies/EvilBird/GreenBird.tscn<>uid://c35yjtl5a8xob::::res://Enemies/DemoEnemy/DemoEnemy3.tscn<>uid://w2mgep2ljr3::::res://Enemies/EvilBird/PurpleBird.tscn<>res://Level/Wave Data/wave_data.gd<>uid://bj5hoh4kid73x::::res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn<>uid://d1p3p0fkf2rwl::::res://Enemies/Spider/Spider.tscn<>uid://kn3ngqcl2eex::::res://Enemies/Spider/PoisonSpider.tscn<>res://MainGame/current_money.gd<>uid://chrv1m4hnlhef::::res://Enemies/DemoEnemy/DemoEnemy4.tscn<>res://Level/PlayGround/wave_sign.gd<>uid://crjern11csy0x::::res://Level/Sprites/Wave Background.png<>uid://dmt8clw634d1e::::res://Enemies/DemoEnemy/DemoEnemy5.tscn<>res://Level/PlayGround/upgrade_buttons.gd<>uid://dolo7tiosewrq::::res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn<>res://Level/PlayGround/upgrades.gd<>res://Objects/FallingObjects/Scripts/summon_objects.gd<>uid://dl6d04pvp0ux::::res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn<>uid://dcckxg4f2bjrf::::res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn<>uid://cyahpo86ugywm::::res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn<>uid://bstmllbqxch1v::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn<>uid://bwdbudjf3cqo3::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade1.png<>uid://b3ut6ryyuxs1k::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUPgrade2.png<>uid://c51w7jyujbqty::::res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png<>uid://bfn30j741tfxs::::res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn<>uid://1p55dgoihewu::::res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn<>uid://bsy8tg0ac6f0n::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn<>uid://c86vyty6mwq30::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png<>uid://baxits5aihfo2::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade2.png<>uid://1ngc042hp5jv::::res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade3.png<>uid://cumh3li424lli::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn<>uid://d36766n7g2188::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png<>uid://311160wwg7qn::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade2.png<>uid://dm15coovb1qa6::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade3.png<>uid://7e7tcn7orna5::::res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn<>uid://casb2wdmiukgh::::res://Player/Upgrades/Abilities/Crit/CritUpgrade1.png<>uid://dlhy1roops8t1::::res://Player/Upgrades/Abilities/Crit/CritUpgrade2.png<>uid://4d8srn1jmgrv::::res://Player/Upgrades/Abilities/Crit/CritUpgrade3.png<>uid://cx83vnegoifdc::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade.tscn<>uid://dl1x6pllgiuh::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade1.png<>uid://w30o53qdvwap::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade2.png<>uid://dt260q61a543b::::res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade3.png<>uid://dq7w8miom00o8::::res://MainGame/background.png<>uid://bwc1wj320gh8j::::res://MainGame/ground.png
 upgrades.gd::GDScript::-1::1738354696::0::1::::UpgradeBuckets<>Node2D<>::
 upgrade_buttons.gd::GDScript::-1::1743086393::0::1::::<>Node2D<>::
 wave_sign.gd::GDScript::-1::1737812382::0::1::::WaveSign<>RigidBody2D<>::
@@ -210,9 +214,9 @@ upgrade_action.gd::GDScript::-1::1737815544::0::1::::UpgradeAction<>Resource<>::
 Mountain Background_1.jpeg::CompressedTexture2D::2652770040994884462::1737143291::1743168386::1::::<><>::
 torrent.png::CompressedTexture2D::7319178323461287025::1734526289::1743168385::1::::<><>::
 Wave Background.png::CompressedTexture2D::5984905059639936185::1737643363::1743168385::1::::<><>::
-::res://Level/Testing/::1744383846
-TestingArea.tscn::PackedScene::351216966456808494::1744383846::0::1::::<><>::res://Level/Testing/testing_area.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://cesvb1a1eu8yq::::res://Player/Player.tscn<>uid://clbn7aipnnhq8::::res://Level/Tiles/Gold Wood Square.png<>uid://c5o8b833xdeaf::::res://Objects/FallingObjects/Objects/TreasureChest/TreasureChest.tscn
-testing_area.gd::GDScript::-1::1744379831::0::1::::<>Node2D<>::
+::res://Level/Testing/::1745270305
+TestingArea.tscn::PackedScene::351216966456808494::1745270305::0::1::::<><>::res://Level/Testing/testing_area.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://cesvb1a1eu8yq::::res://Player/Player.tscn<>uid://clbn7aipnnhq8::::res://Level/Tiles/Gold Wood Square.png<>uid://b3b0oqm1t2e4u::::res://Tower/Tower.tscn<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>res://Tower/Scripts/tower_data.gd
+testing_area.gd::GDScript::-1::1744633700::0::1::::<>Node2D<>::
 ::res://Level/Tiles/::1743168385
 Gold Wood Square.png::CompressedTexture2D::5547829504527397493::1737661342::1743168385::1::::<><>::
 lightblueBlock.png::CompressedTexture2D::2106768324102612931::1734529400::1743168385::1::::<><>::
@@ -220,27 +224,18 @@ square3.png::CompressedTexture2D::1177065965895221925::1732697515::1743168385::1
 square3_opaque.png::CompressedTexture2D::1054101302844022392::1737370247::1743168385::1::::<><>::
 Wood Square Opaque.png::CompressedTexture2D::3625020633921910798::1737666667::1743168385::1::::<><>::
 Wood Square.png::CompressedTexture2D::955304259001040057::1737663230::1743168385::1::::<><>::
-::res://Level/Torrents/::1738596946
-mini_me.gd::GDScript::-1::1738596946::0::1::::<>Sprite2D<>::
-torrent.gd::GDScript::-1::1734526446::0::1::::Torrent<>Node2D<>::
-torrent.tscn::PackedScene::1836005949157295593::1738596946::0::1::::<><>::res://Level/Torrents/torrent.gd<>uid://dm4qh0feeaauc::::res://Level/Torrents/Sprites/Tower.png<>uid://buatmq0bqb47n::::res://Level/Torrents/Sprites/Tower Archer.png<>res://Level/Torrents/mini_me.gd
-::res://Level/Torrents/Sprites/::1743168385
-Tower Archer.png::CompressedTexture2D::3791373487903773737::1738595683::1743168385::1::::<><>::
-Tower.png::CompressedTexture2D::8062380423039886378::1738596343::1743168385::1::::<><>::
-::res://Level/Torrents/TorrentBow/::1738795079
-TorrentBow.tscn::PackedScene::3062214253507571055::1738795079::0::1::::<><>::res://Level/Torrents/TorrentBow/torrent_bow.gd
-torrent_bow.gd::GDScript::-1::1738597162::0::1::::TorrentBow<>Node2D<>::
-torrent_bow_data.gd::GDScript::-1::1738597655::0::1::::TorrentBowData<>Resource<>::
-::res://Level/Wave Data/::1744380455
-level_difficulty_logic.gd::GDScript::-1::1742915155::0::1::::LevelDifficultyLogic<>Resource<>::
+::res://Level/Wave Data/::1744640746
+level_difficulty_logic.gd::GDScript::-1::1744640746::0::1::::LevelDifficultyLogic<>Resource<>::
 wave_data.gd::GDScript::-1::1744380455::0::1::::WaveData<>Resource<>::
-::res://MainGame/::1744385109
+::res://MainGame/::1745270305
 background.png::CompressedTexture2D::8349738985749238953::1742989853::1743168385::1::::<><>::
 current_money.gd::GDScript::-1::1735853850::0::1::::CurrentMoney<>Label<>::
-game.gd::GDScript::-1::1743872403::0::1::::Game<>Node2D<>::
-Game.tscn::PackedScene::6264226031946492471::1744383845::0::1::::<><>::res://MainGame/game.gd<>uid://cdu6hjoweee6s::::res://Level/PlayGround/PlayGround.tscn<>uid://cnhbrpo4htp2y::::res://MainMenu/MainMenu.tscn<>uid://kqtm00s5xgeb::::res://Shop/Shop.tscn<>uid://cmdeim0mrcv32::::res://Shop/BowsShop/BowsShop.tscn<>uid://boqh5qxj8h80x::::res://Shop/AbilitiesShop/AbilitiesShop.tscn<>uid://clubhhuu1gip3::::res://Shop/PlatformShop/PlatformShop.tscn
+game.gd::GDScript::-1::1744389219::0::1::::Game<>Node2D<>::
+Game.tscn::PackedScene::6264226031946492471::1745270305::0::1::::<><>::res://MainGame/game.gd<>uid://cdu6hjoweee6s::::res://Level/PlayGround/PlayGround.tscn<>uid://cnhbrpo4htp2y::::res://MainMenu/MainMenu.tscn<>uid://kqtm00s5xgeb::::res://Shop/Shop.tscn<>uid://cmdeim0mrcv32::::res://Shop/BowsShop/BowsShop.tscn<>uid://boqh5qxj8h80x::::res://Shop/AbilitiesShop/AbilitiesShop.tscn<>uid://clubhhuu1gip3::::res://Shop/PlatformShop/PlatformShop.tscn
 ground.png::CompressedTexture2D::3936322445740853671::1742990523::1743168385::1::::<><>::
-::res://MainGame/Clouds/::1744385129
+::res://MainGame/Clouds/::1744389219
+cloud.gd::GDScript::-1::1744386168::0::1::::Cloud<>CharacterBody2D<>::
+Cloud.tscn::PackedScene::8422651773602008189::1744389219::0::1::::<><>::res://MainGame/Clouds/cloud.gd<>uid://upqfr2pidroy::::res://MainGame/Clouds/Clouds.png
 Clouds.png::CompressedTexture2D::1435723875224364016::1744385059::1744385132::1::::<><>::
 ::res://MainGame/Music/::1743168380
 MainMenuMusic.mp3::AudioStreamMP3::5051025059519164457::1737495412::1743168380::1::::<><>::
@@ -275,8 +270,8 @@ Door.png::CompressedTexture2D::3567221850596995906::1734632734::1743168384::1:::
 ::res://Objects/::1744373001
 ::res://Objects/FallingObjects/::1744374209
 ::res://Objects/FallingObjects/Objects/::1744374071
-::res://Objects/FallingObjects/Objects/TreasureChest/::1744385110
-TreasureChest.tscn::PackedScene::6909415189467337245::1744383198::0::1::::<><>::res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>res://Objects/FallingObjects/Scripts/falling_objcets_data.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://c4oftynas7wmn::::res://Objects/FallingObjects/Sprites/TreasureChest.png<>uid://d0coedohrill3::::res://Items/RedDiamond.tres<>uid://bqo76ftmuvx6c::::res://Objects/FallingObjects/Objects/TreasureChest/TreasureSound.mp3
+::res://Objects/FallingObjects/Objects/TreasureChest/::1744642622
+TreasureChest.tscn::PackedScene::6909415189467337245::1744642622::0::1::::<><>::res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd<>res://Items/drop_data.gd<>uid://d2y7btr0r5s71::::res://Items/Diamond.tres<>res://Objects/FallingObjects/Scripts/falling_objcets_data.gd<>uid://b1ax10wl1o1p0::::res://Items/Coin.tres<>uid://c4oftynas7wmn::::res://Objects/FallingObjects/Sprites/TreasureChest.png<>uid://d0coedohrill3::::res://Items/RedDiamond.tres<>uid://bqo76ftmuvx6c::::res://Objects/FallingObjects/Objects/TreasureChest/TreasureSound.mp3
 TreasureSound.mp3::AudioStreamMP3::3540342066378874148::1744379407::1744385110::1::::<><>::
 treasure_chest.gd::GDScript::-1::1744382035::0::1::::TreasureChest<>FallingObject<>::
 ::res://Objects/FallingObjects/Scripts/::1744382160
@@ -286,7 +281,7 @@ summon_objects.gd::GDScript::-1::1744382160::0::1::::SummonObjects<>Resource<>::
 ::res://Objects/FallingObjects/Sprites/::1744374226
 MedicalKit.png::CompressedTexture2D::5954704650731718533::1744298464::1744374226::1::::<><>::
 TreasureChest.png::CompressedTexture2D::6837557917162201949::1744310298::1744374226::1::::<><>::
-::res://Player/::1744383846
+::res://Player/::1745270306
 buff_tooltip_control.gd::GDScript::-1::1739306444::0::1::::BuffTooltipControl<>Node2D<>::
 camera_2d.gd::GDScript::-1::1738775363::0::1::::<>Camera2D<>::
 combo_activated.gd::GDScript::-1::1737503302::0::1::::ComboActivated<>Node2D<>::
@@ -294,7 +289,7 @@ combo_activated_effect.gd::GDScript::-1::1744197060::0::1::::ComboActivatedEffec
 dash_state.gd::GDScript::-1::1743864563::0::1::::PlayerDashState<>State<>::
 flow_container.gd::GDScript::-1::1739307140::0::1::::<>FlowContainer<>::
 player.gd::GDScript::-1::1744204299::0::1::::Player<>CharacterBody2D<>::
-Player.tscn::PackedScene::5092033750948003428::1744383846::0::1::::<><>::uid://b7mbeynvkpc26::::res://Player/Body/Body.tscn<>res://Player/player.gd<>res://PlayerData/player_stats.gd<>uid://bug4e8v5lnb0m::::res://Player/Hand/Hand.tscn<>res://Player/Abilities/ArrowAbilities/arrow_ability.gd<>res://Player/Abilities/JumpAbilities/jump_ability.gd<>res://Player/Abilities/ShootAbilities/shoot_ability.gd<>uid://b42wwmoixjwrj::::res://Player/States/PlayerStateMachine.tscn<>res://Player/States/player_idle_state.gd<>res://Player/Abilities/SlamAbilities/slam_ability.gd<>res://Player/States/player_walking_state.gd<>uid://cd1qmsp2wywey::::res://Player/Player Actions/Jump/Jump.tscn<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn<>uid://bebh86kswi26y::::res://Player/Player Actions/Shoot/Shoot.tscn<>res://Player/camera_2d.gd<>uid://caekf50aq824k::::res://Player/Mana/ManaBar.tscn<>uid://dp4648msdak81::::res://Player/Abilities/SpecialAbilities/SpecialAbility.png<>res://Player/States/player_slam_state.gd<>res://Player/States/player_dead_state.gd<>uid://c2cmn2xqaux53::::res://HealthBar/HealthBar.tscn<>res://Player/combo_activated.gd<>res://Player/dash_state.gd<>res://Player/combo_activated_effect.gd<>res://Player/upgrades.gd<>uid://c2sbisfgqj8am::::res://Player/Abilities/MegaShot/particles.tscn<>res://Player/BuffDisplay/buff_display_control.gd<>res://Player/buff_tooltip_control.gd<>res://Player/flow_container.gd<>uid://duv405amm7ir::::res://Player/BuffDisplay/Buff.tscn<>res://Player/slow.gd
+Player.tscn::PackedScene::5092033750948003428::1745270306::0::1::::<><>::uid://b7mbeynvkpc26::::res://Player/Body/Body.tscn<>res://Player/player.gd<>res://PlayerData/player_stats.gd<>uid://bug4e8v5lnb0m::::res://Player/Hand/Hand.tscn<>res://Player/Abilities/ArrowAbilities/arrow_ability.gd<>res://Player/Abilities/JumpAbilities/jump_ability.gd<>res://Player/Abilities/ShootAbilities/shoot_ability.gd<>uid://b42wwmoixjwrj::::res://Player/States/PlayerStateMachine.tscn<>res://Player/States/player_idle_state.gd<>res://Player/Abilities/SlamAbilities/slam_ability.gd<>res://Player/States/player_walking_state.gd<>uid://cd1qmsp2wywey::::res://Player/Player Actions/Jump/Jump.tscn<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn<>res://Tower/Scripts/tower_data.gd<>uid://bebh86kswi26y::::res://Player/Player Actions/Shoot/Shoot.tscn<>res://Player/camera_2d.gd<>uid://caekf50aq824k::::res://Player/Mana/ManaBar.tscn<>uid://dp4648msdak81::::res://Player/Abilities/SpecialAbilities/SpecialAbility.png<>res://Player/States/player_slam_state.gd<>res://Player/States/player_dead_state.gd<>uid://c2cmn2xqaux53::::res://HealthBar/HealthBar.tscn<>res://Player/combo_activated.gd<>res://Player/dash_state.gd<>res://Player/combo_activated_effect.gd<>res://Player/upgrades.gd<>uid://c2sbisfgqj8am::::res://Player/Abilities/MegaShot/particles.tscn<>res://Player/BuffDisplay/buff_display_control.gd<>res://Player/buff_tooltip_control.gd<>res://Player/flow_container.gd<>uid://duv405amm7ir::::res://Player/BuffDisplay/Buff.tscn<>res://Player/slow.gd
 slow.gd::GDScript::-1::1743170631::0::1::::Slow<>Node2D<>::
 total_buffs.gd::GDScript::-1::1739203725::0::1::::<>Control<>::
 upgrades.gd::GDScript::-1::1738355519::0::1::::Upgrades<>Node2D<>::
@@ -332,7 +327,7 @@ blue_bow_ability.gd::GDScript::-1::1738888659::0::1::::BlueBowAbility<>SpecialAb
 JumpEffect.tscn::PackedScene::9164681561222480243::1735940218::0::1::::<><>::
 ::res://Player/Abilities/SpecialAbilities/BoneBowAbility/::1738886085
 bone_bow_ability.gd::GDScript::-1::1738886085::0::1::::BoneBowAbility<>SpecialAbility<>::
-::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/::1744331767
+::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/::1744713380
 ArmProjectile.tscn::PackedScene::8441186370076113410::1739201945::0::1::::<><>::uid://dsxypwiqr5ih::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/SkeletonArm.png<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/arm_projectile.gd
 arm_projectile.gd::GDScript::-1::1738531895::0::1::::SkeletonArm<>Area2D<>::
 companion_attack_state.gd::GDScript::-1::1739201291::0::1::::CompanionAttackingState<>CompanionState<>::
@@ -340,7 +335,7 @@ companion_moving_state.gd::GDScript::-1::1744229368::0::1::::CompanionMovingStat
 companion_summoned_state.gd::GDScript::-1::1738529437::0::1::::CompanionSummonedState<>CompanionState<>::
 skeleton.gd::GDScript::-1::1744229499::0::1::::Skeleton<>Companion<>::
 Skeleton.png::CompressedTexture2D::5781172675711583611::1738528404::1743168384::1::::<><>::
-Skeleton.tscn::PackedScene::6609320064206217711::1744331767::0::1::::<><>::uid://compcme560lgl::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.png<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd<>uid://dsi8du20scawg::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/ArmProjectile.tscn<>res://Player/Abilities/SpecialAbilities/Companions/companion_data.gd<>res://Player/Abilities/SpecialAbilities/Companions/companion_state_machine.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_moving_state.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_summoned_state.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_attack_state.gd<>uid://g8g8amkgna1r::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Soundeffects/bone_break.mp3
+Skeleton.tscn::PackedScene::6609320064206217711::1744713380::0::1::::<><>::uid://compcme560lgl::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.png<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/skeleton.gd<>uid://dsi8du20scawg::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/ArmProjectile.tscn<>res://Player/Abilities/SpecialAbilities/Companions/companion_data.gd<>res://Player/Abilities/SpecialAbilities/Companions/companion_state_machine.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_moving_state.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_summoned_state.gd<>res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/companion_attack_state.gd<>uid://g8g8amkgna1r::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Soundeffects/bone_break.mp3
 SkeletonArm.png::CompressedTexture2D::249165502596036503::1738510669::1743168384::1::::<><>::
 ::res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Soundeffects/::1743168380
 bone_break.mp3::AudioStreamMP3::489680779868164365::1738535171::1743168380::1::::<><>::
@@ -362,24 +357,24 @@ UnlimitedManaTimer.tscn::PackedScene::8268819076045974318::1736104767::0::1::::<
 ThunderStrike.tscn::PackedScene::1951692228990761126::1738795079::0::1::::<><>::res://Player/Abilities/SpecialAbilities/ThunderBowAbility/thunder_strike.gd<>uid://bndhi0n2ycg2q::::res://Audio/Player/thunder_strike.mp3
 thunder_bow_ability.gd::GDScript::-1::1736010986::0::1::::ThunderBowAbility<>SpecialAbility<>::
 thunder_strike.gd::GDScript::-1::1738776959::0::1::::ThunderStrike<>CPUParticles2D<>::
-::res://Player/Body/::1744331767
+::res://Player/Body/::1744731574
 Archer.png::CompressedTexture2D::2461281040422464626::1744291382::1744291397::1::::<><>::
 beaver body.png::CompressedTexture2D::2770829818299707712::1740661285::1743168384::1::::<><>::
 body.gd::GDScript::-1::1741189261::0::1::::Body<>CharacterBody2D<>::
 Body.png::CompressedTexture2D::6116141844538137054::1737642182::1743168384::1::::<><>::
-Body.tscn::PackedScene::4657305354938201653::1744331767::0::1::::<><>::res://Player/Body/body.gd<>uid://bbci66v5bwo47::::res://Player/Body/Archer.png
+Body.tscn::PackedScene::4657305354938201653::1744731574::0::1::::<><>::res://Player/Body/body.gd<>uid://bbci66v5bwo47::::res://Player/Body/Archer.png
 ::res://Player/BuffDisplay/::1742996484
 buff.gd::GDScript::-1::1742996484::0::1::::Buff<>TextureRect<>::
 Buff.tscn::PackedScene::253182290311061441::1739309390::0::1::::<><>::res://Player/BuffDisplay/buff.gd<>uid://d36766n7g2188::::res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png
 buff_display_control.gd::GDScript::-1::1742996351::0::1::::TotalBuffs<>Control<>::
-::res://Player/Hand/::1744331767
+::res://Player/Hand/::1744731574
 beaver hand.png::CompressedTexture2D::815603372557423706::1740660854::1743168384::1::::<><>::
 Bow - Beaver.png::CompressedTexture2D::5258785453323620921::1740660326::1743168384::1::::<><>::
 Bows2.png::CompressedTexture2D::8818461034883295887::1744291787::1744291798::1::::<><>::
 Bows.png::CompressedTexture2D::403827120175079486::1734380213::1743168384::1::::<><>::
 hand.gd::GDScript::-1::1743862581::0::1::::Hand<>CharacterBody2D<>::
 Hand.png::CompressedTexture2D::8749424097563674864::1734371909::1743168384::1::::<><>::
-Hand.tscn::PackedScene::3804353526033677306::1744331767::0::1::::<><>::res://Player/Hand/hand.gd<>uid://dxvy1afyixc12::::res://Player/Hand/Bows2.png
+Hand.tscn::PackedScene::3804353526033677306::1744731574::0::1::::<><>::res://Player/Hand/hand.gd<>uid://dxvy1afyixc12::::res://Player/Hand/Bows2.png
 ::res://Player/HealthBar/::1743168384
 HealthBar Under.png::CompressedTexture2D::4448148034987292626::1737638726::1743168384::1::::<><>::
 Healthbar.png::CompressedTexture2D::4042135019699469780::1737638749::1743168382::1::::<><>::
@@ -495,10 +490,10 @@ SpeedUpgrade3.png::CompressedTexture2D::1851655370290775472::1738171162::1743168
 ::res://Player/Upgrades/StatsUpgrades/Slam/::1744027836
 ::res://Player/Upgrades/StatsUpgrades/Slam/SlamDamage/::1744027759
 ::res://Player/Upgrades/StatsUpgrades/Slam/SuccessfulSlam/::1744027776
-::res://PlayerData/::1744230019
+::res://PlayerData/::1744705839
 PlayerStats.tres::Resource/PlayerStats::607368196319821400::1735908030::0::1::::<><>::res://PlayerData/player_stats.gd<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn
-player_stats.gd::GDScript::-1::1744230019::0::1::::PlayerStats<>Resource<>::
-::res://Shop/::1741189261
+player_stats.gd::GDScript::-1::1744705839::0::1::::PlayerStats<>Resource<>::
+::res://Shop/::1744389931
 Shop2.tscn::PackedScene::7148349802993456241::1735652822::0::1::::<><>::res://Shop/shop.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://bh84i6y0mmcf3::::res://MainMenu/Sprites/BigDoor.png
 shop.gd::GDScript::-1::1741189261::0::1::::Shop<>Node2D<>::
 Shop.tscn::PackedScene::736094885397404601::1738441160::0::1::::<><>::uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>res://Shop/shop.gd<>uid://bjekrlb1r8icx::::res://MainMenu/ButtonShootClick.tscn<>res://Shop/BowsShop/go_to_shop_action.gd<>res://MainMenu/ButtonData/button_data.gd<>res://MainMenu/Scripts/door.gd<>res://MainMenu/ButtonData/ButtonActions/go_to_platform_shop.gd<>uid://dbvkhim2q6dke::::res://MainMenu/Sprites/BigDoor on Wood.png<>res://MainGame/current_money.gd
@@ -531,19 +526,45 @@ Bow_5.png::CompressedTexture2D::3248195871244962786::1735940657::1743168382::1::
 bow_6.png::CompressedTexture2D::401310600817748606::1738971942::1743168382::1::::<><>::
 bow_7.png::CompressedTexture2D::8352550263708602435::1738971995::1743168382::1::::<><>::
 bow_8.png::CompressedTexture2D::4808834144565056722::1738973063::1743168382::1::::<><>::
-::res://Shop/PlatformShop/::1737667013
+::res://Shop/PlatformShop/::1745270334
 BuyPlatform.tscn::PackedScene::8936567171868466953::1737283304::0::1::::<><>::res://Shop/PlatformShop/buy_platform.gd<>uid://bjekrlb1r8icx::::res://MainMenu/ButtonShootClick.tscn
 buy_platform.gd::GDScript::-1::1737280490::0::1::::BuyPlatform<>Node2D<>::
 buy_platform_action.gd::GDScript::-1::1737160768::0::1::::BuyPlatformAction<>ButtonAction<>::
 PlatformButton.tscn::PackedScene::8199858773518163326::1737666704::0::1::::<><>::uid://brv8tbu3hns8m::::res://Level/Tiles/Wood Square Opaque.png<>res://Shop/PlatformShop/platform_button.gd<>uid://nu0yse0m3b1b::::res://Level/Tiles/Wood Square.png<>uid://dwa52hqimfbqp::::res://Shop/PlatformShop/PlatformBuyMenu.tscn
 PlatformBuyMenu.tscn::PackedScene::8705286730094481051::1737446803::0::1::::<><>::res://Shop/PlatformShop/platform_buy_menu.gd
-PlatformShop.tscn::PackedScene::5586279819539092746::1737667013::0::1::::<><>::res://Shop/PlatformShop/platform_shop.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://d0k67q0yyup4t::::res://Shop/PlatformShop/BuyPlatform.tscn<>res://Shop/PlatformShop/buy_platform_action.gd<>uid://do3cqgiesj6ik::::res://Shop/PlatformShop/PlatformButton.tscn<>res://Shop/PlatformShop/reset_button.gd
+PlatformShop.tscn::PackedScene::5586279819539092746::1745270334::0::1::::<><>::res://Shop/PlatformShop/platform_shop.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://d0k67q0yyup4t::::res://Shop/PlatformShop/BuyPlatform.tscn<>res://Shop/PlatformShop/buy_platform_action.gd<>uid://do3cqgiesj6ik::::res://Shop/PlatformShop/PlatformButton.tscn<>res://Shop/PlatformShop/reset_button.gd
 platform_button.gd::GDScript::-1::1737394547::0::1::::PlatformButton<>TextureButton<>::
 platform_buy_menu.gd::GDScript::-1::1737373671::0::1::::PlatformBuyMenu<>Node2D<>::
 platform_shop.gd::GDScript::-1::1737394547::0::1::::PlatformShop<>Node2D<>::
 platform_upgrade_function.gd::GDScript::-1::1737161740::0::1::::PlatformUpgradeFunction<>UpgradeFunction<>::
 reset_button.gd::GDScript::-1::1737394449::0::1::::PlatformResetButton<>Button<>::
+::res://Shop/TowersShopMenu/::1745270306
+TowerShopMenu.tscn::PackedScene::8608007866497806572::1745270306::0::1::::<><>::res://Shop/TowersShopMenu/tower_shop_menu.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn
+tower_shop_menu.gd::GDScript::-1::1744927542::0::1::::TowerShopMenu<>Node2D<>::
+::res://Shop/TowersShopMenu/ShopTower/::1745270306
+ShopTower.tscn::PackedScene::7164384545841520621::1745270306::0::1::::<><>::res://Shop/TowersShopMenu/ShopTower/shop_tower.gd<>uid://b3b0oqm1t2e4u::::res://Tower/Tower.tscn<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>res://Tower/Scripts/tower_data.gd<>uid://5ja4joi88e24::::res://Shop/TowersShopMenu/ShopTower/UpgradeTowerButton.tscn<>uid://cggdcuxxgrs5e::::res://Shop/TowersShopMenu/ShopTower/Sprites/NextArrowBasic.png
+shop_tower.gd::GDScript::-1::1744928858::0::1::::ShopTower<>Control<>::
+tower_upgrade_button.gd::GDScript::-1::1745244341::0::1::::TowerUpgradeButton<>TextureButton<>::
+UpgradeTowerButton.tscn::PackedScene::2124296991697049691::1745270306::0::1::::<><>::res://Shop/TowersShopMenu/ShopTower/upgrade_tower_button.gd<>uid://datomsdah0edm::::res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange.png<>uid://dt4bidyhh6viy::::res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange2.png<>uid://bl37dc7ydtll5::::res://Shop/TowersShopMenu/ShopTower/Sprites/TowerRange3.png<>res://Shop/TowersShopMenu/ShopTower/tower_upgrade_button.gd
+upgrade_tower_button.gd::GDScript::-1::1745244284::0::1::::UpgradeTowerButton<>Control<>::
+::res://Shop/TowersShopMenu/ShopTower/Sprites/::1745269365
+NextArrow.png::CompressedTexture2D::219424723589280014::1745258391::1745258411::1::::<><>::
+NextArrowBasic.png::CompressedTexture2D::5206547505356091472::1745269341::1745269365::1::::<><>::
+TowerRange2.png::CompressedTexture2D::8552792233387659332::1745243817::1745243877::1::::<><>::
+TowerRange3.png::CompressedTexture2D::3218248997551033224::1745243840::1745243877::1::::<><>::
+TowerRange.png::CompressedTexture2D::7199357645897085690::1745243791::1745243877::1::::<><>::
 ::res://TheBowman/::1737279155
+::res://Tower/::1744928245
+shooter_hand.gd::GDScript::-1::1744710429::0::1::::ShooterHand<>Node2D<>::
+Tower.tscn::PackedScene::4355316469364931270::1744928245::0::1::::<><>::res://Tower/Scripts/tower.gd<>uid://dr7jdvqa56tnm::::res://Tower/Sprites/WoodTower.png<>res://Tower/Scripts/tower_data.gd<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>uid://bsxu54nt67xg8::::res://Tower/Sprites/TowerShooter.png<>res://Tower/shooter_hand.gd<>uid://dxvy1afyixc12::::res://Player/Hand/Bows2.png<>res://Tower/tower_arrows.gd
+tower_arrows.gd::GDScript::-1::1744641197::0::1::::TowerArrows<>Node2D<>::
+::res://Tower/Scripts/::1744730574
+tower.gd::GDScript::-1::1744709429::0::1::::Tower<>Node2D<>::
+tower_data.gd::GDScript::-1::1744730574::0::1::::TowerData<>Resource<>::
+::res://Tower/Sprites/::1744632591
+Tower.png::CompressedTexture2D::1236831340192152733::1744390857::1744390873::1::::<><>::
+TowerShooter.png::CompressedTexture2D::3698570015359130585::1744632574::1744632591::1::::<><>::
+WoodTower.png::CompressedTexture2D::8419085419120933994::1744632099::1744632127::1::::<><>::
 ::res://Weapons/::1739308607
 ::res://Weapons/0_BasicBow/::1744227691
 BasicBow.tscn::PackedScene::2587370572507137135::1744227691::0::1::::<><>::res://Weapons/0_BasicBow/basic_bow.gd<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_ability.gd<>res://Weapons/Scripts/weapon_data.gd
@@ -620,8 +641,8 @@ leech_life.gd::GDScript::-1::1744373984::0::1::::LeechLife<>Sprite2D<>::
 ::res://Weapons/Effects/WallHitEffect/::1737810050
 WallHitEffect.tscn::PackedScene::5404847450140260744::1737810050::0::1::::<><>::res://Weapons/Effects/WallHitEffect/wall_hit_effect.gd
 wall_hit_effect.gd::GDScript::-1::1737801165::0::1::::<>CPUParticles2D<>::
-::res://Weapons/Scripts/::1744204950
-arrow.gd::GDScript::-1::1744116015::0::1::::Arrow<>Area2D<>::
+::res://Weapons/Scripts/::1744634550
+arrow.gd::GDScript::-1::1744634550::0::1::::Arrow<>Area2D<>::
 arrow_data.gd::GDScript::-1::1735920233::0::1::::ArrowData<>Resource<>::
 weapon.gd::GDScript::-1::1744204950::0::1::::Weapon<>Node2D<>::
 weapon_data.gd::GDScript::-1::1744115909::0::1::::WeaponData<>Resource<>::

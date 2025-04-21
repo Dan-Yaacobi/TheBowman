@@ -1,20 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://clubhhuu1gip3"]
+[gd_scene load_steps=6 format=3 uid="uid://clubhhuu1gip3"]
 
 [ext_resource type="Script" path="res://Shop/PlatformShop/platform_shop.gd" id="1_e8pwv"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_oixod"]
-[ext_resource type="PackedScene" uid="uid://d0k67q0yyup4t" path="res://Shop/PlatformShop/BuyPlatform.tscn" id="3_nrl40"]
-[ext_resource type="Script" path="res://Shop/PlatformShop/buy_platform_action.gd" id="4_vs1kd"]
 [ext_resource type="PackedScene" uid="uid://do3cqgiesj6ik" path="res://Shop/PlatformShop/PlatformButton.tscn" id="5_adtye"]
 [ext_resource type="Script" path="res://Shop/PlatformShop/reset_button.gd" id="5_kbbko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hl5w"]
 size = Vector2(2545, 12)
-
-[sub_resource type="Resource" id="Resource_dianm"]
-script = ExtResource("4_vs1kd")
-
-[sub_resource type="Resource" id="Resource_oyplm"]
-script = ExtResource("4_vs1kd")
 
 [node name="PlatformShop" type="Node2D"]
 script = ExtResource("1_e8pwv")
@@ -57,19 +49,6 @@ text = "Money: 0"
 position = Vector2(-0.5, 150)
 shape = SubResource("RectangleShape2D_0hl5w")
 debug_color = Color(0.9612, 0.176432, 0.233953, 0.42)
-
-[node name="BuyLeftPlatform" parent="." instance=ExtResource("3_nrl40")]
-visible = false
-position = Vector2(-85, -50)
-button_action = SubResource("Resource_dianm")
-side = "Left"
-price = 1
-
-[node name="BuyRightPlatform" parent="." instance=ExtResource("3_nrl40")]
-visible = false
-position = Vector2(50, -50)
-button_action = SubResource("Resource_oyplm")
-side = "Right"
 
 [node name="ResetButton" type="Button" parent="."]
 offset_left = -17.0

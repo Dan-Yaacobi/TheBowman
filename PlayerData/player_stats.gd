@@ -27,7 +27,7 @@ var player: Player
 @export var upgrd_points: int
 @export var weapon_name: String
 @export var weapon_scene: PackedScene
-
+@export var towers: Array[TowerData]
 
 
 @export_subgroup("Abilities")

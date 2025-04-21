@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dag51ujde7i2y"]
+
+[ext_resource type="Texture2D" uid="uid://cqvpi1p6st1pm" path="res://Enemies/EnemyEffects/Burned/flame.png" id="1_unu4b"]
+
+[sub_resource type="Curve" id="Curve_hry2w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_l6po5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="BurnedEffect" type="CPUParticles2D"]
+amount = 5
+texture = ExtResource("1_unu4b")
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_hry2w")
+color_ramp = SubResource("Gradient_l6po5")

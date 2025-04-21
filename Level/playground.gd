@@ -25,6 +25,7 @@ signal new_wave
 @export var summon_objects: SummonObjects
 @export_custom(PROPERTY_HINT_NONE,"suffix:%") var summon_object_chance: int
 
+var active_towers: Array[Tower]
 var player: Player
 var enemies_killed: int
 var summoned_enemies: Array[Enemy]
@@ -212,6 +213,7 @@ func set_scene(_player: Player) -> void:
 			player.money_changed.connect(update_money)
 		update_money(player.stats.money)
 		_player.mana_bar.set_value_to_max()
+		set_towers()
 		
 func update_money(amount) -> void:
 	current_money.update_current_money(amount)
@@ -253,7 +255,26 @@ func kill_all_enemies() -> void:
 			child.queue_free()
 			
 	summoned_enemies.clear()
-	pass
+	clear_tower_targets()
+	
+
+
+func set_towers() -> void:
+	const TOWER = preload("res://Tower/Tower.tscn")
+	for tower in active_towers:
+		tower.queue_free()
+		active_towers.erase(tower)
+		
+	for tower_data in player.stats.towers:
+		var _tower: Tower = TOWER.instantiate()
+		add_child(_tower)
+		_tower.data = tower_data
+		_tower.set_tower()
+		active_towers.append(_tower)
+
+func clear_tower_targets() -> void:
+	for tower in active_towers:
+		tower.clear_all_targets()
 
 func change_wave(wave_num: int) -> void:
 		wave_data.current_wave = wave_num

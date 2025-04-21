@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=83 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://chrv1m4hnlhef" path="res://Enemies/DemoEnemy/DemoEnemy4.tscn" id="14_c77lc"]
 [ext_resource type="Script" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
-[ext_resource type="Texture2D" uid="uid://bd2ay8wp2mqjm" path="res://Level/Sprites/Mountain Background_1.jpeg" id="15_p7ivi"]
 [ext_resource type="PackedScene" uid="uid://dmt8clw634d1e" path="res://Enemies/DemoEnemy/DemoEnemy5.tscn" id="17_n8jhk"]
 [ext_resource type="Script" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
 [ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
@@ -421,29 +420,6 @@ theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 150
 text = "Money:"
 script = ExtResource("10_qool0")
-
-[node name="Background" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.588235)
-z_index = -3
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("15_p7ivi")
-
-[node name="Background2" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.588235)
-z_index = -3
-position = Vector2(307, 0)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("15_p7ivi")
-
-[node name="Background3" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.588235)
-z_index = -3
-position = Vector2(-307, 0)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("15_p7ivi")
 
 [node name="ComboCounter" type="Label" parent="."]
 offset_left = -557.0

@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://dacqmp7mkkawr"]
+
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/ShopTower/shop_tower.gd" id="1_ac06i"]
+[ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="1_ir2mt"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_ds2g7"]
+[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="3_gu2wy"]
+[ext_resource type="PackedScene" uid="uid://5ja4joi88e24" path="res://Shop/TowersShopMenu/ShopTower/UpgradeTowerButton.tscn" id="4_fmpho"]
+[ext_resource type="Texture2D" uid="uid://cggdcuxxgrs5e" path="res://Shop/TowersShopMenu/ShopTower/Sprites/NextArrowBasic.png" id="6_d33dl"]
+
+[sub_resource type="Resource" id="Resource_8jn82"]
+resource_local_to_scene = true
+script = ExtResource("3_gu2wy")
+level = 1
+damage = 0
+damage_timer = 1.0
+range = 1.0
+cost_to_upgrade = 0
+position = Vector2(0, 0)
+arrow = ExtResource("2_ds2g7")
+
+[node name="ShopTower" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ac06i")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(0.121569, 0.34902, 0.439216, 1)
+layout_mode = 0
+offset_left = -45.0
+offset_top = -30.0
+offset_right = 47.0
+offset_bottom = 10.0
+
+[node name="Tower" parent="." instance=ExtResource("1_ir2mt")]
+data = SubResource("Resource_8jn82")
+
+[node name="UpgradeTowerButton" parent="." instance=ExtResource("4_fmpho")]
+offset_left = 19.0
+offset_top = -17.0
+offset_right = 19.0
+offset_bottom = -17.0
+scale = Vector2(0.5, 0.5)
+
+[node name="UpgradeTowerButton4" parent="." instance=ExtResource("4_fmpho")]
+offset_left = 34.0
+offset_top = -17.0
+offset_right = 34.0
+offset_bottom = -17.0
+scale = Vector2(0.5, 0.5)
+
+[node name="UpgradeTowerButton2" parent="." instance=ExtResource("4_fmpho")]
+offset_left = -40.0
+offset_top = -18.0
+offset_right = -40.0
+offset_bottom = -18.0
+scale = Vector2(0.5, 0.5)
+
+[node name="UpgradeTowerButton3" parent="." instance=ExtResource("4_fmpho")]
+offset_left = -25.0
+offset_top = -18.0
+offset_right = -25.0
+offset_bottom = -18.0
+scale = Vector2(0.5, 0.5)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -8.0
+offset_right = 47.0
+offset_bottom = 32.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("6_d33dl")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -8.0
+offset_right = 23.0
+offset_bottom = 32.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("6_d33dl")
+flip_h = true
+
+[node name="TowerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -26.0
+offset_right = 1109.0
+offset_bottom = 316.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 250
+text = "Tower #1"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://duv1vqq2qbq3m"]
+
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/tower_shop_menu.gd" id="1_04fdc"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_iuy0s"]
+
+[node name="TowerShopMenu" type="Node2D"]
+script = ExtResource("1_04fdc")
+
+[node name="Tiles" parent="." instance=ExtResource("2_iuy0s")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)

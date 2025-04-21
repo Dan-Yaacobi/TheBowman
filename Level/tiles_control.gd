@@ -1,8 +1,8 @@
 class_name TilesControl extends TileMapLayer
 
-const TORRENT = preload("res://Level/Torrents/torrent.tscn")
-var right_torrents: Array[Torrent]
-var left_torrents: Array[Torrent]
+#const TORRENT = preload("res://Level/Torrents/torrent.tscn")
+#var right_torrents: Array[Torrent]
+#var left_torrents: Array[Torrent]
 
 var base_tile_index: int = 0
 var right_tiles: Array[Vector2i] = [Vector2i.ZERO]
@@ -17,20 +17,20 @@ func _ready() -> void:
 
 func get_limits() -> Rect2i:
 	return get_used_rect()
-	
-func add_right_torrent(_tile: Vector2i) -> void:
-	var new_torrent = TORRENT.instantiate()
-	right_torrents.append(new_torrent)
-	new_torrent.global_position = Vector2i(16 * _tile[0] + 8, -6)
-	add_child(new_torrent)
-	pass
-	
-func add_left_torrent(_tile: Vector2i) -> void:
-	var new_torrent = TORRENT.instantiate()
-	left_torrents.append(new_torrent)
-	new_torrent.global_position = Vector2i(16 * (_tile[0] +1) - 8, -6)
-	add_child(new_torrent)
-	pass
+	#
+#func add_right_torrent(_tile: Vector2i) -> void:
+	#var new_torrent = TORRENT.instantiate()
+	#right_torrents.append(new_torrent)
+	#new_torrent.global_position = Vector2i(16 * _tile[0] + 8, -6)
+	#add_child(new_torrent)
+	#pass
+	#
+#func add_left_torrent(_tile: Vector2i) -> void:
+	#var new_torrent = TORRENT.instantiate()
+	#left_torrents.append(new_torrent)
+	#new_torrent.global_position = Vector2i(16 * (_tile[0] +1) - 8, -6)
+	#add_child(new_torrent)
+	#pass
 
 func add_left_tile(_color: int) -> void:
 	left_most_tile_index += 1
