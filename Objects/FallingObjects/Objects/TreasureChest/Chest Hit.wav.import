@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3uk6pw51gjcn"
+path="res://.godot/imported/Chest Hit.wav-f81a49a64d1ba4a36cbf4b1a64767c3a.sample"
+
+[deps]
+
+source_file="res://Objects/FallingObjects/Objects/TreasureChest/Chest Hit.wav"
+dest_files=["res://.godot/imported/Chest Hit.wav-f81a49a64d1ba4a36cbf4b1a64767c3a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

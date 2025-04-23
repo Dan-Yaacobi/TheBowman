@@ -4,6 +4,8 @@ class_name TreasureChest extends FallingObject
 @onready var area: Area2D = $Area2D
 @onready var audio_stream_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
+@onready var damaged_audio: AudioStreamPlayer2D = $DamagedAudio
+@onready var sprite: Sprite2D = $Sprite2D
 
 var falling_state: bool = true
 
@@ -12,12 +14,18 @@ func _ready() -> void:
 	animation_player.play("Idle")
 	mass = data.mass
 	self.gravity_scale = 0.05
+	self.damaged.connect(damaged_animation)
 	
 func _physics_process(delta: float) -> void:
 	pass
 
-func destroyed() -> void:
+func damaged_animation() -> void:
+	animation_player.play("Damaged")
+	animation_player.current_animation
 	
+	damaged_audio.play(0.2)
+	
+func destroyed() -> void:
 	cpu_particles_2d.emitting = false
 	animation_player.play("Destroyed")
 	audio_stream_player.play()

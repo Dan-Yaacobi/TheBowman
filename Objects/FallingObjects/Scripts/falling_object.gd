@@ -2,6 +2,8 @@ class_name FallingObject extends RigidBody2D
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 
+signal damaged
+
 @export var data: FallingObjectData
 var player: Player
 var destroyed_state: bool = false
@@ -18,6 +20,8 @@ func take_hit(a) -> void:
 			if data.hits_to_destory <= 0:
 				destroyed_state = true
 				destroyed()
+			else:
+				damaged.emit()
 			
 func destroyed() -> void:
 	queue_free()

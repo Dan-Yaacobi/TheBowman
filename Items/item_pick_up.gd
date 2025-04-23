@@ -43,9 +43,11 @@ func random_direction() -> Vector2:
 	return dirc
 	
 func calculate_direction_to_player() -> Vector2:
-	var _direction: Vector2
-	_direction = player.global_position - global_position
-	return _direction.normalized()
+	if player != null:
+		var _direction: Vector2
+		_direction = player.global_position - global_position
+		return _direction.normalized()
+	return Vector2.ZERO
 
 func item_picked_up(body) -> void:
 	if body is Player:

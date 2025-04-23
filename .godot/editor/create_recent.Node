@@ -1,3 +1,5 @@
+AudioStreamPlayer2D
+Sprite2D
 TextureRect
 PanelContainer
 Label
@@ -11,5 +13,3 @@ CollisionShape2D
 Area2D
 Node2D
 Timer
-Sprite2D
-HFlowContainer
