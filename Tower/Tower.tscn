@@ -19,6 +19,7 @@ range = 1.0
 cost_to_upgrade = 0
 position = Vector2(0, 0)
 arrow = ExtResource("2_dcpbp")
+speciality = ""
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7ilc"]
 radius = 61.131

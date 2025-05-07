@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://duv1vqq2qbq3m"]
+
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/tower_upgrade_menu.gd" id="1_04fdc"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_iuy0s"]
+[ext_resource type="PackedScene" uid="uid://dacqmp7mkkawr" path="res://Shop/TowersShopMenu/UpgradeTower/ShopTower.tscn" id="3_yxosn"]
+[ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/Archer.png" id="4_ayskd"]
+[ext_resource type="PackedScene" uid="uid://cgwfircvba322" path="res://Shop/TowersShopMenu/ShopTower/BuyTower.tscn" id="5_tpc0n"]
+
+[node name="TowerUpgradeMenu" type="Node2D"]
+script = ExtResource("1_04fdc")
+
+[node name="Tiles" parent="." instance=ExtResource("2_iuy0s")]
+position = Vector2(-105, -16)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="ShopTower" parent="." instance=ExtResource("3_yxosn")]
+offset_left = 5.0
+offset_top = -44.0
+offset_right = 5.0
+offset_bottom = -44.0
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(-105, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoint"]
+modulate = Color(0, 0.25, 1, 0.65098)
+position = Vector2(5, -8)
+texture = ExtResource("4_ayskd")
+hframes = 4
+vframes = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = -1
+offset_left = -173.0
+offset_top = -104.0
+offset_right = -136.0
+offset_bottom = -23.0
+
+[node name="BuyTower" parent="." instance=ExtResource("5_tpc0n")]
+offset_left = -170.0
+offset_top = -94.0
+offset_right = -164.0
+offset_bottom = -82.0
+scale = Vector2(1.5, 1.5)
+
+[node name="UpgradeLabel" type="Label" parent="."]
+offset_left = -36.0
+offset_top = -126.0
+offset_right = 1934.0
+offset_bottom = 216.0
+scale = Vector2(0.04, 0.04)
+theme_override_font_sizes/font_size = 250
+text = "Upgrade Towers
+"
+
+[node name="BuyLabel" type="Label" parent="."]
+offset_left = -182.0
+offset_top = -125.0
+offset_right = 1213.0
+offset_bottom = 217.0
+scale = Vector2(0.04, 0.04)
+theme_override_font_sizes/font_size = 250
+text = "Buy Towers"

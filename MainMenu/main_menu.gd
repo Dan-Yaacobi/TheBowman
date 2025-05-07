@@ -8,6 +8,8 @@ class_name MainMenu extends Node2D
 @onready var hard_mode_button: Button = $HardMode
 @onready var normal_mode_button: Button = $NormalMode
 
+@onready var test_button: Button = $Button
+
 var menu_tile_limit: Rect2i
 var tile_size: int = 16
 var playground: PlayGround
@@ -24,7 +26,11 @@ func _ready() -> void:
 	var game = get_parent()
 	if game is Game:
 		game.get_playground().wave_reset.connect(update_wave_label)
+	test_button.pressed.connect(test)
 
+func test() -> void:
+	changed_scene.emit("TowerUpgrade")
+	pass
 func activate_hard_mode() -> void:
 	hard_mode = true
 	playground.hard_mode = hard_mode

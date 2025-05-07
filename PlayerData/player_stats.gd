@@ -56,3 +56,7 @@ func add_arrow_ability(ability: ArrowAbility) -> void:
 func add_shoot_ability(ability: ShootAbility) -> void:
 	if ability != null:
 		shoot_abilities.append(ability)
+
+func add_tower() -> void:
+	var new_tower: TowerData = TowerData.new()
+	towers.append(new_tower)

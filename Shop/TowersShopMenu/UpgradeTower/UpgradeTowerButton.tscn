@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ja4joi88e24"]
+
+[ext_resource type="Texture2D" uid="uid://bxgpfcbh2j3hy" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/TowerRange/TowerRangeUpgrade1.png" id="1_ln415"]
+[ext_resource type="Texture2D" uid="uid://ch0wlccsk8sq3" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/TowerRange/TowerRangeUpgrade2.png" id="2_icc6f"]
+[ext_resource type="Texture2D" uid="uid://blp0q5gmkjhsh" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/TowerRange/TowerRangeUpgrade3.png" id="3_ud3pl"]
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/UpgradeTower/tower_upgrade_button.gd" id="5_wnfox"]
+
+[node name="UpgradeButton" type="TextureButton"]
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("1_ln415")
+texture_pressed = ExtResource("2_icc6f")
+texture_hover = ExtResource("3_ud3pl")
+script = ExtResource("5_wnfox")
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 1055.0
+offset_bottom = 335.0
+scale = Vector2(0.02, 0.02)
+theme_override_colors/font_color = Color(1, 0.866667, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.42, 0.364, 0, 1)
+theme_override_colors/font_outline_color = Color(0.74, 0.641333, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 55
+theme_override_font_sizes/font_size = 250
+text = "cost: 100"

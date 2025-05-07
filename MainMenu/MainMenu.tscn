@@ -250,3 +250,12 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 250
 disabled = true
 text = "Normal Mode"
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 296.0
+offset_bottom = 51.0
+disabled = true
+text = "TEST"

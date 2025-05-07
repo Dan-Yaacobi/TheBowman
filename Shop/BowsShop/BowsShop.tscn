@@ -43,7 +43,7 @@ weapon_scene = ExtResource("7_gdy8u")
 [sub_resource type="Resource" id="Resource_qtlra"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_s27dk"]
+[sub_resource type="Resource" id="Resource_wl1kh"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("6_p58kp")
@@ -60,7 +60,7 @@ weapon_scene = ExtResource("9_0rvep")
 [sub_resource type="Resource" id="Resource_o2gpa"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_6royt"]
+[sub_resource type="Resource" id="Resource_cbgi6"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("8_6p2fp")
@@ -74,7 +74,7 @@ bought = false
 button_click_action = SubResource("Resource_o2gpa")
 weapon_scene = ExtResource("9_n7crj")
 
-[sub_resource type="Resource" id="Resource_lvfei"]
+[sub_resource type="Resource" id="Resource_1pved"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("12_3lnwp")
@@ -88,7 +88,7 @@ bought = false
 button_click_action = SubResource("Resource_o2gpa")
 weapon_scene = ExtResource("13_fdnd6")
 
-[sub_resource type="Resource" id="Resource_ake7n"]
+[sub_resource type="Resource" id="Resource_akm4r"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("14_i3fme")
@@ -105,7 +105,7 @@ weapon_scene = ExtResource("15_e6rfv")
 [sub_resource type="Resource" id="Resource_75hcs"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_heubh"]
+[sub_resource type="Resource" id="Resource_ydsig"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("14_2d56c")
@@ -158,27 +158,27 @@ data = SubResource("Resource_nml22")
 [node name="ShopWeapon2" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(212, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_s27dk")
+data = SubResource("Resource_wl1kh")
 
 [node name="ShopWeapon3" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(372, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_6royt")
+data = SubResource("Resource_cbgi6")
 
 [node name="ShopWeapon4" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(532, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_lvfei")
+data = SubResource("Resource_1pved")
 
 [node name="ShopWeapon5" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(694, 111)
 scale = Vector2(2, 2)
-data = SubResource("Resource_ake7n")
+data = SubResource("Resource_akm4r")
 
 [node name="ShopWeapon6" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(697, 289)
 scale = Vector2(2, 2)
-data = SubResource("Resource_heubh")
+data = SubResource("Resource_ydsig")
 
 [node name="ShopWeapon7" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(537, 289)

@@ -20,7 +20,8 @@ func jump() -> void:
 		player.velocity.y -= player.stats.jump_height
 		jumps -= 1
 		jump_particles.restart()
-
+		return
+		
 		var flip_jump_random: int = randi_range(0,jump_flip_chance)
 		if flip_jump_random == 0:
 			jump_flip = true
@@ -35,7 +36,7 @@ func jumping_flip() -> void:
 		player.body.rotation = 0
 		
 func reset_jumps(_var1,_var2,_var3,_var4) -> void:
-	if _var2 is TileMapLayer:
+	if _var2 is TileMapLayer or _var2 is PhysicsBody2D:
 		if player.stats.hp > 0:
 			jump_flip = false
 			#if jumps == 0:

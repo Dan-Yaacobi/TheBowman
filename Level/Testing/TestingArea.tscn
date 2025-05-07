@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://faeqy5pfi8yk"]
+[gd_scene load_steps=31 format=4 uid="uid://faeqy5pfi8yk"]
 
 [ext_resource type="Script" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_u5lkp"]
@@ -13,6 +13,8 @@
 [ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="12_bdfic"]
 [ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="13_j7khy"]
 [ext_resource type="Script" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="13_qn8nl"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_x1o37"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="15_fwxk5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mix7l"]
 texture = ExtResource("4_o1u76")
@@ -31,6 +33,7 @@ range = 1.0
 cost_to_upgrade = 0
 position = Vector2(0, 0)
 arrow = ExtResource("12_4r26e")
+speciality = ""
 
 [sub_resource type="Resource" id="Resource_unsoy"]
 script = ExtResource("9_si70b")
@@ -102,7 +105,7 @@ mass = 100.0
 script = ExtResource("1_e8ewn")
 
 [node name="Player" parent="." instance=ExtResource("2_7l2ag")]
-position = Vector2(0, -9)
+position = Vector2(0, -12)
 
 [node name="Tiles" parent="." instance=ExtResource("1_u5lkp")]
 tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAD5/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAA=")
@@ -126,3 +129,19 @@ data = SubResource("Resource_5i24m")
 [node name="TreasureChest3" parent="." instance=ExtResource("8_5cpo0")]
 position = Vector2(-23, -46)
 data = SubResource("Resource_js0aj")
+
+[node name="Island" parent="." instance=ExtResource("14_x1o37")]
+position = Vector2(150, 10)
+
+[node name="Island3" parent="." instance=ExtResource("14_x1o37")]
+position = Vector2(235, 28)
+scale = Vector2(2, 2)
+
+[node name="Portal" parent="." instance=ExtResource("15_fwxk5")]
+position = Vector2(151, -14)
+
+[node name="Island2" parent="." instance=ExtResource("14_x1o37")]
+position = Vector2(286, -21)
+
+[node name="Portal2" parent="." instance=ExtResource("15_fwxk5")]
+position = Vector2(287, -45)

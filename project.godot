@@ -22,6 +22,8 @@ PlayerManager="*res://00 Globals/global_player_manager.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=2
 
 [gui]

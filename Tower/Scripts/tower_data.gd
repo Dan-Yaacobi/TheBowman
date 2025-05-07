@@ -8,3 +8,4 @@ class_name TowerData extends Resource
 @export var cost_to_upgrade: int
 @export var position: Vector2
 @export var arrow: PackedScene
+@export var speciality: String

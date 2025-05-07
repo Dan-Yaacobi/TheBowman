@@ -34,7 +34,7 @@ func Process(_delta: float) -> State:
 	if player.stats.hp <= 0:
 		return dead
 	player.velocity.x = dash_direction * player.stats.move_speed * 4
-	player.body.change_side(dash_direction != 1)
+	player.update_direction(dash_direction != 1)
 	if dash_direction == 1:
 		if player.global_position.x > init_position + dash_distance:
 			return walking

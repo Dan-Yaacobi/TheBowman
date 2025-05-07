@@ -131,6 +131,7 @@ func init_bonus_stats() -> void:
 	bonus_stats = stats.duplicate()
 	
 func _process(delta: float) -> void:
+	
 	if stats.hp > 0:
 		direction = Input.get_axis("Left","Right")
 	else:
@@ -198,6 +199,9 @@ func mega_shot() -> void:
 	shoot_action.mega_shot(mouse_pos)
 	deactivate_mega_shot()
 	pass
+
+func get_shoot_position() -> Vector2:
+	return $ShootPosition.global_position
 	
 func shoot() -> void:
 	if mana_bar.use_mana(regular_mana_cost):
@@ -273,6 +277,7 @@ func update_animation(_animation_name: String) -> void:
 
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side:
+		
 		direction_side = _new_side
 		body.change_side(direction_side)
 
@@ -395,3 +400,9 @@ func round_to_dec(num, digit):
 	
 func slow_player(slow_time: float,effect: Node2D) -> void:
 	slow.slow_player(slow_time,effect)
+
+func buy(price: int) -> bool:
+	if stats.money >= price:
+		stats.money -= price
+		return true
+	return false

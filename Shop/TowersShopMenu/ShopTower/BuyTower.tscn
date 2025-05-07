@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgwfircvba322"]
+
+[ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="1_j35c3"]
+[ext_resource type="Script" path="res://Shop/TowersShopMenu/ShopTower/buy_tower.gd" id="1_q7tk3"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_ntmw4"]
+[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="3_gj3jx"]
+
+[sub_resource type="Resource" id="Resource_npt64"]
+resource_local_to_scene = true
+script = ExtResource("3_gj3jx")
+level = 1
+damage = 0
+damage_timer = 1.0
+range = 1.0
+cost_to_upgrade = 0
+position = Vector2(0, 0)
+arrow = ExtResource("2_ntmw4")
+speciality = ""
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 19.0
+offset_bottom = 40.0
+script = ExtResource("1_q7tk3")
+
+[node name="BuyTower" type="Button" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 287.0
+offset_bottom = 214.0
+scale = Vector2(0.04, 0.04)
+focus_mode = 0
+theme_override_font_sizes/font_size = 150
+text = "Buy
+"
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 639.0
+offset_bottom = 214.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/font_size = 150
+text = "cost: 500"
+
+[node name="Tower" parent="." instance=ExtResource("1_j35c3")]
+position = Vector2(10, 31)
+data = SubResource("Resource_npt64")

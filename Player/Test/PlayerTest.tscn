@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpa1uss45ehqd"]
+
+[ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/Archer.png" id="1_bvg1b"]
+[ext_resource type="PackedScene" uid="uid://bt4xsbsjnxkmb" path="res://Player/Test/Hand.tscn" id="2_lodko"]
+
+[sub_resource type="Animation" id="Animation_fjwoa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_e4jp6"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8ots"]
+_data = {
+"RESET": SubResource("Animation_fjwoa"),
+"Walk": SubResource("Animation_e4jp6")
+}
+
+[node name="PlayerTest" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bvg1b")
+flip_h = true
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_i8ots")
+}
+
+[node name="Hand" parent="." instance=ExtResource("2_lodko")]
+position = Vector2(5.333, 8)
+rotation = 6.28319
+scale = Vector2(0.75, 0.75)

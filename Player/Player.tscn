@@ -69,10 +69,10 @@ leech_chance = 5
 size = Vector2(18, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
-size = Vector2(7, 15)
+size = Vector2(13, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(8, 1.75)
+size = Vector2(13.3333, 3.20833)
 
 [sub_resource type="Curve" id="Curve_g8oqh"]
 max_value = 2.0
@@ -80,7 +80,7 @@ _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
-size = Vector2(7, 14)
+size = Vector2(13, 20)
 
 [sub_resource type="Curve" id="Curve_wqenp"]
 max_value = 4.0
@@ -104,6 +104,7 @@ point_count = 2
 radius = 49.0408
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
@@ -115,12 +116,13 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="Hand" parent="." instance=ExtResource("2_alpnv")]
+position = Vector2(-5, 7)
 rotation = -0.00872665
 collision_layer = 0
 collision_mask = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4.5, 4.5)
+zoom = Vector2(5.5, 5.5)
 position_smoothing_enabled = true
 script = ExtResource("8_qvxki")
 random_strength = 5.0
@@ -142,7 +144,7 @@ position = Vector2(0, 1)
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
-position = Vector2(0, 9)
+position = Vector2(-1, 14)
 shape = SubResource("RectangleShape2D_6nowa")
 debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
 
@@ -153,7 +155,7 @@ script = ExtResource("15_qho0y")
 script = ExtResource("16_lcihm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0.5)
+position = Vector2(-1.5, 6)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="."]
@@ -161,7 +163,7 @@ position = Vector2(1, 4)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
-position = Vector2(1, 4.125)
+position = Vector2(-2.33333, 11.7292)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
@@ -188,14 +190,15 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(1.5, 0)
+position = Vector2(-1.5, 3)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="ManaBar" parent="." instance=ExtResource("13_yhb7f")]
-offset_left = -30.0
-offset_top = 65.0
-offset_right = 204.0
-offset_bottom = 97.0
+offset_left = -36.0
+offset_top = 64.0
+offset_right = 198.0
+offset_bottom = 96.0
+scale = Vector2(1.25, 1.25)
 bar_color = Color(1, 1, 1, 1)
 
 [node name="DamagedParticles" type="CPUParticles2D" parent="."]
@@ -224,7 +227,7 @@ one_shot = true
 wait_time = 3.0
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="."]
-position = Vector2(44, 81)
+position = Vector2(52, 73.3333)
 texture = ExtResource("14_gy5xr")
 
 [node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
@@ -245,10 +248,11 @@ text = "0
 metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" parent="." instance=ExtResource("15_wqrs0")]
-offset_left = -30.0
-offset_top = 51.0
-offset_right = 34.0
-offset_bottom = 83.0
+offset_left = -36.0
+offset_top = 46.6667
+offset_right = 28.0
+offset_bottom = 78.6667
+scale = Vector2(1.25, 1.25)
 
 [node name="ComboActivated" type="Node2D" parent="."]
 script = ExtResource("16_j4os2")
@@ -306,10 +310,11 @@ color = Color(0.5, 0, 0, 1)
 [node name="TotalBuffs" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 110.0
-offset_top = -71.0
-offset_right = 110.0
-offset_bottom = -71.0
+offset_left = 141.333
+offset_top = -105.333
+offset_right = 141.333
+offset_bottom = -105.333
+scale = Vector2(1.25, 1.25)
 script = ExtResource("25_qwhxq")
 
 [node name="FlowContainer" type="FlowContainer" parent="TotalBuffs"]
@@ -365,3 +370,8 @@ script = ExtResource("29_b4moh")
 wait_time = 1.5
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
+
+[node name="MouseDetector" type="Area2D" parent="."]
+
+[node name="ShootPosition" type="Node2D" parent="."]
+position = Vector2(-1.33333, 5.33333)

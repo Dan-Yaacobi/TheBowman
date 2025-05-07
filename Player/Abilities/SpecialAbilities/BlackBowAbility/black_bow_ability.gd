@@ -22,6 +22,6 @@ func instance_special_arrow(ARROW: PackedScene, _the_position,_rotation_angle,_d
 	arrow.arrow_hit_sound.connect(player.current_weapon.emit_hit_sound)
 	arrow.global_position = _the_position
 	arrow.z_index = -1
-	arrow.rotate(_rotation_angle)
+	arrow.rotate(_rotation_angle + PI)
 	arrow.direction = _direction
 	return arrow

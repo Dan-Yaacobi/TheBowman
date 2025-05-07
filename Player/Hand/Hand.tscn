@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bug4e8v5lnb0m"]
 
 [ext_resource type="Script" path="res://Player/Hand/hand.gd" id="1_tcjxu"]
-[ext_resource type="Texture2D" uid="uid://dxvy1afyixc12" path="res://Player/Hand/Bows2.png" id="2_mdaeq"]
+[ext_resource type="Texture2D" uid="uid://bl14d73t4igbx" path="res://Player/Hand/BowsV2.png" id="2_j1n7c"]
 
 [node name="Hand" type="CharacterBody2D"]
 script = ExtResource("1_tcjxu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2)
-texture = ExtResource("2_mdaeq")
-hframes = 6
-vframes = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_j1n7c")
+hframes = 7
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

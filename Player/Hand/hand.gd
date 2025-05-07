@@ -4,12 +4,10 @@ class_name Hand extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var player: Player = $".."
 @onready var player_state_machine: PlayerStateMachine = $"../PlayerStateMachine"
+@onready var mouse_detector: Area2D = $"../MouseDetector"
 
 var hand_direction: Vector2
 
-func _ready() -> void:
-	pass
-	
 func _process(delta: float) -> void:
 
 	calculate_direction_to_cursor()
@@ -22,9 +20,9 @@ func calculate_direction_to_cursor() -> void:
 	hand_direction = Vector2(mouse_pos[0] - player_pos[0],
 	 mouse_pos[1] - player_pos[1])
 	if player_state_machine.curr_state != PlayerDashState:
-		if mouse_pos.x > player_pos.x:
+		if mouse_pos.x > player_pos.x + 4:
 			player.update_direction(false)
-		else:
+		elif mouse_pos.x < player_pos.x - 4:
 			player.update_direction(true)
 
 func set_hand_direction() -> void:

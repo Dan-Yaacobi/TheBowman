@@ -85,7 +85,7 @@ func wall_clear_shot() -> void:
 	
 func _physics_process(delta: float) -> void:
 	global_position += direction * delta * data.speed
-
+	
 func hit_wall(_val1,_val2,_val3,_val4) -> void:
 	if _val2 is TileMapLayer:
 		wall_hit_effect = WALL_HIT_EFFECT.instantiate()

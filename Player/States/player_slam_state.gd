@@ -5,6 +5,7 @@ class_name PlayerSlamState extends State
 @onready var dead: PlayerDeadState = $"../Dead"
 
 var hit_somthing: bool = false
+
 func _ready() -> void:
 	ground_detector.body_shape_entered.connect(hit_ground)
 	pass
@@ -35,6 +36,7 @@ func Process(_delta: float) -> State:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> State:
+
 	if player.velocity.y == 0:
 		return idle
 	if hit_somthing:

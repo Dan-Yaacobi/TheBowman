@@ -257,8 +257,6 @@ func kill_all_enemies() -> void:
 	summoned_enemies.clear()
 	clear_tower_targets()
 	
-
-
 func set_towers() -> void:
 	const TOWER = preload("res://Tower/Tower.tscn")
 	for tower in active_towers:
@@ -266,11 +264,12 @@ func set_towers() -> void:
 		active_towers.erase(tower)
 		
 	for tower_data in player.stats.towers:
-		var _tower: Tower = TOWER.instantiate()
-		add_child(_tower)
-		_tower.data = tower_data
-		_tower.set_tower()
-		active_towers.append(_tower)
+		if tower_data.position != Vector2.ZERO:
+			var _tower: Tower = TOWER.instantiate()
+			add_child(_tower)
+			_tower.data = tower_data
+			_tower.set_tower()
+			active_towers.append(_tower)
 
 func clear_tower_targets() -> void:
 	for tower in active_towers:

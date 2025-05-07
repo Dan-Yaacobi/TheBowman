@@ -11,7 +11,7 @@ func shoot(_mouse_pos: Vector2) -> void:
 		if i > 0:
 			offset = true
 		player.get_current_weapon().shoot(offset,false)
-	player.body.change_side(_mouse_pos.x < player.global_position.x)
+	player.update_direction(_mouse_pos.x < player.global_position.x)
 	arrow_shot.play()
 	pass
 
@@ -21,7 +21,7 @@ func mega_shot(_mouse_pos: Vector2) -> void:
 		if i > 0:
 			offset = true
 		player.get_current_weapon().shoot(offset,true)
-	player.body.change_side(_mouse_pos.x < player.global_position.x)
+	player.update_direction(_mouse_pos.x < player.global_position.x)
 	arrow_shot.play()
 	pass
 	

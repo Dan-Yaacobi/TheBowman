@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=81 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -52,8 +52,6 @@
 [ext_resource type="Texture2D" uid="uid://dl1x6pllgiuh" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade1.png" id="48_rx7hp"]
 [ext_resource type="Texture2D" uid="uid://w30o53qdvwap" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade2.png" id="49_h6vmv"]
 [ext_resource type="Texture2D" uid="uid://dt260q61a543b" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade3.png" id="50_siq3f"]
-[ext_resource type="Texture2D" uid="uid://dq7w8miom00o8" path="res://MainGame/background.png" id="53_pbkxp"]
-[ext_resource type="Texture2D" uid="uid://bwc1wj320gh8j" path="res://MainGame/ground.png" id="54_l0gt4"]
 
 [sub_resource type="Resource" id="Resource_k715f"]
 script = ExtResource("2_r03de")
@@ -564,105 +562,3 @@ ID = 102
 bucket = 3
 is_ability = true
 can_choose_once = true
-
-[node name="BackgroundSprites" type="Node2D" parent="."]
-visible = false
-position = Vector2(-92, 1)
-
-[node name="BG1" type="Sprite2D" parent="BackgroundSprites"]
-z_index = -3
-position = Vector2(2, -3)
-texture = ExtResource("53_pbkxp")
-
-[node name="BG2" type="Sprite2D" parent="BackgroundSprites"]
-z_index = -4
-position = Vector2(-361, -8)
-texture = ExtResource("53_pbkxp")
-
-[node name="BG3" type="Sprite2D" parent="BackgroundSprites"]
-z_index = -3
-position = Vector2(364, 3)
-texture = ExtResource("53_pbkxp")
-
-[node name="BG4" type="Sprite2D" parent="BackgroundSprites"]
-z_index = -3
-position = Vector2(727, 9)
-texture = ExtResource("53_pbkxp")
-
-[node name="Grounds" type="Node2D" parent="BackgroundSprites"]
-position = Vector2(-2, -1)
-
-[node name="Ground" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(416, 156)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground3" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(728, 156)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground2" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-z_index = -3
-position = Vector2(101, 156)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground4" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(416, 220)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground5" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(728, 220)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground6" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-z_index = -3
-position = Vector2(101, 220)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground7" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(416, 283)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground10" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 145)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground11" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 209)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground12" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 272)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground13" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 145)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground14" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 209)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground15" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-252, 272)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground16" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-361, 144)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground17" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-361, 208)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground18" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(-361, 271)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground8" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-position = Vector2(728, 283)
-texture = ExtResource("54_l0gt4")
-
-[node name="Ground9" type="Sprite2D" parent="BackgroundSprites/Grounds"]
-z_index = -3
-position = Vector2(101, 283)
-texture = ExtResource("54_l0gt4")

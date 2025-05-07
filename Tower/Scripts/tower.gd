@@ -14,8 +14,10 @@ class_name Tower extends Node2D
 var target: Enemy
 var direction: Vector2
 var targets: Array[Enemy]
+var tower_placed: bool = false
 
 func _ready() -> void:
+	return
 	shoot_range.body_entered.connect(set_target)
 	shoot_range.body_exited.connect(clear_target)
 	switch_target_timer.timeout.connect(pick_closest_target)
@@ -23,12 +25,13 @@ func _ready() -> void:
 	blind_spot.body_exited.connect(blind_spot_exited)
 
 func _physics_process(delta: float) -> void:
-	if target != null :
-		calculate_direction_to_target()
-		if switch_target_timer.is_stopped():
-			switch_target_timer.start()
-	else:
-		switch_target_timer.stop()
+	if tower_placed:
+		if target != null :
+			calculate_direction_to_target()
+			if switch_target_timer.is_stopped():
+				switch_target_timer.start()
+		else:
+			switch_target_timer.stop()
 		
 func set_target(b) -> void:
 	if b is Enemy:
@@ -50,7 +53,6 @@ func blind_spot_entered(b) -> void:
 func blind_spot_exited(b) -> void:
 	if target == null:
 		target = b
-	pass
 	
 func pick_closer_target(curr_target, other_target) -> Enemy:
 	if is_instance_valid(curr_target) and is_instance_valid(other_target):
@@ -88,7 +90,9 @@ func set_tower() -> void:
 	shoot_timer.wait_time = data.damage_timer
 	shooter_hand.shooter_hand_sprite.frame = data.level
 	global_position = data.position
-	pass
+	if global_position != Vector2.ZERO:
+		tower_placed = true
+
 
 func update_direction(side: bool) -> void:
 	tower_shooter_sprite.flip_h = side

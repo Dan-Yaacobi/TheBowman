@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://duv1vqq2qbq3m"]
+[gd_scene load_steps=3 format=3 uid="uid://hli1fp66m7wb"]
 
 [ext_resource type="Script" path="res://Shop/TowersShopMenu/tower_shop_menu.gd" id="1_04fdc"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_iuy0s"]

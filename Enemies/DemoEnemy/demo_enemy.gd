@@ -18,7 +18,8 @@ var stopped: bool = false
 func _ready() -> void:
 	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
-	wings_animation.play("Fly")
+	if wings_animation != null:
+		wings_animation.play("Fly")
 	
 	if stats.boss:
 		scale *= 5

@@ -19,9 +19,12 @@ func shoot(_offset: bool,mega: bool) -> void:
 	var offset: Vector2 = Vector2.ZERO
 	if _offset:
 		offset = Vector2(randf_range(-0.2,0.2),randf_range(-0.2,0.2))
-	if not (mouse_pos.x > player.global_position.x - 5 and mouse_pos.x < player.global_position.x + 5 and mouse_pos.y > player.global_position.y - 5 and mouse_pos.y < player.global_position.y + 5):
-		
-		var arrow = instance_arrow(weapon_data.arrow,global_position,offset)
+	var click_offset: int = 5
+	if not (mouse_pos.x > player.global_position.x - click_offset and
+	 mouse_pos.x < player.global_position.x + click_offset and
+	 mouse_pos.y > player.global_position.y - click_offset and
+	 mouse_pos.y < player.global_position.y + click_offset):
+		var arrow = instance_arrow(weapon_data.arrow,player.hand.global_position,offset)
 		
 		if weapon_data.can_pierce:
 			arrow.can_pierce = true
@@ -54,7 +57,7 @@ func shoot(_offset: bool,mega: bool) -> void:
 		player.get_parent().call_deferred("add_child",arrow)
 
 func set_arrow_rotation() -> float:
-	var player_pos = player.global_position
+	var player_pos = player.hand.global_position
 	var mouse_pos = player.get_global_mouse_position()
 	var angle_rotation: float = (player_pos - mouse_pos).angle()
 	return angle_rotation
