@@ -1,27 +1,20 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpkc7rbbp36vu"]
 
-[ext_resource type="Script" path="res://Shop/BowsShop/shop_weapon.gd" id="1_ohfgj"]
-[ext_resource type="Script" path="res://Shop/BowsShop/shop_weapon_data.gd" id="2_de5vr"]
+[ext_resource type="Script" uid="uid://b6sj53e6i61f0" path="res://Shop/BowsShop/shop_weapon.gd" id="1_ohfgj"]
+[ext_resource type="Script" uid="uid://cdolf4nrn5r45" path="res://Shop/BowsShop/shop_weapon_data.gd" id="2_de5vr"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="2_r1lb1"]
-[ext_resource type="Texture2D" uid="uid://wepteipa4kag" path="res://Shop/BowsShop/Sprites/Bow_1.png" id="2_txt7c"]
+[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Shop/BowsShop/Sprites/Bow1.png" id="3_2413h"]
 [ext_resource type="Texture2D" uid="uid://b36pvyfukpxjr" path="res://Shop/BowsShop/Sprites/BowFrame.png" id="5_pjnw0"]
-[ext_resource type="Script" path="res://MainMenu/ButtonData/button_data.gd" id="5_u16uf"]
+[ext_resource type="Script" uid="uid://c8kt1315rsybw" path="res://MainMenu/ButtonData/button_data.gd" id="5_u16uf"]
 
 [sub_resource type="Resource" id="Resource_6ah8a"]
 script = ExtResource("2_de5vr")
-name = ""
-name_color = Color(0, 0, 0, 1)
-name_shadow_color = Color(0, 0, 0, 1)
-price = 0
-special_ability = ""
-block_coordinate = Vector2(0, 0)
-bought = false
 
 [sub_resource type="Resource" id="Resource_0er48"]
 script = ExtResource("5_u16uf")
 
 [sub_resource type="Curve" id="Curve_lhkgh"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -30,7 +23,7 @@ offsets = PackedFloat32Array(0, 0.147651, 0.248322, 0.42953, 0.583893, 0.744966,
 colors = PackedColorArray(1, 0.839216, 0, 1, 0, 1, 0.166667, 1, 0.9, 1, 0, 1, 0.85, 0, 1, 1, 0, 0.0166669, 1, 1, 0.866667, 1, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="Curve" id="Curve_5tewp"]
-min_value = -1.0
+_limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -39,8 +32,9 @@ script = ExtResource("1_ohfgj")
 data = SubResource("Resource_6ah8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 2)
-texture = ExtResource("2_txt7c")
+position = Vector2(1, 3.9999998)
+scale = Vector2(0.53906256, 0.53906256)
+texture = ExtResource("3_2413h")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 42.0

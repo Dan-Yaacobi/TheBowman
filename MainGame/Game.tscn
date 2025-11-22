@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cvio5f8sadcl8"]
+[gd_scene load_steps=10 format=3 uid="uid://cvio5f8sadcl8"]
 
-[ext_resource type="Script" path="res://MainGame/game.gd" id="1_iteqa"]
+[ext_resource type="Script" uid="uid://dex3xgdv4beu3" path="res://MainGame/game.gd" id="1_iteqa"]
 [ext_resource type="PackedScene" uid="uid://cdu6hjoweee6s" path="res://Level/PlayGround/PlayGround.tscn" id="1_maytk"]
 [ext_resource type="PackedScene" uid="uid://cnhbrpo4htp2y" path="res://MainMenu/MainMenu.tscn" id="2_id0vo"]
 [ext_resource type="PackedScene" uid="uid://kqtm00s5xgeb" path="res://Shop/Shop.tscn" id="3_eirnv"]
@@ -8,11 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://boqh5qxj8h80x" path="res://Shop/AbilitiesShop/AbilitiesShop.tscn" id="6_onhyr"]
 [ext_resource type="PackedScene" uid="uid://clubhhuu1gip3" path="res://Shop/PlatformShop/PlatformShop.tscn" id="7_8hn01"]
 [ext_resource type="PackedScene" uid="uid://duv1vqq2qbq3m" path="res://Shop/TowersShopMenu/TowerUpgradeMenu.tscn" id="8_nnxe6"]
+[ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="9_yk4gd"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iteqa")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_id0vo")]
+visible = false
 
 [node name="PlayGround" parent="." instance=ExtResource("1_maytk")]
 
@@ -29,3 +31,5 @@ script = ExtResource("1_iteqa")
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
 
 [node name="CloudTimer" type="Timer" parent="."]
+
+[node name="Hud" parent="." instance=ExtResource("9_yk4gd")]

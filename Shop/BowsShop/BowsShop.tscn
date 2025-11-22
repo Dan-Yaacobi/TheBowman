@@ -1,15 +1,15 @@
 [gd_scene load_steps=38 format=4 uid="uid://cmdeim0mrcv32"]
 
-[ext_resource type="Script" path="res://Shop/BowsShop/bows_shop.gd" id="1_ca2ob"]
+[ext_resource type="Script" uid="uid://btsxr8bei66af" path="res://Shop/BowsShop/bows_shop.gd" id="1_ca2ob"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_jhkpf"]
 [ext_resource type="PackedScene" uid="uid://bpkc7rbbp36vu" path="res://Shop/BowsShop/ShopWeapon.tscn" id="2_v1eix"]
-[ext_resource type="Script" path="res://Shop/BowsShop/shop_weapon_data.gd" id="3_bnjw8"]
-[ext_resource type="Texture2D" uid="uid://wepteipa4kag" path="res://Shop/BowsShop/Sprites/Bow_1.png" id="4_1e7f4"]
-[ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/buy_bow_button.gd" id="4_aus3d"]
+[ext_resource type="Script" uid="uid://cdolf4nrn5r45" path="res://Shop/BowsShop/shop_weapon_data.gd" id="3_bnjw8"]
+[ext_resource type="Script" uid="uid://c71hp128qawkr" path="res://MainMenu/ButtonData/ButtonActions/buy_bow_button.gd" id="4_aus3d"]
+[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Shop/BowsShop/Sprites/Bow1.png" id="6_ia1ak"]
 [ext_resource type="Texture2D" uid="uid://b3tmin4b1qqw4" path="res://Shop/BowsShop/Sprites/Bow_2.png" id="6_p58kp"]
 [ext_resource type="PackedScene" uid="uid://b5yjt3rxeprfj" path="res://Weapons/1_BlueBow/BlueBow.tscn" id="7_gdy8u"]
 [ext_resource type="Texture2D" uid="uid://74kklgf4stgy" path="res://Shop/BowsShop/Sprites/Bow_3.png" id="8_6p2fp"]
-[ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="8_vnfog"]
+[ext_resource type="Script" uid="uid://c7mrg7kkwnut4" path="res://MainMenu/Scripts/door.gd" id="8_vnfog"]
 [ext_resource type="PackedScene" uid="uid://cothgt5is5u1q" path="res://Weapons/2_RedBow/RedBow.tscn" id="9_0rvep"]
 [ext_resource type="PackedScene" uid="uid://jej20pf43m2p" path="res://Weapons/3_BlackBow/BlackBow.tscn" id="9_n7crj"]
 [ext_resource type="Texture2D" uid="uid://bmq2wagnyl81i" path="res://Shop/BowsShop/Sprites/Bow_4.png" id="12_3lnwp"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bg8cpwxytaj4p" path="res://Weapons/6_BoneBow/BoneBow.tscn" id="15_wcqo3"]
 [ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="16_5tpjh"]
 [ext_resource type="Texture2D" uid="uid://drabjuugg3n12" path="res://Shop/BowsShop/Sprites/bow_7.png" id="18_4bnt7"]
-[ext_resource type="Script" path="res://MainGame/current_money.gd" id="18_m8yn8"]
+[ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="18_m8yn8"]
 [ext_resource type="PackedScene" uid="uid://dy483h11yxme" path="res://Weapons/7_BubbleGumBow/BubbleGumBow.tscn" id="19_60cpi"]
 
 [sub_resource type="Resource" id="Resource_q703r"]
@@ -29,21 +29,20 @@ script = ExtResource("4_aus3d")
 
 [sub_resource type="Resource" id="Resource_nml22"]
 script = ExtResource("3_bnjw8")
-texture = ExtResource("4_1e7f4")
+texture = ExtResource("6_ia1ak")
 name = "Blue Bow"
 name_color = Color(0, 0.462745, 1, 1)
 name_shadow_color = Color(0, 0, 1, 1)
 price = 50
 special_ability = "RapidFire"
 block_coordinate = Vector2(11, 9)
-bought = false
 button_click_action = SubResource("Resource_q703r")
 weapon_scene = ExtResource("7_gdy8u")
 
 [sub_resource type="Resource" id="Resource_qtlra"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_wl1kh"]
+[sub_resource type="Resource" id="Resource_ia1ak"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("6_p58kp")
@@ -53,28 +52,25 @@ name_shadow_color = Color(0.521162, 0.159423, 0.162428, 1)
 price = 300
 special_ability = "Temporary Infinite Mana"
 block_coordinate = Vector2(21, 9)
-bought = false
 button_click_action = SubResource("Resource_qtlra")
 weapon_scene = ExtResource("9_0rvep")
 
 [sub_resource type="Resource" id="Resource_o2gpa"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_cbgi6"]
+[sub_resource type="Resource" id="Resource_spq4w"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("8_6p2fp")
 name = "Black Bow"
 name_color = Color(0.266575, 0.266575, 0.266575, 1)
-name_shadow_color = Color(0, 0, 0, 1)
 price = 1000
 special_ability = "Fire arrows around you"
 block_coordinate = Vector2(31, 9)
-bought = false
 button_click_action = SubResource("Resource_o2gpa")
 weapon_scene = ExtResource("9_n7crj")
 
-[sub_resource type="Resource" id="Resource_1pved"]
+[sub_resource type="Resource" id="Resource_nlbfr"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("12_3lnwp")
@@ -84,11 +80,10 @@ name_shadow_color = Color(0.142865, 0.373991, 0.0921751, 1)
 price = 2500
 special_ability = "Summon Poison Cloud"
 block_coordinate = Vector2(41, 9)
-bought = false
 button_click_action = SubResource("Resource_o2gpa")
 weapon_scene = ExtResource("13_fdnd6")
 
-[sub_resource type="Resource" id="Resource_akm4r"]
+[sub_resource type="Resource" id="Resource_4j01i"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("14_i3fme")
@@ -98,14 +93,13 @@ name_shadow_color = Color(0.72, 0.6264, 0.1584, 1)
 price = 4000
 special_ability = "Stuns nearby enemies"
 block_coordinate = Vector2(51, 9)
-bought = false
 button_click_action = SubResource("Resource_o2gpa")
 weapon_scene = ExtResource("15_e6rfv")
 
 [sub_resource type="Resource" id="Resource_75hcs"]
 script = ExtResource("4_aus3d")
 
-[sub_resource type="Resource" id="Resource_ydsig"]
+[sub_resource type="Resource" id="Resource_g0s01"]
 resource_local_to_scene = true
 script = ExtResource("3_bnjw8")
 texture = ExtResource("14_2d56c")
@@ -115,7 +109,6 @@ name_shadow_color = Color(0.442911, 0.442911, 0.442911, 1)
 price = 10000
 special_ability = "Summon skeletons"
 block_coordinate = Vector2(41, 21)
-bought = false
 button_click_action = SubResource("Resource_75hcs")
 weapon_scene = ExtResource("15_wcqo3")
 
@@ -131,7 +124,6 @@ name_shadow_color = Color(0.980392, 0.341176, 0.776471, 1)
 price = 25000
 special_ability = "None"
 block_coordinate = Vector2(31, 21)
-bought = false
 button_click_action = SubResource("Resource_cb4ee")
 weapon_scene = ExtResource("19_60cpi")
 
@@ -158,27 +150,27 @@ data = SubResource("Resource_nml22")
 [node name="ShopWeapon2" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(212, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_wl1kh")
+data = SubResource("Resource_ia1ak")
 
 [node name="ShopWeapon3" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(372, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_cbgi6")
+data = SubResource("Resource_spq4w")
 
 [node name="ShopWeapon4" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(532, 109)
 scale = Vector2(2, 2)
-data = SubResource("Resource_1pved")
+data = SubResource("Resource_nlbfr")
 
 [node name="ShopWeapon5" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(694, 111)
 scale = Vector2(2, 2)
-data = SubResource("Resource_akm4r")
+data = SubResource("Resource_4j01i")
 
 [node name="ShopWeapon6" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(697, 289)
 scale = Vector2(2, 2)
-data = SubResource("Resource_ydsig")
+data = SubResource("Resource_g0s01")
 
 [node name="ShopWeapon7" parent="." instance=ExtResource("2_v1eix")]
 position = Vector2(537, 289)
@@ -208,6 +200,7 @@ shape = SubResource("RectangleShape2D_64mxg")
 debug_color = Color(0.371579, 0.608447, 0.265125, 0.42)
 
 [node name="CurrentMoney" type="Label" parent="."]
+visible = false
 offset_left = 34.0
 offset_top = 67.0
 offset_right = 1167.0

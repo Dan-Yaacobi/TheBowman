@@ -2,7 +2,6 @@ class_name PlatformShop extends Node2D
 
 signal changed_scene
 
-@onready var current_money: Label = $CurrentMoney
 @onready var tiles: TilesControl = $Tiles
 @onready var fall: Area2D = $Fall
 @onready var reset_button: PlatformResetButton = $ResetButton
@@ -19,12 +18,9 @@ func set_scene(_player: Player) -> void:
 		player.global_position = Vector2(0,-8)
 		player.stats.in_menu = true
 		player.set_camera(Rect2i(Vector2(-100000,-100000),Vector2(10000000,10000000)),16)
-		set_current_money(player.stats.money)
 		visible = true
 		tiles.collision_enabled = true
 		set_shop_platforms()
-		if not player.money_changed.is_connected(set_current_money):
-			player.money_changed.connect(set_current_money)
 		
 		if not fall.body_entered.is_connected(to_shop):
 			fall.body_entered.connect(to_shop)
@@ -90,9 +86,6 @@ func add_platform_at(coords: Vector2,color_index: int) -> void:
 	tiles.add_tile_at(coords,color_index)
 	playground.tiles.add_tile_at(coords,color_index)
 	
-func set_current_money(amount: int) -> void:
-	current_money.text = "Money: " + str(amount)
-
 func refund(amount: int) -> void:
 	player.collect_money(amount)
 	player.money_changed.emit(player.stats.money)

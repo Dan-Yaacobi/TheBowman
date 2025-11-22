@@ -2,7 +2,7 @@ class_name TotalBuffs extends Control
 
 @onready var flow_container: FlowContainer = $FlowContainer
 @onready var buff_ids: Dictionary = {}
-@onready var player: Player = $".."
+@onready var player: Player = PlayerManager.player
 
 const BUFF = preload("res://Player/BuffDisplay/Buff.tscn")
 

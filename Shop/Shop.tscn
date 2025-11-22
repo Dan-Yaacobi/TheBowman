@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=4 uid="uid://kqtm00s5xgeb"]
 
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_g6tmg"]
-[ext_resource type="Script" path="res://Shop/shop.gd" id="1_olmr6"]
+[ext_resource type="Script" uid="uid://c1k26r41i0m25" path="res://Shop/shop.gd" id="1_olmr6"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="2_qj66g"]
-[ext_resource type="Script" path="res://Shop/BowsShop/go_to_shop_action.gd" id="4_equfb"]
-[ext_resource type="Script" path="res://MainMenu/ButtonData/button_data.gd" id="4_wuv3j"]
-[ext_resource type="Script" path="res://MainMenu/Scripts/door.gd" id="5_5dwf0"]
-[ext_resource type="Script" path="res://MainMenu/ButtonData/ButtonActions/go_to_platform_shop.gd" id="7_l5wgc"]
+[ext_resource type="Script" uid="uid://bbjv2e87m1emm" path="res://Shop/BowsShop/go_to_shop_action.gd" id="4_equfb"]
+[ext_resource type="Script" uid="uid://c8kt1315rsybw" path="res://MainMenu/ButtonData/button_data.gd" id="4_wuv3j"]
+[ext_resource type="Script" uid="uid://c7mrg7kkwnut4" path="res://MainMenu/Scripts/door.gd" id="5_5dwf0"]
+[ext_resource type="Script" uid="uid://d1fmmxn3ehhkr" path="res://MainMenu/ButtonData/ButtonActions/go_to_platform_shop.gd" id="7_l5wgc"]
 [ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="8_a1yjt"]
-[ext_resource type="Script" path="res://MainGame/current_money.gd" id="9_xklby"]
+[ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_xklby"]
 
 [sub_resource type="Resource" id="Resource_pmkci"]
 script = ExtResource("4_equfb")
@@ -103,6 +103,7 @@ shape = SubResource("RectangleShape2D_1ahqc")
 debug_color = Color(0.648687, 0.520527, 0, 0.42)
 
 [node name="CurrentMoney" type="Label" parent="."]
+visible = false
 offset_left = 22.0
 offset_top = 17.0
 offset_right = 1155.0

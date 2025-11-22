@@ -3,7 +3,6 @@ class_name MainMenu extends Node2D
 @onready var enter_fight: Area2D = $RightDoor/Enter
 @onready var enter_shop: Area2D = $LeftDoor/Enter
 @onready var wave_label: Label = $CurrentWaves
-@onready var current_money: CurrentMoney = $CurrentMoney
 @onready var tiles: TileMapLayer = $Tiles
 @onready var hard_mode_button: Button = $HardMode
 @onready var normal_mode_button: Button = $NormalMode
@@ -53,8 +52,6 @@ func set_player_camera(_player: Player) -> void:
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		_player.global_position = Vector2(185,104)
-		if not _player.money_changed.is_connected(update_money_label):
-			_player.money_changed.connect(update_money_label)
 		menu_tile_limit = tiles.get_used_rect()
 		_player.stats.in_menu = true
 		_player.stats.hp = _player.stats.max_hp
@@ -62,8 +59,6 @@ func set_scene(_player: Player) -> void:
 		visible = true
 		tiles.collision_enabled = true
 		enable_doors()
-		update_money_label(_player.stats.money)
-		current_money.update_current_money(_player.stats.money)
 		
 func exit_scene(_player) -> void:
 	disable_doors()
@@ -83,9 +78,6 @@ func enable_doors() -> void:
 
 func update_wave_label(wave_num: int) -> void:
 	wave_label.text = "Current Wave: " + str(wave_num)
-	
-func update_money_label(amount) -> void:
-	current_money.update_current_money(amount)
 	
 #func enable() -> void:
 	#visible = true

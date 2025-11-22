@@ -15,7 +15,7 @@ signal back_to_menu(scene: String)
 @onready var shoot_action: ShootAction = $ShootAction
 @onready var hit_box: Area2D = $HitBox
 @onready var camera: Camera2D = $Camera2D
-@onready var mana_bar: ManaBar = $ManaBar
+
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var death_animation_timer: Timer = $DeathAnimationTimer
@@ -29,11 +29,6 @@ signal back_to_menu(scene: String)
 @onready var upgrades: Upgrades = $Upgrades
 @onready var mega_shot_effect: CPUParticles2D = $MegaShotEffect
 
-@onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
-@onready var time_left_label: Label = $SpecialAbilityCD/TimeLeftLabel
-@onready var health_bar: HealthBar = $HealthBar
-
-@onready var total_buffs: TotalBuffs = $TotalBuffs
 @onready var slow: Slow = $Debuffs/Slow
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var invincibility_timer: Timer = $InvincibilityTimer
@@ -42,7 +37,10 @@ signal back_to_menu(scene: String)
 @export var stats: PlayerStats
 
 const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
-
+var mana_bar: ManaBar
+var health_bar: HealthBar
+var total_buffs: TotalBuffs
+var special_ability_cd: Sprite2D
 var direction: float
 var direction_side: bool = false
 var current_weapon: Weapon
@@ -66,7 +64,6 @@ var mega_shot_activated: bool = false
 var invincible: bool = false
 
 func _ready() -> void:
-	
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
@@ -140,9 +137,6 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if stats.hp > 0:
-
-		if event.is_action_pressed("test"):
-			pass
 
 		if event.is_action_pressed("Menu"):
 			back_to_menu.emit("Menu")
@@ -392,12 +386,8 @@ func special_ability_indictaor() -> void:
 	var t_left = special_ability_cooldown.time_left
 	var t_total = special_ability_cooldown.wait_time
 	special_ability_cd.modulate.a = 1 - t_left/t_total
-	time_left_label.text = str(round_to_dec(t_left,1))
-	pass
-	
-func round_to_dec(num, digit):
-	return round(num * pow(10.0, digit)) / pow(10.0, digit)
-	
+	special_ability_cd.update_time_left(t_left)
+
 func slow_player(slow_time: float,effect: Node2D) -> void:
 	slow.slow_player(slow_time,effect)
 

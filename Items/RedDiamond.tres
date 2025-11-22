@@ -1,15 +1,14 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://d0coedohrill3"]
 
-[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="1_kq4bl"]
-[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="2_sd6dp"]
+[ext_resource type="Script" uid="uid://dwa1xg7ylpp4y" path="res://Items/ItemEffects/item_effect.gd" id="1_kq4bl"]
+[ext_resource type="Script" uid="uid://gwfm40yibx2n" path="res://Items/ItemEffects/sparkle.gd" id="2_sd6dp"]
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="3_v3q1v"]
 [ext_resource type="Texture2D" uid="uid://ca1dpb3akulj3" path="res://Items/Sprites/RedDiamond.png" id="4_k5v8l"]
-[ext_resource type="Script" path="res://Items/item_data.gd" id="5_k1y8t"]
+[ext_resource type="Script" uid="uid://chfcjmpmpeon0" path="res://Items/item_data.gd" id="5_k1y8t"]
 
 [sub_resource type="Resource" id="Resource_tsgmg"]
 script = ExtResource("2_sd6dp")
 sparkle_color = "db2121"
-sparkle_scene = ExtResource("3_v3q1v")
 
 [resource]
 script = ExtResource("5_k1y8t")

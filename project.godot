@@ -10,15 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Archery"
-run/main_scene="res://MainGame/Game.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/name="TheBowman"
+run/main_scene="uid://bsesww0tvvo33"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EnemyAbilityData="*res://00 Globals/enemy_ability_data.gd"
 PlayerManager="*res://00 Globals/global_player_manager.gd"
+SceneTransition="*res://HUD/Scene Transition/scene_transition.tscn"
 
 [display]
 
@@ -29,6 +30,7 @@ window/size/mode=2
 [gui]
 
 timers/tooltip_delay_sec=0.0
+theme/custom_font="uid://b7lpukcfa8uxr"
 
 [input]
 

@@ -1,22 +1,5 @@
-res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn
+res://StartMenu/StartMenu.tscn
 res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
-res://Weapons/2_RedBow/RedArrow/RedArrow.tscn
-res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn
-res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn
 res://MainGame/Game.tscn
-res://Level/Testing/TestingArea.tscn
-res://Player/Player.tscn
-res://Level/Islands/Island.tscn
-res://Player/Hand/Hand.tscn
-res://Objects/Portal/Portal.tscn
-res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
-res://Player/Abilities/SpecialAbilities/BlackBowAbility/black_bow_ability.gd
-res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn
-res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn
-res://Weapons/5_ThunderBow/ThunderArrow/thunder_arrow.gd
-res://Player/Player Actions/Shoot/shoot.gd
-res://Player/dash_state.gd
-res://MainMenu/MainMenu.tscn
-res://Enemies/DemoEnemy/demo_enemy.gd

@@ -5,17 +5,18 @@ class_name ManaBar extends TextureProgressBar
 @export var mana_rate: float
 @export var shoot_cost: int
 @export var bar_color: Color
-@onready var player: Player = $".."
+var player: Player
 
 func _ready() -> void:
 	set_value_to_max()
 	regenrate_timer.timeout.connect(regenerate_mana)
 	regular_color()
-	
+
+	player = PlayerManager.player
+
 func _process(delta: float) -> void:
 	if regenrate_timer.is_stopped():
 		regenrate_timer.start()
-	pass
 
 func set_mana_bar_stats(_mana_rate: float, _shoot_cost: int) -> void:
 	mana_rate = _mana_rate

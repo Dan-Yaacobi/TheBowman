@@ -1,0 +1,296 @@
+[gd_scene load_steps=17 format=3 uid="uid://bju1rx12kx8oe"]
+
+[ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
+[ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
+[ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="2_ja1d4"]
+[ext_resource type="Script" uid="uid://07lk15kopw0g" path="res://Player/BuffDisplay/buff_display_control.gd" id="4_njmlf"]
+[ext_resource type="Script" uid="uid://cpowcmubsuafi" path="res://Player/flow_container.gd" id="5_lkt0t"]
+[ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="6_6i5cd"]
+[ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="7_lkt0t"]
+[ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
+[ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
+[ext_resource type="Script" uid="uid://du44dkpi0kvi3" path="res://HUD/combo_counter.gd" id="10_pd2p5"]
+
+[sub_resource type="Animation" id="Animation_xyp2j"]
+resource_name = "Gained"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.25, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_klfvc"]
+resource_name = "Gained10"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1e6g1"]
+resource_name = "Gained25"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0.67451, 0.0392157, 0.8, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tq3ew"]
+resource_name = "Lost"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_06wjn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r47hq"]
+_data = {
+&"Gained": SubResource("Animation_xyp2j"),
+&"Gained10": SubResource("Animation_klfvc"),
+&"Gained25": SubResource("Animation_1e6g1"),
+&"Lost": SubResource("Animation_tq3ew"),
+&"RESET": SubResource("Animation_06wjn")
+}
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_ja1d4")
+
+[node name="HealthBar" parent="." instance=ExtResource("1_b7ubu")]
+custom_minimum_size = Vector2(50, 20)
+offset_left = 73.0
+offset_top = 854.0
+offset_right = 137.0
+offset_bottom = 886.0
+scale = Vector2(6, 6)
+
+[node name="ManaBar" parent="." instance=ExtResource("2_ja1d4")]
+offset_left = 1515.0
+offset_top = 848.0
+offset_right = 1579.0
+offset_bottom = 880.0
+scale = Vector2(6, 6)
+
+[node name="LevelStats" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TotalBuffs" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 863.0
+offset_top = 270.99997
+offset_right = 863.0
+offset_bottom = 270.99997
+scale = Vector2(5, 5)
+script = ExtResource("4_njmlf")
+
+[node name="FlowContainer" type="FlowContainer" parent="TotalBuffs"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = 119.0
+offset_right = -75.0
+offset_bottom = 127.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 1
+vertical = true
+script = ExtResource("5_lkt0t")
+
+[node name="Buff" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff2" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff3" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff4" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff5" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff6" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff7" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="Buff8" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+layout_mode = 2
+
+[node name="SpecialAbilityCD" type="Sprite2D" parent="."]
+position = Vector2(1405.0001, 937)
+scale = Vector2(5, 5)
+texture = ExtResource("7_lkt0t")
+script = ExtResource("8_6i5cd")
+
+[node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
+offset_left = 8.0
+offset_top = -10.0
+offset_right = 151.0
+offset_bottom = 332.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 25
+theme_override_constants/shadow_outline_size = 30
+theme_override_font_sizes/font_size = 250
+text = "0
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentMoney" type="Label" parent="."]
+offset_left = 30.999996
+offset_top = 32.999992
+offset_right = 1164.0
+offset_bottom = 238.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.76, 0.608, 0, 1)
+theme_override_colors/font_outline_color = Color(0.54, 0.432, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 150
+text = "Money:"
+script = ExtResource("9_t1yhm")
+
+[node name="ComboCounter" type="Label" parent="."]
+offset_left = 425.0
+offset_top = -104.0
+offset_right = 1560.0
+offset_bottom = 238.0
+scale = Vector2(0.05, 0.05)
+pivot_offset = Vector2(567, 171)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Combo: 0"
+script = ExtResource("10_pd2p5")
+
+[node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
+libraries = {
+&"": SubResource("AnimationLibrary_r47hq")
+}

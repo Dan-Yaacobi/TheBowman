@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://clubhhuu1gip3"]
 
-[ext_resource type="Script" path="res://Shop/PlatformShop/platform_shop.gd" id="1_e8pwv"]
+[ext_resource type="Script" uid="uid://di48qnrvlaegf" path="res://Shop/PlatformShop/platform_shop.gd" id="1_e8pwv"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_oixod"]
 [ext_resource type="PackedScene" uid="uid://do3cqgiesj6ik" path="res://Shop/PlatformShop/PlatformButton.tscn" id="5_adtye"]
-[ext_resource type="Script" path="res://Shop/PlatformShop/reset_button.gd" id="5_kbbko"]
+[ext_resource type="Script" uid="uid://dwhxpqfqhym1l" path="res://Shop/PlatformShop/reset_button.gd" id="5_kbbko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hl5w"]
 size = Vector2(2545, 12)
@@ -27,21 +27,6 @@ theme_override_constants/outline_size = 35
 theme_override_constants/shadow_outline_size = 55
 theme_override_font_sizes/font_size = 250
 text = "Click on a platform to buy it"
-
-[node name="CurrentMoney" type="Label" parent="."]
-offset_left = -16.0
-offset_top = -71.0
-offset_right = 1081.0
-offset_bottom = 271.0
-scale = Vector2(0.025, 0.025)
-theme_override_colors/font_color = Color(1, 0.8, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.75, 0.6, 0, 1)
-theme_override_colors/font_outline_color = Color(0.5, 0.4, 0, 1)
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
-theme_override_font_sizes/font_size = 250
-text = "Money: 0"
 
 [node name="Fall" type="Area2D" parent="."]
 

@@ -7,7 +7,6 @@ signal new_wave
 @onready var summon_timer: Timer = $SummonTimer
 @onready var falling_death: Area2D = $FallingDeath
 @onready var tiles: TilesControl = $Tiles
-@onready var current_money: CurrentMoney = $CurrentMoney
 @onready var combo_counter: Label = $ComboCounter
 @onready var combo_animation: AnimationPlayer = $ComboCounter/ComboAnimation
 @onready var next_wave_button: Button = $Button
@@ -209,14 +208,9 @@ func set_scene(_player: Player) -> void:
 		summon_timer.wait_time = enemies.spawn_time
 		summon_timer.timeout.connect(summon_enemy)
 		falling_death.body_entered.connect(death)
-		if not player.money_changed.is_connected(update_money):
-			player.money_changed.connect(update_money)
-		update_money(player.stats.money)
+
 		_player.mana_bar.set_value_to_max()
 		set_towers()
-		
-func update_money(amount) -> void:
-	current_money.update_current_money(amount)
 
 func update_combo(amount: int) -> void:
 	combo_counter.text = "Combo: " + str(amount)

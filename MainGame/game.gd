@@ -12,6 +12,7 @@ const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 "Shop": shop, "BowsShop": bows_shop, "AbilitiesShop": abilities_shop,"PlatformShop":platform_shop,
 "TowerUpgrade": tower_upgrade_menu}
 @onready var cloud_timer: Timer = $CloudTimer
+@onready var hud: HUD = $Hud
 
 @export var music_on: bool = true :
 	set(val):
@@ -24,9 +25,16 @@ var player: Player
 var last_scene: Node
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	
 	cloud_timer.timeout.connect(summon_cloud)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	player = PLAYER.instantiate()
+	player = PlayerManager.player
+	player.mana_bar = hud.get_mana_bar()
+	player.health_bar = hud.get_health_bar()
+	player.total_buffs = hud.get_total_buffs()
+	player.special_ability_cd = hud.get_special_ability_cd()
+	
 	player.died.connect(change_scene)
 	add_child(player)
 	
@@ -37,20 +45,45 @@ func _ready() -> void:
 	abilities_shop.changed_scene.connect(change_scene)
 	player.back_to_menu.connect(change_scene)
 	
-	player.reparent(main_menu)
-	main_menu.set_scene(player)
+	#player.reparent(main_menu)
+	#main_menu.set_scene(player)
+	
 	last_scene = main_menu
 	main_menu.playground = play_ground
 	cloud_timer.start()
 	for child in get_children():
 		if child != last_scene and child.has_method("exit_scene"):
 			child.call_deferred("exit_scene",player)
-
+	
+	change_scene("Menu")
+	hud.visible = false
+	main_menu.visible = false
+	await get_tree().create_timer(0.4).timeout
+	RenderingServer.set_default_clear_color(Color.from_string("64c5f2",Color.AQUA))
+	player.visible = true
+	hud.visible = true
+	main_menu.visible = true
+	
 func change_scene(new_scene: String) -> void:
+	get_tree().paused = true
+
+	hud.visible = false
+	
+	await SceneTransition.fade_out()
+	
 	last_scene.call_deferred("exit_scene", player)
 	scenes_dic.get(new_scene).call_deferred("set_scene", player)
 	player.call_deferred("reparent",scenes_dic.get(new_scene))
 	last_scene = scenes_dic.get(new_scene)
+	
+	await get_tree().process_frame
+	
+	await SceneTransition.fade_in()
+	
+	get_tree().paused = false
+	hud.visible = true
+	await get_tree().process_frame
+	
 	#player.player_state_machine.ChangeState(player.idle_state)
 
 func get_playground() -> PlayGround:
@@ -67,7 +100,6 @@ func summon_cloud() -> void:
 	pass
 	
 func music_on_off() -> void:
-	print("changed")
 	if music_on:
 		game_music.play()
 	else:
