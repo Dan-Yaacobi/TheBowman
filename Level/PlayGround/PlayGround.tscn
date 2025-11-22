@@ -150,7 +150,6 @@ bird_spawn = Array[int]([0, 0])
 total_enemies = 10
 spawn_time = 1.0
 base_spawn_time = 1.5
-double_spawn_chance = 10.0
 
 [sub_resource type="Resource" id="Resource_xq6vo"]
 script = ExtResource("20_ueqxs")
@@ -380,7 +379,7 @@ position = Vector2(9, 28.5)
 shape = SubResource("RectangleShape2D_bice2")
 
 [node name="SummonTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 3.5
 
 [node name="FallingDeath" type="Area2D" parent="."]
 position = Vector2(226, -1)

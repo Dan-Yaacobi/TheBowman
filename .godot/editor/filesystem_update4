@@ -3,3 +3,9 @@ res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
 res://MainGame/Game.tscn
+res://Enemies/DemoEnemy/DemoEnemy.tscn
+res://Enemies/DemoEnemy/DemoEnemy2.tscn
+res://Level/PlayGround/PlayGround.tscn
+res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn
+res://Player/Upgrades/upgrade.gd
+res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn

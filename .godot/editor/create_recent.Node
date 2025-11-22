@@ -12,4 +12,3 @@ Area2D
 RayCast2D
 CharacterBody2D
 CPUParticles2D
-PanelContainer

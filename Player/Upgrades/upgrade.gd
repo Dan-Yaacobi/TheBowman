@@ -13,13 +13,13 @@ signal chosen
 @export var tool_tip: String
 @export var tool_tip2: String
 
-
 @export_category("")
 @export var ID: int
 @export var bucket: int = 1
 @export var is_ability: bool = false
 @export var ability_chosen: bool = false
 @export var can_choose_once: bool = false
+
 
 func upgrade(_player: Player) -> void:
 	pass

@@ -1,12 +1,12 @@
 [gd_scene load_steps=25 format=3 uid="uid://cyv1v6g5srjk1"]
 
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_7uoph"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nqjsy"]
+[ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_7uoph"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nqjsy"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_olou7"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_7f1kl"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="3_vmfyd"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_6q55h"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="5_b4mrk"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_7f1kl"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_vmfyd"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_6q55h"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="5_b4mrk"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="6_21mn1"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="10_u3mhv"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_mrufl"]
@@ -23,18 +23,10 @@ move_speed = 15
 knockback = 100
 skin = ExtResource("10_u3mhv")
 coins_dropped = 1
-sharp_movement = false
 touch_damage = 1
 death_ability = Array[ExtResource("2_nqjsy")]([SubResource("Resource_t1xp5")])
-initial_ability = Array[ExtResource("2_nqjsy")]([])
-special_ability = Array[ExtResource("2_nqjsy")]([])
-debuffs = Array[ExtResource("3_7f1kl")]([])
-boss = false
-teleport_chance = 0
-shooter = false
 shooter_chance = 50
 bullet = ExtResource("2_olou7")
-shoot_speed = 0.0
 
 [sub_resource type="Resource" id="Resource_kuvca"]
 script = ExtResource("5_b4mrk")
@@ -200,9 +192,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
 _data = {
-"Damaged": SubResource("Animation_hcxsj"),
-"Move": SubResource("Animation_rwjqo"),
-"RESET": SubResource("Animation_wrm4u")
+&"Damaged": SubResource("Animation_hcxsj"),
+&"Move": SubResource("Animation_rwjqo"),
+&"RESET": SubResource("Animation_wrm4u")
 }
 
 [sub_resource type="Animation" id="Animation_hsnyq"]
@@ -254,9 +246,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
 _data = {
-"Fly": SubResource("Animation_hsnyq"),
-"RESET": SubResource("Animation_f1xcn"),
-"Slam": SubResource("Animation_goyeu")
+&"Fly": SubResource("Animation_hsnyq"),
+&"RESET": SubResource("Animation_f1xcn"),
+&"Slam": SubResource("Animation_goyeu")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
@@ -266,7 +258,7 @@ radius = 6.15385
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_emnjt"]
-radius = 6.0
+radius = 7.6923084
 
 [node name="DemoEnemy" type="CharacterBody2D"]
 scale = Vector2(0.65, 0.65)
@@ -282,7 +274,7 @@ texture = ExtResource("10_u3mhv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_o35pa")
+&"": SubResource("AnimationLibrary_o35pa")
 }
 
 [node name="Wings" type="Sprite2D" parent="Sprite2D"]
@@ -291,7 +283,7 @@ vframes = 6
 
 [node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
 libraries = {
-"": SubResource("AnimationLibrary_qgtth")
+&"": SubResource("AnimationLibrary_qgtth")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

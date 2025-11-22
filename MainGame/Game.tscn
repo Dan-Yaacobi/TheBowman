@@ -17,18 +17,25 @@ script = ExtResource("1_iteqa")
 visible = false
 
 [node name="PlayGround" parent="." instance=ExtResource("1_maytk")]
+visible = false
 
 [node name="Shop" parent="." instance=ExtResource("3_eirnv")]
+visible = false
 
 [node name="BowsShop" parent="." instance=ExtResource("5_bk4eh")]
+visible = false
 
 [node name="AbilitiesShop" parent="." instance=ExtResource("6_onhyr")]
+visible = false
 
 [node name="PlatformShop" parent="." instance=ExtResource("7_8hn01")]
+visible = false
 
 [node name="TowerUpgradeMenu" parent="." instance=ExtResource("8_nnxe6")]
+visible = false
 
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
+visible = false
 
 [node name="CloudTimer" type="Timer" parent="."]
 

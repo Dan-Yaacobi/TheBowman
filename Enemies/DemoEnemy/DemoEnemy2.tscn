@@ -1,15 +1,15 @@
 [gd_scene load_steps=28 format=3 uid="uid://cn76h3jplsrfn"]
 
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_t5j42"]
+[ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_t5j42"]
 [ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_b0juv"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_fb18l"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="3_duv7u"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_e70ef"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_eldsg"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_fb18l"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_duv7u"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_e70ef"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_eldsg"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="6_8bfgm"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="7_0mc1a"]
 [ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="7_mruj4"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="9_8b8lc"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="9_8b8lc"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_slubb"]
 
 [sub_resource type="Resource" id="Resource_fth6d"]
@@ -26,20 +26,12 @@ coins_dropped = 7
 sharp_movement = true
 touch_damage = 2
 death_ability = Array[ExtResource("2_fb18l")]([SubResource("Resource_fth6d")])
-initial_ability = Array[ExtResource("2_fb18l")]([])
-special_ability = Array[ExtResource("2_fb18l")]([])
-debuffs = Array[ExtResource("3_e70ef")]([])
-boss = false
-teleport_chance = 0
-shooter = false
 shooter_chance = 30
 bullet = ExtResource("2_b0juv")
-shoot_speed = 0.0
 
 [sub_resource type="Resource" id="Resource_g5qpi"]
 script = ExtResource("9_8b8lc")
 item_data = ExtResource("6_8bfgm")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_by4vd"]
 script = ExtResource("9_8b8lc")
@@ -211,9 +203,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
 _data = {
-"Damaged": SubResource("Animation_ltlc2"),
-"Move": SubResource("Animation_rwjqo"),
-"RESET": SubResource("Animation_wrm4u")
+&"Damaged": SubResource("Animation_ltlc2"),
+&"Move": SubResource("Animation_rwjqo"),
+&"RESET": SubResource("Animation_wrm4u")
 }
 
 [sub_resource type="Animation" id="Animation_hsnyq"]
@@ -265,19 +257,19 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
 _data = {
-"Fly": SubResource("Animation_hsnyq"),
-"RESET": SubResource("Animation_f1xcn"),
-"Slam": SubResource("Animation_goyeu")
+&"Fly": SubResource("Animation_hsnyq"),
+&"RESET": SubResource("Animation_f1xcn"),
+&"Slam": SubResource("Animation_goyeu")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ig30"]
-radius = 6.0
+radius = 6.666667
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_emnjt"]
-radius = 7.0
+radius = 8.0
 
 [node name="DemoEnemy2" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
@@ -293,7 +285,7 @@ texture = ExtResource("7_mruj4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_o35pa")
+&"": SubResource("AnimationLibrary_o35pa")
 }
 
 [node name="Wings" type="Sprite2D" parent="Sprite2D"]
@@ -302,7 +294,7 @@ vframes = 6
 
 [node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
 libraries = {
-"": SubResource("AnimationLibrary_qgtth")
+&"": SubResource("AnimationLibrary_qgtth")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
