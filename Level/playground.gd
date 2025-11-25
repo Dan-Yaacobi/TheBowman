@@ -41,9 +41,9 @@ func _ready() -> void:
 	next_wave_button.disabled = true
 	next_wave_button.visible = false
 	
-	upgrade_button_1.pressed.connect(new_wave_difficulty)
-	upgrade_button_2.pressed.connect(new_wave_difficulty)
-	upgrade_button_3.pressed.connect(new_wave_difficulty)
+	upgrade_button_1.choose_button.pressed.connect(new_wave_difficulty)
+	upgrade_button_2.choose_button.pressed.connect(new_wave_difficulty)
+	upgrade_button_3.choose_button.pressed.connect(new_wave_difficulty)
 	upgrade_buttons.disable()
 	
 func _process(delta: float) -> void:

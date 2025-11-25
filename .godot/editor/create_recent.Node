@@ -1,14 +1,14 @@
 TextureRect
-Label
 Button
+Control
+Node2D
+Label
 ColorRect
 AnimationPlayer
 CanvasLayer
-Node2D
 StaticBody2D
 CollisionShape2D
 Sprite2D
 Area2D
 RayCast2D
 CharacterBody2D
-CPUParticles2D

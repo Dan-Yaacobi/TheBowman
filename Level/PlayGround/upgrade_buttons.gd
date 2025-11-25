@@ -54,10 +54,8 @@ func remove_chosen_ability_from_bucket(upgrade: PlayerUpgrade) -> void:
 
 func disable() -> void:
 	for button in upgrade_buttons:
-		button.disabled = true
-		button.visible = false
+		button.disable()
 
 func enable() -> void:
 	for button in upgrade_buttons:
-		button.disabled = false
-		button.visible = true
+		button.enable()
