@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://duv1vqq2qbq3m"]
 
-[ext_resource type="Script" path="res://Shop/TowersShopMenu/tower_upgrade_menu.gd" id="1_04fdc"]
+[ext_resource type="Script" uid="uid://bdctt7l6t0ayl" path="res://Shop/TowersShopMenu/tower_upgrade_menu.gd" id="1_04fdc"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_iuy0s"]
 [ext_resource type="PackedScene" uid="uid://dacqmp7mkkawr" path="res://Shop/TowersShopMenu/UpgradeTower/ShopTower.tscn" id="3_yxosn"]
 [ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/Archer.png" id="4_ayskd"]
@@ -11,7 +11,6 @@ script = ExtResource("1_04fdc")
 
 [node name="Tiles" parent="." instance=ExtResource("2_iuy0s")]
 position = Vector2(-105, -16)
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="ShopTower" parent="." instance=ExtResource("3_yxosn")]
 offset_left = 5.0

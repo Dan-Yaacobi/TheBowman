@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 EnemyAbilityData="*res://00 Globals/enemy_ability_data.gd"
 PlayerManager="*res://00 Globals/global_player_manager.gd"
 SceneTransition="*res://HUD/Scene Transition/scene_transition.tscn"
+EventBus="*res://00 Globals/event_bus.gd"
 
 [display]
 
