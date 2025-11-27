@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b7mbeynvkpc26"]
 
-[ext_resource type="Script" path="res://Player/Body/body.gd" id="1_32ny8"]
+[ext_resource type="Script" uid="uid://btpafd3s6icv0" path="res://Player/Body/body.gd" id="1_32ny8"]
 [ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/Archer.png" id="2_bskum"]
 
 [sub_resource type="Animation" id="Animation_ijub2"]
@@ -190,12 +190,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yod2m"]
 _data = {
-"Dash": SubResource("Animation_ijub2"),
-"Dead": SubResource("Animation_cl7rm"),
-"Idle": SubResource("Animation_j87py"),
-"Jump": SubResource("Animation_nxu33"),
-"RESET": SubResource("Animation_kej4i"),
-"Walk": SubResource("Animation_fdv26")
+&"Dash": SubResource("Animation_ijub2"),
+&"Dead": SubResource("Animation_cl7rm"),
+&"Idle": SubResource("Animation_j87py"),
+&"Jump": SubResource("Animation_nxu33"),
+&"RESET": SubResource("Animation_kej4i"),
+&"Walk": SubResource("Animation_fdv26")
 }
 
 [node name="Body" type="CharacterBody2D"]
@@ -208,5 +208,5 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_yod2m")
+&"": SubResource("AnimationLibrary_yod2m")
 }

@@ -10,7 +10,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	player.update_animation("Walk")
+	player.body.update_animation("Walk")
 	pass
 	
 #what happens when the player exits this state
@@ -23,7 +23,8 @@ func Process(_delta: float) -> State:
 		return dead
 	if player.direction == 0:
 		return idle
-	player.update_direction(player.direction < 0)
+	
+	
 	if player.stats.in_menu:
 		player.velocity.x = player.direction * player.stats.menu_speed
 	else:
@@ -32,6 +33,7 @@ func Process(_delta: float) -> State:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> State:
+	player.update_direction(player.direction < 0)
 	return null
 	
 #what happens during input events in this state

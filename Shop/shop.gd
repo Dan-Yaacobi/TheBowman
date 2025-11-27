@@ -3,6 +3,7 @@ class_name Shop extends Node2D
 @onready var enter_menu: Area2D = $Door/Enter
 @onready var tiles: TileMapLayer = $Tiles
 @onready var current_money: CurrentMoney = $CurrentMoney
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
 
 signal changed_scene
 
@@ -30,7 +31,7 @@ func set_scene(_player: Player) -> void:
 		visible = true
 		menu_tile_limit = tiles.get_used_rect()
 		set_player_camera(_player)
-		_player.global_position = Vector2(300,104)
+		_player.global_position = player_spawn.global_position
 		tiles.collision_enabled = true
 		#enter_menu.monitoring = true
 		for child in get_children():

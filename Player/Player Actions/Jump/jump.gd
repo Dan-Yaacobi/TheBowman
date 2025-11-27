@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 
 func jump() -> void:
 	if jumps > 0:
-		player.update_animation("Jump")
+		player.body.update_animation("Jump")
 		player.velocity.y = 0
 		player.velocity.y -= player.stats.jump_height
 		jumps -= 1

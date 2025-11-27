@@ -29,8 +29,10 @@ visible = false
 visible = false
 
 [node name="PlatformShop" parent="." instance=ExtResource("7_8hn01")]
+visible = false
 
 [node name="TowerUpgradeMenu" parent="." instance=ExtResource("8_nnxe6")]
+visible = false
 
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
 visible = false

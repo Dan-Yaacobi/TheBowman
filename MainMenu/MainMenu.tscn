@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cnhbrpo4htp2y"]
+[gd_scene load_steps=22 format=4 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_tpybg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dnefafqr4l430" path="res://MainMenu/ButtonData/ButtonActions/add_money_action.gd" id="10_aa3ac"]
 [ext_resource type="Script" uid="uid://bmttan0snrryu" path="res://MainMenu/music_button.gd" id="11_rwkms"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -242,3 +243,6 @@ offset_right = 296.0
 offset_bottom = 51.0
 disabled = true
 text = "TEST"
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("12_g1826")]
+position = Vector2(207, 96)

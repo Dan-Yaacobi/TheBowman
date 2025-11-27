@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=82 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
 [ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
 [ext_resource type="PackedScene" uid="uid://bstmllbqxch1v" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn" id="24_mi85c"]
+[ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="24_xpwt5"]
 [ext_resource type="Texture2D" uid="uid://bwdbudjf3cqo3" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade1.png" id="25_iq6ym"]
 [ext_resource type="Texture2D" uid="uid://b3ut6ryyuxs1k" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUPgrade2.png" id="26_wdchw"]
 [ext_resource type="Texture2D" uid="uid://c51w7jyujbqty" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png" id="27_oorb6"]
@@ -51,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://dl1x6pllgiuh" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade1.png" id="48_rx7hp"]
 [ext_resource type="Texture2D" uid="uid://w30o53qdvwap" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade2.png" id="49_h6vmv"]
 [ext_resource type="Texture2D" uid="uid://dt260q61a543b" path="res://Player/Upgrades/Abilities/ChargeMegaArrow/ChargeMegaUpgrade3.png" id="50_siq3f"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="53_q6dew"]
 
 [sub_resource type="Resource" id="Resource_k715f"]
 script = ExtResource("2_r03de")
@@ -379,11 +381,12 @@ position = Vector2(9, 28.5)
 shape = SubResource("RectangleShape2D_bice2")
 
 [node name="SummonTimer" type="Timer" parent="."]
-wait_time = 3.5
+wait_time = 10000.0
 
 [node name="FallingDeath" type="Area2D" parent="."]
 position = Vector2(226, -1)
-collision_mask = 9
+collision_mask = 11
+script = ExtResource("24_xpwt5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
 position = Vector2(-3, 467)
@@ -535,3 +538,8 @@ ID = 102
 bucket = 3
 is_ability = true
 can_choose_once = true
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("53_q6dew")]
+position = Vector2(10, -16)
+
+[connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

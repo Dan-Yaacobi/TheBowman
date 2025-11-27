@@ -42,12 +42,11 @@ func calculate_direction_to_player() -> Vector2:
 	_direction = player.global_position - global_position
 	return _direction.normalized()
 
-func hit(_arrow: Area2D) -> void:
+func hit(_arrow: CharacterBody2D) -> void:
 	if _arrow is Arrow and _arrow != null:
 		take_hit_effect()
 		if not no_push_back:
-			push_back(_arrow.direction,_arrow.data.pushback_power)
-		_arrow.hit(self)
+			push_back(_arrow.velocity.normalized(),_arrow.data.pushback_power)
 		_arrow.clear_shot()
 		if _arrow.crit:
 			take_damage(_arrow.data.damage * 2)
@@ -79,8 +78,9 @@ func take_damage(_dmg: int) -> void:
 	stats.hp -= _dmg
 	took_damage.emit()
 	update_animation("Damaged")
+	
 	if stats.shooter and not stats.boss:
-		stats.shooter = false
+		#stats.shooter = false
 		if not animation_player.animation_finished.is_connected(shooter_damaged_animation_finished):
 			animation_player.animation_finished.connect(shooter_damaged_animation_finished)
 	else:

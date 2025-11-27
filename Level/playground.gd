@@ -3,6 +3,8 @@ class_name PlayGround extends Node2D
 signal wave_reset
 signal new_wave
 
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
+
 @onready var label: Label = $WaveSign/WaveBackground/Label
 @onready var summon_timer: Timer = $SummonTimer
 @onready var falling_death: Area2D = $FallingDeath
@@ -36,7 +38,6 @@ var summoned_an_object: bool = false
 
 func _ready() -> void:
 	summon_timer.timeout.connect(summon_enemy)
-	falling_death.body_entered.connect(death)
 	next_wave_button.pressed.connect(new_wave_difficulty)
 	next_wave_button.disabled = true
 	next_wave_button.visible = false
@@ -183,12 +184,6 @@ func new_wave_difficulty() -> void:
 	else:
 		wave_data.boss_wave = false
 
-func death(b) -> void:
-	if b is FallingObject:
-		b.queue_free()
-	elif b is Player:
-		b.stats.hp = 0
-
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
@@ -200,15 +195,14 @@ func set_scene(_player: Player) -> void:
 		_player.show_buffs()
 		visible = true
 		tiles.collision_enabled = true
-		_player.global_position = Vector2(0,-8)
+		_player.global_position = player_spawn.global_position
 		_player.stats.in_menu = false
 		_player.set_camera(Rect2i(Vector2(-100000,-100000),Vector2(10000000,10000000)),16)
 		new_wave_difficulty()
 		update_label()
 		summon_timer.wait_time = enemies.spawn_time
 		summon_timer.timeout.connect(summon_enemy)
-		falling_death.body_entered.connect(death)
-
+		falling_death.monitoring = true
 		_player.mana_bar.set_value_to_max()
 		set_towers()
 
@@ -226,13 +220,13 @@ func update_combo(amount: int) -> void:
 			combo_animation.play("Gained")
 
 func exit_scene(_player: Player) -> void:
-	falling_death.body_entered.disconnect(death)
 	summon_timer.timeout.disconnect(summon_enemy)
 	visible = false
 	tiles.collision_enabled = false
 	kill_all_enemies()
 	enemies_killed = 0
 	wave_reset.emit(wave_data.current_wave)
+	falling_death.monitoring = false
 	_player.end_combo_buff()
 	_player.combo_lost()
 	_player.reset_minions()
@@ -283,3 +277,14 @@ func summon_object() -> void:
 		summon_position = player.global_position + Vector2([1,-1].pick_random() * 50, - 100)
 	new_object.global_position = summon_position
 	add_child(new_object)
+
+
+func _on_falling_death_body_entered(body: Node2D) -> void:
+	print(body)
+	if body is FallingObject:
+		body.queue_free()
+	elif body is Player:
+		body.stats.hp = 0
+	elif body is Arrow:
+		body.missed()
+	pass # Replace with function body.

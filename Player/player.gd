@@ -7,8 +7,7 @@ signal took_hit
 signal critical_hit
 signal back_to_menu(scene: String)
 
-@onready var hand: Hand = $Hand
-@onready var body: Body = $Body
+@onready var body: PlayerBody = $PlayerBody
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
 @onready var jump_reset: Area2D = $JumpReset
 @onready var jump_action: JumpAction = $JumpAction
@@ -18,7 +17,6 @@ signal back_to_menu(scene: String)
 
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var death_animation_timer: Timer = $DeathAnimationTimer
 @onready var special_ability_cooldown: Timer = $SpecialAbilityCooldown
 @onready var unlimited_mana_timer: Timer = $UnlimitedManaTimer
 @onready var combo_timer: Timer = $ComboActivated/ComboTimer
@@ -63,6 +61,12 @@ var current_minions: Array[Companion] = []
 var mega_shot_activated: bool = false
 var invincible: bool = false
 
+@onready var main_hand: PlayerMainHand = $PlayerMainHand
+@onready var off_hand: CharacterBody2D = $PlayerOffHand
+@onready var off_hand_shoulder: Node2D = $OffHandShoulder
+var shooting: bool = false
+var perfect_shot_counter: int = 0
+
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
@@ -80,6 +84,9 @@ func _ready() -> void:
 	reset_to_base_stats()
 	mega_shot_effect.stop()
 	invincibility_timer.timeout.connect(invincibility_over)
+	
+	off_hand.connect_hands(main_hand, off_hand_shoulder)
+	main_hand.connect_hands(off_hand)
 	
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
@@ -128,7 +135,6 @@ func init_bonus_stats() -> void:
 	bonus_stats = stats.duplicate()
 	
 func _process(delta: float) -> void:
-	
 	if stats.hp > 0:
 		direction = Input.get_axis("Left","Right")
 	else:
@@ -198,6 +204,9 @@ func get_shoot_position() -> Vector2:
 	return $ShootPosition.global_position
 	
 func shoot() -> void:
+	EventBus.start_shooting.emit()
+	return
+	
 	if mana_bar.use_mana(regular_mana_cost):
 		current_weapon.regular_attack = true
 		var mouse_pos = get_global_mouse_position()
@@ -266,21 +275,28 @@ func _physics_process(delta: float) -> void:
 	#if dropping_down:
 		#drop_down()
 		
-func update_animation(_animation_name: String) -> void:
-	body.change_animation(_animation_name)
-
+#func update_animation(_animation_name: String) -> void:
+	#body.change_animation(_animation_name)
+	
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side:
-		
 		direction_side = _new_side
-		body.change_side(direction_side)
+		body.change_direction(_new_side)
+		main_hand.change_direction()
+		off_hand_shoulder.position.x *= -1
+		off_hand.position = off_hand_shoulder.position
+
+func update_body_animation(_anim: String) -> void:
+	body.update_animation(_anim)
+#func update_direction(_new_side: bool) -> void:
+	#if _new_side != direction_side:
+		#
+		#direction_side = _new_side
+		#body.change_side(direction_side)
 
 func apply_gravity(delta) -> void:
 		if velocity.y < 100:
 			velocity.y += gravity*delta
-
-func get_shoot_direction() -> Vector2:
-	return hand.hand_direction.normalized()
 
 func get_current_weapon() -> Weapon:
 	return current_weapon
@@ -301,7 +317,6 @@ func init_bow() -> void:
 	current_weapon.combo_gained.connect(combo_gained)
 	current_weapon.critical_hit.connect(emit_crit)
 	current_weapon.leeched.connect(leech_heal)
-	hand.sprite.frame = current_weapon.weapon_data.sprite_frame
 	current_weapon.init_weapon(self,current_weapon)
 	mana_bar.set_mana_bar_stats(current_weapon.weapon_data.mana_rate,current_weapon.weapon_data.shoot_cost)
 	
@@ -396,3 +411,43 @@ func buy(price: int) -> bool:
 		stats.money -= price
 		return true
 	return false
+
+############# IS METHODS #############
+func is_idle() -> bool:
+	return player_state_machine.curr_state is PlayerIdleState
+	
+func is_dash() -> bool:
+	return player_state_machine.curr_state is PlayerDashState
+############# GET METHODS #############
+func get_strength() -> int:
+	return stats.strength
+	
+func get_agility() -> int:
+	return stats.agility
+	
+func get_stamina() -> int:
+	return stats.stamina
+
+func get_pull_speed() -> float:
+	return stats.pull_speed + get_strength()*0.01
+
+func get_strength_shot_modifier() -> float:
+	return get_strength() * 5 + stats.basic_shot_power
+
+func get_arrow_ability() -> Array[ArrowAbility]:
+	return stats.arrow_abilities
+
+func get_perfect_shots_amount() -> int:
+	return perfect_shot_counter
+	############# SET METHODS #############
+	
+func set_shooting(_val: bool) -> void:
+	shooting = _val
+	
+func set_perfect_shots(was_perfect: bool) -> void:
+	if was_perfect:
+		perfect_shot_counter += 1
+	else:
+		perfect_shot_counter = 0
+#func get_shoot_abilities() -> Array[PlayerOnShootAbility]:
+	#return stats.shoot_abilities

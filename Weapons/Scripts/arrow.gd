@@ -1,4 +1,4 @@
-class_name Arrow extends Area2D
+class_name Arrow extends CharacterBody2D
 
 signal arrow_missed
 signal arrow_hit
@@ -9,8 +9,8 @@ signal leeched(amount: int, enemy_position: Vector2)
 @export var data: ArrowData
 @export var explosion_chance: int = 20
 
-@onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
+@onready var hit_box: Area2D = $Area2D
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -41,24 +41,32 @@ var leech_chance: int = 10
 var leech_life: bool = false
 var leech_amount: int = -1
 
+var fired: bool = false
+var perfect_shot: bool = false
+var shot_power_mod: float = 0
+
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
-	visible_on_screen_notifier.screen_exited.connect(missed)
-	cpu_particles.gravity = direction
-	body_shape_entered.connect(hit_wall)
+	cpu_particles.emitting = false
+	hit_box.monitorable = false
+	hit_box.monitoring = false
+	hit_box.body_shape_entered.connect(hit_wall)
+	hit_box.body_entered.connect(hit)
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
-
-func hit(enemy: Enemy) -> void:
-	if regular_shot:
-		explosion()
-		critical_hit()
-		stun_hit()
-		apply_leech(enemy)
-		succesfuly_hit = true
-		arrow_hit.emit()
-
+	
+func hit(body) -> void:
+	if body is Enemy:
+		if regular_shot:
+			explosion()
+			critical_hit()
+			stun_hit()
+			apply_leech(body)
+			succesfuly_hit = true
+			arrow_hit.emit()
+			body.hit(self)
+		
 func explosion() -> void:
 	if can_explode:
 		var try: int = randi_range(1,100)
@@ -82,18 +90,36 @@ func clear_shot() -> void:
 func wall_clear_shot() -> void:
 	arrow_hit_sound.emit()
 	queue_free()
-	
+
+var gravity: float = 50
+
 func _physics_process(delta: float) -> void:
-	global_position += direction * delta * data.speed
+	if fired:
+		cpu_particles.emitting = true
+		rotate_arrow(velocity.angle())
+		cpu_particles.direction = velocity
+		velocity.y += gravity*delta
+	move_and_slide()
+	
+func set_shot_power_mod(_shot_power: float) -> void:
+	shot_power_mod = pow(_shot_power, 2)
+	
+func rotate_arrow(angle: float) -> void:
+	rotation = angle
+
+func enable_arrow() -> void:
+	hit_box.monitoring = true
+	hit_box.monitorable = true
 	
 func hit_wall(_val1,_val2,_val3,_val4) -> void:
-	if _val2 is TileMapLayer:
-		wall_hit_effect = WALL_HIT_EFFECT.instantiate()
-		if wall_hit_effect.get_parent() == null:
-			get_parent().call_deferred("add_child",wall_hit_effect)
-		wall_hit_effect.emitting = true
-		wall_hit_effect.global_position = global_position
-		wall_clear_shot()
+	if fired:
+		if _val2 is TileMapLayer:
+			wall_hit_effect = WALL_HIT_EFFECT.instantiate()
+			if wall_hit_effect.get_parent() == null:
+				get_parent().call_deferred("add_child",wall_hit_effect)
+			wall_hit_effect.emitting = true
+			wall_hit_effect.global_position = global_position
+			wall_clear_shot()
 
 func critical_hit() -> void:
 

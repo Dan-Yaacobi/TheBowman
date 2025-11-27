@@ -33,7 +33,7 @@ func _ready() -> void:
 			stats.shooter = true
 		shoot_height = randi_range(50,80)
 	animation_player.play("Move")
-	hit_box.area_entered.connect(hit)
+	hit_box.body_entered.connect(hit)
 	hurt_box.body_entered.connect(player_hit)
 	sprite.texture = stats.skin
 	change_direction()

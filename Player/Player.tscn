@@ -1,9 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=38 format=3 uid="uid://cesvb1a1eu8yq"]
 
-[ext_resource type="PackedScene" uid="uid://b7mbeynvkpc26" path="res://Player/Body/Body.tscn" id="1_1adnh"]
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
-[ext_resource type="PackedScene" uid="uid://bug4e8v5lnb0m" path="res://Player/Hand/Hand.tscn" id="2_alpnv"]
 [ext_resource type="Script" uid="uid://cd0876l1xhef" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_jhcyx"]
 [ext_resource type="Script" uid="uid://bu8rrfoiwqr26" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="2_ohurx"]
 [ext_resource type="Script" uid="uid://bob8cvby6imtx" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="4_qie87"]
@@ -16,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bebh86kswi26y" path="res://Player/Player Actions/Shoot/Shoot.tscn" id="8_gtm6s"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/0_BasicBow/BasicBow.tscn" id="8_yifbt"]
+[ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
+[ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
+[ext_resource type="PackedScene" uid="uid://dxk6tfmffd8bb" path="res://Player/Player2.0/OffHand/PlayerOffHand.tscn" id="11_croik"]
 [ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
 [ext_resource type="Script" uid="uid://cbpkfb2oarrbd" path="res://Player/combo_activated.gd" id="16_j4os2"]
@@ -34,12 +35,16 @@ move_speed = 75
 max_jumps = 2
 jump_height = 90
 knockback_resistance = 3
+strength = 5
+agility = 5
+stamina = 5
 menu_speed = 150
 max_minions = 3
 dash_distance = 50
 invinc_duration = 1
 combo_to_activate = 25
 combo_duration = 8.0
+basic_shot_power = 150.0
 weapon_name = "Basic Bow"
 weapon_scene = ExtResource("8_yifbt")
 crit_chance = 5
@@ -85,25 +90,26 @@ point_count = 2
 radius = 49.0408
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(0.75, 0.75)
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
 gravity = 150
 stats = SubResource("Resource_sedti")
 
-[node name="Body" parent="." instance=ExtResource("1_1adnh")]
-collision_layer = 0
-collision_mask = 0
+[node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]
+z_index = 1
 
-[node name="Hand" parent="." instance=ExtResource("2_alpnv")]
-position = Vector2(-5, 7)
-rotation = -0.00872665
-collision_layer = 0
-collision_mask = 0
+[node name="PlayerMainHand" parent="." instance=ExtResource("10_wo5nf")]
+position = Vector2(-5, 5)
+
+[node name="PlayerOffHand" parent="." instance=ExtResource("11_croik")]
+position = Vector2(2, 5)
+
+[node name="OffHandShoulder" type="Node2D" parent="."]
+position = Vector2(2, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(6, 6)
 position_smoothing_enabled = true
 script = ExtResource("8_qvxki")
 random_strength = 5.0

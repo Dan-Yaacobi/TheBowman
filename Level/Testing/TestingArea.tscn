@@ -1,19 +1,19 @@
 [gd_scene load_steps=31 format=4 uid="uid://faeqy5pfi8yk"]
 
-[ext_resource type="Script" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
+[ext_resource type="Script" uid="uid://cnccnf7l3hvfy" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_u5lkp"]
-[ext_resource type="PackedScene" uid="uid://cesvb1a1eu8yq" path="res://Player/Player.tscn" id="2_7l2ag"]
 [ext_resource type="Texture2D" uid="uid://clbn7aipnnhq8" path="res://Level/Tiles/Gold Wood Square.png" id="4_o1u76"]
 [ext_resource type="PackedScene" uid="uid://c5o8b833xdeaf" path="res://Objects/FallingObjects/Objects/TreasureChest/TreasureChest.tscn" id="8_5cpo0"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="9_si70b"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="9_si70b"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="10_2upya"]
 [ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="11_8wq7p"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="11_jqrw7"]
 [ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="12_4r26e"]
 [ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="12_bdfic"]
-[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="13_j7khy"]
-[ext_resource type="Script" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="13_qn8nl"]
+[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="13_j7khy"]
+[ext_resource type="Script" uid="uid://csxarxwi5hnax" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="13_qn8nl"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_x1o37"]
+[ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="15_epv0q"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="15_fwxk5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mix7l"]
@@ -26,19 +26,11 @@ sources/0 = SubResource("TileSetAtlasSource_mix7l")
 [sub_resource type="Resource" id="Resource_qdy2n"]
 resource_local_to_scene = true
 script = ExtResource("13_j7khy")
-level = 0
-damage = 0
-damage_timer = 1.0
-range = 1.0
-cost_to_upgrade = 0
-position = Vector2(0, 0)
 arrow = ExtResource("12_4r26e")
-speciality = ""
 
 [sub_resource type="Resource" id="Resource_unsoy"]
 script = ExtResource("9_si70b")
 item_data = ExtResource("10_2upya")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_34f6k"]
 script = ExtResource("9_si70b")
@@ -48,22 +40,18 @@ probability = 50.0
 [sub_resource type="Resource" id="Resource_83x02"]
 script = ExtResource("9_si70b")
 item_data = ExtResource("11_jqrw7")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_ipauh"]
 script = ExtResource("9_si70b")
 item_data = ExtResource("11_jqrw7")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_rr0iv"]
 script = ExtResource("9_si70b")
 item_data = ExtResource("11_jqrw7")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_tjq0x"]
 script = ExtResource("9_si70b")
 item_data = ExtResource("11_jqrw7")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_x1iiq"]
 script = ExtResource("9_si70b")
@@ -104,9 +92,6 @@ mass = 100.0
 [node name="TestingArea" type="Node2D"]
 script = ExtResource("1_e8ewn")
 
-[node name="Player" parent="." instance=ExtResource("2_7l2ag")]
-position = Vector2(0, -12)
-
 [node name="Tiles" parent="." instance=ExtResource("1_u5lkp")]
 tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAD5/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAA=")
 
@@ -145,3 +130,5 @@ position = Vector2(286, -21)
 
 [node name="Portal2" parent="." instance=ExtResource("15_fwxk5")]
 position = Vector2(287, -45)
+
+[node name="Hud" parent="." instance=ExtResource("15_epv0q")]

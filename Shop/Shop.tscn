@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://kqtm00s5xgeb"]
+[gd_scene load_steps=18 format=4 uid="uid://kqtm00s5xgeb"]
 
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_g6tmg"]
 [ext_resource type="Script" uid="uid://c1k26r41i0m25" path="res://Shop/shop.gd" id="1_olmr6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d1fmmxn3ehhkr" path="res://MainMenu/ButtonData/ButtonActions/go_to_platform_shop.gd" id="7_l5wgc"]
 [ext_resource type="Texture2D" uid="uid://dbvkhim2q6dke" path="res://MainMenu/Sprites/BigDoor on Wood.png" id="8_a1yjt"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_xklby"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="10_i2ngk"]
 
 [sub_resource type="Resource" id="Resource_pmkci"]
 script = ExtResource("4_equfb")
@@ -118,3 +119,6 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 150
 text = "Current Money:"
 script = ExtResource("9_xklby")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("10_i2ngk")]
+position = Vector2(280, 96)

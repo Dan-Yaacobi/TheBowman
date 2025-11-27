@@ -9,19 +9,31 @@ var player: Player
 @export var max_jumps: int
 @export var jump_height: int
 @export var knockback_resistance: int
+@export var strength: int
+@export var agility: int
+@export var stamina: int
 @export var menu_speed: int
 @export var in_menu: bool
 @export var boost_mana_rate: float
-@export var shoot_cost: int
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
 @export var dash_distance: int
 @export var invinc_duration: int
+
+@export_subgroup("Combo")
 @export var max_combo: int
 @export var combo_to_activate: int
 @export var combo_duration: float
 
-
+@export_subgroup("Shooting")
+@export var basic_shot_power: float
+@export var shoot_cost: int
+@export var max_pull_strength: float
+@export var pull_speed: float = 1:
+	get:
+		return pull_speed
+	set(value):
+		pull_speed = clamp(value,1,4)
 @export_subgroup("Player Items")
 @export var money: int
 @export var upgrd_points: int

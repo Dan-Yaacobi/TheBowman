@@ -17,7 +17,7 @@ func Enter() -> void:
 	player.set_pushback_values(Vector2.ZERO,0)
 	player.jump_action.jump_flip = false
 	player.body.rotation = 0
-	player.update_animation("Jump")
+	player.body.update_animation("Jump")
 	hit_somthing = false
 	player.velocity = Vector2.ZERO
 	pass

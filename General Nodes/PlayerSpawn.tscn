@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmq0egwvp55s2"]
+
+[ext_resource type="Script" uid="uid://dpnd4bi118a4m" path="res://General Nodes/player_spawn.gd" id="1_8jh6v"]
+[ext_resource type="Texture2D" uid="uid://cgty1wah1xo08" path="res://Player/Player2.0/Sprites/Archer.png" id="1_yej4b"]
+
+[node name="PlayerSpawn" type="Node2D"]
+script = ExtResource("1_8jh6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 0.8)
+texture = ExtResource("1_yej4b")
+hframes = 4
+vframes = 2

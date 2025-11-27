@@ -6,6 +6,7 @@ class_name MainMenu extends Node2D
 @onready var tiles: TileMapLayer = $Tiles
 @onready var hard_mode_button: Button = $HardMode
 @onready var normal_mode_button: Button = $NormalMode
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
 
 @onready var test_button: Button = $Button
 
@@ -51,7 +52,7 @@ func set_player_camera(_player: Player) -> void:
 
 func set_scene(_player: Player) -> void:
 	if _player != null:
-		_player.global_position = Vector2(185,104)
+		_player.global_position = player_spawn.global_position
 		menu_tile_limit = tiles.get_used_rect()
 		_player.stats.in_menu = true
 		_player.stats.hp = _player.stats.max_hp

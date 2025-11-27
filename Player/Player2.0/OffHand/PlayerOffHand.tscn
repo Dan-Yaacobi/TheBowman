@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxk6tfmffd8bb"]
+
+[ext_resource type="Texture2D" uid="uid://d3l31kuovyir1" path="res://Player/Player2.0/Sprites/PlayerOffHandSprite.png" id="1_bfu6e"]
+[ext_resource type="Script" uid="uid://dd6ry72lmjepc" path="res://Player/Player2.0/OffHand/player_off_hand.gd" id="1_dyut0"]
+[ext_resource type="Script" uid="uid://c8s38ngop7fkj" path="res://Player/Player2.0/OffHand/States/off_hand_state_machine.gd" id="2_hdxbw"]
+[ext_resource type="Script" uid="uid://cew0nfmkvmt6e" path="res://Player/Player2.0/OffHand/States/o_h_idle_state.gd" id="3_b6f1e"]
+[ext_resource type="Script" uid="uid://b5d11u4vmlib8" path="res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd" id="4_dyut0"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Player/Player2.0/Sprites/Bow_1.png" id="5_b6f1e"]
+
+[sub_resource type="Animation" id="Animation_o0dpc"]
+resource_name = "Pull"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667), PackedVector2Array(-1.667, -1.667, 6.667, -10, 10, -10, 20, -1.667)]
+}
+
+[sub_resource type="Animation" id="Animation_tixxj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6bga"]
+_data = {
+&"Pull": SubResource("Animation_o0dpc"),
+&"RESET": SubResource("Animation_tixxj")
+}
+
+[node name="PlayerOffHand" type="CharacterBody2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_dyut0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bfu6e")
+centered = false
+offset = Vector2(-7.5, -1)
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+position = Vector2(-8.33333, 3.33333)
+points = PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667)
+width = 0.4
+default_color = Color(1, 0.759619, 0.662997, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t6bga")
+}
+
+[node name="MidStringPos" type="Node2D" parent="."]
+position = Vector2(0, 1.66667)
+
+[node name="OffHandStateMachine" type="Node2D" parent="."]
+script = ExtResource("2_hdxbw")
+
+[node name="Idle" type="Node2D" parent="OffHandStateMachine"]
+script = ExtResource("3_b6f1e")
+
+[node name="Shooting" type="Node2D" parent="OffHandStateMachine"]
+script = ExtResource("4_dyut0")
+
+[node name="Bow" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bow"]
+z_index = 2
+position = Vector2(0, 6.6666665)
+texture = ExtResource("5_b6f1e")

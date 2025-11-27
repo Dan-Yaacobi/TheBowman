@@ -5,3 +5,39 @@ res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
 res://MainGame/Game.tscn
+res://Player/Player2.0/Body/PlayerBody.tscn
+res://Player/Player2.0/MainHand/PlayerMainHand.tscn
+res://Player/Player2.0/OffHand/PlayerOffHand.tscn
+res://Player/player.gd
+res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd
+res://Player/Player2.0/MainHand/States/m_h_swing_state.gd
+res://Player/Player2.0/MainHand/player_main_hand.gd
+res://Player/Player2.0/MainHand/States/m_h_idle_state.gd
+res://Player/States/player_idle_state.gd
+res://Player/States/player_walking_state.gd
+res://PlayerData/player_stats.gd
+res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd
+res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
+res://Weapons/Scripts/arrow.gd
+res://Enemies/Scripts/enemy.gd
+res://Weapons/5_ThunderBow/ThunderArrow/thunder_arrow.gd
+res://Player/Player2.0/OffHand/States/o_h_idle_state.gd
+res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd
+res://Player/Player Actions/Jump/jump.gd
+res://Player/States/player_dead_state.gd
+res://Level/Testing/TestingArea.tscn
+res://Level/Testing/testing_area.gd
+res://Level/PlayGround/PlayGround.tscn
+res://Player/States/player_slam_state.gd
+res://Enemies/DemoEnemy/demo_enemy.gd
+res://Player/Player2.0/OffHand/player_off_hand.gd
+res://Enemies/DemoEnemy/DemoEnemy.tscn
+res://Level/playground.gd
+res://Level/PlayGround/falling_death.gd
+res://Player/Body/Body.tscn
+res://General Nodes/PlayerSpawn.tscn
+res://General Nodes/player_spawn.gd
+res://MainMenu/MainMenu.tscn
+res://MainMenu/main_menu.gd
+res://Shop/Shop.tscn
+res://Shop/shop.gd
