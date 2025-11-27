@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8cod48iqt17m"]
+[gd_scene load_steps=8 format=3 uid="uid://c8cod48iqt17m"]
 
 [ext_resource type="Script" uid="uid://bxm3y1p56xv70" path="res://Weapons/0_BasicBow/BasicArrow/basic_arrow.gd" id="1_c8afm"]
 [ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_ifcpi"]
 [ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.png" id="3_gvchp"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_f2keo"]
 
 [sub_resource type="Resource" id="Resource_mjy66"]
 script = ExtResource("2_ifcpi")
 speed = 250
-damage = 1
+base_damage = 1
 pushback_power = 10
 scale = 1.0
 
@@ -41,11 +42,9 @@ gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_8js4e")
 color = Color(0.643137, 0.152941, 0, 0.45098)
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(8, -3.496911e-07)
-collision_layer = 2
-collision_mask = 20
+[node name="HurtBox" parent="." instance=ExtResource("4_f2keo")]
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(6.5, -0.249983)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(14.5, -0.24998336)
 shape = SubResource("RectangleShape2D_m802n")

@@ -155,7 +155,6 @@ func new_wave_difficulty() -> void:
 	new_wave.emit()
 	update_label()
 	summon_count = 0
-	wave_data.spawn_time_update(hard_mode)
 	wave_data.calc_total_enemies()
 	wave_data.targets_spawn = level_logic.calculate_logic_targets(wave_data.current_wave,enemies.target_enemies.size())
 	wave_data.bird_spawn = level_logic.calculate_logic_birds(wave_data.current_wave,enemies.bird_enemies.size())

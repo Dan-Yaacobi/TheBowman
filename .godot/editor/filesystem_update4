@@ -41,3 +41,27 @@ res://MainMenu/MainMenu.tscn
 res://MainMenu/main_menu.gd
 res://Shop/Shop.tscn
 res://Shop/shop.gd
+res://General Nodes/CombatText/CombatText.tscn
+res://General Nodes/HitBox/Hitbox.tscn
+res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn
+res://General Nodes/HurtBox/hurt_box.gd
+res://General Nodes/HitBox/hit_box.gd
+res://00 Globals/event_bus.gd
+res://Weapons/Scripts/weapon.gd
+res://Weapons/0_BasicBow/BasicBow.tscn
+res://Weapons/Scripts/arrow_data.gd
+res://HUD/HUD.tscn
+res://Player/Mana/mana_bar.gd
+res://Player/dash_state.gd
+res://MainGame/game.gd
+res://Level/Wave Data/wave_data.gd
+res://Objects/Portal/Portal.tscn
+res://Objects/Portal/portal.gd
+res://Shop/BowsShop/bows_shop.gd
+res://Shop/AbilitiesShop/abilities_shop.gd
+res://Level/Islands/Island3.tscn
+res://Level/Islands/Island2.tscn
+res://Level/Islands/Island4.tscn
+res://Level/Islands/Island5.tscn
+res://Level/Islands/Island.tscn
+res://Level/Islands/island.gd

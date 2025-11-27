@@ -1,7 +1,5 @@
 class_name BowsShop extends Node2D
 
-signal changed_scene
-
 @onready var tiles: TileMapLayer = $Tiles
 @onready var enter: Area2D = $LeftDoor/Enter
 @onready var current_money: CurrentMoney = $CurrentMoney
@@ -48,7 +46,7 @@ func set_button_colors() -> void:
 ####### Functions for setting the scene #######
 func shop(b) -> void:
 	if b is Player:
-		changed_scene.emit("Shop")
+		EventBus.changed_scene.emit("Shop")
 
 func set_player_camera(_player: Player) -> void:
 	_player.set_camera(menu_tile_limit,tile_size)

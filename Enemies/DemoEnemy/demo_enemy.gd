@@ -1,8 +1,8 @@
 class_name DemoEnemy extends Enemy
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var hit_box: Area2D = $HitBox
-@onready var hurt_box: Area2D = $HurtBox
+@onready var hurt_box: HurtBox = $HurtBox
+@onready var hit_box: HitBox = $Hitbox
 
 enum directions{TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT}
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 			stats.shooter = true
 		shoot_height = randi_range(50,80)
 	animation_player.play("Move")
-	hit_box.body_entered.connect(hit)
+	#hit_box.body_entered.connect(hit)
 	hurt_box.body_entered.connect(player_hit)
 	sprite.texture = stats.skin
 	change_direction()

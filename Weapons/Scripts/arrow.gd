@@ -10,7 +10,7 @@ signal leeched(amount: int, enemy_position: Vector2)
 @export var explosion_chance: int = 20
 
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
-@onready var hit_box: Area2D = $Area2D
+@onready var hurt_box: HurtBox = $HurtBox
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -48,10 +48,10 @@ var shot_power_mod: float = 0
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
 	cpu_particles.emitting = false
-	hit_box.monitorable = false
-	hit_box.monitoring = false
-	hit_box.body_shape_entered.connect(hit_wall)
-	hit_box.body_entered.connect(hit)
+	hurt_box.monitorable = false
+	hurt_box.monitoring = false
+	hurt_box.body_shape_entered.connect(hit_wall)
+
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
@@ -65,8 +65,11 @@ func hit(body) -> void:
 			apply_leech(body)
 			succesfuly_hit = true
 			arrow_hit.emit()
-			body.hit(self)
-		
+
+func calc_dmg(shot_power: float) -> void:
+	data.damage = floor((PlayerManager.player.get_strength() + data.base_damage)
+	*pow(shot_power, 2))
+	
 func explosion() -> void:
 	if can_explode:
 		var try: int = randi_range(1,100)
@@ -108,8 +111,8 @@ func rotate_arrow(angle: float) -> void:
 	rotation = angle
 
 func enable_arrow() -> void:
-	hit_box.monitoring = true
-	hit_box.monitorable = true
+	hurt_box.monitoring = true
+	hurt_box.monitorable = true
 	
 func hit_wall(_val1,_val2,_val3,_val4) -> void:
 	if fired:
@@ -122,7 +125,6 @@ func hit_wall(_val1,_val2,_val3,_val4) -> void:
 			wall_clear_shot()
 
 func critical_hit() -> void:
-
 	if can_crit:
 		var roll_crit: int = randi_range(0,100)
 		if roll_crit < crit_chance:
@@ -131,7 +133,8 @@ func critical_hit() -> void:
 			get_parent().call_deferred("add_child", crit_effect)
 			crit = true
 			crit_hit.emit()
-
+			hurt_box.damage = data.damage*2
+			
 func stun_hit() -> void:
 	if can_stun:
 		var roll_stun: int = randi_range(0,100)

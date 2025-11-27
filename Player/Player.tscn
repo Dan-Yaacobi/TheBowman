@@ -31,13 +31,13 @@
 script = ExtResource("2_2aet8")
 hp = 5
 max_hp = 5
-move_speed = 75
+move_speed = 35
 max_jumps = 2
 jump_height = 90
 knockback_resistance = 3
-strength = 5
-agility = 5
-stamina = 5
+strength = 3
+agility = 20
+stamina = 3
 menu_speed = 150
 max_minions = 3
 dash_distance = 50
@@ -93,7 +93,7 @@ radius = 49.0408
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
-gravity = 150
+gravity = 200
 stats = SubResource("Resource_sedti")
 
 [node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]
@@ -109,7 +109,7 @@ position = Vector2(2, 5)
 position = Vector2(2, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(6, 6)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 script = ExtResource("8_qvxki")
 random_strength = 5.0

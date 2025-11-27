@@ -9,6 +9,7 @@ var finished_pulling: bool = false
 var full_pull_duration: float
 var pull_start_time: float
 # store a refernece to the player this belongs to
+
 func init() -> void:
 	entity.animation_player.animation_finished.connect(finished)
 	full_pull_duration = entity.animation_player.get_animation("Pull").length
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	EventBus.out_of_mana.connect(release)
 	entity.draw_arrow()
 	PlayerManager.player.shooting = true
 	entity.shot_power = 0
@@ -31,6 +33,7 @@ func Enter() -> void:
 	
 #what happens when the player exits this state
 func Exit() -> void:
+	EventBus.out_of_mana.disconnect(release)
 	entity.animation_player.speed_scale = init_animation_speed
 	pass
 	
@@ -45,19 +48,23 @@ func Process(_delta: float) -> MainHandState:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> MainHandState:
+	PlayerManager.player.use_mana(_delta)
+	
 	#GlobalPlayer.shot_zoom(_delta*GlobalPlayer.get_pull_speed(), true,6,5)
 	return null
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
 	if _event.is_action_released("shoot",true):
-		PlayerManager.player.set_shooting(true)
-		#entity.set_offset(0)
-		entity.release_arrow()
-		PlayerManager.player.shooting = false
-		return idle
+		release()
 	return null
-	
+
+func release() -> void:
+	PlayerManager.player.set_shooting(true)
+	entity.release_arrow()
+	PlayerManager.player.shooting = false
+	state_machine.ChangeState(idle)
+
 func finished(_animation_name) -> void:
 	if _animation_name == 'Pull':
 		finished_pulling = true 

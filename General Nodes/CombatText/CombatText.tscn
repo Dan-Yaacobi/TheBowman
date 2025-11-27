@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2utpjqol01vy"]
+
+[ext_resource type="Script" uid="uid://ddxi6l6gymgce" path="res://General Nodes/CombatText/combat_text.gd" id="1_h771a"]
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_h771a")
+
+[node name="CombatText" type="Label" parent="."]
+modulate = Color(1, 0.859309, 0.826114, 1)
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 200
+text = "5"

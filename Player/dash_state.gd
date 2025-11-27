@@ -17,7 +17,7 @@ func Enter() -> void:
 	dash_distance = player.stats.dash_distance
 	init_position = player.global_position.x
 	done_dash = false
-	player.update_animation("Dash")
+	player.body.update_animation("Jump")
 	
 	dash_direction = 1
 	if player.direction_side:

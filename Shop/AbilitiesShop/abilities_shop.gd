@@ -1,7 +1,5 @@
 class_name AbilitiesShop extends Node2D
 
-signal changed_scene
-
 @onready var tiles: TileMapLayer = $Tiles
 @onready var door_enter: Area2D = $LeftDoor/Enter
 
@@ -52,4 +50,4 @@ func set_buttons_colors() -> void:
 
 func menu(b) -> void:
 	if b is Player:
-		changed_scene.emit("Shop")
+		EventBus.changed_scene.emit("Shop")

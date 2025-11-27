@@ -1,7 +1,5 @@
 class_name PlatformShop extends Node2D
 
-signal changed_scene
-
 @onready var tiles: TilesControl = $Tiles
 @onready var fall: Area2D = $Fall
 @onready var reset_button: PlatformResetButton = $ResetButton
@@ -63,7 +61,7 @@ func set_shop_platforms() -> void:
 
 func to_shop(b) -> void:
 	if b is Player:
-		changed_scene.emit("Shop")
+		EventBus.changed_scene.emit("Shop")
 
 #func buy_platforms(side: String) -> void:
 	#if player != null:

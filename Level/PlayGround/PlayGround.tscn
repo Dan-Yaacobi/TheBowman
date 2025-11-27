@@ -142,7 +142,7 @@ bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), Sub
 boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp"), SubResource("Resource_njak4")])
 rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
 spiders = Array[ExtResource("2_r03de")]([SubResource("Resource_lqffn"), SubResource("Resource_gge3p")])
-spawn_time = 2.0
+spawn_time = 5.0
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
 script = ExtResource("7_wvqgp")
@@ -150,7 +150,6 @@ current_wave = 1
 targets_spawn = Array[int]([0, 0, 0])
 bird_spawn = Array[int]([0, 0])
 total_enemies = 10
-spawn_time = 1.0
 base_spawn_time = 1.5
 
 [sub_resource type="Resource" id="Resource_xq6vo"]
@@ -381,7 +380,7 @@ position = Vector2(9, 28.5)
 shape = SubResource("RectangleShape2D_bice2")
 
 [node name="SummonTimer" type="Timer" parent="."]
-wait_time = 10000.0
+wait_time = 5.0
 
 [node name="FallingDeath" type="Area2D" parent="."]
 position = Vector2(226, -1)

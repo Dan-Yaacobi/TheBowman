@@ -42,19 +42,17 @@ func calculate_direction_to_player() -> Vector2:
 	_direction = player.global_position - global_position
 	return _direction.normalized()
 
-func hit(_arrow: CharacterBody2D) -> void:
-	if _arrow is Arrow and _arrow != null:
+func hit(_arrow: HurtBox) -> void:
+	if _arrow.get_parent() is Arrow and _arrow != null:
+		var arrow: Arrow = _arrow.get_parent()
 		take_hit_effect()
 		if not no_push_back:
-			push_back(_arrow.velocity.normalized(),_arrow.data.pushback_power)
-		_arrow.clear_shot()
-		if _arrow.crit:
-			take_damage(_arrow.data.damage * 2)
-		else:
-			take_damage(_arrow.data.damage)
-		if _arrow.stun:
-			apply_stun(_arrow.stun_duration)
-		_arrow.reset_specials()
+			push_back(arrow.velocity.normalized(),arrow.data.pushback_power)
+		arrow.clear_shot()
+		take_damage(_arrow.damage)
+		if arrow.stun:
+			apply_stun(arrow.stun_duration)
+		arrow.reset_specials()
 		
 func apply_stun(stun_duration) -> void:
 	if not stats.boss:

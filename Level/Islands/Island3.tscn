@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://crgxmsjdnkrt4"]
+
+[ext_resource type="Script" uid="uid://dd5uq7un0y3cu" path="res://Level/Islands/island.gd" id="1_wbk3b"]
+[ext_resource type="Texture2D" uid="uid://bod6bf4uewamn" path="res://Level/Islands/sprites/Island3.png" id="2_wbk3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
+size = Vector2(31, 2)
+
+[node name="Island" type="StaticBody2D"]
+z_index = -4
+collision_layer = 16
+script = ExtResource("1_wbk3b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wbk3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, -7)
+shape = SubResource("RectangleShape2D_sp085")

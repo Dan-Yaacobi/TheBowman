@@ -14,10 +14,8 @@
 script = ExtResource("1_iteqa")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_id0vo")]
-visible = false
 
 [node name="PlayGround" parent="." instance=ExtResource("1_maytk")]
-visible = false
 
 [node name="Shop" parent="." instance=ExtResource("3_eirnv")]
 visible = false

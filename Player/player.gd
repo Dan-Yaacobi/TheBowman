@@ -5,7 +5,6 @@ signal money_changed
 signal combo(amount: int)
 signal took_hit
 signal critical_hit
-signal back_to_menu(scene: String)
 
 @onready var body: PlayerBody = $PlayerBody
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
@@ -64,8 +63,12 @@ var invincible: bool = false
 @onready var main_hand: PlayerMainHand = $PlayerMainHand
 @onready var off_hand: CharacterBody2D = $PlayerOffHand
 @onready var off_hand_shoulder: Node2D = $OffHandShoulder
+
 var shooting: bool = false
 var perfect_shot_counter: int = 0
+var current_arrow: Arrow
+
+var current_portal: Portal
 
 func _ready() -> void:
 	stats.player = self
@@ -87,6 +90,7 @@ func _ready() -> void:
 	
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
 	main_hand.connect_hands(off_hand)
+	EventBus.invisible_hands.connect(show_hands)
 	
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
@@ -139,13 +143,15 @@ func _process(delta: float) -> void:
 		direction = Input.get_axis("Left","Right")
 	else:
 		direction = 0
-	
-func _unhandled_input(event: InputEvent) -> void:
-	
-	if stats.hp > 0:
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if stats.hp > 0:
+		if event.is_action_pressed("up"):
+			if current_portal:
+				current_portal.enter()
 		if event.is_action_pressed("Menu"):
-			back_to_menu.emit("Menu")
+			EventBus.changed_scene.emit("Menu")
 				
 		if event.is_action_pressed("Jump"):
 			jump_action.jump()
@@ -179,11 +185,11 @@ func mega_shot_stop() -> void:
 func special_ability() -> void:
 	if current_weapon.weapon_data.special_ability != null:
 		if special_ability_available and current_weapon.weapon_data.special_ability.can_use(self):
-			if mana_bar.use_mana(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
-				current_weapon.weapon_data.special_ability.activate_special_ability(self)
-				current_weapon.regular_attack = false
-				special_ability_available = false
-				special_ability_cooldown.start()
+			#if mana_bar.has_enough_mana_spcl(current_weapon.weapon_data.spcl_ablty_cost_mltplr):
+			current_weapon.weapon_data.special_ability.activate_special_ability(self)
+			current_weapon.regular_attack = false
+			special_ability_available = false
+			special_ability_cooldown.start()
 
 func activate_mega_shot() -> void:
 	mega_shot_activated = true
@@ -205,20 +211,23 @@ func get_shoot_position() -> Vector2:
 	
 func shoot() -> void:
 	EventBus.start_shooting.emit()
-	return
-	
-	if mana_bar.use_mana(regular_mana_cost):
-		current_weapon.regular_attack = true
-		var mouse_pos = get_global_mouse_position()
-		for ability in stats.shoot_abilities:
-			ability.activate_ability(self)
-		shoot_action.shoot(mouse_pos)
+	current_weapon.regular_attack = true
+	for ability in stats.shoot_abilities:
+		ability.activate_ability(self)
 
+func use_mana(amount: float) -> void:
+	return
+	mana_bar.use_mana(amount)
+
+func show_hands(yes: bool) -> void:
+	main_hand.visible = yes
+	off_hand.visible = yes
+	
 func combo_lost() -> void:
 	combo_counter = 0
 	combo.emit(combo_counter)
 	pass
-	
+
 func combo_gained() -> void:
 	combo_counter += 1
 	if stats.max_combo < combo_counter:

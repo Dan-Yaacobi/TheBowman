@@ -103,8 +103,11 @@ func fire_arrow() -> void:
 	current_arrow.set_shot_power_mod(shot_power)
 	current_arrow.enable_arrow()
 	#current_arrow.arrow_shot()
-	
+	current_arrow.calc_dmg(shot_power)
 	current_arrow.reparent(get_tree().root)
+	PlayerManager.player.current_arrow = current_arrow
+	var mouse_pos = get_global_mouse_position()
+	PlayerManager.player.shoot_action.shoot(mouse_pos)
 	
 func calc_shot_velocity(_shot_power,direction) -> Vector2:
 	return _shot_power * direction * PlayerManager.player.get_strength_shot_modifier()

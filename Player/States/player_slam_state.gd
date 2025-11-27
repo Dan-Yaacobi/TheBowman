@@ -45,7 +45,7 @@ func Physics(_delta: float) -> State:
 	if player.stats.hp <= 0:
 		return dead
 		
-	player.velocity.y += 20
+	player.velocity.y += 2000 * _delta
 
 	return null
 	

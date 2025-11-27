@@ -10,6 +10,7 @@ func _ready() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	player.body.update_animation("Idle")
+	
 	#player.body.change_side(player.direction_side)
 	pass
 	

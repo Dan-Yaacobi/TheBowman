@@ -24,7 +24,7 @@ func shoot(_offset: bool,mega: bool) -> void:
 	 mouse_pos.x < player.global_position.x + click_offset and
 	 mouse_pos.y > player.global_position.y - click_offset and
 	 mouse_pos.y < player.global_position.y + click_offset):
-		var arrow = instance_arrow(weapon_data.arrow,player.hand.global_position,offset)
+		var arrow = PlayerManager.player.current_arrow
 		
 		if weapon_data.can_pierce:
 			arrow.can_pierce = true
@@ -52,15 +52,15 @@ func shoot(_offset: bool,mega: bool) -> void:
 			arrow.data.damage *= 5
 		
 		arrow.global_position += arrow.direction*10
-		arrow.rotate(set_arrow_rotation())
+		#arrow.rotate(set_arrow_rotation())
 		arrow.regular_shot = regular_attack
-		player.get_parent().call_deferred("add_child",arrow)
+		#player.get_parent().call_deferred("add_child",arrow)
 
-func set_arrow_rotation() -> float:
-	var player_pos = player.hand.global_position
-	var mouse_pos = player.get_global_mouse_position()
-	var angle_rotation: float = (player_pos - mouse_pos).angle()
-	return angle_rotation
+#func set_arrow_rotation() -> float:
+	#var player_pos = player.global_position
+	#var mouse_pos = player.get_global_mouse_position()
+	#var angle_rotation: float = (player_pos - mouse_pos).angle()
+	#return angle_rotation
 	
 func init_weapon(_player: Player, _weapon: Weapon) -> void:
 	player = _player

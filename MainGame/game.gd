@@ -1,4 +1,5 @@
 class_name Game extends Node2D
+
 const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var game_music: AudioStreamPlayer2D = $GameMusic
 @onready var platform_shop: PlatformShop = $PlatformShop
@@ -27,6 +28,7 @@ var last_scene: Node
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	
+	EventBus.changed_scene.connect(change_scene)
 	cloud_timer.timeout.connect(summon_cloud)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	player = PlayerManager.player
@@ -35,15 +37,15 @@ func _ready() -> void:
 	player.total_buffs = hud.get_total_buffs()
 	player.special_ability_cd = hud.get_special_ability_cd()
 	
-	player.died.connect(change_scene)
+	#player.died.connect(change_scene)
 	add_child(player)
 	
-	platform_shop.changed_scene.connect(change_scene)
-	main_menu.changed_scene.connect(change_scene)
-	shop.changed_scene.connect(change_scene)
-	bows_shop.changed_scene.connect(change_scene)
-	abilities_shop.changed_scene.connect(change_scene)
-	player.back_to_menu.connect(change_scene)
+	#platform_shop.changed_scene.connect(change_scene)
+	#main_menu.changed_scene.connect(change_scene)
+	#shop.changed_scene.connect(change_scene)
+	#bows_shop.changed_scene.connect(change_scene)
+	#abilities_shop.changed_scene.connect(change_scene)
+	#player.back_to_menu.connect(change_scene)
 	
 	#player.reparent(main_menu)
 	#main_menu.set_scene(player)
@@ -65,26 +67,27 @@ func _ready() -> void:
 	main_menu.visible = true
 	
 func change_scene(new_scene: String) -> void:
-	get_tree().paused = true
+	if new_scene in scenes_dic:
+		get_tree().paused = true
 
-	hud.visible = false
-	
-	await SceneTransition.fade_out()
-	
-	last_scene.call_deferred("exit_scene", player)
-	scenes_dic.get(new_scene).call_deferred("set_scene", player)
-	player.call_deferred("reparent",scenes_dic.get(new_scene))
-	last_scene = scenes_dic.get(new_scene)
-	
-	await get_tree().process_frame
-	
-	await SceneTransition.fade_in()
-	
-	get_tree().paused = false
-	hud.visible = true
-	await get_tree().process_frame
-	
-	#player.player_state_machine.ChangeState(player.idle_state)
+		hud.visible = false
+		
+		await SceneTransition.fade_out()
+		
+		last_scene.call_deferred("exit_scene", player)
+		scenes_dic.get(new_scene).call_deferred("set_scene", player)
+		player.call_deferred("reparent",scenes_dic.get(new_scene))
+		last_scene = scenes_dic.get(new_scene)
+		
+		await get_tree().process_frame
+		
+		await SceneTransition.fade_in()
+		EventBus.invisible_hands.emit(true)
+		get_tree().paused = false
+		hud.visible = true
+		await get_tree().process_frame
+		
+		#player.player_state_machine.ChangeState(player.idle_state)
 
 func get_playground() -> PlayGround:
 	for child in get_children():

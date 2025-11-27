@@ -175,11 +175,13 @@ offset_bottom = 886.0
 scale = Vector2(6, 6)
 
 [node name="ManaBar" parent="." instance=ExtResource("2_ja1d4")]
+visible = false
 offset_left = 1515.0
 offset_top = 848.0
 offset_right = 1579.0
 offset_bottom = 880.0
 scale = Vector2(6, 6)
+mana_rate = 0.5
 
 [node name="LevelStats" type="Label" parent="."]
 offset_right = 40.0
@@ -237,7 +239,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="."]
-position = Vector2(1405.0001, 937)
+position = Vector2(964, 906.00006)
 scale = Vector2(5, 5)
 texture = ExtResource("7_lkt0t")
 script = ExtResource("8_6i5cd")
@@ -271,7 +273,7 @@ theme_override_colors/font_outline_color = Color(0.54, 0.432, 0, 1)
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 150
-text = "Money:"
+text = "Money: 0"
 script = ExtResource("9_t1yhm")
 
 [node name="ComboCounter" type="Label" parent="."]

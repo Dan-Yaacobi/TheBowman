@@ -23,13 +23,22 @@ func set_mana_bar_stats(_mana_rate: float, _shoot_cost: int) -> void:
 	shoot_cost = _shoot_cost
 	pass
 
-func use_mana(_cost_multiplier) -> bool:
-	
+func use_mana(_cost_multiplier) -> void:
 	if value >= shoot_cost * _cost_multiplier:
 		value -= shoot_cost * _cost_multiplier
+	else:
+		EventBus.out_of_mana.emit()
+		
+func has_enough_mana() -> bool:
+	if value >= shoot_cost:
 		return true
 	return false
 
+func has_enough_mana_spcl(amount) -> bool:
+	if value >= amount:
+		return true
+	return false
+	
 func regular_color() -> void:
 	change_color(bar_color)
 	

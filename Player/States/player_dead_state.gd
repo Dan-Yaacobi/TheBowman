@@ -2,10 +2,9 @@ class_name PlayerDeadState extends State
 
 @onready var death_animation_timer: Timer = $"../../DeathAnimationTimer"
 @onready var idle: PlayerIdleState = $"../Idle"
-@onready var player_main_hand: PlayerMainHand = $"../../PlayerMainHand"
-@onready var player_off_hand: PlayerOffHand = $"../../PlayerOffHand"
 
 var death_done: bool = false
+
 func _ready() -> void:
 	death_animation_timer.timeout.connect(reset)
 	pass
@@ -13,8 +12,7 @@ func _ready() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	death_animation_timer.wait_time = 0.4
-	player_main_hand.visible = false
-	player_off_hand.visible = false
+	EventBus.invisible_hands.emit(false)
 	death_animation_timer.start()
 	death_done = false
 	player.body.update_animation("Dead")
@@ -27,12 +25,10 @@ func Exit() -> void:
 	if player.stats.reset_upgrades:
 		player.reset_to_base_stats()
 	player.died.emit("Menu")
-	player_main_hand.visible = true
-	player_off_hand.visible = true
 	player.collision_shape.set_deferred("disabled", false)
 	player.stats.hp = player.stats.max_hp
 	player.health_bar._set_health(player.stats.max_hp)
-	player.body.scale = Vector2(1,1)
+	EventBus.changed_scene.emit("Menu")
 	pass
 	
 #what happens during process update in this state

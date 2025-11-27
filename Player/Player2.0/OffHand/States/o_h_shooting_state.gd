@@ -3,6 +3,7 @@ class_name ShootingOffHandState extends OffHandState
 
 # store a refernece to the player this belongs to
 func init() -> void:
+	EventBus.out_of_mana.connect(change_to_idle)
 	pass
 	
 func _ready() -> void:
@@ -35,4 +36,6 @@ func HandleInput(_event: InputEvent) -> OffHandState:
 		return idle
 	return null
 	
+func change_to_idle() -> void:
+	state_machine.ChangeState(idle)
 	

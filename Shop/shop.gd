@@ -5,8 +5,6 @@ class_name Shop extends Node2D
 @onready var current_money: CurrentMoney = $CurrentMoney
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 
-signal changed_scene
-
 var menu_tile_limit: Rect2i
 var tile_size: int = 16
 var player: Player
@@ -16,11 +14,11 @@ func _ready() -> void:
 
 func abilities_shop(b) -> void:
 	if b is Player:
-		changed_scene.emit("AbilitiesShop")
+		EventBus.changed_scene.emit("AbilitiesShop")
 		
 func menu(b) -> void:
 	if b is Player:
-		changed_scene.emit("Menu")
+		EventBus.changed_scene.emit("Menu")
 		
 func set_player_camera(_player: Player) -> void:
 	_player.set_camera(menu_tile_limit,tile_size)
