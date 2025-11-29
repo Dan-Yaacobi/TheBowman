@@ -1,6 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764354782
-export_presets.cfg::TextFile::-1::1761257792::0::1::::<><><>0<>0<><>::
+::res://::1764409147
+export_presets.cfg::TextFile::-1::1764409147::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::4266016548506147734::1761257703::1761257703::1::::<><><>0<>0<>9f0503c60e6082dbf7616f89c9d5a420<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1764110902::0::1::::<><><>0<>0<><>::
 ::res://00 Globals/::1764341470
@@ -20,10 +20,10 @@ fart.mp3::AudioStreamMP3::5182794666029087722::1761257791::1761257791::1::::<><>
 small_thunder_strike.mp3::AudioStreamMP3::3117366548321397240::1761257791::1761257791::1::::<><><>0<>0<>8e76b55126c1b3bb9a45380152051def<>res://.godot/imported/small_thunder_strike.mp3-66f5f5f2f48aaba8b0d4e876d12ab20b.mp3str::
 thunder_strike.mp3::AudioStreamMP3::3305509423975431790::1761257791::1761257791::1::::<><><>0<>0<>74d5e43e99898ea3333cc3aa59cfea30<>res://.godot/imported/thunder_strike.mp3-be14f7eca92fc14305d99d39d2e753c1.mp3str::
 wood destruction.mp3::AudioStreamMP3::8856393150164343181::1761257791::1761257791::1::::<><><>0<>0<>a7bbb0a56db3386ea559624fcfcba704<>res://.godot/imported/wood destruction.mp3-7db5d3dde435d96c38f366cb30eef274.mp3str::
-::res://docs/::1764267565
-index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1761257703::1761257703::1::::<><><>0<>0<>84abcf01272f12d2e8b3dc4bf6154750<>res://.godot/imported/index.apple-touch-icon.png-b21a756d869f84af832970a74d8371bc.ctex::
-index.icon.png::CompressedTexture2D::5242730578329901994::1761257703::1761257703::1::::<><><>0<>0<>a435628a48cc1498aeb4554ffdfbaf3c<>res://.godot/imported/index.icon.png-b92c9a802ad4b78e247784454a6b506f.ctex::
-index.png::CompressedTexture2D::8419645050844991133::1761257703::1761257703::1::::<><><>0<>0<>ea8a8fde8b2b7e6dfa4b83f58a2eda6c<>res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex::
+::res://docs/::1764409148
+index.apple-touch-icon.png::CompressedTexture2D::5470186908023640190::1764409148::1764409537::1::::<><><>0<>0<>d76e099d340510ffdce1e7ffec17f1d2<>res://.godot/imported/index.apple-touch-icon.png-b21a756d869f84af832970a74d8371bc.ctex::
+index.icon.png::CompressedTexture2D::5242730578329901994::1764409148::1764409537::1::::<><><>0<>0<>1dd8c054eab1eee666140f9239f5dd34<>res://.godot/imported/index.icon.png-b92c9a802ad4b78e247784454a6b506f.ctex::
+index.png::CompressedTexture2D::8419645050844991133::1764409148::1761257703::1::::<><><>0<>0<>ea8a8fde8b2b7e6dfa4b83f58a2eda6c<>res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex::
 ::res://Enemies/::1761257791
 ::res://Enemies/11_HellEnemies/::1761257791
 ::res://Enemies/11_HellEnemies/EvilWizard/::1761257791
@@ -675,8 +675,8 @@ Tower.png::CompressedTexture2D::1236831340192152733::1761257792::1761257792::1::
 TowerShooter.png::CompressedTexture2D::3698570015359130585::1761257792::1761257792::1::::<><><>0<>0<>3403aa824ab6d3b715b9ee8cc3e4b44f<>res://.godot/imported/TowerShooter.png-6beaf11123e62fec60efa8485df08ac0.ctex::
 WoodTower.png::CompressedTexture2D::8419085419120933994::1761257792::1761257792::1::::<><><>0<>0<>ba9c790947ef8f755bd2722ce0322016<>res://.godot/imported/WoodTower.png-a609ab1a516c572eea2bb48dc3b6eee3.ctex::
 ::res://Weapons/::1764357603
-::res://Weapons/0_BasicBow/::1764359744
-BasicBow.tscn::PackedScene::2587370572507137135::1764359744::0::1::::<><><>0<>0<><>::uid://bvwpiatycoo4e::::res://Weapons/0_BasicBow/basic_bow.gd<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>uid://ds3skhdahxs2u::::res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_ability.gd<>uid://cqv3i2t5b4mbg::::res://Weapons/Scripts/weapon_data.gd<>uid://8smj4t6bgyg1::::res://Weapons/0_BasicBow/Bow_1.png
+::res://Weapons/0_BasicBow/::1764409043
+BasicBow.tscn::PackedScene::2587370572507137135::1764409043::0::1::::<><><>0<>0<><>::uid://bvwpiatycoo4e::::res://Weapons/0_BasicBow/basic_bow.gd<>uid://c8cod48iqt17m::::res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn<>uid://ds3skhdahxs2u::::res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_ability.gd<>uid://cqv3i2t5b4mbg::::res://Weapons/Scripts/weapon_data.gd<>uid://8smj4t6bgyg1::::res://Weapons/0_BasicBow/Bow_1.png
 basic_bow.gd::GDScript::3906727782368806502::1761257703::0::1::::BasicBow<>Weapon<><>0<>0<><>::
 Bow_1.png::CompressedTexture2D::2354136869625022630::1764177960::1764354783::1::::<><><>0<>0<>b485c87de204a1cc1b0132c437de9400<>res://.godot/imported/Bow_1.png-f469aec970bf26486e52f665c1feb688.ctex::
 ::res://Weapons/0_BasicBow/BasicArrow/::1764355570
@@ -733,10 +733,10 @@ thunder_arrow.gd::GDScript::5922833901402783251::1764246857::0::1::::ThunderArro
 ::res://Weapons/6_BoneBow/::1764360056
 BoneBow.tscn::PackedScene::2875827624459431037::1764359980::0::1::::<><><>0<>0<><>::uid://ci3hcd55bclpl::::res://Weapons/6_BoneBow/bone_bow.gd<>uid://ccoj0xf4s6mlo::::res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn<>uid://cqv3i2t5b4mbg::::res://Weapons/Scripts/weapon_data.gd<>uid://bsoel6vaa43su::::res://Player/Abilities/SpecialAbilities/BoneBowAbility/bone_bow_ability.gd<>uid://dttm4tlkdhjv4::::res://Weapons/6_BoneBow/Skeletor.png
 bone_bow.gd::GDScript::5392583489419983765::1761257792::0::1::::BoneBow<>Weapon<><>0<>0<><>::
-Skeletor.png::CompressedTexture2D::8532854664860644595::1764360048::1764360056::1::::<><><>0<>0<>89707667d625dbc301150f823e6c17df<>res://.godot/imported/Skeletor.png-1fa4bf1439a466d3a2fa79441e53fe5b.ctex::
-::res://Weapons/6_BoneBow/BoneBowArrow/::1764360178
+Skeletor.png::CompressedTexture2D::8532854664860644595::1764360250::1764360056::1::::<><><>0<>0<>89707667d625dbc301150f823e6c17df<>res://.godot/imported/Skeletor.png-1fa4bf1439a466d3a2fa79441e53fe5b.ctex::
+::res://Weapons/6_BoneBow/BoneBowArrow/::1764360246
 BoneArrow.png::CompressedTexture2D::2046100359284988398::1761257792::1761257792::1::::<><><>0<>0<>ba24df399728947508d5524cc5984d1a<>res://.godot/imported/BoneArrow.png-f8f7c0396046a843d8312d71594847dc.ctex::
-BoneArrow.tscn::PackedScene::4942712658105613740::1764360040::0::1::::<><><>0<>0<><>::uid://ctqrxqshl6c2t::::res://Weapons/6_BoneBow/BoneBowArrow/bone_arrow.gd<>uid://7k55pgy1tsuq::::res://Weapons/Scripts/arrow_data.gd<>uid://ilnbfv47765s::::res://Weapons/6_BoneBow/BoneBowArrow/SkullArrow.png<>uid://ck8i7ukrq5afx::::res://General Nodes/HurtBox/HurtBox.tscn
+BoneArrow.tscn::PackedScene::4942712658105613740::1764360246::0::1::::<><><>0<>0<><>::uid://ctqrxqshl6c2t::::res://Weapons/6_BoneBow/BoneBowArrow/bone_arrow.gd<>uid://7k55pgy1tsuq::::res://Weapons/Scripts/arrow_data.gd<>uid://ilnbfv47765s::::res://Weapons/6_BoneBow/BoneBowArrow/SkullArrow.png<>uid://ck8i7ukrq5afx::::res://General Nodes/HurtBox/HurtBox.tscn
 bone_arrow.gd::GDScript::6140533571224667449::1761257792::0::1::::BoneArrow<>Arrow<><>0<>0<><>::
 SkullArrow.png::CompressedTexture2D::585010307518113642::1764360201::1764360202::1::::<><><>0<>0<>453a2e214172a9d6fcfe79eb8a9d2800<>res://.godot/imported/SkullArrow.png-8c8553e126f4cda37e68ac36352355f4.ctex::
 ::res://Weapons/7_BubbleGumBow/::1761257810
