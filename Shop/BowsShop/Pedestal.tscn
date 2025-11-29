@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcgks5a8huff6"]
+
+[ext_resource type="Script" uid="uid://c36trchugsnlo" path="res://Shop/BowsShop/pedestal.gd" id="1_hrklu"]
+[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://Shop/BowsShop/Sprites/Pedestal.png" id="2_htf41"]
+[ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="3_pgjq2"]
+[ext_resource type="Script" uid="uid://7dat2p3rgwiy" path="res://Shop/BowsShop/pedestal_bow.gd" id="4_pgjq2"]
+[ext_resource type="PackedScene" uid="uid://cqafvtw74thf0" path="res://Shop/BowsShop/BuyBowMenu.tscn" id="6_a5bpj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw43u"]
+size = Vector2(42, 40)
+
+[node name="Pedestal" type="Node2D"]
+script = ExtResource("1_hrklu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_htf41")
+
+[node name="Island" parent="." instance=ExtResource("3_pgjq2")]
+position = Vector2(-1, 23)
+
+[node name="PedestalBow" type="Node2D" parent="."]
+position = Vector2(-2, -26)
+rotation = 1.5707964
+script = ExtResource("4_pgjq2")
+
+[node name="BowSprite" type="Sprite2D" parent="PedestalBow"]
+
+[node name="BuyBowMenu" parent="." instance=ExtResource("6_a5bpj")]
+z_index = -1
+offset_left = -22.0
+offset_top = -88.0
+offset_right = -22.0
+offset_bottom = -88.0
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_mw43u")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]

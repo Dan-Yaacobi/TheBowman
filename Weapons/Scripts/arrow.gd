@@ -44,7 +44,7 @@ var leech_amount: int = -1
 var fired: bool = false
 var perfect_shot: bool = false
 var shot_power_mod: float = 0
-
+var damage: int
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
 	cpu_particles.emitting = false
@@ -67,7 +67,7 @@ func hit(body) -> void:
 			arrow_hit.emit()
 
 func calc_dmg(shot_power: float) -> void:
-	data.damage = floor((PlayerManager.player.get_strength() + data.base_damage)
+	damage = floor((PlayerManager.player.get_strength() + data.base_damage)
 	*pow(shot_power, 2))
 	
 func explosion() -> void:
@@ -75,7 +75,7 @@ func explosion() -> void:
 		var try: int = randi_range(1,100)
 		if try < explosion_chance:
 			var explosion = ARROW_EXPLODE.instantiate()
-			explosion.damage = data.damage
+			explosion.damage = damage
 			explosion.global_position = global_position
 			get_parent().call_deferred("add_child",explosion)
 			explosion.call_deferred("start")
@@ -133,7 +133,7 @@ func critical_hit() -> void:
 			get_parent().call_deferred("add_child", crit_effect)
 			crit = true
 			crit_hit.emit()
-			hurt_box.damage = data.damage*2
+			hurt_box.damage = damage*2
 			
 func stun_hit() -> void:
 	if can_stun:

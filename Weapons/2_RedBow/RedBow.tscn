@@ -1,34 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://cothgt5is5u1q"]
+[gd_scene load_steps=8 format=3 uid="uid://cothgt5is5u1q"]
 
-[ext_resource type="Script" path="res://Weapons/2_RedBow/red_bow.gd" id="1_6ylsy"]
-[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="2_1uwyy"]
+[ext_resource type="Script" uid="uid://rmuoexh4578w" path="res://Weapons/2_RedBow/red_bow.gd" id="1_6ylsy"]
+[ext_resource type="Script" uid="uid://cqv3i2t5b4mbg" path="res://Weapons/Scripts/weapon_data.gd" id="2_1uwyy"]
 [ext_resource type="PackedScene" uid="uid://bveontxtvavqy" path="res://Weapons/2_RedBow/RedArrow/RedArrow.tscn" id="2_h8skw"]
-[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/RedBowAbility/red_bow_ability.gd" id="4_blvwf"]
+[ext_resource type="Script" uid="uid://dpuxed6qq01qw" path="res://Player/Abilities/SpecialAbilities/RedBowAbility/red_bow_ability.gd" id="4_blvwf"]
+[ext_resource type="Texture2D" uid="uid://dsk05vfiaptdh" path="res://Weapons/2_RedBow/RedBow.png" id="5_gvre5"]
 
 [sub_resource type="Resource" id="Resource_q3ybw"]
 script = ExtResource("4_blvwf")
-name = ""
 
 [sub_resource type="Resource" id="Resource_3s676"]
 script = ExtResource("2_1uwyy")
+bow_name = "Red Bow"
+text_color = Color(0.6627451, 0, 0, 1)
+string_color = Color(0.98039216, 0.11372549, 0.08235294, 1)
+string_thickness = 0.7
+sprite = ExtResource("5_gvre5")
+arrow = ExtResource("2_h8skw")
+bow_position = Vector2(0, 5)
 sprite_frame = 2
 special_ability = SubResource("Resource_q3ybw")
 mana_rate = 1.5
 shoot_cost = 12
-arrow = ExtResource("2_h8skw")
 special_ability_cooldown = 13.0
-spcl_ablty_cost_mltplr = 0
-combo_buff_activated = false
-shots = 1
 damage = 4
-can_pierce = false
-arrows_explode = false
-crit_arrows = false
-crit_chance = 10
-can_stun = false
-stun_chance = 10
-can_leech = false
-leech_chance = 10
 
 [node name="RedBow" type="Node2D"]
 script = ExtResource("1_6ylsy")

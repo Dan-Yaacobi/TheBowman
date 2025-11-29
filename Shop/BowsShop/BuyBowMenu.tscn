@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqafvtw74thf0"]
+
+[ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="1_8i501"]
+[ext_resource type="Script" uid="uid://cxn4fufxvnxgn" path="res://Shop/BowsShop/buy_bow_menu.gd" id="1_l8f87"]
+
+[sub_resource type="Animation" id="Animation_l8f87"]
+resource_name = "Appear"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rd4nb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xchwq"]
+resource_name = "Disappear"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xchwq"]
+_data = {
+&"Appear": SubResource("Animation_l8f87"),
+&"Disappear": SubResource("Animation_xchwq"),
+&"RESET": SubResource("Animation_rd4nb")
+}
+
+[node name="BuyBowMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(24, 48)
+script = ExtResource("1_l8f87")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("1_8i501")
+
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 18.999998
+offset_top = 38.0
+offset_right = 189.0
+offset_bottom = 171.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 100
+text = "Buy"
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.999999
+offset_top = 1.9999999
+offset_right = 385.0
+offset_bottom = 127.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 100
+text = "BlueBow"
+
+[node name="Special" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Damage" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xchwq")
+}
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

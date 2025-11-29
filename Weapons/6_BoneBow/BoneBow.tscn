@@ -1,34 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg8cpwxytaj4p"]
+[gd_scene load_steps=8 format=3 uid="uid://bg8cpwxytaj4p"]
 
-[ext_resource type="Script" path="res://Weapons/6_BoneBow/bone_bow.gd" id="1_l3qhy"]
+[ext_resource type="Script" uid="uid://ci3hcd55bclpl" path="res://Weapons/6_BoneBow/bone_bow.gd" id="1_l3qhy"]
 [ext_resource type="PackedScene" uid="uid://ccoj0xf4s6mlo" path="res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn" id="2_5g134"]
-[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="2_8ekir"]
-[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/bone_bow_ability.gd" id="4_xsomm"]
+[ext_resource type="Script" uid="uid://cqv3i2t5b4mbg" path="res://Weapons/Scripts/weapon_data.gd" id="2_8ekir"]
+[ext_resource type="Script" uid="uid://bsoel6vaa43su" path="res://Player/Abilities/SpecialAbilities/BoneBowAbility/bone_bow_ability.gd" id="4_xsomm"]
+[ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/6_BoneBow/Skeletor.png" id="5_4o27n"]
 
 [sub_resource type="Resource" id="Resource_qotwc"]
 script = ExtResource("4_xsomm")
-name = ""
 
 [sub_resource type="Resource" id="Resource_dyw5y"]
 script = ExtResource("2_8ekir")
+bow_name = "Skeletor"
+text_color = Color(1, 1, 1, 1)
+string_color = Color(0.8980392, 0.78039217, 0.33333334, 1)
+string_thickness = 2.0
+sprite = ExtResource("5_4o27n")
+arrow = ExtResource("2_5g134")
+bow_position = Vector2(0, 11.667)
 sprite_frame = 6
 special_ability = SubResource("Resource_qotwc")
 mana_rate = 5.0
 shoot_cost = 20
-arrow = ExtResource("2_5g134")
 special_ability_cooldown = 1.0
 spcl_ablty_cost_mltplr = 4
-combo_buff_activated = false
 shots = 2
 damage = 10
-can_pierce = false
-arrows_explode = false
-crit_arrows = false
-crit_chance = 10
-can_stun = false
-stun_chance = 10
-can_leech = false
-leech_chance = 10
 
 [node name="BoneBow" type="Node2D"]
 script = ExtResource("1_l3qhy")

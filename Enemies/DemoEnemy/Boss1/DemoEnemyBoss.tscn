@@ -1,19 +1,21 @@
-[gd_scene load_steps=41 format=3 uid="uid://c2eppdxet4q8c"]
+[gd_scene load_steps=43 format=3 uid="uid://c2eppdxet4q8c"]
 
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd" id="1_007ct"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
+[ext_resource type="Script" uid="uid://ich6jvigbqps" path="res://Enemies/DemoEnemy/Boss1/demo_enemy_boss.gd" id="1_007ct"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_ns1qc"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_4vwgm"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_4vwgm"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="6_gbtff"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="7_o3eph"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="7_o3eph"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="8_showg"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_46lb5"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="10_88q2y"]
-[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd" id="16_ikffo"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_setslam_state.gd" id="17_p45i5"]
-[ext_resource type="Script" path="res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd" id="18_52sys"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_gsefu"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_36fxj"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
+[ext_resource type="Script" uid="uid://posnurh0ksc2" path="res://Enemies/DemoEnemy/Boss1/boss_roam_state.gd" id="16_ikffo"]
+[ext_resource type="Script" uid="uid://cxfla8j1hfdad" path="res://Enemies/DemoEnemy/Boss1/boss_setslam_state.gd" id="17_p45i5"]
+[ext_resource type="Script" uid="uid://do7gf25dtq7xg" path="res://Enemies/DemoEnemy/Boss1/boss_slam_state.gd" id="18_52sys"]
 
 [sub_resource type="Resource" id="Resource_c5f3p"]
 resource_local_to_scene = true
@@ -22,29 +24,19 @@ hp = 120
 move_speed = 35
 knockback = 100
 skin = ExtResource("6_gbtff")
-coins_dropped = 0
-sharp_movement = false
 touch_damage = 2
-death_ability = Array[ExtResource("2_g7uw7")]([])
-initial_ability = Array[ExtResource("2_g7uw7")]([])
-special_ability = Array[ExtResource("2_g7uw7")]([])
-debuffs = Array[ExtResource("3_4vwgm")]([])
 boss = true
-teleport_chance = 0
 shooter = true
-shooter_chance = 0
 bullet = ExtResource("2_ns1qc")
 shoot_speed = 3.0
 
 [sub_resource type="Resource" id="Resource_1phje"]
 script = ExtResource("7_o3eph")
 item_data = ExtResource("8_showg")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_ggc8h"]
 script = ExtResource("7_o3eph")
 item_data = ExtResource("8_showg")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_0hlqk"]
 script = ExtResource("7_o3eph")
@@ -64,7 +56,6 @@ probability = 50.0
 [sub_resource type="Resource" id="Resource_4e1yg"]
 script = ExtResource("7_o3eph")
 item_data = ExtResource("9_46lb5")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_k1iwl"]
 script = ExtResource("7_o3eph")
@@ -174,24 +165,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
 _data = {
-"Damaged": SubResource("Animation_k0qd3"),
-"Move": SubResource("Animation_rwjqo"),
-"RESET": SubResource("Animation_wrm4u")
-}
-
-[sub_resource type="Animation" id="Animation_f1xcn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+&"Damaged": SubResource("Animation_k0qd3"),
+&"Move": SubResource("Animation_rwjqo"),
+&"RESET": SubResource("Animation_wrm4u")
 }
 
 [sub_resource type="Animation" id="Animation_hsnyq"]
@@ -211,6 +187,21 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_f1xcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_goyeu"]
 resource_name = "Slam"
 tracks/0/type = "value"
@@ -228,9 +219,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
 _data = {
-"Fly": SubResource("Animation_hsnyq"),
-"RESET": SubResource("Animation_f1xcn"),
-"Slam": SubResource("Animation_goyeu")
+&"Fly": SubResource("Animation_hsnyq"),
+&"RESET": SubResource("Animation_f1xcn"),
+&"Slam": SubResource("Animation_goyeu")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
@@ -249,12 +240,12 @@ size = Vector2(12, 2)
 size = Vector2(8, 11)
 
 [sub_resource type="Curve" id="Curve_fkhtr"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_3801e"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0.0301724, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -271,7 +262,7 @@ texture = ExtResource("6_gbtff")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_o35pa")
+&"": SubResource("AnimationLibrary_o35pa")
 }
 
 [node name="Wings" type="Sprite2D" parent="Sprite2D"]
@@ -280,22 +271,21 @@ vframes = 6
 
 [node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
 libraries = {
-"": SubResource("AnimationLibrary_qgtth")
+&"": SubResource("AnimationLibrary_qgtth")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uehev")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" parent="." instance=ExtResource("11_gsefu")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 4
+[node name="HurtBox" parent="." instance=ExtResource("12_36fxj")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")

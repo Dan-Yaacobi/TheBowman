@@ -1,67 +1,29 @@
-res://Player/Player.tscn
-res://Shop/PlatformShop/platform_shop.gd
-res://Shop/TowersShopMenu/TowerUpgradeMenu.tscn
+res://Shop/BowsShop/Pedestal.tscn
 res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
-res://MainGame/Game.tscn
-res://Player/Player2.0/Body/PlayerBody.tscn
-res://Player/Player2.0/MainHand/PlayerMainHand.tscn
+res://Shop/BowsShop/pedestal.gd
 res://Player/Player2.0/OffHand/PlayerOffHand.tscn
+res://Weapons/1_BlueBow/BlueBow.tscn
+res://Weapons/Scripts/weapon_data.gd
 res://Player/player.gd
-res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd
-res://Player/Player2.0/MainHand/States/m_h_swing_state.gd
-res://Player/Player2.0/MainHand/player_main_hand.gd
-res://Player/Player2.0/MainHand/States/m_h_idle_state.gd
-res://Player/States/player_idle_state.gd
-res://Player/States/player_walking_state.gd
-res://PlayerData/player_stats.gd
-res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd
+res://Player/Player2.0/OffHand/player_off_hand.gd
+res://Weapons/0_BasicBow/BasicBow.tscn
+res://Weapons/2_RedBow/RedBow.tscn
+res://Weapons/2_RedBow/RedArrow/RedArrow.tscn
 res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
 res://Weapons/Scripts/arrow.gd
-res://Enemies/Scripts/enemy.gd
-res://Weapons/5_ThunderBow/ThunderArrow/thunder_arrow.gd
-res://Player/Player2.0/OffHand/States/o_h_idle_state.gd
-res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd
-res://Player/Player Actions/Jump/jump.gd
-res://Player/States/player_dead_state.gd
-res://Level/Testing/TestingArea.tscn
-res://Level/Testing/testing_area.gd
-res://Level/PlayGround/PlayGround.tscn
-res://Player/States/player_slam_state.gd
-res://Enemies/DemoEnemy/demo_enemy.gd
-res://Player/Player2.0/OffHand/player_off_hand.gd
-res://Enemies/DemoEnemy/DemoEnemy.tscn
-res://Level/playground.gd
-res://Level/PlayGround/falling_death.gd
-res://Player/Body/Body.tscn
-res://General Nodes/PlayerSpawn.tscn
-res://General Nodes/player_spawn.gd
-res://MainMenu/MainMenu.tscn
-res://MainMenu/main_menu.gd
-res://Shop/Shop.tscn
-res://Shop/shop.gd
-res://General Nodes/CombatText/CombatText.tscn
-res://General Nodes/HitBox/Hitbox.tscn
-res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn
-res://General Nodes/HurtBox/hurt_box.gd
-res://General Nodes/HitBox/hit_box.gd
-res://00 Globals/event_bus.gd
-res://Weapons/Scripts/weapon.gd
-res://Weapons/0_BasicBow/BasicBow.tscn
 res://Weapons/Scripts/arrow_data.gd
-res://HUD/HUD.tscn
-res://Player/Mana/mana_bar.gd
-res://Player/dash_state.gd
-res://MainGame/game.gd
-res://Level/Wave Data/wave_data.gd
-res://Objects/Portal/Portal.tscn
-res://Objects/Portal/portal.gd
+res://Weapons/1_BlueBow/BlueArrow/BlueArrow.tscn
+res://General Nodes/HurtBox/hurt_box.gd
+res://Shop/BowsShop/BowsShop.tscn
 res://Shop/BowsShop/bows_shop.gd
-res://Shop/AbilitiesShop/abilities_shop.gd
-res://Level/Islands/Island3.tscn
-res://Level/Islands/Island2.tscn
-res://Level/Islands/Island4.tscn
-res://Level/Islands/Island5.tscn
-res://Level/Islands/Island.tscn
-res://Level/Islands/island.gd
+res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn
+res://Weapons/3_BlackBow/BlackBow.tscn
+res://Weapons/4_NatureBow/NatureBow.tscn
+res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn
+res://Weapons/5_ThunderBow/ThunderBow.tscn
+res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn
+res://Weapons/Scripts/weapon.gd
+res://Weapons/6_BoneBow/BoneBow.tscn
+res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn

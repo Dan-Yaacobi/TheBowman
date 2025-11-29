@@ -19,7 +19,7 @@ func AreaEnetered( a : Area2D) -> void:
 		added_effects(a.get_parent())
 		var parent = get_parent()
 		if parent is Arrow:
-			damage = parent.data.damage
+			damage = parent.damage
 			parent.hit(a.enemy)
 			one_time_hit = true
 			#parent.arrow_hit_resolve(a.get_enemy())

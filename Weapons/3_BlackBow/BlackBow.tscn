@@ -1,34 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://jej20pf43m2p"]
+[gd_scene load_steps=8 format=3 uid="uid://jej20pf43m2p"]
 
-[ext_resource type="Script" path="res://Weapons/3_BlackBow/black_bow.gd" id="1_t23ek"]
+[ext_resource type="Script" uid="uid://bi8viquhohcwm" path="res://Weapons/3_BlackBow/black_bow.gd" id="1_t23ek"]
 [ext_resource type="PackedScene" uid="uid://d15f8jk6g0f6x" path="res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn" id="2_5xibf"]
-[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="3_xyxta"]
-[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BlackBowAbility/black_bow_ability.gd" id="4_akytw"]
+[ext_resource type="Script" uid="uid://cqv3i2t5b4mbg" path="res://Weapons/Scripts/weapon_data.gd" id="3_xyxta"]
+[ext_resource type="Script" uid="uid://dx4vkks8jxv4a" path="res://Player/Abilities/SpecialAbilities/BlackBowAbility/black_bow_ability.gd" id="4_akytw"]
+[ext_resource type="Texture2D" uid="uid://c04dsaarp4w75" path="res://Weapons/3_BlackBow/BlackBow.png" id="5_nq0wj"]
 
 [sub_resource type="Resource" id="Resource_ihv5v"]
 script = ExtResource("4_akytw")
-name = ""
 
 [sub_resource type="Resource" id="Resource_cdyc5"]
 script = ExtResource("3_xyxta")
+bow_name = "Black Bow"
+text_color = Color(0.17641911, 0.17641908, 0.17641908, 1)
+string_color = Color(1, 1, 1, 1)
+string_thickness = 0.7
+sprite = ExtResource("5_nq0wj")
+arrow = ExtResource("2_5xibf")
+bow_position = Vector2(0, 5)
 sprite_frame = 3
 special_ability = SubResource("Resource_ihv5v")
 mana_rate = 2.0
 shoot_cost = 14
-arrow = ExtResource("2_5xibf")
 special_ability_cooldown = 5.0
 spcl_ablty_cost_mltplr = 3
-combo_buff_activated = false
-shots = 1
 damage = 6
-can_pierce = false
-arrows_explode = false
-crit_arrows = false
-crit_chance = 10
-can_stun = false
-stun_chance = 10
-can_leech = false
-leech_chance = 10
 
 [node name="BlackBow" type="Node2D"]
 script = ExtResource("1_t23ek")

@@ -1,34 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5yjt3rxeprfj"]
+[gd_scene load_steps=8 format=3 uid="uid://b5yjt3rxeprfj"]
 
-[ext_resource type="Script" path="res://Weapons/1_BlueBow/BlueBow.gd" id="1_aerjk"]
+[ext_resource type="Script" uid="uid://cyb3jkevf6ir3" path="res://Weapons/1_BlueBow/BlueBow.gd" id="1_aerjk"]
 [ext_resource type="PackedScene" uid="uid://smcagm1ag48m" path="res://Weapons/1_BlueBow/BlueArrow/BlueArrow.tscn" id="2_awhf8"]
-[ext_resource type="Script" path="res://Weapons/Scripts/weapon_data.gd" id="3_f5hsv"]
-[ext_resource type="Script" path="res://Player/Abilities/SpecialAbilities/BlueBowAbility/blue_bow_ability.gd" id="4_i2dmr"]
+[ext_resource type="Script" uid="uid://cqv3i2t5b4mbg" path="res://Weapons/Scripts/weapon_data.gd" id="3_f5hsv"]
+[ext_resource type="Script" uid="uid://cep1g5f5ai8oj" path="res://Player/Abilities/SpecialAbilities/BlueBowAbility/blue_bow_ability.gd" id="4_i2dmr"]
+[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Weapons/1_BlueBow/Bow1.png" id="5_cxjw6"]
 
 [sub_resource type="Resource" id="Resource_f84i7"]
 script = ExtResource("4_i2dmr")
-name = ""
 
 [sub_resource type="Resource" id="Resource_ivkbw"]
 script = ExtResource("3_f5hsv")
+bow_name = "Blue Bow"
+text_color = Color(0, 0.3372549, 1, 1)
+string_color = Color(0.25490198, 0.6431373, 0.9098039, 1)
+string_thickness = 0.7
+sprite = ExtResource("5_cxjw6")
+arrow = ExtResource("2_awhf8")
+bow_position = Vector2(1.667, 6.667)
 sprite_frame = 1
 special_ability = SubResource("Resource_f84i7")
 mana_rate = 1.0
 shoot_cost = 10
-arrow = ExtResource("2_awhf8")
 special_ability_cooldown = 5.0
 spcl_ablty_cost_mltplr = 2
-combo_buff_activated = false
-shots = 1
 damage = 2
-can_pierce = false
-arrows_explode = false
-crit_arrows = false
-crit_chance = 10
-can_stun = false
-stun_chance = 10
-can_leech = false
-leech_chance = 10
 
 [node name="BlueBow" type="Node2D"]
 script = ExtResource("1_aerjk")

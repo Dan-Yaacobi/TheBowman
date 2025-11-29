@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cn76h3jplsrfn"]
+[gd_scene load_steps=30 format=3 uid="uid://cn76h3jplsrfn"]
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_t5j42"]
 [ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_b0juv"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="7_mruj4"]
 [ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="9_8b8lc"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_slubb"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="12_iw7s3"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="13_lgrm0"]
 
 [sub_resource type="Resource" id="Resource_fth6d"]
 script = ExtResource("4_eldsg")
@@ -113,30 +115,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../HitBox:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.65),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../HurtBox:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.65),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5)]
-}
 
 [sub_resource type="Animation" id="Animation_wrm4u"]
 length = 0.001
@@ -171,30 +149,6 @@ tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../HitBox:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../HurtBox:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -300,16 +254,15 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uehev")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="Hitbox" parent="." instance=ExtResource("12_iw7s3")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 4
+[node name="HurtBox" parent="." instance=ExtResource("13_lgrm0")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")

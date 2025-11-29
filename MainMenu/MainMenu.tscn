@@ -68,10 +68,10 @@ theme_override_font_sizes/font_size = 200
 text = "Current Wave:"
 
 [node name="HowToPlay" type="Label" parent="."]
-offset_left = 129.0
-offset_top = 14.0
-offset_right = 4323.0
-offset_bottom = 2558.0
+offset_left = 123.0
+offset_top = 2.0
+offset_right = 4317.0
+offset_bottom = 2546.0
 scale = Vector2(0.04, 0.04)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
@@ -101,10 +101,10 @@ text = "Next Wave"
 button_data = SubResource("Resource_etkyy")
 
 [node name="ButtonShootClick2" parent="." instance=ExtResource("3_0uxqg")]
-offset_left = 18.0
-offset_top = 19.0
-offset_right = 1388.0
-offset_bottom = 369.0
+offset_left = 315.0
+offset_top = 17.0
+offset_right = 1685.0
+offset_bottom = 367.0
 scale = Vector2(0.02, 0.02)
 tooltip_text = "For Testing Purposes"
 text = "Add Money"
@@ -203,20 +203,45 @@ position = Vector2(206, 121)
 [node name="Island6" parent="Islands" instance=ExtResource("13_qvidt")]
 position = Vector2(99, 114)
 
+[node name="Island13" parent="Islands" instance=ExtResource("13_qvidt")]
+position = Vector2(119, 162)
+floating = true
+
 [node name="Island3" parent="Islands" instance=ExtResource("14_5lv0r")]
 position = Vector2(293, 96)
 
+[node name="Island12" parent="Islands" instance=ExtResource("14_5lv0r")]
+position = Vector2(15, -13)
+
 [node name="Island4" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(149, 118)
+floating = true
+
+[node name="Island14" parent="Islands" instance=ExtResource("15_167x7")]
+position = Vector2(62, 191)
+floating = true
+
+[node name="Island10" parent="Islands" instance=ExtResource("15_167x7")]
+position = Vector2(28, 34)
+floating = true
 
 [node name="Island5" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(258, 109)
+floating = true
 
 [node name="Island7" parent="Islands" instance=ExtResource("16_24r6y")]
 position = Vector2(22, 97)
 
 [node name="Island8" parent="Islands" instance=ExtResource("16_24r6y")]
 position = Vector2(57, 106)
+floating = true
+
+[node name="Island11" parent="Islands" instance=ExtResource("16_24r6y")]
+position = Vector2(72, 6)
+floating = true
+
+[node name="Island9" parent="Islands" instance=ExtResource("16_24r6y")]
+position = Vector2(88, 61)
 
 [node name="Portals" type="Node2D" parent="."]
 
@@ -227,4 +252,10 @@ flip_h = true
 
 [node name="Portal2" parent="Portals" instance=ExtResource("13_npjie")]
 position = Vector2(22, 74)
-destination = "Shop"
+color = Color(1, 1, 0, 1)
+destination = "BowsShop"
+
+[node name="Portal3" parent="Portals" instance=ExtResource("13_npjie")]
+position = Vector2(88, 39)
+color = Color(1, 0.28235295, 1, 1)
+destination = "PlatformShop"

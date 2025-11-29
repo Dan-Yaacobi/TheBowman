@@ -61,7 +61,7 @@ var mega_shot_activated: bool = false
 var invincible: bool = false
 
 @onready var main_hand: PlayerMainHand = $PlayerMainHand
-@onready var off_hand: CharacterBody2D = $PlayerOffHand
+@onready var off_hand: PlayerOffHand = $PlayerOffHand
 @onready var off_hand_shoulder: Node2D = $OffHandShoulder
 
 var shooting: bool = false
@@ -314,13 +314,20 @@ func change_to_new_bow(_new_bow: PackedScene) -> void:
 	if _new_bow != null:
 		stats.weapon_scene = _new_bow
 		init_bow()
-
+		
+func set_hands_new_bow() -> void:
+	var bow_data = current_weapon.weapon_data
+	main_hand.new_arrow(bow_data.arrow)
+	off_hand.new_bow(bow_data)
+	
 func init_bow() -> void:
 	#if current_weapon != null:
 		#new_bow_buy_effect.emitting = true
 		#
 	
 	current_weapon = stats.weapon_scene.instantiate()
+	set_hands_new_bow()
+	
 	current_weapon.arrow_hit_sound.connect(shoot_action.arrow_hit_sound)
 	current_weapon.combo_loss.connect(combo_lost)
 	current_weapon.combo_gained.connect(combo_gained)

@@ -4,6 +4,10 @@ class_name BowsShop extends Node2D
 @onready var enter: Area2D = $LeftDoor/Enter
 @onready var current_money: CurrentMoney = $CurrentMoney
 @onready var fall: Area2D = $Fall
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
+@onready var islands: Node2D = $Islands
+@onready var pedestals: Node2D = $Pedestals
+@onready var portals: Node2D = $Portals
 
 var shop_weapons: Array[ShopWeapon] = []
 var total_bows: int
@@ -53,14 +57,14 @@ func set_player_camera(_player: Player) -> void:
 
 func set_scene(_player: Player) -> void:
 		menu_tile_limit = tiles.get_used_rect()
-		set_player_camera(_player)
+		#set_player_camera(_player)
 		player = _player
 		for child in get_children():
 			if child is ShopWeapon:
 				child.player = player
 				child.set_shop_weapon()
 		visible = true
-		_player.global_position = Vector2(70,150)
+		_player.global_position = player_spawn.global_position
 		tiles.collision_enabled = true
 		for child in get_children():
 			if child is MainButton:
@@ -73,7 +77,24 @@ func set_scene(_player: Player) -> void:
 		current_money.update_current_money(_player.stats.money)
 		if not fall.body_entered.is_connected(shop):
 			fall.body_entered.connect(shop)
+		enable()
+func disable() -> void:
+	for portal in portals.get_children():
+		portal.disable()
+	for island in islands.get_children():
+		island.disable()
+	for pedestal in pedestals.get_children():
+		pedestal.disable()
 
+
+func enable() -> void:
+	for portal in portals.get_children():
+		portal.enable()
+	for island in islands.get_children():
+		island.enable()
+	for pedestal in pedestals.get_children():
+		pedestal.enable()
+		
 func update_money(_val: int) -> void:
 	current_money.update_current_money(_val)
 
@@ -87,7 +108,8 @@ func exit_scene(_player) -> void:
 		fall.body_entered.disconnect(shop)
 	visible = false
 	disable_doors()
-
+	disable()
+	
 func disable_doors() -> void:
 	for child in get_children():
 		if child is Door:

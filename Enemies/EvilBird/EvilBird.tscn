@@ -1,20 +1,22 @@
-[gd_scene load_steps=35 format=3 uid="uid://cdtin5d5lhmfi"]
+[gd_scene load_steps=37 format=3 uid="uid://cdtin5d5lhmfi"]
 
-[ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
+[ext_resource type="Script" uid="uid://d2y3mpjq3t166" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_idach"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="7_qgn5p"]
-[ext_resource type="Script" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="7_qgn5p"]
+[ext_resource type="Script" uid="uid://dwa1xg7ylpp4y" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="9_gwqcn"]
 [ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="9_prxv3"]
-[ext_resource type="Script" path="res://Items/ItemEffects/sparkle.gd" id="9_s8nod"]
-[ext_resource type="Script" path="res://Items/item_data.gd" id="10_0bpxa"]
+[ext_resource type="Script" uid="uid://gwfm40yibx2n" path="res://Items/ItemEffects/sparkle.gd" id="9_s8nod"]
+[ext_resource type="Script" uid="uid://chfcjmpmpeon0" path="res://Items/item_data.gd" id="10_0bpxa"]
 [ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_a4bmo"]
 [ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_2scv3"]
 [ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="16_rhfyp"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="16_sqrbk"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_j7d4o"]
 
 [sub_resource type="Resource" id="Resource_w50ih"]
 script = ExtResource("4_w0v01")
@@ -27,28 +29,18 @@ move_speed = 50
 knockback = 200
 skin = ExtResource("16_rhfyp")
 coins_dropped = 10
-sharp_movement = false
 touch_damage = 1
 death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
-initial_ability = Array[ExtResource("2_1cl26")]([])
-special_ability = Array[ExtResource("2_1cl26")]([])
-debuffs = Array[ExtResource("3_duj8d")]([])
-boss = false
-teleport_chance = 0
-shooter = false
-shooter_chance = 0
 bullet = ExtResource("2_idach")
 shoot_speed = 3.0
 
 [sub_resource type="Resource" id="Resource_rjwp8"]
 script = ExtResource("7_qgn5p")
 item_data = ExtResource("9_gwqcn")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_x2nk2"]
 script = ExtResource("9_s8nod")
 sparkle_color = "ffcc00"
-sparkle_scene = ExtResource("10_a4bmo")
 
 [sub_resource type="Resource" id="Resource_ag1v1"]
 script = ExtResource("10_0bpxa")
@@ -61,7 +53,6 @@ effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_x2nk2")])
 resource_local_to_scene = true
 script = ExtResource("7_qgn5p")
 item_data = SubResource("Resource_ag1v1")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_xj4sr"]
 script = ExtResource("7_qgn5p")
@@ -81,7 +72,6 @@ probability = 10.0
 [sub_resource type="Resource" id="Resource_amrel"]
 script = ExtResource("9_s8nod")
 sparkle_color = "6ec7db"
-sparkle_scene = ExtResource("10_a4bmo")
 
 [sub_resource type="Resource" id="Resource_msidu"]
 script = ExtResource("10_0bpxa")
@@ -195,9 +185,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]
 _data = {
-"Damaged": SubResource("Animation_qmrug"),
-"Move": SubResource("Animation_sngn8"),
-"RESET": SubResource("Animation_jqhj0")
+&"Damaged": SubResource("Animation_qmrug"),
+&"Move": SubResource("Animation_sngn8"),
+&"RESET": SubResource("Animation_jqhj0")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82j1c"]
@@ -226,26 +216,27 @@ hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_jiyox")
+&"": SubResource("AnimationLibrary_jiyox")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 2.18166
 shape = SubResource("CapsuleShape2D_82j1c")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" parent="." instance=ExtResource("16_sqrbk")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 rotation = 2.18166
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_wpa61")
 debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 4
+[node name="HurtBox" parent="." instance=ExtResource("17_j7d4o")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 rotation = 2.18166
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_vrf4a")
 debug_color = Color(1, 0, 0.0166664, 0.419608)

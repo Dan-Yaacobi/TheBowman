@@ -61,9 +61,9 @@ func arrow_setup() -> void:
 	
 func draw_arrow() -> void:
 	if !current_arrow:
-		var new_arrow: Arrow = arrow.instantiate()
-		arrow_position.add_child(new_arrow)
-		current_arrow = new_arrow
+		var _arrow: Arrow = arrow.instantiate()
+		arrow_position.add_child(_arrow)
+		current_arrow = _arrow
 
 func set_hand_direction() -> void:
 	rotation = hand_direction.angle() - PI/2
@@ -79,6 +79,10 @@ func where_to_hold_arrow() -> Vector2:
 func change_direction() -> void:
 	position.x *= - 1
 
+func new_arrow(_arrow: PackedScene) -> void:
+	if arrow.instantiate() is Arrow:
+		arrow = _arrow
+		
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
 	#for shoot_ability in PlayerManager.player.get_shoot_abilities():

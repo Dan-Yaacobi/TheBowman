@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8smj4t6bgyg1"
-path="res://.godot/imported/Bow_1.png-b1b478a7407682b81a2f0a3d99bcc30f.ctex"
+uid="uid://c04dsaarp4w75"
+path="res://.godot/imported/BlackBow.png-c2c97e042f69fe437452ceb509319e4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Player2.0/Sprites/Bow_1.png"
-dest_files=["res://.godot/imported/Bow_1.png-b1b478a7407682b81a2f0a3d99bcc30f.ctex"]
+source_file="res://Weapons/3_BlackBow/BlackBow.png"
+dest_files=["res://.godot/imported/BlackBow.png-c2c97e042f69fe437452ceb509319e4f.ctex"]
 
 [params]
 

@@ -1,44 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddcxl8d6d0fhx"]
+[gd_scene load_steps=8 format=3 uid="uid://ddcxl8d6d0fhx"]
 
-[ext_resource type="Script" path="res://Weapons/4_NatureBow/NatureArrow/nature_arrow.gd" id="1_xffs3"]
-[ext_resource type="Script" path="res://Weapons/Scripts/arrow_data.gd" id="2_a5r3o"]
+[ext_resource type="Script" uid="uid://cd6efy8ji234g" path="res://Weapons/4_NatureBow/NatureArrow/nature_arrow.gd" id="1_xffs3"]
+[ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_a5r3o"]
 [ext_resource type="Texture2D" uid="uid://2k08i7rod8ti" path="res://Weapons/4_NatureBow/NatureArrow/PoisonArrow.png" id="3_w5g70"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_on13g"]
 
 [sub_resource type="Resource" id="Resource_k1eep"]
 script = ExtResource("2_a5r3o")
 speed = 450
-damage = 8
+base_damage = 15
 pushback_power = 25
-scale = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgar8"]
-size = Vector2(2, 3)
 
 [sub_resource type="Curve" id="Curve_homi5"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="NatureArrow" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hckkm"]
+size = Vector2(7, 6)
+
+[node name="NatureArrow" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+rotation = 1.5707964
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("1_xffs3")
 data = SubResource("Resource_k1eep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, -2.6226832e-07)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_w5g70")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0.5)
-shape = SubResource("RectangleShape2D_kgar8")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -1
-position = Vector2(7, -1)
-amount = 120
+amount = 15
 randomness = 1.0
 lifetime_randomness = 1.0
 emission_shape = 1
@@ -46,3 +43,11 @@ emission_sphere_radius = 3.0
 gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_homi5")
 color = Color(0.415686, 0.745098, 0.188235, 1)
+
+[node name="HurtBox" parent="." instance=ExtResource("4_on13g")]
+position = Vector2(13, -5.68248e-07)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1.5, 1.5497403e-07)
+shape = SubResource("RectangleShape2D_hckkm")

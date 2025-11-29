@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c8s38ngop7fkj" path="res://Player/Player2.0/OffHand/States/off_hand_state_machine.gd" id="2_hdxbw"]
 [ext_resource type="Script" uid="uid://cew0nfmkvmt6e" path="res://Player/Player2.0/OffHand/States/o_h_idle_state.gd" id="3_b6f1e"]
 [ext_resource type="Script" uid="uid://b5d11u4vmlib8" path="res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd" id="4_dyut0"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Player/Player2.0/Sprites/Bow_1.png" id="5_b6f1e"]
+[ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/6_BoneBow/Skeletor.png" id="6_dyut0"]
 
 [sub_resource type="Animation" id="Animation_o0dpc"]
 resource_name = "Pull"
@@ -13,7 +13,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Line2D:points")
+tracks/0/path = NodePath("String:points")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +28,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Line2D:points")
+tracks/0/path = NodePath("String:points")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,11 +53,11 @@ texture = ExtResource("1_bfu6e")
 centered = false
 offset = Vector2(-7.5, -1)
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="String" type="Line2D" parent="."]
 z_index = 1
 position = Vector2(-8.33333, 3.33333)
 points = PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667)
-width = 0.4
+width = 1.0
 default_color = Color(1, 0.759619, 0.662997, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -81,5 +81,5 @@ script = ExtResource("4_dyut0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bow"]
 z_index = 2
-position = Vector2(0, 6.6666665)
-texture = ExtResource("5_b6f1e")
+position = Vector2(0, 11.666666)
+texture = ExtResource("6_dyut0")

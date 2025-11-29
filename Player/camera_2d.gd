@@ -3,24 +3,47 @@ extends Camera2D
 @onready var player: Player = $".."
 @export var random_strength: float = 30.0
 @export var shake_fade: float = 5.0
+@export var move_speed_variant: float = 8.0
 
 var rng = RandomNumberGenerator.new()
 var shake_strength: float = 0.0
 
+var moving_camera: bool = false
+var target_move: Vector2
+
 func _ready() -> void:
 	player.took_hit.connect(apply_shake)
 	player.critical_hit.connect(apply_shake)
+	
+	EventBus.change_camera_focus.connect(change_focus)
+	EventBus.reset_camera_focus.connect(reset_focus)
 	pass
 	
 func _physics_process(delta: float) -> void:
 	if shake_strength > 0:
 		shake_strength = lerpf(shake_strength, 0 , shake_fade * delta)
-		
 		offset = random_offset()
-	pass
+	if moving_camera:
+		move_the_camera(target_move, delta)
+	else:
+		move_the_camera(player.global_position, delta)
 
 func apply_shake() -> void:
 	shake_strength = random_strength
 	
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength,shake_strength),rng.randf_range(-shake_strength,shake_strength))
+
+func move_the_camera(target: Vector2, delta: float) -> void:
+	global_position = lerp(global_position,target,move_speed_variant * delta)
+	pass
+	
+func change_focus(target: Vector2) -> void:
+	moving_camera = true
+	target_move = target
+	pass
+
+func reset_focus() -> void:
+	moving_camera = false
+	pass
+	
