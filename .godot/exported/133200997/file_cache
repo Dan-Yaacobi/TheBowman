@@ -1,8 +1,8 @@
-res://Enemies/DemoEnemy/DemoEnemy2.tscn::d06818da1db29bb7e0c26eda70ad8a2a::1764271412::res://.godot/exported/133200997/export-feb2cd143f668709c8cfb7b3e34799d8-DemoEnemy2.scn
+res://Enemies/DemoEnemy/DemoEnemy2.tscn::6db7cd97206ad6195a8ce2c41d5f6fb9::1764500442::res://.godot/exported/133200997/export-feb2cd143f668709c8cfb7b3e34799d8-DemoEnemy2.scn
 res://Enemies/DemoEnemy/DemoEnemy3.tscn::cf36b1991e02bbe7409bfbf960c79718::1761257791::res://.godot/exported/133200997/export-cf935259902ade3e5998ffbc368d6133-DemoEnemy3.scn
 res://Enemies/DemoEnemy/DemoEnemy4.tscn::db19fcb41f8afdfb000c4e80ff58cb17::1761257791::res://.godot/exported/133200997/export-7f56a84d65437230a1bf45eb4b7e3220-DemoEnemy4.scn
 res://Enemies/DemoEnemy/DemoEnemy5.tscn::4702b3f43fe7abf60ac778561740671f::1761257791::res://.godot/exported/133200997/export-539a7b4f2621d9ec96d70f1d69ad92b9-DemoEnemy5.scn
-res://Enemies/DemoEnemy/DemoEnemy.tscn::44f23790e684d96f7d57e8256b3fe1c9::1764249653::res://.godot/exported/133200997/export-b6e2b3eed7d26487a23a908bff384b52-DemoEnemy.scn
+res://Enemies/DemoEnemy/DemoEnemy.tscn::950eec685e633e4ad8dc249b6801b099::1764500477::res://.godot/exported/133200997/export-b6e2b3eed7d26487a23a908bff384b52-DemoEnemy.scn
 res://Enemies/DemoEnemy/DemoEnemyGold.tscn::6444af1f758c770fbff99c699c1e6f97::1761257791::res://.godot/exported/133200997/export-9be0d6d889db1749095592098fb9741a-DemoEnemyGold.scn
 res://Enemies/EnemyAbilities/Sparkle/Sparkle.tscn::8e6ee6a41a7785f1f8a8a74d3f5ff64b::1761257703::res://.godot/exported/133200997/export-aee466e3974be3d9684652f6c6c0c00e-Sparkle.scn
 res://Enemies/EnemyEffects/Poisoned/poisoned_effect.tscn::6b3f0e5343e29b7c2001c39702b9404e::1761257703::res://.godot/exported/133200997/export-649062c6da5bccf19324163200df61ec-poisoned_effect.scn
@@ -10,13 +10,13 @@ res://Enemies/EnemyEffects/Poisoned/poisoned_timer.tscn::508565e7f2f7ca721e2c500
 res://Enemies/EnemyEffects/Stunned/stunned_effect.tscn::29d86365e5c44dea9765e0a114ba0d16::1761257703::res://.godot/exported/133200997/export-9451f48fb51f9e5755c4b53e0b48faca-stunned_effect.scn
 res://Enemies/EnemyEffects/Stunned/stunned_timer.tscn::4e640e47b7dd38bfaf0c81ced7ab8e0d::1761257703::res://.godot/exported/133200997/export-09523d3c17a500b924942e014de04765-stunned_timer.scn
 res://Items/ItemEffects/Sparkle.tscn::8280f58a958471a7fc03f1c5c80a1ea1::1761257703::res://.godot/exported/133200997/export-8005a048e821e676c6adece80c0965ff-Sparkle.scn
-res://Items/Coin.tres::28071d667e2b79435899ffb9398bcb77::1764354509::res://.godot/exported/133200997/export-524c3948d6bb9ab6923b2d18a163d66b-Coin.res
-res://Items/Diamond.tres::35cb4b71072b7d46360f377cdaeb0821::1764354509::res://.godot/exported/133200997/export-d68491598d933e0a520e13828b8f3875-Diamond.res
+res://Items/Coin.tres::28071d667e2b79435899ffb9398bcb77::1764486667::res://.godot/exported/133200997/export-524c3948d6bb9ab6923b2d18a163d66b-Coin.res
+res://Items/Diamond.tres::35cb4b71072b7d46360f377cdaeb0821::1764486667::res://.godot/exported/133200997/export-d68491598d933e0a520e13828b8f3875-Diamond.res
 res://Items/ItemPickUp.tscn::cbe297d8779c7f633ded80e3438ef311::1761257791::res://.godot/exported/133200997/export-5ae46435b1b63586e649e575b5427bd0-ItemPickUp.scn
 res://Level/ChangeScene/ChangeScene.tscn::799e761ef9351de950cf6bf64c70c013::1761257703::res://.godot/exported/133200997/export-f08527b6c9084167e4521962901cb079-ChangeScene.scn
-res://Level/PlayGround/PlayGround.tscn::2c3607b95dc8ddbe745509be877d9c66::1764263389::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
+res://Level/PlayGround/PlayGround.tscn::2c3607b95dc8ddbe745509be877d9c66::1764439990::res://.godot/exported/133200997/export-f3815ca72d166616d4021eb53297915a-PlayGround.scn
 res://Level/Tiles.tscn::98b08bf29faadcdba952d9ab1fb0e1e5::1761257791::res://.godot/exported/133200997/export-7dd1420a976f4534020ca5638c4abe6a-Tiles.scn
-res://MainGame/Game.tscn::d9f0705d2f2cda1de30552aa934ce4b6::1764337923::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
+res://MainGame/Game.tscn::d9f0705d2f2cda1de30552aa934ce4b6::1764417705::res://.godot/exported/133200997/export-c727af1d82ae548d9fd66b65c7d50ab6-Game.scn
 res://MainMenu/ButtonShootClick.tscn::b1facf63ea66f3212f38717743e89da0::1761257791::res://.godot/exported/133200997/export-24b0b019d54cfcbe60dab6c435d546d2-ButtonShootClick.scn
 res://MainMenu/MainMenu.tscn::1b45231ba1691054fe2f0b4dab5de9bb::1764351414::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
 res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_particles.tscn::813066928a7c0770a41712a7e8063913::1761257791::res://.godot/exported/133200997/export-53e20b62ed6fe22cf71eeb0a78f464f5-basic_bow_particles.scn
@@ -29,40 +29,27 @@ res://Player/Body/Body.tscn::435c917d01d45fb2ada7209d32e27629::1764243680::res:/
 res://Player/Hand/Hand.tscn::5387779f759ffe2ce224f747cb1fac31::1761257791::res://.godot/exported/133200997/export-9056502bf9377bae3d26edf11644e46d-Hand.scn
 res://Player/Mana/ManaBar.tscn::aff4a1432e2fc6c4dfc86c90a95945de::1763818478::res://.godot/exported/133200997/export-6b4ef7601db59b647ec55623c0b628c3-ManaBar.scn
 res://Player/Player Actions/Jump/Jump.tscn::63cfd2d5f54ca3223a65f52315aef3b4::1761257703::res://.godot/exported/133200997/export-fec1536713ca7da36d6707f147f74554-Jump.scn
-res://Player/Player Actions/Shoot/Shoot.tscn::b6b31ba815fd39e08bb4b7f335361554::1761257791::res://.godot/exported/133200997/export-b504db0c3c2c9e1ad54fcc20c246eaa7-Shoot.scn
 res://Player/States/PlayerStateMachine.tscn::853fde01bba479de3d509f8d16010217::1761257703::res://.godot/exported/133200997/export-78068f79b8e3ba168e6f72469afed863-PlayerStateMachine.scn
-res://Player/Player.tscn::f7f514e9d2727dacab4541e7c3d0b4d2::1764351476::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
+res://Player/Player.tscn::dacfd226d450af08815b1a99f92df550::1764500557::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
 res://PlayerData/PlayerStats.tres::a5a8e7394677a2d5cf5d663c2aa9ce5a::1761257703::res://.godot/exported/133200997/export-8fb5315e12567ae4e160e1d84f120afd-PlayerStats.res
 res://Shop/AbilitiesShop/AbilitiesShop.tscn::3de6296d4cff82ebba74e165ae08b4df::1761257791::res://.godot/exported/133200997/export-51683065a65fd7f140250a56328c4097-AbilitiesShop.scn
 res://Shop/AbilitiesShop/AbilitiesShopButton.tscn::9096e525e86b540e769d8e887bfc8d81::1761257703::res://.godot/exported/133200997/export-01497330158b607902c6acc13a84c390-AbilitiesShopButton.scn
-res://Shop/BowsShop/BowsShop.tscn::8255d57cb73b9f514978c529e49c885a::1764360029::res://.godot/exported/133200997/export-99c7a474cb20fc34efa5d03a1817a187-BowsShop.scn
+res://Shop/BowsShop/BowsShop.tscn::b24dbd9fa0b408a7d6df460b4b8b39f3::1764432778::res://.godot/exported/133200997/export-99c7a474cb20fc34efa5d03a1817a187-BowsShop.scn
 res://Shop/BowsShop/ShopWeapon.tscn::1615a7fede47d8e4826b5e9919f52d7f::1764340098::res://.godot/exported/133200997/export-e4b6a8a6c58dc78ba4531c7dec88b8cf-ShopWeapon.scn
 res://Shop/PlatformShop/BuyPlatform.tscn::d13268520214ac0fa91339dcc381b1ac::1761257703::res://.godot/exported/133200997/export-259b0b7c5ed398c21facff2ab2da4fcc-BuyPlatform.scn
 res://Shop/PlatformShop/PlatformShop.tscn::cf9ea47261eaf12fb458ae77787ab0e9::1763820072::res://.godot/exported/133200997/export-092c5fcccacfbf536bb6c30736ad56b7-PlatformShop.scn
 res://Shop/Shop2.tscn::cadaca491a466a46d42ff23777f7e76f::1761257703::res://.godot/exported/133200997/export-708df04471d053f9116513d9bc2a61c6-Shop2.scn
 res://Shop/Shop.tscn::579e788b22e91df1dfcb315960fdf95b::1764244350::res://.godot/exported/133200997/export-13ffd801030b642723a5b64266c5aea9-Shop.scn
-res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn::6390710698158734fe0d396fa5af8513::1764355570::res://.godot/exported/133200997/export-329a2e2617024a7b1e643e0a9a106beb-BasicArrow.scn
-res://Weapons/0_BasicBow/BasicBow.tscn::62fe96c1519051bafe7f145ae042dd3c::1764409043::res://.godot/exported/133200997/export-2c669b726719ca277a5b53a9cb5060d4-BasicBow.scn
-res://Weapons/1_BlueBow/BlueArrow/BlueArrow.tscn::440cc8575762a9d841bb9d01d12beec8::1764355850::res://.godot/exported/133200997/export-92442a11a038b9dbf9fb0159d6db3782-BlueArrow.scn
-res://Weapons/1_BlueBow/BlueBow.tscn::99556e7cd5196bdf0ce94cc2d6446fac::1764354939::res://.godot/exported/133200997/export-3dc19cc14b6884c60b9c23a9ac59db18-BlueBow.scn
-res://Weapons/2_RedBow/RedArrow/RedArrow.tscn::e4e0e6b7bbf69986444705fda43f5d4a::1764355873::res://.godot/exported/133200997/export-5a2e9531c082a04c39c53733eb567936-RedArrow.scn
-res://Weapons/2_RedBow/RedBow.tscn::4bf352576cc3e5b0b76f3cf1cdf2376b::1764355389::res://.godot/exported/133200997/export-be12772c275f1191eee7e9ac328370a5-RedBow.scn
-res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn::d5f80a94aae3dd73d4ea294c2d40b01e::1764358683::res://.godot/exported/133200997/export-1f2138968b640216194c6b096f2c7cb0-BlackArrow.scn
-res://Weapons/3_BlackBow/BlackBow.tscn::8c1698cf8c53fd02061c2a3459d5e3e3::1764358947::res://.godot/exported/133200997/export-daebc2c58d2dac6e63d4d91dd6f4d019-BlackBow.scn
-res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn::dbefc6d31827caec884563255e0798f2::1764358931::res://.godot/exported/133200997/export-bb0bea3e9d665e7523d791ec47743231-NatureArrow.scn
-res://Weapons/4_NatureBow/NatureBow.tscn::4e11680a7a58ffa23846c41f3aba609e::1764359798::res://.godot/exported/133200997/export-3513e86194ea52f57d06e6b5fb788ef1-NatureBow.scn
-res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn::2c531275f28dd149d14dcdb1540f8a61::1764359751::res://.godot/exported/133200997/export-2d6adfdaa74cffbcd75afee3a567f015-ThunderArrow.scn
-res://Weapons/5_ThunderBow/ThunderBow.tscn::2b3b0ea8b38dd303a166bb309b25b80b::1764359232::res://.godot/exported/133200997/export-5987927524b6f75830fc779735822c8f-ThunderBow.scn
-res://HealthBar/HealthBar.tscn::b1ad9c3921e14a785c42704c14383769::1761257791::res://.godot/exported/133200997/export-ff366640997bc299e9392e98f5680f59-HealthBar.scn
-res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn::4552dd36e17c80284860734f439c5b78::1761257791::res://.godot/exported/133200997/export-81ff85b496bc1fb84e3df80e2f4bf8da-BlueBullet.scn
-res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn::6cf0695ace0beaacd27edbe9591acdac::1761257791::res://.godot/exported/133200997/export-b7ecac70551cd2e54aecdbec5a64f4b9-RedBullet.scn
+res://HealthBar/HealthBar.tscn::16eb0648258f3c64c9e3a1d70fd6aad1::1764435415::res://.godot/exported/133200997/export-ff366640997bc299e9392e98f5680f59-HealthBar.scn
+res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn::2956113dd39d6f6883346d12ad517866::1764500414::res://.godot/exported/133200997/export-81ff85b496bc1fb84e3df80e2f4bf8da-BlueBullet.scn
+res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn::2dcdbcdb34419c6a3ffedf71bd4528b6::1764500427::res://.godot/exported/133200997/export-b7ecac70551cd2e54aecdbec5a64f4b9-RedBullet.scn
 res://Level/Animations/TransitionAnimation.tscn::59677d90f97ce37051accb8f6ec24f20::1761257791::res://.godot/exported/133200997/export-c4978beba7db5619a510b203c74761ba-TransitionAnimation.scn
 res://Shop/PlatformShop/PlatformButton.tscn::55ac8163c114e061c258a3bcd80a39f5::1761257791::res://.godot/exported/133200997/export-34d77e800b2cd584605060680aebbcce-PlatformButton.scn
 res://Shop/PlatformShop/PlatformBuyMenu.tscn::366aa6b5a8ad7f76f7451576528ff08c::1761257791::res://.godot/exported/133200997/export-1ff08d38ca59644b457fcb8ddb01b101-PlatformBuyMenu.scn
 res://Enemies/EvilBird/EvilBird.tscn::bd18b70072e5173a58db0284312ee752::1764272004::res://.godot/exported/133200997/export-38b05785e9c129bcec9a980cc08fb560-EvilBird.scn
 res://Enemies/Cloud/CloudEnemy.tscn::7a39bd17c5129e1782a7003cdf6b6bf5::1761257791::res://.godot/exported/133200997/export-80907b79528cd84314f312f64027792f-CloudEnemy.scn
 res://Enemies/EnemyAbilities/DeathAbility/DeathParticles.tscn::7e7525bee4fe5552d8675b1c01a8c2fc::1761257791::res://.godot/exported/133200997/export-fc4dea130840c0c1d87cb8fb13f315da-DeathParticles.scn
-res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn::11f6b4c5a6c11e55f97c6d9df619b0e7::1761257791::res://.godot/exported/133200997/export-a85a8776d508678d8e92976eff69c467-BirdBullet.scn
+res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn::bb5850faa9adbd199e8a8ee073034d3a::1764487133::res://.godot/exported/133200997/export-a85a8776d508678d8e92976eff69c467-BirdBullet.scn
 res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn::aa3ad4337a8ccc3eb4fe5b5abe3892fe::1761257791::res://.godot/exported/133200997/export-2dbec18a6d8d6a88b23d6928a39abd9d-HitParticles.scn
 res://Enemies/EvilBird/BlueBird.tscn::5d81a70bae545a804e64712db1bee6c2::1761257791::res://.godot/exported/133200997/export-c423a1a5f000f2c440352bdb2c462a31-BlueBird.scn
 res://Enemies/FlyingApple/FlyingApple.tscn::3428bab7c4cbfd57486b6df946c46684::1761257791::res://.godot/exported/133200997/export-da50fd53d3ee9be533ee742606f7d50e-FlyingApple.scn
@@ -79,7 +66,7 @@ res://Enemies/Spider/PoisonSpider.tscn::494795104530d5e0eacf11cf0b83a048::176125
 res://Enemies/Spider/Spider.tscn::430f96db8e2bf1127b9b807cc628f06b::1761257791::res://.godot/exported/133200997/export-740cce71fc5770f8416b0ce7cffa5d18-Spider.scn
 res://Enemies/Spider/SpiderWeb.tscn::715855b3f3e6e4c0c6713a8723bec1ee::1761257791::res://.godot/exported/133200997/export-fb765916c4cbb9947ed78c4e06412087-SpiderWeb.scn
 res://Player/Abilities/MegaShot/particles.tscn::e50f5342c7d4b08d9ba8d0c0dae91866::1761257791::res://.godot/exported/133200997/export-3340e497e6a7927fc9d21046ccbb2d3f-particles.scn
-res://Player/Abilities/ShootAbilities/ArrowExplode/ArrowExplode.tscn::247ba010c0964372e8574a930c111883::1761257791::res://.godot/exported/133200997/export-46d2aa8bc2bb391a1e54cc5bd8760c3b-ArrowExplode.scn
+res://Player/Abilities/ShootAbilities/ArrowExplode/ArrowExplode.tscn::0199334171cf49d81c61a783790f77a1::1764419627::res://.godot/exported/133200997/export-46d2aa8bc2bb391a1e54cc5bd8760c3b-ArrowExplode.scn
 res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn::a72a1136a5dc62e68526fcc881fce993::1761257791::res://.godot/exported/133200997/export-bb172b0170ada3bc728ddc12697d7692-StunArrowEffect.scn
 res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/ArmProjectile.tscn::0971fb221bc9c3b3b07bfa1484f858e7::1761257791::res://.godot/exported/133200997/export-df241cb952c9ce11568fa65c288fbfe4-ArmProjectile.scn
 res://Player/Abilities/SpecialAbilities/BoneBowAbility/Skeleton/Skeleton.tscn::cef462838dd85ebe96bf4342a50d584f::1761257791::res://.godot/exported/133200997/export-a9b8c0aa98b9225b6e8cab7f60f4c277-Skeleton.scn
@@ -95,17 +82,13 @@ res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn::9c0c4406c6c27ddd9e2d1b710
 res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn::55bdb14b177c1f2b14409ba7aeede5ff::1764110425::res://.godot/exported/133200997/export-dacfb1ea618b684c855a075dba807ae9-JumpUpgrade.scn
 res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn::fe54cd9ab2050cbb2ccf8cf4ec127df3::1761257791::res://.godot/exported/133200997/export-4f337c74976b8bcb78f6bf3451bd520a-KnockbackResistanceUpgrade.scn
 res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn::d860ea9ca1341923bc96ba3da4dc5c75::1761257791::res://.godot/exported/133200997/export-0f228b2573c804446445440a700a1a8a-MoveSpeedUpgrade.scn
-res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn::05ebafb34ad8a5a0d9ef8672757eaf5f::1764360246::res://.godot/exported/133200997/export-7270fca20a5b25bcc335e8fc927a906e-BoneArrow.scn
-res://Weapons/6_BoneBow/BoneBow.tscn::6888f148ca3971eb1e2770f23ee48b91::1764359980::res://.godot/exported/133200997/export-37e444f575e8934f98fd3b2fb8adae0e-BoneBow.scn
 res://Weapons/Effects/CriticalHit/Crit.tscn::8a5241777a662ce955f75df69ca282c7::1761257792::res://.godot/exported/133200997/export-0f849edf6f96269cfe98d4d79c92b223-Crit.scn
 res://Weapons/Effects/LeechLife/HealthGainEffect.tscn::cc63b83a3d7f1fcc7e70b183d5f04714::1761257792::res://.godot/exported/133200997/export-eaf04802fed8aee552631887f6456d05-HealthGainEffect.scn
 res://Weapons/Effects/LeechLife/LeechLife.tscn::6dd29c0514710b192b381fd05f0bc54c::1761257792::res://.godot/exported/133200997/export-f3e636219c93cb95ed2f4da8f137b2eb-LeechLife.scn
 res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn::acda5127e9110bd0bd7fcef369099137::1761257791::res://.godot/exported/133200997/export-4ed705539461a6ba50d361a627be4015-DemoEnemyBoss3.scn
 res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn::869d562d10c7b242bee06aadbe775ab1::1761257791::res://.godot/exported/133200997/export-18093216a67234ade3feaea99207df8c-GreenBullet.scn
-res://Items/RedDiamond.tres::e339cf84b6094ec0e531dcc7446b859c::1764354509::res://.godot/exported/133200997/export-b9c1c49be14d19ad4f836ec2d655bb01-RedDiamond.res
+res://Items/RedDiamond.tres::e339cf84b6094ec0e531dcc7446b859c::1764486667::res://.godot/exported/133200997/export-b9c1c49be14d19ad4f836ec2d655bb01-RedDiamond.res
 res://Player/BuffDisplay/Buff.tscn::9b9e08dbbcda7c217f97d2c5716ccabe::1761257791::res://.godot/exported/133200997/export-4d6a5aa1600f342b9fe7980cd2e6e0eb-Buff.scn
-res://Weapons/7_BubbleGumBow/BubbleGum/BubbleGum.tscn::60f8bcbb0e0f251da962efd164106498::1761257792::res://.godot/exported/133200997/export-5b34d61cef6841456adba8912818bdfc-BubbleGum.scn
-res://Weapons/7_BubbleGumBow/BubbleGumBow.tscn::d26bd21dfb989c63bb164ad45290234b::1761257792::res://.godot/exported/133200997/export-1d50ba9e068e460499563b5f44307629-BubbleGumBow.scn
 res://Enemies/11_HellEnemies/EvilWizard/EvilWizard.tscn::cdbc31c5729f3c39de845cbee955b537::1761257791::res://.godot/exported/133200997/export-f73ec199c83b4b68a608c8a34b3a3be4-EvilWizard.scn
 res://Enemies/Spider/SpiderBoss/SpiderBoss.tscn::9a5440b20b07f0f2b4633fc301513756::1761257791::res://.godot/exported/133200997/export-99b0894006c4907539ad6ffe5cc9443e-SpiderBoss.scn
 res://Enemies/Spider/SpiderBoss/SpiderWebProjectile.tscn::12d86960742e4e74e076819bef1035a9::1761257791::res://.godot/exported/133200997/export-7273adce90d756754a97e613e8ccd415-SpiderWebProjectile.scn
@@ -136,17 +119,37 @@ res://Shop/TowersShopMenu/TowerUpgradeMenu.tscn::73261839190ec2f49a6bb4003012af1
 res://General Nodes/CombatText/CombatText.tscn::fee6f4f35f8839ee15c5f064718079c8::1764249737::res://.godot/exported/133200997/export-d696fb0b3b24a79952e3b96cf6c9eefa-CombatText.scn
 res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn::40b86350b71d37b02138e133b8c1fd44::1764247029::res://.godot/exported/133200997/export-efaeed349d183d7598c3adf0bfcd0d95-EnemyHitEffect.scn
 res://General Nodes/HitBox/Hitbox.tscn::0d89d66fab2f96bd7bdba4c4f625f336::1764271928::res://.godot/exported/133200997/export-535e76619be33ca1c049035022109c21-Hitbox.scn
-res://General Nodes/HurtBox/HurtBox.tscn::ec5c4b6c98063a8b0ad1fa7589858a5c::1755030407::res://.godot/exported/133200997/export-e7bf47fae3a031ff3ea367caae90af06-HurtBox.scn
+res://General Nodes/HurtBox/HurtBox.tscn::f4d9ff3cd62c0df6b303519462d436fc::1764499872::res://.godot/exported/133200997/export-e7bf47fae3a031ff3ea367caae90af06-HurtBox.scn
 res://General Nodes/PlayerSpawn.tscn::aa33cbc8af39f0e9b773edc784cb537c::1764244077::res://.godot/exported/133200997/export-b9642090e8bd8dbccb39b27b9f3c3af8-PlayerSpawn.scn
 res://HUD/Scene Transition/scene_transition.tscn::ef90c8d914f8dcf150146ebbb883d991::1763822943::res://.godot/exported/133200997/export-4e1da985acebbc9106fa763d7afacce7-scene_transition.scn
-res://HUD/HUD.tscn::68ed696db0c54632037794dbe984fd23::1764264687::res://.godot/exported/133200997/export-00ec45ea1f31fb52755c1ca74bb7047d-HUD.scn
+res://HUD/HUD.tscn::2237a5fe6d6f451fa2f6d4f2b6a1c89b::1764500937::res://.godot/exported/133200997/export-00ec45ea1f31fb52755c1ca74bb7047d-HUD.scn
 res://Level/Islands/Island2.tscn::1967f08cc3a015ec092bdfe03757a4b9::1764350870::res://.godot/exported/133200997/export-721ce1dc0b785994db6ab6bdf268d64e-Island2.scn
 res://Level/Islands/Island3.tscn::58dbef1d74d934ca911f32fd9bb962c0::1764266061::res://.godot/exported/133200997/export-8ac98d2cdc3f42801e0f1fabc3c9efad-Island3.scn
 res://Level/Islands/Island4.tscn::3b4abb05dd8a18f070e4552c3ad5116a::1764266105::res://.godot/exported/133200997/export-d10966c01f92927d884a8b90b52be94e-Island4.scn
 res://Level/Islands/Island5.tscn::cd6ebcf3e116818ccbf5cc9fa2119047::1764350929::res://.godot/exported/133200997/export-023dc35960d039fd5e37c9c97f57ba00-Island5.scn
 res://Player/Player2.0/Body/PlayerBody.tscn::9dbc22b67bcd9fdcb352f8ce2e4b518b::1764262516::res://.godot/exported/133200997/export-3998a3337365437f5c449489a48705be-PlayerBody.scn
-res://Player/Player2.0/MainHand/PlayerMainHand.tscn::f7e1259b8072d47cab2cbbb5514012d7::1764352291::res://.godot/exported/133200997/export-5d22bd6a8864a22dd90de53c20f8da90-PlayerMainHand.scn
-res://Player/Player2.0/OffHand/PlayerOffHand.tscn::2b590eb00e74bf80f9d535e8e830ac58::1764359988::res://.godot/exported/133200997/export-60949940b982a2af909863346667be66-PlayerOffHand.scn
+res://Player/Player2.0/MainHand/PlayerMainHand.tscn::b3a630a245a97ab97226348e1b42b88d::1764501118::res://.godot/exported/133200997/export-5d22bd6a8864a22dd90de53c20f8da90-PlayerMainHand.scn
+res://Player/Player2.0/OffHand/PlayerOffHand.tscn::64c08742b5bfc1bc9d0784af6609a50c::1764487340::res://.godot/exported/133200997/export-60949940b982a2af909863346667be66-PlayerOffHand.scn
 res://StartMenu/StartMenu.tscn::535086e545227c4be847660bbd92b023::1763824892::res://.godot/exported/133200997/export-656b3dff86ccbe5a1f7fe3a41708bc3c-StartMenu.scn
 res://Shop/BowsShop/BuyBowMenu.tscn::8ae061ea063ff25abaf596b099af2192::1764352150::res://.godot/exported/133200997/export-0d9df1155c0c20e3675cdbe34759f427-BuyBowMenu.scn
-res://Shop/BowsShop/Pedestal.tscn::9529e93a8c8e507d6ea64c4c9cce848f::1764354509::res://.godot/exported/133200997/export-1f01a000356e485c87f064a3deb22773-Pedestal.scn
+res://Shop/BowsShop/Pedestal.tscn::a5bbc5a1359f4146b117f54f6abd4f13::1764435885::res://.godot/exported/133200997/export-1f01a000356e485c87f064a3deb22773-Pedestal.scn
+res://00 Globals/SoundManager.tscn::f1196cc3b92482c76b45cb9784b50e55::1764418895::res://.godot/exported/133200997/export-d6c877a73c25bec982f6344cf6a159b9-SoundManager.scn
+res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn::9d4074882a0566e943d506053fc57816::1764486833::res://.godot/exported/133200997/export-caa21e9bbde863c593aa34bd98bccb3b-BasicArrow.scn
+res://Weapons/Bows/0_BasicBow/BasicBow.tscn::41d8223b8f108a10274df016f4b72eec::1764485708::res://.godot/exported/133200997/export-c67d7e8866f6d6963580e584ffda2020-BasicBow.scn
+res://Weapons/Bows/1_BlueBow/BlueArrow/BlueArrow.tscn::d37b0483d1860b5825e793a1b3ad4457::1764499590::res://.godot/exported/133200997/export-2b123cb118918630d27d1f1ed19f09e6-BlueArrow.scn
+res://Weapons/Bows/1_BlueBow/BlueBow.tscn::3f96d3c32a6800987583c9a729b9bd94::1764435999::res://.godot/exported/133200997/export-d723420ddc1fbc9129e72d83d234ddee-BlueBow.scn
+res://Weapons/Bows/1_BlueBow/ChooseParticles.tscn::a4815f39b6a7e729d9a9d17c30c23491::1764435988::res://.godot/exported/133200997/export-8d2d10bc917153ac0840297b868b6cd6-ChooseParticles.scn
+res://Weapons/Bows/2_RedBow/RedArrow/RedArrow.tscn::80f3b2a68fcbd213580527e56d2b1990::1764500881::res://.godot/exported/133200997/export-08c0868281b727f1e465a240dbd4a0a4-RedArrow.scn
+res://Weapons/Bows/2_RedBow/RedBow.tscn::4bf352576cc3e5b0b76f3cf1cdf2376b::1764355389::res://.godot/exported/133200997/export-a50535663267cc51003f00899ec181a2-RedBow.scn
+res://Weapons/Bows/3_BlackBow/BlackArrow/BlackArrow.tscn::f930f1c1603d3c38897cae048be3d3b5::1764500878::res://.godot/exported/133200997/export-70e3025a66b9be15b179e17501240659-BlackArrow.scn
+res://Weapons/Bows/3_BlackBow/BlackBow.tscn::8c1698cf8c53fd02061c2a3459d5e3e3::1764358947::res://.godot/exported/133200997/export-b47ebe2c29eed65d3ddd9f47eff415d0-BlackBow.scn
+res://Weapons/Bows/4_NatureBow/NatureArrow/NatureArrow.tscn::37f4a2d380882aa866c626cd63c75eee::1764500875::res://.godot/exported/133200997/export-549909f8b1a5b3c5656e9c01a379f699-NatureArrow.scn
+res://Weapons/Bows/4_NatureBow/NatureBow.tscn::4e11680a7a58ffa23846c41f3aba609e::1764359798::res://.godot/exported/133200997/export-72a05c247f9af3ded6354188f94f8874-NatureBow.scn
+res://Weapons/Bows/5_ThunderBow/ThunderArrow/ThunderArrow.tscn::92ace08ed6c1c39eaa6a8701bf06a697::1764500872::res://.godot/exported/133200997/export-a7e918d1d00e110d2e21e584bc87d1ae-ThunderArrow.scn
+res://Weapons/Bows/5_ThunderBow/ThunderBow.tscn::2b3b0ea8b38dd303a166bb309b25b80b::1764359232::res://.godot/exported/133200997/export-033c488af6d06e9160728653fcd9ab0e-ThunderBow.scn
+res://Weapons/Bows/6_BoneBow/BoneBowArrow/BoneArrow.tscn::d5ac27a6b8ffc47d8ff545ce3fdc8cb1::1764500869::res://.godot/exported/133200997/export-85ba058bd17d9f08949d79ef20f495b5-BoneArrow.scn
+res://Weapons/Bows/6_BoneBow/BoneBow.tscn::6888f148ca3971eb1e2770f23ee48b91::1764359980::res://.godot/exported/133200997/export-c7f8f43127a6318e6c9051faa40fb5bb-BoneBow.scn
+res://Weapons/Bows/7_BubbleGumBow/BubbleGum/BubbleGum.tscn::60f8bcbb0e0f251da962efd164106498::1761257792::res://.godot/exported/133200997/export-ab96b1ae949a7509750cbe4a27e35d05-BubbleGum.scn
+res://Weapons/Bows/7_BubbleGumBow/BubbleGumBow.tscn::d26bd21dfb989c63bb164ad45290234b::1761257792::res://.godot/exported/133200997/export-a1a707bf001d1623ac1f60ec043cd457-BubbleGumBow.scn
+res://Weapons/Bows/9_DemonBow/Demon Arrow/DemonArrow.tscn::7a41ae2f0499ced64be9e2f519e34f64::1764500865::res://.godot/exported/133200997/export-fc21d3d946a40398dc4c5b50ae871454-DemonArrow.scn
+res://Weapons/Bows/9_DemonBow/DemonBow.tscn::5ff07bba87745911777c4176af401910::1764432945::res://.godot/exported/133200997/export-565add490eba81759f539abfb124e209-DemonBow.scn
