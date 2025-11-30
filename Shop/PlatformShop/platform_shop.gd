@@ -3,6 +3,7 @@ class_name PlatformShop extends Node2D
 @onready var tiles: TilesControl = $Tiles
 @onready var fall: Area2D = $Fall
 @onready var reset_button: PlatformResetButton = $ResetButton
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
 
 var playground: PlayGround
 var player: Player
@@ -13,7 +14,7 @@ var current_platform_button: TextureButton = null
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
-		player.global_position = Vector2(0,-8)
+		player.global_position = player_spawn.global_position
 		player.stats.in_menu = true
 		player.set_camera(Rect2i(Vector2(-100000,-100000),Vector2(10000000,10000000)),16)
 		visible = true

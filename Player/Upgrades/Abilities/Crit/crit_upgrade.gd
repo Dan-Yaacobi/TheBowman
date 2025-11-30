@@ -1,24 +1,18 @@
 class_name CritUpgrade extends PlayerUpgrade
 
-const CRIT_ABILITY: String = "res://Player/Upgrades/Abilities/Crit/crit_ability.gd"
+const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/Crit/crit_ability.gd" #"res://Player/Upgrades/Abilities/Crit/crit_ability.gd"
+
+var ability: PlayerShootAbility
+
+func _ready() -> void:
+	ability = load(ABILITY_SCRIPT).new()
 
 func upgrade(_player: Player) -> void:
-	if _player != null:
-		if ability_chosen == false:
-			ability_chosen = true
-			var node = load(CRIT_ABILITY).new()
-			_player.add_ability("shooting",node)
-		else:
-			upgrade2(_player)
-
-func upgrade2(_player: Player) -> void:
-	_player.stats.crit_chance += randi_range(1,5)
-	#_player.current_weapon.weapon_data.crit_chance += 5
-
-func get_current(_player: Player) -> String:
-	if _player != null:
-		return "none"
-	return ""
+	if ability_chosen == false:
+		ability_chosen = true
+		ability.add_ability()
+	else:
+		ability.update_ability()
 
 func get_buff_tooltip(_player: Player) -> String:
-	return "Crit Chance: " + str(_player.stats.crit_chance) + "%"
+	return ability.get_tooltip()

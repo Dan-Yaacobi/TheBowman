@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	pass
 
 
-func clear_shot() -> void:
+func clear_shot(_h = null) -> void:
 	explosion.emitting = true
 	explosion_detector.monitoring = true
 	

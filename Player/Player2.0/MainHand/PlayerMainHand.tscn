@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://7vjvk5bghwkq"]
+[gd_scene load_steps=26 format=3 uid="uid://7vjvk5bghwkq"]
 
 [ext_resource type="Script" uid="uid://cnljqw751d587" path="res://Player/Player2.0/MainHand/player_main_hand.gd" id="1_grn42"]
 [ext_resource type="Texture2D" uid="uid://x2ybpkt3kmnk" path="res://Player/Player2.0/Sprites/PlayerHandSprite.png" id="2_075al"]
@@ -359,8 +359,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_u8r4h"]
 resource_name = "SlashEffect"
-length = 0.4
-step = 0.05
+length = 0.3
+step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -368,7 +368,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.09090909, 0.15151516, 0.21212122, 0.27272728),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -379,6 +379,8 @@ _data = {
 &"RESET": SubResource("Animation_rg8yt"),
 &"SlashEffect": SubResource("Animation_u8r4h")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ej1j"]
 
 [sub_resource type="Curve" id="Curve_sgu6n"]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -434,27 +436,42 @@ visible = false
 z_index = 1
 position = Vector2(5, 5)
 rotation = -1.5708
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("9_3cqt0")
 stats = SubResource("Resource_30xy1")
 
 [node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword"]
-position = Vector2(9.53674e-07, -8)
+position = Vector2(8.202132e-05, -22.666668)
 texture = ExtResource("8_y7ab3")
 
-[node name="SlashEffect" type="Sprite2D" parent="MainHandStateMachine/Swing"]
+[node name="SlashEffect" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword"]
 z_index = 2
-position = Vector2(22, -6)
+position = Vector2(-22.000153, -41.999924)
+rotation = -1.5708
+scale = Vector2(2, 2)
 texture = ExtResource("10_3m267")
 hframes = 5
 frame = 4
 
-[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="MainHandStateMachine/Swing/SlashEffect"]
+[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="MainHandStateMachine/Swing/Sword/SlashEffect"]
 libraries = {
 &"": SubResource("AnimationLibrary_5orw7")
 }
 
-[node name="SwingCooldown" type="Timer" parent="MainHandStateMachine"]
+[node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword"]
+position = Vector2(-9.999992, 2.0000362)
+rotation = -1.5708
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 132
+script = ExtResource("11_3jnc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox"]
+position = Vector2(22, 0)
+shape = SubResource("CircleShape2D_5ej1j")
+debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)
+
+[node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing"]
 
 [node name="PerfectAimParticles" type="CPUParticles2D" parent="."]
 z_index = 1
@@ -475,12 +492,3 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
 scale_amount_curve = SubResource("Curve_sgu6n")
-
-[node name="SlashHurtBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("11_3jnc7")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashHurtBox"]
-position = Vector2(6, -1)
-polygon = PackedVector2Array(34, 11, 17, 13, 16, -9, 0, -18, 20, -20, 31, -14)

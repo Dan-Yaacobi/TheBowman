@@ -21,7 +21,6 @@ func AreaEnetered( a : Area2D) -> void:
 		arrow.hit(a.enemy)
 		#parent.arrow_hit_resolve(a.get_enemy())
 		#EventBus.shot_power.emit(parent.shot_power_mod)
-		CombatTextSpawner.spawn(a.global_position, str(damage),combat_text_color)
 		a.TakeDamage(self)
 
 func added_effects(a: Enemy) -> void:

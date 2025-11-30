@@ -11,3 +11,6 @@ func activate_ability(_arrow: Arrow) -> void:
 
 func update_ability() -> void:
 	crit_chance+= randi_range(1,4)
+
+func get_tooltip() -> String:
+	return "Crit Chance: " + str(crit_chance) + "%"

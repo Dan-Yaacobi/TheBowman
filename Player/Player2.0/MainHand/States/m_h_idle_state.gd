@@ -40,5 +40,6 @@ func HandleInput(_event: InputEvent) -> MainHandState:
 	return null
 
 func change_to_pulling() -> void:
-	state_machine.ChangeState(pulling)
+	if not entity.is_swinging():
+		state_machine.ChangeState(pulling)
 	

@@ -254,11 +254,11 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uehev")
 
-[node name="Hitbox" parent="." instance=ExtResource("12_iw7s3")]
+[node name="HitBox" parent="." instance=ExtResource("12_iw7s3")]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 

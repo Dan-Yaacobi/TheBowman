@@ -1,9 +1,11 @@
 class_name SwingMainHandState extends MainHandState
 
 @onready var idle: IdleMainHandState = $"../Idle"
-@onready var slash_animation_player: AnimationPlayer = $SlashEffect/SlashAnimationPlayer
-@onready var slash_hurt_box: HurtBox = $"../../SlashHurtBox"
-@onready var swing_cooldown: Timer = $"../SwingCooldown"
+@onready var swing_cooldown: Timer = $SwingCooldown
+@onready var slash_hurt_box: HurtBox = $Sword/SlashHurtBox
+@onready var slash_animation_player: AnimationPlayer = $Sword/SlashEffect/SlashAnimationPlayer
+
+@onready var sword: Sword = $Sword
 
 var finished: bool = false
 
@@ -11,6 +13,7 @@ var finished: bool = false
 func init() -> void:
 	entity.animation_player.animation_finished.connect(swing_done)
 	slash_hurt_box.monitoring = false
+	set_sword_size()
 	pass
 	
 func _ready() -> void:
@@ -18,6 +21,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	
 	entity.can_swing = false
 	finished = false
 	slash_hurt_box.damage = floor(PlayerManager.player.get_strength()/2)
@@ -35,9 +39,10 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
-	set_direction()
+
 	if finished:
 		return idle
+	set_direction()
 	#await get_tree().create_timer(entity.animation_player.get_animation("Swing").length).timeout
 	#return idle
 	return null
@@ -66,3 +71,6 @@ func slash_hit_direction() -> void:
 func set_direction() -> void:
 	slash_hit_direction()
 	entity.set_swing_direction(PlayerManager.player.direction_side)
+
+func set_sword_size() -> void:
+	sword.scale *= PlayerManager.player.stats.sword_size

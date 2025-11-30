@@ -20,7 +20,7 @@ func AreaEnetered( a : Area2D) -> void:
 	if a is HitBox:
 		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 		effect_color = DEFAULT_HIT_EFFECT_COLOR
-		CombatTextSpawner.spawn(a.global_position, str(damage),combat_text_color)
+		#CombatTextSpawner.spawn(a.global_position, str(damage),combat_text_color)
 		knockback_dir = (a.global_position - self.global_position).normalized()
 		a.TakeDamage(self)
 		successful_hit.emit()

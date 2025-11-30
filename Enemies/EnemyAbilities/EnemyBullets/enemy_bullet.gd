@@ -5,6 +5,7 @@ class_name EnemyBullet extends Area2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var hurt_box: HurtBox = $HurtBox
+@onready var hit_box: HitBox = $HitBox
 
 var direction: Vector2 = Vector2.ZERO
 
@@ -14,6 +15,8 @@ func _ready() -> void:
 	body_shape_entered.connect(hit_wall)
 	hurt_box.damage = data.damage
 	hurt_box.knockback = data.knockback
+	hit_box.Damaged.connect(clear_shot)
+	hurt_box.successful_hit.connect(queue_free)
 	
 func _physics_process(delta: float) -> void:
 	global_position += direction * data.move_speed * delta
@@ -29,5 +32,5 @@ func _physics_process(delta: float) -> void:
 func hit_wall(_v1,_v2,_v3,_v4) -> void:
 	clear_shot()
 	
-func clear_shot() -> void:
+func clear_shot(_h = null) -> void:
 	queue_free()

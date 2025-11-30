@@ -8,7 +8,7 @@ signal shot_power_amount(amount)
 @onready var max_pull_state: MaxPullMainHandState = $MainHandStateMachine/MaxPull
 @onready var arrow_position: Node2D = $ArrowPosition
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var swing_cooldown: Timer = $MainHandStateMachine/SwingCooldown
+@onready var swing_cooldown: Timer = $MainHandStateMachine/Swing/SwingCooldown
 
 @export var arrow: PackedScene
 @export var min_shot_power: float = 0.5
@@ -130,8 +130,8 @@ func calc_shot_velocity(_shot_power,direction) -> Vector2:
 func swing_off_cooldown() -> void:
 	can_swing = true
 	
-#func is_swinging() -> bool:
-	#return main_hand_state_machine.curr_state is SwingMainHandState
+func is_swinging() -> bool:
+	return main_hand_state_machine.curr_state is SwingMainHandState
 
 func set_time_for_perfect_shot(amount: float) -> void:
 	if amount > 0:

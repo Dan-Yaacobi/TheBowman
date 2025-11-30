@@ -20,6 +20,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	entity.animation_player.play("Pull")
 	EventBus.out_of_mana.connect(release)
 	entity.draw_arrow()
 	PlayerManager.player.shooting = true
@@ -27,7 +28,6 @@ func Enter() -> void:
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))
 	entity.animation_player.speed_scale = PlayerManager.player.get_pull_speed()
 	finished_pulling = false
-	entity.animation_player.play("Pull")
 	pull_start_time = Time.get_unix_time_from_system()
 	pass
 	

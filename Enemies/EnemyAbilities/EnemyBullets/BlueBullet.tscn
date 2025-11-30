@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfyfy4cii21yn"]
+[gd_scene load_steps=9 format=3 uid="uid://cfyfy4cii21yn"]
 
 [ext_resource type="Script" uid="uid://cgo7dukio5cvu" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_3ioi6"]
 [ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_7rk4l"]
 [ext_resource type="Texture2D" uid="uid://uqukpjduqhdd" path="res://Enemies/Sprites/BlueAppleSeed.png" id="3_mlhiq"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_gvp8q"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="5_tmxei"]
 
 [sub_resource type="Resource" id="Resource_vfufh"]
 script = ExtResource("2_7rk4l")
@@ -13,6 +14,9 @@ knockback = 80
 fire_cooldown = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tmxei"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jj37c"]
 radius = 5.09902
 
 [node name="BlueBullet" type="Area2D"]
@@ -34,3 +38,11 @@ knockback = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_tmxei")
+
+[node name="HitBox" parent="." instance=ExtResource("5_tmxei")]
+collision_layer = 128
+collision_mask = 0
+show_damage = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_jj37c")

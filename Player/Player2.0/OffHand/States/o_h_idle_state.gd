@@ -35,4 +35,5 @@ func HandleInput(_event: InputEvent) -> OffHandState:
 	return null
 
 func change_to_shooting() -> void:
-	state_machine.ChangeState(shooting)
+	if not entity.main_hand.is_swinging():
+		state_machine.ChangeState(shooting)

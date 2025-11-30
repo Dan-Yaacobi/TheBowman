@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://7e7tcn7orna5"]
 
-[ext_resource type="Script" path="res://Player/Upgrades/Abilities/Crit/crit_upgrade.gd" id="1_qfc6j"]
+[ext_resource type="Script" uid="uid://djvryhqf6f5cg" path="res://Player/Upgrades/Abilities/Crit/crit_upgrade.gd" id="1_qfc6j"]
 
 [node name="CritUpgrade" type="Node2D"]
 script = ExtResource("1_qfc6j")

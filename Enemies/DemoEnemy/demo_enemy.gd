@@ -2,7 +2,7 @@ class_name DemoEnemy extends Enemy
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var hit_box: HitBox = $Hitbox
+@onready var hit_box: HitBox = $HitBox
 
 enum directions{TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT}
 

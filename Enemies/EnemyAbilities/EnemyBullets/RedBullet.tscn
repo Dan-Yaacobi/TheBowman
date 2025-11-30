@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b35crep84od1i"]
+[gd_scene load_steps=8 format=3 uid="uid://b35crep84od1i"]
 
 [ext_resource type="Script" uid="uid://cgo7dukio5cvu" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_57jy3"]
 [ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_imlbk"]
 [ext_resource type="Texture2D" uid="uid://cbmfknnq5gqyt" path="res://Enemies/Sprites/AppleSeed.png" id="3_rnvgk"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_beouh"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="5_7g23u"]
 
 [sub_resource type="Resource" id="Resource_xam82"]
 script = ExtResource("2_imlbk")
@@ -28,8 +29,16 @@ texture = ExtResource("3_rnvgk")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="HurtBox" parent="." instance=ExtResource("4_beouh")]
-collision_layer = 4
+collision_layer = 128
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ob05t")
+
+[node name="HitBox" parent="." instance=ExtResource("5_7g23u")]
+collision_layer = 128
+collision_mask = 0
+show_damage = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_ob05t")

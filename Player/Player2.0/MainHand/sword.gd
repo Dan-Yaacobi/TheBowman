@@ -1,7 +1,7 @@
 class_name Sword extends Node2D
 
 @export var stats: SwordStats
-@onready var slash_hurt_box: HurtBox = $"../../../SlashHurtBox"
+@onready var slash_hurt_box: HurtBox = $SlashHurtBox
 
 func _ready() -> void:
 	set_sword()

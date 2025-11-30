@@ -1,4 +1,4 @@
-class_name StunAbility extends ShootAbility
+class_name _StunAbility extends ShootAbility
 
 
 func activate_ability(_player: Player) -> void:

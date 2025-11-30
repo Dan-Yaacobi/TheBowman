@@ -358,6 +358,7 @@ func is_idle() -> bool:
 	
 func is_dash() -> bool:
 	return player_state_machine.curr_state is PlayerDashState
+	
 ############# GET METHODS #############
 func get_strength() -> int:
 	return stats.strength
@@ -369,7 +370,7 @@ func get_stamina() -> int:
 	return stats.stamina
 
 func get_pull_speed() -> float:
-	return stats.pull_speed + get_strength()*0.01
+	return stats.pull_speed + get_agility()*0.01
 
 func get_strength_shot_modifier() -> float:
 	return get_strength() + stats.basic_shot_power
@@ -379,7 +380,14 @@ func get_arrow_ability() -> Array[ArrowAbility]:
 
 func get_perfect_shots_amount() -> int:
 	return perfect_shot_counter
-	############# SET METHODS #############
+
+func get_shoot_abilities() -> Array[PlayerShootAbility]:
+	return stats.shooting_abilities
+
+func get_weapon_size() -> float:
+	return stats.sword_size
+	
+############# SET METHODS #############
 	
 func set_shooting(_val: bool) -> void:
 	shooting = _val
@@ -389,6 +397,3 @@ func set_perfect_shots(was_perfect: bool) -> void:
 		perfect_shot_counter += 1
 	else:
 		perfect_shot_counter = 0
-
-func get_shoot_abilities() -> Array[PlayerShootAbility]:
-	return stats.shooting_abilities

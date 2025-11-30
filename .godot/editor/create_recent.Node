@@ -1,8 +1,8 @@
+CollisionShape2D
 CollisionPolygon2D
 CPUParticles2D
 Node2D
 CharacterBody2D
-CollisionShape2D
 Area2D
 AnimationPlayer
 Label
@@ -12,4 +12,3 @@ Sprite2D
 Island
 StaticBody2D
 Control
-ColorRect

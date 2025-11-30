@@ -51,12 +51,8 @@ var player: Player
 @export var slam_abilities: Array[SlamAbility]
 
 
-
 @export_subgroup("Upgrade values")
-@export var can_mega_shot: bool = false
-@export var crit_chance: int = 10
-@export var stun_chance: int = 10
-@export var leech_chance: int = 10
+@export var sword_size: float = 1.0
 
 
 func add_jump_ability(ability: JumpAbility) -> void:

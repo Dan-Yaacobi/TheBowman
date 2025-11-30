@@ -456,44 +456,7 @@ script = ExtResource("20_8lbxg")
 
 [node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
-[node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("21_imgkr")]
-
-[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("22_67mw3")]
-ID = 1
-
-[node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("24_mi85c")]
-amount = 1
-normal_texture = ExtResource("25_iq6ym")
-pressed_texture = ExtResource("26_wdchw")
-hover_texture = ExtResource("27_oorb6")
-tool_tip = "Increase your knockback resistance"
-ID = 3
-
-[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
-
-[node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("34_ah7gd")]
-normal_texture = ExtResource("35_johw3")
-pressed_texture = ExtResource("36_772sc")
-hover_texture = ExtResource("37_31pi7")
-color = Color(0.188235, 0.890196, 0.34902, 1)
-tool_tip = "Arrows can stun"
-tool_tip2 = "Increase stun chance"
-ID = 10
-bucket = 2
-is_ability = true
-
-[node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("38_3abtr")]
-normal_texture = ExtResource("39_14wyh")
-pressed_texture = ExtResource("40_abgki")
-hover_texture = ExtResource("41_13v1j")
-color = Color(0.188235, 0.890196, 0.34902, 1)
-tool_tip = "Arrows can leech life"
-tool_tip2 = "Increase leech chance"
-ID = 11
-bucket = 2
-is_ability = true
-
-[node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("42_iqpx2")]
+[node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_iqpx2")]
 normal_texture = ExtResource("43_r1mi8")
 pressed_texture = ExtResource("44_awenb")
 hover_texture = ExtResource("45_t6bp6")
@@ -504,10 +467,48 @@ ID = 12
 bucket = 2
 is_ability = true
 
+[node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_3abtr")]
+normal_texture = ExtResource("39_14wyh")
+pressed_texture = ExtResource("40_abgki")
+hover_texture = ExtResource("41_13v1j")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can leech life"
+tool_tip2 = "Increase leech chance"
+ID = 11
+bucket = 2
+is_ability = true
+
+[node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("34_ah7gd")]
+normal_texture = ExtResource("35_johw3")
+pressed_texture = ExtResource("36_772sc")
+hover_texture = ExtResource("37_31pi7")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can stun"
+tool_tip2 = "Increase stun chance"
+ID = 10
+bucket = 2
+is_ability = true
+
+[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
 [node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("23_v6ol2")]
 color = Color(0.188235, 0.890196, 0.34902, 1)
 ID = 2
 bucket = 2
+
+[node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("21_imgkr")]
+color = Color(0.1882353, 0.8901961, 0.34901962, 1)
+
+[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("22_67mw3")]
+ID = 1
+
+[node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("24_mi85c")]
+amount = 1
+normal_texture = ExtResource("25_iq6ym")
+pressed_texture = ExtResource("26_wdchw")
+hover_texture = ExtResource("27_oorb6")
+tool_tip = "Increase your knockback resistance"
+ID = 3
 
 [node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
 

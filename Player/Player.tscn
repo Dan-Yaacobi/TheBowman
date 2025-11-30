@@ -1,17 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=33 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
-[ext_resource type="Script" uid="uid://cd0876l1xhef" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_jhcyx"]
-[ext_resource type="Script" uid="uid://bu8rrfoiwqr26" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="2_ohurx"]
-[ext_resource type="Script" uid="uid://bqnydmr6nno03" path="res://Player/Abilities2.0/player_shoot_ability.gd" id="2_yifbt"]
-[ext_resource type="Script" uid="uid://bob8cvby6imtx" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="4_qie87"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
-[ext_resource type="Script" uid="uid://c8xkfwn8288iq" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="6_ae18a"]
 [ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
-[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="7_mhpv8"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
 [ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
@@ -36,21 +30,33 @@ move_speed = 35
 max_jumps = 2
 jump_height = 90
 knockback_resistance = 3
-strength = 5
-agility = 5
+strength = 50
+agility = 50
 stamina = 5
 menu_speed = 150
+in_menu = null
+boost_mana_rate = null
+reset_upgrades = null
 max_minions = 3
 dash_distance = 50
 invinc_duration = 1
+max_combo = null
 combo_to_activate = 25
 combo_duration = 8.0
 basic_shot_power = 150.0
+shoot_cost = null
+max_pull_strength = null
+shooting_abilities = null
+pull_speed = null
+money = null
+upgrd_points = null
 weapon_name = "Basic Bow"
 weapon_scene = ExtResource("10_x70vp")
-crit_chance = 5
-stun_chance = 5
-leech_chance = 5
+towers = null
+jump_abilities = null
+shoot_abilities = null
+arrow_abilities = null
+slam_abilities = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(18, 3)

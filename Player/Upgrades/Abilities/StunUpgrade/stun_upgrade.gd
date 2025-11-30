@@ -1,24 +1,18 @@
 class_name StunUpgrade extends PlayerUpgrade
 
-const STUN_ABILITY = "res://Player/Upgrades/Abilities/StunUpgrade/stun_ability.gd"
+const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/Stun/stun_ability.gd"
+
+var ability: PlayerShootAbility
+
+func _ready() -> void:
+	ability = load(ABILITY_SCRIPT).new()
 
 func upgrade(_player: Player) -> void:
-	if _player != null:
-		if ability_chosen == false:
-			ability_chosen = true
-			var node = load(STUN_ABILITY).new()
-			_player.add_ability("shooting",node)
-		else:
-			upgrade2(_player)
-
-func upgrade2(_player: Player) -> void:
-	_player.stats.stun_chance += randi_range(1,5)
-	#_player.current_weapon.weapon_data.stun_chance += 5
-	
-func get_current(_player: Player) -> String:
-	if _player != null:
-		return "none"
-	return ""
+	if ability_chosen == false:
+		ability_chosen = true
+		ability.add_ability()
+	else:
+		ability.update_ability()
 
 func get_buff_tooltip(_player: Player) -> String:
-	return "Stun Chance: " + str(_player.stats.stun_chance) + "%"
+	return ability.get_tooltip()
