@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://1jahx7pcdpu6"]
+
+[ext_resource type="Script" uid="uid://c1bwbm1c05ifw" path="res://00 Globals/sound_manager.gd" id="1_2asnt"]
+[ext_resource type="AudioStream" uid="uid://32moefoiwsry" path="res://Audio/Player/arrow_shot-shorter.mp3" id="2_dwqjv"]
+[ext_resource type="AudioStream" uid="uid://de0bwrmr7d6ev" path="res://Audio/Player/arrow_hit.mp3" id="3_rbqa3"]
+
+[node name="SoundManager" type="Node2D"]
+script = ExtResource("1_2asnt")
+
+[node name="ArrowShot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dwqjv")
+volume_db = 8.602
+
+[node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rbqa3")
+volume_db = -24.24
+pitch_scale = 0.49

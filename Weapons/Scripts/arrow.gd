@@ -2,7 +2,6 @@ class_name Arrow extends CharacterBody2D
 
 signal arrow_missed
 signal arrow_hit
-signal arrow_hit_sound
 signal crit_hit
 signal leeched(amount: int, enemy_position: Vector2)
 
@@ -10,7 +9,7 @@ signal leeched(amount: int, enemy_position: Vector2)
 @export var explosion_chance: int = 20
 
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
-@onready var hurt_box: HurtBox = $HurtBox
+@onready var hurt_box: ArrowHurtBox = $HurtBox
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -27,7 +26,7 @@ var can_pierce: bool = false
 var can_explode: bool = false
 
 var can_crit: bool = false
-var crit_chance: int = 10
+var crit_chance: int = 0
 var crit: bool = false
 var succesfuly_hit: bool = false
 
@@ -45,17 +44,20 @@ var fired: bool = false
 var perfect_shot: bool = false
 var shot_power_mod: float = 0
 var damage: int
+
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
 	cpu_particles.emitting = false
 	hurt_box.monitorable = false
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
-
+	hurt_box.set_arrow(self)
+	hurt_box.successful_hit.connect(clear_shot)
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
-	
+
+
 func hit(body) -> void:
 	if body is Enemy:
 		if regular_shot:
@@ -86,12 +88,12 @@ func missed() -> void:
 	queue_free()
 
 func clear_shot() -> void:
-	arrow_hit_sound.emit()
+	EventBus.arrow_hit_sound.emit()
 	if not can_pierce:
 		queue_free()
 		
 func wall_clear_shot() -> void:
-	arrow_hit_sound.emit()
+	EventBus.arrow_hit_sound.emit()
 	queue_free()
 
 var gravity: float = 50
@@ -125,15 +127,14 @@ func hit_wall(_val1,_val2,_val3,_val4) -> void:
 			wall_clear_shot()
 
 func critical_hit() -> void:
-	if can_crit:
-		var roll_crit: int = randi_range(0,100)
-		if roll_crit < crit_chance:
-			var crit_effect = CRIT.instantiate()
-			crit_effect.global_position = global_position
-			get_parent().call_deferred("add_child", crit_effect)
-			crit = true
-			crit_hit.emit()
-			hurt_box.damage = damage*2
+	var roll_crit: int = randi_range(0,100)
+	if roll_crit < crit_chance:
+		var crit_effect = CRIT.instantiate()
+		crit_effect.global_position = global_position
+		get_parent().call_deferred("add_child", crit_effect)
+		crit = true
+		crit_hit.emit()
+		hurt_box.damage = damage*2
 			
 func stun_hit() -> void:
 	if can_stun:
@@ -154,3 +155,4 @@ func apply_leech(enemy: Enemy) -> void:
 func reset_specials() -> void:
 	stun = false
 	crit = false
+	

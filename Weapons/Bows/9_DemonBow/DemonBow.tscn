@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfplcoxey47hy"]
+
+[ext_resource type="Script" uid="uid://bvwpiatycoo4e" path="res://Weapons/0_BasicBow/basic_bow.gd" id="1_kypml"]
+[ext_resource type="PackedScene" uid="uid://dedyhhxnc7wc3" path="res://Weapons/9_DemonBow/Demon Arrow/DemonArrow.tscn" id="2_bfvvg"]
+[ext_resource type="Script" uid="uid://cqv3i2t5b4mbg" path="res://Weapons/Scripts/weapon_data.gd" id="3_hhqru"]
+[ext_resource type="Script" uid="uid://ds3skhdahxs2u" path="res://Player/Abilities/SpecialAbilities/basic_bow_ability/basic_bow_ability.gd" id="4_6ao50"]
+[ext_resource type="Texture2D" uid="uid://dxdf855leqlwj" path="res://Weapons/9_DemonBow/DemonBow.png" id="5_g02v4"]
+
+[sub_resource type="Resource" id="Resource_nwrg2"]
+script = ExtResource("4_6ao50")
+
+[sub_resource type="Resource" id="Resource_yex3g"]
+script = ExtResource("3_hhqru")
+bow_name = "Lucifer"
+text_color = Color(0.5397251, 0, 0.005265937, 1)
+string_thickness = 2.0
+sprite = ExtResource("5_g02v4")
+arrow = ExtResource("2_bfvvg")
+bow_position = Vector2(0, 6.667)
+special_ability = SubResource("Resource_nwrg2")
+shots = 2
+
+[node name="DemonBow" type="Node2D"]
+script = ExtResource("1_kypml")
+weapon_data = SubResource("Resource_yex3g")

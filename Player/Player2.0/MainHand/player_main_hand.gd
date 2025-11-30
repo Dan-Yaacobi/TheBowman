@@ -85,13 +85,13 @@ func new_arrow(_arrow: PackedScene) -> void:
 		
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	#for shoot_ability in PlayerManager.player.get_shoot_abilities():
-		#if shoot_ability:
-			#shoot_ability.activate_ability()
 	#PlayerManager.player.shake_screen.emit(shot_power)
 	if shot_power * PlayerManager.player.get_pull_speed() >= min_shot_power:
 		#PlayerManager.player.apply_recoil(shot_power * 50)
 		## if shot power is 1: max pull, if shot_offset = 0: released within perfect shot window
+		for shoot_ability in PlayerManager.player.get_shoot_abilities():
+			if shoot_ability:
+				shoot_ability.activate_ability(current_arrow)
 		fire_arrow()
 	else:
 		current_arrow.free()
@@ -109,12 +109,11 @@ func fire_arrow() -> void:
 	#current_arrow.arrow_shot()
 	current_arrow.calc_dmg(shot_power)
 	current_arrow.reparent(get_tree().root)
+	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
-	var mouse_pos = get_global_mouse_position()
-	PlayerManager.player.shoot_action.shoot(mouse_pos)
 	
 func calc_shot_velocity(_shot_power,direction) -> Vector2:
-	return _shot_power * direction * PlayerManager.player.get_strength_shot_modifier()
+	return _shot_power * direction *( PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)
 
 #func set_offset(amount: float) -> void:
 	#shot_offset = amount * 5

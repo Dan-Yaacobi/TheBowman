@@ -8,11 +8,11 @@ func _ready() -> void:
 	scale *= 0.75
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	
-	body_entered.connect(hit_player)
+	#body_entered.connect(hit_player)
 	body_shape_entered.connect(hit_wall)
 	
 	explosion_detector.monitoring = false
-	explosion_detector.body_entered.connect(hit_player)
+	#explosion_detector.body_entered.connect(hit_player)
 	
 
 func _physics_process(delta: float) -> void:

@@ -32,7 +32,6 @@ func _ready() -> void:
 	cloud_timer.timeout.connect(summon_cloud)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	player = PlayerManager.player
-	player.mana_bar = hud.get_mana_bar()
 	player.health_bar = hud.get_health_bar()
 	player.total_buffs = hud.get_total_buffs()
 	player.special_ability_cd = hud.get_special_ability_cd()

@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://fugmx8l75yct"]
+
+[ext_resource type="Script" uid="uid://cqnchdvj6301l" path="res://Weapons/Bows/5_ThunderBow/ThunderArrow/thunder_arrow.gd" id="1_5fhpf"]
+[ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_10w1w"]
+[ext_resource type="Texture2D" uid="uid://c68idtngmkr2w" path="res://Weapons/Bows/5_ThunderBow/ThunderArrow/ElectricJolt.png" id="3_gwcsm"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_2efc4"]
+[ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_fyqss"]
+
+[sub_resource type="Resource" id="Resource_0gub2"]
+script = ExtResource("2_10w1w")
+speed = 22
+base_damage = 20
+pushback_power = 20
+
+[sub_resource type="Curve" id="Curve_np4a2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bp7nx"]
+size = Vector2(7, 6)
+
+[node name="ThunderArrow" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+rotation = 1.5707964
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_5fhpf")
+data = SubResource("Resource_0gub2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6.9999995, -3.059797e-07)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_gwcsm")
+flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 1
+z_as_relative = false
+amount = 15
+randomness = 1.0
+lifetime_randomness = 1.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_np4a2")
+color = Color(1, 0.8, 0, 1)
+
+[node name="HurtBox" parent="." instance=ExtResource("4_2efc4")]
+z_index = 1
+z_as_relative = false
+position = Vector2(1, -4.3711395e-08)
+collision_mask = 4
+script = ExtResource("5_fyqss")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(12, -2.1855698e-07)
+shape = SubResource("RectangleShape2D_bp7nx")

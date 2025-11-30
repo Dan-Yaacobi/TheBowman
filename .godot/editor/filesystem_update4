@@ -1,29 +1,31 @@
-res://Shop/BowsShop/Pedestal.tscn
+res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn
 res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
-res://Shop/BowsShop/pedestal.gd
-res://Player/Player2.0/OffHand/PlayerOffHand.tscn
-res://Weapons/1_BlueBow/BlueBow.tscn
-res://Weapons/Scripts/weapon_data.gd
+res://Weapons/Bows/0_BasicBow/basic_bow.gd
+res://Player/Player.tscn
+res://General Nodes/HurtBox/arrow_hurt_box.gd
+res://General Nodes/HitBox/hit_box.gd
 res://Player/player.gd
-res://Player/Player2.0/OffHand/player_off_hand.gd
-res://Weapons/0_BasicBow/BasicBow.tscn
-res://Weapons/2_RedBow/RedBow.tscn
-res://Weapons/2_RedBow/RedArrow/RedArrow.tscn
-res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn
-res://Weapons/Scripts/arrow.gd
-res://Weapons/Scripts/arrow_data.gd
-res://Weapons/1_BlueBow/BlueArrow/BlueArrow.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd
+res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/bird_bullet.gd
 res://General Nodes/HurtBox/hurt_box.gd
-res://Shop/BowsShop/BowsShop.tscn
-res://Shop/BowsShop/bows_shop.gd
-res://Weapons/3_BlackBow/BlackArrow/BlackArrow.tscn
-res://Weapons/3_BlackBow/BlackBow.tscn
-res://Weapons/4_NatureBow/NatureBow.tscn
-res://Weapons/4_NatureBow/NatureArrow/NatureArrow.tscn
-res://Weapons/5_ThunderBow/ThunderBow.tscn
-res://Weapons/5_ThunderBow/ThunderArrow/ThunderArrow.tscn
-res://Weapons/Scripts/weapon.gd
-res://Weapons/6_BoneBow/BoneBow.tscn
-res://Weapons/6_BoneBow/BoneBowArrow/BoneArrow.tscn
+res://Player/Player2.0/OffHand/PlayerOffHand.tscn
+res://Enemies/DemoEnemy/DemoEnemy.tscn
+res://Player/States/player_slam_state.gd
+res://Enemies/DemoEnemy/demo_enemy.gd
+res://Enemies/Scripts/enemy.gd
+res://Enemies/DemoEnemy/DemoEnemy2.tscn
+res://Weapons/Bows/1_BlueBow/BlueArrow/BlueArrow.tscn
+res://General Nodes/HurtBox/HurtBox.tscn
+res://HUD/HUD.tscn
+res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn
+res://Player/Player2.0/MainHand/PlayerMainHand.tscn
+res://Weapons/Bows/9_DemonBow/Demon Arrow/DemonArrow.tscn
+res://Weapons/Bows/6_BoneBow/BoneBowArrow/BoneArrow.tscn
+res://Weapons/Bows/5_ThunderBow/ThunderArrow/ThunderArrow.tscn
+res://Weapons/Bows/4_NatureBow/NatureArrow/NatureArrow.tscn
+res://Weapons/Bows/3_BlackBow/BlackArrow/BlackArrow.tscn
+res://Weapons/Bows/2_RedBow/RedArrow/RedArrow.tscn

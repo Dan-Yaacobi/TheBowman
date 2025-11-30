@@ -51,7 +51,6 @@ func release() -> void:
 	state_machine.ChangeState(idle)
 
 func Physics(_delta: float) -> MainHandState:
-	PlayerManager.player.use_mana(_delta)
 	return null
 	
 #what happens during input events in this state

@@ -42,18 +42,20 @@ func calculate_direction_to_player() -> Vector2:
 	_direction = player.global_position - global_position
 	return _direction.normalized()
 
-func hit(_arrow: HurtBox) -> void:
-	if _arrow.get_parent() is Arrow and _arrow != null:
-		var arrow: Arrow = _arrow.get_parent()
-		take_hit_effect()
-		if not no_push_back:
-			push_back(arrow.velocity.normalized(),arrow.data.pushback_power)
+func hit(hurt_box: HurtBox) -> void:
+	if hurt_box is ArrowHurtBox:
+		var arrow: Arrow = hurt_box.arrow
+		
 		arrow.clear_shot()
-		take_damage(_arrow.damage)
+		#arrow.reset_specials()
 		if arrow.stun:
 			apply_stun(arrow.stun_duration)
-		arrow.reset_specials()
-		
+
+	if not no_push_back:
+		push_back(hurt_box.knockback_dir,hurt_box.knockback)
+	take_damage(hurt_box.damage)
+	take_hit_effect()	
+	
 func apply_stun(stun_duration) -> void:
 	if not stats.boss:
 		var stun: EnemyEffect = Stunned.new()
@@ -112,20 +114,18 @@ func enemy_died() -> void:
 	died.emit(self)
 	queue_free()
 	
-func push_back(_direction: Vector2, power: int) -> void:
+func push_back(_direction: Vector2 = -direction, power: int = stats.move_speed*2) -> void:
 	if not stunned_state:
 		if not (stats.boss and stats.shooter):
 			velocity = _direction * power
+			
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(stats.touch_damage)
 			body.set_pushback_values(direction,stats.knockback)
-			if stats.boss:
-				push_back(-direction,stats.move_speed/2)
-			else:
-				push_back(-direction,stats.move_speed)
+			push_back(-direction,stats.move_speed)
 
 func drop_item() -> void:
 	if not no_drops:

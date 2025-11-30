@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccoj0xf4s6mlo"]
+
+[ext_resource type="Script" uid="uid://ctqrxqshl6c2t" path="res://Weapons/Bows/6_BoneBow/BoneBowArrow/bone_arrow.gd" id="1_c2bp7"]
+[ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_lpier"]
+[ext_resource type="Texture2D" uid="uid://ilnbfv47765s" path="res://Weapons/Bows/6_BoneBow/BoneBowArrow/SkullArrow.png" id="3_36x84"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_pm2vc"]
+[ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_xtt12"]
+
+[sub_resource type="Resource" id="Resource_alqiq"]
+script = ExtResource("2_lpier")
+speed = 30
+base_damage = 35
+pushback_power = 25
+
+[sub_resource type="Curve" id="Curve_d5mht"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhimf"]
+size = Vector2(8, 8)
+
+[node name="BoneArrow" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+rotation = 1.5707964
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("1_c2bp7")
+data = SubResource("Resource_alqiq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_36x84")
+flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(3, 0)
+amount = 100
+randomness = 1.0
+lifetime_randomness = 1.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_d5mht")
+color = Color(0.65, 0.65, 0.65, 1)
+
+[node name="HurtBox" parent="." instance=ExtResource("4_pm2vc")]
+position = Vector2(1, 0)
+collision_mask = 4
+script = ExtResource("5_xtt12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1, 5.9604645e-08)
+shape = SubResource("RectangleShape2D_dhimf")

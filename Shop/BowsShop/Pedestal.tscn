@@ -40,5 +40,17 @@ collision_layer = 0
 position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_mw43u")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -2
+amount = 25
+lifetime = 1.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector2(0, 0)
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+tangential_accel_min = 50.0
+tangential_accel_max = 50.0
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]

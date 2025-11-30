@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c8s38ngop7fkj" path="res://Player/Player2.0/OffHand/States/off_hand_state_machine.gd" id="2_hdxbw"]
 [ext_resource type="Script" uid="uid://cew0nfmkvmt6e" path="res://Player/Player2.0/OffHand/States/o_h_idle_state.gd" id="3_b6f1e"]
 [ext_resource type="Script" uid="uid://b5d11u4vmlib8" path="res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd" id="4_dyut0"]
-[ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/6_BoneBow/Skeletor.png" id="6_dyut0"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="6_dyut0"]
 
 [sub_resource type="Animation" id="Animation_o0dpc"]
 resource_name = "Pull"
@@ -81,5 +81,5 @@ script = ExtResource("4_dyut0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bow"]
 z_index = 2
-position = Vector2(0, 11.666666)
+position = Vector2(0, 6.6666665)
 texture = ExtResource("6_dyut0")

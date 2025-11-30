@@ -15,7 +15,6 @@ func hit_enemy(b) -> void:
 	if b is Enemy:
 		b.take_damage(damage)
 
-
 func start() -> void:
 	area.monitoring = true
 	emitting = true

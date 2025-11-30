@@ -5,7 +5,7 @@ const JUMP_EFFECT = preload("res://Player/Abilities/SpecialAbilities/BlueBowAbil
 func activate_special_ability(_player: Player) -> void:
 	for i in 10:
 		await _player.get_tree().create_timer(0.07).timeout
-		_player.current_weapon.shoot(false,false)
+		_player.current_weapon.shoot(false)
 
 # old ability which was flash jump
 func old_ability(_player: Player) -> void:

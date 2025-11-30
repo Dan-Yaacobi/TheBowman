@@ -11,3 +11,6 @@ signal changed_scene(new_scene: String)
 
 signal change_camera_focus(target: Vector2)
 signal reset_camera_focus
+
+signal arrow_hit_sound
+signal arrow_shot_sound

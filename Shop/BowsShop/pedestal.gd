@@ -13,12 +13,14 @@ class_name Pedestal extends Node2D
 			_update_sprite()
 @onready var island: Island = $Island
 @onready var player_detector: Area2D = $PlayerDetector
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var current_bow: Weapon
 
 func _ready() -> void:
 	_update_sprite()
 	if not Engine.is_editor_hint():
+		particles.emitting = false
 		if bow:
 			current_bow = bow.instantiate()
 			buy_bow_menu.set_up(current_bow.weapon_data)
@@ -34,10 +36,12 @@ func _bought_bow() -> void:
 	
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	buy_bow_menu.appear()
-
+	particles.emitting = true
+	
 func _on_player_detector_body_exited(body: Node2D) -> void:
 	buy_bow_menu.disappear()
-
+	particles.emitting = false
+	
 func enable() -> void:
 	island.enable()
 	player_detector.monitoring = true

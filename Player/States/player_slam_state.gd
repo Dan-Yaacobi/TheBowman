@@ -58,6 +58,7 @@ func stop_slamming() -> void:
 	player.velocity.y = 0
 	
 func hit_enemy(b) -> void:
+	return
 	if b is Enemy:
 		if not b.stats.boss:
 			b.take_damage(player.current_weapon.weapon_data.damage + 3)

@@ -15,7 +15,7 @@ func get_damage() -> int:
 	var val = 0
 	if weapon_scene != null:
 		var temp: Weapon = weapon_scene.instantiate()
-		val = temp.weapon_data.damage
+		val = temp.weapon_data.base_damage
 		temp.queue_free()
 	return val
 	

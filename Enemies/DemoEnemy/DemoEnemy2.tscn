@@ -20,9 +20,9 @@ script = ExtResource("4_eldsg")
 [sub_resource type="Resource" id="Resource_venkp"]
 resource_local_to_scene = true
 script = ExtResource("3_duv7u")
-hp = 5
+hp = 30
 move_speed = 20
-knockback = 150
+knockback = 80
 skin = ExtResource("7_mruj4")
 coins_dropped = 7
 sharp_movement = true
@@ -263,6 +263,7 @@ shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
 [node name="HurtBox" parent="." instance=ExtResource("13_lgrm0")]
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")

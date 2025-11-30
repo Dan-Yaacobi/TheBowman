@@ -40,7 +40,7 @@ func Physics(_delta: float) -> State:
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("DropDown") and player.velocity.y != 0:
 		return slam
-	if _event.is_action_pressed("Dash"):
+	if _event.is_action_pressed("dash"):
 		return dash
 	return null
 	

@@ -1,6 +1,5 @@
 class_name HUD extends CanvasLayer
 
-@onready var mana_bar: ManaBar = $ManaBar
 @onready var health_bar: HealthBar = $HealthBar
 @onready var level_stats: Label = $LevelStats
 @onready var total_buffs: TotalBuffs = $TotalBuffs
@@ -11,9 +10,6 @@ class_name HUD extends CanvasLayer
 func _ready() -> void:
 	PlayerManager.player.money_changed.connect(update_money)
 	PlayerManager.player.combo.connect(combo_counter.update_combo)
-	
-func get_mana_bar() -> ManaBar:
-	return mana_bar
 	
 func get_health_bar() -> HealthBar:
 	return health_bar

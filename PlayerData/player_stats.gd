@@ -29,11 +29,13 @@ var player: Player
 @export var basic_shot_power: float
 @export var shoot_cost: int
 @export var max_pull_strength: float
+@export var shooting_abilities: Array[PlayerShootAbility]
 @export var pull_speed: float = 1:
 	get:
 		return pull_speed
 	set(value):
 		pull_speed = clamp(value,1,4)
+
 @export_subgroup("Player Items")
 @export var money: int
 @export var upgrd_points: int

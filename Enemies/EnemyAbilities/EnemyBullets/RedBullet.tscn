@@ -1,31 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://b35crep84od1i"]
+[gd_scene load_steps=7 format=3 uid="uid://b35crep84od1i"]
 
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_57jy3"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_imlbk"]
+[ext_resource type="Script" uid="uid://cgo7dukio5cvu" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_57jy3"]
+[ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_imlbk"]
 [ext_resource type="Texture2D" uid="uid://cbmfknnq5gqyt" path="res://Enemies/Sprites/AppleSeed.png" id="3_rnvgk"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_beouh"]
 
 [sub_resource type="Resource" id="Resource_xam82"]
 script = ExtResource("2_imlbk")
 texture = ExtResource("3_rnvgk")
 damage = 1
-knockback = 0
+knockback = 50
 fire_cooldown = 2.0
-move_speed = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ob05t"]
 radius = 5.09902
 
 [node name="RedBullet" type="Area2D"]
 scale = Vector2(0.3, 0.3)
-collision_layer = 4
-collision_mask = 17
+collision_layer = 0
+collision_mask = 16
 script = ExtResource("1_57jy3")
 data = SubResource("Resource_xam82")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_rnvgk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ob05t")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource("4_beouh")]
+collision_layer = 4
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ob05t")

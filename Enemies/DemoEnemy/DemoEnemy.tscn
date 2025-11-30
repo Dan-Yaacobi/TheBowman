@@ -22,7 +22,7 @@ resource_local_to_scene = true
 script = ExtResource("3_vmfyd")
 hp = 15
 move_speed = 15
-knockback = 100
+knockback = 75
 skin = ExtResource("10_u3mhv")
 coins_dropped = 1
 touch_damage = 1
@@ -277,6 +277,7 @@ debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
 [node name="HurtBox" parent="." instance=ExtResource("12_opslt")]
 collision_mask = 1
+knockback = 20
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")

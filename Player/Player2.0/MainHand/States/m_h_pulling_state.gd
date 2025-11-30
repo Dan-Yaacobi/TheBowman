@@ -47,9 +47,7 @@ func Process(_delta: float) -> MainHandState:
 	return null
 	
 #what happens during _physics_process update in this state
-func Physics(_delta: float) -> MainHandState:
-	PlayerManager.player.use_mana(_delta)
-	
+func Physics(_delta: float) -> MainHandState:	
 	#GlobalPlayer.shot_zoom(_delta*GlobalPlayer.get_pull_speed(), true,6,5)
 	return null
 	

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bju1rx12kx8oe"]
+[gd_scene load_steps=16 format=3 uid="uid://bju1rx12kx8oe"]
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
-[ext_resource type="PackedScene" uid="uid://caekf50aq824k" path="res://Player/Mana/ManaBar.tscn" id="2_ja1d4"]
 [ext_resource type="Script" uid="uid://07lk15kopw0g" path="res://Player/BuffDisplay/buff_display_control.gd" id="4_njmlf"]
 [ext_resource type="Script" uid="uid://cpowcmubsuafi" path="res://Player/flow_container.gd" id="5_lkt0t"]
 [ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="6_6i5cd"]
@@ -168,20 +167,11 @@ script = ExtResource("1_ja1d4")
 
 [node name="HealthBar" parent="." instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
-offset_left = 73.0
-offset_top = 854.0
-offset_right = 137.0
-offset_bottom = 886.0
+offset_left = 66.0
+offset_top = 741.00006
+offset_right = 130.0
+offset_bottom = 773.00006
 scale = Vector2(6, 6)
-
-[node name="ManaBar" parent="." instance=ExtResource("2_ja1d4")]
-visible = false
-offset_left = 1515.0
-offset_top = 848.0
-offset_right = 1579.0
-offset_bottom = 880.0
-scale = Vector2(6, 6)
-mana_rate = 0.5
 
 [node name="LevelStats" type="Label" parent="."]
 offset_right = 40.0
@@ -190,10 +180,10 @@ offset_bottom = 23.0
 [node name="TotalBuffs" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 863.0
-offset_top = 270.99997
-offset_right = 863.0
-offset_bottom = 270.99997
+offset_left = 836.0
+offset_top = 149.0
+offset_right = 836.0
+offset_bottom = 149.0
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
@@ -239,7 +229,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="."]
-position = Vector2(964, 906.00006)
+position = Vector2(960, 814)
 scale = Vector2(5, 5)
 texture = ExtResource("7_lkt0t")
 script = ExtResource("8_6i5cd")
@@ -277,10 +267,10 @@ text = "Money: 0"
 script = ExtResource("9_t1yhm")
 
 [node name="ComboCounter" type="Label" parent="."]
-offset_left = 425.0
-offset_top = -104.0
-offset_right = 1560.0
-offset_bottom = 238.0
+offset_left = 1174.9998
+offset_top = -125.000015
+offset_right = 2309.9998
+offset_bottom = 216.99998
 scale = Vector2(0.05, 0.05)
 pivot_offset = Vector2(567, 171)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

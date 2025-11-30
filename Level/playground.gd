@@ -133,7 +133,6 @@ func between_waves() -> void:
 	for child in get_children():
 		if child is EnemyBullet:
 			child.queue_free()
-	player.mana_bar.set_value_to_max()
 	player.can_use_special_ability()
 	
 	#if wave_data.current_wave % 3 == 0 or (wave_data.current_wave - 1) % 5 == 0:
@@ -202,7 +201,6 @@ func set_scene(_player: Player) -> void:
 		summon_timer.wait_time = enemies.spawn_time
 		summon_timer.timeout.connect(summon_enemy)
 		falling_death.monitoring = true
-		_player.mana_bar.set_value_to_max()
 		set_towers()
 
 func update_combo(amount: int) -> void:
@@ -230,7 +228,6 @@ func exit_scene(_player: Player) -> void:
 	_player.combo_lost()
 	_player.reset_minions()
 	_player.hide_buffs()
-	_player.deactivate_mega_shot()
 	
 func kill_all_enemies() -> void:
 	for enemy in summoned_enemies:

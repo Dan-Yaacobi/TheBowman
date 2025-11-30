@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bj636ws18vxe"]
 
-[ext_resource type="Script" path="res://Player/Abilities/ShootAbilities/ArrowExplode/arrow_explode.gd" id="1_uikty"]
+[ext_resource type="Script" uid="uid://cu06x2dah3wbs" path="res://Player/Abilities/ShootAbilities/ArrowExplode/arrow_explode.gd" id="1_uikty"]
 
 [sub_resource type="Curve" id="Curve_44fdj"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 

@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dedyhhxnc7wc3"]
+
+[ext_resource type="Script" uid="uid://bxm3y1p56xv70" path="res://Weapons/Bows/0_BasicBow/BasicArrow/basic_arrow.gd" id="1_5n7ld"]
+[ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_xf40j"]
+[ext_resource type="Texture2D" uid="uid://b7o0utd7nostr" path="res://Weapons/Bows/9_DemonBow/Demon Arrow/Demon Arrow.png" id="3_xv0e1"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_0ji8g"]
+[ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_gnq4t"]
+
+[sub_resource type="Resource" id="Resource_mjy66"]
+script = ExtResource("2_xf40j")
+speed = 40
+base_damage = 1
+pushback_power = 10
+scale = 1.0
+
+[sub_resource type="Curve" id="Curve_8js4e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
+size = Vector2(7, 10)
+
+[node name="DemonArrow" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+rotation = 1.5707964
+collision_layer = 2
+collision_mask = 28
+script = ExtResource("1_5n7ld")
+data = SubResource("Resource_mjy66")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, -3.059797e-07)
+rotation = 0.7853982
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_xv0e1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 10
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_8js4e")
+color = Color(0.643137, 0.152941, 0, 0.45098)
+
+[node name="HurtBox" parent="." instance=ExtResource("4_0ji8g")]
+collision_mask = 4
+script = ExtResource("5_gnq4t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(14.5, -8.722337e-07)
+shape = SubResource("RectangleShape2D_m802n")

@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvio5f8sadcl8"]
+
+[ext_resource type="Script" uid="uid://dex3xgdv4beu3" path="res://MainGame/game.gd" id="1_iteqa"]
+[ext_resource type="PackedScene" uid="uid://cdu6hjoweee6s" path="res://Level/PlayGround/PlayGround.tscn" id="1_maytk"]
+[ext_resource type="PackedScene" uid="uid://cnhbrpo4htp2y" path="res://MainMenu/MainMenu.tscn" id="2_id0vo"]
+[ext_resource type="PackedScene" uid="uid://kqtm00s5xgeb" path="res://Shop/Shop.tscn" id="3_eirnv"]
+[ext_resource type="PackedScene" uid="uid://cmdeim0mrcv32" path="res://Shop/BowsShop/BowsShop.tscn" id="5_bk4eh"]
+[ext_resource type="PackedScene" uid="uid://boqh5qxj8h80x" path="res://Shop/AbilitiesShop/AbilitiesShop.tscn" id="6_onhyr"]
+[ext_resource type="PackedScene" uid="uid://clubhhuu1gip3" path="res://Shop/PlatformShop/PlatformShop.tscn" id="7_8hn01"]
+[ext_resource type="PackedScene" uid="uid://duv1vqq2qbq3m" path="res://Shop/TowersShopMenu/TowerUpgradeMenu.tscn" id="8_nnxe6"]
+[ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="9_yk4gd"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_iteqa")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_id0vo")]
+
+[node name="PlayGround" parent="." instance=ExtResource("1_maytk")]
+
+[node name="Shop" parent="." instance=ExtResource("3_eirnv")]
+visible = false
+
+[node name="BowsShop" parent="." instance=ExtResource("5_bk4eh")]
+visible = false
+
+[node name="AbilitiesShop" parent="." instance=ExtResource("6_onhyr")]
+visible = false
+
+[node name="PlatformShop" parent="." instance=ExtResource("7_8hn01")]
+visible = false
+
+[node name="TowerUpgradeMenu" parent="." instance=ExtResource("8_nnxe6")]
+visible = false
+
+[node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
+visible = false
+
+[node name="CloudTimer" type="Timer" parent="."]
+
+[node name="Hud" parent="." instance=ExtResource("9_yk4gd")]

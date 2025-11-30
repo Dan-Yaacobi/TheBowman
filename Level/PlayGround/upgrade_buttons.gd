@@ -10,6 +10,7 @@ var current_button_set_up: int = 0
 var player: Player
 var boss_upgrade_boost: bool = false
 var success_boost: float = 1.0
+
 func _ready() -> void:
 	for child in get_children():
 		if child is UpgradeButton:

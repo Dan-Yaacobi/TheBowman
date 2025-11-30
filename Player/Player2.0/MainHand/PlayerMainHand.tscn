@@ -1,13 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://7vjvk5bghwkq"]
+[gd_scene load_steps=25 format=3 uid="uid://7vjvk5bghwkq"]
 
 [ext_resource type="Script" uid="uid://cnljqw751d587" path="res://Player/Player2.0/MainHand/player_main_hand.gd" id="1_grn42"]
 [ext_resource type="Texture2D" uid="uid://x2ybpkt3kmnk" path="res://Player/Player2.0/Sprites/PlayerHandSprite.png" id="2_075al"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_y7ab3"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_y7ab3"]
 [ext_resource type="Script" uid="uid://btdlu5633ilbk" path="res://Player/Player2.0/MainHand/States/main_hand_state_machine.gd" id="3_y475i"]
 [ext_resource type="Script" uid="uid://ckwk3o5f8tfd2" path="res://Player/Player2.0/MainHand/States/m_h_idle_state.gd" id="4_24nrb"]
 [ext_resource type="Script" uid="uid://bdh8wnqs3ugce" path="res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd" id="5_ysxrx"]
 [ext_resource type="Script" uid="uid://cy0hbbl8bgqk2" path="res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd" id="6_i2jfe"]
+[ext_resource type="Script" uid="uid://ctejtc1jkqp2d" path="res://Player/Player2.0/MainHand/States/m_h_swing_state.gd" id="8_ww5t3"]
+[ext_resource type="Texture2D" uid="uid://b2ltxpnx4x6ia" path="res://Weapons/Swords/BasicSword/BasicSword.png" id="8_y7ab3"]
+[ext_resource type="Script" uid="uid://dh6oejforol0n" path="res://Player/Player2.0/MainHand/sword.gd" id="9_3cqt0"]
 [ext_resource type="Texture2D" uid="uid://3p61xqypv41m" path="res://Player/Player2.0/Sprites/SwingEffect.png" id="10_3m267"]
+[ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Weapons/Swords/sword_stats.gd" id="10_5ej1j"]
+[ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="11_3jnc7"]
 
 [sub_resource type="Animation" id="Animation_8g0cn"]
 resource_name = "Idle"
@@ -331,6 +336,12 @@ _data = {
 &"Swing": SubResource("Animation_6jul4")
 }
 
+[sub_resource type="Resource" id="Resource_30xy1"]
+script = ExtResource("10_5ej1j")
+knockback_power = 40
+damage = 3
+metadata/_custom_type_script = "uid://bymwdo1ku6acd"
+
 [sub_resource type="Animation" id="Animation_rg8yt"]
 length = 0.001
 tracks/0/type = "value"
@@ -372,10 +383,6 @@ _data = {
 [sub_resource type="Curve" id="Curve_sgu6n"]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m5yu"]
-radius = 7.0
-height = 34.0
 
 [node name="PlayerMainHand" type="CharacterBody2D"]
 script = ExtResource("1_grn42")
@@ -420,18 +427,24 @@ script = ExtResource("6_i2jfe")
 wait_time = 0.5
 
 [node name="Swing" type="Node2D" parent="MainHandStateMachine"]
+script = ExtResource("8_ww5t3")
 
 [node name="Sword" type="Node2D" parent="MainHandStateMachine/Swing"]
 visible = false
+z_index = 1
 position = Vector2(5, 5)
 rotation = -1.5708
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("9_3cqt0")
+stats = SubResource("Resource_30xy1")
 
 [node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword"]
 position = Vector2(9.53674e-07, -8)
+texture = ExtResource("8_y7ab3")
 
 [node name="SlashEffect" type="Sprite2D" parent="MainHandStateMachine/Swing"]
-position = Vector2(17, -4)
+z_index = 2
+position = Vector2(22, -6)
 texture = ExtResource("10_3m267")
 hframes = 5
 frame = 4
@@ -465,8 +478,9 @@ scale_amount_curve = SubResource("Curve_sgu6n")
 
 [node name="SlashHurtBox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 4
+script = ExtResource("11_3jnc7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashHurtBox"]
-position = Vector2(21, -5)
-shape = SubResource("CapsuleShape2D_7m5yu")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashHurtBox"]
+position = Vector2(6, -1)
+polygon = PackedVector2Array(34, 11, 17, 13, 16, -9, 0, -18, 20, -20, 31, -14)
