@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ixmdtc2clse4"]
+
+[ext_resource type="Script" uid="uid://2bbre7vch103" path="res://Player/Upgrades/Abilities/SwordCooldown/sword_cooldown_upgrade.gd" id="1_cf7l1"]
+
+[node name="SwordCooldownUpgrade" type="Node2D"]
+script = ExtResource("1_cf7l1")

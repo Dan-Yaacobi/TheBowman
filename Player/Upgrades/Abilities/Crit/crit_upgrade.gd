@@ -1,6 +1,6 @@
 class_name CritUpgrade extends PlayerUpgrade
 
-const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/Crit/crit_ability.gd" #"res://Player/Upgrades/Abilities/Crit/crit_ability.gd"
+const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/ShootAbilities/Crit/crit_ability.gd"
 
 var ability: PlayerShootAbility
 

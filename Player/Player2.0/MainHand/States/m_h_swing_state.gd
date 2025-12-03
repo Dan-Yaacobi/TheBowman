@@ -9,11 +9,13 @@ class_name SwingMainHandState extends MainHandState
 
 var finished: bool = false
 
+var base_sword_scale: Vector2
+
 # store a refernece to the player this belongs to
 func init() -> void:
 	entity.animation_player.animation_finished.connect(swing_done)
 	slash_hurt_box.monitoring = false
-	set_sword_size()
+	base_sword_scale = sword.scale
 	pass
 	
 func _ready() -> void:
@@ -21,7 +23,10 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	
+	for ability in PlayerManager.player.get_sword_abilities():
+		ability.activate_ability()
+	set_sword_size()
+	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
 	entity.can_swing = false
 	finished = false
 	slash_hurt_box.damage = floor(PlayerManager.player.get_strength()/2)
@@ -29,12 +34,14 @@ func Enter() -> void:
 	set_direction()
 	entity.animation_player.play("Swing")
 	slash_hurt_box.monitoring = true
+
 	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
 	slash_hurt_box.monitoring = false
 	swing_cooldown.start()
+	reset_sword_size()
 	pass
 	
 #what happens during process update in this state
@@ -66,11 +73,12 @@ func slash_hit_direction() -> void:
 		if slash_hurt_box.position.x < 0:
 			slash_hurt_box.position.x *= -1
 
-	pass
-
 func set_direction() -> void:
 	slash_hit_direction()
 	entity.set_swing_direction(PlayerManager.player.direction_side)
 
 func set_sword_size() -> void:
-	sword.scale *= PlayerManager.player.stats.sword_size
+	sword.scale *= PlayerManager.player.get_sword_size()
+	
+func reset_sword_size() -> void:
+	sword.scale = base_sword_scale

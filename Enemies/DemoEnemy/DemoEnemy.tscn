@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cyv1v6g5srjk1"]
+[gd_scene load_steps=28 format=3 uid="uid://cyv1v6g5srjk1"]
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_7uoph"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nqjsy"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_654r4"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_mrufl"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_opslt"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="13_opslt"]
 
 [sub_resource type="Resource" id="Resource_t1xp5"]
 resource_local_to_scene = true
@@ -282,3 +283,5 @@ knockback = 20
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")
 debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
+
+[node name="DebuffHandler" parent="." instance=ExtResource("13_opslt")]

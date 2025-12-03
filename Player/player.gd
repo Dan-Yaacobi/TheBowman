@@ -77,7 +77,8 @@ func _ready() -> void:
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
 	main_hand.connect_hands(off_hand)
 	EventBus.invisible_hands.connect(show_hands)
-	
+	EventBus.leeched.connect(leech_heal)
+
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
 		if key == stat:
@@ -155,15 +156,15 @@ func special_ability() -> void:
 	if current_weapon.weapon_data.special_ability != null:
 		if special_ability_available and current_weapon.weapon_data.special_ability.can_use(self):
 			current_weapon.weapon_data.special_ability.activate_special_ability(self)
-			current_weapon.regular_attack = false
+			#current_weapon.regular_attack = false
 			special_ability_available = false
 			special_ability_cooldown.start()
 
 func shoot() -> void:
 	EventBus.start_shooting.emit()
-	current_weapon.regular_attack = true
-	for ability in stats.shoot_abilities:
-		ability.activate_ability(self)
+	#current_weapon.regular_attack = true
+	#for ability in stats.shoot_abilities:
+		#ability.activate_ability(self)
 
 
 func show_hands(yes: bool) -> void:
@@ -214,12 +215,10 @@ func set_hands_new_bow() -> void:
 func init_bow() -> void:
 	current_weapon = stats.weapon_scene.instantiate()
 	set_hands_new_bow()
-	
-	current_weapon.combo_loss.connect(combo_lost)
-	current_weapon.combo_gained.connect(combo_gained)
-	current_weapon.critical_hit.connect(emit_crit)
-	current_weapon.leeched.connect(leech_heal)
-	current_weapon.init_weapon(self,current_weapon)
+
+	#current_weapon.combo_loss.connect(combo_lost)
+	#current_weapon.combo_gained.connect(combo_gained)
+	#current_weapon.init_weapon(self,current_weapon)
 	
 	if current_weapon.weapon_data.special_ability_cooldown <= 0:
 		special_ability_cooldown.wait_time = 1
@@ -243,7 +242,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		took_hit.emit()
 		damaged_particles.emitting = true
 		stats.hp -= _hurt_box.damage
-		health_bar._set_health(stats.hp)
+		health_bar.reduce_health(_hurt_box.damage)
 		set_pushback_values(_hurt_box.knockback_dir,_hurt_box.knockback)
 		
 func start_invincibilty() -> void:
@@ -251,7 +250,7 @@ func start_invincibilty() -> void:
 	hit_box.set_collision_mask_value(3,false)
 	modulate.a = 0.5
 	invincible = true
-	invincibility_timer.wait_time = stats.invinc_duration
+	invincibility_timer.wait_time = stats.invinc_duration + get_stamina() * 0.02
 	invincibility_timer.start()
 	pass
 	
@@ -263,11 +262,10 @@ func invincibility_over() -> void:
 	hit_box.monitoring = true
 	
 func heal(amount: int) -> void:
-	if amount < 0:
-		if stats.hp - amount > stats.stamina:
-			return
-	stats.hp -= amount
-	health_bar._set_health(stats.hp)
+	if stats.hp + amount <= get_stamina():
+		print("healing")
+		stats.hp += amount
+		health_bar.heal(amount)
 
 func leech_heal(amount: int,enemy_position: Vector2) -> void:
 	var health_gain_effect: HealthGainEffect = HEALTH_GAIN_EFFECT.instantiate()
@@ -318,8 +316,13 @@ func buy(price: int) -> bool:
 	return false
 
 func add_shoot_ability(_ability: PlayerShootAbility) -> void:
-	stats.shooting_abilities.append(_ability)
-	
+	if _ability:
+		stats.shooting_abilities.append(_ability)
+
+func add_sword_ability(_ability: PlayerSwordAbility) -> void:
+	if _ability:
+		stats.sword_abilities.append(_ability)
+
 ############# COMBO METHODS #############
 func combo_lost() -> void:
 	combo_counter = 0
@@ -343,7 +346,7 @@ func combo_bonus_activate() -> void:
 	combo_timer.start()
 	combo_effect.emitting = true
 	current_weapon.weapon_data.combo_buff_activated = true
-	health_bar._set_health(stats.stats.stamina)
+
 	pass
 	
 func end_combo_buff() -> void:
@@ -386,9 +389,26 @@ func get_shoot_abilities() -> Array[PlayerShootAbility]:
 
 func get_weapon_size() -> float:
 	return stats.sword_size
-	
+
+func get_stat_points() -> int:
+	return stats.stat_points
+
+func get_sword_cd() -> float:
+	return max(stats.base_sword_cooldown - stats.sword_cooldown_mod,1.0)
+
+func get_sword_size() -> float:
+	return stats.sword_size + stats.sword_size_mod
+
+func get_sword_abilities() -> Array[PlayerSwordAbility]:
+	return stats.sword_abilities
 ############# SET METHODS #############
+
+func set_sword_size(amount: float) -> void:
+	stats.sword_size_mod = amount
 	
+func set_sword_cd(amount: float) -> void:
+	stats.sword_cooldown_mod = amount
+
 func set_shooting(_val: bool) -> void:
 	shooting = _val
 	
@@ -397,3 +417,20 @@ func set_perfect_shots(was_perfect: bool) -> void:
 		perfect_shot_counter += 1
 	else:
 		perfect_shot_counter = 0
+
+func set_strength(amount: int) -> void:
+	stats.strength += amount
+	
+func set_agility(amount: int) -> void:
+	stats.agility += amount
+	
+func set_stamina(amount: int) -> void:
+	stats.stamina += amount
+	stats.hp = stats.stamina
+	health_bar.init_health(stats.stamina)
+
+func use_stat_point() -> bool:
+	if stats.stat_points > 0:
+		stats.stat_points -= 1
+		return true
+	return false

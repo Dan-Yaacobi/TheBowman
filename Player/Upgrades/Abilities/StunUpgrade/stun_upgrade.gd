@@ -1,7 +1,6 @@
 class_name StunUpgrade extends PlayerUpgrade
 
-const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/Stun/stun_ability.gd"
-
+const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/ShootAbilities/Stun/stun_ability.gd"
 var ability: PlayerShootAbility
 
 func _ready() -> void:

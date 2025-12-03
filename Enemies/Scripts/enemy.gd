@@ -3,6 +3,8 @@ class_name Enemy extends CharacterBody2D
 @export var stats: EnemyData
 @export var item_drops: Array[DropData]
 
+@onready var debuff_handler: DebuffHandler = $DebuffHandler
+
 static var player: Player
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
@@ -13,13 +15,17 @@ signal died(enemy: Enemy)
 signal took_damage
 var poisoned_timer: Timer
 var stunned_timer: Timer
+var bleed_timer: Timer
 var stunned_effect: CPUParticles2D
 var enemy_scene: PackedScene
 var direction: Vector2
 var poisoned_state: bool = false
 var stunned_state: bool = false
 var poisoned_damage: int = 0
-var temp_move_speed: int
+var bleed_state: bool = false
+var bleed_damage: int = 0
+var bleed_ticks: int = 0
+var base_move_speed: int
 var no_drops: bool = false
 
 var added_hit_effect: bool = false
@@ -50,21 +56,20 @@ func hit(hurt_box: HurtBox) -> void:
 		#arrow.reset_specials()
 		if arrow.stun:
 			apply_stun(arrow.stun_duration)
-
+	if hurt_box is SlashHurtBox:
+		if hurt_box.bleed:
+			apply_bleed(hurt_box.bleed_duration)
+		pass
+		
 	if not no_push_back:
 		push_back(hurt_box.knockback_dir,hurt_box.knockback)
 	take_damage(hurt_box.damage)
 	take_hit_effect()	
+
+func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
+	debuff_handler.add_debuff(_debuff, _duration, _ticks)
 	
-func apply_stun(stun_duration) -> void:
-	if not stats.boss:
-		var stun: EnemyEffect = Stunned.new()
-		stun.set_stun_duration(stun_duration)
-		self.stats.debuffs.append(stun)
-		var stun_effect = STUN_ARROW_EFFECT.instantiate()
-		stun_effect.global_position = global_position
-		get_parent().call_deferred("add_child", stun_effect)
-	
+
 func take_hit_effect() -> void:
 	if not added_hit_effect:
 		added_hit_effect = true
@@ -142,34 +147,59 @@ func spawn_drop(drop) -> void:
 
 func disable_drops() -> void:
 	no_drops = true
-	
+func update_animation(_animation: String) -> void:
+	if animation_player != null:
+		animation_player.play(_animation)
+
+
+
+
+
+
 func activate_debuffs() -> void:
 	for debuff in stats.debuffs:
 		debuff.activate_enemy_effect(self)
 		stats.debuffs.erase(debuff)
 		
+func apply_bleed(bleed_duration: float) -> void:
+	pass
+
+func apply_stun(stun_duration) -> void:
+	if not stats.boss:
+		var stun: EnemyEffect = Stunned.new()
+		stun.set_stun_duration(stun_duration)
+		self.stats.debuffs.append(stun)
+		var stun_effect = STUN_ARROW_EFFECT.instantiate()
+		stun_effect.global_position = global_position
+		get_parent().call_deferred("add_child", stun_effect)
+	
+func take_bleed_damage() -> void:
+	take_damage(bleed_damage)
+	pass
+
+func bleeding(_damage: int, total_ticks: int) -> void:
+	bleed_state = true
+	bleed_damage += _damage
+	bleed_timer.timeout.connect(take_bleed_damage)
+	bleed_ticks += total_ticks
+	pass
+			
 func take_poisoned_damage() -> void:
 	take_damage(poisoned_damage)
-	
+
 func poisoned(_damage: int) -> void:
 	poisoned_state = true
 	poisoned_damage = _damage
-	stats.move_speed /= 3
 	poisoned_timer.timeout.connect(take_poisoned_damage)
 
 func stunned(duration: float) -> void:
 	stunned_state = true
-	temp_move_speed = stats.move_speed
+	base_move_speed = stats.move_speed
 	stats.move_speed = 0
 	stunned_timer.wait_time = duration
 	stunned_timer.timeout.connect(stun_release)
-	
+
 func stun_release() -> void:
 	stunned_state = false
 	stunned_effect.emitting = false
-	stats.move_speed = temp_move_speed
-
-func update_animation(_animation: String) -> void:
-	if animation_player != null:
-		animation_player.play(_animation)
-	pass
+	stats.move_speed = base_move_speed

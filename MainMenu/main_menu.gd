@@ -49,7 +49,6 @@ func set_scene(_player: Player) -> void:
 		_player.global_position = player_spawn.global_position
 		#menu_tile_limit = tiles.get_used_rect()
 		_player.stats.in_menu = true
-		_player.stats.hp = _player.stats.max_hp
 		#set_player_camera(_player)
 		visible = true
 		#tiles.collision_enabled = true
@@ -81,3 +80,9 @@ func update_wave_label(wave_num: int) -> void:
 	#enter_fight.monitoring = true
 	#enter_shop.monitoring = true
 	#tiles.collision_enabled = true
+
+
+func _on_falling_death_body_entered(body: Node2D) -> void:
+	if body is Player:
+		EventBus.changed_scene.emit("Menu")
+	pass # Replace with function body.

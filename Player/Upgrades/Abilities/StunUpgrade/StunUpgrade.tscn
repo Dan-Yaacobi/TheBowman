@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsy8tg0ac6f0n"]
 
-[ext_resource type="Script" path="res://Player/Upgrades/Abilities/StunUpgrade/stun_upgrade.gd" id="1_cv3ty"]
+[ext_resource type="Script" uid="uid://drgmht2nebsj" path="res://Player/Upgrades/Abilities/StunUpgrade/stun_upgrade.gd" id="1_cv3ty"]
 
 [node name="StunUpgrade" type="Node2D"]
 script = ExtResource("1_cv3ty")

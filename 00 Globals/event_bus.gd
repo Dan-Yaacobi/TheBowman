@@ -14,3 +14,7 @@ signal reset_camera_focus
 
 signal arrow_hit_sound
 signal arrow_shot_sound
+
+signal leeched(amount: int, position: Vector2)
+
+signal exit_ui

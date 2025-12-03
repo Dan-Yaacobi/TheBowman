@@ -4,7 +4,6 @@ var player: Player
 
 @export_subgroup("Player Stats")
 @export var hp: int
-@export var max_hp: int
 @export var move_speed: int
 @export var max_jumps: int
 @export var jump_height: int
@@ -19,6 +18,7 @@ var player: Player
 @export var max_minions: int 
 @export var dash_distance: int
 @export var invinc_duration: int
+@export var stat_points: int = 0
 
 @export_subgroup("Combo")
 @export var max_combo: int
@@ -50,10 +50,12 @@ var player: Player
 @export var arrow_abilities: Array[ArrowAbility]
 @export var slam_abilities: Array[SlamAbility]
 
-
-@export_subgroup("Upgrade values")
+@export_subgroup("Sword")
 @export var sword_size: float = 1.0
-
+@export var sword_size_mod: float = 0.0
+@export var base_sword_cooldown: float = 1.5
+@export var sword_cooldown_mod: float = 0.0
+@export var sword_abilities: Array[PlayerSwordAbility]
 
 func add_jump_ability(ability: JumpAbility) -> void:
 	if ability != null:

@@ -17,6 +17,9 @@ const ARROW_EXPLODE = preload("res://Player/Abilities/ShootAbilities/ArrowExplod
 const CRIT = preload("res://Weapons/Effects/CriticalHit/Crit.tscn")
 const LEECH_LIFE = preload("res://Weapons/Effects/LeechLife/LeechLife.tscn")
 
+const STUN_DEBUFF = preload("res://Debuffs/Stun/StunDebuff.tscn")
+
+
 var direction: Vector2
 var regular_shot: bool = true
 
@@ -25,20 +28,17 @@ var hit_sound: AudioStreamPlayer2D
 var can_pierce: bool = false
 var can_explode: bool = false
 
-var can_crit: bool = false
 var crit_chance: int = 0
 var crit: bool = false
 var succesfuly_hit: bool = false
 
-var can_stun: bool = false
-var stun_chance: int = 10
+var stun_chance: int = 100
 var stun: bool = false
 var stun_duration: float = 2
 
-var can_leechlife: bool = false
-var leech_chance: int = 10
+var leech_chance: int = 0
 var leech_life: bool = false
-var leech_amount: int = -1
+var leech_amount: int = 1
 
 var fired: bool = false
 var perfect_shot: bool = false
@@ -63,24 +63,24 @@ func hit(body) -> void:
 		if regular_shot:
 			explosion()
 			critical_hit()
-			stun_hit()
+			stun_hit(body)
 			apply_leech(body)
 			succesfuly_hit = true
 			arrow_hit.emit()
 
 func calc_dmg(shot_power: float) -> void:
-	damage = floor((PlayerManager.player.get_strength() + data.base_damage)
+	damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
 	*pow(shot_power, 2))
 	
 func explosion() -> void:
 	if can_explode:
 		var try: int = randi_range(1,100)
 		if try < explosion_chance:
-			var explosion = ARROW_EXPLODE.instantiate()
-			explosion.damage = damage
-			explosion.global_position = global_position
-			get_parent().call_deferred("add_child",explosion)
-			explosion.call_deferred("start")
+			var explosion_scene = ARROW_EXPLODE.instantiate()
+			explosion_scene.damage = damage
+			explosion_scene.global_position = global_position
+			get_parent().call_deferred("add_child",explosion_scene)
+			explosion_scene.call_deferred("start")
 		
 func missed() -> void:
 	if regular_shot and not succesfuly_hit:
@@ -136,21 +136,20 @@ func critical_hit() -> void:
 		crit_hit.emit()
 		hurt_box.damage = damage*2
 			
-func stun_hit() -> void:
-	if can_stun:
-		var roll_stun: int = randi_range(0,100)
-		if roll_stun < stun_chance:
-			stun = true
+func stun_hit(_enemy: Enemy) -> void:
+	var roll_stun: int = randi_range(0,100)
+	if roll_stun < stun_chance:
+		var new_stun_debuff = STUN_DEBUFF.instantiate()
+		_enemy.apply_debuff(new_stun_debuff,3,1)
+		#stun = true
 
 func apply_leech(enemy: Enemy) -> void:
-	if can_leechlife:
-		var leech_roll: int = randi_range(0,100)
-		if leech_roll < leech_chance:
-			var leech_effect: LeechLife = LEECH_LIFE.instantiate()
-			leech_effect.global_position = enemy.global_position
-			get_parent().call_deferred("add_child",leech_effect)
-			leeched.emit(leech_amount,enemy.global_position)
-			pass
+	var leech_roll: int = randi_range(0,100)
+	if leech_roll < leech_chance:
+		var leech_effect: LeechLife = LEECH_LIFE.instantiate()
+		leech_effect.global_position = enemy.global_position
+		get_parent().call_deferred("add_child",leech_effect)
+		EventBus.leeched.emit(leech_amount,enemy.global_position)
 	
 func reset_specials() -> void:
 	stun = false

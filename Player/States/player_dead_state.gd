@@ -26,8 +26,8 @@ func Exit() -> void:
 		player.reset_to_base_stats()
 	player.died.emit("Menu")
 	player.collision_shape.set_deferred("disabled", false)
-	player.stats.hp = player.stats.max_hp
-	player.health_bar._set_health(player.stats.max_hp)
+	player.stats.hp = player.stats.stamina
+	player.health_bar._set_health(player.stats.stamina)
 	EventBus.changed_scene.emit("Menu")
 	pass
 	

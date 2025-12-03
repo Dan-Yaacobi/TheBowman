@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bju1rx12kx8oe"]
+[gd_scene load_steps=21 format=3 uid="uid://bju1rx12kx8oe"]
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="7_lkt0t"]
 [ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
+[ext_resource type="PackedScene" uid="uid://7k55k4vb8xb6" path="res://StatsUI/StatsUIOpenButton.tscn" id="10_fwgky"]
 [ext_resource type="Script" uid="uid://du44dkpi0kvi3" path="res://HUD/combo_counter.gd" id="10_pd2p5"]
+[ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
 
 [sub_resource type="Animation" id="Animation_xyp2j"]
 resource_name = "Gained"
@@ -162,6 +164,45 @@ _data = {
 &"RESET": SubResource("Animation_06wjn")
 }
 
+[sub_resource type="Animation" id="Animation_7odlb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pd2p5"]
+resource_name = "Rotate"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwgky"]
+_data = {
+&"RESET": SubResource("Animation_7odlb"),
+&"Rotate": SubResource("Animation_pd2p5")
+}
+
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_ja1d4")
 
@@ -252,10 +293,10 @@ text = "0
 metadata/_edit_use_anchors_ = true
 
 [node name="CurrentMoney" type="Label" parent="."]
-offset_left = 30.999996
-offset_top = 32.999992
-offset_right = 1164.0
-offset_bottom = 238.0
+offset_left = 130.0
+offset_top = 29.0
+offset_right = 293.0
+offset_bottom = 234.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.76, 0.608, 0, 1)
@@ -263,10 +304,11 @@ theme_override_colors/font_outline_color = Color(0.54, 0.432, 0, 1)
 theme_override_constants/shadow_offset_y = 15
 theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 150
-text = "Money: 0"
+text = "x0"
 script = ExtResource("9_t1yhm")
 
 [node name="ComboCounter" type="Label" parent="."]
+visible = false
 offset_left = 1174.9998
 offset_top = -125.000015
 offset_right = 2309.9998
@@ -285,4 +327,22 @@ script = ExtResource("10_pd2p5")
 [node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
 libraries = {
 &"": SubResource("AnimationLibrary_r47hq")
+}
+
+[node name="StatsUiOpenButton" parent="." instance=ExtResource("10_fwgky")]
+offset_left = 36.0
+offset_top = 176.0
+offset_right = -1845.0
+offset_bottom = -876.0
+scale = Vector2(4, 4)
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(71.99999, 76.99999)
+scale = Vector2(5, 5)
+texture = ExtResource("11_fwgky")
+hframes = 5
+
+[node name="CoinAnimation" type="AnimationPlayer" parent="Coin"]
+libraries = {
+&"": SubResource("AnimationLibrary_fwgky")
 }

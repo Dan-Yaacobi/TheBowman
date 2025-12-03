@@ -16,6 +16,7 @@ var shoot_cooldown: float = 0
 var stopped: bool = false
 
 func _ready() -> void:
+	debuff_handler.set_enemy(self)
 	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
 	if wings_animation != null:
@@ -28,7 +29,7 @@ func _ready() -> void:
 	
 	animation_player.play("Move")
 	#hit_box.body_entered.connect(hit)
-	hurt_box.body_entered.connect(player_hit)
+	#hurt_box.body_entered.connect(player_hit)
 	hurt_box.knockback = stats.knockback
 	hurt_box.damage = stats.touch_damage
 	sprite.texture = stats.skin
@@ -38,23 +39,23 @@ func _ready() -> void:
 	hurt_box.successful_hit.connect(push_back)
 	
 func _physics_process(delta: float) -> void:
+	#print(stats.move_speed)
 	direction = calculate_direction_to_player()
-	
-	if stats.boss:
-		if not boss_phase_II and stats.hp < max_hp/2:
-			boss_upgrade()
-			boss_phase_II = true
 
+	if bleed_state and bleed_timer:
+		if bleed_timer.is_stopped() and bleed_ticks > 0:
+			bleed_timer.start()
+			bleed_ticks -= 1
+			
 	if poisoned_state and poisoned_timer != null:
 		if poisoned_timer.is_stopped():
 			poisoned_timer.start()
 	
-	if stunned_state and stunned_timer != null:
-		velocity = Vector2.ZERO
-		if stunned_timer.is_stopped():
-			stunned_timer.start()
+	#if stunned_state and stunned_timer != null:
+		#velocity = Vector2.ZERO
+		#if stunned_timer.is_stopped():
+			#stunned_timer.start()
 			
-	
 	if stats.shooter and not stunned_state:
 		initial_speed()
 		if abs(global_position.y - player.global_position.y) > shoot_height:
@@ -64,18 +65,17 @@ func _physics_process(delta: float) -> void:
 			shoot_cooldown -= delta
 			if shoot_cooldown <= 0:
 				shoot()
-		pass
 
 	else:
 		if change_direction():
 			initial_speed()
-		if velocity == Vector2.ZERO:
+		if velocity == Vector2.ZERO and not stunned_state:
 			initial_speed()
 		velocity  += calculate_direction_to_player() * stats.move_speed * delta
 	activate_debuffs()
 	move_and_slide()
 	pass
-	
+
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
@@ -86,7 +86,6 @@ func shoot() -> void:
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
-		new_bullet.data.move_speed = stats.move_speed * 3
 		new_bullet.data.knockback = stats.knockback
 		
 		get_parent().add_child(new_bullet)
@@ -117,11 +116,3 @@ func change_direction() -> bool:
 	
 func initial_speed() -> void:
 	velocity = calculate_direction_to_player() * stats.move_speed * 2
-
-func boss_upgrade() -> void:
-		stats.move_speed *= 1.2
-		scale /= 1.5
-		stats.knockback *= 2
-		var player_x = player.global_position.x
-		global_position = player.global_position + Vector2(randi_range(player_x - 100, player_x + 100),-100)
-		initial_speed()

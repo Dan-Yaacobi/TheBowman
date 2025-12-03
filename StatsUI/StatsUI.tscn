@@ -1,0 +1,290 @@
+[gd_scene load_steps=16 format=3 uid="uid://dtwmj2dnymdn4"]
+
+[ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="1_2obp1"]
+[ext_resource type="Script" uid="uid://d3f37l3ynf2ke" path="res://StatsUI/stats_ui.gd" id="1_cl7it"]
+[ext_resource type="PackedScene" uid="uid://d23sg8jvu28sg" path="res://StatsUI/Stat.tscn" id="2_ovp8d"]
+[ext_resource type="Texture2D" uid="uid://w8syl8q3ggwa" path="res://StatsUI/Sprites/MoreInfoButton.png" id="3_4ek2f"]
+[ext_resource type="Texture2D" uid="uid://cvbcd7ca1egfo" path="res://StatsUI/Sprites/MoreInfoButtonPressed.png" id="4_cl7it"]
+[ext_resource type="Texture2D" uid="uid://122k5727876t" path="res://StatsUI/Sprites/MoreInfoButtonHover.png" id="5_j1nup"]
+[ext_resource type="Script" uid="uid://g5q4p7wn2b0a" path="res://StatsUI/more_info.gd" id="7_j1nup"]
+
+[sub_resource type="Animation" id="Animation_vhq5x"]
+resource_name = "Close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1cbug"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_accxh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gf6xr"]
+_data = {
+&"Close": SubResource("Animation_vhq5x"),
+&"Open": SubResource("Animation_1cbug"),
+&"RESET": SubResource("Animation_accxh")
+}
+
+[sub_resource type="Animation" id="Animation_e8h7u"]
+resource_name = "Close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cl7it"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j1nup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j1nup"]
+_data = {
+&"Close": SubResource("Animation_e8h7u"),
+&"Open": SubResource("Animation_cl7it"),
+&"RESET": SubResource("Animation_j1nup")
+}
+
+[node name="StatsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cl7it")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 120.0
+texture = ExtResource("1_2obp1")
+
+[node name="StatTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 5.0
+offset_right = 325.0
+offset_bottom = 193.0
+scale = Vector2(0.15, 0.15)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 150
+text = "Stats"
+
+[node name="StatsNode" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Stat" parent="StatsNode" instance=ExtResource("2_ovp8d")]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 36.0
+offset_right = 672.0
+offset_bottom = 224.0
+text = "Strength:"
+text_color = Color(0.6901961, 0, 0.011764706, 1)
+
+[node name="Stat2" parent="StatsNode" instance=ExtResource("2_ovp8d")]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 60.0
+offset_right = 672.0
+offset_bottom = 248.0
+stat_upgrade = 1
+text = "Agility:"
+text_color = Color(0.13750005, 0.75, 0, 1)
+
+[node name="Stat3" parent="StatsNode" instance=ExtResource("2_ovp8d")]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 83.0
+offset_right = 672.0
+offset_bottom = 271.0
+stat_upgrade = 2
+text = "Stamina:"
+text_color = Color(0, 0.47999993, 0.8, 1)
+
+[node name="MoreInfo" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 7.0
+offset_right = 130.0
+offset_bottom = 31.0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("3_4ek2f")
+texture_pressed = ExtResource("4_cl7it")
+texture_hover = ExtResource("5_j1nup")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_j1nup")
+
+[node name="TextureRect" type="TextureRect" parent="MoreInfo"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 145.0
+offset_bottom = 129.0
+texture = ExtResource("1_2obp1")
+
+[node name="Label" type="Label" parent="MoreInfo/TextureRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 1097.9999
+offset_bottom = 386.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "Strength improves damage, arrow velocity and perfect shot window"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="MoreInfo/TextureRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 43.000004
+offset_right = 1047.9999
+offset_bottom = 424.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "Agility improves draw speed, movement and jump"
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="MoreInfo/TextureRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.99999
+offset_right = 1047.9999
+offset_bottom = 334.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "Stamina improves Hp and invincibilty time"
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoreInfo"]
+libraries = {
+&"": SubResource("AnimationLibrary_gf6xr")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j1nup")
+}
+
+[node name="Points" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 101.0
+offset_right = 1039.0
+offset_bottom = 289.0
+scale = Vector2(0.08, 0.08)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 150
+text = "Points: 0"
+
+[connection signal="toggled" from="MoreInfo" to="MoreInfo" method="_on_toggled"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

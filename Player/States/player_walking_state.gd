@@ -15,6 +15,8 @@ func Enter() -> void:
 	
 #what happens when the player exits this state
 func Exit() -> void:
+	player.body.update_animation("")
+
 	pass
 	
 #what happens during process update in this state
@@ -24,11 +26,7 @@ func Process(_delta: float) -> State:
 	if player.direction == 0:
 		return idle
 	
-	
-	if player.stats.in_menu:
-		player.velocity.x = player.direction * (player.stats.menu_speed + player.get_agility())
-	else:
-		player.velocity.x = player.direction * (player.stats.move_speed + player.get_agility())
+	player.velocity.x = player.direction * (player.stats.move_speed + player.get_agility())
 	return null
 	
 #what happens during _physics_process update in this state

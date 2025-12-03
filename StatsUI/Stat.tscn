@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://d23sg8jvu28sg"]
+
+[ext_resource type="Texture2D" uid="uid://dm442xhpr6tg2" path="res://StatsUI/Sprites/UpgradeButton.png" id="1_5xwa1"]
+[ext_resource type="Script" uid="uid://vsc7u6oir3i7" path="res://StatsUI/stat_control.gd" id="1_i6xpp"]
+[ext_resource type="Texture2D" uid="uid://bw3yf62h3kss" path="res://StatsUI/Sprites/UpgradeButtonPressed.png" id="2_cgqo4"]
+[ext_resource type="Texture2D" uid="uid://7dbx5fmrewsc" path="res://StatsUI/Sprites/UpgradeButtonHover.png" id="3_i6xpp"]
+
+[node name="Stat" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_i6xpp")
+
+[node name="Stat" type="Label" parent="."]
+layout_mode = 0
+offset_right = 649.0
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 150
+text = "Strength:"
+
+[node name="Button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_right = 912.0
+offset_bottom = 183.0
+focus_mode = 0
+texture_normal = ExtResource("1_5xwa1")
+texture_pressed = ExtResource("2_cgqo4")
+texture_hover = ExtResource("3_i6xpp")
+stretch_mode = 4
+
+[node name="StatValue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 580.0
+offset_right = 660.00006
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 150
+text = "5"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

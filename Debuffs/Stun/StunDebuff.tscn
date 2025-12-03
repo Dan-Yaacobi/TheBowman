@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1gcykybdcokh"]
+
+[ext_resource type="Script" uid="uid://bp2bqtrgmd3to" path="res://Debuffs/Stun/stun_debuff.gd" id="1_a6ee4"]
+[ext_resource type="PackedScene" uid="uid://f3gi3n3nq0ia" path="res://Enemies/EnemyEffects/Stunned/stunned_effect.tscn" id="2_qmo66"]
+[ext_resource type="PackedScene" uid="uid://bj2ua5b17bpjx" path="res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn" id="3_j7ngs"]
+
+[node name="StunDebuff" type="Node2D"]
+script = ExtResource("1_a6ee4")
+ID = 1
+
+[node name="StunnedEffect" parent="." instance=ExtResource("2_qmo66")]
+
+[node name="StunArrowEffect" parent="." instance=ExtResource("3_j7ngs")]

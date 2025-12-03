@@ -12,6 +12,7 @@ texture = ExtResource("3_rnvgk")
 damage = 1
 knockback = 50
 fire_cooldown = 2.0
+move_speed = 45
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ob05t"]
 radius = 5.09902

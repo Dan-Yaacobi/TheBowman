@@ -1,0 +1,262 @@
+[gd_scene load_steps=39 format=3 uid="uid://cesvb1a1eu8yq"]
+
+[ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
+[ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
+[ext_resource type="Script" uid="uid://cd0876l1xhef" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_hqjia"]
+[ext_resource type="Script" uid="uid://bu8rrfoiwqr26" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="3_x70vp"]
+[ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
+[ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
+[ext_resource type="Script" uid="uid://bob8cvby6imtx" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="5_wo5nf"]
+[ext_resource type="Script" uid="uid://bqnydmr6nno03" path="res://Player/Abilities2.0/player_shoot_ability.gd" id="6_croik"]
+[ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
+[ext_resource type="Script" uid="uid://c8xkfwn8288iq" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="7_bgaaw"]
+[ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="8_gv3fu"]
+[ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
+[ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
+[ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
+[ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/Bows/0_BasicBow/BasicBow.tscn" id="10_x70vp"]
+[ext_resource type="PackedScene" uid="uid://dxk6tfmffd8bb" path="res://Player/Player2.0/OffHand/PlayerOffHand.tscn" id="11_croik"]
+[ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
+[ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
+[ext_resource type="Script" uid="uid://cbpkfb2oarrbd" path="res://Player/combo_activated.gd" id="16_j4os2"]
+[ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
+[ext_resource type="Script" uid="uid://bfaixwknlmsd2" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
+[ext_resource type="Script" uid="uid://bfh1b4g0isfgh" path="res://Player/upgrades.gd" id="20_mgkdb"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
+[ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
+[ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
+[ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
+
+[sub_resource type="Resource" id="Resource_sedti"]
+script = ExtResource("2_2aet8")
+hp = 5
+move_speed = 35
+max_jumps = 1
+jump_height = 80
+knockback_resistance = 3
+strength = 5
+agility = 5
+stamina = 5
+menu_speed = 150
+max_minions = 3
+dash_distance = 50
+invinc_duration = 1
+combo_to_activate = 25
+combo_duration = 8.0
+basic_shot_power = 150.0
+weapon_name = "Basic Bow"
+weapon_scene = ExtResource("10_x70vp")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
+size = Vector2(18, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
+size = Vector2(13, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
+size = Vector2(13.3333, 3.20833)
+
+[sub_resource type="Curve" id="Curve_g8oqh"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
+size = Vector2(17.666666, 21)
+
+[sub_resource type="Curve" id="Curve_wqenp"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_u4yfg"]
+colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_cqixw"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0mjqs"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_whdv5"]
+radius = 49.0408
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 65
+collision_mask = 17
+script = ExtResource("1_4bii6")
+gravity = 200
+stats = SubResource("Resource_sedti")
+
+[node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]
+z_index = 1
+
+[node name="PlayerMainHand" parent="." instance=ExtResource("10_wo5nf")]
+position = Vector2(-5, 5)
+
+[node name="PlayerOffHand" parent="." instance=ExtResource("11_croik")]
+position = Vector2(2, 5)
+
+[node name="OffHandShoulder" type="Node2D" parent="."]
+position = Vector2(2, 5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+script = ExtResource("8_qvxki")
+random_strength = 5.0
+shake_fade = 10.0
+
+[node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
+
+[node name="Idle" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("5_kcllr")
+
+[node name="Walking" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("6_vo15m")
+
+[node name="Slam" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("14_nepur")
+
+[node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam"]
+position = Vector2(0, 1)
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
+position = Vector2(-1, 14)
+shape = SubResource("RectangleShape2D_6nowa")
+debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
+
+[node name="Dead" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("15_qho0y")
+
+[node name="Dash" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("16_lcihm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 6)
+shape = SubResource("RectangleShape2D_0mb5q")
+
+[node name="JumpReset" type="Area2D" parent="."]
+position = Vector2(1, 4)
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
+position = Vector2(-2.33333, 11.7292)
+shape = SubResource("RectangleShape2D_7fpcy")
+debug_color = Color(0, 0.648432, 0.180981, 0.42)
+
+[node name="JumpAction" parent="." instance=ExtResource("7_kkejo")]
+
+[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction"]
+position = Vector2(0, 11)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 3)
+gravity = Vector2(0, 50)
+scale_amount_curve = SubResource("Curve_g8oqh")
+color = Color(0.831239, 0.712185, 0.672638, 1)
+
+[node name="HitBox" parent="." instance=ExtResource("22_x70vp")]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2.1666665, 2.5)
+shape = SubResource("RectangleShape2D_4o0d0")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
+[node name="DamagedParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 20)
+linear_accel_min = 20.0
+linear_accel_max = 20.0
+radial_accel_min = 20.0
+radial_accel_max = 50.0
+scale_amount_curve = SubResource("Curve_wqenp")
+color_ramp = SubResource("Gradient_u4yfg")
+
+[node name="DeathAnimationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpecialAbilityCooldown" type="Timer" parent="."]
+
+[node name="ComboActivated" type="Node2D" parent="."]
+script = ExtResource("16_j4os2")
+
+[node name="ComboTimer" type="Timer" parent="ComboActivated"]
+wait_time = 8.0
+
+[node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated"]
+z_index = -1
+position = Vector2(0, -1)
+emitting = false
+amount = 200
+emission_shape = 2
+emission_sphere_radius = 7.0
+gravity = Vector2(0, -50)
+scale_amount_curve = SubResource("Curve_cqixw")
+color = Color(0.673333, 0.04, 0.8, 1)
+
+[node name="ComboActivatedEffect" type="CPUParticles2D" parent="ComboActivated"]
+emitting = false
+amount = 500
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+emission_shape = 2
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 0)
+radial_accel_min = 250.0
+radial_accel_max = 250.0
+scale_amount_curve = SubResource("Curve_0mjqs")
+color = Color(0.67451, 0.0392157, 0.8, 1)
+script = ExtResource("18_n3ww0")
+
+[node name="Area2D" type="Area2D" parent="ComboActivated/ComboActivatedEffect"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_whdv5")
+
+[node name="Upgrades" type="Node2D" parent="."]
+script = ExtResource("20_mgkdb")
+
+[node name="BuffTooltipControl" type="Node2D" parent="."]
+script = ExtResource("26_8kdbo")
+
+[node name="Debuffs" type="Node2D" parent="."]
+
+[node name="Slow" type="Node2D" parent="Debuffs"]
+script = ExtResource("29_b4moh")
+
+[node name="Timer" type="Timer" parent="Debuffs/Slow"]
+wait_time = 1.5
+
+[node name="Abilities" type="Node2D" parent="."]
+script = ExtResource("26_s0mko")
+
+[node name="ShootAbilities" type="Node2D" parent="Abilities"]
+
+[node name="PeriodicAbilities" type="Node2D" parent="Abilities"]
+
+[node name="ActiveAbilities" type="Node2D" parent="Abilities"]

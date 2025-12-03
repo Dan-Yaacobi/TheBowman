@@ -5,4 +5,4 @@ extends CPUParticles2D
 func _ready() -> void:
 	audio_stream_player_2d.play()
 	emitting = true
-	audio_stream_player_2d.finished.connect(queue_free)
+	#audio_stream_player_2d.finished.connect(queue_free)

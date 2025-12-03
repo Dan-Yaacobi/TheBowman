@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnhbrpo4htp2y"]
+[gd_scene load_steps=24 format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="3_0uxqg"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="15_167x7"]
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
+[ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -36,6 +37,9 @@ script = ExtResource("10_aa3ac")
 [sub_resource type="Resource" id="Resource_ctujf"]
 script = ExtResource("4_7hy75")
 button_action = SubResource("Resource_ssi0y")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lv0r"]
+size = Vector2(10949, 680)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_4xjwr")
@@ -68,6 +72,7 @@ theme_override_font_sizes/font_size = 200
 text = "Current Wave:"
 
 [node name="HowToPlay" type="Label" parent="."]
+visible = false
 offset_left = 123.0
 offset_top = 2.0
 offset_right = 4317.0
@@ -204,25 +209,25 @@ position = Vector2(206, 121)
 position = Vector2(99, 114)
 
 [node name="Island13" parent="Islands" instance=ExtResource("13_qvidt")]
-position = Vector2(119, 162)
+position = Vector2(208, -12)
 floating = true
 
 [node name="Island3" parent="Islands" instance=ExtResource("14_5lv0r")]
 position = Vector2(293, 96)
 
 [node name="Island12" parent="Islands" instance=ExtResource("14_5lv0r")]
-position = Vector2(15, -13)
+position = Vector2(146, 13)
 
 [node name="Island4" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(149, 118)
 floating = true
 
 [node name="Island14" parent="Islands" instance=ExtResource("15_167x7")]
-position = Vector2(62, 191)
+position = Vector2(268, -28)
 floating = true
 
 [node name="Island10" parent="Islands" instance=ExtResource("15_167x7")]
-position = Vector2(28, 34)
+position = Vector2(74, 33)
 floating = true
 
 [node name="Island5" parent="Islands" instance=ExtResource("15_167x7")]
@@ -237,11 +242,11 @@ position = Vector2(57, 106)
 floating = true
 
 [node name="Island11" parent="Islands" instance=ExtResource("16_24r6y")]
-position = Vector2(72, 6)
+position = Vector2(-8, 79)
 floating = true
 
 [node name="Island9" parent="Islands" instance=ExtResource("16_24r6y")]
-position = Vector2(88, 61)
+position = Vector2(-39, 67)
 
 [node name="Portals" type="Node2D" parent="."]
 
@@ -256,6 +261,18 @@ color = Color(1, 1, 0, 1)
 destination = "BowsShop"
 
 [node name="Portal3" parent="Portals" instance=ExtResource("13_npjie")]
-position = Vector2(88, 39)
+position = Vector2(-39, 45)
 color = Color(1, 0.28235295, 1, 1)
 destination = "PlatformShop"
+
+[node name="FallingDeath" type="Area2D" parent="."]
+position = Vector2(227, 107)
+collision_mask = 11
+script = ExtResource("16_qvidt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+position = Vector2(-3, 467)
+shape = SubResource("RectangleShape2D_5lv0r")
+debug_color = Color(1, 0, 0.2, 0.419608)
+
+[connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

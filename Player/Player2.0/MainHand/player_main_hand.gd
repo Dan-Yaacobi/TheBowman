@@ -91,7 +91,8 @@ func release_arrow() -> void:
 		## if shot power is 1: max pull, if shot_offset = 0: released within perfect shot window
 		for shoot_ability in PlayerManager.player.get_shoot_abilities():
 			if shoot_ability:
-				shoot_ability.activate_ability(current_arrow)
+				shoot_ability.get_arrow(current_arrow)
+				shoot_ability.activate_ability()
 		fire_arrow()
 	else:
 		current_arrow.free()

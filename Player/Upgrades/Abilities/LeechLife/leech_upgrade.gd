@@ -1,6 +1,6 @@
 class_name LeechUpgrade extends PlayerUpgrade
 
-const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/leech/leech_ability.gd"
+const ABILITY_SCRIPT: String = "res://Player/Abilities2.0/ShootAbilities/leech/leech_ability.gd"
 
 var ability: PlayerShootAbility
 

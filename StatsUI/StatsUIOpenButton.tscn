@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://7k55k4vb8xb6"]
+
+[ext_resource type="Script" uid="uid://dtja76shntmfx" path="res://StatsUI/stats_ui_open_button.gd" id="1_8v1v7"]
+[ext_resource type="Texture2D" uid="uid://boalsxqix47ys" path="res://StatsUI/Sprites/Stats.png" id="1_b0af2"]
+[ext_resource type="Texture2D" uid="uid://dgiryddt1nnui" path="res://StatsUI/Sprites/StatsPressed.png" id="2_r4sph"]
+[ext_resource type="PackedScene" uid="uid://dtwmj2dnymdn4" path="res://StatsUI/StatsUI.tscn" id="2_u0puy"]
+[ext_resource type="Texture2D" uid="uid://ccwmjvxkpdrry" path="res://StatsUI/Sprites/StatsHover.png" id="3_v4nsf"]
+
+[node name="StatsUiOpenButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1881.0
+offset_bottom = -1052.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("1_b0af2")
+texture_pressed = ExtResource("2_r4sph")
+texture_hover = ExtResource("3_v4nsf")
+script = ExtResource("1_8v1v7")
+
+[node name="StatsUI" parent="." instance=ExtResource("2_u0puy")]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 1.0
+offset_right = 39.0
+offset_bottom = 1.0
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

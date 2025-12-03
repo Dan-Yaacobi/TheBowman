@@ -27,4 +27,7 @@ func blink() -> void:
 		eyes_sprite.frame = 0
 		
 func update_animation(anim: String) -> void:
-	animation_player.play(anim)
+	if anim == "":
+		animation_player.stop()
+	else:
+		animation_player.play(anim)
