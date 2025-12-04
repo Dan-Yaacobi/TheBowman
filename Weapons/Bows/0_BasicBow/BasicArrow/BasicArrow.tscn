@@ -10,7 +10,7 @@
 script = ExtResource("2_ifcpi")
 speed = 10
 base_damage = 1
-pushback_power = 10
+pushback_power = 15
 metadata/_custom_type_script = "uid://7k55pgy1tsuq"
 
 [sub_resource type="Curve" id="Curve_8js4e"]

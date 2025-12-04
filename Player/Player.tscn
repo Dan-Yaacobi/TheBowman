@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=42 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://bfaixwknlmsd2" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 [ext_resource type="Script" uid="uid://bfh1b4g0isfgh" path="res://Player/upgrades.gd" id="20_mgkdb"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
+[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
 [ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
 [ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
 [ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
@@ -68,13 +69,18 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
 size = Vector2(17.666666, 21)
 
-[sub_resource type="Curve" id="Curve_wqenp"]
-_limits = [0.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_croik"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 6.138935), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_wqenp"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.51923084, 0.17399032), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Gradient" id="Gradient_u4yfg"]
-colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 1)
+colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 0.64705884)
 
 [sub_resource type="Curve" id="Curve_cqixw"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -180,18 +186,17 @@ shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="DamagedParticles" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 5
+amount = 3
+texture = ExtResource("23_wo5nf")
 lifetime = 0.7
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 6.0
-gravity = Vector2(0, 20)
-linear_accel_min = 20.0
-linear_accel_max = 20.0
-radial_accel_min = 20.0
-radial_accel_max = 50.0
+gravity = Vector2(0, 50)
+radial_accel_max = 20.0
+radial_accel_curve = SubResource("Curve_croik")
 scale_amount_curve = SubResource("Curve_wqenp")
 color_ramp = SubResource("Gradient_u4yfg")
 

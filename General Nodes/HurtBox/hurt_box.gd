@@ -6,7 +6,7 @@ const DEFAULT_COMBAT_TEXT_COLOR = Color.WHITE
 const DEFAULT_HIT_EFFECT_COLOR = Color("ba0000")
 
 @export var damage: int  = 1
-@export var knockback: int
+@export var knockback: float
 @export var knockback_dir: Vector2
 
 var one_time_hit: bool = false
@@ -23,7 +23,9 @@ func AreaEnetered( a : Area2D) -> void:
 		#CombatTextSpawner.spawn(a.global_position, str(damage),combat_text_color)
 		knockback_dir = (a.global_position - self.global_position).normalized()
 		a.TakeDamage(self)
-		successful_hit.emit()
+	if a.get_parent() is Enemy:
+		added_effects(a.enemy)
+	successful_hit.emit()
 		
 func added_effects(a: Enemy) -> void:
 	pass

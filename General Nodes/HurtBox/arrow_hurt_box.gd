@@ -16,11 +16,9 @@ func AreaEnetered( a : Area2D) -> void:
 		one_time_hit = true
 		added_effects(a.get_parent())
 		damage = arrow.damage
-		knockback = arrow.data.pushback_power
+		knockback = arrow.knockback
 		knockback_dir = arrow.velocity.normalized()
 		arrow.hit(a.enemy)
-		#parent.arrow_hit_resolve(a.get_enemy())
-		#EventBus.shot_power.emit(parent.shot_power_mod)
 		a.TakeDamage(self)
 
 func added_effects(a: Enemy) -> void:

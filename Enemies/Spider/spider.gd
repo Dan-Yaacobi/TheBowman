@@ -31,7 +31,6 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		if stunned_timer.is_stopped():
 			stunned_timer.start()
-	activate_debuffs()
 	apply_gravity(delta)
 	move_and_slide()
 	

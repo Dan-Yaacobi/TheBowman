@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://7vjvk5bghwkq"]
+[gd_scene load_steps=27 format=3 uid="uid://7vjvk5bghwkq"]
 
 [ext_resource type="Script" uid="uid://cnljqw751d587" path="res://Player/Player2.0/MainHand/player_main_hand.gd" id="1_grn42"]
 [ext_resource type="Texture2D" uid="uid://x2ybpkt3kmnk" path="res://Player/Player2.0/Sprites/PlayerHandSprite.png" id="2_075al"]
@@ -327,19 +327,39 @@ tracks/5/keys = {
 "values": [-1.5708, -1.22173, -1.0472, 0.785398, 0.959931, 1.13446, 1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_5ej1j"]
+resource_name = "Swinging"
+length = 0.5
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.17453292519943295, 0.17453292519943295]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3cely"]
 _data = {
 &"Idle": SubResource("Animation_8g0cn"),
 &"Max_Pull": SubResource("Animation_e83k8"),
 &"Pull": SubResource("Animation_52yoq"),
 &"RESET": SubResource("Animation_25jve"),
-&"Swing": SubResource("Animation_6jul4")
+&"Swing": SubResource("Animation_6jul4"),
+&"Swinging": SubResource("Animation_5ej1j")
 }
 
 [sub_resource type="Resource" id="Resource_30xy1"]
 script = ExtResource("10_5ej1j")
-knockback_power = 40
+knockback_power = 30
 damage = 3
+bleed_chance = 100
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 
 [sub_resource type="Animation" id="Animation_rg8yt"]
@@ -465,9 +485,6 @@ scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 132
 script = ExtResource("13_5ej1j")
-damage = null
-knockback = null
-knockback_dir = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox"]
 position = Vector2(22, 0)

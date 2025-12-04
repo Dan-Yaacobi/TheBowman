@@ -2,7 +2,7 @@ class_name DemoEnemy extends Enemy
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var hit_box: HitBox = $HitBox
+@onready var hit_box: EnemyHitBox = $HitBox
 
 enum directions{TOP_LEFT,TOP_RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT}
 
@@ -15,7 +15,9 @@ var shoot_height: int = 80
 var shoot_cooldown: float = 0
 var stopped: bool = false
 
-func _ready() -> void:
+var turn_speed_deg: float = 120.0
+
+func extra_ready_functions() -> void:
 	debuff_handler.set_enemy(self)
 	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
@@ -28,36 +30,28 @@ func _ready() -> void:
 	shoot_height = randi_range(50,80)
 	
 	animation_player.play("Move")
-	#hit_box.body_entered.connect(hit)
-	#hurt_box.body_entered.connect(player_hit)
+
 	hurt_box.knockback = stats.knockback
 	hurt_box.damage = stats.touch_damage
+	hurt_box.successful_hit.connect(push_back)
+	hit_box.set_enemy(self)
 	sprite.texture = stats.skin
-	change_direction()
 	for ability in stats.initial_ability:
 		ability.activate_ability(self)
-	hurt_box.successful_hit.connect(push_back)
-	
-func _physics_process(delta: float) -> void:
-	#print(stats.move_speed)
-	direction = calculate_direction_to_player()
 
-	if bleed_state and bleed_timer:
-		if bleed_timer.is_stopped() and bleed_ticks > 0:
-			bleed_timer.start()
-			bleed_ticks -= 1
-			
-	if poisoned_state and poisoned_timer != null:
-		if poisoned_timer.is_stopped():
-			poisoned_timer.start()
+func _physics_process(delta: float) -> void:
+	direction = calculate_direction_to_player()
 	
-	#if stunned_state and stunned_timer != null:
-		#velocity = Vector2.ZERO
-		#if stunned_timer.is_stopped():
-			#stunned_timer.start()
+	if pushed_back:
+		velocity = pushback_dir * pushback_power
+		pushback_power -= delta * stats.knockback_resistance
+		if pushback_power <= 0:
+			pushed_back = false
 			
-	if stats.shooter and not stunned_state:
-		initial_speed()
+	elif stunned_state:
+		velocity = Vector2.ZERO
+	
+	elif stats.shooter:
 		if abs(global_position.y - player.global_position.y) > shoot_height:
 			velocity  += calculate_direction_to_player() * stats.move_speed * delta
 		else:
@@ -65,16 +59,10 @@ func _physics_process(delta: float) -> void:
 			shoot_cooldown -= delta
 			if shoot_cooldown <= 0:
 				shoot()
-
+	
 	else:
-		if change_direction():
-			initial_speed()
-		if velocity == Vector2.ZERO and not stunned_state:
-			initial_speed()
-		velocity  += calculate_direction_to_player() * stats.move_speed * delta
-	activate_debuffs()
+		velocity = direction * stats.move_speed
 	move_and_slide()
-	pass
 
 func shoot() -> void:
 	if stats.bullet != null and not stunned_state:
@@ -89,30 +77,4 @@ func shoot() -> void:
 		new_bullet.data.knockback = stats.knockback
 		
 		get_parent().add_child(new_bullet)
-
-func change_direction() -> bool:
-	if not stats.sharp_movement:
-		return false
-	var turn: bool = false
-	if global_position.x > player.global_position.x:
-		if global_position.y > player.global_position.y:
-			if current_direction != directions.BOTTOM_RIGHT:
-				turn = true
-				current_direction = directions.BOTTOM_RIGHT
-		else:
-			if current_direction != directions.TOP_RIGHT:
-				turn = true
-				current_direction = directions.TOP_RIGHT
-	else:
-		if global_position.y > player.global_position.y:
-			if current_direction != directions.BOTTOM_LEFT:
-				turn = true
-				current_direction = directions.BOTTOM_LEFT
-		else:
-			if current_direction != directions.TOP_LEFT:
-				turn = true
-				current_direction = directions.TOP_LEFT
-	return turn
 	
-func initial_speed() -> void:
-	velocity = calculate_direction_to_player() * stats.move_speed * 2

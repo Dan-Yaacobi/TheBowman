@@ -17,8 +17,6 @@ func Enter() -> void:
 func Exit() -> void:
 	player.body.update_animation("")
 
-	pass
-	
 #what happens during process update in this state
 func Process(_delta: float) -> State:
 	if player.stats.hp <= 0:

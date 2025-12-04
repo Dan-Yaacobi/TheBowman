@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=80 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
 [ext_resource type="Script" uid="uid://l716tqh1t70b" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
 [ext_resource type="Script" uid="uid://d35o1sx2biv2n" path="res://Objects/FallingObjects/Scripts/summon_objects.gd" id="20_ueqxs"]
-[ext_resource type="PackedScene" uid="uid://dl6d04pvp0ux" path="res://Player/Upgrades/StatsUpgrades/HP/HpUpgrade.tscn" id="21_imgkr"]
 [ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
 [ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
 [ext_resource type="PackedScene" uid="uid://bstmllbqxch1v" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn" id="24_mi85c"]
@@ -43,10 +42,9 @@
 [ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="38_3abtr"]
 [ext_resource type="Texture2D" uid="uid://d36766n7g2188" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png" id="39_14wyh"]
 [ext_resource type="Texture2D" uid="uid://311160wwg7qn" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade2.png" id="40_abgki"]
-[ext_resource type="PackedScene" uid="uid://ixmdtc2clse4" path="res://Player/Upgrades/Abilities/SwordCooldown/SwordCooldownUpgrade.tscn" id="40_e8prh"]
 [ext_resource type="Texture2D" uid="uid://dm15coovb1qa6" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade3.png" id="41_13v1j"]
-[ext_resource type="Texture2D" uid="uid://bp5n108w76jds" path="res://Player/Upgrades/Abilities/SwordCooldown/SwordCooldown.png" id="41_xpwt5"]
 [ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="42_iqpx2"]
+[ext_resource type="PackedScene" uid="uid://caq6l5xbwajld" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn" id="42_q6dew"]
 [ext_resource type="PackedScene" uid="uid://b8gmj6kbjq75c" path="res://Player/Upgrades/Abilities/SwordSize/SwordSizeUpgrade.tscn" id="42_xpwt5"]
 [ext_resource type="Texture2D" uid="uid://cqi54pid5qnan" path="res://Player/Upgrades/Abilities/SwordSize/SwordSize.png" id="43_q6dew"]
 [ext_resource type="Texture2D" uid="uid://casb2wdmiukgh" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade1.png" id="43_r1mi8"]
@@ -463,20 +461,15 @@ hover_texture = ExtResource("45_t6bp6")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can crit"
 tool_tip2 = "Increase crit chance"
-ID = 12
+ID = 1
 is_ability = true
-
-[node name="SwordCooldownUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("40_e8prh")]
-normal_texture = ExtResource("41_xpwt5")
-color = Color(1, 1, 1, 1)
-tool_tip = "Reduce Sword Attack Cooldown"
-ID = 13
 
 [node name="SwordSizeUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_xpwt5")]
 normal_texture = ExtResource("43_q6dew")
 color = Color(1, 1, 1, 1)
 tool_tip = "Increase Sword Size"
-ID = 14
+ID = 3
+is_ability = true
 
 [node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_3abtr")]
 normal_texture = ExtResource("39_14wyh")
@@ -485,7 +478,7 @@ hover_texture = ExtResource("41_13v1j")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can leech life"
 tool_tip2 = "Increase leech chance"
-ID = 11
+ID = 4
 is_ability = true
 
 [node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("34_ah7gd")]
@@ -495,21 +488,24 @@ hover_texture = ExtResource("37_31pi7")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can stun"
 tool_tip2 = "Increase stun chance"
-ID = 10
+ID = 5
+is_ability = true
+
+[node name="SwordBleedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_q6dew")]
+tool_tip = "Sword can cause enemies to bleed"
+tool_tip2 = "Increase bleed chance"
+ID = 6
 is_ability = true
 
 [node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
 [node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("23_v6ol2")]
 color = Color(0.188235, 0.890196, 0.34902, 1)
-ID = 2
+ID = 11
 bucket = 2
 
-[node name="HpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("21_imgkr")]
-color = Color(0.1882353, 0.8901961, 0.34901962, 1)
-
 [node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("22_67mw3")]
-ID = 1
+ID = 13
 
 [node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("24_mi85c")]
 amount = 1
@@ -517,7 +513,7 @@ normal_texture = ExtResource("25_iq6ym")
 pressed_texture = ExtResource("26_wdchw")
 hover_texture = ExtResource("27_oorb6")
 tool_tip = "Increase your knockback resistance"
-ID = 3
+ID = 14
 
 [node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
 

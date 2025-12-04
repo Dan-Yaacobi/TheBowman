@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://caq6l5xbwajld"]
+
+[ext_resource type="Script" uid="uid://6nqrh3tb2tbo" path="res://Player/Upgrades/Abilities/SwordBleed/sword_bleed_upgrade.gd" id="1_5ptyu"]
+[ext_resource type="Texture2D" uid="uid://btxlheyabo6j5" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedIcon.png" id="2_3tl6f"]
+
+[node name="SwordBleedUpgrade" type="Node2D"]
+script = ExtResource("1_5ptyu")
+normal_texture = ExtResource("2_3tl6f")
+color = Color(1, 1, 1, 1)
+ID = 16

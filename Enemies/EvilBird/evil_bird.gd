@@ -54,7 +54,6 @@ func _physics_process(delta: float) -> void:
 		
 	if player.global_position.y < global_position.y:
 		shooting_state = false
-	activate_debuffs()
 	move_and_slide()
 
 func check_if_reached_height() -> bool:

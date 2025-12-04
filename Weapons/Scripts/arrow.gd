@@ -1,7 +1,6 @@
 class_name Arrow extends CharacterBody2D
 
 signal arrow_missed
-signal arrow_hit
 signal crit_hit
 signal leeched(amount: int, enemy_position: Vector2)
 
@@ -18,6 +17,7 @@ const CRIT = preload("res://Weapons/Effects/CriticalHit/Crit.tscn")
 const LEECH_LIFE = preload("res://Weapons/Effects/LeechLife/LeechLife.tscn")
 
 const STUN_DEBUFF = preload("res://Debuffs/Stun/StunDebuff.tscn")
+const BLEED_DEBUFF = preload("uid://b0pv21kfxpvci")
 
 
 var direction: Vector2
@@ -32,9 +32,8 @@ var crit_chance: int = 0
 var crit: bool = false
 var succesfuly_hit: bool = false
 
-var stun_chance: int = 100
-var stun: bool = false
-var stun_duration: float = 2
+var stun_chance: int = 0
+var bleed_chance: int = 0
 
 var leech_chance: int = 0
 var leech_life: bool = false
@@ -44,6 +43,7 @@ var fired: bool = false
 var perfect_shot: bool = false
 var shot_power_mod: float = 0
 var damage: int
+var knockback: float
 
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
@@ -65,13 +65,18 @@ func hit(body) -> void:
 			critical_hit()
 			stun_hit(body)
 			apply_leech(body)
+			bleed_hit(body)
 			succesfuly_hit = true
-			arrow_hit.emit()
+			clear_shot()
+
 
 func calc_dmg(shot_power: float) -> void:
 	damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
 	*pow(shot_power, 2))
+
+func calc_knockback(shot_power: float) -> void:
 	
+	knockback = data.pushback_power * shot_power + log(velocity.length())
 func explosion() -> void:
 	if can_explode:
 		var try: int = randi_range(1,100)
@@ -141,8 +146,14 @@ func stun_hit(_enemy: Enemy) -> void:
 	if roll_stun < stun_chance:
 		var new_stun_debuff = STUN_DEBUFF.instantiate()
 		_enemy.apply_debuff(new_stun_debuff,3,1)
-		#stun = true
 
+func bleed_hit(_enemy: Enemy) -> void:
+	var roll_bleed: int = randi_range(0,100)
+	if roll_bleed < bleed_chance:
+		var new_bleed_debuff = BLEED_DEBUFF.instantiate()
+		new_bleed_debuff.set_damage(max(floor(PlayerManager.player.get_strength() / 10),1))
+		_enemy.apply_debuff(new_bleed_debuff, 5,5)
+		
 func apply_leech(enemy: Enemy) -> void:
 	var leech_roll: int = randi_range(0,100)
 	if leech_roll < leech_chance:
@@ -152,6 +163,5 @@ func apply_leech(enemy: Enemy) -> void:
 		EventBus.leeched.emit(leech_amount,enemy.global_position)
 	
 func reset_specials() -> void:
-	stun = false
 	crit = false
 	

@@ -14,6 +14,8 @@ signal shot_power_amount(amount)
 @export var min_shot_power: float = 0.5
 @export var max_offset: float
 
+@onready var sword: Sword = $MainHandStateMachine/Swing/Sword
+
 var current_arrow: Arrow = null
 var hand_direction: Vector2
 var pulling: bool = false
@@ -109,7 +111,9 @@ func fire_arrow() -> void:
 	current_arrow.enable_arrow()
 	#current_arrow.arrow_shot()
 	current_arrow.calc_dmg(shot_power)
+	current_arrow.calc_knockback(shot_power)
 	current_arrow.reparent(get_tree().root)
+	
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	
@@ -137,3 +141,6 @@ func is_swinging() -> bool:
 func set_time_for_perfect_shot(amount: float) -> void:
 	if amount > 0:
 		max_pull_state.perfect_shot_time = amount
+
+func is_idle() -> bool:
+	return main_hand_state_machine.curr_state is IdleMainHandState

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/DemoEnemy/demo_enemy.gd" id="1_7uoph"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nqjsy"]
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_olou7"]
-[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_7f1kl"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_vmfyd"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_6q55h"]
 [ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="5_b4mrk"]
@@ -12,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_654r4"]
 [ext_resource type="Texture2D" uid="uid://0b800144sjhx" path="res://Enemies/Sprites/AppleWings.png" id="11_mrufl"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_opslt"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="12_sg63u"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="13_opslt"]
 
 [sub_resource type="Resource" id="Resource_t1xp5"]
@@ -27,6 +27,7 @@ knockback = 75
 skin = ExtResource("10_u3mhv")
 coins_dropped = 1
 touch_damage = 1
+knockback_resistance = 20.0
 death_ability = Array[ExtResource("2_nqjsy")]([SubResource("Resource_t1xp5")])
 shooter_chance = 50
 bullet = ExtResource("2_olou7")
@@ -271,6 +272,7 @@ shape = SubResource("CircleShape2D_uehev")
 [node name="HitBox" parent="." instance=ExtResource("11_654r4")]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("12_sg63u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_4ig30")
@@ -278,7 +280,6 @@ debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
 [node name="HurtBox" parent="." instance=ExtResource("12_opslt")]
 collision_mask = 1
-knockback = 20
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_emnjt")

@@ -13,18 +13,13 @@ const STUN_ARROW_EFFECT = preload("res://Player/Abilities/ShootAbilities/StunAbi
 
 signal died(enemy: Enemy)
 signal took_damage
-var poisoned_timer: Timer
-var stunned_timer: Timer
-var bleed_timer: Timer
-var stunned_effect: CPUParticles2D
-var enemy_scene: PackedScene
+
 var direction: Vector2
+
 var poisoned_state: bool = false
 var stunned_state: bool = false
-var poisoned_damage: int = 0
 var bleed_state: bool = false
-var bleed_damage: int = 0
-var bleed_ticks: int = 0
+
 var base_move_speed: int
 var no_drops: bool = false
 
@@ -32,11 +27,23 @@ var added_hit_effect: bool = false
 var hit_particle_effect: CPUParticles2D
 
 var animation_player: AnimationPlayer
+
+var can_move: bool = true
+
+## Push back variables ##
 var no_push_back: bool = false
+var pushed_back: bool = false
+var pushback_dir: Vector2
+var pushback_power: float
 
 var hard_mode: bool = false
 
 func _ready() -> void:
+	extra_ready_functions()
+	animation_player.animation_finished.connect(reset_animation)
+	pass
+
+func extra_ready_functions() -> void:
 	pass
 
 func get_player(_player: Player) -> void:
@@ -44,31 +51,20 @@ func get_player(_player: Player) -> void:
 		player = _player
 	
 func calculate_direction_to_player() -> Vector2:
-	var _direction: Vector2
-	_direction = player.global_position - global_position
-	return _direction.normalized()
+	return (player.global_position - global_position).normalized()
 
 func hit(hurt_box: HurtBox) -> void:
-	if hurt_box is ArrowHurtBox:
-		var arrow: Arrow = hurt_box.arrow
-		
-		arrow.clear_shot()
-		#arrow.reset_specials()
-		if arrow.stun:
-			apply_stun(arrow.stun_duration)
-	if hurt_box is SlashHurtBox:
-		if hurt_box.bleed:
-			apply_bleed(hurt_box.bleed_duration)
-		pass
-		
 	if not no_push_back:
 		push_back(hurt_box.knockback_dir,hurt_box.knockback)
+		
 	take_damage(hurt_box.damage)
 	take_hit_effect()	
 
 func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 	debuff_handler.add_debuff(_debuff, _duration, _ticks)
-	
+
+func show_damage(_damage: int, color: Color) -> void:
+	CombatTextSpawner.spawn(global_position, str(_damage),color)
 
 func take_hit_effect() -> void:
 	if not added_hit_effect:
@@ -81,34 +77,17 @@ func take_hit_effect() -> void:
 		
 func take_damage(_dmg: int) -> void:
 	stats.hp -= _dmg
-	took_damage.emit()
 	update_animation("Damaged")
-	
-	if stats.shooter and not stats.boss:
-		#stats.shooter = false
-		if not animation_player.animation_finished.is_connected(shooter_damaged_animation_finished):
-			animation_player.animation_finished.connect(shooter_damaged_animation_finished)
-	else:
-		if not animation_player.animation_finished.is_connected(regular_damaged_animation_finished):
-			animation_player.animation_finished.connect(regular_damaged_animation_finished)
-			
+
 	if stats.hp <= 0:
 		activate_death_ability()
 		enemy_died()
-		drop_item()
+		drop_item(drop_logic(stats.coins_dropped))
 
-func shooter_damaged_animation_finished(anim_name: String) -> void:
+func reset_animation(anim_name: String) -> void:
 	if anim_name == "Damaged":
 		update_animation("Move")
-		await get_tree().create_timer(0.5).timeout
-		
-		stats.shooter = true
 
-
-func regular_damaged_animation_finished(anim_name: String) -> void:
-	if anim_name == "Damaged":
-		update_animation("Move")
-	
 func activate_death_ability() -> void:
 	if stats.death_ability.size() > 0:
 		for ability in stats.death_ability:
@@ -119,20 +98,23 @@ func enemy_died() -> void:
 	died.emit(self)
 	queue_free()
 	
-func push_back(_direction: Vector2 = -direction, power: int = stats.move_speed*2) -> void:
+func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed) -> void:
 	if not stunned_state:
 		if not (stats.boss and stats.shooter):
-			velocity = _direction * power
-			
+			pushed_back = true
+			pushback_dir = -direction
+			pushback_power = power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(stats.touch_damage)
 			body.set_pushback_values(direction,stats.knockback)
-			push_back(-direction,stats.move_speed)
+			push_back(direction,stats.move_speed)
 
-func drop_item() -> void:
+func drop_item(_drops: Array[DropData]) -> void:
+	for drop in _drops:
+		spawn_drop(drop)
 	if not no_drops:
 		for drop in item_drops:
 			if drop.drop_chance():
@@ -147,59 +129,12 @@ func spawn_drop(drop) -> void:
 
 func disable_drops() -> void:
 	no_drops = true
+	
 func update_animation(_animation: String) -> void:
 	if animation_player != null:
 		animation_player.play(_animation)
 
-
-
-
-
-
-func activate_debuffs() -> void:
-	for debuff in stats.debuffs:
-		debuff.activate_enemy_effect(self)
-		stats.debuffs.erase(debuff)
-		
-func apply_bleed(bleed_duration: float) -> void:
-	pass
-
-func apply_stun(stun_duration) -> void:
-	if not stats.boss:
-		var stun: EnemyEffect = Stunned.new()
-		stun.set_stun_duration(stun_duration)
-		self.stats.debuffs.append(stun)
-		var stun_effect = STUN_ARROW_EFFECT.instantiate()
-		stun_effect.global_position = global_position
-		get_parent().call_deferred("add_child", stun_effect)
+func drop_logic(amount: int) -> Array[DropData]:
+	var drops: Array[DropData]
 	
-func take_bleed_damage() -> void:
-	take_damage(bleed_damage)
-	pass
-
-func bleeding(_damage: int, total_ticks: int) -> void:
-	bleed_state = true
-	bleed_damage += _damage
-	bleed_timer.timeout.connect(take_bleed_damage)
-	bleed_ticks += total_ticks
-	pass
-			
-func take_poisoned_damage() -> void:
-	take_damage(poisoned_damage)
-
-func poisoned(_damage: int) -> void:
-	poisoned_state = true
-	poisoned_damage = _damage
-	poisoned_timer.timeout.connect(take_poisoned_damage)
-
-func stunned(duration: float) -> void:
-	stunned_state = true
-	base_move_speed = stats.move_speed
-	stats.move_speed = 0
-	stunned_timer.wait_time = duration
-	stunned_timer.timeout.connect(stun_release)
-
-func stun_release() -> void:
-	stunned_state = false
-	stunned_effect.emitting = false
-	stats.move_speed = base_move_speed
+	return drops

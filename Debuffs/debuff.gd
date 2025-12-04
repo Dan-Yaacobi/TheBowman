@@ -11,7 +11,6 @@ var ticks: int = 0
 var enemy: Enemy
 
 func _ready() -> void:
-	print(ticks)
 	if ticks == 1:
 		apply_debuff_effect()
 	

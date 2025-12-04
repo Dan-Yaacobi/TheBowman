@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0pv21kfxpvci"]
+
+[ext_resource type="Script" uid="uid://bv1k356ogs273" path="res://Debuffs/Bleed/bleed_debuff.gd" id="1_6cl21"]
+[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="2_4obob"]
+
+[sub_resource type="Curve" id="Curve_6cl21"]
+_limits = [0.0, 0.2, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.54615384, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="BleedDebuff" type="Node2D"]
+script = ExtResource("1_6cl21")
+ID = 2
+
+[node name="BleedEffect" type="CPUParticles2D" parent="."]
+amount = 2
+texture = ExtResource("2_4obob")
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+gravity = Vector2(0, 20)
+radial_accel_min = 1.0
+radial_accel_max = 15.0
+scale_amount_curve = SubResource("Curve_6cl21")
+color = Color(0.69, 0, 0, 1)

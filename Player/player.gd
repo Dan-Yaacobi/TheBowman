@@ -401,6 +401,9 @@ func get_sword_size() -> float:
 
 func get_sword_abilities() -> Array[PlayerSwordAbility]:
 	return stats.sword_abilities
+
+func get_sword() -> Sword:
+	return main_hand.sword
 ############# SET METHODS #############
 
 func set_sword_size(amount: float) -> void:
