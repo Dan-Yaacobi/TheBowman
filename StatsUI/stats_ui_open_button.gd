@@ -9,7 +9,7 @@ func _ready() -> void:
 	stats_ui.set_up_signals()
 	EventBus.exit_ui.connect(close)
 	
-func _on_toggled(toggled_on: bool) -> void:
+func _on_toggled(_toggled_on: bool) -> void:
 	if closed:
 		stats_ui.open()
 	else:

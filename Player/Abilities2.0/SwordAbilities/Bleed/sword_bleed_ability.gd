@@ -9,7 +9,7 @@ func activate_ability() -> void:
 	if can_activate:
 		PlayerManager.player.get_sword().set_bleed_chance(sword_bleed_chance)
 
-func update_ability(amount = 0) -> void:
+func update_ability(_amount = 0) -> void:
 	sword_bleed_chance += randi_range(1,4)
 
 func get_tooltip() -> String:

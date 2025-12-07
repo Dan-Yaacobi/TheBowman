@@ -9,7 +9,7 @@ func activate_ability() -> void:
 	if can_activate and arrow:
 		arrow.poison_chance += poison_chance
 
-func update_ability(amount = 0) -> void:
+func update_ability(_amount = 0) -> void:
 	poison_chance += randi_range(1,4)
 
 func get_tooltip() -> String:

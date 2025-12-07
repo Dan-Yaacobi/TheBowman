@@ -11,7 +11,7 @@ func activate_ability() -> void:
 	else:
 		PlayerManager.player.set_sword_size(-sword_size)
 
-func update_ability(amount = 0) -> void:
+func update_ability(_amount = 0) -> void:
 	sword_size += randf_range(0.05,0.1)
 
 func get_tooltip() -> String:

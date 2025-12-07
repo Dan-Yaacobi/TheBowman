@@ -21,7 +21,7 @@ func close() -> void:
 		animation_player.play("Close")
 		closed = not closed
 		
-func _on_toggled(toggled_on: bool) -> void:
+func _on_toggled(_toggled_on: bool) -> void:
 	if closed:
 		open()
 	else:
