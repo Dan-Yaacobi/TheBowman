@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=43 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
 [ext_resource type="Script" uid="uid://cd0876l1xhef" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_hqjia"]
 [ext_resource type="Script" uid="uid://bu8rrfoiwqr26" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="3_x70vp"]
+[ext_resource type="Script" uid="uid://dcyomtj13exhm" path="res://Player/Abilities2.0/PassiveAbilities/player_passive_ability.gd" id="4_croik"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" uid="uid://bob8cvby6imtx" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="5_wo5nf"]
@@ -37,7 +38,7 @@ move_speed = 50
 max_jumps = 1
 jump_height = 90
 knockback_resistance = 3
-strength = 5
+strength = 25
 agility = 25
 stamina = 5
 menu_speed = 150
@@ -106,7 +107,7 @@ stats = SubResource("Resource_sedti")
 z_index = 1
 
 [node name="PlayerMainHand" parent="." instance=ExtResource("10_wo5nf")]
-position = Vector2(-5, 5)
+position = Vector2(-6, 6)
 
 [node name="PlayerOffHand" parent="." instance=ExtResource("11_croik")]
 position = Vector2(2, 5)

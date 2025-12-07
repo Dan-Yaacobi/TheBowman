@@ -17,13 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EnemyAbilityData="*res://00 Globals/enemy_ability_data.gd"
 PlayerManager="*res://00 Globals/global_player_manager.gd"
 SceneTransition="*res://HUD/Scene Transition/scene_transition.tscn"
 EventBus="*res://00 Globals/event_bus.gd"
 CombatTextSpawner="*res://00 Globals/combat_text_spawner.gd"
 SoundManager="*res://00 Globals/SoundManager.tscn"
 CustomVariables="*res://00 Globals/custom_variables.gd"
+CoinDropLogic="*res://00 Globals/coin_drop_logic.gd"
 
 [display]
 

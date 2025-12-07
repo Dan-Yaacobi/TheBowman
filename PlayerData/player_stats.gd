@@ -19,6 +19,7 @@ var player: Player
 @export var dash_distance: int
 @export var invinc_duration: int
 @export var stat_points: int = 0
+@export var extra_gold: int = 0
 
 @export_subgroup("Combo")
 @export var max_combo: int
@@ -45,6 +46,8 @@ var player: Player
 
 
 @export_subgroup("Abilities")
+@export var passive_abilities: Array[PlayerPassiveAbility]
+
 @export var jump_abilities: Array[JumpAbility]
 @export var shoot_abilities: Array[ShootAbility]
 @export var arrow_abilities: Array[ArrowAbility]

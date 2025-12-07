@@ -1,1 +1,0 @@
-class_name EnemyAbilitiesData extends Node

@@ -6,10 +6,10 @@ func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
 func activate_ability() -> void:
-	if activated and arrow:
+	if can_activate and arrow:
 		arrow.crit_chance += crit_chance
 
-func update_ability() -> void:
+func update_ability(amount = 0) -> void:
 	crit_chance+= randi_range(1,4)
 
 func get_tooltip() -> String:

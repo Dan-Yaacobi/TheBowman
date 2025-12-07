@@ -14,4 +14,4 @@ emission_shape = 3
 emission_rect_extents = Vector2(5, 0)
 gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_a7t45")
-color = Color(0.966667, 1, 0, 1)
+color = Color(0.98039216, 1, 0.3882353, 1)

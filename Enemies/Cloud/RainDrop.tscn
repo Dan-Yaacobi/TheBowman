@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://he5b02nm11v5"]
+
+[ext_resource type="Script" uid="uid://dicvvc5jtp083" path="res://Enemies/Cloud/rain_drop.gd" id="1_5yjxy"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_etmxi"]
+[ext_resource type="Texture2D" uid="uid://b5sarxeghvvnc" path="res://Enemies/Cloud/Sprites/RainDrop.png" id="2_iaohl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iaohl"]
+radius = 6.6666665
+
+[sub_resource type="Curve" id="Curve_etmxi"]
+_limits = [0.0, 0.2, 0.0, 1.0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="RainDrop" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_5yjxy")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_etmxi")]
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_iaohl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_iaohl")
+
+[node name="PopParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+texture = ExtResource("2_iaohl")
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+use_fixed_seed = true
+gravity = Vector2(0, -10)
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+tangential_accel_min = -10.0
+tangential_accel_max = 10.0
+angle_min = 180.0
+angle_max = 180.0
+scale_amount_curve = SubResource("Curve_etmxi")
+
+[node name="WallDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+shape = SubResource("CircleShape2D_iaohl")

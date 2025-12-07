@@ -25,6 +25,11 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
+	if PlayerManager.player.is_moving():
+		if not entity.animation_player.current_animation == "Swinging":
+			entity.animation_player.play("Swinging")
+	else:
+		entity.animation_player.play("Idle")
 	return null
 	
 #what happens during _physics_process update in this state

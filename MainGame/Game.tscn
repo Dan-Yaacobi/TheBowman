@@ -21,7 +21,6 @@ script = ExtResource("1_iteqa")
 visible = false
 
 [node name="BowsShop" parent="." instance=ExtResource("5_bk4eh")]
-visible = false
 
 [node name="AbilitiesShop" parent="." instance=ExtResource("6_onhyr")]
 visible = false

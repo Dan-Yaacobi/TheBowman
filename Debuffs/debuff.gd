@@ -11,12 +11,13 @@ var ticks: int = 0
 var enemy: Enemy
 
 func _ready() -> void:
-	if ticks == 1:
-		apply_debuff_effect()
+	start_debuff_effect()
 	
 func apply_debuff_effect() -> void:
 	pass
 
+func start_debuff_effect() -> void:
+	pass
 func _process(delta: float) -> void:
 	time_accumulator += delta
 	if time_accumulator >= tick_interval:

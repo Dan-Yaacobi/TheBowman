@@ -3,9 +3,7 @@ class_name PlayerUpgrade extends Node2D
 signal chosen
 
 @export_category("Textures")
-@export var normal_texture: Texture
-@export var pressed_texture: Texture
-@export var hover_texture: Texture
+@export var texture: Texture
 @export var color: Color
 
 

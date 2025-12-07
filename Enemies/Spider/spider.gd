@@ -23,14 +23,14 @@ func _ready() -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
-	if poisoned_state and poisoned_timer != null:
-		if poisoned_timer.is_stopped():
-			poisoned_timer.start()
-	
-	if stunned_state and stunned_timer != null:
-		velocity = Vector2.ZERO
-		if stunned_timer.is_stopped():
-			stunned_timer.start()
+	#if poisoned_state and poisoned_timer != null:
+		#if poisoned_timer.is_stopped():
+			#poisoned_timer.start()
+	#
+	#if stunned_state and stunned_timer != null:
+		#velocity = Vector2.ZERO
+		#if stunned_timer.is_stopped():
+			#stunned_timer.start()
 	apply_gravity(delta)
 	move_and_slide()
 	

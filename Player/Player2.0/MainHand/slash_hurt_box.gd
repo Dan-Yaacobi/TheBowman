@@ -8,7 +8,6 @@ func set_sword(_sword: Sword) -> void:
 	sword = _sword
 	
 func added_effects(a: Enemy) -> void:
-	print("here")
 	apply_bleed(a)
 	
 func apply_bleed(a: Enemy) -> void:

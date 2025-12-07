@@ -1,7 +1,6 @@
 class_name PlayerAbility extends Resource
 
-
-var activated: bool = true
+var can_activate: bool = true
 
 func add_ability() -> void:
 	pass
@@ -9,11 +8,11 @@ func add_ability() -> void:
 func activate_ability() -> void:
 	pass
 
-func update_ability() -> void:
+func update_ability(_amount = 0) -> void:
 	pass
 
 func deactivate_ability() -> void:
-	activated = false
+	can_activate = false
 
 func reactivate_ability() -> void:
-	activated = true
+	can_activate = true

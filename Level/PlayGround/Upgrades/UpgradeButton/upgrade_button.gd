@@ -18,7 +18,7 @@ func set_button_upgrade(upgrade_node: PlayerUpgrade, _player: Player) -> void:
 		player = _player
 		node = upgrade_node
 		particles.color = node.color
-		upgrade_icon.texture = node.normal_texture
+		upgrade_icon.texture = node.texture
 		current_stat.text = node.tool_tip
 		
 

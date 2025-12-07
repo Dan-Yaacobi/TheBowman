@@ -1,26 +1,74 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2ag7d2j5mctf"]
+[gd_scene load_steps=34 format=3 uid="uid://d2ag7d2j5mctf"]
 
+[ext_resource type="Script" uid="uid://7ira1qek0c3v" path="res://Enemies/Cloud/cloud_enemy.gd" id="1_1hdfk"]
 [ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Cloud/Sprites/Cloud Enemy.png" id="1_07fyk"]
+[ext_resource type="PackedScene" uid="uid://he5b02nm11v5" path="res://Enemies/Cloud/RainDrop.tscn" id="2_g87bp"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_ws7tv"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_aq55l"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_y73ug"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_jj0fl"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="4_ws7tv"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="5_aq55l"]
+[ext_resource type="Shader" uid="uid://bkedesuwvo27x" path="res://Enemies/Cloud/CloudEnemy.gdshader" id="6_51br6"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="6_ra6dr"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_ra6dr"]
+[ext_resource type="Script" uid="uid://6gbdiv0wryal" path="res://Enemies/Cloud/wander_state.gd" id="10_nts66"]
+[ext_resource type="Script" uid="uid://epvrsdeddc0i" path="res://Enemies/Cloud/seek_state.gd" id="11_swwo8"]
+[ext_resource type="Script" uid="uid://dlbmukypxs013" path="res://Enemies/Cloud/attack_state.gd" id="12_g87bp"]
+[ext_resource type="Shader" uid="uid://dqaedy5b2ydp4" path="res://Enemies/Cloud/lightningshader.gdshader" id="15_aqnr1"]
+[ext_resource type="Script" uid="uid://cqstctojgygpv" path="res://Enemies/Cloud/lightning.gd" id="15_vs4ks"]
+[ext_resource type="AudioStream" uid="uid://bndhi0n2ycg2q" path="res://Audio/Player/thunder_strike.mp3" id="16_nbmpm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvopk"]
-size = Vector2(14.5, 10)
+[sub_resource type="Resource" id="Resource_vs4ks"]
+script = ExtResource("4_jj0fl")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
-[sub_resource type="Animation" id="Animation_13qm5"]
-resource_name = "Move"
+[sub_resource type="Resource" id="Resource_ra6dr"]
+script = ExtResource("3_aq55l")
+max_hp = 30
+move_speed = 20
+death_ability = Array[ExtResource("2_ws7tv")]([SubResource("Resource_vs4ks")])
+bullet = ExtResource("2_g87bp")
+metadata/_custom_type_script = "uid://rlvenynllobd"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nts66"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo2yr"]
+resource_local_to_scene = true
+shader = ExtResource("6_51br6")
+shader_parameter/charge = 1.0
+shader_parameter/base_tint = Color(1, 1, 1, 1)
+shader_parameter/charge_tint = Color(0.6, 0.9, 1.5, 1)
+shader_parameter/pulse_speed = 4.8850002320375
+
+[sub_resource type="Animation" id="Animation_g87bp"]
+resource_name = "Damaged"
 length = 0.4
-loop_mode = 2
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1]
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_ig0ik"]
@@ -37,41 +85,216 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_82i05"]
 _data = {
-"Move": SubResource("Animation_13qm5"),
-"RESET": SubResource("Animation_ig0ik")
+&"Damaged": SubResource("Animation_g87bp"),
+&"RESET": SubResource("Animation_ig0ik")
 }
 
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_8tgax"]
-length = 111.0
+[sub_resource type="Animation" id="Animation_jj0fl"]
+resource_name = "Move"
+length = 0.5
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vs4ks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbmpm"]
+_data = {
+&"Move": SubResource("Animation_jj0fl"),
+&"RESET": SubResource("Animation_vs4ks")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51br6"]
+shader = ExtResource("15_aqnr1")
+shader_parameter/inner_color = Color(0.5, 0.6, 1, 1)
+shader_parameter/outer_color = Color(1, 1, 1, 0)
+shader_parameter/core_width = 0.08800000418
+shader_parameter/pulse_strength = 0.8590000408025
+shader_parameter/speed = 20.0
+
+[sub_resource type="Curve" id="Curve_aqnr1"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.6229006), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51br6"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_nbmpm"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.1389339), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_aqnr1"]
+colors = PackedColorArray(1, 0.9658333, 0.59000003, 1, 0, 0, 0, 0.5803922)
 
 [node name="CloudEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_1hdfk")
+stats = SubResource("Resource_ra6dr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.25, -2)
-shape = SubResource("RectangleShape2D_fvopk")
+visible = false
+z_index = 1
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_nts66")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jo2yr")
+position = Vector2(1, -8)
 texture = ExtResource("1_07fyk")
-hframes = 2
+hframes = 4
+vframes = 2
+
+[node name="DamagedAnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_82i05")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_82i05")
+&"": SubResource("AnimationLibrary_nbmpm")
 }
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="DebuffHandler" parent="." instance=ExtResource("3_y73ug")]
+
+[node name="HitBox" parent="." instance=ExtResource("4_ws7tv")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_aq55l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
+z_index = 1
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_nts66")
+debug_color = Color(0.973625, 0, 0.43603754, 0.41960785)
+
+[node name="HurtBox" parent="." instance=ExtResource("6_ra6dr")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+z_index = 1
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_nts66")
+debug_color = Color(0.6611062, 0.5144994, 0, 0.41960785)
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("9_ra6dr")
+
+[node name="Wander" type="Node2D" parent="EnemyStateMachine"]
+position = Vector2(0, -1)
+script = ExtResource("10_nts66")
+
+[node name="WanderTimer" type="Timer" parent="EnemyStateMachine/Wander"]
+
+[node name="Seek" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("11_swwo8")
+
+[node name="Attack" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("12_g87bp")
+
+[node name="AttackTimer" type="Timer" parent="EnemyStateMachine/Attack"]
+autostart = true
+
+[node name="Lightning" type="Line2D" parent="EnemyStateMachine/Attack"]
 z_index = -1
+material = SubResource("ShaderMaterial_51br6")
+width = 2.0
+width_curve = SubResource("Curve_aqnr1")
+texture_mode = 2
+script = ExtResource("15_vs4ks")
+segments = 20
+max_offset = 5.0
+flicker = true
+
+[node name="HurtBox" parent="EnemyStateMachine/Attack" instance=ExtResource("6_ra6dr")]
+collision_mask = 1
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine/Attack/HurtBox"]
+shape = SubResource("CircleShape2D_51br6")
+
+[node name="LightningImpact" type="CPUParticles2D" parent="EnemyStateMachine/Attack/HurtBox"]
 emitting = false
-amount = 25
-emission_shape = 3
-emission_rect_extents = Vector2(6, 1)
-gravity = Vector2(0, 250)
-color = Color(0.24, 0.949333, 1, 1)
+amount = 50
+lifetime = 1.5
+one_shot = true
+preprocess = 0.3
+speed_scale = 2.0
+explosiveness = 0.55
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, -50)
+radial_accel_min = 50.0
+radial_accel_max = 50.0
+scale_amount_curve = SubResource("Curve_nbmpm")
+color_ramp = SubResource("Gradient_aqnr1")
 
-[node name="Area2D" type="Area2D" parent="CPUParticles2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CPUParticles2D/Area2D"]
-shape = SubResource("SeparationRayShape2D_8tgax")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyStateMachine/Attack"]
+stream = ExtResource("16_nbmpm")

@@ -14,5 +14,5 @@ sparkle_color = "6ec7db"
 script = ExtResource("1_1b2ih")
 image = ExtResource("1_m8a1o")
 image_size = 0.3
-value = 3
+value = 10
 effects = Array[ExtResource("1_tbwsr")]([SubResource("Resource_tsgmg")])

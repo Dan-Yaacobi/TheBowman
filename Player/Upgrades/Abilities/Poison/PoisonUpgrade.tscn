@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://curkiynf7h80v"]
+
+[ext_resource type="Script" uid="uid://hhge7llrjy7l" path="res://Player/Upgrades/Abilities/Poison/poison_upgrade.gd" id="1_aw44s"]
+
+[node name="PoisonUpgrade" type="Node2D"]
+script = ExtResource("1_aw44s")

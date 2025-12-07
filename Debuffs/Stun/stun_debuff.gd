@@ -2,6 +2,9 @@ class_name StunDebuff extends Debuff
 
 @onready var stunned_effect: CPUParticles2D = $StunnedEffect
 
+func start_debuff_effect() -> void:
+	apply_debuff_effect()
+	
 func apply_debuff_effect() -> void:
 	enemy.stunned_state = true
 	stunned_effect.emitting = true

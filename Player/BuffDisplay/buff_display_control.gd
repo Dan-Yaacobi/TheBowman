@@ -9,7 +9,7 @@ const BUFF = preload("res://Player/BuffDisplay/Buff.tscn")
 func add_display_buff(buff_node: PlayerUpgrade) -> void:
 	if not buff_ids.has(buff_node.ID):
 		var new_buff: Buff = BUFF.instantiate()
-		new_buff.set_buff(buff_node.normal_texture,buff_node.ID,buff_node.get_buff_tooltip(player))
+		new_buff.set_buff(buff_node.texture,buff_node.ID,buff_node.get_buff_tooltip(player))
 		buff_ids[buff_node.ID] = new_buff
 		flow_container.add_child(new_buff)
 	else:

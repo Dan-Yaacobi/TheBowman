@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4w1awb7d0w8w"]
+
+[ext_resource type="Script" uid="uid://dwbknw0r2822u" path="res://Player/Upgrades/Abilities/ExtraGold/extra_gold_upgrade.gd" id="1_dujo5"]
+
+[node name="ExtraGoldUpgrade" type="Node2D"]
+script = ExtResource("1_dujo5")

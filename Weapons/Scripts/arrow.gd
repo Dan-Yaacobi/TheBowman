@@ -18,6 +18,7 @@ const LEECH_LIFE = preload("res://Weapons/Effects/LeechLife/LeechLife.tscn")
 
 const STUN_DEBUFF = preload("res://Debuffs/Stun/StunDebuff.tscn")
 const BLEED_DEBUFF = preload("uid://b0pv21kfxpvci")
+const POISON_DEBUFF = preload("res://Debuffs/Poisoned/PoisonDebuff.tscn")
 
 
 var direction: Vector2
@@ -34,8 +35,9 @@ var succesfuly_hit: bool = false
 
 var stun_chance: int = 0
 var bleed_chance: int = 0
-
+var poison_chance: int = 0
 var leech_chance: int = 0
+
 var leech_life: bool = false
 var leech_amount: int = 1
 
@@ -66,6 +68,7 @@ func hit(body) -> void:
 			stun_hit(body)
 			apply_leech(body)
 			bleed_hit(body)
+			poison_hit(body)
 			succesfuly_hit = true
 			clear_shot()
 
@@ -130,6 +133,12 @@ func hit_wall(_val1,_val2,_val3,_val4) -> void:
 			wall_hit_effect.emitting = true
 			wall_hit_effect.global_position = global_position
 			wall_clear_shot()
+
+func poison_hit(_enemy: Enemy) -> void:
+	var roll_poison: int = randi_range(0,100)
+	if roll_poison < poison_chance:
+		var poison_effect: Debuff = POISON_DEBUFF.instantiate()
+		_enemy.apply_debuff(poison_effect,10,5)
 
 func critical_hit() -> void:
 	var roll_crit: int = randi_range(0,100)

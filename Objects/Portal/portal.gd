@@ -51,3 +51,4 @@ func _update_flip() -> void:
 func _update_color() -> void:
 	if sprite:
 		sprite.modulate = color
+	

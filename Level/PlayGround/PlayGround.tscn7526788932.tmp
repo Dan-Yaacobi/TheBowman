@@ -1,0 +1,516 @@
+[gd_scene load_steps=50 format=3 uid="uid://cdu6hjoweee6s"]
+
+[ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
+[ext_resource type="Script" uid="uid://cu2jp5mww0be3" path="res://00 Globals/enemies.gd" id="2_lmkum"]
+[ext_resource type="Script" uid="uid://b2s0ifufjiho" path="res://Enemies/EnemyData/enemy_spawn_data.gd" id="2_r03de"]
+[ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_sm034"]
+[ext_resource type="Script" uid="uid://bwombitl8brmm" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
+[ext_resource type="Texture2D" uid="uid://dv2p6vmbmhpgb" path="res://Enemies/Sprites/Flying Apple.png" id="10_jv2oc"]
+[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="12_jv2oc"]
+[ext_resource type="Script" uid="uid://yrg8jskcantp" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
+[ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
+[ext_resource type="Script" uid="uid://cklsqejxas1gu" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
+[ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
+[ext_resource type="Script" uid="uid://l716tqh1t70b" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
+[ext_resource type="Script" uid="uid://d35o1sx2biv2n" path="res://Objects/FallingObjects/Scripts/summon_objects.gd" id="20_ueqxs"]
+[ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
+[ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
+[ext_resource type="PackedScene" uid="uid://bstmllbqxch1v" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn" id="24_mi85c"]
+[ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="24_xpwt5"]
+[ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="28_8kany"]
+[ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="29_mlbf7"]
+[ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="29_y7ifn"]
+[ext_resource type="Texture2D" uid="uid://ceyj26wphvmuv" path="res://Level/Sprites/Upgrades/SwordIcon.png" id="31_bfuq3"]
+[ext_resource type="Texture2D" uid="uid://r6icgs1bvtku" path="res://Level/Sprites/Upgrades/LeechLifeIcon.png" id="33_jypeg"]
+[ext_resource type="PackedScene" uid="uid://bsy8tg0ac6f0n" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn" id="34_ah7gd"]
+[ext_resource type="Texture2D" uid="uid://c06v3rtneiuqa" path="res://Level/Sprites/Upgrades/StunIcon.png" id="35_jv2oc"]
+[ext_resource type="Texture2D" uid="uid://bu2ggc7wd8fei" path="res://Level/Sprites/Upgrades/BleedIcon.png" id="37_ofn0p"]
+[ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="38_3abtr"]
+[ext_resource type="PackedScene" uid="uid://curkiynf7h80v" path="res://Player/Upgrades/Abilities/Poison/PoisonUpgrade.tscn" id="38_bfuq3"]
+[ext_resource type="Texture2D" uid="uid://1gpkkexjya0h" path="res://Level/Sprites/Upgrades/PoisonIcon.png" id="39_jypeg"]
+[ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="42_iqpx2"]
+[ext_resource type="PackedScene" uid="uid://caq6l5xbwajld" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn" id="42_q6dew"]
+[ext_resource type="PackedScene" uid="uid://b8gmj6kbjq75c" path="res://Player/Upgrades/Abilities/SwordSize/SwordSizeUpgrade.tscn" id="42_xpwt5"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="53_q6dew"]
+
+[sub_resource type="Animation" id="Animation_he687"]
+resource_name = "Fly"
+length = 1.15
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_hnfe4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1no0"]
+_data = {
+&"Fly": SubResource("Animation_he687"),
+&"RESET": SubResource("Animation_hnfe4")
+}
+
+[sub_resource type="PackedScene" id="PackedScene_ofn0p"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("FlyingApple", "CharacterBody2D", "Apple", "Sprite2D", "texture", "vframes", "AnimationPlayer", "AnimationPlayer", "libraries"),
+"node_count": 3,
+"node_paths": [NodePath("."), NodePath("./Apple")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 1073741824, 0, 3, 2, -1, 2, 4, 0, 5, 1, 0, 1073741825, 0, 7, 6, -1, 1, 8, 2, 0),
+"variants": [ExtResource("10_jv2oc"), 6, {
+&"": SubResource("AnimationLibrary_b1no0")
+}],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_s07r2"]
+script = ExtResource("2_lmkum")
+spawn_time = 5.0
+flying_apple_scene = SubResource("PackedScene_ofn0p")
+red = ExtResource("12_jv2oc")
+
+[sub_resource type="Resource" id="Resource_bnwpa"]
+script = ExtResource("7_wvqgp")
+current_wave = 1
+targets_spawn = Array[int]([0, 0, 0])
+bird_spawn = Array[int]([0, 0])
+total_enemies = 10
+base_spawn_time = 1.5
+
+[sub_resource type="Resource" id="Resource_xq6vo"]
+script = ExtResource("20_ueqxs")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hl8g"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_romlk"]
+size = Vector2(58, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bice2"]
+size = Vector2(58, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
+size = Vector2(10949, 680)
+
+[sub_resource type="Animation" id="Animation_xyp2j"]
+resource_name = "Gained"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.25, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_klfvc"]
+resource_name = "Gained10"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1e6g1"]
+resource_name = "Gained25"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0.67451, 0.0392157, 0.8, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tq3ew"]
+resource_name = "Lost"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.25, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_06wjn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r47hq"]
+_data = {
+&"Gained": SubResource("Animation_xyp2j"),
+&"Gained10": SubResource("Animation_klfvc"),
+&"Gained25": SubResource("Animation_1e6g1"),
+&"Lost": SubResource("Animation_tq3ew"),
+&"RESET": SubResource("Animation_06wjn")
+}
+
+[node name="PlayGround" type="Node2D"]
+script = ExtResource("1_fq8oi")
+enemies = SubResource("Resource_s07r2")
+wave_data = SubResource("Resource_bnwpa")
+summon_objects = SubResource("Resource_xq6vo")
+summon_object_chance = 2
+
+[node name="Tiles" parent="." instance=ExtResource("2_sm034")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="SignHolder" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SignHolder"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_4hl8g")
+debug_color = Color(0.821622, 0.00173155, 0.96307, 0.42)
+
+[node name="WaveSign" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+mass = 0.5
+script = ExtResource("14_db0ww")
+
+[node name="WaveBackground" type="Sprite2D" parent="WaveSign"]
+z_index = -1
+position = Vector2(9, 19)
+texture = ExtResource("14_ggsjl")
+
+[node name="Label" type="Label" parent="WaveSign/WaveBackground"]
+offset_left = -15.0
+offset_top = 3.0
+offset_right = 734.0
+offset_bottom = 276.0
+scale = Vector2(0.04, 0.04)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 200
+text = "Wave: 1"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="WaveSign/WaveBackground"]
+position = Vector2(-1, 9)
+collision_layer = 4
+collision_mask = 2
+mass = 2.0
+constant_force = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSign/WaveBackground/RigidBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_romlk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSign"]
+position = Vector2(9, 28.5)
+shape = SubResource("RectangleShape2D_bice2")
+
+[node name="SummonTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="FallingDeath" type="Area2D" parent="."]
+position = Vector2(226, -1)
+collision_mask = 11
+script = ExtResource("24_xpwt5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+position = Vector2(-3, 467)
+shape = SubResource("RectangleShape2D_lvsqu")
+debug_color = Color(1, 0, 0.2, 0.419608)
+
+[node name="ComboCounter" type="Label" parent="."]
+visible = false
+offset_left = -557.0
+offset_top = -245.0
+offset_right = 578.0
+offset_bottom = 97.0
+scale = Vector2(0.05, 0.05)
+pivot_offset = Vector2(567, 171)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 35
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 250
+text = "Combo: 0"
+
+[node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
+libraries = {
+&"": SubResource("AnimationLibrary_r47hq")
+}
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(8, 8)
+node_a = NodePath("../SignHolder")
+node_b = NodePath("../WaveSign")
+motor_enabled = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = -24.0
+offset_top = -33.0
+offset_right = 1284.0
+offset_bottom = 317.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 250
+text = "Next Wave"
+
+[node name="UpgradeButtons" type="Node2D" parent="."]
+position = Vector2(0, -48)
+script = ExtResource("18_487cb")
+bucket_upgrade_chance = 15
+
+[node name="UpgradeButton" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = -78.0
+offset_top = -48.0
+offset_right = -62.0
+offset_bottom = -32.0
+
+[node name="UpgradeButton2" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 80.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -32.0
+
+[node name="UpgradeButton3" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
+offset_left = 2.0
+offset_top = -48.0
+offset_right = 18.0
+offset_bottom = -32.0
+
+[node name="Upgrades" type="Node2D" parent="UpgradeButtons"]
+script = ExtResource("20_8lbxg")
+
+[node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_iqpx2")]
+texture = ExtResource("29_mlbf7")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can crit"
+tool_tip2 = "Increase crit chance"
+ID = 1
+bucket = null
+is_ability = true
+ability_chosen = null
+can_choose_once = null
+
+[node name="SwordSizeUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_xpwt5")]
+texture = ExtResource("31_bfuq3")
+color = Color(1, 1, 1, 1)
+tool_tip = "Increase Sword Size"
+ID = 3
+is_ability = true
+
+[node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_3abtr")]
+texture = ExtResource("33_jypeg")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can leech life"
+tool_tip2 = "Increase leech chance"
+ID = 4
+is_ability = true
+
+[node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("34_ah7gd")]
+texture = ExtResource("35_jv2oc")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can stun"
+tool_tip2 = "Increase stun chance"
+ID = 5
+is_ability = true
+
+[node name="SwordBleedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_q6dew")]
+texture = ExtResource("37_ofn0p")
+tool_tip = "Sword can cause enemies to bleed"
+tool_tip2 = "Increase bleed chance"
+ID = 6
+is_ability = true
+
+[node name="PoisonUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_bfuq3")]
+texture = ExtResource("39_jypeg")
+color = Color(0.083333254, 1, 0, 1)
+tool_tip = "Chance to poison enemies with arrow"
+ID = 7
+is_ability = true
+
+[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("23_v6ol2")]
+color = Color(0.188235, 0.890196, 0.34902, 1)
+ID = 11
+bucket = 2
+
+[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("22_67mw3")]
+ID = 13
+
+[node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("24_mi85c")]
+amount = 1
+tool_tip = "Increase your knockback resistance"
+ID = 14
+
+[node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
+
+[node name="ArrowExplosionUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("29_y7ifn")]
+color = Color(0.68103, 0.1222, 0.94, 1)
+tool_tip = "Arrows explode on hit"
+ID = 100
+bucket = 3
+is_ability = true
+can_choose_once = true
+
+[node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("28_8kany")]
+color = Color(0.682353, 0.121569, 0.941176, 1)
+tool_tip = "Arrows can pierce enemies"
+ID = 102
+bucket = 3
+is_ability = true
+can_choose_once = true
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("53_q6dew")]
+position = Vector2(10, -16)
+
+[connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

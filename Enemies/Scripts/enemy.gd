@@ -1,11 +1,8 @@
 class_name Enemy extends CharacterBody2D
 
 @export var stats: EnemyData
-@export var item_drops: Array[DropData]
 
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
-
-static var player: Player
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -27,6 +24,7 @@ var added_hit_effect: bool = false
 var hit_particle_effect: CPUParticles2D
 
 var animation_player: AnimationPlayer
+var damaged_animation_player : AnimationPlayer
 
 var can_move: bool = true
 
@@ -38,20 +36,21 @@ var pushback_power: float
 
 var hard_mode: bool = false
 
+var current_hp: int
 func _ready() -> void:
+	current_hp = stats.max_hp
 	extra_ready_functions()
-	animation_player.animation_finished.connect(reset_animation)
 	pass
 
 func extra_ready_functions() -> void:
 	pass
 
-func get_player(_player: Player) -> void:
-	if _player != null:
-		player = _player
-	
+func set_data(_data: EnemyData) -> void:
+	if _data:
+		stats = _data
+
 func calculate_direction_to_player() -> Vector2:
-	return (player.global_position - global_position).normalized()
+	return (PlayerManager.player.global_position - global_position).normalized()
 
 func hit(hurt_box: HurtBox) -> void:
 	if not no_push_back:
@@ -76,17 +75,13 @@ func take_hit_effect() -> void:
 		hit_particle_effect.restart()
 		
 func take_damage(_dmg: int) -> void:
-	stats.hp -= _dmg
-	update_animation("Damaged")
-
-	if stats.hp <= 0:
+	current_hp -= _dmg
+	damaged_animation_player.play("Damaged")
+	
+	if current_hp <= 0:
 		activate_death_ability()
 		enemy_died()
-		drop_item(drop_logic(stats.coins_dropped))
-
-func reset_animation(anim_name: String) -> void:
-	if anim_name == "Damaged":
-		update_animation("Move")
+		drop_item(CoinDropLogic.drop_logic(stats.avg_coins_dropped))
 
 func activate_death_ability() -> void:
 	if stats.death_ability.size() > 0:
@@ -101,6 +96,7 @@ func enemy_died() -> void:
 func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed) -> void:
 	if not stunned_state:
 		if not (stats.boss and stats.shooter):
+
 			pushed_back = true
 			pushback_dir = -direction
 			pushback_power = power
@@ -112,29 +108,24 @@ func player_hit(body: CharacterBody2D) -> void:
 			body.set_pushback_values(direction,stats.knockback)
 			push_back(direction,stats.move_speed)
 
-func drop_item(_drops: Array[DropData]) -> void:
+func drop_item(_drops: Array[ItemData]) -> void:
 	for drop in _drops:
 		spawn_drop(drop)
-	if not no_drops:
-		for drop in item_drops:
-			if drop.drop_chance():
-				spawn_drop(drop)
+	#if not no_drops:
+		#for drop in item_drops:
+			#if drop.drop_chance():
+				#spawn_drop(drop)
 
-func spawn_drop(drop) -> void:
+func spawn_drop(drop: ItemData) -> void:
 	var item = ITEM_PICK_UP.instantiate()
-	item.assign_item(drop.item_data)
+	item.assign_item(drop)
 	item.global_position = global_position
-	item.inititalize(player)
+	item.inititalize(PlayerManager.player)
 	get_parent().call_deferred("add_child", item)
 
 func disable_drops() -> void:
 	no_drops = true
 	
-func update_animation(_animation: String) -> void:
+func update_animation(_animation: String, _position: float = 0.0) -> void:
 	if animation_player != null:
-		animation_player.play(_animation)
-
-func drop_logic(amount: int) -> Array[DropData]:
-	var drops: Array[DropData]
-	
-	return drops
+		animation_player.play_section(_animation, _position)

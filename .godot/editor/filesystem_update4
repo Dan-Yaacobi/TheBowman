@@ -1,33 +1,12 @@
-res://Debuffs/Bleed/BleedDebuff.tscn
-res://Items/Diamond.tres
+res://Enemies/Cloud/CloudEnemy.tscn
 res://Items/Coin.tres
+res://Items/Diamond.tres
 res://Items/RedDiamond.tres
-res://Enemies/Scripts/enemy.gd
-res://General Nodes/HitBox/hit_box.gd
-res://Debuffs/Bleed/bleed_debuff.gd
-res://Debuffs/Stun/StunDebuff.tscn
-res://Weapons/Scripts/arrow.gd
-res://Player/Abilities2.0/ShootAbilities/Bleed/bleed_ability.gd
-res://Player/Abilities2.0/SwordAbilities/Bleed/sword_bleed_ability.gd
-res://Player/Player2.0/MainHand/PlayerMainHand.tscn
-res://Player/Player2.0/MainHand/slash_hurt_box.gd
-res://General Nodes/HurtBox/hurt_box.gd
-res://Weapons/Swords/sword_stats.gd
-res://Player/Player2.0/MainHand/sword.gd
-res://Player/player.gd
-res://Player/Player2.0/MainHand/player_main_hand.gd
-res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn
-res://Player/Upgrades/Abilities/SwordBleed/sword_bleed_upgrade.gd
-res://Level/PlayGround/PlayGround.tscn
-res://Enemies/DemoEnemy/DemoEnemy.tscn
-res://Enemies/Scripts/enemy_hit_box.gd
-res://Enemies/DemoEnemy/demo_enemy.gd
-res://Enemies/EnemyEffects/Poisoned/poisoned_effect.tscn
-res://Player/Player.tscn
-res://Enemies/EnemyEffects/Burned/BurnedEffect.tscn
-res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn
-res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn
-res://Player/States/player_walking_state.gd
-res://Enemies/EnemyData/enemy_data.gd
-res://Enemies/Spider/spider.gd
-res://Enemies/EvilBird/evil_bird.gd
+res://Enemies/Cloud/CloudEnemy.gdshader
+res://Enemies/Cloud/lightningshader.gdshader
+res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
+res://Enemies/Cloud/attack_state.gd
+res://Enemies/Cloud/wander_state.gd
+res://Enemies/Cloud/lightning.gd

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn4wbtuany6er"]
+[gd_scene load_steps=10 format=3 uid="uid://dn4wbtuany6er"]
 
 [ext_resource type="Texture2D" uid="uid://bjfdjpihrog6u" path="res://Objects/Portal/Sprites/PortalEmpty.png" id="1_g0x3d"]
 [ext_resource type="Script" uid="uid://cp6i17b4tlslg" path="res://Objects/Portal/portal.gd" id="1_goeoo"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="2_ucj1u"]
+[ext_resource type="Texture2D" uid="uid://blnt0yu63hgv3" path="res://Particles/star.png" id="4_mc0vw"]
 
 [sub_resource type="Curve" id="Curve_w7i7w"]
 _limits = [0.0, 0.2, 0.0, 1.0]
@@ -12,6 +13,15 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_4m5hj"]
 resource_local_to_scene = true
 colors = PackedColorArray(0, 0.27451, 0.6, 1, 1, 1, 1, 0.94902)
+
+[sub_resource type="Curve" id="Curve_444u7"]
+_limits = [0.0, 0.2, 0.0, 1.0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_gtw83"]
+offsets = PackedFloat32Array(0, 0.36324787, 0.5769231, 0.83760685)
+colors = PackedColorArray(0, 0.27450982, 0.6, 1, 0.52136755, 0.58518517, 1, 0.6912686, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goeoo"]
 size = Vector2(18, 23)
@@ -25,9 +35,11 @@ texture = ExtResource("1_g0x3d")
 
 [node name="Spiral" type="CPUParticles2D" parent="Sprite2D"]
 position = Vector2(0, 1)
+emitting = false
 amount = 350
 texture = ExtResource("2_ucj1u")
 lifetime = 0.07
+preprocess = 0.02
 speed_scale = 0.02
 emission_shape = 4
 emission_points = PackedVector2Array(5, -3, -5, 5, -4, -5, 4, 5, -3, 2, -1, 1)
@@ -40,7 +52,20 @@ radial_accel_max = -5000.0
 scale_amount_curve = SubResource("Curve_w7i7w")
 color_ramp = SubResource("Gradient_4m5hj")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D"]
+position = Vector2(0, 2)
+amount = 30
+texture = ExtResource("4_mc0vw")
+lifetime = 0.75
+speed_scale = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(7, 10)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_444u7")
+color_ramp = SubResource("Gradient_gtw83")
+
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 3.5)

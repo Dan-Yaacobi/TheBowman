@@ -1,11 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://fdfy77bkxfsg"]
+[gd_scene load_steps=28 format=3 uid="uid://cn76h3jplsrfn"]
 
-[ext_resource type="Texture2D" uid="uid://dv2p6vmbmhpgb" path="res://Enemies/Sprites/Flying Apple.png" id="1_2vlwu"]
+[ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/FlyingApple/flying_apple.gd" id="1_whfbk"]
+[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_qmrg8"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_0birg"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_5n10g"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="5_kus7w"]
+[ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="6_dgpt0"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_h5knc"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="12_8wwju"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="13_nfvr7"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="14_dilap"]
 
-[sub_resource type="Animation" id="Animation_he687"]
-resource_name = "Fly"
-length = 1.15
-loop_mode = 1
+[sub_resource type="Resource" id="Resource_fth6d"]
+script = ExtResource("4_5n10g")
+
+[sub_resource type="Resource" id="Resource_venkp"]
+resource_local_to_scene = true
+script = ExtResource("5_kus7w")
+move_speed = 20
+knockback = 80
+skin = ExtResource("6_dgpt0")
+avg_coins_dropped = 5
+touch_damage = 2
+knockback_resistance = 30.0
+death_ability = Array[ExtResource("3_0birg")]([SubResource("Resource_fth6d")])
+shooter_chance = 30
+bullet = ExtResource("2_qmrg8")
+
+[sub_resource type="Animation" id="Animation_ltlc2"]
+resource_name = "Damaged"
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -14,26 +38,29 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -20)]
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_hnfe4"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_rwjqo"]
+resource_name = "Move"
+length = 1.15
+loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,25 +80,248 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wrm4u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1no0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o35pa"]
 _data = {
-"Fly": SubResource("Animation_he687"),
-"RESET": SubResource("Animation_hnfe4")
+&"Damaged": SubResource("Animation_ltlc2"),
+&"Move": SubResource("Animation_rwjqo"),
+&"RESET": SubResource("Animation_wrm4u")
 }
+
+[sub_resource type="Animation" id="Animation_lgrm0"]
+resource_name = "Damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4jjxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vf7r2"]
+_data = {
+&"Damaged": SubResource("Animation_lgrm0"),
+&"RESET": SubResource("Animation_4jjxd")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_idn3m"]
+load_path = "res://.godot/imported/AppleWings.png-5f8875c288b0b53199dae805013f0b0c.ctex"
+
+[sub_resource type="Animation" id="Animation_hsnyq"]
+resource_name = "Fly"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_f1xcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_goyeu"]
+resource_name = "Slam"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgtth"]
+_data = {
+&"Fly": SubResource("Animation_hsnyq"),
+&"RESET": SubResource("Animation_f1xcn"),
+&"Slam": SubResource("Animation_goyeu")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uehev"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ig30"]
+radius = 6.666667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_emnjt"]
+radius = 8.0
 
 [node name="FlyingApple" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 4
+collision_mask = 17
+motion_mode = 1
+script = ExtResource("1_whfbk")
+stats = SubResource("Resource_venkp")
 
-[node name="Apple" type="Sprite2D" parent="."]
-texture = ExtResource("1_2vlwu")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.254902)
+texture = ExtResource("6_dgpt0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_o35pa")
+}
+
+[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_vf7r2")
+}
+
+[node name="Wings" type="Sprite2D" parent="Sprite2D"]
+texture = SubResource("CompressedTexture2D_idn3m")
 vframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Apple"]
+[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
 libraries = {
-"": SubResource("AnimationLibrary_b1no0")
+&"": SubResource("AnimationLibrary_qgtth")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_uehev")
+
+[node name="HitBox" parent="." instance=ExtResource("11_h5knc")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("12_8wwju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
+shape = SubResource("CircleShape2D_4ig30")
+debug_color = Color(0.97, 0, 0.0969999, 0.419608)
+
+[node name="HurtBox" parent="." instance=ExtResource("13_nfvr7")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+shape = SubResource("CircleShape2D_emnjt")
+debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
+
+[node name="DebuffHandler" parent="." instance=ExtResource("14_dilap")]

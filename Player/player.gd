@@ -244,6 +244,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		stats.hp -= _hurt_box.damage
 		health_bar.reduce_health(_hurt_box.damage)
 		set_pushback_values(_hurt_box.knockback_dir,_hurt_box.knockback)
+		display_combat_text(_hurt_box.damage, Color.RED)
 		
 func start_invincibilty() -> void:
 	hit_box.set_collision_layer_value(1,false)
@@ -263,9 +264,12 @@ func invincibility_over() -> void:
 	
 func heal(amount: int) -> void:
 	if stats.hp + amount <= get_stamina():
-		print("healing")
 		stats.hp += amount
 		health_bar.heal(amount)
+		display_combat_text(amount, Color.GREEN)
+		
+func display_combat_text(amount: int, color: Color) -> void:
+	CombatTextSpawner.spawn(global_position, str(amount),color)
 
 func leech_heal(amount: int,enemy_position: Vector2) -> void:
 	var health_gain_effect: HealthGainEffect = HEALTH_GAIN_EFFECT.instantiate()
@@ -347,8 +351,6 @@ func combo_bonus_activate() -> void:
 	combo_effect.emitting = true
 	current_weapon.weapon_data.combo_buff_activated = true
 
-	pass
-	
 func end_combo_buff() -> void:
 	if combo_buff:
 		combo_buff = false
@@ -361,7 +363,9 @@ func is_idle() -> bool:
 	
 func is_dash() -> bool:
 	return player_state_machine.curr_state is PlayerDashState
-	
+
+func is_moving() -> bool:
+	return direction != 0
 ############# GET METHODS #############
 func get_strength() -> int:
 	return stats.strength
@@ -404,7 +408,13 @@ func get_sword_abilities() -> Array[PlayerSwordAbility]:
 
 func get_sword() -> Sword:
 	return main_hand.sword
+	
+func get_gold_bonus() -> int:
+	return stats.extra_gold
 ############# SET METHODS #############
+
+func set_gold_bonus(_amount: int) -> void:
+	stats.extra_gold += _amount
 
 func set_sword_size(amount: float) -> void:
 	stats.sword_size_mod = amount

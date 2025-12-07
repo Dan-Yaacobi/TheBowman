@@ -1,146 +1,44 @@
-[gd_scene load_steps=80 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=42 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
-[ext_resource type="PackedScene" uid="uid://cyv1v6g5srjk1" path="res://Enemies/DemoEnemy/DemoEnemy.tscn" id="2_a863k"]
 [ext_resource type="Script" uid="uid://cu2jp5mww0be3" path="res://00 Globals/enemies.gd" id="2_lmkum"]
-[ext_resource type="Script" uid="uid://b2s0ifufjiho" path="res://Enemies/EnemyData/enemy_spawn_data.gd" id="2_r03de"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="2_sm034"]
-[ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/DemoEnemy/Boss1/DemoEnemyBoss.tscn" id="3_c8kbf"]
-[ext_resource type="PackedScene" uid="uid://cdtin5d5lhmfi" path="res://Enemies/EvilBird/EvilBird.tscn" id="3_evq3g"]
-[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/DemoEnemy/DemoEnemy2.tscn" id="3_qp6b5"]
-[ext_resource type="PackedScene" uid="uid://bc36788hmae5b" path="res://Enemies/EvilBird/BlueBird.tscn" id="4_cffcb"]
-[ext_resource type="PackedScene" uid="uid://bwkebvyfvvrv8" path="res://Enemies/DemoEnemy/DemoEnemyGold.tscn" id="4_kxj81"]
-[ext_resource type="PackedScene" uid="uid://dqnds5n75tnpw" path="res://Enemies/DemoEnemy/Boss2/DemoEnemyBoss2.tscn" id="4_udil8"]
-[ext_resource type="PackedScene" uid="uid://c87lkba7dkiy0" path="res://Enemies/EvilBird/GreenBird.tscn" id="5_vhu6f"]
-[ext_resource type="PackedScene" uid="uid://c35yjtl5a8xob" path="res://Enemies/DemoEnemy/DemoEnemy3.tscn" id="5_xd300"]
-[ext_resource type="PackedScene" uid="uid://w2mgep2ljr3" path="res://Enemies/EvilBird/PurpleBird.tscn" id="6_qyrkq"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="3_qp6b5"]
+[ext_resource type="Resource" uid="uid://bogvy8w5pn6fb" path="res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres" id="7_idn3m"]
 [ext_resource type="Script" uid="uid://bwombitl8brmm" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
-[ext_resource type="PackedScene" uid="uid://bj5hoh4kid73x" path="res://Enemies/DemoEnemy/DemoEnemyBoss3.tscn" id="9_f4cq7"]
-[ext_resource type="PackedScene" uid="uid://d1p3p0fkf2rwl" path="res://Enemies/Spider/Spider.tscn" id="9_ph66v"]
-[ext_resource type="PackedScene" uid="uid://kn3ngqcl2eex" path="res://Enemies/Spider/PoisonSpider.tscn" id="10_olg81"]
-[ext_resource type="PackedScene" uid="uid://chrv1m4hnlhef" path="res://Enemies/DemoEnemy/DemoEnemy4.tscn" id="14_c77lc"]
+[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="12_jv2oc"]
 [ext_resource type="Script" uid="uid://yrg8jskcantp" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
-[ext_resource type="PackedScene" uid="uid://dmt8clw634d1e" path="res://Enemies/DemoEnemy/DemoEnemy5.tscn" id="17_n8jhk"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="16_bw3vh"]
 [ext_resource type="Script" uid="uid://cklsqejxas1gu" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
+[ext_resource type="Resource" uid="uid://bifydptc2miel" path="res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres" id="19_e2v75"]
 [ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
 [ext_resource type="Script" uid="uid://l716tqh1t70b" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
 [ext_resource type="Script" uid="uid://d35o1sx2biv2n" path="res://Objects/FallingObjects/Scripts/summon_objects.gd" id="20_ueqxs"]
-[ext_resource type="PackedScene" uid="uid://dcckxg4f2bjrf" path="res://Player/Upgrades/StatsUpgrades/MoveSpeed/MoveSpeedUpgrade.tscn" id="22_67mw3"]
-[ext_resource type="PackedScene" uid="uid://cyahpo86ugywm" path="res://Player/Upgrades/StatsUpgrades/Jump/JumpUpgrade.tscn" id="23_v6ol2"]
-[ext_resource type="PackedScene" uid="uid://bstmllbqxch1v" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KnockbackResistanceUpgrade.tscn" id="24_mi85c"]
+[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="20_w4w4y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="24_xpwt5"]
-[ext_resource type="Texture2D" uid="uid://bwdbudjf3cqo3" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade1.png" id="25_iq6ym"]
-[ext_resource type="Texture2D" uid="uid://b3ut6ryyuxs1k" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUPgrade2.png" id="26_wdchw"]
-[ext_resource type="Texture2D" uid="uid://c51w7jyujbqty" path="res://Player/Upgrades/StatsUpgrades/KnockbackResistance/KBRUpgrade3.png" id="27_oorb6"]
 [ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="28_8kany"]
+[ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="29_mlbf7"]
 [ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="29_y7ifn"]
+[ext_resource type="PackedScene" uid="uid://4w1awb7d0w8w" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.tscn" id="30_gqul3"]
+[ext_resource type="Texture2D" uid="uid://ceyj26wphvmuv" path="res://Level/Sprites/Upgrades/SwordIcon.png" id="31_bfuq3"]
+[ext_resource type="Texture2D" uid="uid://dtailwyo7vyw2" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.png" id="31_xwm8b"]
+[ext_resource type="Texture2D" uid="uid://r6icgs1bvtku" path="res://Level/Sprites/Upgrades/LeechLifeIcon.png" id="33_jypeg"]
 [ext_resource type="PackedScene" uid="uid://bsy8tg0ac6f0n" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn" id="34_ah7gd"]
-[ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="35_johw3"]
-[ext_resource type="Texture2D" uid="uid://baxits5aihfo2" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade2.png" id="36_772sc"]
-[ext_resource type="Texture2D" uid="uid://1ngc042hp5jv" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade3.png" id="37_31pi7"]
+[ext_resource type="Texture2D" uid="uid://c06v3rtneiuqa" path="res://Level/Sprites/Upgrades/StunIcon.png" id="35_jv2oc"]
+[ext_resource type="Texture2D" uid="uid://bu2ggc7wd8fei" path="res://Level/Sprites/Upgrades/BleedIcon.png" id="37_ofn0p"]
 [ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="38_3abtr"]
-[ext_resource type="Texture2D" uid="uid://d36766n7g2188" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png" id="39_14wyh"]
-[ext_resource type="Texture2D" uid="uid://311160wwg7qn" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade2.png" id="40_abgki"]
-[ext_resource type="Texture2D" uid="uid://dm15coovb1qa6" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade3.png" id="41_13v1j"]
+[ext_resource type="PackedScene" uid="uid://curkiynf7h80v" path="res://Player/Upgrades/Abilities/Poison/PoisonUpgrade.tscn" id="38_bfuq3"]
+[ext_resource type="Texture2D" uid="uid://1gpkkexjya0h" path="res://Level/Sprites/Upgrades/PoisonIcon.png" id="39_jypeg"]
 [ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="42_iqpx2"]
 [ext_resource type="PackedScene" uid="uid://caq6l5xbwajld" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn" id="42_q6dew"]
 [ext_resource type="PackedScene" uid="uid://b8gmj6kbjq75c" path="res://Player/Upgrades/Abilities/SwordSize/SwordSizeUpgrade.tscn" id="42_xpwt5"]
-[ext_resource type="Texture2D" uid="uid://cqi54pid5qnan" path="res://Player/Upgrades/Abilities/SwordSize/SwordSize.png" id="43_q6dew"]
-[ext_resource type="Texture2D" uid="uid://casb2wdmiukgh" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade1.png" id="43_r1mi8"]
-[ext_resource type="Texture2D" uid="uid://dlhy1roops8t1" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade2.png" id="44_awenb"]
-[ext_resource type="Texture2D" uid="uid://4d8srn1jmgrv" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade3.png" id="45_t6bp6"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="53_q6dew"]
-
-[sub_resource type="Resource" id="Resource_k715f"]
-script = ExtResource("2_r03de")
-enemy_name = "RedBird"
-enemy = ExtResource("3_evq3g")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_450uo"]
-script = ExtResource("2_r03de")
-enemy_name = "BlueBird"
-enemy = ExtResource("4_cffcb")
-
-[sub_resource type="Resource" id="Resource_0rgrq"]
-script = ExtResource("2_r03de")
-enemy_name = "GreenBird"
-enemy = ExtResource("5_vhu6f")
-
-[sub_resource type="Resource" id="Resource_mirdq"]
-script = ExtResource("2_r03de")
-enemy_name = "PurpleBird"
-enemy = ExtResource("6_qyrkq")
-
-[sub_resource type="Resource" id="Resource_j0euw"]
-script = ExtResource("2_r03de")
-enemy_name = "RedBoss"
-enemy = ExtResource("3_c8kbf")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_rmdxp"]
-script = ExtResource("2_r03de")
-enemy_name = "BlueBoss"
-enemy = ExtResource("4_udil8")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_njak4"]
-script = ExtResource("2_r03de")
-enemy_name = "GreenBoss"
-enemy = ExtResource("9_f4cq7")
-
-[sub_resource type="Resource" id="Resource_17qqw"]
-script = ExtResource("2_r03de")
-enemy_name = "Gold"
-enemy = ExtResource("4_kxj81")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_lqffn"]
-script = ExtResource("2_r03de")
-enemy_name = "Spider"
-enemy = ExtResource("9_ph66v")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_gge3p"]
-script = ExtResource("2_r03de")
-enemy_name = "PoisonSpider"
-enemy = ExtResource("10_olg81")
-
-[sub_resource type="Resource" id="Resource_cy7u7"]
-script = ExtResource("2_r03de")
-enemy_name = "RedTarget"
-enemy = ExtResource("2_a863k")
-spawn_chance = 100
-
-[sub_resource type="Resource" id="Resource_s46cd"]
-script = ExtResource("2_r03de")
-enemy_name = "BlueTarget"
-enemy = ExtResource("3_qp6b5")
-
-[sub_resource type="Resource" id="Resource_a0m40"]
-script = ExtResource("2_r03de")
-enemy_name = "GreenTarget"
-enemy = ExtResource("5_xd300")
-
-[sub_resource type="Resource" id="Resource_tm3r1"]
-script = ExtResource("2_r03de")
-enemy_name = "PurpleTarget"
-enemy = ExtResource("14_c77lc")
-
-[sub_resource type="Resource" id="Resource_75nly"]
-script = ExtResource("2_r03de")
-enemy_name = "OrangeTarget"
-enemy = ExtResource("17_n8jhk")
 
 [sub_resource type="Resource" id="Resource_s07r2"]
 script = ExtResource("2_lmkum")
-target_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_cy7u7"), SubResource("Resource_s46cd"), SubResource("Resource_a0m40"), SubResource("Resource_tm3r1"), SubResource("Resource_75nly")])
-bird_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_k715f"), SubResource("Resource_450uo"), SubResource("Resource_0rgrq"), SubResource("Resource_mirdq")])
-boss_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_j0euw"), SubResource("Resource_rmdxp"), SubResource("Resource_njak4")])
-rare_enemies = Array[ExtResource("2_r03de")]([SubResource("Resource_17qqw")])
-spiders = Array[ExtResource("2_r03de")]([SubResource("Resource_lqffn"), SubResource("Resource_gge3p")])
-spawn_time = 5.0
+flying_apple_scene = ExtResource("3_qp6b5")
+flying_apples_data = Array[ExtResource("16_bw3vh")]([ExtResource("12_jv2oc"), ExtResource("7_idn3m"), ExtResource("20_w4w4y"), ExtResource("19_e2v75")])
 
 [sub_resource type="Resource" id="Resource_bnwpa"]
 script = ExtResource("7_wvqgp")
@@ -148,7 +46,6 @@ current_wave = 1
 targets_spawn = Array[int]([0, 0, 0])
 bird_spawn = Array[int]([0, 0])
 total_enemies = 10
-base_spawn_time = 1.5
 
 [sub_resource type="Resource" id="Resource_xq6vo"]
 script = ExtResource("20_ueqxs")
@@ -164,158 +61,6 @@ size = Vector2(58, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvsqu"]
 size = Vector2(10949, 680)
-
-[sub_resource type="Animation" id="Animation_xyp2j"]
-resource_name = "Gained"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0, 0.25, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_klfvc"]
-resource_name = "Gained10"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0.25, 1, 1), Color(1, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_1e6g1"]
-resource_name = "Gained25"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(0.67451, 0.0392157, 0.8, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tq3ew"]
-resource_name = "Lost"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0.25, 1, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_06wjn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.05, 0.05)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r47hq"]
-_data = {
-&"Gained": SubResource("Animation_xyp2j"),
-&"Gained10": SubResource("Animation_klfvc"),
-&"Gained25": SubResource("Animation_1e6g1"),
-&"Lost": SubResource("Animation_tq3ew"),
-&"RESET": SubResource("Animation_06wjn")
-}
 
 [node name="PlayGround" type="Node2D"]
 script = ExtResource("1_fq8oi")
@@ -390,41 +135,11 @@ position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_lvsqu")
 debug_color = Color(1, 0, 0.2, 0.419608)
 
-[node name="ComboCounter" type="Label" parent="."]
-visible = false
-offset_left = -557.0
-offset_top = -245.0
-offset_right = 578.0
-offset_bottom = 97.0
-scale = Vector2(0.05, 0.05)
-pivot_offset = Vector2(567, 171)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
-theme_override_font_sizes/font_size = 250
-text = "Combo: 0"
-
-[node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
-libraries = {
-&"": SubResource("AnimationLibrary_r47hq")
-}
-
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 position = Vector2(8, 8)
 node_a = NodePath("../SignHolder")
 node_b = NodePath("../WaveSign")
 motor_enabled = true
-
-[node name="Button" type="Button" parent="."]
-offset_left = -24.0
-offset_top = -33.0
-offset_right = 1284.0
-offset_bottom = 317.0
-scale = Vector2(0.05, 0.05)
-theme_override_font_sizes/font_size = 250
-text = "Next Wave"
 
 [node name="UpgradeButtons" type="Node2D" parent="."]
 position = Vector2(0, -48)
@@ -455,26 +170,25 @@ script = ExtResource("20_8lbxg")
 [node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
 [node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_iqpx2")]
-normal_texture = ExtResource("43_r1mi8")
-pressed_texture = ExtResource("44_awenb")
-hover_texture = ExtResource("45_t6bp6")
+texture = ExtResource("29_mlbf7")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can crit"
 tool_tip2 = "Increase crit chance"
 ID = 1
+bucket = null
 is_ability = true
+ability_chosen = null
+can_choose_once = null
 
 [node name="SwordSizeUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_xpwt5")]
-normal_texture = ExtResource("43_q6dew")
+texture = ExtResource("31_bfuq3")
 color = Color(1, 1, 1, 1)
 tool_tip = "Increase Sword Size"
 ID = 3
 is_ability = true
 
 [node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_3abtr")]
-normal_texture = ExtResource("39_14wyh")
-pressed_texture = ExtResource("40_abgki")
-hover_texture = ExtResource("41_13v1j")
+texture = ExtResource("33_jypeg")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can leech life"
 tool_tip2 = "Increase leech chance"
@@ -482,9 +196,7 @@ ID = 4
 is_ability = true
 
 [node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("34_ah7gd")]
-normal_texture = ExtResource("35_johw3")
-pressed_texture = ExtResource("36_772sc")
-hover_texture = ExtResource("37_31pi7")
+texture = ExtResource("35_jv2oc")
 color = Color(0.188235, 0.890196, 0.34902, 1)
 tool_tip = "Arrows can stun"
 tool_tip2 = "Increase stun chance"
@@ -492,28 +204,27 @@ ID = 5
 is_ability = true
 
 [node name="SwordBleedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_q6dew")]
+texture = ExtResource("37_ofn0p")
 tool_tip = "Sword can cause enemies to bleed"
 tool_tip2 = "Increase bleed chance"
 ID = 6
 is_ability = true
 
+[node name="PoisonUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_bfuq3")]
+texture = ExtResource("39_jypeg")
+color = Color(0.083333254, 1, 0, 1)
+tool_tip = "Chance to poison enemies with arrow"
+ID = 7
+is_ability = true
+
 [node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
-[node name="JumpUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("23_v6ol2")]
-color = Color(0.188235, 0.890196, 0.34902, 1)
+[node name="ExtraGoldUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("30_gqul3")]
+texture = ExtResource("31_xwm8b")
+color = Color(0, 0.8117647, 0.1764706, 1)
+tool_tip = "Increase The Amount of gold dropped by 1"
 ID = 11
-bucket = 2
-
-[node name="MoveSpeedUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("22_67mw3")]
-ID = 13
-
-[node name="KnockbackResistanceUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("24_mi85c")]
-amount = 1
-normal_texture = ExtResource("25_iq6ym")
-pressed_texture = ExtResource("26_wdchw")
-hover_texture = ExtResource("27_oorb6")
-tool_tip = "Increase your knockback resistance"
-ID = 14
+is_ability = true
 
 [node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
 
