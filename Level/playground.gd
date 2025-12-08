@@ -68,7 +68,7 @@ func summon() -> void:
 	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
 		
 		var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
-		var enemy: Enemy = CLOUD_ENEMY.instantiate()#enemies.get_enemy(wave_data.current_wave)# init_enemy(enemy_position,,player)
+		var enemy: Enemy = enemies.get_enemy(wave_data.current_wave)# init_enemy(enemy_position,,player)
 		enemy.global_position = enemy_position
 		summoned_enemies.append(enemy)
 		enemy.died.connect(killed_enemy)
