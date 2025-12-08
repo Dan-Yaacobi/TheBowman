@@ -43,7 +43,7 @@ res://Enemies/EnemyAbilities/DeathAbility/DeathParticles.tscn::7e7525bee4fe5552d
 res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn::14e0831627292869c4c8087a3a90e076::1765137575::res://.godot/exported/133200997/export-a85a8776d508678d8e92976eff69c467-BirdBullet.scn
 res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn::aa3ad4337a8ccc3eb4fe5b5abe3892fe::1765137575::res://.godot/exported/133200997/export-2dbec18a6d8d6a88b23d6928a39abd9d-HitParticles.scn
 res://Enemies/EvilBird/BlueBird.tscn::5d81a70bae545a804e64712db1bee6c2::1765137576::res://.godot/exported/133200997/export-c423a1a5f000f2c440352bdb2c462a31-BlueBird.scn
-res://Enemies/FlyingApple/FlyingApple.tscn::f45628ec58dc9a86be9a088c1fafad62::1765139170::res://.godot/exported/133200997/export-da50fd53d3ee9be533ee742606f7d50e-FlyingApple.scn
+res://Enemies/FlyingApple/FlyingApple.tscn::c895e6c2dbedbc65eca66f3001b863df::1765209784::res://.godot/exported/133200997/export-da50fd53d3ee9be533ee742606f7d50e-FlyingApple.scn
 res://Level/Testing/TestingArea.tscn::6cfb108a9c797b64c8d6e4b0d8b0bfa4::1765137576::res://.godot/exported/133200997/export-8e93965c38d98f26ff4401f02b4dad7f-TestingArea.scn
 res://Player/HealthBar/HealthBar.tscn::9da5e38c95def406a6f79727bd7c988a::1765137576::res://.godot/exported/133200997/export-5b49fc34bd3e0a3752f628f6422cb998-HealthBar.scn
 res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn::96de4a4bb47e4f0c2a72d93de8610589::1765137576::res://.godot/exported/133200997/export-55e0c14e534c24413e67da96e85b3768-UpgradeButton.scn

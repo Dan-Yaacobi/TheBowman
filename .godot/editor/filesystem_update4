@@ -9,3 +9,4 @@ res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Level/PlayGround/PlayGround.tscn
 res://Level/playground.gd
+res://Enemies/FlyingApple/FlyingApple.tscn

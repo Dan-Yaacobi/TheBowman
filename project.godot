@@ -29,7 +29,7 @@ CoinDropLogic="*res://00 Globals/coin_drop_logic.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/mode=3
 
 [gui]
 
