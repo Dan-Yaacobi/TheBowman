@@ -21,7 +21,7 @@ res://Player/Hand/Hand.tscn::5387779f759ffe2ce224f747cb1fac31::1765137576::res:/
 res://Player/Mana/ManaBar.tscn::5bc6d39366a4ab9fe8f886bec10985a6::1765137576::res://.godot/exported/133200997/export-6b4ef7601db59b647ec55623c0b628c3-ManaBar.scn
 res://Player/Player Actions/Jump/Jump.tscn::7470aca9c12649bf4a94617e1f2bcd16::1765137576::res://.godot/exported/133200997/export-fec1536713ca7da36d6707f147f74554-Jump.scn
 res://Player/States/PlayerStateMachine.tscn::853fde01bba479de3d509f8d16010217::1761257703::res://.godot/exported/133200997/export-78068f79b8e3ba168e6f72469afed863-PlayerStateMachine.scn
-res://Player/Player.tscn::3f6974d7e21f45e651fb7281c5797be0::1765208377::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
+res://Player/Player.tscn::3f6974d7e21f45e651fb7281c5797be0::1765209314::res://.godot/exported/133200997/export-48b487cb3fbab0e0d627d8f8de2ba1d9-Player.scn
 res://PlayerData/PlayerStats.tres::a5a8e7394677a2d5cf5d663c2aa9ce5a::1761257703::res://.godot/exported/133200997/export-8fb5315e12567ae4e160e1d84f120afd-PlayerStats.res
 res://Shop/AbilitiesShop/AbilitiesShop.tscn::3de6296d4cff82ebba74e165ae08b4df::1765137577::res://.godot/exported/133200997/export-51683065a65fd7f140250a56328c4097-AbilitiesShop.scn
 res://Shop/AbilitiesShop/AbilitiesShopButton.tscn::9096e525e86b540e769d8e887bfc8d81::1761257703::res://.godot/exported/133200997/export-01497330158b607902c6acc13a84c390-AbilitiesShopButton.scn
