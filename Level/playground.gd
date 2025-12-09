@@ -10,7 +10,7 @@ signal new_wave
 @onready var summon_timer: Timer = $SummonTimer
 @onready var tiles: TilesControl = $Tiles
 
-@onready var upgrade_buttons: Node2D = $UpgradeButtons
+@onready var upgrade_buttons: Control = $UpgradeButtons
 
 @onready var upgrade_button_1: UpgradeButton = $UpgradeButtons/UpgradeButton
 @onready var upgrade_button_2: UpgradeButton = $UpgradeButtons/UpgradeButton2

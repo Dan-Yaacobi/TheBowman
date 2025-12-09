@@ -1,12 +1,12 @@
 class_name HUD extends CanvasLayer
 
-@onready var health_bar: HealthBar = $HealthBar
-@onready var level_stats: Label = $LevelStats
-@onready var total_buffs: TotalBuffs = $TotalBuffs
-@onready var special_ability_cd: Sprite2D = $SpecialAbilityCD
-@onready var current_money: CurrentMoney = $CurrentMoney
-@onready var combo_counter: ComboCounter = $ComboCounter
-@onready var coin_animation: AnimationPlayer = $Coin/CoinAnimation
+@onready var health_bar: HealthBar = $Control/HealthBar
+@onready var level_stats: Label = $Control/LevelStats
+@onready var total_buffs: TotalBuffs = $Control/TotalBuffs
+@onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
+@onready var current_money: CurrentMoney = $Control/CurrentMoney
+@onready var combo_counter: ComboCounter = $Control/ComboCounter
+@onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 
 func _ready() -> void:
 	PlayerManager.player.money_changed.connect(update_money)

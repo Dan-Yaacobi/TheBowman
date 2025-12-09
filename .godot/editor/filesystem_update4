@@ -27,3 +27,9 @@ res://Shop/PlatformShop/PlatformShop.tscn
 res://Shop/PlatformShop/platform_shop.gd
 res://Shop/BowsShop/BowsShop.tscn
 res://Shop/BowsShop/bows_shop.gd
+res://HUD/hud.gd
+res://Enemies/FlyingApple/FlyingApple.tscn
+res://Level/PlayGround/upgrade_buttons.gd
+res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn
+res://StatsUI/Stat.tscn
+res://StatsUI/stat_control.gd

@@ -265,20 +265,30 @@ _data = {
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_ja1d4")
 
-[node name="HealthBar" parent="." instance=ExtResource("1_b7ubu")]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HealthBar" parent="Control" instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
+layout_mode = 0
 offset_left = 1499.0
 offset_top = 859.0
 offset_right = 1563.0
 offset_bottom = 891.0
 scale = Vector2(6, 6)
 
-[node name="LevelStats" type="Label" parent="."]
+[node name="LevelStats" type="Label" parent="Control"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="TotalBuffs" type="Control" parent="."]
-layout_mode = 3
+[node name="TotalBuffs" type="Control" parent="Control"]
 anchors_preset = 0
 offset_left = 3015.0
 offset_top = -609.0
@@ -287,7 +297,7 @@ offset_bottom = -609.0
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
-[node name="FlowContainer" type="FlowContainer" parent="TotalBuffs"]
+[node name="FlowContainer" type="FlowContainer" parent="Control/TotalBuffs"]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 11
@@ -304,38 +314,38 @@ theme_override_constants/h_separation = 1
 vertical = true
 script = ExtResource("5_lkt0t")
 
-[node name="Buff" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff2" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff2" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff3" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff3" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff4" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff4" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff5" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff5" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff6" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff6" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff7" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff7" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff8" parent="TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff8" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="SpecialAbilityCD" type="Sprite2D" parent="."]
+[node name="SpecialAbilityCD" type="Sprite2D" parent="Control"]
 visible = false
 position = Vector2(481.00006, 968.99994)
 scale = Vector2(5, 5)
 texture = ExtResource("7_lkt0t")
 script = ExtResource("8_6i5cd")
 
-[node name="TimeLeftLabel" type="Label" parent="SpecialAbilityCD"]
+[node name="TimeLeftLabel" type="Label" parent="Control/SpecialAbilityCD"]
 offset_left = 8.0
 offset_top = -10.0
 offset_right = 151.0
@@ -352,7 +362,8 @@ text = "0
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrentMoney" type="Label" parent="."]
+[node name="CurrentMoney" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 116.0
 offset_top = 66.0
 offset_right = 279.0
@@ -367,8 +378,9 @@ theme_override_font_sizes/font_size = 150
 text = "x0"
 script = ExtResource("9_t1yhm")
 
-[node name="ComboCounter" type="Label" parent="."]
+[node name="ComboCounter" type="Label" parent="Control"]
 visible = false
+layout_mode = 0
 offset_left = 1174.9998
 offset_top = -125.000015
 offset_right = 2309.9998
@@ -384,30 +396,32 @@ theme_override_font_sizes/font_size = 250
 text = "Combo: 0"
 script = ExtResource("10_pd2p5")
 
-[node name="ComboAnimation" type="AnimationPlayer" parent="ComboCounter"]
+[node name="ComboAnimation" type="AnimationPlayer" parent="Control/ComboCounter"]
 libraries = {
 &"": SubResource("AnimationLibrary_r47hq")
 }
 
-[node name="StatsUiOpenButton" parent="." instance=ExtResource("10_fwgky")]
+[node name="StatsUiOpenButton" parent="Control" instance=ExtResource("10_fwgky")]
+layout_mode = 1
 offset_left = 1.0
 offset_top = 243.0
 offset_right = -1855.0
 offset_bottom = -805.0
 scale = Vector2(4, 4)
 
-[node name="Coin" type="Sprite2D" parent="."]
+[node name="Coin" type="Sprite2D" parent="Control"]
 position = Vector2(62.000004, 122)
 scale = Vector2(5, 5)
 texture = ExtResource("11_fwgky")
 hframes = 5
 
-[node name="CoinAnimation" type="AnimationPlayer" parent="Coin"]
+[node name="CoinAnimation" type="AnimationPlayer" parent="Control/Coin"]
 libraries = {
 &"": SubResource("AnimationLibrary_fwgky")
 }
 
-[node name="MoreInfo" type="TextureButton" parent="."]
+[node name="MoreInfo" type="TextureButton" parent="Control"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = 416.0
 offset_right = 26.0
@@ -422,7 +436,7 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("15_fjfvf")
 
-[node name="TextureRect" type="TextureRect" parent="MoreInfo"]
+[node name="TextureRect" type="TextureRect" parent="Control/MoreInfo"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 13.0
@@ -431,7 +445,7 @@ offset_bottom = 129.0
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("16_65vjf")
 
-[node name="Label" type="Label" parent="MoreInfo/TextureRect"]
+[node name="Label" type="Label" parent="Control/MoreInfo/TextureRect"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -456,7 +470,7 @@ Back to menu: M
 "
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="MoreInfo/TextureRect"]
+[node name="Label2" type="Label" parent="Control/MoreInfo/TextureRect"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -473,7 +487,7 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 100
 autowrap_mode = 3
 
-[node name="Label3" type="Label" parent="MoreInfo/TextureRect"]
+[node name="Label3" type="Label" parent="Control/MoreInfo/TextureRect"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -490,9 +504,9 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 100
 autowrap_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MoreInfo"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MoreInfo"]
 libraries = {
 &"": SubResource("AnimationLibrary_gf6xr")
 }
 
-[connection signal="toggled" from="MoreInfo" to="MoreInfo" method="_on_toggled"]
+[connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

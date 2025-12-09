@@ -26,6 +26,7 @@ func _update_label() -> void:
 	stat.text = text
 	stat.set("theme_override_colors/font_color", text_color)
 	stat_value.set("theme_override_colors/font_color", text_color)
+	
 
 func _on_button_pressed() -> void:
 	trying_to_upgrade.emit(stat_upgrade,self)

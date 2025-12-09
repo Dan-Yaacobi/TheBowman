@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var upgrades: UpgradeBuckets = $Upgrades
 @export var bucket_upgrade_chance: int = 0

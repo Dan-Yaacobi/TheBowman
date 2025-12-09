@@ -1,3 +1,4 @@
+Control
 CollisionShape2D
 Area2D
 AudioStreamPlayer2D
@@ -11,4 +12,3 @@ CharacterBody2D
 GPUParticles2D
 TextureRect
 TextureButton
-Label

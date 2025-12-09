@@ -240,6 +240,7 @@ position = Vector2(293, 96)
 
 [node name="Island12" parent="Islands" instance=ExtResource("14_5lv0r")]
 position = Vector2(146, 13)
+floating = true
 
 [node name="Island4" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(149, 118)
@@ -247,7 +248,6 @@ floating = true
 
 [node name="Island14" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(268, -28)
-floating = true
 
 [node name="Island10" parent="Islands" instance=ExtResource("15_167x7")]
 position = Vector2(74, 33)
