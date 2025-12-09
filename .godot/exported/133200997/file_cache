@@ -108,7 +108,7 @@ res://General Nodes/HitBox/Hitbox.tscn::28320f9941a942ccbc788c4e177af763::176527
 res://General Nodes/HurtBox/HurtBox.tscn::40651512a89ebfb9afb71d883b5ee6be::1765275207::res://.godot/exported/133200997/export-e7bf47fae3a031ff3ea367caae90af06-HurtBox.scn
 res://General Nodes/PlayerSpawn.tscn::6087cc38e8382432d48ad5ef88b19fa9::1765275207::res://.godot/exported/133200997/export-b9642090e8bd8dbccb39b27b9f3c3af8-PlayerSpawn.scn
 res://HUD/Scene Transition/scene_transition.tscn::498b378946c4604ac9045712334a2187::1765275207::res://.godot/exported/133200997/export-4e1da985acebbc9106fa763d7afacce7-scene_transition.scn
-res://HUD/HUD.tscn::4a9c53dbab3edc8320895931219238b9::1765314181::res://.godot/exported/133200997/export-00ec45ea1f31fb52755c1ca74bb7047d-HUD.scn
+res://HUD/HUD.tscn::e7afb0d37d8dc136f4e323597031cfce::1765314672::res://.godot/exported/133200997/export-00ec45ea1f31fb52755c1ca74bb7047d-HUD.scn
 res://Level/Islands/Island2.tscn::7b0df9fbb87fe3e18414417b5144e7be::1765312172::res://.godot/exported/133200997/export-721ce1dc0b785994db6ab6bdf268d64e-Island2.scn
 res://Level/Islands/Island3.tscn::b4d250df266846e3f8a47f65d1648d88::1765312187::res://.godot/exported/133200997/export-8ac98d2cdc3f42801e0f1fabc3c9efad-Island3.scn
 res://Level/Islands/Island4.tscn::c328005acad52c91d1b3daa492a221f3::1765312197::res://.godot/exported/133200997/export-d10966c01f92927d884a8b90b52be94e-Island4.scn

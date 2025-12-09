@@ -2,6 +2,9 @@ class_name MoreInfoButton extends TextureButton
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var label_1: Label = $TextureRect/Label
+@onready var label_2: Label = $"../../../MoreInfo/TextureRect/Label2"
+@onready var label_3: Label = $"../../../MoreInfo/TextureRect/Label3"
+
 var closed: bool = true
 #
 func _ready() -> void:

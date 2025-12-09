@@ -267,10 +267,10 @@ script = ExtResource("1_ja1d4")
 
 [node name="HealthBar" parent="." instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
-offset_left = 1499.0
-offset_top = 859.0
-offset_right = 1563.0
-offset_bottom = 891.0
+offset_left = 1505.0
+offset_top = 690.0
+offset_right = 1569.0
+offset_bottom = 722.0
 scale = Vector2(6, 6)
 
 [node name="LevelStats" type="Label" parent="."]
@@ -294,10 +294,10 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -304.40002
-offset_top = 320.6
-offset_right = -233.40002
-offset_bottom = 328.6
+offset_left = -303.2
+offset_top = 286.80002
+offset_right = -232.20001
+offset_bottom = 294.80002
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/h_separation = 1
