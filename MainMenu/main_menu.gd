@@ -9,6 +9,7 @@ class_name MainMenu extends Node2D
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 @onready var portals: Node2D = $Portals
 @onready var islands: Node2D = $Islands
+@onready var falling_death: FallingDeath = $FallingDeath
 
 var menu_tile_limit: Rect2i
 var tile_size: int = 16
@@ -53,10 +54,12 @@ func set_scene(_player: Player) -> void:
 		visible = true
 		#tiles.collision_enabled = true
 		enable_islands_portals()
+		falling_death.enabled()
 		
 func exit_scene(_player) -> void:
 	disable_islands_portals()
 	visible = false
+	falling_death.disabled()
 	#tiles.collision_enabled = false
 	#_player.stats.move_speed /= 2
 

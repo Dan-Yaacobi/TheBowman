@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cmdeim0mrcv32"]
+[gd_scene load_steps=22 format=3 uid="uid://cmdeim0mrcv32"]
 
 [ext_resource type="Script" uid="uid://btsxr8bei66af" path="res://Shop/BowsShop/bows_shop.gd" id="1_ca2ob"]
 [ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Weapons/Bows/1_BlueBow/Bow1.png" id="6_ia1ak"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bg8cpwxytaj4p" path="res://Weapons/Bows/6_BoneBow/BoneBow.tscn" id="15_wcqo3"]
 [ext_resource type="PackedScene" uid="uid://dfplcoxey47hy" path="res://Weapons/Bows/9_DemonBow/DemonBow.tscn" id="16_si2bx"]
 [ext_resource type="Texture2D" uid="uid://dxdf855leqlwj" path="res://Weapons/Bows/9_DemonBow/DemonBow.png" id="17_y6hjf"]
+[ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="20_y6hjf"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="23_nlbfr"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="24_4j01i"]
 [ext_resource type="PackedScene" uid="uid://bcgks5a8huff6" path="res://Shop/BowsShop/Pedestal.tscn" id="25_4j01i"]
@@ -19,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://d030x63vqq3ih" path="res://Weapons/Bows/5_ThunderBow/Zeus.png" id="28_bbg62"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="28_bq6li"]
 [ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/Bows/6_BoneBow/Skeletor.png" id="29_ddwbi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u56fe"]
+size = Vector2(10000, 100)
 
 [node name="BowsShop" type="Node2D"]
 script = ExtResource("1_ca2ob")
@@ -74,3 +78,13 @@ destination = "Menu"
 
 [node name="Island" parent="Islands" instance=ExtResource("24_4j01i")]
 position = Vector2(34, -91)
+
+[node name="FallingDeath" type="Area2D" parent="."]
+position = Vector2(0, 246)
+collision_layer = 0
+script = ExtResource("20_y6hjf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+position = Vector2(-2, 51)
+shape = SubResource("RectangleShape2D_u56fe")
+debug_color = Color(0.98719627, 0, 0.32055512, 0.41960785)

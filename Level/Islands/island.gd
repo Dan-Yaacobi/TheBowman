@@ -1,5 +1,8 @@
 class_name Island extends StaticBody2D
 
+@onready var player_spawn: PlayerSpawn = $PlayerSpawn
+
+@export var start_island: bool = false
 @export var floating: bool
 var float_amplitude: float = 3.0
 var float_speed: float = 2.0
@@ -9,6 +12,7 @@ func _ready() -> void:
 	base_height = global_position.y
 	float_speed *= randf_range(0.5,1.5)
 	float_amplitude *= randf_range(0.5,1.5)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if floating:
@@ -22,3 +26,6 @@ func enable() -> void:
 	set_collision_layer_value(5,true)
 	set_collision_mask_value(1,true)
 	pass
+
+func spawn_position() -> Vector2:
+	return player_spawn.global_position

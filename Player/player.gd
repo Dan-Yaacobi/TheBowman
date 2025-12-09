@@ -196,8 +196,8 @@ func update_body_animation(_anim: String) -> void:
 
 
 func apply_gravity(delta) -> void:
-		if velocity.y < 100:
-			velocity.y += gravity*delta
+		#if velocity.y < 100:
+		velocity.y += gravity*delta
 
 func get_current_weapon() -> Weapon:
 	return current_weapon

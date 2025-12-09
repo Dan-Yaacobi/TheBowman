@@ -5,10 +5,11 @@ class_name MoreInfoButton extends TextureButton
 @onready var label_2: Label = $TextureRect/Label2
 @onready var label_3: Label = $TextureRect/Label3
 
-var closed: bool = false
+var closed: bool = true
 #
 func _ready() -> void:
 	close()
+	pass
 
 func open() -> void:
 	visible = true

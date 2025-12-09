@@ -4,10 +4,10 @@ signal wave_reset
 signal new_wave
 
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
+@onready var falling_death: FallingDeath = $FallingDeath
 
 @onready var label: Label = $WaveSign/WaveBackground/Label
 @onready var summon_timer: Timer = $SummonTimer
-@onready var falling_death: Area2D = $FallingDeath
 @onready var tiles: TilesControl = $Tiles
 
 @onready var upgrade_buttons: Node2D = $UpgradeButtons
@@ -63,6 +63,7 @@ func try_to_summon_object() -> void:
 			summon_object()
 			can_summon_object = false
 const CLOUD_ENEMY = preload("uid://d2ag7d2j5mctf")
+const SPIDER = preload("uid://d1p3p0fkf2rwl")
 
 func summon() -> void:
 	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
@@ -175,7 +176,7 @@ func set_scene(_player: Player) -> void:
 		summon_timer.timeout.connect(summon_enemy)
 		falling_death.monitoring = true
 		set_towers()
-
+		falling_death.enabled()
 func exit_scene(_player: Player) -> void:
 	summon_timer.timeout.disconnect(summon_enemy)
 	visible = false
@@ -186,7 +187,7 @@ func exit_scene(_player: Player) -> void:
 	falling_death.monitoring = false
 	_player.reset_minions()
 	_player.hide_buffs()
-	
+	falling_death.disabled()
 func kill_all_enemies() -> void:
 	for enemy in summoned_enemies:
 		if is_instance_valid(enemy):

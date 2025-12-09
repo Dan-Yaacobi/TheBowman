@@ -45,6 +45,7 @@ size = Vector2(10949, 680)
 script = ExtResource("1_4xjwr")
 
 [node name="ButtonShootClick3" parent="." instance=ExtResource("3_0uxqg")]
+visible = false
 offset_left = 354.0
 offset_top = 16.0
 offset_right = 1374.0
@@ -57,6 +58,7 @@ text = "Reset"
 button_data = SubResource("Resource_fjbbq")
 
 [node name="CurrentWaves" type="Label" parent="."]
+visible = false
 offset_left = 355.0
 offset_top = 35.0
 offset_right = 1736.0
@@ -95,6 +97,7 @@ Right Mouse: Special Ability
 M: Back to Menu"
 
 [node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
+visible = false
 offset_left = 355.0
 offset_top = 45.0
 offset_right = 1663.0
@@ -106,6 +109,7 @@ text = "Next Wave"
 button_data = SubResource("Resource_etkyy")
 
 [node name="ButtonShootClick2" parent="." instance=ExtResource("3_0uxqg")]
+visible = false
 offset_left = 315.0
 offset_top = 17.0
 offset_right = 1685.0
@@ -148,6 +152,26 @@ theme_override_constants/outline_size = 50
 theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
 text = "Fight"
+
+[node name="ArrowSign3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(223, -35)
+texture = ExtResource("12_a6mvh")
+
+[node name="Label2" type="Label" parent="ArrowSign3"]
+offset_left = -12.0
+offset_top = -5.0
+offset_right = 1188.0
+offset_bottom = 308.0
+scale = Vector2(0.02, 0.02)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 50
+theme_override_font_sizes/font_size = 250
+text = "In progress"
 
 [node name="ArrowSign2" type="Sprite2D" parent="."]
 z_index = -1
@@ -210,7 +234,6 @@ position = Vector2(99, 114)
 
 [node name="Island13" parent="Islands" instance=ExtResource("13_qvidt")]
 position = Vector2(208, -12)
-floating = true
 
 [node name="Island3" parent="Islands" instance=ExtResource("14_5lv0r")]
 position = Vector2(293, 96)
@@ -274,5 +297,11 @@ script = ExtResource("16_qvidt")
 position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
+
+[node name="Portal" parent="." instance=ExtResource("13_npjie")]
+position = Vector2(271, -49)
+color = Color(0.2901961, 0.38431373, 1, 0.78039217)
+destination = "Rifts"
+flip_h = true
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

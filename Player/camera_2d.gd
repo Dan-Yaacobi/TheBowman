@@ -47,3 +47,10 @@ func reset_focus() -> void:
 	moving_camera = false
 	pass
 	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("zoom in"):
+		zoom += Vector2(0.1,0.1)
+	if event.is_action_pressed("zoom out"):
+		zoom -= Vector2(0.1,0.1)
+	pass
+	

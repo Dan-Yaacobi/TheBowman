@@ -36,7 +36,7 @@ script = ExtResource("2_2aet8")
 hp = 5
 move_speed = 50
 max_jumps = 1
-jump_height = 90
+jump_height = 150
 knockback_resistance = 3
 strength = 5
 agility = 5
@@ -100,7 +100,7 @@ radius = 49.0408
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
-gravity = 200
+gravity = 500
 stats = SubResource("Resource_sedti")
 
 [node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]

@@ -1,18 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://d1p3p0fkf2rwl"]
+[gd_scene load_steps=24 format=3 uid="uid://d1p3p0fkf2rwl"]
 
-[ext_resource type="Script" path="res://Enemies/Spider/spider.gd" id="1_7135b"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_3um86"]
+[ext_resource type="Script" uid="uid://dqcn4fvcowbk8" path="res://Enemies/Spider/spider.gd" id="1_7135b"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_3um86"]
 [ext_resource type="Texture2D" uid="uid://chhklq8k7ecbr" path="res://Enemies/Spider/Sprites/SpiderWalking.png" id="2_44sm3"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_rnln2"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_sbwv3"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_rnln2"]
 [ext_resource type="Texture2D" uid="uid://dnqqaaj0yfhfy" path="res://Enemies/Spider/Sprites/SpiderDrop.png" id="3_x2dl3"]
-[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_mob8f"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_soewm"]
-[ext_resource type="Script" path="res://Enemies/Spider/spider_dropping_state.gd" id="5_lrwbi"]
-[ext_resource type="Script" path="res://Enemies/Spider/spider_walking_state.gd" id="6_cg4nc"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="6_h0hfx"]
-[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="7_5580v"]
-[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="8_0u4dl"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_mob8f"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_soewm"]
+[ext_resource type="Script" uid="uid://cdg4y771vfg1d" path="res://Enemies/Spider/spider_dropping_state.gd" id="5_lrwbi"]
+[ext_resource type="Script" uid="uid://c8wnkfyix4jj1" path="res://Enemies/Spider/spider_walking_state.gd" id="6_cg4nc"]
 
 [sub_resource type="Resource" id="Resource_fqrf0"]
 script = ExtResource("3_rnln2")
@@ -20,46 +16,10 @@ script = ExtResource("3_rnln2")
 [sub_resource type="Resource" id="Resource_4bgit"]
 resource_local_to_scene = true
 script = ExtResource("4_soewm")
-hp = 45
 move_speed = 50
 knockback = 150
-coins_dropped = 35
-sharp_movement = false
 touch_damage = 3
 death_ability = Array[ExtResource("2_3um86")]([SubResource("Resource_fqrf0")])
-initial_ability = Array[ExtResource("2_3um86")]([])
-special_ability = Array[ExtResource("2_3um86")]([])
-debuffs = Array[ExtResource("3_sbwv3")]([])
-boss = false
-teleport_chance = 0
-shooter = false
-shooter_chance = 0
-shoot_speed = 0.0
-
-[sub_resource type="Resource" id="Resource_ydwtp"]
-script = ExtResource("6_h0hfx")
-item_data = ExtResource("7_5580v")
-probability = 100.0
-
-[sub_resource type="Resource" id="Resource_ee7x0"]
-script = ExtResource("6_h0hfx")
-item_data = ExtResource("7_5580v")
-probability = 100.0
-
-[sub_resource type="Resource" id="Resource_nub64"]
-script = ExtResource("6_h0hfx")
-item_data = ExtResource("7_5580v")
-probability = 100.0
-
-[sub_resource type="Resource" id="Resource_0yp1b"]
-script = ExtResource("6_h0hfx")
-item_data = ExtResource("8_0u4dl")
-probability = 50.0
-
-[sub_resource type="Resource" id="Resource_exswr"]
-script = ExtResource("6_h0hfx")
-item_data = ExtResource("8_0u4dl")
-probability = 15.0
 
 [sub_resource type="Animation" id="Animation_a04px"]
 resource_name = "Damaged"
@@ -137,9 +97,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pb0a5"]
 _data = {
-"Damaged": SubResource("Animation_a04px"),
-"Move": SubResource("Animation_02pi1"),
-"RESET": SubResource("Animation_hmuq7")
+&"Damaged": SubResource("Animation_a04px"),
+&"Move": SubResource("Animation_02pi1"),
+&"RESET": SubResource("Animation_hmuq7")
 }
 
 [sub_resource type="Animation" id="Animation_o3yy2"]
@@ -218,9 +178,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ly8t0"]
 _data = {
-"Damaged": SubResource("Animation_o3yy2"),
-"Move": SubResource("Animation_x5445"),
-"RESET": SubResource("Animation_8qn1x")
+&"Damaged": SubResource("Animation_o3yy2"),
+&"Move": SubResource("Animation_x5445"),
+&"RESET": SubResource("Animation_8qn1x")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dgku"]
@@ -241,7 +201,6 @@ motion_mode = 1
 script = ExtResource("1_7135b")
 gravity = 100
 stats = SubResource("Resource_4bgit")
-item_drops = Array[ExtResource("6_h0hfx")]([SubResource("Resource_ydwtp"), SubResource("Resource_ee7x0"), SubResource("Resource_nub64"), SubResource("Resource_0yp1b"), SubResource("Resource_exswr")])
 
 [node name="WalkingSprite" type="Sprite2D" parent="."]
 position = Vector2(1, 4)
@@ -250,7 +209,7 @@ vframes = 4
 
 [node name="WalkingAnimation" type="AnimationPlayer" parent="WalkingSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_pb0a5")
+&"": SubResource("AnimationLibrary_pb0a5")
 }
 
 [node name="DroppingSprite" type="Sprite2D" parent="."]
@@ -260,7 +219,7 @@ hframes = 3
 
 [node name="DroppingAnimation" type="AnimationPlayer" parent="DroppingSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_ly8t0")
+&"": SubResource("AnimationLibrary_ly8t0")
 }
 autoplay = "Move"
 

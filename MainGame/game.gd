@@ -9,11 +9,13 @@ const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var main_menu: MainMenu = $MainMenu
 @onready var play_ground: PlayGround = $PlayGround
 @onready var tower_upgrade_menu: TowerUpgradeMenu = $TowerUpgradeMenu
+@onready var rift_controller: Node2D = $RiftController
 @onready var scenes_dic: Dictionary = {"Menu" : main_menu, "PlayGround": play_ground,
 "Shop": shop, "BowsShop": bows_shop, "AbilitiesShop": abilities_shop,"PlatformShop":platform_shop,
-"TowerUpgrade": tower_upgrade_menu}
+"TowerUpgrade": tower_upgrade_menu, "Rifts" :rift_controller }
 @onready var cloud_timer: Timer = $CloudTimer
 @onready var hud: HUD = $Hud
+
 
 @export var music_on: bool = true :
 	set(val):

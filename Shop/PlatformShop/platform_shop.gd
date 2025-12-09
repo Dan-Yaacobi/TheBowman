@@ -11,6 +11,9 @@ var player: Player
 
 var current_platform_button: TextureButton = null
 
+func _ready() -> void:
+		fall.body_entered.connect(to_menu)
+
 func set_scene(_player: Player) -> void:
 	if _player != null:
 		player = _player
@@ -20,9 +23,9 @@ func set_scene(_player: Player) -> void:
 		visible = true
 		tiles.collision_enabled = true
 		set_shop_platforms()
-		
-		if not fall.body_entered.is_connected(to_shop):
-			fall.body_entered.connect(to_shop)
+		fall.monitoring = true
+		fall.monitorable = true
+
 			
 		for child in get_children():
 			#if child is BuyPlatform:
@@ -42,9 +45,9 @@ func set_scene(_player: Player) -> void:
 func exit_scene(_player) -> void:
 	visible = false
 	tiles.collision_enabled = false
-	if fall.body_entered.is_connected(to_shop):
-		fall.body_entered.disconnect(to_shop)
-		
+	fall.monitoring = false
+	fall.monitorable = false
+
 #func set_prices() -> void:
 	#for key in buttons.keys():
 		#buttons[key].price = pow(tiles.get_used_cells().size(),3)
@@ -60,9 +63,9 @@ func set_shop_platforms() -> void:
 			for cell in child.tiles.get_used_cells():
 				tiles.set_cell(cell,0,Vector2i(0,0))
 
-func to_shop(b) -> void:
+func to_menu(b) -> void:
 	if b is Player:
-		EventBus.changed_scene.emit("Shop")
+		EventBus.changed_scene.emit("Menu")
 
 #func buy_platforms(side: String) -> void:
 	#if player != null:
