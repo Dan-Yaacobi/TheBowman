@@ -267,10 +267,10 @@ script = ExtResource("1_ja1d4")
 
 [node name="HealthBar" parent="." instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
-offset_left = 71.0
-offset_top = 802.0
-offset_right = 135.0
-offset_bottom = 834.0
+offset_left = 1505.0
+offset_top = 690.0
+offset_right = 1569.0
+offset_bottom = 722.0
 scale = Vector2(6, 6)
 
 [node name="LevelStats" type="Label" parent="."]
@@ -280,10 +280,10 @@ offset_bottom = 23.0
 [node name="TotalBuffs" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1614.0
-offset_top = -502.99994
-offset_right = 1614.0
-offset_bottom = -502.99994
+offset_left = 3015.0
+offset_top = -609.0
+offset_right = 3015.0
+offset_bottom = -609.0
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
@@ -353,10 +353,10 @@ text = "0
 metadata/_edit_use_anchors_ = true
 
 [node name="CurrentMoney" type="Label" parent="."]
-offset_left = 122.0
-offset_top = 114.0
-offset_right = 285.0
-offset_bottom = 319.0
+offset_left = 116.0
+offset_top = 66.0
+offset_right = 279.0
+offset_bottom = 271.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -390,14 +390,14 @@ libraries = {
 }
 
 [node name="StatsUiOpenButton" parent="." instance=ExtResource("10_fwgky")]
-offset_left = 9.0
-offset_top = 238.0
-offset_right = -1847.0
-offset_bottom = -810.0
+offset_left = 1.0
+offset_top = 243.0
+offset_right = -1855.0
+offset_bottom = -805.0
 scale = Vector2(4, 4)
 
 [node name="Coin" type="Sprite2D" parent="."]
-position = Vector2(52, 161.99998)
+position = Vector2(62.000004, 122)
 scale = Vector2(5, 5)
 texture = ExtResource("11_fwgky")
 hframes = 5
@@ -408,9 +408,10 @@ libraries = {
 }
 
 [node name="MoreInfo" type="TextureButton" parent="."]
-offset_top = 347.0
-offset_right = 27.0
-offset_bottom = 371.0
+offset_left = -1.0
+offset_top = 416.0
+offset_right = 26.0
+offset_bottom = 440.0
 scale = Vector2(4, 4)
 focus_mode = 0
 toggle_mode = true
