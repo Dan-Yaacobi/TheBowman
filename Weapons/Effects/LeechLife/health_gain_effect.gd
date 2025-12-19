@@ -11,7 +11,7 @@ func set_positions(_player: Player, start_pos: Vector2):
 	global_position = start_pos
 	player = _player
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position += Vector2(player.global_position - global_position).normalized()
 	pass
 	

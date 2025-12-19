@@ -1,0 +1,149 @@
+[gd_scene load_steps=20 format=3 uid="uid://bfwugrpdftgjh"]
+
+[ext_resource type="Script" uid="uid://cklsqejxas1gu" path="res://Level/PlayGround/upgrade_buttons.gd" id="1_yaenb"]
+[ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://HUD/Upgrades/UpgradeButton/UpgradeButton.tscn" id="2_uewwt"]
+[ext_resource type="Script" uid="uid://l716tqh1t70b" path="res://Level/PlayGround/upgrades.gd" id="3_pghlr"]
+[ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="4_mincf"]
+[ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="5_n688f"]
+[ext_resource type="PackedScene" uid="uid://b8gmj6kbjq75c" path="res://Player/Upgrades/Abilities/SwordSize/SwordSizeUpgrade.tscn" id="6_0n7y3"]
+[ext_resource type="Texture2D" uid="uid://ceyj26wphvmuv" path="res://Level/Sprites/Upgrades/SwordIcon.png" id="7_gh86a"]
+[ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="8_2uvm4"]
+[ext_resource type="Texture2D" uid="uid://r6icgs1bvtku" path="res://Level/Sprites/Upgrades/LeechLifeIcon.png" id="9_b18tq"]
+[ext_resource type="PackedScene" uid="uid://bsy8tg0ac6f0n" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn" id="10_7bdtr"]
+[ext_resource type="Texture2D" uid="uid://c06v3rtneiuqa" path="res://Level/Sprites/Upgrades/StunIcon.png" id="11_g4dov"]
+[ext_resource type="PackedScene" uid="uid://caq6l5xbwajld" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn" id="12_m025e"]
+[ext_resource type="Texture2D" uid="uid://bu2ggc7wd8fei" path="res://Level/Sprites/Upgrades/BleedIcon.png" id="13_anl1k"]
+[ext_resource type="PackedScene" uid="uid://curkiynf7h80v" path="res://Player/Upgrades/Abilities/Poison/PoisonUpgrade.tscn" id="14_q1ncp"]
+[ext_resource type="Texture2D" uid="uid://1gpkkexjya0h" path="res://Level/Sprites/Upgrades/PoisonIcon.png" id="15_1g2sv"]
+[ext_resource type="PackedScene" uid="uid://4w1awb7d0w8w" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.tscn" id="16_j6lgl"]
+[ext_resource type="Texture2D" uid="uid://dtailwyo7vyw2" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.png" id="17_m371p"]
+[ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="18_o847p"]
+[ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="19_eqilc"]
+
+[node name="UpgradeButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = -1.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_yaenb")
+bucket_upgrade_chance = 15
+
+[node name="UpgradeButton" parent="." instance=ExtResource("2_uewwt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -78.0
+offset_top = -48.0
+offset_right = -62.0
+offset_bottom = -32.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="UpgradeButton2" parent="." instance=ExtResource("2_uewwt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 80.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -32.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="UpgradeButton3" parent="." instance=ExtResource("2_uewwt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 2.0
+offset_top = -48.0
+offset_right = 18.0
+offset_bottom = -32.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Upgrades" type="Node2D" parent="."]
+script = ExtResource("3_pghlr")
+
+[node name="Bucket1" type="Node2D" parent="Upgrades"]
+
+[node name="CritUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("4_mincf")]
+texture = ExtResource("5_n688f")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can crit"
+tool_tip2 = "Increase crit chance"
+ID = 1
+is_ability = true
+
+[node name="SwordSizeUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("6_0n7y3")]
+texture = ExtResource("7_gh86a")
+color = Color(1, 1, 1, 1)
+tool_tip = "Increase Sword Size"
+ID = 3
+is_ability = true
+
+[node name="LeechUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("8_2uvm4")]
+texture = ExtResource("9_b18tq")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can leech life"
+tool_tip2 = "Increase leech chance"
+ID = 4
+is_ability = true
+
+[node name="StunUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("10_7bdtr")]
+texture = ExtResource("11_g4dov")
+color = Color(0.188235, 0.890196, 0.34902, 1)
+tool_tip = "Arrows can stun"
+tool_tip2 = "Increase stun chance"
+ID = 5
+is_ability = true
+
+[node name="SwordBleedUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("12_m025e")]
+texture = ExtResource("13_anl1k")
+tool_tip = "Sword can cause enemies to bleed"
+tool_tip2 = "Increase bleed chance"
+ID = 6
+is_ability = true
+
+[node name="PoisonUpgrade" parent="Upgrades/Bucket1" instance=ExtResource("14_q1ncp")]
+texture = ExtResource("15_1g2sv")
+color = Color(0.083333254, 1, 0, 1)
+tool_tip = "Chance to poison enemies with arrow"
+ID = 7
+is_ability = true
+
+[node name="Bucket2" type="Node2D" parent="Upgrades"]
+
+[node name="ExtraGoldUpgrade" parent="Upgrades/Bucket2" instance=ExtResource("16_j6lgl")]
+texture = ExtResource("17_m371p")
+color = Color(0, 0.8117647, 0.1764706, 1)
+tool_tip = "Increase The Amount of gold dropped by 1"
+ID = 11
+is_ability = true
+
+[node name="Bucket3" type="Node2D" parent="Upgrades"]
+
+[node name="ArrowExplosionUpgrade" parent="Upgrades/Bucket3" instance=ExtResource("18_o847p")]
+color = Color(0.68103, 0.1222, 0.94, 1)
+tool_tip = "Arrows explode on hit"
+ID = 100
+bucket = 3
+is_ability = true
+can_choose_once = true
+
+[node name="PierceUpgrade" parent="Upgrades/Bucket3" instance=ExtResource("19_eqilc")]
+color = Color(0.682353, 0.121569, 0.941176, 1)
+tool_tip = "Arrows can pierce enemies"
+ID = 102
+bucket = 3
+is_ability = true
+can_choose_once = true

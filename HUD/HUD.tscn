@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bju1rx12kx8oe"]
+[gd_scene load_steps=31 format=3 uid="uid://bju1rx12kx8oe"]
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://122k5727876t" path="res://StatsUI/Sprites/MoreInfoButtonHover.png" id="14_33ejm"]
 [ext_resource type="Script" uid="uid://g5q4p7wn2b0a" path="res://StatsUI/more_info.gd" id="15_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="16_65vjf"]
+[ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 
 [sub_resource type="Animation" id="Animation_xyp2j"]
 resource_name = "Gained"
@@ -508,5 +509,18 @@ autowrap_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_gf6xr")
 }
+
+[node name="UpgradeButtons" parent="Control" instance=ExtResource("17_ihvjp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+scale = Vector2(5, 5)
 
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

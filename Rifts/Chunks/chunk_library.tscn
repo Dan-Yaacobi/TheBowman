@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5x4nkm1387qe"]
+
+[ext_resource type="Script" uid="uid://co6xputyjmuin" path="res://Rifts/Chunks/chunk_library.gd" id="1_o0a4m"]
+
+[node name="ChunkLibrary" type="Node2D"]
+script = ExtResource("1_o0a4m")

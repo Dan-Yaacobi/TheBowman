@@ -88,7 +88,7 @@ func add_ability(ability_type_name: String, ability) -> void:
 	upgrades.call_deferred(upgrades.new_abilities_dict[ability_type_name],ability)
 
 func add_display_buff(buff: PlayerUpgrade) -> void:
-	if buff != null:
+	if buff:
 		total_buffs.add_display_buff(buff)
 		
 func hide_buffs() -> void:
@@ -97,7 +97,7 @@ func hide_buffs() -> void:
 func show_buffs() -> void:
 	total_buffs.visible = true
 
-func get_buff_tooltip(id: int) -> String:
+func get_buff_tooltip(_id: int) -> String:
 	
 	return ""
 func reset_to_base_stats() -> void:
@@ -125,7 +125,7 @@ func init_stats_with_bonus() -> void:
 func init_bonus_stats() -> void:
 	bonus_stats = stats.duplicate()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if stats.hp > 0:
 		direction = Input.get_axis("Left","Right")
 	else:

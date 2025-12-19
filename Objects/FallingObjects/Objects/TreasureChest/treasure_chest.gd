@@ -16,12 +16,12 @@ func _ready() -> void:
 	self.gravity_scale = 0.05
 	self.damaged.connect(damaged_animation)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pass
 
 func damaged_animation() -> void:
 	animation_player.play("Damaged")
-	animation_player.current_animation
+
 	
 	damaged_audio.play(0.2)
 	

@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://dolo7tiosewrq"]
+
+[ext_resource type="Script" uid="uid://ccnccc8ocw8oe" path="res://HUD/Upgrades/UpgradeButton/upgrade_button.gd" id="1_2vqur"]
+[ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="3_grqo8"]
+[ext_resource type="Texture2D" uid="uid://c2fj27oxbkhly" path="res://HUD/Upgrades/UpgradeButton/upgrade_frame.png" id="5_jqxbo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqxbo"]
+bg_color = Color(0.6, 0.6, 0.45490196, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42v61"]
+bg_color = Color(0.6, 0.6, 0.45490196, 0.39607844)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sajvq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="UpgradeButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2vqur")
+
+[node name="CurrentStat" type="Label" parent="."]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 19.0
+offset_right = 808.99994
+offset_bottom = 498.99997
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "Upgrade Information
+"
+autowrap_mode = 3
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, 8)
+amount = 20
+emission_shape = 3
+emission_rect_extents = Vector2(15, 15)
+gravity = Vector2(0, 0)
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+clip_contents = true
+layout_mode = 0
+offset_left = -26.000002
+offset_top = -9.0
+offset_right = 13.999998
+offset_bottom = 31.0
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("5_jqxbo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="UpgradeIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 23.0
+offset_bottom = 24.0
+texture = ExtResource("3_grqo8")
+
+[node name="ChooseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 43.0
+offset_right = 522.0
+offset_bottom = 276.0
+scale = Vector2(0.04, 0.04)
+theme_override_font_sizes/font_size = 180
+theme_override_styles/normal = SubResource("StyleBoxFlat_jqxbo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_42v61")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sajvq")
+text = "Choose"
+
+[connection signal="pressed" from="ChooseButton" to="." method="_on_choose_button_pressed"]

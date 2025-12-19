@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 		combo_activated_effect.emitting = false
 		area.monitoring = false
 		
-func detect_enemy(b) -> void:
+func detect_enemy(_b) -> void:
 	return
 	#if b is Enemy:
 		#b.take_damage(player.current_weapon.weapon_data.damage)

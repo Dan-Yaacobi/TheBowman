@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://badgca1qq36ad"]
+
+[ext_resource type="Texture2D" uid="uid://bod6bf4uewamn" path="res://Level/Islands/sprites/Island3.png" id="1_8awij"]
+
+[node name="IslandMarker" type="Marker2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.4862745, 1, 0.4392157, 0.5529412)
+position = Vector2(-3, 3)
+texture = ExtResource("1_8awij")

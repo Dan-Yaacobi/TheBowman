@@ -7,7 +7,7 @@ class_name ShooterHand extends Node2D
 func _ready() -> void:
 	shoot_timer.timeout.connect(shoot)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if tower.target != null:
 		set_hand_direction()
 		if shoot_timer.is_stopped():

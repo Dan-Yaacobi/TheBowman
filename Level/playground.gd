@@ -40,7 +40,7 @@ func _ready() -> void:
 	upgrade_button_3.choose_button.pressed.connect(new_wave_difficulty)
 	upgrade_buttons.disable()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if summon_timer.is_stopped():
 		summon_timer.start()
 

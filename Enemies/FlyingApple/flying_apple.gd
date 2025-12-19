@@ -66,9 +66,8 @@ func shoot() -> void:
 
 		shoot_cooldown = new_bullet.data.fire_cooldown
 		new_bullet.direction = calculate_direction_to_player()
-		new_bullet.global_position = global_position
+		new_bullet.position = position
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.knockback = stats.knockback
-		
 		get_parent().add_child(new_bullet)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cvio5f8sadcl8"]
+[gd_scene load_steps=11 format=3 uid="uid://cvio5f8sadcl8"]
 
 [ext_resource type="Script" uid="uid://dex3xgdv4beu3" path="res://MainGame/game.gd" id="1_iteqa"]
 [ext_resource type="PackedScene" uid="uid://cdu6hjoweee6s" path="res://Level/PlayGround/PlayGround.tscn" id="1_maytk"]
@@ -8,28 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://boqh5qxj8h80x" path="res://Shop/AbilitiesShop/AbilitiesShop.tscn" id="6_onhyr"]
 [ext_resource type="PackedScene" uid="uid://clubhhuu1gip3" path="res://Shop/PlatformShop/PlatformShop.tscn" id="7_8hn01"]
 [ext_resource type="PackedScene" uid="uid://duv1vqq2qbq3m" path="res://Shop/TowersShopMenu/TowerUpgradeMenu.tscn" id="8_nnxe6"]
+[ext_resource type="PackedScene" uid="uid://iitxisrr6wi5" path="res://Rifts/Rift.tscn" id="9_d47r0"]
 [ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="9_yk4gd"]
-[ext_resource type="PackedScene" uid="uid://30wx8ts1il36" path="res://Rifts/RiftController.tscn" id="10_d47r0"]
-[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="11_gt6jl"]
-[ext_resource type="Script" uid="uid://nrlxaksqvxe5" path="res://Rifts/RiftGeneration/rift_cluster_config.gd" id="11_hygys"]
-[ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="12_qeody"]
-[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="13_e3pk7"]
-[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="14_ermko"]
-[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="15_jbm63"]
-
-[sub_resource type="Resource" id="Resource_gt6jl"]
-script = ExtResource("11_hygys")
-island_scene = Array[PackedScene]([ExtResource("11_gt6jl"), ExtResource("12_qeody"), ExtResource("13_e3pk7"), ExtResource("14_ermko"), ExtResource("15_jbm63")])
-island_count = 500
-max_depth = 15
-max_children = 10
-horizontal_step = 150.0
-horizontal_jitter = 300.0
-vertical_spacing = 150.0
-vertical_jitter = 300.0
-cluster_min_y = -2000.0
-cluster_max_y = 2000.0
-metadata/_custom_type_script = "uid://nrlxaksqvxe5"
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iteqa")
@@ -54,12 +34,11 @@ visible = false
 [node name="TowerUpgradeMenu" parent="." instance=ExtResource("8_nnxe6")]
 visible = false
 
+[node name="Rift" parent="." instance=ExtResource("9_d47r0")]
+
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
 visible = false
 
 [node name="CloudTimer" type="Timer" parent="."]
 
 [node name="Hud" parent="." instance=ExtResource("9_yk4gd")]
-
-[node name="RiftController" parent="." instance=ExtResource("10_d47r0")]
-rift_config = SubResource("Resource_gt6jl")

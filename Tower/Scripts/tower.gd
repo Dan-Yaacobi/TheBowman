@@ -18,13 +18,13 @@ var tower_placed: bool = false
 
 func _ready() -> void:
 	return
-	shoot_range.body_entered.connect(set_target)
-	shoot_range.body_exited.connect(clear_target)
-	switch_target_timer.timeout.connect(pick_closest_target)
-	blind_spot.body_entered.connect(blind_spot_entered)
-	blind_spot.body_exited.connect(blind_spot_exited)
+	#shoot_range.body_entered.connect(set_target)
+	#shoot_range.body_exited.connect(clear_target)
+	#switch_target_timer.timeout.connect(pick_closest_target)
+	#blind_spot.body_entered.connect(blind_spot_entered)
+	#blind_spot.body_exited.connect(blind_spot_exited)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if tower_placed:
 		if target != null :
 			calculate_direction_to_target()
@@ -105,7 +105,7 @@ func calculate_direction_to_target() -> void:
 		update_direction(false)
 	pass
 	
-func upgrade(arrow:PackedScene, bow: Texture) -> void:
+func upgrade(_arrow:PackedScene, _bow: Texture) -> void:
 	pass
 
 func change_direction() -> void:

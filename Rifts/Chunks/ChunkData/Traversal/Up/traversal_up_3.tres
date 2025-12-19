@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChunkData" load_steps=3 format=3 uid="uid://bq1oxee65vkvd"]
+
+[ext_resource type="PackedScene" uid="uid://bantk404k2hrb" path="res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_3.tscn" id="1_fn83s"]
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_hdgbr"]
+
+[resource]
+script = ExtResource("1_hdgbr")
+scene = ExtResource("1_fn83s")
+id = "traversal_up_3"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

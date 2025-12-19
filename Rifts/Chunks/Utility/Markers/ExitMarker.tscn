@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://4qu0wmi6ueq8"]
+
+[ext_resource type="Script" uid="uid://xbq8vi23s0f7" path="res://Rifts/Chunks/Utility/Markers/exit_marker.gd" id="1_pnvei"]
+
+[node name="ExitMarker" type="Marker2D"]
+script = ExtResource("1_pnvei")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.9999995
+offset_top = -7.9999995
+offset_right = 187.0
+offset_bottom = 142.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 120
+text = "Exit"

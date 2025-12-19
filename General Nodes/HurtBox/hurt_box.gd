@@ -27,5 +27,5 @@ func AreaEnetered( a : Area2D) -> void:
 		added_effects(a.enemy)
 	successful_hit.emit()
 		
-func added_effects(a: Enemy) -> void:
+func added_effects(_a: Enemy) -> void:
 	pass

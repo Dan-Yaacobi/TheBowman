@@ -91,7 +91,7 @@ func reset_tiles() -> int:
 		#remove_right_tile()
 	##
 	#pass
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func remove_cell_at_point(_point: Vector2) -> void:

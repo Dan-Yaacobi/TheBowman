@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene load_steps=24 format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="Script" uid="uid://cu2jp5mww0be3" path="res://00 Globals/enemies.gd" id="2_lmkum"]
@@ -9,30 +9,12 @@
 [ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="12_jv2oc"]
 [ext_resource type="Script" uid="uid://yrg8jskcantp" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
+[ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="15_53yb1"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="16_bw3vh"]
-[ext_resource type="Script" uid="uid://cklsqejxas1gu" path="res://Level/PlayGround/upgrade_buttons.gd" id="18_487cb"]
 [ext_resource type="Resource" uid="uid://bifydptc2miel" path="res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres" id="19_e2v75"]
-[ext_resource type="PackedScene" uid="uid://dolo7tiosewrq" path="res://Level/PlayGround/Upgrades/UpgradeButton/UpgradeButton.tscn" id="19_odtes"]
-[ext_resource type="Script" uid="uid://l716tqh1t70b" path="res://Level/PlayGround/upgrades.gd" id="20_8lbxg"]
 [ext_resource type="Script" uid="uid://d35o1sx2biv2n" path="res://Objects/FallingObjects/Scripts/summon_objects.gd" id="20_ueqxs"]
 [ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="20_w4w4y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="24_xpwt5"]
-[ext_resource type="PackedScene" uid="uid://bfn30j741tfxs" path="res://Player/Upgrades/Abilities/Pierce/PierceUpgrade.tscn" id="28_8kany"]
-[ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="29_mlbf7"]
-[ext_resource type="PackedScene" uid="uid://1p55dgoihewu" path="res://Player/Upgrades/Abilities/ArrowExplode/ArrowExplosionUpgrade.tscn" id="29_y7ifn"]
-[ext_resource type="PackedScene" uid="uid://4w1awb7d0w8w" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.tscn" id="30_gqul3"]
-[ext_resource type="Texture2D" uid="uid://ceyj26wphvmuv" path="res://Level/Sprites/Upgrades/SwordIcon.png" id="31_bfuq3"]
-[ext_resource type="Texture2D" uid="uid://dtailwyo7vyw2" path="res://Player/Upgrades/Abilities/ExtraGold/ExtraGoldUpgrade.png" id="31_xwm8b"]
-[ext_resource type="Texture2D" uid="uid://r6icgs1bvtku" path="res://Level/Sprites/Upgrades/LeechLifeIcon.png" id="33_jypeg"]
-[ext_resource type="PackedScene" uid="uid://bsy8tg0ac6f0n" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade.tscn" id="34_ah7gd"]
-[ext_resource type="Texture2D" uid="uid://c06v3rtneiuqa" path="res://Level/Sprites/Upgrades/StunIcon.png" id="35_jv2oc"]
-[ext_resource type="Texture2D" uid="uid://bu2ggc7wd8fei" path="res://Level/Sprites/Upgrades/BleedIcon.png" id="37_ofn0p"]
-[ext_resource type="PackedScene" uid="uid://cumh3li424lli" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade.tscn" id="38_3abtr"]
-[ext_resource type="PackedScene" uid="uid://curkiynf7h80v" path="res://Player/Upgrades/Abilities/Poison/PoisonUpgrade.tscn" id="38_bfuq3"]
-[ext_resource type="Texture2D" uid="uid://1gpkkexjya0h" path="res://Level/Sprites/Upgrades/PoisonIcon.png" id="39_jypeg"]
-[ext_resource type="PackedScene" uid="uid://7e7tcn7orna5" path="res://Player/Upgrades/Abilities/Crit/CritUpgrade.tscn" id="42_iqpx2"]
-[ext_resource type="PackedScene" uid="uid://caq6l5xbwajld" path="res://Player/Upgrades/Abilities/SwordBleed/SwordBleedUpgrade.tscn" id="42_q6dew"]
-[ext_resource type="PackedScene" uid="uid://b8gmj6kbjq75c" path="res://Player/Upgrades/Abilities/SwordSize/SwordSizeUpgrade.tscn" id="42_xpwt5"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="53_q6dew"]
 
 [sub_resource type="Resource" id="Resource_s07r2"]
@@ -141,121 +123,7 @@ node_a = NodePath("../SignHolder")
 node_b = NodePath("../WaveSign")
 motor_enabled = true
 
-[node name="UpgradeButtons" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -65.0
-offset_right = -1.0
-offset_bottom = -65.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("18_487cb")
-bucket_upgrade_chance = 15
-
-[node name="UpgradeButton" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
-layout_mode = 0
-offset_left = -78.0
-offset_top = -48.0
-offset_right = -62.0
-offset_bottom = -32.0
-
-[node name="UpgradeButton2" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
-layout_mode = 0
-offset_left = 80.0
-offset_top = -48.0
-offset_right = 96.0
-offset_bottom = -32.0
-
-[node name="UpgradeButton3" parent="UpgradeButtons" instance=ExtResource("19_odtes")]
-layout_mode = 0
-offset_left = 2.0
-offset_top = -48.0
-offset_right = 18.0
-offset_bottom = -32.0
-
-[node name="Upgrades" type="Node2D" parent="UpgradeButtons"]
-script = ExtResource("20_8lbxg")
-
-[node name="Bucket1" type="Node2D" parent="UpgradeButtons/Upgrades"]
-
-[node name="CritUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_iqpx2")]
-texture = ExtResource("29_mlbf7")
-color = Color(0.188235, 0.890196, 0.34902, 1)
-tool_tip = "Arrows can crit"
-tool_tip2 = "Increase crit chance"
-ID = 1
-bucket = null
-is_ability = true
-ability_chosen = null
-can_choose_once = null
-
-[node name="SwordSizeUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_xpwt5")]
-texture = ExtResource("31_bfuq3")
-color = Color(1, 1, 1, 1)
-tool_tip = "Increase Sword Size"
-ID = 3
-is_ability = true
-
-[node name="LeechUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_3abtr")]
-texture = ExtResource("33_jypeg")
-color = Color(0.188235, 0.890196, 0.34902, 1)
-tool_tip = "Arrows can leech life"
-tool_tip2 = "Increase leech chance"
-ID = 4
-is_ability = true
-
-[node name="StunUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("34_ah7gd")]
-texture = ExtResource("35_jv2oc")
-color = Color(0.188235, 0.890196, 0.34902, 1)
-tool_tip = "Arrows can stun"
-tool_tip2 = "Increase stun chance"
-ID = 5
-is_ability = true
-
-[node name="SwordBleedUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("42_q6dew")]
-texture = ExtResource("37_ofn0p")
-tool_tip = "Sword can cause enemies to bleed"
-tool_tip2 = "Increase bleed chance"
-ID = 6
-is_ability = true
-
-[node name="PoisonUpgrade" parent="UpgradeButtons/Upgrades/Bucket1" instance=ExtResource("38_bfuq3")]
-texture = ExtResource("39_jypeg")
-color = Color(0.083333254, 1, 0, 1)
-tool_tip = "Chance to poison enemies with arrow"
-ID = 7
-is_ability = true
-
-[node name="Bucket2" type="Node2D" parent="UpgradeButtons/Upgrades"]
-
-[node name="ExtraGoldUpgrade" parent="UpgradeButtons/Upgrades/Bucket2" instance=ExtResource("30_gqul3")]
-texture = ExtResource("31_xwm8b")
-color = Color(0, 0.8117647, 0.1764706, 1)
-tool_tip = "Increase The Amount of gold dropped by 1"
-ID = 11
-is_ability = true
-
-[node name="Bucket3" type="Node2D" parent="UpgradeButtons/Upgrades"]
-
-[node name="ArrowExplosionUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("29_y7ifn")]
-color = Color(0.68103, 0.1222, 0.94, 1)
-tool_tip = "Arrows explode on hit"
-ID = 100
-bucket = 3
-is_ability = true
-can_choose_once = true
-
-[node name="PierceUpgrade" parent="UpgradeButtons/Upgrades/Bucket3" instance=ExtResource("28_8kany")]
-color = Color(0.682353, 0.121569, 0.941176, 1)
-tool_tip = "Arrows can pierce enemies"
-ID = 102
-bucket = 3
-is_ability = true
-can_choose_once = true
+[node name="UpgradeButtons" parent="." instance=ExtResource("15_53yb1")]
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("53_q6dew")]
 position = Vector2(10, -16)

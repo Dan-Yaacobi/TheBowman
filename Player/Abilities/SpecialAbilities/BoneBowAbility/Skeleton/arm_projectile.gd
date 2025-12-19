@@ -10,7 +10,7 @@ func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position += direction*speed
 	rotation += 0.1
 

@@ -1,6 +1,12 @@
+res://Rifts/Upgrades
+res://Rifts/Chunks/ChunkData/Intro
+res://Rifts/Chunks/ChunkData/Traversal/Up
+res://Rifts/Chunks/ChunkData/Traversal/Left
+res://Rifts/Chunks/ChunkData/Traversal/Down
+res://Rifts/Chunks/ChunkData
+res://00 Globals
 C:/Users/dany/Desktop/TheBowman/docs
 res://Enemies/EnemyData/EnemyValues
-res://00 Globals
 res://Fonts
 res://StartMenu
 res://HUD/Scene Transition

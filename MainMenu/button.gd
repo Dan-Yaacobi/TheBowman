@@ -1,8 +1,6 @@
 @tool
 class_name MainButton extends Button
 
-signal clicked
-
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @export var button_data: ButtonData

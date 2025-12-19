@@ -12,7 +12,7 @@ class_name Enemies extends Resource
 
 const SPIDER_BOSS = preload("res://Enemies/Spider/SpiderBoss/SpiderBoss.tscn")
 
-func get_enemy(current_wave : int) -> Enemy:
+func get_enemy(_current_wave : int) -> Enemy:
 	
 	var apple: FlyingApple = flying_apple_scene.instantiate()
 	apple.set_data(flying_apples_data[0])

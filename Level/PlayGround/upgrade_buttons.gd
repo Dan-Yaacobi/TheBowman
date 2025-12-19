@@ -12,14 +12,15 @@ var boss_upgrade_boost: bool = false
 var success_boost: float = 1.0
 
 func _ready() -> void:
+	EventBus.open_upgrades_window.connect(get_upgrades)
 	for child in get_children():
 		if child is UpgradeButton:
 			upgrade_buttons.append(child)
 			child.upgrade_chosen.connect(remove_chosen_ability_from_bucket)
 
-func get_upgrades(current_wave: int) -> void:
+func get_upgrades(tier: int) -> void:
 	current_button_set_up = 0
-	if (current_wave - 1) % 5 == 0:
+	if (tier - 1) % 5 == 0:
 		boss_upgrade_boost = true
 		
 	for i in upgrade_buttons.size():
@@ -41,9 +42,9 @@ func get_upgrades(current_wave: int) -> void:
 				success_boost +=0.04
 			
 			
-		upgrade_buttons[current_button_set_up].set_button_upgrade(upgrades.get_bucket_upgrade(current_button_bucket),player)
+		upgrade_buttons[current_button_set_up].set_button_upgrade(upgrades.get_bucket_upgrade(current_button_bucket),PlayerManager.player)
 		current_button_set_up += 1
-	
+	enable()
 
 func remove_chosen_ability_from_bucket(upgrade: PlayerUpgrade) -> void:
 	if upgrade.is_ability:
@@ -51,7 +52,7 @@ func remove_chosen_ability_from_bucket(upgrade: PlayerUpgrade) -> void:
 			upgrades.used_buckets[upgrade.bucket].erase(upgrade)
 			upgrades.abilities_bucket[upgrade.bucket].append(upgrade)
 	upgrades.refill_buckets()	
-
+	disable()
 
 func disable() -> void:
 	for button in upgrade_buttons:

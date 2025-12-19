@@ -8,5 +8,5 @@ func extra_ready_functions() -> void:
 	enemy_state_machine.Initialize(self)
 	hit_box.set_enemy(self)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()

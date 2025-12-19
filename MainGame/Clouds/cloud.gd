@@ -11,7 +11,7 @@ func _ready() -> void:
 	sprite.frame = randi_range(0 , sprite.hframes*sprite.vframes - 1)
 	move_speed = randf_range(move_speed - 10, move_speed + 10)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity.x = move_speed
 	move_and_slide()
 

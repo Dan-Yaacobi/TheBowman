@@ -18,5 +18,5 @@ func _ready() -> void:
 	data.move_speed = randi_range(800,1500)
 	pass
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()

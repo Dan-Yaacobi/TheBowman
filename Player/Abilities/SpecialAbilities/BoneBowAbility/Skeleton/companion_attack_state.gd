@@ -45,7 +45,7 @@ func calculate_direction_to_target() -> void:
 	if companion.curr_enemy_att != null:
 		attack_direction = (companion.curr_enemy_att.global_position - companion.global_position).normalized()
 
-func shoot(v) -> void:
+func shoot(_v) -> void:
 	var arm: SkeletonArm = companion.data.projectile.instantiate()
 	arm.global_position = companion.global_position
 	arm.direction = attack_direction

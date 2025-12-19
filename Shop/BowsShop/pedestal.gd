@@ -34,11 +34,11 @@ func _update_sprite() -> void:
 func _bought_bow() -> void:
 	PlayerManager.player.change_to_new_bow(bow)
 	
-func _on_player_detector_body_entered(body: Node2D) -> void:
+func _on_player_detector_body_entered(_body: Node2D) -> void:
 	buy_bow_menu.appear()
 	particles.emitting = true
 	
-func _on_player_detector_body_exited(body: Node2D) -> void:
+func _on_player_detector_body_exited(_body: Node2D) -> void:
 	buy_bow_menu.disappear()
 	particles.emitting = false
 	

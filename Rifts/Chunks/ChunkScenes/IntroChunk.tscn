@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://f48hfq74th42"]
+
+[ext_resource type="Script" uid="uid://cqbq0cukextt3" path="res://Rifts/Chunks/ChunkScenes/intro_chunk.gd" id="1_2wsaq"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_2wsaq"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="3_41muo"]
+[ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="3_o6pb5"]
+[ext_resource type="PackedScene" uid="uid://ccp2hrnf3s4hu" path="res://Rifts/Chunks/Utility/Spawners/PowerOrb/PowerOrb.tscn" id="7_7ky7e"]
+[ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="8_u0t7j"]
+[ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="9_okqnu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0t7j"]
+resource_local_to_scene = true
+size = Vector2(53, 25)
+
+[node name="IntroChunk" type="Node2D"]
+script = ExtResource("1_2wsaq")
+
+[node name="Bounds" parent="." instance=ExtResource("8_u0t7j")]
+
+[node name="CollisionShape2D" parent="Bounds" index="0"]
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_u0t7j")
+
+[node name="Island" parent="." instance=ExtResource("2_2wsaq")]
+position = Vector2(0, 5)
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("3_41muo")]
+position = Vector2(1, -19)
+
+[node name="ExitMarker" parent="." instance=ExtResource("3_o6pb5")]
+position = Vector2(59, -16)
+
+[node name="ExitMarker2" parent="." instance=ExtResource("3_o6pb5")]
+position = Vector2(-66, -7)
+
+[node name="ExitMarker3" parent="." instance=ExtResource("3_o6pb5")]
+position = Vector2(-24, -50)
+
+[node name="ExitMarker4" parent="." instance=ExtResource("3_o6pb5")]
+position = Vector2(16, 43)
+
+[node name="EntryMarker" parent="." instance=ExtResource("9_okqnu")]
+position = Vector2(0, -11)
+
+[node name="PowerOrb" parent="." instance=ExtResource("7_7ky7e")]
+position = Vector2(-30, -16)
+
+[editable path="Bounds"]

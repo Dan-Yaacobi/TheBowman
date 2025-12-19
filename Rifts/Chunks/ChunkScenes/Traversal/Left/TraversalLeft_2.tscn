@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgqr7lw4kp3ur"]
+
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="1_a2f80"]
+[ext_resource type="Script" uid="uid://402kq4g6y6pg" path="res://Rifts/Chunks/chunk.gd" id="1_qh1hh"]
+[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="2_qh1hh"]
+[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="4_c0md2"]
+[ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="5_lupre"]
+[ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="6_l11jf"]
+[ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="7_o5j0p"]
+[ext_resource type="PackedScene" uid="uid://dwr52hxemyjof" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawner.tscn" id="8_ysb5k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neyya"]
+resource_local_to_scene = true
+size = Vector2(268.5, 90)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_neyya"]
+resource_local_to_scene = true
+radius = 42.296574
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lykj"]
+resource_local_to_scene = true
+size = Vector2(130.875, 26.5)
+
+[node name="TraversalLeft_2" type="Node2D"]
+script = ExtResource("1_qh1hh")
+
+[node name="Island" parent="." instance=ExtResource("1_a2f80")]
+position = Vector2(4, 15)
+
+[node name="Island2" parent="." instance=ExtResource("2_qh1hh")]
+position = Vector2(82, -4)
+
+[node name="Island5" parent="." instance=ExtResource("2_qh1hh")]
+position = Vector2(52, 37)
+
+[node name="Island4" parent="." instance=ExtResource("4_c0md2")]
+position = Vector2(131, 17)
+
+[node name="EntryMarker" parent="." instance=ExtResource("5_lupre")]
+position = Vector2(136, 3)
+
+[node name="ExitMarker" parent="." instance=ExtResource("6_l11jf")]
+position = Vector2(-80, 12)
+
+[node name="ExitMarker2" parent="." instance=ExtResource("6_l11jf")]
+position = Vector2(-31, 66)
+
+[node name="ExitMarker3" parent="." instance=ExtResource("6_l11jf")]
+position = Vector2(-30, -30)
+
+[node name="Bounds" parent="." instance=ExtResource("7_o5j0p")]
+visible = false
+position = Vector2(75, 1)
+
+[node name="CollisionShape2D" parent="Bounds" index="0"]
+position = Vector2(20, 13)
+shape = SubResource("RectangleShape2D_neyya")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("8_ysb5k")]
+position = Vector2(62, -6)
+
+[node name="CollisionShape2D" parent="EnemySpawner/PlayerDetector" index="0"]
+shape = SubResource("CircleShape2D_neyya")
+
+[node name="SpawnArea" parent="EnemySpawner" index="1"]
+position = Vector2(27, 1)
+
+[node name="CollisionShape2D" parent="EnemySpawner/SpawnArea" index="0"]
+position = Vector2(-29.4375, -43)
+shape = SubResource("RectangleShape2D_4lykj")
+
+[editable path="Bounds"]
+[editable path="EnemySpawner"]

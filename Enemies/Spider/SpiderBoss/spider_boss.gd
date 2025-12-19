@@ -27,7 +27,7 @@ func _ready() -> void:
 	#also summons a spider every X seconds
 	#at 50% hp it crawls back up, crawls down at a different position, 
 	#becomes larger, slightly red and timers are faster
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 func summon_spider() -> void:

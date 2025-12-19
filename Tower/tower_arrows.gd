@@ -11,6 +11,6 @@ class_name TowerArrows extends Node2D
 #const ARROWS: Array[PackedScene] = [BASIC_ARROW,BLUE_ARROW,RED_ARROW,BLACK_ARROW,
 #NATURE_ARROW,THUNDER_ARROW,BONE_BOW,BUBBLE_GUM]
 
-func get_arrow(level: int) -> PackedScene:
+func get_arrow(_level: int) -> PackedScene:
 	return null
 	#return ARROWS[level]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://l2y4uh7pm6ak"]
+[gd_scene load_steps=4 format=3 uid="uid://l2y4uh7pm6ak"]
 
 [ext_resource type="Script" uid="uid://dd5uq7un0y3cu" path="res://Level/Islands/island.gd" id="1_1f8eg"]
 [ext_resource type="Texture2D" uid="uid://rm1qwighhd20" path="res://Level/Islands/sprites/Island5.png" id="2_1f8eg"]
-[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="3_x5mjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
 size = Vector2(30, 2)
@@ -18,6 +17,3 @@ texture = ExtResource("2_1f8eg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_sp085")
-
-[node name="PlayerSpawn" parent="." instance=ExtResource("3_x5mjq")]
-position = Vector2(2, -22)

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyksd451ieeu2"]
-
-[ext_resource type="Script" uid="uid://da4u7xpq1ew00" path="res://Rifts/RiftGeneration/rift_cluster_generator.gd" id="1_16pkx"]
-
-[node name="RiftClusterGenerator" type="Node2D"]
-script = ExtResource("1_16pkx")
