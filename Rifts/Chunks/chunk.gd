@@ -3,15 +3,14 @@ class_name RiftChunk extends Node2D
 @onready var bounds: Bounds = $Bounds
 @onready var entry: EntryMarker = $EntryMarker
 
-@onready var enemy_spawner: EnemySpawner = $EnemySpawner
-
 var rift: Rift
 
 func _ready() -> void:
-	if enemy_spawner:
-		enemy_spawner.active = true
-		enemy_spawner.summoned.connect(add_enemy)
-		
+	extra_ready_functions()
+
+func extra_ready_functions() -> void:
+	pass
+
 func set_rift(_rift: Rift) -> void:
 	if _rift:
 		rift = _rift
@@ -43,8 +42,3 @@ func get_exit_global(exit_index: int) -> Vector2:
 
 func get_bounds_rect() -> Rect2:
 	return bounds.get_boundaries()
-
-func add_enemy(_enemy: Enemy) -> void:
-	if _enemy:
-		rift.call_deferred("add_child",_enemy)
-	pass

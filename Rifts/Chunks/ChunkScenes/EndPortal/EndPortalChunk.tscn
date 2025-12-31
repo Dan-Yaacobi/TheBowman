@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://gbv2dl3ewpp5"]
+
+[ext_resource type="Script" uid="uid://cibq8sfe1c8em" path="res://Rifts/Chunks/ChunkScenes/EndPortal/end_portal_chunk.gd" id="1_1i8qb"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="2_8k06k"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="3_vmfpc"]
+[ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="4_vmfpc"]
+[ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="5_ao63r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li86b"]
+resource_local_to_scene = true
+size = Vector2(49, 59)
+
+[node name="EndPortalChunk" type="Node2D"]
+script = ExtResource("1_1i8qb")
+
+[node name="Portal" parent="." instance=ExtResource("2_8k06k")]
+color = Color(1, 0, 0, 1)
+destination = "Rift"
+
+[node name="Island" parent="." instance=ExtResource("3_vmfpc")]
+position = Vector2(0, 24)
+
+[node name="EntryMarker" parent="." instance=ExtResource("4_vmfpc")]
+position = Vector2(0, 12)
+
+[node name="Bounds" parent="." instance=ExtResource("5_ao63r")]
+position = Vector2(12, 19)
+
+[node name="CollisionShape2D" parent="Bounds" index="0"]
+position = Vector2(-12.5, -9.5)
+shape = SubResource("RectangleShape2D_li86b")
+
+[editable path="Bounds"]

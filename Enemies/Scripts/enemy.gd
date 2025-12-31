@@ -91,6 +91,7 @@ func activate_death_ability() -> void:
 
 func enemy_died() -> void:
 	died.emit(self)
+	EventBus.enemy_died.emit(self)
 	queue_free()
 	
 func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed) -> void:

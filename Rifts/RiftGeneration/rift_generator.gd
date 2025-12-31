@@ -3,7 +3,7 @@ class_name RiftGenerator extends Node2D
 @export var data: GeneratorData
 @export var library: RiftChunkLibrary
 @export var intro_data: ChunkData
-
+@export var end_data: ChunkData
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -33,6 +33,9 @@ func generate() -> RiftChunk:
 	_side_budget_left = data.base_side_budget_nodes + data.side_budget_per_difficulty * data.difficulty
 	_max_branch_depth = data.max_branch_depth_base + int(floor(float(data.difficulty) / 2.0)) * data.max_branch_depth_per_two_difficulty
 	var attempt: int = 0
+	
+	
+	
 	while attempt < data.max_regen_attempts:
 		_reset_world()
 
@@ -44,17 +47,24 @@ func generate() -> RiftChunk:
 		_register_bounds(intro)
 
 		var main_chain: Array[RiftChunk] = _build_main_path(intro, data.main_path_length)
+
 		_try_branch_recursive(main_chain, 1)
 
 		if _total_chunks >= data.min_total_chunks and main_chain.size() >= 2:
 			print("RiftGen OK: total=", _total_chunks, " main=", main_chain.size(), " side_left=", _side_budget_left)
+			
+			var end_portal: RiftChunk = _place_end_portal(main_chain)
+			print("end portal: ", end_portal)
+			if end_portal == null:
+				print("No available portal placement")
 			return intro
 
 		attempt += 1
 	
+
 	# Last resort: return whatever we got (or null if you prefer)
 	print("RiftGen FAILSAFE HIT: total=", get_child_count())
-	return _spawn_chunk(intro_data)# (don’t do this; keep intro from last attempt if you want)
+	return _spawn_chunk(intro_data)
 
 
 # ------------------------------------------------------------
@@ -234,8 +244,9 @@ func _get_free_exits(chunk: RiftChunk) -> Array[ExitMarker]:
 
 func _pick_chunk_data(desired_type: ChunkData.types, desired_difficulty: int, tried_ids: Dictionary) -> ChunkData:
 	var pool: Array[ChunkData] = []
-
-	for c: ChunkData in library.chunks:
+	
+	
+	for c: ChunkData in library.get_chunks(desired_type):
 		if c == null:
 			continue
 		if c.type != desired_type:
@@ -267,9 +278,10 @@ func _pick_chunk_data(desired_type: ChunkData.types, desired_difficulty: int, tr
 				break
 		if picked == null:
 			picked = pool[pool.size() - 1]
-
+			
 	tried_ids[picked.id] = true
 	return picked
+
 
 # ------------------------------------------------------------
 # Purpose + length knobs
@@ -398,3 +410,41 @@ func _shuffled_exits(arr: Array[ExitMarker]) -> Array[ExitMarker]:
 		i -= 1
 
 	return out
+	
+func _place_end_portal(main_chain: Array[RiftChunk]) -> RiftChunk:
+	if main_chain.is_empty():
+		return null
+
+	var last_chunk: RiftChunk = main_chain[main_chain.size() - 1]
+
+	# Try normal attachment from the last main-path chunk
+	var rec: PlacementRecord = _try_attach_new_chunk(
+		last_chunk,
+		end_data.type,
+		end_data.difficulty
+	)
+
+	if rec != null:
+		return rec.chunk
+
+	# --- Failsafe path ---
+	# Extremely rare case: last chunk has no free exits or placement fails.
+	# We now try earlier main-path chunks, starting from the end and moving backward.
+
+	var i: int = main_chain.size() - 2
+	while i >= 0:
+		var fallback_parent: RiftChunk = main_chain[i]
+
+		rec = _try_attach_new_chunk(
+			fallback_parent,
+			end_data.type,
+			end_data.difficulty
+		)
+
+		if rec != null:
+			return rec.chunk
+
+		i -= 1
+
+	# Absolute failure: no place to put the end portal
+	return null

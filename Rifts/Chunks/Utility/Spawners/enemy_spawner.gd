@@ -13,14 +13,16 @@ signal summoned(enemy: Enemy)
 const POWER_ORB = preload("uid://ccp2hrnf3s4hu")
 
 func _ready() -> void:
-	spawn_timer.timeout.connect(summon)
-	spawn_timer.wait_time = spawn_time - difficulty * 0.2
-	
+	if active:
+		spawn_timer.timeout.connect(summon)
+		spawn_timer.wait_time = spawn_time - difficulty * 0.2
+		
 func summon() -> void:
 	var new_enemy: Enemy = data.get_apple(difficulty)
 	if data.total > 0:
 		new_enemy.global_position = get_spawn_position()
 		summoned.emit(new_enemy)
+		EventBus.enemy_summoned.emit(new_enemy)
 		data.total -= 1
 		
 	if data.total <= 0:

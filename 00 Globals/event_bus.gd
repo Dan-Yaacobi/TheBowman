@@ -20,3 +20,6 @@ signal leeched(amount: int, position: Vector2)
 signal exit_ui
 
 signal open_upgrades_window(tier: int)
+
+signal enemy_summoned(enemy: Enemy)
+signal enemy_died(enemy: Enemy)

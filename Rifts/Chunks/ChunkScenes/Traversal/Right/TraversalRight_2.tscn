@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://bhx7k1p8sua8s"]
 
-[ext_resource type="Script" uid="uid://402kq4g6y6pg" path="res://Rifts/Chunks/chunk.gd" id="1_aedd6"]
+[ext_resource type="Script" uid="uid://dnvx18dxxbpms" path="res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd" id="1_jbnxj"]
 [ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="1_ppd84"]
 [ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="2_jc4kb"]
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="3_u04yv"]
@@ -89,7 +89,7 @@ resource_local_to_scene = true
 size = Vector2(175, 30)
 
 [node name="TraversalRight_2" type="Node2D"]
-script = ExtResource("1_aedd6")
+script = ExtResource("1_jbnxj")
 
 [node name="Island" parent="." instance=ExtResource("1_ppd84")]
 position = Vector2(1, 5)

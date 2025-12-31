@@ -58,6 +58,7 @@ amount = 30
 texture = ExtResource("4_mc0vw")
 lifetime = 0.75
 speed_scale = 0.2
+lifetime_randomness = 0.51
 emission_shape = 3
 emission_rect_extents = Vector2(7, 10)
 gravity = Vector2(0, 0)

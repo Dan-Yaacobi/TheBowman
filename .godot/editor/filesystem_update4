@@ -1,3 +1,4 @@
+res://Rifts/Chunks/ChunkScenes/IntroChunk.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -7,3 +8,28 @@ res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Enemies/Summoner/Glow.gdshader
+res://Rifts/Chunks/Utility/Spawners/enemy_spawner.gd
+res://Rifts/Chunks/ChunkScenes/Traversal/Down/TraversalDown_1.tscn
+res://Rifts/Chunks/chunk.gd
+res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd
+res://Rifts/Chunks/ChunkScenes/Traversal/Down/TraversalDown_2.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Left/TraversalLeft_1.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Left/TraversalLeft_2.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Right/TraversalRight_3.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Right/TraversalRight_2.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Right/TraversalRight_1.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_3.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_2.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_1.tscn
+res://Rifts/Chunks/ChunkScenes/EndPortal/EndPortalChunk.tscn
+res://Rifts/Chunks/ChunkScenes/EndPortal/end_portal_chunk.gd
+res://Rifts/Rift.tscn
+res://Rifts/rift.gd
+res://Objects/Portal/Portal.tscn
+res://Rifts/Chunks/chunk_library.gd
+res://Rifts/RiftGeneration/rift_generator.gd
+res://Rifts/Chunks/ChunkData/End/end_portal_data.tres
+res://Rifts/Chunks/chunk_bucket.gd
+res://Level/PlayGround/PlayGround.tscn
+res://00 Globals/event_bus.gd
+res://Enemies/Scripts/enemy.gd
