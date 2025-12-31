@@ -1,0 +1,9 @@
+res://Items/Coin.tres
+res://Items/Diamond.tres
+res://Items/RedDiamond.tres
+res://Enemies/Cloud/CloudEnemy.gdshader
+res://Enemies/Cloud/lightningshader.gdshader
+res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
+res://Enemies/Summoner/Glow.gdshader

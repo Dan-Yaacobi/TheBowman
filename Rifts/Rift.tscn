@@ -19,6 +19,8 @@
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
+main_path_length = 15
+main_backtrack_depth = 3
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
 [sub_resource type="Resource" id="Resource_clqlo"]

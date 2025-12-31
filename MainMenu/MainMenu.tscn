@@ -302,7 +302,7 @@ destination = "PlayGround"
 flip_h = true
 
 [node name="Portal4" parent="Portals" instance=ExtResource("13_npjie")]
-position = Vector2(370, 46)
+position = Vector2(205, 98)
 color = Color(1, 0.45, 0.45, 1)
 destination = "Rift"
 flip_h = true

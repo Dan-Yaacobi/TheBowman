@@ -30,7 +30,8 @@ class PlacementRecord:
 
 func generate() -> RiftChunk:
 	_rng.randomize()
-
+	_side_budget_left = data.base_side_budget_nodes + data.side_budget_per_difficulty * data.difficulty
+	_max_branch_depth = data.max_branch_depth_base + int(floor(float(data.difficulty) / 2.0)) * data.max_branch_depth_per_two_difficulty
 	var attempt: int = 0
 	while attempt < data.max_regen_attempts:
 		_reset_world()

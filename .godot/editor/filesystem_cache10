@@ -1,6 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1766159105
-export_presets.cfg::TextFile::-1::1765315864::0::1::::<><><>0<>0<><>::
+::res://::1766605824
+export_presets.cfg::TextFile::-1::1766159116::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::4266016548506147734::1761257703::1765274674::1::::<><><>0<>0<>9f0503c60e6082dbf7616f89c9d5a420<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1765275208::0::1::::<><><>0<>0<><>::
 ::res://00 Globals/::1766157481
@@ -36,23 +36,23 @@ poison_debuff.gd::GDScript::1572062454968218212::1765275207::0::1::::PoisonDebuf
 ::res://Debuffs/Stun/::1765275207
 StunDebuff.tscn::PackedScene::6610302423897000179::1765275207::0::1::::<><><>0<>0<><>::uid://bp2bqtrgmd3to::::res://Debuffs/Stun/stun_debuff.gd<>uid://f3gi3n3nq0ia::::res://Enemies/EnemyEffects/Stunned/stunned_effect.tscn<>uid://bj2ua5b17bpjx::::res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn
 stun_debuff.gd::GDScript::3495081851812572892::1765275207::0::1::::StunDebuff<>Debuff<><>0<>0<><>::
-::res://docs/::1765315864
-index.apple-touch-icon.png::CompressedTexture2D::7460221214610869146::1765315864::1765275227::1::::<><><>0<>0<>38895e59b1889e7fb850d72ad42ba3ba<>res://.godot/imported/index.apple-touch-icon.png-b21a756d869f84af832970a74d8371bc.ctex::
-index.icon.png::CompressedTexture2D::7028297209852147864::1765315864::1765275227::1::::<><><>0<>0<>0c11514958b9a316e0f5743f46ab4e4d<>res://.godot/imported/index.icon.png-b92c9a802ad4b78e247784454a6b506f.ctex::
-index.png::CompressedTexture2D::7232664651608162186::1765315864::1765275227::1::::<><><>0<>0<>ec54b7b3072d4d231869a94986128f16<>res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex::
+::res://docs/::1766159117
+index.apple-touch-icon.png::CompressedTexture2D::7460221214610869146::1766159117::1765275227::1::::<><><>0<>0<>38895e59b1889e7fb850d72ad42ba3ba<>res://.godot/imported/index.apple-touch-icon.png-b21a756d869f84af832970a74d8371bc.ctex::
+index.icon.png::CompressedTexture2D::7028297209852147864::1766159117::1765275227::1::::<><><>0<>0<>0c11514958b9a316e0f5743f46ab4e4d<>res://.godot/imported/index.icon.png-b92c9a802ad4b78e247784454a6b506f.ctex::
+index.png::CompressedTexture2D::7232664651608162186::1766159117::1765275227::1::::<><><>0<>0<>ec54b7b3072d4d231869a94986128f16<>res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex::
 ::res://Enemies/::1765663185
 ::res://Enemies/11_HellEnemies/::1765275207
 ::res://Enemies/11_HellEnemies/EvilWizard/::1765275207
 EvilWizard.tscn::PackedScene::8952670060607342395::1765275207::0::1::::<><><>0<>0<><>::uid://dmqfs2kvs8mjy::::res://Enemies/11_HellEnemies/sprites/Wizard.png
 ::res://Enemies/11_HellEnemies/sprites/::1765275207
 Wizard.png::CompressedTexture2D::8034895382612775874::1765275207::1765275207::1::::<><><>0<>0<>b37091d16da602d134df3d4253e6f89b<>res://.godot/imported/Wizard.png-94044c90e98df8f0cfe1066eba6b1786.ctex::
-::res://Enemies/Cloud/::1766140112
+::res://Enemies/Cloud/::1766242846
 attack_state.gd::GDScript::7934168591664826452::1765275207::0::1::::CloudAttackState<>EnemyState<><>0<>0<><>::
-CloudEnemy.gdshader::Shader::3096756902588198851::1766140112::0::1::::<><><>0<>0<><>::
+CloudEnemy.gdshader::Shader::3096756902588198851::1766242846::0::1::::<><><>0<>0<><>::
 CloudEnemy.tscn::PackedScene::9054782476396986163::1765275207::0::1::::<><><>0<>0<><>::uid://7ira1qek0c3v::::res://Enemies/Cloud/cloud_enemy.gd<>uid://bp8epu764ng7s::::res://Enemies/Cloud/Sprites/Cloud Enemy.png<>uid://he5b02nm11v5::::res://Enemies/Cloud/RainDrop.tscn<>uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://e6ki53roj2tq::::res://General Nodes/DebuffHandler/DebuffHandler.tscn<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://gx0ttrql3dsf::::res://General Nodes/HitBox/Hitbox.tscn<>uid://buwajsaukfabu::::res://Enemies/Scripts/enemy_hit_box.gd<>uid://bkedesuwvo27x::::res://Enemies/Cloud/CloudEnemy.gdshader<>uid://ck8i7ukrq5afx::::res://General Nodes/HurtBox/HurtBox.tscn<>uid://bxpqmg6oqsxsu::::res://Enemies/Scripts/enemy_state_machine.gd<>uid://6gbdiv0wryal::::res://Enemies/Cloud/wander_state.gd<>uid://epvrsdeddc0i::::res://Enemies/Cloud/seek_state.gd<>uid://dlbmukypxs013::::res://Enemies/Cloud/attack_state.gd<>uid://dqaedy5b2ydp4::::res://Enemies/Cloud/lightningshader.gdshader<>uid://cqstctojgygpv::::res://Enemies/Cloud/lightning.gd<>uid://bndhi0n2ycg2q::::res://Audio/Player/thunder_strike.mp3
 cloud_enemy.gd::GDScript::2263591597846609725::1766071897::0::1::::CloudEnemy<>Enemy<><>0<>0<><>::
 lightning.gd::GDScript::5934179879606970987::1765275207::0::1::::Lightning<>Line2D<><>0<>0<><>::
-lightningshader.gdshader::Shader::8282533081627601591::1766140112::0::1::::<><><>0<>0<><>::
+lightningshader.gdshader::Shader::8282533081627601591::1766242846::0::1::::<><><>0<>0<><>::
 RainDrop.tscn::PackedScene::501404067460586688::1765275207::0::1::::<><><>0<>0<><>::uid://dicvvc5jtp083::::res://Enemies/Cloud/rain_drop.gd<>uid://ck8i7ukrq5afx::::res://General Nodes/HurtBox/HurtBox.tscn<>uid://b5sarxeghvvnc::::res://Enemies/Cloud/Sprites/RainDrop.png
 rain_drop.gd::GDScript::7726214266037541930::1765275207::0::1::::RainDrop<>Node2D<><>0<>0<><>::
 seek_state.gd::GDScript::313027406448092778::1765275207::0::1::::CloudSeekState<>EnemyState<><>0<>0<><>::
@@ -83,11 +83,11 @@ enemy_ability.gd::GDScript::2514351499079144250::1761257703::0::1::::EnemyAbilit
 enemy_data.gd::GDScript::1217201417649590021::1765275207::0::1::::EnemyData<>Resource<><>0<>0<><>::
 enemy_effect.gd::GDScript::3764004041466554861::1761257703::0::1::::EnemyEffect<>Resource<><>0<>0<><>::
 enemy_spawn_data.gd::GDScript::127065022541641716::1761257703::0::1::::EnemySpawnData<>Resource<><>0<>0<><>::
-::res://Enemies/EnemyData/EnemyValues/::1766140112
-blue_flying_apple.tres::Resource/EnemyData::3382770445691632959::1766140112::0::1::::<><><>0<>0<><>::uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png
+::res://Enemies/EnemyData/EnemyValues/::1766242846
+blue_flying_apple.tres::Resource/EnemyData::3382770445691632959::1766242846::0::1::::<><><>0<>0<><>::uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://cfyfy4cii21yn::::res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://bdon8uf4agx6q::::res://Enemies/Sprites/Blue Apple.png
 colorless_flying_apple.tres::Resource/EnemyData::2959716704104737859::1765275207::0::1::::<><><>0<>0<><>::uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://dewibjwg0glxq::::res://Enemies/Sprites/ColorlessApple.png
-green_flying_apple.tres::Resource/EnemyData::9095704142781230869::1766140112::0::1::::<><><>0<>0<><>::uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://dok5esyet0y5n::::res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://bvla6jdht1gip::::res://Enemies/Sprites/Green Apple.png
-red_flying_apple.tres::Resource/EnemyData::7268017648598723800::1766140112::0::1::::<><><>0<>0<><>::uid://b35crep84od1i::::res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn<>uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://mppvwjsxg31l::::res://Enemies/Sprites/RedApple.png
+green_flying_apple.tres::Resource/EnemyData::9095704142781230869::1766242846::0::1::::<><><>0<>0<><>::uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://dok5esyet0y5n::::res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://bvla6jdht1gip::::res://Enemies/Sprites/Green Apple.png
+red_flying_apple.tres::Resource/EnemyData::7268017648598723800::1766242846::0::1::::<><><>0<>0<><>::uid://b35crep84od1i::::res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn<>uid://bb28acei3himk::::res://Enemies/EnemyData/enemy_ability.gd<>uid://rlvenynllobd::::res://Enemies/EnemyData/enemy_data.gd<>uid://du1epmdpcfmpv::::res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd<>uid://mppvwjsxg31l::::res://Enemies/Sprites/RedApple.png
 ::res://Enemies/EnemyEffects/::1765275207
 ::res://Enemies/EnemyEffects/Burned/::1765275207
 BurnedEffect.tscn::PackedScene::7173517322541345198::1765275207::0::1::::<><><>0<>0<><>::uid://dvkk15aw1kym1::::res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png
@@ -168,8 +168,8 @@ ColorlessApple.png::CompressedTexture2D::7485921764958903114::1765275207::176527
 Green Apple Seed.png::CompressedTexture2D::4475531405994074122::1765275207::1765275227::1::::<><><>0<>0<>14e583df915e20564d521e7682697087<>res://.godot/imported/Green Apple Seed.png-be188561b5525f54257c81c758385729.ctex::
 Green Apple.png::CompressedTexture2D::3883150392686522455::1765275207::1765275227::1::::<><><>0<>0<>c1b627c661b4b3a694f5025a3f9b6acc<>res://.godot/imported/Green Apple.png-7ef5415bfdffcfc3225fe37a27026986.ctex::
 RedApple.png::CompressedTexture2D::874181216796570383::1765275207::1765275227::1::::<><><>0<>0<>0ab18af3751217b52f18ecac7c240354<>res://.godot/imported/RedApple.png-58f527d5736a3b1015539cb1fac68db4.ctex::
-::res://Enemies/Summoner/::1766140112
-Glow.gdshader::Shader::2340962250634857930::1766140112::0::1::::<><><>0<>0<><>::
+::res://Enemies/Summoner/::1766242846
+Glow.gdshader::Shader::2340962250634857930::1766242846::0::1::::<><><>0<>0<><>::
 Summoner2.png::CompressedTexture2D::846072778898070531::1765740009::1765740010::1::::<><><>0<>0<>e4af3d92a158ff98e68f094b698f4fff<>res://.godot/imported/Summoner2.png-e77e776a0ba3e4a22ac8265d623b9c52.ctex::
 summoner.gd::GDScript::33671740975614116::1765740246::0::1::::<>Node2D<><>0<>0<><>::
 Summoner.png::CompressedTexture2D::3220850644428565182::1765738868::1765738869::1::::<><><>0<>0<>d59ef8bec28f9156f4eff6614eb22025<>res://.godot/imported/Summoner.png-e2334b596b0ba1c5ef457c3d280514dc.ctex::
@@ -219,14 +219,14 @@ upgrade_button.gd::GDScript::4940181127703304628::1766158247::0::1::::UpgradeBut
 upgrade_frame.png::CompressedTexture2D::6678858407174924778::1765275207::1766157012::1::::<><><>0<>0<>9bc96a880c1130437ff85d0140af4a12<>res://.godot/imported/upgrade_frame.png-d81338d73b289524c5a0962fafd238d9.ctex::
 ::res://HUD/Upgrades/UpgradeButton/UpgradeActions/::1765275207
 upgrade_action.gd::GDScript::7082519156585575766::1765274761::0::1::::UpgradeAction<>Resource<><>0<>0<><>::
-::res://Items/::1766140112
-Coin.tres::Resource/ItemData::4212774887361665007::1766140111::0::1::::<><><>0<>0<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://chfcjmpmpeon0::::res://Items/item_data.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
-Diamond.tres::Resource/ItemData::9105851650331176066::1766140111::0::1::::<><><>0<>0<><>::uid://chfcjmpmpeon0::::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+::res://Items/::1766242846
+Coin.tres::Resource/ItemData::4212774887361665007::1766242846::0::1::::<><><>0<>0<><>::uid://b8ha1ki2kcf1f::::res://Items/Sprites/Coin.png<>uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://chfcjmpmpeon0::::res://Items/item_data.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
+Diamond.tres::Resource/ItemData::9105851650331176066::1766242846::0::1::::<><><>0<>0<><>::uid://chfcjmpmpeon0::::res://Items/item_data.gd<>uid://ckgqe2gc21eny::::res://Items/Sprites/Daimond.png<>uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn
 drop_data.gd::GDScript::8046884464261406902::1761257703::0::1::::DropData<>Resource<><>0<>0<><>::
 ItemPickUp.tscn::PackedScene::5228580237706944200::1765275207::0::1::::<><><>0<>0<><>::res://Items/item_pick_up.gd
 item_data.gd::GDScript::5274623321771116635::1765275207::0::1::::ItemData<>Resource<><>0<>0<><>::
 item_pick_up.gd::GDScript::8089285319827680531::1765275207::0::1::::ItemPickUp<>Node2D<><>0<>0<><>::
-RedDiamond.tres::Resource/ItemData::8918969258150987886::1766140111::0::1::::<><><>0<>0<><>::uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>uid://chfcjmpmpeon0::::res://Items/item_data.gd
+RedDiamond.tres::Resource/ItemData::8918969258150987886::1766242846::0::1::::<><><>0<>0<><>::uid://dwa1xg7ylpp4y::::res://Items/ItemEffects/item_effect.gd<>uid://gwfm40yibx2n::::res://Items/ItemEffects/sparkle.gd<>uid://bhog4fnjuftnx::::res://Items/ItemEffects/Sparkle.tscn<>uid://ca1dpb3akulj3::::res://Items/Sprites/RedDiamond.png<>uid://chfcjmpmpeon0::::res://Items/item_data.gd
 ::res://Items/ItemEffects/::1765275207
 item_effect.gd::GDScript::8705036691867356246::1761257703::0::1::::ItemEffect<>Resource<><>0<>0<><>::
 sparkle.gd::GDScript::466875949806672711::1761257703::0::1::::Sparkle<>ItemEffect<><>0<>0<><>::
@@ -305,10 +305,10 @@ Cloud.tscn::PackedScene::8422651773602008189::1765275207::0::1::::<><><>0<>0<><>
 Clouds.png::CompressedTexture2D::1435723875224364016::1765275207::1765275207::1::::<><><>0<>0<>9927201fe45c4b53289598428569e37f<>res://.godot/imported/Clouds.png-661216b663b0fd31cb3977b2dfa88441.ctex::
 ::res://MainGame/Music/::1765274761
 MainMenuMusic.mp3::AudioStreamMP3::5051025059519164457::1765274761::1765274761::1::::<><><>0<>0<>9a87303b75b8cebc4916b388f6b4b19a<>res://.godot/imported/MainMenuMusic.mp3-615e6abc4662cfef6f5ce7790be0f52c.mp3str::
-::res://MainMenu/::1766158891
+::res://MainMenu/::1766243345
 button.gd::GDScript::4786265955570380790::1766071896::0::1::::MainButton<>Button<><>0<>1<><>::
 ButtonShootClick.tscn::PackedScene::3027015896382680595::1765274761::0::1::::<><><>0<>0<><>::res://MainMenu/button.gd<>res://MainMenu/ButtonData/button_data.gd
-MainMenu.tscn::PackedScene::5699838865253451922::1766158891::0::1::::<><><>0<>0<><>::uid://u8tfro4qp4ts::::res://MainMenu/main_menu.gd<>uid://bjekrlb1r8icx::::res://MainMenu/ButtonShootClick.tscn<>uid://c8kt1315rsybw::::res://MainMenu/ButtonData/button_data.gd<>uid://mb31atc2mc5j::::res://MainMenu/ButtonData/ButtonActions/reset_wave.gd<>uid://dh71tk38y0vvk::::res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd<>uid://dnefafqr4l430::::res://MainMenu/ButtonData/ButtonActions/add_money_action.gd<>uid://bmttan0snrryu::::res://MainMenu/music_button.gd<>uid://c8xvliip7pqim::::res://MainMenu/Sprites/Arrow Sign.png<>uid://cmq0egwvp55s2::::res://General Nodes/PlayerSpawn.tscn<>uid://dn4wbtuany6er::::res://Objects/Portal/Portal.tscn<>uid://djpo5x6fupy0e::::res://Level/Islands/Island2.tscn<>uid://crgxmsjdnkrt4::::res://Level/Islands/Island3.tscn<>uid://bnq5ivogfkh6w::::res://Level/Islands/Island.tscn<>uid://b506vw0hbtcju::::res://Level/Islands/Island4.tscn<>uid://l2y4uh7pm6ak::::res://Level/Islands/Island5.tscn<>uid://bgqqc5p3ma7t6::::res://Level/PlayGround/falling_death.gd
+MainMenu.tscn::PackedScene::5699838865253451922::1766243345::0::1::::<><><>0<>0<><>::uid://u8tfro4qp4ts::::res://MainMenu/main_menu.gd<>uid://bjekrlb1r8icx::::res://MainMenu/ButtonShootClick.tscn<>uid://c8kt1315rsybw::::res://MainMenu/ButtonData/button_data.gd<>uid://mb31atc2mc5j::::res://MainMenu/ButtonData/ButtonActions/reset_wave.gd<>uid://dh71tk38y0vvk::::res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd<>uid://dnefafqr4l430::::res://MainMenu/ButtonData/ButtonActions/add_money_action.gd<>uid://bmttan0snrryu::::res://MainMenu/music_button.gd<>uid://c8xvliip7pqim::::res://MainMenu/Sprites/Arrow Sign.png<>uid://cmq0egwvp55s2::::res://General Nodes/PlayerSpawn.tscn<>uid://dn4wbtuany6er::::res://Objects/Portal/Portal.tscn<>uid://djpo5x6fupy0e::::res://Level/Islands/Island2.tscn<>uid://crgxmsjdnkrt4::::res://Level/Islands/Island3.tscn<>uid://bnq5ivogfkh6w::::res://Level/Islands/Island.tscn<>uid://b506vw0hbtcju::::res://Level/Islands/Island4.tscn<>uid://l2y4uh7pm6ak::::res://Level/Islands/Island5.tscn<>uid://bgqqc5p3ma7t6::::res://Level/PlayGround/falling_death.gd
 main_menu.gd::GDScript::1473064806340554276::1765293955::0::1::::MainMenu<>Node2D<><>0<>0<><>::
 music_button.gd::GDScript::3269064329798749152::1765274761::0::1::::MusicButton<>Button<><>0<>0<><>::
 sign.gd::GDScript::9151046717387974601::1765274761::0::1::::<>RigidBody2D<><>0<>0<><>::
@@ -361,7 +361,8 @@ Portal.tscn::PackedScene::8132922561734317477::1765275207::0::1::::<><><>0<>0<><
 ::res://Objects/Portal/Sprites/::1765275227
 PortalEmpty.png::CompressedTexture2D::3028641188879146282::1765275207::1765275227::1::::<><><>0<>0<>aaf0e5de9526aa08a71c415be139aa10<>res://.godot/imported/PortalEmpty.png-168295cfc14aaff54b2917a1c3a30238.ctex::
 RoundParticle.png::CompressedTexture2D::616636958285098400::1765275207::1765275207::1::::<><><>0<>0<>e1414deb40ea5bbad889fd7ab3f86df4<>res://.godot/imported/RoundParticle.png-6bb405f37517099dbbe55449abb580ec.ctex::
-::res://Particles/::1765275227
+::res://Particles/::1766606213
+BigBall.png::CompressedTexture2D::7888023730784632213::1766606213::1766606214::1::::<><><>0<>0<>7e950cb9e1bbd0b4db77104927ce53ba<>res://.godot/imported/BigBall.png-a5a114056c70dddf8022c27ce7c65853.ctex::
 droplet.png::CompressedTexture2D::364876204972865736::1765275207::1765275227::1::::<><><>0<>0<>b3d0dd576443ba0105e0dab58ed7e743<>res://.godot/imported/droplet.png-afd8b4a5e6167db00fa9051f72bd5ac3.ctex::
 star.png::CompressedTexture2D::3186534435127109718::1765275207::1765275227::1::::<><><>0<>0<>0d0f1393b325b009e8fc315a43d43018<>res://.godot/imported/star.png-732d876934560f138cd44208be67440d.ctex::
 ::res://Player/::1766158152
@@ -647,9 +648,9 @@ SpeedUpgrade3.png::CompressedTexture2D::1851655370290775472::1765274762::1765274
 ::res://PlayerData/::1765275208
 PlayerStats.tres::Resource/PlayerStats::607368196319821400::1761257703::0::1::::<><><>0<>0<><>::res://PlayerData/player_stats.gd<>uid://bc4lu6kenryfn::::res://Weapons/0_BasicBow/BasicBow.tscn
 player_stats.gd::GDScript::7152086823264360123::1765275208::0::1::::PlayerStats<>Resource<><>0<>0<><>::
-::res://Rifts/::1766158247
+::res://Rifts/::1766247066
 rift.gd::GDScript::9012228160352121311::1766158247::0::1::::Rift<>Node2D<><>0<>0<><>::
-Rift.tscn::PackedScene::579220916048757422::1766158247::0::1::::<><><>0<>0<><>::uid://d1nuc00qfn6v8::::res://Rifts/rift.gd<>uid://daqty3s8xq8df::::res://Rifts/RiftGeneration/RiftGenerator.tscn<>uid://d1o4fpn64j8cu::::res://Rifts/Chunks/chunk_data.gd<>uid://b7p0flr2uopwv::::res://Rifts/RiftGeneration/generator_data.gd<>uid://c3plkncaygns5::::res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_1.tres<>uid://b45tkbqikmw0w::::res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_2.tres<>uid://cqxxa2a2mtpei::::res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_1.tres<>uid://dwno03ntsasoi::::res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres<>uid://cgwpaefsfrma1::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres<>uid://bnkr6l4rqbmvg::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_2.tres<>uid://c6frrd5ceaktm::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_3.tres<>uid://byrxxduio7yma::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_1.tres<>uid://rwhqlp7cbqw0::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_2.tres<>uid://bq1oxee65vkvd::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_3.tres<>uid://co6xputyjmuin::::res://Rifts/Chunks/chunk_library.gd<>uid://dj8i0e2574b5s::::res://Rifts/Chunks/ChunkData/Intro/intro_1.tres
+Rift.tscn::PackedScene::579220916048757422::1766247066::0::1::::<><><>0<>0<><>::uid://d1nuc00qfn6v8::::res://Rifts/rift.gd<>uid://daqty3s8xq8df::::res://Rifts/RiftGeneration/RiftGenerator.tscn<>uid://d1o4fpn64j8cu::::res://Rifts/Chunks/chunk_data.gd<>uid://b7p0flr2uopwv::::res://Rifts/RiftGeneration/generator_data.gd<>uid://c3plkncaygns5::::res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_1.tres<>uid://b45tkbqikmw0w::::res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_2.tres<>uid://cqxxa2a2mtpei::::res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_1.tres<>uid://dwno03ntsasoi::::res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres<>uid://cgwpaefsfrma1::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres<>uid://bnkr6l4rqbmvg::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_2.tres<>uid://c6frrd5ceaktm::::res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_3.tres<>uid://byrxxduio7yma::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_1.tres<>uid://rwhqlp7cbqw0::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_2.tres<>uid://bq1oxee65vkvd::::res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_3.tres<>uid://co6xputyjmuin::::res://Rifts/Chunks/chunk_library.gd<>uid://dj8i0e2574b5s::::res://Rifts/Chunks/ChunkData/Intro/intro_1.tres
 ::res://Rifts/Chunks/::1766156713
 chunk.gd::GDScript::2088744011586126000::1766156713::0::1::::RiftChunk<>Node2D<><>0<>0<><>::
 ChunkBase.tscn::PackedScene::6376492873755634332::1765981384::0::1::::<><><>0<>0<><>::uid://402kq4g6y6pg::::res://Rifts/Chunks/chunk.gd<>uid://d1o4fpn64j8cu::::res://Rifts/Chunks/chunk_data.gd
@@ -711,10 +712,10 @@ PowerOrb.png::CompressedTexture2D::5122263660292569069::1765742994::1766156844::
 PowerOrb.tscn::PackedScene::4945837493579937958::1766158415::0::1::::<><><>0<>0<><>::uid://go2yiih18tkk::::res://Rifts/Chunks/Utility/Spawners/PowerOrb/power_orb.gd<>uid://ce8i603m0eltl::::res://Rifts/Chunks/Utility/Spawners/PowerOrb/PowerOrb.png
 PowerOrbSpawner.tscn::PackedScene::1388739569963471759::1766156839::0::1::::<><><>0<>0<><>::
 power_orb.gd::GDScript::451717001142791730::1766158386::0::1::::PowerOrb<>Node2D<><>0<>0<><>::
-::res://Rifts/RiftGeneration/::1766155878
-generator_data.gd::GDScript::4664956805482298253::1766152719::0::1::::GeneratorData<>Resource<><>0<>0<><>::
+::res://Rifts/RiftGeneration/::1766244740
+generator_data.gd::GDScript::4664956805482298253::1766244218::0::1::::GeneratorData<>Resource<><>0<>0<><>::
 RiftGenerator.tscn::PackedScene::7193490077051595263::1766070899::0::1::::<><><>0<>0<><>::uid://ccmjo4lmoae1v::::res://Rifts/RiftGeneration/rift_generator.gd
-rift_generator.gd::GDScript::4938564582494492985::1766155878::0::1::::RiftGenerator<>Node2D<><>0<>0<><>::
+rift_generator.gd::GDScript::4938564582494492985::1766244740::0::1::::RiftGenerator<>Node2D<><>0<>0<><>::
 ::res://Shop/::1765275208
 Shop2.tscn::PackedScene::7148349802993456241::1761257703::0::1::::<><><>0<>0<><>::res://Shop/shop.gd<>uid://d0aswr8q0lpei::::res://Level/Tiles.tscn<>uid://bh84i6y0mmcf3::::res://MainMenu/Sprites/BigDoor.png
 shop.gd::GDScript::6620090736820677804::1765275208::0::1::::Shop<>Node2D<><>0<>0<><>::
