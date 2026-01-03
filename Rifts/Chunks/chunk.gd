@@ -14,6 +14,7 @@ func extra_ready_functions() -> void:
 func set_rift(_rift: Rift) -> void:
 	if _rift:
 		rift = _rift
+
 func get_entry_global() -> Vector2:
 	return entry.global_position
 

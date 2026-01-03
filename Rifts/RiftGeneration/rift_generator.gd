@@ -28,12 +28,12 @@ class PlacementRecord:
 		exit_id = e_id
 		rect = r
 
-func generate() -> RiftChunk:
+func generate(_level: int) -> RiftChunk:
+	data.difficulty = _level
 	_rng.randomize()
 	_side_budget_left = data.base_side_budget_nodes + data.side_budget_per_difficulty * data.difficulty
 	_max_branch_depth = data.max_branch_depth_base + int(floor(float(data.difficulty) / 2.0)) * data.max_branch_depth_per_two_difficulty
 	var attempt: int = 0
-	
 	
 	
 	while attempt < data.max_regen_attempts:
@@ -54,7 +54,6 @@ func generate() -> RiftChunk:
 			print("RiftGen OK: total=", _total_chunks, " main=", main_chain.size(), " side_left=", _side_budget_left)
 			
 			var end_portal: RiftChunk = _place_end_portal(main_chain)
-			print("end portal: ", end_portal)
 			if end_portal == null:
 				print("No available portal placement")
 			return intro

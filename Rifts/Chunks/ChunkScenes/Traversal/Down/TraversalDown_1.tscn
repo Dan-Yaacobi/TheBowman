@@ -82,11 +82,11 @@ metadata/_custom_type_script = "uid://cpc01laocnq5u"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_neyya"]
 resource_local_to_scene = true
-radius = 21.0
+radius = 23.086792
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4lykj"]
 resource_local_to_scene = true
-size = Vector2(64.4375, 26.25)
+size = Vector2(68, 33)
 
 [node name="TraversalDown_1" type="Node2D"]
 script = ExtResource("1_aiuh3")

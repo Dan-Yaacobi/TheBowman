@@ -60,6 +60,9 @@ var player: Player
 @export var sword_cooldown_mod: float = 0.0
 @export var sword_abilities: Array[PlayerSwordAbility]
 
+@export_subgroup("Rift")
+@export var rift_level: int = 1
+
 func add_jump_ability(ability: JumpAbility) -> void:
 	if ability != null:
 		jump_abilities.append(ability)

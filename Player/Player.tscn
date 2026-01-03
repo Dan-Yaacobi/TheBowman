@@ -38,9 +38,9 @@ move_speed = 50
 max_jumps = 1
 jump_height = 150
 knockback_resistance = 3
-strength = 10
-agility = 10
-stamina = 10
+strength = 30
+agility = 30
+stamina = 15
 menu_speed = 150
 max_minions = 3
 dash_distance = 50
@@ -52,6 +52,7 @@ basic_shot_power = 150.0
 weapon_name = "Basic Bow"
 weapon_scene = ExtResource("10_x70vp")
 base_sword_cooldown = 2.0
+rift_level = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(18, 3)

@@ -10,7 +10,7 @@ class_name GeneratorData extends Resource
 @export_subgroup("Difficulty / Branching")
 
 ## Difficulty level driving branching density, depth, and overall complexity
-@export_range(1, 5, 1) var difficulty: int = 1
+@export_range(1, 20, 1) var difficulty: int = 1
 ## Base number of chunks available for side branches (before difficulty scaling)
 @export_range(0, 200, 1) var base_side_budget_nodes: int = 2
 ## Additional side-branch chunks added per difficulty level

@@ -23,3 +23,7 @@ signal open_upgrades_window(tier: int)
 
 signal enemy_summoned(enemy: Enemy)
 signal enemy_died(enemy: Enemy)
+
+signal entered_rift
+
+signal summon_effect(effect: Node2D)

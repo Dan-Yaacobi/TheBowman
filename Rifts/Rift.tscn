@@ -21,8 +21,11 @@
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
-main_path_length = 15
+main_path_length = 10
 main_backtrack_depth = 3
+base_side_budget_nodes = 5
+base_branch_start_branch = 0.05
+branch_start_branch_per_difficulty = 0.1
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
 [sub_resource type="Resource" id="Resource_v6yg5"]

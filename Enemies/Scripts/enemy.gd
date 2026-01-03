@@ -122,7 +122,7 @@ func spawn_drop(drop: ItemData) -> void:
 	item.assign_item(drop)
 	item.global_position = global_position
 	item.inititalize(PlayerManager.player)
-	get_parent().call_deferred("add_child", item)
+	EventBus.summon_effect.emit(item)
 
 func disable_drops() -> void:
 	no_drops = true

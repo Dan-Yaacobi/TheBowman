@@ -49,6 +49,7 @@ func set_scene(_player: Player) -> void:
 	if _player != null:
 		_player.global_position = player_spawn.global_position
 		#menu_tile_limit = tiles.get_used_rect()
+		_player.stats.rift_level = 0
 		_player.stats.in_menu = true
 		#set_player_camera(_player)
 		visible = true
