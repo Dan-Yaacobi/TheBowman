@@ -41,3 +41,8 @@ class_name GeneratorData extends Resource
 @export_range(1, 200, 1) var min_total_chunks: int = 8
 ## How many full regeneration attempts are allowed before giving up
 @export_range(1, 20, 1) var max_regen_attempts: int = 10
+
+
+@export_subgroup("Spawns")
+## How many spawns per rift level
+@export var _base_spawn_budget: int = 10

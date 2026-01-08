@@ -1,0 +1,1 @@
+class_name SpawnMarker extends Marker2D

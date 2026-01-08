@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dwr52hxemyjof"]
 
-[ext_resource type="Script" uid="uid://36oxwgmb4krd" path="res://Rifts/Chunks/Utility/Spawners/enemy_spawner.gd" id="1_8cyt5"]
-[ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/enemy_spawner_data.gd" id="2_aahhi"]
+[ext_resource type="Script" uid="uid://36oxwgmb4krd" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner.gd" id="1_8cyt5"]
+[ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner_data.gd" id="2_aahhi"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="2_buugi"]
 [ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="3_s4kkp"]
 [ext_resource type="Resource" uid="uid://bogvy8w5pn6fb" path="res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres" id="4_i2a7e"]

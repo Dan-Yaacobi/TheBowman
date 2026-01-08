@@ -1,66 +1,67 @@
-[gd_scene load_steps=24 format=3 uid="uid://tpty2gvjhn30"]
+[gd_scene load_steps=25 format=3 uid="uid://tpty2gvjhn30"]
 
-[ext_resource type="Script" uid="uid://bdra8cct7n3xx" path="res://Objects/Trees/apple_tree.gd" id="1_ac620"]
-[ext_resource type="Texture2D" uid="uid://6sqe4r4sncof" path="res://Objects/Trees/sprites/Tree_2.png" id="2_oq4xf"]
-[ext_resource type="PackedScene" uid="uid://dwr52hxemyjof" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawner.tscn" id="3_0n2du"]
-[ext_resource type="Script" uid="uid://ds8ym24y1ty3p" path="res://Rifts/Chunks/Utility/Spawners/tree_spawner.gd" id="4_oc0ew"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_w87by"]
-[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="5_oc0ew"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="6_n51s7"]
-[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="7_fgign"]
-[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="8_nqv5i"]
-[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="9_kmmpx"]
-[ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="10_3iibb"]
-[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="11_jhaa1"]
-[ext_resource type="Texture2D" uid="uid://dewibjwg0glxq" path="res://Enemies/Sprites/ColorlessApple.png" id="12_c566u"]
-[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="13_83bli"]
-[ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/enemy_spawner_data.gd" id="14_0gxox"]
+[ext_resource type="Script" uid="uid://bdra8cct7n3xx" path="res://Objects/Trees/apple_tree.gd" id="1_a3uie"]
+[ext_resource type="Texture2D" uid="uid://6sqe4r4sncof" path="res://Objects/Trees/sprites/Tree_2.png" id="2_h37ha"]
+[ext_resource type="PackedScene" uid="uid://dwr52hxemyjof" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/EnemySpawner.tscn" id="3_uq76f"]
+[ext_resource type="Script" uid="uid://ds8ym24y1ty3p" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/tree_spawner.gd" id="4_3nghk"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="5_p0qsm"]
+[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="6_8ythq"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="7_bqugk"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="8_atnhr"]
+[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="9_f1s8b"]
+[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="10_rhris"]
+[ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="11_dgboc"]
+[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="12_1wt2n"]
+[ext_resource type="Texture2D" uid="uid://dewibjwg0glxq" path="res://Enemies/Sprites/ColorlessApple.png" id="13_hw8fy"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="14_nwj3p"]
+[ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner_data.gd" id="15_yakjg"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="16_fpkb1"]
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
-script = ExtResource("7_fgign")
+script = ExtResource("8_atnhr")
 metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_lnhjg"]
 resource_local_to_scene = true
-script = ExtResource("4_w87by")
+script = ExtResource("5_p0qsm")
 max_hp = 15
 move_speed = 20
 knockback = 75
-skin = ExtResource("8_nqv5i")
+skin = ExtResource("9_f1s8b")
 avg_coins_dropped = 1
 touch_damage = 1
 knockback_resistance = 20.0
-death_ability = Array[ExtResource("6_n51s7")]([SubResource("Resource_3u2p4")])
+death_ability = Array[ExtResource("7_bqugk")]([SubResource("Resource_3u2p4")])
 shooter_chance = 30
-bullet = ExtResource("5_oc0ew")
+bullet = ExtResource("6_8ythq")
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Resource" id="Resource_cnptj"]
-script = ExtResource("7_fgign")
+script = ExtResource("8_atnhr")
 metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_n0xre"]
 resource_local_to_scene = true
-script = ExtResource("4_w87by")
+script = ExtResource("5_p0qsm")
 max_hp = 30
 move_speed = 20
 knockback = 80
-skin = ExtResource("10_3iibb")
+skin = ExtResource("11_dgboc")
 avg_coins_dropped = 5
 touch_damage = 2
 knockback_resistance = 30.0
-death_ability = Array[ExtResource("6_n51s7")]([SubResource("Resource_cnptj")])
+death_ability = Array[ExtResource("7_bqugk")]([SubResource("Resource_cnptj")])
 shooter_chance = 30
-bullet = ExtResource("9_kmmpx")
+bullet = ExtResource("10_rhris")
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Resource" id="Resource_yb32l"]
 resource_local_to_scene = true
-script = ExtResource("4_w87by")
+script = ExtResource("5_p0qsm")
 max_hp = 100
 move_speed = 35
 knockback = 100
-skin = ExtResource("12_c566u")
+skin = ExtResource("13_hw8fy")
 avg_coins_dropped = 30
 touch_damage = 4
 knockback_resistance = 50.0
@@ -68,8 +69,8 @@ metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Resource" id="Resource_u7162"]
 resource_local_to_scene = true
-script = ExtResource("14_0gxox")
-apple_data = Array[ExtResource("4_w87by")]([SubResource("Resource_lnhjg"), SubResource("Resource_n0xre"), ExtResource("11_jhaa1"), SubResource("Resource_yb32l")])
+script = ExtResource("15_yakjg")
+apple_data = Array[ExtResource("5_p0qsm")]([SubResource("Resource_lnhjg"), SubResource("Resource_n0xre"), ExtResource("12_1wt2n"), SubResource("Resource_yb32l")])
 metadata/_custom_type_script = "uid://cpc01laocnq5u"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dvek"]
@@ -81,13 +82,13 @@ size = Vector2(7.8774986, 149.18243)
 
 [node name="AppleTree_1" type="Node2D"]
 scale = Vector2(1.5, 1.5)
-script = ExtResource("1_ac620")
+script = ExtResource("1_a3uie")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_oq4xf")
+texture = ExtResource("2_h37ha")
 
-[node name="EnemySpawnerTree" parent="." instance=ExtResource("3_0n2du")]
-script = ExtResource("4_oc0ew")
+[node name="EnemySpawnerTree" parent="." instance=ExtResource("3_uq76f")]
+script = ExtResource("4_3nghk")
 data = SubResource("Resource_u7162")
 active = true
 
@@ -134,5 +135,8 @@ position = Vector2(18.666668, 2)
 
 [node name="Marker2D8" type="Marker2D" parent="EnemySpawnerTree/SpawnMarkers"]
 position = Vector2(-14, -6.6666665)
+
+[node name="Island" parent="." instance=ExtResource("16_fpkb1")]
+position = Vector2(0.6666667, 30.000002)
 
 [editable path="EnemySpawnerTree"]

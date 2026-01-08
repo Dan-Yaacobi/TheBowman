@@ -15,6 +15,7 @@
 script = ExtResource("1_iteqa")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_id0vo")]
+visible = false
 
 [node name="PlayGround" parent="." instance=ExtResource("1_maytk")]
 visible = false
@@ -35,6 +36,7 @@ visible = false
 visible = false
 
 [node name="Rift" parent="." instance=ExtResource("9_d47r0")]
+visible = false
 
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
 visible = false

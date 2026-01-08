@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccp2hrnf3s4hu"]
 
-[ext_resource type="Script" uid="uid://go2yiih18tkk" path="res://Rifts/Chunks/Utility/Spawners/PowerOrb/power_orb.gd" id="1_h6fav"]
-[ext_resource type="Texture2D" uid="uid://ce8i603m0eltl" path="res://Rifts/Chunks/Utility/Spawners/PowerOrb/PowerOrb.png" id="2_fudte"]
+[ext_resource type="Script" uid="uid://go2yiih18tkk" path="res://Rifts/Chunks/Utility/Spawns/PowerOrb/power_orb.gd" id="1_h6fav"]
+[ext_resource type="Texture2D" uid="uid://ce8i603m0eltl" path="res://Rifts/Chunks/Utility/Spawns/PowerOrb/PowerOrb.png" id="2_fudte"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h6fav"]
 radius = 16.0

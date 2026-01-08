@@ -1,20 +1,20 @@
-[gd_scene load_steps=30 format=3 uid="uid://c5o8b833xdeaf"]
+[gd_scene load_steps=31 format=3 uid="uid://c5o8b833xdeaf"]
 
-[ext_resource type="Script" path="res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd" id="1_d3xib"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="2_sn45b"]
+[ext_resource type="Script" uid="uid://ck3jg0j6mgk71" path="res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd" id="1_d3xib"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="2_sn45b"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="3_mk6tc"]
-[ext_resource type="Script" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="3_ugdmx"]
+[ext_resource type="Script" uid="uid://csxarxwi5hnax" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="3_ugdmx"]
 [ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="4_ip0xq"]
 [ext_resource type="Texture2D" uid="uid://c4oftynas7wmn" path="res://Objects/FallingObjects/Sprites/TreasureChest.png" id="4_qrrt5"]
 [ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="5_40hub"]
 [ext_resource type="Texture2D" uid="uid://cvomifa28xhvn" path="res://Objects/FallingObjects/Sprites/twinkle.png" id="8_q4k2q"]
 [ext_resource type="AudioStream" uid="uid://d2tjadsxjmphi" path="res://Objects/FallingObjects/Objects/TreasureChest/ChestOpen.wav" id="8_snum2"]
 [ext_resource type="AudioStream" uid="uid://d3uk6pw51gjcn" path="res://Objects/FallingObjects/Objects/TreasureChest/Chest Hit.wav" id="9_x28gj"]
+[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="11_r443e"]
 
 [sub_resource type="Resource" id="Resource_unsoy"]
 script = ExtResource("2_sn45b")
 item_data = ExtResource("3_mk6tc")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_34f6k"]
 script = ExtResource("2_sn45b")
@@ -24,22 +24,18 @@ probability = 50.0
 [sub_resource type="Resource" id="Resource_83x02"]
 script = ExtResource("2_sn45b")
 item_data = ExtResource("4_ip0xq")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_ipauh"]
 script = ExtResource("2_sn45b")
 item_data = ExtResource("4_ip0xq")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_rr0iv"]
 script = ExtResource("2_sn45b")
 item_data = ExtResource("4_ip0xq")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_tjq0x"]
 script = ExtResource("2_sn45b")
 item_data = ExtResource("4_ip0xq")
-probability = 100.0
 
 [sub_resource type="Resource" id="Resource_x1iiq"]
 script = ExtResource("2_sn45b")
@@ -200,14 +196,14 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xggia"]
 _data = {
-"Damaged": SubResource("Animation_en8i0"),
-"Destroyed": SubResource("Animation_gxbjr"),
-"Idle": SubResource("Animation_h0s70"),
-"RESET": SubResource("Animation_4pgoo")
+&"Damaged": SubResource("Animation_en8i0"),
+&"Destroyed": SubResource("Animation_gxbjr"),
+&"Idle": SubResource("Animation_h0s70"),
+&"RESET": SubResource("Animation_4pgoo")
 }
 
 [sub_resource type="Curve" id="Curve_t7gy6"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0.0172414, 0.483516), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -233,15 +229,15 @@ hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_xggia")
+&"": SubResource("AnimationLibrary_xggia")
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -2
 amount = 50
+texture = ExtResource("8_q4k2q")
 lifetime = 0.5
 speed_scale = 0.5
-texture = ExtResource("8_q4k2q")
 emission_shape = 3
 emission_rect_extents = Vector2(10, 10)
 gravity = Vector2(0, 0)
@@ -269,3 +265,6 @@ volume_db = -13.546
 [node name="DamagedAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_x28gj")
 pitch_scale = 2.28
+
+[node name="Island" parent="." instance=ExtResource("11_r443e")]
+position = Vector2(0, 13)

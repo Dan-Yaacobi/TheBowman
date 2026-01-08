@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ctma0op04apcv"]
+[gd_scene load_steps=10 format=3 uid="uid://ctma0op04apcv"]
 
 [ext_resource type="Script" uid="uid://dnvx18dxxbpms" path="res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd" id="1_c4wlx"]
 [ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="1_dbyeq"]
@@ -7,86 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="4_ey5bo"]
 [ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="5_t0bht"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_t0bht"]
-[ext_resource type="PackedScene" uid="uid://dwr52hxemyjof" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawner.tscn" id="7_ky60y"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="9_c4wlx"]
-[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="10_palp1"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="11_bep2x"]
-[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="12_b8q6j"]
-[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="13_qfci4"]
-[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="14_xkhmn"]
-[ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="15_qksur"]
-[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="16_1v678"]
-[ext_resource type="Texture2D" uid="uid://dewibjwg0glxq" path="res://Enemies/Sprites/ColorlessApple.png" id="17_xctod"]
-[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="18_xpvyu"]
-[ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/enemy_spawner_data.gd" id="19_3kl0d"]
+[ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="8_5i4cy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ky60y"]
 resource_local_to_scene = true
 size = Vector2(239.5, 102)
-
-[sub_resource type="Resource" id="Resource_3u2p4"]
-script = ExtResource("12_b8q6j")
-metadata/_custom_type_script = "uid://du1epmdpcfmpv"
-
-[sub_resource type="Resource" id="Resource_sgthb"]
-resource_local_to_scene = true
-script = ExtResource("9_c4wlx")
-max_hp = 15
-move_speed = 20
-knockback = 75
-skin = ExtResource("13_qfci4")
-avg_coins_dropped = 1
-touch_damage = 1
-knockback_resistance = 20.0
-death_ability = Array[ExtResource("11_bep2x")]([SubResource("Resource_3u2p4")])
-shooter_chance = 30
-bullet = ExtResource("10_palp1")
-metadata/_custom_type_script = "uid://rlvenynllobd"
-
-[sub_resource type="Resource" id="Resource_cnptj"]
-script = ExtResource("12_b8q6j")
-metadata/_custom_type_script = "uid://du1epmdpcfmpv"
-
-[sub_resource type="Resource" id="Resource_33gmo"]
-resource_local_to_scene = true
-script = ExtResource("9_c4wlx")
-max_hp = 30
-move_speed = 20
-knockback = 80
-skin = ExtResource("15_qksur")
-avg_coins_dropped = 5
-touch_damage = 2
-knockback_resistance = 30.0
-death_ability = Array[ExtResource("11_bep2x")]([SubResource("Resource_cnptj")])
-shooter_chance = 30
-bullet = ExtResource("14_xkhmn")
-metadata/_custom_type_script = "uid://rlvenynllobd"
-
-[sub_resource type="Resource" id="Resource_edn8t"]
-resource_local_to_scene = true
-script = ExtResource("9_c4wlx")
-max_hp = 100
-move_speed = 35
-knockback = 100
-skin = ExtResource("17_xctod")
-avg_coins_dropped = 30
-touch_damage = 4
-knockback_resistance = 50.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
-
-[sub_resource type="Resource" id="Resource_bky43"]
-resource_local_to_scene = true
-script = ExtResource("19_3kl0d")
-apple_data = Array[ExtResource("9_c4wlx")]([SubResource("Resource_sgthb"), SubResource("Resource_33gmo"), ExtResource("16_1v678"), SubResource("Resource_edn8t")])
-metadata/_custom_type_script = "uid://cpc01laocnq5u"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_5i4cy"]
-resource_local_to_scene = true
-radius = 54.037025
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_upm1l"]
-resource_local_to_scene = true
-size = Vector2(199, 29)
 
 [node name="TraversalRight_3" type="Node2D"]
 script = ExtResource("1_c4wlx")
@@ -121,21 +46,7 @@ position = Vector2(92, 37)
 [node name="CollisionShape2D" parent="Bounds" index="0"]
 shape = SubResource("RectangleShape2D_ky60y")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("7_ky60y")]
-position = Vector2(51, 26)
-data = SubResource("Resource_bky43")
-
-[node name="PlayerDetector" parent="EnemySpawner" index="0"]
-position = Vector2(38, 11)
-
-[node name="CollisionShape2D" parent="EnemySpawner/PlayerDetector" index="0"]
-shape = SubResource("CircleShape2D_5i4cy")
-
-[node name="SpawnArea" parent="EnemySpawner" index="1"]
-position = Vector2(51, -53)
-
-[node name="CollisionShape2D" parent="EnemySpawner/SpawnArea" index="0"]
-shape = SubResource("RectangleShape2D_upm1l")
+[node name="SpawnMarker" parent="." instance=ExtResource("8_5i4cy")]
+position = Vector2(114, 68)
 
 [editable path="Bounds"]
-[editable path="EnemySpawner"]

@@ -1,6 +1,5 @@
 class_name TraversalChunk extends RiftChunk
 
-@onready var enemy_spawner: EnemySpawner = $EnemySpawner
 @onready var apple_tree: AppleTree = $AppleTree_1
 
 func extra_ready_functions() -> void:

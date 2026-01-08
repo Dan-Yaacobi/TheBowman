@@ -4,6 +4,8 @@ class_name RiftGenerator extends Node2D
 @export var library: RiftChunkLibrary
 @export var intro_data: ChunkData
 @export var end_data: ChunkData
+@export var spawnings: Array[]
+@export var spawn_budget: int = 10
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -28,11 +30,14 @@ class PlacementRecord:
 		exit_id = e_id
 		rect = r
 
+func set_budget() -> void:
+	_side_budget_left = data.base_side_budget_nodes + data.side_budget_per_difficulty * data.difficulty
+	_max_branch_depth = data.max_branch_depth_base + int(floor(float(data.difficulty) / 2.0)) * data.max_branch_depth_per_two_difficulty
+
 func generate(_level: int) -> RiftChunk:
 	data.difficulty = _level
 	_rng.randomize()
-	_side_budget_left = data.base_side_budget_nodes + data.side_budget_per_difficulty * data.difficulty
-	_max_branch_depth = data.max_branch_depth_base + int(floor(float(data.difficulty) / 2.0)) * data.max_branch_depth_per_two_difficulty
+	set_budget()
 	var attempt: int = 0
 	
 	

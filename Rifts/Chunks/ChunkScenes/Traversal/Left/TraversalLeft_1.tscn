@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="5_3k6md"]
 [ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="6_btrv3"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="7_1xldk"]
-[ext_resource type="PackedScene" uid="uid://tpty2gvjhn30" path="res://Objects/Trees/AppleTree.tscn" id="21_1yplr"]
+[ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="9_4ew4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_neyya"]
 resource_local_to_scene = true
@@ -47,7 +47,7 @@ position = Vector2(90, 7)
 [node name="CollisionShape2D" parent="Bounds" index="0"]
 shape = SubResource("RectangleShape2D_neyya")
 
-[node name="AppleTree_1" parent="." instance=ExtResource("21_1yplr")]
-position = Vector2(130, -16)
+[node name="SpawnMarker" parent="." instance=ExtResource("9_4ew4u")]
+position = Vector2(131, 9)
 
 [editable path="Bounds"]
