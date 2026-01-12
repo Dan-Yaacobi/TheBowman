@@ -198,30 +198,6 @@ theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
 text = "Shops"
 
-[node name="HardMode" type="Button" parent="."]
-visible = false
-offset_left = 372.0
-offset_top = 98.0
-offset_right = 1724.0
-offset_bottom = 448.0
-scale = Vector2(0.03, 0.03)
-focus_mode = 0
-theme_override_font_sizes/font_size = 250
-disabled = true
-text = "Hard Mode"
-
-[node name="NormalMode" type="Button" parent="."]
-visible = false
-offset_left = 372.0
-offset_top = 83.0
-offset_right = 2038.0
-offset_bottom = 433.0
-scale = Vector2(0.03, 0.03)
-focus_mode = 0
-theme_override_font_sizes/font_size = 250
-disabled = true
-text = "Normal Mode"
-
 [node name="PlayerSpawn" parent="." instance=ExtResource("12_g1826")]
 position = Vector2(207, 96)
 
