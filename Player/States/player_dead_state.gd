@@ -2,6 +2,7 @@ class_name PlayerDeadState extends State
 
 @onready var death_animation_timer: Timer = $"../../DeathAnimationTimer"
 @onready var idle: PlayerIdleState = $"../Idle"
+@onready var hook: Hook = $"../../GrappleHook/Hook"
 
 var death_done: bool = false
 
@@ -17,7 +18,6 @@ func Enter() -> void:
 	death_done = false
 	player.body.update_animation("Dead")
 	player.collision_shape.set_deferred("disabled", true)
-	
 	pass
 	
 #what happens when the player exits this state

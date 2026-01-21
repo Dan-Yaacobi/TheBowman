@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=50 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
@@ -27,10 +27,14 @@
 [ext_resource type="Script" uid="uid://bfh1b4g0isfgh" path="res://Player/upgrades.gd" id="20_mgkdb"]
 [ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="22_bgaaw"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
+[ext_resource type="Script" uid="uid://5aetuiovci75" path="res://Player/grappling_state.gd" id="23_gv3fu"]
 [ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
+[ext_resource type="Script" uid="uid://rdxrjtmc6byw" path="res://Player/hook.gd" id="25_4n5ed"]
+[ext_resource type="Texture2D" uid="uid://eve74ii5oe07" path="res://Player/Player2.0/Sprites/grappling_hook.png" id="25_78fhc"]
 [ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
 [ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
 [ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
+[ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
@@ -67,7 +71,7 @@ point_count = 2
 size = Vector2(13, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(18, 4.3333654)
+size = Vector2(20, 4.166683)
 
 [sub_resource type="Curve" id="Curve_g8oqh"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -102,6 +106,10 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_whdv5"]
 radius = 49.0408
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4n5ed"]
+radius = 9.421122
+height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 65
@@ -172,16 +180,19 @@ color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
 [node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash"]
 wait_time = 2.0
 
+[node name="Grappling" type="Node2D" parent="PlayerStateMachine"]
+script = ExtResource("23_gv3fu")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 7)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="."]
-position = Vector2(1, 4)
+position = Vector2(-1, 15)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
-position = Vector2(-2, 11.166682)
+position = Vector2(0, -0.0833416)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
@@ -293,3 +304,38 @@ script = ExtResource("26_s0mko")
 [node name="PeriodicAbilities" type="Node2D" parent="Abilities"]
 
 [node name="ActiveAbilities" type="Node2D" parent="Abilities"]
+
+[node name="GrappleHook" type="Node2D" parent="."]
+script = ExtResource("33_yf47d")
+
+[node name="HookString" type="Line2D" parent="GrappleHook"]
+texture_repeat = 2
+position = Vector2(0, 8)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(0.52156866, 0.26666668, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hook" type="Area2D" parent="GrappleHook"]
+position = Vector2(25, -1)
+rotation = -0.7853982
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("25_4n5ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/Hook"]
+position = Vector2(2, -2)
+rotation = 2.3177972
+scale = Vector2(0.6000012, 1)
+shape = SubResource("CapsuleShape2D_4n5ed")
+
+[node name="Sprite2D" type="Sprite2D" parent="GrappleHook/Hook"]
+texture = ExtResource("25_78fhc")
+
+[node name="LinePoint" type="Node2D" parent="GrappleHook/Hook"]
+position = Vector2(-6, 6)
+
+[connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]

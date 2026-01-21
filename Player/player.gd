@@ -26,6 +26,12 @@ signal dash_finished
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
+@onready var grapple_hook: GrappleHook = $GrappleHook
+@onready var grappling_state: PlayerGrapplingState = $PlayerStateMachine/Grappling
+@onready var hook: Hook = $GrappleHook/Hook
+@onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
+var can_hook: bool = true
+
 @export var gravity: int
 @export var stats: PlayerStats
 
@@ -152,7 +158,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("special"):
 			special_ability()
-			
+		
+		if event.is_action_pressed("grapple"):
+			grapple()
 	
 func special_ability() -> void:
 	if current_weapon.weapon_data.special_ability != null:
@@ -176,7 +184,18 @@ func shoot() -> void:
 	#for ability in stats.shoot_abilities:
 		#ability.activate_ability(self)
 
+func grapple() -> void:
+	if not player_state_machine.curr_state is PlayerGrapplingState:
+		grapple_hook.activate_hook()
+		hook.call_deferred("reparent",get_parent())
 
+func _on_hook_body_entered(_body: Node2D) -> void:
+	if _body is Island:
+		hook.is_active = false
+		player_state_machine.ChangeState(grappling_state)
+		grappling_state.hook_pos = hook.global_position
+		hook.call_deferred("reparent",_body)
+		
 func show_hands(yes: bool) -> void:
 	main_hand.visible = yes
 	off_hand.visible = yes

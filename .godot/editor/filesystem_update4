@@ -1,4 +1,4 @@
-res://Rifts/Chunks/Utility/Spawners/EnemySpawners/AppleTree.tscn
+res://Player/Player.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -7,12 +7,10 @@ res://Enemies/Cloud/lightningshader.gdshader
 res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
+res://Player/rope.gdshader
 res://Enemies/Summoner/Glow.gdshader
-res://Rifts/Chunks/Utility/Spawners/EnemySpawners/tree_spawner.gd
-res://Rifts/Rift.tscn
-res://Rifts/RiftGeneration/rift_generator.gd
-res://Rifts/Chunks/chunk.gd
-res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd
-res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_1.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_3.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_2.tscn
+res://Player/grappling_state.gd
+res://Player/hook.gd
+res://Player/grapple_hook.gd
+res://Player/player.gd
+res://Player/States/player_dead_state.gd
