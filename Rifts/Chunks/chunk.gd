@@ -3,6 +3,9 @@ class_name RiftChunk extends Node2D
 @onready var bounds: Bounds = $Bounds
 @onready var entry: EntryMarker = $EntryMarker
 
+@export var allowed_spawn: bool = true
+@export var spawn_chance: float = 0.2
+
 var rift: Rift
 
 func _ready() -> void:

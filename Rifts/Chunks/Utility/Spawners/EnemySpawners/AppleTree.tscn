@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dewibjwg0glxq" path="res://Enemies/Sprites/ColorlessApple.png" id="13_hw8fy"]
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="14_nwj3p"]
 [ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner_data.gd" id="15_yakjg"]
-[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="16_fpkb1"]
+[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="16_fpkb1"]
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
 script = ExtResource("8_atnhr")
@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://cpc01laocnq5u"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dvek"]
 resource_local_to_scene = true
-radius = 30.666668
+radius = 50.671055
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe6ya"]
 size = Vector2(7.8774986, 149.18243)
@@ -137,6 +137,7 @@ position = Vector2(18.666668, 2)
 position = Vector2(-14, -6.6666665)
 
 [node name="Island" parent="." instance=ExtResource("16_fpkb1")]
-position = Vector2(0.6666667, 30.000002)
+position = Vector2(0.66666675, 24.666666)
+scale = Vector2(0.75, 0.75)
 
 [editable path="EnemySpawnerTree"]

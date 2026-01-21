@@ -29,6 +29,7 @@ size = Vector2(18, 23)
 [node name="Portal" type="Node2D"]
 z_index = -3
 script = ExtResource("1_goeoo")
+destination = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_g0x3d")

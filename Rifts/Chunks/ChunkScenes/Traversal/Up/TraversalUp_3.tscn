@@ -29,13 +29,13 @@ position = Vector2(7, -65)
 position = Vector2(8, -4)
 
 [node name="ExitMarker" parent="." instance=ExtResource("5_vt2ij")]
-position = Vector2(10, -134)
+position = Vector2(-8, -129)
 
 [node name="ExitMarker2" parent="." instance=ExtResource("5_vt2ij")]
-position = Vector2(102, -106)
+position = Vector2(95, -103)
 
 [node name="ExitMarker3" parent="." instance=ExtResource("5_vt2ij")]
-position = Vector2(-94, -79)
+position = Vector2(-88, -70)
 
 [node name="Bounds" parent="." instance=ExtResource("6_skgmo")]
 position = Vector2(15, -35)
@@ -46,7 +46,12 @@ shape = SubResource("RectangleShape2D_umnvj")
 [node name="Island3" parent="." instance=ExtResource("2_fudh7")]
 position = Vector2(-19, -29)
 
-[node name="SpawnMarker" parent="." instance=ExtResource("8_fudh7")]
-position = Vector2(-19, -42)
+[node name="SpawnMarkers" type="Node2D" parent="."]
+
+[node name="SpawnMarker" parent="SpawnMarkers" instance=ExtResource("8_fudh7")]
+position = Vector2(105, 3)
+
+[node name="SpawnMarker2" parent="SpawnMarkers" instance=ExtResource("8_fudh7")]
+position = Vector2(-76, 15)
 
 [editable path="Bounds"]

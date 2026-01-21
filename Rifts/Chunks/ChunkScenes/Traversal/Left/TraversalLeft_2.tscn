@@ -48,7 +48,9 @@ position = Vector2(75, 1)
 position = Vector2(20, 13)
 shape = SubResource("RectangleShape2D_neyya")
 
-[node name="SpawnMarker" parent="." instance=ExtResource("20_xqc1t")]
-position = Vector2(5, 0)
+[node name="SpawnMarkers" type="Node2D" parent="."]
+
+[node name="SpawnMarker" parent="SpawnMarkers" instance=ExtResource("20_xqc1t")]
+position = Vector2(55, -43)
 
 [editable path="Bounds"]

@@ -47,6 +47,8 @@ var shot_power_mod: float = 0
 var damage: int
 var knockback: float
 
+var gravity: float = 50
+
 func _ready() -> void:
 	hit_sound = HIT_SOUND.instantiate()
 	cpu_particles.emitting = false
@@ -58,7 +60,6 @@ func _ready() -> void:
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
-
 
 func hit(body) -> void:
 	if body is Enemy:
@@ -72,14 +73,13 @@ func hit(body) -> void:
 			succesfuly_hit = true
 			clear_shot()
 
-
 func calc_dmg(shot_power: float) -> void:
 	damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
 	*pow(shot_power, 2))
 
 func calc_knockback(shot_power: float) -> void:
-	
 	knockback = data.pushback_power * shot_power + log(velocity.length())
+
 func explosion() -> void:
 	if can_explode:
 		var try: int = randi_range(1,100)
@@ -103,8 +103,6 @@ func clear_shot() -> void:
 func wall_clear_shot() -> void:
 	EventBus.arrow_hit_sound.emit()
 	queue_free()
-
-var gravity: float = 50
 
 func _physics_process(delta: float) -> void:
 	if fired:

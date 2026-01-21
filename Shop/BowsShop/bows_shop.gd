@@ -1,4 +1,4 @@
-class_name BowsShop extends Node2D
+class_name BowsShop extends GameWorld
 
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 @onready var islands: Node2D = $Islands
@@ -9,39 +9,44 @@ class_name BowsShop extends Node2D
 var player: Player
 
 func _ready() -> void:
-	falling_death.body_entered.connect(to_menu)
+	pass
+
+func spawn_position() -> Vector2:
+	return player_spawn.global_position
 	
-func to_menu(b) -> void:
-	if b is Player:
-		EventBus.changed_scene.emit("Menu")
-
-func set_scene(_player: Player) -> void:
-		visible = true
-		player = _player
-		_player.global_position = player_spawn.global_position
-		enable()
-		falling_death.enabled()
-		
-func disable() -> void:
-	for portal in portals.get_children():
-		portal.disable()
-	for island in islands.get_children():
-		island.disable()
-	for pedestal in pedestals.get_children():
-		pedestal.disable()
-
-func enable() -> void:
-	for portal in portals.get_children():
-		portal.enable()
-	for island in islands.get_children():
-		island.enable()
-	for pedestal in pedestals.get_children():
-		pedestal.enable()
-		
-#func update_money(_val: int) -> void:
-	#current_money.update_current_money(_val)
-
-func exit_scene(_player) -> void:
-	visible = false
-	disable()
-	falling_death.disabled()
+	#falling_death.body_entered.connect(to_menu)
+	#
+#func to_menu(b) -> void:
+	#if b is Player:
+		#EventBus.changed_scene.emit("Menu")
+#
+#func set_scene(_player: Player) -> void:
+		#visible = true
+		#player = _player
+		#_player.global_position = player_spawn.global_position
+		#enable()
+		#falling_death.enabled()
+		#
+#func disable() -> void:
+	#for portal in portals.get_children():
+		#portal.disable()
+	#for island in islands.get_children():
+		#island.disable()
+	#for pedestal in pedestals.get_children():
+		#pedestal.disable()
+#
+#func enable() -> void:
+	#for portal in portals.get_children():
+		#portal.enable()
+	#for island in islands.get_children():
+		#island.enable()
+	#for pedestal in pedestals.get_children():
+		#pedestal.enable()
+		#
+##func update_money(_val: int) -> void:
+	##current_money.update_current_money(_val)
+#
+#func exit_scene(_player) -> void:
+	#visible = false
+	#disable()
+	#falling_death.disabled()

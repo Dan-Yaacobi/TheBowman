@@ -274,24 +274,21 @@ position = Vector2(-39, 67)
 [node name="Portal" parent="Portals" instance=ExtResource("13_npjie")]
 position = Vector2(449, 81)
 color = Color(0.99333346, 0.6, 1, 1)
-destination = "PlayGround"
 flip_h = true
 
 [node name="Portal4" parent="Portals" instance=ExtResource("13_npjie")]
 position = Vector2(205, 98)
 color = Color(1, 0.45, 0.45, 1)
-destination = "Rift"
+destination = 2
 flip_h = true
 
 [node name="Portal2" parent="Portals" instance=ExtResource("13_npjie")]
 position = Vector2(22, 74)
 color = Color(1, 1, 0, 1)
-destination = "BowsShop"
 
 [node name="Portal3" parent="Portals" instance=ExtResource("13_npjie")]
 position = Vector2(-39, 45)
 color = Color(1, 0.28235295, 1, 1)
-destination = "PlatformShop"
 
 [node name="FallingDeath" type="Area2D" parent="."]
 position = Vector2(227, 107)

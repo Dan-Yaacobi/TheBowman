@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bod6bf4uewamn" path="res://Level/Islands/sprites/Island3.png" id="2_wbk3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
-size = Vector2(31, 2)
+size = Vector2(31, 9)
 
 [node name="Island" type="StaticBody2D"]
 z_index = -4
@@ -15,5 +15,5 @@ script = ExtResource("1_wbk3b")
 texture = ExtResource("2_wbk3b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4.5, -7)
+position = Vector2(4.5, -3.5)
 shape = SubResource("RectangleShape2D_sp085")

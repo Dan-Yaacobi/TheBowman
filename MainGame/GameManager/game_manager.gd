@@ -6,45 +6,55 @@ var prev_world: GameWorld
 var game:Game
 var hud: HUD
 
+func _ready() -> void:
+	EventBus.changed_scene.connect(change_game_world)
+	
 func set_game(_game: Game) -> void:
 	if _game:
 		game = _game
-
-
+		hud = game.hud
 func spawn_player(_pos: Vector2 = Vector2.ZERO) -> void:
+	PlayerManager.player.camera.position_smoothing_enabled = false
+
 	PlayerManager.player.global_position = _pos
+	PlayerManager.player.camera.force_update_scroll()
 
 
-func change_game_world(_new: GameWorld) -> void:
-	if _new:
-		get_tree().paused = true
-
+func change_game_world(_new: GameWorlds.worlds) -> void:
+	if _new is GameWorlds.worlds:
 		game.hud.visible = false
 		
 		await SceneTransition.fade_out()
+
+		var next_world = GameWorlds.get_world(_new)
+		
+		get_tree().paused = true
 		
 		prev_world = curr_world
-		curr_world = _new
+		curr_world = next_world
 		
 		game.add_child(curr_world)
 		curr_world.set_world()
-		
+		PlayerManager.player.reparent(curr_world)
 		if prev_world:
 			prev_world.exit_world()
 			game.remove_child(prev_world)
-			PlayerManager.player.reparent(curr_world)
-
-		else:
-			curr_world.add_child(PlayerManager.player	)
-
-		
+			#
+#
+		#else:
+			#curr_world.add_child(PlayerManager.player	)
+		#
 		
 		spawn_player(curr_world.spawn_position())
 		
 		await get_tree().process_frame
 		
-		await SceneTransition.fade_in()
+		
 		EventBus.invisible_hands.emit(true)
 		get_tree().paused = false
 		game.hud.visible = true
+		PlayerManager.player.visible = true
+		PlayerManager.player.camera.position_smoothing_enabled = true
 		await get_tree().process_frame
+		await SceneTransition.fade_in()
+		EventBus.finished_loading.emit()

@@ -1,4 +1,5 @@
-class_name ArrowData extends Resource
+extends Resource
+class_name ArrowData
 
 @export var speed: int
 @export var base_damage: int 

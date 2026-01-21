@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_xtt12"]
 
 [sub_resource type="Resource" id="Resource_alqiq"]
+resource_local_to_scene = true
 script = ExtResource("2_lpier")
 speed = 30
 base_damage = 35

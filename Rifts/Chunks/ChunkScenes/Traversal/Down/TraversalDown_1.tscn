@@ -43,7 +43,9 @@ position = Vector2(19, 43)
 [node name="CollisionShape2D" parent="Bounds" index="0"]
 shape = SubResource("RectangleShape2D_neyya")
 
-[node name="SpawnMarker" parent="." instance=ExtResource("20_u7ert")]
-position = Vector2(42, 29)
+[node name="SpawnMarkers" type="Node2D" parent="."]
+
+[node name="SpawnMarker" parent="SpawnMarkers" instance=ExtResource("20_u7ert")]
+position = Vector2(108, 39)
 
 [editable path="Bounds"]

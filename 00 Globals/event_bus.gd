@@ -7,7 +7,7 @@ signal out_of_mana
 
 signal invisible_hands(yes: bool)
 
-signal changed_scene(new_scene: String)
+signal changed_scene(new_scene: GameWorlds.worlds)
 
 signal change_camera_focus(target: Vector2)
 signal reset_camera_focus
@@ -27,3 +27,5 @@ signal enemy_died(enemy: Enemy)
 signal entered_rift
 
 signal summon_effect(effect: Node2D)
+
+signal finished_loading

@@ -1,4 +1,6 @@
 Node2D
+Timer
+CPUParticles2D
 Label
 Marker2D
 CollisionPolygon2D
@@ -7,8 +9,6 @@ CollisionShape2D
 Area2D
 Sprite2D
 EnemySpawner
-Timer
-CPUParticles2D
 AnimationPlayer
 Control
 AudioStreamPlayer2D

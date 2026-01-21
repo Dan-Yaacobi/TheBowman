@@ -72,7 +72,7 @@ sprite = ExtResource("17_y6hjf")
 [node name="Portal2" parent="Portals" instance=ExtResource("28_bq6li")]
 position = Vector2(34, -114)
 color = Color(1, 1, 0, 1)
-destination = "Menu"
+destination = 1
 
 [node name="Islands" type="Node2D" parent="."]
 

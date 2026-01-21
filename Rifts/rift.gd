@@ -1,4 +1,4 @@
-class_name Rift extends Node2D
+class_name Rift extends GameWorld
 
 @onready var rift_generator: RiftGenerator = $RiftGenerator
 @export var rift_values: Array[float]
@@ -8,7 +8,25 @@ var current_enemies: Array[Enemy]
 func _ready() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)
 	EventBus.enemy_died.connect(remove_enemy)
+	EventBus.summon_effect.connect(summon_effect)
 	
+func set_world() -> void:
+	PlayerManager.player.stats.rift_level += 1
+	print("here")
+	EventBus.entered_rift.emit()
+	pass
+
+func exit_world() -> void:
+	PlayerManager.player.hide_buffs()
+	rift_generator._reset_world()
+	kill_all_enemies()
+	pass
+
+func spawn_position() -> Vector2:
+	var start_chunk: IntroChunk = rift_generator.generate(PlayerManager.player.stats.rift_level)
+
+	return start_chunk.spawn_position()
+
 func set_scene(_player) -> void:
 	#for i in range(20):
 		#rift_generator.generate()
@@ -39,4 +57,4 @@ func kill_all_enemies() -> void:
 		enemy.queue_free()
 
 func summon_effect(effect: Node2D) -> void:
-	add_child(effect)
+	call_deferred("add_child", effect)

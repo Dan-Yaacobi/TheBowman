@@ -53,9 +53,9 @@ position = Vector2(-25, 119)
 [node name="SpawnMarkers" type="Node2D" parent="."]
 
 [node name="SpawnMarker" parent="SpawnMarkers" instance=ExtResource("21_e5hgq")]
-position = Vector2(-109, 31)
+position = Vector2(-96, 38)
 
 [node name="SpawnMarker2" parent="SpawnMarkers" instance=ExtResource("21_e5hgq")]
-position = Vector2(121, 31)
+position = Vector2(104, 40)
 
 [editable path="Bounds"]

@@ -5,6 +5,7 @@ signal money_changed
 signal combo(amount: int)
 signal took_hit
 signal critical_hit
+signal dash_finished
 
 @onready var body: PlayerBody = $PlayerBody
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
@@ -59,6 +60,7 @@ var perfect_shot_counter: int = 0
 var current_arrow: Arrow
 
 var current_portal: Portal
+var can_dash: bool = true
 
 func _ready() -> void:
 	stats.player = self
@@ -137,10 +139,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if current_portal:
 				current_portal.enter()
 		if event.is_action_pressed("Menu"):
-			EventBus.changed_scene.emit("Menu")
+			EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 				
 		if event.is_action_pressed("Jump"):
-			jump_action.jump()
+			jump()
 			for ability in stats.jump_abilities:
 				ability.activate_ability(self)
 				
@@ -160,6 +162,14 @@ func special_ability() -> void:
 			special_ability_available = false
 			special_ability_cooldown.start()
 
+func jump() -> void:
+	if jump_action.jumps > 0:
+		var jump_power = stats.jump_height + get_agility()
+		velocity.y = 0
+		var tween = create_tween().bind_node(self).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(self, "velocity:y", velocity.y - jump_power,0.1)
+		jump_action.handle_jumps()
+	
 func shoot() -> void:
 	EventBus.start_shooting.emit()
 	#current_weapon.regular_attack = true
@@ -171,7 +181,6 @@ func show_hands(yes: bool) -> void:
 	main_hand.visible = yes
 	off_hand.visible = yes
 	
-
 func can_use_special_ability() -> void:
 	special_ability_available = true
 	special_ability_cooldown.stop()
@@ -261,6 +270,16 @@ func invincibility_over() -> void:
 	hit_box.set_collision_mask_value(3,true)
 	self.modulate.a = 1
 	hit_box.monitoring = true
+
+func dash(dash_direction) -> void:
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	velocity.y = 0
+	tween.tween_property(self, "velocity", velocity + Vector2(dash_direction * stats.move_speed * 5,0), 0.2)
+	
+	await tween.finished
+	
+	dash_finished.emit()
+	pass
 	
 func heal(amount: int) -> void:
 	if stats.hp + amount <= get_stamina():

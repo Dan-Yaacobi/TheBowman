@@ -12,6 +12,7 @@ func _ready() -> void:
 	PlayerManager.player.money_changed.connect(update_money)
 	PlayerManager.player.combo.connect(combo_counter.update_combo)
 	coin_animation.play("Rotate")
+
 func get_health_bar() -> HealthBar:
 	return health_bar
 

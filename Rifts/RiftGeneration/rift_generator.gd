@@ -4,7 +4,7 @@ class_name RiftGenerator extends Node2D
 @export var library: RiftChunkLibrary
 @export var intro_data: ChunkData
 @export var end_data: ChunkData
-@export var spawnings: Array
+
 @export var spawn_budget: int = 10
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -249,7 +249,6 @@ func _get_free_exits(chunk: RiftChunk) -> Array[ExitMarker]:
 func _pick_chunk_data(desired_type: ChunkData.types, desired_difficulty: int, tried_ids: Dictionary) -> ChunkData:
 	var pool: Array[ChunkData] = []
 	
-	
 	for c: ChunkData in library.get_chunks(desired_type):
 		if c == null:
 			continue
@@ -282,7 +281,8 @@ func _pick_chunk_data(desired_type: ChunkData.types, desired_difficulty: int, tr
 				break
 		if picked == null:
 			picked = pool[pool.size() - 1]
-			
+	
+	
 	tried_ids[picked.id] = true
 	return picked
 

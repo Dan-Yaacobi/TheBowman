@@ -26,7 +26,7 @@ func spawn_position() -> Vector2:
 #func shop(b) -> void:
 	#if b is Player:
 		#EventBus.changed_scene.emit("Shop")
-#
+##
 #func set_scene(_player: Player) -> void:
 	#if _player != null:
 		#_player.global_position = player_spawn.global_position
@@ -38,7 +38,7 @@ func spawn_position() -> Vector2:
 		##tiles.collision_enabled = true
 		##enable_islands_portals()
 		#falling_death.enabled()
-		#
+		
 #func exit_scene(_player) -> void:
 	##disable_islands_portals()
 	#visible = false
@@ -70,5 +70,5 @@ func spawn_position() -> Vector2:
 
 func _on_falling_death_body_entered(body: Node2D) -> void:
 	if body is Player:
-		EventBus.changed_scene.emit("Menu")
+		EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	pass # Replace with function body.

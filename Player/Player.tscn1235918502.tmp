@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene load_steps=43 format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
 [ext_resource type="Script" uid="uid://bfaixwknlmsd2" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
 [ext_resource type="Script" uid="uid://bfh1b4g0isfgh" path="res://Player/upgrades.gd" id="20_mgkdb"]
-[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="22_bgaaw"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
 [ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
 [ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
@@ -39,8 +38,8 @@ move_speed = 50
 max_jumps = 1
 jump_height = 150
 knockback_resistance = 3
-strength = 15
-agility = 15
+strength = 30
+agility = 30
 stamina = 15
 menu_speed = 150
 max_minions = 3
@@ -58,16 +57,11 @@ rift_level = 0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(18, 3)
 
-[sub_resource type="Curve" id="Curve_gv3fu"]
-_limits = [0.0, 0.5, 0.0, 1.0]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
-size = Vector2(13, 18)
+size = Vector2(13, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(18, 4.3333654)
+size = Vector2(13.3333, 3.20833)
 
 [sub_resource type="Curve" id="Curve_g8oqh"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -75,7 +69,7 @@ _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
-size = Vector2(17.666666, 17)
+size = Vector2(17.666666, 21)
 
 [sub_resource type="Curve" id="Curve_croik"]
 _limits = [0.0, 20.0, 0.0, 1.0]
@@ -155,25 +149,8 @@ script = ExtResource("15_qho0y")
 [node name="Dash" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource("16_lcihm")
 
-[node name="Dust" type="CPUParticles2D" parent="PlayerStateMachine/Dash"]
-position = Vector2(0, 8)
-emitting = false
-amount = 5
-texture = ExtResource("22_bgaaw")
-one_shot = true
-preprocess = 0.3
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 8.0
-gravity = Vector2(2, -20)
-scale_amount_curve = SubResource("Curve_gv3fu")
-color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
-
-[node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash"]
-wait_time = 2.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 7)
+position = Vector2(-1.5, 6)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="."]
@@ -181,7 +158,7 @@ position = Vector2(1, 4)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
-position = Vector2(-2, 11.166682)
+position = Vector2(-2.33333, 11.7292)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
@@ -204,7 +181,7 @@ color = Color(0.831239, 0.712185, 0.672638, 1)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-2.1666665, 4.5)
+position = Vector2(-2.1666665, 2.5)
 shape = SubResource("RectangleShape2D_4o0d0")
 
 [node name="InvincibilityTimer" type="Timer" parent="."]

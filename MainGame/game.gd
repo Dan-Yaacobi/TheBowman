@@ -4,21 +4,9 @@ class_name Game extends Node2D
 
 const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var game_music: AudioStreamPlayer2D = $GameMusic
-@onready var platform_shop: PlatformShop = $PlatformShop
-@onready var abilities_shop: AbilitiesShop = $AbilitiesShop
-@onready var bows_shop: BowsShop = $BowsShop
-@onready var shop: Shop = $Shop
-@onready var play_ground: PlayGround = $PlayGround
-@onready var tower_upgrade_menu: TowerUpgradeMenu = $TowerUpgradeMenu
 @onready var rift: Rift = $Rift
 @onready var scenes_dic: Dictionary = {
 "Menu": main_menu,
-"PlayGround": play_ground,
-"Shop": shop,
-"BowsShop": bows_shop,
-"AbilitiesShop": abilities_shop,
-"PlatformShop": platform_shop,
-"TowerUpgrade": tower_upgrade_menu,
 "Rift": rift
 }
 @onready var cloud_timer: Timer = $CloudTimer
@@ -37,17 +25,18 @@ var last_scene: Node
 
 func _ready() -> void:
 	game_manager.set_game(self)
-	game_manager.change_game_world(main_menu.instantiate())
+	game_manager.change_game_world(GameWorlds.worlds.Main_Menu)
+	PlayerManager.player.health_bar = hud.get_health_bar()
+	PlayerManager.player.total_buffs = hud.get_total_buffs()
+	PlayerManager.player.special_ability_cd = hud.get_special_ability_cd()
+	add_child(PlayerManager.player)
 	return
 	#RenderingServer.set_default_clear_color(Color.BLACK)
 	#
 	##EventBus.changed_scene.connect(change_scene)
 	#cloud_timer.timeout.connect(summon_cloud)
 	#player = PlayerManager.player
-	PlayerManager.player.health_bar = hud.get_health_bar()
-	PlayerManager.player.total_buffs = hud.get_total_buffs()
-	PlayerManager.player.special_ability_cd = hud.get_special_ability_cd()
-	
+
 	#add_child(player)
 	#
 	#last_scene = main_menu

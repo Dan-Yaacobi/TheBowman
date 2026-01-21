@@ -84,6 +84,7 @@ func change_direction() -> void:
 func new_arrow(_arrow: PackedScene) -> void:
 	if arrow.instantiate() is Arrow:
 		arrow = _arrow
+
 		
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
