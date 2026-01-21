@@ -124,8 +124,30 @@ node_b = NodePath("../WaveSign")
 motor_enabled = true
 
 [node name="UpgradeButtons" parent="." instance=ExtResource("15_53yb1")]
+focus_behavior_recursive = 1
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("53_q6dew")]
 position = Vector2(10, -16)
 
+[node name="cloudSummonButton" type="Button" parent="."]
+offset_left = 119.0
+offset_top = -52.0
+offset_right = 538.99994
+offset_bottom = 158.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 150
+text = "Cloud"
+
+[node name="summonSpiderButton" type="Button" parent="."]
+offset_left = 121.0
+offset_top = -28.0
+offset_right = 517.0
+offset_bottom = 168.0
+scale = Vector2(0.1, 0.1)
+focus_mode = 0
+theme_override_font_sizes/font_size = 150
+text = "Spider"
+
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]
+[connection signal="pressed" from="cloudSummonButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="summonSpiderButton" to="." method="_on_summon_spider_button_pressed"]

@@ -16,7 +16,7 @@ script = ExtResource("3_rnln2")
 [sub_resource type="Resource" id="Resource_4bgit"]
 resource_local_to_scene = true
 script = ExtResource("4_soewm")
-move_speed = 50
+move_speed = 25
 knockback = 150
 touch_damage = 3
 death_ability = Array[ExtResource("2_3um86")]([SubResource("Resource_fqrf0")])

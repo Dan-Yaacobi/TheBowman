@@ -22,7 +22,6 @@ func set_scene(_player) -> void:
 func exit_scene(_player) -> void:
 	PlayerManager.player.hide_buffs()
 	rift_generator._reset_world()
-	EventBus.summon_effect.disconnect(summon_effect)
 	kill_all_enemies()
 	
 func add_enemy(_enemy: Enemy) -> void:

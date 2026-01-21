@@ -140,10 +140,10 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_a6mvh")
 
 [node name="Label2" type="Label" parent="ArrowSign4"]
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 600.0
-offset_bottom = 337.0
+offset_left = -6.6666665
+offset_top = -4.0
+offset_right = 684.3333
+offset_bottom = 338.0
 scale = Vector2(0.02, 0.02)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -302,7 +302,7 @@ destination = "PlayGround"
 flip_h = true
 
 [node name="Portal4" parent="Portals" instance=ExtResource("13_npjie")]
-position = Vector2(205, 98)
+position = Vector2(371, 46)
 color = Color(1, 0.45, 0.45, 1)
 destination = "Rift"
 flip_h = true

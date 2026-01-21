@@ -39,7 +39,11 @@ func _ready() -> void:
 	upgrade_button_2.choose_button.pressed.connect(new_wave_difficulty)
 	upgrade_button_3.choose_button.pressed.connect(new_wave_difficulty)
 	upgrade_buttons.disable()
-	
+	EventBus.summon_effect.connect(summon_effect)
+
+func summon_effect(effect: Node2D) -> void:
+	call_deferred("add_child",effect)
+
 func _process(_delta: float) -> void:
 	if summon_timer.is_stopped():
 		summon_timer.start()
@@ -230,4 +234,20 @@ func _on_falling_death_body_entered(body: Node2D) -> void:
 		body.stats.hp = 0
 	elif body is Arrow:
 		body.missed()
+	pass # Replace with function body.
+
+@onready var cloud_summon_button: Button = $cloudSummonButton
+
+func _on_button_pressed() -> void:
+	var new_cloud = CLOUD_ENEMY.instantiate()
+	new_cloud.global_position = player.global_position + Vector2(0,-150)
+	call_deferred("add_child", new_cloud)
+	pass # Replace with function body.
+
+
+func _on_summon_spider_button_pressed() -> void:
+	var new_spider = SPIDER.instantiate()
+	new_spider.global_position = player.global_position + Vector2(0,-150)
+	call_deferred("add_child", new_spider)
+
 	pass # Replace with function body.

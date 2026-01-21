@@ -103,6 +103,7 @@ func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed
 			pushback_power = power
 
 func player_hit(body: CharacterBody2D) -> void:
+	return
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(stats.touch_damage)
