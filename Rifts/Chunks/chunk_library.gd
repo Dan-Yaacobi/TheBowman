@@ -1,11 +1,13 @@
 class_name RiftChunkLibrary extends Resource
 
-@export var buckets: Array[ChunkBucket]
+@export var traversal_chunks: Dictionary[CustomVariables.directions,ChunkBucket]
+@export var other_chunks: Dictionary[ChunkData.types,ChunkBucket]
 
-func get_chunks(type: ChunkData.types) -> Array[ChunkData]:
-	var res: Array[ChunkData] = []
-	for bucket in buckets:
-		if bucket.type == type:
-			res = bucket.chunks
-	return res
-	
+func get_traversal_chunk(direction: CustomVariables.directions) -> ChunkData:
+	return traversal_chunks[direction].chunks.pick_random()
+
+func get_intro_chunk() -> ChunkData:
+	return other_chunks[ChunkData.types.INTRO].chunks.pick_random()
+
+func get_portal_chunk() -> ChunkData:
+	return other_chunks[ChunkData.types.PORTAL_APPROACH].chunks.pick_random()

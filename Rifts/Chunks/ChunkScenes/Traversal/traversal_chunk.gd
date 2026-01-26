@@ -3,6 +3,8 @@ class_name TraversalChunk extends RiftChunk
 const APPLE_TREE = preload("uid://tpty2gvjhn30")
 @onready var spawn_markers: Node2D = $SpawnMarkers
 
+@export var direction: CustomVariables.directions
+
 func extra_ready_functions() -> void:
 	if allowed_spawn:
 		if randf() < spawn_chance:

@@ -32,13 +32,13 @@ position = Vector2(114, 80)
 position = Vector2(-1, -9)
 
 [node name="ExitMarker" parent="." instance=ExtResource("5_t0bht")]
-position = Vector2(254, 37)
+position = Vector2(241, -17)
 
 [node name="ExitMarker2" parent="." instance=ExtResource("5_t0bht")]
-position = Vector2(260, 111)
+position = Vector2(269, 71)
 
 [node name="ExitMarker3" parent="." instance=ExtResource("5_t0bht")]
-position = Vector2(185, 144)
+position = Vector2(196, 141)
 
 [node name="Bounds" parent="." instance=ExtResource("6_t0bht")]
 position = Vector2(92, 37)

@@ -6,6 +6,8 @@ class_name RiftChunk extends Node2D
 @export var allowed_spawn: bool = true
 @export var spawn_chance: float = 0.2
 
+var connected_chunks: Array[RiftChunk] = []
+
 var rift: Rift
 
 func _ready() -> void:

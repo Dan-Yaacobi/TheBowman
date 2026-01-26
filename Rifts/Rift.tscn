@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://iitxisrr6wi5"]
+[gd_scene load_steps=23 format=3 uid="uid://iitxisrr6wi5"]
 
 [ext_resource type="Script" uid="uid://d1nuc00qfn6v8" path="res://Rifts/rift.gd" id="1_hofdl"]
 [ext_resource type="PackedScene" uid="uid://daqty3s8xq8df" path="res://Rifts/RiftGeneration/RiftGenerator.tscn" id="2_pe0ph"]
@@ -16,38 +16,42 @@
 [ext_resource type="Resource" uid="uid://rwhqlp7cbqw0" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_2.tres" id="12_if34p"]
 [ext_resource type="Resource" uid="uid://bq1oxee65vkvd" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_3.tres" id="13_onntq"]
 [ext_resource type="Script" uid="uid://co6xputyjmuin" path="res://Rifts/Chunks/chunk_library.gd" id="14_km5dl"]
-[ext_resource type="Resource" uid="uid://dj8i0e2574b5s" path="res://Rifts/Chunks/ChunkData/Intro/intro_1.tres" id="15_cv4sj"]
-[ext_resource type="Resource" uid="uid://0kfokxymkgwt" path="res://Rifts/Chunks/ChunkData/End/end_portal_data.tres" id="17_d1hhh"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
-main_path_length = 10
-main_backtrack_depth = 3
-base_side_budget_nodes = 5
-base_branch_start_branch = 0.05
-branch_start_branch_per_difficulty = 0.1
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
 [sub_resource type="Resource" id="Resource_v6yg5"]
 script = ExtResource("4_v6yg5")
-chunks = Array[ExtResource("3_clqlo")]([ExtResource("15_cv4sj")])
+type = 2
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("11_k3d36"), ExtResource("12_if34p"), ExtResource("13_onntq")])
 metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_3f0ah"]
 script = ExtResource("4_v6yg5")
 type = 2
-chunks = Array[ExtResource("3_clqlo")]([ExtResource("4_cv4sj"), ExtResource("5_jukhk"), ExtResource("6_d1hhh"), ExtResource("7_v6yg5"), ExtResource("8_3f0ah"), ExtResource("9_4xrky"), ExtResource("10_5l72e"), ExtResource("11_k3d36"), ExtResource("12_if34p"), ExtResource("13_onntq")])
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("4_cv4sj"), ExtResource("5_jukhk")])
 metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_4xrky"]
 script = ExtResource("4_v6yg5")
-type = 4
-chunks = Array[ExtResource("3_clqlo")]([ExtResource("17_d1hhh")])
+type = 2
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("6_d1hhh"), ExtResource("7_v6yg5")])
+metadata/_custom_type_script = "uid://rxohwem0g1cv"
+
+[sub_resource type="Resource" id="Resource_5l72e"]
+script = ExtResource("4_v6yg5")
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("8_3f0ah"), ExtResource("9_4xrky"), ExtResource("10_5l72e")])
 metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_clqlo"]
 script = ExtResource("14_km5dl")
-buckets = Array[ExtResource("4_v6yg5")]([SubResource("Resource_v6yg5"), SubResource("Resource_3f0ah"), SubResource("Resource_4xrky")])
+traversal_chunks = Dictionary[int, ExtResource("4_v6yg5")]({
+0: SubResource("Resource_v6yg5"),
+1: SubResource("Resource_3f0ah"),
+2: SubResource("Resource_4xrky"),
+3: SubResource("Resource_5l72e")
+})
 metadata/_custom_type_script = "uid://co6xputyjmuin"
 
 [node name="Rift" type="Node2D"]
@@ -56,5 +60,3 @@ script = ExtResource("1_hofdl")
 [node name="RiftGenerator" parent="." instance=ExtResource("2_pe0ph")]
 data = SubResource("Resource_d1hhh")
 library = SubResource("Resource_clqlo")
-intro_data = ExtResource("15_cv4sj")
-end_data = ExtResource("17_d1hhh")
