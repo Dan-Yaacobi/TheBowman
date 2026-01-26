@@ -7,7 +7,6 @@ class_name RiftChunk extends Node2D
 @export var spawn_chance: float = 0.2
 
 var connected_chunks: Array[RiftChunk] = []
-
 var rift: Rift
 
 func _ready() -> void:
@@ -28,17 +27,14 @@ func get_exit_markers() -> Array[ExitMarker]:
 
 	for n in get_children():
 		if n is ExitMarker:
-			exits.append(n)
+			if n.available:
+				exits.append(n)
 
 	exits.sort_custom(
 		func(a: ExitMarker, b: ExitMarker) -> bool:
 		return String(a.name) < String(b.name)
 	)
 	return exits
-
-func get_exit_count() -> int:
-	var exits: Array[ExitMarker] = get_exit_markers()
-	return exits.size()
 
 func get_exit_global(exit_index: int) -> Vector2:
 	var exits: Array[ExitMarker] = get_exit_markers()

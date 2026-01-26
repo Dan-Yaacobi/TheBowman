@@ -134,6 +134,7 @@ grapple={
 2d_physics/layer_6="Buttons"
 2d_physics/layer_7="PlayerPickup"
 2d_physics/layer_8="Projectiles"
+2d_physics/layer_15="ChunkBounds"
 
 [rendering]
 

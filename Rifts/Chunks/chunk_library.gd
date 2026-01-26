@@ -5,7 +5,10 @@ class_name RiftChunkLibrary extends Resource
 
 func get_traversal_chunk(direction: CustomVariables.directions) -> ChunkData:
 	return traversal_chunks[direction].chunks.pick_random()
-
+	
+func get_all_traversal_chunks(direction: CustomVariables.directions) -> Array[ChunkData]:
+	return traversal_chunks[direction].chunks
+	
 func get_intro_chunk() -> ChunkData:
 	return other_chunks[ChunkData.types.INTRO].chunks.pick_random()
 

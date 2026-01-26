@@ -29,7 +29,7 @@ func exit_world() -> void:
 	pass
 
 func spawn_position() -> Vector2:
-	var start_chunk: IntroChunk = rift_generator.generate(PlayerManager.player.stats.rift_level)
+	var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
 
 	return start_chunk.spawn_position()
 
@@ -37,7 +37,7 @@ func set_scene(_player) -> void:
 	#for i in range(20):
 		#rift_generator.generate()
 	_player.stats.rift_level += 1
-	var start_chunk: IntroChunk = rift_generator.generate(PlayerManager.player.stats.rift_level)
+	var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
 	PlayerManager.player.global_position = start_chunk.spawn_position()
 	PlayerManager.player.show_buffs()
 	EventBus.entered_rift.emit()

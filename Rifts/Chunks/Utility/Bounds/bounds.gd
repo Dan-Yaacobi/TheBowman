@@ -2,6 +2,12 @@ class_name Bounds extends Area2D
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
+var colliding: bool = false
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Bounds:
+		area.colliding = true
+
 func get_boundaries() -> Rect2:
 	var rect_shape: RectangleShape2D = collision_shape.shape as RectangleShape2D
 	if rect_shape == null:

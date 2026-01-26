@@ -1,4 +1,4 @@
-class_name TraversalChunk extends RiftChunk
+class_name TraversalChunk extends 
 
 const APPLE_TREE = preload("uid://tpty2gvjhn30")
 @onready var spawn_markers: Node2D = $SpawnMarkers

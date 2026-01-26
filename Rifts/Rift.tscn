@@ -19,6 +19,7 @@
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
+probability_decay = 1.25
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
 [sub_resource type="Resource" id="Resource_v6yg5"]

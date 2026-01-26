@@ -5,20 +5,138 @@ class_name RiftGenerator extends Node2D
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
 
 signal rift_created(RiftLevel)
+var rift_level: RiftLevel
+var main_path_chunks: Array[RiftChunk] = []
 
-func generate(_curr_level: int) -> RiftChunk:
+var biased_towards: CustomVariables.directions
+var rng = RandomNumberGenerator.new()
 
-	var rift_level = RIFT_LEVEL.instantiate()
+
+func generate(_curr_level: int) -> RiftLevel:
+
+	rift_level = RIFT_LEVEL.instantiate()
 	
-	var intro_chunk: IntroChunk = library.get_intro_chunk().instantiate()
-	
+	build_main_path()
+	#Create Everything
 	
 	rift_created.emit(rift_level)
 	return rift_level
 
-func build_path(_max_length: int) -> void:
+func build_main_path() -> void:
+	var intro_chunk: IntroChunk = library.get_intro_chunk().instantiate()
+	rift_level.add_child(intro_chunk)
+	main_path_chunks.append(intro_chunk)
+	
+	build_path(data.main_path_length, intro_chunk, true)
+
 	pass
 
+func build_all_side_paths() -> void:
+	pass
+	
+func build_side_path(_start_chunk: RiftChunk) -> void:
+	## length needs better adjustments
+	var length: int = randi_range(int(data.main_path_length/5), int(data.main_path_length/2))
+	build_path(length,_start_chunk, false)
+	pass
+
+func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool = true, _first_exit: ExitMarker = null) -> bool:
+	var length: int = 0
+	var _curr_chunk: RiftChunk = _starting_chunk
+	var _prev_chunk: RiftChunk = _curr_chunk
+	var chunks: Array[RiftChunk] = main_path_chunks
+	
+	if not _main_path:
+		chunks = []
+	
+	#first exit is random if none provided
+	var exit: ExitMarker
+	
+	if not _first_exit:
+		var exits: Array[ExitMarker] = _curr_chunk.get_exit_markers()
+		if exits.size() > 0:
+			exit = exits.pick_random()
+	else:
+		exit = _first_exit
+		
+	while(length < _max_length):
+		
+		var next_chunk: RiftChunk = await try_to_add_chunk(exit)
+		
+		if next_chunk:
+			chunks.append(next_chunk)
+			_prev_chunk = _curr_chunk
+			_curr_chunk = next_chunk
+			length += 1
+			exit.available = false
+			exit = pick_exit(_curr_chunk, exit.direction, chunks, _max_length)
+		else:
+
+			exit.available = false
+			
+			var exits: Array[ExitMarker] = _curr_chunk.get_exit_markers()
+			if exits.size() > 0:
+				exit = exits.pick_random()
+			else:
+				if chunks.size() == 1:
+					_curr_chunk.queue_free()
+					return false ## getting here means we are the first chunk and have no available exits
+					
+				_curr_chunk.queue_free()
+				_curr_chunk = _prev_chunk
+				_prev_chunk = chunks[chunks.size() - 2]
+				length -= 1
+	return true
+
+func pick_exit(_curr_chunk: RiftChunk, _direction: CustomVariables.directions, _chunks: Array, _length: int) -> ExitMarker:
+	
+	var weighted_direction_dic: Dictionary[CustomVariables.directions,float] ={
+	CustomVariables.directions.Up: 0.25,
+	CustomVariables.directions.Left: 0.25,
+	CustomVariables.directions.Down: 0.25,
+	CustomVariables.directions.Right: 0.25
+	}
+
+	#get the direction for the next exit.
+	var bias: CustomVariables.directions = _direction
+	var bias_offset: float = float(_chunks.size()) / float(_length)
+	var main_bias: float = data.main_bias
+	var zero_bias: float = 0.0
+	var final_bias: float = data.final_bias
+	
+	main_bias = max(final_bias, main_bias - (main_bias - final_bias) * bias_offset * data.probability_decay)
+	weighted_direction_dic[bias] = main_bias
+	weighted_direction_dic[(bias + 2)% 4] = zero_bias
+	weighted_direction_dic[(bias + 1) % 4] = (1 - main_bias)/2
+	weighted_direction_dic[(bias + 3) % 4] = (1 - main_bias)/2
+	var direction: CustomVariables.directions = (
+		weighted_direction_dic.keys()[
+			rng.rand_weighted(weighted_direction_dic.values())
+			]
+		)
+		
+	var exits: Array[ExitMarker] = _curr_chunk.get_exit_markers()
+	for exit in exits:
+		if exit.direction == direction:
+			return exit
+	return null
+	
+func try_to_add_chunk(_exit: ExitMarker) -> RiftChunk:
+	var chunks: Array[ChunkData] = library.get_all_traversal_chunks(_exit.direction).duplicate()
+	chunks.shuffle()
+	
+	while chunks.size() > 0:
+		var chunk_node = chunks.pop_back().scene.instaitate()
+		chunk_node.global_position = _exit.global_position
+		rift_level.add_child(chunk_node)
+		
+		#waiting a physics frame for the collision to take effect
+		await get_tree().physics_frame
+		
+		if not chunk_node.bounds.colliding:
+			return chunk_node
+		chunk_node.queue_free()
+	return null
 
 #
 #var _rng: RandomNumberGenerator = RandomNumberGenerator.new()

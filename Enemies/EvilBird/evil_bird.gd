@@ -15,6 +15,7 @@ var right_end_pos: int
 var fly_direction: int = -1
 var shoot_speed: float = 0
 
+var player: Player
 func _ready() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
 	animation_player.play("Move")

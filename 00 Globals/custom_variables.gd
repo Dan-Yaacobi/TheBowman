@@ -2,4 +2,4 @@ extends Node
 
 enum stats {Strength, Agility, Stamina}
 
-enum directions {Up, Down, Left, Right}
+enum directions {Up, Left ,Down ,Right}
