@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://iitxisrr6wi5"]
+[gd_scene load_steps=25 format=3 uid="uid://iitxisrr6wi5"]
 
 [ext_resource type="Script" uid="uid://d1nuc00qfn6v8" path="res://Rifts/rift.gd" id="1_hofdl"]
 [ext_resource type="PackedScene" uid="uid://daqty3s8xq8df" path="res://Rifts/RiftGeneration/RiftGenerator.tscn" id="2_pe0ph"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://rxohwem0g1cv" path="res://Rifts/Chunks/chunk_bucket.gd" id="4_v6yg5"]
 [ext_resource type="Resource" uid="uid://b45tkbqikmw0w" path="res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_2.tres" id="5_jukhk"]
 [ext_resource type="Resource" uid="uid://cqxxa2a2mtpei" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_1.tres" id="6_d1hhh"]
+[ext_resource type="Resource" uid="uid://dj8i0e2574b5s" path="res://Rifts/Chunks/ChunkData/Intro/intro_1.tres" id="6_v6yg5"]
 [ext_resource type="Resource" uid="uid://dwno03ntsasoi" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres" id="7_v6yg5"]
 [ext_resource type="Resource" uid="uid://cgwpaefsfrma1" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres" id="8_3f0ah"]
 [ext_resource type="Resource" uid="uid://bnkr6l4rqbmvg" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_2.tres" id="9_4xrky"]
@@ -19,8 +20,14 @@
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
+main_path_length = 15
 probability_decay = 1.25
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
+
+[sub_resource type="Resource" id="Resource_k3d36"]
+script = ExtResource("4_v6yg5")
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("6_v6yg5")])
+metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_v6yg5"]
 script = ExtResource("4_v6yg5")
@@ -52,6 +59,9 @@ traversal_chunks = Dictionary[int, ExtResource("4_v6yg5")]({
 1: SubResource("Resource_3f0ah"),
 2: SubResource("Resource_4xrky"),
 3: SubResource("Resource_5l72e")
+})
+other_chunks = Dictionary[int, ExtResource("4_v6yg5")]({
+0: SubResource("Resource_k3d36")
 })
 metadata/_custom_type_script = "uid://co6xputyjmuin"
 

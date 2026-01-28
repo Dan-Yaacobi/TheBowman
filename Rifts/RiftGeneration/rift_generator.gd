@@ -3,19 +3,25 @@ class_name RiftGenerator extends Node2D
 @export var data: GeneratorData
 @export var library: RiftChunkLibrary
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
+const BOUNDS_LAYER: int = 15
 
 signal rift_created(RiftLevel)
 var rift_level: RiftLevel
 var main_path_chunks: Array[RiftChunk] = []
 
+var enemy_spawn_streak: int = 0
+var max_spawn_streak: int = 1
+
 var biased_towards: CustomVariables.directions
 var rng = RandomNumberGenerator.new()
 
+#Generator Invariants:
+#1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
 func generate(_curr_level: int) -> RiftLevel:
-
+	main_path_chunks = []
 	rift_level = RIFT_LEVEL.instantiate()
-	
+	add_child(rift_level)
 	build_main_path()
 	#Create Everything
 	
@@ -23,12 +29,18 @@ func generate(_curr_level: int) -> RiftLevel:
 	return rift_level
 
 func build_main_path() -> void:
-	var intro_chunk: IntroChunk = library.get_intro_chunk().instantiate()
+	var intro_chunk: IntroChunk = library.get_intro_chunk().scene.instantiate()
 	rift_level.add_child(intro_chunk)
+	rift_level.starting_chunk = intro_chunk
 	main_path_chunks.append(intro_chunk)
-	
-	build_path(data.main_path_length, intro_chunk, true)
-
+	var last_chunk: RiftChunk = await build_path(data.main_path_length, intro_chunk, true)
+	if !last_chunk:
+		#try again
+		pass
+	else:
+		#add end portal
+		#continue to build side paths
+		pass
 	pass
 
 func build_all_side_paths() -> void:
@@ -36,11 +48,26 @@ func build_all_side_paths() -> void:
 	
 func build_side_path(_start_chunk: RiftChunk) -> void:
 	## length needs better adjustments
-	var length: int = randi_range(int(data.main_path_length/5), int(data.main_path_length/2))
-	build_path(length,_start_chunk, false)
+	var length: int = int(data.main_path_length / 3.0)
+	var last_chunk: RiftChunk = await build_path(length,_start_chunk, false)
+	if !last_chunk:
+		#if there is budget left call spawn_something on the last chunk
+		return
+	
 	pass
 
-func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool = true, _first_exit: ExitMarker = null) -> bool:
+func spawn_something(_chunk: RiftChunk) -> void:
+	if _chunk:
+		# find available exits and pick one
+		# roll something to spawn
+		# try to spawn it
+		# if successful, mark exit as un available and use spawn budget
+		# if it fails, try a different exit
+		# if there are no exits left available -> return
+		pass
+	pass
+	
+func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool = true, _first_exit: ExitMarker = null) -> RiftChunk:
 	var length: int = 0
 	var _curr_chunk: RiftChunk = _starting_chunk
 	var _prev_chunk: RiftChunk = _curr_chunk
@@ -58,35 +85,45 @@ func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool =
 			exit = exits.pick_random()
 	else:
 		exit = _first_exit
-		
-	while(length < _max_length):
-		
-		var next_chunk: RiftChunk = await try_to_add_chunk(exit)
+	var i = -1
+	while(length <= _max_length):
+		i+=1
+		print("attempt: " , i)
+		var next_chunk: RiftChunk = try_to_add_chunk(exit)
 		
 		if next_chunk:
 			chunks.append(next_chunk)
 			_prev_chunk = _curr_chunk
 			_curr_chunk = next_chunk
 			length += 1
-			exit.available = false
+			print("this is next chunk " ,next_chunk)
+			exit.disable()
 			exit = pick_exit(_curr_chunk, exit.direction, chunks, _max_length)
+			if not exit:
+				print("exit 1")
+				return null # This means there was a bug where a chunk was designed without 3 exits and a direction for each
 		else:
 
-			exit.available = false
+			exit.disable()
 			
 			var exits: Array[ExitMarker] = _curr_chunk.get_exit_markers()
 			if exits.size() > 0:
 				exit = exits.pick_random()
 			else:
 				if chunks.size() == 1:
+					print(_curr_chunk, " was freed")
 					_curr_chunk.queue_free()
-					return false ## getting here means we are the first chunk and have no available exits
+					print("exit 2")
+					return null ## getting here means we are the first chunk and have no available exits
 					
+				print(_curr_chunk, " was freed option 2")
 				_curr_chunk.queue_free()
 				_curr_chunk = _prev_chunk
+				chunks.pop_back()
 				_prev_chunk = chunks[chunks.size() - 2]
 				length -= 1
-	return true
+	print("finished")
+	return chunks[_max_length]
 
 func pick_exit(_curr_chunk: RiftChunk, _direction: CustomVariables.directions, _chunks: Array, _length: int) -> ExitMarker:
 	
@@ -109,6 +146,7 @@ func pick_exit(_curr_chunk: RiftChunk, _direction: CustomVariables.directions, _
 	weighted_direction_dic[(bias + 2)% 4] = zero_bias
 	weighted_direction_dic[(bias + 1) % 4] = (1 - main_bias)/2
 	weighted_direction_dic[(bias + 3) % 4] = (1 - main_bias)/2
+	
 	var direction: CustomVariables.directions = (
 		weighted_direction_dic.keys()[
 			rng.rand_weighted(weighted_direction_dic.values())
@@ -119,26 +157,44 @@ func pick_exit(_curr_chunk: RiftChunk, _direction: CustomVariables.directions, _
 	for exit in exits:
 		if exit.direction == direction:
 			return exit
-	return null
+	return exits.pick_random()
 	
 func try_to_add_chunk(_exit: ExitMarker) -> RiftChunk:
 	var chunks: Array[ChunkData] = library.get_all_traversal_chunks(_exit.direction).duplicate()
 	chunks.shuffle()
 	
 	while chunks.size() > 0:
-		var chunk_node = chunks.pop_back().scene.instaitate()
+		var chunk_node: RiftChunk = chunks.pop_back().scene.instantiate()
 		chunk_node.global_position = _exit.global_position
 		rift_level.add_child(chunk_node)
-		
-		#waiting a physics frame for the collision to take effect
-		await get_tree().physics_frame
-		
-		if not chunk_node.bounds.colliding:
+		if would_collide_at(chunk_node.global_position,chunk_node.get_bounds_shape(), chunk_node.get_bounds_transform(),BOUNDS_LAYER):
+			chunk_node.queue_free()
+			continue
+		else:
 			return chunk_node
-		chunk_node.queue_free()
 	return null
+	
+func would_collide_at(_position: Vector2, _shape: Shape2D,_shape_transform: Transform2D, _collision_mask: int) -> bool:
+	var world: World2D = get_world_2d()
+	var space_state: PhysicsDirectSpaceState2D = world.direct_space_state
 
-#
+	var query_params: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	query_params.shape = _shape
+	query_params.transform = Transform2D(0.0, _position) * _shape_transform
+	query_params.collision_mask = _collision_mask
+	query_params.collide_with_areas = true
+	var max_results: int = 1
+	var results: Array = space_state.intersect_shape(query_params, max_results)
+
+	var has_collision: bool = results.size() > 0
+	return has_collision
+
+func spawn_enemies() -> void:
+	
+	pass
+	
+func reset_world() -> void:
+	pass
 #var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 #
 #var _side_budget_left: int = 0

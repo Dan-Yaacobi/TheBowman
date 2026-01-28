@@ -34,12 +34,14 @@ position = Vector2(8, -4)
 
 [node name="ExitMarker" parent="." instance=ExtResource("6_nm8em")]
 position = Vector2(278, -1)
+direction = 3
 
 [node name="ExitMarker2" parent="." instance=ExtResource("6_nm8em")]
 position = Vector2(238, -59)
 
 [node name="ExitMarker3" parent="." instance=ExtResource("6_nm8em")]
 position = Vector2(243, 51)
+direction = 2
 
 [node name="Bounds" parent="." instance=ExtResource("7_fnudr")]
 position = Vector2(89, -3)

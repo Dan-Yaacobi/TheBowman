@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bf3pp5cfghaxr" path="res://Rifts/Chunks/Utility/Markers/spawn_marker.gd" id="1_wellx"]
 
 [node name="SpawnMarker" type="Marker2D"]
-position = Vector2(0, -22)
 script = ExtResource("1_wellx")
 
 [node name="Label" type="Label" parent="."]

@@ -8,6 +8,9 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Bounds:
 		area.colliding = true
 
+func get_shape() -> Shape2D:
+	return collision_shape.shape
+	
 func get_boundaries() -> Rect2:
 	var rect_shape: RectangleShape2D = collision_shape.shape as RectangleShape2D
 	if rect_shape == null:

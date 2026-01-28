@@ -20,32 +20,37 @@ func add_rift_level(_rift: RiftLevel) -> void:
 func set_world() -> void:
 	PlayerManager.player.stats.rift_level += 1
 	EventBus.entered_rift.emit()
+	var rift_level: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
+	rift_levels.append(rift_level)
+	rift_level.reparent(self)
 	pass
 
 func exit_world() -> void:
 	PlayerManager.player.hide_buffs()
-	rift_generator._reset_world()
+	#rift_generator._reset_world()
+	for level in rift_levels:
+		level.queue_free()
+	rift_levels.clear()
 	kill_all_enemies()
 	pass
 
 func spawn_position() -> Vector2:
-	var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
-
-	return start_chunk.spawn_position()
+	return rift_levels[0].starting_chunk.spawn_position()
 
 func set_scene(_player) -> void:
 	#for i in range(20):
 		#rift_generator.generate()
 	_player.stats.rift_level += 1
-	var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
-	PlayerManager.player.global_position = start_chunk.spawn_position()
+	#print("called again")
+	#var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
+	#PlayerManager.player.global_position = start_chunk.spawn_position()
 	PlayerManager.player.show_buffs()
 	EventBus.entered_rift.emit()
 	EventBus.summon_effect.connect(summon_effect)
 	
 func exit_scene(_player) -> void:
 	PlayerManager.player.hide_buffs()
-	rift_generator._reset_world()
+
 	if EventBus.summon_effect.is_connected(summon_effect):
 		EventBus.summon_effect.disconnect(summon_effect)
 	kill_all_enemies()

@@ -10,6 +10,8 @@ var connected_chunks: Array[RiftChunk] = []
 var rift: Rift
 
 func _ready() -> void:
+
+	free_exits()
 	extra_ready_functions()
 
 func extra_ready_functions() -> void:
@@ -44,3 +46,14 @@ func get_exit_global(exit_index: int) -> Vector2:
 
 func get_bounds_rect() -> Rect2:
 	return bounds.get_boundaries()
+
+func get_bounds_shape() -> Shape2D:
+	return bounds.get_shape()
+
+func get_bounds_transform() -> Transform2D:
+	return bounds.transform
+	
+func free_exits() -> void:
+	for n in get_children():
+		if n is ExitMarker:
+			n.available = true

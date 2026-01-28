@@ -195,6 +195,7 @@ func _on_hook_body_entered(_body: Node2D) -> void:
 		player_state_machine.ChangeState(grappling_state)
 		grappling_state.hook_pos = hook.global_position
 		hook.call_deferred("reparent",_body)
+		jump_action.set_jumps()
 		
 func show_hands(yes: bool) -> void:
 	main_hand.visible = yes

@@ -11,7 +11,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ky60y"]
 resource_local_to_scene = true
-size = Vector2(239.5, 102)
+size = Vector2(225.75, 90)
 
 [node name="TraversalRight_3" type="Node2D"]
 script = ExtResource("1_c4wlx")
@@ -32,18 +32,21 @@ position = Vector2(114, 80)
 position = Vector2(-1, -9)
 
 [node name="ExitMarker" parent="." instance=ExtResource("5_t0bht")]
-position = Vector2(241, -17)
+position = Vector2(240, -11)
 
 [node name="ExitMarker2" parent="." instance=ExtResource("5_t0bht")]
 position = Vector2(269, 71)
+direction = 3
 
 [node name="ExitMarker3" parent="." instance=ExtResource("5_t0bht")]
 position = Vector2(196, 141)
+direction = 2
 
 [node name="Bounds" parent="." instance=ExtResource("6_t0bht")]
 position = Vector2(92, 37)
 
 [node name="CollisionShape2D" parent="Bounds" index="0"]
+position = Vector2(-6.875, 6)
 shape = SubResource("RectangleShape2D_ky60y")
 
 [node name="SpawnMarkers" type="Node2D" parent="."]
