@@ -1,4 +1,4 @@
-class_name Buff extends TextureRect
+class_name BuffRect extends TextureRect
 
 @onready var amount_label: Label = $Amount
 @onready var panel: Panel = $Panel

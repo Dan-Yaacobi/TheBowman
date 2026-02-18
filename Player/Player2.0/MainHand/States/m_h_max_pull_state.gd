@@ -19,7 +19,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	EventBus.out_of_mana.connect(release)
+	#EventBus.out_of_mana.connect(release)
 	tired = false
 	perfect_shot_window.wait_time = perfect_shot_time + PlayerManager.player.get_stamina()*0.1
 	perfect_aim_particles.rotation = entity.rotation
@@ -38,7 +38,7 @@ func Exit() -> void:
 	entity.release_arrow()
 	hold_time = 0
 	PlayerManager.player.shooting = false
-	EventBus.out_of_mana.disconnect(release)
+	#EventBus.out_of_mana.disconnect(release)
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
 	entity.arrow_setup()

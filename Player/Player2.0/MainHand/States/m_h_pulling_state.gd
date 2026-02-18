@@ -8,6 +8,8 @@ var init_animation_speed: float = 1
 var finished_pulling: bool = false
 var full_pull_duration: float
 var pull_start_time: float
+
+var charge_rate: float
 # store a refernece to the player this belongs to
 
 func init() -> void:
@@ -21,26 +23,29 @@ func _ready() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	entity.animation_player.play("Pull")
-	EventBus.out_of_mana.connect(release)
+	#EventBus.out_of_mana.connect(release)
 	entity.draw_arrow()
 	PlayerManager.player.shooting = true
 	entity.shot_power = 0
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))
-	entity.animation_player.speed_scale = PlayerManager.player.get_pull_speed()
+	charge_rate = PlayerManager.player.get_pull_speed()
+	entity.animation_player.speed_scale = charge_rate
 	finished_pulling = false
-	pull_start_time = Time.get_unix_time_from_system()
+	#pull_start_time = Time.get_unix_time_from_system()
 	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
 	EventBus.out_of_mana.disconnect(release)
 	entity.animation_player.speed_scale = init_animation_speed
+	entity.shot_power = min(entity.shot_power, 1.0)
 	pass
 	
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
 	entity.arrow_setup()
-	entity.shot_power = Time.get_unix_time_from_system() - pull_start_time
+	entity.shot_power += _delta * charge_rate
+	#entity.shot_power = Time.get_unix_time_from_system() - pull_start_time
 	#print(PlayerManager.player.stats.min_move_shoot_spd.final_stat())
 	#if PlayerManager.player.stats.move_speed > PlayerManager.player.stats.min_move_shoot_spd:
 		#PlayerManager.player.stats.move_speed -= _delta* speed_decrease

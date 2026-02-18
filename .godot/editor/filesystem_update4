@@ -1,4 +1,4 @@
-res://Rifts/Chunks/ChunkScenes/IntroChunk.tscn
+res://Player/Player.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -9,20 +9,4 @@ res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Enemies/Summoner/Glow.gdshader
 res://Player/rope.gdshader
-res://Rifts/Chunks/Utility/Bounds/bounds.gd
-res://Rifts/RiftGeneration/rift_generator.gd
-res://Rifts/Chunks/chunk.gd
-res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn
-res://Rifts/Chunks/Utility/Markers/exit_marker.gd
-res://Rifts/Chunks/Utility/Markers/spawn_marker.gd
-res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd
-res://Rifts/Chunks/ChunkScenes/Traversal/Left/TraversalLeft_2.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Left/TraversalLeft_1.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Down/TraversalDown_2.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Down/TraversalDown_1.tscn
-res://Player/player.gd
-res://Rifts/Rift.tscn
-res://Rifts/Chunks/ChunkScenes/Traversal/Up/TraversalUp_3.tscn
-res://Rifts/Chunks/Utility/Bounds/Bounds.tscn
-res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn
+res://StatClass/stat.gd

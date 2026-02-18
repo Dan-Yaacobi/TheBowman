@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://duv405amm7ir"]
 
-[ext_resource type="Script" path="res://Player/BuffDisplay/buff.gd" id="1_8wu54"]
+[ext_resource type="Script" uid="uid://2ngov1j5w6my" path="res://Player/BuffDisplay/buff.gd" id="1_8wu54"]
 [ext_resource type="Texture2D" uid="uid://d36766n7g2188" path="res://Player/Upgrades/Abilities/LeechLife/LeechUpgrade1.png" id="1_55ncm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6sxi"]
