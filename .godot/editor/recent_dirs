@@ -1,21 +1,24 @@
-res://Weapons/Bows/ArrowsData
-res://00 Globals
-res://Rifts/Chunks/ChunkData/End
-C:/Users/dany/Desktop/TheBowman/docs
-res://Rifts/Chunks/ChunkData/Intro
-res://Rifts/Chunks/ChunkData/Traversal/Up
-res://Rifts/Chunks/ChunkData/Traversal/Left
-res://Rifts/Chunks/ChunkData/Traversal/Down
-res://Rifts/Chunks/ChunkData
-res://Enemies/EnemyData/EnemyValues
-res://Fonts
-res://StartMenu
-res://HUD/Scene Transition
-res://MainGame
-res://Enemies/EnemyAbilities/Sparkle
-res://Items
-res://PlayerData
-res://Level/Tiles
-res://Player/Hand
-res://Weapons
-res://.godot/imported
+C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Effects/
+C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Buffs/
+res://Player/Effects/Resources/
+res://Player/Effects/
+res://Weapons/Bows/ArrowsData/
+res://00 Globals/
+res://Rifts/Chunks/ChunkData/End/
+res://Rifts/Chunks/ChunkData/Intro/
+res://Rifts/Chunks/ChunkData/Traversal/Up/
+res://Rifts/Chunks/ChunkData/Traversal/Left/
+res://Rifts/Chunks/ChunkData/Traversal/Down/
+res://Rifts/Chunks/ChunkData/
+res://Enemies/EnemyData/EnemyValues/
+res://Fonts/
+res://StartMenu/
+res://HUD/Scene Transition/
+res://MainGame/
+res://Enemies/EnemyAbilities/Sparkle/
+res://Items/
+res://PlayerData/
+res://Level/Tiles/
+res://Player/Hand/
+res://Weapons/
+res://.godot/imported/

@@ -4,7 +4,7 @@ var player: Player
 
 @export_subgroup("Player Stats")
 @export var hp: int
-@export var move_speed: int
+@export var move_speed: Stat
 @export var max_jumps: int
 @export var jump_height: int
 @export var knockback_resistance: int

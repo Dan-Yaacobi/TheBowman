@@ -29,3 +29,7 @@ signal entered_rift
 signal summon_effect(effect: Node2D)
 
 signal finished_loading
+
+signal add_player_buff(_buff: Buff)
+
+signal add_arrow_effect(_effect: Effect)

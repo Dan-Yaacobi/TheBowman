@@ -20,9 +20,7 @@ func upgrade_jumps(amount: int) -> void:
 func upgrade_knockback_resistance(amount: int) -> void:
 	player.stats.knockback_resistance += amount
 
-func upgrade_movement_speed(amount: int) -> void:
-	player.stats.move_speed += amount
-	
+
 func add_shooting_ability(ability: ShootAbility) -> void:
 	if ability != null:
 		if ability is ShootAbility:

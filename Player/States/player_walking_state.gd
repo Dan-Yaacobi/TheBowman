@@ -24,7 +24,7 @@ func Process(_delta: float) -> State:
 	if player.direction == 0:
 		return idle
 	
-	player.velocity.x = player.direction * (player.stats.move_speed + player.get_agility())
+	player.velocity.x = player.direction * player.get_move_speed()
 	return null
 	
 #what happens during _physics_process update in this state

@@ -10,14 +10,13 @@ var multi_mod: Array[Stat_Buff] = []
 class Stat_Buff:
 	var id: int
 	var amount: float
-	var type: buff_type
 	var stacks: int = 0
 	
 	func _init(_id: int, _amount: float, _type: buff_type) -> void:
 		id = _id
 		amount = _amount
-		type = _type
 		increase_stack()
+		
 	func get_amount() -> float:
 		return amount * stacks
 	
@@ -32,8 +31,7 @@ class Stat_Buff:
 		return false
 	
 	func reduce_all_stack() -> void:
-		while reduce_stack():
-			continue
+		stacks = 0
 			
 func value() -> float:
 	var add_sum: float = 0.0
@@ -47,36 +45,42 @@ func value() -> float:
 	return (base_value + add_sum) * (1.0 + mult_sum)
 
 func add_buff(id: int,amount: float, type: buff_type) -> void:
-	var array: Array[Stat_Buff]
-	if type == buff_type.ADDITIVE:
-		array = additive_mod
-	elif type == buff_type.MULTIPLICATIVE:
-		array = multi_mod
-	
-	var found: bool = false
-	for mod in array:
-		if mod.id == id:
-			mod.increase_stack()
-			found = true
-			break
-	if !found:
+
+	var mod: Stat_Buff = find_buff(id, type)
+	if mod:
+		mod.increase_stack()
+	else:
 		var new_buff: Stat_Buff = Stat_Buff.new(id,amount,type)
-		array.append(new_buff)
+		find_array(type).append(new_buff)
 
 func remove_buff_completly(id: int, type: buff_type) -> void:
-	pass
-	
+	var mod: Stat_Buff = find_buff(id, type)
+	var array = find_array(type)
+	mod.reduce_all_stack()
+	array.erase(mod)
+
+
 func remove_buff_stack(id: int, type: buff_type) -> void:
+	var mod: Stat_Buff = find_buff(id, type)
+	if mod:
+		mod.reduce_stack()
+		if mod.stacks <= 0:
+			find_array(type).erase(mod)
+
+func find_array(type: buff_type) -> Array[Stat_Buff]:
 	var array: Array[Stat_Buff]
 	if type == buff_type.ADDITIVE:
 		array = additive_mod
 	elif type == buff_type.MULTIPLICATIVE:
 		array = multi_mod
+	return array
 	
+func find_buff(id: int, type: buff_type) -> Stat_Buff:
+	var array: Array[Stat_Buff] = find_array(type)
+	
+	var res: Stat_Buff = null
 	for mod in array:
 		if mod.id == id:
-			mod.reduce_stack()
-			array.erase(mod)
-			break
-	
-	
+			res = mod
+			return res
+	return null

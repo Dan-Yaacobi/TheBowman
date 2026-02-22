@@ -34,7 +34,10 @@ var can_hook: bool = true
 
 @export var gravity: int
 @export var stats: PlayerStats
+@export_subgroup("Buffs")
+@export var hit_effects: Dictionary[OnHitEffect,int] = {}
 
+const PERMA_EFFECT: int = -1
 const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
 var health_bar: HealthBar
 var total_buffs: TotalBuffs
@@ -121,10 +124,9 @@ func reset_to_base_stats() -> void:
 	for ability in stats.slam_abilities:
 		ability.deactivate_ability(self)
 	stats = base_stats.duplicate()
-	stats.menu_speed = base_stats.move_speed * 2
+
 	
 func init_base_stats() -> void:
-	stats.menu_speed = stats.move_speed * 2
 	base_stats = stats.duplicate()	
 
 func init_stats_with_bonus() -> void:
@@ -294,7 +296,7 @@ func invincibility_over() -> void:
 func dash(dash_direction) -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	velocity.y = 0
-	tween.tween_property(self, "velocity", velocity + Vector2(dash_direction * stats.move_speed * 5,0), 0.2)
+	tween.tween_property(self, "velocity", velocity + Vector2(dash_direction * stats.move_speed.value() * 5,0), 0.2)
 	
 	await tween.finished
 	
@@ -415,6 +417,13 @@ func get_agility() -> int:
 func get_stamina() -> int:
 	return stats.stamina
 
+var max_speed: float = 1.0 ## 1.0 means maximum is double speed
+var C: int = 200 ## controls how fast you upgrade movement speed via agility
+
+## asymptotic increase towards max speed
+func get_move_speed() -> float:
+	return stats.move_speed.value() * (1.0 + max_speed * get_agility() / (get_agility() + C))
+	
 func get_pull_speed() -> float:
 	return stats.pull_speed + get_agility()*0.01
 
@@ -486,3 +495,21 @@ func use_stat_point() -> bool:
 		stats.stat_points -= 1
 		return true
 	return false
+
+## If amount is not provided, the effect is considered permanent. Otherwise amount means how many times the effect can be consumed.
+func add_hit_effect(_effect: OnHitEffect, _amount: int = PERMA_EFFECT) -> void:
+	if hit_effects.has(_effect):
+		if _amount > 0:
+			hit_effects[_effect] += _amount
+	else:
+		hit_effects[_effect] = _amount
+
+func use_effects() -> Array[OnHitEffect]:
+	var _effects: Array[OnHitEffect]
+	for key in hit_effects.keys():
+		if hit_effects[key] > 0 and hit_effects[key] != PERMA_EFFECT:
+			hit_effects[key] -= 1
+			if hit_effects[key] == 0:
+				hit_effects.erase(key)
+		_effects.append(key)
+	return _effects

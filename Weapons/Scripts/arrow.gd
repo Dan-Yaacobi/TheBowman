@@ -20,6 +20,7 @@ const STUN_DEBUFF = preload("res://Debuffs/Stun/StunDebuff.tscn")
 const BLEED_DEBUFF = preload("uid://b0pv21kfxpvci")
 const POISON_DEBUFF = preload("res://Debuffs/Poisoned/PoisonDebuff.tscn")
 
+var hit_effects: Array[OnHitEffect] = []
 
 var direction: Vector2
 var regular_shot: bool = true
@@ -60,10 +61,13 @@ func _ready() -> void:
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
-
+	hit_effects = PlayerManager.player.use_effects()
+	
 func hit(body) -> void:
 	if body is Enemy:
 		if regular_shot:
+			for hit_effect in hit_effects:
+				hit_effect.apply_effect(body,self)
 			explosion()
 			critical_hit()
 			stun_hit(body)

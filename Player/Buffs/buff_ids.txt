@@ -1,0 +1,2 @@
+Pyromaniac: 1
+Explosive Arrow: 2 

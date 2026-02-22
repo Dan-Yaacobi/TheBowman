@@ -24,7 +24,7 @@ func Exit() -> void:
 
 #what happens during process update in this state
 func Process(_delta: float) -> State:
-	player.velocity = player.stats.move_speed * 3 * (hook_pos - player.global_position).normalized()
+	player.velocity = player.get_move_speed() * 3 * (hook_pos - player.global_position).normalized()
 	return null
 	
 #what happens during _physics_process update in this state

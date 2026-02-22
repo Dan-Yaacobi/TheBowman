@@ -36,7 +36,7 @@ func Enter() -> void:
 	
 #what happens when the player exits this state
 func Exit() -> void:
-	EventBus.out_of_mana.disconnect(release)
+	#EventBus.out_of_mana.disconnect(release)
 	entity.animation_player.speed_scale = init_animation_speed
 	entity.shot_power = min(entity.shot_power, 1.0)
 	pass

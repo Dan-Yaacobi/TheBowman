@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://osfqafboyjib"]
+
+[ext_resource type="Script" uid="uid://cfug7plo1wfoj" path="res://Player/Buffs/FireBuffs/explosive_arrows.gd" id="1_wtvbi"]
+[ext_resource type="Texture2D" uid="uid://ckgeiu3phkuv3" path="res://Player/Upgrades/Abilities/ArrowExplode/ExplosionUpgrade1.png" id="2_6pogt"]
+
+[node name="ExplosiveArrows" type="Node2D" unique_id=65443177]
+script = ExtResource("1_wtvbi")
+ID = 2
+texture = ExtResource("2_6pogt")
+tooltip = "Your next arrow explodes on hit"
+max_stacks = 1
+constant_buff = true
+duration = 999.0

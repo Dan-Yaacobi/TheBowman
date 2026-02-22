@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=7 format=3 uid="uid://dbsxgoiwtydme"]
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dbsxgoiwtydme"]
 
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="1_4o1pv"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_cs78x"]

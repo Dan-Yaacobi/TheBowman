@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c8xxhiavn7s50"]
+
+[ext_resource type="Script" uid="uid://ba7g7pla1tyfb" path="res://Player/Effects/OnHitEffects/Scenes/explosion.gd" id="2_34n86"]
+[ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="3_g3sfy"]
+[ext_resource type="Texture2D" uid="uid://dknaul0f46qmv" path="res://Particles/BigBall.png" id="3_s456d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hcmi0"]
+radius = 14.035668
+
+[sub_resource type="Curve" id="Curve_4b6nl"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.991453, 13.669685), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_34n86"]
+_limits = [0.0, 0.2, 0.0, 1.0]
+_data = [Vector2(0, 0.1047003), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_g3sfy"]
+offsets = PackedFloat32Array(0, 0.22571428, 0.43142858, 0.6085714, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.85, 0, 1, 1, 0.6, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="Explosion" type="Node2D" unique_id=294650094]
+z_index = 2
+scale = Vector2(2, 2)
+script = ExtResource("2_34n86")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1211202819]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_g3sfy")
+metadata/_custom_type_script = "uid://b4s4fndrtcgwn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=232989353]
+shape = SubResource("CircleShape2D_hcmi0")
+
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=1943402360]
+emitting = false
+amount = 70
+texture = ExtResource("3_s456d")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.5
+speed_scale = 2.0
+explosiveness = 0.3
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2(0, -20)
+radial_accel_max = 20.0
+radial_accel_curve = SubResource("Curve_4b6nl")
+scale_amount_curve = SubResource("Curve_34n86")
+color_ramp = SubResource("Gradient_g3sfy")

@@ -26,6 +26,9 @@ func AreaEnetered( a : Area2D) -> void:
 	if a.get_parent() is Enemy:
 		added_effects(a.enemy)
 	successful_hit.emit()
-		
+
+func set_text_color(_color: Color) -> void:
+	combat_text_color = _color
+	
 func added_effects(_a: Enemy) -> void:
 	pass

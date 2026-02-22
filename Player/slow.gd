@@ -16,8 +16,7 @@ func slow_player(slow_time: float, effect: Node2D) -> void:
 			debuff_effect = effect
 			player.add_child(debuff_effect)
 			debuff_effect.global_position = player.global_position
-		intial_speed = player.stats.move_speed
-		player.stats.move_speed /= 2
+
 	
 	timer.wait_time = slow_time
 	if timer.is_stopped():
@@ -27,6 +26,6 @@ func slow_ended() -> void:
 	player_slowed = false
 	debuff_effect.queue_free()
 	timer.stop()
-	player.stats.move_speed = intial_speed
+
 	pass
 	

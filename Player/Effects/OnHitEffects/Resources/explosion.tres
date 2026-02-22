@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExplosionEffect" format=3 uid="uid://bkqik0hphhkuy"]
+
+[ext_resource type="PackedScene" uid="uid://c8xxhiavn7s50" path="res://Player/Effects/OnHitEffects/Scenes/Explosion.tscn" id="1_lk0ov"]
+[ext_resource type="Script" uid="uid://b6bc3n8bcym1w" path="res://Player/Effects/OnHitEffects/Resources/explosion_effect.gd" id="2_38rwl"]
+
+[resource]
+script = ExtResource("2_38rwl")
+effect = ExtResource("1_lk0ov")
+ID = 1
+chance = 100
+metadata/_custom_type_script = "uid://b6bc3n8bcym1w"
