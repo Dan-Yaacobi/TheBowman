@@ -1,4 +1,4 @@
-res://Player/Effects/Resources/explosion_effect.gd
+OnHitEffect
 ArrowData
 ChunkData
 EnemyData

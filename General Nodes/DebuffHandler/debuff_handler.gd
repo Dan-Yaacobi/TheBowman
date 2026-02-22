@@ -23,7 +23,7 @@ func add_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 		debuff_added.emit()
 
 		curr_debuff.ticks = _ticks
-		enemy.add_child(curr_debuff)
+		enemy.sprite.add_child(curr_debuff)
 	
 
 

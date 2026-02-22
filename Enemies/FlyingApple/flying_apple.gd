@@ -70,19 +70,17 @@ func _physics_process(delta: float) -> void:
 			if pushback_power <= 0:
 				pushed_back = false
 				
-		elif stunned_state:
-			velocity = Vector2.ZERO
 		
 		elif stats.shooter:
 			shooting(delta)
 		
 		else:
-			velocity = direction * stats.move_speed
+			velocity = direction * stats.move_speed.value()
 	move_and_slide()
 	
 func shooting(delta: float) -> void:
 	if abs(global_position.y - PlayerManager.player.global_position.y) > shoot_height:
-		velocity  += calculate_direction_to_player() * stats.move_speed * delta
+		velocity  += calculate_direction_to_player() * stats.move_speed.value() * delta
 	else:
 		velocity = Vector2.ZERO
 		shoot_cooldown -= delta

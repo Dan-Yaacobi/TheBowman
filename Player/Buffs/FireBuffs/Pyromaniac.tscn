@@ -1,13 +1,14 @@
-[gd_scene format=3 uid="uid://dvx6ga0xrhc3j"]
+[gd_scene load_steps=3 format=3 uid="uid://dvx6ga0xrhc3j"]
 
 [ext_resource type="Script" uid="uid://bq8o0omurnspa" path="res://Player/Buffs/FireBuffs/pyromaniac.gd" id="1_vksfj"]
 [ext_resource type="Texture2D" uid="uid://br8hnwfoojauc" path="res://Player/Buffs/FireBuffs/Sprites/Pyromaniac.png" id="2_ogrx8"]
 
-[node name="Pyromaniac" type="Node2D" unique_id=1539941715]
+[node name="Pyromaniac" type="Node2D"]
 script = ExtResource("1_vksfj")
 ID = 1
 texture = ExtResource("2_ogrx8")
 tooltip = "Next arrow explodes upon reaching 3 stacks"
 max_stacks = 3
 constant_buff = true
+ticks = null
 duration = 999.0

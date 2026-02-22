@@ -10,6 +10,5 @@ func _ready() -> void:
 	explosion.emitting = true
 	explosion.finished.connect(finished)
 	
-
 func finished() -> void:
 	queue_free()

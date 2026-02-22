@@ -15,7 +15,7 @@ func Enter() -> void:
 	rain_height = randi_range(60,80)
 	target_rain_position = Vector2(PlayerManager.player.global_position.x , PlayerManager.player.global_position.y - rain_height)
 	set_rain_direction = (target_rain_position - enemy.global_position).normalized()
-	enemy.velocity = set_rain_direction*enemy.stats.move_speed * 5
+	enemy.velocity = set_rain_direction*enemy.stats.move_speed.value() * 5
 	pass
 	
 #what happens when the player exits this state

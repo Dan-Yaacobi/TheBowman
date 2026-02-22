@@ -61,8 +61,8 @@ func Physics(_delta: float) -> EnemyState:
 	if not enemy.is_on_floor():
 		enemy.velocity.x = 0
 		
-	enemy.velocity.x += direction * enemy.stats.move_speed * _delta
+	enemy.velocity.x += direction * enemy.stats.move_speed.value() * _delta
 	return null
 	
 func initial_speed() -> void:
-	enemy.velocity.x = direction * enemy.stats.move_speed
+	enemy.velocity.x = direction * enemy.stats.move_speed.value()

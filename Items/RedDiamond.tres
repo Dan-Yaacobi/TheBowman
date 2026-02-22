@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d0coedohrill3"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://d0coedohrill3"]
 
 [ext_resource type="Script" uid="uid://dwa1xg7ylpp4y" path="res://Items/ItemEffects/item_effect.gd" id="1_kq4bl"]
 [ext_resource type="Script" uid="uid://gwfm40yibx2n" path="res://Items/ItemEffects/sparkle.gd" id="2_sd6dp"]

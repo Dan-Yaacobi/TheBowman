@@ -1,4 +1,4 @@
-res://Player/Player.tscn
+res://HUD/BuffDisplay/BuffDisplay.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -7,29 +7,19 @@ res://Enemies/Cloud/lightningshader.gdshader
 res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres
 res://Enemies/Summoner/Glow.gdshader
 res://Player/rope.gdshader
-res://Player/Effects/Scenes/explosion.gd
-res://Player/player.gd
-res://Player/player_buffs.gd
-res://Player/Effects/on_hit_effect.gd
-res://Player/Effects/Resources/explosion.tres
-res://Player/Effects/effect.gd
-res://Player/Effects/Scenes/Explosion.tscn
+res://HUD/BuffDisplay/buff_display.gd
+res://HUD/BuffDisplay/buff_displayer.gd
 res://Player/Buffs/FireBuffs/Pyromaniac.tscn
+res://Player/Effects/OnHitEffects/Resources/burn_effect.gd
+res://HUD/HUD.tscn
 res://Player/Buffs/FireBuffs/pyromaniac.gd
-res://00 Globals/event_bus.gd
-res://General Nodes/BuffHandler/buff.gd
 res://General Nodes/BuffHandler/buff_handler.gd
+res://Player/Player.tscn
+res://Player/player.gd
+res://General Nodes/BuffHandler/buff.gd
+res://HUD/BuffDisplay/BuffDisplayer.tscn
+res://00 Globals/event_bus.gd
 res://Player/Buffs/FireBuffs/ExplosiveArrows.tscn
-res://Player/Buffs/FireBuffs/explosive_arrows.gd
-res://Player/Buffs/buff_ids.txt
-res://Player/Effects/effects_ids.txt
-res://Player/Effects/OnHitEffects/Resources/explosion.tres
-res://Weapons/Scripts/arrow.gd
-res://Player/Effects/OnHitEffects/Resources/explosion_effect.gd
-res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd
-res://Player/Effects/OnHitEffects/Scenes/Explosion.tscn
-res://Player/Effects/OnHitEffects/Scenes/explosion.gd
-res://Player/grappling_state.gd
-res://General Nodes/HurtBox/hurt_box.gd

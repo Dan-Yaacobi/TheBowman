@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bju1rx12kx8oe"]
+[gd_scene load_steps=33 format=3 uid="uid://bju1rx12kx8oe"]
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://g5q4p7wn2b0a" path="res://StatsUI/more_info.gd" id="15_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="16_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
+[ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
+[ext_resource type="PackedScene" uid="uid://bxf73pxjntnjx" path="res://HUD/BuffDisplay/BuffDisplay.tscn" id="19_fjfvf"]
 
 [sub_resource type="Animation" id="Animation_xyp2j"]
 resource_name = "Gained"
@@ -522,5 +524,46 @@ offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 scale = Vector2(5, 5)
+
+[node name="BuffDisplayer" parent="Control" instance=ExtResource("18_33ejm")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1318.0
+offset_top = 0.99999976
+offset_right = 1422.8
+offset_bottom = 43.999996
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(5, 5)
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 18
+alignment = 2
+last_wrap_alignment = 0
+
+[node name="BuffDisplay" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay6" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay7" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay8" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay2" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay3" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay4" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
+
+[node name="BuffDisplay5" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
+layout_mode = 2
 
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

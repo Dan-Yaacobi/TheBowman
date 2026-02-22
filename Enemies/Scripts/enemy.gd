@@ -14,7 +14,6 @@ signal took_damage
 var direction: Vector2
 
 var poisoned_state: bool = false
-var stunned_state: bool = false
 var bleed_state: bool = false
 
 var base_move_speed: int
@@ -94,20 +93,19 @@ func enemy_died() -> void:
 	EventBus.enemy_died.emit(self)
 	queue_free()
 	
-func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed) -> void:
-	if not stunned_state:
-		if not (stats.boss and stats.shooter):
+func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed.value()) -> void:
+	if not (stats.boss and stats.shooter):
 
-			pushed_back = true
-			pushback_dir = -direction
-			pushback_power = power
+		pushed_back = true
+		pushback_dir = -direction
+		pushback_power = power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(stats.touch_damage)
 			body.set_pushback_values(direction,stats.knockback)
-			push_back(direction,stats.move_speed)
+			push_back(direction,stats.move_speed.value())
 
 func drop_item(_drops: Array[ItemData]) -> void:
 	for drop in _drops:
@@ -130,3 +128,6 @@ func disable_drops() -> void:
 func update_animation(_animation: String, _position: float = 0.0) -> void:
 	if animation_player != null:
 		animation_player.play_section(_animation, _position)
+
+func alter_moving(_stop: bool) -> void:
+	stats.move_speed.zero = _stop

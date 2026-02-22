@@ -36,6 +36,7 @@ var can_hook: bool = true
 @export var stats: PlayerStats
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
+@onready var buff_handler: BuffHandler = $BuffHandler
 
 const PERMA_EFFECT: int = -1
 const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
@@ -89,6 +90,7 @@ func _ready() -> void:
 	main_hand.connect_hands(off_hand)
 	EventBus.invisible_hands.connect(show_hands)
 	EventBus.leeched.connect(leech_heal)
+	buff_handler.set_entity(self)
 
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():

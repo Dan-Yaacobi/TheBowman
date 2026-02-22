@@ -28,8 +28,7 @@ func start_buff_effect() -> void:
 	
 func _process(delta: float) -> void:
 	if constant_buff:
-		time_accumulator += delta
-		if time_accumulator > duration:
+		if check_end_conditions():
 			buff_end()
 
 	else:
@@ -48,7 +47,11 @@ func add_stack() -> void:
 func buff_end() -> void:
 	buff_over.emit(ID)
 	extra_end_buff_methods()
+	EventBus.player_buff_ended.emit(self.ID)
 	queue_free()
-
+	
+func check_end_conditions() -> bool:
+	return false
+	
 func extra_end_buff_methods() -> void:
 	pass

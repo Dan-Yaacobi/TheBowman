@@ -2,7 +2,7 @@ class_name EnemyData extends Resource
 
 @export_subgroup("Stats")
 @export var max_hp: int
-@export var move_speed: int
+@export var move_speed: Stat = Stat.new()
 @export var knockback: int
 @export var skin: Texture
 @export var avg_coins_dropped: int

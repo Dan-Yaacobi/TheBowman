@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BurnEffect" load_steps=3 format=3 uid="uid://bv1ou10viyo1d"]
+
+[ext_resource type="PackedScene" uid="uid://caiebherwxilx" path="res://Debuffs/Burned/BurnDebuff.tscn" id="1_1ivra"]
+[ext_resource type="Script" uid="uid://d2thkmlhwcaga" path="res://Player/Effects/OnHitEffects/Resources/burn_effect.gd" id="2_1ivra"]
+
+[resource]
+script = ExtResource("2_1ivra")
+duration = 5.0
+ticks = 5.0
+effect = ExtResource("1_1ivra")
+ID = 3
+chance = 100
+metadata/_custom_type_script = "uid://dq6u4mugc3ypm"

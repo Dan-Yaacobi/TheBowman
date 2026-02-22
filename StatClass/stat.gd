@@ -6,6 +6,7 @@ enum buff_type{ADDITIVE, MULTIPLICATIVE}
 
 var additive_mod: Array[Stat_Buff] = []
 var multi_mod: Array[Stat_Buff] = []
+var zero: bool = false
 
 class Stat_Buff:
 	var id: int
@@ -34,6 +35,9 @@ class Stat_Buff:
 		stacks = 0
 			
 func value() -> float:
+	if zero:
+		return 0.0
+		
 	var add_sum: float = 0.0
 	var mult_sum: float = 0.0
 	for mod in additive_mod:

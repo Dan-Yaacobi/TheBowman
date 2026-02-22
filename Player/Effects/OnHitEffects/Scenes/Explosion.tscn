@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c8xxhiavn7s50"]
+[gd_scene load_steps=8 format=3 uid="uid://c8xxhiavn7s50"]
 
 [ext_resource type="Script" uid="uid://ba7g7pla1tyfb" path="res://Player/Effects/OnHitEffects/Scenes/explosion.gd" id="2_34n86"]
 [ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="3_g3sfy"]
@@ -21,21 +21,21 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.22571428, 0.43142858, 0.6085714, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.85, 0, 1, 1, 0.6, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0)
 
-[node name="Explosion" type="Node2D" unique_id=294650094]
+[node name="Explosion" type="Node2D"]
 z_index = 2
 scale = Vector2(2, 2)
 script = ExtResource("2_34n86")
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1211202819]
+[node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_g3sfy")
 metadata/_custom_type_script = "uid://b4s4fndrtcgwn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=232989353]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_hcmi0")
 
-[node name="Explosion" type="CPUParticles2D" parent="." unique_id=1943402360]
+[node name="Explosion" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 70
 texture = ExtResource("3_s456d")

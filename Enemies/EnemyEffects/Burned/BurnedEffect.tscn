@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="1_wu4ia"]
 
 [sub_resource type="Curve" id="Curve_hry2w"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.30384615, 0.84248793), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49635038, 0.40998483), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_l6po5"]
-offsets = PackedFloat32Array(0, 0.16239317, 0.51282054, 0.83760685)
-colors = PackedColorArray(0.29666638, 0, 0.89, 1, 0.89, 0, 0, 1, 1, 0.8000001, 0, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.25, 0.51282054, 0.83760685)
+colors = PackedColorArray(0.89, 0, 0, 1, 1, 0.8000001, 0, 1, 0, 0, 0, 1)
 
 [node name="BurnedEffect" type="CPUParticles2D"]
 amount = 100

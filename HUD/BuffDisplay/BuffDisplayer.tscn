@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2b305rore0wx"]
+
+[ext_resource type="Script" uid="uid://373imt38x1l3" path="res://HUD/BuffDisplay/buff_displayer.gd" id="1_6ci44"]
+
+[node name="BuffDisplayer" type="HFlowContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+last_wrap_alignment = 1
+script = ExtResource("1_6ci44")

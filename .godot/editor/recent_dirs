@@ -1,6 +1,6 @@
+res://Player/Effects/OnHitEffects/Resources
 C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Effects/
 C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Buffs/
-res://Player/Effects/Resources/
 res://Player/Effects/
 res://Weapons/Bows/ArrowsData/
 res://00 Globals/
@@ -20,5 +20,3 @@ res://Items/
 res://PlayerData/
 res://Level/Tiles/
 res://Player/Hand/
-res://Weapons/
-res://.godot/imported/

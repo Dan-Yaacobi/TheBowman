@@ -11,7 +11,6 @@ func set_entity(_entity: Node2D) -> void:
 		EventBus.add_player_buff.connect(add_buff)
 	
 func add_buff(_buff: Buff) -> void:
-
 	if buffs.has(_buff.ID):
 		var curr_buff: Buff = buffs[_buff.ID]
 		curr_buff.add_stack()
@@ -24,6 +23,5 @@ func add_buff(_buff: Buff) -> void:
 		buff_added.emit(_buff)
 		entity.add_child(_buff)
 	
-
 func remove_buff(_id: int) -> void:
 	buffs.erase(_id)
