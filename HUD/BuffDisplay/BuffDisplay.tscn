@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxf73pxjntnjx"]
+[gd_scene load_steps=5 format=3 uid="uid://bxf73pxjntnjx"]
 
 [ext_resource type="Script" uid="uid://bgeqj8w0uhj8" path="res://HUD/BuffDisplay/buff_display.gd" id="1_nqvvu"]
 [ext_resource type="Texture2D" uid="uid://br8hnwfoojauc" path="res://Player/Buffs/FireBuffs/Sprites/Pyromaniac.png" id="2_5jou1"]
 [ext_resource type="Texture2D" uid="uid://dl8tlwpls8btc" path="res://Player/Buffs/buff_overlay.png" id="3_5jou1"]
+[ext_resource type="Texture2D" uid="uid://t04d6b8fcvpa" path="res://Player/Buffs/FireBuffs/Sprites/Burn.png" id="4_vk8y7"]
 
 [node name="BuffDisplay" type="Control"]
 layout_mode = 3
@@ -15,24 +16,27 @@ grow_vertical = 2
 script = ExtResource("1_nqvvu")
 texture = ExtResource("2_5jou1")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 17.0
-max_value = 1.0
-step = 0.01
-fill_mode = 4
-texture_over = ExtResource("2_5jou1")
-texture_progress = ExtResource("3_5jou1")
-
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.39000002
 anchor_bottom = 0.41300002
-offset_right = -1.8650036
-offset_bottom = -0.004003525
-texture = ExtResource("2_5jou1")
+offset_right = 48.01
+offset_bottom = 47.48
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_vk8y7")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+scale = Vector2(0.85, 0.85)
+max_value = 1.0
+step = 0.01
+fill_mode = 4
+texture_progress = ExtResource("3_5jou1")
 
 [node name="Timer" type="Timer" parent="."]
 

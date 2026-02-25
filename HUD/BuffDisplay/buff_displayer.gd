@@ -19,7 +19,6 @@ func add_buff(_buff: Buff) -> void:
 		new_buff_display.set_duration(_buff.duration)
 		new_buff_display.max_stacks = _buff.max_stacks
 		new_buff_display.ID = _buff.ID
-		print("buff stacks are: ", _buff.stacks)
 		new_buff_display.stacks = _buff.stacks
 		
 		add_child(new_buff_display)

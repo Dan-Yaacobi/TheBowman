@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi642vttvke27"]
+
+[ext_resource type="Script" uid="uid://beotkvdypwekg" path="res://Player/Buffs/FireBuffs/BurningArrow/burning_arrow.gd" id="1_ednnw"]
+[ext_resource type="Texture2D" uid="uid://t04d6b8fcvpa" path="res://Player/Buffs/FireBuffs/Sprites/Burn.png" id="2_ybivd"]
+
+[node name="BurningArrow" type="Node2D"]
+script = ExtResource("1_ednnw")
+ID = 3
+texture = ExtResource("2_ybivd")
+tooltip = "Your Next Arrow Will Burn The Enemy"
+max_stacks = 1
+constant_buff = true
+duration = 10.0

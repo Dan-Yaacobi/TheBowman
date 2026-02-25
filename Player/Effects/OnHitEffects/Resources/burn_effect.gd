@@ -5,6 +5,7 @@ const PYROMANIAC = preload("res://Player/Buffs/FireBuffs/Pyromaniac.tscn")
 @export var ticks: float
 
 var has_pyromaniac: bool = true
+
 func apply_effect(_target: Node2D, _arrow: Arrow) -> void:
 	if _target is Enemy:
 		var try_apply: int = randi_range(0,100)

@@ -20,10 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/Bows/0_BasicBow/BasicBow.tscn" id="10_x70vp"]
 [ext_resource type="PackedScene" uid="uid://dxk6tfmffd8bb" path="res://Player/Player2.0/OffHand/PlayerOffHand.tscn" id="11_croik"]
-[ext_resource type="Script" uid="uid://dq6u4mugc3ypm" path="res://Player/Effects/OnHitEffects/on_hit_effect.gd" id="13_ib3vm"]
-[ext_resource type="Resource" uid="uid://bv1ou10viyo1d" path="res://Player/Effects/OnHitEffects/Resources/burn.tres" id="14_ib3vm"]
 [ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
+[ext_resource type="Script" uid="uid://bawb3ysex0r03" path="res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd" id="15_o1b5h"]
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
+[ext_resource type="Resource" uid="uid://ck8ck21kjw4n2" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres" id="16_7w4lt"]
 [ext_resource type="Script" uid="uid://cbpkfb2oarrbd" path="res://Player/combo_activated.gd" id="16_j4os2"]
 [ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
 [ext_resource type="Script" uid="uid://bfaixwknlmsd2" path="res://Player/combo_activated_effect.gd" id="18_n3ww0"]
@@ -126,8 +126,8 @@ collision_mask = 17
 script = ExtResource("1_4bii6")
 gravity = 500
 stats = SubResource("Resource_sedti")
-hit_effects = Dictionary[ExtResource("13_ib3vm"), int]({
-ExtResource("14_ib3vm"): -1
+perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
+ExtResource("16_7w4lt"): -1
 })
 
 [node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]

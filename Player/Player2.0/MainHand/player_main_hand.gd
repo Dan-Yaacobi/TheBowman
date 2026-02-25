@@ -115,6 +115,10 @@ func fire_arrow() -> void:
 	current_arrow.calc_knockback(shot_power)
 	current_arrow.reparent(get_tree().root)
 	
+	if current_arrow.perfect_shot:
+		var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
+		for effect in effects:
+			effect.apply_effect(null,current_arrow)
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	

@@ -36,6 +36,8 @@ var can_hook: bool = true
 @export var stats: PlayerStats
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
+@export var perfect_shot_effects: Dictionary[OnPerfectShotEffect,int] = {}
+
 @onready var buff_handler: BuffHandler = $BuffHandler
 
 const PERMA_EFFECT: int = -1
@@ -507,11 +509,28 @@ func add_hit_effect(_effect: OnHitEffect, _amount: int = PERMA_EFFECT) -> void:
 		hit_effects[_effect] = _amount
 
 func use_effects() -> Array[OnHitEffect]:
-	var _effects: Array[OnHitEffect]
+	var _effects: Array[OnHitEffect] = []
 	for key in hit_effects.keys():
 		if hit_effects[key] > 0 and hit_effects[key] != PERMA_EFFECT:
 			hit_effects[key] -= 1
 			if hit_effects[key] == 0:
 				hit_effects.erase(key)
+		_effects.append(key)
+	return _effects
+
+func add_perfect_shot_effect(_effect: OnPerfectShotEffect, _amount: int = PERMA_EFFECT) -> void:
+	if perfect_shot_effects.has(_effect):
+		if _amount > 0:
+			perfect_shot_effects[_effect] += _amount
+		else:
+			perfect_shot_effects[_effect] = _amount
+
+func use_perfect_shot_effects() -> Array[OnPerfectShotEffect]:
+	var _effects: Array[OnPerfectShotEffect] = []
+	for key in perfect_shot_effects.keys():
+		if perfect_shot_effects[key] > 0 and perfect_shot_effects[key] != PERMA_EFFECT:
+			perfect_shot_effects[key] -= 1
+			if perfect_shot_effects[key] == 0:
+				perfect_shot_effects.erase(key)
 		_effects.append(key)
 	return _effects

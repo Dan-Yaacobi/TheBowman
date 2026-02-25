@@ -1,3 +1,4 @@
+res://Player/Effects/OnPerfectShotEffects/Resources
 res://Player/Effects/OnHitEffects/Resources
 C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Effects/
 C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Buffs/
@@ -19,4 +20,3 @@ res://Enemies/EnemyAbilities/Sparkle/
 res://Items/
 res://PlayerData/
 res://Level/Tiles/
-res://Player/Hand/

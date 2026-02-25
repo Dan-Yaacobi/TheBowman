@@ -1,2 +1,3 @@
 Pyromaniac: 1
 Explosive Arrow: 2 
+Burning Arrow: 3

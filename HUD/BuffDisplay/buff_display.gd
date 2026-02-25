@@ -22,7 +22,6 @@ func _ready() -> void:
 	stacks_label.text = ""
 	if stacks > 0:
 		stacks_label.text = str(stacks)
-
 	timer.wait_time = duration
 	timer.timeout.connect(buff_over)
 	timer.start()
@@ -30,7 +29,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var curr_time: float = (timer.wait_time - timer.time_left) / timer.wait_time
 	texture_progress_bar.value = 1.0 - curr_time
-
+	if texture_progress_bar.value <= texture_progress_bar.min_value:
+		buff_over()
+		
 func add_stack(_stacks: int, _duration: float) -> void:
 	if stacks < max_stacks:
 		stacks += _stacks
@@ -39,4 +40,4 @@ func add_stack(_stacks: int, _duration: float) -> void:
 	timer.start(new_time)
 	
 func buff_over() -> void:
-	buff_ended.emit(self)
+	buff_ended.emit(self.ID)

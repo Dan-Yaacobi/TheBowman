@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BurnArrowPerfectEffect" load_steps=3 format=3 uid="uid://ck8ck21kjw4n2"]
+
+[ext_resource type="Script" uid="uid://ramsxmq55srs" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.gd" id="1_8grue"]
+[ext_resource type="PackedScene" uid="uid://bi642vttvke27" path="res://Player/Buffs/FireBuffs/BurningArrow/BurningArrow.tscn" id="1_c3ho4"]
+
+[resource]
+script = ExtResource("1_8grue")
+effect = ExtResource("1_c3ho4")
+ID = 3
+chance = 50
+metadata/_custom_type_script = "uid://bawb3ysex0r03"
