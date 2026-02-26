@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ccg8yfaghk8ga"]
+
+[ext_resource type="Script" uid="uid://bqdytigxin6bg" path="res://Enemies/Scripts/enemy.gd" id="1_s7iq5"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="2_5hp6r"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_p5wai"]
+[ext_resource type="Texture2D" uid="uid://dcqsaxtum85jb" path="res://Enemies/TargetDummy/TargetDummy.png" id="2_u5jre"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_5k5yt"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_u5jre"]
+[ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn" id="6_5k5yt"]
+
+[sub_resource type="Resource" id="Resource_qb1bn"]
+script = ExtResource("3_5k5yt")
+max_hp = 1000000
+metadata/_custom_type_script = "uid://rlvenynllobd"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ieskh"]
+radius = 14.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5wai"]
+radius = 14.0
+height = 64.0
+
+[node name="TargetDummy" type="CharacterBody2D" unique_id=603628097]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_s7iq5")
+stats = SubResource("Resource_qb1bn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1219711078]
+texture = ExtResource("2_u5jre")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1903068361]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_5hp6r")
+metadata/_custom_type_script = "uid://buwajsaukfabu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1313670609]
+shape = SubResource("CapsuleShape2D_ieskh")
+debug_color = Color(0.96561843, 0, 0.4885252, 0.41960785)
+
+[node name="EnemyHitEffect" parent="HitBox" unique_id=321210242 instance=ExtResource("6_5k5yt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1289704985]
+shape = SubResource("CapsuleShape2D_p5wai")
+
+[node name="DebuffHandler" parent="." unique_id=1086958927 instance=ExtResource("3_u5jre")]

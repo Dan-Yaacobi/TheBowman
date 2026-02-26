@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi642vttvke27"]
+[gd_scene format=3 uid="uid://bi642vttvke27"]
 
 [ext_resource type="Script" uid="uid://beotkvdypwekg" path="res://Player/Buffs/FireBuffs/BurningArrow/burning_arrow.gd" id="1_ednnw"]
 [ext_resource type="Texture2D" uid="uid://t04d6b8fcvpa" path="res://Player/Buffs/FireBuffs/Sprites/Burn.png" id="2_ybivd"]
 
-[node name="BurningArrow" type="Node2D"]
+[node name="BurningArrow" type="Node2D" unique_id=533173712]
 script = ExtResource("1_ednnw")
 ID = 3
 texture = ExtResource("2_ybivd")

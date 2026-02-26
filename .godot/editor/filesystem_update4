@@ -1,4 +1,4 @@
-res://Player/Buffs/FireBuffs/ExplosiveArrows.tscn
+res://Player/Buffs/FireBuffs/Pyromaniac.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -8,21 +8,34 @@ res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres
-res://Player/Effects/OnHitEffects/Resources/burn.tres
 res://Enemies/Summoner/Glow.gdshader
 res://Player/rope.gdshader
-res://Player/Effects/OnHitEffects/Resources/burn_effect.gd
-res://Player/Buffs/FireBuffs/BurningArrow/BurningArrow.tscn
-res://Player/Buffs/FireBuffs/BurningArrow/burning_arrow.gd
-res://Player/Buffs/buff_ids.txt
-res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd
-res://Player/Player.tscn
-res://Player/player.gd
-res://Player/Player2.0/MainHand/player_main_hand.gd
-res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres
-res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.gd
+res://HUD/BuffDisplay/buff_displayer.gd
+res://00 Globals/event_bus.gd
+res://General Nodes/BuffHandler/buff_handler.gd
 res://HUD/BuffDisplay/BuffDisplay.tscn
 res://HUD/BuffDisplay/buff_display.gd
-res://General Nodes/BuffHandler/buff_handler.gd
-res://HUD/BuffDisplay/buff_displayer.gd
-res://Debuffs/Burned/BurnDebuff.tscn
+res://Player/player.gd
+res://Player/Player.tscn
+res://Player/Buffs/FireBuffs/ExplosiveArrows.tscn
+res://Player/Buffs/FireBuffs/explosive_arrows.gd
+res://Player/Effects/OnHitEffects/Resources/burn_effect.gd
+res://Player/Player2.0/MainHand/player_main_hand.gd
+res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.gd
+res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd
+res://Weapons/Scripts/arrow.gd
+res://Player/Effects/effect.gd
+res://Player/Buffs/FireBuffs/BurningArrow/BurningArrow.tscn
+res://Player/Effects/OnHitEffects/Resources/burn.tres
+res://Player/Buffs/FireBuffs/BurningArrow/burning_arrow.gd
+res://Enemies/TargetDummy/TargetDummy.tscn
+res://HUD/HUD.tscn
+res://MainMenu/MainMenu.tscn
+res://Enemies/Scripts/enemy.gd
+res://Enemies/FlyingApple/FlyingApple.tscn
+res://Enemies/FlyingApple/flying_apple.gd
+res://Enemies/Cloud/cloud_enemy.gd
+res://Enemies/Spider/spider.gd
+res://Enemies/Spider/SpiderBoss/spider_boss.gd
+res://General Nodes/BuffHandler/buff.gd
+res://Player/Effects/OnHitEffects/Scenes/Explosion.tscn

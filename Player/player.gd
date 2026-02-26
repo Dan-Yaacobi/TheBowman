@@ -507,7 +507,10 @@ func add_hit_effect(_effect: OnHitEffect, _amount: int = PERMA_EFFECT) -> void:
 			hit_effects[_effect] += _amount
 	else:
 		hit_effects[_effect] = _amount
-
+func remove_hit_effect(_effect: OnHitEffect) -> void:
+	if hit_effects.has(_effect):
+		hit_effects.erase(_effect)
+	
 func use_effects() -> Array[OnHitEffect]:
 	var _effects: Array[OnHitEffect] = []
 	for key in hit_effects.keys():

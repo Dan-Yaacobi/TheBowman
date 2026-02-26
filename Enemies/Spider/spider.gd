@@ -8,7 +8,6 @@ const SPIDER_WEB = preload("res://Enemies/Spider/SpiderWeb.tscn")
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var enemy_state_machine: Node2D = $EnemyStateMachine
 @onready var ground_detector: Area2D = $GroundDetector
-@onready var hit_box: Area2D = $HitBox
 @onready var hurt_box: Area2D = $HurtBox
 
 var web: SpiderWeb

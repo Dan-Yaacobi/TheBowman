@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cnhbrpo4htp2y"]
+[gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="3_0uxqg"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="15_167x7"]
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
+[ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -41,10 +42,10 @@ button_action = SubResource("Resource_ssi0y")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lv0r"]
 size = Vector2(10949, 680)
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
 
-[node name="ButtonShootClick3" parent="." instance=ExtResource("3_0uxqg")]
+[node name="ButtonShootClick3" parent="." unique_id=996661813 instance=ExtResource("3_0uxqg")]
 visible = false
 offset_left = 354.0
 offset_top = 16.0
@@ -57,7 +58,7 @@ theme_override_constants/outline_size = 75
 text = "Reset"
 button_data = SubResource("Resource_fjbbq")
 
-[node name="CurrentWaves" type="Label" parent="."]
+[node name="CurrentWaves" type="Label" parent="." unique_id=1810882176]
 visible = false
 offset_left = 355.0
 offset_top = 35.0
@@ -73,7 +74,7 @@ theme_override_constants/shadow_outline_size = 35
 theme_override_font_sizes/font_size = 200
 text = "Current Wave:"
 
-[node name="HowToPlay" type="Label" parent="."]
+[node name="HowToPlay" type="Label" parent="." unique_id=1358765188]
 visible = false
 offset_left = 123.0
 offset_top = 2.0
@@ -96,7 +97,7 @@ Left Mouse: Shoot
 Right Mouse: Special Ability
 M: Back to Menu"
 
-[node name="ButtonShootClick" parent="." instance=ExtResource("3_0uxqg")]
+[node name="ButtonShootClick" parent="." unique_id=1706101214 instance=ExtResource("3_0uxqg")]
 visible = false
 offset_left = 355.0
 offset_top = 45.0
@@ -108,7 +109,7 @@ action_mode = 0
 text = "Next Wave"
 button_data = SubResource("Resource_etkyy")
 
-[node name="ButtonShootClick2" parent="." instance=ExtResource("3_0uxqg")]
+[node name="ButtonShootClick2" parent="." unique_id=2117362035 instance=ExtResource("3_0uxqg")]
 visible = false
 offset_left = 315.0
 offset_top = 17.0
@@ -119,7 +120,7 @@ tooltip_text = "For Testing Purposes"
 text = "Add Money"
 button_data = SubResource("Resource_ctujf")
 
-[node name="MusicButton" type="Button" parent="."]
+[node name="MusicButton" type="Button" parent="." unique_id=794920078]
 visible = false
 offset_left = 97.0
 offset_top = 17.0
@@ -133,13 +134,13 @@ toggle_mode = true
 text = "Music"
 script = ExtResource("11_rwkms")
 
-[node name="ArrowSign4" type="Sprite2D" parent="."]
+[node name="ArrowSign4" type="Sprite2D" parent="." unique_id=1171596319]
 z_index = -1
 position = Vector2(405, 83)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_a6mvh")
 
-[node name="Label2" type="Label" parent="ArrowSign4"]
+[node name="Label2" type="Label" parent="ArrowSign4" unique_id=1935939676]
 offset_left = -5.0
 offset_top = -5.0
 offset_right = 600.0
@@ -155,13 +156,13 @@ theme_override_font_sizes/font_size = 250
 text = "Waves"
 metadata/_edit_use_anchors_ = true
 
-[node name="ArrowSign5" type="Sprite2D" parent="."]
+[node name="ArrowSign5" type="Sprite2D" parent="." unique_id=548771561]
 z_index = -1
 position = Vector2(326.00003, 42)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_a6mvh")
 
-[node name="Label2" type="Label" parent="ArrowSign5"]
+[node name="Label2" type="Label" parent="ArrowSign5" unique_id=1503989702]
 offset_left = -5.0
 offset_top = -5.0
 offset_right = 600.0
@@ -177,13 +178,13 @@ theme_override_font_sizes/font_size = 250
 text = "Rifts"
 metadata/_edit_use_anchors_ = true
 
-[node name="ArrowSign2" type="Sprite2D" parent="."]
+[node name="ArrowSign2" type="Sprite2D" parent="." unique_id=2135706618]
 z_index = -1
 position = Vector2(90, 90)
 texture = ExtResource("12_a6mvh")
 flip_h = true
 
-[node name="Label2" type="Label" parent="ArrowSign2"]
+[node name="Label2" type="Label" parent="ArrowSign2" unique_id=1343425458]
 offset_left = -5.0
 offset_top = -5.0
 offset_right = 600.0
@@ -198,106 +199,108 @@ theme_override_constants/shadow_outline_size = 50
 theme_override_font_sizes/font_size = 250
 text = "Shops"
 
-[node name="PlayerSpawn" parent="." instance=ExtResource("12_g1826")]
+[node name="PlayerSpawn" parent="." unique_id=1049349633 instance=ExtResource("12_g1826")]
 position = Vector2(207, 96)
 
-[node name="Islands" type="Node2D" parent="."]
+[node name="Islands" type="Node2D" parent="." unique_id=2124960339]
 
-[node name="Island" parent="Islands" instance=ExtResource("14_7t2hb")]
+[node name="Island" parent="Islands" unique_id=1797598660 instance=ExtResource("14_7t2hb")]
 position = Vector2(371, 70)
 
-[node name="Island2" parent="Islands" instance=ExtResource("13_qvidt")]
+[node name="Island2" parent="Islands" unique_id=182829244 instance=ExtResource("13_qvidt")]
 position = Vector2(206, 121)
 
-[node name="Island6" parent="Islands" instance=ExtResource("13_qvidt")]
+[node name="Island6" parent="Islands" unique_id=829077785 instance=ExtResource("13_qvidt")]
 position = Vector2(99, 114)
 
-[node name="Island13" parent="Islands" instance=ExtResource("13_qvidt")]
+[node name="Island13" parent="Islands" unique_id=1990421653 instance=ExtResource("13_qvidt")]
 position = Vector2(208, -12)
 
-[node name="Island19" parent="Islands" instance=ExtResource("13_qvidt")]
+[node name="Island19" parent="Islands" unique_id=1362480300 instance=ExtResource("13_qvidt")]
 position = Vector2(160, -100)
 
-[node name="Island3" parent="Islands" instance=ExtResource("14_5lv0r")]
+[node name="Island3" parent="Islands" unique_id=1047838277 instance=ExtResource("14_5lv0r")]
 position = Vector2(298, 90)
 floating = true
 
-[node name="Island12" parent="Islands" instance=ExtResource("14_5lv0r")]
+[node name="Island12" parent="Islands" unique_id=1035312660 instance=ExtResource("14_5lv0r")]
 position = Vector2(146, 13)
 floating = true
 
-[node name="Island16" parent="Islands" instance=ExtResource("14_5lv0r")]
+[node name="Island16" parent="Islands" unique_id=323879176 instance=ExtResource("14_5lv0r")]
 position = Vector2(324, 62)
 
-[node name="Island17" parent="Islands" instance=ExtResource("14_5lv0r")]
+[node name="Island17" parent="Islands" unique_id=919845256 instance=ExtResource("14_5lv0r")]
 position = Vector2(400, 104)
 
-[node name="Island4" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island4" parent="Islands" unique_id=1949571672 instance=ExtResource("15_167x7")]
 position = Vector2(149, 118)
-floating = true
 
-[node name="Island14" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island14" parent="Islands" unique_id=192330461 instance=ExtResource("15_167x7")]
 position = Vector2(268, -28)
 floating = true
 
-[node name="Island18" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island18" parent="Islands" unique_id=491443278 instance=ExtResource("15_167x7")]
 position = Vector2(223, -68)
 floating = true
 
-[node name="Island10" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island10" parent="Islands" unique_id=1343375228 instance=ExtResource("15_167x7")]
 position = Vector2(74, 33)
 floating = true
 
-[node name="Island5" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island5" parent="Islands" unique_id=2017175388 instance=ExtResource("15_167x7")]
 position = Vector2(258, 109)
 floating = true
 
-[node name="Island15" parent="Islands" instance=ExtResource("15_167x7")]
+[node name="Island15" parent="Islands" unique_id=1442143414 instance=ExtResource("15_167x7")]
 position = Vector2(450, 103)
 
-[node name="Island7" parent="Islands" instance=ExtResource("16_24r6y")]
+[node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
 position = Vector2(22, 97)
 
-[node name="Island8" parent="Islands" instance=ExtResource("16_24r6y")]
+[node name="Island8" parent="Islands" unique_id=1728728178 instance=ExtResource("16_24r6y")]
 position = Vector2(57, 106)
 floating = true
 
-[node name="Island11" parent="Islands" instance=ExtResource("16_24r6y")]
+[node name="Island11" parent="Islands" unique_id=283845787 instance=ExtResource("16_24r6y")]
 position = Vector2(-8, 79)
 floating = true
 
-[node name="Island9" parent="Islands" instance=ExtResource("16_24r6y")]
+[node name="Island9" parent="Islands" unique_id=1814454497 instance=ExtResource("16_24r6y")]
 position = Vector2(-39, 67)
 
-[node name="Portals" type="Node2D" parent="."]
+[node name="Portals" type="Node2D" parent="." unique_id=1828147291]
 
-[node name="Portal" parent="Portals" instance=ExtResource("13_npjie")]
+[node name="Portal" parent="Portals" unique_id=10218384 instance=ExtResource("13_npjie")]
 position = Vector2(449, 81)
 color = Color(0.99333346, 0.6, 1, 1)
 flip_h = true
 
-[node name="Portal4" parent="Portals" instance=ExtResource("13_npjie")]
+[node name="Portal4" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
 position = Vector2(205, 98)
 color = Color(1, 0.45, 0.45, 1)
 destination = 2
 flip_h = true
 
-[node name="Portal2" parent="Portals" instance=ExtResource("13_npjie")]
+[node name="Portal2" parent="Portals" unique_id=1352386912 instance=ExtResource("13_npjie")]
 position = Vector2(22, 74)
 color = Color(1, 1, 0, 1)
 
-[node name="Portal3" parent="Portals" instance=ExtResource("13_npjie")]
+[node name="Portal3" parent="Portals" unique_id=417308666 instance=ExtResource("13_npjie")]
 position = Vector2(-39, 45)
 color = Color(1, 0.28235295, 1, 1)
 
-[node name="FallingDeath" type="Area2D" parent="."]
+[node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)
 collision_mask = 11
 script = ExtResource("16_qvidt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath" unique_id=1429140167]
 position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
+
+[node name="TargetDummy" parent="." unique_id=603628097 instance=ExtResource("17_5lv0r")]
+position = Vector2(149, 98)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

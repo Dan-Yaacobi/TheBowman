@@ -1,1 +1,1 @@
-class_name OnPerfectShotEffect extends Effect
+class_name OnPerfectShotEffect extends OnHitEffect

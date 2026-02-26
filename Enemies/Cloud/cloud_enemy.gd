@@ -1,6 +1,5 @@
 class_name CloudEnemy extends Enemy
 @onready var enemy_state_machine: EnemyStateMachine = $EnemyStateMachine
-@onready var hit_box: EnemyHitBox = $HitBox
 
 func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer

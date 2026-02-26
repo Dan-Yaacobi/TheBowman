@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cn76h3jplsrfn"]
+[gd_scene format=3 uid="uid://cn76h3jplsrfn"]
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/FlyingApple/flying_apple.gd" id="1_whfbk"]
 [ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_qmrg8"]
@@ -277,55 +277,50 @@ radius = 6.666667
 [sub_resource type="CircleShape2D" id="CircleShape2D_emnjt"]
 radius = 8.0
 
-[node name="FlyingApple" type="CharacterBody2D"]
+[node name="FlyingApple" type="CharacterBody2D" unique_id=451680564]
 collision_layer = 4
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_whfbk")
+tree_spawn = null
 stats = SubResource("Resource_venkp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628174994]
 texture = ExtResource("6_dgpt0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_o35pa")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=590260233]
+libraries/ = SubResource("AnimationLibrary_o35pa")
 
-[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_vf7r2")
-}
+[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=1184515213]
+libraries/ = SubResource("AnimationLibrary_vf7r2")
 
-[node name="Wings" type="Sprite2D" parent="Sprite2D"]
+[node name="Wings" type="Sprite2D" parent="Sprite2D" unique_id=122169939]
 texture = SubResource("CompressedTexture2D_idn3m")
 vframes = 6
 
-[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
-libraries = {
-&"": SubResource("AnimationLibrary_qgtth")
-}
+[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings" unique_id=1169098378]
+libraries/ = SubResource("AnimationLibrary_qgtth")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1680040937]
 visible = false
 shape = SubResource("CircleShape2D_uehev")
 
-[node name="HitBox" parent="." instance=ExtResource("11_h5knc")]
+[node name="HitBox" parent="." unique_id=575808413 instance=ExtResource("11_h5knc")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("12_8wwju")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1133667212]
 visible = false
 shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
-[node name="HurtBox" parent="." instance=ExtResource("13_nfvr7")]
+[node name="HurtBox" parent="." unique_id=683933014 instance=ExtResource("13_nfvr7")]
 collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2043604913]
 visible = false
 shape = SubResource("CircleShape2D_emnjt")
 debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
 
-[node name="DebuffHandler" parent="." instance=ExtResource("14_dilap")]
+[node name="DebuffHandler" parent="." unique_id=622220340 instance=ExtResource("14_dilap")]

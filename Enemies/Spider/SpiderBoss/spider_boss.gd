@@ -1,11 +1,9 @@
 class_name SpiderBoss extends Enemy
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var spider_state_machine: EnemyStateMachine = $SpiderStateMachine
 @onready var animation: AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var spider_summon_timer: Timer = $SpiderSummonTimer
 @onready var web_shoot_timer: Timer = $WebShootTimer
-@onready var hit_box: Area2D = $HitBox
 
 const SPIDER_WEB_PROJECTILE = preload("res://Enemies/Spider/SpiderBoss/SpiderWebProjectile.tscn")
 

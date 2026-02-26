@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bju1rx12kx8oe"]
+[gd_scene format=3 uid="uid://bju1rx12kx8oe"]
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="16_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
-[ext_resource type="PackedScene" uid="uid://bxf73pxjntnjx" path="res://HUD/BuffDisplay/BuffDisplay.tscn" id="19_fjfvf"]
 
 [sub_resource type="Animation" id="Animation_xyp2j"]
 resource_name = "Gained"
@@ -265,10 +264,10 @@ _data = {
 &"RESET": SubResource("Animation_accxh")
 }
 
-[node name="Hud" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1300124923]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,7 +276,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HealthBar" parent="Control" instance=ExtResource("1_b7ubu")]
+[node name="HealthBar" parent="Control" unique_id=1431315462 instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 0
 offset_left = 1499.0
@@ -286,12 +285,12 @@ offset_right = 1563.0
 offset_bottom = 891.0
 scale = Vector2(6, 6)
 
-[node name="LevelStats" type="Label" parent="Control"]
+[node name="LevelStats" type="Label" parent="Control" unique_id=683982552]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="TotalBuffs" type="Control" parent="Control"]
+[node name="TotalBuffs" type="Control" parent="Control" unique_id=1937500504]
 anchors_preset = 0
 offset_left = 3015.0
 offset_top = -609.0
@@ -300,7 +299,7 @@ offset_bottom = -609.0
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
-[node name="FlowContainer" type="FlowContainer" parent="Control/TotalBuffs"]
+[node name="FlowContainer" type="FlowContainer" parent="Control/TotalBuffs" unique_id=1966368116]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 11
@@ -317,38 +316,38 @@ theme_override_constants/h_separation = 1
 vertical = true
 script = ExtResource("5_lkt0t")
 
-[node name="Buff" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff" parent="Control/TotalBuffs/FlowContainer" unique_id=1853198063 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff2" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff2" parent="Control/TotalBuffs/FlowContainer" unique_id=1953363489 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff3" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff3" parent="Control/TotalBuffs/FlowContainer" unique_id=962988819 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff4" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff4" parent="Control/TotalBuffs/FlowContainer" unique_id=1518487579 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff5" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff5" parent="Control/TotalBuffs/FlowContainer" unique_id=1243918760 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff6" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff6" parent="Control/TotalBuffs/FlowContainer" unique_id=1281087535 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff7" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff7" parent="Control/TotalBuffs/FlowContainer" unique_id=516307007 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="Buff8" parent="Control/TotalBuffs/FlowContainer" instance=ExtResource("6_6i5cd")]
+[node name="Buff8" parent="Control/TotalBuffs/FlowContainer" unique_id=1566104910 instance=ExtResource("6_6i5cd")]
 layout_mode = 2
 
-[node name="SpecialAbilityCD" type="Sprite2D" parent="Control"]
+[node name="SpecialAbilityCD" type="Sprite2D" parent="Control" unique_id=400582482]
 visible = false
 position = Vector2(481.00006, 968.99994)
 scale = Vector2(5, 5)
 texture = ExtResource("7_lkt0t")
 script = ExtResource("8_6i5cd")
 
-[node name="TimeLeftLabel" type="Label" parent="Control/SpecialAbilityCD"]
+[node name="TimeLeftLabel" type="Label" parent="Control/SpecialAbilityCD" unique_id=1329799947]
 offset_left = 8.0
 offset_top = -10.0
 offset_right = 151.0
@@ -365,7 +364,7 @@ text = "0
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrentMoney" type="Label" parent="Control"]
+[node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
 layout_mode = 0
 offset_left = 116.0
 offset_top = 66.0
@@ -381,7 +380,7 @@ theme_override_font_sizes/font_size = 150
 text = "x0"
 script = ExtResource("9_t1yhm")
 
-[node name="ComboCounter" type="Label" parent="Control"]
+[node name="ComboCounter" type="Label" parent="Control" unique_id=1642379438]
 visible = false
 layout_mode = 0
 offset_left = 1174.9998
@@ -399,12 +398,10 @@ theme_override_font_sizes/font_size = 250
 text = "Combo: 0"
 script = ExtResource("10_pd2p5")
 
-[node name="ComboAnimation" type="AnimationPlayer" parent="Control/ComboCounter"]
-libraries = {
-&"": SubResource("AnimationLibrary_r47hq")
-}
+[node name="ComboAnimation" type="AnimationPlayer" parent="Control/ComboCounter" unique_id=1947772916]
+libraries/ = SubResource("AnimationLibrary_r47hq")
 
-[node name="StatsUiOpenButton" parent="Control" instance=ExtResource("10_fwgky")]
+[node name="StatsUiOpenButton" parent="Control" unique_id=6288633 instance=ExtResource("10_fwgky")]
 layout_mode = 1
 offset_left = 1.0
 offset_top = 243.0
@@ -412,18 +409,16 @@ offset_right = -1855.0
 offset_bottom = -805.0
 scale = Vector2(4, 4)
 
-[node name="Coin" type="Sprite2D" parent="Control"]
+[node name="Coin" type="Sprite2D" parent="Control" unique_id=480222187]
 position = Vector2(62.000004, 122)
 scale = Vector2(5, 5)
 texture = ExtResource("11_fwgky")
 hframes = 5
 
-[node name="CoinAnimation" type="AnimationPlayer" parent="Control/Coin"]
-libraries = {
-&"": SubResource("AnimationLibrary_fwgky")
-}
+[node name="CoinAnimation" type="AnimationPlayer" parent="Control/Coin" unique_id=102977012]
+libraries/ = SubResource("AnimationLibrary_fwgky")
 
-[node name="MoreInfo" type="TextureButton" parent="Control"]
+[node name="MoreInfo" type="TextureButton" parent="Control" unique_id=1856658326]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 416.0
@@ -439,7 +434,7 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("15_fjfvf")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MoreInfo"]
+[node name="TextureRect" type="TextureRect" parent="Control/MoreInfo" unique_id=1862376403]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 13.0
@@ -448,7 +443,7 @@ offset_bottom = 129.0
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("16_65vjf")
 
-[node name="Label" type="Label" parent="Control/MoreInfo/TextureRect"]
+[node name="Label" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=1965026019]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -473,7 +468,7 @@ Back to menu: M
 "
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="Control/MoreInfo/TextureRect"]
+[node name="Label2" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=1882743205]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -490,7 +485,7 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 100
 autowrap_mode = 3
 
-[node name="Label3" type="Label" parent="Control/MoreInfo/TextureRect"]
+[node name="Label3" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=506014709]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 5.0
@@ -507,12 +502,10 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 100
 autowrap_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MoreInfo"]
-libraries = {
-&"": SubResource("AnimationLibrary_gf6xr")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MoreInfo" unique_id=970691259]
+libraries/ = SubResource("AnimationLibrary_gf6xr")
 
-[node name="UpgradeButtons" parent="Control" instance=ExtResource("17_ihvjp")]
+[node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -525,7 +518,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 scale = Vector2(5, 5)
 
-[node name="BuffDisplayer" parent="Control" instance=ExtResource("18_33ejm")]
+[node name="BuffDisplayer" parent="Control" unique_id=866180409 instance=ExtResource("18_33ejm")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -541,29 +534,5 @@ theme_override_constants/h_separation = 18
 theme_override_constants/v_separation = 18
 alignment = 2
 last_wrap_alignment = 0
-
-[node name="BuffDisplay" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay6" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay7" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay8" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay2" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay3" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay4" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
-
-[node name="BuffDisplay5" parent="Control/BuffDisplayer" instance=ExtResource("19_fjfvf")]
-layout_mode = 2
 
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

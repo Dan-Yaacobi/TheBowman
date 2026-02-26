@@ -3,6 +3,8 @@ class_name Enemy extends CharacterBody2D
 @export var stats: EnemyData
 
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
+@onready var hit_box: EnemyHitBox = $HitBox
+@onready var sprite: Sprite2D = $Sprite2D
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -36,8 +38,11 @@ var pushback_power: float
 var hard_mode: bool = false
 
 var current_hp: int
+
 func _ready() -> void:
 	current_hp = stats.max_hp
+	debuff_handler.set_enemy(self)
+	hit_box.set_enemy(self)
 	extra_ready_functions()
 	pass
 
@@ -75,7 +80,8 @@ func take_hit_effect() -> void:
 		
 func take_damage(_dmg: int) -> void:
 	current_hp -= _dmg
-	damaged_animation_player.play("Damaged")
+	if damaged_animation_player:
+		damaged_animation_player.play("Damaged")
 	
 	if current_hp <= 0:
 		activate_death_ability()

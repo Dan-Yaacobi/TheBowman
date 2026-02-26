@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cesvb1a1eu8yq"]
+[gd_scene format=3 uid="uid://cesvb1a1eu8yq"]
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
@@ -120,7 +120,7 @@ radius = 49.0408
 radius = 9.421122
 height = 20.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1253253931]
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
@@ -130,52 +130,52 @@ perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
 ExtResource("16_7w4lt"): -1
 })
 
-[node name="PlayerBody" parent="." instance=ExtResource("9_x70vp")]
+[node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
 z_index = 1
 
-[node name="PlayerMainHand" parent="." instance=ExtResource("10_wo5nf")]
+[node name="PlayerMainHand" parent="." unique_id=1139132622 instance=ExtResource("10_wo5nf")]
 position = Vector2(-6, 6)
 
-[node name="PlayerOffHand" parent="." instance=ExtResource("11_croik")]
+[node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
 position = Vector2(2, 5)
 
-[node name="OffHandShoulder" type="Node2D" parent="."]
+[node name="OffHandShoulder" type="Node2D" parent="." unique_id=1530002589]
 position = Vector2(2, 5)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1994014699]
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 script = ExtResource("8_qvxki")
 random_strength = 5.0
 shake_fade = 10.0
 
-[node name="PlayerStateMachine" parent="." instance=ExtResource("4_tfnw6")]
+[node name="PlayerStateMachine" parent="." unique_id=1204656686 instance=ExtResource("4_tfnw6")]
 
-[node name="Idle" type="Node2D" parent="PlayerStateMachine"]
+[node name="Idle" type="Node2D" parent="PlayerStateMachine" unique_id=424752262]
 script = ExtResource("5_kcllr")
 
-[node name="Walking" type="Node2D" parent="PlayerStateMachine"]
+[node name="Walking" type="Node2D" parent="PlayerStateMachine" unique_id=1189973943]
 script = ExtResource("6_vo15m")
 
-[node name="Slam" type="Node2D" parent="PlayerStateMachine"]
+[node name="Slam" type="Node2D" parent="PlayerStateMachine" unique_id=2130948580]
 script = ExtResource("14_nepur")
 
-[node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam"]
+[node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam" unique_id=670631579]
 position = Vector2(0, 1)
 collision_mask = 20
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector" unique_id=1587100838]
 position = Vector2(-1, 14)
 shape = SubResource("RectangleShape2D_6nowa")
 debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
 
-[node name="Dead" type="Node2D" parent="PlayerStateMachine"]
+[node name="Dead" type="Node2D" parent="PlayerStateMachine" unique_id=1457544463]
 script = ExtResource("15_qho0y")
 
-[node name="Dash" type="Node2D" parent="PlayerStateMachine"]
+[node name="Dash" type="Node2D" parent="PlayerStateMachine" unique_id=1253471932]
 script = ExtResource("16_lcihm")
 
-[node name="Dust" type="CPUParticles2D" parent="PlayerStateMachine/Dash"]
+[node name="Dust" type="CPUParticles2D" parent="PlayerStateMachine/Dash" unique_id=1550651360]
 position = Vector2(0, 8)
 emitting = false
 amount = 5
@@ -189,28 +189,28 @@ gravity = Vector2(2, -20)
 scale_amount_curve = SubResource("Curve_gv3fu")
 color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
 
-[node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash"]
+[node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash" unique_id=1018166173]
 wait_time = 2.0
 
-[node name="Grappling" type="Node2D" parent="PlayerStateMachine"]
+[node name="Grappling" type="Node2D" parent="PlayerStateMachine" unique_id=452980340]
 script = ExtResource("23_gv3fu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=11877925]
 position = Vector2(-1.5, 7)
 shape = SubResource("RectangleShape2D_0mb5q")
 
-[node name="JumpReset" type="Area2D" parent="."]
+[node name="JumpReset" type="Area2D" parent="." unique_id=1946683667]
 position = Vector2(-1, 15)
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset" unique_id=841087047]
 position = Vector2(0, -0.0833416)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
-[node name="JumpAction" parent="." instance=ExtResource("7_kkejo")]
+[node name="JumpAction" parent="." unique_id=975901094 instance=ExtResource("7_kkejo")]
 
-[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction"]
+[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction" unique_id=1493980358]
 position = Vector2(-1, 16)
 emitting = false
 amount = 5
@@ -223,16 +223,16 @@ gravity = Vector2(0, 50)
 scale_amount_curve = SubResource("Curve_g8oqh")
 color = Color(0.831239, 0.712185, 0.672638, 1)
 
-[node name="HitBox" parent="." instance=ExtResource("22_x70vp")]
+[node name="HitBox" parent="." unique_id=1751345076 instance=ExtResource("22_x70vp")]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=90149864]
 position = Vector2(-2.1666665, 4.5)
 shape = SubResource("RectangleShape2D_4o0d0")
 
-[node name="InvincibilityTimer" type="Timer" parent="."]
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=513053942]
 
-[node name="DamagedParticles" type="CPUParticles2D" parent="."]
+[node name="DamagedParticles" type="CPUParticles2D" parent="." unique_id=1150190285]
 emitting = false
 amount = 3
 texture = ExtResource("23_wo5nf")
@@ -248,18 +248,18 @@ radial_accel_curve = SubResource("Curve_croik")
 scale_amount_curve = SubResource("Curve_wqenp")
 color_ramp = SubResource("Gradient_u4yfg")
 
-[node name="DeathAnimationTimer" type="Timer" parent="."]
+[node name="DeathAnimationTimer" type="Timer" parent="." unique_id=1957289314]
 one_shot = true
 
-[node name="SpecialAbilityCooldown" type="Timer" parent="."]
+[node name="SpecialAbilityCooldown" type="Timer" parent="." unique_id=2037916886]
 
-[node name="ComboActivated" type="Node2D" parent="."]
+[node name="ComboActivated" type="Node2D" parent="." unique_id=1236015426]
 script = ExtResource("16_j4os2")
 
-[node name="ComboTimer" type="Timer" parent="ComboActivated"]
+[node name="ComboTimer" type="Timer" parent="ComboActivated" unique_id=49600355]
 wait_time = 8.0
 
-[node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated"]
+[node name="ComboEffect" type="CPUParticles2D" parent="ComboActivated" unique_id=1209500870]
 z_index = -1
 position = Vector2(0, -1)
 emitting = false
@@ -270,7 +270,7 @@ gravity = Vector2(0, -50)
 scale_amount_curve = SubResource("Curve_cqixw")
 color = Color(0.673333, 0.04, 0.8, 1)
 
-[node name="ComboActivatedEffect" type="CPUParticles2D" parent="ComboActivated"]
+[node name="ComboActivatedEffect" type="CPUParticles2D" parent="ComboActivated" unique_id=1643067424]
 emitting = false
 amount = 500
 one_shot = true
@@ -285,42 +285,42 @@ scale_amount_curve = SubResource("Curve_0mjqs")
 color = Color(0.67451, 0.0392157, 0.8, 1)
 script = ExtResource("18_n3ww0")
 
-[node name="Area2D" type="Area2D" parent="ComboActivated/ComboActivatedEffect"]
+[node name="Area2D" type="Area2D" parent="ComboActivated/ComboActivatedEffect" unique_id=1654137454]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComboActivated/ComboActivatedEffect/Area2D" unique_id=1084664331]
 visible = false
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_whdv5")
 
-[node name="Upgrades" type="Node2D" parent="."]
+[node name="Upgrades" type="Node2D" parent="." unique_id=2021101307]
 script = ExtResource("20_mgkdb")
 
-[node name="BuffTooltipControl" type="Node2D" parent="."]
+[node name="BuffTooltipControl" type="Node2D" parent="." unique_id=109648080]
 script = ExtResource("26_8kdbo")
 
-[node name="Debuffs" type="Node2D" parent="."]
+[node name="Debuffs" type="Node2D" parent="." unique_id=638474099]
 
-[node name="Slow" type="Node2D" parent="Debuffs"]
+[node name="Slow" type="Node2D" parent="Debuffs" unique_id=1200710417]
 script = ExtResource("29_b4moh")
 
-[node name="Timer" type="Timer" parent="Debuffs/Slow"]
+[node name="Timer" type="Timer" parent="Debuffs/Slow" unique_id=629961226]
 wait_time = 1.5
 
-[node name="Abilities" type="Node2D" parent="."]
+[node name="Abilities" type="Node2D" parent="." unique_id=737411167]
 script = ExtResource("26_s0mko")
 
-[node name="ShootAbilities" type="Node2D" parent="Abilities"]
+[node name="ShootAbilities" type="Node2D" parent="Abilities" unique_id=1501929022]
 
-[node name="PeriodicAbilities" type="Node2D" parent="Abilities"]
+[node name="PeriodicAbilities" type="Node2D" parent="Abilities" unique_id=382239454]
 
-[node name="ActiveAbilities" type="Node2D" parent="Abilities"]
+[node name="ActiveAbilities" type="Node2D" parent="Abilities" unique_id=404174291]
 
-[node name="GrappleHook" type="Node2D" parent="."]
+[node name="GrappleHook" type="Node2D" parent="." unique_id=1409160597]
 script = ExtResource("33_yf47d")
 
-[node name="HookString" type="Line2D" parent="GrappleHook"]
+[node name="HookString" type="Line2D" parent="GrappleHook" unique_id=152630332]
 texture_repeat = 2
 position = Vector2(0, 8)
 points = PackedVector2Array(0, 0, 0, 0)
@@ -330,7 +330,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Hook" type="Area2D" parent="GrappleHook"]
+[node name="Hook" type="Area2D" parent="GrappleHook" unique_id=1542797305]
 position = Vector2(25, -1)
 rotation = -0.7853982
 scale = Vector2(0.5, 0.5)
@@ -338,18 +338,18 @@ collision_layer = 0
 collision_mask = 16
 script = ExtResource("25_4n5ed")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/Hook"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/Hook" unique_id=1816862064]
 position = Vector2(2, -2)
 rotation = 2.3177972
 scale = Vector2(0.6000012, 1)
 shape = SubResource("CapsuleShape2D_4n5ed")
 
-[node name="Sprite2D" type="Sprite2D" parent="GrappleHook/Hook"]
+[node name="Sprite2D" type="Sprite2D" parent="GrappleHook/Hook" unique_id=1653132328]
 texture = ExtResource("25_78fhc")
 
-[node name="LinePoint" type="Node2D" parent="GrappleHook/Hook"]
+[node name="LinePoint" type="Node2D" parent="GrappleHook/Hook" unique_id=387021048]
 position = Vector2(-6, 6)
 
-[node name="BuffHandler" parent="." instance=ExtResource("39_vtj8b")]
+[node name="BuffHandler" parent="." unique_id=2096724640 instance=ExtResource("39_vtj8b")]
 
 [connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]

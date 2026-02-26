@@ -4,7 +4,7 @@ const PYROMANIAC = preload("res://Player/Buffs/FireBuffs/Pyromaniac.tscn")
 @export var duration: float
 @export var ticks: float
 
-var has_pyromaniac: bool = true
+var has_pyromaniac: bool = false
 
 func apply_effect(_target: Node2D, _arrow: Arrow) -> void:
 	if _target is Enemy:
@@ -18,3 +18,4 @@ func apply_effect(_target: Node2D, _arrow: Arrow) -> void:
 				var pyro: Buff = PYROMANIAC.instantiate()
 				pyro.add_stack()
 				EventBus.add_player_buff.emit(pyro)
+		

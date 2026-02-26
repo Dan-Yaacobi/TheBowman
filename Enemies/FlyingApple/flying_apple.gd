@@ -1,8 +1,6 @@
 class_name FlyingApple extends Enemy
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var hit_box: EnemyHitBox = $HitBox
 @onready var wings: Sprite2D = $Sprite2D/Wings
 
 @export var tree_spawn: bool = false
@@ -32,7 +30,6 @@ func initialize() -> void:
 	hurt_box.knockback = stats.knockback
 	hurt_box.damage = stats.touch_damage
 	hurt_box.successful_hit.connect(push_back)
-	debuff_handler.set_enemy(self)
 	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
 	damaged_animation_player = $Sprite2D/DamagedAnimation
@@ -44,7 +41,7 @@ func initialize() -> void:
 		stats.shooter = true
 	shoot_height = randi_range(50,80)
 
-	hit_box.set_enemy(self)
+	
 	
 	for ability in stats.initial_ability:
 		ability.activate_ability(self)

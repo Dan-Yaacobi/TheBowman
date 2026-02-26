@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BurnEffect" load_steps=3 format=3 uid="uid://bv1ou10viyo1d"]
+[gd_resource type="Resource" script_class="BurnEffect" format=3 uid="uid://bv1ou10viyo1d"]
 
 [ext_resource type="PackedScene" uid="uid://caiebherwxilx" path="res://Debuffs/Burned/BurnDebuff.tscn" id="1_1ivra"]
 [ext_resource type="Script" uid="uid://d2thkmlhwcaga" path="res://Player/Effects/OnHitEffects/Resources/burn_effect.gd" id="2_1ivra"]

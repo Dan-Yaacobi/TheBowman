@@ -40,4 +40,4 @@ func add_stack(_stacks: int, _duration: float) -> void:
 	timer.start(new_time)
 	
 func buff_over() -> void:
-	buff_ended.emit(self.ID)
+	buff_ended.emit(ID)

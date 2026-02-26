@@ -61,11 +61,13 @@ func _ready() -> void:
 	succesfuly_hit = false
 	if data.scale != 0:
 		scale *= data.scale
-	hit_effects = PlayerManager.player.use_effects()
+	
+	hit_effects += PlayerManager.player.use_effects()
 	
 func hit(body) -> void:
 	if body is Enemy:
 		if regular_shot:
+			EventBus.arrow_hit_enemy.emit(self)
 			for hit_effect in hit_effects:
 				hit_effect.apply_effect(body,self)
 			explosion()
