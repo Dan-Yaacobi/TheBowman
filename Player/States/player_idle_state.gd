@@ -3,6 +3,7 @@ class_name PlayerIdleState extends State
 @onready var walking: PlayerWalkingState = $"../Walking"
 @onready var slam: PlayerSlamState = $"../Slam"
 @onready var dead: PlayerDeadState = $"../Dead"
+@onready var dash: PlayerDashState = $"../Dash"
 
 func _ready() -> void:
 	pass
@@ -24,7 +25,8 @@ func Process(_delta: float) -> State:
 		return dead
 	if player.direction != 0.0:
 		return walking
-	player.velocity.x = 0
+	var deceleration = player.stats.ground_dec if player.is_on_floor() else player.stats.air_dec
+	player.velocity.x = move_toward(player.velocity.x,0,deceleration)
 	return null
 	
 #what happens during _physics_process update in this state
@@ -35,4 +37,6 @@ func Physics(_delta: float) -> State:
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("DropDown"):
 		return slam
+	if _event.is_action_pressed("dash") and player.can_dash:
+		return dash
 	return null

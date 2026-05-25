@@ -10,13 +10,38 @@ class_name Enemies extends Resource
 @export var evil_bird_scene: PackedScene
 @export var evil_birds_data: Array[EnemyData]
 
+
+@export_subgroup("Spiders")
+@export var black_spider: PackedScene
+@export var spiders_data: Array[EnemyData]
+
+@export_subgroup("Clouds")
+@export var regular_cloud: PackedScene
+@export var clouds_data: Array[EnemyData]
+
 const SPIDER_BOSS = preload("res://Enemies/Spider/SpiderBoss/SpiderBoss.tscn")
 
-func get_enemy(_current_wave : int) -> Enemy:
+func get_factory(scene: PackedScene, data: EnemyData) -> Callable:
+	return func() -> Enemy:
+		var node: Enemy = scene.instantiate()
+		node.set_data(data)
+		return node
+
+func get_red_evil_bird_factory() -> Callable:
+	return get_factory(evil_bird_scene,evil_birds_data[0])
+func get_regular_cloud_factory() -> Callable:
+	return get_factory(regular_cloud,clouds_data[0])
 	
-	var apple: FlyingApple = flying_apple_scene.instantiate()
-	apple.set_data(flying_apples_data[0])
-	return apple
+func get_black_spider_factory() -> Callable:
+	return get_factory(black_spider,spiders_data[0])
+	
+func get_red_apple_factory() -> Callable:
+	return get_factory(flying_apple_scene, flying_apples_data[0])
+#func get_enemy(difficulty : int = 0) -> PackedScene:
+	#
+	#var apple: PackedScene = flying_apple_scene
+	#apple.set_data(flying_apples_data[difficulty])
+	#return apple
 	#
 	#if current_wave == 35:
 		#return SPIDER_BOSS

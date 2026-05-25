@@ -274,6 +274,7 @@ position = Vector2(-39, 67)
 [node name="Portal" parent="Portals" unique_id=10218384 instance=ExtResource("13_npjie")]
 position = Vector2(449, 81)
 color = Color(0.99333346, 0.6, 1, 1)
+destination = 1
 flip_h = true
 
 [node name="Portal4" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]

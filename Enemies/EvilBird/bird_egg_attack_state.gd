@@ -1,0 +1,96 @@
+class_name BirdEggAttackState extends EnemyState
+
+@onready var seek: BirdSeekState = $"../Seek"
+@onready var pre_dive: BirdPreDiveState = $"../PreDive"
+@onready var egg_attack_timer: Timer = $EggAttackTimer
+@onready var ground_detector: Area2D = $GroundDetector
+
+@export var egg_attack_min_time: float = 1.0
+@export var egg_attack_max_time: float = 1.3
+@export var min_end: float = 30.0
+@export var max_end: float = 60.0
+@export var too_close_x: float = 30
+@export var too_close_y: float = 30
+@export var too_far_x: float = 200
+@export var too_far_y: float = 150
+
+var fly_direction: int
+var right_end: float
+var left_end: float
+var egg_blocked: bool = false
+
+func init() -> void:
+	egg_attack_timer.timeout.connect(shoot)
+	ground_detector.body_shape_entered.connect(disable_shoot)
+	ground_detector.body_shape_exited.connect(enable_shoot)
+	
+func Enter() -> void:
+	fly_direction = [-1, 1].pick_random()
+	right_end = randf_range(min_end, max_end)
+	left_end = -right_end
+	egg_attack_timer.wait_time = randf_range(egg_attack_min_time, egg_attack_max_time)
+	egg_attack_timer.start()
+
+func Exit() -> void:
+	egg_attack_timer.stop()
+	enemy.sprite.flip_h = true
+
+func Process(_delta: float) -> EnemyState:
+	update_horizontal_movement()
+	enemy.velocity = Vector2(fly_direction * enemy.stats.move_speed.value(), 0)
+	return check_transitions()
+
+func Physics(_delta: float) -> EnemyState:
+	return null
+
+# --- Movement ---
+
+func update_horizontal_movement() -> void:
+	var bound = PlayerManager.player.global_position.x + (right_end if fly_direction == 1 else left_end)
+	if fly_direction * enemy.global_position.x > fly_direction * bound:
+		fly_direction *= -1
+		enemy.sprite.flip_h = fly_direction == 1
+
+# --- Transition checks ---
+
+func check_transitions() -> EnemyState:
+	if is_player_above() or is_too_close():
+		return seek
+	if is_too_far():
+		return pre_dive
+	return null
+
+func is_player_above() -> bool:
+	return PlayerManager.player.global_position.y < enemy.global_position.y
+
+func is_too_close() -> bool:
+	var y_dist = abs(enemy.global_position.y - PlayerManager.player.global_position.y)
+	return y_dist < too_close_y
+
+func is_too_far() -> bool:
+	var x_dist = abs(enemy.global_position.x - PlayerManager.player.global_position.x)
+	var y_dist = abs(enemy.global_position.y - PlayerManager.player.global_position.y)
+	return x_dist > too_far_x or y_dist > too_far_y
+
+# --- Shooting ---
+
+func shoot() -> void:
+	if enemy.stats.bullet == null:
+		return
+	if not egg_blocked:
+		var new_bullet: EnemyBullet = enemy.stats.bullet.instantiate()
+		new_bullet.global_position = enemy.global_position
+		new_bullet.scale *= 0.7
+		new_bullet.data.damage = enemy.stats.touch_damage
+		new_bullet.data.knockback = enemy.stats.knockback / 2
+		enemy.get_parent().call_deferred("add_child", new_bullet)
+	else:
+		egg_attack_timer.stop()
+
+func disable_shoot(_m1,_m2,_m3,_m4) -> void:
+	egg_blocked = true
+	
+func enable_shoot(_m1,_m2,_m3,_m4) -> void:
+	egg_blocked = false
+	shoot()
+	egg_attack_timer.start()

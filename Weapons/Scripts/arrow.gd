@@ -6,6 +6,7 @@ signal leeched(amount: int, enemy_position: Vector2)
 
 @export var data: ArrowData
 @export var explosion_chance: int = 20
+@onready var sprite: ArrowSprite = $Sprite2D
 
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var hurt_box: ArrowHurtBox = $HurtBox
@@ -63,6 +64,7 @@ func _ready() -> void:
 		scale *= data.scale
 	
 	hit_effects += PlayerManager.player.use_effects()
+	hurt_box.set_collision_layer_value(5,true)
 	
 func hit(body) -> void:
 	if body is Enemy:
@@ -78,13 +80,21 @@ func hit(body) -> void:
 			poison_hit(body)
 			succesfuly_hit = true
 			clear_shot()
-
+			
 func calc_dmg(shot_power: float) -> void:
-	damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
-	*pow(shot_power, 2))
+	var perfect_bonus = 1.8 if shot_power >= 1.0 else 1.0
+	damage = floor((PlayerManager.player.get_strength() / 2 + data.base_damage + 4) * shot_power * perfect_bonus)
+	
+#func calc_dmg(shot_power: float) -> void:
+	#damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
+	#*pow(shot_power, 2))
 
 func calc_knockback(shot_power: float) -> void:
-	knockback = data.pushback_power * shot_power + log(velocity.length())
+	var perfect_bonus = 1.8 if shot_power >= 1.0 else 1.0
+	knockback = data.pushback_power * shot_power * perfect_bonus + log(velocity.length())
+	
+#func calc_knockback(shot_power: float) -> void:
+	#knockback = data.pushback_power * shot_power + log(velocity.length())
 
 func explosion() -> void:
 	if can_explode:
@@ -129,14 +139,16 @@ func enable_arrow() -> void:
 	hurt_box.monitorable = true
 	
 func hit_wall(_val1,_val2,_val3,_val4) -> void:
+	
 	if fired:
-		if _val2 is TileMapLayer:
-			wall_hit_effect = WALL_HIT_EFFECT.instantiate()
-			if wall_hit_effect.get_parent() == null:
-				get_parent().call_deferred("add_child",wall_hit_effect)
-			wall_hit_effect.emitting = true
-			wall_hit_effect.global_position = global_position
-			wall_clear_shot()
+		#wall_hit_effect = WALL_HIT_EFFECT.instantiate()
+		#if wall_hit_effect.get_parent() == null:
+			#get_parent().call_deferred("add_child",wall_hit_effect)
+		#wall_hit_effect.emitting = true
+		#wall_hit_effect.global_position = global_position
+		sprite.call_deferred("reparent",_val2)
+		sprite.hit = true
+		wall_clear_shot()
 
 func poison_hit(_enemy: Enemy) -> void:
 	var roll_poison: int = randi_range(0,100)

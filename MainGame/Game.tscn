@@ -1,20 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvio5f8sadcl8"]
+[gd_scene format=3 uid="uid://cvio5f8sadcl8"]
 
 [ext_resource type="Script" uid="uid://dex3xgdv4beu3" path="res://MainGame/game.gd" id="1_iteqa"]
 [ext_resource type="PackedScene" uid="uid://c48tkg5iwqxfo" path="res://MainGame/GameManager/GameManager.tscn" id="7_ygsly"]
-[ext_resource type="PackedScene" uid="uid://iitxisrr6wi5" path="res://Rifts/Rift.tscn" id="9_d47r0"]
 [ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="9_yk4gd"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1108030155]
 script = ExtResource("1_iteqa")
 
-[node name="Rift" parent="." instance=ExtResource("9_d47r0")]
-
-[node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="GameMusic" type="AudioStreamPlayer2D" parent="." unique_id=1809560062]
 visible = false
 
-[node name="CloudTimer" type="Timer" parent="."]
+[node name="CloudTimer" type="Timer" parent="." unique_id=249615843]
 
-[node name="Hud" parent="." instance=ExtResource("9_yk4gd")]
+[node name="Hud" parent="." unique_id=572572008 instance=ExtResource("9_yk4gd")]
 
-[node name="GameManager" parent="." instance=ExtResource("7_ygsly")]
+[node name="GameManager" parent="." unique_id=1818963860 instance=ExtResource("7_ygsly")]

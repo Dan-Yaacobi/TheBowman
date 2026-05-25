@@ -14,8 +14,6 @@ func _ready() -> void:
 func Enter() -> void:
 	ground_detector.body_entered.connect(hit_enemy)
 	player.took_hit.connect(stop_slamming)
-	player.set_pushback_values(Vector2.ZERO,0)
-	player.jump_action.jump_flip = false
 	player.body.rotation = 0
 	player.body.update_animation("Jump")
 	hit_somthing = false

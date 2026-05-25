@@ -1,5 +1,7 @@
 class_name Bounds extends Area2D
 
+signal player_entered
+
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 var colliding: bool = false
@@ -36,3 +38,8 @@ func get_boundaries() -> Rect2:
 
 func intersects_with(other: Bounds) -> bool:
 	return get_boundaries().intersects(other.get_boundaries(), true)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player_entered.emit()

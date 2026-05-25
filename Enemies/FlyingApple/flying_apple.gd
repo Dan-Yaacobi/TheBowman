@@ -1,6 +1,5 @@
 class_name FlyingApple extends Enemy
 
-@onready var hurt_box: HurtBox = $HurtBox
 @onready var wings: Sprite2D = $Sprite2D/Wings
 
 @export var tree_spawn: bool = false
@@ -41,8 +40,6 @@ func initialize() -> void:
 		stats.shooter = true
 	shoot_height = randi_range(50,80)
 
-	
-	
 	for ability in stats.initial_ability:
 		ability.activate_ability(self)
 	start_moving = true

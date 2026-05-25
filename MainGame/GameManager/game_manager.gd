@@ -39,16 +39,10 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		if prev_world:
 			prev_world.exit_world()
 			game.remove_child(prev_world)
-			#
-#
-		#else:
-			#curr_world.add_child(PlayerManager.player	)
-		#
-		
+
 		spawn_player(curr_world.spawn_position())
 		
 		await get_tree().process_frame
-		
 		
 		EventBus.invisible_hands.emit(true)
 		get_tree().paused = false
@@ -57,4 +51,4 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		PlayerManager.player.camera.position_smoothing_enabled = true
 		await get_tree().process_frame
 		await SceneTransition.fade_in()
-		EventBus.finished_loading.emit()
+		#EventBus.finished_loading.emit()

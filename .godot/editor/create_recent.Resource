@@ -1,8 +1,8 @@
+EnemyData
 OnPerfectShotEffect
 OnHitEffect
 ArrowData
 ChunkData
-EnemyData
 Resource
 EnemyAbility
 ItemData

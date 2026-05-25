@@ -1,4 +1,4 @@
-class_name State extends Node
+class_name State extends Node2D
 
 # store a refernece to the player this belongs to
 static var player: Player

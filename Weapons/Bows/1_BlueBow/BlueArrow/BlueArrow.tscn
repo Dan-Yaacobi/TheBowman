@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://smcagm1ag48m"]
+[gd_scene format=3 uid="uid://smcagm1ag48m"]
 
 [ext_resource type="Script" uid="uid://i7tuncem3c1f" path="res://Weapons/Bows/1_BlueBow/BlueArrow/blue_arrow.gd" id="1_ywm3k"]
 [ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_servu"]
@@ -20,7 +20,7 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vcj2"]
 size = Vector2(7.5, 9)
 
-[node name="BlueArrow" type="CharacterBody2D"]
+[node name="BlueArrow" type="CharacterBody2D" unique_id=1038661489]
 z_index = 1
 z_as_relative = false
 rotation = 1.5707964
@@ -30,11 +30,11 @@ collision_mask = 20
 script = ExtResource("1_ywm3k")
 data = SubResource("Resource_cmefu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1274850120]
 position = Vector2(13, -5.9604645e-07)
 texture = ExtResource("3_sc0oc")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1458192857]
 z_index = -1
 amount = 10
 emission_shape = 3
@@ -43,10 +43,10 @@ gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_17625")
 color = Color(0.0108331675, 0, 0.65, 1)
 
-[node name="HurtBox" parent="." instance=ExtResource("4_sc0oc")]
+[node name="HurtBox" parent="." unique_id=1552246903 instance=ExtResource("4_sc0oc")]
 collision_mask = 4
 script = ExtResource("5_vhmh6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1851361173]
 position = Vector2(24.75, -0.50000095)
 shape = SubResource("RectangleShape2D_5vcj2")

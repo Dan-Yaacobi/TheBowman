@@ -8,10 +8,12 @@ class_name PlayerDashState extends State
 @onready var dust: CPUParticles2D = $Dust
 @onready var dash_cooldown: Timer = $DashCooldown
 
-var dash_direction: int
+#var dash_direction: int
+var dash_direction: Vector2
 var done_dash: bool
-var dash_distance: int
-var init_position: float
+var init_position: Vector2
+
+var started_on_floor: bool
 
 func init() -> void:
 	player.dash_finished.connect(go_to_walking)
@@ -22,41 +24,29 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	dash_cooldown.wait_time = max(1.0, base_dash_cooldown - float(player.get_agility())/max_agility_reduce_dash_cd)
+	player.disable_jump()
+	started_on_floor = player.is_on_floor()
 	player.can_dash = false
-	dash_distance = player.stats.dash_distance
-	init_position = player.global_position.x
-	done_dash = false
 	player.body.update_animation("Jump")
-	dash_direction = 1
-	if player.direction_side:
-		dash_direction = - 1
-	
+	dash_direction = calculate_direction_to_cursor()
 	dust.emitting = true
-	dust.gravity.x = -1* dash_direction * 50
-	player.dash(dash_direction)
-	dash_cooldown.start()
 
+	player.velocity = dash_direction * player.stats.dash_power	
+	var tween = player.create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(player, "velocity", dash_direction * player.stats.dash_power*0.1,0.2)
+	tween.finished.connect(go_to_walking)
+	dash_cooldown.start()
 	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
-	player.velocity = Vector2.ZERO
+	player.enable_jump()
 	pass
 	
 #what happens during process update in this state
 func Process(_delta: float) -> State:
 	if player.stats.hp <= 0:
 		return dead
-	#player.velocity.x = dash_direction * player.stats.move_speed * 4
-	#player.update_direction(dash_direction != 1)
-	#if dash_direction == 1:
-		#if player.global_position.x > init_position + dash_distance:
-			#return walking
-	#else:
-		#if player.global_position.x < init_position - dash_distance:
-			#return walking
-
 	return null
 	
 #what happens during _physics_process update in this state
@@ -65,11 +55,15 @@ func Physics(_delta: float) -> State:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> State:
-	if _event.is_action_pressed("DropDown"):
-		return slam
 	return null
+	
 func go_to_walking() -> void:
 	state_machine.ChangeState(walking)
 
 func can_dash_again() -> void:
 	player.can_dash = true
+
+func calculate_direction_to_cursor() -> Vector2:
+	var mouse_pos = player.get_global_mouse_position()
+	var direction = mouse_pos - PlayerManager.player.global_position
+	return direction.normalized()

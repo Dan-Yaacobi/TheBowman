@@ -4,6 +4,7 @@ var arrow: Arrow
 
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
+	body_shape_entered.connect(queue_free)
 
 func set_arrow(_arrow: Arrow) -> void:
 	if _arrow:
@@ -20,6 +21,9 @@ func AreaEnetered( a : Area2D) -> void:
 		knockback_dir = arrow.velocity.normalized()
 		arrow.hit(a.enemy)
 		a.TakeDamage(self)
-
+		
+func hit_wall(_m1,_m2,_m3,_m4) -> void:
+	arrow.hit_wall(_m1,_m2,_m3,_m4)
+	
 func added_effects(a: Enemy) -> void:
 	pass

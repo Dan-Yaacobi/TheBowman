@@ -12,5 +12,5 @@ func get_all_traversal_chunks(direction: CustomVariables.directions) -> Array[Ch
 func get_intro_chunk() -> ChunkData:
 	return other_chunks[ChunkData.types.INTRO].chunks.pick_random()
 
-func get_portal_chunk() -> ChunkData:
-	return other_chunks[ChunkData.types.PORTAL_APPROACH].chunks.pick_random()
+func get_portal_chunk() -> Array[ChunkData]:
+	return other_chunks[ChunkData.types.PORTAL].chunks

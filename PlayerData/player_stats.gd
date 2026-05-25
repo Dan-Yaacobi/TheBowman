@@ -2,6 +2,14 @@ class_name PlayerStats extends Resource
 
 var player: Player
 
+@export_subgroup("Enviorments")
+@export var down_gravity: int
+@export var up_gravity: int
+@export var ground_dec: int
+@export var ground_acc: int
+@export var air_dec: int
+@export var air_acc: int
+
 @export_subgroup("Player Stats")
 @export var hp: int
 @export var move_speed: Stat
@@ -16,7 +24,7 @@ var player: Player
 @export var boost_mana_rate: float
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
-@export var dash_distance: int
+@export var dash_power: int
 @export var invinc_duration: int
 @export var stat_points: int = 0
 @export var extra_gold: int = 0

@@ -30,14 +30,16 @@ signal dash_finished
 @onready var grappling_state: PlayerGrapplingState = $PlayerStateMachine/Grappling
 @onready var hook: Hook = $GrappleHook/Hook
 @onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
+
+@onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
 
-@export var gravity: int
 @export var stats: PlayerStats
+@export var talents: PlayerTalents
+
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
 @export var perfect_shot_effects: Dictionary[OnPerfectShotEffect,int] = {}
-
 @onready var buff_handler: BuffHandler = $BuffHandler
 
 const PERMA_EFFECT: int = -1
@@ -152,12 +154,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				current_portal.enter()
 		if event.is_action_pressed("Menu"):
 			EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-				
+		
 		if event.is_action_pressed("Jump"):
-			jump()
-			for ability in stats.jump_abilities:
-				ability.activate_ability(self)
-				
+			jump_action.request_jump()
+
+		if event.is_action_released("Jump"):
+			jump_action.release_jump()
+
 		if event.is_action_pressed("shoot",true):
 			shoot()
 		
@@ -175,14 +178,6 @@ func special_ability() -> void:
 			#current_weapon.regular_attack = false
 			special_ability_available = false
 			special_ability_cooldown.start()
-
-func jump() -> void:
-	if jump_action.jumps > 0:
-		var jump_power = stats.jump_height + get_agility()
-		velocity.y = 0
-		var tween = create_tween().bind_node(self).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		tween.tween_property(self, "velocity:y", velocity.y - jump_power,0.1)
-		jump_action.handle_jumps()
 	
 func shoot() -> void:
 	EventBus.start_shooting.emit()
@@ -213,11 +208,13 @@ func can_use_special_ability() -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
-	pushed_back(knockback_power["direction"], knockback_power["power"])
 	apply_gravity(delta)
-	move_and_slide()
 	special_ability_indictaor()
+	move_and_slide()
 
+func apply_knockback(_direction: Vector2, force: float) -> void:
+	velocity += _direction.normalized() * force
+	
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side:
 		direction_side = _new_side
@@ -229,10 +226,11 @@ func update_direction(_new_side: bool) -> void:
 func update_body_animation(_anim: String) -> void:
 	body.update_animation(_anim)
 
-
 func apply_gravity(delta) -> void:
-		#if velocity.y < 100:
-		velocity.y += gravity*delta
+		if velocity.y > 0:
+			velocity.y += stats.down_gravity*delta
+		else:
+			velocity.y += stats.up_gravity*delta
 
 func get_current_weapon() -> Weapon:
 	return current_weapon
@@ -278,7 +276,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		damaged_particles.emitting = true
 		stats.hp -= _hurt_box.damage
 		health_bar.reduce_health(_hurt_box.damage)
-		set_pushback_values(_hurt_box.knockback_dir,_hurt_box.knockback)
+		apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback)
 		display_combat_text(_hurt_box.damage, Color.RED)
 		
 func start_invincibilty() -> void:
@@ -296,16 +294,6 @@ func invincibility_over() -> void:
 	hit_box.set_collision_mask_value(3,true)
 	self.modulate.a = 1
 	hit_box.monitoring = true
-
-func dash(dash_direction) -> void:
-	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	velocity.y = 0
-	tween.tween_property(self, "velocity", velocity + Vector2(dash_direction * stats.move_speed.value() * 5,0), 0.2)
-	
-	await tween.finished
-	
-	dash_finished.emit()
-	pass
 	
 func heal(amount: int) -> void:
 	if stats.hp + amount <= get_stamina():
@@ -322,22 +310,6 @@ func leech_heal(amount: int,enemy_position: Vector2) -> void:
 	health_gain_effect.heal_amount = amount
 	get_parent().call_deferred("add_child", health_gain_effect)
 	
-func pushed_back(_direction: Vector2, _power: int) -> void:
-	if knockback_power["power"] < stats.knockback_resistance:
-		return
-	if knockback_power["power"] > 0:
-		knockback_power["power"] -= stats.knockback_resistance
-		velocity.x += _direction.x * _power
-	pass
-
-func set_pushback_values(_direction: Vector2, _power: int):
-	if _direction.x > 0:
-		_direction.x = 1
-	else:
-		_direction.x = -1
-	knockback_power["direction"] = _direction
-	knockback_power["power"] = _power
-
 func collect_money(amount: int) -> void:
 	stats.money += amount
 	money_changed.emit(stats.money)
@@ -372,6 +344,12 @@ func add_sword_ability(_ability: PlayerSwordAbility) -> void:
 	if _ability:
 		stats.sword_abilities.append(_ability)
 
+func enable_jump() -> void:
+	jump_action.can_jump = true
+
+func disable_jump() -> void:
+	jump_action.can_jump = false
+	
 ############# COMBO METHODS #############
 func combo_lost() -> void:
 	combo_counter = 0

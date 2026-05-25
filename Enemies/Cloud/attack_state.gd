@@ -13,6 +13,7 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	attack_timer.stop()
 	sprite.frame = 5
 	#attack_timer.stop()
 	enemy.velocity = Vector2.ZERO
@@ -28,6 +29,7 @@ func Enter() -> void:
 func Exit() -> void:
 	var tween := create_tween()
 	tween.tween_property(sprite.material, "shader_parameter/charge", 0.0, 0.3)
+	attack_timer.start()
 
 	#lightning.clear_points()
 	pass

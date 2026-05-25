@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8cod48iqt17m"]
+[gd_scene format=3 uid="uid://c8cod48iqt17m"]
 
 [ext_resource type="Script" uid="uid://bxm3y1p56xv70" path="res://Weapons/Bows/0_BasicBow/BasicArrow/basic_arrow.gd" id="1_c8afm"]
 [ext_resource type="Script" uid="uid://7k55pgy1tsuq" path="res://Weapons/Scripts/arrow_data.gd" id="2_ifcpi"]
 [ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.png" id="3_gvchp"]
+[ext_resource type="Script" uid="uid://cforgr3w6srvu" path="res://Weapons/Bows/0_BasicBow/BasicArrow/arrow_sprite.gd" id="4_5oh4i"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_f2keo"]
 [ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_43g4f"]
 
@@ -21,7 +22,7 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
 size = Vector2(4, 4)
 
-[node name="BasicArrow" type="CharacterBody2D"]
+[node name="BasicArrow" type="CharacterBody2D" unique_id=142696300]
 z_index = 1
 z_as_relative = false
 rotation = 1.5707964
@@ -30,12 +31,13 @@ collision_mask = 28
 script = ExtResource("1_c8afm")
 data = SubResource("Resource_43g4f")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=899441193]
 position = Vector2(7, -3.059797e-07)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_gvchp")
+script = ExtResource("4_5oh4i")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1614479728]
 z_index = -1
 amount = 10
 emission_shape = 3
@@ -44,10 +46,10 @@ gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_8js4e")
 color = Color(0.643137, 0.152941, 0, 0.45098)
 
-[node name="HurtBox" parent="." instance=ExtResource("4_f2keo")]
-collision_mask = 4
+[node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_f2keo")]
+collision_mask = 20
 script = ExtResource("5_43g4f")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1725749955]
 position = Vector2(13, -5.384457e-07)
 shape = SubResource("RectangleShape2D_m802n")

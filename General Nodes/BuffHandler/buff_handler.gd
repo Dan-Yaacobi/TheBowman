@@ -24,6 +24,8 @@ func add_buff(_buff: Buff) -> void:
 		entity.add_child(_buff)
 	
 func remove_buff(_id: int) -> void:
-	print("buff over with id: ", _id)
 	EventBus.player_buff_ended.emit(_id)
 	buffs.erase(_id)
+
+func has_buff(_id: int) -> bool:
+	return buffs.has(_id)

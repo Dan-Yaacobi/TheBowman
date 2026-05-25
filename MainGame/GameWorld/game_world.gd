@@ -6,5 +6,8 @@ func set_world() -> void:
 func exit_world() -> void:
 	pass
 
+func add_enemy(_enemy: Enemy) -> void:
+	pass
+	
 func spawn_position() -> Vector2:
 	return Vector2.ZERO

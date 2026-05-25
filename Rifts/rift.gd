@@ -2,6 +2,7 @@ class_name Rift extends GameWorld
 
 @onready var rift_generator: RiftGenerator = $RiftGenerator
 @export var rift_values: Array[float]
+@onready var rift_enemy_spawner: RiftEnemySpawner = $RiftEnemySpawner
 
 var current_enemies: Array[Enemy]
 var rift_levels: Array[RiftLevel]
@@ -11,19 +12,24 @@ func _ready() -> void:
 	EventBus.enemy_died.connect(remove_enemy)
 	EventBus.summon_effect.connect(summon_effect)
 	
+	rift_enemy_spawner.enemy_spawned.connect(add_enemy)
+	
 	rift_generator.rift_created.connect(add_rift_level)
 
 func add_rift_level(_rift: RiftLevel) -> void:
 	if _rift:
 		rift_levels.append(_rift)
-	pass
+
 func set_world() -> void:
 	PlayerManager.player.stats.rift_level += 1
 	EventBus.entered_rift.emit()
 	var rift_level: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
-	rift_levels.append(rift_level)
+	rift_levels.append(rift_level)	
 	rift_level.reparent(self)
-	pass
+	rift_level.get_summon_enemy.connect(call_enemy_spawner)
+
+func call_enemy_spawner(level: int) -> void:
+	rift_enemy_spawner.spawn_enemy(level)
 
 func exit_world() -> void:
 	PlayerManager.player.hide_buffs()
@@ -32,6 +38,7 @@ func exit_world() -> void:
 		level.queue_free()
 	rift_levels.clear()
 	kill_all_enemies()
+	queue_free()
 	pass
 
 func spawn_position() -> Vector2:
@@ -58,6 +65,10 @@ func exit_scene(_player) -> void:
 func add_enemy(_enemy: Enemy) -> void:
 	if _enemy:
 		current_enemies.append(_enemy)
+		if _enemy.get_parent():
+			_enemy.call_deferred("reparent", self)
+		else:
+			call_deferred("add_child",_enemy)
 
 func remove_enemy(_enemy: Enemy) -> void:
 	current_enemies.erase(_enemy)

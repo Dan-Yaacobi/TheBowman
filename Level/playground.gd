@@ -66,15 +66,16 @@ const CLOUD_ENEMY = preload("uid://d2ag7d2j5mctf")
 const SPIDER = preload("uid://d1p3p0fkf2rwl")
 
 func summon() -> void:
-	if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
-		
-		var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
-		var enemy: Enemy = enemies.get_enemy(wave_data.current_wave)# init_enemy(enemy_position,,player)
-		enemy.global_position = enemy_position
-		summoned_enemies.append(enemy)
-		enemy.died.connect(killed_enemy)
-		summon_count += 1
-		add_child(enemy)
+	return
+	#if summoned_enemies.size() + enemies_killed < wave_data.total_enemies:
+		#
+		#var enemy_position: Vector2 = player.global_position + Vector2(randi_range(-100,100),randi_range(-80,-100))
+		#var enemy: Enemy = enemies.get_enemy(wave_data.current_wave)# init_enemy(enemy_position,,player)
+		#enemy.global_position = enemy_position
+		#summoned_enemies.append(enemy)
+		#enemy.died.connect(killed_enemy)
+		#summon_count += 1
+		#add_child(enemy)
 		#if enemy != null:
 			#if enemy is Spider:
 				#enemy.global_position.x = player.global_position.x

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://daqty3s8xq8df"]
+[gd_scene format=3 uid="uid://daqty3s8xq8df"]
 
 [ext_resource type="Script" uid="uid://ccmjo4lmoae1v" path="res://Rifts/RiftGeneration/rift_generator.gd" id="1_w5p4t"]
 
-[node name="RiftGenerator" type="Node2D"]
+[node name="RiftGenerator" type="Node2D" unique_id=2028080570]
 script = ExtResource("1_w5p4t")

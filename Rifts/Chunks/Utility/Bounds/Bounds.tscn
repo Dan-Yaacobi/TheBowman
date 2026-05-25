@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4jty1bhlinxr"]
+[gd_scene format=3 uid="uid://c4jty1bhlinxr"]
 
 [ext_resource type="Script" uid="uid://doep3hq8w7e7l" path="res://Rifts/Chunks/Utility/Bounds/bounds.gd" id="1_j842m"]
 
@@ -6,12 +6,13 @@
 resource_local_to_scene = true
 size = Vector2(268.5, 121)
 
-[node name="Bounds" type="Area2D"]
+[node name="Bounds" type="Area2D" unique_id=1128394681]
 collision_layer = 16384
-collision_mask = 16384
+collision_mask = 16385
 script = ExtResource("1_j842m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=744888302]
 shape = SubResource("RectangleShape2D_s0vjy")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d2h6q0iccy87e"]
+
+[ext_resource type="Script" uid="uid://chanmyr64pfo5" path="res://Items/PickUp/pick_up.gd" id="1_elkho"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elkho"]
+radius = 13.0
+
+[node name="PickUp" type="Node2D" unique_id=713445952]
+script = ExtResource("1_elkho")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1554344871]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=177199665]
+shape = SubResource("CircleShape2D_elkho")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

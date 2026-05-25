@@ -85,36 +85,44 @@ func new_arrow(_arrow: PackedScene) -> void:
 	if arrow.instantiate() is Arrow:
 		arrow = _arrow
 
-		
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	#PlayerManager.player.shake_screen.emit(shot_power)
-	if shot_power * PlayerManager.player.get_pull_speed() >= min_shot_power:
-		#PlayerManager.player.apply_recoil(shot_power * 50)
-		## if shot power is 1: max pull, if shot_offset = 0: released within perfect shot window
+	if shot_power < 0.15:
+		current_arrow.free()
+	else:
 		for shoot_ability in PlayerManager.player.get_shoot_abilities():
 			if shoot_ability:
 				shoot_ability.get_arrow(current_arrow)
 				shoot_ability.activate_ability()
 		fire_arrow()
-	else:
-		current_arrow.free()
 	current_arrow = null
-	
+#func release_arrow() -> void:
+	#PlayerManager.player.set_shooting(false)
+	##PlayerManager.player.shake_screen.emit(shot_power)
+	#if shot_power * PlayerManager.player.get_pull_speed() >= min_shot_power:
+		##PlayerManager.player.apply_recoil(shot_power * 50)
+		### if shot power is 1: max pull, if shot_offset = 0: released within perfect shot window
+		#for shoot_ability in PlayerManager.player.get_shoot_abilities():
+			#if shoot_ability:
+				#shoot_ability.get_arrow(current_arrow)
+				#shoot_ability.activate_ability()
+		#fire_arrow()
+	#else:
+		#current_arrow.free()
+	#current_arrow = null
+
 func fire_arrow() -> void:
-	var direction = hand_direction.normalized() # calc_offset_direction(hand_direction,shot_offset).normalized()
-	if shot_power == 1:# and shot_offset == 0:
+	var direction = hand_direction.normalized()
+	var effective_power = lerpf(0.4, 1.0, shot_power)
+	if shot_power >= 1.0:
 		current_arrow.perfect_shot = true
-	current_arrow.velocity = calc_shot_velocity(shot_power,direction)
+	current_arrow.velocity = calc_shot_velocity(effective_power, direction)
 	current_arrow.fired = true
-	#current_arrow.set_ability(PlayerManager.player.get_arrow_ability())
-	current_arrow.set_shot_power_mod(shot_power)
+	current_arrow.set_shot_power_mod(effective_power)
 	current_arrow.enable_arrow()
-	#current_arrow.arrow_shot()
-	current_arrow.calc_dmg(shot_power)
-	current_arrow.calc_knockback(shot_power)
+	current_arrow.calc_dmg(effective_power)
+	current_arrow.calc_knockback(effective_power)
 	current_arrow.reparent(get_tree().root)
-	
 	if current_arrow.perfect_shot:
 		var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
 		for effect in effects:
@@ -122,8 +130,31 @@ func fire_arrow() -> void:
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	
-func calc_shot_velocity(_shot_power,direction) -> Vector2:
-	return _shot_power * direction *( PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)
+#func fire_arrow() -> void:
+	#var direction = hand_direction.normalized() # calc_offset_direction(hand_direction,shot_offset).normalized()
+	#if shot_power == 1:# and shot_offset == 0:
+		#current_arrow.perfect_shot = true
+	#current_arrow.velocity = calc_shot_velocity(shot_power,direction)
+	#current_arrow.fired = true
+	##current_arrow.set_ability(PlayerManager.player.get_arrow_ability())
+	#current_arrow.set_shot_power_mod(shot_power)
+	#current_arrow.enable_arrow()
+	##current_arrow.arrow_shot()
+	#current_arrow.calc_dmg(shot_power)
+	#current_arrow.calc_knockback(shot_power)
+	#current_arrow.reparent(get_tree().root)
+	#
+	#if current_arrow.perfect_shot:
+		#var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
+		#for effect in effects:
+			#current_arrow.hit_effects.append(effect)
+	#EventBus.arrow_shot_sound.emit()
+	#PlayerManager.player.current_arrow = current_arrow
+func calc_shot_velocity(_shot_power, direction) -> Vector2:
+	var perfect_bonus = 1.8 if _shot_power >= 1.0 else 1.0
+	return _shot_power * perfect_bonus * direction * (PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)	
+#func calc_shot_velocity(_shot_power,direction) -> Vector2:
+	#return _shot_power * direction *( PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)
 
 #func set_offset(amount: float) -> void:
 	#shot_offset = amount * 5

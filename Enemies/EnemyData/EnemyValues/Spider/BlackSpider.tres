@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://vvnsl3x61vqb"]
+
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_av3fj"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="2_8iksw"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="2_phfi7"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_p71ns"]
+
+[sub_resource type="Resource" id="Resource_gbjug"]
+script = ExtResource("2_phfi7")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
+
+[sub_resource type="Resource" id="Resource_1t7v1"]
+script = ExtResource("3_p71ns")
+base_value = 30.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[resource]
+script = ExtResource("2_8iksw")
+max_hp = 50
+move_speed = SubResource("Resource_1t7v1")
+knockback = 150
+avg_coins_dropped = 10
+touch_damage = 3
+knockback_resistance = 30.0
+death_ability = Array[ExtResource("1_av3fj")]([SubResource("Resource_gbjug")])
+metadata/_custom_type_script = "uid://rlvenynllobd"

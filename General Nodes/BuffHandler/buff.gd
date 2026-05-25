@@ -48,7 +48,6 @@ func add_stack() -> void:
 func buff_end() -> void:
 	buff_over.emit(ID)
 	extra_end_buff_methods()
-	print("queue freeing the buff")
 	queue_free()
 	
 func check_end_conditions() -> bool:

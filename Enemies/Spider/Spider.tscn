@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d1p3p0fkf2rwl"]
+[gd_scene format=3 uid="uid://d1p3p0fkf2rwl"]
 
 [ext_resource type="Script" uid="uid://dqcn4fvcowbk8" path="res://Enemies/Spider/spider.gd" id="1_7135b"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_3um86"]
@@ -9,6 +9,10 @@
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_soewm"]
 [ext_resource type="Script" uid="uid://cdg4y771vfg1d" path="res://Enemies/Spider/spider_dropping_state.gd" id="5_lrwbi"]
 [ext_resource type="Script" uid="uid://c8wnkfyix4jj1" path="res://Enemies/Spider/spider_walking_state.gd" id="6_cg4nc"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="10_yxflk"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="11_qa3em"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="12_e0aha"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_qa3em"]
 
 [sub_resource type="Resource" id="Resource_fqrf0"]
 script = ExtResource("3_rnln2")
@@ -189,12 +193,12 @@ size = Vector2(20, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2d2x"]
 size = Vector2(23.5, 6)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fjjq4"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t84w8"]
 size = Vector2(22, 10)
 
-[node name="Spider" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjjq4"]
+
+[node name="Spider" type="CharacterBody2D" unique_id=1625970484]
 collision_layer = 4
 collision_mask = 19
 motion_mode = 1
@@ -202,74 +206,75 @@ script = ExtResource("1_7135b")
 gravity = 100
 stats = SubResource("Resource_4bgit")
 
-[node name="WalkingSprite" type="Sprite2D" parent="."]
+[node name="WalkingSprite" type="Sprite2D" parent="." unique_id=546299894]
 position = Vector2(1, 4)
 texture = ExtResource("2_44sm3")
 vframes = 4
 
-[node name="WalkingAnimation" type="AnimationPlayer" parent="WalkingSprite"]
-libraries = {
-&"": SubResource("AnimationLibrary_pb0a5")
-}
+[node name="WalkingAnimation" type="AnimationPlayer" parent="WalkingSprite" unique_id=1622944951]
+libraries/ = SubResource("AnimationLibrary_pb0a5")
 
-[node name="DroppingSprite" type="Sprite2D" parent="."]
+[node name="DroppingSprite" type="Sprite2D" parent="." unique_id=1648578258]
 visible = false
 texture = ExtResource("3_x2dl3")
 hframes = 3
 
-[node name="DroppingAnimation" type="AnimationPlayer" parent="DroppingSprite"]
-libraries = {
-&"": SubResource("AnimationLibrary_ly8t0")
-}
-autoplay = "Move"
+[node name="DroppingAnimation" type="AnimationPlayer" parent="DroppingSprite" unique_id=1883462147]
+libraries/ = SubResource("AnimationLibrary_ly8t0")
+autoplay = &"Move"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49446178]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_2dgku")
 
-[node name="GroundDetector" type="Area2D" parent="."]
+[node name="GroundDetector" type="Area2D" parent="." unique_id=1894268731]
 position = Vector2(-1, 5)
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector" unique_id=315566678]
 position = Vector2(0.75, 3)
 shape = SubResource("RectangleShape2D_s2d2x")
 debug_color = Color(0.658856, 0.513023, 0.130291, 0.42)
 
-[node name="EnemyStateMachine" type="Node2D" parent="."]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1949642762]
 script = ExtResource("4_mob8f")
 
-[node name="Dropping" type="Node2D" parent="EnemyStateMachine"]
+[node name="Dropping" type="Node2D" parent="EnemyStateMachine" unique_id=510415977]
 script = ExtResource("5_lrwbi")
 
-[node name="Walking" type="Node2D" parent="EnemyStateMachine"]
+[node name="Walking" type="Node2D" parent="EnemyStateMachine" unique_id=1525936643]
 script = ExtResource("6_cg4nc")
 
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
+[node name="RayCast2D_Left" type="RayCast2D" parent="." unique_id=1423151185]
+position = Vector2(-13, 3)
+target_position = Vector2(0, 45)
+collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_fjjq4")
-debug_color = Color(0.954369, 0, 0.548779, 0.42)
+[node name="RayCast2D_Right" type="RayCast2D" parent="." unique_id=1177805652]
+position = Vector2(13, 3)
+target_position = Vector2(0, 45)
+collision_mask = 16
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 0
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=597561586]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="DebuffHandler" parent="." unique_id=1310560997 instance=ExtResource("11_qa3em")]
+
+[node name="HurtBox" parent="." unique_id=1265416237 instance=ExtResource("12_qa3em")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=627631680]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_t84w8")
 debug_color = Color(0.567316, 0.523189, 0.530331, 0.42)
 
-[node name="RayCast2D_Left" type="RayCast2D" parent="."]
-position = Vector2(-10, 3)
-target_position = Vector2(0, 45)
-collision_mask = 16
+[node name="HitBox" parent="." unique_id=257472289 instance=ExtResource("12_e0aha")]
+position = Vector2(-26.314873, 9.079613)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_yxflk")
 
-[node name="RayCast2D_Right" type="RayCast2D" parent="."]
-position = Vector2(10, 3)
-target_position = Vector2(0, 45)
-collision_mask = 16
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1069929139]
+position = Vector2(26.314873, -9.079613)
+shape = SubResource("CircleShape2D_fjjq4")
+debug_color = Color(0.954369, 0, 0.548779, 0.42)

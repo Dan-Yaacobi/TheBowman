@@ -14,17 +14,12 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	
 	enemy.no_push_back = false
 	enemy.animation_player = walking_animation
 	enemy.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 	walking_sprite.visible = true
 	enemy.update_animation("Move")
-	if enemy.player.global_position.x > enemy.global_position.x:
-		direction = 1
-	else:
-		direction = -1
-	pass
+	direction = [-1, 1].pick_random()
 	
 #what happens when the player exits this state
 func Exit() -> void:
@@ -36,32 +31,21 @@ func Process(_delta: float) -> EnemyState:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> EnemyState:
-
-	if enemy.velocity.x > 0:
+	# pick raycast based on movement direction
+	if direction > 0:
 		raycast = $"../../RayCast2D_Right"
 	else:
 		raycast = $"../../RayCast2D_Left"
-		
-	if enemy.player.global_position.x > enemy.global_position.x:
-		if walking_sprite.flip_h == false:
-			enemy.velocity.x = 0
-			direction = 1
-		walking_sprite.flip_h = true
-	else:
-		if walking_sprite.flip_h == true:
-			enemy.velocity.x = 0
-			direction = -1
-		walking_sprite.flip_h = false
-		
-	if not raycast.is_colliding():
+
+	# flip sprite to match direction
+	walking_sprite.flip_h = direction > 0
+
+	# reverse direction at edge or if airborne
+	if not raycast.is_colliding() or not enemy.is_on_floor():
+		direction = -direction
 		enemy.velocity.x = 0
-		enemy.no_push_back = true
-	else:
-		enemy.no_push_back = false
-	if not enemy.is_on_floor():
-		enemy.velocity.x = 0
-		
-	enemy.velocity.x += direction * enemy.stats.move_speed.value() * _delta
+
+	enemy.velocity.x = direction * enemy.stats.move_speed.value()
 	return null
 	
 func initial_speed() -> void:

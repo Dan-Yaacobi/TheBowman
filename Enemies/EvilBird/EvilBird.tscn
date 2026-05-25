@@ -1,19 +1,17 @@
-[gd_scene load_steps=37 format=3 uid="uid://cdtin5d5lhmfi"]
+[gd_scene format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" uid="uid://d2y3mpjq3t166" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_idach"]
-[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_duj8d"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
-[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="7_qgn5p"]
-[ext_resource type="Script" uid="uid://dwa1xg7ylpp4y" path="res://Items/ItemEffects/item_effect.gd" id="8_0p4pr"]
-[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="9_gwqcn"]
-[ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="9_prxv3"]
-[ext_resource type="Script" uid="uid://gwfm40yibx2n" path="res://Items/ItemEffects/sparkle.gd" id="9_s8nod"]
-[ext_resource type="Script" uid="uid://chfcjmpmpeon0" path="res://Items/item_data.gd" id="10_0bpxa"]
-[ext_resource type="PackedScene" uid="uid://bhog4fnjuftnx" path="res://Items/ItemEffects/Sparkle.tscn" id="10_a4bmo"]
-[ext_resource type="Texture2D" uid="uid://ckgqe2gc21eny" path="res://Items/Sprites/Daimond.png" id="11_2scv3"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="8_40b5k"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_7k2vi"]
+[ext_resource type="Script" uid="uid://ddr1kknnnh0jp" path="res://Enemies/EvilBird/bird_seek_state.gd" id="11_w4iuy"]
+[ext_resource type="Script" uid="uid://c830rgsysfpf7" path="res://Enemies/EvilBird/bird_pre_dive_state.gd" id="12_lkeh4"]
+[ext_resource type="Script" uid="uid://by1511sk08ncs" path="res://Enemies/EvilBird/bird_egg_attack_state.gd" id="12_w4iuy"]
+[ext_resource type="Script" uid="uid://wcfu7frk1ny2" path="res://Enemies/EvilBird/bird_dive_attack_state.gd" id="13_lkeh4"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_nboip"]
 [ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="16_rhfyp"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="16_sqrbk"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_j7d4o"]
@@ -24,66 +22,11 @@ script = ExtResource("4_w0v01")
 [sub_resource type="Resource" id="Resource_jvrjh"]
 resource_local_to_scene = true
 script = ExtResource("4_armh2")
-hp = 8
-move_speed = 50
 knockback = 200
 skin = ExtResource("16_rhfyp")
-coins_dropped = 10
 touch_damage = 1
 death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
 bullet = ExtResource("2_idach")
-shoot_speed = 3.0
-
-[sub_resource type="Resource" id="Resource_rjwp8"]
-script = ExtResource("7_qgn5p")
-item_data = ExtResource("9_gwqcn")
-
-[sub_resource type="Resource" id="Resource_x2nk2"]
-script = ExtResource("9_s8nod")
-sparkle_color = "ffcc00"
-
-[sub_resource type="Resource" id="Resource_ag1v1"]
-script = ExtResource("10_0bpxa")
-image = ExtResource("9_prxv3")
-image_size = 0.3
-value = 1
-effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_x2nk2")])
-
-[sub_resource type="Resource" id="Resource_mcgos"]
-resource_local_to_scene = true
-script = ExtResource("7_qgn5p")
-item_data = SubResource("Resource_ag1v1")
-
-[sub_resource type="Resource" id="Resource_xj4sr"]
-script = ExtResource("7_qgn5p")
-item_data = ExtResource("9_gwqcn")
-probability = 50.0
-
-[sub_resource type="Resource" id="Resource_qk1wn"]
-script = ExtResource("7_qgn5p")
-item_data = ExtResource("9_gwqcn")
-probability = 25.0
-
-[sub_resource type="Resource" id="Resource_rbs8a"]
-script = ExtResource("7_qgn5p")
-item_data = ExtResource("9_gwqcn")
-probability = 10.0
-
-[sub_resource type="Resource" id="Resource_amrel"]
-script = ExtResource("9_s8nod")
-sparkle_color = "6ec7db"
-
-[sub_resource type="Resource" id="Resource_msidu"]
-script = ExtResource("10_0bpxa")
-image = ExtResource("11_2scv3")
-image_size = 0.3
-value = 5
-effects = Array[ExtResource("8_0p4pr")]([SubResource("Resource_amrel")])
-
-[sub_resource type="Resource" id="Resource_yfwxr"]
-script = ExtResource("7_qgn5p")
-item_data = SubResource("Resource_msidu")
-probability = 25.0
 
 [sub_resource type="Animation" id="Animation_qmrug"]
 resource_name = "Damaged"
@@ -112,6 +55,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w4iuy"]
+resource_name = "Dive"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_sngn8"]
@@ -186,6 +157,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]
 _data = {
 &"Damaged": SubResource("Animation_qmrug"),
+&"Dive": SubResource("Animation_w4iuy"),
 &"Move": SubResource("Animation_sngn8"),
 &"RESET": SubResource("Animation_jqhj0")
 }
@@ -202,41 +174,68 @@ height = 15.0
 radius = 5.0
 height = 15.0
 
-[node name="EvilBird" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nboip"]
+size = Vector2(24, 10)
+
+[node name="EvilBird" type="CharacterBody2D" unique_id=196136335]
 collision_layer = 4
-collision_mask = 17
 script = ExtResource("1_jdshu")
 stats = SubResource("Resource_jvrjh")
-item_drops = Array[ExtResource("7_qgn5p")]([SubResource("Resource_rjwp8"), SubResource("Resource_mcgos"), SubResource("Resource_xj4sr"), SubResource("Resource_qk1wn"), SubResource("Resource_rbs8a"), SubResource("Resource_yfwxr")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1713613863]
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("16_rhfyp")
 hframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_jiyox")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=205774334]
+libraries/ = SubResource("AnimationLibrary_jiyox")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1001681620]
 rotation = 2.18166
 shape = SubResource("CapsuleShape2D_82j1c")
 
-[node name="HitBox" parent="." instance=ExtResource("16_sqrbk")]
+[node name="HitBox" parent="." unique_id=744493708 instance=ExtResource("16_sqrbk")]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("8_40b5k")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=141246783]
 rotation = 2.18166
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_wpa61")
 debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
 
-[node name="HurtBox" parent="." instance=ExtResource("17_j7d4o")]
+[node name="HurtBox" parent="." unique_id=497636217 instance=ExtResource("17_j7d4o")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=555656013]
 rotation = 2.18166
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_vrf4a")
 debug_color = Color(1, 0, 0.0166664, 0.419608)
+
+[node name="StateMachine" type="Node2D" parent="." unique_id=1028536934]
+script = ExtResource("9_7k2vi")
+
+[node name="Seek" type="Node2D" parent="StateMachine" unique_id=1500441861]
+script = ExtResource("11_w4iuy")
+
+[node name="EggAttack" type="Node2D" parent="StateMachine" unique_id=1691147603]
+script = ExtResource("12_w4iuy")
+
+[node name="EggAttackTimer" type="Timer" parent="StateMachine/EggAttack" unique_id=347636976]
+
+[node name="GroundDetector" type="Area2D" parent="StateMachine/EggAttack" unique_id=178459828]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/EggAttack/GroundDetector" unique_id=1286028758]
+position = Vector2(1, 12)
+shape = SubResource("RectangleShape2D_nboip")
+
+[node name="PreDive" type="Node2D" parent="StateMachine" unique_id=768638697]
+script = ExtResource("12_lkeh4")
+
+[node name="DiveAttack" type="Node2D" parent="StateMachine" unique_id=835197878]
+script = ExtResource("13_lkeh4")
+
+[node name="DebuffHandler" parent="." unique_id=1513628500 instance=ExtResource("15_nboip")]

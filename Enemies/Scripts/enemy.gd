@@ -5,6 +5,7 @@ class_name Enemy extends CharacterBody2D
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var hurt_box: Area2D = $HurtBox
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -41,6 +42,7 @@ var current_hp: int
 
 func _ready() -> void:
 	current_hp = stats.max_hp
+	hurt_box.damage = stats.touch_damage
 	debuff_handler.set_enemy(self)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
@@ -53,9 +55,12 @@ func set_data(_data: EnemyData) -> void:
 	if _data:
 		stats = _data
 
-func calculate_direction_to_player() -> Vector2:
-	return (PlayerManager.player.global_position - global_position).normalized()
+func calculate_direction_to_player(offset: Vector2 = Vector2.ZERO) -> Vector2:
+	return (PlayerManager.player.global_position + offset - global_position).normalized()
 
+func calculate_distance_to_player() -> float:
+	return PlayerManager.player.global_position.distance_to(global_position)
+	
 func hit(hurt_box: HurtBox) -> void:
 	if not no_push_back:
 		push_back(hurt_box.knockback_dir,hurt_box.knockback)
@@ -109,8 +114,7 @@ func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
-			body.hit_player(stats.touch_damage)
-			body.set_pushback_values(direction,stats.knockback)
+			body.hit_player(hurt_box)
 			push_back(direction,stats.move_speed.value())
 
 func drop_item(_drops: Array[ItemData]) -> void:

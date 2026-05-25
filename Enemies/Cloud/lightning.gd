@@ -57,16 +57,23 @@ func _generate_lightning_local(a: Vector2, b: Vector2) -> void:
 		add_point(final_pos)
 		hurt_box.position = final_pos
 		await get_tree().create_timer(0.005).timeout
-	
+		if not is_inside_tree():  # node was freed mid-coroutine
+			return
 
 	lightning_impact.emitting = true
 	hurt_box.monitoring = false
 	audio_stream_player.pitch_scale = randf_range(0.8,1.2)
 	audio_stream_player.play()
 	await get_tree().create_timer(1.0).timeout
-	
+	if not is_inside_tree():  # node was freed mid-coroutine
+		return
 	finished.emit()
 
 func done() -> void:
 	
 	clear_points()
+	
+func _exit_tree() -> void:
+	# Safety net: if we're torn down mid-coroutine, disarm the hurtbox
+	if is_instance_valid(hurt_box):
+		hurt_box.monitoring = false

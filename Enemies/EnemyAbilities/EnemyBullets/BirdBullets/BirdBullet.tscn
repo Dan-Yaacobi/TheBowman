@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dq8jw2t0m3aks"]
+[gd_scene format=3 uid="uid://dq8jw2t0m3aks"]
 
 [ext_resource type="Script" uid="uid://da06n1f8wn3a4" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/bird_bullet.gd" id="1_882qa"]
 [ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_pjoay"]
@@ -6,11 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://d1cx73j10b7eg" path="res://Enemies/EvilBird/Sprites/Feather.png" id="4_xvdir"]
 [ext_resource type="Script" uid="uid://dyluaahfxwseh" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/explosion.gd" id="5_gtfsv"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="6_xptvq"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="7_wip3i"]
 
 [sub_resource type="Resource" id="Resource_1gxwb"]
 script = ExtResource("2_pjoay")
 texture = ExtResource("4_qwvqa")
-move_speed = 1
+move_speed = 50
 
 [sub_resource type="Curve" id="Curve_vaeie"]
 _limits = [0.0, 0.5, 0.0, 1.0]
@@ -23,18 +24,18 @@ radius = 12.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6ofq"]
 size = Vector2(8, 9)
 
-[node name="BirdBullet" type="Area2D"]
-collision_layer = 4
+[node name="BirdBullet" type="Area2D" unique_id=2028076233]
+collision_layer = 128
 collision_mask = 17
 script = ExtResource("1_882qa")
 data = SubResource("Resource_1gxwb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=431027877]
 texture = ExtResource("4_qwvqa")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=457185341]
 
-[node name="Explosion" type="CPUParticles2D" parent="."]
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=1389034429]
 emitting = false
 texture = ExtResource("4_xvdir")
 one_shot = true
@@ -49,21 +50,33 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_vaeie")
 script = ExtResource("5_gtfsv")
 
-[node name="ExplosionDetector" type="Area2D" parent="Explosion"]
+[node name="ExplosionDetector" type="Area2D" parent="Explosion" unique_id=1966250949]
 collision_layer = 0
 
-[node name="HurtBox2" parent="Explosion" instance=ExtResource("6_xptvq")]
+[node name="HurtBox2" parent="Explosion" unique_id=779571135 instance=ExtResource("6_xptvq")]
 collision_layer = 4
 collision_mask = 17
 
-[node name="ExplosionCollision" type="CollisionShape2D" parent="Explosion/HurtBox2"]
+[node name="ExplosionCollision" type="CollisionShape2D" parent="Explosion/HurtBox2" unique_id=1721434450]
 shape = SubResource("CircleShape2D_yqnk0")
 debug_color = Color(0.980944, 0, 0.375347, 0.42)
 
-[node name="HurtBox" parent="." instance=ExtResource("6_xptvq")]
+[node name="HurtBox" parent="." unique_id=600829522 instance=ExtResource("6_xptvq")]
 collision_layer = 4
 collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1606446263]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_r6ofq")
+
+[node name="HitBox" parent="." unique_id=917065143 instance=ExtResource("7_wip3i")]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1265021382]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_r6ofq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=798128749]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_r6ofq")

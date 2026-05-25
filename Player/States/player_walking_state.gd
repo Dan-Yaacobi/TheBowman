@@ -23,8 +23,9 @@ func Process(_delta: float) -> State:
 		return dead
 	if player.direction == 0:
 		return idle
-	
-	player.velocity.x = player.direction * player.get_move_speed()
+	var target_x = player.direction * player.get_move_speed()
+	var acceleration = player.stats.ground_acc if player.is_on_floor() else player.stats.air_acc
+	player.velocity.x = move_toward(player.velocity.x, target_x, acceleration * _delta)
 	return null
 	
 #what happens during _physics_process update in this state

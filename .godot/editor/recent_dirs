@@ -1,7 +1,8 @@
-res://Player/Effects/OnPerfectShotEffects/Resources
-res://Player/Effects/OnHitEffects/Resources
-C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Effects/
-C:/Users/ssdan/Desktop/Godot Projects/TheBowman/Player/Buffs/
+res://Enemies/EnemyData/EnemyValues/EvilBirds/
+res://Enemies/EnemyData/EnemyValues/Clouds/
+res://Enemies/EnemyData/EnemyValues/Spider/
+res://Player/Effects/OnPerfectShotEffects/Resources/
+res://Player/Effects/OnHitEffects/Resources/
 res://Player/Effects/
 res://Weapons/Bows/ArrowsData/
 res://00 Globals/
@@ -19,4 +20,3 @@ res://MainGame/
 res://Enemies/EnemyAbilities/Sparkle/
 res://Items/
 res://PlayerData/
-res://Level/Tiles/

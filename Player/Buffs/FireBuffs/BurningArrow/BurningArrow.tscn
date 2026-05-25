@@ -8,6 +8,5 @@ script = ExtResource("1_ednnw")
 ID = 3
 texture = ExtResource("2_ybivd")
 tooltip = "Your Next Arrow Will Burn The Enemy"
-max_stacks = 1
 constant_buff = true
 duration = 10.0

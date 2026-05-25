@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://f48hfq74th42"]
+[gd_scene format=3 uid="uid://f48hfq74th42"]
 
 [ext_resource type="Script" uid="uid://cqbq0cukextt3" path="res://Rifts/Chunks/ChunkScenes/intro_chunk.gd" id="1_2wsaq"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_2wsaq"]
@@ -8,41 +8,41 @@
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="8_u0t7j"]
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="9_okqnu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0t7j"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ky7e"]
 resource_local_to_scene = true
 size = Vector2(53, 25)
 
-[node name="IntroChunk" type="Node2D"]
+[node name="IntroChunk" type="Node2D" unique_id=791909822]
 script = ExtResource("1_2wsaq")
 
-[node name="Bounds" parent="." instance=ExtResource("8_u0t7j")]
+[node name="Bounds" parent="." unique_id=2072018073 instance=ExtResource("8_u0t7j")]
 
 [node name="CollisionShape2D" parent="Bounds" index="0"]
 position = Vector2(0.5, 2.5)
-shape = SubResource("RectangleShape2D_u0t7j")
+shape = SubResource("RectangleShape2D_7ky7e")
 
-[node name="Island" parent="." instance=ExtResource("2_2wsaq")]
+[node name="Island" parent="." unique_id=1286990208 instance=ExtResource("2_2wsaq")]
 position = Vector2(0, 5)
 
-[node name="PlayerSpawn" parent="." instance=ExtResource("3_41muo")]
+[node name="PlayerSpawn" parent="." unique_id=408485101 instance=ExtResource("3_41muo")]
 position = Vector2(1, -19)
 
-[node name="ExitMarker" parent="." instance=ExtResource("3_o6pb5")]
+[node name="ExitMarker" parent="." unique_id=2020963953 instance=ExtResource("3_o6pb5")]
 position = Vector2(59, -16)
 
-[node name="ExitMarker2" parent="." instance=ExtResource("3_o6pb5")]
+[node name="ExitMarker2" parent="." unique_id=1182872707 instance=ExtResource("3_o6pb5")]
 position = Vector2(-66, -7)
 
-[node name="ExitMarker3" parent="." instance=ExtResource("3_o6pb5")]
+[node name="ExitMarker3" parent="." unique_id=1826010917 instance=ExtResource("3_o6pb5")]
 position = Vector2(-24, -50)
 
-[node name="ExitMarker4" parent="." instance=ExtResource("3_o6pb5")]
+[node name="ExitMarker4" parent="." unique_id=1868817489 instance=ExtResource("3_o6pb5")]
 position = Vector2(16, 43)
 
-[node name="EntryMarker" parent="." instance=ExtResource("9_okqnu")]
+[node name="EntryMarker" parent="." unique_id=1731001056 instance=ExtResource("9_okqnu")]
 position = Vector2(0, -11)
 
-[node name="PowerOrb" parent="." instance=ExtResource("7_7ky7e")]
+[node name="PowerOrb" parent="." unique_id=598279639 instance=ExtResource("7_7ky7e")]
 position = Vector2(-30, -16)
 
 [editable path="Bounds"]

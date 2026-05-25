@@ -8,6 +8,7 @@ class_name RiftChunk extends Node2D
 
 var connected_chunks: Array[RiftChunk] = []
 var rift: Rift
+var rift_level: RiftLevel
 
 func _ready() -> void:
 
@@ -57,3 +58,7 @@ func free_exits() -> void:
 	for n in get_children():
 		if n is ExitMarker:
 			n.available = true
+
+func set_rift_level(_rift_level: RiftLevel) -> void:
+	if _rift_level:
+		rift_level = _rift_level

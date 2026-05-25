@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d2ag7d2j5mctf"]
+[gd_scene format=3 uid="uid://d2ag7d2j5mctf"]
 
 [ext_resource type="Script" uid="uid://7ira1qek0c3v" path="res://Enemies/Cloud/cloud_enemy.gd" id="1_1hdfk"]
 [ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Cloud/Sprites/Cloud Enemy.png" id="1_07fyk"]
@@ -26,7 +26,6 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 [sub_resource type="Resource" id="Resource_ra6dr"]
 script = ExtResource("3_aq55l")
 max_hp = 30
-move_speed = 20
 death_ability = Array[ExtResource("2_ws7tv")]([SubResource("Resource_vs4ks")])
 bullet = ExtResource("2_g87bp")
 metadata/_custom_type_script = "uid://rlvenynllobd"
@@ -191,78 +190,75 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_aqnr1"]
 colors = PackedColorArray(1, 0.9658333, 0.59000003, 1, 0, 0, 0, 0.5803922)
 
-[node name="CloudEnemy" type="CharacterBody2D"]
+[node name="CloudEnemy" type="CharacterBody2D" unique_id=700042512]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_1hdfk")
 stats = SubResource("Resource_ra6dr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2052737311]
 visible = false
 z_index = 1
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_nts66")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=825346320]
 material = SubResource("ShaderMaterial_jo2yr")
 position = Vector2(1, -8)
 texture = ExtResource("1_07fyk")
 hframes = 4
 vframes = 2
 
-[node name="DamagedAnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_82i05")
-}
+[node name="DamagedAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=934303259]
+libraries/ = SubResource("AnimationLibrary_82i05")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_nbmpm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=704762273]
+libraries/ = SubResource("AnimationLibrary_nbmpm")
 
-[node name="DebuffHandler" parent="." instance=ExtResource("3_y73ug")]
+[node name="DebuffHandler" parent="." unique_id=653247217 instance=ExtResource("3_y73ug")]
 
-[node name="HitBox" parent="." instance=ExtResource("4_ws7tv")]
+[node name="HitBox" parent="." unique_id=1909779526 instance=ExtResource("4_ws7tv")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("5_aq55l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1873567944]
 visible = false
 z_index = 1
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_nts66")
 debug_color = Color(0.973625, 0, 0.43603754, 0.41960785)
 
-[node name="HurtBox" parent="." instance=ExtResource("6_ra6dr")]
+[node name="HurtBox" parent="." unique_id=1919511838 instance=ExtResource("6_ra6dr")]
 collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1783017977]
 visible = false
 z_index = 1
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_nts66")
 debug_color = Color(0.6611062, 0.5144994, 0, 0.41960785)
 
-[node name="EnemyStateMachine" type="Node2D" parent="."]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=232016900]
 script = ExtResource("9_ra6dr")
 
-[node name="Wander" type="Node2D" parent="EnemyStateMachine"]
+[node name="Wander" type="Node2D" parent="EnemyStateMachine" unique_id=1393956646]
 position = Vector2(0, -1)
 script = ExtResource("10_nts66")
 
-[node name="WanderTimer" type="Timer" parent="EnemyStateMachine/Wander"]
+[node name="WanderTimer" type="Timer" parent="EnemyStateMachine/Wander" unique_id=743821124]
 
-[node name="Seek" type="Node2D" parent="EnemyStateMachine"]
+[node name="Seek" type="Node2D" parent="EnemyStateMachine" unique_id=584335020]
 script = ExtResource("11_swwo8")
 
-[node name="Attack" type="Node2D" parent="EnemyStateMachine"]
+[node name="Attack" type="Node2D" parent="EnemyStateMachine" unique_id=812130912]
 script = ExtResource("12_g87bp")
 
-[node name="AttackTimer" type="Timer" parent="EnemyStateMachine/Attack"]
+[node name="AttackTimer" type="Timer" parent="EnemyStateMachine/Attack" unique_id=907329890]
+wait_time = 0.3
 autostart = true
 
-[node name="Lightning" type="Line2D" parent="EnemyStateMachine/Attack"]
+[node name="Lightning" type="Line2D" parent="EnemyStateMachine/Attack" unique_id=888347047]
 z_index = -1
 material = SubResource("ShaderMaterial_51br6")
 width = 2.0
@@ -273,14 +269,14 @@ segments = 20
 max_offset = 5.0
 flicker = true
 
-[node name="HurtBox" parent="EnemyStateMachine/Attack" instance=ExtResource("6_ra6dr")]
+[node name="HurtBox" parent="EnemyStateMachine/Attack" unique_id=1004123360 instance=ExtResource("6_ra6dr")]
 collision_mask = 1
 damage = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine/Attack/HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine/Attack/HurtBox" unique_id=1259945101]
 shape = SubResource("CircleShape2D_51br6")
 
-[node name="LightningImpact" type="CPUParticles2D" parent="EnemyStateMachine/Attack/HurtBox"]
+[node name="LightningImpact" type="CPUParticles2D" parent="EnemyStateMachine/Attack/HurtBox" unique_id=1956219331]
 emitting = false
 amount = 50
 lifetime = 1.5
@@ -296,5 +292,5 @@ radial_accel_max = 50.0
 scale_amount_curve = SubResource("Curve_nbmpm")
 color_ramp = SubResource("Gradient_aqnr1")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyStateMachine/Attack"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyStateMachine/Attack" unique_id=1373101123]
 stream = ExtResource("16_nbmpm")
