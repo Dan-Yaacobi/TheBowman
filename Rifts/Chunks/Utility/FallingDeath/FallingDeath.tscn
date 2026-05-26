@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dre264ek5xw44"]
+
+[ext_resource type="Script" uid="uid://b7hjhwcu5gn8e" path="res://Rifts/Chunks/Utility/FallingDeath/falling_death.gd" id="1_fgacu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrjfc"]
+size = Vector2(100000, 500)
+
+[node name="FallingDeath" type="Area2D" unique_id=931662378]
+collision_layer = 0
+script = ExtResource("1_fgacu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1969314529]
+shape = SubResource("RectangleShape2D_qrjfc")
+debug_color = Color(0.9820784, 0, 0.36956722, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

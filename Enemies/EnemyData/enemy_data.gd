@@ -9,6 +9,7 @@ class_name EnemyData extends Resource
 @export var touch_damage: int
 @export var knockback_resistance: float = 0.0
 @export var boss: bool = false
+@export var can_be_knockedback: bool = true
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]
@@ -19,6 +20,7 @@ class_name EnemyData extends Resource
 @export var shooter: bool = false
 @export_custom(PROPERTY_HINT_NONE,"suffix:%") var shooter_chance: int = 0
 @export var bullet: PackedScene
+@export var shot_cooldown: float = 1.0
 #func initialize(_hp: int, _speed: int, _knockback: int, _skin: Texture, _avg_coins_dropped: int,
 #_touch_dmg: int, _knockback_resistance: float, _boss: bool, _shooter_chance: int,
 #_bullet: PackedScene) -> void:

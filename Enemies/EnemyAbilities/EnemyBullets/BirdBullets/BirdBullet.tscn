@@ -11,6 +11,7 @@
 [sub_resource type="Resource" id="Resource_1gxwb"]
 script = ExtResource("2_pjoay")
 texture = ExtResource("4_qwvqa")
+knockback = 50
 move_speed = 50
 
 [sub_resource type="Curve" id="Curve_vaeie"]
@@ -50,19 +51,16 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_vaeie")
 script = ExtResource("5_gtfsv")
 
-[node name="ExplosionDetector" type="Area2D" parent="Explosion" unique_id=1966250949]
-collision_layer = 0
-
 [node name="HurtBox2" parent="Explosion" unique_id=779571135 instance=ExtResource("6_xptvq")]
-collision_layer = 4
 collision_mask = 17
+monitoring = false
+monitorable = false
 
 [node name="ExplosionCollision" type="CollisionShape2D" parent="Explosion/HurtBox2" unique_id=1721434450]
 shape = SubResource("CircleShape2D_yqnk0")
 debug_color = Color(0.980944, 0, 0.375347, 0.42)
 
 [node name="HurtBox" parent="." unique_id=600829522 instance=ExtResource("6_xptvq")]
-collision_layer = 4
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1606446263]

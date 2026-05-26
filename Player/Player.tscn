@@ -51,6 +51,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 script = ExtResource("2_2aet8")
 down_gravity = 1500
 up_gravity = 650
+max_down_gravity = 400
 ground_dec = 2400
 ground_acc = 1800
 air_dec = 600

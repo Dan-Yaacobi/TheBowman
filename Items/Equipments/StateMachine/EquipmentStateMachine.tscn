@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://gql106m3gm4s"]
+
+[ext_resource type="Script" uid="uid://b384dgrhqpyvf" path="res://Items/Equipments/StateMachine/equipment_state_machine.gd" id="1_gt1ev"]
+[ext_resource type="Script" uid="uid://b3y8euoi2151k" path="res://Items/Equipments/StateMachine/equipment_dropped_state.gd" id="2_s1mff"]
+[ext_resource type="Script" uid="uid://c472eq0mlx3l6" path="res://Items/Equipments/StateMachine/equipment_onground_state.gd" id="3_fdd2l"]
+[ext_resource type="Script" uid="uid://bjfr54nbnys5b" path="res://Items/Equipments/StateMachine/equipment_interacted_state.gd" id="4_uvjxj"]
+[ext_resource type="Script" uid="uid://1c1j0v1v0xw0" path="res://Items/Equipments/StateMachine/equipment_equipped_state.gd" id="5_2s8g5"]
+[ext_resource type="Script" uid="uid://djsv6qbljikxu" path="res://Items/Equipments/StateMachine/equipment_unequipped_state.gd" id="6_d2dm5"]
+
+[node name="EquipmentStateMachine" type="Node2D" unique_id=1113797908]
+script = ExtResource("1_gt1ev")
+
+[node name="Dropped" type="Node2D" parent="." unique_id=1637829049]
+script = ExtResource("2_s1mff")
+
+[node name="OnGround" type="Node2D" parent="." unique_id=1071046023]
+script = ExtResource("3_fdd2l")
+
+[node name="Interacted" type="Node2D" parent="." unique_id=1840451519]
+script = ExtResource("4_uvjxj")
+
+[node name="Equipped" type="Node2D" parent="." unique_id=1759979882]
+script = ExtResource("5_2s8g5")
+
+[node name="UnEquipped" type="Node2D" parent="." unique_id=1786588768]
+script = ExtResource("6_d2dm5")

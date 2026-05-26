@@ -14,9 +14,12 @@ func _ready() -> void:
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	body_shape_entered.connect(hit_wall)
 	hurt_box.damage = data.damage
-	hurt_box.knockback = data.knockback
+	hurt_box.knockback_power = data.knockback
 	hit_box.Damaged.connect(clear_shot)
-	hurt_box.successful_hit.connect(queue_free)
+	hurt_box.successful_hit.connect(clear_shot)
+	extra_ready_function()
+func extra_ready_function() -> void:
+	pass
 	
 func _physics_process(delta: float) -> void:
 	global_position += direction * data.move_speed * delta

@@ -37,3 +37,6 @@ signal player_buff_ended(_buff_id: int)
 signal add_arrow_effect(_effect: Effect)
 
 signal arrow_hit_enemy(_target: Enemy)
+
+#signals that you went to the next rift level
+signal entered_rift_portal

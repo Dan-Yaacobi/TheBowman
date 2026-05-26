@@ -229,6 +229,7 @@ func update_body_animation(_anim: String) -> void:
 func apply_gravity(delta) -> void:
 		if velocity.y > 0:
 			velocity.y += stats.down_gravity*delta
+			velocity.y = min(velocity.y, stats.max_down_gravity)
 		else:
 			velocity.y += stats.up_gravity*delta
 
@@ -276,12 +277,10 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		damaged_particles.emitting = true
 		stats.hp -= _hurt_box.damage
 		health_bar.reduce_health(_hurt_box.damage)
-		apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback)
+		apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback_power)
 		display_combat_text(_hurt_box.damage, Color.RED)
 		
 func start_invincibilty() -> void:
-	hit_box.set_collision_layer_value(1,false)
-	hit_box.set_collision_mask_value(3,false)
 	modulate.a = 0.5
 	invincible = true
 	invincibility_timer.wait_time = stats.invinc_duration + get_stamina() * 0.02
@@ -290,8 +289,6 @@ func start_invincibilty() -> void:
 	
 func invincibility_over() -> void:
 	invincible = false
-	hit_box.set_collision_layer_value(1,true)
-	hit_box.set_collision_mask_value(3,true)
 	self.modulate.a = 1
 	hit_box.monitoring = true
 	

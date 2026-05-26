@@ -26,6 +26,8 @@ func init() -> void:
 	
 func Enter() -> void:
 	fly_direction = [-1, 1].pick_random()
+	enemy.sprite.flip_h = fly_direction == 1
+	
 	right_end = randf_range(min_end, max_end)
 	left_end = -right_end
 	egg_attack_timer.wait_time = randf_range(egg_attack_min_time, egg_attack_max_time)

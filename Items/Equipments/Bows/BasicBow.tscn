@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1wcbwbv2qlbd"]
+
+[ext_resource type="Script" uid="uid://bejyhsd1kcmw2" path="res://Items/Equipments/equipment.gd" id="1_6nh1o"]
+
+[node name="BasicBow" type="Node2D" unique_id=677677407]
+script = ExtResource("1_6nh1o")

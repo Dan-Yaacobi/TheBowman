@@ -84,7 +84,6 @@ func hit(body) -> void:
 func calc_dmg(shot_power: float) -> void:
 	var perfect_bonus = 1.8 if shot_power >= 1.0 else 1.0
 	damage = floor((PlayerManager.player.get_strength() / 2 + data.base_damage + 4) * shot_power * perfect_bonus)
-	
 #func calc_dmg(shot_power: float) -> void:
 	#damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
 	#*pow(shot_power, 2))
@@ -140,12 +139,13 @@ func enable_arrow() -> void:
 	
 func hit_wall(_val1,_val2,_val3,_val4) -> void:
 	
-	if fired:
+	if fired and _val2 is Island:
 		#wall_hit_effect = WALL_HIT_EFFECT.instantiate()
 		#if wall_hit_effect.get_parent() == null:
 			#get_parent().call_deferred("add_child",wall_hit_effect)
 		#wall_hit_effect.emitting = true
 		#wall_hit_effect.global_position = global_position
+
 		sprite.call_deferred("reparent",_val2)
 		sprite.hit = true
 		wall_clear_shot()

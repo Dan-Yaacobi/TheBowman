@@ -153,20 +153,7 @@ func fire_arrow() -> void:
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = 1.8 if _shot_power >= 1.0 else 1.0
 	return _shot_power * perfect_bonus * direction * (PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)	
-#func calc_shot_velocity(_shot_power,direction) -> Vector2:
-	#return _shot_power * direction *( PlayerManager.player.get_strength_shot_modifier() + current_arrow.data.speed)
 
-#func set_offset(amount: float) -> void:
-	#shot_offset = amount * 5
-	
-#func calc_offset_direction(og_direction: Vector2, offset: float) -> Vector2:
-	#var res: Vector2
-	#var rand_dir: int = [1,-1].pick_random()
-	#if abs(og_direction.x) > abs(og_direction.y):
-		#res = Vector2(og_direction.x, og_direction.y + rand_dir * offset)
-	#else:
-		#res = Vector2(og_direction.x + rand_dir * offset, og_direction.y)
-	#return res
 
 func swing_off_cooldown() -> void:
 	can_swing = true

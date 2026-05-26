@@ -1,5 +1,5 @@
 extends Node
-enum worlds {Bow_Shop,Main_Menu,Rift_1}
+enum worlds {Bow_Shop,Main_Menu,Rift_1,NextRift}
 
 const BOWS_SHOP = preload("uid://cmdeim0mrcv32")
 const MAIN_MENU = preload("uid://cnhbrpo4htp2y")

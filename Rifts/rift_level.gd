@@ -12,4 +12,5 @@ func add_chunk(chunk: RiftChunk) -> void:
 	chunks.append(chunk)
 
 func summon_enemy() -> void:
+	level = PlayerManager.player.stats.rift_level
 	get_summon_enemy.emit(level)

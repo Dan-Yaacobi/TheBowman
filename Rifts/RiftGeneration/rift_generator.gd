@@ -4,6 +4,7 @@ class_name RiftGenerator extends Node2D
 @export var library: RiftChunkLibrary
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
 const BOUNDS_LAYER: int = 15
+const FALLING_DEATH = preload("uid://dre264ek5xw44")
 
 signal rift_created(RiftLevel)
 var rift_level: RiftLevel
@@ -15,6 +16,8 @@ var max_spawn_streak: int = 1
 var biased_towards: CustomVariables.directions
 var rng = RandomNumberGenerator.new()
 var placed_bounds: Array[Bounds]
+
+var lowest_chunk: RiftChunk
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
@@ -24,14 +27,22 @@ func generate(_curr_level: int) -> RiftLevel:
 	rift_level = RIFT_LEVEL.instantiate()
 	add_child(rift_level)
 	build_main_path(_curr_level)
-
-	#Create Everything
-
 	return rift_level
+	
+func manage_lowest_chunk(chunk: RiftChunk) -> void:
+	lowest_chunk = chunk
 
+func add_death_area() -> void:
+	if lowest_chunk:
+		var falling_death: Area2D = FALLING_DEATH.instantiate()
+		falling_death.global_position = Vector2(0, lowest_chunk.global_position.y + 500)
+		rift_level.add_child(falling_death)
+	
 func build_main_path(_curr_level: int) -> void:
 	var intro_chunk: IntroChunk = library.get_intro_chunk().scene.instantiate()
 	rift_level.add_child(intro_chunk)
+	manage_lowest_chunk(intro_chunk)
+	
 	placed_bounds.append(intro_chunk.bounds)
 	rift_level.starting_chunk = intro_chunk
 	main_path_chunks.append(intro_chunk)
@@ -48,6 +59,7 @@ func build_main_path(_curr_level: int) -> void:
 				return
 		build_all_side_paths(2, main_path_chunks)
 		rift_created.emit(rift_level)
+		add_death_area()
 		EventBus.finished_loading.emit()
 
 func build_all_side_paths(amount: int, chunks: Array[RiftChunk]) -> void:
@@ -200,6 +212,8 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 		if not overlaps:
 			placed_bounds.append(chunk_node.bounds)
 			chunk_node.set_rift_level(rift_level)
+			if lowest_chunk == null or chunk_node.global_position.y > lowest_chunk.global_position.y:
+				manage_lowest_chunk(chunk_node)
 			return chunk_node
 		else:
 			chunk_node.queue_free()

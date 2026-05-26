@@ -1,37 +1,15 @@
 [gd_scene format=3 uid="uid://cn76h3jplsrfn"]
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/FlyingApple/flying_apple.gd" id="1_whfbk"]
-[ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="2_qmrg8"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_0birg"]
-[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_5n10g"]
-[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_er6rk"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="5_kus7w"]
 [ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="6_dgpt0"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_h5knc"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="12_8wwju"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="12_kl176"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="13_nfvr7"]
+[ext_resource type="Script" uid="uid://bn7i8btunjcni" path="res://Enemies/FlyingApple/apple_seek_state.gd" id="13_whfbk"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="14_dilap"]
-
-[sub_resource type="Resource" id="Resource_fth6d"]
-script = ExtResource("4_5n10g")
-
-[sub_resource type="Resource" id="Resource_er6rk"]
-script = ExtResource("5_er6rk")
-base_value = 50.0
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_venkp"]
-resource_local_to_scene = true
-script = ExtResource("5_kus7w")
-move_speed = SubResource("Resource_er6rk")
-knockback = 80
-skin = ExtResource("6_dgpt0")
-avg_coins_dropped = 5
-touch_damage = 2
-knockback_resistance = 30.0
-death_ability = Array[ExtResource("3_0birg")]([SubResource("Resource_fth6d")])
-shooter_chance = 30
-bullet = ExtResource("2_qmrg8")
+[ext_resource type="Script" uid="uid://dqsnpcqjq2gnl" path="res://Enemies/FlyingApple/apple_decide_state.gd" id="14_qmrg8"]
+[ext_resource type="Script" uid="uid://djtg8frtkr2at" path="res://Enemies/FlyingApple/apple_shoot_state.gd" id="15_0birg"]
 
 [sub_resource type="Animation" id="Animation_ltlc2"]
 resource_name = "Damaged"
@@ -282,8 +260,6 @@ collision_layer = 4
 collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_whfbk")
-tree_spawn = null
-stats = SubResource("Resource_venkp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628174994]
 texture = ExtResource("6_dgpt0")
@@ -324,3 +300,21 @@ shape = SubResource("CircleShape2D_emnjt")
 debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
 
 [node name="DebuffHandler" parent="." unique_id=622220340 instance=ExtResource("14_dilap")]
+
+[node name="StateMachine" type="Node2D" parent="." unique_id=555296849]
+script = ExtResource("12_kl176")
+
+[node name="Seek" type="Node2D" parent="StateMachine" unique_id=999819182]
+script = ExtResource("13_whfbk")
+
+[node name="Decide" type="Node2D" parent="StateMachine" unique_id=1142532004]
+script = ExtResource("14_qmrg8")
+
+[node name="Shoot" type="Node2D" parent="StateMachine" unique_id=206311826]
+script = ExtResource("15_0birg")
+
+[node name="ShootTimer" type="Timer" parent="StateMachine/Shoot" unique_id=382980169]
+wait_time = 1.5
+
+[node name="DecisionTimer" type="Timer" parent="StateMachine" unique_id=685103792]
+wait_time = 1.5

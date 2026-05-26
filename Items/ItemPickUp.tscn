@@ -1,21 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgq07nhm5y2sy"]
+[gd_scene format=3 uid="uid://cgq07nhm5y2sy"]
 
-[ext_resource type="Script" path="res://Items/item_pick_up.gd" id="1_k6hx1"]
+[ext_resource type="Script" uid="uid://dnirl2stipgxv" path="res://Items/item_pick_up.gd" id="1_k6hx1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xsch0"]
 radius = 9.0
 
-[node name="ItemPickUp" type="Node2D"]
+[node name="ItemPickUp" type="Node2D" unique_id=2043267814]
 script = ExtResource("1_k6hx1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2106383886]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1967702035]
 collision_layer = 0
 collision_mask = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=200558608]
 shape = SubResource("CircleShape2D_xsch0")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1560450143]
 wait_time = 0.3

@@ -5,6 +5,7 @@ var player: Player
 @export_subgroup("Enviorments")
 @export var down_gravity: int
 @export var up_gravity: int
+@export var max_down_gravity: int
 @export var ground_dec: int
 @export var ground_acc: int
 @export var air_dec: int

@@ -1,0 +1,38 @@
+class_name Equipment extends RigidBody2D
+
+@export var data: EquipmentData
+
+@onready var state_machine: EquipmentStateMachine = $EquipmentStateMachine
+@onready var ground_ray: RayCast2D = $GroundRay
+@onready var magnet_area: Area2D = $MagnetArea
+@onready var interaction_area: Area2D = $InteractionArea
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var ground_detection_area: Area2D = $GroundDetectionArea
+
+var is_landed: bool = false
+
+func _ready() -> void:
+	lock_rotation = true
+	gravity_scale = 1.0
+	freeze = false
+	ground_detection_area.connect("body_shape_entered", _on_ground_detected)
+	state_machine.Initialize(self)
+
+func apply_drop_impulse() -> void:
+	apply_impulse(Vector2(randf_range(-30, 30), -200))
+
+func freeze_body() -> void:
+	freeze = true
+	freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
+	lock_rotation = true
+	gravity_scale = 0.0
+
+func get_equipped_item_in_same_slot() -> EquipmentData:
+	# return the player's currently equipped item in the same slot as this equipment
+	# e.g. return PlayerManager.player.equipment_handler.get_slot(data.slot)
+	# return null if slot is empty
+	return null
+
+func _on_ground_detected(_var1,_var2,_var3,_var4) -> void:
+	if not is_landed and _var2 is Island:
+		is_landed = true

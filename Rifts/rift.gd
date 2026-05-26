@@ -62,6 +62,14 @@ func exit_scene(_player) -> void:
 		EventBus.summon_effect.disconnect(summon_effect)
 	kill_all_enemies()
 	
+func _on_portal_entered() -> void:
+	for level in rift_levels:
+		level.queue_free()
+	rift_levels.clear()
+	kill_all_enemies()
+	set_world()
+	#game_manager.spawn_player(spawn_position())	
+	
 func add_enemy(_enemy: Enemy) -> void:
 	if _enemy:
 		current_enemies.append(_enemy)

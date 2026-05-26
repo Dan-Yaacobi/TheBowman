@@ -8,6 +8,10 @@ var hud: HUD
 
 func _ready() -> void:
 	EventBus.changed_scene.connect(change_game_world)
+	EventBus.entered_rift_portal.connect(_on_portal_entered)
+
+func _on_portal_entered() -> void:
+	change_game_world(GameWorlds.worlds.Rift_1)
 	
 func set_game(_game: Game) -> void:
 	if _game:

@@ -12,7 +12,6 @@ var enraged: bool
 var max_hp: int
 
 func _ready() -> void:
-	no_push_back = true
 	hit_box.area_entered.connect(hit)
 	enraged = false
 	max_hp = stats.hp

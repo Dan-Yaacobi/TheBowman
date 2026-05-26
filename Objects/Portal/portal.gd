@@ -13,6 +13,7 @@ class_name Portal extends Node2D
 			_update_color()
 
 @export var destination: GameWorlds.worlds = GameWorlds.worlds.Main_Menu
+@export var is_rift_portal: bool = false
 
 @export var flip_h: bool = false:
 	set(value):
@@ -41,7 +42,9 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		body.current_portal = null
 
 func enter() -> void:
-	if destination is GameWorlds.worlds:
+	if is_rift_portal:
+		EventBus.entered_rift_portal.emit()
+	elif destination is GameWorlds.worlds:
 		EventBus.changed_scene.emit(destination)
 
 func _update_flip() -> void:

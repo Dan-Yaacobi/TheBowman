@@ -5,7 +5,7 @@ class_name Enemy extends CharacterBody2D
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var hurt_box: Area2D = $HurtBox
+@onready var hurt_box: HurtBox = $HurtBox
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -30,15 +30,12 @@ var damaged_animation_player : AnimationPlayer
 
 var can_move: bool = true
 
-## Push back variables ##
-var no_push_back: bool = false
-var pushed_back: bool = false
-var pushback_dir: Vector2
-var pushback_power: float
-
 var hard_mode: bool = false
 
 var current_hp: int
+var knockback_velocity: Vector2 = Vector2.ZERO
+var knockback_threshold: float = 0.2
+var knockback_decay: float = 0.05
 
 func _ready() -> void:
 	current_hp = stats.max_hp
@@ -61,11 +58,9 @@ func calculate_direction_to_player(offset: Vector2 = Vector2.ZERO) -> Vector2:
 func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
-func hit(hurt_box: HurtBox) -> void:
-	if not no_push_back:
-		push_back(hurt_box.knockback_dir,hurt_box.knockback)
-		
-	take_damage(hurt_box.damage)
+func hit(_hurt_box: HurtBox) -> void:
+	take_damage(_hurt_box.damage)
+	knockback(_hurt_box)
 	take_hit_effect()	
 
 func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
@@ -104,26 +99,19 @@ func enemy_died() -> void:
 	EventBus.enemy_died.emit(self)
 	queue_free()
 	
-func push_back(_direction: Vector2 = -direction, power: float = stats.move_speed.value()) -> void:
-	if not (stats.boss and stats.shooter):
-
-		pushed_back = true
-		pushback_dir = -direction
-		pushback_power = power
+func knockback(_hurt_box: HurtBox) -> void:
+	if stats.can_be_knockedback:
+		knockback_velocity = -_hurt_box.knockback_dir * _hurt_box.knockback_power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(hurt_box)
-			push_back(direction,stats.move_speed.value())
 
 func drop_item(_drops: Array[ItemData]) -> void:
 	for drop in _drops:
 		spawn_drop(drop)
-	#if not no_drops:
-		#for drop in item_drops:
-			#if drop.drop_chance():
-				#spawn_drop(drop)
+
 
 func spawn_drop(drop: ItemData) -> void:
 	var item = ITEM_PICK_UP.instantiate()

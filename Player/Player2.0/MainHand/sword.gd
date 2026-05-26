@@ -9,7 +9,7 @@ func _ready() -> void:
 func set_sword() -> void:
 	slash_hurt_box.sword = self
 	slash_hurt_box.damage = stats.damage
-	slash_hurt_box.knockback = stats.knockback_power
+	slash_hurt_box.knockback_power = stats.knockback_power
 	pass
 
 func set_bleed_chance(_amount: int) -> void:
