@@ -36,3 +36,5 @@ func _disable_player_interaction() -> void:
 	# re-interact with the item they just unequipped
 	# re-enable it once the player exits and re-enters the interaction area
 	equipment.interaction_area.monitoring = false
+func HandleInput(_event: InputEvent) -> EquipmentState:
+	return null

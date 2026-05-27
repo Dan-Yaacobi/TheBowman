@@ -11,7 +11,7 @@ func _ready() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)
 	EventBus.enemy_died.connect(remove_enemy)
 	EventBus.summon_effect.connect(summon_effect)
-	
+	EventBus.equipment_dropped.connect(drop_equipment)
 	rift_enemy_spawner.enemy_spawned.connect(add_enemy)
 	
 	rift_generator.rift_created.connect(add_rift_level)
@@ -85,6 +85,9 @@ func kill_all_enemies() -> void:
 	for enemy in current_enemies:
 		remove_enemy(enemy)
 		enemy.queue_free()
+
+func drop_equipment(equip: Equipment) -> void:
+	call_deferred("add_child", equip)
 
 func summon_effect(effect: Node2D) -> void:
 	call_deferred("add_child", effect)

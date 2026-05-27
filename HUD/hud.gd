@@ -8,11 +8,16 @@ class_name HUD extends CanvasLayer
 @onready var combo_counter: ComboCounter = $Control/ComboCounter
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 
+@onready var interaction_ui: Control = $InteractionUi
+
 func _ready() -> void:
+	interaction_ui.visible = false
 	PlayerManager.player.money_changed.connect(update_money)
 	PlayerManager.player.combo.connect(combo_counter.update_combo)
 	coin_animation.play("Rotate")
-
+	EventBus.equipment_interaction_enter.connect(show_equip_interaction_ui)
+	EventBus.equipment_interaction_exit.connect(hide_equip_interaction_ui)
+	
 func get_health_bar() -> HealthBar:
 	return health_bar
 
@@ -29,3 +34,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Exit"):
 		EventBus.exit_ui.emit()
 		
+func show_equip_interaction_ui(equipment: Equipment) -> void:
+	var screen_pos = equipment.get_viewport().get_canvas_transform() * equipment.position
+	interaction_ui.global_position = screen_pos + Vector2(0,-50)
+	interaction_ui.visible = true
+
+func hide_equip_interaction_ui(_equip: Equipment) -> void:
+	interaction_ui.visible = false

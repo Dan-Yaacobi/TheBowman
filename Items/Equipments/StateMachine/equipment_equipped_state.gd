@@ -31,3 +31,5 @@ func _apply_stats_to_player() -> void:
 func _update_equipment_ui() -> void:
 	# update the equipment slot UI to display this item in its correct slot
 	pass
+func HandleInput(_event: InputEvent) -> EquipmentState:
+	return null

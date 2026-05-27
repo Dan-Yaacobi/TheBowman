@@ -1,15 +1,17 @@
 class_name EquipmentInteractedState extends EquipmentState
+@onready var on_ground: EquipmentOnGroundState = $"../OnGround"
 
 func init() -> void:
-	pass
-
+	equipment.interaction_area.connect("body_exited", _on_player_exited)
+	
+	
 func Enter() -> void:
+	EventBus.equipment_interaction_enter.emit(equipment)
 	_pause_game_loop()
 	_shift_camera_up()
-	_open_comparison_window()
 
 func Exit() -> void:
-	_close_comparison_window()
+	EventBus.equipment_interaction_exit.emit(equipment)
 	_restore_camera()
 	_unpause_game_loop()
 
@@ -28,11 +30,13 @@ func on_cancelled() -> void:
 	state_machine.ChangeState(state_machine.states[1]) # EquipmentOnGroundState
 
 func _pause_game_loop() -> void:
+	#get_tree().paused = true
 	# pause the game tree or relevant entities
 	# e.g. get_tree().paused = true, ensure equipment has process_mode = PROCESS_MODE_ALWAYS
 	pass
 
 func _unpause_game_loop() -> void:
+	#get_tree().paused = false
 	# unpause what was paused in _pause_game_loop
 	pass
 
@@ -44,13 +48,14 @@ func _restore_camera() -> void:
 	# restore camera to its default offset
 	pass
 
-func _open_comparison_window() -> void:
-	# open the equipment comparison UI window
-	# pass equipment.data as the new item
-	# pass the player's currently equipped item in the same slot for comparison
-	# if no item is equipped in that slot, show only the new item stats
-	pass
 
-func _close_comparison_window() -> void:
-	# close and hide the comparison UI window
+func HandleInput(_event: InputEvent) -> EquipmentState:
+	return null
+
+func _on_player_exited(body: Node2D) -> void:
+	if body is Player:
+		state_machine.ChangeState(on_ground)
+
+func highlight() -> void:
+	#highlights the interacted item
 	pass

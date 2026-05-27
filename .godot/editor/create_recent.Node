@@ -1,3 +1,9 @@
+Label
+VBoxContainer
+Button
+HBoxContainer
+PanelContainer
+Control
 CollisionShape2D
 Area2D
 RayCast2D
@@ -6,9 +12,3 @@ RigidBody2D
 Node2D
 Timer
 SpawnMarker
-Label
-CPUParticles2D
-EnemyHitBox
-HurtBox
-CharacterBody2D
-TextureProgressBar

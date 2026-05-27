@@ -5,7 +5,7 @@ class_name ExitMarker extends Marker2D
 @export var available: bool = true
 
 func _ready() -> void:
-	#label.visible = false
+	label.visible = false
 	enable()
 
 func disable() -> void:

@@ -24,14 +24,16 @@ func _unhandled_input(event: InputEvent) -> void:
 func Initialize(_equipment: Equipment)->void:
 	states = []
 	for c in get_children():
-		if c is State:
+		if c is EquipmentState:
 			states.append(c)
-			
+			c.equipment = _equipment
+			c.state_machine = self
+	
 	if states.size() == 0:
 		return
-		
-	states[0].equipment = _equipment
-	states[0].state_machine = self
+	
+	#states[0].equipment = _equipment
+	#states[0].state_machine = self
 	
 	for state in states:
 		state.init()

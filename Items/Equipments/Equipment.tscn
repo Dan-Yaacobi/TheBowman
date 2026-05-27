@@ -2,22 +2,25 @@
 
 [ext_resource type="Script" uid="uid://bejyhsd1kcmw2" path="res://Items/Equipments/equipment.gd" id="1_4m1mi"]
 [ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="2_3qtbi"]
-[ext_resource type="PackedScene" uid="uid://gql106m3gm4s" path="res://Items/Equipments/StateMachine/EquipmentStateMachine.tscn" id="3_svy1w"]
+[ext_resource type="Script" uid="uid://b384dgrhqpyvf" path="res://Items/Equipments/StateMachine/equipment_state_machine.gd" id="3_lss0t"]
+[ext_resource type="Script" uid="uid://b3y8euoi2151k" path="res://Items/Equipments/StateMachine/equipment_dropped_state.gd" id="4_h4v1l"]
+[ext_resource type="Script" uid="uid://c472eq0mlx3l6" path="res://Items/Equipments/StateMachine/equipment_onground_state.gd" id="5_atbo7"]
+[ext_resource type="Script" uid="uid://bjfr54nbnys5b" path="res://Items/Equipments/StateMachine/equipment_interacted_state.gd" id="6_5uo0g"]
+[ext_resource type="Script" uid="uid://1c1j0v1v0xw0" path="res://Items/Equipments/StateMachine/equipment_equipped_state.gd" id="7_lm5rg"]
+[ext_resource type="Script" uid="uid://djsv6qbljikxu" path="res://Items/Equipments/StateMachine/equipment_unequipped_state.gd" id="8_cseru"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5u1rc"]
-radius = 5.0
-height = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4v1l"]
+radius = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0bak"]
-size = Vector2(22, 5)
+size = Vector2(16, 6.1054688)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1cu4p"]
-radius = 20.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_lss0t"]
-radius = 155.00322
+radius = 17.0
 
 [node name="Equipment" type="RigidBody2D" unique_id=1274195967]
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("1_4m1mi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=917064341]
@@ -25,32 +28,43 @@ texture = ExtResource("2_3qtbi")
 
 [node name="GroundRay" type="RayCast2D" parent="." unique_id=1150998646]
 target_position = Vector2(0, 250)
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1391844463]
-visible = false
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_5u1rc")
+shape = SubResource("CircleShape2D_h4v1l")
 
 [node name="GroundDetectionArea" type="Area2D" parent="." unique_id=1532163834]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetectionArea" unique_id=1253307808]
-visible = false
-position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_b0bak")
 debug_color = Color(0.36, 0.15696, 0.10079999, 0.41960785)
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1382338764]
+collision_layer = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1288462402]
-visible = false
 shape = SubResource("CircleShape2D_1cu4p")
 debug_color = Color(0, 0.6473174, 0.22262406, 0.41960785)
 
-[node name="MagnetArea" type="Area2D" parent="." unique_id=1779719772]
+[node name="EquipmentStateMachine" type="Node2D" parent="." unique_id=1113797908]
+script = ExtResource("3_lss0t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=669610666]
-visible = false
-shape = SubResource("CircleShape2D_lss0t")
-debug_color = Color(0.21300001, 0.28695002, 0.3, 0.41960785)
+[node name="Dropped" type="Node2D" parent="EquipmentStateMachine" unique_id=1637829049]
+script = ExtResource("4_h4v1l")
 
-[node name="EquipmentStateMachine" parent="." unique_id=1113797908 instance=ExtResource("3_svy1w")]
+[node name="OnGround" type="Node2D" parent="EquipmentStateMachine" unique_id=1071046023]
+script = ExtResource("5_atbo7")
+
+[node name="Interacted" type="Node2D" parent="EquipmentStateMachine" unique_id=1840451519]
+script = ExtResource("6_5uo0g")
+
+[node name="Equipped" type="Node2D" parent="EquipmentStateMachine" unique_id=1759979882]
+script = ExtResource("7_lm5rg")
+
+[node name="UnEquipped" type="Node2D" parent="EquipmentStateMachine" unique_id=1786588768]
+script = ExtResource("8_cseru")

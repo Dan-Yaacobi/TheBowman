@@ -107,13 +107,22 @@ func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(hurt_box)
+			
+const EQUIPMENT = preload("uid://djxch32a87fle")
 
 func drop_item(_drops: Array[ItemData]) -> void:
+	var equip_drop: Equipment = EQUIPMENT.instantiate()
+	equip_drop.global_position = global_position
+	EventBus.equipment_dropped.emit(equip_drop)
+	
+	return
 	for drop in _drops:
 		spawn_drop(drop)
 
 
+
 func spawn_drop(drop: ItemData) -> void:
+
 	var item = ITEM_PICK_UP.instantiate()
 	item.assign_item(drop)
 	item.global_position = global_position

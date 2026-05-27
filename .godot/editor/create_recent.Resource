@@ -1,3 +1,4 @@
+EquipmentData
 EnemyData
 OnPerfectShotEffect
 OnHitEffect

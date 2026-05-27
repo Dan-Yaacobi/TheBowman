@@ -76,6 +76,8 @@ var current_arrow: Arrow
 var current_portal: Portal
 var can_dash: bool = true
 
+var equipment_interacted: Equipment = null
+
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
@@ -95,7 +97,9 @@ func _ready() -> void:
 	EventBus.invisible_hands.connect(show_hands)
 	EventBus.leeched.connect(leech_heal)
 	buff_handler.set_entity(self)
-
+	EventBus.equipment_interaction_enter.connect(equipment_interaction_begin)
+	EventBus.equipment_interaction_exit.connect(equipment_interaction_end)
+	
 func upgrade_stat(stat: String, amount) -> void:
 	for key in upgrades.upgrades_dict.keys():
 		if key == stat:
@@ -169,6 +173,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			special_ability()
 		
 		if event.is_action_pressed("grapple"):
+			return
 			grapple()
 	
 func special_ability() -> void:
@@ -212,6 +217,16 @@ func _physics_process(delta: float) -> void:
 	special_ability_indictaor()
 	move_and_slide()
 
+func is_equipment_interaction() -> bool:
+	return equipment_interacted != null
+	
+func equipment_interaction_begin(equip: Equipment) -> void:
+	if equip:
+		equipment_interacted = equip
+
+func equipment_interaction_end(_equip: Equipment) -> void:
+	equipment_interacted = null
+	
 func apply_knockback(_direction: Vector2, force: float) -> void:
 	velocity += _direction.normalized() * force
 	

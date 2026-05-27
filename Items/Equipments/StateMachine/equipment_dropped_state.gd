@@ -1,42 +1,35 @@
 class_name EquipmentDroppedState extends EquipmentState
+@onready var on_ground: EquipmentOnGroundState = $"../OnGround"
 var rotation_speed: float = 5.0
 
 func init() -> void:
 	pass
 
 func Enter() -> void:
-	equipment.lock_rotation = false
+	equipment.sprite.scale = Vector2(0.5, 0.5)
+	equipment.lock_rotation = true
 	equipment.gravity_scale = 1.0
 	equipment.freeze = false
+	equipment.ground_detection_area.monitoring = false
 	equipment.apply_drop_impulse()
-	_attempt_ground_detection()
 
 func Exit() -> void:
-	pass
+	equipment.ground_detection_area.monitoring = false
 
 func Process(_delta: float) -> EquipmentState:
 	return null
 
 func Physics(delta: float) -> EquipmentState:
 	equipment.sprite.rotation += rotation_speed * delta
+	equipment.linear_velocity = equipment.linear_velocity.clamp(
+		Vector2(-200, -200), 
+		Vector2(200, 200)
+	)
+	if not equipment.ground_detection_area.monitoring and equipment.linear_velocity.y > 0:
+		equipment.ground_detection_area.monitoring = true
 	if equipment.is_landed:
-		return state_machine.states[1]
+		return on_ground
 	return null
 
-func _attempt_ground_detection() -> void:
-	equipment.ground_ray.force_raycast_update()
-	if equipment.ground_ray.is_colliding():
-		# ray found ground, physics will land it naturally
-		pass
-	else:
-		# no ground below, activate magnet area to find nearby island
-		equipment.magnet_area.monitoring = true
-		equipment.magnet_area.connect("area_entered", _on_magnet_area_detected)
-
-func _on_magnet_area_detected(area: Area2D) -> void:
-	# get the nearest point on the detected island and apply a continuous
-	# force toward it each physics frame until landed
-	equipment.magnet_area.monitoring = false
-	var target_position = area.global_position
-	var direction = (target_position - equipment.global_position).normalized()
-	equipment.linear_velocity = direction * 300.0
+func HandleInput(_event: InputEvent) -> EquipmentState:
+	return null

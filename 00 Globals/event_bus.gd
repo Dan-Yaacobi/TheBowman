@@ -40,3 +40,8 @@ signal arrow_hit_enemy(_target: Enemy)
 
 #signals that you went to the next rift level
 signal entered_rift_portal
+
+signal equipment_dropped(equip: Equipment)
+
+signal equipment_interaction_enter(equip: Equipment)
+signal equipment_interaction_exit(equip: Equipment)

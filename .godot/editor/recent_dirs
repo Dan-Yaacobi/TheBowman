@@ -1,3 +1,4 @@
+res://Items/Equipments/Bows/
 res://Enemies/EnemyData/EnemyValues/EvilBirds/
 res://Enemies/EnemyData/EnemyValues/Clouds/
 res://Enemies/EnemyData/EnemyValues/Spider/
@@ -19,4 +20,3 @@ res://HUD/Scene Transition/
 res://MainGame/
 res://Enemies/EnemyAbilities/Sparkle/
 res://Items/
-res://PlayerData/

@@ -24,3 +24,5 @@ func Process(_delta: float) -> EquipmentState:
 func Physics(_delta: float) -> EquipmentState:
 	return null
 	
+func HandleInput(_event: InputEvent) -> EquipmentState:
+	return null

@@ -4,7 +4,6 @@ class_name Equipment extends RigidBody2D
 
 @onready var state_machine: EquipmentStateMachine = $EquipmentStateMachine
 @onready var ground_ray: RayCast2D = $GroundRay
-@onready var magnet_area: Area2D = $MagnetArea
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ground_detection_area: Area2D = $GroundDetectionArea
