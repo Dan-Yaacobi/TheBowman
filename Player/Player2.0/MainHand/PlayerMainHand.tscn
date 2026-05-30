@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://7vjvk5bghwkq"]
+[gd_scene format=3 uid="uid://7vjvk5bghwkq"]
 
 [ext_resource type="Script" uid="uid://cnljqw751d587" path="res://Player/Player2.0/MainHand/player_main_hand.gd" id="1_grn42"]
 [ext_resource type="Texture2D" uid="uid://x2ybpkt3kmnk" path="res://Player/Player2.0/Sprites/PlayerHandSprite.png" id="2_075al"]
@@ -405,13 +405,13 @@ _data = {
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="PlayerMainHand" type="CharacterBody2D"]
+[node name="PlayerMainHand" type="CharacterBody2D" unique_id=1400376021]
 script = ExtResource("1_grn42")
 arrow = ExtResource("2_y7ab3")
 min_shot_power = 0.3
 max_offset = 15.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=23231684]
 z_index = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_075al")
@@ -420,37 +420,34 @@ hframes = 6
 vframes = 2
 frame = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3cely")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1997855398]
+libraries/ = SubResource("AnimationLibrary_3cely")
 
-[node name="HoldPosition" type="Node2D" parent="."]
+[node name="HoldPosition" type="Node2D" parent="." unique_id=245273370]
 position = Vector2(1, 8)
 
-[node name="ArrowPosition" type="Node2D" parent="."]
+[node name="ArrowPosition" type="Node2D" parent="." unique_id=1893792647]
 position = Vector2(1, 8)
 
-[node name="MainHandStateMachine" type="Node2D" parent="."]
+[node name="MainHandStateMachine" type="Node2D" parent="." unique_id=95782697]
 script = ExtResource("3_y475i")
 
-[node name="Idle" type="Node2D" parent="MainHandStateMachine"]
+[node name="Idle" type="Node2D" parent="MainHandStateMachine" unique_id=1742101838]
 script = ExtResource("4_24nrb")
 
-[node name="Pulling" type="Node2D" parent="MainHandStateMachine"]
+[node name="Pulling" type="Node2D" parent="MainHandStateMachine" unique_id=22069023]
 script = ExtResource("5_ysxrx")
-speed_decrease = 10.0
 
-[node name="MaxPull" type="Node2D" parent="MainHandStateMachine"]
+[node name="MaxPull" type="Node2D" parent="MainHandStateMachine" unique_id=1580267110]
 script = ExtResource("6_i2jfe")
 
-[node name="PerfectShotWindow" type="Timer" parent="MainHandStateMachine/MaxPull"]
+[node name="PerfectShotWindow" type="Timer" parent="MainHandStateMachine/MaxPull" unique_id=1097164913]
 wait_time = 0.5
 
-[node name="Swing" type="Node2D" parent="MainHandStateMachine"]
+[node name="Swing" type="Node2D" parent="MainHandStateMachine" unique_id=245290404]
 script = ExtResource("8_ww5t3")
 
-[node name="Sword" type="Node2D" parent="MainHandStateMachine/Swing"]
+[node name="Sword" type="Node2D" parent="MainHandStateMachine/Swing" unique_id=1686774002]
 visible = false
 z_index = 1
 position = Vector2(5, 5)
@@ -459,11 +456,11 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("9_3cqt0")
 stats = SubResource("Resource_30xy1")
 
-[node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword"]
+[node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1919667962]
 position = Vector2(8.202132e-05, -22.666668)
 texture = ExtResource("8_y7ab3")
 
-[node name="SlashEffect" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword"]
+[node name="SlashEffect" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1901214077]
 z_index = 2
 position = Vector2(-22.000153, -41.999924)
 rotation = -1.5708
@@ -472,12 +469,10 @@ texture = ExtResource("10_3m267")
 hframes = 5
 frame = 4
 
-[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="MainHandStateMachine/Swing/Sword/SlashEffect"]
-libraries = {
-&"": SubResource("AnimationLibrary_5orw7")
-}
+[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="MainHandStateMachine/Swing/Sword/SlashEffect" unique_id=1107291960]
+libraries/ = SubResource("AnimationLibrary_5orw7")
 
-[node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword"]
+[node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
 position = Vector2(-9.999992, 2.0000362)
 rotation = -1.5708
 scale = Vector2(2, 2)
@@ -485,14 +480,14 @@ collision_layer = 0
 collision_mask = 132
 script = ExtResource("13_5ej1j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox" unique_id=623930274]
 position = Vector2(22, 0)
 shape = SubResource("CircleShape2D_5ej1j")
 debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)
 
-[node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing"]
+[node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing" unique_id=1585976196]
 
-[node name="PerfectAimParticles" type="CPUParticles2D" parent="."]
+[node name="PerfectAimParticles" type="CPUParticles2D" parent="." unique_id=490070079]
 z_index = 1
 position = Vector2(0, 5)
 scale = Vector2(0.5, 0.5)

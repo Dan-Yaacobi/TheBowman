@@ -18,7 +18,8 @@ func upgrade_jumps(amount: int) -> void:
 	player.jump_action.jumps = player.stats.max_jumps
 	
 func upgrade_knockback_resistance(amount: int) -> void:
-	player.stats.knockback_resistance += amount
+	return
+	#player.stats.knockback_resistance.add += amount
 
 
 func add_shooting_ability(ability: ShootAbility) -> void:

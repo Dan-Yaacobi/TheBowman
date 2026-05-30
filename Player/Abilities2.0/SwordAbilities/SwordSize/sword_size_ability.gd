@@ -15,4 +15,4 @@ func update_ability(_amount = 0) -> void:
 	sword_size += randf_range(0.05,0.1)
 
 func get_tooltip() -> String:
-	return "Sword Size: " + str(PlayerManager.player.stats.sword_size + sword_size)
+	return "Sword Size: " + str(PlayerManager.player.stats.sword_size.value() + sword_size)

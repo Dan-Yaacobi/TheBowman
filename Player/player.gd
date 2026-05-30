@@ -2,7 +2,6 @@ class_name Player extends CharacterBody2D
 
 signal died
 signal money_changed
-signal combo(amount: int)
 signal took_hit
 signal critical_hit
 signal dash_finished
@@ -17,9 +16,6 @@ signal dash_finished
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var special_ability_cooldown: Timer = $SpecialAbilityCooldown
-@onready var combo_timer: Timer = $ComboActivated/ComboTimer
-@onready var combo_effect: CPUParticles2D = $ComboActivated/ComboEffect
-@onready var combo_activated_effect: CPUParticles2D = $ComboActivated/ComboActivatedEffect
 @onready var upgrades: Upgrades = $Upgrades
 
 @onready var slow: Slow = $Debuffs/Slow
@@ -56,9 +52,6 @@ var special_ability_available: bool = true
 
 var dropping_down: bool = false
 
-var combo_counter: int = 48
-var combo_buff: bool = false
-
 var base_stats: PlayerStats
 var bonus_stats: PlayerStats
 var current_minions: Array[Companion] = []
@@ -82,11 +75,10 @@ func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
-	stats.hp = stats.stamina
+	stats.hp = stats.max_hp
 	init_bow()
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
-	health_bar.init_health(stats.stamina)
-	combo_timer.timeout.connect(end_combo_buff)
+	health_bar.init_health(stats.max_hp)
 	init_base_stats()
 	init_bonus_stats()
 	reset_to_base_stats()
@@ -123,7 +115,6 @@ func get_buff_tooltip(_id: int) -> String:
 	return ""
 func reset_to_base_stats() -> void:
 	base_stats.money = stats.money
-	base_stats.upgrd_points = stats.upgrd_points
 	
 	for ability in stats.jump_abilities:
 		ability.deactivate_ability(self)
@@ -264,11 +255,6 @@ func set_hands_new_bow() -> void:
 func init_bow() -> void:
 	current_weapon = stats.weapon_scene.instantiate()
 	set_hands_new_bow()
-
-	#current_weapon.combo_loss.connect(combo_lost)
-	#current_weapon.combo_gained.connect(combo_gained)
-	#current_weapon.init_weapon(self,current_weapon)
-	
 	if current_weapon.weapon_data.special_ability_cooldown <= 0:
 		special_ability_cooldown.wait_time = 1
 	else:
@@ -298,7 +284,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 func start_invincibilty() -> void:
 	modulate.a = 0.5
 	invincible = true
-	invincibility_timer.wait_time = stats.invinc_duration + get_stamina() * 0.02
+	invincibility_timer.wait_time = stats.invinc_duration.value()
 	invincibility_timer.start()
 	pass
 	
@@ -308,7 +294,7 @@ func invincibility_over() -> void:
 	hit_box.monitoring = true
 	
 func heal(amount: int) -> void:
-	if stats.hp + amount <= get_stamina():
+	if stats.hp + amount <= stats.max_hp:
 		stats.hp += amount
 		health_bar.heal(amount)
 		display_combat_text(amount, Color.GREEN)
@@ -361,36 +347,6 @@ func enable_jump() -> void:
 
 func disable_jump() -> void:
 	jump_action.can_jump = false
-	
-############# COMBO METHODS #############
-func combo_lost() -> void:
-	combo_counter = 0
-	combo.emit(combo_counter)
-	pass
-
-func combo_gained() -> void:
-	combo_counter += 1
-	if stats.max_combo < combo_counter:
-		stats.max_combo = combo_counter
-		
-	if combo_counter %stats.combo_to_activate == 0:
-		combo_bonus_activate()
-	combo.emit(combo_counter)
-	pass
-
-func combo_bonus_activate() -> void:
-	combo_activated_effect.emitting = true
-	combo_buff = true
-	combo_timer.wait_time = stats.combo_duration
-	combo_timer.start()
-	combo_effect.emitting = true
-	current_weapon.weapon_data.combo_buff_activated = true
-
-func end_combo_buff() -> void:
-	if combo_buff:
-		combo_buff = false
-		combo_effect.emitting = false
-		current_weapon.weapon_data.combo_buff_activated = false
 
 ############# IS METHODS #############
 func is_idle() -> bool:
@@ -402,28 +358,20 @@ func is_dash() -> bool:
 func is_moving() -> bool:
 	return direction != 0
 ############# GET METHODS #############
-func get_strength() -> int:
-	return stats.strength
-	
-func get_agility() -> int:
-	return stats.agility
-	
-func get_stamina() -> int:
-	return stats.stamina
 
 var max_speed: float = 1.0 ## 1.0 means maximum is double speed
 var C: int = 200 ## controls how fast you upgrade movement speed via agility
 
 ## asymptotic increase towards max speed
 func get_move_speed() -> float:
-	return stats.move_speed.value() * (1.0 + max_speed * get_agility() / (get_agility() + C))
+	return stats.move_speed.value()
 	
 func get_pull_speed() -> float:
-	return stats.pull_speed + get_agility()*0.01
+	return stats.pull_speed.value()
 
 func get_strength_shot_modifier() -> float:
-	return get_strength() + stats.basic_shot_power
-
+	return stats.basic_shot_power
+	
 func get_arrow_ability() -> Array[ArrowAbility]:
 	return stats.arrow_abilities
 
@@ -434,16 +382,14 @@ func get_shoot_abilities() -> Array[PlayerShootAbility]:
 	return stats.shooting_abilities
 
 func get_weapon_size() -> float:
-	return stats.sword_size
+	return stats.sword_size.value()
 
-func get_stat_points() -> int:
-	return stats.stat_points
 
 func get_sword_cd() -> float:
-	return max(stats.base_sword_cooldown - stats.sword_cooldown_mod,1.0)
+	return max(stats.base_sword_cooldown.value(),1.0)
 
 func get_sword_size() -> float:
-	return stats.sword_size + stats.sword_size_mod
+	return stats.sword_size.value()
 
 func get_sword_abilities() -> Array[PlayerSwordAbility]:
 	return stats.sword_abilities
@@ -453,8 +399,33 @@ func get_sword() -> Sword:
 	
 func get_gold_bonus() -> int:
 	return stats.extra_gold
-############# SET METHODS #############
+	
+func get_equipped_in_slot(_slot: EquipmentData.slots) -> EquipmentData:
+	match _slot:
+		EquipmentData.slots.BOW:
+			return stats.bow
+		EquipmentData.slots.ARROW:
+			return stats.arrow
+		EquipmentData.slots.RING:
+			return stats.ring
+		_:
+			return null
 
+
+############# SET METHODS #############
+func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) -> void:
+	if _slot != null and _new_item:
+		var current = get_equipped_in_slot(_slot)
+		if current:
+			current.unequip(stats)
+		_new_item.equip(stats)
+		match _slot:
+			EquipmentData.slots.BOW:
+				stats.bow = _new_item
+			EquipmentData.slots.ARROW:
+				stats.arrow = _new_item
+			EquipmentData.slots.RING:
+				stats.ring = _new_item
 func set_gold_bonus(_amount: int) -> void:
 	stats.extra_gold += _amount
 
@@ -472,23 +443,6 @@ func set_perfect_shots(was_perfect: bool) -> void:
 		perfect_shot_counter += 1
 	else:
 		perfect_shot_counter = 0
-
-func set_strength(amount: int) -> void:
-	stats.strength += amount
-	
-func set_agility(amount: int) -> void:
-	stats.agility += amount
-	
-func set_stamina(amount: int) -> void:
-	stats.stamina += amount
-	stats.hp = stats.stamina
-	health_bar.init_health(stats.stamina)
-
-func use_stat_point() -> bool:
-	if stats.stat_points > 0:
-		stats.stat_points -= 1
-		return true
-	return false
 
 ## If amount is not provided, the effect is considered permanent. Otherwise amount means how many times the effect can be consumed.
 func add_hit_effect(_effect: OnHitEffect, _amount: int = PERMA_EFFECT) -> void:

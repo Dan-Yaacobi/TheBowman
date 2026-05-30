@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemPool" format=3 uid="uid://b12a6b3o5v31k"]
+
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_v12hp"]
+[ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_a5xjm"]
+
+[resource]
+script = ExtResource("2_a5xjm")
+metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

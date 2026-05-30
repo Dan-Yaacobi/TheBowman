@@ -49,7 +49,6 @@ func value() -> float:
 	return (base_value + add_sum) * (1.0 + mult_sum)
 
 func add_buff(id: int,amount: float, type: buff_type) -> void:
-
 	var mod: Stat_Buff = find_buff(id, type)
 	if mod:
 		mod.increase_stack()
@@ -62,7 +61,6 @@ func remove_buff_completly(id: int, type: buff_type) -> void:
 	var array = find_array(type)
 	mod.reduce_all_stack()
 	array.erase(mod)
-
 
 func remove_buff_stack(id: int, type: buff_type) -> void:
 	var mod: Stat_Buff = find_buff(id, type)

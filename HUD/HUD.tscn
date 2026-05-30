@@ -8,8 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="7_lkt0t"]
 [ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
-[ext_resource type="PackedScene" uid="uid://7k55k4vb8xb6" path="res://StatsUI/StatsUIOpenButton.tscn" id="10_fwgky"]
-[ext_resource type="Script" uid="uid://du44dkpi0kvi3" path="res://HUD/combo_counter.gd" id="10_pd2p5"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
 [ext_resource type="Texture2D" uid="uid://w8syl8q3ggwa" path="res://StatsUI/Sprites/MoreInfoButton.png" id="12_kcgbh"]
 [ext_resource type="Texture2D" uid="uid://cvbcd7ca1egfo" path="res://StatsUI/Sprites/MoreInfoButtonPressed.png" id="13_ihvjp"]
@@ -19,158 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
-
-[sub_resource type="Animation" id="Animation_xyp2j"]
-resource_name = "Gained"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0, 0.25, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_klfvc"]
-resource_name = "Gained10"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0.25, 1, 1), Color(1, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_1e6g1"]
-resource_name = "Gained25"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(0.67451, 0.0392157, 0.8, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tq3ew"]
-resource_name = "Lost"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0.25, 1, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_06wjn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.05, 0.05)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r47hq"]
-_data = {
-&"Gained": SubResource("Animation_xyp2j"),
-&"Gained10": SubResource("Animation_klfvc"),
-&"Gained25": SubResource("Animation_1e6g1"),
-&"Lost": SubResource("Animation_tq3ew"),
-&"RESET": SubResource("Animation_06wjn")
-}
 
 [sub_resource type="Animation" id="Animation_7odlb"]
 length = 0.001
@@ -381,35 +227,6 @@ theme_override_font_sizes/font_size = 150
 text = "x0"
 script = ExtResource("9_t1yhm")
 
-[node name="ComboCounter" type="Label" parent="Control" unique_id=1642379438]
-visible = false
-layout_mode = 0
-offset_left = 1174.9998
-offset_top = -125.000015
-offset_right = 2309.9998
-offset_bottom = 216.99998
-scale = Vector2(0.05, 0.05)
-pivot_offset = Vector2(567, 171)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
-theme_override_font_sizes/font_size = 250
-text = "Combo: 0"
-script = ExtResource("10_pd2p5")
-
-[node name="ComboAnimation" type="AnimationPlayer" parent="Control/ComboCounter" unique_id=1947772916]
-libraries/ = SubResource("AnimationLibrary_r47hq")
-
-[node name="StatsUiOpenButton" parent="Control" unique_id=6288633 instance=ExtResource("10_fwgky")]
-layout_mode = 1
-offset_left = 1.0
-offset_top = 243.0
-offset_right = -1855.0
-offset_bottom = -805.0
-scale = Vector2(4, 4)
-
 [node name="Coin" type="Sprite2D" parent="Control" unique_id=480222187]
 position = Vector2(62.000004, 122)
 scale = Vector2(5, 5)
@@ -537,5 +354,12 @@ alignment = 2
 last_wrap_alignment = 0
 
 [node name="InteractionUi" parent="." unique_id=1611403518 instance=ExtResource("19_fjfvf")]
+stat_names_dict = Dictionary[String, String]({
+"arrow_damage": "Damage",
+"arrow_speed": "Arrow Velocity",
+"perfect_shot_bonus": "Perfect Shot Bonus",
+"perfect_shot_window": "Perfect Shot Window",
+"pull_speed": "Pull Speed"
+})
 
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

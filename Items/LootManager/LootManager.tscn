@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://brk4k1xmci30m"]
+
+[ext_resource type="Script" uid="uid://dw8olehnt8e1u" path="res://Items/LootManager/loot_manager.gd" id="1_6nptd"]
+[ext_resource type="Resource" uid="uid://ce4d00nu7udqk" path="res://Items/LootManager/ItemPools/bow_pool.tres" id="2_aliuf"]
+
+[node name="LootManager" type="Node2D" unique_id=897363174]
+script = ExtResource("1_6nptd")
+bow_pool = ExtResource("2_aliuf")

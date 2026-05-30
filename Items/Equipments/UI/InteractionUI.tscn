@@ -1,11 +1,20 @@
 [gd_scene format=3 uid="uid://doat5doem53a8"]
 
+[ext_resource type="Script" uid="uid://2kln8owfj3mr" path="res://Items/Equipments/UI/interaction_ui.gd" id="1_qxexj"]
+
 [node name="InteractionUI" type="Control" unique_id=696699529]
 layout_mode = 3
 anchor_right = 0.020000001
 anchor_bottom = 0.07300001
 offset_right = -38.4
 offset_bottom = -78.840004
+script = ExtResource("1_qxexj")
+stat_names_dict = Dictionary[String, String]({
+"arrow_damage": "Damage",
+"arrow_speed": "Arrow Velocity",
+"perfect_shot_bonus": "Perfect Shot Bonus",
+"perfect_shot_window": "Perfect Shot Window"
+})
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1158546383]
 layout_mode = 0
@@ -48,8 +57,21 @@ text = "str = 3"
 layout_mode = 2
 text = "Pull speed = 1.1"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=484818317]
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=732498011]
+layout_mode = 2
+alignment = 1
+
+[node name="EquipButton" type="Button" parent="PanelContainer/VBoxContainer/Buttons" unique_id=484818317]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Equip"
+
+[node name="DeleteButton" type="Button" parent="PanelContainer/VBoxContainer/Buttons" unique_id=250215097]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "delete"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/EquipButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/DeleteButton" to="." method="_on_delete_button_pressed"]

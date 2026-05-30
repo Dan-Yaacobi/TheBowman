@@ -1,9 +1,10 @@
 class_name EquipmentInteractedState extends EquipmentState
 @onready var on_ground: EquipmentOnGroundState = $"../OnGround"
+@onready var equipped: EquipmentEquippedState = $"../Equipped"
 
 func init() -> void:
 	equipment.interaction_area.connect("body_exited", _on_player_exited)
-	
+	EventBus.equip_item.connect(on_equip_pressed)
 	
 func Enter() -> void:
 	EventBus.equipment_interaction_enter.emit(equipment)
@@ -21,9 +22,10 @@ func Process(_delta: float) -> EquipmentState:
 func Physics(_delta: float) -> EquipmentState:
 	return null
 
-func on_equip_pressed() -> void:
+func on_equip_pressed(equip: Equipment) -> void:
+	if equip == equipment:
 	# called by the UI equip button signal
-	state_machine.ChangeState(state_machine.states[3]) # EquipmentEquippedState
+		state_machine.ChangeState(equipped) # EquipmentEquippedState
 
 func on_cancelled() -> void:
 	# called if player walks away or presses cancel

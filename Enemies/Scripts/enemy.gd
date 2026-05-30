@@ -111,6 +111,8 @@ func player_hit(body: CharacterBody2D) -> void:
 const EQUIPMENT = preload("uid://djxch32a87fle")
 
 func drop_item(_drops: Array[ItemData]) -> void:
+	EventBus.try_drop.emit(global_position)
+	return
 	var equip_drop: Equipment = EQUIPMENT.instantiate()
 	equip_drop.global_position = global_position
 	EventBus.equipment_dropped.emit(equip_drop)

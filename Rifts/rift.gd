@@ -1,8 +1,10 @@
 class_name Rift extends GameWorld
 
-@onready var rift_generator: RiftGenerator = $RiftGenerator
 @export var rift_values: Array[float]
+
+@onready var rift_generator: RiftGenerator = $RiftGenerator
 @onready var rift_enemy_spawner: RiftEnemySpawner = $RiftEnemySpawner
+@onready var loot_manager: LootManager = $LootManager
 
 var current_enemies: Array[Enemy]
 var rift_levels: Array[RiftLevel]
@@ -86,8 +88,11 @@ func kill_all_enemies() -> void:
 		remove_enemy(enemy)
 		enemy.queue_free()
 
-func drop_equipment(equip: Equipment) -> void:
-	call_deferred("add_child", equip)
+func drop_equipment(equip_data: EquipmentData, _position: Vector2) -> void:
+	var new_equip: Equipment = equip_data.equipment_scene.instantiate()
+	new_equip.data = equip_data
+	new_equip.global_position = _position
+	call_deferred("add_child",new_equip)
 
 func summon_effect(effect: Node2D) -> void:
 	call_deferred("add_child", effect)

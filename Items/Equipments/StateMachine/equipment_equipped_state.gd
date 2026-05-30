@@ -19,6 +19,7 @@ func Physics(_delta: float) -> EquipmentState:
 	return null
 
 func _reparent_to_player() -> void:
+	equipment.equip_to_player()
 	# reparent this equipment node to the player node
 	# e.g. equipment.reparent(player_reference)
 	pass

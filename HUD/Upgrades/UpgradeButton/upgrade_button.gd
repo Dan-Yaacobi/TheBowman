@@ -34,7 +34,6 @@ func disable() -> void:
 func upgrade() -> void:
 	node.upgrade(player)
 	await Engine.get_main_loop().process_frame
-	player.stats.upgrd_points += 1
 	player.add_display_buff(node)
 	upgrade_chosen.emit(node)
 	pass

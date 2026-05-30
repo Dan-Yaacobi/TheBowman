@@ -1,7 +1,7 @@
 class_name MaxPullMainHandState extends MainHandState
 
 @onready var idle: IdleMainHandState = $"../Idle"
-@export var perfect_shot_time: float = 0.5
+
 @onready var perfect_aim_particles: CPUParticles2D = $"../../PerfectAimParticles"
 @onready var perfect_shot_window: Timer = $PerfectShotWindow
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 func Enter() -> void:
 	#EventBus.out_of_mana.connect(release)
 	tired = false
-	perfect_shot_window.wait_time = perfect_shot_time + PlayerManager.player.get_stamina()*0.1
+	perfect_shot_window.wait_time = PlayerManager.player.stats.perfect_shot_window.value()
 	perfect_aim_particles.rotation = entity.rotation
 	perfect_aim_particles.emitting = true
 	hold_time = 0

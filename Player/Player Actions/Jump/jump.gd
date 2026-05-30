@@ -32,7 +32,7 @@ func reset_jumps(_var1, _var2, _var3, _var4) -> void:
 		set_jumps()
 
 func set_jumps() -> void:
-	jumps = player.stats.max_jumps + int(player.get_agility() / 20)
+	jumps = player.stats.max_jumps
 
 func try_jump() -> void:
 	if buffer_timer <= 0:
@@ -45,7 +45,7 @@ func try_jump() -> void:
 		buffer_timer = 0.0
 		
 func jump() -> void:
-	player.velocity.y = player.stats.jump_height
+	player.velocity.y = player.stats.jump_height.value()
 	hold_time = 0.0
 	is_holding = true
 

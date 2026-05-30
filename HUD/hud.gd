@@ -5,18 +5,20 @@ class_name HUD extends CanvasLayer
 @onready var total_buffs: TotalBuffs = $Control/TotalBuffs
 @onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
-@onready var combo_counter: ComboCounter = $Control/ComboCounter
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 
-@onready var interaction_ui: Control = $InteractionUi
+@onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
+
+var current_view_item: Equipment
 
 func _ready() -> void:
 	interaction_ui.visible = false
 	PlayerManager.player.money_changed.connect(update_money)
-	PlayerManager.player.combo.connect(combo_counter.update_combo)
 	coin_animation.play("Rotate")
 	EventBus.equipment_interaction_enter.connect(show_equip_interaction_ui)
 	EventBus.equipment_interaction_exit.connect(hide_equip_interaction_ui)
+	interaction_ui.equip_new_item.connect(equip_item)
+	interaction_ui.destory_new_item.connect(destory_item)
 	
 func get_health_bar() -> HealthBar:
 	return health_bar
@@ -38,6 +40,17 @@ func show_equip_interaction_ui(equipment: Equipment) -> void:
 	var screen_pos = equipment.get_viewport().get_canvas_transform() * equipment.position
 	interaction_ui.global_position = screen_pos + Vector2(0,-50)
 	interaction_ui.visible = true
-
+	interaction_ui.set_items(equipment, PlayerManager.player.stats.bow)
+	current_view_item = equipment
+	
 func hide_equip_interaction_ui(_equip: Equipment) -> void:
 	interaction_ui.visible = false
+	current_view_item = null
+
+func equip_item() -> void:
+	if current_view_item:
+		EventBus.equip_item.emit(current_view_item)
+
+func destory_item() -> void:
+	if current_view_item:
+		EventBus.destory_view_item.emit(current_view_item)

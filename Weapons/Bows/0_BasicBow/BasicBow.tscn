@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc4lu6kenryfn"]
+[gd_scene format=3 uid="uid://bc4lu6kenryfn"]
 
 [ext_resource type="Script" uid="uid://bvwpiatycoo4e" path="res://Weapons/Bows/0_BasicBow/basic_bow.gd" id="1_foym6"]
 [ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_0a0xf"]
@@ -21,6 +21,6 @@ bow_position = Vector2(0, 6.667)
 special_ability = SubResource("Resource_nwrg2")
 shots = 2
 
-[node name="BasicBow" type="Node2D"]
+[node name="BasicBow" type="Node2D" unique_id=574485521]
 script = ExtResource("1_foym6")
 weapon_data = SubResource("Resource_yex3g")

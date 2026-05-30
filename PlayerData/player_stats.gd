@@ -2,6 +2,15 @@ class_name PlayerStats extends Resource
 
 var player: Player
 
+@export_subgroup("Basic Stats")
+@export var hp: int
+@export var max_hp: int
+@export var knockback_resistance: Stat
+@export var reset_upgrades: bool = false
+@export var max_minions: int 
+@export var invinc_duration: Stat
+@export var extra_gold: int = 0
+
 @export_subgroup("Enviorments")
 @export var down_gravity: int
 @export var up_gravity: int
@@ -11,63 +20,45 @@ var player: Player
 @export var air_dec: int
 @export var air_acc: int
 
-@export_subgroup("Player Stats")
-@export var hp: int
+@export_subgroup("Movement")
+@export var dash_power: Stat
 @export var move_speed: Stat
 @export var max_jumps: int
-@export var jump_height: int
-@export var knockback_resistance: int
-@export var strength: int
-@export var agility: int
-@export var stamina: int
-@export var menu_speed: int
-@export var in_menu: bool
-@export var boost_mana_rate: float
-@export var reset_upgrades: bool = false
-@export var max_minions: int 
-@export var dash_power: int
-@export var invinc_duration: int
-@export var stat_points: int = 0
-@export var extra_gold: int = 0
-
-@export_subgroup("Combo")
-@export var max_combo: int
-@export var combo_to_activate: int
-@export var combo_duration: float
+@export var jump_height: Stat
 
 @export_subgroup("Shooting")
 @export var basic_shot_power: float
-@export var shoot_cost: int
 @export var max_pull_strength: float
-@export var shooting_abilities: Array[PlayerShootAbility]
-@export var pull_speed: float = 1:
-	get:
-		return pull_speed
-	set(value):
-		pull_speed = clamp(value,1,4)
+@export var perfect_shot_window: Stat
+@export var perfect_shot_bonus: Stat
+@export var arrow_damage: Stat
+@export var arrow_speed: Stat
+@export var arrow_count: Stat
+@export var arrow_pierce: Stat
+@export var pull_speed: Stat
+@export var pushback_power: Stat
+
 
 @export_subgroup("Player Items")
 @export var money: int
-@export var upgrd_points: int
-@export var weapon_name: String
 @export var weapon_scene: PackedScene
-@export var towers: Array[TowerData]
-
+@export var arrow: EquipmentData
+@export var ring: EquipmentData
+@export var bow: EquipmentData
 
 @export_subgroup("Abilities")
-@export var passive_abilities: Array[PlayerPassiveAbility]
-
 @export var jump_abilities: Array[JumpAbility]
 @export var shoot_abilities: Array[ShootAbility]
 @export var arrow_abilities: Array[ArrowAbility]
 @export var slam_abilities: Array[SlamAbility]
+@export var shooting_abilities: Array[PlayerShootAbility]
+@export var sword_abilities: Array[PlayerSwordAbility]
+@export var passive_abilities: Array[PlayerPassiveAbility]
 
 @export_subgroup("Sword")
-@export var sword_size: float = 1.0
-@export var sword_size_mod: float = 0.0
-@export var base_sword_cooldown: float = 1.5
-@export var sword_cooldown_mod: float = 0.0
-@export var sword_abilities: Array[PlayerSwordAbility]
+@export var sword_size: Stat
+@export var base_sword_cooldown: Stat
+@export var sword_damage: Stat
 
 @export_subgroup("Rift")
 @export var rift_level: int = 1
@@ -83,7 +74,3 @@ func add_arrow_ability(ability: ArrowAbility) -> void:
 func add_shoot_ability(ability: ShootAbility) -> void:
 	if ability != null:
 		shoot_abilities.append(ability)
-
-func add_tower() -> void:
-	var new_tower: TowerData = TowerData.new()
-	towers.append(new_tower)

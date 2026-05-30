@@ -29,7 +29,7 @@ func Enter() -> void:
 	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
 	entity.can_swing = false
 	finished = false
-	slash_hurt_box.damage = floor(PlayerManager.player.get_strength()/2)
+	slash_hurt_box.damage = floor(PlayerManager.player.stats.sword_damage.value())
 	slash_animation_player.play("SlashEffect")
 	set_direction()
 	entity.animation_player.play("Swing")

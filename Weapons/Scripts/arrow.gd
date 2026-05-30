@@ -4,7 +4,6 @@ signal arrow_missed
 signal crit_hit
 signal leeched(amount: int, enemy_position: Vector2)
 
-@export var data: ArrowData
 @export var explosion_chance: int = 20
 @onready var sprite: ArrowSprite = $Sprite2D
 
@@ -60,8 +59,7 @@ func _ready() -> void:
 	hurt_box.set_arrow(self)
 	hurt_box.successful_hit.connect(clear_shot)
 	succesfuly_hit = false
-	if data.scale != 0:
-		scale *= data.scale
+
 	
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5,true)
@@ -82,18 +80,12 @@ func hit(body) -> void:
 			clear_shot()
 			
 func calc_dmg(shot_power: float) -> void:
-	var perfect_bonus = 1.8 if shot_power >= 1.0 else 1.0
-	damage = floor((PlayerManager.player.get_strength() / 2 + data.base_damage + 4) * shot_power * perfect_bonus)
-#func calc_dmg(shot_power: float) -> void:
-	#damage = floor((PlayerManager.player.get_strength()/2 + data.base_damage + 4)
-	#*pow(shot_power, 2))
+	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
+	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus)
 
 func calc_knockback(shot_power: float) -> void:
-	var perfect_bonus = 1.8 if shot_power >= 1.0 else 1.0
-	knockback = data.pushback_power * shot_power * perfect_bonus + log(velocity.length())
-	
-#func calc_knockback(shot_power: float) -> void:
-	#knockback = data.pushback_power * shot_power + log(velocity.length())
+	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
+	knockback = PlayerManager.player.stats.pushback_power.value() * shot_power * perfect_bonus + log(velocity.length())
 
 func explosion() -> void:
 	if can_explode:
@@ -176,7 +168,7 @@ func bleed_hit(_enemy: Enemy) -> void:
 	var roll_bleed: int = randi_range(0,100)
 	if roll_bleed < bleed_chance:
 		var new_bleed_debuff = BLEED_DEBUFF.instantiate()
-		new_bleed_debuff.set_damage(max(floor(PlayerManager.player.get_strength() / 10),1))
+		new_bleed_debuff.set_damage(1)
 		_enemy.apply_debuff(new_bleed_debuff, 5,5)
 		
 func apply_leech(enemy: Enemy) -> void:

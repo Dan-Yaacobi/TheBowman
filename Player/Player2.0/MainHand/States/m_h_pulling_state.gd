@@ -3,7 +3,6 @@ class_name PullingMainHandState extends MainHandState
 @onready var max_pull: MaxPullMainHandState = $"../MaxPull"
 @onready var idle: IdleMainHandState = $"../Idle"
 
-@export var speed_decrease: float
 var init_animation_speed: float = 1
 var finished_pulling: bool = false
 var full_pull_duration: float
@@ -45,10 +44,6 @@ func Exit() -> void:
 func Process(_delta: float) -> MainHandState:
 	entity.arrow_setup()
 	entity.shot_power += _delta * charge_rate
-	#entity.shot_power = Time.get_unix_time_from_system() - pull_start_time
-	#print(PlayerManager.player.stats.min_move_shoot_spd.final_stat())
-	#if PlayerManager.player.stats.move_speed > PlayerManager.player.stats.min_move_shoot_spd:
-		#PlayerManager.player.stats.move_speed -= _delta* speed_decrease
 	return null
 	
 #what happens during _physics_process update in this state
