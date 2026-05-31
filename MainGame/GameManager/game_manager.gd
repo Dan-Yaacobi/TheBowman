@@ -6,17 +6,21 @@ var prev_world: GameWorld
 var game:Game
 var hud: HUD
 
+var _is_transitioning: bool = false
+
 func _ready() -> void:
 	EventBus.changed_scene.connect(change_game_world)
 	EventBus.entered_rift_portal.connect(_on_portal_entered)
 
 func _on_portal_entered() -> void:
+	print(EventBus.entered_rift_portal.get_connections())
 	change_game_world(GameWorlds.worlds.Rift_1)
 	
 func set_game(_game: Game) -> void:
 	if _game:
 		game = _game
 		hud = game.hud
+
 func spawn_player(_pos: Vector2 = Vector2.ZERO) -> void:
 	PlayerManager.player.camera.position_smoothing_enabled = false
 
@@ -25,6 +29,9 @@ func spawn_player(_pos: Vector2 = Vector2.ZERO) -> void:
 
 
 func change_game_world(_new: GameWorlds.worlds) -> void:
+	if _is_transitioning:
+		return
+	_is_transitioning = true
 	if _new is GameWorlds.worlds:
 		game.hud.visible = false
 		
@@ -32,6 +39,9 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 
 		var next_world = GameWorlds.get_world(_new)
 		
+		if next_world is MainMenu:
+			PlayerManager.player.stats.rift_level = 1
+			
 		get_tree().paused = true
 		
 		prev_world = curr_world
@@ -55,4 +65,5 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		PlayerManager.player.camera.position_smoothing_enabled = true
 		await get_tree().process_frame
 		await SceneTransition.fade_in()
-		#EventBus.finished_loading.emit()
+
+		_is_transitioning = false

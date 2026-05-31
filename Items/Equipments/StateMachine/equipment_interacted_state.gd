@@ -4,14 +4,15 @@ class_name EquipmentInteractedState extends EquipmentState
 
 func init() -> void:
 	equipment.interaction_area.connect("body_exited", _on_player_exited)
-	EventBus.equip_item.connect(on_equip_pressed)
 	
 func Enter() -> void:
+	EventBus.equip_item.connect(on_equip_pressed)
 	EventBus.equipment_interaction_enter.emit(equipment)
 	_pause_game_loop()
 	_shift_camera_up()
 
 func Exit() -> void:
+	EventBus.equip_item.disconnect(on_equip_pressed)
 	EventBus.equipment_interaction_exit.emit(equipment)
 	_restore_camera()
 	_unpause_game_loop()

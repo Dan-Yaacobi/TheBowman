@@ -101,7 +101,7 @@ func enemy_died() -> void:
 	
 func knockback(_hurt_box: HurtBox) -> void:
 	if stats.can_be_knockedback:
-		knockback_velocity = -_hurt_box.knockback_dir * _hurt_box.knockback_power
+		knockback_velocity = _hurt_box.knockback_dir * _hurt_box.knockback_power
 
 func player_hit(body: CharacterBody2D) -> void:
 	if body is Player:

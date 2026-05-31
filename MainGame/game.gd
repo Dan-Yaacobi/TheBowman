@@ -24,6 +24,8 @@ func _ready() -> void:
 	PlayerManager.player.health_bar = hud.get_health_bar()
 	PlayerManager.player.total_buffs = hud.get_total_buffs()
 	PlayerManager.player.special_ability_cd = hud.get_special_ability_cd()
+	cloud_timer.timeout.connect(summon_cloud)
+	cloud_timer.start()
 	add_child(PlayerManager.player)
 
 func summon_cloud() -> void:

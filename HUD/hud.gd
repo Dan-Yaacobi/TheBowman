@@ -46,7 +46,7 @@ func show_equip_interaction_ui(equipment: Equipment) -> void:
 func hide_equip_interaction_ui(_equip: Equipment) -> void:
 	interaction_ui.visible = false
 	current_view_item = null
-
+	
 func equip_item() -> void:
 	if current_view_item:
 		EventBus.equip_item.emit(current_view_item)

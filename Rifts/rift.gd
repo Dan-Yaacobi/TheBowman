@@ -50,6 +50,7 @@ func set_scene(_player) -> void:
 	#for i in range(20):
 		#rift_generator.generate()
 	_player.stats.rift_level += 1
+	
 	#print("called again")
 	#var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
 	#PlayerManager.player.global_position = start_chunk.spawn_position()

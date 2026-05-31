@@ -28,7 +28,6 @@ func Exit() -> void:
 	player.collision_shape.set_deferred("disabled", false)
 	player.stats.hp = player.stats.max_hp
 	player.health_bar._set_health(player.stats.max_hp)
-	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	pass
 	
 #what happens during process update in this state

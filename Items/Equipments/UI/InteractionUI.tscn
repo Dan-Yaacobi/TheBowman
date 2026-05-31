@@ -27,21 +27,6 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1852107598]
 layout_mode = 2
 
-[node name="CurrentItem" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=667999494]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/CurrentItem" unique_id=770324539]
-layout_mode = 2
-text = "BasicBow"
-
-[node name="Stat1" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/CurrentItem" unique_id=345967107]
-layout_mode = 2
-text = "str=2"
-
-[node name="Stat2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/CurrentItem" unique_id=935645154]
-layout_mode = 2
-text = "Pull speed = 1.2"
-
 [node name="NewItem" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1569960710]
 layout_mode = 2
 

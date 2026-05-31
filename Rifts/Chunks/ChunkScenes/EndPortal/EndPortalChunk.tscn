@@ -16,6 +16,7 @@ script = ExtResource("1_1i8qb")
 [node name="Portal" parent="." unique_id=1887135002 instance=ExtResource("2_8k06k")]
 position = Vector2(0, -24)
 color = Color(1, 0, 0, 1)
+destination = 3
 is_rift_portal = true
 
 [node name="Island" parent="." unique_id=384425143 instance=ExtResource("3_vmfpc")]

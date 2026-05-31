@@ -1,18 +1,27 @@
 class_name LootManager extends Node2D
-
 const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
+
+# Rarity
+@export var quality_floor_max: float = 0.5       # how high the floor gets at max rarity
+@export var quality_ceiling_min: float = 0.6     # ceiling for rarity 1 items
+@export var rarity_bias: float = 2.0             # higher = legendary items rarer (C base)
+
+# Rift level scaling
+@export var rift_stat_scale: float = 0.1         # A: how much stat ranges grow per rift (logarithmic)
+@export var rift_quality_scale: float = 0.1      # B: how much rift level boosts quality floor
+@export var rift_rarity_scale: float = 0.1       # C: how much rift level reduces rarity bias
+
 @export var bow_pool: ItemPool
 @export var quiver_pool: ItemPool
 @export var ring_pool: ItemPool
-
 enum Slot { BOW, QUIVER, RING }
 
 func _ready() -> void:
 	set_up()
-	
+
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
-	
+
 func drop_item(slot: Slot) -> EquipmentData:
 	return roll_item(bow_pool)
 	match slot:
@@ -25,7 +34,6 @@ func drop_random_item(_position: Vector2) -> EquipmentData:
 	var item: EquipmentData = drop_item(randi_range(0, 2) as Slot)
 	EventBus.equipment_dropped.emit(item, _position)
 	return item
-# In LootManager
 
 func roll_item(pool: ItemPool) -> EquipmentData:
 	var data = EquipmentData.new()
@@ -33,32 +41,60 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 	data.display_name = pool.possible_display_names.pick_random()
 	data.equipment_scene = load(EQUIPMENT)
 
-	var count = randi_range(pool.min_stat_count, pool.max_stat_count)
-	var available = pool.possible_stats.duplicate()
-	available.shuffle()
+	var rift_level: int = PlayerManager.player.stats.rift_level
 
-	var total_quality: float = 0.0
+	# A: logarithmic stat range scalar — gradual growth with rift level
+	var rift_stat_scalar = 1.0 + log(max(rift_level, 1)) * rift_stat_scale
 
-	for i in count:
-		var def: StatRollDef = available[i]
-		var amount = randf_range(def.min_value, def.max_value)
+	# B: rift quality floor boost — later rifts guarantee better rolls
+	var rift_quality_boost = log(max(rift_level, 1)) * rift_quality_scale
+
+	# C: rift rarity bias reduction — higher rarity items more common in later rifts
+	var effective_rarity_bias = max(rarity_bias - log(max(rift_level, 1)) * rift_rarity_scale, 0.5)
+
+	# roll rarity first
+	var rarity_roll = randf()
+	var rarity_curved = pow(rarity_roll, effective_rarity_bias)
+	data.rarity = 1.0 + rarity_curved * (CustomVariables.MAX_RARITY - 1)
+
+	# stat count scales with rarity
+	var rarity_normalized = (data.rarity - 1.0) / (CustomVariables.MAX_RARITY - 1.0)
+	var count = pool.min_stat_count + roundi(rarity_normalized * (pool.max_stat_count - pool.min_stat_count))
+
+	# floor and ceiling — rarity driven + rift quality boost
+	var quality_floor = clampf(rarity_normalized * quality_floor_max + rift_quality_boost, 0.0, 1.0)
+	var quality_ceiling = clampf(rarity_normalized * (1.0 - quality_ceiling_min) + quality_ceiling_min + rift_quality_boost, 0.0, 1.0)
+
+	var selected = _weighted_pick(pool.possible_stats.duplicate(), count)
+	for def in selected:
+		var roll_normalized = randf()
+		var roll_curved = pow(roll_normalized, def.rarity_weight)
+		var roll_bounded = quality_floor + roll_curved * (quality_ceiling - quality_floor)
+		# A: scale the actual stat range by rift scalar
+		var scaled_min = def.min_value * rift_stat_scalar
+		var scaled_max = def.max_value * rift_stat_scalar
+		var amount = scaled_min + roll_bounded * (scaled_max - scaled_min)
 		amount = snappedf(amount, 0.1)
 		data.add_modifier(def.stat_name, amount, def.type)
 
-		# Quality: how close was this roll to the max (0.0 → 1.0)
-		var range_size = def.max_value - def.min_value
-		var quality: float = 0.0
-		if range_size > 0.0:
-			quality = (amount - def.min_value) / range_size
-		total_quality += quality
-
-	# Normalize: average quality per stat, scaled by stat count generosity
-	# max_stat_count stats all at 1.0 = rarity 5
-	var max_possible_quality = float(pool.max_stat_count)
-	var raw_score = total_quality / max_possible_quality  # 0.0 → ~1.0+
-	
-	# Map to 1–5 range (scores above 1.0 can push past 5, handled by rarity_color)
-	data.rarity = 1.0 + raw_score * 4.0
-	data.texture = pool.possible_textures[mini(floori(data.rarity) - 1, pool.possible_textures.size() - 1)]
-
+	data.texture = pool.possible_textures[mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)]
 	return data
+
+func _weighted_pick(stats: Array[StatRollDef], count: int) -> Array[StatRollDef]:
+	var result: Array[StatRollDef] = []
+	var remaining = stats.duplicate()
+	for i in count:
+		if remaining.is_empty():
+			break
+		var total_weight = 0.0
+		for stat in remaining:
+			total_weight += 1.0 / stat.rarity_weight
+		var roll = randf() * total_weight
+		var cumulative = 0.0
+		for stat in remaining:
+			cumulative += 1.0 / stat.rarity_weight
+			if roll <= cumulative:
+				result.append(stat)
+				remaining.erase(stat)
+				break
+	return result
