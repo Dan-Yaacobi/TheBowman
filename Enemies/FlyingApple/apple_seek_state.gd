@@ -19,6 +19,7 @@ func Enter() -> void:
 	
 #what happens when the player exits this state
 func Exit() -> void:
+	succesfull_hit = false 
 	pass
 	
 #what happens during process update in this state
@@ -42,6 +43,6 @@ func Physics(_delta: float) -> EnemyState:
 	return null
 
 func hit_player(_var) -> void:
+	if state_machine.curr_state != self:
+		return
 	succesfull_hit = true
-	pass
-	

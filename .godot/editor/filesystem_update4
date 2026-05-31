@@ -32,3 +32,4 @@ res://Rifts/Chunks/ChunkScenes/EndPortal/EndPortalChunk.tscn
 res://Rifts/RiftEnemySpawner/rift_enemy_spawner.gd
 res://Player/States/player_dead_state.gd
 res://Rifts/Chunks/Utility/FallingDeath/falling_death.gd
+res://Enemies/FlyingApple/apple_seek_state.gd
