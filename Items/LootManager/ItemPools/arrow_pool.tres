@@ -1,8 +1,45 @@
 [gd_resource type="Resource" script_class="ItemPool" format=3 uid="uid://b12a6b3o5v31k"]
 
+[ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.png" id="1_n3tsu"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_v12hp"]
+[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Arrows/Sprites/Quiver_Wooden.png" id="2_7typt"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_a5xjm"]
+[ext_resource type="Texture2D" uid="uid://dajhgy0nad6gm" path="res://Weapons/Bows/1_BlueBow/BlueArrow/BlueArrow.png" id="2_x2s5p"]
+[ext_resource type="Texture2D" uid="uid://cy35gvnyu51eg" path="res://Weapons/Bows/2_RedBow/RedArrow/RedArrow.png" id="3_7fb6t"]
+[ext_resource type="Texture2D" uid="uid://7mgxqtpduwa3" path="res://Items/Equipments/Arrows/Sprites/Quiver_Blue.png" id="3_u1e4n"]
+[ext_resource type="Texture2D" uid="uid://bchin526oeubw" path="res://Items/Equipments/Arrows/Sprites/Quiver_Red.png" id="4_2aujr"]
+[ext_resource type="Texture2D" uid="uid://bhn7ebb76412p" path="res://Weapons/Bows/3_BlackBow/BlackArrow/BlackArrow.png" id="4_rhkdk"]
+[ext_resource type="Texture2D" uid="uid://cltfh8d1xgqfm" path="res://Items/Equipments/Arrows/Sprites/Quiver_Black.png" id="5_0mpld"]
+[ext_resource type="Texture2D" uid="uid://2k08i7rod8ti" path="res://Weapons/Bows/4_NatureBow/NatureArrow/PoisonArrow.png" id="5_v5xmh"]
+[ext_resource type="Texture2D" uid="uid://b6th5fykp34sr" path="res://Items/Equipments/Arrows/Sprites/Quiver_Poison.png" id="6_hauan"]
+
+[sub_resource type="Resource" id="Resource_v12hp"]
+script = ExtResource("1_v12hp")
+stat_name = "arrow_damage"
+min_value = 5.0
+max_value = 15.0
+rarity_weight = 1.5
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_a5xjm"]
+script = ExtResource("1_v12hp")
+stat_name = "arrow_speed"
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_f7nmc"]
+script = ExtResource("1_v12hp")
+stat_name = "arrow_weight"
+min_value = -50.0
+max_value = 100.0
+rarity_weight = 0.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [resource]
 script = ExtResource("2_a5xjm")
+possible_stats = Array[ExtResource("1_v12hp")]([SubResource("Resource_v12hp"), SubResource("Resource_a5xjm"), SubResource("Resource_f7nmc")])
+possible_textures = Array[Texture2D]([ExtResource("2_7typt"), ExtResource("3_u1e4n"), ExtResource("4_2aujr"), ExtResource("5_0mpld"), ExtResource("6_hauan")])
+equipped_textures = Array[Texture2D]([ExtResource("1_n3tsu"), ExtResource("2_x2s5p"), ExtResource("3_7fb6t"), ExtResource("4_rhkdk"), ExtResource("5_v5xmh")])
+possible_display_names = Array[String](["Wooden Arrows", "Blue Arrows", "Red Arrows", "Black Arrows", "Poison Arrows"])
+slot = 1
+scale = 0.2
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

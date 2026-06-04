@@ -20,7 +20,10 @@ class StatModifier:
 @export var display_name: String
 @export var texture: Texture2D
 @export var rarity: float
+@export var equipped_texture: Texture2D
 
+var ability: PlayerAbility = null
+var dropped_scale: float
 var equipment_scene: PackedScene
 var slot: slots
 var modifiers: Array = []

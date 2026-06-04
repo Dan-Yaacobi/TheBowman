@@ -22,15 +22,15 @@ func apply_drop_impulse() -> void:
 	apply_impulse(Vector2(randf_range(-30, 30), -200))
 	
 func equip_to_player() -> void:
-	#var current: EquipmentData = PlayerManager.player.get_equipped_in_slot(data.slot)
-	#if current:
-		#current.unequip(PlayerManager.player.stats)
-	#data.equip(PlayerManager.player.stats)
 	PlayerManager.player.set_equipped_in_slot(data.slot, data)
+	if data.ability:
+		PlayerManager.player.register_ability(data.ability)
 	clear_item(self)
-#
+
 func unequip_from_player() -> void:
 	data.unequip(PlayerManager.player.stats)
+	if data.ability:
+		PlayerManager.player.unregister_ability(data.ability)
 	PlayerManager.player.set_equipped_in_slot(data.slot, null)
 	
 func freeze_body() -> void:

@@ -46,5 +46,6 @@ func HandleInput(_event: InputEvent) -> State:
 	return null
 	
 func reset() -> void:
+	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	death_done = true
 	

@@ -2,17 +2,19 @@
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
-[ext_resource type="Script" uid="uid://cd0876l1xhef" path="res://Player/Abilities/ArrowAbilities/arrow_ability.gd" id="2_hqjia"]
-[ext_resource type="Script" uid="uid://bu8rrfoiwqr26" path="res://Player/Abilities/JumpAbilities/jump_ability.gd" id="3_x70vp"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_o1b5h"]
+[ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.png" id="3_7w4lt"]
 [ext_resource type="Script" uid="uid://dcyomtj13exhm" path="res://Player/Abilities2.0/PassiveAbilities/player_passive_ability.gd" id="4_croik"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
-[ext_resource type="Script" uid="uid://bob8cvby6imtx" path="res://Player/Abilities/ShootAbilities/shoot_ability.gd" id="5_wo5nf"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn" id="6_7w4lt"]
 [ext_resource type="Script" uid="uid://bqnydmr6nno03" path="res://Player/Abilities2.0/ShootAbilities/player_shoot_ability.gd" id="6_croik"]
 [ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
-[ext_resource type="Script" uid="uid://c8xkfwn8288iq" path="res://Player/Abilities/SlamAbilities/slam_ability.gd" id="7_bgaaw"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="6_ww5s2"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="Script" uid="uid://dfp1lq87xvbec" path="res://Player/Abilities2.0/DashAbilities/player_dash_ability.gd" id="7_rqaa0"]
+[ext_resource type="Script" uid="uid://bouplwlkskimt" path="res://Player/Abilities2.0/JumpAbilities/player_jump_ability.gd" id="8_o1b5h"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
 [ext_resource type="Script" uid="uid://bwy6ucreholkq" path="res://Player/Abilities2.0/SwordAbilities/play_sword_abilities.gd" id="8_x70vp"]
 [ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
@@ -25,7 +27,6 @@
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
 [ext_resource type="Resource" uid="uid://ck8ck21kjw4n2" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres" id="16_7w4lt"]
 [ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
-[ext_resource type="Script" uid="uid://bfh1b4g0isfgh" path="res://Player/upgrades.gd" id="20_mgkdb"]
 [ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="22_bgaaw"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
 [ext_resource type="Script" uid="uid://5aetuiovci75" path="res://Player/grappling_state.gd" id="23_gv3fu"]
@@ -38,6 +39,12 @@
 [ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
 [ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
 [ext_resource type="Script" uid="uid://bssc4pin0y0q2" path="res://Player/spawn_handler.gd" id="41_7w4lt"]
+
+[sub_resource type="Resource" id="Resource_vuo2u"]
+script = ExtResource("2_o1b5h")
+texture = ExtResource("3_7w4lt")
+equipped_texture = ExtResource("3_7w4lt")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
 [sub_resource type="Resource" id="Resource_i325y"]
 script = ExtResource("4_yf47d")
@@ -58,10 +65,19 @@ script = ExtResource("4_yf47d")
 base_value = 150.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
+[sub_resource type="Resource" id="Resource_ustk3"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
 [sub_resource type="Resource" id="Resource_x2ho1"]
 script = ExtResource("4_yf47d")
 base_value = 2.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_8agqw"]
+script = ExtResource("2_o1b5h")
+texture = ExtResource("6_ww5s2")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
 [sub_resource type="Resource" id="Resource_7w4lt"]
 script = ExtResource("4_yf47d")
@@ -144,7 +160,11 @@ arrow_count = SubResource("Resource_i325y")
 arrow_pierce = SubResource("Resource_nm06d")
 pull_speed = SubResource("Resource_yyr8h")
 pushback_power = SubResource("Resource_r04tr")
+arrow_weight = SubResource("Resource_ustk3")
 weapon_scene = ExtResource("10_x70vp")
+arrow = SubResource("Resource_vuo2u")
+arrow_scene = ExtResource("6_7w4lt")
+bow = SubResource("Resource_8agqw")
 sword_size = SubResource("Resource_rqaa0")
 base_sword_cooldown = SubResource("Resource_x2ho1")
 sword_damage = SubResource("Resource_lre2g")
@@ -336,9 +356,6 @@ color_ramp = SubResource("Gradient_u4yfg")
 one_shot = true
 
 [node name="SpecialAbilityCooldown" type="Timer" parent="." unique_id=2037916886]
-
-[node name="Upgrades" type="Node2D" parent="." unique_id=2021101307]
-script = ExtResource("20_mgkdb")
 
 [node name="BuffTooltipControl" type="Node2D" parent="." unique_id=109648080]
 script = ExtResource("26_8kdbo")

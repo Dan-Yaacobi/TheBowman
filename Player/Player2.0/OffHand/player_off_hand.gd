@@ -15,6 +15,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func set_new_bow(_data: EquipmentData) -> void:
+	if _data:
+		bow_sprite.texture = _data.texture
+		
 func new_bow(weapon_data: WeaponData) -> void:
 	string.default_color = weapon_data.string_color
 	bow_sprite.texture = weapon_data.sprite

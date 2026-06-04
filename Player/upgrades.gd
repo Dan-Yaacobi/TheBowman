@@ -6,7 +6,7 @@ var upgrades_dict: Dictionary = {"hp": "upgrade_hp","jumps": "upgrade_jumps",
 "knockback resistance": "upgrade_knockback_resistance","move speed": "upgrade_movement_speed"}
 
 var new_abilities_dict: Dictionary = {"jumps": "add_jumping_ability", "shooting": "add_shooting_ability", 
-"arrow":"add_arrow_ability", "slam": "add_slam_ability"}
+"arrow":"add_arrow_ability", "slam": "add_slam_ability", "dash": "add_dash_ability"}
 
 func upgrade_hp(amount: int) -> void:
 	player.stats.max_hp += amount

@@ -8,13 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c04dsaarp4w75" path="res://Weapons/Bows/3_BlackBow/BlackBow.png" id="5_gs463"]
 [ext_resource type="Texture2D" uid="uid://v6rpvfly0fmv" path="res://Weapons/Bows/4_NatureBow/PoisonIvy.png" id="6_l6j88"]
 
-[sub_resource type="Resource" id="Resource_2bno1"]
-script = ExtResource("1_s2d1f")
-stat_name = "arrow_damage"
-min_value = 5.0
-max_value = 10.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_s0yus"]
 script = ExtResource("1_s2d1f")
 stat_name = "arrow_speed"
@@ -47,7 +40,9 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [resource]
 script = ExtResource("2_ualu4")
-possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_2bno1"), SubResource("Resource_s0yus"), SubResource("Resource_a180u"), SubResource("Resource_l6j88"), SubResource("Resource_gs463")])
+possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_s0yus"), SubResource("Resource_a180u"), SubResource("Resource_l6j88"), SubResource("Resource_gs463")])
 possible_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88")])
+equipped_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88")])
 possible_display_names = Array[String](["Wooden Bow"])
+scale = 0.5
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

@@ -14,6 +14,10 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 @export var bow_pool: ItemPool
 @export var quiver_pool: ItemPool
 @export var ring_pool: ItemPool
+
+@export var uncommon_ability_chance: float = 0.2
+@export var rare_ability_chance: float = 0.65
+
 enum Slot { BOW, QUIVER, RING }
 
 func _ready() -> void:
@@ -23,7 +27,6 @@ func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
 
 func drop_item(slot: Slot) -> EquipmentData:
-	return roll_item(bow_pool)
 	match slot:
 		Slot.BOW: return roll_item(bow_pool)
 		Slot.QUIVER: return roll_item(quiver_pool)
@@ -31,7 +34,7 @@ func drop_item(slot: Slot) -> EquipmentData:
 	return null
 
 func drop_random_item(_position: Vector2) -> EquipmentData:
-	var item: EquipmentData = drop_item(randi_range(0, 2) as Slot)
+	var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
 	EventBus.equipment_dropped.emit(item, _position)
 	return item
 
@@ -40,7 +43,8 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 	data.slot = pool.slot
 	data.display_name = pool.possible_display_names.pick_random()
 	data.equipment_scene = load(EQUIPMENT)
-
+	data.dropped_scale = pool.scale
+	
 	var rift_level: int = PlayerManager.player.stats.rift_level
 
 	# A: logarithmic stat range scalar — gradual growth with rift level
@@ -76,8 +80,11 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 		var amount = scaled_min + roll_bounded * (scaled_max - scaled_min)
 		amount = snappedf(amount, 0.1)
 		data.add_modifier(def.stat_name, amount, def.type)
-
+		
+	data.ability = _roll_ability(pool, roundi(data.rarity))
+	
 	data.texture = pool.possible_textures[mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)]
+	data.equipped_texture = pool.equipped_textures[mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)]
 	return data
 
 func _weighted_pick(stats: Array[StatRollDef], count: int) -> Array[StatRollDef]:
@@ -98,3 +105,43 @@ func _weighted_pick(stats: Array[StatRollDef], count: int) -> Array[StatRollDef]
 				remaining.erase(stat)
 				break
 	return result
+
+func _roll_ability(pool: ItemPool, rarity: int) -> PlayerAbility:
+	var chance := _ability_chance_for_rarity(rarity)
+	if randf() > chance:
+		return null
+	
+	var eligible := pool.possible_abilities.filter(
+		func(a): return a.tier <= _max_ability_tier_for_rarity(rarity))
+	if eligible.is_empty():
+		return null
+	
+	return _weighted_ability_pick(eligible)
+
+func _ability_chance_for_rarity(rarity: int) -> float:
+	match rarity:
+		1: return 0.0   # common — no ability
+		2: return uncommon_ability_chance   # uncommon — small chance
+		3: return rare_ability_chance  # rare — good chance
+		4: return 1.0   # legendary — guaranteed
+	return 0.0
+
+func _max_ability_tier_for_rarity(rarity: int) -> PlayerAbility.Tier:
+	match rarity:
+		2: return PlayerAbility.Tier.COMMON
+		3: return PlayerAbility.Tier.UNCOMMON
+		_: return PlayerAbility.Tier.LEGENDARY
+		
+func _weighted_ability_pick(abilities: Array) -> PlayerAbility:
+	var total_weight := 0.0
+	for ability in abilities:
+		total_weight += 1.0 / ability.rarity_weight
+	
+	var roll := randf() * total_weight
+	var cumulative := 0.0
+	for ability in abilities:
+		cumulative += 1.0 / ability.rarity_weight
+		if roll <= cumulative:
+			return ability.duplicate()
+	
+	return abilities.back().duplicate()

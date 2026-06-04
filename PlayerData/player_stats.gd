@@ -37,20 +37,19 @@ var player: Player
 @export var arrow_pierce: Stat
 @export var pull_speed: Stat
 @export var pushback_power: Stat
-
+@export var arrow_weight: Stat
 
 @export_subgroup("Player Items")
 @export var money: int
 @export var weapon_scene: PackedScene
 @export var arrow: EquipmentData
+@export var arrow_scene: PackedScene
 @export var ring: EquipmentData
 @export var bow: EquipmentData
 
 @export_subgroup("Abilities")
-@export var jump_abilities: Array[JumpAbility]
-@export var shoot_abilities: Array[ShootAbility]
-@export var arrow_abilities: Array[ArrowAbility]
-@export var slam_abilities: Array[SlamAbility]
+@export var jump_abilities: Array[PlayerJumpAbility]
+@export var dash_abilities: Array[PlayerDashAbility]
 @export var shooting_abilities: Array[PlayerShootAbility]
 @export var sword_abilities: Array[PlayerSwordAbility]
 @export var passive_abilities: Array[PlayerPassiveAbility]
@@ -62,15 +61,3 @@ var player: Player
 
 @export_subgroup("Rift")
 @export var rift_level: int = 1
-
-func add_jump_ability(ability: JumpAbility) -> void:
-	if ability != null:
-		jump_abilities.append(ability)
-
-func add_arrow_ability(ability: ArrowAbility) -> void:
-	if ability != null:
-		arrow_abilities.append(ability)
-	
-func add_shoot_ability(ability: ShootAbility) -> void:
-	if ability != null:
-		shoot_abilities.append(ability)

@@ -6,7 +6,6 @@ func start_debuff_effect() -> void:
 	apply_debuff_effect()
 	
 func apply_debuff_effect() -> void:
-	
 	enemy.alter_moving(true)
 	stunned_effect.emitting = true
 	

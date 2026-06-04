@@ -1,0 +1,1 @@
+class_name PlayerDashAbility extends PlayerAbility

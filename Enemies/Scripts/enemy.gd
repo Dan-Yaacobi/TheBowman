@@ -121,10 +121,7 @@ func drop_item(_drops: Array[ItemData]) -> void:
 	for drop in _drops:
 		spawn_drop(drop)
 
-
-
 func spawn_drop(drop: ItemData) -> void:
-
 	var item = ITEM_PICK_UP.instantiate()
 	item.assign_item(drop)
 	item.global_position = global_position

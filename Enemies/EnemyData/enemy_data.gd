@@ -21,16 +21,3 @@ class_name EnemyData extends Resource
 @export_custom(PROPERTY_HINT_NONE,"suffix:%") var shooter_chance: int = 0
 @export var bullet: PackedScene
 @export var shot_cooldown: float = 1.0
-#func initialize(_hp: int, _speed: int, _knockback: int, _skin: Texture, _avg_coins_dropped: int,
-#_touch_dmg: int, _knockback_resistance: float, _boss: bool, _shooter_chance: int,
-#_bullet: PackedScene) -> void:
-	#hp = _hp
-	#move_speed = _speed
-	#knockback = _knockback
-	#skin = _skin
-	#avg_coins_dropped = _avg_coins_dropped
-	#touch_damage = _touch_dmg
-	#boss = _boss
-	#shooter = _shooter_chance
-	#knockback_resistance = _knockback_resistance
-	#bullet = _bullet

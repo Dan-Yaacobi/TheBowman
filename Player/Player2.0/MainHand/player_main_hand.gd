@@ -11,6 +11,7 @@ signal shot_power_amount(amount)
 @onready var swing_cooldown: Timer = $MainHandStateMachine/Swing/SwingCooldown
 
 @export var arrow: PackedScene
+@export var arrow_texture: Texture
 @export var min_shot_power: float = 0.5
 @export var max_offset: float
 
@@ -65,6 +66,7 @@ func draw_arrow() -> void:
 	if !current_arrow:
 		var _arrow: Arrow = arrow.instantiate()
 		arrow_position.add_child(_arrow)
+		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
 
 func set_hand_direction() -> void:
@@ -90,10 +92,7 @@ func release_arrow() -> void:
 	if shot_power < 0.15:
 		current_arrow.free()
 	else:
-		for shoot_ability in PlayerManager.player.get_shoot_abilities():
-			if shoot_ability:
-				shoot_ability.get_arrow(current_arrow)
-				shoot_ability.activate_ability()
+		current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 		fire_arrow()
 	current_arrow = null
 
@@ -119,7 +118,8 @@ func fire_arrow() -> void:
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0
-	return _shot_power * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())	
+	var final_value = _shot_power * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
+	return final_value
 
 
 func swing_off_cooldown() -> void:

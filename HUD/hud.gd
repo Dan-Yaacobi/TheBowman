@@ -40,7 +40,7 @@ func show_equip_interaction_ui(equipment: Equipment) -> void:
 	var screen_pos = equipment.get_viewport().get_canvas_transform() * equipment.position
 	interaction_ui.global_position = screen_pos + Vector2(0,-50)
 	interaction_ui.visible = true
-	interaction_ui.set_items(equipment, PlayerManager.player.stats.bow)
+	interaction_ui.set_items(equipment)
 	current_view_item = equipment
 	
 func hide_equip_interaction_ui(_equip: Equipment) -> void:

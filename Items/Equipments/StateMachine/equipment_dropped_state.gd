@@ -6,7 +6,7 @@ func init() -> void:
 	pass
 
 func Enter() -> void:
-	equipment.sprite.scale = Vector2(0.5, 0.5)
+	equipment.sprite.scale *= equipment.data.dropped_scale
 	equipment.lock_rotation = true
 	equipment.gravity_scale = 1.0
 	equipment.freeze = false

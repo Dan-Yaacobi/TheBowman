@@ -12,10 +12,10 @@ func _make_label(_name: String, _amount: float = NAN) -> StatLabel:
 	label.set_label(_name, _amount)
 	return label
 
-func set_items(new_equip: Equipment, current_equip: EquipmentData) -> void:
+func set_items(new_equip: Equipment) -> void:
 	for child in new_item.get_children():
 		child.queue_free()
-
+	var current_equip = PlayerManager.player.get_equipped_in_slot(new_equip.data.slot)
 	var new_name_label = _make_label(new_equip.data.display_name)
 	new_name_label.set_color(rarity_color(new_equip.data.rarity))
 	new_item.add_child(new_name_label)
@@ -44,6 +44,10 @@ func set_items(new_equip: Equipment, current_equip: EquipmentData) -> void:
 		else:
 			label.set_color(Color.WHITE)
 		new_item.add_child(label)
+	if new_equip.data.ability:
+		var ability_label = _make_label(new_equip.data.ability.get_tooltip())
+		ability_label.set_color(Color.YELLOW)  # or whatever feels distinct
+		new_item.add_child(ability_label)
 		
 func rarity_color(rarity: float) -> Color:
 	var colors: Array[Color] = [

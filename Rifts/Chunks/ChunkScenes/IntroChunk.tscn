@@ -4,11 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_2wsaq"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="3_41muo"]
 [ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="3_o6pb5"]
-[ext_resource type="PackedScene" uid="uid://ccp2hrnf3s4hu" path="res://Rifts/Chunks/Utility/Spawns/PowerOrb/PowerOrb.tscn" id="7_7ky7e"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="8_u0t7j"]
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="9_okqnu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ky7e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nf5br"]
 resource_local_to_scene = true
 size = Vector2(53, 25)
 
@@ -17,9 +16,9 @@ script = ExtResource("1_2wsaq")
 
 [node name="Bounds" parent="." unique_id=2072018073 instance=ExtResource("8_u0t7j")]
 
-[node name="CollisionShape2D" parent="Bounds" index="0"]
+[node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(0.5, 2.5)
-shape = SubResource("RectangleShape2D_7ky7e")
+shape = SubResource("RectangleShape2D_nf5br")
 
 [node name="Island" parent="." unique_id=1286990208 instance=ExtResource("2_2wsaq")]
 position = Vector2(0, 5)
@@ -41,8 +40,5 @@ position = Vector2(16, 43)
 
 [node name="EntryMarker" parent="." unique_id=1731001056 instance=ExtResource("9_okqnu")]
 position = Vector2(0, -11)
-
-[node name="PowerOrb" parent="." unique_id=598279639 instance=ExtResource("7_7ky7e")]
-position = Vector2(-30, -16)
 
 [editable path="Bounds"]

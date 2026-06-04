@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxk6tfmffd8bb"]
+[gd_scene format=3 uid="uid://dxk6tfmffd8bb"]
 
 [ext_resource type="Texture2D" uid="uid://d3l31kuovyir1" path="res://Player/Player2.0/Sprites/PlayerOffHandSprite.png" id="1_bfu6e"]
 [ext_resource type="Script" uid="uid://dd6ry72lmjepc" path="res://Player/Player2.0/OffHand/player_off_hand.gd" id="1_dyut0"]
@@ -44,42 +44,40 @@ _data = {
 &"RESET": SubResource("Animation_tixxj")
 }
 
-[node name="PlayerOffHand" type="CharacterBody2D"]
+[node name="PlayerOffHand" type="CharacterBody2D" unique_id=987889372]
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_dyut0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1283359690]
 texture = ExtResource("1_bfu6e")
 centered = false
 offset = Vector2(-7.5, -1)
 
-[node name="String" type="Line2D" parent="."]
+[node name="String" type="Line2D" parent="." unique_id=1243189938]
 z_index = 1
 position = Vector2(-8.33333, 3.33333)
 points = PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667)
 width = 1.0
 default_color = Color(1, 0.759619, 0.662997, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t6bga")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1989337742]
+libraries/ = SubResource("AnimationLibrary_t6bga")
 
-[node name="MidStringPos" type="Node2D" parent="."]
+[node name="MidStringPos" type="Node2D" parent="." unique_id=671594613]
 position = Vector2(0, 1.66667)
 
-[node name="OffHandStateMachine" type="Node2D" parent="."]
+[node name="OffHandStateMachine" type="Node2D" parent="." unique_id=428536854]
 script = ExtResource("2_hdxbw")
 
-[node name="Idle" type="Node2D" parent="OffHandStateMachine"]
+[node name="Idle" type="Node2D" parent="OffHandStateMachine" unique_id=1705695474]
 script = ExtResource("3_b6f1e")
 
-[node name="Shooting" type="Node2D" parent="OffHandStateMachine"]
+[node name="Shooting" type="Node2D" parent="OffHandStateMachine" unique_id=1960188921]
 script = ExtResource("4_dyut0")
 
-[node name="Bow" type="Node2D" parent="."]
+[node name="Bow" type="Node2D" parent="." unique_id=235911937]
 
-[node name="Sprite2D" type="Sprite2D" parent="Bow"]
+[node name="Sprite2D" type="Sprite2D" parent="Bow" unique_id=749530841]
 z_index = 2
 position = Vector2(0, 6.6666665)
 texture = ExtResource("6_dyut0")

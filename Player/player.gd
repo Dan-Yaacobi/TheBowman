@@ -16,7 +16,6 @@ signal dash_finished
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var special_ability_cooldown: Timer = $SpecialAbilityCooldown
-@onready var upgrades: Upgrades = $Upgrades
 
 @onready var slow: Slow = $Debuffs/Slow
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
@@ -71,17 +70,21 @@ var can_dash: bool = true
 
 var equipment_interacted: Equipment = null
 
+var abilities: Dictionary = {
+	PlayerAbility.TriggerType.PASSIVE: [],
+	PlayerAbility.TriggerType.SHOOT: [],
+	PlayerAbility.TriggerType.JUMP: [],
+	PlayerAbility.TriggerType.DASH: [],
+}
+
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	stats.hp = stats.max_hp
-	init_bow()
+	#init_bow()
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	health_bar.init_health(stats.max_hp)
-	init_base_stats()
-	init_bonus_stats()
-	reset_to_base_stats()
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(hit_player)
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
@@ -91,15 +94,10 @@ func _ready() -> void:
 	buff_handler.set_entity(self)
 	EventBus.equipment_interaction_enter.connect(equipment_interaction_begin)
 	EventBus.equipment_interaction_exit.connect(equipment_interaction_end)
+	set_new_bow()
+	set_arrow_scene()
+	set_new_arrow()
 	
-func upgrade_stat(stat: String, amount) -> void:
-	for key in upgrades.upgrades_dict.keys():
-		if key == stat:
-			upgrades.call_deferred(upgrades.upgrades_dict[stat],amount)
-
-func add_ability(ability_type_name: String, ability) -> void:
-	upgrades.call_deferred(upgrades.new_abilities_dict[ability_type_name],ability)
-
 func add_display_buff(buff: PlayerUpgrade) -> void:
 	if buff:
 		total_buffs.add_display_buff(buff)
@@ -111,30 +109,7 @@ func show_buffs() -> void:
 	total_buffs.visible = true
 
 func get_buff_tooltip(_id: int) -> String:
-	
 	return ""
-func reset_to_base_stats() -> void:
-	base_stats.money = stats.money
-	
-	for ability in stats.jump_abilities:
-		ability.deactivate_ability(self)
-	for ability in stats.shoot_abilities:
-		ability.deactivate_ability(self)
-	for ability in stats.arrow_abilities:
-		ability.deactivate_ability(self)
-	for ability in stats.slam_abilities:
-		ability.deactivate_ability(self)
-	stats = base_stats.duplicate()
-
-	
-func init_base_stats() -> void:
-	base_stats = stats.duplicate()	
-
-func init_stats_with_bonus() -> void:
-	stats = bonus_stats.duplicate()
-
-func init_bonus_stats() -> void:
-	bonus_stats = stats.duplicate()
 	
 func _process(_delta: float) -> void:
 	if stats.hp > 0:
@@ -177,9 +152,6 @@ func special_ability() -> void:
 	
 func shoot() -> void:
 	EventBus.start_shooting.emit()
-	#current_weapon.regular_attack = true
-	#for ability in stats.shoot_abilities:
-		#ability.activate_ability(self)
 
 func grapple() -> void:
 	if not player_state_machine.curr_state is PlayerGrapplingState:
@@ -242,11 +214,22 @@ func apply_gravity(delta) -> void:
 func get_current_weapon() -> Weapon:
 	return current_weapon
 
+func set_new_bow() -> void:
+	if stats.bow:
+		off_hand.set_new_bow(stats.bow)
+
+func set_new_arrow() -> void:
+	main_hand.arrow_texture = stats.arrow.equipped_texture
+
+func set_arrow_scene() -> void:
+	if stats.arrow_scene:
+		main_hand.new_arrow(stats.arrow_scene)
+		
 func change_to_new_bow(_new_bow: PackedScene) -> void:
 	if _new_bow != null:
 		stats.weapon_scene = _new_bow
 		init_bow()
-		
+
 func set_hands_new_bow() -> void:
 	var bow_data = current_weapon.weapon_data
 	main_hand.new_arrow(bow_data.arrow)
@@ -334,14 +317,17 @@ func buy(price: int) -> bool:
 		return true
 	return false
 
-func add_shoot_ability(_ability: PlayerShootAbility) -> void:
-	if _ability:
-		stats.shooting_abilities.append(_ability)
+func register_ability(ability: PlayerAbility) -> void:
+	abilities[ability.trigger_type].append(ability)
+	ability.on_equipped()
 
-func add_sword_ability(_ability: PlayerSwordAbility) -> void:
-	if _ability:
-		stats.sword_abilities.append(_ability)
+func unregister_ability(ability: PlayerAbility) -> void:
+	abilities[ability.trigger_type].erase(ability)
+	ability.on_unequipped()
 
+func get_abilities(trigger: PlayerAbility.TriggerType) -> Array:
+	return abilities[trigger]
+	
 func enable_jump() -> void:
 	jump_action.can_jump = true
 
@@ -363,6 +349,7 @@ var max_speed: float = 1.0 ## 1.0 means maximum is double speed
 var C: int = 200 ## controls how fast you upgrade movement speed via agility
 
 ## asymptotic increase towards max speed
+
 func get_move_speed() -> float:
 	return stats.move_speed.value()
 	
@@ -422,8 +409,10 @@ func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) 
 		match _slot:
 			EquipmentData.slots.BOW:
 				stats.bow = _new_item
+				set_new_bow()
 			EquipmentData.slots.ARROW:
 				stats.arrow = _new_item
+				set_new_arrow()
 			EquipmentData.slots.RING:
 				stats.ring = _new_item
 func set_gold_bonus(_amount: int) -> void:
