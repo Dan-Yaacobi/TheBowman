@@ -43,3 +43,5 @@ script = ExtResource("5_43g4f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1725749955]
 position = Vector2(13, -5.384457e-07)
 shape = SubResource("RectangleShape2D_m802n")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=4300824]

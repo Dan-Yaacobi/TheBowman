@@ -356,7 +356,10 @@ last_wrap_alignment = 0
 [node name="InteractionUi" parent="." unique_id=1611403518 instance=ExtResource("19_fjfvf")]
 stat_names_dict = Dictionary[String, String]({
 "arrow_damage": "Damage",
-"arrow_speed": "Arrow Velocity",
+"arrow_size": "Size",
+"arrow_speed": "Velocity",
+"arrow_weight": "Weight",
+"crit_chance": "Crit Chance",
 "perfect_shot_bonus": "Perfect Shot Bonus",
 "perfect_shot_window": "Perfect Shot Window",
 "pull_speed": "Pull Speed"

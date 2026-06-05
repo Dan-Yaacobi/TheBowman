@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvpa8tuvsardc"]
+[gd_scene format=3 uid="uid://dvpa8tuvsardc"]
 
-[ext_resource type="Script" path="res://Weapons/Effects/CriticalHit/crit.gd" id="1_kxrop"]
+[ext_resource type="Script" uid="uid://xwafxvhb52cv" path="res://Weapons/Effects/CriticalHit/crit.gd" id="1_kxrop"]
 
 [sub_resource type="Animation" id="Animation_1yo72"]
 resource_name = "Crit"
@@ -19,23 +19,11 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath(".:position")
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -59,22 +47,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -83,11 +59,13 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vjpky"]
 _data = {
-"Crit": SubResource("Animation_1yo72"),
-"RESET": SubResource("Animation_ed31p")
+&"Crit": SubResource("Animation_1yo72"),
+&"RESET": SubResource("Animation_ed31p")
 }
 
-[node name="Crit" type="Label"]
+[node name="CritEffect" type="Node2D" unique_id=693158243]
+
+[node name="Crit" type="Label" parent="." unique_id=662734479]
 offset_right = 1542.0
 offset_bottom = 342.0
 scale = Vector2(0.025, 0.025)
@@ -100,7 +78,5 @@ theme_override_font_sizes/font_size = 250
 text = "CRITICAL HIT"
 script = ExtResource("1_kxrop")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vjpky")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Crit" unique_id=974258154]
+libraries/ = SubResource("AnimationLibrary_vjpky")

@@ -100,6 +100,10 @@ func _ready() -> void:
 	buff_handler.set_entity(self)
 	EventBus.equipment_interaction_enter.connect(equipment_interaction_begin)
 	EventBus.equipment_interaction_exit.connect(equipment_interaction_end)
+	
+	EventBus.arrow_enemy_hit.connect(add_shot_streak)
+	EventBus.arrow_missed.connect(reset_shot_streak)
+	
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
@@ -496,3 +500,31 @@ func use_perfect_shot_effects() -> Array[OnPerfectShotEffect]:
 				perfect_shot_effects.erase(key)
 		_effects.append(key)
 	return _effects
+
+
+## STREAK ##
+
+func add_shot_streak(_perfect: bool) -> void:
+	stats.shot_streak += 1
+	if _perfect:
+		add_perfect_shot_streak()
+	else:
+		reset_perfect_shot_streak()
+
+func add_perfect_shot_streak() -> void:
+	stats.perfect_shot_streak += 1
+
+func get_shot_streak() -> int:
+	return stats.shot_streak
+	
+func get_perfect_shot_streak() -> int:
+	return stats.perfect_shot_streak
+
+func reset_shot_streak() -> void:
+	stats.shot_streak = 0
+	reset_perfect_shot_streak()
+	
+func reset_perfect_shot_streak() -> void:
+	stats.perfect_shot_streak = 0
+
+	

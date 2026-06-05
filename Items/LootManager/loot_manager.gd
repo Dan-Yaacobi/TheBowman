@@ -4,7 +4,8 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 # Rarity
 @export var quality_floor_max: float = 0.5       # how high the floor gets at max rarity
 @export var quality_ceiling_min: float = 0.6     # ceiling for rarity 1 items
-@export var rarity_bias: float = 2.0             # higher = legendary items rarer (C base)
+@export var rarity_bias: float = 3.0          # higher = legendary items rarer (C base)
+@export var lift_exp: float = 0.7
 
 # Rift level scaling
 @export var rift_stat_scale: float = 0.1         # A: how much stat ranges grow per rift (logarithmic)
@@ -33,10 +34,11 @@ func drop_item(slot: Slot) -> EquipmentData:
 		Slot.RING: return roll_item(ring_pool)
 	return null
 
-func drop_random_item(_position: Vector2) -> EquipmentData:
-	var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
-	EventBus.equipment_dropped.emit(item, _position, null)
-	return item
+func drop_random_item(_position: Vector2, _chance: float) -> void:
+	if randf_range(0,100) <= _chance:
+		var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
+		EventBus.equipment_dropped.emit(item, _position, null)
+
 
 func roll_item(pool: ItemPool) -> EquipmentData:
 	var data = EquipmentData.new()
@@ -58,7 +60,7 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 
 	# roll rarity first
 	var rarity_roll = randf()
-	var rarity_curved = pow(rarity_roll, effective_rarity_bias)
+	var rarity_curved = pow(pow(rarity_roll, lift_exp), effective_rarity_bias)
 	data.rarity = 1.0 + rarity_curved * (CustomVariables.MAX_RARITY - 1)
 
 	# stat count scales with rarity

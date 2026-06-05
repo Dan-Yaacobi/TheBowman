@@ -112,7 +112,9 @@ func fire_arrow() -> void:
 			get_tree().root.add_child(fired_arrow)
 			fired_arrow.set_texture(arrow_texture)
 			
-		
+		fired_arrow.possible_pierce = PlayerManager.player.stats.arrow_pierce.value()
+		fired_arrow.can_pass_walls = PlayerManager.player.stats.can_pass_walls
+		fired_arrow.crit_chance = PlayerManager.player.stats.crit_chance.value()
 		var angle_offset: float = 0.0
 		if arrow_count > 1:
 			var t = (i / float(arrow_count - 1)) - 0.5
@@ -141,24 +143,24 @@ func fire_arrow() -> void:
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	
-func TEMP_fire_arrow() -> void:
-	var direction = hand_direction.normalized()
-	var effective_power = lerpf(0.4, 1.0, shot_power)
-	if shot_power >= 1.0:
-		current_arrow.perfect_shot = true
-	current_arrow.velocity = calc_shot_velocity(effective_power, direction)
-	current_arrow.fired = true
-	current_arrow.set_shot_power_mod(effective_power)
-	current_arrow.enable_arrow()
-	current_arrow.calc_dmg(effective_power)
-	current_arrow.calc_knockback(effective_power)
-	current_arrow.reparent(get_tree().root)
-	if current_arrow.perfect_shot:
-		var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
-		for effect in effects:
-			current_arrow.hit_effects.append(effect)
-	EventBus.arrow_shot_sound.emit()
-	PlayerManager.player.current_arrow = current_arrow
+#func TEMP_fire_arrow() -> void:
+	#var direction = hand_direction.normalized()
+	#var effective_power = lerpf(0.4, 1.0, shot_power)
+	#if shot_power >= 1.0:
+		#current_arrow.perfect_shot = true
+	#current_arrow.velocity = calc_shot_velocity(effective_power, direction)
+	#current_arrow.fired = true
+	#current_arrow.set_shot_power_mod(effective_power)
+	#current_arrow.enable_arrow()
+	#current_arrow.calc_dmg(effective_power)
+	#current_arrow.calc_knockback(effective_power)
+	#current_arrow.reparent(get_tree().root)
+	#if current_arrow.perfect_shot:
+		#var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
+		#for effect in effects:
+			#current_arrow.hit_effects.append(effect)
+	#EventBus.arrow_shot_sound.emit()
+	#PlayerManager.player.current_arrow = current_arrow
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0

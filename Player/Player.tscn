@@ -59,6 +59,12 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_nm06d"]
 script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_xehjw"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_vhfjx"]
@@ -80,9 +86,22 @@ script = ExtResource("2_o1b5h")
 texture = ExtResource("6_ww5s2")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
+[sub_resource type="Resource" id="Resource_1ylbe"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_sqgfh"]
+script = ExtResource("4_yf47d")
+base_value = 1.5
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
 [sub_resource type="Resource" id="Resource_7w4lt"]
 script = ExtResource("4_yf47d")
 base_value = 950.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_e03cv"]
+script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_ww5s2"]
@@ -141,6 +160,7 @@ max_hp = 10
 knockback_resistance = SubResource("Resource_o1b5h")
 max_minions = 3
 invinc_duration = SubResource("Resource_ww5s2")
+extra_drop_chance = SubResource("Resource_e03cv")
 down_gravity = 1500
 up_gravity = 650
 max_down_gravity = 400
@@ -162,6 +182,9 @@ arrow_pierce = SubResource("Resource_nm06d")
 pull_speed = SubResource("Resource_yyr8h")
 pushback_power = SubResource("Resource_r04tr")
 arrow_weight = SubResource("Resource_ustk3")
+crit_chance = SubResource("Resource_1ylbe")
+crit_modifier = SubResource("Resource_sqgfh")
+arrow_size = SubResource("Resource_xehjw")
 weapon_scene = ExtResource("10_x70vp")
 arrow = SubResource("Resource_vuo2u")
 arrow_scene = ExtResource("6_7w4lt")

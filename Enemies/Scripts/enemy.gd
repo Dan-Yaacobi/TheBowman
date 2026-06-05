@@ -109,6 +109,9 @@ func enemy_died() -> void:
 	queue_free()
 	
 func knockback(_hurt_box: HurtBox) -> void:
+	print("knockback called — can_be_knockedback: ", stats.can_be_knockedback, 
+		" dir: ", _hurt_box.knockback_dir, 
+		" power: ", _hurt_box.knockback_power)
 	if stats.can_be_knockedback:
 		knockback_velocity = _hurt_box.knockback_dir * _hurt_box.knockback_power
 
@@ -117,16 +120,13 @@ func player_hit(body: CharacterBody2D) -> void:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(hurt_box)
 			
-const EQUIPMENT = preload("uid://djxch32a87fle")
-
 func drop_item(_drops: Array[ItemData]) -> void:
-	EventBus.try_drop.emit(global_position)
+	var drop_chance: float = min(
+		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
+		100)
+	EventBus.try_drop.emit(global_position, drop_chance)
 	return
-	var equip_drop: Equipment = EQUIPMENT.instantiate()
-	equip_drop.global_position = global_position
-	EventBus.equipment_dropped.emit(equip_drop)
-	
-	return
+
 	for drop in _drops:
 		spawn_drop(drop)
 

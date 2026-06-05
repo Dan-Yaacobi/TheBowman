@@ -1,14 +1,13 @@
 class_name Arrow extends CharacterBody2D
 
-signal arrow_missed
-signal crit_hit
-
 @onready var sprite: ArrowSprite = $Sprite2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var hurt_box: ArrowHurtBox = $HurtBox
+@onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
+const CRIT = preload("uid://dvpa8tuvsardc")
 
 var hit_effects: Array[OnHitEffect] = []
 var shoot_abilities: Array = []
@@ -25,6 +24,12 @@ var knockback: float
 var gravity: float = 50
 
 var succesfuly_hit: bool = false
+var possible_pierce: int = 1
+var pierce_count: int = 0
+
+var can_pass_walls: bool = false
+var crit_chance: float = 0.0
+var crit: bool = false
 
 func _ready() -> void:
 	cpu_particles.emitting = false
@@ -35,21 +40,34 @@ func _ready() -> void:
 	hurt_box.successful_hit.connect(clear_shot)
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
-
+	visible_on_screen_notifier.screen_exited.connect(missed)
+	scale *= PlayerManager.player.stats.arrow_size.value()
+	
 func hit(body) -> void:
 	if body is Enemy:
 		if regular_shot:
-			EventBus.arrow_hit_enemy.emit(self)
-			for hit_effect in hit_effects:
-				hit_effect.apply_effect(body, self)
+			if crit:
+				crit_effect(body)
 			for ability in shoot_abilities:
 				ability.activate_ability(body,self)
 			succesfuly_hit = true
+			EventBus.arrow_enemy_hit.emit(perfect_shot)
+			pierce_count += 1
+
 			clear_shot()
+			
+func crit_effect(_body: Enemy) -> void:
+	var _crit_effect = CRIT.instantiate()
+	_crit_effect.global_position = _body.global_position
+	EventBus.summon_effect.emit(_crit_effect)
 
 func calc_dmg(shot_power: float) -> void:
+	var crit_bonus = 1.0
+	if randf_range(0,100) < crit_chance:
+		crit = true
+		crit_bonus = PlayerManager.player.stats.crit_modifier.value()
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
-	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus)
+	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * crit_bonus)
 
 func calc_knockback(shot_power: float) -> void:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
@@ -57,12 +75,12 @@ func calc_knockback(shot_power: float) -> void:
 
 func missed() -> void:
 	if regular_shot and not succesfuly_hit:
-		arrow_missed.emit()
+		EventBus.arrow_missed.emit()
 	queue_free()
 
 func clear_shot() -> void:
 	EventBus.arrow_hit_sound.emit()
-	if not can_pierce:
+	if pierce_count >= possible_pierce:
 		queue_free()
 
 func wall_clear_shot() -> void:
@@ -75,7 +93,7 @@ func _physics_process(delta: float) -> void:
 		rotate_arrow(velocity.angle())
 		cpu_particles.direction = velocity
 		var arrow_weight = PlayerManager.player.stats.arrow_weight.value()
-		velocity.y += gravity * remap(arrow_weight, 0.0, 100.0, 1.0, 5.0) * delta
+		velocity.y += gravity * remap(arrow_weight, 0.0, 30, 1.0, 3.0) * delta
 	move_and_slide()
 
 func set_shot_power_mod(_shot_power: float) -> void:
@@ -89,9 +107,11 @@ func enable_arrow() -> void:
 	hurt_box.monitorable = true
 
 func hit_wall(_val1, _val2, _val3, _val4) -> void:
-	if fired and _val2 is Island:
+	if fired and _val2 is Island and not can_pass_walls:
 		sprite.call_deferred("reparent", _val2)
 		sprite.hit = true
+		if regular_shot and not succesfuly_hit:
+			EventBus.arrow_missed.emit()
 		wall_clear_shot()
 
 func set_texture(_texture: Texture) -> void:

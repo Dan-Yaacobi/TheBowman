@@ -10,6 +10,7 @@ var player: Player
 @export var max_minions: int 
 @export var invinc_duration: Stat
 @export var extra_gold: int = 0
+@export var extra_drop_chance: Stat
 
 @export_subgroup("Enviorments")
 @export var down_gravity: int
@@ -38,6 +39,12 @@ var player: Player
 @export var pull_speed: Stat
 @export var pushback_power: Stat
 @export var arrow_weight: Stat
+@export var shot_streak: int = 0
+@export var perfect_shot_streak: int = 0
+@export var can_pass_walls: bool = false
+@export var crit_chance: Stat
+@export var crit_modifier: Stat
+@export var arrow_size: Stat
 
 @export_subgroup("Player Items")
 @export var money: int
