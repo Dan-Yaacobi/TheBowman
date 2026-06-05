@@ -48,7 +48,7 @@ func value() -> float:
 		
 	return (base_value + add_sum) * (1.0 + mult_sum)
 
-func add_buff(id: int,amount: float, type: buff_type) -> void:
+func add_buff(id: int, amount: float, type: buff_type) -> void:
 	var mod: Stat_Buff = find_buff(id, type)
 	if mod:
 		mod.increase_stack()

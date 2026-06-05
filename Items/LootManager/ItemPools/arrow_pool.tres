@@ -12,6 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://cltfh8d1xgqfm" path="res://Items/Equipments/Arrows/Sprites/Quiver_Black.png" id="5_0mpld"]
 [ext_resource type="Texture2D" uid="uid://2k08i7rod8ti" path="res://Weapons/Bows/4_NatureBow/NatureArrow/PoisonArrow.png" id="5_v5xmh"]
 [ext_resource type="Texture2D" uid="uid://b6th5fykp34sr" path="res://Items/Equipments/Arrows/Sprites/Quiver_Poison.png" id="6_hauan"]
+[ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="6_x2s5p"]
+[ext_resource type="Script" uid="uid://hqu465ov5673" path="res://Player/Abilities2.0/ShootAbilities/Bleed/bleed_ability.gd" id="7_7fb6t"]
+
+[sub_resource type="Resource" id="Resource_rhkdk"]
+script = ExtResource("7_7fb6t")
+trigger_type = 1
+metadata/_custom_type_script = "uid://hqu465ov5673"
 
 [sub_resource type="Resource" id="Resource_v12hp"]
 script = ExtResource("1_v12hp")
@@ -40,6 +47,7 @@ possible_stats = Array[ExtResource("1_v12hp")]([SubResource("Resource_v12hp"), S
 possible_textures = Array[Texture2D]([ExtResource("2_7typt"), ExtResource("3_u1e4n"), ExtResource("4_2aujr"), ExtResource("5_0mpld"), ExtResource("6_hauan")])
 equipped_textures = Array[Texture2D]([ExtResource("1_n3tsu"), ExtResource("2_x2s5p"), ExtResource("3_7fb6t"), ExtResource("4_rhkdk"), ExtResource("5_v5xmh")])
 possible_display_names = Array[String](["Wooden Arrows", "Blue Arrows", "Red Arrows", "Black Arrows", "Poison Arrows"])
+possible_abilities = Array[ExtResource("6_x2s5p")]([SubResource("Resource_rhkdk")])
 slot = 1
 scale = 0.2
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

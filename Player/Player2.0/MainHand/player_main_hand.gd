@@ -96,8 +96,52 @@ func release_arrow() -> void:
 		fire_arrow()
 	current_arrow = null
 
-
 func fire_arrow() -> void:
+	var direction = hand_direction.normalized()
+	var effective_power = lerpf(0.4, 1.0, shot_power)
+	var arrow_count = PlayerManager.player.stats.arrow_count.value()
+	var spread_angle = deg_to_rad(12.0)
+	
+	for i in arrow_count:
+		var fired_arrow: Arrow
+		if i == 0:
+			fired_arrow = current_arrow
+		else:
+			fired_arrow = arrow.instantiate()
+			fired_arrow.position = current_arrow.position
+			get_tree().root.add_child(fired_arrow)
+			fired_arrow.set_texture(arrow_texture)
+			
+		
+		var angle_offset: float = 0.0
+		if arrow_count > 1:
+			var t = (i / float(arrow_count - 1)) - 0.5
+			angle_offset = t * spread_angle * (arrow_count - 1)
+		
+		var spread_direction = direction.rotated(angle_offset)
+		
+		if shot_power >= 1.0:
+			fired_arrow.perfect_shot = true
+		fired_arrow.velocity = calc_shot_velocity(effective_power, spread_direction)
+		fired_arrow.fired = true
+		fired_arrow.set_shot_power_mod(effective_power)
+		fired_arrow.enable_arrow()
+		fired_arrow.calc_dmg(effective_power)
+		fired_arrow.calc_knockback(effective_power)
+		fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+		if i != 0:
+			fired_arrow.reparent(get_tree().root)
+		else:
+			current_arrow.reparent(get_tree().root)
+		if fired_arrow.perfect_shot:
+			var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
+			for effect in effects:
+				fired_arrow.hit_effects.append(effect)
+	
+	EventBus.arrow_shot_sound.emit()
+	PlayerManager.player.current_arrow = current_arrow
+	
+func TEMP_fire_arrow() -> void:
 	var direction = hand_direction.normalized()
 	var effective_power = lerpf(0.4, 1.0, shot_power)
 	if shot_power >= 1.0:

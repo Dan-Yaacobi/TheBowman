@@ -1,40 +1,38 @@
 class_name EquipmentUnEquippedState extends EquipmentState
+@onready var dropped: EquipmentDroppedState = $"../Dropped"
 
 func init() -> void:
 	pass
-
+	
 func Enter() -> void:
-	_remove_stats_from_player()
 	_reparent_to_world()
 	_disable_player_interaction()
 	equipment.show()
 	equipment.is_landed = false
-	state_machine.ChangeState(state_machine.states[0]) # EquipmentDroppedState
-
+	state_machine.ChangeState(dropped)
+	
 func Exit() -> void:
+	equipment.sprite.scale = Vector2(1,1)
 	pass
-
+	
 func Process(_delta: float) -> EquipmentState:
 	return null
-
+	
 func Physics(_delta: float) -> EquipmentState:
 	return null
-
+	
 func _remove_stats_from_player() -> void:
-	# reverse whatever was applied in EquipmentEquippedState._apply_stats_to_player()
-	# e.g. player.stats.damage.remove_modifier(equipment.data.damage_modifier)
-	pass
-
+	equipment.unequip_from_player()
+	
 func _reparent_to_world() -> void:
-	# reparent equipment back to the world scene from the player node
-	# e.g. equipment.reparent(get_tree().current_scene)
-	# preserve global position so it drops from where the player is
-	pass
+	EventBus.equipment_dropped.emit(equipment.data,PlayerManager.player.global_position, equipment)
 
 func _disable_player_interaction() -> void:
-	# disable the interaction area so the player cannot immediately
-	# re-interact with the item they just unequipped
-	# re-enable it once the player exits and re-enters the interaction area
 	equipment.interaction_area.monitoring = false
+	equipment.interaction_area.body_exited.connect(_on_player_exited, CONNECT_ONE_SHOT)
+	
+func _on_player_exited(_body: Node2D) -> void:
+	equipment.interaction_area.monitoring = true
+	
 func HandleInput(_event: InputEvent) -> EquipmentState:
 	return null

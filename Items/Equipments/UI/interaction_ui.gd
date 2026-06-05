@@ -17,7 +17,7 @@ func set_items(new_equip: Equipment) -> void:
 		child.queue_free()
 	var current_equip = PlayerManager.player.get_equipped_in_slot(new_equip.data.slot)
 	var new_name_label = _make_label(new_equip.data.display_name)
-	new_name_label.set_color(rarity_color(new_equip.data.rarity))
+	new_name_label.set_color(CustomVariables.rarity_color(new_equip.data.rarity))
 	new_item.add_child(new_name_label)
 
 	var all_stats: Array = []
@@ -48,24 +48,6 @@ func set_items(new_equip: Equipment) -> void:
 		var ability_label = _make_label(new_equip.data.ability.get_tooltip())
 		ability_label.set_color(Color.YELLOW)  # or whatever feels distinct
 		new_item.add_child(ability_label)
-		
-func rarity_color(rarity: float) -> Color:
-	var colors: Array[Color] = [
-		Color.WHITE,
-		Color.GREEN,
-		Color.CYAN,
-		Color.PURPLE,
-		Color.ORANGE
-	]
-	var max_rarity = CustomVariables.MAX_RARITY
-	if rarity >= max_rarity:
-		var overflow = clampf(rarity - max_rarity, 0.0, 1.0)
-		return Color.ORANGE.lerp(Color(1.0, 0.84, 0.0), overflow)
-	var normalized = clampf(rarity - 1.0, 0.0, max_rarity - 1.0)
-	var low = floori(normalized / (max_rarity - 1.0) * (colors.size() - 1))
-	var high = mini(low + 1, colors.size() - 1)
-	var fraction = (normalized / (max_rarity - 1.0) * (colors.size() - 1)) - low
-	return colors[low].lerp(colors[high], fraction)
 
 func _on_equip_button_pressed() -> void:
 	equip_new_item.emit()

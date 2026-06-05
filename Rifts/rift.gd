@@ -9,6 +9,7 @@ class_name Rift extends GameWorld
 var current_enemies: Array[Enemy]
 var rift_levels: Array[RiftLevel]
 
+
 func _ready() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)
 	EventBus.enemy_died.connect(remove_enemy)
@@ -40,6 +41,7 @@ func exit_world() -> void:
 		level.queue_free()
 	rift_levels.clear()
 	kill_all_enemies()
+	despawn_equipments()
 	queue_free()
 	pass
 
@@ -88,12 +90,23 @@ func kill_all_enemies() -> void:
 	for enemy in current_enemies:
 		remove_enemy(enemy)
 		enemy.queue_free()
+		
+func despawn_equipments() -> void:
+	for child in get_children():
+		if child is Equipment:
+			child.clear_item(child)
 
-func drop_equipment(equip_data: EquipmentData, _position: Vector2) -> void:
-	var new_equip: Equipment = equip_data.equipment_scene.instantiate()
-	new_equip.data = equip_data
+func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equip: Equipment = null) -> void:
+	var new_equip: Equipment
+	if _existing_equip:
+		new_equip = _existing_equip
+	else:
+		new_equip = equip_data.equipment_scene.instantiate()
+		new_equip.data = equip_data
+
 	new_equip.global_position = _position
 	call_deferred("add_child",new_equip)
+	
 
 func summon_effect(effect: Node2D) -> void:
 	call_deferred("add_child", effect)

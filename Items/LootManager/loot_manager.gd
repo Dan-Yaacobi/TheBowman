@@ -35,7 +35,7 @@ func drop_item(slot: Slot) -> EquipmentData:
 
 func drop_random_item(_position: Vector2) -> EquipmentData:
 	var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
-	EventBus.equipment_dropped.emit(item, _position)
+	EventBus.equipment_dropped.emit(item, _position, null)
 	return item
 
 func roll_item(pool: ItemPool) -> EquipmentData:

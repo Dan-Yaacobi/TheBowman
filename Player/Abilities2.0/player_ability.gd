@@ -15,7 +15,7 @@ func on_equipped() -> void:
 func on_unequipped() -> void:
 	pass
 	
-func activate_ability(_arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 	pass
 
 func update_ability(_amount = 0) -> void:

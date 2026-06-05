@@ -286,10 +286,12 @@ flip_h = true
 [node name="Portal2" parent="Portals" unique_id=1352386912 instance=ExtResource("13_npjie")]
 position = Vector2(22, 74)
 color = Color(1, 1, 0, 1)
+destination = 1
 
 [node name="Portal3" parent="Portals" unique_id=417308666 instance=ExtResource("13_npjie")]
 position = Vector2(-39, 45)
 color = Color(1, 0.28235295, 1, 1)
+destination = 1
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)

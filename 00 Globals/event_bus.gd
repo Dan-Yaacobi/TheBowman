@@ -42,7 +42,7 @@ signal arrow_hit_enemy(_target: Enemy)
 signal entered_rift_portal
 
 signal try_drop(position: Vector2)
-signal equipment_dropped(equip_data: EquipmentData, position: Vector2)
+signal equipment_dropped(equip_data: EquipmentData, position: Vector2, _existing_equipment: Equipment)
 
 signal equipment_interaction_enter(equip: Equipment)
 signal equipment_interaction_exit(equip: Equipment)

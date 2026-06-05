@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
 [ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
 [ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
+[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Arrows/Sprites/Quiver_Wooden.png" id="40_rqaa0"]
 [ext_resource type="Script" uid="uid://bssc4pin0y0q2" path="res://Player/spawn_handler.gd" id="41_7w4lt"]
 
 [sub_resource type="Resource" id="Resource_vuo2u"]
@@ -53,7 +54,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_eu7rt"]
 script = ExtResource("4_yf47d")
-base_value = 3.0
+base_value = 15.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_nm06d"]
@@ -237,6 +238,13 @@ ExtResource("16_7w4lt"): -1
 
 [node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
 z_index = 1
+
+[node name="Quiver" type="Sprite2D" parent="PlayerBody" unique_id=557666127]
+z_index = -1
+position = Vector2(-7, 4)
+rotation = -0.34906584
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("40_rqaa0")
 
 [node name="PlayerMainHand" parent="." unique_id=1139132622 instance=ExtResource("10_wo5nf")]
 position = Vector2(-6, 6)

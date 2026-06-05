@@ -5,6 +5,7 @@ class_name Equipment extends RigidBody2D
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ground_detection_area: Area2D = $GroundDetectionArea
+@onready var un_equipped_state: EquipmentUnEquippedState = $EquipmentStateMachine/UnEquipped
 
 var data: EquipmentData
 var is_landed: bool = false
@@ -19,19 +20,17 @@ func _ready() -> void:
 	set_data()
 	
 func apply_drop_impulse() -> void:
-	apply_impulse(Vector2(randf_range(-30, 30), -200))
+	apply_impulse(Vector2(randf_range(-30, 30), -400))
 	
 func equip_to_player() -> void:
 	PlayerManager.player.set_equipped_in_slot(data.slot, data)
-	if data.ability:
-		PlayerManager.player.register_ability(data.ability)
-	clear_item(self)
-
+	PlayerManager.player.equip_item(self, data.slot)
+	PlayerManager.player.call_deferred("add_child", self)
+	
 func unequip_from_player() -> void:
 	data.unequip(PlayerManager.player.stats)
 	if data.ability:
 		PlayerManager.player.unregister_ability(data.ability)
-	PlayerManager.player.set_equipped_in_slot(data.slot, null)
 	
 func freeze_body() -> void:
 	freeze = true
@@ -56,3 +55,6 @@ func clear_item(_equip: Equipment) -> void:
 func set_data() -> void:
 	if data and sprite:
 		sprite.texture = data.texture
+
+func become_unequipped() -> void:
+	state_machine.ChangeState(un_equipped_state)

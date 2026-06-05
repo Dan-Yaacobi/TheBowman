@@ -37,6 +37,8 @@ var knockback_velocity: Vector2 = Vector2.ZERO
 var knockback_threshold: float = 0.2
 var knockback_decay: float = 0.05
 
+var is_dead: bool = false
+
 func _ready() -> void:
 	current_hp = stats.max_hp
 	hurt_box.damage = stats.touch_damage
@@ -52,6 +54,9 @@ func set_data(_data: EnemyData) -> void:
 	if _data:
 		stats = _data
 
+func is_damaged() -> bool:
+	return current_hp < stats.max_hp
+	
 func calculate_direction_to_player(offset: Vector2 = Vector2.ZERO) -> Vector2:
 	return (PlayerManager.player.global_position + offset - global_position).normalized()
 
@@ -79,11 +84,15 @@ func take_hit_effect() -> void:
 		hit_particle_effect.restart()
 		
 func take_damage(_dmg: int) -> void:
+	if is_dead:
+		return
+		
 	current_hp -= _dmg
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
 	
 	if current_hp <= 0:
+		is_dead = true
 		activate_death_ability()
 		enemy_died()
 		drop_item(CoinDropLogic.drop_logic(stats.avg_coins_dropped))

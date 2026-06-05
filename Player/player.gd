@@ -25,6 +25,7 @@ signal dash_finished
 @onready var grappling_state: PlayerGrapplingState = $PlayerStateMachine/Grappling
 @onready var hook: Hook = $GrappleHook/Hook
 @onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
+@onready var quiver: Sprite2D = $PlayerBody/Quiver
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
@@ -75,6 +76,11 @@ var abilities: Dictionary = {
 	PlayerAbility.TriggerType.SHOOT: [],
 	PlayerAbility.TriggerType.JUMP: [],
 	PlayerAbility.TriggerType.DASH: [],
+}
+var equipped_nodes: Dictionary = {
+	EquipmentData.slots.BOW: null,
+	EquipmentData.slots.ARROW: null,
+	EquipmentData.slots.RING: null,
 }
 
 func _ready() -> void:
@@ -221,6 +227,10 @@ func set_new_bow() -> void:
 func set_new_arrow() -> void:
 	main_hand.arrow_texture = stats.arrow.equipped_texture
 
+func set_new_quiver(_texture: Texture2D) -> void:
+	if _texture:
+		quiver.texture = _texture
+		
 func set_arrow_scene() -> void:
 	if stats.arrow_scene:
 		main_hand.new_arrow(stats.arrow_scene)
@@ -413,8 +423,24 @@ func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) 
 			EquipmentData.slots.ARROW:
 				stats.arrow = _new_item
 				set_new_arrow()
+				set_new_quiver(stats.arrow.texture)
 			EquipmentData.slots.RING:
 				stats.ring = _new_item
+
+func equip_item(_equip: Equipment, _slot: EquipmentData.slots) -> void:
+	if _equip and _slot >= 0:
+		equipped_nodes[_slot] = _equip
+
+func unequip_item(_slot: EquipmentData.slots) -> void:
+	equipped_nodes[_slot] = null
+	
+func get_equipped_node_in_slot(_slot: EquipmentData.slots) -> Equipment:
+	if _slot >= 0:
+		var node = equipped_nodes[_slot]
+		if is_instance_valid(node):
+			return node
+	return null
+	
 func set_gold_bonus(_amount: int) -> void:
 	stats.extra_gold += _amount
 

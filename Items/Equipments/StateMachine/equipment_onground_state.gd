@@ -1,5 +1,8 @@
 class_name EquipmentOnGroundState extends EquipmentState
+
 @onready var interacted: EquipmentInteractedState = $"../Interacted"
+@onready var rarity_sparkle: CPUParticles2D = $"../../RaritySparkle"
+
 const BOB_SPEED = 2.0
 const BOB_AMPLITUDE = 3.0
 var _bob_time: float = 0.0
@@ -21,6 +24,7 @@ func Exit() -> void:
 	if equipment.interaction_area.is_connected("body_entered", _on_player_entered):
 		equipment.interaction_area.disconnect("body_entered", _on_player_entered)
 	_bob_time = 0.0
+	rarity_sparkle.emitting = false
 
 func Process(delta: float) -> EquipmentState:
 	_bob_time += delta
@@ -32,6 +36,8 @@ func Physics(_delta: float) -> EquipmentState:
 	return null
 
 func _apply_glow() -> void:
+	rarity_sparkle.color = CustomVariables.rarity_color(equipment.data.rarity)
+	rarity_sparkle.emitting = true
 	pass
 
 func _on_player_entered(body: Node2D) -> void:

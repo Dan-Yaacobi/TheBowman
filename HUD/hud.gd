@@ -50,7 +50,8 @@ func hide_equip_interaction_ui(_equip: Equipment) -> void:
 func equip_item() -> void:
 	if current_view_item:
 		EventBus.equip_item.emit(current_view_item)
-
+		
 func destory_item() -> void:
 	if current_view_item:
 		EventBus.destory_view_item.emit(current_view_item)
+		

@@ -25,9 +25,11 @@ func Physics(_delta: float) -> EquipmentState:
 
 func on_equip_pressed(equip: Equipment) -> void:
 	if equip == equipment:
-	# called by the UI equip button signal
-		state_machine.ChangeState(equipped) # EquipmentEquippedState
-
+		var old_item: Equipment = PlayerManager.player.get_equipped_node_in_slot(equipment.data.slot)
+		if old_item:
+			old_item.become_unequipped()
+		state_machine.ChangeState(equipped)
+		
 func on_cancelled() -> void:
 	# called if player walks away or presses cancel
 	state_machine.ChangeState(state_machine.states[1]) # EquipmentOnGroundState
@@ -56,7 +58,7 @@ func HandleInput(_event: InputEvent) -> EquipmentState:
 	return null
 
 func _on_player_exited(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and state_machine.curr_state is EquipmentInteractedState:
 		state_machine.ChangeState(on_ground)
 
 func highlight() -> void:

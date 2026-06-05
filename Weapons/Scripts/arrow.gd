@@ -43,7 +43,7 @@ func hit(body) -> void:
 			for hit_effect in hit_effects:
 				hit_effect.apply_effect(body, self)
 			for ability in shoot_abilities:
-				ability.activate_ability(self)
+				ability.activate_ability(body,self)
 			succesfuly_hit = true
 			clear_shot()
 

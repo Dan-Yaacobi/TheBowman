@@ -11,7 +11,7 @@ func Enter() -> void:
 	equipment.gravity_scale = 1.0
 	equipment.freeze = false
 	equipment.ground_detection_area.monitoring = false
-	equipment.apply_drop_impulse()
+	equipment.call_deferred("apply_drop_impulse")
 
 func Exit() -> void:
 	equipment.ground_detection_area.monitoring = false

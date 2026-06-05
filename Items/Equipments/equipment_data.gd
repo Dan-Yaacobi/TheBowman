@@ -38,7 +38,9 @@ func equip(player_stats: PlayerStats) -> void:
 			push_error("Unknown stat: " + mod.stat_name)
 			continue
 		stat.add_buff(mod.id, mod.amount, mod.stat_type)
-
+	if ability:
+		PlayerManager.player.register_ability(ability)
+		
 func unequip(player_stats: PlayerStats) -> void:
 	for mod in modifiers:
 		var stat: Stat = player_stats.get(mod.stat_name)
@@ -46,3 +48,5 @@ func unequip(player_stats: PlayerStats) -> void:
 			push_error("Unknown stat: " + mod.stat_name)
 			continue
 		stat.remove_buff_completly(mod.id, mod.stat_type)
+	if ability:
+		PlayerManager.player.unregister_ability(ability)

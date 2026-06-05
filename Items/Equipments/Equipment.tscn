@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bjfr54nbnys5b" path="res://Items/Equipments/StateMachine/equipment_interacted_state.gd" id="6_5uo0g"]
 [ext_resource type="Script" uid="uid://1c1j0v1v0xw0" path="res://Items/Equipments/StateMachine/equipment_equipped_state.gd" id="7_lm5rg"]
 [ext_resource type="Script" uid="uid://djsv6qbljikxu" path="res://Items/Equipments/StateMachine/equipment_unequipped_state.gd" id="8_cseru"]
+[ext_resource type="PackedScene" uid="uid://dwuj4mv0ehiic" path="res://Items/ItemEffects/rarity_sparkle.tscn" id="9_h4v1l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4v1l"]
 radius = 12.0
@@ -68,3 +69,6 @@ script = ExtResource("7_lm5rg")
 
 [node name="UnEquipped" type="Node2D" parent="EquipmentStateMachine" unique_id=1786588768]
 script = ExtResource("8_cseru")
+
+[node name="RaritySparkle" parent="." unique_id=1851276448 instance=ExtResource("9_h4v1l")]
+z_index = -1
