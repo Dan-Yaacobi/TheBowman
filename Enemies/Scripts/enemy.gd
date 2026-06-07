@@ -109,9 +109,6 @@ func enemy_died() -> void:
 	queue_free()
 	
 func knockback(_hurt_box: HurtBox) -> void:
-	print("knockback called — can_be_knockedback: ", stats.can_be_knockedback, 
-		" dir: ", _hurt_box.knockback_dir, 
-		" power: ", _hurt_box.knockback_power)
 	if stats.can_be_knockedback:
 		knockback_velocity = _hurt_box.knockback_dir * _hurt_box.knockback_power
 

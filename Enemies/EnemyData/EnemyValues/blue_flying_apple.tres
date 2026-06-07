@@ -27,6 +27,5 @@ avg_coins_dropped = 5
 touch_damage = 2
 knockback_resistance = 30.0
 death_ability = Array[ExtResource("1_jbdos")]([SubResource("Resource_cnptj")])
-shooter_chance = 30
 bullet = ExtResource("1_mwrnf")
 metadata/_custom_type_script = "uid://rlvenynllobd"

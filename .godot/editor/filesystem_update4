@@ -1,4 +1,7 @@
-res://Player/Player.tscn
+res://Enemies/FlyingApple/FlyingApple.tscn
+res://Items/Coin.tres
+res://Items/Diamond.tres
+res://Items/RedDiamond.tres
 res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
@@ -8,49 +11,11 @@ res://Enemies/EnemyData/EnemyValues/EvilBirds/red_evil_bird.tres
 res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres
 res://Items/LootManager/ItemPools/bow_pool.tres
 res://Items/LootManager/ItemPools/arrow_pool.tres
-res://Items/Coin.tres
-res://Items/Diamond.tres
-res://Items/RedDiamond.tres
-res://Player/Abilities2.0/ShootAbilities/Bleed/bleed_ability.gd
-res://Weapons/Scripts/arrow.gd
-res://Player/Abilities2.0/player_ability.gd
-res://Enemies/FlyingApple/FlyingApple.tscn
-res://Player/Abilities2.0/ShootAbilities/Crit/crit_ability.gd
-res://Player/Abilities2.0/SwordAbilities/SwordSize/sword_size_ability.gd
-res://Player/Abilities2.0/ShootAbilities/leech/leech_ability.gd
-res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd
-res://Player/Abilities2.0/ShootAbilities/Stun/stun_ability.gd
-res://Player/Abilities2.0/SwordAbilities/Bleed/sword_bleed_ability.gd
-res://Player/Abilities2.0/PassiveAbilities/ExtraGold/extra_gold_ability.gd
-res://Player/player.gd
-res://Player/Player2.0/MainHand/player_main_hand.gd
 res://Enemies/Scripts/enemy.gd
-res://MainMenu/MainMenu.tscn
-res://Player/Player2.0/MainHand/PlayerMainHand.tscn
-res://Player/Abilities2.0/ShootAbilities/ExtraArrow/extra_arrow_ability.gd
-res://StatClass/stat.gd
-res://Items/Equipments/Equipment.tscn
-res://Items/Equipments/StateMachine/equipment_unequipped_state.gd
-res://Items/Equipments/StateMachine/equipment_equipped_state.gd
-res://HUD/hud.gd
-res://Items/Equipments/equipment.gd
-res://Items/Equipments/StateMachine/equipment_interacted_state.gd
-res://Items/Equipments/UI/interaction_ui.gd
-res://Items/Equipments/equipment_data.gd
-res://Items/LootManager/LootManager.tscn
-res://Items/Equipments/StateMachine/equipment_onground_state.gd
-res://HUD/HUD.tscn
-res://Rifts/rift.gd
-res://00 Globals/event_bus.gd
-res://Items/LootManager/loot_manager.gd
-res://Items/Equipments/StateMachine/equipment_dropped_state.gd
-res://00 Globals/custom_variables.gd
-res://Items/ItemEffects/rarity_sparkle.tscn
-res://PlayerData/player_stats.gd
-res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn
-res://Enemies/EnemyData/enemy_data.gd
-res://Weapons/Effects/CriticalHit/Crit.tscn
-res://General Nodes/HurtBox/arrow_hurt_box.gd
-res://Enemies/FlyingApple/apple_seek_state.gd
-res://Enemies/FlyingApple/flying_apple.gd
-res://General Nodes/HurtBox/hurt_box.gd
+res://Weapons/Scripts/arrow.gd
+res://Player/Player.tscn
+res://Player/background.gdshader
+res://MainGame/Game.tscn
+res://Rifts/Rift.tscn
+res://MainGame/Clouds/Cloud.tscn
+res://MainGame/game.gd

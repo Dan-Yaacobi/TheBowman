@@ -1,20 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr883x3lhveo0"]
+[gd_scene format=3 uid="uid://dr883x3lhveo0"]
 
-[ext_resource type="Script" path="res://MainGame/Clouds/cloud.gd" id="1_kehg7"]
+[ext_resource type="Script" uid="uid://cr3hdp5q4ytvc" path="res://MainGame/Clouds/cloud.gd" id="1_kehg7"]
 [ext_resource type="Texture2D" uid="uid://upqfr2pidroy" path="res://MainGame/Clouds/Clouds.png" id="2_7thou"]
 
-[node name="Cloud" type="CharacterBody2D"]
+[node name="Cloud" type="CharacterBody2D" unique_id=438643090]
 modulate = Color(1, 1, 1, 0.713726)
 z_index = -5
 script = ExtResource("1_kehg7")
 move_speed = 10.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1547334974]
 texture = ExtResource("2_7thou")
 hframes = 4
 vframes = 3
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2027424451]
 
-[node name="ExitedScreenTimer" type="Timer" parent="VisibleOnScreenNotifier2D"]
+[node name="ExitedScreenTimer" type="Timer" parent="VisibleOnScreenNotifier2D" unique_id=1656021980]
 wait_time = 5.0

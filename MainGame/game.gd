@@ -30,10 +30,14 @@ func _ready() -> void:
 
 func summon_cloud() -> void:
 	var new_cloud: Cloud = CLOUD.instantiate()
-	new_cloud.global_position = PlayerManager.player.global_position + Vector2([1,-1].pick_random() * 500,randf_range(-20,-100))
+	new_cloud.global_position = PlayerManager.player.global_position + Vector2(-500, randf_range(-200, -50))
+	
+	var depth = randf_range(0.3, 1.0)
+	new_cloud.scale = Vector2.ONE * depth
+	new_cloud.move_speed = lerp(10.0, 40.0, depth)
+	
 	add_child(new_cloud)
-	cloud_timer.wait_time = randf_range(1,5)
-
+	cloud_timer.wait_time = randf_range(1, 5)
 	
 func music_on_off() -> void:
 	if music_on:
