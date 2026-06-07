@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drwcrh5hyijoj"]
+
+[ext_resource type="Texture2D" uid="uid://blfxj36023kfj" path="res://Items/Other/Coin/Coin.png" id="1_64xu8"]
+[ext_resource type="Script" uid="uid://bx61whsw25xrp" path="res://Items/Other/Coin/coin.gd" id="1_mcakf"]
+
+[node name="Coin" type="Sprite2D" unique_id=1166221354]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_64xu8")
+script = ExtResource("1_mcakf")
+spin_speed = 3.0

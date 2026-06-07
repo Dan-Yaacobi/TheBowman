@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dlxcc0gk5mdes"]
+
+[ext_resource type="Script" uid="uid://bma3kqvn2rj10" path="res://Level/Islands/objects_spawn_markers.gd" id="1_yrh2u"]
+
+[node name="ObjectsSpawnMarkers" type="Node2D" unique_id=1079830238]
+script = ExtResource("1_yrh2u")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=717071919]
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=537345532]
+position = Vector2(8, 0)
+
+[node name="Marker2D3" type="Marker2D" parent="." unique_id=839380369]
+position = Vector2(-10, 0)

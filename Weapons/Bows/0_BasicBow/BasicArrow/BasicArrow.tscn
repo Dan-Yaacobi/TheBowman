@@ -37,7 +37,7 @@ scale_amount_curve = SubResource("Curve_8js4e")
 color = Color(0.643137, 0.152941, 0, 0.45098)
 
 [node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_f2keo")]
-collision_mask = 20
+collision_mask = 28
 script = ExtResource("5_43g4f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1725749955]

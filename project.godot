@@ -30,6 +30,8 @@ CustomVariables="*res://00 Globals/custom_variables.gd"
 CoinDropLogic="*res://00 Globals/coin_drop_logic.gd"
 Islands="*res://00 Globals/islands.gd"
 GameWorlds="*res://00 Globals/game_worlds.gd"
+GameObjects="*uid://d15wf4xedfh2a"
+GeneralFunctions="*uid://3ytsro82mj06"
 
 [display]
 

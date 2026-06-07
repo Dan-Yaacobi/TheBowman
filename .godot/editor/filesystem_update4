@@ -1,4 +1,4 @@
-res://Enemies/FlyingApple/FlyingApple.tscn
+res://Objects/Scenes/Crate.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -11,11 +11,26 @@ res://Enemies/EnemyData/EnemyValues/EvilBirds/red_evil_bird.tres
 res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres
 res://Items/LootManager/ItemPools/bow_pool.tres
 res://Items/LootManager/ItemPools/arrow_pool.tres
-res://Enemies/Scripts/enemy.gd
-res://Weapons/Scripts/arrow.gd
-res://Player/Player.tscn
 res://Player/background.gdshader
+res://Objects/Effects/break.gdshader
+res://Enemies/TargetDummy/TargetDummy.tscn
+res://Objects/object.gd
+res://Objects/Scenes/Barrel.tscn
+res://Level/Islands/Island.tscn
+res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd
+res://Level/Islands/ObjectsSpawnMarkers.tscn
+res://Level/Islands/Island2.tscn
+res://Level/Islands/Island4.tscn
+res://Level/Islands/Island5.tscn
+res://Level/Islands/island.gd
+res://Level/Islands/objects_spawn_markers.gd
+res://Level/Islands/Island3.tscn
+res://00 Globals/game_objects.gd
+res://Objects/Scenes/LightPost.tscn
+res://Objects/Scenes/Vase.tscn
+res://MainMenu/MainMenu.tscn
+res://General Nodes/HurtBox/arrow_hurt_box.gd
+res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn
+res://00 Globals/general_functions.gd
+res://Weapons/Scripts/arrow.gd
 res://MainGame/Game.tscn
-res://Rifts/Rift.tscn
-res://MainGame/Clouds/Cloud.tscn
-res://MainGame/game.gd

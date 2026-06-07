@@ -477,7 +477,7 @@ position = Vector2(-9.999992, 2.0000362)
 rotation = -1.5708
 scale = Vector2(2, 2)
 collision_layer = 0
-collision_mask = 132
+collision_mask = 140
 script = ExtResource("13_5ej1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox" unique_id=623930274]

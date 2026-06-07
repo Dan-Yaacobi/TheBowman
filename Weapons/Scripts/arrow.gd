@@ -43,8 +43,9 @@ func _ready() -> void:
 	visible_on_screen_notifier.screen_exited.connect(missed)
 	scale *= PlayerManager.player.stats.arrow_size.value()
 	
-func hit(body) -> void:
-	if body is Enemy:
+func hit(_hit_box) -> void:
+	if _hit_box is EnemyHitBox:
+		var body = _hit_box.enemy
 		if regular_shot:
 			if crit:
 				crit_effect(body)
@@ -52,9 +53,9 @@ func hit(body) -> void:
 				ability.activate_ability(body,self)
 			succesfuly_hit = true
 			EventBus.arrow_enemy_hit.emit(perfect_shot)
-			pierce_count += 1
-
-			clear_shot()
+	pierce_count += 1
+	clear_shot()
+	
 			
 func crit_effect(_body: Enemy) -> void:
 	var _crit_effect = CRIT.instantiate()
@@ -81,6 +82,9 @@ func missed() -> void:
 func clear_shot() -> void:
 	EventBus.arrow_hit_sound.emit()
 	if pierce_count >= possible_pierce:
+		hurt_box.monitoring = false
+		hurt_box.monitorable = false
+		await get_tree().create_timer(0.05, true, false, true).timeout
 		queue_free()
 
 func wall_clear_shot() -> void:

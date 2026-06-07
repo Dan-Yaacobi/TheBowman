@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://cyqdfqcoqypvx"]
+
+[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/object.gd" id="1_sl7t1"]
+[ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_3w18e"]
+[ext_resource type="Texture2D" uid="uid://d3dkpctrgsjj" path="res://Objects/Sprites/Crate.png" id="3_m4ol7"]
+[ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="4_52qba"]
+
+[sub_resource type="Resource" id="Resource_qhhqe"]
+script = ExtResource("2_3w18e")
+interactable = true
+metadata/_custom_type_script = "uid://dpi6xu2twbnpw"
+
+[sub_resource type="Shader" id="Shader_u6i21"]
+code = "shader_type canvas_item;
+
+//shard_count — how many pieces the sprite breaks into. Low values (4–6) give big chunky shards like thick glass or pottery. High values (20–30) give a fine shatter like thin ice or a mirror. Default 12 is a good middle ground for most items.
+//spread — how far shards fly outward from the impact point. Low (0.3–0.6) keeps pieces close together, like something crumbling and falling in place. High (1.5–3.0) sends pieces flying dramatically. Tune this alongside gravity — high spread + low gravity = explosion outward, low spread + high gravity = pieces just drop.
+//gravity — downward pull on the shards over time. Since it's multiplied by t² it accelerates naturally. Low (0.2–0.5) for something light like a leaf or paper. High (2.0–3.0) for something heavy like a rock or metal object.
+//spin_amount — how much each shard rotates as it flies. 0 means pieces slide away flat which looks unnatural. Around 3–5 is realistic for most objects. Very high (8–10) gives a chaotic explosive feel.
+//fade_start — at what point during the animation pieces start fading out. 0.2 means they start disappearing almost immediately. 0.8 means they stay visible for most of the animation and vanish at the end. Lower values hide the UV sampling artifacts better but feel less physical.
+//gap_darkness — how dark the cracks between separating shards are. 0 means no visible cracks. 1.0 means fully black gaps. Keep it around 0.6–0.8 for a clean look.
+//delay_variance — how staggered the shard movement is. 0 means all shards move together. 0.15–0.3 gives a natural fracture propagation feel.
+//impact_point — the UV coordinate the break originates from. Default (0.5, 0.5) is center. If an arrow hits the left side of a crate, pass in something like (0.2, 0.5) so shards fly away from that side instead.
+
+uniform float progress : hint_range(0.0, 1.0) = 0.0;
+uniform int shard_count : hint_range(3, 30) = 12;
+uniform float gravity : hint_range(0.0, 3.0) = 1.5;
+uniform float spread : hint_range(0.0, 3.0) = 1.2;
+uniform float spin_amount : hint_range(0.0, 10.0) = 4.0;
+uniform float fade_start : hint_range(0.0, 1.0) = 0.4;
+uniform float gap_darkness : hint_range(0.0, 1.0) = 0.8;
+uniform float delay_variance : hint_range(0.0, 0.5) = 0.15;
+uniform vec2 impact_point = vec2(0.5, 0.5);
+
+vec2 hash2(vec2 p) {
+    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+    return fract(sin(p) * 43758.5453123);
+}
+
+void voronoi(vec2 uv, int count, out vec2 cell_id, out vec2 cell_seed_uv, out float border_dist) {
+    float scale = float(count) * 0.5;
+    vec2 scaled = uv * scale;
+    vec2 cell = floor(scaled);
+    vec2 local = fract(scaled);
+
+    float min_dist = 8.0;
+    float second_dist = 8.0;
+    cell_id = vec2(0.0);
+    cell_seed_uv = vec2(0.5);
+
+    for (int y = -1; y <= 1; y++) {
+        for (int x = -1; x <= 1; x++) {
+            vec2 neighbor = vec2(float(x), float(y));
+            vec2 h = hash2(cell + neighbor);
+            vec2 point = h + neighbor;
+            float d = length(point - local);
+            if (d < min_dist) {
+                second_dist = min_dist;
+                min_dist = d;
+                cell_id = cell + neighbor;
+                cell_seed_uv = (cell + neighbor + h) / scale;
+            } else if (d < second_dist) {
+                second_dist = d;
+            }
+        }
+    }
+    border_dist = (second_dist - min_dist) * scale * 0.5;
+}
+
+mat2 rotate2d(float a) {
+    float c = cos(a); float s = sin(a);
+    return mat2(vec2(c, -s), vec2(s, c));
+}
+
+uniform float burst_sharpness : hint_range(1.0, 10.0) = 3.0;
+
+float burst(float t) {
+    return 1.0 - pow(1.0 - t, burst_sharpness);
+}
+
+void fragment() {
+    vec2 uv = UV;
+
+    vec2 cell_id;
+    vec2 seed_uv;
+    float border_dist;
+    voronoi(uv, shard_count, cell_id, seed_uv, border_dist);
+
+    vec2 rnd  = hash2(cell_id);
+    vec2 rnd2 = hash2(cell_id + vec2(53.2, 31.7));
+    vec2 rnd3 = hash2(cell_id + vec2(11.4, 97.6));
+    vec2 rnd4 = hash2(cell_id + vec2(74.1, 43.9));
+
+    float delay = rnd4.x * delay_variance;
+    float t = clamp((progress - delay) / (1.0 - delay), 0.0, 1.0);
+
+    float mass = mix(0.5, 1.5, rnd3.y);
+
+    float impact_dist = length(seed_uv - impact_point);
+    float velocity = mix(1.6, 0.5, clamp(impact_dist * 2.0, 0.0, 1.0)) / mass;
+
+    vec2 base_dir = seed_uv - impact_point;
+    float base_len = length(base_dir);
+    vec2 away = base_len > 0.001
+        ? base_dir / base_len
+        : vec2(rnd.x - 0.5, rnd.y - 0.5) * 2.0;
+
+    float scatter_angle = (rnd3.x - 0.5) * 1.4;
+    float sc = cos(scatter_angle); float ss = sin(scatter_angle);
+    away = mat2(vec2(sc, -ss), vec2(ss, sc)) * away;
+
+    float bt = burst(t);
+
+    vec2 offset;
+    offset.x = away.x * spread * velocity * rnd2.x * bt;
+    offset.y = away.y * spread * velocity * rnd2.y * bt + gravity * t * t;
+
+    float angle = (rnd.x - 0.5) * spin_amount * velocity * bt;
+
+    float shard_scale = 1.0 - t * 0.3 * rnd2.y;
+
+    vec2 local_uv = (uv - seed_uv) / max(shard_scale, 0.01);
+    vec2 sample_uv = rotate2d(-angle) * local_uv + seed_uv - offset;
+
+    float gap = clamp(border_dist - progress * 0.3, 0.0, 1.0);
+    float border_mask = smoothstep(0.0, 0.08, gap);
+
+    float fade = 1.0 - smoothstep(fade_start, 1.0, t);
+
+    float in_bounds = step(0.0, sample_uv.x) * step(sample_uv.x, 1.0)
+                    * step(0.0, sample_uv.y) * step(sample_uv.y, 1.0);
+
+    vec4 tex = texture(TEXTURE, clamp(sample_uv, vec2(0.0), vec2(1.0)));
+
+    // Only show cracks once breaking has actually started
+    float breaking = smoothstep(0.0, 0.02, progress);
+
+    float gap_shadow = mix(1.0 - gap_darkness * breaking, 1.0, border_mask);
+
+    COLOR = vec4(tex.rgb * gap_shadow, tex.a * mix(1.0, border_mask * fade, breaking) * in_bounds);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct031"]
+shader = SubResource("Shader_u6i21")
+shader_parameter/progress = 0.0
+shader_parameter/shard_count = 3
+shader_parameter/gravity = 0.30000001425
+shader_parameter/spread = 1.0000000475
+shader_parameter/spin_amount = 2.000000095
+shader_parameter/fade_start = 0.2000000095
+shader_parameter/gap_darkness = 0.8
+shader_parameter/delay_variance = 0.15
+shader_parameter/impact_point = Vector2(0.5, 0.5)
+shader_parameter/burst_sharpness = 5.00000019
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qd5k"]
+size = Vector2(32, 32)
+
+[node name="Crate" type="Node2D" unique_id=84532828]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_sl7t1")
+data = SubResource("Resource_qhhqe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
+material = SubResource("ShaderMaterial_ct031")
+position = Vector2(0, 12)
+texture = ExtResource("3_m4ol7")
+region_enabled = true
+region_rect = Rect2(-38.484512, -28.652885, 107.80299, 119.42443)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=325197998]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_52qba")
+metadata/_custom_type_script = "uid://dypeadprx6irb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1488326359]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_8qd5k")
+
+[node name="PlacementMarker" type="Marker2D" parent="." unique_id=630391235]
+position = Vector2(0, 10)

@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bn3sgk18054s0"]
+
+[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/object.gd" id="1_lawhw"]
+[ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_3j11q"]
+[ext_resource type="Shader" uid="uid://fdcnf00myt8h" path="res://Objects/Effects/break.gdshader" id="3_ae328"]
+[ext_resource type="Texture2D" uid="uid://crlq82niv4eku" path="res://Objects/Sprites/Vase.png" id="4_lawhw"]
+[ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="5_2o05d"]
+
+[sub_resource type="Resource" id="Resource_qhhqe"]
+script = ExtResource("2_3j11q")
+interactable = true
+metadata/_custom_type_script = "uid://dpi6xu2twbnpw"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct031"]
+shader = ExtResource("3_ae328")
+shader_parameter/progress = 0.0
+shader_parameter/shard_count = 3
+shader_parameter/gravity = 0.30000001425
+shader_parameter/spread = 0.50000002375
+shader_parameter/spin_amount = 2.000000095
+shader_parameter/fade_start = 0.2000000095
+shader_parameter/gap_darkness = 0.8
+shader_parameter/delay_variance = 0.15
+shader_parameter/impact_point = Vector2(0.5, 0.5)
+shader_parameter/flash = 0.0
+shader_parameter/burst_sharpness = 10.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bc7jc"]
+radius = 16.0
+height = 40.0
+
+[node name="Vase" type="Node2D" unique_id=84532828]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_lawhw")
+data = SubResource("Resource_qhhqe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
+material = SubResource("ShaderMaterial_ct031")
+texture = ExtResource("4_lawhw")
+region_enabled = true
+region_rect = Rect2(-10, -0.042398453, 53, 58.10697)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=325197998]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_2o05d")
+metadata/_custom_type_script = "uid://dypeadprx6irb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1488326359]
+shape = SubResource("CapsuleShape2D_bc7jc")
+
+[node name="PlacementMarker" type="Marker2D" parent="." unique_id=1100764304]
+position = Vector2(0, 18)

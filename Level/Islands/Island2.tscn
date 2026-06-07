@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dd5uq7un0y3cu" path="res://Level/Islands/island.gd" id="1_f68h2"]
 [ext_resource type="Texture2D" uid="uid://ddfackbuv8seg" path="res://Level/Islands/sprites/Island2.png" id="2_f68h2"]
+[ext_resource type="PackedScene" uid="uid://dlxcc0gk5mdes" path="res://Level/Islands/ObjectsSpawnMarkers.tscn" id="3_pkq1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
-size = Vector2(40, 4)
+size = Vector2(40, 7)
 
 [node name="Island" type="StaticBody2D" unique_id=391047933]
 z_index = -4
@@ -15,5 +16,8 @@ script = ExtResource("1_f68h2")
 texture = ExtResource("2_f68h2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2032839967]
-position = Vector2(0, -5)
+position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_sp085")
+
+[node name="ObjectsSpawnMarkers" parent="." unique_id=1079830238 instance=ExtResource("3_pkq1e")]
+position = Vector2(0, -7)
