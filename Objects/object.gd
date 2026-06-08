@@ -5,7 +5,7 @@ class_name GameObject extends Node2D
 @onready var placement_marker: Marker2D = $PlacementMarker
 
 @export var data: ObjectData
-
+@export var avg_coin_drop: int = 1
 var got_hit: bool = false
 
 func _ready() -> void:
@@ -25,5 +25,6 @@ func break_item(_hurt_box: HurtBox) -> void:
 			0.0, 1.0, 0.4
 		).set_trans(Tween.TRANS_LINEAR)
 		await tween.finished
+		EventBus.drop_coins.emit(global_position,avg_coin_drop)
 		queue_free()
 	

@@ -1,10 +1,41 @@
 [gd_scene format=3 uid="uid://drwcrh5hyijoj"]
 
 [ext_resource type="Texture2D" uid="uid://blfxj36023kfj" path="res://Items/Other/Coin/Coin.png" id="1_64xu8"]
-[ext_resource type="Script" uid="uid://bx61whsw25xrp" path="res://Items/Other/Coin/coin.gd" id="1_mcakf"]
+[ext_resource type="Script" uid="uid://bvif8g7h07prn" path="res://Items/Other/Coin/coin.gd" id="1_mcakf"]
+[ext_resource type="Script" uid="uid://bx61whsw25xrp" path="res://Items/Other/Coin/coin_visuals.gd" id="3_5yd7k"]
 
-[node name="Coin" type="Sprite2D" unique_id=1166221354]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5yd7k"]
+radius = 3.0
+
+[node name="Coin" type="Node2D" unique_id=967061751]
+script = ExtResource("1_mcakf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_64xu8")
-script = ExtResource("1_mcakf")
+script = ExtResource("3_5yd7k")
 spin_speed = 3.0
+
+[node name="MagnetArea" type="Area2D" parent="." unique_id=1129579687]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=344677100]
+shape = SubResource("CircleShape2D_y6rwh")
+debug_color = Color(0.77325535, 0.44298598, 0, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=521789860]
+
+[node name="LifetimeTimer" type="Timer" parent="." unique_id=96067277]
+
+[node name="LandingDetector" type="Area2D" parent="." unique_id=1415796400]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LandingDetector" unique_id=620379657]
+shape = SubResource("CircleShape2D_5yd7k")
+
+[connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]
+[connection signal="body_exited" from="MagnetArea" to="." method="_on_magnet_area_body_exited"]

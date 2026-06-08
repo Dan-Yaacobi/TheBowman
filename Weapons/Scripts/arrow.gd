@@ -82,8 +82,8 @@ func missed() -> void:
 func clear_shot() -> void:
 	EventBus.arrow_hit_sound.emit()
 	if pierce_count >= possible_pierce:
-		hurt_box.monitoring = false
-		hurt_box.monitorable = false
+		hurt_box.set_deferred("monitoring",false)
+		hurt_box.set_deferred("monitorable",false)
 		await get_tree().create_timer(0.05, true, false, true).timeout
 		queue_free()
 

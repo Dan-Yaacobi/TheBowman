@@ -43,6 +43,8 @@ signal arrow_hit_enemy(_target: Enemy)
 signal entered_rift_portal
 
 signal try_drop(position: Vector2, _chance: float)
+signal drop_coins(position: Vector2, _amount: int)
+
 signal equipment_dropped(equip_data: EquipmentData, position: Vector2, _existing_equipment: Equipment)
 
 signal equipment_interaction_enter(equip: Equipment)

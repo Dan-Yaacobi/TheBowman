@@ -365,4 +365,12 @@ stat_names_dict = Dictionary[String, String]({
 "pull_speed": "Pull Speed"
 })
 
+[node name="RiftLevel" type="Label" parent="." unique_id=1835615876]
+offset_left = 623.0
+offset_top = 91.0
+offset_right = 1134.0
+offset_bottom = 248.0
+theme_override_font_sizes/font_size = 125
+text = "Rift Level:"
+
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

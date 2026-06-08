@@ -16,7 +16,7 @@ var max_spawn_streak: int = 1
 var biased_towards: CustomVariables.directions
 var rng = RandomNumberGenerator.new()
 var placed_bounds: Array[Bounds]
-
+var side_path_terminal_chunks: Array[RiftChunk] = []
 var lowest_chunk: RiftChunk
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
@@ -79,6 +79,9 @@ func build_side_path(_start_chunk: RiftChunk) -> bool:
 	var last_chunk: RiftChunk = build_path(length,_start_chunk, false)
 	if !last_chunk:
 		return false
+	side_path_terminal_chunks.append(last_chunk)
+	last_chunk.is_side_path_terminal = true
+	rift_level.side_path_terminal_chunks.append(last_chunk)
 	return true
 
 func spawn_something(_chunk: RiftChunk) -> void:
@@ -116,7 +119,11 @@ func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool =
 		var next_chunk: RiftChunk = try_to_add_chunk(exit)
 		
 		if next_chunk:
+			next_chunk.is_main_path = _main_path
 			chunks.append(next_chunk)
+			if _main_path:
+				rift_level.main_path_chunks.append(next_chunk)
+				
 			_prev_chunk = _curr_chunk
 			_curr_chunk = next_chunk
 			length += 1

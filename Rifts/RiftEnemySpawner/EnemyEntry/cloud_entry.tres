@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://ogdqqlqr3glj"]
+
+[ext_resource type="Resource" uid="uid://ckvligvrymvot" path="res://Enemies/EnemyData/EnemyValues/Clouds/regular_cloud.tres" id="1_c504u"]
+[ext_resource type="PackedScene" uid="uid://d2ag7d2j5mctf" path="res://Enemies/Cloud/CloudEnemy.tscn" id="2_wyfbs"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="3_rsflc"]
+
+[resource]
+script = ExtResource("3_rsflc")
+scene = ExtResource("2_wyfbs")
+data = ExtResource("1_c504u")
+cost = 3
+min_level = 3
+base_weight = 4.0
+weight_curve = 0.5
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

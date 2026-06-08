@@ -1,6 +1,5 @@
 class_name TraversalChunk extends RiftChunk
 
-const APPLE_TREE = preload("uid://tpty2gvjhn30")
 @onready var spawn_markers: Node2D = $SpawnMarkers
 @export var direction: CustomVariables.directions
 
@@ -18,10 +17,12 @@ func get_spawn_markers() -> Array:
 	return spawn_markers.get_children()
 	
 func on_player_enter() -> void:
-	if allowed_spawn:
-		if randf() < spawn_chance:
-			rift_level.summon_enemy()
-
+	if is_main_path and not visited:
+		rift_level.main_path_visited_count += 1
+	if allowed_spawn and not visited:
+		rift_level.summon_enemy(is_main_path, is_side_path_terminal)
+	visited = true
+	
 func spawn_game_objects() -> void:
 	var amount: int = randi_range(1,islands.size())
 	islands.shuffle()

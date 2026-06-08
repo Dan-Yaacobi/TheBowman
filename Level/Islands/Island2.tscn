@@ -10,6 +10,7 @@ size = Vector2(40, 7)
 [node name="Island" type="StaticBody2D" unique_id=391047933]
 z_index = -4
 collision_layer = 16
+collision_mask = 513
 script = ExtResource("1_f68h2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772742298]

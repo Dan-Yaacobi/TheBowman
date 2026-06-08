@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://dky6wnpla6kei"]
+
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_4qiov"]
+[ext_resource type="Resource" uid="uid://vvnsl3x61vqb" path="res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres" id="1_u80x4"]
+[ext_resource type="PackedScene" uid="uid://d1p3p0fkf2rwl" path="res://Enemies/Spider/Spider.tscn" id="2_m8270"]
+
+[resource]
+script = ExtResource("1_4qiov")
+scene = ExtResource("2_m8270")
+data = ExtResource("1_u80x4")
+cost = 2
+base_weight = 5.0
+weight_curve = 0.5
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

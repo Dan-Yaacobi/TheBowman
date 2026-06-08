@@ -14,7 +14,8 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	enemy.no_push_back = false
+	enemy.sprite = walking_sprite
+	enemy.stats.can_be_knockedback = true
 	enemy.animation_player = walking_animation
 	enemy.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 	walking_sprite.visible = true

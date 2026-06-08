@@ -18,9 +18,10 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
+	enemy.sprite = dropping_sprite
 	dropping_sprite.visible = true
 	walking_sprite.visible = false
-	enemy.no_push_back = true
+	enemy.stats.can_be_knockedback = false
 	initial_y = enemy.global_position.y
 	enemy.animation_player = dropping_animation
 	enemy.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING

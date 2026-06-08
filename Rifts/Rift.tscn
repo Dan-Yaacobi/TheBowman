@@ -31,6 +31,11 @@
 [ext_resource type="Resource" uid="uid://bravebi6u7yxh" path="res://Enemies/EnemyData/EnemyValues/EvilBirds/red_evil_bird.tres" id="25_jrg21"]
 [ext_resource type="Resource" uid="uid://vvnsl3x61vqb" path="res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres" id="26_00pap"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="31_5icp2"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="31_y5ptd"]
+[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="32_qxt8x"]
+[ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="33_u3v33"]
+[ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="34_vwcbb"]
+[ext_resource type="Resource" uid="uid://ogdqqlqr3glj" path="res://Rifts/RiftEnemySpawner/EnemyEntry/cloud_entry.tres" id="35_oe8us"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
@@ -107,5 +112,6 @@ library = SubResource("Resource_clqlo")
 [node name="RiftEnemySpawner" parent="." unique_id=1673800169 instance=ExtResource("19_4xrky")]
 script = ExtResource("20_5l72e")
 enemies = SubResource("Resource_x6s0t")
+enemy_pool = Array[ExtResource("31_y5ptd")]([ExtResource("32_qxt8x"), ExtResource("33_u3v33"), ExtResource("34_vwcbb"), ExtResource("35_oe8us")])
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("31_5icp2")]

@@ -1,5 +1,6 @@
 class_name LootManager extends Node2D
 const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
+const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 # Rarity
 @export var quality_floor_max: float = 0.5       # how high the floor gets at max rarity
@@ -26,7 +27,8 @@ func _ready() -> void:
 
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
-
+	EventBus.drop_coins.connect(drop_coins)
+	
 func drop_item(slot: Slot) -> EquipmentData:
 	match slot:
 		Slot.BOW: return roll_item(bow_pool)
@@ -39,6 +41,8 @@ func drop_random_item(_position: Vector2, _chance: float) -> void:
 		var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
 		EventBus.equipment_dropped.emit(item, _position, null)
 
+func drop_coins(_position: Vector2, _amount: int) -> void:
+	CoinDropManager.drop_coins(_position, _amount)
 
 func roll_item(pool: ItemPool) -> EquipmentData:
 	var data = EquipmentData.new()

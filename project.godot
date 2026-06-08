@@ -32,6 +32,7 @@ Islands="*res://00 Globals/islands.gd"
 GameWorlds="*res://00 Globals/game_worlds.gd"
 GameObjects="*uid://d15wf4xedfh2a"
 GeneralFunctions="*uid://3ytsro82mj06"
+CoinDropManager="*uid://bnjd8xgn1wdul"
 
 [display]
 
@@ -141,6 +142,7 @@ grapple={
 2d_physics/layer_7="PlayerPickup"
 2d_physics/layer_8="Projectiles"
 2d_physics/layer_9="Equipment"
+2d_physics/layer_10="Coins"
 2d_physics/layer_15="ChunkBounds"
 
 [rendering]

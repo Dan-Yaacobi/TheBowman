@@ -107,7 +107,6 @@ func _ready() -> void:
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
-	
 func add_display_buff(buff: PlayerUpgrade) -> void:
 	if buff:
 		total_buffs.add_display_buff(buff)

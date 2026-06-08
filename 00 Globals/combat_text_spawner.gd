@@ -8,4 +8,6 @@ func spawn(_pos: Vector2, _text: String, _color: Color) -> void:
 	combat_text.text = _text
 	combat_text.set_text_color(_color)
 	combat_text.start()
-	combat_text.set_position(_pos + Vector2(randi_range(-10,10),-20))
+	var angle: float = randf_range(0, TAU)
+	var radius: float = randf_range(0, 15)
+	combat_text.set_position(_pos + Vector2(cos(angle), sin(angle)) * radius + Vector2(0, -20))

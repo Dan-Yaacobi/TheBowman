@@ -6,6 +6,7 @@ class_name HUD extends CanvasLayer
 @onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
+@onready var rift_level_label: Label = $RiftLevel
 
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 	EventBus.equipment_interaction_exit.connect(hide_equip_interaction_ui)
 	interaction_ui.equip_new_item.connect(equip_item)
 	interaction_ui.destory_new_item.connect(destory_item)
+	EventBus.entered_rift.connect(show_rift_label)
+	rift_level_label.modulate.a = 0
 	
 func get_health_bar() -> HealthBar:
 	return health_bar
@@ -54,4 +57,9 @@ func equip_item() -> void:
 func destory_item() -> void:
 	if current_view_item:
 		EventBus.destory_view_item.emit(current_view_item)
-		
+
+func show_rift_label() -> void:
+	rift_level_label.text = "Rift Level: " + str(PlayerManager.player.stats.rift_level)
+	rift_level_label.modulate.a = 1.0
+	var tween = create_tween()
+	tween.tween_property(rift_level_label, "modulate:a", 0.0, 1.5).set_delay(1)

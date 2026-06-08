@@ -31,8 +31,8 @@ func set_world() -> void:
 	rift_level.reparent(self)
 	rift_level.get_summon_enemy.connect(call_enemy_spawner)
 
-func call_enemy_spawner(level: int) -> void:
-	rift_enemy_spawner.spawn_enemy(level)
+func call_enemy_spawner(level: int, _main_progress: float, is_main_path: bool, is_side_path_terminal: bool) -> void:
+	rift_enemy_spawner.spawn_enemy(level, _main_progress, is_main_path, is_side_path_terminal)
 
 func exit_world() -> void:
 	PlayerManager.player.hide_buffs()

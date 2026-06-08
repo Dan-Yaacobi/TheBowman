@@ -52,7 +52,7 @@ func extra_ready_functions() -> void:
 
 func set_data(_data: EnemyData) -> void:
 	if _data:
-		stats = _data
+		stats = _data.duplicate()
 
 func is_damaged() -> bool:
 	return current_hp < stats.max_hp
@@ -122,6 +122,7 @@ func drop_item(_drops: Array[ItemData]) -> void:
 		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
 		100)
 	EventBus.try_drop.emit(global_position, drop_chance)
+	EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
 	return
 
 	for drop in _drops:

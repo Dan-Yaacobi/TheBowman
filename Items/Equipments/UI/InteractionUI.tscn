@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://doat5doem53a8"]
 
 [ext_resource type="Script" uid="uid://2kln8owfj3mr" path="res://Items/Equipments/UI/interaction_ui.gd" id="1_qxexj"]
+[ext_resource type="Shader" uid="uid://dsjd8llvoqwdm" path="res://Items/Equipments/UI/wooden_UI.gdshader" id="2_6ssy7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1p5pq"]
+shader = ExtResource("2_6ssy7")
+shader_parameter/transparency = 0.70000003325
+shader_parameter/wood_light = Color(0.6, 0.4, 0.2, 1)
+shader_parameter/wood_dark = Color(0.3, 0.18, 0.08, 1)
+shader_parameter/grain_scale = 6.0
+shader_parameter/grain_distortion = 0.3
+shader_parameter/border_width = 0.03
+shader_parameter/border_color = Color(0.15, 0.08, 0.02, 1)
 
 [node name="InteractionUI" type="Control" unique_id=696699529]
 layout_mode = 3
@@ -17,6 +28,7 @@ stat_names_dict = Dictionary[String, String]({
 })
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1158546383]
+material = SubResource("ShaderMaterial_1p5pq")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

@@ -53,8 +53,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 script = ExtResource("1_v12hp")
 stat_name = "arrow_size"
 type = 1
-min_value = 1.1
-max_value = 2.0
+min_value = 0.1
+max_value = 0.5
 rarity_weight = 1.5
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 

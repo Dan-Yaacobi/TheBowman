@@ -40,7 +40,7 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		var next_world = GameWorlds.get_world(_new)
 		
 		if next_world is MainMenu:
-			PlayerManager.player.stats.rift_level = 1
+			PlayerManager.player.stats.rift_level = 0
 			
 		get_tree().paused = true
 		

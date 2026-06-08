@@ -92,8 +92,9 @@ func release_arrow() -> void:
 	if shot_power < 0.15:
 		current_arrow.free()
 	else:
-		current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
-		fire_arrow()
+		if current_arrow:
+			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+			fire_arrow()
 	current_arrow = null
 
 func fire_arrow() -> void:
