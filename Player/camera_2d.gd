@@ -17,6 +17,7 @@ func _ready() -> void:
 	
 	EventBus.change_camera_focus.connect(change_focus)
 	EventBus.reset_camera_focus.connect(reset_focus)
+	EventBus.camera_shake.connect(apply_shake)
 	pass
 	
 func _physics_process(delta: float) -> void:
@@ -28,8 +29,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_the_camera(player.global_position, delta)
 
-func apply_shake() -> void:
-	shake_strength = random_strength
+func apply_shake(_strength: float = random_strength, _fade: float = 10.0) -> void:
+	shake_strength = _strength
+	shake_fade = _fade
 	
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength,shake_strength),rng.randf_range(-shake_strength,shake_strength))

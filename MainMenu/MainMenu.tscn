@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
+[ext_resource type="PackedScene" uid="uid://cyqdfqcoqypvx" path="res://Objects/Scenes/Crate.tscn" id="18_167x7"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -304,5 +305,8 @@ debug_color = Color(1, 0, 0.2, 0.419608)
 
 [node name="TargetDummy" parent="." unique_id=603628097 instance=ExtResource("17_5lv0r")]
 position = Vector2(149, 98)
+
+[node name="Crate" parent="." unique_id=84532828 instance=ExtResource("18_167x7")]
+position = Vector2(248, 99)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

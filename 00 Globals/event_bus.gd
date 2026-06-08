@@ -11,6 +11,7 @@ signal changed_scene(new_scene: GameWorlds.worlds)
 
 signal change_camera_focus(target: Vector2)
 signal reset_camera_focus
+signal camera_shake(_strength: float, _fade: float)
 
 signal arrow_hit_sound
 signal arrow_shot_sound

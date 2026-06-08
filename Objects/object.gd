@@ -17,6 +17,7 @@ func _ready() -> void:
 func break_item(_hurt_box: HurtBox) -> void:
 	if data.interactable and not got_hit:
 		got_hit = true
+		EventBus.camera_shake.emit(2.0,25.0)
 		sprite.material = sprite.material.duplicate()
 		var tween: Tween = create_tween()
 		tween.tween_method(
