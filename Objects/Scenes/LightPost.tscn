@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tyfgom2bccki"]
 
-[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/object.gd" id="1_iywku"]
+[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/game_object.gd" id="1_iywku"]
 [ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_r8pqt"]
 [ext_resource type="Texture2D" uid="uid://bvp7e5y00ag3k" path="res://Objects/Sprites/LightPost.png" id="3_iywku"]
 [ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="4_e3s08"]
@@ -163,6 +163,7 @@ gradient = SubResource("Gradient_iywku")
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_iywku")
 data = SubResource("Resource_qhhqe")
+avg_coin_drop = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
 material = SubResource("ShaderMaterial_ct031")

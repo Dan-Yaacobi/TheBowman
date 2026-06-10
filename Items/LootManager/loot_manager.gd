@@ -3,9 +3,9 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 # Rarity
-@export var quality_floor_max: float = 0.5       # how high the floor gets at max rarity
-@export var quality_ceiling_min: float = 0.6     # ceiling for rarity 1 items
-@export var rarity_bias: float = 3.0          # higher = legendary items rarer (C base)
+@export var quality_floor_max: float = 0.8       # how high the floor gets at max rarity
+@export var quality_ceiling_min: float = 0.4     # ceiling for rarity 1 items
+@export var rarity_bias: float = 3.0         # higher = legendary items rarer (C base)
 @export var lift_exp: float = 0.7
 
 # Rift level scaling
@@ -28,6 +28,7 @@ func _ready() -> void:
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
 	EventBus.drop_coins.connect(drop_coins)
+	EventBus.drop_potion.connect(drop_potion)
 	
 func drop_item(slot: Slot) -> EquipmentData:
 	match slot:
@@ -42,8 +43,11 @@ func drop_random_item(_position: Vector2, _chance: float) -> void:
 		EventBus.equipment_dropped.emit(item, _position, null)
 
 func drop_coins(_position: Vector2, _amount: int) -> void:
-	CoinDropManager.drop_coins(_position, _amount)
+	ItemDropManager.drop_coins(_position, _amount)
 
+func drop_potion(_position: Vector2, _chance: float) -> void:
+	ItemDropManager.drop_potion(_position, _chance)
+	
 func roll_item(pool: ItemPool) -> EquipmentData:
 	var data = EquipmentData.new()
 	data.slot = pool.slot
@@ -125,18 +129,16 @@ func _roll_ability(pool: ItemPool, rarity: int) -> PlayerAbility:
 	return _weighted_ability_pick(eligible)
 
 func _ability_chance_for_rarity(rarity: int) -> float:
-	match rarity:
-		1: return 0.0   # common — no ability
-		2: return uncommon_ability_chance   # uncommon — small chance
-		3: return rare_ability_chance  # rare — good chance
-		4: return 1.0   # legendary — guaranteed
-	return 0.0
+	var t = float(rarity - 1) / float(CustomVariables.MAX_RARITY - 1)  # 0.0 at common, 1.0 at max
+	if t < 0.25: return 0.0
+	if t >= 1.0: return 1.0
+	return lerpf(uncommon_ability_chance, rare_ability_chance, (t - 0.25) / 0.75)
 
 func _max_ability_tier_for_rarity(rarity: int) -> PlayerAbility.Tier:
-	match rarity:
-		2: return PlayerAbility.Tier.COMMON
-		3: return PlayerAbility.Tier.UNCOMMON
-		_: return PlayerAbility.Tier.LEGENDARY
+	var t = float(rarity - 1) / float(CustomVariables.MAX_RARITY - 1)
+	if t < 0.25: return PlayerAbility.Tier.COMMON
+	if t < 0.75: return PlayerAbility.Tier.UNCOMMON
+	return PlayerAbility.Tier.LEGENDARY
 		
 func _weighted_ability_pick(abilities: Array) -> PlayerAbility:
 	var total_weight := 0.0

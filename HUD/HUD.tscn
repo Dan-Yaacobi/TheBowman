@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="16_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
+[ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
 
 [sub_resource type="Animation" id="Animation_7odlb"]
@@ -372,5 +373,9 @@ offset_right = 1134.0
 offset_bottom = 248.0
 theme_override_font_sizes/font_size = 125
 text = "Rift Level:"
+
+[node name="EquipmentMenu" parent="." unique_id=74341901 instance=ExtResource("18_fjfvf")]
+offset = Vector2(500, 100)
+transform = Transform2D(1, 0, 0, 1, 500, 100)
 
 [connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

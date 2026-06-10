@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://c2cyut0rfnys6"]
+
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_4bun7"]
+[ext_resource type="PackedScene" uid="uid://bdbqlu4vfxwdb" path="res://Rifts/Chunks/ChunkScenes/Reward/ChestIsland.tscn" id="1_dkhwt"]
+
+[resource]
+script = ExtResource("1_4bun7")
+scene = ExtResource("1_dkhwt")
+type = 3
+id = "chest_island_1"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

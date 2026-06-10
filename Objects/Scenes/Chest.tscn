@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bi4in2t4m7gip"]
+
+[ext_resource type="Script" uid="uid://w2tqlh7aswid" path="res://Objects/Scenes/chest.gd" id="1_526wg"]
+[ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_xj16g"]
+[ext_resource type="Texture2D" uid="uid://rlqyjewak5wp" path="res://Objects/Sprites/Chest.png" id="3_526wg"]
+[ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="5_iqkf0"]
+
+[sub_resource type="Resource" id="Resource_yy256"]
+script = ExtResource("2_xj16g")
+interactable = true
+metadata/_custom_type_script = "uid://dpi6xu2twbnpw"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bc7jc"]
+radius = 16.0
+height = 40.0
+
+[sub_resource type="Animation" id="Animation_yy256"]
+resource_name = "Open"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xj16g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_snbm8"]
+_data = {
+&"Open": SubResource("Animation_yy256"),
+&"RESET": SubResource("Animation_xj16g")
+}
+
+[node name="Chest" type="Node2D" unique_id=84532828]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_526wg")
+data = SubResource("Resource_yy256")
+avg_coin_drop = 10
+potion_drop_chance = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
+texture = ExtResource("3_526wg")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, -0.042398453, 144, 48.042397)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=325197998]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_iqkf0")
+metadata/_custom_type_script = "uid://dypeadprx6irb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1488326359]
+shape = SubResource("CapsuleShape2D_bc7jc")
+
+[node name="PlacementMarker" type="Marker2D" parent="." unique_id=1100764304]
+position = Vector2(0, 18)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=276742901]
+libraries/ = SubResource("AnimationLibrary_snbm8")

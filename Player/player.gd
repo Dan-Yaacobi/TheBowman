@@ -128,6 +128,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if stats.hp > 0:
+
 		if event.is_action_pressed("up"):
 			if current_portal:
 				current_portal.enter()
@@ -288,13 +289,20 @@ func invincibility_over() -> void:
 	invincible = false
 	self.modulate.a = 1
 	hit_box.monitoring = true
+
+func can_heal(amount: int) -> bool:
+	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
+	return amount_healed > 0
 	
-func heal(amount: int) -> void:
-	if stats.hp + amount <= stats.max_hp:
-		stats.hp += amount
-		health_bar.heal(amount)
-		display_combat_text(amount, Color.GREEN)
-		
+func heal(amount: int) -> bool:
+	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
+	if can_heal(amount):
+		stats.hp += amount_healed
+		health_bar.heal(amount_healed)
+		display_combat_text(amount_healed, Color.GREEN)
+		return true
+	return false
+	
 func display_combat_text(amount: int, color: Color) -> void:
 	CombatTextSpawner.spawn(global_position, str(amount),color)
 

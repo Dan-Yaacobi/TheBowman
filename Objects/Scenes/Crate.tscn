@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyqdfqcoqypvx"]
 
-[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/object.gd" id="1_sl7t1"]
+[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/game_object.gd" id="1_sl7t1"]
 [ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_3w18e"]
 [ext_resource type="Texture2D" uid="uid://d3dkpctrgsjj" path="res://Objects/Sprites/Crate.png" id="3_m4ol7"]
 [ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="4_52qba"]
@@ -161,6 +161,7 @@ scale = Vector2(0.4, 0.4)
 script = ExtResource("1_sl7t1")
 data = SubResource("Resource_qhhqe")
 avg_coin_drop = 2
+potion_drop_chance = 15.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
 material = SubResource("ShaderMaterial_ct031")

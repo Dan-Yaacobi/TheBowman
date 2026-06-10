@@ -68,3 +68,38 @@ var player: Player
 
 @export_subgroup("Rift")
 @export var rift_level: int = 1
+
+
+static var DISPLAY_STATS: Array = [
+	# [group, display_name, property]
+	["Movement", "Move Speed", "move_speed"],
+	["Movement", "Dash Power", "dash_power"],
+	["Movement", "Jump Height", "jump_height"],
+	["Movement", "Max Jumps", "max_jumps"],
+	["Shooting", "Arrow Damage", "arrow_damage"],
+	["Shooting", "Arrow Speed", "arrow_speed"],
+	["Shooting", "Pull Speed", "pull_speed"],
+	["Shooting", "Arrow Count", "arrow_count"],
+	["Shooting", "Arrow Pierce", "arrow_pierce"],
+	["Shooting", "Arrow Weight", "arrow_weight"],
+	["Shooting", "Arrow Size", "arrow_size"],
+	["Shooting", "Pushback Power", "pushback_power"],
+	["Shooting", "Perfect Window", "perfect_shot_window"],
+	["Shooting", "Perfect Bonus", "perfect_shot_bonus"],
+	["Shooting", "Crit Chance", "crit_chance"],
+	["Shooting", "Crit Modifier", "crit_modifier"],
+	["Defense", "Max HP", "max_hp"],
+	["Defense", "Knockback Resist", "knockback_resistance"],
+	["Defense", "Invincibility", "invinc_duration"],
+	["Sword", "Sword Damage", "sword_damage"],
+	["Sword", "Sword Size", "sword_size"],
+	["Sword", "Sword Cooldown", "base_sword_cooldown"],
+]
+
+static var ABILITY_GROUPS: Array = [
+	["Jump", "jump_abilities"],
+	["Dash", "dash_abilities"],
+	["Shoot", "shooting_abilities"],
+	["Sword", "sword_abilities"],
+	["Passive", "passive_abilities"],
+]

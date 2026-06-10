@@ -14,3 +14,6 @@ func get_intro_chunk() -> ChunkData:
 
 func get_portal_chunk() -> Array[ChunkData]:
 	return other_chunks[ChunkData.types.PORTAL].chunks
+
+func get_treasure_chunk() -> Array[ChunkData]:
+	return other_chunks[ChunkData.types.TREASURE].chunks

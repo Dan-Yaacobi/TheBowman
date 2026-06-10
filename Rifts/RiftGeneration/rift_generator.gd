@@ -81,6 +81,7 @@ func build_side_path(_start_chunk: RiftChunk) -> bool:
 		return false
 	side_path_terminal_chunks.append(last_chunk)
 	last_chunk.is_side_path_terminal = true
+	place_treasure_island(last_chunk)
 	rift_level.side_path_terminal_chunks.append(last_chunk)
 	return true
 
@@ -202,6 +203,10 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 		
 	elif type == ChunkData.types.PORTAL:
 		chunks = library.get_portal_chunk().duplicate()
+	
+	elif type == ChunkData.types.TREASURE:
+		chunks = library.get_treasure_chunk().duplicate()
+		chunks.shuffle()
 		
 	while chunks.size() > 0:
 		var chunk_node: RiftChunk = chunks.pop_back().scene.instantiate()
@@ -227,7 +232,12 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 	
 	return null
 
-
+func place_treasure_island(last_chunk: RiftChunk) -> bool:
+	for exit in last_chunk.get_exit_markers():
+		if try_to_add_chunk(exit,ChunkData.types.TREASURE):
+			return true
+	return false
+		
 func place_end_portal(last_chunk: RiftChunk) -> bool:
 	for exit in last_chunk.get_exit_markers():
 		if try_to_add_chunk(exit,ChunkData.types.PORTAL):

@@ -1,5 +1,4 @@
-res://Player/Player2.0/MainHand/player_main_hand.gd
-res://Enemies/Spider/Spider.tscn
+res://Player/Player.tscn
 res://Items/Coin.tres
 res://Items/Diamond.tres
 res://Items/RedDiamond.tres
@@ -10,13 +9,45 @@ res://Enemies/EnemyData/EnemyValues/EvilBirds/red_evil_bird.tres
 res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres
 res://Items/LootManager/ItemPools/bow_pool.tres
 res://Items/LootManager/ItemPools/arrow_pool.tres
-res://Player/background.gdshader
-res://Items/Equipments/UI/wooden_UI.gdshader
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres
+res://Player/background.gdshader
+res://Items/Equipments/UI/wooden_UI.gdshader
 res://Items/Equipments/UI/wooden_buttons.gdshader
-res://Enemies/Spider/spider.gd
-res://Enemies/Spider/spider_dropping_state.gd
-res://Enemies/Spider/spider_walking_state.gd
-res://Player/spawn_handler.gd
+res://00 Globals/coin_drop_manager.gd
+res://Objects/Scenes/Chest.tscn
+res://Items/ItemEffects/glow_sparkle.gdshader
+res://MainMenu/MainMenu.tscn
+res://Objects/Scenes/chest.gd
+res://Rifts/RiftGeneration/rift_generator.gd
+res://Objects/Scenes/LightPost.tscn
+res://Objects/Scenes/LightPost_2.tscn
+res://Rifts/Chunks/ChunkScenes/Reward/ChestIsland.tscn
+res://Rifts/Rift.tscn
+res://Rifts/Chunks/ChunkData/End/end_portal_data.tres
+res://Rifts/Chunks/ChunkData/Intro/intro_1.tres
+res://Rifts/Chunks/ChunkData/Treasure/chest_island.tres
+res://Rifts/Chunks/chunk_library.gd
+res://00 Globals/custom_variables.gd
+res://Items/LootManager/loot_manager.gd
+res://Items/Other/Potion/Potion.tscn
+res://Items/Other/Coin/coin.gd
+res://Items/Other/Coin/coin.tscn
+res://Items/Other/Potion/potion.gd
+res://00 Globals/item_drop_manager.gd
+res://Items/Other/item.gd
+res://00 Globals/event_bus.gd
+res://Objects/game_object.gd
+res://Objects/Scenes/Barrel.tscn
+res://Objects/Scenes/Vase.tscn
+res://Objects/Scenes/Crate.tscn
+res://Objects/object_data.gd
+res://Player/player.gd
+res://PlayerData/player_stats.gd
+res://HUD/EquipmentMenu/EquipmentMenu.tscn
+res://HUD/EquipmentMenu/equipment_menu.gd
+res://HUD/HUD.tscn
+res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres
+res://HUD/EquipmentMenu/EquipmentSlot.tscn
+res://HUD/EquipmentMenu/equipment_slot.gd

@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://cyqdfqcoqypvx" path="res://Objects/Scenes/Crate.tscn" id="18_167x7"]
+[ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="19_24r6y"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -308,5 +309,8 @@ position = Vector2(149, 98)
 
 [node name="Crate" parent="." unique_id=84532828 instance=ExtResource("18_167x7")]
 position = Vector2(248, 99)
+
+[node name="Barrel" parent="." unique_id=1250284733 instance=ExtResource("19_24r6y")]
+position = Vector2(268, 95)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

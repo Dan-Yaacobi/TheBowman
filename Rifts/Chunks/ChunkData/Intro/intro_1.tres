@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ChunkData" load_steps=3 format=3 uid="uid://dj8i0e2574b5s"]
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://dj8i0e2574b5s"]
 
 [ext_resource type="PackedScene" uid="uid://f48hfq74th42" path="res://Rifts/Chunks/ChunkScenes/IntroChunk.tscn" id="1_ejo4i"]
 [ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_r8w7d"]

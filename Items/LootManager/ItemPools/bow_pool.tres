@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="3_s0yus"]
 [ext_resource type="Texture2D" uid="uid://dsk05vfiaptdh" path="res://Weapons/Bows/2_RedBow/RedBow.png" id="4_l6j88"]
 [ext_resource type="Texture2D" uid="uid://c04dsaarp4w75" path="res://Weapons/Bows/3_BlackBow/BlackBow.png" id="5_gs463"]
+[ext_resource type="Texture2D" uid="uid://d030x63vqq3ih" path="res://Weapons/Bows/5_ThunderBow/Zeus.png" id="6_681w5"]
 [ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="6_gs463"]
 [ext_resource type="Texture2D" uid="uid://v6rpvfly0fmv" path="res://Weapons/Bows/4_NatureBow/PoisonIvy.png" id="6_l6j88"]
 [ext_resource type="Script" uid="uid://byn0domth7kwx" path="res://Player/Abilities2.0/ShootAbilities/ExtraArrow/extra_arrow_ability.gd" id="7_74y5u"]
+[ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/Bows/6_BoneBow/Skeletor.png" id="7_kkuwe"]
 
 [sub_resource type="Resource" id="Resource_681w5"]
 script = ExtResource("7_74y5u")
@@ -47,8 +49,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [resource]
 script = ExtResource("2_ualu4")
 possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_s0yus"), SubResource("Resource_a180u"), SubResource("Resource_l6j88"), SubResource("Resource_gs463")])
-possible_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88")])
-equipped_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88")])
+possible_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
+equipped_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
 possible_display_names = Array[String](["Wooden Bow"])
 possible_abilities = Array[ExtResource("6_gs463")]([SubResource("Resource_681w5")])
 scale = 0.5

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cqvhvd0pwv7eh"]
+
+[ext_resource type="Script" uid="uid://cfrirlku7makf" path="res://HUD/EquipmentMenu/equipment_slot.gd" id="1_ummve"]
+
+[node name="EquipmentSlot" type="Button" unique_id=1553754737]
+custom_minimum_size = Vector2(100, 120)
+script = ExtResource("1_ummve")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1746063438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="SlotTexture" type="TextureRect" parent="HBoxContainer" unique_id=430588476]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SlotLabel" type="Label" parent="HBoxContainer" unique_id=1971432579]
+layout_mode = 2
+horizontal_alignment = 1

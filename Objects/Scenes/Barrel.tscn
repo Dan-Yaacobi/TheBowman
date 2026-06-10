@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgg5cogy6ysqm"]
 
-[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/object.gd" id="1_ehw5v"]
+[ext_resource type="Script" uid="uid://d12chquv76h7c" path="res://Objects/game_object.gd" id="1_ehw5v"]
 [ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_bc7jc"]
 [ext_resource type="Shader" uid="uid://fdcnf00myt8h" path="res://Objects/Effects/break.gdshader" id="3_bc7jc"]
 [ext_resource type="Texture2D" uid="uid://d3fxbcgyh7y85" path="res://Objects/Sprites/Barrel.png" id="3_ehw5v"]
@@ -33,6 +33,7 @@ height = 40.0
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_ehw5v")
 data = SubResource("Resource_qhhqe")
+potion_drop_chance = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
 material = SubResource("ShaderMaterial_ct031")
