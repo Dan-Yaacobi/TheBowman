@@ -8,7 +8,7 @@ script = ExtResource("1_yrh2u")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=717071919]
 
 [node name="Marker2D2" type="Marker2D" parent="." unique_id=537345532]
-position = Vector2(8, 0)
+position = Vector2(13, 0)
 
 [node name="Marker2D3" type="Marker2D" parent="." unique_id=839380369]
-position = Vector2(-10, 0)
+position = Vector2(-12, 0)

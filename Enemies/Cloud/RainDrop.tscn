@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://he5b02nm11v5"]
+[gd_scene format=3 uid="uid://he5b02nm11v5"]
 
 [ext_resource type="Script" uid="uid://dicvvc5jtp083" path="res://Enemies/Cloud/rain_drop.gd" id="1_5yjxy"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_etmxi"]
@@ -12,20 +12,20 @@ _limits = [0.0, 0.2, 0.0, 1.0]
 _data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="RainDrop" type="Node2D"]
+[node name="RainDrop" type="Node2D" unique_id=1426473022]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_5yjxy")
 
-[node name="HurtBox" parent="." instance=ExtResource("2_etmxi")]
+[node name="HurtBox" parent="." unique_id=2002138307 instance=ExtResource("2_etmxi")]
 collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1018614911]
 shape = SubResource("CircleShape2D_iaohl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1783975580]
 texture = ExtResource("2_iaohl")
 
-[node name="PopParticles" type="CPUParticles2D" parent="."]
+[node name="PopParticles" type="CPUParticles2D" parent="." unique_id=270331763]
 emitting = false
 amount = 10
 texture = ExtResource("2_iaohl")
@@ -35,6 +35,7 @@ speed_scale = 2.0
 explosiveness = 1.0
 randomness = 1.0
 use_fixed_seed = true
+seed = 1685055949
 gravity = Vector2(0, -10)
 radial_accel_min = 10.0
 radial_accel_max = 10.0
@@ -44,9 +45,9 @@ angle_min = 180.0
 angle_max = 180.0
 scale_amount_curve = SubResource("Curve_etmxi")
 
-[node name="WallDetector" type="Area2D" parent="."]
+[node name="WallDetector" type="Area2D" parent="." unique_id=811277260]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector" unique_id=1657816812]
 shape = SubResource("CircleShape2D_iaohl")

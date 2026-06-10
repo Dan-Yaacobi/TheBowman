@@ -114,9 +114,9 @@ func build_path(_max_length: int, _starting_chunk: RiftChunk, _main_path: bool =
 			exit = exits.pick_random()
 	else:
 		exit = _first_exit
-	var i = -1
+	var _i = -1
 	while(length <= _max_length):
-		i+=1
+		_i+=1
 		var next_chunk: RiftChunk = try_to_add_chunk(exit)
 		
 		if next_chunk:
@@ -203,7 +203,7 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 		
 	elif type == ChunkData.types.PORTAL:
 		chunks = library.get_portal_chunk().duplicate()
-	
+
 	elif type == ChunkData.types.TREASURE:
 		chunks = library.get_treasure_chunk().duplicate()
 		chunks.shuffle()
@@ -244,9 +244,9 @@ func place_end_portal(last_chunk: RiftChunk) -> bool:
 			return true
 	return false
 
-func check_overlapping_bounds(chunk_node: RiftChunk, checking_bounds: Array[Bounds] = placed_bounds) -> bool:
+func check_overlapping_bounds(_chunk_node: RiftChunk, _checking_bounds: Array[Bounds] = placed_bounds) -> bool:
 	for exisiting_bounds in placed_bounds:
-		if chunk_node.bounds.intersects_with(exisiting_bounds):
+		if _chunk_node.bounds.intersects_with(exisiting_bounds):
 			return true
 	return false
 	

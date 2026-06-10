@@ -1,5 +1,11 @@
 class_name GameManager extends Node2D
 
+@export var boss_entries: Array[EnemyEntry]
+
+const BOSS_ARENAS = {
+	1: GameWorlds.worlds.Boss_Arena_1,
+}
+
 var curr_world: GameWorld
 var prev_world: GameWorld
 
@@ -8,13 +14,17 @@ var hud: HUD
 
 var _is_transitioning: bool = false
 
+
 func _ready() -> void:
 	EventBus.changed_scene.connect(change_game_world)
 	EventBus.entered_rift_portal.connect(_on_portal_entered)
 
 func _on_portal_entered() -> void:
-	print(EventBus.entered_rift_portal.get_connections())
-	change_game_world(GameWorlds.worlds.Rift_1)
+	var rift_level: int = PlayerManager.player.stats.rift_level
+	if rift_level %2 == 0 and not curr_world is BossArena1:
+		change_game_world(GameWorlds.worlds.Boss_Arena_1)
+	else:
+		change_game_world(GameWorlds.worlds.Rift_1)
 	
 func set_game(_game: Game) -> void:
 	if _game:
@@ -65,5 +75,5 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		PlayerManager.player.camera.position_smoothing_enabled = true
 		await get_tree().process_frame
 		await SceneTransition.fade_in()
-
+		curr_world.on_world_ready()
 		_is_transitioning = false

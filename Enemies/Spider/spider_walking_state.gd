@@ -1,9 +1,8 @@
 class_name SpiderWalkingState extends EnemyState
 
-@onready var walking_sprite: Sprite2D = $"../../WalkingSprite"
-@onready var walking_animation: AnimationPlayer = $"../../WalkingSprite/WalkingAnimation"
-
+@onready var walking_sprite: Sprite2D = $"../../Sprite2D"
 @onready var raycast: RayCast2D = $"../../RayCast2D_Left"
+@onready var walking_animation: AnimationPlayer = $"../../Sprite2D/WalkingAnimation"
 
 
 var direction: int

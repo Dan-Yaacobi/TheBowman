@@ -11,7 +11,7 @@ class_name Item extends Node2D
 @onready var landing_detector: Area2D = $LandingDetector
 @onready var magnet_area: Area2D = $MagnetArea
 
-var _player: Node2D = null
+var _player: Player = null
 var _magnetized: bool = false
 var _landed: bool = false
 var _tween: Tween = null
@@ -27,20 +27,9 @@ func _ready() -> void:
 	
 func extra_ready_functions() -> void:
 	pass
-#func _launch(target: Vector2) -> void:
-	#_landed = false
-	#_tween = create_tween()
-	#var mid: Vector2 = (global_position + target) / 2.0 + Vector2(0, -arc_height)
-	#_tween.tween_method(_move_along_arc.bind(global_position, mid, target), 0.0, 1.0, arc_duration)
-	#_tween.tween_callback(_on_arc_complete)
 	
-func launch(target: Vector2) -> void:
-	_landed = false
-	var origin: Vector2 = global_position
-	_tween = create_tween()
-	var mid: Vector2 = (origin + target) / 2.0 + Vector2(0, -arc_height)
-	_tween.tween_method(_move_along_arc.bind(origin, mid, origin), 0.0, 1.0, arc_duration)
-	_tween.tween_callback(_on_arc_complete)
+func launch(_target: Vector2) -> void:
+	pass
 	
 func _move_along_arc(t: float, start: Vector2, mid: Vector2, end: Vector2) -> void:
 	if _landed:
@@ -60,13 +49,14 @@ func _on_landing_detector_body_shape_entered(_body_rid: RID, _body: Node2D, _bod
 		_tween.kill()
 
 func _process(_delta: float) -> void:
+	extra_process_functions(_delta)
 	if not _landed or not _magnetized or _player == null:
 		return
 	if global_position.distance_to(_player.global_position) <= collect_radius:
 		_collect()
 		return
 	global_position = global_position.lerp(_player.global_position, 0.15)
-	extra_process_functions(_delta)
+	
 
 func extra_process_functions(_delta: float) -> void:
 	pass

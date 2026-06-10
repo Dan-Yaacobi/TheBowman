@@ -67,7 +67,7 @@ func roam_around(delta) -> void:
 	
 	## MOVING UP AND DOWN ##
 	if moving_up:
-		enemy.velocity.y -= enemy.stats.move_speed*delta*move_y_boost
+		enemy.velocity.y -= enemy.stats.move_speed.value() * delta * move_y_boost
 		if enemy.global_position.y < roam_top_max:
 			moving_up = false
 			move_y_boost = 10
@@ -75,7 +75,7 @@ func roam_around(delta) -> void:
 			move_y_boost -= 1
 			move_y_boost = clampi(move_y_boost,1,10)
 	else:
-		enemy.velocity.y += enemy.stats.move_speed*delta*move_y_boost
+		enemy.velocity.y += enemy.stats.move_speed.value() * delta * move_y_boost
 		if enemy.global_position.y > roam_bottom_max:
 			moving_up = true
 			move_y_boost = 10
@@ -85,7 +85,7 @@ func roam_around(delta) -> void:
 	
 	## MOVING LEFT AND RIGHT ##
 	if moving_right:
-		enemy.velocity.x += enemy.stats.move_speed*delta*move_x_boost
+		enemy.velocity.x += enemy.stats.move_speed.value() * delta * move_x_boost
 		if enemy.global_position.x > roam_right_max:
 			moving_right = false
 			move_x_boost = 10
@@ -94,7 +94,7 @@ func roam_around(delta) -> void:
 			move_x_boost = clampi(move_x_boost,1,10)
 			
 	else:
-		enemy.velocity.x -= enemy.stats.move_speed*delta*move_x_boost
+		enemy.velocity.x -= enemy.stats.move_speed.value() * delta * move_x_boost
 		if enemy.global_position.x < roam_left_max:
 			moving_right = true
 			move_x_boost = 10

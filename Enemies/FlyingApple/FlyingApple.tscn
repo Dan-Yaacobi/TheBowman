@@ -298,20 +298,20 @@ debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
 
 [node name="DebuffHandler" parent="." unique_id=622220340 instance=ExtResource("14_dilap")]
 
-[node name="StateMachine" type="Node2D" parent="." unique_id=555296849]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=555296849]
 script = ExtResource("12_kl176")
 
-[node name="Seek" type="Node2D" parent="StateMachine" unique_id=999819182]
+[node name="Seek" type="Node2D" parent="EnemyStateMachine" unique_id=999819182]
 script = ExtResource("13_whfbk")
 
-[node name="Decide" type="Node2D" parent="StateMachine" unique_id=1142532004]
+[node name="Decide" type="Node2D" parent="EnemyStateMachine" unique_id=1142532004]
 script = ExtResource("14_qmrg8")
 
-[node name="Shoot" type="Node2D" parent="StateMachine" unique_id=206311826]
+[node name="Shoot" type="Node2D" parent="EnemyStateMachine" unique_id=206311826]
 script = ExtResource("15_0birg")
 
-[node name="ShootTimer" type="Timer" parent="StateMachine/Shoot" unique_id=382980169]
+[node name="ShootTimer" type="Timer" parent="EnemyStateMachine/Shoot" unique_id=382980169]
 wait_time = 1.5
 
-[node name="DecisionTimer" type="Timer" parent="StateMachine" unique_id=685103792]
+[node name="DecisionTimer" type="Timer" parent="EnemyStateMachine" unique_id=685103792]
 wait_time = 1.5

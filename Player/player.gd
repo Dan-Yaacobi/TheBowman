@@ -150,7 +150,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("grapple"):
 			return
-			grapple()
+			#grapple()
 	
 func special_ability() -> void:
 	if current_weapon.weapon_data.special_ability != null:
@@ -441,8 +441,12 @@ func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) 
 func equip_item(_equip: Equipment, _slot: EquipmentData.slots) -> void:
 	if _equip and _slot >= 0:
 		equipped_nodes[_slot] = _equip
+		_equip.reparent(self)
 
 func unequip_item(_slot: EquipmentData.slots) -> void:
+	var item: Equipment = equipped_nodes[_slot]
+	if item:
+		EventBus.equipment_dropped.emit(item.data, global_position, item)
 	equipped_nodes[_slot] = null
 	
 func get_equipped_node_in_slot(_slot: EquipmentData.slots) -> Equipment:

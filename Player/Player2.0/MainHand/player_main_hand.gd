@@ -113,6 +113,7 @@ func fire_arrow() -> void:
 			get_tree().root.add_child(fired_arrow)
 			fired_arrow.set_texture(arrow_texture)
 			
+		@warning_ignore("narrowing_conversion")
 		fired_arrow.possible_pierce = PlayerManager.player.stats.arrow_pierce.value()
 		fired_arrow.can_pass_walls = PlayerManager.player.stats.can_pass_walls
 		fired_arrow.crit_chance = PlayerManager.player.stats.crit_chance.value()

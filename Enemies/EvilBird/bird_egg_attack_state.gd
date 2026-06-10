@@ -84,6 +84,7 @@ func shoot() -> void:
 		new_bullet.global_position = enemy.global_position
 		new_bullet.scale *= 0.7
 		new_bullet.data.damage = enemy.stats.touch_damage
+		@warning_ignore("integer_division")
 		new_bullet.data.knockback = enemy.stats.knockback / 2
 		enemy.get_parent().call_deferred("add_child", new_bullet)
 	else:

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dipjouhd8m0gx"]
+
+[ext_resource type="Script" uid="uid://2wpulqncrjqj" path="res://Rifts/Chunks/ChunkScenes/BossArenas/boss_arena.gd" id="1_3oh3i"]
+[ext_resource type="PackedScene" uid="uid://bnprk200ktpqr" path="res://Level/Islands/BossIsland.tscn" id="2_c7c8w"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="3_nhx6v"]
+[ext_resource type="PackedScene" uid="uid://cu2idgxeevefa" path="res://Level/BossSpawner/BossSpawner.tscn" id="4_c7c8w"]
+[ext_resource type="Resource" uid="uid://cps5g7ct7kq2g" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_boss_entry.tres" id="5_nhx6v"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="6_cvgq2"]
+
+[node name="BossArena1" type="Node2D" unique_id=1476915705]
+script = ExtResource("1_3oh3i")
+
+[node name="BossIsland" parent="." unique_id=1847265216 instance=ExtResource("2_c7c8w")]
+
+[node name="PlayerSpawn" parent="." unique_id=1731050133 instance=ExtResource("3_nhx6v")]
+position = Vector2(1, -40)
+
+[node name="BossSpawner" parent="." unique_id=773468997 instance=ExtResource("4_c7c8w")]
+boss_entry = ExtResource("5_nhx6v")
+
+[node name="Portal" parent="." unique_id=1166811293 instance=ExtResource("6_cvgq2")]
+z_index = 0
+position = Vector2(-123, -40)
+destination = 3
+is_rift_portal = true

@@ -25,7 +25,7 @@ func Enter() -> void:
 #what happens when the player exits this state
 func Exit() -> void:
 	slam_particles.emitting = false
-	enemy.velocity = Vector2([1,-1].pick_random()*5,-enemy.stats.move_speed/4)
+	enemy.velocity = Vector2([1,-1].pick_random()*5,-enemy.stats.move_speed.value()/4)
 	enemy.wings_animation.play("Fly")
 	pass
 	
@@ -35,7 +35,7 @@ func Process(_delta: float) -> EnemyState:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> EnemyState:
-	enemy.velocity.y += enemy.stats.move_speed * _delta * slam_speed_modifier
+	enemy.velocity.y += enemy.stats.move_speed.value() * _delta * slam_speed_modifier
 	if slam_done:
 		return roam
 	return null

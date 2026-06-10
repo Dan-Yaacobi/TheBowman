@@ -9,11 +9,6 @@
 [ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
-[ext_resource type="Texture2D" uid="uid://w8syl8q3ggwa" path="res://StatsUI/Sprites/MoreInfoButton.png" id="12_kcgbh"]
-[ext_resource type="Texture2D" uid="uid://cvbcd7ca1egfo" path="res://StatsUI/Sprites/MoreInfoButtonPressed.png" id="13_ihvjp"]
-[ext_resource type="Texture2D" uid="uid://122k5727876t" path="res://StatsUI/Sprites/MoreInfoButtonHover.png" id="14_33ejm"]
-[ext_resource type="Script" uid="uid://g5q4p7wn2b0a" path="res://StatsUI/more_info.gd" id="15_fjfvf"]
-[ext_resource type="Texture2D" uid="uid://pw5lxq2rki4h" path="res://Shop/BowsShop/Sprites/BowBackground.png" id="16_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
@@ -56,60 +51,6 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_7odlb"),
 &"Rotate": SubResource("Animation_pd2p5")
-}
-
-[sub_resource type="Animation" id="Animation_vhq5x"]
-resource_name = "Close"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_1cbug"]
-resource_name = "Open"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_accxh"]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gf6xr"]
-_data = {
-&"Close": SubResource("Animation_vhq5x"),
-&"Open": SubResource("Animation_1cbug"),
-&"RESET": SubResource("Animation_accxh")
 }
 
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
@@ -237,93 +178,6 @@ hframes = 5
 [node name="CoinAnimation" type="AnimationPlayer" parent="Control/Coin" unique_id=102977012]
 libraries/ = SubResource("AnimationLibrary_fwgky")
 
-[node name="MoreInfo" type="TextureButton" parent="Control" unique_id=1856658326]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 416.0
-offset_right = 26.0
-offset_bottom = 440.0
-scale = Vector2(4, 4)
-focus_mode = 0
-toggle_mode = true
-texture_normal = ExtResource("12_kcgbh")
-texture_pressed = ExtResource("13_ihvjp")
-texture_hover = ExtResource("14_33ejm")
-ignore_texture_size = true
-stretch_mode = 4
-script = ExtResource("15_fjfvf")
-
-[node name="TextureRect" type="TextureRect" parent="Control/MoreInfo" unique_id=1862376403]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 13.0
-offset_right = 145.0
-offset_bottom = 129.0
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("16_65vjf")
-
-[node name="Label" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=1965026019]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 1097.9999
-offset_bottom = 386.0
-scale = Vector2(0.1, 0.1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 30
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 100
-text = "How to play:
-Shoot: Right mouse click
-Slash: Left mouse click
-Move: W,A,S,D
-Dash: F
-Jump: Spacebar
-Back to menu: M
-"
-autowrap_mode = 3
-
-[node name="Label2" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=1882743205]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 1097.9999
-offset_bottom = 386.0
-scale = Vector2(0.1, 0.1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 30
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 100
-autowrap_mode = 3
-
-[node name="Label3" type="Label" parent="Control/MoreInfo/TextureRect" unique_id=506014709]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 1097.9999
-offset_bottom = 386.0
-scale = Vector2(0.1, 0.1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 10
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 30
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 100
-autowrap_mode = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MoreInfo" unique_id=970691259]
-libraries/ = SubResource("AnimationLibrary_gf6xr")
-
 [node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
 layout_mode = 1
 anchors_preset = 8
@@ -377,5 +231,3 @@ text = "Rift Level:"
 [node name="EquipmentMenu" parent="." unique_id=74341901 instance=ExtResource("18_fjfvf")]
 offset = Vector2(500, 100)
 transform = Transform2D(1, 0, 0, 1, 500, 100)
-
-[connection signal="toggled" from="Control/MoreInfo" to="Control/MoreInfo" method="_on_toggled"]

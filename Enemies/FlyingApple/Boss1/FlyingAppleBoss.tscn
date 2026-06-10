@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c2eppdxet4q8c"]
+[gd_scene format=3 uid="uid://c2eppdxet4q8c"]
 
 [ext_resource type="Script" uid="uid://ich6jvigbqps" path="res://Enemies/FlyingApple/Boss1/flying_apple_boss.gd" id="1_007ct"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
@@ -22,8 +22,6 @@ move_speed = 35
 knockback = 100
 skin = ExtResource("6_gbtff")
 touch_damage = 2
-boss = true
-shooter = true
 bullet = ExtResource("2_ns1qc")
 
 [sub_resource type="Animation" id="Animation_k0qd3"]
@@ -71,6 +69,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_wrm4u"]
@@ -259,91 +269,85 @@ _limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0.0301724, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="DemoEnemyBoss" type="CharacterBody2D"]
+[node name="FlyingAppleBoss" type="CharacterBody2D" unique_id=613350604]
 collision_layer = 4
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_007ct")
 stats = SubResource("Resource_c5f3p")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=936217923]
 modulate = Color(1, 1, 1, 0.254902)
 texture = ExtResource("6_gbtff")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_o35pa")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=378024237]
+libraries/ = SubResource("AnimationLibrary_o35pa")
 
-[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_vf7r2")
-}
+[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=841935738]
+libraries/ = SubResource("AnimationLibrary_vf7r2")
 
-[node name="Wings" type="Sprite2D" parent="Sprite2D"]
+[node name="Wings" type="Sprite2D" parent="Sprite2D" unique_id=1630475905]
 texture = ExtResource("10_88q2y")
 vframes = 6
 
-[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings"]
-libraries = {
-&"": SubResource("AnimationLibrary_qgtth")
-}
+[node name="WingsAnimation" type="AnimationPlayer" parent="Sprite2D/Wings" unique_id=850720397]
+libraries/ = SubResource("AnimationLibrary_qgtth")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1477156968]
 shape = SubResource("CircleShape2D_uehev")
 
-[node name="HitBox" parent="." instance=ExtResource("11_gsefu")]
+[node name="HitBox" parent="." unique_id=1431416554 instance=ExtResource("11_gsefu")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("11_36fxj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=469247324]
 shape = SubResource("CircleShape2D_4ig30")
 debug_color = Color(0.97, 0, 0.0969999, 0.419608)
 
-[node name="HurtBox" parent="." instance=ExtResource("12_36fxj")]
+[node name="HurtBox" parent="." unique_id=591353747 instance=ExtResource("12_36fxj")]
 collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2018951348]
 shape = SubResource("CircleShape2D_emnjt")
 debug_color = Color(0.698224, 0.489977, 0.15621, 0.42)
 
-[node name="GroundDetector" type="Area2D" parent="."]
+[node name="GroundDetector" type="Area2D" parent="." unique_id=1584522559]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector" unique_id=37994591]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_smg2o")
 
-[node name="EnemyStateMachine" type="Node2D" parent="."]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=317574382]
 script = ExtResource("15_und3f")
 
-[node name="Roam" type="Node2D" parent="EnemyStateMachine"]
+[node name="Roam" type="Node2D" parent="EnemyStateMachine" unique_id=960487537]
 script = ExtResource("16_ikffo")
 
-[node name="SetSlam" type="Node2D" parent="EnemyStateMachine"]
+[node name="SetSlam" type="Node2D" parent="EnemyStateMachine" unique_id=268976585]
 script = ExtResource("17_p45i5")
 
-[node name="Slam" type="Node2D" parent="EnemyStateMachine"]
+[node name="Slam" type="Node2D" parent="EnemyStateMachine" unique_id=652438506]
 script = ExtResource("18_52sys")
 
-[node name="ShootTimer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="." unique_id=1887075188]
 
-[node name="SlamTimer" type="Timer" parent="."]
+[node name="SlamTimer" type="Timer" parent="." unique_id=973898746]
 wait_time = 3.0
 
-[node name="RoofDetector" type="Area2D" parent="."]
+[node name="RoofDetector" type="Area2D" parent="." unique_id=1459446698]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoofDetector" unique_id=92972572]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_nptp6")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1601393390]
 
-[node name="SlamParticles" type="CPUParticles2D" parent="."]
+[node name="SlamParticles" type="CPUParticles2D" parent="." unique_id=1427177330]
 modulate = Color(0.75, 0.0225, 0.0225, 1)
 z_index = -1
 emitting = false
@@ -355,7 +359,7 @@ linear_accel_min = 100.0
 linear_accel_max = 100.0
 scale_amount_curve = SubResource("Curve_fkhtr")
 
-[node name="SlamHitParticles" type="CPUParticles2D" parent="."]
+[node name="SlamHitParticles" type="CPUParticles2D" parent="." unique_id=1678981530]
 position = Vector2(0, 5)
 emitting = false
 amount = 20
@@ -371,4 +375,4 @@ radial_accel_max = 100.0
 scale_amount_curve = SubResource("Curve_3801e")
 color = Color(0.64, 0, 0, 1)
 
-[node name="DebuffHandler" parent="." instance=ExtResource("17_36fxj")]
+[node name="DebuffHandler" parent="." unique_id=808985084 instance=ExtResource("17_36fxj")]

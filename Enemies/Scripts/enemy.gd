@@ -95,7 +95,7 @@ func take_damage(_dmg: int) -> void:
 		is_dead = true
 		activate_death_ability()
 		enemy_died()
-		drop_item(CoinDropLogic.drop_logic(stats.avg_coins_dropped))
+		drop_item()
 
 func activate_death_ability() -> void:
 	if stats.death_ability.size() > 0:
@@ -117,23 +117,13 @@ func player_hit(body: CharacterBody2D) -> void:
 		if body.stats.hp > 0 and not body.invincible:
 			body.hit_player(hurt_box)
 			
-func drop_item(_drops: Array[ItemData]) -> void:
+func drop_item() -> void:
 	var drop_chance: float = min(
 		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
 		100)
 	EventBus.try_drop.emit(global_position, drop_chance)
 	EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
 	return
-
-	for drop in _drops:
-		spawn_drop(drop)
-
-func spawn_drop(drop: ItemData) -> void:
-	var item = ITEM_PICK_UP.instantiate()
-	item.assign_item(drop)
-	item.global_position = global_position
-	item.inititalize(PlayerManager.player)
-	EventBus.summon_effect.emit(item)
 
 func disable_drops() -> void:
 	no_drops = true

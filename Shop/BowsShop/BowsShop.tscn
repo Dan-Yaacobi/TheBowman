@@ -1,90 +1,38 @@
-[gd_scene load_steps=22 format=3 uid="uid://cmdeim0mrcv32"]
+[gd_scene format=3 uid="uid://cmdeim0mrcv32"]
 
 [ext_resource type="Script" uid="uid://btsxr8bei66af" path="res://Shop/BowsShop/bows_shop.gd" id="1_ca2ob"]
-[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Weapons/Bows/1_BlueBow/Bow1.png" id="6_ia1ak"]
-[ext_resource type="PackedScene" uid="uid://b5yjt3rxeprfj" path="res://Weapons/Bows/1_BlueBow/BlueBow.tscn" id="7_gdy8u"]
-[ext_resource type="PackedScene" uid="uid://cothgt5is5u1q" path="res://Weapons/Bows/2_RedBow/RedBow.tscn" id="9_0rvep"]
-[ext_resource type="PackedScene" uid="uid://jej20pf43m2p" path="res://Weapons/Bows/3_BlackBow/BlackBow.tscn" id="9_n7crj"]
-[ext_resource type="PackedScene" uid="uid://utxa65f3hxv5" path="res://Weapons/Bows/4_NatureBow/NatureBow.tscn" id="13_fdnd6"]
-[ext_resource type="PackedScene" uid="uid://bwxh1irybhfs4" path="res://Weapons/Bows/5_ThunderBow/ThunderBow.tscn" id="15_e6rfv"]
-[ext_resource type="PackedScene" uid="uid://bg8cpwxytaj4p" path="res://Weapons/Bows/6_BoneBow/BoneBow.tscn" id="15_wcqo3"]
-[ext_resource type="PackedScene" uid="uid://dfplcoxey47hy" path="res://Weapons/Bows/9_DemonBow/DemonBow.tscn" id="16_si2bx"]
-[ext_resource type="Texture2D" uid="uid://dxdf855leqlwj" path="res://Weapons/Bows/9_DemonBow/DemonBow.png" id="17_y6hjf"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="20_y6hjf"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="23_nlbfr"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="24_4j01i"]
-[ext_resource type="PackedScene" uid="uid://bcgks5a8huff6" path="res://Shop/BowsShop/Pedestal.tscn" id="25_4j01i"]
-[ext_resource type="Texture2D" uid="uid://dsk05vfiaptdh" path="res://Weapons/Bows/2_RedBow/RedBow.png" id="26_g0s01"]
-[ext_resource type="Texture2D" uid="uid://c04dsaarp4w75" path="res://Weapons/Bows/3_BlackBow/BlackBow.png" id="27_ey1bh"]
-[ext_resource type="Texture2D" uid="uid://v6rpvfly0fmv" path="res://Weapons/Bows/4_NatureBow/PoisonIvy.png" id="27_uvtt1"]
-[ext_resource type="Texture2D" uid="uid://d030x63vqq3ih" path="res://Weapons/Bows/5_ThunderBow/Zeus.png" id="28_bbg62"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="28_bq6li"]
-[ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/Bows/6_BoneBow/Skeletor.png" id="29_ddwbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u56fe"]
 size = Vector2(10000, 100)
 
-[node name="BowsShop" type="Node2D"]
+[node name="BowsShop" type="Node2D" unique_id=1026012601]
 script = ExtResource("1_ca2ob")
 
-[node name="PlayerSpawn" parent="." instance=ExtResource("23_nlbfr")]
+[node name="PlayerSpawn" parent="." unique_id=137452234 instance=ExtResource("23_nlbfr")]
 position = Vector2(35, -114)
 
-[node name="Pedestals" type="Node2D" parent="."]
+[node name="Portals" type="Node2D" parent="." unique_id=13390098]
 
-[node name="Pedestal" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(99, -120)
-bow = ExtResource("7_gdy8u")
-sprite = ExtResource("6_ia1ak")
-
-[node name="Pedestal2" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(161, -134)
-bow = ExtResource("9_0rvep")
-sprite = ExtResource("26_g0s01")
-
-[node name="Pedestal3" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(223, -148)
-bow = ExtResource("9_n7crj")
-sprite = ExtResource("27_ey1bh")
-
-[node name="Pedestal4" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(285, -166)
-bow = ExtResource("13_fdnd6")
-sprite = ExtResource("27_uvtt1")
-
-[node name="Pedestal5" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(342, -183)
-bow = ExtResource("15_e6rfv")
-sprite = ExtResource("28_bbg62")
-
-[node name="Pedestal6" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(403, -199)
-bow = ExtResource("15_wcqo3")
-sprite = ExtResource("29_ddwbi")
-
-[node name="Pedestal7" parent="Pedestals" instance=ExtResource("25_4j01i")]
-position = Vector2(470, -213)
-bow = ExtResource("16_si2bx")
-sprite = ExtResource("17_y6hjf")
-
-[node name="Portals" type="Node2D" parent="."]
-
-[node name="Portal2" parent="Portals" instance=ExtResource("28_bq6li")]
+[node name="Portal2" parent="Portals" unique_id=63340101 instance=ExtResource("28_bq6li")]
 position = Vector2(34, -114)
 color = Color(1, 1, 0, 1)
 destination = 1
 
-[node name="Islands" type="Node2D" parent="."]
+[node name="Islands" type="Node2D" parent="." unique_id=1082079453]
 
-[node name="Island" parent="Islands" instance=ExtResource("24_4j01i")]
+[node name="Island" parent="Islands" unique_id=1334849862 instance=ExtResource("24_4j01i")]
 position = Vector2(34, -91)
 
-[node name="FallingDeath" type="Area2D" parent="."]
+[node name="FallingDeath" type="Area2D" parent="." unique_id=1704575995]
 position = Vector2(0, 246)
 collision_layer = 0
 script = ExtResource("20_y6hjf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDeath" unique_id=478567708]
 position = Vector2(-2, 51)
 shape = SubResource("RectangleShape2D_u56fe")
 debug_color = Color(0.98719627, 0, 0.32055512, 0.41960785)

@@ -11,4 +11,5 @@ data = ExtResource("1_dxbhj")
 cost = 2
 base_weight = 3.0
 weight_curve = 0.5
+spawn_zone = 1
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

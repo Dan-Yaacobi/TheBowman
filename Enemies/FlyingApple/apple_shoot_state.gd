@@ -10,7 +10,7 @@ func init() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	enemy.velocity = Vector2.ZERO
-	shoot()
+	enemy.shoot()
 	shoot_timer.start()
 	pass
 	
@@ -29,12 +29,3 @@ func Physics(_delta: float) -> EnemyState:
 	
 func done_shooting() -> void:
 	state_machine.ChangeState(seek)
-
-func shoot() -> void:
-	if enemy.stats.bullet != null:
-		var new_bullet: EnemyBullet = enemy.stats.bullet.instantiate()
-		new_bullet.direction = enemy.calculate_direction_to_player()
-		new_bullet.global_position = enemy.global_position
-		new_bullet.data.knockback = enemy.stats.knockback
-		new_bullet.data.knockback = enemy.stats.knockback
-		enemy.get_parent().add_child(new_bullet)

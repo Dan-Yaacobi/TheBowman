@@ -6,11 +6,11 @@ const SPIDER_WEB = preload("res://Enemies/Spider/SpiderWeb.tscn")
 @onready var ground_detector: Area2D = $"../../GroundDetector"
 @onready var walking_state: SpiderWalkingState = $"../Walking"
 @onready var dropping_sprite: Sprite2D = $"../../DroppingSprite"
-@onready var walking_sprite: Sprite2D = $"../../WalkingSprite"
+@onready var walking_sprite: Sprite2D = $"../../Sprite2D"
 
 var web: SpiderWeb
 var walking: bool = false
-var initial_y: int
+var initial_y: float
 #what happens when we initialize this state
 
 func init() -> void:

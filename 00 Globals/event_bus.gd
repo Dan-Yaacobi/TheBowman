@@ -1,5 +1,4 @@
 extends Node
-
 signal start_shooting
 signal arrow(_arrow: Arrow)
 

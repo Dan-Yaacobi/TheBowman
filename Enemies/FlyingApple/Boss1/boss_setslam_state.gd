@@ -15,7 +15,7 @@ func Enter() -> void:
 	slam_height = randi_range(60,80)
 	target_slam_position = Vector2(enemy.player.global_position.x , enemy.player.global_position.y - slam_height)
 	set_slam_direction = (target_slam_position - enemy.global_position).normalized()
-	enemy.velocity = set_slam_direction*enemy.stats.move_speed * 3
+	enemy.velocity = set_slam_direction * enemy.stats.move_speed.value() * 3
 	pass
 	
 #what happens when the player exits this state

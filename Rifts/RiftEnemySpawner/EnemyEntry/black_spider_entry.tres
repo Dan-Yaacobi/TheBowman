@@ -11,4 +11,5 @@ data = ExtResource("1_u80x4")
 cost = 2
 base_weight = 5.0
 weight_curve = 0.5
+spawn_zone = 1
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

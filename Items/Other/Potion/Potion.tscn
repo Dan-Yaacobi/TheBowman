@@ -7,12 +7,13 @@
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5yd7k"]
-radius = 4.472136
+radius = 3.0
 
 [node name="Potion" type="Node2D" unique_id=967061751]
 script = ExtResource("1_jnqfh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
+position = Vector2(0, -3.9999998)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_jnqfh")
 
@@ -30,9 +31,10 @@ debug_color = Color(0.77325535, 0.44298598, 0, 0.41960785)
 [node name="LandingDetector" type="Area2D" parent="." unique_id=1415796400]
 collision_layer = 0
 collision_mask = 16
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LandingDetector" unique_id=620379657]
-position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_5yd7k")
 
 [connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]

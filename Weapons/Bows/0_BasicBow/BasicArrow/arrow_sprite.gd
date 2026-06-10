@@ -2,7 +2,7 @@ class_name ArrowSprite extends Sprite2D
 
 var hit: bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if hit:
 		set_process(false)
 		var tween = create_tween()

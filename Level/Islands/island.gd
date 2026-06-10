@@ -29,14 +29,14 @@ func enable() -> void:
 	set_collision_mask_value(1,true)
 	pass
 
-func spawn_game_object(_obj: GameObject) -> bool:
-	var success: bool = false
-	if not has_game_object and _obj:
-		add_child(_obj)
+func spawn_game_object() -> bool:
+	var possible_amount: int = objects_spawn_markers.get_total_possible_spawns()
+	var final_amount: int = randi_range(1, possible_amount)
+	for i in range(final_amount):
+		var obj: GameObject = GameObjects.get_random_object().instantiate()
+		add_child(obj)
 		var spawn_pos: Vector2 = objects_spawn_markers.get_spawn_position()
-		# Get the offset between object origin and placement marker in global space
-		var marker_offset: Vector2 = _obj.placement_marker.global_position - _obj.global_position
-		_obj.global_position = spawn_pos - marker_offset
+		var marker_offset: Vector2 = obj.placement_marker.global_position - obj.global_position
+		obj.global_position = spawn_pos - marker_offset
 		has_game_object = true
-		success = true
-	return success
+	return true

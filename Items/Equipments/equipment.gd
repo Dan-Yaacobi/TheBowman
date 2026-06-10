@@ -25,7 +25,6 @@ func apply_drop_impulse() -> void:
 func equip_to_player() -> void:
 	PlayerManager.player.set_equipped_in_slot(data.slot, data)
 	PlayerManager.player.equip_item(self, data.slot)
-	PlayerManager.player.call_deferred("add_child", self)
 	
 func unequip_from_player() -> void:
 	data.unequip(PlayerManager.player.stats)

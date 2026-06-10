@@ -8,6 +8,9 @@ func exit_world() -> void:
 
 func add_enemy(_enemy: Enemy) -> void:
 	pass
+
+func on_world_ready() -> void:
+	pass
 	
 func spawn_position() -> Vector2:
 	return Vector2.ZERO

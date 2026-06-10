@@ -263,6 +263,9 @@ position = Vector2(22, 97)
 position = Vector2(57, 106)
 floating = true
 
+[node name="TargetDummy" parent="Islands/Island8" unique_id=603628097 instance=ExtResource("17_5lv0r")]
+position = Vector2(-1, -20)
+
 [node name="Island11" parent="Islands" unique_id=283845787 instance=ExtResource("16_24r6y")]
 position = Vector2(-8, 79)
 floating = true
@@ -273,9 +276,9 @@ position = Vector2(-39, 67)
 [node name="Portals" type="Node2D" parent="." unique_id=1828147291]
 
 [node name="Portal" parent="Portals" unique_id=10218384 instance=ExtResource("13_npjie")]
-position = Vector2(449, 81)
+position = Vector2(149, 96)
 color = Color(0.99333346, 0.6, 1, 1)
-destination = 1
+destination = 4
 flip_h = true
 
 [node name="Portal4" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
@@ -303,9 +306,6 @@ script = ExtResource("16_qvidt")
 position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
-
-[node name="TargetDummy" parent="." unique_id=603628097 instance=ExtResource("17_5lv0r")]
-position = Vector2(149, 98)
 
 [node name="Crate" parent="." unique_id=84532828 instance=ExtResource("18_167x7")]
 position = Vector2(248, 99)

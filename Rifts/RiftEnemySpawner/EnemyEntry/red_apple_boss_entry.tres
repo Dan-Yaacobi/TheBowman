@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://cps5g7ct7kq2g"]
+
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_4dayh"]
+[ext_resource type="Resource" uid="uid://fly5qy0bkee4" path="res://Enemies/EnemyData/EnemyValues/Boss/red_apple_boss.tres" id="1_sfken"]
+[ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/FlyingApple/Boss1/FlyingAppleBoss.tscn" id="2_ivwdm"]
+
+[resource]
+script = ExtResource("1_4dayh")
+scene = ExtResource("2_ivwdm")
+data = ExtResource("1_sfken")
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

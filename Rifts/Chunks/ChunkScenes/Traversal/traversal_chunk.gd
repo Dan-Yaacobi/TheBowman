@@ -24,8 +24,7 @@ func on_player_enter() -> void:
 	visited = true
 	
 func spawn_game_objects() -> void:
-	var amount: int = randi_range(1,islands.size())
+	var amount: int = randi_range(1, islands.size())
 	islands.shuffle()
 	for i in amount:
-		var new_object: GameObject = GameObjects.get_random_object().instantiate()
-		islands[i].spawn_game_object(new_object)
+		islands[i].spawn_game_object()

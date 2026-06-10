@@ -29,9 +29,11 @@ func _ready() -> void:
 
 func disable() -> void:
 	area_2d.monitoring = false
-
+	modulate.a = 0.75
+	
 func enable() -> void:
 	area_2d.monitoring = true
+	modulate.a = 1
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:

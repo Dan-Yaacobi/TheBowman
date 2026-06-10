@@ -124,9 +124,9 @@ func _build_item_stats(equipment: EquipmentData) -> void:
 
 	for mod: EquipmentData.StatModifier in equipment.modifiers:
 		var line: Label = Label.new()
-		var sign: String = "+" if mod.amount >= 0 else ""
+		var _sign: String = "+" if mod.amount >= 0 else ""
 		var type_label: String = " (x)" if mod.stat_type == Stat.buff_type.MULTIPLICATIVE else ""
-		line.text = mod.stat_name + ": " + sign + "%.2f" % mod.amount + type_label
+		line.text = mod.stat_name + ": " + _sign + "%.2f" % mod.amount + type_label
 		stats_panel.add_child(line)
 
 

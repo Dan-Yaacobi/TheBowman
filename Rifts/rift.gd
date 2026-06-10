@@ -48,18 +48,6 @@ func exit_world() -> void:
 func spawn_position() -> Vector2:
 	return rift_levels[0].starting_chunk.spawn_position()
 
-func set_scene(_player) -> void:
-	#for i in range(20):
-		#rift_generator.generate()
-	_player.stats.rift_level += 1
-	
-	#print("called again")
-	#var start_chunk: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
-	#PlayerManager.player.global_position = start_chunk.spawn_position()
-	PlayerManager.player.show_buffs()
-	EventBus.entered_rift.emit()
-	EventBus.summon_effect.connect(summon_effect)
-	
 func exit_scene(_player) -> void:
 	PlayerManager.player.hide_buffs()
 
@@ -105,7 +93,11 @@ func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equ
 		new_equip.data = equip_data
 
 	new_equip.global_position = _position
-	call_deferred("add_child",new_equip)
+	if not new_equip.get_parent():
+		call_deferred("add_child",new_equip)
+	else:
+		new_equip.call_deferred("reparent", self)
+
 	
 
 func summon_effect(effect: Node2D) -> void:

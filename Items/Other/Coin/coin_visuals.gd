@@ -6,7 +6,6 @@ class_name CoinVisual extends Sprite2D
 @export var edge_darken_color: Color = Color(0.5, 0.5, 0.5, 1.0)
 
 var _base_scale_x: float = 1.0
-var _captured: bool = false
 
 func _ready() -> void:
 	_base_scale_x = scale.x

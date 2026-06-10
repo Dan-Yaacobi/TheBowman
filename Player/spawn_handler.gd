@@ -3,11 +3,13 @@ class_name SpawnHandler extends Node2D
 @onready var left_area: Area2D = $LeftArea
 @onready var bottom_area: Area2D = $BottomArea
 @onready var right_area: Area2D = $RightArea
+
 var all: Array[CollisionShape2D]
 var top: CollisionShape2D
 var left: CollisionShape2D
 var bottom: CollisionShape2D
 var right: CollisionShape2D
+enum Zone { ANY, TOP, LEFT, BOTTOM, RIGHT }
 
 func _ready() -> void:
 	top = top_area.get_child(0)
@@ -19,6 +21,15 @@ func _ready() -> void:
 	all.append(bottom)
 	all.append(right)
 
+
+func spawn_from_zone(enemy_factory: Callable, zone: Zone) -> Enemy:
+	match zone:
+		Zone.TOP: return spawn_from_top(enemy_factory)
+		Zone.LEFT: return spawn_from_left(enemy_factory)
+		Zone.BOTTOM: return spawn_from_bottom(enemy_factory)
+		Zone.RIGHT: return spawn_from_right(enemy_factory)
+		_: return spawn_from_any(enemy_factory)
+		
 func _spawn_at(enemy_factory: Callable, shape: CollisionShape2D) -> Enemy:
 	var enemy_node: Enemy = enemy_factory.call()
 	if enemy_node == null:

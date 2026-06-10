@@ -196,7 +196,9 @@ size = Vector2(23.5, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t84w8"]
 size = Vector2(22, 10)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fjjq4"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0aha"]
+radius = 6.0
+height = 20.0
 
 [node name="Spider" type="CharacterBody2D" unique_id=1625970484]
 collision_layer = 4
@@ -206,12 +208,12 @@ script = ExtResource("1_7135b")
 gravity = 100
 stats = SubResource("Resource_4bgit")
 
-[node name="WalkingSprite" type="Sprite2D" parent="." unique_id=546299894]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=546299894]
 position = Vector2(1, 4)
 texture = ExtResource("2_44sm3")
 vframes = 4
 
-[node name="WalkingAnimation" type="AnimationPlayer" parent="WalkingSprite" unique_id=1622944951]
+[node name="WalkingAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=1622944951]
 libraries/ = SubResource("AnimationLibrary_pb0a5")
 
 [node name="DroppingSprite" type="Sprite2D" parent="." unique_id=1648578258]
@@ -269,12 +271,13 @@ shape = SubResource("RectangleShape2D_t84w8")
 debug_color = Color(0.567316, 0.523189, 0.530331, 0.42)
 
 [node name="HitBox" parent="." unique_id=257472289 instance=ExtResource("12_e0aha")]
-position = Vector2(-26.314873, 9.079613)
+position = Vector2(0, 3)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("10_yxflk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1069929139]
-position = Vector2(26.314873, -9.079613)
-shape = SubResource("CircleShape2D_fjjq4")
+position = Vector2(0, 2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_e0aha")
 debug_color = Color(0.954369, 0, 0.548779, 0.42)

@@ -4,12 +4,11 @@ var arrow: Arrow
 
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
-	body_shape_entered.connect(queue_free)
-
+	
 func set_arrow(_arrow: Arrow) -> void:
 	if _arrow:
 		arrow = _arrow
-	
+		
 func AreaEnetered( a : Area2D) -> void:
 	combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 	effect_color = DEFAULT_HIT_EFFECT_COLOR
@@ -25,6 +24,6 @@ func AreaEnetered( a : Area2D) -> void:
 func hit_wall(_m1,_m2,_m3,_m4) -> void:
 	arrow.hit_wall(_m1,_m2,_m3,_m4)
 	
-func added_effects(a: Enemy) -> void:
+func added_effects(_a: Enemy) -> void:
 	pass
 	

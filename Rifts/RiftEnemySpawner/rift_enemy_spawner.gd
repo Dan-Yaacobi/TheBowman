@@ -21,9 +21,10 @@ func get_spawn_chance(intensity: float) -> float:
 
 func get_spawn_count(intensity: float, level: int) -> int:
 	var base: float = lerpf(1.0, 4.0, intensity)
-	return mini(roundi(base) + int(level / 3), 6)
+	@warning_ignore("integer_division")
+	return mini(roundi(base) + (level) / 3, 6)
 	
-func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: bool) -> void:	#var spider_factory: Callable = enemies.get_black_spider_factory()
+func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: bool) -> void:
 	var intensity: float
 	if is_terminal:
 		intensity = 1.0
@@ -31,14 +32,13 @@ func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: b
 		intensity = get_spawn_intensity(progress)
 	else:
 		intensity = SIDE_PATH_INTENSITY
-
 	var chance: float = get_spawn_chance(intensity)
 	if randf() > chance:
 		return
 	var count: int = get_spawn_count(intensity, level)
-	var factories: Array[Callable] = roll_enemies(count, level)
-	for factory in factories:
-		var new_enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_any(factory)
+	var entries: Array[EnemyEntry] = roll_enemies(count, level)
+	for entry in entries:
+		var new_enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_zone(entry.get_factory(), entry.spawn_zone)
 		if new_enemy != null:
 			enemy_spawned.emit(new_enemy)
 
@@ -48,22 +48,19 @@ func get_eligible_entries(level: int) -> Array[EnemyEntry]:
 func get_weight(entry: EnemyEntry, level: int) -> float:
 	return maxf(0.0, entry.base_weight + entry.weight_curve * level)
 
-func roll_enemies(budget: int, level: int) -> Array[Callable]:
-	var result: Array[Callable] = []
+func roll_enemies(budget: int, level: int) -> Array[EnemyEntry]:
+	var result: Array[EnemyEntry] = []
 	var remaining: int = budget
-	
 	while remaining > 0:
 		var eligible: Array[EnemyEntry] = get_eligible_entries(level).filter(
 			func(e: EnemyEntry) -> bool: return e.cost <= remaining
 		)
 		if eligible.is_empty():
 			break
-		
 		var weights = eligible.map(
 			func(e: EnemyEntry) -> float: return get_weight(e, level)
 		)
 		var rolled: EnemyEntry = eligible[rng.rand_weighted(weights)]
-		result.append(rolled.get_factory())
+		result.append(rolled)
 		remaining -= rolled.cost
-	
 	return result

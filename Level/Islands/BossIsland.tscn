@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bnprk200ktpqr"]
+
+[ext_resource type="Script" uid="uid://brjfr5i5cex6n" path="res://Level/Islands/boss_island.gd" id="1_vdmcf"]
+[ext_resource type="Texture2D" uid="uid://ckar6n7saofe7" path="res://Level/Islands/sprites/BigIsland.png" id="2_dm46n"]
+[ext_resource type="PackedScene" uid="uid://dlxcc0gk5mdes" path="res://Level/Islands/ObjectsSpawnMarkers.tscn" id="3_tno7x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
+size = Vector2(288, 12)
+
+[node name="BossIsland" type="StaticBody2D" unique_id=1847265216]
+z_index = -4
+collision_layer = 16
+script = ExtResource("1_vdmcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131090441]
+z_index = -4
+texture = ExtResource("2_dm46n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1568231833]
+position = Vector2(1, -18)
+shape = SubResource("RectangleShape2D_sp085")
+
+[node name="ObjectsSpawnMarkers" parent="." unique_id=1079830238 instance=ExtResource("3_tno7x")]
+position = Vector2(-69, -24)
