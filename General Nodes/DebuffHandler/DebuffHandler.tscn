@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://e6ki53roj2tq"]
+[gd_scene format=3 uid="uid://e6ki53roj2tq"]
 
 [ext_resource type="Script" uid="uid://bqlqvvg4yqoy8" path="res://General Nodes/DebuffHandler/debuff_handler.gd" id="1_5nkvb"]
 
-[node name="DebuffHandler" type="Node2D"]
+[node name="DebuffHandler" type="Node2D" unique_id=435665992]
 script = ExtResource("1_5nkvb")

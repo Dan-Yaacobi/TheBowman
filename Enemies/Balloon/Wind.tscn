@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dh0wik5pjscau"]
+
+[ext_resource type="Script" uid="uid://bqnct2poa6e1u" path="res://Enemies/Balloon/wind.gd" id="1_qt0gp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8ewb"]
+size = Vector2(20, 30)
+
+[node name="Wind" type="Area2D" unique_id=230637160]
+script = ExtResource("1_qt0gp")
+knockback_force = 2000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657097631]
+shape = SubResource("RectangleShape2D_s8ewb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=462390536]
+emitting = false
+amount = 40
+lifetime = 0.4
+speed_scale = 1.5
+emission_shape = 3
+emission_rect_extents = Vector2(1, 5)
+spread = 15.0
+gravity = Vector2(200, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 140.0

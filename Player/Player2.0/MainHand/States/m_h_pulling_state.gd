@@ -22,7 +22,6 @@ func _ready() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	entity.animation_player.play("Pull")
-	#EventBus.out_of_mana.connect(release)
 	entity.draw_arrow()
 	PlayerManager.player.shooting = true
 	entity.shot_power = 0
@@ -35,7 +34,6 @@ func Enter() -> void:
 	
 #what happens when the player exits this state
 func Exit() -> void:
-	#EventBus.out_of_mana.disconnect(release)
 	entity.animation_player.speed_scale = init_animation_speed
 	entity.shot_power = min(entity.shot_power, 1.0)
 	pass

@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://c2eppdxet4q8c"]
 
 [ext_resource type="Script" uid="uid://ich6jvigbqps" path="res://Enemies/FlyingApple/Boss1/flying_apple_boss.gd" id="1_007ct"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_g7uw7"]
-[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_ns1qc"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_uh2fb"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="6_gbtff"]
 [ext_resource type="Texture2D" uid="uid://drtobaioy4nqb" path="res://Enemies/Sprites/AppleWings.png" id="10_88q2y"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="11_36fxj"]
@@ -14,15 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="17_36fxj"]
 [ext_resource type="Script" uid="uid://cxfla8j1hfdad" path="res://Enemies/FlyingApple/Boss1/boss_setslam_state.gd" id="17_p45i5"]
 [ext_resource type="Script" uid="uid://do7gf25dtq7xg" path="res://Enemies/FlyingApple/Boss1/boss_slam_state.gd" id="18_52sys"]
-
-[sub_resource type="Resource" id="Resource_c5f3p"]
-resource_local_to_scene = true
-script = ExtResource("4_uh2fb")
-move_speed = 35
-knockback = 100
-skin = ExtResource("6_gbtff")
-touch_damage = 2
-bullet = ExtResource("2_ns1qc")
 
 [sub_resource type="Animation" id="Animation_k0qd3"]
 resource_name = "Damaged"
@@ -274,7 +262,6 @@ collision_layer = 4
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_007ct")
-stats = SubResource("Resource_c5f3p")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=936217923]
 modulate = Color(1, 1, 1, 0.254902)

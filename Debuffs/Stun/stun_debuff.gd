@@ -6,8 +6,8 @@ func start_debuff_effect() -> void:
 	apply_debuff_effect()
 	
 func apply_debuff_effect() -> void:
-	enemy.alter_moving(true)
+	enemy.stun(true)
 	stunned_effect.emitting = true
 	
 func extra_end_debuff_methods() -> void:
-	enemy.alter_moving(false)
+	enemy.stun(false)

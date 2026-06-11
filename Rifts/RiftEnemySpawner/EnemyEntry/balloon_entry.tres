@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://d1g23al65w5pd"]
+
+[ext_resource type="Resource" uid="uid://bihgpfkxuvpus" path="res://Enemies/EnemyData/EnemyValues/Balloon/balloon_data.tres" id="1_5a7f4"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_6ys56"]
+[ext_resource type="PackedScene" uid="uid://8lmb4nmal22g" path="res://Enemies/Balloon/BalloonEnemy.tscn" id="2_66wbd"]
+
+[resource]
+script = ExtResource("1_6ys56")
+scene = ExtResource("2_66wbd")
+data = ExtResource("1_5a7f4")
+spawn_zone = 3
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

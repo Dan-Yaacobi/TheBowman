@@ -6,6 +6,7 @@ class_name Enemy extends CharacterBody2D
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
+@onready var state_machine: EnemyStateMachine = $EnemyStateMachine
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -15,11 +16,6 @@ signal died(enemy: Enemy)
 signal took_damage
 
 var direction: Vector2
-
-var poisoned_state: bool = false
-var bleed_state: bool = false
-
-var base_move_speed: int
 var no_drops: bool = false
 
 var added_hit_effect: bool = false
@@ -27,10 +23,6 @@ var hit_particle_effect: CPUParticles2D
 
 var animation_player: AnimationPlayer
 var damaged_animation_player : AnimationPlayer
-
-var can_move: bool = true
-
-var hard_mode: bool = false
 
 var current_hp: int
 var knockback_velocity: Vector2 = Vector2.ZERO
@@ -42,6 +34,8 @@ var is_dead: bool = false
 func _ready() -> void:
 	current_hp = stats.max_hp
 	hurt_box.damage = stats.touch_damage
+	hurt_box.knockback_power = stats.knockback
+	hurt_box.successful_hit.connect(knockback)
 	debuff_handler.set_enemy(self)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
@@ -55,7 +49,7 @@ func extra_ready_functions() -> void:
 
 func set_data(_data: EnemyData) -> void:
 	if _data:
-		stats = _data.duplicate()
+		stats = _data.duplicate(true)
 
 func is_damaged() -> bool:
 	return current_hp < stats.max_hp
@@ -115,19 +109,14 @@ func knockback(_hurt_box: HurtBox) -> void:
 	if stats.can_be_knockedback:
 		knockback_velocity = _hurt_box.knockback_dir * _hurt_box.knockback_power
 
-func player_hit(body: CharacterBody2D) -> void:
-	if body is Player:
-		if body.stats.hp > 0 and not body.invincible:
-			body.hit_player(hurt_box)
-			
 func drop_item() -> void:
 	var drop_chance: float = min(
 		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
 		100)
 	EventBus.try_drop.emit(global_position, drop_chance)
 	EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
-	return
 
+	
 func disable_drops() -> void:
 	no_drops = true
 	
@@ -135,5 +124,9 @@ func update_animation(_animation: String, _position: float = 0.0) -> void:
 	if animation_player != null:
 		animation_player.play_section(_animation, _position)
 
-func alter_moving(_stop: bool) -> void:
-	stats.move_speed.zero = _stop
+func can_be_stunned() -> bool:
+	return not stats.stun_immune
+	
+func stun(_stop: bool) -> void:
+	state_machine.cause_pause(_stop)
+	set_physics_process(!_stop)

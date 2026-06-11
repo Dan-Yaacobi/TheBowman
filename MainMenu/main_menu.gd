@@ -10,6 +10,9 @@ class_name MainMenu extends GameWorld
 func _ready() -> void:
 	pass
 
+func set_world() -> void:
+	PlayerManager.player.heal(999, false)
+	
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
 

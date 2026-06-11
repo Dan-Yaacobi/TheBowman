@@ -7,10 +7,13 @@ class_name HUD extends CanvasLayer
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 @onready var rift_level_label: Label = $RiftLevel
+@onready var damaged_flash: ColorRect = $DamagedFlash
+@onready var heal_flash: ColorRect = $HealFlash
 
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 
 var current_view_item: Equipment
+var flash_tween: Tween
 
 func _ready() -> void:
 	interaction_ui.visible = false
@@ -22,7 +25,26 @@ func _ready() -> void:
 	interaction_ui.destory_new_item.connect(destory_item)
 	EventBus.entered_rift.connect(show_rift_label)
 	rift_level_label.modulate.a = 0
+	EventBus.damaged_flash.connect(apply_damage_flash)
+	EventBus.healed_flash.connect(apply_heal_flash)
+	damaged_flash.modulate.a = 0.0
+	heal_flash.modulate.a = 0.0
 	
+func apply_damage_flash() -> void:
+	if flash_tween:
+		flash_tween.kill()
+	damaged_flash.modulate = Color(1, 0, 0, 0.3)
+	flash_tween = create_tween()
+	flash_tween.tween_property(damaged_flash, "modulate", Color(1, 0, 0, 0.0), 0.3)
+
+func apply_heal_flash() -> void:
+	if flash_tween:
+		flash_tween.kill()
+	heal_flash.modulate = Color(0.0, 1.0, 0.0, 0.3)
+	flash_tween = create_tween()
+	flash_tween.tween_property(heal_flash, "modulate", Color(1, 0, 0, 0.0), 0.3)
+
+	pass
 func get_health_bar() -> HealthBar:
 	return health_bar
 

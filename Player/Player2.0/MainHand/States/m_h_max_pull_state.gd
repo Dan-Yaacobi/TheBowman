@@ -19,7 +19,6 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	#EventBus.out_of_mana.connect(release)
 	tired = false
 	perfect_shot_window.wait_time = PlayerManager.player.stats.perfect_shot_window.value()
 	perfect_aim_particles.rotation = entity.rotation

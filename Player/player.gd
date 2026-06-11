@@ -71,6 +71,9 @@ var can_dash: bool = true
 
 var equipment_interacted: Equipment = null
 
+var knockback: Vector2 = Vector2.ZERO
+const KNOCKBACK_FRICTION: float = 300.0 
+
 var abilities: Dictionary = {
 	PlayerAbility.TriggerType.PASSIVE: [],
 	PlayerAbility.TriggerType.SHOOT: [],
@@ -88,7 +91,6 @@ func _ready() -> void:
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	stats.hp = stats.max_hp
-	#init_bow()
 	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	health_bar.init_health(stats.max_hp)
 	invincibility_timer.timeout.connect(invincibility_over)
@@ -107,6 +109,7 @@ func _ready() -> void:
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
+
 func add_display_buff(buff: PlayerUpgrade) -> void:
 	if buff:
 		total_buffs.add_display_buff(buff)
@@ -202,11 +205,13 @@ func equipment_interaction_begin(equip: Equipment) -> void:
 
 func equipment_interaction_end(_equip: Equipment) -> void:
 	equipment_interacted = null
-var knockback: Vector2 = Vector2.ZERO
-const KNOCKBACK_FRICTION: float = 300.0 
 
-func apply_knockback(_direction: Vector2, force: float) -> void:
-	knockback += _direction.normalized() * force
+
+func apply_knockback(_direction: Vector2, force: float, continuous: bool = false) -> void:
+	if continuous:
+		knockback = _direction.normalized() * force
+	else:
+		knockback += _direction.normalized() * force
 
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side:
@@ -277,6 +282,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 	if not invincible:
 		start_invincibilty()
 		took_hit.emit()
+		EventBus.damaged_flash.emit()
 		damaged_particles.emitting = true
 		stats.hp -= _hurt_box.damage
 		health_bar.reduce_health(_hurt_box.damage)
@@ -299,12 +305,14 @@ func can_heal(amount: int) -> bool:
 	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
 	return amount_healed > 0
 	
-func heal(amount: int) -> bool:
+func heal(amount: int, _flash: bool = true) -> bool:
 	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
 	if can_heal(amount):
 		stats.hp += amount_healed
 		health_bar.heal(amount_healed)
-		display_combat_text(amount_healed, Color.GREEN)
+		if _flash:
+			EventBus.healed_flash.emit()
+			display_combat_text(amount_healed, Color.GREEN)
 		return true
 	return false
 	
@@ -542,5 +550,3 @@ func reset_shot_streak() -> void:
 	
 func reset_perfect_shot_streak() -> void:
 	stats.perfect_shot_streak = 0
-
-	

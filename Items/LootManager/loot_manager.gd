@@ -22,14 +22,17 @@ const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 enum Slot { BOW, QUIVER, RING }
 
-func _ready() -> void:
-	set_up()
 
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
 	EventBus.drop_coins.connect(drop_coins)
 	EventBus.drop_potion.connect(drop_potion)
-	
+
+func unset_up() -> void:
+	EventBus.try_drop.disconnect(drop_random_item)
+	EventBus.drop_coins.disconnect(drop_coins)
+	EventBus.drop_potion.disconnect(drop_potion)
+
 func drop_item(slot: Slot) -> EquipmentData:
 	match slot:
 		Slot.BOW: return roll_item(bow_pool)

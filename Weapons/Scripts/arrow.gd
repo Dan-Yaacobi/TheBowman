@@ -37,7 +37,7 @@ func _ready() -> void:
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
 	hurt_box.set_arrow(self)
-	hurt_box.successful_hit.connect(clear_shot)
+	#hurt_box.successful_hit.connect(clear_shot)
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
@@ -55,7 +55,6 @@ func hit(_hit_box) -> void:
 			EventBus.arrow_enemy_hit.emit(perfect_shot)
 	pierce_count += 1
 	clear_shot()
-	
 			
 func crit_effect(_body: Enemy) -> void:
 	var _crit_effect = CRIT.instantiate()

@@ -10,6 +10,7 @@ class_name EnemyData extends Resource
 @export var knockback_resistance: float = 0.0
 @export var can_be_knockedback: bool = true
 @export_range(0, 100, 0.1, "suffix:%") var drop_chance: float = 20.0
+@export var stun_immune: bool = false
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]
