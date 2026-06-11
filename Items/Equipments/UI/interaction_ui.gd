@@ -105,7 +105,13 @@ func set_items(new_equip: Equipment) -> void:
 		var cur_amount: float = cur_mod[0].amount if cur_mod.size() > 0 else 0.0
 		var delta = new_amount - cur_amount
 		var display_name = stat_names_dict.get(stat_name, stat_name)
-		var label = _make_label(display_name, delta)
+		var label: StatLabel
+		if current_equip == null:
+			label = _make_label(display_name, new_amount)
+		else:
+			var sign_str := "+" if delta >= 0 else ""
+			var delta_str := sign_str + ("%.2f" % delta).trim_suffix("0").trim_suffix(".")
+			label = _make_label(display_name + ":  " + delta_str)
 		if delta > 0:
 			label.set_color(COLOR_UPGRADE)
 		elif delta < 0:

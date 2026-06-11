@@ -162,6 +162,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_sedti"]
 script = ExtResource("2_2aet8")
+hp = 10
 max_hp = 10
 knockback_resistance = SubResource("Resource_o1b5h")
 max_minions = 3

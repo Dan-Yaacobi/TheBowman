@@ -14,6 +14,7 @@ signal camera_shake(_strength: float, _fade: float)
 
 signal arrow_hit_sound
 signal arrow_shot_sound
+signal coin_drop_sound
 
 signal leeched(amount: int, position: Vector2)
 

@@ -1,17 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://1jahx7pcdpu6"]
+[gd_scene format=3 uid="uid://1jahx7pcdpu6"]
 
 [ext_resource type="Script" uid="uid://c1bwbm1c05ifw" path="res://00 Globals/sound_manager.gd" id="1_2asnt"]
 [ext_resource type="AudioStream" uid="uid://32moefoiwsry" path="res://Audio/Player/arrow_shot-shorter.mp3" id="2_dwqjv"]
 [ext_resource type="AudioStream" uid="uid://de0bwrmr7d6ev" path="res://Audio/Player/arrow_hit.mp3" id="3_rbqa3"]
+[ext_resource type="AudioStream" uid="uid://ddd4tt73l1lxp" path="res://Audio/Player/coin_drop.mp3" id="4_dwqjv"]
 
-[node name="SoundManager" type="Node2D"]
+[node name="SoundManager" type="Node2D" unique_id=21001669]
 script = ExtResource("1_2asnt")
 
-[node name="ArrowShot" type="AudioStreamPlayer2D" parent="."]
+[node name="ArrowShot" type="AudioStreamPlayer2D" parent="." unique_id=469219128]
 stream = ExtResource("2_dwqjv")
 volume_db = 8.602
 
-[node name="ArrowHit" type="AudioStreamPlayer2D" parent="."]
+[node name="ArrowHit" type="AudioStreamPlayer2D" parent="." unique_id=962861024]
 stream = ExtResource("3_rbqa3")
 volume_db = -24.24
 pitch_scale = 0.49
+
+[node name="CoinDrop" type="AudioStreamPlayer2D" parent="." unique_id=1547779381]
+stream = ExtResource("4_dwqjv")
+volume_db = -15.0

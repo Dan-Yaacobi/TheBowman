@@ -1,12 +1,16 @@
 class_name StunAbility extends PlayerShootAbility
 
-var stun_chance: int = 5
+const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
 
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func update_ability(_amount = 0) -> void:
-	stun_chance+= randi_range(1,4)
-
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+	if _target and _arrow:
+		if _target is Enemy:
+			if _target.full_health:
+				var stun_debuff: Debuff = STUN_DEBUFF.instantiate()
+				_target.debuff_handler.add_debuff(stun_debuff,5,1)
+				
 func get_tooltip() -> String:
-	return "Stun Chance: " + str(stun_chance) + "%"
+	return "Arrows stun full-health enemies"

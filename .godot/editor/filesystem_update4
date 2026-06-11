@@ -1,4 +1,4 @@
-res://Rifts/Rift.tscn
+res://MainGame/Game.tscn
 res://Objects/Effects/break.gdshader
 res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/Clouds/regular_cloud.tres
@@ -6,13 +6,19 @@ res://Enemies/EnemyData/EnemyValues/EvilBirds/red_evil_bird.tres
 res://Enemies/EnemyData/EnemyValues/Spider/BlackSpider.tres
 res://Items/LootManager/ItemPools/bow_pool.tres
 res://Items/LootManager/ItemPools/arrow_pool.tres
-res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres
-res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres
-res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres
-res://Rifts/RiftEnemySpawner/EnemyEntry/cloud_entry.tres
 res://Enemies/EnemyData/EnemyValues/Boss/red_apple_boss.tres
 res://Player/background.gdshader
 res://Items/Equipments/UI/wooden_UI.gdshader
 res://Items/Equipments/UI/wooden_buttons.gdshader
 res://Items/ItemEffects/glow_sparkle.gdshader
+res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd
+res://Player/Abilities2.0/ShootAbilities/Stun/stun_ability.gd
+res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
+res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres
+res://Items/Diamond.tres
+res://Items/Coin.tres
+res://Items/RedDiamond.tres
+res://Enemies/Scripts/enemy.gd
 res://Enemies/Spider/Spider.tscn
+res://General Nodes/DebuffHandler/debuff_handler.gd

@@ -1,13 +1,16 @@
-class_name PoisonHitAbility extends PlayerShootAbility
+class_name PoisonAbility extends PlayerShootAbility
 
-var poison_chance: int = 5
+const POISON_DEBUFF = preload("uid://dw404fcvhcw52")
 
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-
-func update_ability(_amount = 0) -> void:
-	poison_chance += randi_range(1,4)
-
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+	if _target and _arrow:
+		if _target is Enemy and _arrow.perfect_shot:
+			var poison_debuff: Debuff = POISON_DEBUFF.instantiate()
+			poison_debuff.poison_damage = 2
+			_target.debuff_handler.add_debuff(poison_debuff,21,3)
+			
 func get_tooltip() -> String:
-	return "Poison Chance: " + str(poison_chance) + "%"
+	return "Perfect shots inflict poison."

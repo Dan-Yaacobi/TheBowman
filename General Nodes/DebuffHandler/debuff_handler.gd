@@ -24,8 +24,6 @@ func add_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 
 		curr_debuff.ticks = _ticks
 		enemy.sprite.add_child(curr_debuff)
-	
-
 
 func remove_debuff(_id: int) -> void:
 	debuffs.erase(_id)

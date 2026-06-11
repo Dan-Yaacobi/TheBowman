@@ -188,7 +188,10 @@ func can_use_special_ability() -> void:
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	special_ability_indictaor()
+	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
+	velocity += knockback
 	move_and_slide()
+	velocity -= knockback
 
 func is_equipment_interaction() -> bool:
 	return equipment_interacted != null
@@ -199,10 +202,12 @@ func equipment_interaction_begin(equip: Equipment) -> void:
 
 func equipment_interaction_end(_equip: Equipment) -> void:
 	equipment_interacted = null
-	
+var knockback: Vector2 = Vector2.ZERO
+const KNOCKBACK_FRICTION: float = 300.0 
+
 func apply_knockback(_direction: Vector2, force: float) -> void:
-	velocity += _direction.normalized() * force
-	
+	knockback += _direction.normalized() * force
+
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side:
 		direction_side = _new_side
@@ -275,7 +280,7 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		damaged_particles.emitting = true
 		stats.hp -= _hurt_box.damage
 		health_bar.reduce_health(_hurt_box.damage)
-		apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback_power)
+		apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
 		display_combat_text(_hurt_box.damage, Color.RED)
 		
 func start_invincibilty() -> void:

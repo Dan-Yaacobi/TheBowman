@@ -47,6 +47,9 @@ func _ready() -> void:
 	extra_ready_functions()
 	pass
 
+func full_health() -> bool:
+	return current_hp == stats.max_hp
+	
 func extra_ready_functions() -> void:
 	pass
 
