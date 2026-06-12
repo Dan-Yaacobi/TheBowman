@@ -6,30 +6,34 @@ const DEFAULT_COMBAT_TEXT_COLOR = Color.WHITE
 const DEFAULT_HIT_EFFECT_COLOR = Color("ba0000")
 
 var damage: int  = 1
+
 var knockback_power: float
 var knockback_dir: Vector2
 var one_time_hit: bool = false
 var combat_text_color: Color
 var effect_color: Color
-var added_effects_override: Callable = Callable()
+var added_effects: Array = []
 
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
 	
-func AreaEnetered( a : Area2D) -> void:
+func AreaEnetered(a: Area2D) -> void:
 	if a is HitBox:
 		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 		effect_color = DEFAULT_HIT_EFFECT_COLOR
-		#CombatTextSpawner.spawn(a.global_position, str(damage),combat_text_color)
 		knockback_dir = -(a.global_position - self.global_position).normalized()
 		a.TakeDamage(self)
 	if a.get_parent() is Enemy:
-		added_effects(a.enemy)
+		_apply_effects(a.get_parent())
 	successful_hit.emit(self)
 
 func set_text_color(_color: Color) -> void:
 	combat_text_color = _color
-	
-func added_effects(_a: Enemy) -> void:
-	if added_effects_override.is_valid():
-		added_effects_override.call(_a)
+
+func add_effect(effect: Callable) -> void:
+	added_effects.append(effect)
+
+func _apply_effects(enemy: Enemy) -> void:
+	for effect in added_effects:
+		if effect.is_valid():
+			effect.call(enemy)

@@ -111,7 +111,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
-[sub_resource type="Resource" id="Resource_27xwf"]
+[sub_resource type="Resource" id="Resource_808i2"]
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
@@ -177,7 +177,7 @@ max_hp = 10
 knockback_resistance = SubResource("Resource_o1b5h")
 max_minions = 3
 invinc_duration = SubResource("Resource_ww5s2")
-extra_gold = SubResource("Resource_27xwf")
+extra_gold = SubResource("Resource_808i2")
 extra_drop_chance = SubResource("Resource_e03cv")
 down_gravity = 1500
 up_gravity = 650

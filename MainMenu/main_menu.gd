@@ -8,12 +8,14 @@ class_name MainMenu extends GameWorld
 
 
 func _ready() -> void:
-	EventBus.summon_effect.connect(summon_effect)
 	pass
 
 func set_world() -> void:
+	EventBus.summon_effect.connect(summon_effect)
 	PlayerManager.player.heal(999, false)
 	
+func exit_world() -> void:
+	EventBus.summon_effect.disconnect(summon_effect)
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
 

@@ -24,7 +24,7 @@ func _ready() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	for ability in player.stats.dash_abilities:
+	for ability in  PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DASH):
 		ability.activate_ability()
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()

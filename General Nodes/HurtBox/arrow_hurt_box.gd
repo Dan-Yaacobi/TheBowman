@@ -13,17 +13,14 @@ func AreaEnetered( a : Area2D) -> void:
 	combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 	effect_color = DEFAULT_HIT_EFFECT_COLOR
 	if a is HitBox:
-		#added_effects(a.get_parent())
 		damage = arrow.damage
 		knockback_power = arrow.knockback
 		knockback_dir = arrow.velocity.normalized()
 		arrow.hit(a)
 		a.TakeDamage(self)
+		if a.get_parent() is Enemy:
+			_apply_effects(a.get_parent())
 		GeneralFunctions.hit_freeze(0.03)
 		
 func hit_wall(_m1,_m2,_m3,_m4) -> void:
 	arrow.hit_wall(_m1,_m2,_m3,_m4)
-	
-func added_effects(_a: Enemy) -> void:
-	pass
-	

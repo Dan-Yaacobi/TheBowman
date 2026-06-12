@@ -15,7 +15,7 @@ func set_arrow(_arrow: Arrow) -> void:
 func _physics_process(_delta: float) -> void:
 	set_direction(arrow.velocity)
 	tick += 1
-	if tick % 3 == 0:
+	if tick % 7 == 0:
 		spawn_patch()
 
 func set_direction(direction: Vector2) -> void:
@@ -25,11 +25,14 @@ func set_direction(direction: Vector2) -> void:
 func spawn_patch() -> void:
 	var patch: BurnPatch = BURN_PATCH.instantiate()
 	patch.global_position = global_position
-	EventBus.summon_effect.emit(patch)
+	var owner_ref = weakref(self)
 	patch.setup(patch_damage, func(enemy: Enemy):
-		apply_burn(enemy)
+		var owner = owner_ref.get_ref()
+		if is_instance_valid(owner):
+			owner.apply_burn(enemy)
 	)
-
+	EventBus.summon_effect.emit(patch)
+	
 func apply_burn(_enemy: Enemy) -> void:
 	if _enemy:
 		var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()

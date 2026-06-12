@@ -7,9 +7,6 @@ const BLEED_DEBUFF = preload("res://Debuffs/Bleed/BleedDebuff.tscn")
 func set_sword(_sword: Sword) -> void:
 	sword = _sword
 	
-func added_effects(a: Enemy) -> void:
-	apply_bleed(a)
-	
 func apply_bleed(a: Enemy) -> void:
 	var try_bleed: int = randi_range(1,100)
 	if try_bleed < sword.get_bleed_chance():

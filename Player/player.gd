@@ -78,7 +78,7 @@ var abilities: Dictionary = {
 	PlayerAbility.TriggerType.SHOOT: [],
 	PlayerAbility.TriggerType.JUMP: [],
 	PlayerAbility.TriggerType.DASH: [],
-	PlayerAbility.TriggerType.RELEASE: [BurningTrailAbility.new()]
+	PlayerAbility.TriggerType.RELEASE: []
 }
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,

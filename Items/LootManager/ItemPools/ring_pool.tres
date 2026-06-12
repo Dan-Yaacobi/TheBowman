@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dkgeft7p3g1b3" path="res://Player/Abilities2.0/PassiveAbilities/PassWallsAbility/pass_walls_ability.gd" id="4_jm3m4"]
 [ext_resource type="Script" uid="uid://detcfoj2muenv" path="res://Player/Abilities2.0/PassiveAbilities/InvincibilityDashAbility/invincibility_dash_ability.gd" id="5_brt0v"]
 [ext_resource type="Script" uid="uid://dswbx1xx3nvnl" path="res://Player/Abilities2.0/ShootAbilities/BurningTrail/burning_trail_ability.gd" id="6_brt0v"]
+[ext_resource type="Script" uid="uid://b7bmpehkag6fe" path="res://Player/Abilities2.0/PassiveAbilities/DoubleJump/double_jump_ability.gd" id="7_pngxw"]
 
 [sub_resource type="Resource" id="Resource_tx7a8"]
 script = ExtResource("4_jm3m4")
@@ -23,7 +24,14 @@ metadata/_custom_type_script = "uid://detcfoj2muenv"
 [sub_resource type="Resource" id="Resource_l88xn"]
 script = ExtResource("6_brt0v")
 trigger_type = 4
+tier = 2
+rarity_weight = 2.0
 metadata/_custom_type_script = "uid://dswbx1xx3nvnl"
+
+[sub_resource type="Resource" id="Resource_gsu5g"]
+script = ExtResource("7_pngxw")
+tier = 1
+metadata/_custom_type_script = "uid://b7bmpehkag6fe"
 
 [sub_resource type="Resource" id="Resource_jm3m4"]
 script = ExtResource("1_3iipa")
@@ -92,7 +100,7 @@ possible_stats = Array[ExtResource("1_3iipa")]([SubResource("Resource_jm3m4"), S
 possible_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
 equipped_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
 possible_display_names = Array[String](["Emerald Dream", "Black Void"])
-possible_abilities = Array[ExtResource("1_epixh")]([SubResource("Resource_tx7a8"), SubResource("Resource_abff8"), SubResource("Resource_l88xn")])
+possible_abilities = Array[ExtResource("1_epixh")]([SubResource("Resource_tx7a8"), SubResource("Resource_abff8"), SubResource("Resource_l88xn"), SubResource("Resource_gsu5g")])
 slot = 2
 max_stat_count = 4
 scale = 0.2

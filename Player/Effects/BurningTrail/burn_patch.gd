@@ -1,9 +1,17 @@
 class_name BurnPatch extends Node2D
+
 @onready var burn_timer: Timer = $BurnTimer
 @onready var hurt_box: HurtBox = $HurtBox
 
-func setup(damage: int, effects_override: Callable) -> void:
-	hurt_box.damage = damage
-	hurt_box.added_effects_override = effects_override
+var _damage: int
+var _effect: Callable
+
+func setup(damage: int, effect: Callable) -> void:
+	_damage = damage
+	_effect = effect
+
+func _ready() -> void:
+	hurt_box.damage = _damage
+	hurt_box.add_effect(_effect)
 	burn_timer.timeout.connect(queue_free)
 	burn_timer.start()
