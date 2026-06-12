@@ -37,6 +37,7 @@
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="33_u3v33"]
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="34_vwcbb"]
 [ext_resource type="Resource" uid="uid://ogdqqlqr3glj" path="res://Rifts/RiftEnemySpawner/EnemyEntry/cloud_entry.tres" id="35_oe8us"]
+[ext_resource type="Resource" uid="uid://coxtd17m35had" path="res://Items/LootManager/ItemPools/ring_pool.tres" id="38_u3v33"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
@@ -124,3 +125,4 @@ enemies = SubResource("Resource_x6s0t")
 enemy_pool = Array[ExtResource("31_y5ptd")]([ExtResource("32_qxt8x"), ExtResource("33_u3v33"), ExtResource("34_vwcbb"), ExtResource("35_oe8us")])
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("31_5icp2")]
+ring_pool = ExtResource("38_u3v33")

@@ -53,7 +53,6 @@ var special_ability_available: bool = true
 var dropping_down: bool = false
 
 var base_stats: PlayerStats
-var bonus_stats: PlayerStats
 var current_minions: Array[Companion] = []
 
 var invincible: bool = false
@@ -76,6 +75,7 @@ var abilities: Dictionary = {
 	PlayerAbility.TriggerType.SHOOT: [],
 	PlayerAbility.TriggerType.JUMP: [],
 	PlayerAbility.TriggerType.DASH: [],
+	PlayerAbility.TriggerType.RELEASE: [BurningTrailAbility.new()]
 }
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,
@@ -410,9 +410,6 @@ func get_sword_abilities() -> Array[PlayerSwordAbility]:
 func get_sword() -> Sword:
 	return main_hand.sword
 	
-func get_gold_bonus() -> int:
-	return stats.extra_gold
-	
 func get_equipped_in_slot(_slot: EquipmentData.slots) -> EquipmentData:
 	match _slot:
 		EquipmentData.slots.BOW:
@@ -461,8 +458,6 @@ func get_equipped_node_in_slot(_slot: EquipmentData.slots) -> Equipment:
 			return node
 	return null
 	
-func set_gold_bonus(_amount: int) -> void:
-	stats.extra_gold += _amount
 
 func set_sword_size(amount: float) -> void:
 	stats.sword_size_mod = amount

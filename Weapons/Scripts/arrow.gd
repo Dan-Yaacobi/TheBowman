@@ -77,6 +77,7 @@ func calc_knockback(shot_power: float) -> void:
 func missed() -> void:
 	if regular_shot and not succesfuly_hit:
 		EventBus.arrow_missed.emit()
+	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
 func clear_shot() -> void:

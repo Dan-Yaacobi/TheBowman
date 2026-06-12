@@ -31,6 +31,7 @@ func set_up() -> void:
 	EventBus.drop_potion.connect(drop_potion)
 	
 func drop_item(slot: Slot) -> EquipmentData:
+	return roll_item(ring_pool)
 	match slot:
 		Slot.BOW: return roll_item(bow_pool)
 		Slot.QUIVER: return roll_item(quiver_pool)
@@ -51,7 +52,6 @@ func drop_potion(_position: Vector2, _chance: float) -> void:
 func roll_item(pool: ItemPool) -> EquipmentData:
 	var data = EquipmentData.new()
 	data.slot = pool.slot
-	data.display_name = pool.possible_display_names.pick_random()
 	data.equipment_scene = load(EQUIPMENT)
 	data.dropped_scale = pool.scale
 	
@@ -92,9 +92,10 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 		data.add_modifier(def.stat_name, amount, def.type)
 		
 	data.ability = _roll_ability(pool, roundi(data.rarity))
-	
-	data.texture = pool.possible_textures[mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)]
-	data.equipped_texture = pool.equipped_textures[mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)]
+	var arr_position: int = mini(roundi(data.rarity) - 1, pool.possible_textures.size() - 1)
+	data.display_name = pool.possible_display_names[arr_position]
+	data.texture = pool.possible_textures[arr_position]
+	data.equipped_texture = pool.equipped_textures[arr_position]
 	return data
 
 func _weighted_pick(stats: Array[StatRollDef], count: int) -> Array[StatRollDef]:

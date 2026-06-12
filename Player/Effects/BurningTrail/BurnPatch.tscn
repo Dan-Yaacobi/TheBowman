@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dh8ohtbhjpxti"]
+
+[ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="1_qc71j"]
+[ext_resource type="Script" uid="uid://b1y8damv7he48" path="res://Player/Effects/BurningTrail/burn_patch.gd" id="1_rit4t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7s1m"]
+
+[node name="BurnPatch" type="Node2D" unique_id=851790589]
+script = ExtResource("1_rit4t")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=666941882]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_qc71j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1381043363]
+shape = SubResource("CircleShape2D_b7s1m")
+
+[node name="BurnTimer" type="Timer" parent="." unique_id=1899934093]
+wait_time = 0.6

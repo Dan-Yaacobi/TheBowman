@@ -101,4 +101,5 @@ func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equ
 	
 
 func summon_effect(effect: Node2D) -> void:
-	call_deferred("add_child", effect)
+	add_child(effect)
+	#call_deferred("add_child", effect)

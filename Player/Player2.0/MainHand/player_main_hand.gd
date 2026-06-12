@@ -133,6 +133,9 @@ func fire_arrow() -> void:
 		fired_arrow.calc_dmg(effective_power)
 		fired_arrow.calc_knockback(effective_power)
 		fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+		var release_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.RELEASE)
+		for ability in release_abilities:
+			ability.activate_ability(null, fired_arrow)
 		if i != 0:
 			fired_arrow.reparent(get_tree().root)
 		else:

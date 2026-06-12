@@ -16,7 +16,7 @@ var items_dic: Dictionary ={
 }
 func drop_coins(_position: Vector2, _amount: int) -> void:
 	var player_stats = PlayerManager.player.stats
-	var adjusted_amount: int = _amount + player_stats.extra_gold
+	var adjusted_amount: int = _amount + player_stats.extra_gold.value()
 	var count: int = _roll_coin_count(adjusted_amount)
 	if count <= 0:
 		return

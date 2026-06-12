@@ -45,3 +45,5 @@ position = Vector2(13, -5.384457e-07)
 shape = SubResource("RectangleShape2D_m802n")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=4300824]
+
+[node name="ExitScreenTimer" type="Timer" parent="." unique_id=1115311203]

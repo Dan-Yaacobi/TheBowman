@@ -6,6 +6,7 @@ func init() -> void:
 	pass
 
 func Enter() -> void:
+	print(equipment.data.dropped_scale)
 	equipment.sprite.scale *= equipment.data.dropped_scale
 	equipment.lock_rotation = true
 	equipment.gravity_scale = 1.0

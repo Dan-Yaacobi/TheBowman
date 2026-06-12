@@ -11,6 +11,7 @@ var knockback_dir: Vector2
 var one_time_hit: bool = false
 var combat_text_color: Color
 var effect_color: Color
+var added_effects_override: Callable = Callable()
 
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
@@ -30,4 +31,5 @@ func set_text_color(_color: Color) -> void:
 	combat_text_color = _color
 	
 func added_effects(_a: Enemy) -> void:
-	pass
+	if added_effects_override.is_valid():
+		added_effects_override.call(_a)

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://brqyuwj57wlga"]
+
+[ext_resource type="Script" uid="uid://c6pe6b3ynr7sd" path="res://Player/Effects/BurningTrail/burning_trail.gd" id="1_5diak"]
+[ext_resource type="PackedScene" uid="uid://dag51ujde7i2y" path="res://Enemies/EnemyEffects/Burned/BurnedEffect.tscn" id="3_raljh"]
+
+[node name="BurningTrail" type="Node2D" unique_id=528233263]
+script = ExtResource("1_5diak")
+
+[node name="BurnedEffect" parent="." unique_id=1516947787 instance=ExtResource("3_raljh")]
+lifetime = 1.0
+emission_sphere_radius = 3.0

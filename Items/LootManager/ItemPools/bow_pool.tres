@@ -20,14 +20,14 @@ metadata/_custom_type_script = "uid://byn0domth7kwx"
 script = ExtResource("1_s2d1f")
 stat_name = "arrow_speed"
 min_value = 10.0
-max_value = 40.0
+max_value = 60.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_a180u"]
 script = ExtResource("1_s2d1f")
 stat_name = "perfect_shot_window"
-min_value = 0.1
-max_value = 1.0
+min_value = 0.5
+max_value = 2.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_l6j88"]
@@ -46,12 +46,20 @@ max_value = 1.5
 rarity_weight = 2.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
+[sub_resource type="Resource" id="Resource_kkuwe"]
+script = ExtResource("1_s2d1f")
+stat_name = "arrow_damage"
+min_value = 1.0
+max_value = 10.0
+rarity_weight = 1.5
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [resource]
 script = ExtResource("2_ualu4")
-possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_s0yus"), SubResource("Resource_a180u"), SubResource("Resource_l6j88"), SubResource("Resource_gs463")])
+possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_s0yus"), SubResource("Resource_a180u"), SubResource("Resource_l6j88"), SubResource("Resource_gs463"), SubResource("Resource_kkuwe")])
 possible_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
 equipped_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
-possible_display_names = Array[String](["Wooden Bow"])
+possible_display_names = Array[String](["Wooden Bow", "Blue Bow", "Red Bow", "Black Bow", "Poison Ivy", "Zeus", "Skeletor"])
 possible_abilities = Array[ExtResource("6_gs463")]([SubResource("Resource_681w5")])
 scale = 0.5
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

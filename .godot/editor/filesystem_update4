@@ -1,4 +1,4 @@
-res://MainGame/Game.tscn
+res://Debuffs/Stun/StunDebuff.tscn
 res://Objects/Effects/break.gdshader
 res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/Clouds/regular_cloud.tres
@@ -11,14 +11,35 @@ res://Player/background.gdshader
 res://Items/Equipments/UI/wooden_UI.gdshader
 res://Items/Equipments/UI/wooden_buttons.gdshader
 res://Items/ItemEffects/glow_sparkle.gdshader
-res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd
-res://Player/Abilities2.0/ShootAbilities/Stun/stun_ability.gd
+res://Items/LootManager/ItemPools/ring_pool.tres
 res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres
 res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres
 res://Items/Diamond.tres
 res://Items/Coin.tres
 res://Items/RedDiamond.tres
-res://Enemies/Scripts/enemy.gd
-res://Enemies/Spider/Spider.tscn
-res://General Nodes/DebuffHandler/debuff_handler.gd
+res://Items/LootManager/loot_manager.gd
+res://Player/Player.tscn
+res://Player/player.gd
+res://PlayerData/player_stats.gd
+res://Player/Abilities2.0/ShootAbilities/PassWallsAbility/pass_walls_ability.gd
+res://Player/dash_state.gd
+res://Player/Abilities2.0/PassiveAbilities/PassWallsAbility/pass_walls_ability.gd
+res://Player/Abilities2.0/PassiveAbilities/InvincibilityDashAbility/invincibility_dash_ability.gd
+res://Player/Effects/BurningTrail/BurningTrail.tscn
+res://Player/Effects/BurningTrail/burning_trail.gd
+res://Player/Player2.0/MainHand/PlayerMainHand.tscn
+res://Player/Abilities2.0/ShootAbilities/BurningTrail/burning_trail_ability.gd
+res://Player/Abilities2.0/player_ability.gd
+res://Player/Player2.0/MainHand/player_main_hand.gd
+res://Rifts/Rift.tscn
+res://00 Globals/item_drop_manager.gd
+res://Items/Equipments/StateMachine/equipment_dropped_state.gd
+res://Items/Equipments/Equipment.tscn
+res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn
+res://Weapons/Scripts/arrow.gd
+res://General Nodes/HurtBox/hurt_box.gd
+res://Player/Effects/BurningTrail/BurnPatch.tscn
+res://Player/Effects/BurningTrail/burn_patch.gd
+res://MainMenu/main_menu.gd
+res://Rifts/rift.gd

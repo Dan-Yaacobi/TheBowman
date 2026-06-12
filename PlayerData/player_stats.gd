@@ -9,7 +9,7 @@ var player: Player
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
 @export var invinc_duration: Stat
-@export var extra_gold: int = 0
+@export var extra_gold: Stat
 @export var extra_drop_chance: Stat
 
 @export_subgroup("Enviorments")
