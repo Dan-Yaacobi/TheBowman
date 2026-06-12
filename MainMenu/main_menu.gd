@@ -11,6 +11,9 @@ func _ready() -> void:
 	EventBus.summon_effect.connect(summon_effect)
 	pass
 
+func set_world() -> void:
+	PlayerManager.player.heal(999, false)
+	
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
 

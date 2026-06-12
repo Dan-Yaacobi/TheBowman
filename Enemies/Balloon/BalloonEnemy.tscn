@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://8lmb4nmal22g"]
+
+[ext_resource type="Script" uid="uid://qoo6oygbach4" path="res://Enemies/Balloon/balloon_enemy.gd" id="1_sn7vl"]
+[ext_resource type="Texture2D" uid="uid://cipxforpdgkwa" path="res://Enemies/Balloon/Sprites/Balloon.png" id="2_58m4j"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_3rnvt"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_tb2nn"]
+[ext_resource type="Script" uid="uid://bg5f7x52k78va" path="res://Enemies/Balloon/balloon_idle_state.gd" id="5_l5fvy"]
+[ext_resource type="Script" uid="uid://bnhaqggow0qbn" path="res://Enemies/Balloon/balloon_seek_state.gd" id="6_3rnvt"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="6_p8jtg"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="7_q28kg"]
+[ext_resource type="Script" uid="uid://6g83cnm5qhai" path="res://Enemies/Balloon/balloon_preblow_state.gd" id="7_tb2nn"]
+[ext_resource type="Script" uid="uid://d3q8ope8ase7i" path="res://Enemies/Balloon/balloon_blow_state.gd" id="8_l5fvy"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="10_q28kg"]
+[ext_resource type="PackedScene" uid="uid://dh0wik5pjscau" path="res://Enemies/Balloon/Wind.tscn" id="11_p8jtg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47m3o"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wm7ah"]
+height = 22.0
+
+[sub_resource type="Animation" id="Animation_47m3o"]
+resource_name = "Blow"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_wm7ah"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_524dv"]
+resource_name = "Interact"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_8qje5"]
+resource_name = "PreBlow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.56666666, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_lf1f6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r6eby"]
+resource_name = "Seek"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy5mb"]
+_data = {
+&"Blow": SubResource("Animation_47m3o"),
+&"Idle": SubResource("Animation_wm7ah"),
+&"Interact": SubResource("Animation_524dv"),
+&"PreBlow": SubResource("Animation_8qje5"),
+&"RESET": SubResource("Animation_lf1f6"),
+&"Seek": SubResource("Animation_r6eby")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tb2nn"]
+radius = 345.3565
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l5fvy"]
+radius = 43.0
+
+[node name="BalloonEnemy" type="CharacterBody2D" unique_id=1250735949]
+scale = Vector2(0.75, 0.75)
+collision_layer = 4
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_sn7vl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2083159471]
+texture = ExtResource("2_58m4j")
+hframes = 5
+vframes = 2
+
+[node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("3_3rnvt")]
+
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1586156602]
+script = ExtResource("4_tb2nn")
+
+[node name="Idle" type="Node2D" parent="EnemyStateMachine" unique_id=114763045]
+script = ExtResource("5_l5fvy")
+
+[node name="Seek" type="Node2D" parent="EnemyStateMachine" unique_id=156498072]
+script = ExtResource("6_3rnvt")
+
+[node name="PreBlow" type="Node2D" parent="EnemyStateMachine" unique_id=2027660643]
+script = ExtResource("7_tb2nn")
+
+[node name="Blow" type="Node2D" parent="EnemyStateMachine" unique_id=881718366]
+script = ExtResource("8_l5fvy")
+
+[node name="BlowTimer" type="Timer" parent="EnemyStateMachine/Blow" unique_id=725955438]
+wait_time = 5.0
+
+[node name="HitBox" parent="." unique_id=1657822466 instance=ExtResource("6_p8jtg")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_q28kg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=458623328]
+position = Vector2(-1, -7)
+shape = SubResource("CapsuleShape2D_47m3o")
+
+[node name="HurtBox" parent="." unique_id=684116007 instance=ExtResource("7_q28kg")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=857227446]
+position = Vector2(-1, -7)
+shape = SubResource("CapsuleShape2D_wm7ah")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=139898856]
+libraries/ = SubResource("AnimationLibrary_iy5mb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1552277563]
+
+[node name="InteractionDetector" type="Area2D" parent="." unique_id=1018285100]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector" unique_id=2087606005]
+shape = SubResource("CircleShape2D_tb2nn")
+
+[node name="BlowingDetector" type="Area2D" parent="." unique_id=1621718541]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlowingDetector" unique_id=1281421054]
+shape = SubResource("CircleShape2D_l5fvy")
+debug_color = Color(0.98797864, 0, 0.3122122, 0.41960785)
+
+[node name="Wind" parent="." unique_id=230637160 instance=ExtResource("11_p8jtg")]
+position = Vector2(15.999999, 0)
+collision_layer = 0

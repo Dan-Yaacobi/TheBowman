@@ -14,7 +14,6 @@ var target_move: Vector2
 func _ready() -> void:
 	player.took_hit.connect(apply_shake)
 	player.critical_hit.connect(apply_shake)
-	
 	EventBus.change_camera_focus.connect(change_focus)
 	EventBus.reset_camera_focus.connect(reset_focus)
 	EventBus.camera_shake.connect(apply_shake)

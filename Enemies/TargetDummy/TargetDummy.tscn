@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="4_qb1bn"]
 [ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn" id="6_5k5yt"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="8_qb1bn"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_odses"]
 
 [sub_resource type="Resource" id="Resource_qb1bn"]
 script = ExtResource("3_5k5yt")
@@ -50,3 +51,6 @@ shape = SubResource("CapsuleShape2D_p5wai")
 [node name="DebuffHandler" parent="." unique_id=1086958927 instance=ExtResource("3_u5jre")]
 
 [node name="HurtBox" parent="." unique_id=185992081 instance=ExtResource("8_qb1bn")]
+
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1839491342]
+script = ExtResource("9_odses")

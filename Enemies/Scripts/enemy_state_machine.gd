@@ -1,21 +1,30 @@
 class_name EnemyStateMachine extends Node
 
+signal pausing(_stop: bool)
+
 var states: Array[EnemyState]
 var prev_state: EnemyState
 var curr_state: EnemyState
 
+var paused: bool = false
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 	pass
-
-
+	
+func cause_pause(_stop: bool) -> void:
+	paused = _stop
+	pausing.emit(_stop)
+	
 func _process(delta: float) -> void:
+	if paused:
+		return
 	ChangeState(curr_state.Process(delta))
-	pass
 
 func _physics_process(delta: float) -> void:
+	if paused:
+		return
 	ChangeState(curr_state.Physics(delta))
-	pass
 	
 func Initialize(_enemy: Enemy)->void:
 	states = []

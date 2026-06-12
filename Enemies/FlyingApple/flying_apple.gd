@@ -1,15 +1,13 @@
 class_name FlyingApple extends Enemy
 
 @onready var wings: Sprite2D = $Sprite2D/Wings
-@onready var state_machine: EnemyStateMachine = $EnemyStateMachine
 
 var wings_animation: AnimationPlayer
 
 func extra_ready_functions() -> void:
 	scale = Vector2(0.75,0.75)
 	sprite.texture = stats.skin
-	hurt_box.knockback_power = stats.knockback
-	hurt_box.successful_hit.connect(knockback)
+
 	wings_animation  = $Sprite2D/Wings/WingsAnimation
 	animation_player = $Sprite2D/AnimationPlayer
 	damaged_animation_player = $Sprite2D/DamagedAnimation
@@ -28,5 +26,6 @@ func shoot() -> void:
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.knockback = stats.knockback
 		get_parent().add_child(new_bullet)
+		
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

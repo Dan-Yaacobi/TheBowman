@@ -8,7 +8,7 @@ func add_ability() -> void:
 func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 	if _target and _arrow:
 		if _target is Enemy:
-			if _target.full_health:
+			if _target.full_health() and _target.can_be_stunned():
 				var stun_debuff: Debuff = STUN_DEBUFF.instantiate()
 				_target.debuff_handler.add_debuff(stun_debuff,5,1)
 				

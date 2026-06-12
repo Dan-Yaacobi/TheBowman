@@ -2,7 +2,8 @@ extends Node
 signal start_shooting
 signal arrow(_arrow: Arrow)
 
-signal out_of_mana
+signal damaged_flash
+signal healed_flash
 
 signal invisible_hands(yes: bool)
 

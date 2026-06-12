@@ -1,5 +1,4 @@
 class_name EvilBird extends Enemy
-@onready var state_machine: EnemyStateMachine = $StateMachine
 
 func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer

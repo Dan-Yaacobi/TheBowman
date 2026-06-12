@@ -168,11 +168,11 @@ height = 12.7801
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpa61"]
 radius = 4.99705
-height = 15.0
+height = 17.203896
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vrf4a"]
-radius = 5.0
-height = 15.0
+radius = 5.570913
+height = 18.842201
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nboip"]
 size = Vector2(24, 10)
@@ -206,6 +206,7 @@ shape = SubResource("CapsuleShape2D_wpa61")
 debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
 
 [node name="HurtBox" parent="." unique_id=497636217 instance=ExtResource("17_j7d4o")]
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=555656013]
 rotation = 2.18166
@@ -213,29 +214,29 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_vrf4a")
 debug_color = Color(1, 0, 0.0166664, 0.419608)
 
-[node name="StateMachine" type="Node2D" parent="." unique_id=1028536934]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1028536934]
 script = ExtResource("9_7k2vi")
 
-[node name="Seek" type="Node2D" parent="StateMachine" unique_id=1500441861]
+[node name="Seek" type="Node2D" parent="EnemyStateMachine" unique_id=1500441861]
 script = ExtResource("11_w4iuy")
 
-[node name="EggAttack" type="Node2D" parent="StateMachine" unique_id=1691147603]
+[node name="EggAttack" type="Node2D" parent="EnemyStateMachine" unique_id=1691147603]
 script = ExtResource("12_w4iuy")
 
-[node name="EggAttackTimer" type="Timer" parent="StateMachine/EggAttack" unique_id=347636976]
+[node name="EggAttackTimer" type="Timer" parent="EnemyStateMachine/EggAttack" unique_id=347636976]
 
-[node name="GroundDetector" type="Area2D" parent="StateMachine/EggAttack" unique_id=178459828]
+[node name="GroundDetector" type="Area2D" parent="EnemyStateMachine/EggAttack" unique_id=178459828]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/EggAttack/GroundDetector" unique_id=1286028758]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine/EggAttack/GroundDetector" unique_id=1286028758]
 position = Vector2(1, 9)
 shape = SubResource("RectangleShape2D_nboip")
 
-[node name="PreDive" type="Node2D" parent="StateMachine" unique_id=768638697]
+[node name="PreDive" type="Node2D" parent="EnemyStateMachine" unique_id=768638697]
 script = ExtResource("12_lkeh4")
 
-[node name="DiveAttack" type="Node2D" parent="StateMachine" unique_id=835197878]
+[node name="DiveAttack" type="Node2D" parent="EnemyStateMachine" unique_id=835197878]
 script = ExtResource("13_lkeh4")
 
 [node name="DebuffHandler" parent="." unique_id=1513628500 instance=ExtResource("15_nboip")]

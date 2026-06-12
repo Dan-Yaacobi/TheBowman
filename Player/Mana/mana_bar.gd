@@ -26,8 +26,6 @@ func set_mana_bar_stats(_mana_rate: float, _shoot_cost: int) -> void:
 func use_mana(_cost_multiplier) -> void:
 	if value >= shoot_cost * _cost_multiplier:
 		value -= shoot_cost * _cost_multiplier
-	else:
-		EventBus.out_of_mana.emit()
 		
 func has_enough_mana() -> bool:
 	if value >= shoot_cost:

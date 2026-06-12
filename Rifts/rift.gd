@@ -11,19 +11,21 @@ var rift_levels: Array[RiftLevel]
 
 
 func _ready() -> void:
-	EventBus.enemy_summoned.connect(add_enemy)
-	EventBus.enemy_died.connect(remove_enemy)
-	EventBus.summon_effect.connect(summon_effect)
-	EventBus.equipment_dropped.connect(drop_equipment)
-	rift_enemy_spawner.enemy_spawned.connect(add_enemy)
-	
-	rift_generator.rift_created.connect(add_rift_level)
+	pass
 
 func add_rift_level(_rift: RiftLevel) -> void:
 	if _rift:
 		rift_levels.append(_rift)
 
 func set_world() -> void:
+	loot_manager.set_up()
+	EventBus.enemy_summoned.connect(add_enemy)
+	EventBus.enemy_died.connect(remove_enemy)
+	EventBus.summon_effect.connect(summon_effect)
+	EventBus.equipment_dropped.connect(drop_equipment)
+	rift_enemy_spawner.enemy_spawned.connect(add_enemy)
+	rift_generator.rift_created.connect(add_rift_level)
+	
 	PlayerManager.player.stats.rift_level += 1
 	EventBus.entered_rift.emit()
 	var rift_level: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
@@ -35,6 +37,13 @@ func call_enemy_spawner(level: int, _main_progress: float, is_main_path: bool, i
 	rift_enemy_spawner.spawn_enemy(level, _main_progress, is_main_path, is_side_path_terminal)
 
 func exit_world() -> void:
+	loot_manager.unset_up()
+	EventBus.enemy_summoned.disconnect(add_enemy)
+	EventBus.enemy_died.disconnect(remove_enemy)
+	EventBus.summon_effect.disconnect(summon_effect)
+	EventBus.equipment_dropped.disconnect(drop_equipment)
+	rift_enemy_spawner.enemy_spawned.disconnect(add_enemy)
+	rift_generator.rift_created.disconnect(add_rift_level)
 	PlayerManager.player.hide_buffs()
 	#rift_generator._reset_world()
 	for level in rift_levels:
@@ -98,7 +107,6 @@ func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equ
 	else:
 		new_equip.call_deferred("reparent", self)
 
-	
 
 func summon_effect(effect: Node2D) -> void:
 	add_child(effect)
