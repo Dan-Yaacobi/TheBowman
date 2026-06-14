@@ -9,6 +9,7 @@ script = ExtResource("1_4qiov")
 scene = ExtResource("2_m8270")
 data = ExtResource("1_u80x4")
 cost = 2
+min_level = 5
 base_weight = 5.0
 weight_curve = 0.5
 spawn_zone = 1

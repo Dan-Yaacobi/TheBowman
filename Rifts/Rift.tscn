@@ -37,8 +37,8 @@
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="33_u3v33"]
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="34_vwcbb"]
 [ext_resource type="Resource" uid="uid://ogdqqlqr3glj" path="res://Rifts/RiftEnemySpawner/EnemyEntry/cloud_entry.tres" id="35_oe8us"]
-[ext_resource type="Resource" uid="uid://coxtd17m35had" path="res://Items/LootManager/ItemPools/ring_pool.tres" id="38_u3v33"]
 [ext_resource type="Resource" uid="uid://d1g23al65w5pd" path="res://Rifts/RiftEnemySpawner/EnemyEntry/balloon_entry.tres" id="37_u3v33"]
+[ext_resource type="Resource" uid="uid://coxtd17m35had" path="res://Items/LootManager/ItemPools/ring_pool.tres" id="38_u3v33"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")

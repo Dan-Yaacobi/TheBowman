@@ -2,9 +2,6 @@ class_name PierceAbility extends PlayerShootAbility
 
 var id: int = 998
 
-func add_ability() -> void:
-	PlayerManager.player.add_shoot_ability(self)
-	
 func on_equipped() -> void:
 	PlayerManager.player.stats.arrow_pierce.add_buff(id,2.0,Stat.buff_type.ADDITIVE)
 
