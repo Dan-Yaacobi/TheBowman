@@ -26,7 +26,7 @@ func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
 		ability.activate_ability()
 	set_sword_size()
-	swing_cooldown.wait_time =0.1 # PlayerManager.player.get_sword_cd()
+	swing_cooldown.wait_time =PlayerManager.player.get_sword_cd()
 	entity.can_swing = false
 	finished = false
 	slash_hurt_box.damage = floor(PlayerManager.player.stats.sword_damage.value())
