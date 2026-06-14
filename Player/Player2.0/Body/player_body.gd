@@ -18,7 +18,6 @@ func _process(_delta: float) -> void:
 func change_direction(_direction: bool) -> void:
 	scale.x *= -1
 
-
 func blink() -> void:
 	var random_chance = randi_range(0,200)
 	if random_chance == 0:

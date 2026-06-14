@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cakf7lhpfqg2w"]
 
 [ext_resource type="Script" uid="uid://dneg123ik38n1" path="res://Player/Player2.0/Body/player_body.gd" id="1_x4lrk"]
-[ext_resource type="Texture2D" uid="uid://cgty1wah1xo08" path="res://Player/Player2.0/Sprites/Archer.png" id="2_bpqpn"]
+[ext_resource type="Texture2D" uid="uid://ngmgxpxrkp3y" path="res://Player/Body/NewArcher.png" id="2_x4lrk"]
 [ext_resource type="Texture2D" uid="uid://pohraps2ktvo" path="res://Player/Player2.0/Sprites/Eyes.png" id="3_ydejg"]
 
 [sub_resource type="Animation" id="Animation_x4lrk"]
@@ -55,10 +55,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 5]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -95,10 +95,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [4]
+"values": [0, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_oroft"]
@@ -186,7 +186,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_jt2tw"]
 resource_name = "Walk"
-length = 0.8
+length = 0.6
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -196,10 +196,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.45, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 0]
+"values": [1, 0, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cglcq"]
@@ -217,11 +217,12 @@ _data = {
 script = ExtResource("1_x4lrk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1746225688]
-texture = ExtResource("2_bpqpn")
+texture = ExtResource("2_x4lrk")
 hframes = 4
 vframes = 2
 
 [node name="Eyes" type="Sprite2D" parent="Sprite2D" unique_id=1818232780]
+visible = false
 texture = ExtResource("3_ydejg")
 hframes = 4
 

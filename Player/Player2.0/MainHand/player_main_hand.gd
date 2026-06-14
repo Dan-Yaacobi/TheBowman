@@ -65,7 +65,7 @@ func arrow_setup() -> void:
 func draw_arrow() -> void:
 	if !current_arrow:
 		var _arrow: Arrow = arrow.instantiate()
-		arrow_position.add_child(_arrow)
+		add_child(_arrow)
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
 
@@ -81,6 +81,7 @@ func where_to_hold_arrow() -> Vector2:
 	return arrow_position.global_position
 	
 func change_direction() -> void:
+	scale.x *= - 1
 	position.x *= - 1
 
 func new_arrow(_arrow: PackedScene) -> void:
@@ -111,6 +112,7 @@ func fire_arrow() -> void:
 			fired_arrow = arrow.instantiate()
 			fired_arrow.position = current_arrow.position
 			get_tree().root.add_child(fired_arrow)
+			fired_arrow.global_scale = current_arrow.global_scale
 			fired_arrow.set_texture(arrow_texture)
 			
 		@warning_ignore("narrowing_conversion")
@@ -185,3 +187,4 @@ func set_time_for_perfect_shot(amount: float) -> void:
 
 func is_idle() -> bool:
 	return main_hand_state_machine.curr_state is IdleMainHandState
+	

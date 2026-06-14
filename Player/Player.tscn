@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
 [sub_resource type="Resource" id="Resource_i325y"]
 script = ExtResource("4_yf47d")
-base_value = 1.0
+base_value = 3.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_eu7rt"]
@@ -167,7 +167,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_rqaa0"]
 script = ExtResource("4_yf47d")
-base_value = 1.0
+base_value = 1.25
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_sedti"]
@@ -226,10 +226,10 @@ _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
-size = Vector2(13, 18)
+size = Vector2(26, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(20, 4.166683)
+size = Vector2(29, 4.166683)
 
 [sub_resource type="Curve" id="Curve_g8oqh"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -237,7 +237,7 @@ _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
-size = Vector2(18, 21)
+size = Vector2(26, 40)
 
 [sub_resource type="Curve" id="Curve_croik"]
 _limits = [0.0, 20.0, 0.0, 1.0]
@@ -269,6 +269,7 @@ size = Vector2(367, 28)
 size = Vector2(42, 200)
 
 [node name="Player" type="CharacterBody2D" unique_id=1253253931]
+scale = Vector2(0.5, 0.5)
 collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
@@ -289,13 +290,13 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("40_rqaa0")
 
 [node name="PlayerMainHand" parent="." unique_id=1139132622 instance=ExtResource("10_wo5nf")]
-position = Vector2(-6, 6)
+position = Vector2(-8, 14)
 
 [node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
-position = Vector2(2, 5)
+position = Vector2(6, 14)
 
 [node name="OffHandShoulder" type="Node2D" parent="." unique_id=1530002589]
-position = Vector2(2, 5)
+position = Vector2(6, 14)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1994014699]
 zoom = Vector2(5, 5)
@@ -350,15 +351,15 @@ color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
 script = ExtResource("23_gv3fu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=11877925]
-position = Vector2(-1.5, 7)
+position = Vector2(-1, 12)
 shape = SubResource("RectangleShape2D_0mb5q")
 
 [node name="JumpReset" type="Area2D" parent="." unique_id=1946683667]
-position = Vector2(-1, 15)
+position = Vector2(0, 32)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset" unique_id=841087047]
-position = Vector2(0, -0.0833416)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 
@@ -381,8 +382,9 @@ color = Color(0.831239, 0.712185, 0.672638, 1)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=90149864]
-position = Vector2(-2, 2.5)
+position = Vector2(-1, 12)
 shape = SubResource("RectangleShape2D_4o0d0")
+debug_color = Color(0.96965665, 0, 0.46305597, 0.41960785)
 
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=513053942]
 
@@ -466,7 +468,7 @@ position = Vector2(-6, 6)
 script = ExtResource("41_7w4lt")
 
 [node name="TopArea" type="Area2D" parent="SpawnHandler" unique_id=317396116]
-position = Vector2(0, -130)
+position = Vector2(0, -232)
 collision_layer = 0
 collision_mask = 0
 
@@ -474,7 +476,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_o1b5h")
 
 [node name="LeftArea" type="Area2D" parent="SpawnHandler" unique_id=1542286843]
-position = Vector2(-225, 0)
+position = Vector2(-408, 0)
 collision_layer = 0
 collision_mask = 0
 
@@ -482,7 +484,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_7w4lt")
 
 [node name="BottomArea" type="Area2D" parent="SpawnHandler" unique_id=950332450]
-position = Vector2(0, 130)
+position = Vector2(0, 232)
 collision_layer = 0
 collision_mask = 0
 
@@ -490,7 +492,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_ww5s2")
 
 [node name="RightArea" type="Area2D" parent="SpawnHandler" unique_id=1879686107]
-position = Vector2(225, 0)
+position = Vector2(409, 0)
 collision_layer = 0
 collision_mask = 0
 

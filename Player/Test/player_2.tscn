@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://bmi3xaqipfjwf"]
+
+[ext_resource type="Texture2D" uid="uid://ngmgxpxrkp3y" path="res://Player/Body/NewArcher.png" id="1_mhmub"]
+[ext_resource type="Texture2D" uid="uid://cpaprvhmflxbd" path="res://Player/Hand/Hand_2.png" id="2_w77hm"]
+
+[sub_resource type="Animation" id="Animation_88b53"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fap3e"]
+resource_name = "InAir"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_h55sd"]
+resource_name = "Jump"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_sp5rn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pj0hk"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ileet"]
+_data = {
+&"Idle": SubResource("Animation_88b53"),
+&"InAir": SubResource("Animation_fap3e"),
+&"Jump": SubResource("Animation_h55sd"),
+&"RESET": SubResource("Animation_sp5rn"),
+&"Walk": SubResource("Animation_pj0hk")
+}
+
+[node name="Player2" type="Node2D" unique_id=373021904]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1009781734]
+texture = ExtResource("1_mhmub")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2109077825]
+libraries/ = SubResource("AnimationLibrary_ileet")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=763005696]
+position = Vector2(-6, 14)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1102311919]
+position = Vector2(-2, 5)
+texture = ExtResource("2_w77hm")

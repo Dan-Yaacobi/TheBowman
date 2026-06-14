@@ -34,7 +34,6 @@ func unset_up() -> void:
 	EventBus.drop_potion.disconnect(drop_potion)
 
 func drop_item(slot: Slot) -> EquipmentData:
-	return roll_item(ring_pool)
 	match slot:
 		Slot.BOW: return roll_item(bow_pool)
 		Slot.QUIVER: return roll_item(quiver_pool)

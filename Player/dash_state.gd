@@ -29,7 +29,7 @@ func Enter() -> void:
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()
 	player.can_dash = false
-	player.body.update_animation("Jump")
+	#player.body.update_animation("Jump")
 	dash_direction = calculate_direction_to_cursor()
 	dust.emitting = true
 

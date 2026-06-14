@@ -3,7 +3,7 @@ class_name SwingMainHandState extends MainHandState
 @onready var idle: IdleMainHandState = $"../Idle"
 @onready var swing_cooldown: Timer = $SwingCooldown
 @onready var slash_hurt_box: HurtBox = $Sword/SlashHurtBox
-@onready var slash_animation_player: AnimationPlayer = $Sword/SlashEffect/SlashAnimationPlayer
+@onready var slash_animation_player: AnimationPlayer = $"../../SlashEffect/SlashAnimationPlayer"
 
 @onready var sword: Sword = $Sword
 
@@ -26,13 +26,16 @@ func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
 		ability.activate_ability()
 	set_sword_size()
-	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
+	swing_cooldown.wait_time =0.1 # PlayerManager.player.get_sword_cd()
 	entity.can_swing = false
 	finished = false
 	slash_hurt_box.damage = floor(PlayerManager.player.stats.sword_damage.value())
 	slash_animation_player.play("SlashEffect")
 	set_direction()
-	entity.animation_player.play("Swing")
+	if PlayerManager.player.direction_side:
+		entity.animation_player.play("SwingLeft")
+	else:
+		entity.animation_player.play("Swing")
 	slash_hurt_box.monitoring = true
 
 	pass

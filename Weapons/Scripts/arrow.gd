@@ -37,7 +37,6 @@ func _ready() -> void:
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
 	hurt_box.set_arrow(self)
-	#hurt_box.successful_hit.connect(clear_shot)
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
