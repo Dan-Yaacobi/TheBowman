@@ -16,6 +16,7 @@ func set_world() -> void:
 	
 func exit_world() -> void:
 	EventBus.summon_effect.disconnect(summon_effect)
+	
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
 

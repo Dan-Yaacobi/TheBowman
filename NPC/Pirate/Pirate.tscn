@@ -1,9 +1,49 @@
 [gd_scene format=3 uid="uid://d35vwdk0icbdk"]
 
 [ext_resource type="Texture2D" uid="uid://b8xm1geww7efn" path="res://NPC/Pirate/Pirate_2.png" id="1_jnrbt"]
+[ext_resource type="Script" uid="uid://bswqymgrqe27v" path="res://NPC/Pirate/pirate.gd" id="1_tb45h"]
+[ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="2_brg4n"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_ipa7f"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="3_0qkrr"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="4_j5iqs"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="5_ipa7f"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="6_t51dc"]
+
+[sub_resource type="Resource" id="Resource_t51dc"]
+script = ExtResource("2_ipa7f")
+npc_name = "Pirate"
+dialogue_lines = Array[String](["Seen many an archer pass through. The ones who bought somethin' fared better", "Fortune favors the bold, and the bold always find me eventually.", "Risk be just opportunity with better stories, says I.", "Ye look like someone who fancies a proper gamble. Smart eyes.", "Finest wares this side of the rift, aye, and I'd wager me ship on it!"])
+fixed_line = "Pay up and let fate do the rest. She's been in a generous mood lately, mostly."
+post_action_lines = Array[String](["May it serve ye better than the poor wretch I took it from."])
+action_button_labels = Array[String](["Gamble (50 Gold)"])
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b5al"]
+size = Vector2(112, 48)
 
 [node name="Pirate" type="Node2D" unique_id=2050973323]
 scale = Vector2(0.5, 0.5)
+script = ExtResource("1_tb45h")
+data = SubResource("Resource_t51dc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=862633739]
 texture = ExtResource("1_jnrbt")
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=620438962]
+script = ExtResource("3_0qkrr")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=191658591]
+script = ExtResource("4_j5iqs")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=159058702]
+script = ExtResource("5_ipa7f")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=446860076]
+script = ExtResource("6_t51dc")
+
+[node name="ChatBox" parent="." unique_id=1771743779 instance=ExtResource("2_brg4n")]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=480803471]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=942936562]
+shape = SubResource("RectangleShape2D_7b5al")

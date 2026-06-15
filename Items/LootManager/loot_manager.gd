@@ -42,7 +42,7 @@ func drop_item(slot: Slot) -> EquipmentData:
 
 func drop_random_item(_position: Vector2, _chance: float) -> void:
 	if randf_range(0,100) <= _chance:
-		var item: EquipmentData = drop_item(randi_range(0, 1) as Slot)
+		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot)
 		EventBus.equipment_dropped.emit(item, _position, null)
 
 func drop_coins(_position: Vector2, _amount: int) -> void:

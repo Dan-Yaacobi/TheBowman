@@ -21,3 +21,7 @@ func heal(amount: int) -> void:
 
 func update_tooltip() -> void:
 	tooltip_text = str(int(value)) + " / " + str(int(max_value))
+
+func increase_max_hp(_new_value: int) -> void:
+	max_value = max(max_value,_new_value)
+	update_tooltip()

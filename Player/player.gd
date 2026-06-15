@@ -74,7 +74,7 @@ var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
 var abilities: Dictionary = {
-	PlayerAbility.TriggerType.PASSIVE: [],
+	PlayerAbility.TriggerType.PASSIVE: [SuperSwordAbility.new()],
 	PlayerAbility.TriggerType.SHOOT: [],
 	PlayerAbility.TriggerType.JUMP: [],
 	PlayerAbility.TriggerType.DASH: [],
@@ -304,6 +304,13 @@ func invincibility_over() -> void:
 func can_heal(amount: int) -> bool:
 	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
 	return amount_healed > 0
+
+func increase_max_hp(_amount: int, _heal: bool) -> void:
+	stats.max_hp += _amount
+	health_bar.increase_max_hp(stats.max_hp)
+	if _heal:
+		heal(999)
+
 	
 func heal(amount: int, _flash: bool = true) -> bool:
 	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
@@ -347,7 +354,7 @@ func slow_player(slow_time: float,effect: Node2D) -> void:
 
 func buy(price: int) -> bool:
 	if stats.money >= price:
-		stats.money -= price
+		collect_money(-price)
 		return true
 	return false
 

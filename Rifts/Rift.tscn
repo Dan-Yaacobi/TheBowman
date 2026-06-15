@@ -12,7 +12,9 @@
 [ext_resource type="Resource" uid="uid://dj8i0e2574b5s" path="res://Rifts/Chunks/ChunkData/Intro/intro_1.tres" id="7_3f0ah"]
 [ext_resource type="Resource" uid="uid://dwno03ntsasoi" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres" id="7_v6yg5"]
 [ext_resource type="Resource" uid="uid://cgwpaefsfrma1" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres" id="8_3f0ah"]
+[ext_resource type="Resource" uid="uid://bm5wpeqsqrof4" path="res://Rifts/Chunks/ChunkData/Treasure/cleric_island.tres" id="8_oe8us"]
 [ext_resource type="Resource" uid="uid://c2cyut0rfnys6" path="res://Rifts/Chunks/ChunkData/Treasure/chest_island.tres" id="8_qxt8x"]
+[ext_resource type="Resource" uid="uid://b7cryatyf3hgs" path="res://Rifts/Chunks/ChunkData/Treasure/pirate_island.tres" id="9_2cjow"]
 [ext_resource type="Resource" uid="uid://bnkr6l4rqbmvg" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_2.tres" id="9_4xrky"]
 [ext_resource type="Resource" uid="uid://c6frrd5ceaktm" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_3.tres" id="10_5l72e"]
 [ext_resource type="Resource" uid="uid://byrxxduio7yma" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_1.tres" id="11_k3d36"]
@@ -54,7 +56,7 @@ metadata/_custom_type_script = "uid://rxohwem0g1cv"
 [sub_resource type="Resource" id="Resource_qxt8x"]
 script = ExtResource("4_v6yg5")
 type = 3
-chunks = Array[ExtResource("3_clqlo")]([ExtResource("8_qxt8x")])
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("8_qxt8x"), ExtResource("8_oe8us"), ExtResource("9_2cjow")])
 metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_k3d36"]

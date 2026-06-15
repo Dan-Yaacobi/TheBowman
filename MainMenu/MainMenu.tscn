@@ -17,10 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
-[ext_resource type="PackedScene" uid="uid://cyqdfqcoqypvx" path="res://Objects/Scenes/Crate.tscn" id="18_167x7"]
-[ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="19_24r6y"]
-[ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="20_c1m2a"]
-[ext_resource type="PackedScene" uid="uid://d35vwdk0icbdk" path="res://NPC/Pirate/Pirate.tscn" id="21_fnqav"]
 
 [sub_resource type="Resource" id="Resource_nby2t"]
 script = ExtResource("4_u2f2c")
@@ -231,9 +227,6 @@ floating = true
 position = Vector2(146, 13)
 floating = true
 
-[node name="Cleric" parent="Islands/Island12" unique_id=158854308 instance=ExtResource("20_c1m2a")]
-position = Vector2(3, -20)
-
 [node name="Island16" parent="Islands" unique_id=323879176 instance=ExtResource("14_5lv0r")]
 position = Vector2(324, 62)
 
@@ -254,9 +247,6 @@ floating = true
 [node name="Island10" parent="Islands" unique_id=1343375228 instance=ExtResource("15_167x7")]
 position = Vector2(74, 33)
 floating = true
-
-[node name="Pirate" parent="Islands/Island10" unique_id=2050973323 instance=ExtResource("21_fnqav")]
-position = Vector2(-4, -18)
 
 [node name="Island5" parent="Islands" unique_id=2017175388 instance=ExtResource("15_167x7")]
 position = Vector2(258, 109)
@@ -314,11 +304,5 @@ script = ExtResource("16_qvidt")
 position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
-
-[node name="Crate" parent="." unique_id=84532828 instance=ExtResource("18_167x7")]
-position = Vector2(248, 99)
-
-[node name="Barrel" parent="." unique_id=1250284733 instance=ExtResource("19_24r6y")]
-position = Vector2(268, 95)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

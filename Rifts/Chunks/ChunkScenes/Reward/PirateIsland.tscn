@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bqrsrc72mk372"]
+
+[ext_resource type="Script" uid="uid://402kq4g6y6pg" path="res://Rifts/Chunks/chunk.gd" id="1_v5vxh"]
+[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="2_xchvw"]
+[ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="4_e6fmw"]
+[ext_resource type="PackedScene" uid="uid://d35vwdk0icbdk" path="res://NPC/Pirate/Pirate.tscn" id="5_4bv0v"]
+[ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="5_507oh"]
+[ext_resource type="Texture2D" uid="uid://dj7y7d6gog5ua" path="res://NPC/Pirate/PirateShip.png" id="6_v5vxh"]
+[ext_resource type="Script" uid="uid://csms6ex3jqmwq" path="res://Rifts/Chunks/ChunkScenes/Reward/pirate_ship.gd" id="7_xchvw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xchvw"]
+resource_local_to_scene = true
+size = Vector2(49, 40)
+
+[node name="PirateIsland" type="Node2D" unique_id=1062710134]
+script = ExtResource("1_v5vxh")
+allowed_spawn = false
+spawn_chance = 0.0
+
+[node name="Island" parent="." unique_id=869652895 instance=ExtResource("2_xchvw")]
+
+[node name="EntryMarker" parent="." unique_id=1822512370 instance=ExtResource("4_e6fmw")]
+
+[node name="Bounds" parent="." unique_id=1128394681 instance=ExtResource("5_507oh")]
+
+[node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
+position = Vector2(0.5, -12)
+shape = SubResource("RectangleShape2D_xchvw")
+
+[node name="Pirate" parent="." unique_id=2050973323 instance=ExtResource("5_4bv0v")]
+position = Vector2(-1, -18)
+
+[node name="PirateShip" type="Sprite2D" parent="." unique_id=61892362]
+position = Vector2(82, -38)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_v5vxh")
+script = ExtResource("7_xchvw")
+
+[editable path="Bounds"]

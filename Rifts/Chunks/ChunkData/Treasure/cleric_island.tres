@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://bm5wpeqsqrof4"]
+
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_65dt3"]
+[ext_resource type="PackedScene" uid="uid://b3upx2qoakq2e" path="res://Rifts/Chunks/ChunkScenes/Reward/ClericIsland.tscn" id="1_udys5"]
+
+[resource]
+script = ExtResource("1_65dt3")
+scene = ExtResource("1_udys5")
+type = 3
+id = "333"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

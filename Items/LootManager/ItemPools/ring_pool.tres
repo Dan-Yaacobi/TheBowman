@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://jqj7moay3r3w" path="res://Items/Equipments/Rings/Sprites/ring1.png" id="3_bxmvx"]
 [ext_resource type="Texture2D" uid="uid://dxtd78sf35jpn" path="res://Items/Equipments/Rings/Sprites/ring2.png" id="4_jhxf4"]
 [ext_resource type="Script" uid="uid://detcfoj2muenv" path="res://Player/Abilities2.0/PassiveAbilities/InvincibilityDashAbility/invincibility_dash_ability.gd" id="5_brt0v"]
+[ext_resource type="Script" uid="uid://nnfrhv7afpwp" path="res://Player/Abilities2.0/PassiveAbilities/SuperSwordAbility/super_sword_ability.gd" id="6_brt0v"]
 [ext_resource type="Script" uid="uid://b7bmpehkag6fe" path="res://Player/Abilities2.0/PassiveAbilities/DoubleJump/double_jump_ability.gd" id="7_pngxw"]
 
 [sub_resource type="Resource" id="Resource_abff8"]
@@ -18,6 +19,12 @@ metadata/_custom_type_script = "uid://detcfoj2muenv"
 script = ExtResource("7_pngxw")
 tier = 1
 metadata/_custom_type_script = "uid://b7bmpehkag6fe"
+
+[sub_resource type="Resource" id="Resource_6a02w"]
+script = ExtResource("6_brt0v")
+tier = 2
+rarity_weight = 2.0
+metadata/_custom_type_script = "uid://nnfrhv7afpwp"
 
 [sub_resource type="Resource" id="Resource_jm3m4"]
 script = ExtResource("1_3iipa")
@@ -71,22 +78,13 @@ min_value = 3.0
 max_value = 15.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
-[sub_resource type="Resource" id="Resource_6a02w"]
-script = ExtResource("1_3iipa")
-stat_name = "sword_size"
-type = 1
-min_value = 1.1
-max_value = 2.0
-rarity_weight = 1.5
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [resource]
 script = ExtResource("2_epixh")
-possible_stats = Array[ExtResource("1_3iipa")]([SubResource("Resource_jm3m4"), SubResource("Resource_bxmvx"), SubResource("Resource_jhxf4"), SubResource("Resource_brt0v"), SubResource("Resource_pngxw"), SubResource("Resource_iqixv"), SubResource("Resource_4a6x1"), SubResource("Resource_6a02w")])
+possible_stats = Array[ExtResource("1_3iipa")]([SubResource("Resource_jm3m4"), SubResource("Resource_bxmvx"), SubResource("Resource_jhxf4"), SubResource("Resource_brt0v"), SubResource("Resource_pngxw"), SubResource("Resource_iqixv"), SubResource("Resource_4a6x1")])
 possible_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
 equipped_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
 possible_display_names = Array[String](["Emerald Dream", "Black Void"])
-possible_abilities = Array[ExtResource("1_epixh")]([SubResource("Resource_abff8"), SubResource("Resource_gsu5g")])
+possible_abilities = Array[ExtResource("1_epixh")]([SubResource("Resource_abff8"), SubResource("Resource_gsu5g"), SubResource("Resource_6a02w")])
 slot = 2
 max_stat_count = 4
 scale = 0.15

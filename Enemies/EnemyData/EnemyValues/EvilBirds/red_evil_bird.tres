@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("2_rbola")
-max_hp = 35
+max_hp = 50
 move_speed = SubResource("Resource_0m8if")
 knockback = 200
 avg_coins_dropped = 3

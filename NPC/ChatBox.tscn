@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bau7d57l7vxjj"]
+
+[ext_resource type="Script" uid="uid://oepko7172eec" path="res://NPC/chat_box.gd" id="1_gs5hv"]
+
+[node name="ChatBox" type="CanvasLayer" unique_id=1771743779]
+layer = 5
+script = ExtResource("1_gs5hv")
+
+[node name="Control" type="Control" parent="." unique_id=1156954484]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ChatPanel" type="PanelContainer" parent="Control" unique_id=54706152]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.282
+anchor_top = 0.717
+anchor_right = 0.703
+anchor_bottom = 0.9620001
+offset_left = -0.44000244
+offset_top = -0.35998535
+offset_right = -0.76000977
+offset_bottom = 0.23999023
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ChatPanel" unique_id=1893089023]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="Control/ChatPanel/VBoxContainer" unique_id=18760952]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Control/ChatPanel/VBoxContainer" unique_id=1050074615]
+layout_mode = 2
+
+[node name="DialogueLabel" type="RichTextLabel" parent="Control/ChatPanel/VBoxContainer" unique_id=2095713866]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+bbcode_enabled = true
+
+[node name="ContinueHint" type="Label" parent="Control/ChatPanel/VBoxContainer" unique_id=1556275817]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Control/ChatPanel/VBoxContainer" unique_id=88407215]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
