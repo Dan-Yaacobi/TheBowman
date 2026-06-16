@@ -142,11 +142,6 @@ func fire_arrow() -> void:
 			fired_arrow.reparent(get_tree().root)
 		else:
 			current_arrow.reparent(get_tree().root)
-		if fired_arrow.perfect_shot:
-			var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
-			for effect in effects:
-				fired_arrow.hit_effects.append(effect)
-	
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	

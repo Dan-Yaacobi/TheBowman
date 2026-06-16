@@ -26,3 +26,6 @@ func deactivate_ability() -> void:
 
 func reactivate_ability() -> void:
 	can_activate = true
+
+func get_tooltip() -> String:
+	return ""

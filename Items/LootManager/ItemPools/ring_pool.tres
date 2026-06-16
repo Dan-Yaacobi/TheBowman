@@ -3,10 +3,13 @@
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_3iipa"]
 [ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="1_epixh"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_epixh"]
-[ext_resource type="Texture2D" uid="uid://jqj7moay3r3w" path="res://Items/Equipments/Rings/Sprites/ring1.png" id="3_bxmvx"]
-[ext_resource type="Texture2D" uid="uid://dxtd78sf35jpn" path="res://Items/Equipments/Rings/Sprites/ring2.png" id="4_jhxf4"]
+[ext_resource type="Texture2D" uid="uid://y16khb3xg3p" path="res://Items/Equipments/Rings/Sprites/Ring_3.png" id="3_6a02w"]
+[ext_resource type="Texture2D" uid="uid://p7bkcry7xk0d" path="res://Items/Equipments/Rings/Sprites/Ring_4.png" id="4_tx7a8"]
+[ext_resource type="Texture2D" uid="uid://5i34kvfexfn7" path="res://Items/Equipments/Rings/Sprites/Ring_1.png" id="5_4a6x1"]
+[ext_resource type="Texture2D" uid="uid://clof17eabdben" path="res://Items/Equipments/Rings/Sprites/Ring_6.png" id="5_abff8"]
 [ext_resource type="Script" uid="uid://detcfoj2muenv" path="res://Player/Abilities2.0/PassiveAbilities/InvincibilityDashAbility/invincibility_dash_ability.gd" id="5_brt0v"]
 [ext_resource type="Script" uid="uid://nnfrhv7afpwp" path="res://Player/Abilities2.0/PassiveAbilities/SuperSwordAbility/super_sword_ability.gd" id="6_brt0v"]
+[ext_resource type="Texture2D" uid="uid://cbhrs0ml2fejq" path="res://Items/Equipments/Rings/Sprites/ring_5.png" id="6_l88xn"]
 [ext_resource type="Script" uid="uid://b7bmpehkag6fe" path="res://Player/Abilities2.0/PassiveAbilities/DoubleJump/double_jump_ability.gd" id="7_pngxw"]
 
 [sub_resource type="Resource" id="Resource_abff8"]
@@ -81,9 +84,9 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [resource]
 script = ExtResource("2_epixh")
 possible_stats = Array[ExtResource("1_3iipa")]([SubResource("Resource_jm3m4"), SubResource("Resource_bxmvx"), SubResource("Resource_jhxf4"), SubResource("Resource_brt0v"), SubResource("Resource_pngxw"), SubResource("Resource_iqixv"), SubResource("Resource_4a6x1")])
-possible_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
-equipped_textures = Array[Texture2D]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4")])
-possible_display_names = Array[String](["Emerald Dream", "Black Void"])
+possible_textures = Array[Texture2D]([ExtResource("4_tx7a8"), ExtResource("3_6a02w"), ExtResource("5_abff8"), ExtResource("6_l88xn"), ExtResource("5_4a6x1")])
+equipped_textures = Array[Texture2D]([ExtResource("4_tx7a8"), ExtResource("3_6a02w"), ExtResource("5_abff8"), ExtResource("6_l88xn"), ExtResource("5_4a6x1")])
+possible_display_names = Array[String](["Ocean", "Lucifer", "Nature's Gift", "Marrow", "Void"])
 possible_abilities = Array[ExtResource("1_epixh")]([SubResource("Resource_abff8"), SubResource("Resource_gsu5g"), SubResource("Resource_6a02w")])
 slot = 2
 max_stat_count = 4

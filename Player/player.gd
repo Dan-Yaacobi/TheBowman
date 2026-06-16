@@ -62,7 +62,6 @@ var invincible: bool = false
 @onready var off_hand_shoulder: Node2D = $OffHandShoulder
 
 var shooting: bool = false
-var perfect_shot_counter: int = 0
 var current_arrow: Arrow
 
 var current_portal: Portal
@@ -74,7 +73,7 @@ var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
 var abilities: Dictionary = {
-	PlayerAbility.TriggerType.PASSIVE: [SuperSwordAbility.new()],
+	PlayerAbility.TriggerType.PASSIVE: [],
 	PlayerAbility.TriggerType.SHOOT: [],
 	PlayerAbility.TriggerType.JUMP: [],
 	PlayerAbility.TriggerType.DASH: [],
@@ -401,10 +400,7 @@ func get_strength_shot_modifier() -> float:
 	return stats.basic_shot_power
 	
 func get_arrow_ability() -> Array[ArrowAbility]:
-	return stats.arrow_abilities
-
-func get_perfect_shots_amount() -> int:
-	return perfect_shot_counter
+	return stats.arrow_abilities 
 
 func get_shoot_abilities() -> Array[PlayerShootAbility]:
 	return stats.shooting_abilities
@@ -482,12 +478,6 @@ func set_sword_cd(amount: float) -> void:
 
 func set_shooting(_val: bool) -> void:
 	shooting = _val
-	
-func set_perfect_shots(was_perfect: bool) -> void:
-	if was_perfect:
-		perfect_shot_counter += 1
-	else:
-		perfect_shot_counter = 0
 
 ## If amount is not provided, the effect is considered permanent. Otherwise amount means how many times the effect can be consumed.
 func add_hit_effect(_effect: OnHitEffect, _amount: int = PERMA_EFFECT) -> void:
@@ -510,26 +500,7 @@ func use_effects() -> Array[OnHitEffect]:
 		_effects.append(key)
 	return _effects
 
-func add_perfect_shot_effect(_effect: OnPerfectShotEffect, _amount: int = PERMA_EFFECT) -> void:
-	if perfect_shot_effects.has(_effect):
-		if _amount > 0:
-			perfect_shot_effects[_effect] += _amount
-		else:
-			perfect_shot_effects[_effect] = _amount
-
-func use_perfect_shot_effects() -> Array[OnPerfectShotEffect]:
-	var _effects: Array[OnPerfectShotEffect] = []
-	for key in perfect_shot_effects.keys():
-		if perfect_shot_effects[key] > 0 and perfect_shot_effects[key] != PERMA_EFFECT:
-			perfect_shot_effects[key] -= 1
-			if perfect_shot_effects[key] == 0:
-				perfect_shot_effects.erase(key)
-		_effects.append(key)
-	return _effects
-
-
 ## STREAK ##
-
 func add_shot_streak(_perfect: bool) -> void:
 	stats.shot_streak += 1
 	if _perfect:
