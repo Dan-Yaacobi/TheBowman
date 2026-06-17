@@ -18,6 +18,7 @@
 [ext_resource type="Shader" uid="uid://dqaedy5b2ydp4" path="res://Enemies/Cloud/lightningshader.gdshader" id="15_aqnr1"]
 [ext_resource type="Script" uid="uid://cqstctojgygpv" path="res://Enemies/Cloud/lightning.gd" id="15_vs4ks"]
 [ext_resource type="AudioStream" uid="uid://bndhi0n2ycg2q" path="res://Audio/Player/thunder_strike.mp3" id="16_nbmpm"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="19_jo2yr"]
 
 [sub_resource type="Resource" id="Resource_vs4ks"]
 script = ExtResource("4_jj0fl")
@@ -293,3 +294,10 @@ color_ramp = SubResource("Gradient_aqnr1")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyStateMachine/Attack" unique_id=1373101123]
 stream = ExtResource("16_nbmpm")
+
+[node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("19_jo2yr")]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 56.0
+offset_bottom = 16.0
+scale = Vector2(0.25, 0.25)

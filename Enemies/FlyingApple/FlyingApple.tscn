@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/FlyingApple/flying_apple.gd" id="1_whfbk"]
 [ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="6_dgpt0"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="11_er6rk"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_h5knc"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="12_8wwju"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="12_kl176"]
@@ -315,3 +316,22 @@ wait_time = 1.5
 
 [node name="DecisionTimer" type="Timer" parent="EnemyStateMachine" unique_id=685103792]
 wait_time = 1.5
+
+[node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("11_er6rk")]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 56.0
+offset_bottom = 18.0
+scale = Vector2(0.25, 0.25)
+
+[node name="RayCastUp" type="RayCast2D" parent="." unique_id=173419502]
+target_position = Vector2(0, -16)
+collision_mask = 16
+
+[node name="RayCastDown" type="RayCast2D" parent="." unique_id=1624816994]
+target_position = Vector2(0, 14)
+collision_mask = 16
+
+[node name="RayCastForward" type="RayCast2D" parent="." unique_id=2087486093]
+target_position = Vector2(-13, 0)
+collision_mask = 16

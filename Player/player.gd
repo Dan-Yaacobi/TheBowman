@@ -212,6 +212,9 @@ func apply_knockback(_direction: Vector2, force: float, continuous: bool = false
 	else:
 		knockback += _direction.normalized() * force
 
+func reset_knockback() -> void:
+	knockback = Vector2.ZERO
+	
 func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side and not main_hand.is_swinging():
 		direction_side = _new_side

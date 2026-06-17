@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://yvo6lok0c6eh"]
+
+[ext_resource type="Script" uid="uid://b6xou1jwtdyxa" path="res://Enemies/EvilBird/BirdBoss/egg.gd" id="1_sxihi"]
+[ext_resource type="Texture2D" uid="uid://cf1ypxn3drbpd" path="res://Enemies/EvilBird/Sprites/Egg.png" id="2_nk72s"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_of1w8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_of1w8"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nk72s"]
+radius = 13.038404
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r756p"]
+radius = 13.0
+
+[node name="Egg" type="RigidBody2D" unique_id=1702711853]
+collision_layer = 0
+collision_mask = 16
+mass = 0.2
+gravity_scale = 0.1
+script = ExtResource("1_sxihi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=46189515]
+shape = SubResource("CircleShape2D_of1w8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1462530492]
+scale = Vector2(2, 2)
+texture = ExtResource("2_nk72s")
+
+[node name="Grounddetector" type="Area2D" parent="." unique_id=865462443]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grounddetector" unique_id=782487325]
+shape = SubResource("CircleShape2D_nk72s")
+debug_color = Color(0.7355557, 0.47010398, 0, 0.41960785)
+
+[node name="HitBox" parent="." unique_id=1189172846 instance=ExtResource("3_of1w8")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1248628689]
+shape = SubResource("CircleShape2D_r756p")
+debug_color = Color(0.9733754, 0, 0.4378033, 0.41960785)
+
+[connection signal="body_shape_entered" from="Grounddetector" to="." method="_on_grounddetector_body_shape_entered"]

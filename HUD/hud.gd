@@ -1,6 +1,5 @@
 class_name HUD extends CanvasLayer
 
-@onready var health_bar: HealthBar = $Control/HealthBar
 @onready var level_stats: Label = $Control/LevelStats
 @onready var total_buffs: TotalBuffs = $Control/TotalBuffs
 @onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
@@ -9,6 +8,7 @@ class_name HUD extends CanvasLayer
 @onready var rift_level_label: Label = $RiftLevel
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
+@onready var health_bar: Control = $Control/HealthBar
 
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 
@@ -43,10 +43,10 @@ func apply_heal_flash() -> void:
 	heal_flash.modulate = Color(0.0, 1.0, 0.0, 0.3)
 	flash_tween = create_tween()
 	flash_tween.tween_property(heal_flash, "modulate", Color(1, 0, 0, 0.0), 0.3)
-
 	pass
+	
 func get_health_bar() -> HealthBar:
-	return health_bar
+	return health_bar.get_child(1)
 
 func get_total_buffs() -> TotalBuffs:
 	return total_buffs

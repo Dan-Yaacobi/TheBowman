@@ -27,6 +27,7 @@ touch_damage = 5
 knockback_resistance = 999.0
 can_be_knockedback = false
 drop_chance = 100.0
+has_health_bar = false
 death_ability = Array[ExtResource("1_qvvre")]([SubResource("Resource_o1shw")])
 bullet = ExtResource("1_c6hqv")
 metadata/_custom_type_script = "uid://rlvenynllobd"

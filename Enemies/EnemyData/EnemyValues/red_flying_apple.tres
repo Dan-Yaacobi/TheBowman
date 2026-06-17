@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("2_t4py0")
-max_hp = 15
+max_hp = 20
 move_speed = SubResource("Resource_8iawy")
 knockback = 75
 skin = ExtResource("5_8iawy")

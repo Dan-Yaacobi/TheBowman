@@ -1,14 +1,19 @@
 class_name NPCGoneState extends NPCState
 
+@onready var idle: NPCIdleState = $"../Idle"
+
 func init() -> void:
 	pass
 
 func Enter() -> void:
-	npc.disappear.emit()
-	var tween: Tween = npc.create_tween()
-	tween.tween_property(npc, "modulate:a", 0.0, 0.5)
-	tween.finished.connect(npc.queue_free)
-
+	if npc.data.disappears:
+		npc.disappear.emit()
+		var tween: Tween = npc.create_tween()
+		tween.tween_property(npc, "modulate:a", 0.0, 0.5)
+		tween.finished.connect(npc.queue_free)
+	else:
+		npc.interaction_area.body_entered.disconnect(idle._on_body_entered)
+		npc.interaction_area.body_exited.disconnect(idle._on_body_exited)
 func Exit() -> void:
 	pass
 

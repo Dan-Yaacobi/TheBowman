@@ -7,6 +7,7 @@ class_name Enemy extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var state_machine: EnemyStateMachine = $EnemyStateMachine
+@onready var enemy_health_bar: Control = get_node_or_null("EnemyHealthBar")
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
@@ -31,6 +32,8 @@ var knockback_decay: float = 0.05
 
 var is_dead: bool = false
 
+var _damage_multiplier: float = 1.0
+
 func _ready() -> void:
 	current_hp = stats.max_hp
 	hurt_box.damage = stats.touch_damage
@@ -39,10 +42,15 @@ func _ready() -> void:
 	debuff_handler.set_enemy(self)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
-	pass
+	if stats.has_health_bar:
+		enemy_health_bar.get_child(1).setup(stats.max_hp)
 
 func full_health() -> bool:
 	return current_hp == stats.max_hp
+
+func heal(_amount: int) -> void:
+	current_hp = mini(current_hp + _amount, stats.max_hp)
+	handle_health_bar()
 	
 func extra_ready_functions() -> void:
 	pass
@@ -62,9 +70,13 @@ func calculate_distance_to_player() -> float:
 	
 func hit(_hurt_box: HurtBox) -> void:
 	take_damage(_hurt_box.damage)
+	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box)
 	take_hit_effect()	
 
+func extra_hit_functions(_hurt_box: HurtBox) -> void:
+	pass
+	
 func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 	debuff_handler.add_debuff(_debuff, _duration, _ticks)
 
@@ -80,11 +92,16 @@ func take_hit_effect() -> void:
 	if hit_particle_effect != null:
 		hit_particle_effect.restart()
 		
+func set_damage_multiplier(_multiplier: float) -> void:
+	_damage_multiplier = _multiplier
+	
 func take_damage(_dmg: int) -> void:
 	if is_dead:
 		return
 		
-	current_hp -= _dmg
+	current_hp -= roundi(_dmg * _damage_multiplier)
+	
+	handle_health_bar()	
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
 	
@@ -94,12 +111,15 @@ func take_damage(_dmg: int) -> void:
 		enemy_died()
 		drop_item()
 
+func handle_health_bar() -> void:
+	if stats.has_health_bar:
+		enemy_health_bar.get_child(1).show_damage(current_hp)
+		
 func activate_death_ability() -> void:
 	if stats.death_ability.size() > 0:
 		for ability in stats.death_ability:
 			if ability != null:
 				ability.activate_ability(self)
-
 func enemy_died() -> void:
 	died.emit(self)
 	EventBus.enemy_died.emit(self)

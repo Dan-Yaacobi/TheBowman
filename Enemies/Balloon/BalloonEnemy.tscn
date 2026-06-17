@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d3q8ope8ase7i" path="res://Enemies/Balloon/balloon_blow_state.gd" id="8_l5fvy"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="10_q28kg"]
 [ext_resource type="PackedScene" uid="uid://dh0wik5pjscau" path="res://Enemies/Balloon/Wind.tscn" id="11_p8jtg"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="13_47m3o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47m3o"]
 height = 24.0
@@ -202,3 +203,10 @@ debug_color = Color(0.98797864, 0, 0.3122122, 0.41960785)
 [node name="Wind" parent="." unique_id=230637160 instance=ExtResource("11_p8jtg")]
 position = Vector2(15.999999, 0)
 collision_layer = 0
+
+[node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("13_47m3o")]
+offset_left = -9.333334
+offset_top = -25.333334
+offset_right = 54.666664
+offset_bottom = 6.666666
+scale = Vector2(0.25, 0.25)

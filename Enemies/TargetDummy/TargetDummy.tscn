@@ -13,6 +13,7 @@
 [sub_resource type="Resource" id="Resource_qb1bn"]
 script = ExtResource("3_5k5yt")
 max_hp = 1000000
+has_health_bar = false
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ieskh"]

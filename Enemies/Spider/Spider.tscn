@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="11_qa3em"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="12_e0aha"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_qa3em"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="14_2agea"]
 
 [sub_resource type="Resource" id="Resource_fqrf0"]
 script = ExtResource("3_rnln2")
@@ -281,3 +282,10 @@ position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_e0aha")
 debug_color = Color(0.954369, 0, 0.548779, 0.42)
+
+[node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("14_2agea")]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 56.0
+offset_bottom = 24.0
+scale = Vector2(0.25, 0.25)

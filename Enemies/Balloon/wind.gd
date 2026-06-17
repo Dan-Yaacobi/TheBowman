@@ -48,3 +48,7 @@ func face_player() -> void:
 	var dir = sign(PlayerManager.player.global_position.x - global_position.x)
 	scale.x = dir
 	position.x = abs(position.x) * dir
+	
+func _on_body_exited(body: Node2D) -> void:
+	if body is Player:
+		body.reset_knockback()

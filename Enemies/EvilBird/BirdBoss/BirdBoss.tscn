@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://c1j7lretee7ip"]
+
+[ext_resource type="Script" uid="uid://bcj03f1mlqj3k" path="res://Enemies/EvilBird/BirdBoss/bird_boss.gd" id="1_1bv40"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="1_2nha2"]
+[ext_resource type="Script" uid="uid://cmfjrfdosiduu" path="res://Enemies/EvilBird/BirdBoss/birdboss_fly_state.gd" id="2_8t6au"]
+[ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="2_crum6"]
+[ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="2_fudsp"]
+[ext_resource type="Script" uid="uid://cudmckx55i501" path="res://Enemies/EvilBird/BirdBoss/birdboss_transition_state.gd" id="3_u4pmd"]
+[ext_resource type="Script" uid="uid://kgutkxewiout" path="res://Enemies/EvilBird/BirdBoss/birdboss_roost_state.gd" id="4_1ecm4"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="6_crum6"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="7_85s0q"]
+[ext_resource type="Script" uid="uid://dgnk8c7mg2r6b" path="res://Enemies/EvilBird/BirdBoss/bird_boss_position_state.gd" id="7_jmu3r"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="8_541n7"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="11_u2mfl"]
+[ext_resource type="PackedScene" uid="uid://dh0wik5pjscau" path="res://Enemies/Balloon/Wind.tscn" id="13_u2mfl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmu3r"]
+radius = 4.992012
+height = 16.398891
+
+[sub_resource type="Animation" id="Animation_85s0q"]
+resource_name = "Fly"
+length = 0.7
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wausn"]
+resource_name = "Land"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_541n7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sutn6"]
+resource_name = "Whirlwind"
+length = 0.15
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fudsp"]
+_data = {
+&"Fly": SubResource("Animation_85s0q"),
+&"Land": SubResource("Animation_wausn"),
+&"RESET": SubResource("Animation_541n7"),
+&"Whirlwind": SubResource("Animation_sutn6")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_crum6"]
+radius = 6.0
+height = 26.692287
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_85s0q"]
+radius = 6.368018
+height = 23.141338
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fudsp"]
+radius = 14.700718
+
+[node name="BirdBoss" type="CharacterBody2D" unique_id=1166316920]
+scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_1bv40")
+bird_entry = ExtResource("2_fudsp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=764500894]
+rotation = -0.8707603
+shape = SubResource("CapsuleShape2D_jmu3r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1259847978]
+texture = ExtResource("2_crum6")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=74293756]
+libraries/ = SubResource("AnimationLibrary_fudsp")
+
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1131580090]
+script = ExtResource("1_2nha2")
+
+[node name="Position" type="Node2D" parent="EnemyStateMachine" unique_id=1374137015]
+script = ExtResource("7_jmu3r")
+
+[node name="Fly" type="Node2D" parent="EnemyStateMachine" unique_id=1325082936]
+script = ExtResource("2_8t6au")
+
+[node name="EggTimer" type="Timer" parent="EnemyStateMachine/Fly" unique_id=936325702]
+wait_time = 5.0
+
+[node name="Transition" type="Node2D" parent="EnemyStateMachine" unique_id=771127116]
+script = ExtResource("3_u4pmd")
+
+[node name="Roost" type="Node2D" parent="EnemyStateMachine" unique_id=430839915]
+script = ExtResource("4_1ecm4")
+
+[node name="WhirlwindTimer" type="Timer" parent="EnemyStateMachine/Roost" unique_id=2031472374]
+
+[node name="RoostTimer" type="Timer" parent="EnemyStateMachine/Roost" unique_id=1936075264]
+wait_time = 15.0
+
+[node name="HitBox" parent="." unique_id=1795985863 instance=ExtResource("6_crum6")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("11_u2mfl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=641664460]
+rotation = -0.86691403
+scale = Vector2(1.0521392, 0.9239353)
+shape = SubResource("CapsuleShape2D_crum6")
+
+[node name="HurtBox" parent="." unique_id=691156105 instance=ExtResource("7_85s0q")]
+rotation = -0.0016281792
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=650821041]
+rotation = -0.8545075
+shape = SubResource("CapsuleShape2D_85s0q")
+
+[node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("8_541n7")]
+
+[node name="GroundEdgeRayCast" type="RayCast2D" parent="." unique_id=2115621331]
+target_position = Vector2(0, 120)
+collision_mask = 16
+
+[node name="RoostDetector" type="Area2D" parent="." unique_id=1200483495]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoostDetector" unique_id=1314057845]
+shape = SubResource("CircleShape2D_fudsp")
+debug_color = Color(0, 0.65040666, 0.1123519, 0.41960785)
+
+[node name="Wind" parent="." unique_id=230637160 instance=ExtResource("13_u2mfl")]
+position = Vector2(-15.666668, 0)
+
+[connection signal="body_entered" from="RoostDetector" to="." method="_on_roost_detector_body_entered"]

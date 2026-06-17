@@ -1,3 +1,3 @@
-ChunkData
-EnemyEntry
 EnemyData
+EnemyEntry
+ChunkData

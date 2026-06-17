@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://rumdyo1hbaet"]
+
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_1d58o"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="2_j2b7v"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_2kuey"]
+
+[sub_resource type="Resource" id="Resource_lhg51"]
+script = ExtResource("2_j2b7v")
+base_value = 100.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[resource]
+script = ExtResource("3_2kuey")
+max_hp = 1000
+move_speed = SubResource("Resource_lhg51")
+avg_coins_dropped = 100
+touch_damage = 8
+can_be_knockedback = false
+drop_chance = 100.0
+stun_immune = true
+has_health_bar = false
+metadata/_custom_type_script = "uid://rlvenynllobd"

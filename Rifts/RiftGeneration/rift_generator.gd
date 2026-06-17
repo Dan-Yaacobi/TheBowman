@@ -75,7 +75,7 @@ func build_all_side_paths(amount: int, chunks: Array[RiftChunk]) -> void:
 
 func build_side_path(_start_chunk: RiftChunk) -> bool:
 	## length needs better adjustments
-	var length: int = int(data.main_path_length / 3.0)
+	var length: int = int(data.main_path_length)
 	var last_chunk: RiftChunk = build_path(length,_start_chunk, false)
 	if !last_chunk:
 		return false

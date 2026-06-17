@@ -20,9 +20,10 @@ func get_spawn_chance(intensity: float) -> float:
 	return lerpf(0.1, 1.0, intensity)
 
 func get_spawn_count(intensity: float, level: int) -> int:
-	var base: float = lerpf(1.0, 4.0, intensity)
+	var count_intensity: float = maxf(0.0, (intensity - 0.4) / 0.6)
+	var base: float = lerpf(1.0, 4.0, count_intensity)
 	@warning_ignore("integer_division")
-	return mini(roundi(base) + (level) / 3, 6)
+	return mini(roundi(base) + level / 3, 6)
 	
 func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: bool) -> void:
 	var intensity: float
@@ -41,7 +42,8 @@ func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: b
 		var new_enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_zone(entry.get_factory(), entry.spawn_zone)
 		if new_enemy != null:
 			enemy_spawned.emit(new_enemy)
-
+		await get_tree().create_timer(0.6).timeout
+		
 func get_eligible_entries(level: int) -> Array[EnemyEntry]:
 	return enemy_pool.filter(func(e: EnemyEntry) -> bool: return level >= e.min_level)
 

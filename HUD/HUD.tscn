@@ -68,10 +68,10 @@ mouse_filter = 2
 [node name="HealthBar" parent="Control" unique_id=1431315462 instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 0
-offset_left = 1499.0
-offset_top = 859.0
-offset_right = 1563.0
-offset_bottom = 891.0
+offset_left = 38.0
+offset_top = 947.00006
+offset_right = 102.833336
+offset_bottom = 967.00006
 scale = Vector2(6, 6)
 
 [node name="LevelStats" type="Label" parent="Control" unique_id=683982552]
@@ -80,11 +80,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="TotalBuffs" type="Control" parent="Control" unique_id=1937500504]
+visible = false
 anchors_preset = 0
-offset_left = 3015.0
-offset_top = -609.0
-offset_right = 3015.0
-offset_bottom = -609.0
+offset_left = 1593.0001
+offset_top = -596.00006
+offset_right = 1593.0001
+offset_bottom = -596.00006
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
@@ -179,6 +180,7 @@ hframes = 5
 libraries/ = SubResource("AnimationLibrary_fwgky")
 
 [node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -233,6 +235,7 @@ offset = Vector2(500, 100)
 transform = Transform2D(1, 0, 0, 1, 500, 100)
 
 [node name="DamagedFlash" type="ColorRect" parent="." unique_id=1183764540]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -242,6 +245,7 @@ mouse_filter = 2
 color = Color(1, 0, 0, 1)
 
 [node name="HealFlash" type="ColorRect" parent="." unique_id=787025505]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

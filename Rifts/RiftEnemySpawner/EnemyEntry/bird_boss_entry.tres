@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://b0dc24d814x82"]
+
+[ext_resource type="Resource" uid="uid://rumdyo1hbaet" path="res://Enemies/EvilBird/BirdBoss/birdboss_data.tres" id="1_q5t5c"]
+[ext_resource type="PackedScene" uid="uid://c1j7lretee7ip" path="res://Enemies/EvilBird/BirdBoss/BirdBoss.tscn" id="2_662e7"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="3_ayqew"]
+
+[resource]
+script = ExtResource("3_ayqew")
+scene = ExtResource("2_662e7")
+data = ExtResource("1_q5t5c")
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

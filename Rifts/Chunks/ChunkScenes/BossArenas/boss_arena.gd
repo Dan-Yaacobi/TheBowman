@@ -28,7 +28,7 @@ func add_enemy(_enemy: Enemy) -> void:
 
 func on_world_ready() -> void:
 	if boss_spawner:
-		boss_spawner.spawn()
+		boss_spawner.spawn(PlayerManager.player.stats.rift_level)
 	portal.disable()
 	
 func spawn_position() -> Vector2:

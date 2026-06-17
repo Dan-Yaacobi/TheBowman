@@ -12,8 +12,10 @@
 [ext_resource type="Script" uid="uid://by1511sk08ncs" path="res://Enemies/EvilBird/bird_egg_attack_state.gd" id="12_w4iuy"]
 [ext_resource type="Script" uid="uid://wcfu7frk1ny2" path="res://Enemies/EvilBird/bird_dive_attack_state.gd" id="13_lkeh4"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_nboip"]
+[ext_resource type="Script" uid="uid://82cwn058elln" path="res://Enemies/EvilBird/fly_to_roost.gd" id="15_sqrbk"]
 [ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="16_rhfyp"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="16_sqrbk"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="16_vr884"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_j7d4o"]
 
 [sub_resource type="Resource" id="Resource_w50ih"]
@@ -239,4 +241,14 @@ script = ExtResource("12_lkeh4")
 [node name="DiveAttack" type="Node2D" parent="EnemyStateMachine" unique_id=835197878]
 script = ExtResource("13_lkeh4")
 
+[node name="FlyToRoost" type="Node2D" parent="EnemyStateMachine" unique_id=1505147968]
+script = ExtResource("15_sqrbk")
+
 [node name="DebuffHandler" parent="." unique_id=1513628500 instance=ExtResource("15_nboip")]
+
+[node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("16_vr884")]
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 55.0
+offset_bottom = 15.0
+scale = Vector2(0.25, 0.25)

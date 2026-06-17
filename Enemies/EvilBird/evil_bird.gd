@@ -1,5 +1,7 @@
 class_name EvilBird extends Enemy
 
+@onready var fly_to_roost_state: BirdFlyToRoostState = $EnemyStateMachine/FlyToRoost
+
 func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
 	state_machine.Initialize(self)
@@ -9,3 +11,9 @@ func _physics_process(_delta: float) -> void:
 
 func face_the_player() -> void:
 	sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
+
+func fly_to_roost(_position: Vector2) -> void:
+	fly_to_roost_state.roost_target = _position
+	state_machine.ChangeState(fly_to_roost_state)
+	pass
+	
