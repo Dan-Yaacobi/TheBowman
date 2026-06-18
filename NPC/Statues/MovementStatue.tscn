@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://c7qhatf1bjndh"]
+
+[ext_resource type="Script" uid="uid://dh82ki0g8fbhm" path="res://NPC/Statues/movement_statue.gd" id="1_nwrdg"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_75e0k"]
+[ext_resource type="Texture2D" uid="uid://bvqof37qo7hw0" path="res://NPC/Statues/Movement_Statue.png" id="3_khuty"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_5wopf"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_uis6y"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_5lgga"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_0uxas"]
+[ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="8_4q87m"]
+[ext_resource type="PackedScene" uid="uid://67r5dkhgwd4b" path="res://NPC/Helper/Helper.tscn" id="9_75e0k"]
+
+[sub_resource type="Resource" id="Resource_khuty"]
+script = ExtResource("2_75e0k")
+npc_name = "Winged Guardian Statue"
+dialogue_lines = Array[String](["The wardens of the rift were said to never fall."])
+fixed_line = "Not because they were strong, but because the sky caught them."
+post_action_lines = Array[String](["The wings don't move. But your next step feels like it could cross anything. Your dash carries you further."])
+action_button_labels = Array[String](["Touch"])
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b5al"]
+size = Vector2(88, 48)
+
+[node name="MovementStatue" type="Node2D" unique_id=2050973323]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_nwrdg")
+data = SubResource("Resource_khuty")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=862633739]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_khuty")
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=620438962]
+script = ExtResource("4_5wopf")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=191658591]
+script = ExtResource("5_uis6y")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=159058702]
+script = ExtResource("6_5lgga")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=446860076]
+script = ExtResource("7_0uxas")
+
+[node name="ChatBox" parent="." unique_id=1771743779 instance=ExtResource("8_4q87m")]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=480803471]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=942936562]
+shape = SubResource("RectangleShape2D_7b5al")
+
+[node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_75e0k")]
+offset_left = -16.0
+offset_top = -30.0
+offset_right = 98.0
+offset_bottom = -10.0

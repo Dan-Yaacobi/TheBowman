@@ -8,4 +8,5 @@ script = ExtResource("1_615yf")
 scene = ExtResource("1_mw5jt")
 type = 3
 id = "777"
+min_rift_level = 3
 metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

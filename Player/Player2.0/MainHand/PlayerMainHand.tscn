@@ -238,6 +238,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6jul4"]
 resource_name = "Swing"
@@ -290,6 +302,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_30xy1"]
@@ -344,6 +368,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_5ej1j"]
 resource_name = "Swinging"
@@ -376,13 +412,11 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_30xy1"]
 script = ExtResource("10_5ej1j")
-knockback_power = 30
+knockback_power = 100
 damage = 3
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30xy1"]
-radius = 8.666666
-height = 34.666668
+[sub_resource type="CircleShape2D" id="CircleShape2D_30xy1"]
 
 [sub_resource type="Curve" id="Curve_sgu6n"]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -481,8 +515,7 @@ position = Vector2(1.3333335, -20)
 texture = ExtResource("8_y7ab3")
 
 [node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
-position = Vector2(19.999996, -22.666666)
-rotation = -2.3561945
+position = Vector2(20.000002, -34.666664)
 scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 140
@@ -490,8 +523,7 @@ script = ExtResource("13_5ej1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox" unique_id=623930274]
 position = Vector2(-1.9073486e-06, 1.9073486e-06)
-rotation = -0.7853982
-shape = SubResource("CapsuleShape2D_30xy1")
+shape = SubResource("CircleShape2D_30xy1")
 debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)
 
 [node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing" unique_id=1585976196]

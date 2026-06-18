@@ -66,7 +66,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 script = ExtResource("1_s2d1f")
 stat_name = "arrow_damage"
 min_value = 1.0
-max_value = 10.0
+max_value = 5.0
 rarity_weight = 1.5
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 

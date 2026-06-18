@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bdttqy1rdab0j"]
+
+[ext_resource type="Script" uid="uid://0pi85xq4t3jg" path="res://Player/Buffs/StatueBuffs/DashBuff/dash_buff.gd" id="1_ylbpn"]
+[ext_resource type="Texture2D" uid="uid://dtjrl4jots1l" path="res://Player/Buffs/Sprites/MovementBuff.png" id="2_wnxb5"]
+
+[node name="DashBuff" type="Node2D" unique_id=1856688812]
+script = ExtResource("1_ylbpn")
+ID = 125
+texture = ExtResource("2_wnxb5")
+constant_buff = true
+duration = 9999.0

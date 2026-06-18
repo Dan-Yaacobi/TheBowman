@@ -55,7 +55,7 @@ metadata/_custom_type_script = "uid://dswbx1xx3nvnl"
 script = ExtResource("1_v12hp")
 stat_name = "arrow_damage"
 min_value = 1.0
-max_value = 10.0
+max_value = 5.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_a5xjm"]

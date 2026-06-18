@@ -9,7 +9,6 @@ class_name RiftChunk extends Node2D
 var connected_chunks: Array[RiftChunk] = []
 var rift: Rift
 var rift_level: RiftLevel
-
 var is_main_path: bool = false
 var visited: bool = false
 var is_side_path_terminal: bool = false

@@ -13,6 +13,7 @@ func init() -> void:
 
 func Enter() -> void:
 	enemy.animation_player.play("Fly")
+	egg_timer.wait_time = 2.0
 	egg_timer.start()
 	_was_colliding = true
 
@@ -26,7 +27,6 @@ func Physics(_delta: float) -> EnemyState:
 	var is_colliding: bool = enemy.ground_edge_ray_cast.is_colliding()
 	if _was_colliding and not is_colliding:
 		_direction *= -1.0
-		enemy.sprite.flip_h = _direction > 0.0
 	_was_colliding = is_colliding
 
 	enemy.velocity.x = enemy.stats.move_speed.value() * _direction
@@ -54,3 +54,4 @@ func _drop_egg() -> void:
 	egg.global_position = enemy.global_position
 	EventBus.summon_effect.emit(egg)
 	egg.cracked.connect(_spawn_bird)
+	egg_timer.wait_time = 5.0

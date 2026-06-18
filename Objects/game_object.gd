@@ -31,9 +31,9 @@ func break_item(_hurt_box: HurtBox) -> void:
 		drop_items()
 		queue_free()
 
-func drop_items() -> void:
+func drop_items(_equip_skew: float = 0) -> void:
 	drop_coins()
-	drop_equip()
+	drop_equip(_equip_skew)
 	drop_potion()
 	
 func drop_coins() -> void:
@@ -42,6 +42,6 @@ func drop_coins() -> void:
 func drop_potion() -> void:
 	EventBus.drop_potion.emit(global_position, potion_drop_chance)
 
-func drop_equip() -> void:
-	EventBus.try_drop.emit(global_position, equip_drop_chance)
+func drop_equip(_equip_skew: float = 0) -> void:
+	EventBus.try_drop.emit(global_position, equip_drop_chance, _equip_skew)
 	

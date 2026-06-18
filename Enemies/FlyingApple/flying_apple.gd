@@ -18,14 +18,5 @@ func extra_ready_functions() -> void:
 		ability.activate_ability(self)
 	state_machine.Initialize(self)
 	
-func shoot() -> void:
-	if stats.bullet != null:
-		var new_bullet: EnemyBullet = stats.bullet.instantiate()
-		new_bullet.direction = calculate_direction_to_player()
-		new_bullet.global_position = global_position
-		new_bullet.data.knockback = stats.knockback
-		new_bullet.data.knockback = stats.knockback
-		get_parent().add_child(new_bullet)
-		
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

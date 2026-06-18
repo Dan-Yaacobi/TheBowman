@@ -9,7 +9,7 @@ var patch_damage: int
 func set_arrow(_arrow: Arrow) -> void:
 	if _arrow:
 		arrow = _arrow
-		patch_damage = floori(arrow.damage / 3)
+		patch_damage = floori(arrow.damage / 4)
 		burned_effect.emitting = true
 
 func _physics_process(_delta: float) -> void:
@@ -37,4 +37,4 @@ func apply_burn(_enemy: Enemy) -> void:
 	if _enemy:
 		var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 		burn_debuff.fire_damage = patch_damage
-		_enemy.debuff_handler.add_debuff(burn_debuff, 6, 12)
+		_enemy.debuff_handler.add_debuff(burn_debuff, 6, 3)

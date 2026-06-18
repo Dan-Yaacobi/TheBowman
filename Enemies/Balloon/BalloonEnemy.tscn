@@ -203,6 +203,7 @@ debug_color = Color(0.98797864, 0, 0.3122122, 0.41960785)
 [node name="Wind" parent="." unique_id=230637160 instance=ExtResource("11_p8jtg")]
 position = Vector2(15.999999, 0)
 collision_layer = 0
+knockback_force = 3000.0
 
 [node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("13_47m3o")]
 offset_left = -9.333334

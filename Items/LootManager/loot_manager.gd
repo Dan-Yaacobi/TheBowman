@@ -2,6 +2,7 @@ class_name LootManager extends Node2D
 const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
+@export var max_rift_level: int = 15
 # Rarity
 @export var quality_floor_max: float = 0.8       # how high the floor gets at max rarity
 @export var quality_ceiling_min: float = 0.4     # ceiling for rarity 1 items
@@ -33,16 +34,16 @@ func unset_up() -> void:
 	EventBus.drop_coins.disconnect(drop_coins)
 	EventBus.drop_potion.disconnect(drop_potion)
 
-func drop_item(slot: Slot) -> EquipmentData:
+func drop_item(slot: Slot, _rarity_skew: float = 0) -> EquipmentData:
 	match slot:
-		Slot.BOW: return roll_item(bow_pool)
-		Slot.QUIVER: return roll_item(quiver_pool)
-		Slot.RING: return roll_item(ring_pool)
+		Slot.BOW: return roll_item(bow_pool, _rarity_skew)
+		Slot.QUIVER: return roll_item(quiver_pool, _rarity_skew)
+		Slot.RING: return roll_item(ring_pool, _rarity_skew)
 	return null
 
-func drop_random_item(_position: Vector2, _chance: float) -> void:
+func drop_random_item(_position: Vector2, _chance: float, _rarity_skew: float = 0) -> void:
 	if randf_range(0,100) <= _chance:
-		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot)
+		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot, _rarity_skew)
 		EventBus.equipment_dropped.emit(item, _position, null)
 
 func drop_coins(_position: Vector2, _amount: int) -> void:
@@ -51,7 +52,7 @@ func drop_coins(_position: Vector2, _amount: int) -> void:
 func drop_potion(_position: Vector2, _chance: float) -> void:
 	ItemDropManager.drop_potion(_position, _chance)
 	
-func roll_item(pool: ItemPool) -> EquipmentData:
+func roll_item(pool: ItemPool, _rarity_skew: float = 0) -> EquipmentData:
 	var data = EquipmentData.new()
 	data.slot = pool.slot
 	data.equipment_scene = load(EQUIPMENT)
@@ -66,13 +67,15 @@ func roll_item(pool: ItemPool) -> EquipmentData:
 	var rift_quality_boost = log(max(rift_level, 1)) * rift_quality_scale
 
 	# C: rift rarity bias reduction — higher rarity items more common in later rifts
-	var effective_rarity_bias = max(rarity_bias - log(max(rift_level, 1)) * rift_rarity_scale, 0.5)
-
+	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
+	var s: float = t * t * (3.0 - 2.0 * t)
+	var effective_rarity_bias: float = lerpf(rarity_bias, 0.5, s)
+	
 	# roll rarity first
 	var rarity_roll = randf()
 	var rarity_curved = pow(pow(rarity_roll, lift_exp), effective_rarity_bias)
-	data.rarity = 1.0 + rarity_curved * (CustomVariables.MAX_RARITY - 1)
-
+	data.rarity = clampf(1.0 + rarity_curved * (CustomVariables.MAX_RARITY - 1) + _rarity_skew, 1.0, CustomVariables.MAX_RARITY)
+	
 	# stat count scales with rarity
 	var rarity_normalized = (data.rarity - 1.0) / (CustomVariables.MAX_RARITY - 1.0)
 	var count = pool.min_stat_count + roundi(rarity_normalized * (pool.max_stat_count - pool.min_stat_count))

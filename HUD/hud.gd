@@ -9,6 +9,7 @@ class_name HUD extends CanvasLayer
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
 @onready var health_bar: Control = $Control/HealthBar
+@onready var boss_health_bar: Control = $Control/BossHealthBar
 
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 
@@ -29,6 +30,9 @@ func _ready() -> void:
 	EventBus.healed_flash.connect(apply_heal_flash)
 	damaged_flash.modulate.a = 0.0
 	heal_flash.modulate.a = 0.0
+	boss_health_bar.hide()
+	EventBus.request_boss_health_bar.connect(send_boss_health_bar)
+	EventBus.hide_boss_health_bar.connect(hide_boss_health_bar)
 	
 func apply_damage_flash() -> void:
 	if flash_tween:
@@ -48,6 +52,13 @@ func apply_heal_flash() -> void:
 func get_health_bar() -> HealthBar:
 	return health_bar.get_child(1)
 
+func send_boss_health_bar() -> void:
+	EventBus.boss_health_bar.emit(boss_health_bar.get_child(1))
+	boss_health_bar.show()
+
+func hide_boss_health_bar() -> void:
+	boss_health_bar.hide()
+	
 func get_total_buffs() -> TotalBuffs:
 	return total_buffs
 

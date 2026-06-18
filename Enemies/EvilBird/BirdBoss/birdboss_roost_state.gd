@@ -6,6 +6,7 @@ class_name BirdbossRoostState extends EnemyState
 
 const GROW_SPEED: float = 200.0
 var wind_active: bool = false
+
 func init() -> void:
 	whirlwind_timer.timeout.connect(_trigger_whirlwind)
 	roost_timer.timeout.connect(_end_roost)
@@ -21,7 +22,7 @@ func Enter() -> void:
 
 func Exit() -> void:
 	roost_detector.monitoring = false
-	
+	enemy.wind.disable()
 	roost_timer.stop()
 	enemy.set_damage_multiplier(1.0)
 	(enemy as BirdBoss).should_roost = false
@@ -39,7 +40,7 @@ func _trigger_whirlwind() -> void:
 	enemy.wind.face_player()
 	enemy.wind.enable(Vector2(enemy.wind.scale.x, 0))
 	wind_active = true
-	enemy.wind.knockback_force = 8000
+	enemy.wind.knockback_force = 7500
 	whirlwind_timer.stop()
 	
 func _end_roost() -> void:

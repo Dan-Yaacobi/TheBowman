@@ -6,11 +6,11 @@ class_name MainMenu extends GameWorld
 @onready var islands: Node2D = $Islands
 @onready var falling_death: FallingDeath = $FallingDeath
 
-
 func _ready() -> void:
 	pass
 
 func set_world() -> void:
+	EventBus.in_main_menu.emit()
 	EventBus.summon_effect.connect(summon_effect)
 	PlayerManager.player.heal(999, false)
 	

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dgj53e103va4p"]
+
+[ext_resource type="Script" uid="uid://sb47qg4sb1e" path="res://Player/Buffs/StatueBuffs/DamageBuff/damage_buff.gd" id="1_l146i"]
+[ext_resource type="Texture2D" uid="uid://cqlu7xgytlg7v" path="res://Player/Buffs/Sprites/DamageBuff.png" id="2_ohpnu"]
+
+[node name="DamageBuff" type="Node2D" unique_id=1438121942]
+script = ExtResource("1_l146i")
+ID = 123
+texture = ExtResource("2_ohpnu")
+constant_buff = true
+duration = 9999.0

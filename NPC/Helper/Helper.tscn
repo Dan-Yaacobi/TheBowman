@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://67r5dkhgwd4b"]
+
+[ext_resource type="Script" uid="uid://cl5intfxdocw8" path="res://NPC/Helper/helper.gd" id="1_f8uu4"]
+
+[node name="Helper" type="Label" unique_id=1126474841]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+text = "Press E to interact"
+script = ExtResource("1_f8uu4")

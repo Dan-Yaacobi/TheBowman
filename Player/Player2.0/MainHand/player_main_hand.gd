@@ -90,7 +90,7 @@ func new_arrow(_arrow: PackedScene) -> void:
 
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	if shot_power < 0.15:
+	if shot_power < 0.2:
 		current_arrow.free()
 	else:
 		if current_arrow:
@@ -100,7 +100,7 @@ func release_arrow() -> void:
 
 func fire_arrow() -> void:
 	var direction = hand_direction.normalized()
-	var effective_power = lerpf(0.4, 1.0, shot_power)
+	var effective_power: float = lerpf(0.0, 1.0, pow(shot_power, 0.5))
 	var arrow_count = PlayerManager.player.stats.arrow_count.value()
 	var spread_angle = deg_to_rad(12.0)
 	
@@ -145,24 +145,6 @@ func fire_arrow() -> void:
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	
-#func TEMP_fire_arrow() -> void:
-	#var direction = hand_direction.normalized()
-	#var effective_power = lerpf(0.4, 1.0, shot_power)
-	#if shot_power >= 1.0:
-		#current_arrow.perfect_shot = true
-	#current_arrow.velocity = calc_shot_velocity(effective_power, direction)
-	#current_arrow.fired = true
-	#current_arrow.set_shot_power_mod(effective_power)
-	#current_arrow.enable_arrow()
-	#current_arrow.calc_dmg(effective_power)
-	#current_arrow.calc_knockback(effective_power)
-	#current_arrow.reparent(get_tree().root)
-	#if current_arrow.perfect_shot:
-		#var effects: Array[OnPerfectShotEffect] = PlayerManager.player.use_perfect_shot_effects()
-		#for effect in effects:
-			#current_arrow.hit_effects.append(effect)
-	#EventBus.arrow_shot_sound.emit()
-	#PlayerManager.player.current_arrow = current_arrow
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0

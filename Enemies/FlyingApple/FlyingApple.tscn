@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="13_nfvr7"]
 [ext_resource type="Script" uid="uid://bn7i8btunjcni" path="res://Enemies/FlyingApple/apple_seek_state.gd" id="13_whfbk"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="14_dilap"]
-[ext_resource type="Script" uid="uid://dqsnpcqjq2gnl" path="res://Enemies/FlyingApple/apple_decide_state.gd" id="14_qmrg8"]
 [ext_resource type="Script" uid="uid://djtg8frtkr2at" path="res://Enemies/FlyingApple/apple_shoot_state.gd" id="15_0birg"]
 
 [sub_resource type="Animation" id="Animation_ltlc2"]
@@ -305,16 +304,10 @@ script = ExtResource("12_kl176")
 [node name="Seek" type="Node2D" parent="EnemyStateMachine" unique_id=999819182]
 script = ExtResource("13_whfbk")
 
-[node name="Decide" type="Node2D" parent="EnemyStateMachine" unique_id=1142532004]
-script = ExtResource("14_qmrg8")
-
 [node name="Shoot" type="Node2D" parent="EnemyStateMachine" unique_id=206311826]
 script = ExtResource("15_0birg")
 
 [node name="ShootTimer" type="Timer" parent="EnemyStateMachine/Shoot" unique_id=382980169]
-wait_time = 1.5
-
-[node name="DecisionTimer" type="Timer" parent="EnemyStateMachine" unique_id=685103792]
 wait_time = 1.5
 
 [node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("11_er6rk")]

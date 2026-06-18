@@ -9,7 +9,7 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	enemy.velocity = Vector2.ZERO
+	#enemy.velocity = Vector2.ZERO
 	enemy.shoot()
 	shoot_timer.start()
 	pass

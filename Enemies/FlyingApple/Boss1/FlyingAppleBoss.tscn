@@ -320,6 +320,7 @@ script = ExtResource("17_p45i5")
 script = ExtResource("18_52sys")
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=1887075188]
+wait_time = 0.75
 
 [node name="SlamTimer" type="Timer" parent="." unique_id=973898746]
 wait_time = 3.0

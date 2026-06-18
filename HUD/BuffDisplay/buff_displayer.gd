@@ -20,6 +20,8 @@ func add_buff(_buff: Buff) -> void:
 		new_buff_display.max_stacks = _buff.max_stacks
 		new_buff_display.ID = _buff.ID
 		new_buff_display.stacks = _buff.stacks
+		new_buff_display.constant_buff = _buff.constant_buff
+		new_buff_display.tooltip_text = _buff.tooltip
 		
 		add_child(new_buff_display)
 		new_buff_display.buff_ended.connect(remove_buff)

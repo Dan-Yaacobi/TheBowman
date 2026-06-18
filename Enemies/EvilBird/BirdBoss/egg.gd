@@ -12,7 +12,6 @@ func crack_egg() -> void:
 
 func _on_grounddetector_body_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if _body is Island:
-		print("egg cracking")
 		crack_egg()
 
 func destroyed(_hurt_box: HurtBox) -> void:

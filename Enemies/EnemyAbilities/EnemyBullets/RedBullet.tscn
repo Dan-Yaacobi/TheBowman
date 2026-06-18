@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b35crep84od1i"]
+[gd_scene format=3 uid="uid://b35crep84od1i"]
 
 [ext_resource type="Script" uid="uid://cgo7dukio5cvu" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet.gd" id="1_57jy3"]
 [ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_imlbk"]
@@ -17,29 +17,29 @@ move_speed = 45
 [sub_resource type="CircleShape2D" id="CircleShape2D_ob05t"]
 radius = 5.09902
 
-[node name="RedBullet" type="Area2D"]
+[node name="RedBullet" type="Area2D" unique_id=763897212]
 scale = Vector2(0.3, 0.3)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_57jy3")
 data = SubResource("Resource_xam82")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=276165269]
 texture = ExtResource("3_rnvgk")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1682491464]
 
-[node name="HurtBox" parent="." instance=ExtResource("4_beouh")]
+[node name="HurtBox" parent="." unique_id=1128752570 instance=ExtResource("4_beouh")]
 collision_layer = 128
 collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=759871026]
 shape = SubResource("CircleShape2D_ob05t")
 
-[node name="HitBox" parent="." instance=ExtResource("5_7g23u")]
+[node name="HitBox" parent="." unique_id=1866100353 instance=ExtResource("5_7g23u")]
 collision_layer = 128
 collision_mask = 0
 show_damage = false
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox" unique_id=1952588056]
 shape = SubResource("CircleShape2D_ob05t")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://cyh2c0ak2k3st"]
+
+[ext_resource type="PackedScene" uid="uid://ei2lv8m0xh7b" path="res://Rifts/Chunks/ChunkScenes/Reward/DashStatueIsland.tscn" id="1_o8yvv"]
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_v53w8"]
+
+[resource]
+script = ExtResource("1_v53w8")
+scene = ExtResource("1_o8yvv")
+type = 3
+id = "dash_statue_island"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

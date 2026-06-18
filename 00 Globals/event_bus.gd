@@ -57,3 +57,10 @@ signal destory_view_item(equip: Equipment)
 
 signal arrow_enemy_hit(_perfect: bool)
 signal arrow_missed
+
+signal boss_health_bar(_bar: HealthBar)
+signal request_boss_health_bar
+signal hide_boss_health_bar
+
+
+signal in_main_menu

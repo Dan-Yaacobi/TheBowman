@@ -16,8 +16,11 @@
 [ext_resource type="Resource" uid="uid://c2cyut0rfnys6" path="res://Rifts/Chunks/ChunkData/Treasure/chest_island.tres" id="8_qxt8x"]
 [ext_resource type="Resource" uid="uid://b7cryatyf3hgs" path="res://Rifts/Chunks/ChunkData/Treasure/pirate_island.tres" id="9_2cjow"]
 [ext_resource type="Resource" uid="uid://bnkr6l4rqbmvg" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_2.tres" id="9_4xrky"]
+[ext_resource type="Resource" uid="uid://dd70vj5lrwbgf" path="res://Rifts/Chunks/ChunkData/Treasure/damage_statue_island.tres" id="10_4phns"]
 [ext_resource type="Resource" uid="uid://c6frrd5ceaktm" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_3.tres" id="10_5l72e"]
+[ext_resource type="Resource" uid="uid://cyh2c0ak2k3st" path="res://Rifts/Chunks/ChunkData/Treasure/dash_statue_island.tres" id="11_hhyca"]
 [ext_resource type="Resource" uid="uid://byrxxduio7yma" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_1.tres" id="11_k3d36"]
+[ext_resource type="Resource" uid="uid://816cxi8hwv48" path="res://Rifts/Chunks/ChunkData/Treasure/luck_statue_island.tres" id="12_c6uaq"]
 [ext_resource type="Resource" uid="uid://rwhqlp7cbqw0" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_2.tres" id="12_if34p"]
 [ext_resource type="Resource" uid="uid://bq1oxee65vkvd" path="res://Rifts/Chunks/ChunkData/Traversal/Up/traversal_up_3.tres" id="13_onntq"]
 [ext_resource type="Script" uid="uid://co6xputyjmuin" path="res://Rifts/Chunks/chunk_library.gd" id="14_km5dl"]
@@ -56,7 +59,7 @@ metadata/_custom_type_script = "uid://rxohwem0g1cv"
 [sub_resource type="Resource" id="Resource_qxt8x"]
 script = ExtResource("4_v6yg5")
 type = 3
-chunks = Array[ExtResource("3_clqlo")]([ExtResource("8_qxt8x"), ExtResource("8_oe8us"), ExtResource("9_2cjow")])
+chunks = Array[ExtResource("3_clqlo")]([ExtResource("8_qxt8x"), ExtResource("8_oe8us"), ExtResource("9_2cjow"), ExtResource("10_4phns"), ExtResource("11_hhyca"), ExtResource("12_c6uaq")])
 metadata/_custom_type_script = "uid://rxohwem0g1cv"
 
 [sub_resource type="Resource" id="Resource_k3d36"]

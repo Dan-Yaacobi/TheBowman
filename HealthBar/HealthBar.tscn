@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c2cmn2xqaux53"]
 
+[ext_resource type="Script" uid="uid://b4fn28qx8xytt" path="res://HealthBar/health_bar_container.gd" id="1_fturp"]
 [ext_resource type="Script" uid="uid://bk1o1qctgt5qr" path="res://HealthBar/health_bar.gd" id="1_k2pjd"]
 [ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="1_oavdx"]
 [ext_resource type="Texture2D" uid="uid://bxubmxoxqclqy" path="res://Player/HealthBar/Healthbar.png" id="2_8ok61"]
@@ -11,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_fturp")
 
 [node name="GhostBar" type="TextureProgressBar" parent="." unique_id=547151696]
 layout_mode = 0
@@ -29,7 +31,7 @@ offset_left = 8.0
 offset_top = -5.0
 offset_right = 72.0
 offset_bottom = 27.0
-value = 50.0
+value = 100.0
 texture_progress = ExtResource("2_8ok61")
 script = ExtResource("1_k2pjd")
 

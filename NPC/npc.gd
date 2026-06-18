@@ -6,6 +6,7 @@ signal disappear
 @onready var chat_box: ChatBox = $ChatBox
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var helper: Helper = $Helper
 
 @export var data: NPCData
 
@@ -13,11 +14,12 @@ var action_taken: bool = false
 var facing_direction: int = 1
 
 func face_the_player() -> void:
-	var player_x: float = PlayerManager.player.global_position.x
-	var dir: int = 1 if player_x > global_position.x else -1
-	if dir != facing_direction:
-		facing_direction = dir
-		sprite.scale.x = dir
+	if not data.idle:
+		var player_x: float = PlayerManager.player.global_position.x
+		var dir: int = 1 if player_x > global_position.x else -1
+		if dir != facing_direction:
+			facing_direction = dir
+			sprite.scale.x = dir
 	
 func _ready() -> void:
 	npc_state_machine.Initialize(self)

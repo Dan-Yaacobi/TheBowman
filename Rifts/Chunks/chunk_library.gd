@@ -16,4 +16,8 @@ func get_portal_chunk() -> Array[ChunkData]:
 	return other_chunks[ChunkData.types.PORTAL].chunks
 
 func get_treasure_chunk() -> Array[ChunkData]:
-	return other_chunks[ChunkData.types.TREASURE].chunks
+	var available_chunks: Array[ChunkData] 
+	for chunk in other_chunks[ChunkData.types.TREASURE].chunks:
+		if chunk.min_rift_level <= PlayerManager.player.stats.rift_level:
+			available_chunks.append(chunk)
+	return available_chunks

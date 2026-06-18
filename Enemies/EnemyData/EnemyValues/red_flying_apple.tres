@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_8iawy"]
 script = ExtResource("4_me664")
-base_value = 50.0
+base_value = 40.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
@@ -27,4 +27,5 @@ touch_damage = 1
 knockback_resistance = 20.0
 death_ability = Array[ExtResource("1_cs78x")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("1_4o1pv")
+bullet_speed = 45.0
 metadata/_custom_type_script = "uid://rlvenynllobd"

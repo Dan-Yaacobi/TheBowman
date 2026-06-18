@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://pb76bqqhr3hp"]
+
+[ext_resource type="Script" uid="uid://q3fqraqrdjn7" path="res://Player/Buffs/StatueBuffs/LuckBuff/luck_buff.gd" id="1_w2dio"]
+[ext_resource type="Texture2D" uid="uid://7v0ul8qiyx8p" path="res://Player/Buffs/Sprites/LuckBuff.png" id="2_mxcae"]
+
+[node name="LuckBuff" type="Node2D" unique_id=331275569]
+script = ExtResource("1_w2dio")
+ID = 124
+texture = ExtResource("2_mxcae")
+constant_buff = true
+duration = 9999.0

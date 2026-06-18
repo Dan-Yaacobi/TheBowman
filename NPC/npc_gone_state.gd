@@ -12,6 +12,7 @@ func Enter() -> void:
 		tween.tween_property(npc, "modulate:a", 0.0, 0.5)
 		tween.finished.connect(npc.queue_free)
 	else:
+		idle.show_helper = false
 		npc.interaction_area.body_entered.disconnect(idle._on_body_entered)
 		npc.interaction_area.body_exited.disconnect(idle._on_body_exited)
 func Exit() -> void:

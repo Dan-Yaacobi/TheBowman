@@ -55,3 +55,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		zoom -= Vector2(0.1,0.1)
 	pass
 	
+func zoom_out() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "zoom", Vector2(4, 4), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func zoom_in() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "zoom", Vector2(5, 5), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

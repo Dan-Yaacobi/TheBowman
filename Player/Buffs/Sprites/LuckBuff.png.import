@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8e7sv5kjyf7n"
-path="res://.godot/imported/Statue_Archer.png-26accc53223395b40733183ee8098585.ctex"
+uid="uid://7v0ul8qiyx8p"
+path="res://.godot/imported/LuckBuff.png-11796c6edc085f9d04431e96f361bdb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NPC/Statues/Statue_Archer.png"
-dest_files=["res://.godot/imported/Statue_Archer.png-26accc53223395b40733183ee8098585.ctex"]
+source_file="res://Player/Buffs/Sprites/LuckBuff.png"
+dest_files=["res://.godot/imported/LuckBuff.png-11796c6edc085f9d04431e96f361bdb5.ctex"]
 
 [params]
 

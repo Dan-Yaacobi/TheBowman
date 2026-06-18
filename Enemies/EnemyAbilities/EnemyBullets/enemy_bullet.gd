@@ -18,6 +18,7 @@ func _ready() -> void:
 	hit_box.Damaged.connect(clear_shot)
 	hurt_box.successful_hit.connect(clear_shot)
 	extra_ready_function()
+	
 func extra_ready_function() -> void:
 	pass
 	
@@ -26,14 +27,9 @@ func _physics_process(delta: float) -> void:
 	rotation += randf_range(0.02,0.04)
 	pass
 
-#func hit_player(b) -> void:
-	#if b is Player:
-		#b.hit_player(data.damage)
-		#b.set_pushback_values(direction,data.knockback)
-		#clear_shot()
-
 func hit_wall(_v1,_v2,_v3,_v4) -> void:
-	clear_shot()
+	if _v2 is Island:
+		clear_shot()
 	
 func clear_shot(_h = null) -> void:
 	queue_free()

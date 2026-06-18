@@ -50,7 +50,8 @@ func full_health() -> bool:
 
 func heal(_amount: int) -> void:
 	current_hp = mini(current_hp + _amount, stats.max_hp)
-	handle_health_bar()
+	handle_health_bar(-_amount)
+	show_damage(_amount, Color.LIME_GREEN)
 	
 func extra_ready_functions() -> void:
 	pass
@@ -101,7 +102,7 @@ func take_damage(_dmg: int) -> void:
 		
 	current_hp -= roundi(_dmg * _damage_multiplier)
 	
-	handle_health_bar()	
+	handle_health_bar(_dmg)	
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
 	
@@ -111,7 +112,7 @@ func take_damage(_dmg: int) -> void:
 		enemy_died()
 		drop_item()
 
-func handle_health_bar() -> void:
+func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)
 		
@@ -127,13 +128,14 @@ func enemy_died() -> void:
 	
 func knockback(_hurt_box: HurtBox) -> void:
 	if stats.can_be_knockedback:
-		knockback_velocity = _hurt_box.knockback_dir * _hurt_box.knockback_power
+		knockback_velocity += _hurt_box.knockback_dir * _hurt_box.knockback_power
 
 func drop_item() -> void:
 	var drop_chance: float = min(
 		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
 		100)
-	EventBus.try_drop.emit(global_position, drop_chance)
+	for item in stats.equip_amount:
+		EventBus.try_drop.emit(global_position, drop_chance,stats.rarity_skew)
 	EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
 
 	
@@ -147,6 +149,22 @@ func update_animation(_animation: String, _position: float = 0.0) -> void:
 func can_be_stunned() -> bool:
 	return not stats.stun_immune
 	
+func shoot() -> void:
+	var bullet = bullet_set_up()
+	get_parent().add_child(bullet)
+
+func bullet_set_up() -> Node2D:
+	if stats.bullet != null:
+		var new_bullet: EnemyBullet = stats.bullet.instantiate()
+		new_bullet.direction = calculate_direction_to_player()
+		new_bullet.global_position = global_position
+		new_bullet.data.knockback = stats.knockback
+		new_bullet.data.move_speed = stats.bullet_speed
+		return new_bullet
+	return null
+	
 func stun(_stop: bool) -> void:
 	state_machine.cause_pause(_stop)
 	set_physics_process(!_stop)
+	if not _stop:
+		knockback_velocity = Vector2.ZERO

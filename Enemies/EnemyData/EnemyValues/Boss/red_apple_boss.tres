@@ -30,4 +30,7 @@ drop_chance = 100.0
 has_health_bar = false
 death_ability = Array[ExtResource("1_qvvre")]([SubResource("Resource_o1shw")])
 bullet = ExtResource("1_c6hqv")
+bullet_speed = 75.0
+equip_amount = 2
+rarity_skew = 1.0
 metadata/_custom_type_script = "uid://rlvenynllobd"

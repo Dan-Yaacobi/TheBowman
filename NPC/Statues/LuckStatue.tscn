@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ducyb8gpg5o6p"]
+
+[ext_resource type="Script" uid="uid://b8weayekbwfj0" path="res://NPC/Statues/luck_statue.gd" id="1_fape4"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_2rtdb"]
+[ext_resource type="Texture2D" uid="uid://dr43r3v5sd3uj" path="res://NPC/Statues/Luck_Statue.png" id="3_wvyim"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_kw03d"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_c0a07"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_4ke3a"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_iw1cu"]
+[ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="8_hl5sr"]
+[ext_resource type="PackedScene" uid="uid://67r5dkhgwd4b" path="res://NPC/Helper/Helper.tscn" id="9_2rtdb"]
+
+[sub_resource type="Resource" id="Resource_wvyim"]
+script = ExtResource("2_2rtdb")
+npc_name = "Jester Statue"
+dialogue_lines = Array[String](["Sky merchants once said that fortune wasn't earned or stolen."])
+fixed_line = "It was simply found by those who knew where to look."
+post_action_lines = Array[String](["The rift feels a little more willing to give. Enemies drop more."])
+action_button_labels = Array[String](["Touch"])
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b5al"]
+size = Vector2(88, 48)
+
+[node name="LuckStatue" type="Node2D" unique_id=2050973323]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_fape4")
+data = SubResource("Resource_wvyim")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=862633739]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_wvyim")
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=620438962]
+script = ExtResource("4_kw03d")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=191658591]
+script = ExtResource("5_c0a07")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=159058702]
+script = ExtResource("6_4ke3a")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=446860076]
+script = ExtResource("7_iw1cu")
+
+[node name="ChatBox" parent="." unique_id=1771743779 instance=ExtResource("8_hl5sr")]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=480803471]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=942936562]
+shape = SubResource("RectangleShape2D_7b5al")
+
+[node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_2rtdb")]
+offset_left = -14.000004
+offset_top = -34.0
+offset_right = 100.0
+offset_bottom = -14.0

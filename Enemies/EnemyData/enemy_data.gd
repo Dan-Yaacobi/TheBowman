@@ -21,3 +21,8 @@ class_name EnemyData extends Resource
 @export_subgroup("Shooting Stats")
 @export var bullet: PackedScene
 @export var shot_cooldown: float = 1.0
+@export var bullet_speed: float = 0.0
+
+@export_subgroup("Loot")
+@export var equip_amount: int = 1
+@export var rarity_skew: float = 0.0

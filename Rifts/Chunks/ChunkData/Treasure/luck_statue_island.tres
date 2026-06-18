@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://816cxi8hwv48"]
+
+[ext_resource type="PackedScene" uid="uid://xp766nl8aarn" path="res://Rifts/Chunks/ChunkScenes/Reward/LuckStatueIsland.tscn" id="1_5y82t"]
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_rd6ef"]
+
+[resource]
+script = ExtResource("1_rd6ef")
+scene = ExtResource("1_5y82t")
+type = 3
+id = "luck_statue_island"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

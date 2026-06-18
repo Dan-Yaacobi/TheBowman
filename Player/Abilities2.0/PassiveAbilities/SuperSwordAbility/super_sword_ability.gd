@@ -7,7 +7,7 @@ class_name SuperSwordAbility extends PlayerPassiveAbility
 func on_equipped() -> void:
 	PlayerManager.player.stats.sword_damage.add_buff(id_1,1.0,Stat.buff_type.MULTIPLICATIVE)
 	PlayerManager.player.stats.sword_size.add_buff(id_2,1.0,Stat.buff_type.MULTIPLICATIVE)
-	PlayerManager.player.stats.base_sword_cooldown.add_buff(id_3,2.0,Stat.buff_type.MULTIPLICATIVE)
+	PlayerManager.player.stats.base_sword_cooldown.add_buff(id_3,0.5,Stat.buff_type.MULTIPLICATIVE)
 
 func on_unequipped() -> void:
 	PlayerManager.player.stats.sword_damage.remove_buff_stack(id_1,Stat.buff_type.MULTIPLICATIVE)

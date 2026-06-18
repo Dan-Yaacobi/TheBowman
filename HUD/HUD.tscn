@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
+[ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="3_33tmu"]
+[ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
 [ext_resource type="Script" uid="uid://07lk15kopw0g" path="res://Player/BuffDisplay/buff_display_control.gd" id="4_njmlf"]
 [ext_resource type="Script" uid="uid://cpowcmubsuafi" path="res://Player/flow_container.gd" id="5_lkt0t"]
 [ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="6_6i5cd"]
@@ -69,10 +71,21 @@ mouse_filter = 2
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 0
 offset_left = 38.0
-offset_top = 947.00006
+offset_top = 950.0
 offset_right = 102.833336
-offset_bottom = 967.00006
+offset_bottom = 970.0
 scale = Vector2(6, 6)
+texture = ExtResource("3_33tmu")
+
+[node name="BossHealthBar" parent="Control" unique_id=828899742 instance=ExtResource("1_b7ubu")]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 0
+offset_left = 1451.0
+offset_top = 950.0
+offset_right = 1515.8334
+offset_bottom = 970.0
+scale = Vector2(6, 6)
+texture = ExtResource("3_ktoim")
 
 [node name="LevelStats" type="Label" parent="Control" unique_id=683982552]
 layout_mode = 0

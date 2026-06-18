@@ -1,6 +1,5 @@
 class_name AppleSeekState extends EnemyState
 
-@onready var decide: AppleDecideState = $"../Decide"
 @onready var shoot: AppleShootState = $"../Shoot"
 @onready var ray_cast_up: RayCast2D = $"../../RayCastUp"
 @onready var ray_cast_down: RayCast2D = $"../../RayCastDown"

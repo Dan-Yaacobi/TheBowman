@@ -7,6 +7,16 @@ const BLEED_DEBUFF = preload("res://Debuffs/Bleed/BleedDebuff.tscn")
 func set_sword(_sword: Sword) -> void:
 	sword = _sword
 	
+func AreaEnetered(a: Area2D) -> void:
+	if a is HitBox:
+		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
+		effect_color = DEFAULT_HIT_EFFECT_COLOR
+		knockback_dir = -(PlayerManager.player.global_position - self.global_position).normalized()
+		a.TakeDamage(self)
+	if a.get_parent() is Enemy:
+		_apply_effects(a.get_parent())
+	successful_hit.emit(self)
+	
 func apply_bleed(a: Enemy) -> void:
 	var try_bleed: int = randi_range(1,100)
 	if try_bleed < sword.get_bleed_chance():

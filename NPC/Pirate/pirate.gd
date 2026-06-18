@@ -12,7 +12,7 @@ func _gamble() -> void:
 	if not buying:
 		buying = true
 		if PlayerManager.player.buy(gamble_cost):
-			EventBus.try_drop.emit(global_position,100)
+			EventBus.try_drop.emit(global_position,100,1.0)
 			show_post_action_line()
 			action_taken = true
 		buying = false

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="5_sxjso"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="6_02btb"]
 [ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="7_x6h5m"]
+[ext_resource type="PackedScene" uid="uid://67r5dkhgwd4b" path="res://NPC/Helper/Helper.tscn" id="9_02btb"]
 
 [sub_resource type="Resource" id="Resource_02btb"]
 script = ExtResource("2_sxjso")
@@ -48,3 +49,9 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=318888137]
 shape = SubResource("RectangleShape2D_sxjso")
+
+[node name="Helper" parent="InteractionArea" unique_id=1126474841 instance=ExtResource("9_02btb")]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 98.0
+offset_bottom = -12.0

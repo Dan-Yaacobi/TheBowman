@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_4l6sm"]
 [ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="6_dshql"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llbis"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dshql"]
 resource_local_to_scene = true
 size = Vector2(49, 40)
 
@@ -27,7 +27,7 @@ position = Vector2(16, -19)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(0.5, -12)
-shape = SubResource("RectangleShape2D_llbis")
+shape = SubResource("RectangleShape2D_dshql")
 
 [node name="Cleric" parent="." unique_id=158854308 instance=ExtResource("6_dshql")]
 position = Vector2(-1, -18)

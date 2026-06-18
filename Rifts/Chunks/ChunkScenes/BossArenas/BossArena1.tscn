@@ -29,5 +29,5 @@ destination = 3
 is_rift_portal = true
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("7_3m2tr")]
-rarity_bias = 1.0
+rarity_bias = 2.0
 ring_pool = ExtResource("8_44ji0")

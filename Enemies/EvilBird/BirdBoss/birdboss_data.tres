@@ -19,4 +19,6 @@ can_be_knockedback = false
 drop_chance = 100.0
 stun_immune = true
 has_health_bar = false
+equip_amount = 2
+rarity_skew = 1.5
 metadata/_custom_type_script = "uid://rlvenynllobd"

@@ -9,6 +9,7 @@ class_name BuffDisplay extends Control
 @export var texture: Texture
 @export var stacks: int = 0
 @export var max_stacks: int = 0
+@export var constant_buff: bool = false
 
 var ID: int
 signal buff_ended(_buff: BuffDisplay)
@@ -22,11 +23,18 @@ func _ready() -> void:
 	stacks_label.text = ""
 	if stacks > 0:
 		stacks_label.text = str(stacks)
+	if constant_buff:
+		texture_progress_bar.hide()
+		timer.stop()
+		return
 	timer.wait_time = duration
 	timer.timeout.connect(buff_over)
 	timer.start()
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	
 func _process(_delta: float) -> void:
+	if constant_buff:
+		return
 	var curr_time: float = (timer.wait_time - timer.time_left) / timer.wait_time
 	texture_progress_bar.value = 1.0 - curr_time
 	if texture_progress_bar.value <= texture_progress_bar.min_value:
