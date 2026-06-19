@@ -51,7 +51,7 @@ collision_layer = 0
 shape = SubResource("RectangleShape2D_7b5al")
 
 [node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_t51dc")]
-offset_left = -14.0
-offset_top = -32.0
-offset_right = 100.0
-offset_bottom = -12.0
+offset_left = -20.0
+offset_top = -34.0
+offset_right = 94.0
+offset_bottom = -14.0

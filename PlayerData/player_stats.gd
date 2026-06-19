@@ -60,6 +60,7 @@ var player: Player
 @export var shooting_abilities: Array[PlayerShootAbility]
 @export var sword_abilities: Array[PlayerSwordAbility]
 @export var passive_abilities: Array[PlayerPassiveAbility]
+@export var release_abilities: Array[PlayerPassiveAbility]
 
 @export_subgroup("Sword")
 @export var sword_size: Stat
@@ -100,6 +101,7 @@ static var ABILITY_GROUPS: Array = [
 	["Jump", "jump_abilities"],
 	["Dash", "dash_abilities"],
 	["Shoot", "shooting_abilities"],
+	["Release", "release_abilities"],
 	["Sword", "sword_abilities"],
 	["Passive", "passive_abilities"],
 ]

@@ -29,6 +29,7 @@ func _reparent_to_world() -> void:
 
 func _disable_player_interaction() -> void:
 	equipment.interaction_area.monitoring = false
+	
 	equipment.interaction_area.body_exited.connect(_on_player_exited, CONNECT_ONE_SHOT)
 	
 func _on_player_exited(_body: Node2D) -> void:

@@ -50,8 +50,8 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=318888137]
 shape = SubResource("RectangleShape2D_sxjso")
 
-[node name="Helper" parent="InteractionArea" unique_id=1126474841 instance=ExtResource("9_02btb")]
-offset_left = -16.0
+[node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_02btb")]
+offset_left = -22.0
 offset_top = -32.0
-offset_right = 98.0
+offset_right = 92.0
 offset_bottom = -12.0

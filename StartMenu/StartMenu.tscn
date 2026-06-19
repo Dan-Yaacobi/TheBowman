@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsesww0tvvo33"]
+[gd_scene format=3 uid="uid://bsesww0tvvo33"]
 
 [ext_resource type="Script" uid="uid://bayac3vjejf8n" path="res://StartMenu/start_menu.gd" id="1_d5kqr"]
 [ext_resource type="FontFile" uid="uid://b7lpukcfa8uxr" path="res://Fonts/Jaro-Regular-VariableFont_opsz.ttf" id="2_w0qft"]
 
-[node name="StartMenu" type="Control"]
+[node name="StartMenu" type="Control" unique_id=971797917]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,13 +12,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d5kqr")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1809453176]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.60784316, 0.30980393, 0.11764706, 1)
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=841085659]
 layout_mode = 0
 offset_left = 783.0
 offset_top = 499.0
@@ -28,7 +28,7 @@ theme_override_fonts/font = ExtResource("2_w0qft")
 theme_override_font_sizes/font_size = 150
 text = "Play"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1062812586]
 layout_mode = 0
 offset_left = 137.0
 offset_top = 79.0
@@ -39,7 +39,7 @@ theme_override_fonts/font = ExtResource("2_w0qft")
 theme_override_font_sizes/font_size = 120
 text = "Bows Bows Bows"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1542828337]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

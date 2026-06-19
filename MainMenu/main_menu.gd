@@ -1,6 +1,5 @@
 class_name MainMenu extends GameWorld
 
-@onready var wave_label: Label = $CurrentWaves
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 @onready var portals: Node2D = $Portals
 @onready var islands: Node2D = $Islands

@@ -39,7 +39,6 @@ func _open(stats: PlayerStats) -> void:
 	show()
 	_refresh_slots()
 	_refresh_stats()
-	_refresh_abilities()
 
 
 func _on_close() -> void:
@@ -90,9 +89,11 @@ func _refresh_stats() -> void:
 		var equipment: EquipmentData = _stats.get(_hovered_slot)
 		if equipment != null:
 			_build_item_stats(equipment)
+			_refresh_abilities(equipment)
 			return
 
 	_build_player_stats()
+	_refresh_abilities()
 
 
 func _build_player_stats() -> void:
@@ -130,31 +131,19 @@ func _build_item_stats(equipment: EquipmentData) -> void:
 		stats_panel.add_child(line)
 
 
-func _refresh_abilities() -> void:
+func _refresh_abilities(hovered_item: EquipmentData = null) -> void:
 	for child: Node in abilities_panel.get_children():
 		child.queue_free()
 
-	var any: bool = false
-	for pair: Array in PlayerStats.ABILITY_GROUPS:
-		var label: String = pair[0]
-		var prop: String = pair[1]
-		var abilities: Array = _stats.get(prop)
-		if abilities == null or abilities.is_empty():
-			continue
-		any = true
-		var header: Label = Label.new()
-		header.text = "— " + label + " —"
-		abilities_panel.add_child(header)
-		for ability: PlayerAbility in abilities:
-			var line: Label = Label.new()
-			line.text = ability.get_tooltip()
-			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			abilities_panel.add_child(line)
+	var line: Label = Label.new()
+	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
-	if not any:
-		var line: Label = Label.new()
-		line.text = "No abilities"
-		abilities_panel.add_child(line)
+	if hovered_item != null and hovered_item.ability != null:
+		line.text = hovered_item.ability.get_tooltip()
+	else:
+		line.text = "No ability"
+
+	abilities_panel.add_child(line)
 
 
 func _format_stat(value: Variant) -> String:

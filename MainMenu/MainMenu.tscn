@@ -1,14 +1,9 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="3_0uxqg"]
-[ext_resource type="Script" uid="uid://c8kt1315rsybw" path="res://MainMenu/ButtonData/button_data.gd" id="4_7hy75"]
-[ext_resource type="Script" uid="uid://mb31atc2mc5j" path="res://MainMenu/ButtonData/ButtonActions/reset_wave.gd" id="4_u2f2c"]
-[ext_resource type="Script" uid="uid://dh71tk38y0vvk" path="res://MainMenu/ButtonData/ButtonActions/next_wave_action.gd" id="9_xr3g3"]
-[ext_resource type="Script" uid="uid://dnefafqr4l430" path="res://MainMenu/ButtonData/ButtonActions/add_money_action.gd" id="10_aa3ac"]
-[ext_resource type="Script" uid="uid://bmttan0snrryu" path="res://MainMenu/music_button.gd" id="11_rwkms"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
+[ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="12_npjie"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="13_qvidt"]
 [ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="14_5lv0r"]
@@ -17,63 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
-[ext_resource type="PackedScene" uid="uid://b7heuvbylsrhh" path="res://NPC/Statues/DamageStatue.tscn" id="18_guwyo"]
-
-[sub_resource type="Resource" id="Resource_nby2t"]
-script = ExtResource("4_u2f2c")
-
-[sub_resource type="Resource" id="Resource_fjbbq"]
-script = ExtResource("4_7hy75")
-button_action = SubResource("Resource_nby2t")
-
-[sub_resource type="Resource" id="Resource_bvb62"]
-script = ExtResource("9_xr3g3")
-
-[sub_resource type="Resource" id="Resource_etkyy"]
-script = ExtResource("4_7hy75")
-button_action = SubResource("Resource_bvb62")
-
-[sub_resource type="Resource" id="Resource_ssi0y"]
-script = ExtResource("10_aa3ac")
-
-[sub_resource type="Resource" id="Resource_ctujf"]
-script = ExtResource("4_7hy75")
-button_action = SubResource("Resource_ssi0y")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lv0r"]
 size = Vector2(10949, 680)
 
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
-
-[node name="ButtonShootClick3" parent="." unique_id=996661813 instance=ExtResource("3_0uxqg")]
-visible = false
-offset_left = 354.0
-offset_top = 16.0
-offset_right = 1374.0
-offset_bottom = 366.0
-tooltip_text = "CANNOT BE UNDONE!"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0.00999999, 0.00999999, 1)
-theme_override_constants/outline_size = 75
-text = "Reset"
-button_data = SubResource("Resource_fjbbq")
-
-[node name="CurrentWaves" type="Label" parent="." unique_id=1810882176]
-visible = false
-offset_left = 355.0
-offset_top = 35.0
-offset_right = 1736.0
-offset_bottom = 308.0
-scale = Vector2(0.025, 0.025)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
-theme_override_colors/font_outline_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
-theme_override_font_sizes/font_size = 200
-text = "Current Wave:"
 
 [node name="HowToPlay" type="Label" parent="." unique_id=1358765188]
 visible = false
@@ -97,43 +41,6 @@ SpaceBar: Jump (Can Double Jump)
 Left Mouse: Shoot
 Right Mouse: Special Ability
 M: Back to Menu"
-
-[node name="ButtonShootClick" parent="." unique_id=1706101214 instance=ExtResource("3_0uxqg")]
-visible = false
-offset_left = 355.0
-offset_top = 45.0
-offset_right = 1663.0
-offset_bottom = 395.0
-scale = Vector2(0.025, 0.025)
-tooltip_text = "For Testing Purposes"
-action_mode = 0
-text = "Next Wave"
-button_data = SubResource("Resource_etkyy")
-
-[node name="ButtonShootClick2" parent="." unique_id=2117362035 instance=ExtResource("3_0uxqg")]
-visible = false
-offset_left = 315.0
-offset_top = 17.0
-offset_right = 1685.0
-offset_bottom = 367.0
-scale = Vector2(0.02, 0.02)
-tooltip_text = "For Testing Purposes"
-text = "Add Money"
-button_data = SubResource("Resource_ctujf")
-
-[node name="MusicButton" type="Button" parent="." unique_id=794920078]
-visible = false
-offset_left = 97.0
-offset_top = 17.0
-offset_right = 810.0
-offset_bottom = 367.0
-scale = Vector2(0.025, 0.025)
-focus_mode = 0
-theme_override_font_sizes/font_size = 250
-disabled = true
-toggle_mode = true
-text = "Music"
-script = ExtResource("11_rwkms")
 
 [node name="ArrowSign4" type="Sprite2D" parent="." unique_id=1171596319]
 z_index = -1
@@ -306,7 +213,7 @@ position = Vector2(-3, 467)
 shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
 
-[node name="DamageStatue" parent="." unique_id=2050973323 instance=ExtResource("18_guwyo")]
-position = Vector2(260, 83)
+[node name="Cleric" parent="." unique_id=158854308 instance=ExtResource("12_npjie")]
+position = Vector2(301, 69)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

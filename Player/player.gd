@@ -72,13 +72,6 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
-var abilities: Dictionary = {
-	PlayerAbility.TriggerType.PASSIVE: [],
-	PlayerAbility.TriggerType.SHOOT: [],
-	PlayerAbility.TriggerType.JUMP: [],
-	PlayerAbility.TriggerType.DASH: [],
-	PlayerAbility.TriggerType.RELEASE: []
-}
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,
 	EquipmentData.slots.ARROW: null,
@@ -359,18 +352,26 @@ func buy(price: int) -> bool:
 		collect_money(-price)
 		return true
 	return false
-
+	
 func register_ability(ability: PlayerAbility) -> void:
-	abilities[ability.trigger_type].append(ability)
+	_get_ability_array(ability.trigger_type).append(ability)
 	ability.on_equipped()
 
 func unregister_ability(ability: PlayerAbility) -> void:
-	abilities[ability.trigger_type].erase(ability)
+	_get_ability_array(ability.trigger_type).erase(ability)
 	ability.on_unequipped()
 
 func get_abilities(trigger: PlayerAbility.TriggerType) -> Array:
-	return abilities[trigger]
+	return _get_ability_array(trigger)
 	
+func _get_ability_array(trigger: PlayerAbility.TriggerType) -> Array:
+	match trigger:
+		PlayerAbility.TriggerType.PASSIVE: return stats.passive_abilities
+		PlayerAbility.TriggerType.SHOOT: return stats.shooting_abilities
+		PlayerAbility.TriggerType.JUMP: return stats.jump_abilities
+		PlayerAbility.TriggerType.DASH: return stats.dash_abilities
+		PlayerAbility.TriggerType.RELEASE: return stats.release_abilities
+		_: return []
 func enable_jump() -> void:
 	jump_action.can_jump = true
 
