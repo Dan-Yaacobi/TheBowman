@@ -23,17 +23,16 @@ func Exit() -> void:
 	succesfull_hit = false
 
 func Process(_delta: float) -> EnemyState:
+	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.knockback_decay * _delta * 60)
+	direction = enemy.calculate_direction_to_player()
+	if enemy.knockback_velocity.length() > enemy.knockback_threshold:
+		enemy.velocity = enemy.knockback_velocity
 	return null
 
 func Physics(_delta: float) -> EnemyState:
 	var modifier: int = 1
 	if enemy.calculate_distance_to_player() <= distance_to_strike:
 		modifier = 2
-	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.knockback_decay * _delta * 60)
-	direction = enemy.calculate_direction_to_player()
-	if enemy.knockback_velocity.length() > enemy.knockback_threshold:
-		enemy.velocity = enemy.knockback_velocity
-		return null
 	if succesfull_hit:
 		return shoot
 	else:

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d56gf1x11e6x"]
+
+[ext_resource type="Script" uid="uid://bq7h2sw3nu44l" path="res://Debuffs/FrostBite/frostbite_debuff.gd" id="1_kgstd"]
+[ext_resource type="Texture2D" uid="uid://cd153o5rc6ovo" path="res://Particles/SnowFlake.png" id="2_m0o7m"]
+
+[sub_resource type="Gradient" id="Gradient_cn3ow"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="FrostBiteDebuff" type="Node2D" unique_id=1925388334]
+script = ExtResource("1_kgstd")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1992319829]
+amount = 1
+texture = ExtResource("2_m0o7m")
+speed_scale = 1.5
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_cn3ow")

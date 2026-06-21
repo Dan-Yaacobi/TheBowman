@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://3kavoouowc45"]
+
+[ext_resource type="Script" uid="uid://c5gwger3r2vf2" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/soul.gd" id="1_ko45e"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_43ooj"]
+[ext_resource type="Texture2D" uid="uid://cal23t1ka4qvt" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/Soul.png" id="2_pptt2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmell"]
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pptt2"]
+radius = 8.0
+height = 22.0
+
+[node name="Soul" type="CharacterBody2D" unique_id=436220264]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ko45e")
+homing_speed = 100.0
+spiral_angular_speed = 2.0
+spiral_radius_growth = 15.0
+spiral_lifetime = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1399177269]
+texture = ExtResource("2_pptt2")
+
+[node name="HurtBox" parent="." unique_id=1374070591 instance=ExtResource("2_43ooj")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1021548976]
+shape = SubResource("CapsuleShape2D_vmell")
+debug_color = Color(0.98272735, 0, 0.36380467, 0.41960785)
+
+[node name="SpiralTimer" type="Timer" parent="." unique_id=1359271329]
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=219923199]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1246399428]
+shape = SubResource("CapsuleShape2D_pptt2")
+
+[connection signal="timeout" from="SpiralTimer" to="." method="_on_spiral_timer_timeout"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

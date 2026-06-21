@@ -101,7 +101,12 @@ func _ready() -> void:
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
-
+	activate_passive_abilities() 
+	
+func activate_passive_abilities() -> void:
+	for ability in get_abilities(PlayerAbility.TriggerType.PASSIVE):
+		ability.on_equipped()
+		
 func add_display_buff(buff: PlayerUpgrade) -> void:
 	if buff:
 		total_buffs.add_display_buff(buff)
@@ -372,6 +377,7 @@ func _get_ability_array(trigger: PlayerAbility.TriggerType) -> Array:
 		PlayerAbility.TriggerType.DASH: return stats.dash_abilities
 		PlayerAbility.TriggerType.RELEASE: return stats.release_abilities
 		_: return []
+		
 func enable_jump() -> void:
 	jump_action.can_jump = true
 
@@ -406,7 +412,7 @@ func get_strength_shot_modifier() -> float:
 func get_arrow_ability() -> Array[ArrowAbility]:
 	return stats.arrow_abilities 
 
-func get_shoot_abilities() -> Array[PlayerShootAbility]:
+func get_shoot_abilities() -> Array[PlayerAbility]:
 	return stats.shooting_abilities
 
 func get_weapon_size() -> float:
@@ -419,7 +425,7 @@ func get_sword_cd() -> float:
 func get_sword_size() -> float:
 	return stats.sword_size.value()
 
-func get_sword_abilities() -> Array[PlayerSwordAbility]:
+func get_sword_abilities() -> Array[PlayerAbility]:
 	return stats.sword_abilities
 
 func get_sword() -> Sword:
@@ -505,7 +511,7 @@ func use_effects() -> Array[OnHitEffect]:
 	return _effects
 
 ## STREAK ##
-func add_shot_streak(_perfect: bool) -> void:
+func add_shot_streak(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	stats.shot_streak += 1
 	if _perfect:
 		add_perfect_shot_streak()

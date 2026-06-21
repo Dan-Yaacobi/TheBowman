@@ -17,8 +17,6 @@ func cause_pause(_stop: bool) -> void:
 	pausing.emit(_stop)
 	
 func _process(delta: float) -> void:
-	if paused:
-		return
 	ChangeState(curr_state.Process(delta))
 
 func _physics_process(delta: float) -> void:

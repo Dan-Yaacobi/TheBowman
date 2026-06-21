@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0pv21kfxpvci"]
+[gd_scene format=3 uid="uid://b0pv21kfxpvci"]
 
 [ext_resource type="Script" uid="uid://bv1k356ogs273" path="res://Debuffs/Bleed/bleed_debuff.gd" id="1_6cl21"]
 [ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="2_4obob"]

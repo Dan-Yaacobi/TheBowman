@@ -15,6 +15,7 @@ func AreaEnetered(a: Area2D) -> void:
 		a.TakeDamage(self)
 	if a.get_parent() is Enemy:
 		_apply_effects(a.get_parent())
+		EventBus.sword_hit.emit(a.get_parent())
 	successful_hit.emit(self)
 	
 func apply_bleed(a: Enemy) -> void:
@@ -23,5 +24,3 @@ func apply_bleed(a: Enemy) -> void:
 		var new_bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
 		new_bleed_debuff.set_damage(max(floor(PlayerManager.player.get_strength() / 10),1))
 		a.apply_debuff(new_bleed_debuff,5,5)
-
-	pass

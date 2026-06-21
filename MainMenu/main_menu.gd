@@ -21,7 +21,7 @@ func _on_falling_death_body_entered(body: Node2D) -> void:
 
 func summon_effect(effect: Node2D) -> void:
 	effects.append(effect)
-	add_child(effect)
+	call_deferred("add_child" ,effect)
 
 func remove_effects() -> void:
 	for effect in effects:
