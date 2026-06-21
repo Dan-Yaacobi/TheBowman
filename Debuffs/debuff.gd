@@ -7,7 +7,7 @@ signal debuff_over(id: int)
 var time_accumulator: float
 var tick_interval: float
 var ticks: int = 0
-
+var one_shot: bool = false
 var enemy: Enemy
 
 func _ready() -> void:
@@ -18,11 +18,13 @@ func apply_debuff_effect() -> void:
 
 func start_debuff_effect() -> void:
 	pass
+	
 func _process(delta: float) -> void:
 	time_accumulator += delta
 	if time_accumulator >= tick_interval:
 		time_accumulator -= tick_interval
-		apply_debuff_effect()
+		if not one_shot:
+			apply_debuff_effect()
 		ticks -= 1
 		if ticks <= 0:
 			debuff_end()

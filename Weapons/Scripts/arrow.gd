@@ -30,6 +30,7 @@ var pierce_count: int = 0
 var can_pass_walls: bool = false
 var crit_chance: float = 0.0
 var crit: bool = false
+var arrow_shot_power: float
 
 func _ready() -> void:
 	cpu_particles.emitting = false
@@ -51,7 +52,7 @@ func hit(_hit_box) -> void:
 			for ability in shoot_abilities:
 				ability.activate_ability(body,self)
 			succesfuly_hit = true
-			EventBus.arrow_enemy_hit.emit(perfect_shot)
+			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
 	pierce_count += 1
 	clear_shot()
 			

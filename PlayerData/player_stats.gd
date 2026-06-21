@@ -46,6 +46,10 @@ var player: Player
 @export var crit_modifier: Stat
 @export var arrow_size: Stat
 
+@export_subgroup("Special")
+@export var bleed_damage: int = 3
+
+
 @export_subgroup("Player Items")
 @export var money: int
 @export var weapon_scene: PackedScene
@@ -55,12 +59,12 @@ var player: Player
 @export var bow: EquipmentData
 
 @export_subgroup("Abilities")
-@export var jump_abilities: Array[PlayerJumpAbility]
-@export var dash_abilities: Array[PlayerDashAbility]
-@export var shooting_abilities: Array[PlayerShootAbility]
-@export var sword_abilities: Array[PlayerSwordAbility]
-@export var passive_abilities: Array[PlayerPassiveAbility]
-@export var release_abilities: Array[PlayerPassiveAbility]
+@export var jump_abilities: Array[PlayerAbility]
+@export var dash_abilities: Array[PlayerAbility]
+@export var shooting_abilities: Array[PlayerAbility]
+@export var sword_abilities: Array[PlayerAbility]
+@export var passive_abilities: Array[PlayerAbility]
+@export var release_abilities: Array[PlayerAbility]
 
 @export_subgroup("Sword")
 @export var sword_size: Stat

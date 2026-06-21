@@ -10,6 +10,7 @@ class_name HUD extends CanvasLayer
 @onready var heal_flash: ColorRect = $HealFlash
 @onready var health_bar: Control = $Control/HealthBar
 @onready var boss_health_bar: Control = $Control/BossHealthBar
+@onready var gauge: TextureProgressBar = $Control/Gauge
 
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 

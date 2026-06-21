@@ -163,8 +163,10 @@ func bullet_set_up() -> Node2D:
 		return new_bullet
 	return null
 	
-func stun(_stop: bool) -> void:
-	state_machine.cause_pause(_stop)
-	set_physics_process(!_stop)
-	if not _stop:
-		knockback_velocity = Vector2.ZERO
+func stun(_activate: bool) -> void:
+	state_machine.cause_pause(_activate)
+	set_physics_process(!_activate)
+	if _activate:
+		EventBus.enemy_stunned.emit(self)
+	knockback_velocity = Vector2.ZERO
+		

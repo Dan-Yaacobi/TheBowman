@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://byn0domth7kwx" path="res://Player/Abilities2.0/ShootAbilities/ExtraArrow/extra_arrow_ability.gd" id="7_74y5u"]
 [ext_resource type="Texture2D" uid="uid://dttm4tlkdhjv4" path="res://Weapons/Bows/6_BoneBow/Skeletor.png" id="7_kkuwe"]
 [ext_resource type="Script" uid="uid://b6exhhmt0flal" path="res://Player/Abilities2.0/ShootAbilities/Pierce/pierce_ability.gd" id="10_jufrr"]
-[ext_resource type="Script" uid="uid://egin2b0rm3e5" path="res://Player/Abilities2.0/ShootAbilities/RampUpAbility/ramp_up_ability.gd" id="11_rmuev"]
+[ext_resource type="Script" uid="uid://b017awe3d5am0" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_gauge_passive_ability.gd" id="12_24shk"]
+[ext_resource type="Script" uid="uid://royi3wayekwd" path="res://Player/Abilities2.0/PassiveAbilities/ChainLightning/chain_lightning_ability.gd" id="13_24shk"]
+[ext_resource type="Script" uid="uid://c1qxjyjyf6hps" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/soul_harvet_ability.gd" id="13_riufi"]
 
 [sub_resource type="Resource" id="Resource_681w5"]
 script = ExtResource("7_74y5u")
@@ -26,11 +28,23 @@ tier = 1
 rarity_weight = 1.5
 metadata/_custom_type_script = "uid://b6exhhmt0flal"
 
-[sub_resource type="Resource" id="Resource_cb1ri"]
-script = ExtResource("11_rmuev")
+[sub_resource type="Resource" id="Resource_ekvhb"]
+script = ExtResource("12_24shk")
+tier = 2
+rarity_weight = 2.0
+metadata/_custom_type_script = "uid://b017awe3d5am0"
+
+[sub_resource type="Resource" id="Resource_uehrl"]
+script = ExtResource("13_riufi")
+tier = 3
+rarity_weight = 2.0
+metadata/_custom_type_script = "uid://c1qxjyjyf6hps"
+
+[sub_resource type="Resource" id="Resource_riufi"]
+script = ExtResource("13_24shk")
 tier = 1
-rarity_weight = 1.5
-metadata/_custom_type_script = "uid://egin2b0rm3e5"
+rarity_weight = 2.0
+metadata/_custom_type_script = "uid://royi3wayekwd"
 
 [sub_resource type="Resource" id="Resource_s0yus"]
 script = ExtResource("1_s2d1f")
@@ -76,6 +90,6 @@ possible_stats = Array[ExtResource("1_s2d1f")]([SubResource("Resource_s0yus"), S
 possible_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
 equipped_textures = Array[Texture2D]([ExtResource("3_s0yus"), ExtResource("3_a180u"), ExtResource("4_l6j88"), ExtResource("5_gs463"), ExtResource("6_l6j88"), ExtResource("6_681w5"), ExtResource("7_kkuwe")])
 possible_display_names = Array[String](["Wooden Bow", "Blue Bow", "Red Bow", "Black Bow", "Poison Ivy", "Zeus", "Skeletor"])
-possible_abilities = Array[ExtResource("6_gs463")]([SubResource("Resource_681w5"), SubResource("Resource_rmuev"), SubResource("Resource_cb1ri")])
+possible_abilities = Array[ExtResource("6_gs463")]([SubResource("Resource_681w5"), SubResource("Resource_rmuev"), SubResource("Resource_ekvhb"), SubResource("Resource_uehrl"), SubResource("Resource_riufi")])
 scale = 0.5
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

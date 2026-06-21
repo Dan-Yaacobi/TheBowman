@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c4wv0u8011p4w"]
+
+[ext_resource type="Script" uid="uid://cctdlumcxu7lx" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/souls_explosion.gd" id="1_1vvv3"]
+
+[node name="SoulsExplosion" type="Node2D" unique_id=304429113]
+script = ExtResource("1_1vvv3")

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dfqptnmqklf0q"]
+
+[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="1_hbriq"]
+[ext_resource type="Script" uid="uid://idaw1wr5uqqd" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_explosion.gd" id="2_urnw4"]
+
+[sub_resource type="Curve" id="Curve_3ljpm"]
+_limits = [0.0, 0.5, 0.0, 1.0]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_t5ppl"]
+colors = PackedColorArray(0.5176471, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k76qx"]
+radius = 21.023796
+
+[node name="BloodExplosion" type="CPUParticles2D" unique_id=2086761620]
+emitting = false
+amount = 25
+texture = ExtResource("1_hbriq")
+lifetime = 1.5
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, 25)
+radial_accel_min = 50.0
+radial_accel_max = 50.0
+scale_amount_curve = SubResource("Curve_3ljpm")
+color_ramp = SubResource("Gradient_t5ppl")
+script = ExtResource("2_urnw4")
+
+[node name="EnemyDetector" type="Area2D" parent="." unique_id=257266584]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector" unique_id=268297443]
+shape = SubResource("CircleShape2D_k76qx")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="body_entered" from="EnemyDetector" to="." method="_on_enemy_detector_body_entered"]

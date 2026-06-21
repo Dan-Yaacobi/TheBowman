@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
+[ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="14_ihvjp"]
+[ext_resource type="Texture2D" uid="uid://2qa7ghob20s3" path="res://HUD/AbilityGauge.png" id="15_33ejm"]
+[ext_resource type="Script" uid="uid://c8fejmjhqikma" path="res://HUD/gauge.gd" id="16_33ejm"]
+[ext_resource type="Texture2D" uid="uid://cal23t1ka4qvt" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/Soul.png" id="17_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
@@ -222,6 +226,27 @@ theme_override_constants/h_separation = 18
 theme_override_constants/v_separation = 18
 alignment = 2
 last_wrap_alignment = 0
+
+[node name="Gauge" type="TextureProgressBar" parent="Control" unique_id=282092059]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 623.0
+offset_right = 68.0
+offset_bottom = 655.0
+rotation = -1.5707964
+scale = Vector2(4, 4)
+step = 0.01
+value = 50.0
+texture_under = ExtResource("14_ihvjp")
+texture_progress = ExtResource("15_33ejm")
+tint_progress = Color(0.4745098, 1, 1, 1)
+script = ExtResource("16_33ejm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Gauge" unique_id=564933444]
+position = Vector2(64, 22.500002)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_fjfvf")
 
 [node name="InteractionUi" parent="." unique_id=1611403518 instance=ExtResource("19_fjfvf")]
 stat_names_dict = Dictionary[String, String]({

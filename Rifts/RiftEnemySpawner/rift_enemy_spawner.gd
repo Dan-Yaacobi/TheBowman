@@ -53,6 +53,8 @@ func spawn_enemy(level: int, progress: float, is_main_path: bool, is_terminal: b
 
 func _do_spawn(entries: Array[EnemyEntry]) -> void:
 	for entry in entries:
+		if not is_inside_tree():
+			return
 		var new_enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_zone(
 			entry.get_factory(), entry.spawn_zone
 		)

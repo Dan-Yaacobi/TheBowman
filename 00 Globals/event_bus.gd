@@ -38,8 +38,6 @@ signal player_buff_ended(_buff_id: int)
 
 signal add_arrow_effect(_effect: Effect)
 
-signal arrow_hit_enemy(_target: Enemy)
-
 #signals that you went to the next rift level
 signal entered_rift_portal
 
@@ -55,12 +53,21 @@ signal equipment_interaction_exit(equip: Equipment)
 signal equip_item(equip: Equipment)
 signal destory_view_item(equip: Equipment)
 
-signal arrow_enemy_hit(_perfect: bool)
+signal arrow_enemy_hit(_perfect: bool, _arrow: Arrow, _target: Enemy)
 signal arrow_missed
 
 signal boss_health_bar(_bar: HealthBar)
 signal request_boss_health_bar
 signal hide_boss_health_bar
 
-
 signal in_main_menu
+
+signal fill_gauge(_amount: int)
+signal request_gauge(_only_full: bool)
+signal use_gauge(_amount: int)
+signal setup_gauge(_max_value: int, _texture: Texture, _tint: Color)
+signal disable_gauge()
+
+signal sword_hit(_enemy: Enemy)
+
+signal enemy_stunned(_enemy: Enemy)

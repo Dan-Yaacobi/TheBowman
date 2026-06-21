@@ -23,5 +23,6 @@ func _on_falling_death_body_entered(body: Node2D) -> void:
 	if body is Player:
 		EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	pass # Replace with function body.
+	
 func summon_effect(effect: Node2D) -> void:
-	add_child(effect)
+	call_deferred("add_child" , effect)
