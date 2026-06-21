@@ -4,17 +4,13 @@ class_name MainMenu extends GameWorld
 @onready var portals: Node2D = $Portals
 @onready var islands: Node2D = $Islands
 @onready var falling_death: FallingDeath = $FallingDeath
+@onready var loot_manager: LootManager = $LootManager
 
-func _ready() -> void:
-	pass
-
-func set_world() -> void:
-	EventBus.in_main_menu.emit()
-	EventBus.summon_effect.connect(summon_effect)
-	PlayerManager.player.heal(999, false)
+func extra_set_world_functions() -> void:
+	loot_manager.set_up()
 	
-func exit_world() -> void:
-	EventBus.summon_effect.disconnect(summon_effect)
+func extra_exit_world_functions() -> void:
+	loot_manager.unset_up()
 	
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
@@ -22,6 +18,13 @@ func spawn_position() -> Vector2:
 func _on_falling_death_body_entered(body: Node2D) -> void:
 	if body is Player:
 		EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-	pass # Replace with function body.
+
 func summon_effect(effect: Node2D) -> void:
+	effects.append(effect)
 	add_child(effect)
+
+func remove_effects() -> void:
+	for effect in effects:
+		if is_instance_valid(effect):
+			effect.queue_free()
+			

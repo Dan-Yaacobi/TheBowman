@@ -111,7 +111,7 @@ func fire_arrow() -> void:
 		else:
 			fired_arrow = arrow.instantiate()
 			fired_arrow.position = current_arrow.position
-			get_tree().root.add_child(fired_arrow)
+			EventBus.summon_effect.emit(fired_arrow)
 			fired_arrow.global_scale = current_arrow.global_scale
 			fired_arrow.set_texture(arrow_texture)
 			

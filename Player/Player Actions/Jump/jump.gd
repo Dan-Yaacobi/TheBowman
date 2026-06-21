@@ -45,7 +45,7 @@ func try_jump() -> void:
 		buffer_timer = 0.0
 		
 func jump() -> void:
-	player.velocity.y = player.stats.jump_height.value()
+	player.velocity.y = - player.stats.jump_height.value()
 	hold_time = 0.0
 	is_holding = true
 

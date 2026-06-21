@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://b6exhhmt0flal"
 
 [sub_resource type="Resource" id="Resource_cb1ri"]
 script = ExtResource("11_rmuev")
+trigger_type = 1
 tier = 1
 rarity_weight = 1.5
 metadata/_custom_type_script = "uid://egin2b0rm3e5"

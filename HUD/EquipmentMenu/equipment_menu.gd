@@ -112,10 +112,24 @@ func _build_player_stats() -> void:
 		var value: Variant = _stats.get(prop)
 		if value == null:
 			continue
-		var line: Label = Label.new()
-		line.text = display + ": " + _format_stat(value)
-		stats_panel.add_child(line)
 
+		if value is Stat:
+			var rtl: RichTextLabel = RichTextLabel.new()
+			rtl.bbcode_enabled = true
+			rtl.fit_content = true
+			rtl.scroll_active = false
+			rtl.text = display + ": " + _format_stat_rich(value)
+			stats_panel.add_child(rtl)
+		else:
+			var line: Label = Label.new()
+			line.text = display + ": " + _format_float(float(value))
+			stats_panel.add_child(line)
+
+func _get_stat_display_name(prop: String) -> String:
+	for entry: Array in PlayerStats.DISPLAY_STATS:
+		if entry[2] == prop:
+			return entry[1]
+	return prop
 
 func _build_item_stats(equipment: EquipmentData) -> void:
 	var header: Label = Label.new()
@@ -127,26 +141,60 @@ func _build_item_stats(equipment: EquipmentData) -> void:
 		var line: Label = Label.new()
 		var _sign: String = "+" if mod.amount >= 0 else ""
 		var type_label: String = " (x)" if mod.stat_type == Stat.buff_type.MULTIPLICATIVE else ""
-		line.text = mod.stat_name + ": " + _sign + "%.2f" % mod.amount + type_label
+		line.text = _get_stat_display_name(mod.stat_name) + ": " + _sign + _format_float(mod.amount) + type_label
 		stats_panel.add_child(line)
-
 
 func _refresh_abilities(hovered_item: EquipmentData = null) -> void:
 	for child: Node in abilities_panel.get_children():
 		child.queue_free()
 
-	var line: Label = Label.new()
-	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var header: Label = Label.new()
+	header.text = "— Abilities —"
+	abilities_panel.add_child(header)
 
-	if hovered_item != null and hovered_item.ability != null:
-		line.text = hovered_item.ability.get_tooltip()
-	else:
-		line.text = "No ability"
+	if hovered_item != null:
+		var line: Label = Label.new()
+		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.text = hovered_item.ability.get_tooltip() if hovered_item.ability != null else "None"
+		abilities_panel.add_child(line)
+		return
 
-	abilities_panel.add_child(line)
+	var any: bool = false
+	for slot in [_stats.bow, _stats.arrow, _stats.ring]:
+		if slot == null or slot.ability == null:
+			continue
+		any = true
+		var line: Label = Label.new()
+		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.text = slot.ability.get_tooltip()
+		abilities_panel.add_child(line)
 
+	if not any:
+		var line: Label = Label.new()
+		line.text = "None"
+		abilities_panel.add_child(line)
 
 func _format_stat(value: Variant) -> String:
 	if value is Stat:
-		return "%.2f" % value.value()
+		return _format_float(value.value())
 	return str(value)
+
+func _format_stat_rich(stat: Stat) -> String:
+	var base: float = stat.base_value
+	var total: float = stat.value()
+	var bonus: float = total - base
+
+	var base_str: String = _format_float(base)
+
+	if absf(bonus) < 0.001:
+		return base_str
+
+	var sign_str: String = "+" if bonus > 0 else ""
+	var color: String = "green" if bonus > 0 else "red"
+	return base_str + " [color=" + color + "]" + sign_str + _format_float(bonus) + "[/color]"
+	
+func _format_float(val: float) -> String:
+	var snapped: float = snappedf(val, 0.0001)
+	if snapped == int(snapped):
+		return str(int(snapped))
+	return str(snapped)

@@ -10,7 +10,7 @@ shader_parameter/transparency = 0.85
 shader_parameter/wood_light = Color(0.6, 0.4, 0.2, 1)
 shader_parameter/wood_dark = Color(0.3, 0.18, 0.08, 1)
 shader_parameter/grain_scale = 6.0
-shader_parameter/grain_distortion = 0.3
+shader_parameter/grain_distortion = 0.098000004655
 shader_parameter/border_width = 0.03
 shader_parameter/border_color = Color(0.15, 0.08, 0.02, 1)
 
@@ -40,11 +40,13 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Left" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer" unique_id=1937485095]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 1
 
-[node name="Slots" type="HBoxContainer" parent="Control/ColorRect/HBoxContainer/Left" unique_id=1555935853]
+[node name="Slots" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer/Left" unique_id=656980656]
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -57,24 +59,29 @@ layout_mode = 2
 [node name="RingSlot" parent="Control/ColorRect/HBoxContainer/Left/Slots" unique_id=1844597354 instance=ExtResource("3_lqv2w")]
 layout_mode = 2
 
-[node name="Right" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer" unique_id=290708286]
+[node name="Right" type="HBoxContainer" parent="Control/ColorRect/HBoxContainer" unique_id=1815253962]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="StatsPanel" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer/Right" unique_id=368770223]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="Control/ColorRect/HBoxContainer/Right" unique_id=995404614]
+layout_mode = 2
 
 [node name="AbilitiesPanel" type="VBoxContainer" parent="Control/ColorRect/HBoxContainer/Right" unique_id=2083031217]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CloseButton" type="Button" parent="Control" unique_id=766304629]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -980.0
-offset_top = 396.0
-offset_right = -874.0
-offset_bottom = 464.0
+offset_left = -421.0
+offset_top = 393.0
+offset_right = -315.0
+offset_bottom = 461.0
 grow_horizontal = 0
 text = "close"
