@@ -4,15 +4,27 @@
 [ext_resource type="AudioStream" uid="uid://32moefoiwsry" path="res://Audio/Player/arrow_shot-shorter.mp3" id="2_dwqjv"]
 [ext_resource type="AudioStream" uid="uid://de0bwrmr7d6ev" path="res://Audio/Player/arrow_hit.mp3" id="3_rbqa3"]
 [ext_resource type="AudioStream" uid="uid://ddd4tt73l1lxp" path="res://Audio/Player/coin_drop.mp3" id="4_dwqjv"]
+[ext_resource type="AudioStream" uid="uid://ch50qjs6ad3kf" path="res://Audio/Player/ArrowTwang.wav" id="5_d5k4q"]
+[ext_resource type="AudioStream" uid="uid://cdv8tbm8yystc" path="res://Audio/Player/click.wav" id="6_1uirl"]
+[ext_resource type="AudioStream" uid="uid://evjyr78iwk8r" path="res://Audio/Player/ArrowHit.mp3" id="6_xy2ov"]
+[ext_resource type="AudioStream" uid="uid://b4648gkxgtbpk" path="res://Audio/Player/StringPull.wav" id="7_27smg"]
+[ext_resource type="AudioStream" uid="uid://ce6wr3l7gcmgh" path="res://Audio/Player/ArrowRelease.wav" id="8_d5k4q"]
+[ext_resource type="AudioStream" uid="uid://bqgdu0jfx5wo8" path="res://Audio/Player/SwordSlash.wav" id="9_4ts0x"]
 
 [node name="SoundManager" type="Node2D" unique_id=21001669]
+process_mode = 3
+process_priority = -2
+process_thread_group = 1
+process_thread_group_order = 0
+process_thread_messages = 0
 script = ExtResource("1_2asnt")
 
 [node name="ArrowShot" type="AudioStreamPlayer2D" parent="." unique_id=469219128]
+process_mode = 3
 stream = ExtResource("2_dwqjv")
 volume_db = 8.602
 
-[node name="ArrowHit" type="AudioStreamPlayer2D" parent="." unique_id=962861024]
+[node name="ObjectDestroyed" type="AudioStreamPlayer2D" parent="." unique_id=962861024]
 stream = ExtResource("3_rbqa3")
 volume_db = -24.24
 pitch_scale = 0.49
@@ -20,3 +32,26 @@ pitch_scale = 0.49
 [node name="CoinDrop" type="AudioStreamPlayer2D" parent="." unique_id=1547779381]
 stream = ExtResource("4_dwqjv")
 volume_db = -15.0
+
+[node name="ArrowTwang" type="AudioStreamPlayer2D" parent="." unique_id=1356875244]
+process_mode = 3
+stream = ExtResource("5_d5k4q")
+pitch_scale = 1.2
+
+[node name="Click" type="AudioStreamPlayer2D" parent="." unique_id=1990340465]
+process_mode = 3
+stream = ExtResource("6_1uirl")
+volume_db = 20.0
+
+[node name="ArrowHitWall" type="AudioStreamPlayer2D" parent="." unique_id=1077082173]
+stream = ExtResource("6_xy2ov")
+
+[node name="StringPull" type="AudioStreamPlayer2D" parent="." unique_id=1129734896]
+stream = ExtResource("7_27smg")
+
+[node name="ArrowRelease" type="AudioStreamPlayer2D" parent="." unique_id=1550723838]
+stream = ExtResource("8_d5k4q")
+volume_db = -10.0
+
+[node name="SwordSlash" type="AudioStreamPlayer2D" parent="." unique_id=514691418]
+stream = ExtResource("9_4ts0x")

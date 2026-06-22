@@ -17,14 +17,5 @@ func spawn_position() -> Vector2:
 
 func _on_falling_death_body_entered(body: Node2D) -> void:
 	if body is Player:
-		EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-
-func summon_effect(effect: Node2D) -> void:
-	effects.append(effect)
-	call_deferred("add_child" ,effect)
-
-func remove_effects() -> void:
-	for effect in effects:
-		if is_instance_valid(effect):
-			effect.queue_free()
-			
+		body.kill()
+		

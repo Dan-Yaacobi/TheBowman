@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://b38tq7flgau6x"]
+
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_a8h2t"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="1_qwh4t"]
+
+[resource]
+script = ExtResource("1_a8h2t")
+display_name = "Basic Bow"
+texture = ExtResource("1_qwh4t")
+equipped_texture = ExtResource("1_qwh4t")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

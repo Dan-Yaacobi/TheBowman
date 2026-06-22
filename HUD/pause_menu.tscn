@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://b7f5hqch7fnns"]
+
+[ext_resource type="Script" uid="uid://cwjiukkamd1wl" path="res://HUD/pause_menu.gd" id="1_1f24j"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1041062043]
+process_mode = 3
+script = ExtResource("1_1f24j")
+
+[node name="Control" type="Control" parent="." unique_id=915076766]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainPanel" type="Control" parent="Control" unique_id=821011909]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/MainPanel" unique_id=1291008095]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -74.0
+offset_right = 44.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/MainPanel/VBox" unique_id=1597923587]
+layout_mode = 2
+text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="Control/MainPanel/VBox" unique_id=860901286]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Resume"
+
+[node name="StatsButton" type="Button" parent="Control/MainPanel/VBox" unique_id=781115130]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Stats"
+
+[node name="HowToPlayButton" type="Button" parent="Control/MainPanel/VBox" unique_id=1538382147]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "How To Play"
+
+[node name="SettingsButton" type="Button" parent="Control/MainPanel/VBox" unique_id=366728644]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Settings
+"
+
+[node name="HowToPlayPanel" type="Control" parent="Control" unique_id=994840626]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control/HowToPlayPanel" unique_id=1287175403]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -2.0
+offset_bottom = 192.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="Control/HowToPlayPanel" unique_id=1651227741]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/HowToPlayPanel/VBox" unique_id=969421844]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "HOW TO PLAY"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/HowToPlayPanel/VBox" unique_id=904114436]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[W / A / D]        Move
+[Space]            Jump (hold longer = higher)
+[F]            Dash toward cursor
+[Left Click]       Hold to charge, release to fire
+                   Full charge = perfect shot 
+[Right Click]      Sword swing
+[Tab]              Equipment
+[Esc]              Pause"
+fit_content = true
+scroll_active = false
+
+[node name="BackButton" type="Button" parent="Control/HowToPlayPanel/VBox" unique_id=2121562900]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Back"
+
+[node name="SettingsPanel" type="Control" parent="Control" unique_id=859489630]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/SettingsPanel" unique_id=202437124]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/SettingsPanel/VBox" unique_id=1387125705]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SETTINGS"
+
+[node name="FullscreenToggle" type="CheckButton" parent="Control/SettingsPanel/VBox" unique_id=926081801]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "FullScreen"
+
+[node name="MuteToggle" type="CheckButton" parent="Control/SettingsPanel/VBox" unique_id=1091439517]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Mute"
+
+[node name="BackButton" type="Button" parent="Control/SettingsPanel/VBox" unique_id=150435436]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Back"

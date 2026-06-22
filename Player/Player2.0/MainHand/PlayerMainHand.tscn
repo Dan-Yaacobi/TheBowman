@@ -463,7 +463,7 @@ _data = {
 [node name="PlayerMainHand" type="CharacterBody2D" unique_id=1400376021]
 script = ExtResource("1_grn42")
 arrow = ExtResource("2_y7ab3")
-min_shot_power = 0.3
+min_shot_power = 0.0
 max_offset = 15.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=23231684]

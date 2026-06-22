@@ -4,7 +4,7 @@ extends Camera2D
 @export var random_strength: float = 30.0
 @export var shake_fade: float = 5.0
 @export var move_speed_variant: float = 8.0
-
+@export var base_zoom: Vector2
 var rng = RandomNumberGenerator.new()
 var shake_strength: float = 0.0
 
@@ -17,6 +17,7 @@ func _ready() -> void:
 	EventBus.change_camera_focus.connect(change_focus)
 	EventBus.reset_camera_focus.connect(reset_focus)
 	EventBus.camera_shake.connect(apply_shake)
+	zoom = base_zoom
 	pass
 	
 func _physics_process(delta: float) -> void:
@@ -57,8 +58,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func zoom_out() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(4, 4), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "zoom", base_zoom - Vector2(1,1), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func zoom_in() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(5, 5), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "zoom", base_zoom, 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

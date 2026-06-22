@@ -30,3 +30,5 @@ script = ExtResource("1_u35a3")
 stream = ExtResource("2_lsei1")
 volume_db = -23.698
 pitch_scale = 0.7
+
+[connection signal="finished" from="." to="." method="_on_finished"]

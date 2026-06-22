@@ -29,13 +29,14 @@ func Enter() -> void:
 	charge_rate = PlayerManager.player.get_pull_speed()
 	entity.animation_player.speed_scale = charge_rate
 	finished_pulling = false
-	#pull_start_time = Time.get_unix_time_from_system()
+	EventBus.string_pull_sound.emit(charge_rate)
 	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
 	entity.animation_player.speed_scale = init_animation_speed
 	entity.shot_power = min(entity.shot_power, 1.0)
+	EventBus.string_pull_stop.emit()
 	pass
 	
 #what happens during process update in this state

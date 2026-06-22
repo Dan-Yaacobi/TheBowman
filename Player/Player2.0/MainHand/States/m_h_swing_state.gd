@@ -25,6 +25,7 @@ func _ready() -> void:
 func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
 		ability.activate_ability()
+	EventBus.sword_slash_sound.emit()
 	set_sword_size()
 	swing_cooldown.wait_time =PlayerManager.player.get_sword_cd()
 	entity.can_swing = false

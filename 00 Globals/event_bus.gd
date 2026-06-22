@@ -1,4 +1,8 @@
 extends Node
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 signal start_shooting
 signal arrow(_arrow: Arrow)
 
@@ -16,6 +20,14 @@ signal camera_shake(_strength: float, _fade: float)
 signal arrow_hit_sound
 signal arrow_shot_sound
 signal coin_drop_sound
+signal button_click_sound
+signal arrow_hit_wall_sound
+signal string_pull_sound(pitch: float)
+signal string_pull_stop
+signal arrow_release_sound(pitch: float)
+signal object_destroyed_sound
+signal enemy_died_sound(_audio: AudioStream)
+signal sword_slash_sound()
 
 signal leeched(amount: int, position: Vector2)
 

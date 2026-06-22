@@ -1,3 +1,4 @@
+EquipmentData
 ChunkData
 EnemyData
 EnemyEntry

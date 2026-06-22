@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_ludeg"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="2_3ofh7"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="2_qbdy4"]
+[ext_resource type="AudioStream" uid="uid://fm0m5qpwwaft" path="res://Audio/Player/BalloonPop.wav" id="2_sxjwv"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_sxjwv"]
 
 [sub_resource type="Resource" id="Resource_mhy26"]
 script = ExtResource("2_qbdy4")
+death_sound = ExtResource("2_sxjwv")
 metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_3waqt"]

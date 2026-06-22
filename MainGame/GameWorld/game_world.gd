@@ -31,14 +31,17 @@ func spawn_position() -> Vector2:
 
 func summon_effect(effect: Node2D) -> void:
 	effects.append(effect)
-	add_child(effect)
+	if effect.get_parent():
+		effect.reparent(self)
+	else:
+		call_deferred("add_child" ,effect)
 
 func remove_effects() -> void:
 	for effect in effects:
-		remove_effect(effect)
 		if is_instance_valid(effect):
 			effect.queue_free()
-
+			remove_effect(effect)
+			
 func remove_effect(effect: Node2D) -> void:
 	effects.erase(effect)
 

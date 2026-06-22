@@ -8,6 +8,7 @@ class_name FlyingRedAppleBoss extends Boss
 var wings_animation: AnimationPlayer
 
 var player: Player
+
 func extra_ready_functions() -> void:
 	scale *= 3
 	state_machine.Initialize(self)

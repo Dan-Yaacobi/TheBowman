@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
+[ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 
 [sub_resource type="Animation" id="Animation_7odlb"]
 length = 0.001
@@ -73,22 +74,34 @@ mouse_filter = 2
 
 [node name="HealthBar" parent="Control" unique_id=1431315462 instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
-layout_mode = 0
-offset_left = 38.0
-offset_top = 950.0
-offset_right = 102.833336
-offset_bottom = 970.0
-scale = Vector2(6, 6)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.82000005
+anchor_right = 0.34500003
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 0.063964844
+offset_right = -349.20004
+offset_bottom = -105.02881
+grow_vertical = 0
+scale = Vector2(5, 5)
 texture = ExtResource("3_33tmu")
 
 [node name="BossHealthBar" parent="Control" unique_id=828899742 instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)
-layout_mode = 0
-offset_left = 1451.0
-offset_top = 950.0
-offset_right = 1515.8334
-offset_bottom = 970.0
-scale = Vector2(6, 6)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.818
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5999756
+offset_top = 0.039978027
+offset_right = -339.59998
+offset_bottom = -106.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(5, 5)
 texture = ExtResource("3_ktoim")
 
 [node name="LevelStats" type="Label" parent="Control" unique_id=683982552]
@@ -97,12 +110,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="TotalBuffs" type="Control" parent="Control" unique_id=1937500504]
-visible = false
-anchors_preset = 0
-offset_left = 1593.0001
-offset_top = -596.00006
-offset_right = 1593.0001
-offset_bottom = -596.00006
+layout_mode = 1
+anchor_left = 0.84700006
+anchor_right = 0.84700006
+offset_left = -0.15991211
+offset_right = -0.15991211
+grow_horizontal = 0
 scale = Vector2(5, 5)
 script = ExtResource("4_njmlf")
 
@@ -228,11 +241,14 @@ alignment = 2
 last_wrap_alignment = 0
 
 [node name="Gauge" type="TextureProgressBar" parent="Control" unique_id=282092059]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 623.0
-offset_right = 68.0
-offset_bottom = 655.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 135.0
+offset_right = 64.0
+offset_bottom = 167.0
+grow_vertical = 2
 rotation = -1.5707964
 scale = Vector2(4, 4)
 step = 0.01
@@ -261,16 +277,23 @@ stat_names_dict = Dictionary[String, String]({
 })
 
 [node name="RiftLevel" type="Label" parent="." unique_id=1835615876]
-offset_left = 623.0
-offset_top = 91.0
-offset_right = 1134.0
-offset_bottom = 248.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.142
+anchor_right = 0.5
+anchor_bottom = 0.142
+offset_left = -254.0
+offset_top = -0.2400055
+offset_right = 257.0
+offset_bottom = 156.76
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 125
 text = "Rift Level:"
 
 [node name="EquipmentMenu" parent="." unique_id=74341901 instance=ExtResource("18_fjfvf")]
-offset = Vector2(500, 100)
-transform = Transform2D(1, 0, 0, 1, 500, 100)
+offset = Vector2(300, 100)
+transform = Transform2D(1, 0, 0, 1, 300, 100)
 
 [node name="DamagedFlash" type="ColorRect" parent="." unique_id=1183764540]
 visible = false
@@ -291,3 +314,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 1, 0, 1)
+
+[node name="PauseMenu" parent="." unique_id=1041062043 instance=ExtResource("20_65vjf")]

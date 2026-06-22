@@ -102,7 +102,22 @@ func _ready() -> void:
 	set_arrow_scene()
 	set_new_arrow()
 	activate_passive_abilities() 
-	
+
+const BASIC_BOW = preload("uid://b38tq7flgau6x")
+const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
+
+func reset_equipment() -> void:
+	for equip in equipped_nodes.values():
+		set_equipped_in_slot(EquipmentData.slots.BOW,BASIC_BOW)
+		set_equipped_in_slot(EquipmentData.slots.ARROW,BASIC_QUIVER)
+		var current = get_equipped_in_slot(EquipmentData.slots.RING)
+		if current:
+			current.unequip(stats)
+		stats.ring = null
+		
+func kill() -> void:
+	player_state_machine.ChangeState($PlayerStateMachine/Dead)
+
 func activate_passive_abilities() -> void:
 	for ability in get_abilities(PlayerAbility.TriggerType.PASSIVE):
 		ability.on_equipped()
@@ -146,7 +161,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		
 		if event.is_action_pressed("special"):
-			special_ability()
+			return
+			#special_ability()
 		
 		if event.is_action_pressed("grapple"):
 			return
@@ -420,7 +436,7 @@ func get_weapon_size() -> float:
 
 
 func get_sword_cd() -> float:
-	return max(stats.base_sword_cooldown.value(),1.0)
+	return max(stats.base_sword_cooldown.value(),0.5)
 
 func get_sword_size() -> float:
 	return stats.sword_size.value()

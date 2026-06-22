@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/Bows/0_BasicBow/BasicBow.tscn" id="10_x70vp"]
 [ext_resource type="PackedScene" uid="uid://dxk6tfmffd8bb" path="res://Player/Player2.0/OffHand/PlayerOffHand.tscn" id="11_croik"]
-[ext_resource type="Script" uid="uid://brrk05xujw1fq" path="res://Player/player_talents.gd" id="14_7w4lt"]
 [ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
 [ext_resource type="Script" uid="uid://bawb3ysex0r03" path="res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd" id="15_o1b5h"]
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
@@ -61,7 +60,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_xehjw"]
 script = ExtResource("4_yf47d")
-base_value = 0.75
+base_value = 0.6
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_vhfjx"]
@@ -75,7 +74,6 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_x2ho1"]
 script = ExtResource("4_yf47d")
-base_value = 2.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rqaa0"]
@@ -193,7 +191,6 @@ arrow_weight = SubResource("Resource_ustk3")
 crit_chance = SubResource("Resource_1ylbe")
 crit_modifier = SubResource("Resource_sqgfh")
 arrow_size = SubResource("Resource_xehjw")
-money = 123123
 weapon_scene = ExtResource("10_x70vp")
 arrow = SubResource("Resource_vuo2u")
 arrow_scene = ExtResource("6_7w4lt")
@@ -201,11 +198,6 @@ bow = SubResource("Resource_8agqw")
 sword_size = SubResource("Resource_rqaa0")
 base_sword_cooldown = SubResource("Resource_x2ho1")
 sword_damage = SubResource("Resource_lre2g")
-rift_level = 2
-
-[sub_resource type="Resource" id="Resource_xw4su"]
-script = ExtResource("14_7w4lt")
-metadata/_custom_type_script = "uid://brrk05xujw1fq"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
 size = Vector2(18, 3)
@@ -264,7 +256,6 @@ collision_layer = 65
 collision_mask = 17
 script = ExtResource("1_4bii6")
 stats = SubResource("Resource_sedti")
-talents = SubResource("Resource_xw4su")
 perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
 ExtResource("16_7w4lt"): -1
 })
@@ -289,11 +280,12 @@ position = Vector2(6, 14)
 position = Vector2(6, 14)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1994014699]
-zoom = Vector2(5, 5)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 script = ExtResource("8_qvxki")
 random_strength = 5.0
 shake_fade = 10.0
+base_zoom = Vector2(3.5, 3.5)
 
 [node name="PlayerStateMachine" parent="." unique_id=1204656686 instance=ExtResource("4_tfnw6")]
 

@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 func break_item(_hurt_box: HurtBox) -> void:
 	if data.interactable and not got_hit:
+		EventBus.object_destroyed_sound.emit()
 		got_hit = true
 		EventBus.camera_shake.emit(2.0,25.0)
 		sprite.material = sprite.material.duplicate()

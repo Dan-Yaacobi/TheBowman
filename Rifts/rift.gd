@@ -43,12 +43,6 @@ func extra_exit_world_functions() -> void:
 func spawn_position() -> Vector2:
 	return rift_levels[0].starting_chunk.spawn_position()
 
-func exit_scene(_player) -> void:
-	PlayerManager.player.hide_buffs()
-
-	if EventBus.summon_effect.is_connected(summon_effect):
-		EventBus.summon_effect.disconnect(summon_effect)
-	kill_all_enemies()
 	
 func _on_portal_entered() -> void:
 	for level in rift_levels:

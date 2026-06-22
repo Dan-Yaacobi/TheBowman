@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="6_cvgq2"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="7_3m2tr"]
 [ext_resource type="Resource" uid="uid://b0dc24d814x82" path="res://Rifts/RiftEnemySpawner/EnemyEntry/bird_boss_entry.tres" id="7_mle5s"]
-[ext_resource type="Resource" uid="uid://coxtd17m35had" path="res://Items/LootManager/ItemPools/ring_pool.tres" id="8_44ji0"]
 
 [node name="BossArena1" type="Node2D" unique_id=1476915705]
 script = ExtResource("1_3oh3i")
@@ -30,4 +29,3 @@ is_rift_portal = true
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("7_3m2tr")]
 rarity_bias = 2.0
-ring_pool = ExtResource("8_44ji0")

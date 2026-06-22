@@ -8,7 +8,8 @@ var _tween: Tween
 func _ready() -> void:
 	hide()
 	EventBus.setup_gauge.connect(setup)
-
+	EventBus.disable_gauge.connect(disable)
+	
 func setup(_max_value: int, _texture: Texture = null, _tint: Color = Color.WHITE) -> void:
 	max_value = _max_value
 	value = 0

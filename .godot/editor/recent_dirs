@@ -1,3 +1,6 @@
+res://00 Globals/
+res://HUD/
+res://Items/Equipments/DefaultEquipment/
 res://Rifts/Chunks/ChunkData/Treasure/
 res://Enemies/EvilBird/BirdBoss/
 res://Rifts/RiftEnemySpawner/EnemyEntry/
@@ -5,4 +8,3 @@ res://NPC/
 res://Player/Test/
 res://Enemies/EnemyData/EnemyValues/Balloon/
 res://Enemies/EnemyData/EnemyValues/Boss/
-res://00 Globals/

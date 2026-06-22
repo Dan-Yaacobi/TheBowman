@@ -17,6 +17,7 @@ var regular_shot: bool = true
 var can_pierce: bool = false
 
 var fired: bool = false
+var enabled: bool = false
 var perfect_shot: bool = false
 var shot_power_mod: float = 0
 var damage: int
@@ -41,7 +42,10 @@ func _ready() -> void:
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
-	scale *= PlayerManager.player.stats.arrow_size.value()
+	#print("scale " , scale, " scaling by " ,PlayerManager.player.stats.arrow_size.value())
+	#scale *= PlayerManager.player.stats.arrow_size.value()
+	#print("scale after scaling: ", scale)
+	
 	
 func hit(_hit_box) -> void:
 	if _hit_box is EnemyHitBox:
@@ -88,11 +92,13 @@ func clear_shot() -> void:
 		queue_free()
 
 func wall_clear_shot() -> void:
-	EventBus.arrow_hit_sound.emit()
 	queue_free()
 
 func _physics_process(delta: float) -> void:
 	if fired:
+		if not enabled:
+			enabled = true
+			enable_arrow()
 		cpu_particles.emitting = true
 		rotate_arrow(velocity.angle())
 		cpu_particles.direction = velocity
@@ -106,12 +112,13 @@ func set_shot_power_mod(_shot_power: float) -> void:
 func rotate_arrow(angle: float) -> void:
 	rotation = angle
 
-func enable_arrow() -> void:
-	hurt_box.monitoring = true
-	hurt_box.monitorable = true
+func enable_arrow(_enable: bool = true) -> void:
+	hurt_box.monitoring = _enable
+	hurt_box.monitorable = _enable
 
 func hit_wall(_val1, _val2, _val3, _val4) -> void:
 	if fired and _val2 is Island and not can_pass_walls:
+		EventBus.arrow_hit_wall_sound.emit()
 		sprite.call_deferred("reparent", _val2)
 		sprite.hit = true
 		if regular_shot and not succesfuly_hit:
@@ -119,4 +126,5 @@ func hit_wall(_val1, _val2, _val3, _val4) -> void:
 		wall_clear_shot()
 
 func set_texture(_texture: Texture) -> void:
-	sprite.texture = _texture
+	if sprite:
+		sprite.texture = _texture

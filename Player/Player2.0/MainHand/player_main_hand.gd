@@ -68,7 +68,8 @@ func draw_arrow() -> void:
 		add_child(_arrow)
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
-
+		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
+		
 func set_hand_direction() -> void:
 	rotation = hand_direction.angle() - PI/2
 	if current_arrow:
@@ -90,10 +91,11 @@ func new_arrow(_arrow: PackedScene) -> void:
 
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	if shot_power < 0.2:
+	if shot_power < min_shot_power:
 		current_arrow.free()
 	else:
 		if current_arrow:
+			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
 			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 			fire_arrow()
@@ -112,10 +114,11 @@ func fire_arrow() -> void:
 		else:
 			fired_arrow = arrow.instantiate()
 			fired_arrow.position = current_arrow.position
-			EventBus.summon_effect.emit(fired_arrow)
-			fired_arrow.global_scale = current_arrow.global_scale
-			fired_arrow.set_texture(arrow_texture)
 			
+			fired_arrow.set_texture(current_arrow.sprite.texture)
+			
+		fired_arrow.global_scale = current_arrow.global_scale
+
 		@warning_ignore("narrowing_conversion")
 		fired_arrow.possible_pierce = PlayerManager.player.stats.arrow_pierce.value()
 		fired_arrow.can_pass_walls = PlayerManager.player.stats.can_pass_walls
@@ -131,18 +134,16 @@ func fire_arrow() -> void:
 			fired_arrow.perfect_shot = true
 		fired_arrow.velocity = calc_shot_velocity(effective_power, spread_direction)
 		fired_arrow.fired = true
+		fired_arrow.enabled = false
 		fired_arrow.set_shot_power_mod(effective_power)
-		fired_arrow.enable_arrow()
 		fired_arrow.calc_dmg(effective_power)
 		fired_arrow.calc_knockback(effective_power)
 		fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 		var release_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.RELEASE)
 		for ability in release_abilities:
 			ability.activate_ability(null, fired_arrow)
-		if i != 0:
-			fired_arrow.reparent(get_tree().root)
-		else:
-			current_arrow.reparent(get_tree().root)
+		
+		EventBus.summon_effect.emit(fired_arrow)
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = current_arrow
 	
