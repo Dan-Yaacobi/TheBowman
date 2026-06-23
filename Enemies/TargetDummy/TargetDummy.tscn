@@ -70,9 +70,9 @@ script = ExtResource("9_odses")
 
 [node name="PerfectShotMissonLabel" type="Label" parent="." unique_id=1165345273]
 offset_left = -80.0
-offset_top = -112.0
+offset_top = -132.0
 offset_right = 200.0
-offset_bottom = -69.0
+offset_bottom = -89.0
 text = "Hold left mouse, aim with cursor
 Land 3 Perfect shots on the target dummy"
 

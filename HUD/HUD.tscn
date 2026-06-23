@@ -350,4 +350,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "I promise to do better"
 
+[node name="Label2" type="Label" parent="." unique_id=1581698220]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "Alpha version: 1.0"
+
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]
