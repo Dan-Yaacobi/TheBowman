@@ -1,10 +1,14 @@
 class_name DeathScreen extends Control
+@onready var tally: Label = $Tally
+@onready var rift_level: Label = $RiftLevel
 
 func _ready() -> void:
 	visible = false
 	EventBus.player_died.connect(death_screen)
 
 func death_screen() -> void:
+	tally.text = "Total Enemies Killed: " + str(PlayerManager.player.enemies_killed)
+	rift_level.text = "You have reached rift level " + str(PlayerManager.player.stats.rift_level)
 	modulate.a = 0.0
 	visible = true
 	get_tree().paused = true
@@ -14,4 +18,5 @@ func death_screen() -> void:
 	
 func _on_button_pressed() -> void:
 	get_tree().paused = false
+	PlayerManager.player.enemies_killed = 0
 	visible = false

@@ -61,6 +61,13 @@ _data = {
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
 
+[node name="Label" type="Label" parent="." unique_id=325342012]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 72.0
+offset_bottom = 25.0
+text = "ESC - Menu"
+
 [node name="Control" type="Control" parent="." unique_id=1300124923]
 layout_mode = 3
 anchors_preset = 15
@@ -134,10 +141,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 3.0
-offset_right = 275.0
-offset_bottom = 208.0
+offset_left = 110.0
+offset_top = 28.0
+offset_right = 273.0
+offset_bottom = 233.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -149,7 +156,7 @@ text = "x0"
 script = ExtResource("9_t1yhm")
 
 [node name="Coin" type="Sprite2D" parent="Control" unique_id=480222187]
-position = Vector2(61, 58)
+position = Vector2(59, 83)
 scale = Vector2(5, 5)
 texture = ExtResource("11_fwgky")
 hframes = 5
@@ -240,6 +247,7 @@ theme_override_font_sizes/font_size = 125
 text = "Rift Level:"
 
 [node name="EquipmentMenu" parent="." unique_id=74341901 instance=ExtResource("18_fjfvf")]
+visible = false
 offset = Vector2(300, 100)
 transform = Transform2D(1, 0, 0, 1, 300, 100)
 
@@ -288,18 +296,44 @@ color = Color(0.33333334, 0, 0, 1)
 [node name="Label" type="Label" parent="DeathScreen" unique_id=1384030250]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.44400004
-anchor_right = 0.5
-anchor_bottom = 0.44400004
-offset_left = -94.0
-offset_top = -31.680023
-offset_right = 87.0
-offset_bottom = 31.319977
+anchor_left = 0.42100003
+anchor_top = 0.40600002
+anchor_right = 0.42100003
+anchor_bottom = 0.40600002
+offset_left = 0.11993408
+offset_top = -31.320007
+offset_right = 181.11993
+offset_bottom = 31.679993
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "You Died"
+
+[node name="Tally" type="Label" parent="DeathScreen" unique_id=1845898578]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42200002
+anchor_top = 0.47200003
+anchor_right = 0.42200002
+anchor_bottom = 0.47200003
+offset_left = -0.16003418
+offset_top = -9.840027
+offset_right = 136.83997
+offset_bottom = 10.159973
+text = "total enemies killed: "
+
+[node name="RiftLevel" type="Label" parent="DeathScreen" unique_id=995812714]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.5
+anchor_right = 0.423
+anchor_bottom = 0.5
+offset_left = -0.44000244
+offset_top = -11.0
+offset_right = 179.56
+offset_bottom = 9.0
+text = "You have reached rift level:"
 
 [node name="Button" type="Button" parent="DeathScreen" unique_id=1252187196]
 layout_mode = 1

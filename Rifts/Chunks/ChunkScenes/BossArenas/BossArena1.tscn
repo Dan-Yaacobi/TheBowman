@@ -29,3 +29,12 @@ is_rift_portal = true
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("7_3m2tr")]
 rarity_bias = 2.0
+
+[node name="BossIncomingLabel" type="Label" parent="." unique_id=1904126388]
+offset_left = -87.0
+offset_top = -111.0
+offset_right = 489.0
+offset_bottom = 14.0
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 100
+text = "Boss Incoming"

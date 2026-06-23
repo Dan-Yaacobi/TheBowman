@@ -17,7 +17,6 @@ var current_view_item: Equipment
 var flash_tween: Tween
 
 func _ready() -> void:
-
 	interaction_ui.visible = false
 	PlayerManager.player.money_changed.connect(update_money)
 	coin_animation.play("Rotate")
@@ -34,8 +33,6 @@ func _ready() -> void:
 	boss_health_bar.hide()
 	EventBus.request_boss_health_bar.connect(send_boss_health_bar)
 	EventBus.hide_boss_health_bar.connect(hide_boss_health_bar)
-
-	# Wire PauseMenu to EquipmentMenu so Stats button can open it
 	pause_menu.setup(equipment_menu)
 
 

@@ -7,7 +7,6 @@ func _ready() -> void:
 
 func Enter() -> void:
 	player.velocity = Vector2.ZERO
-	
 
 func Exit() -> void:
 	player.reset_equipment()
@@ -17,7 +16,6 @@ func Exit() -> void:
 	player.health_bar._set_health(player.stats.max_hp)
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	EventBus.player_died.emit()
-	pass
 	
 func Process(_delta: float) -> State:
 	return idle

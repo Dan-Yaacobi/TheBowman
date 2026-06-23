@@ -118,7 +118,7 @@ func fire_arrow() -> void:
 			fired_arrow = arrow.instantiate()
 			fired_arrow.position = current_arrow.position
 			
-			fired_arrow.set_texture(current_arrow.sprite.texture)
+			fired_arrow.texture = current_arrow.sprite.texture
 			
 		fired_arrow.global_scale = current_arrow.global_scale
 

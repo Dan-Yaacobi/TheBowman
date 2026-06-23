@@ -26,6 +26,7 @@ func _ready() -> void:
 func Enter() -> void:
 	for ability in  PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DASH):
 		ability.activate_ability()
+	EventBus.dash_preformed.emit()
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()
 	player.can_dash = false

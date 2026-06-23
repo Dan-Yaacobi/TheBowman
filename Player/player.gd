@@ -71,6 +71,8 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
+var target_dummy_tutorial_passed: bool = false
+
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,
 	EquipmentData.slots.ARROW: null,
@@ -93,7 +95,7 @@ func _ready() -> void:
 	buff_handler.set_entity(self)
 	EventBus.equipment_interaction_enter.connect(equipment_interaction_begin)
 	EventBus.equipment_interaction_exit.connect(equipment_interaction_end)
-	
+	EventBus.enemy_died.connect(count_enemy_death)
 	EventBus.arrow_enemy_hit.connect(add_shot_streak)
 	EventBus.arrow_missed.connect(reset_shot_streak)
 	
@@ -104,6 +106,11 @@ func _ready() -> void:
 
 const BASIC_BOW = preload("uid://b38tq7flgau6x")
 const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
+
+var enemies_killed: int = 0
+
+func count_enemy_death(_enemy: Enemy) -> void:
+	enemies_killed+=1
 
 func reset_equipment() -> void:
 	for equip in equipped_nodes.values():

@@ -1,19 +1,30 @@
 [gd_scene format=3 uid="uid://ccg8yfaghk8ga"]
 
-[ext_resource type="Script" uid="uid://bqdytigxin6bg" path="res://Enemies/Scripts/enemy.gd" id="1_s7iq5"]
+[ext_resource type="Script" uid="uid://bmpreiwxnrkg0" path="res://Enemies/TargetDummy/target_dummy.gd" id="1_5k5yt"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="2_5hp6r"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_p5wai"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_5k5yt"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_5ndgq"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_u5jre"]
 [ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="4_qb1bn"]
 [ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn" id="6_5k5yt"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="8_qb1bn"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_odses"]
 
-[sub_resource type="Resource" id="Resource_qb1bn"]
+[sub_resource type="Resource" id="Resource_vd7t3"]
+script = ExtResource("3_5ndgq")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_37em1"]
 script = ExtResource("3_5k5yt")
-max_hp = 1000000
+max_hp = 10000000
+move_speed = SubResource("Resource_vd7t3")
+avg_coins_dropped = 1000
+can_be_knockedback = false
+drop_chance = 100.0
 has_health_bar = false
+equip_amount = 15
+rarity_skew = 5.0
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ieskh"]
@@ -28,11 +39,12 @@ height = 64.0
 scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 17
-script = ExtResource("1_s7iq5")
-stats = SubResource("Resource_qb1bn")
+script = ExtResource("1_5k5yt")
+stats = SubResource("Resource_37em1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1219711078]
 texture = ExtResource("4_qb1bn")
+flip_h = true
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1903068361]
 collision_layer = 4
@@ -55,3 +67,27 @@ shape = SubResource("CapsuleShape2D_p5wai")
 
 [node name="EnemyStateMachine" type="Node2D" parent="." unique_id=1839491342]
 script = ExtResource("9_odses")
+
+[node name="PerfectShotMissonLabel" type="Label" parent="." unique_id=1165345273]
+offset_left = -80.0
+offset_top = -112.0
+offset_right = 200.0
+offset_bottom = -69.0
+text = "Hold left mouse, aim with cursor
+Land 3 Perfect shots on the target dummy"
+
+[node name="ProgressLabel" type="Label" parent="." unique_id=1806812481]
+offset_left = -46.0
+offset_top = -56.0
+offset_right = 53.0
+offset_bottom = -36.0
+text = "Perfect Shots: 0"
+
+[node name="FinishLabel" type="Label" parent="." unique_id=857568397]
+offset_left = -66.0
+offset_top = -102.0
+offset_right = 108.0
+offset_bottom = -36.0
+text = "Good Job!
+Head right to start your rift
+click W at the portal"

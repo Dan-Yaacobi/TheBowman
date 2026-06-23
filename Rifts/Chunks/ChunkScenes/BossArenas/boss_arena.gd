@@ -5,6 +5,7 @@ class_name BossArena1 extends GameWorld
 @onready var boss_island: BossIsland = $BossIsland
 @onready var portal: Portal = $Portal
 @onready var loot_manager: LootManager = $LootManager
+@onready var boss_incoming_label: Label = $BossIncomingLabel
 
 var boss_died: bool = false
 var boss_health_bar: HealthBar
@@ -25,10 +26,14 @@ func extra_exit_world_functions() -> void:
 func set_boss_health_bar(_bar: HealthBar) -> void:
 	if _bar:
 		boss_health_bar = _bar
-
+		
 func on_world_ready() -> void:
-	PlayerManager.player.camera.zoom_out()
 	portal.disable()
+	boss_incoming_label.modulate.a = 1.0
+	var tween: Tween = create_tween()
+	tween.tween_property(boss_incoming_label, "modulate:a", 0.0, 1.5)
+	await tween.finished
+	PlayerManager.player.camera.zoom_out()
 	await get_tree().create_timer(0.5).timeout
 	if boss_spawner:
 		boss_spawner.spawn(PlayerManager.player.stats.rift_level, boss_health_bar)

@@ -32,6 +32,7 @@ var can_pass_walls: bool = false
 var crit_chance: float = 0.0
 var crit: bool = false
 var arrow_shot_power: float
+var texture: Texture2D
 
 func _ready() -> void:
 	cpu_particles.emitting = false
@@ -42,6 +43,7 @@ func _ready() -> void:
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
+	set_texture(texture)
 	#print("scale " , scale, " scaling by " ,PlayerManager.player.stats.arrow_size.value())
 	#scale *= PlayerManager.player.stats.arrow_size.value()
 	#print("scale after scaling: ", scale)
@@ -126,5 +128,4 @@ func hit_wall(_val1, _val2, _val3, _val4) -> void:
 		wall_clear_shot()
 
 func set_texture(_texture: Texture) -> void:
-	if sprite:
-		sprite.texture = _texture
+	sprite.texture = _texture

@@ -10,7 +10,6 @@ func set_arrow(_arrow: Arrow) -> void:
 	if _arrow:
 		arrow = _arrow
 		patch_damage = floori(arrow.damage / 4)
-		burned_effect.emitting = true
 
 func _physics_process(_delta: float) -> void:
 	set_direction(arrow.velocity)

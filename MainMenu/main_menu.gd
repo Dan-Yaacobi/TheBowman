@@ -6,9 +6,17 @@ class_name MainMenu extends GameWorld
 @onready var falling_death: FallingDeath = $FallingDeath
 @onready var loot_manager: LootManager = $LootManager
 
+@onready var rift_portal: Portal = $Portals/RiftPortal
+
 func extra_set_world_functions() -> void:
 	EventBus.in_main_menu.emit()
 	loot_manager.set_up()
+	if not PlayerManager.player.target_dummy_tutorial_passed:
+		rift_portal.disable()
+	EventBus.tutorial_done.connect(tutorial_done)
+	
+func tutorial_done() -> void:
+	rift_portal.enable()
 	
 func extra_exit_world_functions() -> void:
 	loot_manager.unset_up()

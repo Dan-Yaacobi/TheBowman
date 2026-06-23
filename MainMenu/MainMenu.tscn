@@ -19,31 +19,8 @@ size = Vector2(10949, 680)
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
 
-[node name="HowToPlay" type="Label" parent="." unique_id=1358765188]
-visible = false
-offset_left = 123.0
-offset_top = 2.0
-offset_right = 4317.0
-offset_bottom = 2546.0
-scale = Vector2(0.04, 0.04)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.75, 0.75, 0.75, 1)
-theme_override_colors/font_outline_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 35
-theme_override_constants/shadow_outline_size = 35
-theme_override_font_sizes/font_size = 250
-text = "How To Play:
-A ,D: Move
-S: Slam Down
-SpaceBar: Jump (Can Double Jump)
-Left Mouse: Shoot
-Right Mouse: Special Ability
-M: Back to Menu"
-
 [node name="PlayerSpawn" parent="." unique_id=1049349633 instance=ExtResource("12_g1826")]
-position = Vector2(207, 96)
+position = Vector2(208, 83)
 
 [node name="Islands" type="Node2D" parent="." unique_id=2124960339]
 
@@ -62,6 +39,9 @@ position = Vector2(-1, -22)
 [node name="Island13" parent="Islands" unique_id=1990421653 instance=ExtResource("13_qvidt")]
 position = Vector2(208, -12)
 
+[node name="Island21" parent="Islands" unique_id=391047933 instance=ExtResource("13_qvidt")]
+position = Vector2(-46, 25)
+
 [node name="Island19" parent="Islands" unique_id=1362480300 instance=ExtResource("13_qvidt")]
 position = Vector2(160, -100)
 
@@ -71,6 +51,10 @@ floating = true
 
 [node name="Island12" parent="Islands" unique_id=1035312660 instance=ExtResource("14_5lv0r")]
 position = Vector2(146, 13)
+floating = true
+
+[node name="Island20" parent="Islands" unique_id=1428564683 instance=ExtResource("14_5lv0r")]
+position = Vector2(9, -3)
 floating = true
 
 [node name="Island16" parent="Islands" unique_id=323879176 instance=ExtResource("14_5lv0r")]
@@ -113,7 +97,7 @@ position = Vector2(223, -68)
 floating = true
 
 [node name="Island10" parent="Islands" unique_id=1343375228 instance=ExtResource("15_167x7")]
-position = Vector2(74, 33)
+position = Vector2(79, -5)
 floating = true
 
 [node name="Island5" parent="Islands" unique_id=2017175388 instance=ExtResource("15_167x7")]
@@ -123,14 +107,10 @@ position = Vector2(258, 109)
 position = Vector2(450, 103)
 
 [node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
-position = Vector2(22, 97)
+position = Vector2(10, 93)
 
 [node name="Island8" parent="Islands" unique_id=1728728178 instance=ExtResource("16_24r6y")]
 position = Vector2(57, 106)
-floating = true
-
-[node name="Island11" parent="Islands" unique_id=283845787 instance=ExtResource("16_24r6y")]
-position = Vector2(-8, 79)
 floating = true
 
 [node name="Island9" parent="Islands" unique_id=1814454497 instance=ExtResource("16_24r6y")]
@@ -139,12 +119,12 @@ position = Vector2(-39, 67)
 [node name="Portals" type="Node2D" parent="." unique_id=1828147291]
 
 [node name="Portal" parent="Portals" unique_id=10218384 instance=ExtResource("13_npjie")]
-position = Vector2(149, 96)
+position = Vector2(160, -123)
 color = Color(0.99333346, 0.6, 1, 1)
 destination = 4
 flip_h = true
 
-[node name="Portal4" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
+[node name="RiftPortal" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
 position = Vector2(370, 46)
 color = Color(1, 0.45, 0.45, 1)
 destination = 2
