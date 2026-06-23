@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bgeqj8w0uhj8" path="res://HUD/BuffDisplay/buff_display.gd" id="1_nqvvu"]
 [ext_resource type="Texture2D" uid="uid://br8hnwfoojauc" path="res://Player/Buffs/FireBuffs/Sprites/Pyromaniac.png" id="2_5jou1"]
 [ext_resource type="Texture2D" uid="uid://dl8tlwpls8btc" path="res://Player/Buffs/buff_overlay.png" id="3_5jou1"]
+[ext_resource type="Texture2D" uid="uid://cqlu7xgytlg7v" path="res://Player/Buffs/Sprites/DamageBuff.png" id="3_vk8y7"]
 
 [node name="BuffDisplay" type="Control" unique_id=202544369]
 layout_mode = 3
@@ -23,6 +24,7 @@ anchor_bottom = 0.41300002
 offset_right = 48.01
 offset_bottom = 47.48
 scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_vk8y7")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=756207340]
 layout_mode = 0
@@ -40,10 +42,10 @@ texture_progress = ExtResource("3_5jou1")
 
 [node name="Stacks" type="Label" parent="." unique_id=494458744]
 layout_mode = 0
-offset_left = 13.0
-offset_top = -1.999999
-offset_right = 93.0
-offset_bottom = 311.0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 89.0
+offset_bottom = 317.0
 scale = Vector2(0.03, 0.03)
 theme_override_font_sizes/font_size = 250
 text = "1"

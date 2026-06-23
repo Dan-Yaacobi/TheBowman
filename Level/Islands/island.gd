@@ -1,33 +1,43 @@
 class_name Island extends StaticBody2D
-
 @onready var objects_spawn_markers: ObjectSpawnMarkers = $ObjectsSpawnMarkers
-
 @export var start_island: bool = false
 @export var floating: bool
-
+@export var moving_island: bool = false
+@export var end_point: Vector2
+var start_point: Vector2
 var float_amplitude: float = 3.0
 var float_speed: float = 2.0
 var base_height: float
-
 var has_game_object: bool = false
+var _move_tween: Tween
+
 func _ready() -> void:
 	base_height = global_position.y
-	float_speed *= randf_range(0.5,1.5)
-	float_amplitude *= randf_range(0.5,1.5)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	float_speed *= randf_range(0.5, 1.5)
+	float_amplitude *= randf_range(0.5, 1.5)
+	start_point = global_position
+	if moving_island:
+		floating = false
+		_start_moving()
+
 func _process(_delta: float) -> void:
 	if floating:
 		global_position.y = base_height + sin(Time.get_ticks_msec() * 0.001 * float_speed) * float_amplitude
 
+func _start_moving() -> void:
+	var distance: float = start_point.distance_to(end_point)
+	var duration: float = distance / 80.0
+	_move_tween = create_tween()
+	_move_tween.set_loops()
+	_move_tween.tween_property(self, "global_position", end_point, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
 func disable() -> void:
-	set_collision_layer_value(5,false)
-	set_collision_mask_value(1,false)
+	set_collision_layer_value(5, false)
+	set_collision_mask_value(1, false)
 
 func enable() -> void:
-	set_collision_layer_value(5,true)
-	set_collision_mask_value(1,true)
-	pass
+	set_collision_layer_value(5, true)
+	set_collision_mask_value(1, true)
 
 func spawn_game_object() -> bool:
 	var possible_amount: int = objects_spawn_markers.get_total_possible_spawns()

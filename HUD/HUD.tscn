@@ -4,9 +4,6 @@
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
 [ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="3_33tmu"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
-[ext_resource type="Script" uid="uid://07lk15kopw0g" path="res://Player/BuffDisplay/buff_display_control.gd" id="4_njmlf"]
-[ext_resource type="Script" uid="uid://cpowcmubsuafi" path="res://Player/flow_container.gd" id="5_lkt0t"]
-[ext_resource type="PackedScene" uid="uid://duv405amm7ir" path="res://Player/BuffDisplay/Buff.tscn" id="6_6i5cd"]
 [ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="7_lkt0t"]
 [ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
@@ -20,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
+[ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
 
 [sub_resource type="Animation" id="Animation_7odlb"]
 length = 0.001
@@ -76,13 +74,14 @@ mouse_filter = 2
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.82000005
+anchor_left = 0.004
+anchor_top = 0.86
 anchor_right = 0.34500003
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 0.063964844
+offset_left = -0.12000036
+offset_top = 0.7999878
 offset_right = -349.20004
-offset_bottom = -105.02881
+offset_bottom = -80.0
 grow_vertical = 0
 scale = Vector2(5, 5)
 texture = ExtResource("3_33tmu")
@@ -91,14 +90,14 @@ texture = ExtResource("3_33tmu")
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.67
-anchor_top = 0.818
+anchor_left = 0.68500006
+anchor_top = 0.86100006
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.5999756
-offset_top = 0.039978027
-offset_right = -339.59998
-offset_bottom = -106.0
+offset_left = 0.2000122
+offset_top = 0.079956055
+offset_right = -323.19995
+offset_bottom = -80.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -108,57 +107,6 @@ texture = ExtResource("3_ktoim")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="TotalBuffs" type="Control" parent="Control" unique_id=1937500504]
-layout_mode = 1
-anchor_left = 0.84700006
-anchor_right = 0.84700006
-offset_left = -0.15991211
-offset_right = -0.15991211
-grow_horizontal = 0
-scale = Vector2(5, 5)
-script = ExtResource("4_njmlf")
-
-[node name="FlowContainer" type="FlowContainer" parent="Control/TotalBuffs" unique_id=1966368116]
-layout_direction = 2
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -304.40002
-offset_top = 320.6
-offset_right = -233.40002
-offset_bottom = 328.6
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/h_separation = 1
-vertical = true
-script = ExtResource("5_lkt0t")
-
-[node name="Buff" parent="Control/TotalBuffs/FlowContainer" unique_id=1853198063 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff2" parent="Control/TotalBuffs/FlowContainer" unique_id=1953363489 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff3" parent="Control/TotalBuffs/FlowContainer" unique_id=962988819 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff4" parent="Control/TotalBuffs/FlowContainer" unique_id=1518487579 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff5" parent="Control/TotalBuffs/FlowContainer" unique_id=1243918760 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff6" parent="Control/TotalBuffs/FlowContainer" unique_id=1281087535 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff7" parent="Control/TotalBuffs/FlowContainer" unique_id=516307007 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
-
-[node name="Buff8" parent="Control/TotalBuffs/FlowContainer" unique_id=1566104910 instance=ExtResource("6_6i5cd")]
-layout_mode = 2
 
 [node name="SpecialAbilityCD" type="Sprite2D" parent="Control" unique_id=400582482]
 visible = false
@@ -186,10 +134,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
 layout_mode = 0
-offset_left = 116.0
-offset_top = 66.0
-offset_right = 279.0
-offset_bottom = 271.0
+offset_left = 112.0
+offset_top = 3.0
+offset_right = 275.0
+offset_bottom = 208.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -201,7 +149,7 @@ text = "x0"
 script = ExtResource("9_t1yhm")
 
 [node name="Coin" type="Sprite2D" parent="Control" unique_id=480222187]
-position = Vector2(62.000004, 122)
+position = Vector2(61, 58)
 scale = Vector2(5, 5)
 texture = ExtResource("11_fwgky")
 hframes = 5
@@ -224,14 +172,14 @@ offset_bottom = 0.0
 scale = Vector2(5, 5)
 
 [node name="BuffDisplayer" parent="Control" unique_id=866180409 instance=ExtResource("18_33ejm")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 1318.0
-offset_top = 0.99999976
-offset_right = 1422.8
-offset_bottom = 43.999996
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78200006
+anchor_right = 0.94600004
+anchor_bottom = 0.11400001
+offset_left = 0.040039063
+offset_right = -167.87988
+offset_bottom = -65.880005
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(5, 5)
@@ -316,3 +264,56 @@ mouse_filter = 2
 color = Color(0, 1, 0, 1)
 
 [node name="PauseMenu" parent="." unique_id=1041062043 instance=ExtResource("20_65vjf")]
+
+[node name="DeathScreen" type="Control" parent="." unique_id=537322321]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_2gu3h")
+
+[node name="ColorRect" type="ColorRect" parent="DeathScreen" unique_id=493062055]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.33333334, 0, 0, 1)
+
+[node name="Label" type="Label" parent="DeathScreen" unique_id=1384030250]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.44400004
+anchor_right = 0.5
+anchor_bottom = 0.44400004
+offset_left = -94.0
+offset_top = -31.680023
+offset_right = 87.0
+offset_bottom = 31.319977
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "You Died"
+
+[node name="Button" type="Button" parent="DeathScreen" unique_id=1252187196]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.54
+anchor_right = 0.5
+anchor_bottom = 0.54
+offset_left = -107.0
+offset_top = -13.800018
+offset_right = 108.0
+offset_bottom = 14.199982
+grow_horizontal = 2
+grow_vertical = 2
+text = "I promise to do better"
+
+[connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

@@ -12,7 +12,7 @@ signal buff_over(id: int)
 
 var time_accumulator: float = 0.0
 var tick_interval: float
-var stacks: int = 0
+var stacks: int = 1
 var entity: Node2D
 
 func _ready() -> void:
@@ -43,6 +43,8 @@ func _process(delta: float) -> void:
 
 func add_stack() -> void:
 	if stacks < max_stacks:
+		if constant_buff:
+			apply_buff_effect()
 		stacks += 1
 		
 func buff_end() -> void:

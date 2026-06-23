@@ -39,9 +39,6 @@ func Physics(_delta: float) -> State:
 		return idle
 	if hit_somthing:
 		return idle
-
-	if player.stats.hp <= 0:
-		return dead
 		
 	player.velocity.y += 2000 * _delta
 

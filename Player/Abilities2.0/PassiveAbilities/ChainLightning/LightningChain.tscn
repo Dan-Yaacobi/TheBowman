@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dyqhi7oqu5goq" path="res://Player/Abilities2.0/PassiveAbilities/ChainLightning/lightning_chain.gd" id="1_q20iu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q20iu"]
-radius = 30.016663
+radius = 43.011627
 
 [node name="LightningChain" type="Node2D" unique_id=1806886690]
 script = ExtResource("1_q20iu")

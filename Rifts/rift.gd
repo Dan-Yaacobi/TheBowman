@@ -31,7 +31,6 @@ func extra_exit_world_functions() -> void:
 	loot_manager.unset_up()
 	rift_enemy_spawner.enemy_spawned.disconnect(add_enemy)
 	rift_generator.rift_created.disconnect(add_rift_level)
-	PlayerManager.player.hide_buffs()
 	#rift_generator._reset_world()
 	for level in rift_levels:
 		level.queue_free()

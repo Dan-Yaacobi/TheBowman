@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfa48x8y20ltv"]
+[gd_scene format=3 uid="uid://dfa48x8y20ltv"]
 
 [ext_resource type="Script" uid="uid://cahv7qfpeb6ye" path="res://HUD/Scene Transition/scene_transition.gd" id="1_3ot75"]
 
@@ -74,11 +74,11 @@ _data = {
 &"fade_out": SubResource("Animation_3jc2v")
 }
 
-[node name="SceneTransition" type="CanvasLayer"]
+[node name="SceneTransition" type="CanvasLayer" unique_id=359742116]
 process_mode = 3
 script = ExtResource("1_3ot75")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=761047339]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,7 +88,7 @@ grow_vertical = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 4
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1202486442]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,8 +98,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
-libraries = {
-&"": SubResource("AnimationLibrary_roy3g")
-}
-autoplay = "default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control" unique_id=1062852858]
+libraries/ = SubResource("AnimationLibrary_roy3g")
+autoplay = &"default"

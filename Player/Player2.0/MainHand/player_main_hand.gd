@@ -12,10 +12,11 @@ signal shot_power_amount(amount)
 
 @export var arrow: PackedScene
 @export var arrow_texture: Texture
-@export var min_shot_power: float = 0.5
+@export var min_shot_power: float = 0.1
 @export var max_offset: float
-
+@export var weak_shot_punish: float = 2.0
 @onready var sword: Sword = $MainHandStateMachine/Swing/Sword
+@onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 
 var current_arrow: Arrow = null
 var hand_direction: Vector2
@@ -28,12 +29,14 @@ var can_swing: bool = true
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
 	swing_cooldown.timeout.connect(swing_off_cooldown)
-	pass
+	EventBus.player_died.connect(reset)
 	
 func _process(_delta: float) -> void:
 	if PlayerManager.player.is_idle(): # and not GlobalPlayer.is_prev_jump():
 		calculate_direction_to_cursor()
-	pass
+
+func reset() -> void:
+	main_hand_state_machine.ChangeState(idle)
 
 func connect_hands(_off_hand) -> void:
 	if _off_hand:
@@ -103,7 +106,7 @@ func release_arrow() -> void:
 
 func fire_arrow() -> void:
 	var direction = hand_direction.normalized()
-	var effective_power: float = lerpf(0.0, 1.0, pow(shot_power, 0.5))
+	var effective_power: float = lerpf(0.0, 1.0, pow(shot_power, weak_shot_punish))
 	var arrow_count = PlayerManager.player.stats.arrow_count.value()
 	var spread_angle = deg_to_rad(12.0)
 	

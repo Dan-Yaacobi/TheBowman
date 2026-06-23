@@ -11,17 +11,14 @@ var finished: bool = false
 
 var base_sword_scale: Vector2
 
-# store a refernece to the player this belongs to
 func init() -> void:
 	entity.animation_player.animation_finished.connect(swing_done)
 	slash_hurt_box.monitoring = false
 	base_sword_scale = sword.scale
-	pass
 	
 func _ready() -> void:
 	pass
 
-#what happens when the player enters this state
 func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
 		ability.activate_ability()
@@ -39,30 +36,24 @@ func Enter() -> void:
 		entity.animation_player.play("Swing")
 	slash_hurt_box.monitoring = true
 
-	pass
 	
-#what happens when the player exits this state
 func Exit() -> void:
 	slash_hurt_box.monitoring = false
 	swing_cooldown.start()
 	reset_sword_size()
-	pass
+
 	
-#what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
 
 	if finished:
 		return idle
 	set_direction()
-	#await get_tree().create_timer(entity.animation_player.get_animation("Swing").length).timeout
-	#return idle
+
 	return null
 	
-#what happens during _physics_process update in this state
 func Physics(_delta: float) -> MainHandState:
 	return null
 	
-#what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
 	return null
 

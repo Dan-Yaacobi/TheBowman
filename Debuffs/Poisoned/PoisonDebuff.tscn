@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw404fcvhcw52"]
+[gd_scene format=3 uid="uid://dw404fcvhcw52"]
 
 [ext_resource type="Script" uid="uid://wnrvyvmy3b3i" path="res://Debuffs/Poisoned/poison_debuff.gd" id="1_jp5x6"]
 [ext_resource type="PackedScene" uid="uid://bnqx58hrgjg7y" path="res://Debuffs/Poisoned/poisoned_effect.tscn" id="2_uqmnf"]
 
-[node name="PoisonDebuff" type="Node2D"]
+[node name="PoisonDebuff" type="Node2D" unique_id=61241645]
 script = ExtResource("1_jp5x6")
 
-[node name="PoisonedEffect" parent="." instance=ExtResource("2_uqmnf")]
+[node name="PoisonedEffect" parent="." unique_id=1742512960 instance=ExtResource("2_uqmnf")]
 local_coords = true

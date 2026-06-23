@@ -21,7 +21,7 @@ func _ready() -> void:
 	if texture:
 		texture_rect.texture = texture
 	stacks_label.text = ""
-	if stacks > 0:
+	if stacks > 1:
 		stacks_label.text = str(stacks)
 	if constant_buff:
 		texture_progress_bar.hide()

@@ -4,13 +4,17 @@ class_name PlayerOffHand extends CharacterBody2D
 @onready var off_hand_state_machine: OffHandStateMachine = $OffHandStateMachine
 @onready var bow_sprite: Sprite2D = $Bow/Sprite2D
 @onready var string: Line2D = $String
+@onready var idle: IdleOffHandState = $OffHandStateMachine/Idle
 
 var main_hand: PlayerMainHand
 var shoulder: Node2D
 
 func _ready() -> void:
 	off_hand_state_machine.Initialize(self)
-	pass
+	EventBus.player_died.connect(reset)
+
+func reset() -> void:
+	off_hand_state_machine.ChangeState(idle)
 	
 func _process(_delta: float) -> void:
 	pass

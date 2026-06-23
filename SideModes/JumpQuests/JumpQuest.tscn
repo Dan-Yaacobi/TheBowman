@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dohgku6qppse0"]
+
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="1_ayj6a"]
+[ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="2_ofjom"]
+[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="3_be314"]
+[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="4_l7c17"]
+[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="5_4nr7p"]
+
+[node name="JumpQuest" type="Node2D" unique_id=1127174774]
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("1_ayj6a")]
+position = Vector2(0, 7)
+
+[node name="Island2" parent="." unique_id=391047933 instance=ExtResource("2_ofjom")]
+position = Vector2(69, -73)
+
+[node name="Island3" parent="." unique_id=1428564683 instance=ExtResource("3_be314")]
+position = Vector2(100, -209)
+
+[node name="Island4" parent="." unique_id=869652895 instance=ExtResource("4_l7c17")]
+position = Vector2(148, -145)
+
+[node name="Island5" parent="." unique_id=1968571780 instance=ExtResource("5_4nr7p")]
+position = Vector2(-37, 5)

@@ -47,8 +47,6 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> State:
-	if player.stats.hp <= 0:
-		return dead
 	return null
 	
 #what happens during _physics_process update in this state

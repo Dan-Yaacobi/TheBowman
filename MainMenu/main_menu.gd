@@ -7,6 +7,7 @@ class_name MainMenu extends GameWorld
 @onready var loot_manager: LootManager = $LootManager
 
 func extra_set_world_functions() -> void:
+	EventBus.in_main_menu.emit()
 	loot_manager.set_up()
 	
 func extra_exit_world_functions() -> void:

@@ -19,8 +19,6 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> State:
-	if player.stats.hp <= 0:
-		return dead
 	if player.direction != 0.0:
 		return walking
 	var deceleration = player.stats.ground_dec if player.is_on_floor() else player.stats.air_dec

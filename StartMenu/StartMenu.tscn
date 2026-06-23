@@ -25,11 +25,11 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=1062812586]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.523
-anchor_right = 0.523
-offset_left = -415.44
-offset_right = 416.56
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -255.0
+offset_right = 255.0
 offset_bottom = 150.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.7176471, 0.29411766, 0.13333334, 1)
@@ -41,7 +41,7 @@ theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("2_w0qft")
 theme_override_font_sizes/font_size = 120
-text = "Infinite Archer"
+text = "Sky Archer"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1655116290]
 layout_mode = 1

@@ -7,5 +7,6 @@
 script = ExtResource("1_l146i")
 ID = 123
 texture = ExtResource("2_ohpnu")
+max_stacks = 99
 constant_buff = true
 duration = 9999.0

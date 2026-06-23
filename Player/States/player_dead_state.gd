@@ -7,8 +7,8 @@ func _ready() -> void:
 
 func Enter() -> void:
 	player.velocity = Vector2.ZERO
-	pass
 	
+
 func Exit() -> void:
 	player.reset_equipment()
 	if player.stats.reset_upgrades:
@@ -16,6 +16,7 @@ func Exit() -> void:
 	player.stats.hp = player.stats.max_hp
 	player.health_bar._set_health(player.stats.max_hp)
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
+	EventBus.player_died.emit()
 	pass
 	
 func Process(_delta: float) -> State:

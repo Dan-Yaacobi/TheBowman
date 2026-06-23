@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-signal died
 signal money_changed
 signal took_hit
 signal critical_hit
@@ -26,6 +25,7 @@ signal dash_finished
 @onready var hook: Hook = $GrappleHook/Hook
 @onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var quiver: Sprite2D = $PlayerBody/Quiver
+@onready var dead: PlayerDeadState = $PlayerStateMachine/Dead
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
@@ -41,7 +41,6 @@ var can_hook: bool = true
 const PERMA_EFFECT: int = -1
 const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
 var health_bar: HealthBar
-var total_buffs: TotalBuffs
 var special_ability_cd: Sprite2D
 var direction: float
 var direction_side: bool = false
@@ -114,26 +113,17 @@ func reset_equipment() -> void:
 		if current:
 			current.unequip(stats)
 		stats.ring = null
-		
+		for node_key in equipped_nodes.keys():
+			equipped_nodes[node_key] = null
+
 func kill() -> void:
-	player_state_machine.ChangeState($PlayerStateMachine/Dead)
+	if not player_state_machine.curr_state == dead:
+		player_state_machine.ChangeState(dead)
 
 func activate_passive_abilities() -> void:
 	for ability in get_abilities(PlayerAbility.TriggerType.PASSIVE):
 		ability.on_equipped()
 		
-func add_display_buff(buff: PlayerUpgrade) -> void:
-	if buff:
-		total_buffs.add_display_buff(buff)
-		
-func hide_buffs() -> void:
-	total_buffs.visible = false
-	
-func show_buffs() -> void:
-	total_buffs.visible = true
-
-func get_buff_tooltip(_id: int) -> String:
-	return ""
 	
 func _process(_delta: float) -> void:
 	if stats.hp > 0:
@@ -147,9 +137,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("up"):
 			if current_portal:
 				current_portal.enter()
-		if event.is_action_pressed("Menu"):
-			EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-		
+
 		if event.is_action_pressed("Jump"):
 			jump_action.request_jump()
 
@@ -159,13 +147,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("shoot",true):
 			shoot()
 		
+		#if event.is_action_pressed("Menu"):
+			#EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 		
-		if event.is_action_pressed("special"):
-			return
+		#if event.is_action_pressed("special"):
 			#special_ability()
 		
-		if event.is_action_pressed("grapple"):
-			return
+		#if event.is_action_pressed("grapple"):
 			#grapple()
 	
 func special_ability() -> void:
@@ -304,7 +292,8 @@ func hit_player(_hurt_box: HurtBox) -> void:
 		health_bar.reduce_health(_hurt_box.damage)
 		apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
 		display_combat_text(_hurt_box.damage, Color.RED)
-		
+		if stats.hp <= 0:
+			kill()
 func start_invincibilty() -> void:
 	modulate.a = 0.5
 	invincible = true

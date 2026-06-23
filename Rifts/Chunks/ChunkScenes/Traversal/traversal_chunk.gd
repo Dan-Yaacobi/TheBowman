@@ -12,7 +12,7 @@ func extra_ready_functions() -> void:
 		if child is Island:
 			islands.append(child)
 	spawn_game_objects()
-	
+
 func get_spawn_markers() -> Array:
 	return spawn_markers.get_children()
 	

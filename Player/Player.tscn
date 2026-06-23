@@ -178,7 +178,7 @@ dash_power = SubResource("Resource_7w4lt")
 move_speed = SubResource("Resource_kveqs")
 max_jumps = 1
 jump_height = SubResource("Resource_d3djb")
-basic_shot_power = 150.0
+basic_shot_power = 120.0
 perfect_shot_window = SubResource("Resource_eennk")
 perfect_shot_bonus = SubResource("Resource_1a3po")
 arrow_damage = SubResource("Resource_eu7rt")
@@ -262,6 +262,8 @@ ExtResource("16_7w4lt"): -1
 
 [node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
 z_index = 1
+collision_layer = 0
+collision_mask = 0
 
 [node name="Quiver" type="Sprite2D" parent="PlayerBody" unique_id=557666127]
 z_index = -1
@@ -272,9 +274,14 @@ texture = ExtResource("40_rqaa0")
 
 [node name="PlayerMainHand" parent="." unique_id=1139132622 instance=ExtResource("10_wo5nf")]
 position = Vector2(-8, 14)
+collision_layer = 0
+collision_mask = 0
+weak_shot_punish = 0.75
 
 [node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
 position = Vector2(6, 14)
+collision_layer = 0
+collision_mask = 0
 
 [node name="OffHandShoulder" type="Node2D" parent="." unique_id=1530002589]
 position = Vector2(6, 14)

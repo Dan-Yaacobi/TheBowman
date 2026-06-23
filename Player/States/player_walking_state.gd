@@ -19,8 +19,6 @@ func Exit() -> void:
 
 #what happens during process update in this state
 func Process(_delta: float) -> State:
-	if player.stats.hp <= 0:
-		return dead
 	if player.direction == 0:
 		return idle
 	var target_x = player.direction * player.get_move_speed()

@@ -1,7 +1,6 @@
 class_name HUD extends CanvasLayer
 
 @onready var level_stats: Label = $Control/LevelStats
-@onready var total_buffs: TotalBuffs = $Control/TotalBuffs
 @onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
@@ -67,10 +66,6 @@ func send_boss_health_bar() -> void:
 
 func hide_boss_health_bar() -> void:
 	boss_health_bar.hide()
-
-
-func get_total_buffs() -> TotalBuffs:
-	return total_buffs
 
 
 func get_special_ability_cd() -> Sprite2D:
