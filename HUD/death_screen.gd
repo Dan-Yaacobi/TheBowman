@@ -6,7 +6,9 @@ func _ready() -> void:
 	visible = false
 	EventBus.player_died.connect(death_screen)
 
-func death_screen() -> void:
+func death_screen(_show: bool = true) -> void:
+	if not _show:
+		return
 	tally.text = "Total Enemies Killed: " + str(PlayerManager.player.enemies_killed)
 	rift_level.text = "You have reached rift level " + str(PlayerManager.player.stats.rift_level)
 	modulate.a = 0.0

@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 	if PlayerManager.player.is_idle(): # and not GlobalPlayer.is_prev_jump():
 		calculate_direction_to_cursor()
 
-func reset() -> void:
+func reset(_m: bool) -> void:
 	main_hand_state_machine.ChangeState(idle)
 
 func connect_hands(_off_hand) -> void:

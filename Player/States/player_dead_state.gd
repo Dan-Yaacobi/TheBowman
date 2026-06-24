@@ -1,6 +1,7 @@
 class_name PlayerDeadState extends State
 
 @onready var idle: PlayerIdleState = $"../Idle"
+var display_death_screen: bool = true
 
 func _ready() -> void:
 	pass
@@ -15,7 +16,7 @@ func Exit() -> void:
 	player.stats.hp = player.stats.max_hp
 	player.health_bar._set_health(player.stats.max_hp)
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-	EventBus.player_died.emit()
+	EventBus.player_died.emit(display_death_screen)
 	
 func Process(_delta: float) -> State:
 	return idle

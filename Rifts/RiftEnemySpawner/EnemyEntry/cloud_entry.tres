@@ -8,7 +8,7 @@
 script = ExtResource("3_rsflc")
 scene = ExtResource("2_wyfbs")
 data = ExtResource("1_c504u")
-cost = 3
+cost = 2
 min_level = 5
 base_weight = 4.0
 weight_curve = 0.5

@@ -55,6 +55,7 @@ layout_mode = 2
 text = "Pull speed = 1.1"
 
 [node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=732498011]
+visible = false
 layout_mode = 2
 alignment = 1
 

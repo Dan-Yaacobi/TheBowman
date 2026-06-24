@@ -4,6 +4,7 @@ signal enemy_spawned(enemy: Enemy)
 
 @export var enemies: Enemies
 @export var enemy_pool: Array[EnemyEntry]
+@export var time_between_spawns: float = 1.0
 @onready var rift: Rift = $".."
 
 const SIDE_PATH_INTENSITY: float = 0.4
@@ -63,7 +64,7 @@ func _do_spawn(entries: Array[EnemyEntry]) -> void:
 		_active_enemies.append(new_enemy)
 		new_enemy.tree_exited.connect(_on_enemy_removed.bind(new_enemy), CONNECT_ONE_SHOT)
 		enemy_spawned.emit(new_enemy)
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(time_between_spawns).timeout
 
 
 func _on_enemy_removed(enemy: Enemy) -> void:

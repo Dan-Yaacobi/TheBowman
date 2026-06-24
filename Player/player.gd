@@ -123,8 +123,9 @@ func reset_equipment() -> void:
 		for node_key in equipped_nodes.keys():
 			equipped_nodes[node_key] = null
 
-func kill() -> void:
+func kill(_death_screen: bool = true) -> void:
 	if not player_state_machine.curr_state == dead:
+		dead.display_death_screen = _death_screen
 		player_state_machine.ChangeState(dead)
 
 func activate_passive_abilities() -> void:

@@ -50,7 +50,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_eu7rt"]
 script = ExtResource("4_yf47d")
-base_value = 3.0
+base_value = 1.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_nm06d"]
@@ -135,7 +135,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_eennk"]
 script = ExtResource("4_yf47d")
-base_value = 0.5
+base_value = 0.75
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_yyr8h"]
@@ -188,10 +188,10 @@ arrow_pierce = SubResource("Resource_nm06d")
 pull_speed = SubResource("Resource_yyr8h")
 pushback_power = SubResource("Resource_r04tr")
 arrow_weight = SubResource("Resource_ustk3")
+can_pass_walls = true
 crit_chance = SubResource("Resource_1ylbe")
 crit_modifier = SubResource("Resource_sqgfh")
 arrow_size = SubResource("Resource_xehjw")
-money = 1231
 weapon_scene = ExtResource("10_x70vp")
 arrow = SubResource("Resource_vuo2u")
 arrow_scene = ExtResource("6_7w4lt")
@@ -277,7 +277,8 @@ texture = ExtResource("40_rqaa0")
 position = Vector2(-8, 14)
 collision_layer = 0
 collision_mask = 0
-weak_shot_punish = 0.75
+min_shot_power = 0.15
+weak_shot_punish = 0.5
 
 [node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
 position = Vector2(6, 14)

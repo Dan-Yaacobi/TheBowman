@@ -26,5 +26,5 @@ func spawn_position() -> Vector2:
 
 func _on_falling_death_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.kill()
+		body.kill(false)
 		

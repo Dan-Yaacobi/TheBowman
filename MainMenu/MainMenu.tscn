@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
-[ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="13_qvidt"]
 [ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="14_5lv0r"]
@@ -37,25 +36,8 @@ position = Vector2(99, 114)
 [node name="TargetDummy" parent="Islands/Island6" unique_id=603628097 instance=ExtResource("17_5lv0r")]
 position = Vector2(-1, -22)
 
-[node name="Island13" parent="Islands" unique_id=1990421653 instance=ExtResource("13_qvidt")]
-position = Vector2(208, -12)
-
-[node name="Island21" parent="Islands" unique_id=391047933 instance=ExtResource("13_qvidt")]
-position = Vector2(-46, 25)
-
-[node name="Island19" parent="Islands" unique_id=1362480300 instance=ExtResource("13_qvidt")]
-position = Vector2(160, -100)
-
 [node name="Island3" parent="Islands" unique_id=1047838277 instance=ExtResource("14_5lv0r")]
 position = Vector2(298, 90)
-floating = true
-
-[node name="Island12" parent="Islands" unique_id=1035312660 instance=ExtResource("14_5lv0r")]
-position = Vector2(146, 13)
-floating = true
-
-[node name="Island20" parent="Islands" unique_id=1428564683 instance=ExtResource("14_5lv0r")]
-position = Vector2(9, -3)
 floating = true
 
 [node name="Island16" parent="Islands" unique_id=323879176 instance=ExtResource("14_5lv0r")]
@@ -89,23 +71,8 @@ position = Vector2(400, 104)
 [node name="Island4" parent="Islands" unique_id=1949571672 instance=ExtResource("15_167x7")]
 position = Vector2(149, 118)
 
-[node name="Island14" parent="Islands" unique_id=192330461 instance=ExtResource("15_167x7")]
-position = Vector2(268, -28)
-floating = true
-
-[node name="Island18" parent="Islands" unique_id=491443278 instance=ExtResource("15_167x7")]
-position = Vector2(223, -68)
-floating = true
-
-[node name="Island10" parent="Islands" unique_id=1343375228 instance=ExtResource("15_167x7")]
-position = Vector2(79, -5)
-floating = true
-
 [node name="Island5" parent="Islands" unique_id=2017175388 instance=ExtResource("15_167x7")]
 position = Vector2(258, 109)
-
-[node name="Island15" parent="Islands" unique_id=1442143414 instance=ExtResource("15_167x7")]
-position = Vector2(450, 103)
 
 [node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
 position = Vector2(10, 93)
@@ -114,20 +81,10 @@ position = Vector2(10, 93)
 position = Vector2(57, 106)
 floating = true
 
-[node name="Island9" parent="Islands" unique_id=1814454497 instance=ExtResource("16_24r6y")]
-position = Vector2(-39, 67)
-
 [node name="Portals" type="Node2D" parent="." unique_id=1828147291]
-
-[node name="Portal" parent="Portals" unique_id=10218384 instance=ExtResource("13_npjie")]
-position = Vector2(160, -123)
-color = Color(0.99333346, 0.6, 1, 1)
-destination = 4
-flip_h = true
 
 [node name="RiftPortal" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
 position = Vector2(370, 46)
-color = Color(1, 0.45, 0.45, 1)
 destination = 2
 flip_h = true
 
@@ -142,8 +99,5 @@ shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("13_7t2hb")]
-
-[node name="Cleric" parent="." unique_id=158854308 instance=ExtResource("13_gej64")]
-position = Vector2(154, 100)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

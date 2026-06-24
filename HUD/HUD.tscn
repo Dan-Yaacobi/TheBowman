@@ -182,11 +182,12 @@ scale = Vector2(5, 5)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.78200006
-anchor_right = 0.94600004
-anchor_bottom = 0.11400001
+anchor_right = 0.95600003
+anchor_bottom = 0.109000005
 offset_left = 0.040039063
-offset_right = -167.87988
-offset_bottom = -65.880005
+offset_top = 3.000002
+offset_right = -222.80798
+offset_bottom = -76.100006
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(5, 5)
@@ -350,4 +351,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "I promise to do better"
 
+[node name="Feedback" type="Button" parent="." unique_id=1875819819]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_right = 97.5
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Send Feedback/Report a Bug"
+
+[node name="Version" type="Label" parent="." unique_id=1192848870]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "Alpha v1.1"
+
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="Feedback" to="." method="_on_feedback_pressed"]

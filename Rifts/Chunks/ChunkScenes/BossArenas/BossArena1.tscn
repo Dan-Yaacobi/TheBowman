@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="6_cvgq2"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="7_3m2tr"]
 [ext_resource type="Resource" uid="uid://b0dc24d814x82" path="res://Rifts/RiftEnemySpawner/EnemyEntry/bird_boss_entry.tres" id="7_mle5s"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="10_6ebgl"]
 
 [node name="BossArena1" type="Node2D" unique_id=1476915705]
 script = ExtResource("1_3oh3i")
@@ -38,3 +39,6 @@ offset_bottom = 14.0
 scale = Vector2(0.3, 0.3)
 theme_override_font_sizes/font_size = 100
 text = "Boss Incoming"
+
+[node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("10_6ebgl")]
+position = Vector2(0, 439)

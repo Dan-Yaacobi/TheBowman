@@ -19,6 +19,7 @@ texture = ExtResource("2_f68h2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2032839967]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_sp085")
+one_way_collision = true
 
 [node name="ObjectsSpawnMarkers" parent="." unique_id=1079830238 instance=ExtResource("3_pkq1e")]
 position = Vector2(0, -7)

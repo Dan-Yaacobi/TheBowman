@@ -142,6 +142,11 @@ func _wrap_in_panel(label: StatLabel) -> PanelContainer:
 	panel.add_theme_stylebox_override("panel", style)
 	panel.add_child(label)
 	return panel
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Interact"):
+		equip_new_item.emit()
+		
 func _on_equip_button_pressed() -> void:
 	equip_new_item.emit()
 

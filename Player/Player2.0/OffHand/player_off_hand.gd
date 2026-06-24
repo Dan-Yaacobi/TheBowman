@@ -13,7 +13,7 @@ func _ready() -> void:
 	off_hand_state_machine.Initialize(self)
 	EventBus.player_died.connect(reset)
 
-func reset() -> void:
+func reset(_m: bool) -> void:
 	off_hand_state_machine.ChangeState(idle)
 	
 func _process(_delta: float) -> void:

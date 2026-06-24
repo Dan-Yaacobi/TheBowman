@@ -1,14 +1,20 @@
 class_name JumpAction extends Node2D
+
 @onready var player: Player = $".."
 @onready var jump_particles: CPUParticles2D = $JumpParticles
 
+const DROP_CLEAR_DISTANCE: float = 32.0
+const BUFFER_WINDOW = 0.1
+const MAX_HOLD = 0.3
+
+var dropping: bool = false
+var drop_start_y: float = 0.0
 var jumps: int = 1
 var hold_time: float = 0.0
 var is_holding: bool = false
 var buffer_timer: float = 0.0
 var can_jump: bool = true
-const BUFFER_WINDOW = 0.1
-const MAX_HOLD = 0.3
+
 
 func _ready() -> void:
 	jumps = player.stats.max_jumps
@@ -19,9 +25,21 @@ func _physics_process(delta: float) -> void:
 	if buffer_timer > 0:
 		buffer_timer -= delta
 		try_jump()
+	if dropping and player.position.y > drop_start_y + DROP_CLEAR_DISTANCE:
+		dropping = false
 		
 func request_jump() -> void:
-	buffer_timer = BUFFER_WINDOW 
+	if Input.is_action_pressed("Down"):
+		drop_through_platform()
+		return
+	buffer_timer = BUFFER_WINDOW
+
+func drop_through_platform() -> void:
+	if not player.is_on_floor() or dropping:
+		return
+	dropping = true
+	drop_start_y = player.position.y
+	player.position.y += 2.0
 	
 func handle_jumps() -> void:
 	jumps -= 1

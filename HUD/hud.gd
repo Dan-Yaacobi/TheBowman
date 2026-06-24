@@ -101,3 +101,8 @@ func show_rift_label() -> void:
 	rift_level_label.modulate.a = 1.0
 	var tween: Tween = create_tween()
 	tween.tween_property(rift_level_label, "modulate:a", 0.0, 1.5).set_delay(1)
+
+
+func _on_feedback_pressed() -> void:
+	pause_menu._set_state(PauseMenu.PauseState.MAIN)
+	OS.shell_open("https://game-feedback-app.vercel.app/")

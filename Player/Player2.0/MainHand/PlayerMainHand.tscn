@@ -419,7 +419,8 @@ metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 [sub_resource type="CircleShape2D" id="CircleShape2D_30xy1"]
 
 [sub_resource type="Curve" id="Curve_sgu6n"]
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Animation" id="Animation_rg8yt"]
@@ -529,23 +530,25 @@ debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)
 [node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing" unique_id=1585976196]
 
 [node name="PerfectAimParticles" type="CPUParticles2D" parent="." unique_id=490070079]
-z_index = 1
+z_index = 2
 position = Vector2(0, 5)
 scale = Vector2(0.5, 0.5)
 emitting = false
 amount = 500
-lifetime = 0.7
+lifetime = 1.4000000000000001
 one_shot = true
-speed_scale = 4.0
+speed_scale = 8.0
 explosiveness = 1.0
 emission_shape = 5
-emission_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+emission_points = PackedVector2Array(5, 5, -5, 5, -5, -5, 5, -5)
 emission_normals = PackedVector2Array(0, 1, -1, 0, 0, -1, 1, 0)
 emission_colors = PackedColorArray()
 spread = 0.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_sgu6n")
 
 [node name="SlashEffect" type="Sprite2D" parent="." unique_id=1901214077]
