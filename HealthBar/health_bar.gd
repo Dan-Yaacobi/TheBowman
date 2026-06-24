@@ -40,4 +40,5 @@ func update_tooltip() -> void:
 
 func increase_max_hp(_new_value: int) -> void:
 	max_value = max(max_value,_new_value)
+	ghost_bar.max_value = max_value
 	update_tooltip()

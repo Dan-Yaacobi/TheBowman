@@ -191,6 +191,7 @@ arrow_weight = SubResource("Resource_ustk3")
 crit_chance = SubResource("Resource_1ylbe")
 crit_modifier = SubResource("Resource_sqgfh")
 arrow_size = SubResource("Resource_xehjw")
+money = 1231
 weapon_scene = ExtResource("10_x70vp")
 arrow = SubResource("Resource_vuo2u")
 arrow_scene = ExtResource("6_7w4lt")
