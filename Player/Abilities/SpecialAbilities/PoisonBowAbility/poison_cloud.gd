@@ -19,7 +19,7 @@ func poison_damage(_body) -> void:
 
 func _physics_process(delta: float) -> void:
 	if emitting == true:
-		if collision_shape.shape.radius < 75:
-			collision_shape.shape.radius += 15*delta
+		if collision_shape.shape.radius < 80:
+			collision_shape.shape.radius += 30*delta
 		else:
 			queue_free()

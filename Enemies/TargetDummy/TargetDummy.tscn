@@ -85,10 +85,10 @@ offset_bottom = -36.0
 text = "Perfect Shots: 0"
 
 [node name="FinishLabel" type="Label" parent="." unique_id=857568397]
-offset_left = -66.0
-offset_top = -102.0
-offset_right = 108.0
-offset_bottom = -36.0
+offset_left = -76.0
+offset_top = -126.0
+offset_right = 98.0
+offset_bottom = -60.0
 text = "Good Job!
 Head right to start your rift
 click W at the portal"

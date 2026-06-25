@@ -41,4 +41,4 @@ theme_override_font_sizes/font_size = 100
 text = "Boss Incoming"
 
 [node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("10_6ebgl")]
-position = Vector2(0, 439)
+position = Vector2(3, 1045)

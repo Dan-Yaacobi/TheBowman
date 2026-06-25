@@ -21,3 +21,4 @@ func thunder_hit(body) -> void:
 
 func stop_monitoring() -> void:
 	area.monitoring = false
+	queue_free()

@@ -4,18 +4,18 @@ class_name SwingMainHandState extends MainHandState
 @onready var swing_cooldown: Timer = $SwingCooldown
 @onready var slash_hurt_box: HurtBox = $Sword/SlashHurtBox
 @onready var slash_animation_player: AnimationPlayer = $"../../SlashEffect/SlashAnimationPlayer"
-
 @onready var sword: Sword = $Sword
 
 var finished: bool = false
-
 var base_sword_scale: Vector2
+var enemies_hit: Array[Enemy] = []
 
 func init() -> void:
 	entity.animation_player.animation_finished.connect(swing_done)
 	slash_hurt_box.monitoring = false
+	slash_hurt_box.swing_state = self
 	base_sword_scale = sword.scale
-	
+
 func _ready() -> void:
 	pass
 
@@ -24,7 +24,7 @@ func Enter() -> void:
 		ability.activate_ability()
 	EventBus.sword_slash_sound.emit()
 	set_sword_size()
-	swing_cooldown.wait_time =PlayerManager.player.get_sword_cd()
+	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
 	entity.can_swing = false
 	finished = false
 	slash_hurt_box.damage = floor(PlayerManager.player.stats.sword_damage.value())
@@ -36,26 +36,29 @@ func Enter() -> void:
 		entity.animation_player.play("Swing")
 	slash_hurt_box.monitoring = true
 
-	
 func Exit() -> void:
 	slash_hurt_box.monitoring = false
 	swing_cooldown.start()
 	reset_sword_size()
+	enemies_hit.clear()
 
-	
 func Process(_delta: float) -> MainHandState:
-
 	if finished:
 		return idle
 	set_direction()
-
 	return null
-	
+
 func Physics(_delta: float) -> MainHandState:
 	return null
-	
+
 func HandleInput(_event: InputEvent) -> MainHandState:
 	return null
+
+func try_hit_enemy(enemy: Enemy) -> bool:
+	if enemy in enemies_hit:
+		return false
+	enemies_hit.append(enemy)
+	return true
 
 func swing_done(_anim) -> void:
 	finished = true
@@ -74,6 +77,6 @@ func set_direction() -> void:
 
 func set_sword_size() -> void:
 	sword.scale *= PlayerManager.player.get_sword_size()
-	
+
 func reset_sword_size() -> void:
 	sword.scale = base_sword_scale
