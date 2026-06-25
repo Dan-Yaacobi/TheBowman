@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BarrageAbility" format=3 uid="uid://dv07o8cjlc0eo"]
+
+[ext_resource type="Script" uid="uid://csbch8j24m2k3" path="res://Player/Abilities2.0/ActiveAbilities/barrage_ability.gd" id="1_13jxq"]
+[ext_resource type="Texture2D" uid="uid://bcuw4godijovp" path="res://Player/Abilities2.0/ActiveAbilities/Resources/Barrage.png" id="1_is1rt"]
+
+[resource]
+script = ExtResource("1_13jxq")
+icon = ExtResource("1_is1rt")
+description = "Fire a barrage or arrows"
+name = "Barrage Ability"
+metadata/_custom_type_script = "uid://csbch8j24m2k3"

@@ -117,6 +117,7 @@ text = "[W / A / D]        Move
 [Space]            Jump (hold longer = higher)
 [Shift]            Dash toward cursor
 [E]				Interact/Pick up items
+[F]				Use Active Ability
 [Left Click]       Hold to charge, release to fire
                    Full charge = perfect shot 
 [Right Click]      Sword swing

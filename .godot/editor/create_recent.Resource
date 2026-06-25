@@ -1,3 +1,9 @@
+ExtraArrowActiveAbility
+ThunderStrikeAbility
+PoisonCloudAbility
+FrenzyAbility
+BarrageAbility
+CircleShotAbility
 EquipmentData
 ChunkData
 EnemyData

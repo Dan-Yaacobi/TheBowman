@@ -14,7 +14,7 @@ signal dash_finished
 
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var special_ability_cooldown: Timer = $SpecialAbilityCooldown
+@onready var active_ability_cooldown: Timer = $ActiveAbilityCooldown
 
 @onready var slow: Slow = $Debuffs/Slow
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
@@ -29,6 +29,7 @@ signal dash_finished
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
+@export var target_dummy_tutorial_passed: bool = false
 
 @export var stats: PlayerStats
 @export var talents: PlayerTalents
@@ -41,14 +42,12 @@ var can_hook: bool = true
 const PERMA_EFFECT: int = -1
 const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
 var health_bar: HealthBar
-var special_ability_cd: Sprite2D
 var direction: float
 var direction_side: bool = false
 var current_weapon: Weapon
 var knockback_power: Dictionary = {"direction": Vector2.ZERO,
  "power": 0}
-var special_ability_available: bool = true
-
+var active_ability_available: bool = true
 var dropping_down: bool = false
 
 var base_stats: PlayerStats
@@ -71,7 +70,6 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
-var target_dummy_tutorial_passed: bool = false
 
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,
@@ -84,7 +82,6 @@ func _ready() -> void:
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	stats.hp = stats.max_hp
-	special_ability_cooldown.timeout.connect(can_use_special_ability)
 	health_bar.init_health(stats.max_hp)
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(hit_player)
@@ -98,6 +95,7 @@ func _ready() -> void:
 	EventBus.enemy_died.connect(count_enemy_death)
 	EventBus.arrow_enemy_hit.connect(add_shot_streak)
 	EventBus.arrow_missed.connect(reset_shot_streak)
+	active_ability_cooldown.timeout.connect(_on_active_ability_cooldown_timeout)
 	
 	set_new_bow()
 	set_arrow_scene()
@@ -154,27 +152,31 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		if event.is_action_pressed("shoot",true):
 			shoot()
-		
-		#if event.is_action_pressed("Menu"):
-			#EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
-		
-		#if event.is_action_pressed("special"):
-			#special_ability()
-		
-		#if event.is_action_pressed("grapple"):
-			#grapple()
-	
-func special_ability() -> void:
-	if current_weapon.weapon_data.special_ability != null:
-		if special_ability_available and current_weapon.weapon_data.special_ability.can_use(self):
-			current_weapon.weapon_data.special_ability.activate_special_ability(self)
-			#current_weapon.regular_attack = false
-			special_ability_available = false
-			special_ability_cooldown.start()
-	
+			
+		if event.is_action_pressed("active"):
+			use_active_ability()
+
 func shoot() -> void:
 	EventBus.start_shooting.emit()
-
+	
+func use_active_ability() -> void:
+	if stats.active_ability == null:
+		return
+	if stats.active_ability.is_passive:
+		return
+	if not active_ability_available:
+		return
+	stats.active_ability.activate(self)
+	active_ability_available = false
+	active_ability_cooldown.wait_time = stats.active_ability.cooldown
+	active_ability_cooldown.start()
+	EventBus.active_ability_used.emit(stats.active_ability.cooldown)
+	
+func _on_active_ability_cooldown_timeout() -> void:
+	active_ability_available = true
+	active_ability_cooldown.stop()
+	EventBus.active_ability_ready.emit()
+	
 func grapple() -> void:
 	if not player_state_machine.curr_state is PlayerGrapplingState:
 		grapple_hook.activate_hook()
@@ -192,14 +194,8 @@ func show_hands(yes: bool) -> void:
 	main_hand.visible = yes
 	off_hand.visible = yes
 	
-func can_use_special_ability() -> void:
-	special_ability_available = true
-	special_ability_cooldown.stop()
-	pass
-	
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
-	special_ability_indictaor()
 	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
 	velocity += knockback
 	move_and_slide()
@@ -274,10 +270,6 @@ func set_hands_new_bow() -> void:
 func init_bow() -> void:
 	current_weapon = stats.weapon_scene.instantiate()
 	set_hands_new_bow()
-	if current_weapon.weapon_data.special_ability_cooldown <= 0:
-		special_ability_cooldown.wait_time = 1
-	else:
-		special_ability_cooldown.wait_time = current_weapon.weapon_data.special_ability_cooldown
 
 func can_summon() -> bool:
 	return current_minions.size() < stats.max_minions
@@ -355,12 +347,6 @@ func set_camera(tile_limit: Rect2i,tile_size: int) -> void:
 	camera.limit_right = tile_limit.end[0] * tile_size
 	camera.limit_bottom = tile_limit.end[1] * tile_size
 	pass
-
-func special_ability_indictaor() -> void:
-	var t_left = special_ability_cooldown.time_left
-	var t_total = special_ability_cooldown.wait_time
-	special_ability_cd.modulate.a = 1 - t_left/t_total
-	special_ability_cd.update_time_left(t_left)
 
 func slow_player(slow_time: float,effect: Node2D) -> void:
 	slow.slow_player(slow_time,effect)

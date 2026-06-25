@@ -2,13 +2,17 @@ class_name GameWorld extends Node2D
 
 var effects: Array[Node2D] = []
 var current_enemies: Array[Enemy] = []
+
 func set_world() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)
 	EventBus.enemy_died.connect(remove_enemy)
 	EventBus.summon_effect.connect(summon_effect)
 	EventBus.equipment_dropped.connect(drop_equipment)
+	EventBus.world_ready.connect(_on_world_ready, CONNECT_ONE_SHOT)
 	extra_set_world_functions()
 
+
+	
 func exit_world() -> void:
 	EventBus.enemy_summoned.disconnect(add_enemy)
 	EventBus.enemy_died.disconnect(remove_enemy)
@@ -19,9 +23,12 @@ func exit_world() -> void:
 
 func extra_set_world_functions() -> void:
 	pass
+	
 func extra_exit_world_functions() -> void:
 	pass
-
+	
+func _on_world_ready() -> void:
+	pass
 
 func on_world_ready() -> void:
 	pass

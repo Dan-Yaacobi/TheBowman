@@ -1,7 +1,6 @@
 class_name HUD extends CanvasLayer
 
 @onready var level_stats: Label = $Control/LevelStats
-@onready var special_ability_cd: Sprite2D = $Control/SpecialAbilityCD
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
 @onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 @onready var rift_level_label: Label = $RiftLevel
@@ -12,6 +11,7 @@ class_name HUD extends CanvasLayer
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 @onready var equipment_menu: EquipmentMenu = $EquipmentMenu
 @onready var pause_menu: PauseMenu = $PauseMenu
+@onready var active_ability_picker: ActiveAbilityPicker = $ActiveAbilityPicker
 
 var current_view_item: Equipment
 var flash_tween: Tween
@@ -63,11 +63,6 @@ func send_boss_health_bar() -> void:
 
 func hide_boss_health_bar() -> void:
 	boss_health_bar.hide()
-
-
-func get_special_ability_cd() -> Sprite2D:
-	return special_ability_cd
-
 
 func update_money(amount: Variant) -> void:
 	current_money.update_current_money(amount)

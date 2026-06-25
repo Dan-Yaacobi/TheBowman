@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://xqcywwa8lpnn"]
+
+[ext_resource type="Script" uid="uid://b6gxvapb1cxqw" path="res://HUD/ActiveAbility/active_ability_indicator.gd" id="1_rm6iq"]
+[ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="2_8ybmi"]
+[ext_resource type="Texture2D" uid="uid://dknaul0f46qmv" path="res://Particles/BigBall.png" id="3_788oi"]
+
+[node name="ActiveAbilityIndicator" type="Control" unique_id=1614194738]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 80.0
+offset_bottom = 80.0
+script = ExtResource("1_rm6iq")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1688491666]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8ybmi")
+stretch_mode = 5
+
+[node name="CoolDownBar" type="TextureProgressBar" parent="." unique_id=190304462]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+step = 0.01
+value = 50.0
+fill_mode = 4
+texture_progress = ExtResource("3_788oi")
+tint_under = Color(1, 1, 1, 0.5568628)
+tint_progress = Color(0, 0, 0, 1)
+
+[node name="ReadyLabel" type="Label" parent="." unique_id=1848637377]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0

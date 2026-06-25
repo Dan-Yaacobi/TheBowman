@@ -66,7 +66,7 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		PlayerManager.player.reparent(curr_world)
 		spawn_player(curr_world.spawn_position())
 		await get_tree().physics_frame
-		PlayerManager.player.get_node("CollisionShape2D").disabled = true
+		#PlayerManager.player.get_node("CollisionShape2D").disabled = true
 
 		EventBus.invisible_hands.emit(true)
 		get_tree().paused = false
@@ -76,9 +76,11 @@ func change_game_world(_new: GameWorlds.worlds) -> void:
 		PlayerManager.player.camera.position_smoothing_enabled = true
 		
 		await get_tree().process_frame
-		PlayerManager.player.get_node("CollisionShape2D").disabled = false
+		#PlayerManager.player.get_node("CollisionShape2D").disabled = false
 		await SceneTransition.fade_in()
 		curr_world.on_world_ready()
+		
+		EventBus.world_ready.emit()
 		
 		_is_transitioning = false
 		

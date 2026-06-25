@@ -17,6 +17,16 @@ func Exit() -> void:
 	player.health_bar._set_health(player.stats.max_hp)
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	EventBus.player_died.emit(display_death_screen)
+	reset_active_ability()
+	
+func reset_active_ability() -> void:
+	var ability: ActiveAbility = PlayerManager.player.stats.active_ability
+	if ability:
+		ability.on_unequipped(PlayerManager.player)
+		PlayerManager.player.stats.active_ability = null
+		EventBus.active_ability_cleared.emit()
+		PlayerManager.player.active_ability_available = true
+		PlayerManager.player.active_ability_cooldown.stop()
 	
 func Process(_delta: float) -> State:
 	return idle

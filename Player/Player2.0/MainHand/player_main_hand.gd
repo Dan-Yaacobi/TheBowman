@@ -104,23 +104,24 @@ func release_arrow() -> void:
 			fire_arrow()
 	current_arrow = null
 
-func fire_arrow() -> void:
-	var direction = hand_direction.normalized()
-	var effective_power: float = lerpf(0.0, 1.0, pow(shot_power, weak_shot_punish))
+func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = hand_direction, _override_power: float = shot_power) -> void:
+	var source_arrow: Arrow = _override_arrow if _override_arrow else current_arrow
+	var direction: Vector2 = _override_direction.normalized()
+	var effective_power: float = lerpf(0.0, 1.0, pow(_override_power, weak_shot_punish))
 	var arrow_count = PlayerManager.player.stats.arrow_count.value()
 	var spread_angle = deg_to_rad(12.0)
 	
 	for i in arrow_count:
 		var fired_arrow: Arrow
 		if i == 0:
-			fired_arrow = current_arrow
+			fired_arrow = source_arrow
 		else:
 			fired_arrow = arrow.instantiate()
-			fired_arrow.position = current_arrow.position
+			fired_arrow.position = source_arrow.position
 			
-			fired_arrow.texture = current_arrow.sprite.texture
+			fired_arrow.texture = source_arrow.sprite.texture
 			
-		fired_arrow.global_scale = current_arrow.global_scale
+		fired_arrow.global_scale = source_arrow.global_scale
 
 		@warning_ignore("narrowing_conversion")
 		fired_arrow.possible_pierce = PlayerManager.player.stats.arrow_pierce.value()
@@ -148,8 +149,19 @@ func fire_arrow() -> void:
 		
 		EventBus.summon_effect.emit(fired_arrow)
 	EventBus.arrow_shot_sound.emit()
-	PlayerManager.player.current_arrow = current_arrow
+	PlayerManager.player.current_arrow = source_arrow
 	
+func draw_arrow_instance() -> Arrow:
+	var _arrow: Arrow = arrow.instantiate()
+	add_child(_arrow)
+	_arrow.set_texture(arrow_texture)
+	_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
+	return _arrow
+	
+func fire_at(_direction: Vector2, _power: float, _position: Vector2 = arrow_position.global_position) -> void:
+	var _arrow: Arrow = draw_arrow_instance()
+	_arrow.global_position = _position
+	fire_arrow(_arrow, _direction, _power)
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PoisonCloudAbility" format=3 uid="uid://0ce5hj6jep6p"]
+
+[ext_resource type="Texture2D" uid="uid://meylijudp7kx" path="res://Player/Abilities2.0/ActiveAbilities/Resources/PoisonIcon.png" id="1_5vc26"]
+[ext_resource type="Script" uid="uid://c1grtah6hkqeq" path="res://Player/Abilities2.0/ActiveAbilities/poison_cloud_ability.gd" id="1_7r5tr"]
+
+[resource]
+script = ExtResource("1_7r5tr")
+cooldown = 20.0
+icon = ExtResource("1_5vc26")
+description = "Summons a poisonous cloud around you"
+name = "Poison Cloud"
+metadata/_custom_type_script = "uid://c1grtah6hkqeq"

@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
+[ext_resource type="PackedScene" uid="uid://bsuxrgl8shr8m" path="res://HUD/ActiveAbility/ActiveAbilityPicker.tscn" id="2_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="3_33tmu"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
-[ext_resource type="Texture2D" uid="uid://dp4648msdak81" path="res://Player/Abilities/SpecialAbilities/SpecialAbility.png" id="7_lkt0t"]
-[ext_resource type="Script" uid="uid://b3rbe4y42mg27" path="res://HUD/special_ability_cd.gd" id="8_6i5cd"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
 [ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="14_ihvjp"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cal23t1ka4qvt" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/Soul.png" id="17_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
+[ext_resource type="PackedScene" uid="uid://xqcywwa8lpnn" path="res://HUD/ActiveAbility/ActiveAbilityIndicator.tscn" id="18_65vjf"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
@@ -115,30 +115,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="SpecialAbilityCD" type="Sprite2D" parent="Control" unique_id=400582482]
-visible = false
-position = Vector2(481.00006, 968.99994)
-scale = Vector2(5, 5)
-texture = ExtResource("7_lkt0t")
-script = ExtResource("8_6i5cd")
-
-[node name="TimeLeftLabel" type="Label" parent="Control/SpecialAbilityCD" unique_id=1329799947]
-offset_left = 8.0
-offset_top = -10.0
-offset_right = 151.0
-offset_bottom = 332.0
-scale = Vector2(0.025, 0.025)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 10
-theme_override_constants/outline_size = 25
-theme_override_constants/shadow_outline_size = 30
-theme_override_font_sizes/font_size = 250
-text = "0
-"
-metadata/_edit_use_anchors_ = true
-
 [node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
 layout_mode = 0
 offset_left = 110.0
@@ -238,10 +214,10 @@ anchor_left = 0.5
 anchor_top = 0.142
 anchor_right = 0.5
 anchor_bottom = 0.142
-offset_left = -254.0
-offset_top = -0.2400055
-offset_right = 257.0
-offset_bottom = 156.76
+offset_left = -258.0
+offset_top = -67.8
+offset_right = 253.0
+offset_bottom = 89.2
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 125
@@ -273,6 +249,38 @@ mouse_filter = 2
 color = Color(0, 1, 0, 1)
 
 [node name="PauseMenu" parent="." unique_id=1041062043 instance=ExtResource("20_65vjf")]
+
+[node name="Feedback" type="Button" parent="." unique_id=1875819819]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_right = 97.5
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Send Feedback/Report a Bug"
+
+[node name="Version" type="Label" parent="." unique_id=1192848870]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "Alpha v1.1"
+
+[node name="ActiveAbilityPicker" parent="." unique_id=31872962 instance=ExtResource("2_fjfvf")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="ActiveAbilityIndicator" parent="." unique_id=1614194738 instance=ExtResource("18_65vjf")]
+offset_left = 13.0
+offset_top = 682.0
+offset_right = 93.0
+offset_bottom = 762.0
 
 [node name="DeathScreen" type="Control" parent="." unique_id=537322321]
 process_mode = 3
@@ -351,24 +359,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "I promise to do better"
 
-[node name="Feedback" type="Button" parent="." unique_id=1875819819]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -97.5
-offset_right = 97.5
-offset_bottom = 28.0
-grow_horizontal = 2
-text = "Send Feedback/Report a Bug"
-
-[node name="Version" type="Label" parent="." unique_id=1192848870]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_bottom = 20.0
-grow_horizontal = 0
-text = "Alpha v1.1"
-
-[connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]
 [connection signal="pressed" from="Feedback" to="." method="_on_feedback_pressed"]
+[connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

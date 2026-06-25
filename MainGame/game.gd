@@ -22,7 +22,6 @@ func _ready() -> void:
 	game_manager.set_game(self)
 	game_manager.change_game_world(GameWorlds.worlds.Main_Menu)
 	PlayerManager.player.health_bar = hud.get_health_bar()
-	PlayerManager.player.special_ability_cd = hud.get_special_ability_cd()
 	cloud_timer.timeout.connect(summon_cloud)
 	cloud_timer.start()
 	add_child(PlayerManager.player)

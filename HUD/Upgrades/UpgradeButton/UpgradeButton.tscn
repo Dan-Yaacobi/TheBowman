@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dolo7tiosewrq"]
+[gd_scene format=3 uid="uid://dolo7tiosewrq"]
 
 [ext_resource type="Script" uid="uid://ccnccc8ocw8oe" path="res://HUD/Upgrades/UpgradeButton/upgrade_button.gd" id="1_2vqur"]
 [ext_resource type="Texture2D" uid="uid://b6j3p8tmw7333" path="res://Level/Sprites/Upgrades/CritIcon.png" id="3_grqo8"]
@@ -13,7 +13,7 @@ bg_color = Color(0.6, 0.6, 0.45490196, 0.39607844)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sajvq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="UpgradeButton" type="Control"]
+[node name="UpgradeButton" type="Control" unique_id=897735987]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2vqur")
 
-[node name="CurrentStat" type="Label" parent="."]
+[node name="CurrentStat" type="Label" parent="." unique_id=119473647]
 layout_mode = 0
 offset_left = -11.0
 offset_top = 19.0
@@ -41,7 +41,7 @@ text = "Upgrade Information
 "
 autowrap_mode = 3
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1610106177]
 z_index = -1
 position = Vector2(8, 8)
 amount = 20
@@ -51,7 +51,7 @@ gravity = Vector2(0, 0)
 radial_accel_min = 10.0
 radial_accel_max = 10.0
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1515949506]
 z_index = -2
 clip_contents = true
 layout_mode = 0
@@ -64,7 +64,7 @@ texture = ExtResource("5_jqxbo")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="UpgradeIcon" type="TextureRect" parent="."]
+[node name="UpgradeIcon" type="TextureRect" parent="." unique_id=446386026]
 layout_mode = 0
 offset_left = -9.0
 offset_top = -8.0
@@ -72,7 +72,7 @@ offset_right = 23.0
 offset_bottom = 24.0
 texture = ExtResource("3_grqo8")
 
-[node name="ChooseButton" type="Button" parent="."]
+[node name="ChooseButton" type="Button" parent="." unique_id=545244532]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 43.0

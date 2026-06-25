@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ExtraArrowActiveAbility" format=3 uid="uid://c5eha4kqajw4m"]
+
+[ext_resource type="Script" uid="uid://ccf0afjvssvbi" path="res://Player/Abilities2.0/ActiveAbilities/extra_arrow_ability.gd" id="1_6md8i"]
+[ext_resource type="Texture2D" uid="uid://2xh3snmct4gj" path="res://Player/Abilities2.0/ActiveAbilities/Resources/ExtraArrow.png" id="1_aem23"]
+
+[resource]
+script = ExtResource("1_6md8i")
+is_passive = true
+icon = ExtResource("1_aem23")
+description = "Fires an extra arrow"
+name = "Extra Arrow"
+metadata/_custom_type_script = "uid://ccf0afjvssvbi"

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://boplqco7dofd"]
+
+[ext_resource type="Script" uid="uid://d03e5sk42r041" path="res://Player/Buffs/FrenzyBuff/frenzy_buff.gd" id="1_pb0bg"]
+[ext_resource type="Texture2D" uid="uid://cypmcmjnmkodt" path="res://Player/Abilities2.0/ActiveAbilities/Resources/Frenzy.png" id="2_6goff"]
+
+[node name="FrenzyBuff" type="Node2D" unique_id=2130752036]
+script = ExtResource("1_pb0bg")
+ID = 444
+texture = ExtResource("2_6goff")
+max_stacks = 1
+constant_buff = true
+ticks = 1
+duration = 5.0

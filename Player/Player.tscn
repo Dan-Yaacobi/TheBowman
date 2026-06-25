@@ -398,7 +398,7 @@ color_ramp = SubResource("Gradient_u4yfg")
 [node name="DeathAnimationTimer" type="Timer" parent="." unique_id=1957289314]
 one_shot = true
 
-[node name="SpecialAbilityCooldown" type="Timer" parent="." unique_id=2037916886]
+[node name="ActiveAbilityCooldown" type="Timer" parent="." unique_id=2037916886]
 
 [node name="BuffTooltipControl" type="Node2D" parent="." unique_id=109648080]
 script = ExtResource("26_8kdbo")

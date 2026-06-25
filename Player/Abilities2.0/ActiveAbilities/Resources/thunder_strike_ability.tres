@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ThunderStrikeAbility" format=3 uid="uid://ss8moblrre6q"]
+
+[ext_resource type="Texture2D" uid="uid://dvnkj4fbxxl6q" path="res://Player/Abilities2.0/ActiveAbilities/Resources/ThunderStrikeIcon.png" id="1_44i7d"]
+[ext_resource type="Script" uid="uid://dfntwv1m8w44s" path="res://Player/Abilities2.0/ActiveAbilities/thunderstrike_ability.gd" id="1_vn4nj"]
+
+[resource]
+script = ExtResource("1_vn4nj")
+cooldown = 20.0
+icon = ExtResource("1_44i7d")
+description = "Stun enemies around with a fierce thunderstrike"
+name = "ThunderStrike"
+metadata/_custom_type_script = "uid://dfntwv1m8w44s"

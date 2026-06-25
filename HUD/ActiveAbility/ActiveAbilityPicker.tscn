@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bsuxrgl8shr8m"]
+
+[ext_resource type="PackedScene" uid="uid://bxbaaxg5eifvu" path="res://HUD/ActiveAbility/ActiveAbilityButton.tscn" id="1_311ke"]
+[ext_resource type="Script" uid="uid://cwlc5ajcjtxrw" path="res://HUD/ActiveAbility/active_ability_picker.gd" id="1_btv3d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btv3d"]
+bg_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2901961, 0.2901961, 0.5411765, 1)
+
+[node name="ActiveAbilityPicker" type="Control" unique_id=31872962]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_btv3d")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1903566171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1409970260]
+custom_minimum_size = Vector2(760, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -150.0
+offset_right = 391.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_btv3d")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=219419504]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1603221260]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1982561559]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Choose your active ability:
+(Press F to Activate)"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=945167329]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Button1" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=134604781 instance=ExtResource("1_311ke")]
+layout_mode = 2
+
+[node name="Button2" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=664142568 instance=ExtResource("1_311ke")]
+layout_mode = 2
+
+[node name="Button3" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=681193203 instance=ExtResource("1_311ke")]
+layout_mode = 2

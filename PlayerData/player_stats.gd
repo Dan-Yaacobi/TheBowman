@@ -65,6 +65,8 @@ var player: Player
 @export var sword_abilities: Array[PlayerAbility]
 @export var passive_abilities: Array[PlayerAbility]
 @export var release_abilities: Array[PlayerAbility]
+@export var active_ability: ActiveAbility
+
 
 @export_subgroup("Sword")
 @export var sword_size: Stat

@@ -42,6 +42,7 @@ signal enemy_summoned(enemy: Enemy)
 signal enemy_died(enemy: Enemy)
 
 signal entered_rift
+signal world_ready
 
 signal summon_effect(effect: Node2D)
 
@@ -88,3 +89,9 @@ signal sword_hit(_enemy: Enemy)
 signal enemy_stunned(_enemy: Enemy)
 
 signal player_died(_death_screen: bool)
+
+signal active_ability_equipped(ability: ActiveAbility)
+signal active_ability_used(cooldown: float)
+signal active_ability_ready()
+signal show_active_ability_picker(pool: Array[ActiveAbility])
+signal active_ability_cleared
