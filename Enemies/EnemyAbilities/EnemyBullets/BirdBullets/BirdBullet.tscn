@@ -27,7 +27,6 @@ size = Vector2(8, 9)
 
 [node name="BirdBullet" type="Area2D" unique_id=2028076233]
 collision_layer = 128
-collision_mask = 17
 script = ExtResource("1_882qa")
 data = SubResource("Resource_1gxwb")
 
@@ -52,7 +51,7 @@ scale_amount_curve = SubResource("Curve_vaeie")
 script = ExtResource("5_gtfsv")
 
 [node name="HurtBox2" parent="Explosion" unique_id=779571135 instance=ExtResource("6_xptvq")]
-collision_mask = 17
+collision_mask = 1
 monitoring = false
 monitorable = false
 
@@ -61,7 +60,7 @@ shape = SubResource("CircleShape2D_yqnk0")
 debug_color = Color(0.980944, 0, 0.375347, 0.42)
 
 [node name="HurtBox" parent="." unique_id=600829522 instance=ExtResource("6_xptvq")]
-collision_mask = 17
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1606446263]
 position = Vector2(0, -0.5)

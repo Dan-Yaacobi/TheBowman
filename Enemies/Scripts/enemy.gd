@@ -33,6 +33,8 @@ var knockback_decay: float = 0.05
 var is_dead: bool = false
 
 var _damage_multiplier: float = 1.0
+var invincible: bool = false
+var final_dmg: int
 
 func _ready() -> void:
 	current_hp = stats.max_hp
@@ -40,6 +42,7 @@ func _ready() -> void:
 	hurt_box.knockback_power = stats.knockback
 	hurt_box.successful_hit.connect(knockback)
 	debuff_handler.set_enemy(self)
+	hit_box.Damaged.connect(hit)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
 	if stats.has_health_bar:
@@ -51,8 +54,11 @@ func full_health() -> bool:
 func heal(_amount: int) -> void:
 	current_hp = mini(current_hp + _amount, stats.max_hp)
 	handle_health_bar(-_amount)
-	show_damage(_amount, Color.LIME_GREEN)
-	
+	show_heal(_amount, Color.LIME_GREEN)
+
+func show_heal(_amount: int, _color: Color) -> void:
+	CombatTextSpawner.spawn(global_position, str(_amount),_color)
+
 func extra_ready_functions() -> void:
 	pass
 
@@ -70,7 +76,8 @@ func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
 func hit(_hurt_box: HurtBox) -> void:
-	take_damage(_hurt_box.damage)
+	final_dmg = roundi(_hurt_box.damage * _damage_multiplier)
+	take_damage(final_dmg)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box)
 	take_hit_effect()	
@@ -81,8 +88,8 @@ func extra_hit_functions(_hurt_box: HurtBox) -> void:
 func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 	debuff_handler.add_debuff(_debuff, _duration, _ticks)
 
-func show_damage(_damage: int, color: Color) -> void:
-	CombatTextSpawner.spawn(global_position, str(_damage),color)
+func show_damage(_amount: int, color: Color) -> void:
+	CombatTextSpawner.spawn(global_position, str(final_dmg),color)
 
 func take_hit_effect() -> void:
 	if not added_hit_effect:
@@ -95,11 +102,12 @@ func take_hit_effect() -> void:
 		
 func set_damage_multiplier(_multiplier: float) -> void:
 	_damage_multiplier = _multiplier
+
 	
 func take_damage(_dmg: int) -> void:
+
 	if is_dead:
 		return
-		
 	current_hp -= roundi(_dmg * _damage_multiplier)
 	
 	handle_health_bar(_dmg)	
@@ -121,6 +129,7 @@ func activate_death_ability() -> void:
 		for ability in stats.death_ability:
 			if ability != null:
 				ability.activate_ability(self)
+				
 func enemy_died() -> void:
 	died.emit(self)
 	EventBus.enemy_died.emit(self)

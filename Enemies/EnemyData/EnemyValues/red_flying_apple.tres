@@ -20,13 +20,14 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("2_t4py0")
-max_hp = 20
+max_hp = 23
 move_speed = SubResource("Resource_8iawy")
 knockback = 75
 skin = ExtResource("5_8iawy")
 avg_coins_dropped = 1
 touch_damage = 1
 knockback_resistance = 20.0
+drop_chance = 25.0
 death_ability = Array[ExtResource("1_cs78x")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("1_4o1pv")
 bullet_speed = 45.0

@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("2_0ngfg")
-max_hp = 200
+max_hp = 300
 move_speed = SubResource("Resource_wu36e")
 knockback = 20
 avg_coins_dropped = 5

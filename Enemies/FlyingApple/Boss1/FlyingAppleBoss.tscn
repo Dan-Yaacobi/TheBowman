@@ -1,16 +1,57 @@
 [gd_scene format=3 uid="uid://c2eppdxet4q8c"]
 
 [ext_resource type="Script" uid="uid://ich6jvigbqps" path="res://Enemies/FlyingApple/Boss1/flying_apple_boss.gd" id="1_007ct"]
+[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="2_7ei6n"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_yjatd"]
+[ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="4_ls7n3"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_kp1gv"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="6_gbtff"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_o0vur"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_hy1ne"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="9_cfd1d"]
 [ext_resource type="Texture2D" uid="uid://drtobaioy4nqb" path="res://Enemies/Sprites/AppleWings.png" id="10_88q2y"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="10_ueqrt"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="11_36fxj"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_gsefu"]
+[ext_resource type="Script" uid="uid://dkodvo5dcbndi" path="res://Enemies/FlyingApple/Boss1/apple_boss_transition_state.gd" id="11_x8b2o"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_36fxj"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="15_und3f"]
 [ext_resource type="Script" uid="uid://posnurh0ksc2" path="res://Enemies/FlyingApple/Boss1/boss_roam_state.gd" id="16_ikffo"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="17_36fxj"]
 [ext_resource type="Script" uid="uid://cxfla8j1hfdad" path="res://Enemies/FlyingApple/Boss1/boss_setslam_state.gd" id="17_p45i5"]
 [ext_resource type="Script" uid="uid://do7gf25dtq7xg" path="res://Enemies/FlyingApple/Boss1/boss_slam_state.gd" id="18_52sys"]
+
+[sub_resource type="Resource" id="Resource_3u2p4"]
+script = ExtResource("5_kp1gv")
+death_sound = ExtResource("4_ls7n3")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
+
+[sub_resource type="Resource" id="Resource_cf35j"]
+script = ExtResource("6_o0vur")
+base_value = 40.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_8c7na"]
+script = ExtResource("7_hy1ne")
+max_hp = 23
+move_speed = SubResource("Resource_cf35j")
+knockback = 75
+skin = ExtResource("6_gbtff")
+touch_damage = 1
+knockback_resistance = 20.0
+drop_chance = 0.0
+death_ability = Array[ExtResource("3_yjatd")]([SubResource("Resource_3u2p4")])
+bullet = ExtResource("2_7ei6n")
+bullet_speed = 45.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
+
+[sub_resource type="Resource" id="Resource_rkubq"]
+script = ExtResource("10_ueqrt")
+scene = ExtResource("9_cfd1d")
+data = SubResource("Resource_8c7na")
+weight_curve = -0.5
+spawn_zone = 1
+metadata/_custom_type_script = "uid://lq0131vpkgfn"
 
 [sub_resource type="Animation" id="Animation_k0qd3"]
 resource_name = "Damaged"
@@ -262,6 +303,7 @@ collision_layer = 4
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_007ct")
+flying_apple_entry = SubResource("Resource_rkubq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=936217923]
 modulate = Color(1, 1, 1, 0.254902)
@@ -318,6 +360,12 @@ script = ExtResource("17_p45i5")
 
 [node name="Slam" type="Node2D" parent="EnemyStateMachine" unique_id=652438506]
 script = ExtResource("18_52sys")
+
+[node name="Transition" type="Node2D" parent="EnemyStateMachine" unique_id=1753354188]
+script = ExtResource("11_x8b2o")
+
+[node name="SummonTimer" type="Timer" parent="EnemyStateMachine/Transition" unique_id=856608342]
+wait_time = 1.5
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=1887075188]
 wait_time = 0.75

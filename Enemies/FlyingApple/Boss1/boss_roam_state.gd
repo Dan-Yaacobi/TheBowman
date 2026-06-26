@@ -1,5 +1,6 @@
 class_name BossRoamState extends EnemyState
 
+@onready var transition: BossTransitionState = $"../Transition"
 @onready var shoot_timer: Timer = $"../../ShootTimer"
 @onready var slam_timer: Timer = $"../../SlamTimer"
 @onready var set_slam: BossSetSlamState = $"../SetSlam"
@@ -26,9 +27,7 @@ func init() -> void:
 	roof_detector.body_shape_entered.connect(dis_collision)
 	pass
 
-#what happens when the player enters this state
 func Enter() -> void:
-	
 	enemy.set_collision_mask_value(5,true)
 	shoot_timer.start()
 	slam_timer.start()
@@ -38,17 +37,18 @@ func Enter() -> void:
 	enemy.update_animation("Move")
 	pass
 	
-#what happens when the player exits this state
 func Exit() -> void:
 	shoot_timer.stop()
 	slam_timer.stop()
 	pass
 	
-#what happens during process update in this state
 func Process(_delta: float) -> EnemyState:
+	@warning_ignore("integer_division")
+	if not enemy.half_hp_activation and enemy.current_hp <= enemy.stats.max_hp /2:
+		enemy.half_hp_activation = true
+		return transition
 	return null
 	
-#what happens during _physics_process update in this state
 func Physics(_delta: float) -> EnemyState:
 	if slam:
 		return set_slam

@@ -13,7 +13,6 @@ func TakeDamage(hurt_box: HurtBox) -> void:
 	if enemy:
 		enemy_hit_effect.hit()
 		change_effect_color(hurt_box.effect_color)
-		enemy.hit(hurt_box)
 	if show_damage:
 		enemy.show_damage(hurt_box.damage,hurt_box.combat_text_color)
 		

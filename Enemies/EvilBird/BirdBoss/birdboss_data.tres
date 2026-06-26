@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("3_2kuey")
-max_hp = 1000
+max_hp = 1250
 move_speed = SubResource("Resource_lhg51")
 avg_coins_dropped = 100
 touch_damage = 8

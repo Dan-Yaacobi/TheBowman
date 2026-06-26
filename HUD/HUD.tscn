@@ -269,7 +269,7 @@ anchor_right = 1.0
 offset_left = -64.0
 offset_bottom = 20.0
 grow_horizontal = 0
-text = "Alpha v1.2"
+text = "Alpha v1.2.1"
 
 [node name="ActiveAbilityPicker" parent="." unique_id=31872962 instance=ExtResource("2_fjfvf")]
 anchors_preset = 8
