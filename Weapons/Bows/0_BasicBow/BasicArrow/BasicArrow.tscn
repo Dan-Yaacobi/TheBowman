@@ -7,7 +7,8 @@
 [ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_43g4f"]
 
 [sub_resource type="Curve" id="Curve_8js4e"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
@@ -34,6 +35,17 @@ emission_rect_extents = Vector2(2, 2)
 gravity = Vector2(0, 0)
 scale_amount_curve = SubResource("Curve_8js4e")
 color = Color(0.643137, 0.152941, 0, 0.45098)
+
+[node name="PerfectParticles" type="CPUParticles2D" parent="." unique_id=301766820]
+z_index = -1
+emitting = false
+amount = 100
+emission_shape = 4
+emission_points = PackedVector2Array(-5, 5, -5, -5)
+emission_colors = PackedColorArray()
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_8js4e")
+color = Color(1, 0.54509807, 0, 1)
 
 [node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_f2keo")]
 collision_mask = 28

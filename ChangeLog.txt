@@ -1,0 +1,40 @@
+_______________________________________________________________
+
+Alpha v1.1:
+
+GamePlay Changes:
+
+ - Enable jumping from underneath a platform.
+ - Enable jump down
+ - Let arrows pass through islands no matter what.
+ - Equip items with E and not with mouse click.
+
+Balance:
+ - Weak shots are too weak
+
+Misc:
+ - Remove the death screen from the menu
+
+_______________________________________________________________
+
+Alpha v1.2
+
+New Feature: 
+ - Added Active abilities to pick 1 out of 3 at the start of each run
+ - Added 6 new Abilities in total
+
+Gameplay Changes:
+ - increase dash and sword hits required to finish tutorial
+
+Bugfix:
+ - Fix the bug where you couldn't click and shoot when mousing over your health bar
+ - Fixed sword slash hitting an enemy more than once
+
+_______________________________________________________________
+
+Alpha v1.2.1
+
+Gameplay Changes:
+ - Added another phase for the Apple Boss.
+ - Bird bullets now pass through walls
+ - Slightly increased enemies HP

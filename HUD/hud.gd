@@ -1,8 +1,6 @@
 class_name HUD extends CanvasLayer
 
-@onready var level_stats: Label = $Control/LevelStats
 @onready var current_money: CurrentMoney = $Control/CurrentMoney
-@onready var coin_animation: AnimationPlayer = $Control/Coin/CoinAnimation
 @onready var rift_level_label: Label = $RiftLevel
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
@@ -12,6 +10,7 @@ class_name HUD extends CanvasLayer
 @onready var equipment_menu: EquipmentMenu = $EquipmentMenu
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var active_ability_picker: ActiveAbilityPicker = $ActiveAbilityPicker
+@onready var coin_animation: AnimationPlayer = $Control/CurrentMoney/Coin/CoinAnimation
 
 var current_view_item: Equipment
 var flash_tween: Tween

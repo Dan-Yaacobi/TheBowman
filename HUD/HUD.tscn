@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
+[ext_resource type="PackedScene" uid="uid://dmnqbuvi5jrng" path="res://HUD/PullBar/PullBar.tscn" id="13_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="14_ihvjp"]
 [ext_resource type="Texture2D" uid="uid://2qa7ghob20s3" path="res://HUD/AbilityGauge.png" id="15_33ejm"]
 [ext_resource type="Script" uid="uid://c8fejmjhqikma" path="res://HUD/gauge.gd" id="16_33ejm"]
@@ -112,17 +113,17 @@ scale = Vector2(5, 5)
 mouse_filter = 2
 texture = ExtResource("3_ktoim")
 
-[node name="LevelStats" type="Label" parent="Control" unique_id=683982552]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
-layout_mode = 0
-offset_left = 110.0
-offset_top = 28.0
-offset_right = 273.0
-offset_bottom = 233.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.049000002
+anchor_top = 0.08800001
+anchor_right = 0.049000002
+anchor_bottom = 0.08800001
+offset_left = 31.599998
+offset_top = -51.200005
+offset_right = 194.6
+offset_bottom = 153.79999
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -133,13 +134,13 @@ theme_override_font_sizes/font_size = 150
 text = "x0"
 script = ExtResource("9_t1yhm")
 
-[node name="Coin" type="Sprite2D" parent="Control" unique_id=480222187]
-position = Vector2(59, 83)
-scale = Vector2(5, 5)
+[node name="Coin" type="Sprite2D" parent="Control/CurrentMoney" unique_id=480222187]
+position = Vector2(-102, 110)
+scale = Vector2(10, 10)
 texture = ExtResource("11_fwgky")
 hframes = 5
 
-[node name="CoinAnimation" type="AnimationPlayer" parent="Control/Coin" unique_id=102977012]
+[node name="CoinAnimation" type="AnimationPlayer" parent="Control/CurrentMoney/Coin" unique_id=102977012]
 libraries/ = SubResource("AnimationLibrary_fwgky")
 
 [node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
@@ -197,6 +198,20 @@ position = Vector2(64, 22.500002)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_fjfvf")
+
+[node name="PullBar" parent="Control" unique_id=1052703624 instance=ExtResource("13_fjfvf")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.97200006
+anchor_top = 0.5
+anchor_right = 0.97200006
+anchor_bottom = 0.509
+offset_left = -64.20007
+offset_top = 135.0
+offset_right = -0.20007324
+offset_bottom = 158.9
+grow_horizontal = 0
+scale = Vector2(4, 4)
 
 [node name="InteractionUi" parent="." unique_id=1611403518 instance=ExtResource("19_fjfvf")]
 stat_names_dict = Dictionary[String, String]({

@@ -17,6 +17,7 @@ signal shot_power_amount(amount)
 @export var weak_shot_punish: float = 2.0
 @onready var sword: Sword = $MainHandStateMachine/Swing/Sword
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
+@onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
 var current_arrow: Arrow = null
 var hand_direction: Vector2
@@ -101,6 +102,8 @@ func release_arrow() -> void:
 			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
 			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+			if shot_power >= 1.0:
+				perfect_release_particles.emitting = true
 			fire_arrow()
 	current_arrow = null
 
