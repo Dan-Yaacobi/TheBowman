@@ -4,6 +4,7 @@ class_name Arrow extends CharacterBody2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var hurt_box: ArrowHurtBox = $HurtBox
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var perfect_particles: CPUParticles2D = $PerfectParticles
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -44,11 +45,7 @@ func _ready() -> void:
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
 	set_texture(texture)
-	#print("scale " , scale, " scaling by " ,PlayerManager.player.stats.arrow_size.value())
-	#scale *= PlayerManager.player.stats.arrow_size.value()
-	#print("scale after scaling: ", scale)
-	
-	
+
 func hit(_hit_box) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
@@ -101,9 +98,12 @@ func _physics_process(delta: float) -> void:
 		if not enabled:
 			enabled = true
 			enable_arrow()
-		cpu_particles.emitting = true
+		if perfect_shot:
+			perfect_particles.emitting = true
+		else:
+			cpu_particles.emitting = true
 		rotate_arrow(velocity.angle())
-		cpu_particles.direction = velocity
+		#cpu_particles.direction = velocity
 		var arrow_weight = PlayerManager.player.stats.arrow_weight.value()
 		velocity.y += gravity * remap(arrow_weight, 0.0, 30, 1.0, 3.0) * delta
 	move_and_slide()

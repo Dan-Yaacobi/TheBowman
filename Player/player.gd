@@ -441,7 +441,9 @@ func get_equipped_in_slot(_slot: EquipmentData.slots) -> EquipmentData:
 		_:
 			return null
 
-
+func get_curr_shot_power() -> float:
+	return main_hand.shot_power
+	
 ############# SET METHODS #############
 func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) -> void:
 	if _slot != null and _new_item:

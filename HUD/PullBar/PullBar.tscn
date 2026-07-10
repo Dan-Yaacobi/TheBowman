@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dmnqbuvi5jrng"]
+
+[ext_resource type="Script" uid="uid://r2thkbjaqobb" path="res://HUD/PullBar/pull_bar.gd" id="1_h74x5"]
+[ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="1_uhdrp"]
+[ext_resource type="Texture2D" uid="uid://2qa7ghob20s3" path="res://HUD/AbilityGauge.png" id="2_2tr14"]
+
+[node name="PullBar" type="TextureProgressBar" unique_id=1052703624]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+step = 0.01
+value = 50.0
+texture_under = ExtResource("1_uhdrp")
+texture_progress = ExtResource("2_2tr14")
+script = ExtResource("1_h74x5")
