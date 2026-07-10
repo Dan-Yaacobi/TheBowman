@@ -252,16 +252,6 @@ color = Color(0, 1, 0, 1)
 
 [node name="PauseMenu" parent="." unique_id=1041062043 instance=ExtResource("20_65vjf")]
 
-[node name="Feedback" type="Button" parent="." unique_id=1875819819]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -97.5
-offset_right = 97.5
-offset_bottom = 28.0
-grow_horizontal = 2
-text = "Send Feedback/Report a Bug"
-
 [node name="Version" type="Label" parent="." unique_id=1192848870]
 anchors_preset = 1
 anchor_left = 1.0
@@ -361,5 +351,4 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "I promise to do better"
 
-[connection signal="pressed" from="Feedback" to="." method="_on_feedback_pressed"]
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

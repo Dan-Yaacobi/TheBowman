@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dsw0uvt8swsn8"]
+
+[ext_resource type="Script" uid="uid://bslljpcghmh53" path="res://Level/Limbo/limbo.gd" id="1_ryaj3"]
+
+[node name="Limbo" type="Node2D" unique_id=489343979]
+script = ExtResource("1_ryaj3")

@@ -168,3 +168,16 @@ text = "Mute"
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Back"
+
+[node name="Feedback" type="Button" parent="Control" unique_id=458119951]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_right = 97.5
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Send Feedback/Report a Bug"
+
+[connection signal="pressed" from="Control/Feedback" to="." method="_on_feedback_pressed"]

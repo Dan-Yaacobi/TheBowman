@@ -103,3 +103,7 @@ func _on_fullscreen_toggled(enabled: bool) -> void:
 
 func _on_mute_toggled(muted: bool) -> void:
 	SettingsManager.set_muted(muted)
+
+
+func _on_feedback_pressed() -> void:
+	OS.shell_open("https://game-feedback-app.vercel.app/")
