@@ -12,6 +12,7 @@ signal arrow(_arrow: Arrow)
 signal damaged_flash
 signal healed_flash
 
+signal apply_player_knockback(direction: Vector2, force: float, continous: bool)
 signal invisible_hands(yes: bool)
 
 signal changed_scene(new_scene: GameWorlds.worlds)

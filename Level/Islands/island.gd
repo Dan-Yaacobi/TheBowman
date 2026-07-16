@@ -1,17 +1,22 @@
 class_name Island extends StaticBody2D
+
 @onready var objects_spawn_markers: ObjectSpawnMarkers = $ObjectsSpawnMarkers
 @export var start_island: bool = false
 @export var floating: bool
 @export var moving_island: bool = false
 @export var end_point: Vector2
+@onready var sprite: Sprite2D = $Sprite2D
+
 var start_point: Vector2
 var float_amplitude: float = 3.0
 var float_speed: float = 2.0
 var base_height: float
 var has_game_object: bool = false
 var _move_tween: Tween
+var _dip_tween: Tween
 
 func _ready() -> void:
+	floating = false
 	base_height = global_position.y
 	float_speed *= randf_range(0.5, 1.5)
 	float_amplitude *= randf_range(0.5, 1.5)
@@ -50,3 +55,12 @@ func spawn_game_object() -> bool:
 		obj.global_position = spawn_pos - marker_offset
 		has_game_object = true
 	return true
+
+func _on_player_interact() -> void:
+	if _dip_tween != null and _dip_tween.is_running():
+		return
+	var original_position: Vector2 = position
+	var dip_offset: Vector2 = Vector2(0, 2)
+	_dip_tween = create_tween()
+	_dip_tween.tween_property(self, "position", original_position + dip_offset, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_dip_tween.tween_property(self, "position", original_position, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

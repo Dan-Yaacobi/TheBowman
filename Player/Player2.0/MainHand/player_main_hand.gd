@@ -46,14 +46,14 @@ func connect_hands(_off_hand) -> void:
 func calculate_direction_to_cursor() -> void:
 	var mouse_pos = get_global_mouse_position()
 	var player_pos = global_position
-	hand_direction = Vector2(mouse_pos[0] - player_pos[0],
-	 mouse_pos[1] - player_pos[1])
+	hand_direction = Vector2(mouse_pos[0] - player_pos[0],mouse_pos[1] - player_pos[1])
 
 	if mouse_pos.x > player_pos.x + 4:
 		PlayerManager.player.update_direction(false)
 	elif mouse_pos.x < player_pos.x - 4:
 		PlayerManager.player.update_direction(true)
 
+	
 func set_swing_direction(_side: bool) -> void:
 	if _side:
 		if scale.x > 0:
@@ -103,6 +103,9 @@ func release_arrow() -> void:
 			current_arrow.arrow_shot_power = shot_power
 			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 			if shot_power >= 1.0:
+				
+				EventBus.camera_shake.emit(2.0,10.0)
+				EventBus.apply_player_knockback.emit(-hand_direction,50)
 				perfect_release_particles.emitting = true
 			fire_arrow()
 	current_arrow = null

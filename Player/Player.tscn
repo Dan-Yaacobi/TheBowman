@@ -212,7 +212,7 @@ point_count = 2
 size = Vector2(26, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
-size = Vector2(29, 4.166683)
+size = Vector2(26, 4.0833426)
 
 [sub_resource type="Curve" id="Curve_g8oqh"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -350,7 +350,7 @@ position = Vector2(0, 32)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset" unique_id=841087047]
-position = Vector2(-0.5, 0)
+position = Vector2(-1, -0.041671753)
 shape = SubResource("RectangleShape2D_7fpcy")
 debug_color = Color(0, 0.648432, 0.180981, 0.42)
 

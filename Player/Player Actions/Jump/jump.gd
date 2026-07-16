@@ -48,6 +48,12 @@ func handle_jumps() -> void:
 func reset_jumps(_var1, _var2, _var3, _var4) -> void:
 	if _var2 is TileMapLayer or _var2 is PhysicsBody2D:
 		set_jumps()
+	if _var2 is Island:
+		call_deferred("_try_dip", _var2)
+
+func _try_dip(island: Island) -> void:
+	if player.is_on_floor():
+		island._on_player_interact()
 
 func set_jumps() -> void:
 	jumps = player.stats.max_jumps

@@ -96,7 +96,7 @@ func _ready() -> void:
 	EventBus.arrow_enemy_hit.connect(add_shot_streak)
 	EventBus.arrow_missed.connect(reset_shot_streak)
 	active_ability_cooldown.timeout.connect(_on_active_ability_cooldown_timeout)
-	
+	EventBus.apply_player_knockback.connect(apply_knockback)
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
