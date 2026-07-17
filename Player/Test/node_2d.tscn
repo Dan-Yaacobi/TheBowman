@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cxycop4k7jhcy"]
+
+[ext_resource type="Script" uid="uid://c6y1iuomnygy0" path="res://node_2d.gd" id="1_uobgi"]
+[ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="2_jkxeh"]
+
+[node name="Node2D" type="Node2D" unique_id=2135937214]
+script = ExtResource("1_uobgi")
+particle_texture = ExtResource("2_jkxeh")
+top_radius = 50.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1781930185]
+zoom = Vector2(4, 4)
