@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://esq83otc8iu8"]
+
+[ext_resource type="Script" uid="uid://cypudr30djexy" path="res://Player/Abilities2.0/ShootAbilities/MagmaBoulder/magma_boulder.gd" id="1_0s3b4"]
+[ext_resource type="Texture2D" uid="uid://dcfpd5ifrk4rj" path="res://Player/Abilities2.0/ShootAbilities/MagmaBoulder/MagmaBoulder.png" id="2_qs1es"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_ujrif"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idc7u"]
+radius = 16.124516
+
+[node name="MagmaBoulder" type="CharacterBody2D" unique_id=221296238]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_0s3b4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=468782305]
+texture = ExtResource("2_qs1es")
+
+[node name="HurtBox" parent="." unique_id=1896646351 instance=ExtResource("3_ujrif")]
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=638414120]
+shape = SubResource("CircleShape2D_idc7u")
+debug_color = Color(0.97022, 0, 0.45935047, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=302897190]
+
+[node name="QueueFreeTimer" type="Timer" parent="VisibleOnScreenNotifier2D" unique_id=609921409]

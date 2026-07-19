@@ -1,7 +1,6 @@
 class_name Enemy extends CharacterBody2D
 
 @export var stats: EnemyData
-
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
@@ -89,7 +88,7 @@ func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
 	debuff_handler.add_debuff(_debuff, _duration, _ticks)
 
 func show_damage(_amount: int, color: Color) -> void:
-	CombatTextSpawner.spawn(global_position, str(final_dmg),color)
+	CombatTextSpawner.spawn(global_position, str(_amount),color)
 
 func take_hit_effect() -> void:
 	if not added_hit_effect:

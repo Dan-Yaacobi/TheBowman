@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://cmv8qrto4g6en"]
+
+[ext_resource type="Script" uid="uid://bohnqwhy8qnyd" path="res://Player/Abilities2.0/ShootAbilities/DragonBite/dragon_bite.gd" id="1_olap5"]
+[ext_resource type="Texture2D" uid="uid://pcd6bumvt63a" path="res://Player/Abilities2.0/ShootAbilities/DragonBite/DragonBite.png" id="1_qs2ps"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_olap5"]
+
+[sub_resource type="Animation" id="Animation_34i0o"]
+resource_name = "Bite"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rcubw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0g5ch"]
+_data = {
+&"Bite": SubResource("Animation_34i0o"),
+&"RESET": SubResource("Animation_rcubw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idc7u"]
+radius = 19.924858
+
+[node name="DragonBite" type="Node2D" unique_id=1387500173]
+z_index = 2
+script = ExtResource("1_olap5")
+
+[node name="DragonBite" type="Sprite2D" parent="." unique_id=147870243]
+texture = ExtResource("1_qs2ps")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=108926487]
+root_node = NodePath("../DragonBite")
+libraries/ = SubResource("AnimationLibrary_0g5ch")
+
+[node name="HurtBox" parent="." unique_id=567197354 instance=ExtResource("2_olap5")]
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=811100220]
+position = Vector2(-14, 4)
+shape = SubResource("CircleShape2D_idc7u")
+debug_color = Color(0.97479004, 0, 0.42766717, 0.41960785)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

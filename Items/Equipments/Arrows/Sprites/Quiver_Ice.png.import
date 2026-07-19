@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnoaywmthfmta"
-path="res://.godot/imported/LizardBow.png-054098bf5db8729cd0dd75f2b77ca00f.ctex"
+uid="uid://cw1432bcghfkd"
+path="res://.godot/imported/Quiver_Ice.png-df401a683b7807fa1862ec39ea205da0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Bows/LizardBow.png"
-dest_files=["res://.godot/imported/LizardBow.png-054098bf5db8729cd0dd75f2b77ca00f.ctex"]
+source_file="res://Items/Equipments/Arrows/Sprites/Quiver_Ice.png"
+dest_files=["res://.godot/imported/Quiver_Ice.png-df401a683b7807fa1862ec39ea205da0.ctex"]
 
 [params]
 
