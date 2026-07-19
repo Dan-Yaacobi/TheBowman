@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6ulwr4lbhd00"
-path="res://.godot/imported/FireBow.png-e432e9f44b5b721c2f7816d2dc375546.ctex"
+uid="uid://cogah6glh4pjj"
+path="res://.godot/imported/HolyBow.png-d314aee9bba409d69577127e01e0f046.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Bows/8_FireBow/FireBow.png"
-dest_files=["res://.godot/imported/FireBow.png-e432e9f44b5b721c2f7816d2dc375546.ctex"]
+source_file="res://Weapons/Bows/HolyBow.png"
+dest_files=["res://.godot/imported/HolyBow.png-d314aee9bba409d69577127e01e0f046.ctex"]
 
 [params]
 

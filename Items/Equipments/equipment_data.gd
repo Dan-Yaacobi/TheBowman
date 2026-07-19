@@ -21,6 +21,7 @@ class StatModifier:
 @export var texture: Texture2D
 @export var rarity: float
 @export var equipped_texture: Texture2D
+@export var equipped_scale: Vector2 = Vector2(1,1)
 
 var ability: PlayerAbility = null
 var dropped_scale: float

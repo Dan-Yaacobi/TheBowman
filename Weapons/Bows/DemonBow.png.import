@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cogah6glh4pjj"
-path="res://.godot/imported/HolyBow.png-d5d1c253ee591a20a7a28533acf07411.ctex"
+uid="uid://dxdf855leqlwj"
+path="res://.godot/imported/DemonBow.png-19d2e1cbdf275c937cf5d44c5ecd7429.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Bows/10_HolyBow/HolyBow.png"
-dest_files=["res://.godot/imported/HolyBow.png-d5d1c253ee591a20a7a28533acf07411.ctex"]
+source_file="res://Weapons/Bows/DemonBow.png"
+dest_files=["res://.godot/imported/DemonBow.png-19d2e1cbdf275c937cf5d44c5ecd7429.ctex"]
 
 [params]
 

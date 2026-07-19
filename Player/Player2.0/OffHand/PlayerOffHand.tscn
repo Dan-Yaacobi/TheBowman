@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://c8s38ngop7fkj" path="res://Player/Player2.0/OffHand/States/off_hand_state_machine.gd" id="2_hdxbw"]
 [ext_resource type="Script" uid="uid://cew0nfmkvmt6e" path="res://Player/Player2.0/OffHand/States/o_h_idle_state.gd" id="3_b6f1e"]
 [ext_resource type="Script" uid="uid://b5d11u4vmlib8" path="res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd" id="4_dyut0"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="6_dyut0"]
 
 [sub_resource type="Animation" id="Animation_o0dpc"]
 resource_name = "Pull"
@@ -55,7 +54,8 @@ flip_h = true
 
 [node name="String" type="Line2D" parent="." unique_id=1243189938]
 z_index = 1
-position = Vector2(-8.33333, 3.33333)
+position = Vector2(-14.717835, 3.33333)
+scale = Vector2(1.6056113, 1)
 points = PackedVector2Array(-1.667, -1.667, 6.667, -1.667, 10, -1.667, 20, -1.667)
 width = 1.0
 default_color = Color(1, 0.759619, 0.662997, 1)
@@ -80,4 +80,3 @@ script = ExtResource("4_dyut0")
 [node name="Sprite2D" type="Sprite2D" parent="Bow" unique_id=749530841]
 z_index = 2
 position = Vector2(0, 6.6666665)
-texture = ExtResource("6_dyut0")

@@ -7,13 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
+[ext_resource type="Texture2D" uid="uid://bq7vpyt7ef4q7" path="res://Weapons/Bows/NinjaBow.png" id="6_4n5ed"]
 [ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn" id="6_7w4lt"]
 [ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="6_ww5s2"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="7_yf47d"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
-[ext_resource type="Script" uid="uid://cofo70ibb0g01" path="res://Player/Abilities2.0/ShootAbilities/MagmaBoulder/magma_boulder_attack.gd" id="8_yf47d"]
 [ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
 [ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/Bows/0_BasicBow/BasicBow.tscn" id="10_x70vp"]
@@ -77,14 +76,12 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rqaa0"]
-load_path = "res://.godot/imported/Bow_1.png-5fdd1f499a964ee5d8af3335d9445dfa.ctex"
-
 [sub_resource type="Resource" id="Resource_8agqw"]
 script = ExtResource("2_o1b5h")
 display_name = "Basic Bow"
-texture = ExtResource("6_ww5s2")
-equipped_texture = SubResource("CompressedTexture2D_rqaa0")
+texture = ExtResource("6_4n5ed")
+equipped_texture = ExtResource("6_4n5ed")
+equipped_scale = Vector2(0.5, 0.5)
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
 [sub_resource type="Resource" id="Resource_1ylbe"]
@@ -149,11 +146,6 @@ script = ExtResource("4_yf47d")
 base_value = 50.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
-[sub_resource type="Resource" id="Resource_yf47d"]
-script = ExtResource("8_yf47d")
-trigger_type = 4
-metadata/_custom_type_script = "uid://cofo70ibb0g01"
-
 [sub_resource type="Resource" id="Resource_lre2g"]
 script = ExtResource("4_yf47d")
 base_value = 5.0
@@ -202,7 +194,6 @@ weapon_scene = ExtResource("10_x70vp")
 arrow = SubResource("Resource_vuo2u")
 arrow_scene = ExtResource("6_7w4lt")
 bow = SubResource("Resource_8agqw")
-release_abilities = Array[ExtResource("7_yf47d")]([SubResource("Resource_yf47d")])
 sword_size = SubResource("Resource_rqaa0")
 base_sword_cooldown = SubResource("Resource_x2ho1")
 sword_damage = SubResource("Resource_lre2g")
@@ -281,12 +272,8 @@ rotation = -0.34906584
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("40_rqaa0")
 
-[node name="PlayerMainHand" parent="." unique_id=1139132622 instance=ExtResource("10_wo5nf")]
+[node name="PlayerMainHand" parent="." unique_id=1400376021 instance=ExtResource("10_wo5nf")]
 position = Vector2(-8, 14)
-collision_layer = 0
-collision_mask = 0
-min_shot_power = 0.15
-weak_shot_punish = 0.5
 
 [node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
 position = Vector2(6, 14)

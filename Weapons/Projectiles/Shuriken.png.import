@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxdf855leqlwj"
-path="res://.godot/imported/DemonBow.png-b6b790d8729a126f98c64daaf50e638e.ctex"
+uid="uid://eeno88yuag1l"
+path="res://.godot/imported/Shuriken.png-b35f5a2b72d592b55a5b41efb0e6b258.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Bows/9_DemonBow/DemonBow.png"
-dest_files=["res://.godot/imported/DemonBow.png-b6b790d8729a126f98c64daaf50e638e.ctex"]
+source_file="res://Weapons/Projectiles/Shuriken.png"
+dest_files=["res://.godot/imported/Shuriken.png-b35f5a2b72d592b55a5b41efb0e6b258.ctex"]
 
 [params]
 
