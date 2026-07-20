@@ -461,16 +461,21 @@ _data = {
 &"SlashEffect": SubResource("Animation_u8r4h")
 }
 
-[sub_resource type="Curve" id="Curve_idc7u"]
+[sub_resource type="Curve" id="Curve_dqcxd"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_30xy1"]
+offsets = PackedFloat32Array(0, 0.82175225)
+colors = PackedColorArray(0.43991134, 0.16710994, 0, 1, 1, 1, 1, 1)
 
 [node name="PlayerMainHand" type="CharacterBody2D" unique_id=1400376021]
 script = ExtResource("1_grn42")
 arrow = ExtResource("2_y7ab3")
 min_shot_power = 0.0
 max_offset = 15.0
+weak_shot_punish = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=23231684]
 z_index = 2
@@ -568,17 +573,19 @@ script = ExtResource("14_30xy1")
 [node name="SlashAnimationPlayer" type="AnimationPlayer" parent="SlashEffect" unique_id=1107291960]
 libraries/ = SubResource("AnimationLibrary_5orw7")
 
-[node name="PerfectReleaseParticles" type="CPUParticles2D" parent="." unique_id=396096124]
+[node name="PerfectReleaseParticles" type="CPUParticles2D" parent="." unique_id=368785878]
 z_index = 3
 emitting = false
-amount = 50
-lifetime = 1.2
+amount = 10
+lifetime = 2.0
 one_shot = true
-speed_scale = 3.0
-explosiveness = 1.0
+speed_scale = 5.0
+explosiveness = 0.5
 emission_shape = 1
-emission_sphere_radius = 1.0
-gravity = Vector2(0, -10)
-radial_accel_min = 50.0
-radial_accel_max = 50.0
-scale_amount_curve = SubResource("Curve_idc7u")
+emission_sphere_radius = 20.0
+gravity = Vector2(0, 0)
+radial_accel_min = 20.0
+radial_accel_max = 20.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dqcxd")
+color_ramp = SubResource("Gradient_30xy1")

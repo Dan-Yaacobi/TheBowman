@@ -12,11 +12,11 @@ point_count = 2
 colors = PackedColorArray(0.5176471, 0, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k76qx"]
-radius = 21.023796
+radius = 30.0
 
 [node name="BloodExplosion" type="CPUParticles2D" unique_id=2086761620]
 emitting = false
-amount = 25
+amount = 40
 texture = ExtResource("1_hbriq")
 lifetime = 1.5
 one_shot = true
@@ -24,7 +24,7 @@ preprocess = 0.2
 speed_scale = 2.0
 explosiveness = 1.0
 emission_shape = 1
-emission_sphere_radius = 5.0
+emission_sphere_radius = 10.0
 gravity = Vector2(0, 25)
 radial_accel_min = 50.0
 radial_accel_max = 50.0

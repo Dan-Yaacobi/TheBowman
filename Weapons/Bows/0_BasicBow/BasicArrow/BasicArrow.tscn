@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://cforgr3w6srvu" path="res://Weapons/Bows/0_BasicBow/BasicArrow/arrow_sprite.gd" id="4_5oh4i"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_f2keo"]
 [ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_43g4f"]
+[ext_resource type="Script" uid="uid://vuqfc118t7gr" path="res://Weapons/Bows/0_BasicBow/BasicArrow/moving_effect.gd" id="6_5oh4i"]
 
-[sub_resource type="Curve" id="Curve_8js4e"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_43g4f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
@@ -29,23 +29,13 @@ script = ExtResource("4_5oh4i")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1614479728]
 z_index = -1
-amount = 10
+position = Vector2(-9, 3.934025e-07)
+amount = 100
 emission_shape = 3
 emission_rect_extents = Vector2(2, 2)
 gravity = Vector2(0, 0)
-scale_amount_curve = SubResource("Curve_8js4e")
+scale_amount_curve = SubResource("Curve_43g4f")
 color = Color(0.643137, 0.152941, 0, 0.45098)
-
-[node name="PerfectParticles" type="CPUParticles2D" parent="." unique_id=301766820]
-z_index = -1
-emitting = false
-amount = 100
-emission_shape = 4
-emission_points = PackedVector2Array(-5, 5, -5, -5)
-emission_colors = PackedColorArray()
-gravity = Vector2(0, 0)
-scale_amount_curve = SubResource("Curve_8js4e")
-color = Color(1, 0.54509807, 0, 1)
 
 [node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_f2keo")]
 collision_mask = 28
@@ -58,3 +48,16 @@ shape = SubResource("RectangleShape2D_m802n")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=4300824]
 
 [node name="ExitScreenTimer" type="Timer" parent="." unique_id=1115311203]
+
+[node name="MovingEffect" type="Node2D" parent="." unique_id=996329935]
+script = ExtResource("6_5oh4i")
+
+[node name="Line2D" type="Line2D" parent="MovingEffect" unique_id=459446148]
+position = Vector2(9, 10)
+points = PackedVector2Array(0.99999917, -19, 12.999999, -19)
+width = 1.0
+
+[node name="Line2D2" type="Line2D" parent="MovingEffect" unique_id=258741397]
+position = Vector2(9.000002, 26)
+points = PackedVector2Array(0.99999917, -19, 12.999999, -19)
+width = 1.0

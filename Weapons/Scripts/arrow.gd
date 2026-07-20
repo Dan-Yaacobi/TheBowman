@@ -4,7 +4,8 @@ class_name Arrow extends CharacterBody2D
 @onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var hurt_box: ArrowHurtBox = $HurtBox
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-@onready var perfect_particles: CPUParticles2D = $PerfectParticles
+@onready var line_2d: Line2D = $Line2D
+@onready var line_2d_2: Line2D = $Line2D2
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -98,9 +99,6 @@ func _physics_process(delta: float) -> void:
 		if not enabled:
 			enabled = true
 			enable_arrow()
-		if perfect_shot:
-			perfect_particles.emitting = true
-		else:
 			cpu_particles.emitting = true
 		rotate_arrow(velocity.angle())
 		#cpu_particles.direction = velocity
