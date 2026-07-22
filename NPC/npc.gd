@@ -7,6 +7,7 @@ signal disappear
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var helper: Helper = $Helper
+@onready var keyboard_press_helper: KeyBoardHelper = $KeyboardPressHelper
 
 @export var data: NPCData
 
@@ -23,8 +24,9 @@ func face_the_player() -> void:
 	
 func _ready() -> void:
 	npc_state_machine.Initialize(self)
+	keyboard_press_helper.set_up()
 	extra_ready_functions()
-
+	
 func _process(_delta: float) -> void:
 	face_the_player()
 	extra_process_function(_delta)

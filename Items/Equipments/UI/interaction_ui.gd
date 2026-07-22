@@ -8,6 +8,7 @@ signal destory_new_item
 @onready var equip_button: Button = $PanelContainer/VBoxContainer/Buttons/EquipButton
 @onready var delete_button: Button = $PanelContainer/VBoxContainer/Buttons/DeleteButton
 @onready var new_item: VBoxContainer = $PanelContainer/VBoxContainer/HBoxContainer/NewItem
+@onready var keyboard_press_helper: KeyBoardHelper = $KeyboardPressHelper
 
 @export var stat_names_dict: Dictionary[String, String] = {}
 
@@ -25,7 +26,7 @@ func _ready() -> void:
 	new_item.add_theme_constant_override("separation", 6)
 	_apply_button_style(equip_button, Color(0.35, 0.2, 0.08), Color(0.5, 0.3, 0.12))
 	_apply_button_style(delete_button, Color(0.4, 0.15, 0.05), Color(0.55, 0.22, 0.08))
-
+	keyboard_press_helper.set_up("E")
 func _apply_button_style(button: Button, normal_color: Color, hover_color: Color) -> void:
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = normal_color

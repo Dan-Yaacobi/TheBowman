@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6gxvapb1cxqw" path="res://HUD/ActiveAbility/active_ability_indicator.gd" id="1_rm6iq"]
 [ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="2_8ybmi"]
 [ext_resource type="Texture2D" uid="uid://dknaul0f46qmv" path="res://Particles/BigBall.png" id="3_788oi"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_788oi"]
 
 [node name="ActiveAbilityIndicator" type="Control" unique_id=1614194738]
 custom_minimum_size = Vector2(80, 80)
@@ -35,3 +36,10 @@ tint_progress = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 20.0
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("4_788oi")]
+layout_mode = 1
+offset_left = -2.0
+offset_top = -36.0
+offset_right = -5.84
+offset_bottom = -38.88

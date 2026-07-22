@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2kln8owfj3mr" path="res://Items/Equipments/UI/interaction_ui.gd" id="1_qxexj"]
 [ext_resource type="Shader" uid="uid://dsjd8llvoqwdm" path="res://Items/Equipments/UI/wooden_UI.gdshader" id="2_6ssy7"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="3_1p5pq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1p5pq"]
 shader = ExtResource("2_6ssy7")
@@ -15,10 +16,12 @@ shader_parameter/border_color = Color(0.15, 0.08, 0.02, 1)
 
 [node name="InteractionUI" type="Control" unique_id=696699529]
 layout_mode = 3
-anchor_right = 0.020000001
-anchor_bottom = 0.07300001
-offset_right = -38.4
-offset_bottom = -78.840004
+anchor_right = 0.059000004
+anchor_bottom = 0.109000005
+offset_left = 2.0
+offset_top = 30.0
+offset_right = -92.40001
+offset_bottom = -68.100006
 script = ExtResource("1_qxexj")
 stat_names_dict = Dictionary[String, String]({
 "arrow_damage": "Damage",
@@ -70,6 +73,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "delete"
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("3_1p5pq")]
+layout_mode = 1
+anchor_right = 0.0
+offset_left = 11.0
+offset_top = -29.0
+offset_right = 11.0
+offset_bottom = -29.0
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/EquipButton" to="." method="_on_equip_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/DeleteButton" to="." method="_on_delete_button_pressed"]

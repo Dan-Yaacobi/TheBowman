@@ -23,8 +23,9 @@ func _on_arrow_hit(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	if _perfect and is_instance_valid(_enemy):
 		_hit_enemy = _enemy
 		_hit_position = _arrow.global_position
-		fill_gauge()
 		EventBus.request_gauge.emit(true)
+		fill_gauge()
+		
 		
 func _on_enemy_stunned(_enemy: Enemy) -> void:
 	_hit_enemy = _enemy
