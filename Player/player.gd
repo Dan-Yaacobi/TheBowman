@@ -95,8 +95,9 @@ func _ready() -> void:
 	EventBus.enemy_died.connect(count_enemy_death)
 	EventBus.arrow_enemy_hit.connect(add_shot_streak)
 	EventBus.arrow_missed.connect(reset_shot_streak)
-	active_ability_cooldown.timeout.connect(_on_active_ability_cooldown_timeout)
 	EventBus.apply_player_knockback.connect(apply_knockback)
+	EventBus.active_ability_ready.connect(active_ability_ready)
+
 	set_new_bow()
 	set_arrow_scene()
 	set_new_arrow()
@@ -166,17 +167,13 @@ func use_active_ability() -> void:
 		return
 	if not active_ability_available:
 		return
+	EventBus.active_ability_used.emit(stats.active_ability.cooldown)
 	stats.active_ability.activate(self)
 	active_ability_available = false
-	active_ability_cooldown.wait_time = stats.active_ability.cooldown
-	active_ability_cooldown.start()
-	EventBus.active_ability_used.emit(stats.active_ability.cooldown)
 	
-func _on_active_ability_cooldown_timeout() -> void:
+func active_ability_ready() -> void:
 	active_ability_available = true
-	active_ability_cooldown.stop()
-	EventBus.active_ability_ready.emit()
-	
+
 func grapple() -> void:
 	if not player_state_machine.curr_state is PlayerGrapplingState:
 		grapple_hook.activate_hook()

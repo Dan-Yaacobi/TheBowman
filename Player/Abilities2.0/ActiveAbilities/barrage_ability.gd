@@ -3,8 +3,7 @@ class_name BarrageAbility extends ActiveAbility
 @export var arrow_count: int = 10
 @export var interval: float = 0.12
 
-func _ready() -> void:
-	print("barrage ready")
+
 func activate(_player: Player) -> void:
 	_barrage(_player)
 

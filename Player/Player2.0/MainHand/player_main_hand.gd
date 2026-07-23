@@ -142,6 +142,7 @@ func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = ha
 		
 		if shot_power >= 1.0:
 			fired_arrow.perfect_shot = true
+		fired_arrow.arrow_shot_power = effective_power
 		fired_arrow.velocity = calc_shot_velocity(effective_power, spread_direction)
 		fired_arrow.fired = true
 		fired_arrow.enabled = false

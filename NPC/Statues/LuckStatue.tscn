@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_iw1cu"]
 [ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="8_hl5sr"]
 [ext_resource type="PackedScene" uid="uid://67r5dkhgwd4b" path="res://NPC/Helper/Helper.tscn" id="9_2rtdb"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="10_w8tg4"]
 
 [sub_resource type="Resource" id="Resource_wvyim"]
 script = ExtResource("2_2rtdb")
@@ -54,7 +55,15 @@ collision_layer = 0
 shape = SubResource("RectangleShape2D_7b5al")
 
 [node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_2rtdb")]
+visible = false
 offset_left = -21.333336
 offset_top = -34.666668
 offset_right = 92.666664
 offset_bottom = -14.666668
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("10_w8tg4")]
+offset_left = -13.333334
+offset_top = -40.0
+offset_right = -13.333334
+offset_bottom = -40.0
+scale = Vector2(0.5, 0.5)

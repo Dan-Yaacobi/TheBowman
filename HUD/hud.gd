@@ -33,8 +33,7 @@ func _ready() -> void:
 	EventBus.request_boss_health_bar.connect(send_boss_health_bar)
 	EventBus.hide_boss_health_bar.connect(hide_boss_health_bar)
 	pause_menu.setup(equipment_menu)
-
-
+	
 func apply_damage_flash() -> void:
 	if flash_tween:
 		flash_tween.kill()

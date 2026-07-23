@@ -1,11 +1,10 @@
 class_name Arrow extends CharacterBody2D
 
 @onready var sprite: ArrowSprite = $Sprite2D
-@onready var cpu_particles: CPUParticles2D = $CPUParticles2D
+#@onready var cpu_particles: CPUParticles2D = $CPUParticles2D
 @onready var hurt_box: ArrowHurtBox = $HurtBox
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-@onready var line_2d: Line2D = $Line2D
-@onready var line_2d_2: Line2D = $Line2D2
+@onready var after_image_spawner: AfterimageSpawner = $AfterImageSpawner
 
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
@@ -37,7 +36,7 @@ var arrow_shot_power: float
 var texture: Texture2D
 
 func _ready() -> void:
-	cpu_particles.emitting = false
+	#cpu_particles.emitting = false
 	hurt_box.monitorable = false
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
@@ -96,10 +95,11 @@ func wall_clear_shot() -> void:
 
 func _physics_process(delta: float) -> void:
 	if fired:
+		after_image_spawner.activate(arrow_shot_power)
 		if not enabled:
 			enabled = true
 			enable_arrow()
-			cpu_particles.emitting = true
+			#cpu_particles.emitting = true
 		rotate_arrow(velocity.angle())
 		#cpu_particles.direction = velocity
 		var arrow_weight = PlayerManager.player.stats.arrow_weight.value()
