@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://dsp81oo6n6qxm"]
+
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_8ojcy"]
+[ext_resource type="Script" uid="uid://b8mm47joioxpj" path="res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd" id="1_ff4eg"]
+[ext_resource type="Texture2D" uid="uid://v6rpvfly0fmv" path="res://Weapons/Bows/4_NatureBow/PoisonIvy.png" id="1_ob2sq"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_ob2sq"]
+[ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="4_bdl1s"]
+
+[sub_resource type="Resource" id="Resource_ob2sq"]
+script = ExtResource("1_ff4eg")
+metadata/_custom_type_script = "uid://b8mm47joioxpj"
+
+[resource]
+script = ExtResource("2_ob2sq")
+display_name = "Poison Ivy"
+texture = ExtResource("1_ob2sq")
+equipped_texture = ExtResource("1_ob2sq")
+ability = SubResource("Resource_ob2sq")
+possible_modifiers = Array[ExtResource("4_bdl1s")]([null])
+max_modifier_count = 3
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

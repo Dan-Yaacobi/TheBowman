@@ -47,8 +47,13 @@ var player: Player
 @export var arrow_size: Stat
 
 @export_subgroup("Special")
-@export var bleed_damage: int = 3
-
+@export var stun_duration: float = 2.0
+@export var bleed_damage: int = 1
+@export var bleed_duration: float = 2.0
+@export var burn_damage: int = 1
+@export var burn_duration: float = 2.0
+@export var poison_damage: int = 1
+@export var poison_duration: float = 2.0
 
 @export_subgroup("Player Items")
 @export var money: int

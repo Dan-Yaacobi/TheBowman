@@ -1,0 +1,1 @@
+class_name MinorAbility extends PlayerAbility
