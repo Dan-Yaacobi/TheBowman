@@ -1,97 +1,9 @@
 [gd_resource type="Resource" script_class="ItemPool" format=3 uid="uid://b12a6b3o5v31k"]
 
-[ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.png" id="1_n3tsu"]
-[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_v12hp"]
-[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Arrows/Sprites/Quiver_Wooden.png" id="2_7typt"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_a5xjm"]
-[ext_resource type="Texture2D" uid="uid://dajhgy0nad6gm" path="res://Weapons/Bows/1_BlueBow/BlueArrow/BlueArrow.png" id="2_x2s5p"]
-[ext_resource type="Texture2D" uid="uid://cy35gvnyu51eg" path="res://Weapons/Bows/2_RedBow/RedArrow/RedArrow.png" id="3_7fb6t"]
-[ext_resource type="Texture2D" uid="uid://7mgxqtpduwa3" path="res://Items/Equipments/Arrows/Sprites/Quiver_Blue.png" id="3_u1e4n"]
-[ext_resource type="Texture2D" uid="uid://bchin526oeubw" path="res://Items/Equipments/Arrows/Sprites/Quiver_Red.png" id="4_2aujr"]
-[ext_resource type="Texture2D" uid="uid://bhn7ebb76412p" path="res://Weapons/Bows/3_BlackBow/BlackArrow/BlackArrow.png" id="4_rhkdk"]
-[ext_resource type="Texture2D" uid="uid://cltfh8d1xgqfm" path="res://Items/Equipments/Arrows/Sprites/Quiver_Black.png" id="5_0mpld"]
-[ext_resource type="Texture2D" uid="uid://2k08i7rod8ti" path="res://Weapons/Bows/4_NatureBow/NatureArrow/PoisonArrow.png" id="5_v5xmh"]
-[ext_resource type="Texture2D" uid="uid://b6th5fykp34sr" path="res://Items/Equipments/Arrows/Sprites/Quiver_Poison.png" id="6_hauan"]
-[ext_resource type="Texture2D" uid="uid://c68idtngmkr2w" path="res://Weapons/Bows/5_ThunderBow/ThunderArrow/ElectricJolt.png" id="6_v5xmh"]
-[ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="6_x2s5p"]
-[ext_resource type="Script" uid="uid://hqu465ov5673" path="res://Player/Abilities2.0/ShootAbilities/Bleed/bleed_ability.gd" id="7_7fb6t"]
-[ext_resource type="Texture2D" uid="uid://ilnbfv47765s" path="res://Weapons/Bows/6_BoneBow/BoneBowArrow/SkullArrow.png" id="7_xf0lt"]
-[ext_resource type="Script" uid="uid://b8mm47joioxpj" path="res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd" id="10_5qo6j"]
-[ext_resource type="Script" uid="uid://6v84ocdux8dl" path="res://Player/Abilities2.0/ShootAbilities/Stun/stun_ability.gd" id="11_rqd6g"]
-[ext_resource type="Script" uid="uid://dswbx1xx3nvnl" path="res://Player/Abilities2.0/ShootAbilities/BurningTrail/burning_trail_ability.gd" id="13_ccgbh"]
-[ext_resource type="Texture2D" uid="uid://crvdoxt74tjqg" path="res://Items/Equipments/Arrows/Sprites/Quiver_Electric.png" id="15_2y33t"]
-[ext_resource type="Texture2D" uid="uid://bilyaairp2gtq" path="res://Items/Equipments/Arrows/Sprites/Quiver_Skulls.png" id="17_5qo6j"]
-
-[sub_resource type="Resource" id="Resource_rhkdk"]
-script = ExtResource("7_7fb6t")
-trigger_type = 1
-metadata/_custom_type_script = "uid://hqu465ov5673"
-
-[sub_resource type="Resource" id="Resource_rqd6g"]
-script = ExtResource("10_5qo6j")
-trigger_type = 1
-tier = 1
-metadata/_custom_type_script = "uid://b8mm47joioxpj"
-
-[sub_resource type="Resource" id="Resource_lj6x1"]
-script = ExtResource("11_rqd6g")
-trigger_type = 1
-tier = 1
-metadata/_custom_type_script = "uid://6v84ocdux8dl"
-
-[sub_resource type="Resource" id="Resource_8fdxr"]
-script = ExtResource("13_ccgbh")
-trigger_type = 4
-tier = 2
-rarity_weight = 2.0
-metadata/_custom_type_script = "uid://dswbx1xx3nvnl"
-
-[sub_resource type="Resource" id="Resource_v12hp"]
-script = ExtResource("1_v12hp")
-stat_name = "arrow_damage"
-min_value = 1.0
-max_value = 5.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
-[sub_resource type="Resource" id="Resource_a5xjm"]
-script = ExtResource("1_v12hp")
-stat_name = "arrow_speed"
-min_value = 10.0
-max_value = 60.0
-rarity_weight = 1.5
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
-[sub_resource type="Resource" id="Resource_7fb6t"]
-script = ExtResource("1_v12hp")
-stat_name = "crit_chance"
-min_value = 5.0
-max_value = 25.0
-rarity_weight = 1.5
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
-[sub_resource type="Resource" id="Resource_v5xmh"]
-script = ExtResource("1_v12hp")
-stat_name = "arrow_size"
-type = 1
-min_value = 0.4
-max_value = 0.8
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
-[sub_resource type="Resource" id="Resource_dojlw"]
-script = ExtResource("1_v12hp")
-stat_name = "pushback_power"
-min_value = 5.0
-max_value = 29.0
-rarity_weight = 1.5
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_v12hp"]
 
 [resource]
 script = ExtResource("2_a5xjm")
-possible_stats = Array[ExtResource("1_v12hp")]([SubResource("Resource_v12hp"), SubResource("Resource_a5xjm"), SubResource("Resource_7fb6t"), SubResource("Resource_v5xmh"), SubResource("Resource_dojlw")])
-possible_textures = Array[Texture2D]([ExtResource("2_7typt"), ExtResource("3_u1e4n"), ExtResource("4_2aujr"), ExtResource("5_0mpld"), ExtResource("6_hauan"), ExtResource("15_2y33t"), ExtResource("17_5qo6j")])
-equipped_textures = Array[Texture2D]([ExtResource("1_n3tsu"), ExtResource("2_x2s5p"), ExtResource("3_7fb6t"), ExtResource("4_rhkdk"), ExtResource("5_v5xmh"), ExtResource("6_v5xmh"), ExtResource("7_xf0lt")])
-possible_display_names = Array[String](["Wooden Quiver", "Blue Quiver", "Red Quiver", "Black Quiver", "Darts", "Jolts", "Skulls"])
-possible_abilities = Array[ExtResource("6_x2s5p")]([SubResource("Resource_rhkdk"), SubResource("Resource_rqd6g"), SubResource("Resource_lj6x1"), SubResource("Resource_8fdxr")])
 slot = 1
-scale = 0.2
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

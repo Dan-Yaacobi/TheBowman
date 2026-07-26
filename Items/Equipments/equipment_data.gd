@@ -8,7 +8,6 @@ class StatModifier:
 	var stat_name: String
 	var amount: float
 	var stat_type: Stat.buff_type
-	var display_name: String
 
 	func _init(_amount: float, _stat_name: String, _type: Stat.buff_type) -> void:
 		id = StatModifier.next_id
@@ -33,17 +32,17 @@ class StatModifier:
 # a ring can list crit_chance, and a quiver can leave stats it doesn't use out.
 @export var guaranteed_stats: Array[StatRollDef] = []
 
-# The random modifier pool - These are minor passive
+# The random minor abilities pool - These are minor passive
 # PlayerAbility effects (e.g. "on kill: -1s active cooldown"), a subset of
 # which gets picked at roll time (see min/max_modifier_count below).
-@export var possible_modifiers: Array[MinorAbility] = []
-@export var min_modifier_count: int = 0
-@export var max_modifier_count: int = 2
+@export var minor_abilities: Array[MinorAbility] = []
+@export var min_minor_count: int = 0
+@export var max_minor_count: int = 2
+@export var equipment_scene: PackedScene = preload("uid://djxch32a87fle")
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---
 var rarity: float
-var equipment_scene: PackedScene
-var modifiers: Array = []                        # StatModifier list, rolled from guaranteed_stats
+var modifiers: Array[StatModifier] = []                      # StatModifier list, rolled from guaranteed_stats
 var bonus_abilities: Array[MinorAbility] = []    # minor abilities picked from possible_modifiers
 
 func add_modifier(stat_name: String, amount: float, _type: Stat.buff_type) -> void:

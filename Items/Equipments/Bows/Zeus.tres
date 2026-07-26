@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cnho4yuoqhjpi"]
+
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="1_01rm4"]
+[ext_resource type="Script" uid="uid://royi3wayekwd" path="res://Player/Abilities2.0/PassiveAbilities/ChainLightning/chain_lightning_ability.gd" id="1_dprp6"]
+[ext_resource type="Texture2D" uid="uid://bj0vflr3cftf0" path="res://Weapons/Bows/Zeus.png" id="2_6v1vm"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_d7umq"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="2_vvh5r"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="3_dprp6"]
+
+[sub_resource type="Resource" id="Resource_6v1vm"]
+script = ExtResource("1_dprp6")
+metadata/_custom_type_script = "uid://royi3wayekwd"
+
+[sub_resource type="Resource" id="Resource_d7umq"]
+script = ExtResource("1_01rm4")
+stat_name = "arrow_damage"
+min_value = 5.0
+max_value = 10.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_vb06c"]
+script = ExtResource("1_01rm4")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 2.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_5oh7t"]
+script = ExtResource("1_01rm4")
+stat_name = "perfect_shot_bonus"
+min_value = 1.5
+max_value = 2.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[resource]
+script = ExtResource("3_dprp6")
+display_name = "Zeus"
+texture = ExtResource("2_6v1vm")
+equipped_texture = ExtResource("2_6v1vm")
+dropped_scale = 0.5
+equipped_scale = Vector2(0.6, 0.6)
+ability = SubResource("Resource_6v1vm")
+guaranteed_stats = Array[ExtResource("1_01rm4")]([SubResource("Resource_d7umq"), SubResource("Resource_vb06c"), SubResource("Resource_5oh7t")])
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

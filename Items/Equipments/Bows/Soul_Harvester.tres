@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://bu83tlwxqtx25"]
+
+[ext_resource type="Script" uid="uid://c1qxjyjyf6hps" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/soul_harvet_ability.gd" id="1_02524"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_jljtp"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="2_v8vsn"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="3_02524"]
+[ext_resource type="Texture2D" uid="uid://cpv1egyqlyimp" path="res://Weapons/Bows/SoulHarvster.png" id="3_uv6fp"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_uv6fp"]
+
+[sub_resource type="Resource" id="Resource_2acew"]
+script = ExtResource("1_02524")
+metadata/_custom_type_script = "uid://c1qxjyjyf6hps"
+
+[resource]
+script = ExtResource("4_uv6fp")
+display_name = "SoulHarvester"
+texture = ExtResource("3_uv6fp")
+equipped_texture = ExtResource("3_uv6fp")
+equipped_scale = Vector2(0.6, 0.6)
+ability = SubResource("Resource_2acew")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"
