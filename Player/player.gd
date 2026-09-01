@@ -98,12 +98,11 @@ func _ready() -> void:
 	EventBus.apply_player_knockback.connect(apply_knockback)
 	EventBus.active_ability_ready.connect(active_ability_ready)
 
-	set_new_bow()
+	reset_equipment()
 	set_arrow_scene()
 	set_new_arrow()
 	activate_passive_abilities() 
-
-const BASIC_BOW = preload("uid://b38tq7flgau6x")
+const BASIC_BOW = preload("uid://doeycgb8i1256")
 const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
 
 var enemies_killed: int = 0
@@ -130,7 +129,6 @@ func kill(_death_screen: bool = true) -> void:
 func activate_passive_abilities() -> void:
 	for ability in get_abilities(PlayerAbility.TriggerType.PASSIVE):
 		ability.on_equipped()
-		
 	
 func _process(_delta: float) -> void:
 	if stats.hp > 0:

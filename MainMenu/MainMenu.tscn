@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
-[ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="13_qvidt"]
 [ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="14_5lv0r"]
@@ -100,8 +99,5 @@ shape = SubResource("RectangleShape2D_5lv0r")
 debug_color = Color(1, 0, 0.2, 0.419608)
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("13_7t2hb")]
-
-[node name="Cleric" parent="." unique_id=158854308 instance=ExtResource("13_gej64")]
-position = Vector2(257, 91)
 
 [connection signal="body_entered" from="FallingDeath" to="." method="_on_falling_death_body_entered"]

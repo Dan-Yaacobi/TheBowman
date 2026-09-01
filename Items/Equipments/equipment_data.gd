@@ -2,6 +2,8 @@ class_name EquipmentData extends Resource
 
 enum slots{BOW,ARROW,RING}
 
+enum Rarity { COMMON, UNCOMMON, EPIC, LEGENDARY }
+
 class StatModifier:
 	static var next_id: int = 0
 	var id: int
@@ -25,19 +27,8 @@ class StatModifier:
 @export var slot: slots
 @export var pick_weight: float = 1.0            # how likely this item is picked from its pool, relative to others
 @export var ability: PlayerAbility = null        # always set on the template — this item's one fixed main ability
+@export var tiers: Array[RarityTier] = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
 
-# The item's defined core stats - always rolled, one modifier per entry, every
-# time this item drops (values roll within each StatRollDef's range, but which
-# stats appear is fixed). e.g. a bow always lists damage + pull_speed here;
-# a ring can list crit_chance, and a quiver can leave stats it doesn't use out.
-@export var guaranteed_stats: Array[StatRollDef] = []
-
-# The random minor abilities pool - These are minor passive
-# PlayerAbility effects (e.g. "on kill: -1s active cooldown"), a subset of
-# which gets picked at roll time (see min/max_modifier_count below).
-@export var minor_abilities: Array[MinorAbility] = []
-@export var min_minor_count: int = 0
-@export var max_minor_count: int = 2
 @export var equipment_scene: PackedScene = preload("uid://djxch32a87fle")
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---

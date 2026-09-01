@@ -212,7 +212,7 @@ func _format_stat_rich(stat: Stat) -> String:
 
 
 func _format_float(val: float) -> String:
-	var snapped: float = snappedf(val, 0.0001)
-	if snapped == int(snapped):
-		return str(int(snapped))
-	return str(snapped)
+	var _snapped: float = snappedf(val, 0.0001)
+	if _snapped == int(_snapped):
+		return str(int(_snapped))
+	return str(_snapped)

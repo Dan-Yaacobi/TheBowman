@@ -3,16 +3,16 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 @export var max_rift_level: int = 15
-# Rarity
-@export var quality_floor_max: float = 0.8       # how high the floor gets at max rarity
-@export var quality_ceiling_min: float = 0.4     # ceiling for rarity 1 items
-@export var rarity_bias: float = 3.0             # higher = legendary items rarer (C base)
-@export var lift_exp: float = 0.7
+
+# Rarity odds — base weights per tier (index matches EquipmentData.Rarity), higher rift level biases toward the back of this array
+@export var rarity_weights: Array[float] = [50.0, 30.0, 15.0, 5.0]
+@export var rift_rarity_scale: float = 0.15       # how much rift level pulls odds toward higher tiers
+
+# Value shift per tier — % increase applied to stat ranges, shared across every item
+@export var rarity_value_shift: Array[float] = [0.0, 0.2, 0.5, 0.8]
 
 # Rift level scaling
-@export var rift_stat_scale: float = 0.1         # A: how much stat ranges grow per rift (logarithmic)
-@export var rift_quality_scale: float = 0.1      # B: how much rift level boosts quality floor
-@export var rift_rarity_scale: float = 0.1       # C: how much rift level reduces rarity bias
+@export var rift_stat_scale: float = 0.1          # how much stat ranges grow per rift (logarithmic), stacks with rarity_value_shift
 
 @export var bow_pool: ItemPool
 @export var quiver_pool: ItemPool
@@ -31,16 +31,16 @@ func unset_up() -> void:
 	EventBus.drop_coins.disconnect(drop_coins)
 	EventBus.drop_potion.disconnect(drop_potion)
 
-func drop_item(slot: Slot, _rarity_skew: float = 0) -> EquipmentData:
+func drop_item(slot: Slot, forced_rarity: int = -1) -> EquipmentData:
 	match slot:
-		Slot.BOW: return roll_item(bow_pool, _rarity_skew)
-		Slot.QUIVER: return roll_item(quiver_pool, _rarity_skew)
-		Slot.RING: return roll_item(ring_pool, _rarity_skew)
+		Slot.BOW: return roll_item(bow_pool, forced_rarity)
+		Slot.QUIVER: return roll_item(quiver_pool, forced_rarity)
+		Slot.RING: return roll_item(ring_pool, forced_rarity)
 	return null
 
-func drop_random_item(_position: Vector2, _chance: float, _rarity_skew: float = 0) -> void:
+func drop_random_item(_position: Vector2, _chance: float, forced_rarity: int = -1) -> void:
 	if randf_range(0, 100) <= _chance:
-		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot, _rarity_skew)
+		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot, forced_rarity)
 		EventBus.equipment_dropped.emit(item, _position, null)
 
 func drop_coins(_position: Vector2, _amount: int) -> void:
@@ -49,53 +49,66 @@ func drop_coins(_position: Vector2, _amount: int) -> void:
 func drop_potion(_position: Vector2, _chance: float) -> void:
 	ItemDropManager.drop_potion(_position, _chance)
 
-func roll_item(pool: ItemPool, _rarity_skew: float = 0) -> EquipmentData:
+func roll_item(pool: ItemPool, forced_rarity: int = -1) -> EquipmentData:
 	var template: EquipmentData = _pick_template(pool)
 	if template == null:
 		push_error("ItemPool has no templates: " + str(pool.resource_path))
 		return null
 	var data: EquipmentData = template.duplicate()
-	# own our ability instance — never register/mutate the shared template resource
 	if data.ability:
 		data.ability = data.ability.duplicate()
+	data.equipment_scene = template.equipment_scene
+
+	var rarity: int = forced_rarity if forced_rarity >= 0 else _roll_rarity()
+	_apply_rarity_rolls(data, rarity)
+	return data
+
+## Rerolls an already-owned item fully at a specific rarity — used by the wizard NPC.
+## Fully replaces modifiers/minors; nothing from the previous roll is preserved.
+func wizard_reroll(item: EquipmentData, new_rarity: int) -> void:
+	_apply_rarity_rolls(item, new_rarity)
+
+func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
+	data.rarity = rarity
+	data.modifiers = []
+	data.bonus_abilities = []
 
 	var rift_level: int = PlayerManager.player.stats.rift_level
-
-	# A: logarithmic stat range scalar — gradual growth with rift level
 	var rift_stat_scalar: float = 1.0 + log(max(rift_level, 1)) * rift_stat_scale
+	var shift: float = rarity_value_shift[rarity]
+	var range_multiplier: float = 1.0 + shift
 
-	# B: rift quality floor boost — later rifts guarantee better rolls
-	var rift_quality_boost: float = log(max(rift_level, 1)) * rift_quality_scale
+	for tier_index in range(rarity + 1):
+		var tier: RarityTier = data.tiers[tier_index]
+		for def in tier.stat_rolls:
+			var scaled_min: float = def.min_value * rift_stat_scalar * range_multiplier
+			var scaled_max: float = def.max_value * rift_stat_scalar * range_multiplier
+			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
+			data.add_modifier(def.stat_name, amount, def.type)
+		if tier.minor_roll_count > 0 and not tier.minor_ability_pool.is_empty():
+			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, shift))
 
-	# C: rift rarity bias reduction — higher rarity items more common in later rifts
+func _roll_rarity() -> int:
+	var rift_level: int = PlayerManager.player.stats.rift_level
 	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
-	var s: float = t * t * (3.0 - 2.0 * t)
-	var effective_rarity_bias: float = lerpf(rarity_bias, 0.5, s)
+	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep
 
-	# roll rarity first
-	var rarity_roll: float = randf()
-	var rarity_curved: float = pow(pow(rarity_roll, lift_exp), effective_rarity_bias)
-	data.rarity = clampf(1.0 + rarity_curved * (CustomVariables.MAX_RARITY - 1) + _rarity_skew, 1.0, CustomVariables.MAX_RARITY)
-	var rarity_normalized: float = (data.rarity - 1.0) / (CustomVariables.MAX_RARITY - 1.0)
+	var weights: Array[float] = rarity_weights.duplicate()
+	# nudge odds toward higher tiers as rift level climbs
+	for i in weights.size():
+		var tier_bias: float = float(i) / float(weights.size() - 1)  # 0 for common, 1 for legendary
+		weights[i] = lerpf(weights[i], weights[i] * (1.0 + tier_bias * rift_rarity_scale * 10.0), s)
 
-	# quality floor and ceiling — rarity driven + rift quality boost
-	var quality_floor: float = clampf(rarity_normalized * quality_floor_max + rift_quality_boost, 0.0, 1.0)
-	var quality_ceiling: float = clampf(rarity_normalized * (1.0 - quality_ceiling_min) + quality_ceiling_min + rift_quality_boost, 0.0, 1.0)
-
-	# guaranteed stats — every entry always rolls, only the value varies
-	for def in template.guaranteed_stats:
-		var roll_bounded: float = quality_floor + randf() * (quality_ceiling - quality_floor)
-		var scaled_min: float = def.min_value * rift_stat_scalar
-		var scaled_max: float = def.max_value * rift_stat_scalar
-		var amount: float = snappedf(scaled_min + roll_bounded * (scaled_max - scaled_min), 0.1)
-		data.add_modifier(def.stat_name, amount, def.type)
-
-	# minor abilities — count scales with rarity, picked without replacement
-	var minor_count: int = template.min_minor_count + roundi(rarity_normalized * (template.max_minor_count - template.min_minor_count))
-	data.bonus_abilities = _roll_minors(template.minor_abilities, minor_count, quality_floor, quality_ceiling)
-
-	data.equipment_scene = load(EQUIPMENT)
-	return data
+	var total: float = 0.0
+	for w in weights:
+		total += w
+	var roll: float = randf() * total
+	var cumulative: float = 0.0
+	for i in weights.size():
+		cumulative += weights[i]
+		if roll <= cumulative:
+			return i
+	return weights.size() - 1
 
 func _pick_template(pool: ItemPool) -> EquipmentData:
 	if pool.templates.is_empty():
@@ -111,7 +124,7 @@ func _pick_template(pool: ItemPool) -> EquipmentData:
 			return template
 	return pool.templates.back()
 
-func _roll_minors(available: Array[MinorAbility], count: int, quality_floor: float, quality_ceiling: float) -> Array[MinorAbility]:
+func _roll_minors(available: Array[MinorAbility], count: int, shift: float) -> Array[MinorAbility]:
 	var result: Array[MinorAbility] = []
 	var remaining: Array[MinorAbility] = available.duplicate()
 	for i in count:
@@ -126,9 +139,16 @@ func _roll_minors(available: Array[MinorAbility], count: int, quality_floor: flo
 			cumulative += 1.0 / minor.rarity_weight
 			if roll <= cumulative:
 				var rolled: MinorAbility = minor.duplicate()
-				var quality: float = quality_floor + randf() * (quality_ceiling - quality_floor)
-				rolled.roll_values(quality)
+				rolled.apply_shift(shift)
 				result.append(rolled)
 				remaining.erase(minor)
 				break
 	return result
+	
+func roll_specific(template: EquipmentData, forced_rarity: int = 0) -> EquipmentData:
+	var data: EquipmentData = template.duplicate()
+	if data.ability:
+		data.ability = data.ability.duplicate()
+	data.equipment_scene = template.equipment_scene
+	_apply_rarity_rolls(data, forced_rarity)
+	return data

@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_ib3vm"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_o1b5h"]
 [ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.png" id="3_7w4lt"]
-[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="3_jvfa1"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="4_ib3vm"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
@@ -15,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="7_yf47d"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
-[ext_resource type="Resource" uid="uid://dsp81oo6n6qxm" path="res://Items/Equipments/Bows/Poison_Ivy.tres" id="9_ib3vm"]
+[ext_resource type="Resource" uid="uid://doeycgb8i1256" path="res://Items/Equipments/Bows/basic_bow.tres" id="9_ib3vm"]
 [ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
 [ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
 [ext_resource type="PackedScene" uid="uid://bc4lu6kenryfn" path="res://Weapons/Bows/0_BasicBow/BasicBow.tscn" id="10_x70vp"]
@@ -44,6 +42,7 @@ script = ExtResource("2_o1b5h")
 display_name = "Basic Arrow"
 texture = ExtResource("3_7w4lt")
 equipped_texture = ExtResource("3_7w4lt")
+tiers = null
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
 
 [sub_resource type="Resource" id="Resource_i325y"]
@@ -122,6 +121,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_1a3po"]
 script = ExtResource("4_yf47d")
+base_value = 1.5
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_eennk"]
