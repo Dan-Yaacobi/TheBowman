@@ -70,7 +70,6 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
-const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
 
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,

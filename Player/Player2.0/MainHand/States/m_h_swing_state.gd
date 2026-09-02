@@ -22,6 +22,7 @@ func _ready() -> void:
 func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
 		ability.activate_ability()
+	EventBus.apply_player_knockback.emit(entity.hand_direction,75)
 	EventBus.sword_slash_sound.emit()
 	set_sword_size()
 	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
@@ -41,7 +42,8 @@ func Exit() -> void:
 	swing_cooldown.start()
 	reset_sword_size()
 	enemies_hit.clear()
-
+	
+	
 func Process(_delta: float) -> MainHandState:
 	if finished:
 		return idle

@@ -526,7 +526,7 @@ position = Vector2(1.3333335, -20)
 texture = ExtResource("8_y7ab3")
 
 [node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
-position = Vector2(20.000002, -34.666664)
+position = Vector2(1.3333321, -35.999996)
 scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 140

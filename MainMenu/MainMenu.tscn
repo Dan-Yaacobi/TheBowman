@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
+[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/DefaultEquipment/basic_quiver.tres" id="10_7t2hb"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
@@ -88,6 +89,7 @@ position = Vector2(312, 104)
 
 [node name="PedestalNPC" parent="Islands/Island9" unique_id=844129433 instance=ExtResource("13_gej64")]
 position = Vector2(1, -18)
+item_data = ExtResource("10_7t2hb")
 
 [node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
 position = Vector2(10, 93)
