@@ -20,17 +20,18 @@ const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 enum Slot { BOW, QUIVER, RING }
 
-
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
 	EventBus.drop_coins.connect(drop_coins)
 	EventBus.drop_potion.connect(drop_potion)
-
+	EventBus.drop_specific_item.connect(drop_specific)
+	
 func unset_up() -> void:
 	EventBus.try_drop.disconnect(drop_random_item)
 	EventBus.drop_coins.disconnect(drop_coins)
 	EventBus.drop_potion.disconnect(drop_potion)
-
+	EventBus.drop_specific_item.disconnect(drop_specific)
+	
 func drop_item(slot: Slot, forced_rarity: int = -1) -> EquipmentData:
 	match slot:
 		Slot.BOW: return roll_item(bow_pool, forced_rarity)
@@ -145,10 +146,10 @@ func _roll_minors(available: Array[MinorAbility], count: int, shift: float) -> A
 				break
 	return result
 	
-func roll_specific(template: EquipmentData, forced_rarity: int = 0) -> EquipmentData:
-	var data: EquipmentData = template.duplicate()
-	if data.ability:
-		data.ability = data.ability.duplicate()
-	data.equipment_scene = template.equipment_scene
-	_apply_rarity_rolls(data, forced_rarity)
-	return data
+func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 0) -> void:
+	var item: EquipmentData = template.duplicate()
+	if item.ability:
+		item.ability = item.ability.duplicate()
+	item.equipment_scene = template.equipment_scene
+	_apply_rarity_rolls(item, forced_rarity)
+	EventBus.equipment_dropped.emit(item, _position, null)

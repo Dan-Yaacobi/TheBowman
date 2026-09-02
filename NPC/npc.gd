@@ -3,16 +3,15 @@ class_name NPC extends Node2D
 signal disappear
 
 @onready var npc_state_machine: NPCStateMachine = $NpcStateMachine
-@onready var chat_box: ChatBox = $ChatBox
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var helper: Helper = $Helper
 @onready var keyboard_press_helper: KeyBoardHelper = $KeyboardPressHelper
 
 @export var data: NPCData
 
 var action_taken: bool = false
 var facing_direction: int = 1
+var chat_box: ChatBox
 
 func face_the_player() -> void:
 	if not data.idle:
@@ -23,6 +22,9 @@ func face_the_player() -> void:
 			sprite.scale.x = dir
 	
 func _ready() -> void:
+	if data.has_chat:
+		chat_box = $ChatBox
+
 	npc_state_machine.Initialize(self)
 	keyboard_press_helper.set_up()
 	extra_ready_functions()
@@ -35,6 +37,9 @@ func extra_process_function(_delta: float) -> void:
 	pass
 	
 func extra_ready_functions() -> void:
+	pass
+	
+func extra_gone_function() -> void:
 	pass
 	
 func action(_index: int) -> void:

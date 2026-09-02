@@ -82,12 +82,14 @@ position = Vector2(255, 104)
 
 [node name="PedestalNPC" parent="Islands/Island5" unique_id=1109545810 instance=ExtResource("13_gej64")]
 position = Vector2(1, -18)
+item_data = null
 
 [node name="Island9" parent="Islands" unique_id=869652895 instance=ExtResource("15_167x7")]
 position = Vector2(312, 104)
 
 [node name="PedestalNPC" parent="Islands/Island9" unique_id=844129433 instance=ExtResource("13_gej64")]
 position = Vector2(1, -18)
+item_data = null
 
 [node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
 position = Vector2(10, 93)

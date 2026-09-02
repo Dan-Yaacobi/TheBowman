@@ -1,7 +1,7 @@
 class_name EquipmentData extends Resource
-
+#
 enum slots{BOW,ARROW,RING}
-
+#
 enum Rarity { COMMON, UNCOMMON, EPIC, LEGENDARY }
 
 class StatModifier:
@@ -25,11 +25,11 @@ class StatModifier:
 @export var dropped_scale: float = 1.0
 @export var equipped_scale: Vector2 = Vector2(1.0, 1.0)
 @export var slot: slots
-@export var pick_weight: float = 1.0            # how likely this item is picked from its pool, relative to others
-@export var ability: PlayerAbility = null        # always set on the template — this item's one fixed main ability
-@export var tiers: Array[RarityTier] = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
-
+@export var pick_weight: float = 1.0
+@export var ability: PlayerAbility
+@export var tiers: Array[RarityTier]  = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
 @export var equipment_scene: PackedScene = preload("uid://djxch32a87fle")
+
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---
 var rarity: float

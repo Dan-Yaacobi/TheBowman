@@ -6,6 +6,9 @@ class_name Arrow extends CharacterBody2D
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var after_image_spawner: AfterimageSpawner = $AfterImageSpawner
 
+@export var dmg_variance_strength: float = 0.5
+@export var dmg_variance_skew: float = 2.0 
+
 const WALL_HIT_EFFECT = preload("res://Weapons/Effects/WallHitEffect/WallHitEffect.tscn")
 const HIT_SOUND = preload("res://Weapons/Effects/HitSound/HitSound.tscn")
 const CRIT = preload("uid://dvpa8tuvsardc")
@@ -66,12 +69,21 @@ func crit_effect(_body: Enemy) -> void:
 
 func calc_dmg(shot_power: float) -> void:
 	var crit_bonus = 1.0
-	if randf_range(0,100) < crit_chance:
+	if randf_range(0, 100) < crit_chance:
 		crit = true
 		crit_bonus = PlayerManager.player.stats.crit_modifier.value()
-	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
-	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * crit_bonus)
 
+	var is_perfect: bool = shot_power >= 1.0
+	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if is_perfect else 1.0
+
+	var variance_mult: float = 1.0
+	if not is_perfect:
+		var floor_mult: float = 1.0 - dmg_variance_strength * (1.0 - shot_power)
+		var roll: float = pow(randf(), dmg_variance_skew)
+		variance_mult = lerpf(floor_mult, 1.0, roll)
+
+	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * crit_bonus * variance_mult)
+	
 func calc_knockback(shot_power: float) -> void:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
 	knockback = PlayerManager.player.stats.pushback_power.value() * shot_power * perfect_bonus + log(velocity.length())

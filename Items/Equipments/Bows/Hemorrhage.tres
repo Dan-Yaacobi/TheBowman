@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b017awe3d5am0" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_gauge_passive_ability.gd" id="1_o8dij"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_ts3m3"]
-[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="2_ae81r"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="3_o8dij"]
 [ext_resource type="Texture2D" uid="uid://ged8d4po736b" path="res://Weapons/Bows/Hemorrhage.png" id="3_u4sxh"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_u4sxh"]
 
@@ -18,4 +16,5 @@ texture = ExtResource("3_u4sxh")
 equipped_texture = ExtResource("3_u4sxh")
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_dpy2w")
+tiers = null
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

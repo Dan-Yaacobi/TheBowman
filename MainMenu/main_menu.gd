@@ -8,6 +8,8 @@ class_name MainMenu extends GameWorld
 
 @onready var rift_portal: Portal = $Portals/RiftPortal
 
+@export var item_data: EquipmentData
+
 func extra_set_world_functions() -> void:
 	EventBus.in_main_menu.emit()
 	loot_manager.set_up()

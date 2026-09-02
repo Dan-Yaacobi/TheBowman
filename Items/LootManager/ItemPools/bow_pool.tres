@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_2bno1"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_ualu4"]
-[ext_resource type="Resource" uid="uid://dsp81oo6n6qxm" path="res://Items/Equipments/Bows/Poison_Ivy.tres" id="3_s0yus"]
 
 [resource]
 script = ExtResource("2_ualu4")
-templates = Array[ExtResource("2_2bno1")]([ExtResource("3_s0yus")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

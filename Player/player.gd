@@ -70,6 +70,7 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0 
 
+const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
 
 var equipped_nodes: Dictionary = {
 	EquipmentData.slots.BOW: null,
@@ -97,13 +98,11 @@ func _ready() -> void:
 	EventBus.arrow_missed.connect(reset_shot_streak)
 	EventBus.apply_player_knockback.connect(apply_knockback)
 	EventBus.active_ability_ready.connect(active_ability_ready)
+	quiver.hide()
+	#reset_equipment()
 
-	reset_equipment()
-	set_arrow_scene()
-	set_new_arrow()
 	activate_passive_abilities() 
-const BASIC_BOW = preload("uid://doeycgb8i1256")
-const BASIC_QUIVER = preload("uid://dl8sslnohn8ig")
+
 
 var enemies_killed: int = 0
 
@@ -111,16 +110,18 @@ func count_enemy_death(_enemy: Enemy) -> void:
 	enemies_killed+=1
 
 func reset_equipment() -> void:
-	for equip in equipped_nodes.values():
-		set_equipped_in_slot(EquipmentData.slots.BOW,BASIC_BOW)
-		set_equipped_in_slot(EquipmentData.slots.ARROW,BASIC_QUIVER)
-		var current = get_equipped_in_slot(EquipmentData.slots.RING)
+	for node_key in equipped_nodes.keys():
+		equipped_nodes[node_key] = null
+		var current = get_equipped_in_slot(node_key)
+
 		if current:
 			current.unequip(stats)
-		stats.ring = null
-		for node_key in equipped_nodes.keys():
-			equipped_nodes[node_key] = null
-
+	off_hand.hide_bow()
+	quiver.hide()
+	stats.bow = null
+	stats.ring = null
+	stats.arrow = null
+	
 func kill(_death_screen: bool = true) -> void:
 	if not player_state_machine.curr_state == dead:
 		dead.display_death_screen = _death_screen
@@ -150,7 +151,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			jump_action.release_jump()
 
 		if event.is_action_pressed("shoot",true):
-			shoot()
+			if stats.bow and stats.arrow:
+				shoot()
 			
 		if event.is_action_pressed("active"):
 			use_active_ability()
@@ -242,29 +244,17 @@ func set_new_bow() -> void:
 		off_hand.set_new_bow(stats.bow)
 
 func set_new_arrow() -> void:
+	set_arrow_scene()
 	main_hand.arrow_texture = stats.arrow.equipped_texture
 
 func set_new_quiver(_texture: Texture2D) -> void:
 	if _texture:
 		quiver.texture = _texture
+		quiver.show()
 		
 func set_arrow_scene() -> void:
 	if stats.arrow_scene:
 		main_hand.new_arrow(stats.arrow_scene)
-		
-func change_to_new_bow(_new_bow: PackedScene) -> void:
-	if _new_bow != null:
-		stats.weapon_scene = _new_bow
-		init_bow()
-
-func set_hands_new_bow() -> void:
-	var bow_data = current_weapon.weapon_data
-	main_hand.new_arrow(bow_data.arrow)
-	off_hand.new_bow(bow_data)
-	
-func init_bow() -> void:
-	current_weapon = stats.weapon_scene.instantiate()
-	set_hands_new_bow()
 
 func can_summon() -> bool:
 	return current_minions.size() < stats.max_minions
@@ -273,7 +263,7 @@ func reset_minions() -> void:
 	for minion in current_minions:
 		minion.queue_free()
 		current_minions.erase(minion)
-		
+
 func emit_crit() -> void:
 	critical_hit.emit()
 

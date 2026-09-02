@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="4_j5iqs"]
 [ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="5_ipa7f"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="6_t51dc"]
-[ext_resource type="PackedScene" uid="uid://67r5dkhgwd4b" path="res://NPC/Helper/Helper.tscn" id="9_t51dc"]
 [ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="10_fc7ru"]
 
 [sub_resource type="Resource" id="Resource_t51dc"]
@@ -50,13 +49,6 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=942936562]
 shape = SubResource("RectangleShape2D_7b5al")
-
-[node name="Helper" parent="." unique_id=1126474841 instance=ExtResource("9_t51dc")]
-visible = false
-offset_left = -20.0
-offset_top = -34.0
-offset_right = 94.0
-offset_bottom = -14.0
 
 [node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("10_fc7ru")]
 offset_left = -12.0

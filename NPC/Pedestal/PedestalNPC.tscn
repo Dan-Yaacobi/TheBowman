@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dg1mbyn5h3dgf"]
+
+[ext_resource type="Script" uid="uid://b2cvy3spvx0ny" path="res://NPC/Pedestal/pedestal_npc.gd" id="1_pn02k"]
+[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://Shop/BowsShop/Sprites/Pedestal.png" id="2_7kftm"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_adyf7"]
+[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/WoodenBow.tres" id="2_umogo"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_5uod6"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_adyf7"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_4b8kh"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_mlx16"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_mlx16"]
+
+[sub_resource type="Resource" id="Resource_4mk7i"]
+script = ExtResource("2_adyf7")
+has_chat = false
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
+size = Vector2(37, 34)
+
+[node name="PedestalNPC" type="Node2D" unique_id=1109545810]
+script = ExtResource("1_pn02k")
+item_data = ExtResource("2_umogo")
+data = SubResource("Resource_4mk7i")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1938151808]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_7kftm")
+
+[node name="ItemSprite" type="Sprite2D" parent="." unique_id=1870229083]
+position = Vector2(0, -26)
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=617992735]
+script = ExtResource("4_5uod6")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=1171863752]
+script = ExtResource("5_4b8kh")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=1762864097]
+script = ExtResource("6_mlx16")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=1822403743]
+script = ExtResource("7_mlx16")
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("4_adyf7")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -14.0
+offset_top = 15.0
+offset_right = -14.0
+offset_bottom = 15.0
+scale = Vector2(0.4, 0.4)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1216373148]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=671109381]
+position = Vector2(-0.5, -5)
+shape = SubResource("RectangleShape2D_e83u5")
+
+[node name="TopFloatMarker" type="Marker2D" parent="." unique_id=398050149]
+position = Vector2(-1, -34)
+
+[node name="BottomFloatMarker" type="Marker2D" parent="." unique_id=1481252570]
+position = Vector2(-1, -20)
+
+[node name="ItemPosition" type="Marker2D" parent="." unique_id=1890977905]
+position = Vector2(-1, -26)

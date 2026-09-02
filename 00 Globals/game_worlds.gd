@@ -6,6 +6,7 @@ const MAIN_MENU = preload("uid://cnhbrpo4htp2y")
 const RIFT = preload("uid://iitxisrr6wi5")
 const BOSS_ARENA_1 = preload("uid://dipjouhd8m0gx")
 
+
 const worlds_dic = {
 	worlds.Bow_Shop: BOWS_SHOP,
  	worlds.Main_Menu: MAIN_MENU,
