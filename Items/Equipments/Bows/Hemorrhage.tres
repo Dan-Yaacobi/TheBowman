@@ -17,4 +17,5 @@ equipped_texture = ExtResource("3_u4sxh")
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_dpy2w")
 tiers = null
+equipment_scene = ExtResource("1_ts3m3")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

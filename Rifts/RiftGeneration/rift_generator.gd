@@ -2,6 +2,7 @@ class_name RiftGenerator extends Node2D
 
 @export var data: GeneratorData
 @export var library: RiftChunkLibrary
+
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
 const BOUNDS_LAYER: int = 15
 const FALLING_DEATH = preload("uid://dre264ek5xw44")

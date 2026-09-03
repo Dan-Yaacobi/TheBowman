@@ -3,6 +3,7 @@ class_name TraversalChunk extends RiftChunk
 @onready var spawn_markers: Node2D = $SpawnMarkers
 @export var direction: CustomVariables.directions
 
+var type: Rift.Type
 var islands: Array[Island] = []
 
 func extra_ready_functions() -> void:
@@ -11,6 +12,8 @@ func extra_ready_functions() -> void:
 	for child in get_children():
 		if child is Island:
 			islands.append(child)
+			child.setup(type)
+			
 	spawn_game_objects()
 
 func get_spawn_markers() -> Array:

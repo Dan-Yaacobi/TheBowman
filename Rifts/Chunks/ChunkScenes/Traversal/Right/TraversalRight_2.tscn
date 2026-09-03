@@ -1,60 +1,59 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhx7k1p8sua8s"]
+[gd_scene format=3 uid="uid://bhx7k1p8sua8s"]
 
 [ext_resource type="Script" uid="uid://dnvx18dxxbpms" path="res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd" id="1_jbnxj"]
-[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="1_ppd84"]
-[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="2_jc4kb"]
-[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="3_u04yv"]
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="4_u04yv"]
 [ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="5_2pxwo"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_2pxwo"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_a4vpk"]
 [ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="8_aedd6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2ow1"]
 resource_local_to_scene = true
 size = Vector2(254.125, 94.625)
 
-[node name="TraversalRight_2" type="Node2D"]
+[node name="TraversalRight_2" type="Node2D" unique_id=74660714]
 script = ExtResource("1_jbnxj")
 
-[node name="Island" parent="." instance=ExtResource("1_ppd84")]
-position = Vector2(1, 5)
-
-[node name="Island2" parent="." instance=ExtResource("2_jc4kb")]
-position = Vector2(59, -12)
-
-[node name="Island3" parent="." instance=ExtResource("1_ppd84")]
-position = Vector2(115, 33)
-
-[node name="Island4" parent="." instance=ExtResource("3_u04yv")]
-position = Vector2(210, -1)
-
-[node name="Island5" parent="." instance=ExtResource("3_u04yv")]
-position = Vector2(143, -44)
-
-[node name="EntryMarker" parent="." instance=ExtResource("4_u04yv")]
+[node name="EntryMarker" parent="." unique_id=949186233 instance=ExtResource("4_u04yv")]
 position = Vector2(0, -6)
 
-[node name="ExitMarker" parent="." instance=ExtResource("5_2pxwo")]
+[node name="ExitMarker" parent="." unique_id=567127769 instance=ExtResource("5_2pxwo")]
 position = Vector2(282, -13)
 direction = 3
 
-[node name="ExitMarker2" parent="." instance=ExtResource("5_2pxwo")]
+[node name="ExitMarker2" parent="." unique_id=443753316 instance=ExtResource("5_2pxwo")]
 position = Vector2(248, -67)
 
-[node name="ExitMarker3" parent="." instance=ExtResource("5_2pxwo")]
+[node name="ExitMarker3" parent="." unique_id=2114103070 instance=ExtResource("5_2pxwo")]
 position = Vector2(257, 72)
 direction = 2
 
-[node name="Bounds" parent="." instance=ExtResource("6_2pxwo")]
+[node name="Bounds" parent="." unique_id=1351310043 instance=ExtResource("6_2pxwo")]
+visible = false
 position = Vector2(105, -6)
 
-[node name="CollisionShape2D" parent="Bounds" index="0"]
+[node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(-4.0625, -0.3125)
 shape = SubResource("RectangleShape2D_t2ow1")
 
-[node name="SpawnMarkers" type="Node2D" parent="."]
+[node name="SpawnMarkers" type="Node2D" parent="." unique_id=437726143]
 
-[node name="SpawnMarker" parent="SpawnMarkers" instance=ExtResource("8_aedd6")]
+[node name="SpawnMarker" parent="SpawnMarkers" unique_id=643078765 instance=ExtResource("8_aedd6")]
 position = Vector2(80, -63)
+
+[node name="Island6" parent="." unique_id=1847265216 instance=ExtResource("6_a4vpk")]
+position = Vector2(1, 5)
+
+[node name="Island7" parent="." unique_id=296945619 instance=ExtResource("6_a4vpk")]
+position = Vector2(143, -44)
+
+[node name="Island8" parent="." unique_id=2121166404 instance=ExtResource("6_a4vpk")]
+position = Vector2(115, 33)
+
+[node name="Island9" parent="." unique_id=2106710196 instance=ExtResource("6_a4vpk")]
+position = Vector2(210, -1)
+
+[node name="Island10" parent="." unique_id=88896698 instance=ExtResource("6_a4vpk")]
+position = Vector2(63, -15)
 
 [editable path="Bounds"]

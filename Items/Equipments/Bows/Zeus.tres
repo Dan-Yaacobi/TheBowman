@@ -18,4 +18,5 @@ dropped_scale = 0.5
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_6v1vm")
 tiers = null
+equipment_scene = ExtResource("2_d7umq")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

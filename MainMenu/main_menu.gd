@@ -1,7 +1,6 @@
 class_name MainMenu extends GameWorld
 
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
-@onready var portals: Node2D = $Portals
 @onready var islands: Node2D = $Islands
 @onready var falling_death: FallingDeath = $FallingDeath
 @onready var loot_manager: LootManager = $LootManager
@@ -17,6 +16,8 @@ func extra_set_world_functions() -> void:
 		rift_portal.disable()
 	EventBus.tutorial_done.connect(tutorial_done)
 	
+	for island in islands.get_children():
+		island.setup(Rift.Type.DIRT)
 func tutorial_done() -> void:
 	rift_portal.enable()
 	

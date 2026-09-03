@@ -13,4 +13,5 @@ equipped_texture = ExtResource("1_es0mq")
 dropped_scale = 0.35
 slot = 1
 tiers = null
+equipment_scene = ExtResource("1_i7k7n")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

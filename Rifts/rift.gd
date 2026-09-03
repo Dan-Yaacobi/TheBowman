@@ -1,5 +1,7 @@
 class_name Rift extends GameWorld
 
+enum Type{DIRT, SNOW, HELL}
+
 @export var rift_values: Array[float]
 @export var active_ability_pool: Array[ActiveAbility]
 

@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dnvx18dxxbpms" path="res://Rifts/Chunks/ChunkScenes/Traversal/traversal_chunk.gd" id="1_3ibbv"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="1_i73l7"]
-[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="2_fudh7"]
-[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="3_k0hrv"]
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="4_86iwa"]
 [ext_resource type="PackedScene" uid="uid://4qu0wmi6ueq8" path="res://Rifts/Chunks/Utility/Markers/ExitMarker.tscn" id="5_vt2ij"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_skgmo"]
 [ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="8_fudh7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fudh7"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tat5"]
 resource_local_to_scene = true
 size = Vector2(100, 107)
 
@@ -19,11 +17,14 @@ script = ExtResource("1_3ibbv")
 [node name="Island" parent="." unique_id=880088010 instance=ExtResource("1_i73l7")]
 position = Vector2(9, 12)
 
-[node name="Island2" parent="." unique_id=2134271861 instance=ExtResource("2_fudh7")]
-position = Vector2(45, -31)
+[node name="Island5" parent="." unique_id=1847265216 instance=ExtResource("1_i73l7")]
+position = Vector2(10, -68)
 
-[node name="Island4" parent="." unique_id=2084171599 instance=ExtResource("3_k0hrv")]
-position = Vector2(7, -65)
+[node name="Island6" parent="." unique_id=1761288332 instance=ExtResource("1_i73l7")]
+position = Vector2(-19, -29)
+
+[node name="Island7" parent="." unique_id=565597106 instance=ExtResource("1_i73l7")]
+position = Vector2(44, -31)
 
 [node name="EntryMarker" parent="." unique_id=305679779 instance=ExtResource("4_86iwa")]
 position = Vector2(8, -4)
@@ -40,13 +41,11 @@ position = Vector2(-88, -70)
 direction = 1
 
 [node name="Bounds" parent="." unique_id=1085525276 instance=ExtResource("6_skgmo")]
+visible = false
 position = Vector2(15, -35)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-shape = SubResource("RectangleShape2D_fudh7")
-
-[node name="Island3" parent="." unique_id=1764824915 instance=ExtResource("2_fudh7")]
-position = Vector2(-19, -29)
+shape = SubResource("RectangleShape2D_8tat5")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=532397584]
 

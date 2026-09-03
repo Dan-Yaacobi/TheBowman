@@ -1,23 +1,54 @@
 [gd_scene format=3 uid="uid://bnq5ivogfkh6w"]
 
 [ext_resource type="Script" uid="uid://dd5uq7un0y3cu" path="res://Level/Islands/island.gd" id="1_jyikq"]
-[ext_resource type="Texture2D" uid="uid://c8b0e68f0m3wo" path="res://Level/Islands/sprites/Island1.png" id="2_t5631"]
+[ext_resource type="Texture2D" uid="uid://dxp5val6ef3ke" path="res://Level/Islands/sprites/Dirt Islands.png" id="2_7mf8l"]
+[ext_resource type="Script" uid="uid://gnexyll2mtpb" path="res://Level/Islands/texture_data.gd" id="2_ahai6"]
+[ext_resource type="Texture2D" uid="uid://dmbb60iq3h813" path="res://Level/Islands/sprites/Snow Islands.png" id="3_mg7j2"]
 [ext_resource type="PackedScene" uid="uid://dlxcc0gk5mdes" path="res://Level/Islands/ObjectsSpawnMarkers.tscn" id="3_yan88"]
+[ext_resource type="Texture2D" uid="uid://de8dpxqxqs63y" path="res://Level/Islands/sprites/Hell Islands.png" id="4_c8r62"]
+[ext_resource type="Texture2D" uid="uid://b4dv4nxdp6knl" path="res://Level/Islands/sprites/IslandTemp.png" id="6_mg7j2"]
+
+[sub_resource type="Resource" id="Resource_ahai6"]
+script = ExtResource("2_ahai6")
+texture = ExtResource("2_7mf8l")
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_g8eam"]
+script = ExtResource("2_ahai6")
+texture = ExtResource("3_mg7j2")
+type = 1
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_7mf8l"]
+script = ExtResource("2_ahai6")
+texture = ExtResource("4_c8r62")
+type = 2
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
-size = Vector2(40, 14)
+size = Vector2(40, 10)
 
 [node name="Island" type="StaticBody2D" unique_id=1847265216]
 z_index = -4
 collision_layer = 16
 script = ExtResource("1_jyikq")
+textures = Array[ExtResource("2_ahai6")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131090441]
-texture = ExtResource("2_t5631")
+texture = ExtResource("6_mg7j2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1568231833]
 shape = SubResource("RectangleShape2D_sp085")
 one_way_collision = true
 
 [node name="ObjectsSpawnMarkers" parent="." unique_id=1079830238 instance=ExtResource("3_yan88")]
-position = Vector2(0, -7)
+position = Vector2(0, -5)

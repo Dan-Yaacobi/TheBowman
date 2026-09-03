@@ -28,7 +28,7 @@ class StatModifier:
 @export var pick_weight: float = 1.0
 @export var ability: PlayerAbility
 @export var tiers: Array[RarityTier]  = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
-@export var equipment_scene: PackedScene = preload("uid://djxch32a87fle")
+@export var equipment_scene: PackedScene
 
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---

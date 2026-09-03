@@ -6,6 +6,10 @@ class_name Island extends StaticBody2D
 @export var moving_island: bool = false
 @export var end_point: Vector2
 @onready var sprite: Sprite2D = $Sprite2D
+@export var use_fixed_frame: bool = false
+@export var fixed_frame_index: int = 0
+@export var textures: Array[TextureData]
+
 
 var start_point: Vector2
 var float_amplitude: float = 3.0
@@ -35,7 +39,25 @@ func _start_moving() -> void:
 	_move_tween = create_tween()
 	_move_tween.set_loops()
 	_move_tween.tween_property(self, "global_position", end_point, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
+	
+func setup(rift_type: Rift.Type) -> void:
+	var matching: TextureData = _get_texture_data_for_type(rift_type)
+	if matching == null:
+		return
+	var new_sprite: AtlasTexture
+	if use_fixed_frame:
+		new_sprite = matching.get_sprite_at(fixed_frame_index)
+	else:
+		new_sprite = matching.get_random_sprite()
+	if new_sprite != null:
+		sprite.texture = new_sprite
+		
+func _get_texture_data_for_type(rift_type: Rift.Type) -> TextureData:
+	for data: TextureData in textures:
+		if data.type == rift_type:
+			return data
+	return null
+	
 func disable() -> void:
 	set_collision_layer_value(5, false)
 	set_collision_mask_value(1, false)

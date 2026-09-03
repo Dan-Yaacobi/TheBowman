@@ -34,4 +34,5 @@ equipped_texture = ExtResource("2_lese3")
 dropped_scale = 0.35
 equipped_scale = Vector2(0.5, 0.4)
 tiers = Array[Object]([SubResource("Resource_onctg")])
+equipment_scene = ExtResource("1_onctg")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

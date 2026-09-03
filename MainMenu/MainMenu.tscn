@@ -7,11 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
-[ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="13_qvidt"]
-[ext_resource type="PackedScene" uid="uid://crgxmsjdnkrt4" path="res://Level/Islands/Island3.tscn" id="14_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
-[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="15_167x7"]
-[ext_resource type="PackedScene" uid="uid://l2y4uh7pm6ak" path="res://Level/Islands/Island5.tscn" id="16_24r6y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 
@@ -27,31 +23,51 @@ position = Vector2(208, 83)
 [node name="Islands" type="Node2D" parent="." unique_id=2124960339]
 
 [node name="Island" parent="Islands" unique_id=1797598660 instance=ExtResource("14_7t2hb")]
-position = Vector2(477, 67)
+position = Vector2(459, 77)
+use_fixed_frame = true
+fixed_frame_index = 4
 
-[node name="Island2" parent="Islands" unique_id=182829244 instance=ExtResource("13_qvidt")]
-position = Vector2(206, 121)
+[node name="RiftPortal" parent="Islands/Island" unique_id=593788380 instance=ExtResource("13_npjie")]
+z_index = 1
+position = Vector2(-1, -21)
+destination = 2
+flip_h = true
 
-[node name="Island6" parent="Islands" unique_id=829077785 instance=ExtResource("13_qvidt")]
-position = Vector2(99, 114)
+[node name="Island10" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
+position = Vector2(38, 94)
 
-[node name="TargetDummy" parent="Islands/Island6" unique_id=603628097 instance=ExtResource("17_5lv0r")]
-position = Vector2(-1, -22)
+[node name="Island11" parent="Islands" unique_id=538615439 instance=ExtResource("14_7t2hb")]
+position = Vector2(155, 118)
 
-[node name="Island3" parent="Islands" unique_id=1047838277 instance=ExtResource("14_5lv0r")]
-position = Vector2(355, 97)
-floating = true
+[node name="Island16" parent="Islands" unique_id=1999979479 instance=ExtResource("14_7t2hb")]
+position = Vector2(96, 102)
+use_fixed_frame = true
+fixed_frame_index = 4
 
-[node name="Island16" parent="Islands" unique_id=323879176 instance=ExtResource("14_5lv0r")]
-position = Vector2(370, 61)
-floating = true
+[node name="TargetDummy" parent="Islands/Island16" unique_id=603628097 instance=ExtResource("17_5lv0r")]
+position = Vector2(0, -21)
 
-[node name="ArrowSign5" type="Sprite2D" parent="Islands/Island16" unique_id=548771561]
-position = Vector2(5, -20)
+[node name="Island12" parent="Islands" unique_id=297227350 instance=ExtResource("14_7t2hb")]
+position = Vector2(318, 109)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Islands/Island12" unique_id=844129433 instance=ExtResource("13_gej64")]
+position = Vector2(2, -18)
+item_data = ExtResource("10_7t2hb")
+
+[node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
+position = Vector2(205, 119)
+
+[node name="Island15" parent="Islands" unique_id=420497880 instance=ExtResource("14_7t2hb")]
+position = Vector2(395, 85)
+
+[node name="ArrowSign5" type="Sprite2D" parent="Islands/Island15" unique_id=548771561]
+position = Vector2(2, -18)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_a6mvh")
 
-[node name="Label2" type="Label" parent="Islands/Island16/ArrowSign5" unique_id=1503989702]
+[node name="Label2" type="Label" parent="Islands/Island15/ArrowSign5" unique_id=1503989702]
 anchors_preset = -1
 anchor_left = 0.711
 anchor_top = 0.75600004
@@ -72,38 +88,13 @@ theme_override_font_sizes/font_size = 250
 text = "Rifts"
 metadata/_edit_use_anchors_ = true
 
-[node name="Island17" parent="Islands" unique_id=919845256 instance=ExtResource("14_5lv0r")]
-position = Vector2(423, 86)
+[node name="Island14" parent="Islands" unique_id=115139399 instance=ExtResource("14_7t2hb")]
+position = Vector2(264, 110)
+use_fixed_frame = true
+fixed_frame_index = 4
 
-[node name="Island4" parent="Islands" unique_id=1949571672 instance=ExtResource("15_167x7")]
-position = Vector2(149, 118)
-
-[node name="Island5" parent="Islands" unique_id=2017175388 instance=ExtResource("15_167x7")]
-position = Vector2(255, 104)
-
-[node name="PedestalNPC" parent="Islands/Island5" unique_id=1109545810 instance=ExtResource("13_gej64")]
-position = Vector2(1, -18)
-
-[node name="Island9" parent="Islands" unique_id=869652895 instance=ExtResource("15_167x7")]
-position = Vector2(312, 104)
-
-[node name="PedestalNPC" parent="Islands/Island9" unique_id=844129433 instance=ExtResource("13_gej64")]
-position = Vector2(1, -18)
-item_data = ExtResource("10_7t2hb")
-
-[node name="Island7" parent="Islands" unique_id=1837539228 instance=ExtResource("16_24r6y")]
-position = Vector2(10, 93)
-
-[node name="Island8" parent="Islands" unique_id=1728728178 instance=ExtResource("16_24r6y")]
-position = Vector2(57, 106)
-floating = true
-
-[node name="Portals" type="Node2D" parent="." unique_id=1828147291]
-
-[node name="RiftPortal" parent="Portals" unique_id=593788380 instance=ExtResource("13_npjie")]
-position = Vector2(476, 43)
-destination = 2
-flip_h = true
+[node name="PedestalNPC" parent="Islands/Island14" unique_id=1109545810 instance=ExtResource("13_gej64")]
+position = Vector2(-1, -18)
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)
