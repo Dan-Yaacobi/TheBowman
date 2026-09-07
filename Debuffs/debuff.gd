@@ -8,7 +8,7 @@ var time_accumulator: float
 var tick_interval: float
 var ticks: int = 0
 var one_shot: bool = false
-var enemy: Enemy
+var entity: GameEntity
 
 func _ready() -> void:
 	start_debuff_effect()

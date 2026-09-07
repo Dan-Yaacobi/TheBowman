@@ -22,9 +22,9 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> EnemyState:
-	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.knockback_decay * _delta * 60)
+	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.stats.knockback_decay * _delta * 60)
 	direction = enemy.calculate_direction_to_player()
-	if enemy.knockback_velocity.length() > enemy.knockback_threshold:
+	if enemy.knockback_velocity.length() > enemy.stats.knockback_threshold:
 		enemy.velocity = enemy.knockback_velocity
 	return null
 	

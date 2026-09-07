@@ -9,8 +9,6 @@ func extra_ready_functions() -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
-func face_the_player() -> void:
-	sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
 
 func fly_to_roost(_position: Vector2) -> void:
 	fly_to_roost_state.roost_target = _position

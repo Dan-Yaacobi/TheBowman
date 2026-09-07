@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://caiebherwxilx"]
+[gd_scene format=3 uid="uid://caiebherwxilx"]
 
 [ext_resource type="Script" uid="uid://m5d6r4rifl4l" path="res://Debuffs/Burned/burn_debuff.gd" id="1_11k1u"]
 [ext_resource type="PackedScene" uid="uid://dag51ujde7i2y" path="res://Enemies/EnemyEffects/Burned/BurnedEffect.tscn" id="2_66oai"]
 
-[node name="BurnDebuff" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+[node name="BurnDebuff" type="Node2D" unique_id=780100279]
 script = ExtResource("1_11k1u")
+ID = null
 
-[node name="BurnedEffect" parent="." instance=ExtResource("2_66oai")]
+[node name="BurnedEffect" parent="." unique_id=1507663576 instance=ExtResource("2_66oai")]
 position = Vector2(0, -6)
 lifetime = 1.0
 speed_scale = 0.5
+local_coords = true
 emission_sphere_radius = 7.0
 gravity = Vector2(0, -50)

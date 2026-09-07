@@ -1,4 +1,4 @@
-class_name EnemyHitEffect extends CPUParticles2D
+extends CPUParticles2D
 
 var initial_color: Color = Color("ba0000")
 

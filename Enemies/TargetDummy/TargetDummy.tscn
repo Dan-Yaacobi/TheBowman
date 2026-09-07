@@ -7,9 +7,10 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_5ndgq"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_u5jre"]
 [ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="4_qb1bn"]
-[ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitEffect.tscn" id="6_5k5yt"]
+[ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitParticles.tscn" id="6_5k5yt"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="8_qb1bn"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_odses"]
+
 
 [sub_resource type="Resource" id="Resource_vd7t3"]
 script = ExtResource("3_5ndgq")

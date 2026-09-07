@@ -4,31 +4,45 @@
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_clsuk"]
 [ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="3_n4anf"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_sage6"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_sage6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_ww2oo"]
+[ext_resource type="PackedScene" uid="uid://dedw0dlwhs2dh" path="res://Enemies/FlamingParticles.tscn" id="6_clsuk"]
+[ext_resource type="Script" uid="uid://bx33hmsxsmvel" path="res://Enemies/EnemyHitEffects/enemy_burn_effect.gd" id="6_ww2oo"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_x05dx"]
-[ext_resource type="Texture2D" uid="uid://dr02ahhlj2hah" path="res://Enemies/FlamingSkull/FlamingSkullSingle.png" id="7_fo8pu"]
+[ext_resource type="Texture2D" uid="uid://d3thlmw02a8br" path="res://Enemies/FlamingSkull/FlamingSkull.png" id="8_n4anf"]
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
 script = ExtResource("4_sage6")
 death_sound = ExtResource("3_n4anf")
 metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
+[sub_resource type="Resource" id="Resource_2ds3n"]
+script = ExtResource("6_ww2oo")
+fire_damage = 1
+applies_to_projectiles = false
+metadata/_custom_type_script = "uid://bx33hmsxsmvel"
+
 [sub_resource type="Resource" id="Resource_8iawy"]
 script = ExtResource("5_ww2oo")
-base_value = 40.0
+base_value = 60.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("6_x05dx")
-max_hp = 23
+max_hp = 40
 move_speed = SubResource("Resource_8iawy")
-knockback = 75
-skin = ExtResource("7_fo8pu")
-avg_coins_dropped = 1
+knockback = 50
+skin = ExtResource("8_n4anf")
+texture_scale = Vector2(0.5, 0.5)
+move_animation = "SkullMove"
+particles_effect = ExtResource("6_clsuk")
+avg_coins_dropped = 5
 touch_damage = 1
-knockback_resistance = 20.0
+knockback_decay = 0.1
 drop_chance = 25.0
 death_ability = Array[ExtResource("2_clsuk")]([SubResource("Resource_3u2p4")])
+hit_effects = Array[ExtResource("5_sage6")]([SubResource("Resource_2ds3n")])
 bullet = ExtResource("1_ts0xg")
 bullet_speed = 45.0
+hits_required = 3
 metadata/_custom_type_script = "uid://rlvenynllobd"

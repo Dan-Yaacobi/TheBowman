@@ -14,6 +14,7 @@ var ray_length: float = 10.0
 var _avoidance_dir: Vector2 = Vector2.ZERO
 var _clear_timer: float = 0.0
 var _clear_duration: float = 0.3
+
 func init() -> void:
 	enemy.hurt_box.successful_hit.connect(hit_player)
 
@@ -25,9 +26,9 @@ func Exit() -> void:
 	succesfull_hit = false
 
 func Process(_delta: float) -> EnemyState:
-	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.knockback_decay * _delta * 60)
+	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.stats.knockback_decay * _delta * 60)
 	direction = enemy.calculate_direction_to_player()
-	if enemy.knockback_velocity.length() > enemy.knockback_threshold:
+	if enemy.knockback_velocity.length() > enemy.stats.knockback_threshold:
 		enemy.velocity = enemy.knockback_velocity
 	return null
 
@@ -38,7 +39,7 @@ func Physics(_delta: float) -> EnemyState:
 	if enemy.stats.pure_ranged_mode:
 		if enemy.calculate_distance_to_player() <= enemy.stats.ranged_trigger_distance:
 			succesfull_hit = true
-	if succesfull_hit:
+	if succesfull_hit and enemy.stats.shooter:
 		return shoot
 	else:
 		var move_dir: Vector2 = _get_avoidance_direction(direction)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce1cc1624pef1"]
+[gd_scene format=3 uid="uid://ce1cc1624pef1"]
 
-[ext_resource type="Script" uid="uid://io6tksoicmef" path="res://General Nodes/EnemyHitEffect/enemy_hit_effect.gd" id="1_2pm2i"]
-[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="1_84x3g"]
+[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="1_2ds3n"]
+[ext_resource type="Script" uid="uid://io6tksoicmef" path="res://General Nodes/EnemyHitEffect/enemy_hit_particles.gd" id="2_2ds3n"]
 
 [sub_resource type="Curve" id="Curve_ryshr"]
 _limits = [0.0, 5.0, 0.0, 1.0]
@@ -16,10 +16,10 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_l1j2q"]
 colors = PackedColorArray(0.729412, 0, 0, 1, 0.729412, 0, 0, 0)
 
-[node name="EnemyHitEffect" type="CPUParticles2D"]
+[node name="EnemyHitParticles" type="CPUParticles2D" unique_id=1341914127]
 emitting = false
 amount = 5
-texture = ExtResource("1_84x3g")
+texture = ExtResource("1_2ds3n")
 lifetime = 1.5
 one_shot = true
 speed_scale = 4.0
@@ -34,4 +34,4 @@ radial_accel_max = 5.0
 radial_accel_curve = SubResource("Curve_ryshr")
 scale_amount_curve = SubResource("Curve_t7dlx")
 color_ramp = SubResource("Gradient_l1j2q")
-script = ExtResource("1_2pm2i")
+script = ExtResource("2_2ds3n")

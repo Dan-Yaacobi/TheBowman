@@ -11,6 +11,7 @@ func Enter() -> void:
 
 func Exit() -> void:
 	player.reset_equipment()
+	player.debuff_handler.reset_debuffs()
 	if player.stats.reset_upgrades:
 		player.reset_to_base_stats()
 	player.stats.hp = player.stats.max_hp

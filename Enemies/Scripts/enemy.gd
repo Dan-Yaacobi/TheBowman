@@ -1,7 +1,6 @@
-class_name Enemy extends CharacterBody2D
+class_name Enemy extends GameEntity
 
 @export var stats: EnemyData
-@onready var debuff_handler: DebuffHandler = $DebuffHandler
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hurt_box: HurtBox = $HurtBox
@@ -26,8 +25,7 @@ var damaged_animation_player : AnimationPlayer
 
 var current_hp: int
 var knockback_velocity: Vector2 = Vector2.ZERO
-var knockback_threshold: float = 0.2
-var knockback_decay: float = 0.05
+
 
 var is_dead: bool = false
 
@@ -40,7 +38,7 @@ func _ready() -> void:
 	hurt_box.damage = stats.touch_damage
 	hurt_box.knockback_power = stats.knockback
 	hurt_box.successful_hit.connect(knockback)
-	debuff_handler.set_enemy(self)
+	debuff_handler.set_entity(self)
 	hit_box.Damaged.connect(hit)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
@@ -53,9 +51,14 @@ func _ready() -> void:
 			add_child(new_effect)
 		else:
 			new_effect.queue_free()
-		
+	sprite.scale = stats.texture_scale
+	_wire_hit_effects(hurt_box, false)
+	
 func full_health() -> bool:
 	return current_hp == stats.max_hp
+	
+func face_the_player() -> void:
+	sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
 
 func heal(_amount: int) -> void:
 	current_hp = mini(current_hp + _amount, stats.max_hp)
@@ -82,8 +85,8 @@ func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
 func hit(_hurt_box: HurtBox) -> void:
-	final_dmg = roundi(_hurt_box.damage * _damage_multiplier)
-	take_damage(final_dmg)
+	
+	take_damage(_hurt_box)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box)
 	take_hit_effect()	
@@ -91,12 +94,6 @@ func hit(_hurt_box: HurtBox) -> void:
 func extra_hit_functions(_hurt_box: HurtBox) -> void:
 	pass
 	
-func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
-	debuff_handler.add_debuff(_debuff, _duration, _ticks)
-
-func show_damage(_amount: int, color: Color) -> void:
-	CombatTextSpawner.spawn(global_position, str(_amount),color)
-
 func take_hit_effect() -> void:
 	if not added_hit_effect:
 		added_hit_effect = true
@@ -110,12 +107,16 @@ func set_damage_multiplier(_multiplier: float) -> void:
 	_damage_multiplier = _multiplier
 
 	
-func take_damage(_dmg: int) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
 	if is_dead:
 		return
-	current_hp -= roundi(_dmg * _damage_multiplier)
+	if _hurt_box:
+		final_dmg = roundi(_hurt_box.damage * _damage_multiplier)
+	else:
+		final_dmg = raw_damage * _damage_multiplier
+	current_hp -= roundi(final_dmg * _damage_multiplier)
 	
-	handle_health_bar(_dmg)	
+	handle_health_bar(final_dmg)	
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
 	
@@ -175,9 +176,19 @@ func bullet_set_up() -> Node2D:
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.move_speed = stats.bullet_speed
+		_wire_hit_effects(new_bullet.hurt_box, true)
 		return new_bullet
 	return null
 	
+func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> void:
+
+	for effect in stats.hit_effects:
+		if projectile and not effect.applies_to_projectiles:
+			continue
+		if not projectile and not effect.applies_to_melee:
+			continue
+		target_hurt_box.add_effect(effect.apply)
+		
 func stun(_activate: bool) -> void:
 	state_machine.cause_pause(_activate)
 	set_physics_process(!_activate)

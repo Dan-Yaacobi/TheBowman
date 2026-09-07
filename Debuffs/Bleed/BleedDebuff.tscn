@@ -8,11 +8,11 @@ _limits = [0.0, 0.2, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.54615384, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="BleedDebuff" type="Node2D"]
+[node name="BleedDebuff" type="Node2D" unique_id=447999380]
 script = ExtResource("1_6cl21")
 ID = 2
 
-[node name="BleedEffect" type="CPUParticles2D" parent="."]
+[node name="BleedEffect" type="CPUParticles2D" parent="." unique_id=1289267636]
 amount = 2
 texture = ExtResource("2_4obob")
 local_coords = true

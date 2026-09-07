@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody2D
+class_name Player extends GameEntity
 
 signal money_changed
 signal took_hit
@@ -76,6 +76,7 @@ var equipped_nodes: Dictionary = {
 	EquipmentData.slots.ARROW: null,
 	EquipmentData.slots.RING: null,
 }
+var sprite: Sprite2D
 
 func _ready() -> void:
 	stats.player = self
@@ -84,7 +85,7 @@ func _ready() -> void:
 	stats.hp = stats.max_hp
 	health_bar.init_health(stats.max_hp)
 	invincibility_timer.timeout.connect(invincibility_over)
-	hit_box.Damaged.connect(hit_player)
+	hit_box.Damaged.connect(take_damage)
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
 	main_hand.connect_hands(off_hand)
 	EventBus.invisible_hands.connect(show_hands)
@@ -99,7 +100,8 @@ func _ready() -> void:
 	EventBus.active_ability_ready.connect(active_ability_ready)
 	quiver.hide()
 	#reset_equipment()
-
+	sprite = body.sprite
+	debuff_handler.set_entity(self)
 	activate_passive_abilities() 
 
 
@@ -266,18 +268,26 @@ func reset_minions() -> void:
 func emit_crit() -> void:
 	critical_hit.emit()
 
-func hit_player(_hurt_box: HurtBox) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int) -> void:
 	if not invincible:
-		start_invincibilty()
 		took_hit.emit()
 		EventBus.damaged_flash.emit()
 		damaged_particles.emitting = true
-		stats.hp -= _hurt_box.damage
-		health_bar.reduce_health(_hurt_box.damage)
-		apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
-		display_combat_text(_hurt_box.damage, Color.RED)
+		var dmg_taken: int = 0
+		if _hurt_box:
+			start_invincibilty()
+			dmg_taken = _hurt_box.damage
+			apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
+			show_damage(_hurt_box.damage, Color.RED)
+		else:
+			dmg_taken = raw_damage
+			
+		stats.hp -= dmg_taken
+		health_bar.reduce_health(dmg_taken)
+
 		if stats.hp <= 0:
 			kill()
+
 func start_invincibilty() -> void:
 	modulate.a = 0.5
 	invincible = true
@@ -308,13 +318,10 @@ func heal(amount: int, _flash: bool = true) -> bool:
 		health_bar.heal(amount_healed)
 		if _flash:
 			EventBus.healed_flash.emit()
-			display_combat_text(amount_healed, Color.GREEN)
+			show_damage(amount_healed, Color.GREEN)
 		return true
 	return false
 	
-func display_combat_text(amount: int, color: Color) -> void:
-	CombatTextSpawner.spawn(global_position, str(amount),color)
-
 func leech_heal(amount: int,enemy_position: Vector2) -> void:
 	var health_gain_effect: HealthGainEffect = HEALTH_GAIN_EFFECT.instantiate()
 	health_gain_effect.set_positions(self,enemy_position)

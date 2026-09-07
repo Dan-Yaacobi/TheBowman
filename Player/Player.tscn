@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
 [ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="7_bgaaw"]
 [ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
 [ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="7_yf47d"]
 [ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
@@ -233,6 +234,9 @@ stats = SubResource("Resource_sedti")
 perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
 ExtResource("16_7w4lt"): -1
 })
+
+[node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("7_bgaaw")]
+position = Vector2(43.421265, 6.9632263)
 
 [node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
 z_index = 1

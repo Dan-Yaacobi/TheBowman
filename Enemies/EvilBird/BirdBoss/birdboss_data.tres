@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://rumdyo1hbaet"]
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://rumdyo1hbaet"]
 
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_1d58o"]
 [ext_resource type="AudioStream" uid="uid://ccgwbicy8i5f0" path="res://Audio/Player/BirdDead.wav" id="2_2kuey"]

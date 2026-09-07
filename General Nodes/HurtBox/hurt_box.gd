@@ -23,7 +23,7 @@ func AreaEnetered(a: Area2D) -> void:
 		effect_color = DEFAULT_HIT_EFFECT_COLOR
 		knockback_dir = -(a.global_position - self.global_position).normalized()
 		a.TakeDamage(self)
-	if a.get_parent() is Enemy:
+	if a.get_parent() is GameEntity:
 		_apply_effects(a.get_parent())
 	successful_hit.emit(self)
 
@@ -33,7 +33,7 @@ func set_text_color(_color: Color) -> void:
 func add_effect(effect: Callable) -> void:
 	added_effects.append(effect)
 
-func _apply_effects(enemy: Enemy) -> void:
+func _apply_effects(entity: GameEntity) -> void:
 	for effect in added_effects:
 		if effect.is_valid():
-			effect.call(enemy)
+			effect.call(entity)

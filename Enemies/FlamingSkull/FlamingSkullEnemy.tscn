@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cahugt3xads6y"]
 
-[ext_resource type="Texture2D" uid="uid://cxorxja1qgyq3" path="res://Enemies/FlamingSkull/FlameSkullSprite.png" id="1_ec5vm"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r4aq1"]
+load_path = "res://.godot/imported/FlameSkullSprite.png-83d126ed3ed2a6b67cdb3e8c07b9bad2.ctex"
 
 [sub_resource type="Curve" id="Curve_e83u5"]
 _limits = [0.0, 3.0, 0.0, 1.0]
@@ -13,7 +14,7 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_adbt4"]
 resource_name = "Attack"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -42,7 +43,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_oyrht"]
 resource_name = "Move"
-length = 0.39999999999999997
+length = 0.4
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -106,7 +107,7 @@ _data = {
 [node name="FlamingSkullEnemy" type="Node2D" unique_id=1691547011]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=322961193]
-texture = ExtResource("1_ec5vm")
+texture = SubResource("CompressedTexture2D_r4aq1")
 hframes = 4
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D" unique_id=334046768]

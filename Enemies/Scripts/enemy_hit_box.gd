@@ -1,7 +1,7 @@
 class_name EnemyHitBox extends HitBox
 
 var enemy: Enemy
-@onready var enemy_hit_effect: EnemyHitEffect = $EnemyHitEffect
+@onready var enemy_hit_effect: CPUParticles2D = $EnemyHitEffect
 
 func set_enemy(_enemy: Enemy) -> void:
 	if _enemy:
