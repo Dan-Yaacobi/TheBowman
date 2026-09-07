@@ -8,7 +8,6 @@ var islands: Array[Island] = []
 
 func extra_ready_functions() -> void:
 	bounds.player_entered.connect(on_player_enter)
-	spawn_chance = 1
 	for child in get_children():
 		if child is Island:
 			islands.append(child)

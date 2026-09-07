@@ -1,7 +1,7 @@
 class_name KeyBoardHelper extends Control
 
 @onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
-@onready var key_text: Label = $KeyText
+@onready var key_text: Label = $Sprite2D/KeyText
 
 func set_up(_key: String = "E") -> void:
 	if _key.length() == 1:

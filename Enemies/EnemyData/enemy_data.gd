@@ -5,6 +5,8 @@ class_name EnemyData extends Resource
 @export var move_speed: Stat = Stat.new()
 @export var knockback: int
 @export var skin: Texture
+@export var texture_data: TextureData
+@export var particles_effect: PackedScene
 @export var avg_coins_dropped: int
 @export var touch_damage: int
 @export var knockback_resistance: float = 0.0
@@ -22,6 +24,12 @@ class_name EnemyData extends Resource
 @export var bullet: PackedScene
 @export var shot_cooldown: float = 1.0
 @export var bullet_speed: float = 0.0
+@export var bullet_sprite: Texture2D
+
+@export_subgroup("Seek/Strike Behavior")
+@export var hits_required: int = 1
+@export var pure_ranged_mode: bool = false
+@export var ranged_trigger_distance: float = 150.0
 
 @export_subgroup("Loot")
 @export var equip_amount: int = 1

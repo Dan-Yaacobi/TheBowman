@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://db476uku3v2g3"]
+
+[ext_resource type="Texture2D" uid="uid://d3thlmw02a8br" path="res://Enemies/FlamingSkull/FlamingSkullFinal.png" id="1_j7ovg"]
+[ext_resource type="PackedScene" uid="uid://dedw0dlwhs2dh" path="res://Enemies/FlamingParticles.tscn" id="2_rfo4u"]
+
+[sub_resource type="Animation" id="Animation_rfo4u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_juil6"]
+resource_name = "new_animation"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_2mxrm"]
+resource_name = "new_animation_2"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tq3wa"]
+_data = {
+&"RESET": SubResource("Animation_rfo4u"),
+&"new_animation": SubResource("Animation_juil6"),
+&"new_animation_2": SubResource("Animation_2mxrm")
+}
+
+[node name="Node2D" type="Node2D" unique_id=1030075602]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=24772015]
+texture = ExtResource("1_j7ovg")
+hframes = 4
+
+[node name="CPUParticles2D" parent="Sprite2D" unique_id=1064686553 instance=ExtResource("2_rfo4u")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=984417093]
+libraries/ = SubResource("AnimationLibrary_tq3wa")

@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwr52hxemyjof"]
+[gd_scene format=3 uid="uid://dwr52hxemyjof"]
 
 [ext_resource type="Script" uid="uid://36oxwgmb4krd" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner.gd" id="1_8cyt5"]
 [ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner_data.gd" id="2_aahhi"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="2_buugi"]
-[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="3_s4kkp"]
+[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/red_flying_apple.tres" id="3_s4kkp"]
 [ext_resource type="Resource" uid="uid://bogvy8w5pn6fb" path="res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres" id="4_i2a7e"]
 [ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="5_8weul"]
 [ext_resource type="Resource" uid="uid://bifydptc2miel" path="res://Enemies/EnemyData/EnemyValues/colorless_flying_apple.tres" id="6_a5b2t"]
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="7_0u535"]
+
 
 [sub_resource type="Resource" id="Resource_66vdx"]
 resource_local_to_scene = true

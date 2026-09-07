@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" uid="uid://d2y3mpjq3t166" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_1cl26"]
-[ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_idach"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_armh2"]
-[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_w0v01"]
+[ext_resource type="Texture2D" uid="uid://diwdma6y7rhxh" path="res://Enemies/EvilBird/Sprites/FireEvilBird.png" id="2_lkeh4"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="8_40b5k"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_7k2vi"]
 [ext_resource type="Script" uid="uid://ddr1kknnnh0jp" path="res://Enemies/EvilBird/bird_seek_state.gd" id="11_w4iuy"]
@@ -13,22 +10,9 @@
 [ext_resource type="Script" uid="uid://wcfu7frk1ny2" path="res://Enemies/EvilBird/bird_dive_attack_state.gd" id="13_lkeh4"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_nboip"]
 [ext_resource type="Script" uid="uid://82cwn058elln" path="res://Enemies/EvilBird/fly_to_roost.gd" id="15_sqrbk"]
-[ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="16_rhfyp"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="16_sqrbk"]
 [ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="16_vr884"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_j7d4o"]
-
-[sub_resource type="Resource" id="Resource_w50ih"]
-script = ExtResource("4_w0v01")
-
-[sub_resource type="Resource" id="Resource_jvrjh"]
-resource_local_to_scene = true
-script = ExtResource("4_armh2")
-knockback = 200
-skin = ExtResource("16_rhfyp")
-touch_damage = 1
-death_ability = Array[ExtResource("2_1cl26")]([SubResource("Resource_w50ih")])
-bullet = ExtResource("2_idach")
 
 [sub_resource type="Animation" id="Animation_qmrug"]
 resource_name = "Damaged"
@@ -182,11 +166,10 @@ size = Vector2(24, 10)
 [node name="EvilBird" type="CharacterBody2D" unique_id=196136335]
 collision_layer = 4
 script = ExtResource("1_jdshu")
-stats = SubResource("Resource_jvrjh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1713613863]
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("16_rhfyp")
+texture = ExtResource("2_lkeh4")
 hframes = 3
 vframes = 2
 

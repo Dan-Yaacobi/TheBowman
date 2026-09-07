@@ -18,7 +18,7 @@ idle = true
 metadata/_custom_type_script = "uid://bmi4eqninttxo"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
-size = Vector2(37, 34)
+size = Vector2(28, 31)
 
 [node name="PedestalNPC" type="Node2D" unique_id=1109545810]
 script = ExtResource("1_pn02k")
@@ -48,16 +48,15 @@ script = ExtResource("7_mlx16")
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -14.0
-offset_top = 15.0
-offset_right = -14.0
-offset_bottom = 15.0
+offset_top = 17.0
+offset_right = 0.0
+offset_bottom = 17.0
 scale = Vector2(0.4, 0.4)
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1216373148]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=671109381]
-position = Vector2(-0.5, -5)
+position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_e83u5")
 
 [node name="TopFloatMarker" type="Marker2D" parent="." unique_id=398050149]

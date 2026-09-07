@@ -4,15 +4,12 @@ const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 @export var max_rift_level: int = 15
 
-# Rarity odds — base weights per tier (index matches EquipmentData.Rarity), higher rift level biases toward the back of this array
-@export var rarity_weights: Array[float] = [50.0, 30.0, 15.0, 5.0]
-@export var rift_rarity_scale: float = 0.15       # how much rift level pulls odds toward higher tiers
+# Rift level → tier thresholds. Reaching threshold N grants tier N (index into data.tiers / RarityTier arrays)
+@export var rift_level_tier_bands: Array[int] = [4, 8, 12]
+@export var tier_upgrade_chance: float = 0.15   # chance to roll one tier above your guaranteed floor
 
-# Value shift per tier — % increase applied to stat ranges, shared across every item
-@export var rarity_value_shift: Array[float] = [0.0, 0.2, 0.5, 0.8]
-
-# Rift level scaling
-@export var rift_stat_scale: float = 0.1          # how much stat ranges grow per rift (logarithmic), stacks with rarity_value_shift
+# Rift level scaling — the only lever on stat magnitude; bounded via smoothstep against max_rift_level
+@export var rift_stat_scale: float = 0.5
 
 @export var bow_pool: ItemPool
 @export var quiver_pool: ItemPool
@@ -20,6 +17,9 @@ const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 enum Slot { BOW, QUIVER, RING }
 
+func _enter_tree() -> void:
+	GameStateManager.current_loot_manager = self
+	
 func set_up() -> void:
 	EventBus.try_drop.connect(drop_random_item)
 	EventBus.drop_coins.connect(drop_coins)
@@ -55,14 +55,7 @@ func roll_item(pool: ItemPool, forced_rarity: int = -1) -> EquipmentData:
 	if template == null:
 		push_error("ItemPool has no templates: " + str(pool.resource_path))
 		return null
-	var data: EquipmentData = template.duplicate()
-	if data.ability:
-		data.ability = data.ability.duplicate()
-	data.equipment_scene = template.equipment_scene
-
-	var rarity: int = forced_rarity if forced_rarity >= 0 else _roll_rarity()
-	_apply_rarity_rolls(data, rarity)
-	return data
+	return _roll_from_template(template, forced_rarity)
 
 ## Rerolls an already-owned item fully at a specific rarity — used by the wizard NPC.
 ## Fully replaces modifiers/minors; nothing from the previous roll is preserved.
@@ -75,41 +68,31 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	data.bonus_abilities = []
 
 	var rift_level: int = PlayerManager.player.stats.rift_level
-	var rift_stat_scalar: float = 1.0 + log(max(rift_level, 1)) * rift_stat_scale
-	var shift: float = rarity_value_shift[rarity]
-	var range_multiplier: float = 1.0 + shift
+	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
+	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep, bounded growth
+	var rift_stat_scalar: float = 1.0 + s * rift_stat_scale
 
 	for tier_index in range(rarity + 1):
 		var tier: RarityTier = data.tiers[tier_index]
 		for def in tier.stat_rolls:
-			var scaled_min: float = def.min_value * rift_stat_scalar * range_multiplier
-			var scaled_max: float = def.max_value * rift_stat_scalar * range_multiplier
+			var scaled_min: float = def.min_value * rift_stat_scalar
+			var scaled_max: float = def.max_value * rift_stat_scalar
 			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
 			data.add_modifier(def.stat_name, amount, def.type)
 		if tier.minor_roll_count > 0 and not tier.minor_ability_pool.is_empty():
-			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, shift))
+			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, 0.0))
 
-func _roll_rarity() -> int:
-	var rift_level: int = PlayerManager.player.stats.rift_level
-	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
-	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep
-
-	var weights: Array[float] = rarity_weights.duplicate()
-	# nudge odds toward higher tiers as rift level climbs
-	for i in weights.size():
-		var tier_bias: float = float(i) / float(weights.size() - 1)  # 0 for common, 1 for legendary
-		weights[i] = lerpf(weights[i], weights[i] * (1.0 + tier_bias * rift_rarity_scale * 10.0), s)
-
-	var total: float = 0.0
-	for w in weights:
-		total += w
-	var roll: float = randf() * total
-	var cumulative: float = 0.0
-	for i in weights.size():
-		cumulative += weights[i]
-		if roll <= cumulative:
-			return i
-	return weights.size() - 1
+## Guaranteed tier floor based on rift level, with a small chance to roll one tier above it.
+## Rarity is never randomly rolled below the current rift-level band.
+func _rarity_for_rift_level(rift_level: int) -> int:
+	var tier: int = 0
+	for threshold in rift_level_tier_bands:
+		if rift_level >= threshold:
+			tier += 1
+	var max_tier: int = rift_level_tier_bands.size()
+	if randf() < tier_upgrade_chance:
+		tier = mini(tier + 1, max_tier)
+	return tier
 
 func _pick_template(pool: ItemPool) -> EquipmentData:
 	if pool.templates.is_empty():
@@ -145,6 +128,37 @@ func _roll_minors(available: Array[MinorAbility], count: int, shift: float) -> A
 				remaining.erase(minor)
 				break
 	return result
+	
+func roll_distinct_items(count: int, forced_rarity: int = -1) -> Array[EquipmentData]:
+	var remaining: Array[EquipmentData] = []
+	remaining.append_array(bow_pool.templates)
+	remaining.append_array(quiver_pool.templates)
+	remaining.append_array(ring_pool.templates)
+
+	var results: Array[EquipmentData] = []
+	for i in mini(count, remaining.size()):
+		var total_weight: float = 0.0
+		for template in remaining:
+			total_weight += template.pick_weight
+		var roll: float = randf() * total_weight
+		var cumulative: float = 0.0
+		for template in remaining:
+			cumulative += template.pick_weight
+			if roll <= cumulative:
+				results.append(_roll_from_template(template, forced_rarity))
+				remaining.erase(template)
+				break
+
+	return results
+
+func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> EquipmentData:
+	var data: EquipmentData = template.duplicate()
+	if data.ability:
+		data.ability = data.ability.duplicate()
+	data.equipment_scene = template.equipment_scene
+	var rarity: int = forced_rarity if forced_rarity >= 0 else _rarity_for_rift_level(PlayerManager.player.stats.rift_level)
+	_apply_rarity_rolls(data, rarity)
+	return data
 	
 func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 0) -> void:
 	var item: EquipmentData = template.duplicate()

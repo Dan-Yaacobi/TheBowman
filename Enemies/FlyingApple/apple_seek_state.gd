@@ -5,6 +5,7 @@ class_name AppleSeekState extends EnemyState
 @onready var ray_cast_down: RayCast2D = $"../../RayCastDown"
 @onready var ray_cast_forward: RayCast2D = $"../../RayCastForward"
 
+var hit_counter: int
 var direction: Vector2
 var distance_to_strike: int = 30
 var succesfull_hit: bool
@@ -18,7 +19,8 @@ func init() -> void:
 
 func Enter() -> void:
 	succesfull_hit = false
-
+	hit_counter = 0
+	
 func Exit() -> void:
 	succesfull_hit = false
 
@@ -33,6 +35,9 @@ func Physics(_delta: float) -> EnemyState:
 	var modifier: int = 1
 	if enemy.calculate_distance_to_player() <= distance_to_strike:
 		modifier = 2
+	if enemy.stats.pure_ranged_mode:
+		if enemy.calculate_distance_to_player() <= enemy.stats.ranged_trigger_distance:
+			succesfull_hit = true
 	if succesfull_hit:
 		return shoot
 	else:
@@ -80,4 +85,6 @@ func _get_avoidance_direction(desired_dir: Vector2) -> Vector2:
 func hit_player(_var) -> void:
 	if state_machine.curr_state != self:
 		return
-	succesfull_hit = true
+	hit_counter += 1
+	if hit_counter >= enemy.stats.hits_required:
+		succesfull_hit = true

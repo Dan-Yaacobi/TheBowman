@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dbsxgoiwtydme"]
+
+[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="1_yc51p"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_eqap5"]
+[ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="3_u5dgx"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_g624p"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_lw5aq"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_kicpw"]
+[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="7_vd8ox"]
+
+[sub_resource type="Resource" id="Resource_3u2p4"]
+script = ExtResource("4_g624p")
+death_sound = ExtResource("3_u5dgx")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
+
+[sub_resource type="Resource" id="Resource_8iawy"]
+script = ExtResource("5_lw5aq")
+base_value = 40.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[resource]
+script = ExtResource("6_kicpw")
+max_hp = 23
+move_speed = SubResource("Resource_8iawy")
+knockback = 75
+skin = ExtResource("7_vd8ox")
+avg_coins_dropped = 1
+touch_damage = 1
+knockback_resistance = 20.0
+drop_chance = 25.0
+death_ability = Array[ExtResource("2_eqap5")]([SubResource("Resource_3u2p4")])
+bullet = ExtResource("1_yc51p")
+bullet_speed = 45.0
+metadata/_custom_type_script = "uid://rlvenynllobd"

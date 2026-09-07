@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bjvdjvlavo3gm"]
+
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="1_jtxco"]
+[ext_resource type="Script" uid="uid://lpwwgl3u2ap2" path="res://Rifts/Chunks/ChunkScenes/Reward/item_pedestal_island.gd" id="1_t8y5c"]
+[ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="2_kq8s8"]
+[ext_resource type="Script" uid="uid://gnexyll2mtpb" path="res://Level/Islands/texture_data.gd" id="2_m4xme"]
+[ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="3_sdeih"]
+[ext_resource type="Texture2D" uid="uid://dxp5val6ef3ke" path="res://Level/Islands/sprites/Dirt Islands.png" id="3_t8y5c"]
+[ext_resource type="Texture2D" uid="uid://dmbb60iq3h813" path="res://Level/Islands/sprites/Snow Islands.png" id="4_y73dv"]
+[ext_resource type="Texture2D" uid="uid://de8dpxqxqs63y" path="res://Level/Islands/sprites/Hell Islands.png" id="5_gsigf"]
+[ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="9_y73dv"]
+
+[sub_resource type="Resource" id="Resource_ahai6"]
+script = ExtResource("2_m4xme")
+texture = ExtResource("3_t8y5c")
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_g8eam"]
+script = ExtResource("2_m4xme")
+texture = ExtResource("4_y73dv")
+type = 1
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_7mf8l"]
+script = ExtResource("2_m4xme")
+texture = ExtResource("5_gsigf")
+type = 2
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y73dv"]
+resource_local_to_scene = true
+size = Vector2(179, 53)
+
+[node name="ItemPedestalIsland" type="Node2D" unique_id=2145072911]
+script = ExtResource("1_t8y5c")
+allowed_spawn = false
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("1_jtxco")]
+textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
+
+[node name="PedestalNPC3" parent="Island" unique_id=1109823043 instance=ExtResource("3_sdeih")]
+position = Vector2(1, -17)
+
+[node name="Island2" parent="." unique_id=320074861 instance=ExtResource("1_jtxco")]
+position = Vector2(-57, 0)
+textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
+
+[node name="PedestalNPC2" parent="Island2" unique_id=762115268 instance=ExtResource("3_sdeih")]
+position = Vector2(0, -17)
+
+[node name="Island3" parent="." unique_id=1839574235 instance=ExtResource("1_jtxco")]
+position = Vector2(59, 0)
+textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
+
+[node name="PedestalNPC" parent="Island3" unique_id=1109545810 instance=ExtResource("3_sdeih")]
+position = Vector2(1, -17)
+
+[node name="Bounds" parent="." unique_id=1128394681 instance=ExtResource("2_kq8s8")]
+
+[node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
+position = Vector2(0.5, -14.5)
+shape = SubResource("RectangleShape2D_y73dv")
+
+[node name="EntryMarker" parent="." unique_id=791692750 instance=ExtResource("9_y73dv")]
+
+[editable path="Bounds"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdu6hjoweee6s"]
+[gd_scene format=3 uid="uid://cdu6hjoweee6s"]
 
 [ext_resource type="Script" uid="uid://c2gf560cjc46a" path="res://Level/playground.gd" id="1_fq8oi"]
 [ext_resource type="Script" uid="uid://cu2jp5mww0be3" path="res://00 Globals/enemies.gd" id="2_lmkum"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="3_qp6b5"]
 [ext_resource type="Resource" uid="uid://bogvy8w5pn6fb" path="res://Enemies/EnemyData/EnemyValues/blue_flying_apple.tres" id="7_idn3m"]
 [ext_resource type="Script" uid="uid://bwombitl8brmm" path="res://Level/Wave Data/wave_data.gd" id="7_wvqgp"]
-[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/red_flying_apple.tres" id="12_jv2oc"]
+[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/red_flying_apple.tres" id="12_jv2oc"]
 [ext_resource type="Script" uid="uid://yrg8jskcantp" path="res://Level/PlayGround/wave_sign.gd" id="14_db0ww"]
 [ext_resource type="Texture2D" uid="uid://crjern11csy0x" path="res://Level/Sprites/Wave Background.png" id="14_ggsjl"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="15_53yb1"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="20_w4w4y"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="24_xpwt5"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="53_q6dew"]
+
 
 [sub_resource type="Resource" id="Resource_s07r2"]
 script = ExtResource("2_lmkum")

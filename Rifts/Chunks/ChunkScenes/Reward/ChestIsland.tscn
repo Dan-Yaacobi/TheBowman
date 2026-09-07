@@ -1,22 +1,53 @@
 [gd_scene format=3 uid="uid://bdbqlu4vfxwdb"]
 
-[ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="1_8jm71"]
 [ext_resource type="Script" uid="uid://402kq4g6y6pg" path="res://Rifts/Chunks/chunk.gd" id="1_a5d1b"]
 [ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="2_1w66f"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_kochp"]
 [ext_resource type="PackedScene" uid="uid://b1vk1jn4fufcj" path="res://Objects/Scenes/LightPost_2.tscn" id="3_1w66f"]
+[ext_resource type="Script" uid="uid://gnexyll2mtpb" path="res://Level/Islands/texture_data.gd" id="3_c75oe"]
+[ext_resource type="Texture2D" uid="uid://dxp5val6ef3ke" path="res://Level/Islands/sprites/Dirt Islands.png" id="4_u5uuv"]
 [ext_resource type="PackedScene" uid="uid://c3sf14ur3il0k" path="res://Rifts/Chunks/Utility/Markers/EntryMarker.tscn" id="5_kochp"]
+[ext_resource type="Texture2D" uid="uid://dmbb60iq3h813" path="res://Level/Islands/sprites/Snow Islands.png" id="5_lnm0u"]
+[ext_resource type="Texture2D" uid="uid://de8dpxqxqs63y" path="res://Level/Islands/sprites/Hell Islands.png" id="6_5fuso"]
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_ocb72"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kochp"]
+[sub_resource type="Resource" id="Resource_ahai6"]
+script = ExtResource("3_c75oe")
+texture = ExtResource("4_u5uuv")
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_g8eam"]
+script = ExtResource("3_c75oe")
+texture = ExtResource("5_lnm0u")
+type = 1
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="Resource" id="Resource_7mf8l"]
+script = ExtResource("3_c75oe")
+texture = ExtResource("6_5fuso")
+type = 2
+hframes = 3
+vframes = 3
+totalframes = 7
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocb72"]
 resource_local_to_scene = true
 size = Vector2(49, 40)
 
 [node name="ChestIsland" type="Node2D" unique_id=1062710134]
 script = ExtResource("1_a5d1b")
 allowed_spawn = false
-spawn_chance = 0.0
 
-[node name="Island" parent="." unique_id=869652895 instance=ExtResource("1_8jm71")]
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("2_kochp")]
+use_fixed_frame = true
+textures = Array[ExtResource("3_c75oe")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l"), null])
 
 [node name="Chest" parent="." unique_id=84532828 instance=ExtResource("2_1w66f")]
 position = Vector2(2.3841858e-07, -13)
@@ -33,6 +64,6 @@ position = Vector2(-14.999998, -19)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(0.5, -12)
-shape = SubResource("RectangleShape2D_kochp")
+shape = SubResource("RectangleShape2D_ocb72")
 
 [editable path="Bounds"]

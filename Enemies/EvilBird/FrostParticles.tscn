@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bpkemriujrtun"]
+
+[ext_resource type="Texture2D" uid="uid://cd153o5rc6ovo" path="res://Particles/SnowFlake.png" id="1_633ay"]
+
+[sub_resource type="Gradient" id="Gradient_1jmy8"]
+offsets = PackedFloat32Array(0, 0.99753696)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="FrostParticles" type="CPUParticles2D" unique_id=2034527596]
+z_index = 1
+amount = 15
+texture = ExtResource("1_633ay")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_1jmy8")

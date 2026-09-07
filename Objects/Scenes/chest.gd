@@ -7,5 +7,5 @@ func break_item(_hurt_box: HurtBox) -> void:
 		got_hit = true
 		animation_player.play("Open")
 		await animation_player.animation_finished
-		drop_items(0.5)
+		drop_items()
 		queue_free()

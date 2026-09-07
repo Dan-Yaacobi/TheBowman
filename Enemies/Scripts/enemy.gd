@@ -16,7 +16,7 @@ signal died(enemy: Enemy)
 signal took_damage
 
 var direction: Vector2
-var no_drops: bool = false
+var no_drops: bool = true # Enemy currently dont drop items
 
 var added_hit_effect: bool = false
 var hit_particle_effect: CPUParticles2D
@@ -44,9 +44,16 @@ func _ready() -> void:
 	hit_box.Damaged.connect(hit)
 	hit_box.set_enemy(self)
 	extra_ready_functions()
+	sprite.texture = stats.skin
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).setup(stats.max_hp)
-
+	if stats.particles_effect:
+		var new_effect = stats.particles_effect.instantiate()
+		if new_effect is CPUParticles2D:
+			add_child(new_effect)
+		else:
+			new_effect.queue_free()
+		
 func full_health() -> bool:
 	return current_hp == stats.max_hp
 
@@ -104,7 +111,6 @@ func set_damage_multiplier(_multiplier: float) -> void:
 
 	
 func take_damage(_dmg: int) -> void:
-
 	if is_dead:
 		return
 	current_hp -= roundi(_dmg * _damage_multiplier)
@@ -139,14 +145,15 @@ func knockback(_hurt_box: HurtBox) -> void:
 		knockback_velocity += _hurt_box.knockback_dir * _hurt_box.knockback_power
 
 func drop_item() -> void:
-	var drop_chance: float = min(
-		stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
-		100)
-	for item in stats.equip_amount:
-		EventBus.try_drop.emit(global_position, drop_chance,stats.rarity_skew)
+	if not no_drops:
+		var drop_chance: float = min(
+			stats.drop_chance + PlayerManager.player.stats.extra_drop_chance.value(),
+			100)
+		for item in stats.equip_amount:
+			EventBus.try_drop.emit(global_position, drop_chance,stats.rarity_skew)
 	EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
 
-	
+		
 func disable_drops() -> void:
 	no_drops = true
 	

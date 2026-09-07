@@ -5,7 +5,7 @@ class_name MainMenu extends GameWorld
 @onready var falling_death: FallingDeath = $FallingDeath
 @onready var loot_manager: LootManager = $LootManager
 
-@onready var rift_portal: Portal = $Portals/RiftPortal
+@onready var rift_portal: Portal = $Islands/Island/RiftPortal
 
 @export var item_data: EquipmentData
 

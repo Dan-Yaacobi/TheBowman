@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dedw0dlwhs2dh"]
+
+[sub_resource type="Curve" id="Curve_nuysd"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1jmy8"]
+offsets = PackedFloat32Array(0, 0.42610836, 0.864532, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0.85490197, 0, 1, 0, 0, 0, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=1064686553]
+z_index = -1
+amount = 50
+lifetime = 2.0
+speed_scale = 2.0
+emission_shape = 1
+emission_sphere_radius = 12.0
+gravity = Vector2(0, -50)
+scale_amount_curve = SubResource("Curve_nuysd")
+color_ramp = SubResource("Gradient_1jmy8")

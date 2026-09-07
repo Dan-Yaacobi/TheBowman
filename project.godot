@@ -33,6 +33,7 @@ GameObjects="*uid://d15wf4xedfh2a"
 GeneralFunctions="*uid://3ytsro82mj06"
 ItemDropManager="*uid://bnjd8xgn1wdul"
 SettingsManager="*uid://bh8ssfgthqhal"
+GameStateManager="*uid://dbs3exo42qa43"
 
 [debug]
 

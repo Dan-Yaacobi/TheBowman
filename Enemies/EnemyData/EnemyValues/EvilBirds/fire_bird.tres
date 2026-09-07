@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://cljbqr34nft1t"]
+
+[ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="1_l6536"]
+[ext_resource type="Texture2D" uid="uid://bfw2vxn7wpnk5" path="res://Enemies/EvilBird/Sprites/FireEgg.png" id="2_6uksh"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_5aw8c"]
+[ext_resource type="AudioStream" uid="uid://ccgwbicy8i5f0" path="res://Audio/Player/BirdDead.wav" id="4_ued3v"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_amy8g"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_f2us0"]
+[ext_resource type="PackedScene" uid="uid://dedw0dlwhs2dh" path="res://Enemies/FlamingParticles.tscn" id="7_5aw8c"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_i6mde"]
+[ext_resource type="Texture2D" uid="uid://diwdma6y7rhxh" path="res://Enemies/EvilBird/Sprites/FireEvilBird.png" id="9_ued3v"]
+
+[sub_resource type="Resource" id="Resource_07lg4"]
+script = ExtResource("5_amy8g")
+death_sound = ExtResource("4_ued3v")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
+
+[sub_resource type="Resource" id="Resource_0m8if"]
+script = ExtResource("6_f2us0")
+base_value = 65.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[resource]
+script = ExtResource("7_i6mde")
+max_hp = 150
+move_speed = SubResource("Resource_0m8if")
+knockback = 200
+skin = ExtResource("9_ued3v")
+particles_effect = ExtResource("7_5aw8c")
+avg_coins_dropped = 9
+touch_damage = 5
+knockback_resistance = 40.0
+drop_chance = 0.0
+death_ability = Array[ExtResource("3_5aw8c")]([SubResource("Resource_07lg4")])
+bullet = ExtResource("1_l6536")
+bullet_sprite = ExtResource("2_6uksh")
+metadata/_custom_type_script = "uid://rlvenynllobd"

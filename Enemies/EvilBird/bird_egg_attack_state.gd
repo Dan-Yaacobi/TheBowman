@@ -6,7 +6,7 @@ class_name BirdEggAttackState extends EnemyState
 @onready var ground_detector: Area2D = $GroundDetector
 
 @export var egg_attack_min_time: float = 1.0
-@export var egg_attack_max_time: float = 1.3
+@export var egg_attack_max_time: float = 2.0
 @export var min_end: float = 30.0
 @export var max_end: float = 60.0
 @export var too_close_x: float = 30
@@ -87,6 +87,7 @@ func shoot() -> void:
 		@warning_ignore("integer_division")
 		new_bullet.data.knockback = enemy.stats.knockback / 2
 		enemy.get_parent().call_deferred("add_child", new_bullet)
+		new_bullet.set_texture(enemy.stats.bullet_sprite)
 	else:
 		egg_attack_timer.stop()
 
