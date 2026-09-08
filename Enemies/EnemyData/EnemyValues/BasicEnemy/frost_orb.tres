@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dqg0q26d6mrf5"]
+
+[ext_resource type="PackedScene" uid="uid://cde2ouylndf60" path="res://Enemies/EnemyEffects/IceShield/IceShard.tscn" id="1_3bld3"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_rb1i3"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="2_oan1j"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="2_xr67v"]
+[ext_resource type="PackedScene" uid="uid://dblch6sbddt5h" path="res://Enemies/EnemyEffects/IceShield/IceShield.tscn" id="3_3bld3"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_3y3v2"]
+[ext_resource type="PackedScene" uid="uid://bpkemriujrtun" path="res://Enemies/EnemyEffects/FrostParticles.tscn" id="4_54cry"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_bjdpv"]
+[ext_resource type="Texture2D" uid="uid://ck6a84jirt5y4" path="res://Enemies/Sprites/FrostOrb.png" id="8_nbips"]
+
+[sub_resource type="Resource" id="Resource_m8shd"]
+script = ExtResource("2_xr67v")
+metadata/_custom_type_script = "uid://du1epmdpcfmpv"
+
+[sub_resource type="Resource" id="Resource_0pd27"]
+script = ExtResource("6_bjdpv")
+base_value = 25.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[resource]
+script = ExtResource("3_3y3v2")
+max_hp = 50
+move_speed = SubResource("Resource_0pd27")
+acceleration = 100.0
+skin = ExtResource("8_nbips")
+texture_scale = Vector2(0.5, 0.5)
+move_animation = "OrbMove"
+effects = Array[PackedScene]([ExtResource("3_3bld3"), ExtResource("4_54cry")])
+avg_coins_dropped = 5
+touch_damage = 3
+drop_chance = 0.0
+death_ability = Array[ExtResource("1_rb1i3")]([SubResource("Resource_m8shd")])
+shooter = true
+bullet = ExtResource("1_3bld3")
+shot_cooldown = 2.5
+bullet_speed = 25.0
+pure_ranged_mode = true
+metadata/_custom_type_script = "uid://rlvenynllobd"

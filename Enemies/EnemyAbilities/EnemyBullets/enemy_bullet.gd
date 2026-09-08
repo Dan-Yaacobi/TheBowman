@@ -7,16 +7,19 @@ class_name EnemyBullet extends Area2D
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var hit_box: HitBox = $HitBox
 
+var was_fired: bool = false
 var direction: Vector2 = Vector2.ZERO
 
-func _ready() -> void: 
-	sprite.texture = data.texture
+func _ready() -> void:
+	if sprite.texture:
+		sprite.texture = data.texture
 	visible_on_screen_notifier.screen_exited.connect(clear_shot)
 	body_shape_entered.connect(hit_wall)
 	hurt_box.damage = data.damage
 	hurt_box.knockback_power = data.knockback
 	hit_box.Damaged.connect(clear_shot)
 	hurt_box.successful_hit.connect(clear_shot)
+	
 	extra_ready_function()
 	
 func extra_ready_function() -> void:

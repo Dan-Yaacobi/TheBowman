@@ -45,20 +45,22 @@ func _ready() -> void:
 	sprite.texture = stats.skin
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).setup(stats.max_hp)
-	if stats.particles_effect:
-		var new_effect = stats.particles_effect.instantiate()
-		if new_effect is CPUParticles2D:
-			add_child(new_effect)
-		else:
-			new_effect.queue_free()
+	init_effects()
+	
 	sprite.scale = stats.texture_scale
 	_wire_hit_effects(hurt_box, false)
-	
+
+func init_effects() -> void:
+	for effect in stats.effects:
+		var new_effect = effect.instantiate()
+		add_child(new_effect)
+
 func full_health() -> bool:
 	return current_hp == stats.max_hp
 	
 func face_the_player() -> void:
-	sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
+	if stats.facing_player:
+		sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
 
 func heal(_amount: int) -> void:
 	current_hp = mini(current_hp + _amount, stats.max_hp)
@@ -159,7 +161,7 @@ func disable_drops() -> void:
 	no_drops = true
 	
 func update_animation(_animation: String, _position: float = 0.0) -> void:
-	if animation_player != null:
+	if animation_player != null and _animation != "":
 		animation_player.play_section(_animation, _position)
 
 func can_be_stunned() -> bool:
@@ -176,6 +178,7 @@ func bullet_set_up() -> Node2D:
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.move_speed = stats.bullet_speed
+		new_bullet.was_fired = true
 		_wire_hit_effects(new_bullet.hurt_box, true)
 		return new_bullet
 	return null

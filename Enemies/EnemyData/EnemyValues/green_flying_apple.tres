@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dok5esyet0y5n" path="res://Enemies/EnemyAbilities/EnemyBullets/GreenBullet.tscn" id="1_xb5m6"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="2_4dgmw"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_ukkwk"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_b45av"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_ukkwk"]
 [ext_resource type="Texture2D" uid="uid://bvla6jdht1gip" path="res://Enemies/Sprites/Green Apple.png" id="5_b45av"]
 
@@ -24,7 +25,6 @@ knockback = 90
 skin = ExtResource("5_b45av")
 avg_coins_dropped = 15
 touch_damage = 3
-knockback_resistance = 40.0
 death_ability = Array[ExtResource("1_le6sj")]([SubResource("Resource_3wtwp")])
 bullet = ExtResource("1_xb5m6")
 metadata/_custom_type_script = "uid://rlvenynllobd"

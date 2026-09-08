@@ -85,8 +85,11 @@ func calc_dmg(shot_power: float) -> void:
 	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * crit_bonus * variance_mult)
 	
 func calc_knockback(shot_power: float) -> void:
-	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
-	knockback = PlayerManager.player.stats.pushback_power.value() * shot_power * perfect_bonus + log(velocity.length())
+	if PlayerManager.player.stats.can_knockback <= 0:
+		var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if shot_power >= 1.0 else 1.0
+		knockback = PlayerManager.player.stats.pushback_power.value() * shot_power * perfect_bonus + log(velocity.length())
+	else:
+		knockback = 0
 
 func missed() -> void:
 	if regular_shot and not succesfuly_hit:

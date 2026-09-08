@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cn3n10s62mfsj"]
+
+[ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="1_5cume"]
+
+[sub_resource type="Curve" id="Curve_e83u5"]
+_data = [Vector2(0.042813458, 0), 0.0, 0.0, 0, 0, Vector2(0.87155956, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_q0xdf"]
+offsets = PackedFloat32Array(0.12292359, 0.27242523, 0.6777409, 0.8538206, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.27450982, 0.49803922, 1, 1, 0, 0.8901961, 1, 1, 0, 0.8901961, 1, 0)
+
+[node name="FrostBreath" type="CPUParticles2D" unique_id=214183790]
+amount = 50
+texture = ExtResource("1_5cume")
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(150, 0)
+scale_amount_curve = SubResource("Curve_e83u5")
+color_ramp = SubResource("Gradient_q0xdf")

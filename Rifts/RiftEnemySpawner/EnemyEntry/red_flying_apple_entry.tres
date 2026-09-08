@@ -1,43 +1,12 @@
 [gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://dsa1dv61p7sdw"]
 
-[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="1_8dvhf"]
+[ext_resource type="Resource" uid="uid://dbsxgoiwtydme" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/red_flying_apple.tres" id="1_77lxj"]
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="2_5iwkg"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_u06m0"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="3_4bvvd"]
-[ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="3_5541o"]
-[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_721cf"]
-[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_7n8bf"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_lcd63"]
-[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="7_yuk7a"]
-
-[sub_resource type="Resource" id="Resource_3u2p4"]
-script = ExtResource("4_721cf")
-death_sound = ExtResource("3_5541o")
-metadata/_custom_type_script = "uid://du1epmdpcfmpv"
-
-[sub_resource type="Resource" id="Resource_8iawy"]
-script = ExtResource("5_7n8bf")
-base_value = 40.0
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_0f3fm"]
-script = ExtResource("6_lcd63")
-max_hp = 23
-move_speed = SubResource("Resource_8iawy")
-knockback = 75
-skin = ExtResource("7_yuk7a")
-avg_coins_dropped = 1
-touch_damage = 1
-knockback_resistance = 20.0
-drop_chance = 25.0
-death_ability = Array[ExtResource("2_u06m0")]([SubResource("Resource_3u2p4")])
-bullet = ExtResource("1_8dvhf")
-bullet_speed = 45.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [resource]
 script = ExtResource("3_4bvvd")
 scene = ExtResource("2_5iwkg")
-data = SubResource("Resource_0f3fm")
+data = ExtResource("1_77lxj")
 weight_curve = -0.5
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

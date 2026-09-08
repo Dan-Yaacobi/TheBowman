@@ -6,9 +6,10 @@
 [ext_resource type="AudioStream" uid="uid://ccgwbicy8i5f0" path="res://Audio/Player/BirdDead.wav" id="4_hhldc"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_aj4i6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_p8uhu"]
-[ext_resource type="PackedScene" uid="uid://bpkemriujrtun" path="res://Enemies/EvilBird/FrostParticles.tscn" id="7_4ip6f"]
+[ext_resource type="PackedScene" uid="uid://bpkemriujrtun" path="res://Enemies/EnemyEffects/FrostParticles.tscn" id="7_4ip6f"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_o3v4q"]
 [ext_resource type="Texture2D" uid="uid://csx1htbauomp7" path="res://Enemies/EvilBird/Sprites/FrostEvilBird.png" id="9_hhldc"]
+
 
 [sub_resource type="Resource" id="Resource_07lg4"]
 script = ExtResource("5_aj4i6")

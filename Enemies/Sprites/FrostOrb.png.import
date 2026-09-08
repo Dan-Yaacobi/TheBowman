@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3thlmw02a8br"
-path="res://.godot/imported/FlamingSkull.png-28fe01d7063d45153c3a1500619dc6c7.ctex"
+uid="uid://ck6a84jirt5y4"
+path="res://.godot/imported/FrostOrb.png-b8593341142d4c0e4b407f5be838b1b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/FlamingSkull/FlamingSkull.png"
-dest_files=["res://.godot/imported/FlamingSkull.png-28fe01d7063d45153c3a1500619dc6c7.ctex"]
+source_file="res://Enemies/Sprites/FrostOrb.png"
+dest_files=["res://.godot/imported/FrostOrb.png-b8593341142d4c0e4b407f5be838b1b7.ctex"]
 
 [params]
 

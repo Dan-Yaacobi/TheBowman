@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
+[ext_resource type="Resource" uid="uid://c70ad8a4k31lf" path="res://Items/Equipments/Bows/Hanzo.tres" id="9_nxm3p"]
 [ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/DefaultEquipment/basic_quiver.tres" id="10_7t2hb"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
@@ -95,6 +96,7 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1109545810 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
+item_data = ExtResource("9_nxm3p")
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)

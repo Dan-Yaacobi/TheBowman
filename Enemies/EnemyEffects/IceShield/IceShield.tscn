@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dblch6sbddt5h"]
+
+[ext_resource type="Script" uid="uid://bmpdiqkoo0hn6" path="res://Enemies/EnemyEffects/IceShield/ice_shield.gd" id="1_5vwtw"]
+
+[node name="IceShield" type="Node2D" unique_id=287436052]
+script = ExtResource("1_5vwtw")
+radius = 14.0
+angular_speed = 1.5

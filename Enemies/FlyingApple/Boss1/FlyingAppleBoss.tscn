@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_kp1gv"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="6_gbtff"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_o0vur"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="6_yjatd"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_hy1ne"]
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="9_cfd1d"]
 [ext_resource type="Texture2D" uid="uid://drtobaioy4nqb" path="res://Enemies/Sprites/AppleWings.png" id="10_88q2y"]
@@ -38,7 +39,6 @@ move_speed = SubResource("Resource_cf35j")
 knockback = 75
 skin = ExtResource("6_gbtff")
 touch_damage = 1
-knockback_resistance = 20.0
 drop_chance = 0.0
 death_ability = Array[ExtResource("3_yjatd")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("2_7ei6n")
@@ -308,6 +308,7 @@ flying_apple_entry = SubResource("Resource_rkubq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=936217923]
 modulate = Color(1, 1, 1, 0.254902)
 texture = ExtResource("6_gbtff")
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=378024237]
 libraries/ = SubResource("AnimationLibrary_o35pa")

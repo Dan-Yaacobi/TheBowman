@@ -37,13 +37,17 @@ func Physics(_delta: float) -> EnemyState:
 	if enemy.calculate_distance_to_player() <= distance_to_strike:
 		modifier = 2
 	if enemy.stats.pure_ranged_mode:
-		if enemy.calculate_distance_to_player() <= enemy.stats.ranged_trigger_distance:
+		if enemy.calculate_distance_to_player() < enemy.stats.ranged_trigger_distance:
 			succesfull_hit = true
 	if succesfull_hit and enemy.stats.shooter:
 		return shoot
 	else:
 		var move_dir: Vector2 = _get_avoidance_direction(direction)
-		enemy.velocity = move_dir * enemy.stats.move_speed.value() * modifier
+		var target_velocity: Vector2 = move_dir * enemy.stats.move_speed.value() * modifier
+		if enemy.stats.acceleration <= 0.0:
+			enemy.velocity = target_velocity
+		else:
+			enemy.velocity = enemy.velocity.move_toward(target_velocity, enemy.stats.acceleration * _delta)
 	return null
 
 func _update_raycasts(desired_dir: Vector2) -> void:

@@ -9,7 +9,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [node name="FrostBiteDebuff" type="Node2D" unique_id=1925388334]
 script = ExtResource("1_kgstd")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1992319829]
+[node name="FrostbiteEffect" type="CPUParticles2D" parent="." unique_id=1992319829]
 amount = 1
 texture = ExtResource("2_m0o7m")
 speed_scale = 1.5

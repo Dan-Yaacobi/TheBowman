@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_eqap5"]
 [ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="3_u5dgx"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_g624p"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_eqap5"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_lw5aq"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_kicpw"]
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="7_vd8ox"]
@@ -29,6 +30,8 @@ move_animation = "Move"
 avg_coins_dropped = 1
 touch_damage = 1
 drop_chance = 25.0
+has_wings = true
+facing_player = false
 death_ability = Array[ExtResource("2_eqap5")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("1_yc51p")
 bullet_speed = 45.0

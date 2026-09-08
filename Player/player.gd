@@ -246,7 +246,10 @@ func set_new_bow() -> void:
 
 func set_new_arrow() -> void:
 	set_arrow_scene()
-	main_hand.arrow_texture = stats.arrow.equipped_texture
+	if stats.arrow_texture_override:
+		main_hand.arrow_texture = stats.arrow_texture_override
+	else:
+		main_hand.arrow_texture = stats.arrow.equipped_texture
 
 func set_new_quiver(_texture: Texture2D) -> void:
 	if _texture:

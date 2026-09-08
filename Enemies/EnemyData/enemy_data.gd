@@ -3,11 +3,12 @@ class_name EnemyData extends Resource
 @export_subgroup("Stats")
 @export var max_hp: int
 @export var move_speed: Stat = Stat.new()
+@export var acceleration: float = 0.0 # set 0 for instant max speed
 @export var knockback: int
 @export var skin: Texture
 @export var texture_scale: Vector2 = Vector2(1,1)
 @export var move_animation: String
-@export var particles_effect: PackedScene
+@export var effects: Array[PackedScene]
 @export var avg_coins_dropped: int
 @export var touch_damage: int
 @export var knockback_threshold: float = 0.2
@@ -17,6 +18,7 @@ class_name EnemyData extends Resource
 @export var stun_immune: bool = false
 @export var has_health_bar: bool = true
 @export var has_wings: bool = false
+@export var facing_player: bool = true
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]

@@ -37,10 +37,11 @@
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="34_y5ptd"]
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="35_qxt8x"]
 [ext_resource type="Resource" uid="uid://dp1tucfijhf6u" path="res://Rifts/RiftEnemySpawner/EnemyEntry/flaming_skull_entry.tres" id="36_qxt8x"]
+[ext_resource type="Resource" uid="uid://1ptx2w5bw665" path="res://Rifts/RiftEnemySpawner/EnemyEntry/frost_orb_entry.tres" id="37_u3v33"]
+[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="38_vwcbb"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
-main_path_length = 4
 probability_decay = 1.25
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
@@ -109,6 +110,6 @@ library = SubResource("Resource_clqlo")
 
 [node name="RiftEnemySpawner" parent="." unique_id=1673800169 instance=ExtResource("19_4xrky")]
 script = ExtResource("20_5l72e")
-enemy_pool = Array[ExtResource("34_y5ptd")]([ExtResource("35_qxt8x"), ExtResource("36_qxt8x")])
+enemy_pool = Array[ExtResource("34_y5ptd")]([ExtResource("35_qxt8x"), ExtResource("36_qxt8x"), ExtResource("37_u3v33"), ExtResource("38_vwcbb")])
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("31_5icp2")]

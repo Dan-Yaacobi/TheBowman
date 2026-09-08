@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cde2ouylndf60"]
+
+[ext_resource type="Script" uid="uid://dlclj0qb06ujc" path="res://Enemies/EnemyEffects/IceShield/ice_shard.gd" id="1_8v4sn"]
+[ext_resource type="Texture2D" uid="uid://nl83pcn7wfch" path="res://Enemies/Sprites/IceShards.png" id="1_gv06g"]
+[ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_jrail"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_x253l"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_wavya"]
+[ext_resource type="PackedScene" uid="uid://bpkemriujrtun" path="res://Enemies/EnemyEffects/FrostParticles.tscn" id="6_d1ldt"]
+
+[sub_resource type="Resource" id="Resource_wavya"]
+script = ExtResource("2_jrail")
+texture = ExtResource("1_gv06g")
+damage = 3
+knockback = 15
+fire_cooldown = 1.0
+move_speed = 25
+metadata/_custom_type_script = "uid://bors7rkc0xbkd"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q0xdf"]
+radius = 6.8181868
+height = 35.355347
+
+[node name="IceShard" type="Area2D" unique_id=1151850651]
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_8v4sn")
+data = SubResource("Resource_wavya")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=991155400]
+texture = ExtResource("1_gv06g")
+hframes = 7
+
+[node name="HitBox" parent="." unique_id=461261477 instance=ExtResource("3_x253l")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1327875591]
+rotation = 0.7853982
+scale = Vector2(0.4399997, 0.5199999)
+shape = SubResource("CapsuleShape2D_q0xdf")
+debug_color = Color(0.34111378, 0.6215308, 3.85046e-07, 0.41960785)
+
+[node name="HurtBox" parent="." unique_id=2010743915 instance=ExtResource("4_wavya")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=839309333]
+rotation = 0.7853982
+scale = Vector2(0.4399997, 0.5199999)
+shape = SubResource("CapsuleShape2D_q0xdf")
+debug_color = Color(0.99059623, 0, 0.28211293, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1749800700]
+
+[node name="FrostParticles" parent="." unique_id=2034527596 instance=ExtResource("6_d1ldt")]

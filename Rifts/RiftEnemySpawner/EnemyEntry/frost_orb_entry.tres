@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://1ptx2w5bw665"]
+
+[ext_resource type="Resource" uid="uid://dqg0q26d6mrf5" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/frost_orb.tres" id="1_byrcy"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_ooral"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="2_j3lv3"]
+
+[resource]
+script = ExtResource("1_ooral")
+scene = ExtResource("2_j3lv3")
+data = ExtResource("1_byrcy")
+cost = 2
+min_level = 3
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

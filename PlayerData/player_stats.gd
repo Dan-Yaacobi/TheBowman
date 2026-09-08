@@ -11,6 +11,7 @@ var player: Player
 @export var invinc_duration: Stat
 @export var extra_gold: Stat
 @export var extra_drop_chance: Stat
+@export var can_knockback: int = 0 #if number is higher than 0 you cannot knockback
 
 @export_subgroup("Enviorments")
 @export var down_gravity: int
@@ -54,6 +55,7 @@ var player: Player
 @export var burn_duration: float = 2.0
 @export var poison_damage: int = 1
 @export var poison_duration: float = 2.0
+@export var arrow_texture_override: Texture2D
 
 @export_subgroup("Player Items")
 @export var money: int
