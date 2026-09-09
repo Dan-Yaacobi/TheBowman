@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
 [ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
 [ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
-[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Arrows/Sprites/Quiver_Wooden.png" id="40_rqaa0"]
+[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="40_rqaa0"]
 [ext_resource type="Script" uid="uid://bssc4pin0y0q2" path="res://Player/spawn_handler.gd" id="41_7w4lt"]
 
 [sub_resource type="Resource" id="Resource_i325y"]
@@ -169,6 +169,7 @@ can_pass_walls = true
 crit_chance = SubResource("Resource_1ylbe")
 crit_modifier = SubResource("Resource_sqgfh")
 arrow_size = SubResource("Resource_xehjw")
+bleed_damage = 3
 sword_size = SubResource("Resource_rqaa0")
 base_sword_cooldown = SubResource("Resource_x2ho1")
 sword_damage = SubResource("Resource_lre2g")

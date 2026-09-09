@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://c70ad8a4k31lf"]
+
+[ext_resource type="Script" uid="uid://tun528ejf2j7" path="res://Player/Abilities2.0/PassiveAbilities/Ninja/ninja_ability.gd" id="1_71sxo"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_j70d1"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_k8xai"]
+[ext_resource type="Texture2D" uid="uid://bq7vpyt7ef4q7" path="res://Items/Equipments/Bows/Sprites/NinjaBow.png" id="2_71sxo"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_nrlnk"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_ueus0"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_oxkxf"]
+
+[sub_resource type="Resource" id="Resource_bgaaw"]
+script = ExtResource("1_71sxo")
+metadata/_custom_type_script = "uid://tun528ejf2j7"
+
+[sub_resource type="Resource" id="Resource_g1826"]
+script = ExtResource("6_ueus0")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_j70d1")
+display_name = "Hanzo"
+texture = ExtResource("2_71sxo")
+equipped_texture = ExtResource("2_71sxo")
+dropped_scale = 0.3
+equipped_scale = Vector2(0.6, 0.5)
+ability = SubResource("Resource_bgaaw")
+tiers = Array[Object]([SubResource("Resource_g1826")])
+equipment_scene = ExtResource("1_k8xai")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

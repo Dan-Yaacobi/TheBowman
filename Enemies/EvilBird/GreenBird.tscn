@@ -1,16 +1,17 @@
-[gd_scene load_steps=26 format=3 uid="uid://c87lkba7dkiy0"]
+[gd_scene format=3 uid="uid://c87lkba7dkiy0"]
 
-[ext_resource type="Script" path="res://Enemies/EvilBird/evil_bird.gd" id="1_noh5m"]
+[ext_resource type="Script" uid="uid://d2y3mpjq3t166" path="res://Enemies/EvilBird/evil_bird.gd" id="1_noh5m"]
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="2_83e84"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_gph1j"]
-[ext_resource type="Script" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_hmk18"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="5_20d0m"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="6_mfogs"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_gph1j"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_hmk18"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="5_20d0m"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_mfogs"]
 [ext_resource type="Texture2D" uid="uid://iwpmijl2w7hi" path="res://Enemies/EvilBird/Sprites/Green Bird.png" id="7_pc8p7"]
-[ext_resource type="Script" path="res://Items/drop_data.gd" id="8_32eg5"]
-[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="9_1uvvm"]
-[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="10_mmgg2"]
+[ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="8_32eg5"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Other/Diamond.tres" id="9_1uvvm"]
+[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/Other/RedDiamond.tres" id="10_mmgg2"]
 [ext_resource type="Texture2D" uid="uid://kuudngn3o5bo" path="res://Enemies/EvilBird/Sprites/Evil Bird Red.png" id="15_wva0u"]
+
 
 [sub_resource type="Resource" id="Resource_ivvup"]
 script = ExtResource("4_hmk18")

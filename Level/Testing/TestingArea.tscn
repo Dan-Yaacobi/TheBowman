@@ -1,20 +1,21 @@
-[gd_scene load_steps=31 format=4 uid="uid://faeqy5pfi8yk"]
+[gd_scene format=4 uid="uid://faeqy5pfi8yk"]
 
 [ext_resource type="Script" uid="uid://cnccnf7l3hvfy" path="res://Level/Testing/testing_area.gd" id="1_e8ewn"]
 [ext_resource type="PackedScene" uid="uid://d0aswr8q0lpei" path="res://Level/Tiles.tscn" id="1_u5lkp"]
 [ext_resource type="Texture2D" uid="uid://clbn7aipnnhq8" path="res://Level/Tiles/Gold Wood Square.png" id="4_o1u76"]
 [ext_resource type="PackedScene" uid="uid://c5o8b833xdeaf" path="res://Objects/FallingObjects/Objects/TreasureChest/TreasureChest.tscn" id="8_5cpo0"]
 [ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="9_si70b"]
-[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="10_2upya"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Other/Diamond.tres" id="10_2upya"]
 [ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="11_8wq7p"]
-[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="11_jqrw7"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="12_4r26e"]
-[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="12_bdfic"]
+[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Other/Coin.tres" id="11_jqrw7"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Items/Equipments/Quivers/BasicArrow/BasicArrow.tscn" id="12_4r26e"]
+[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/Other/RedDiamond.tres" id="12_bdfic"]
 [ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="13_j7khy"]
 [ext_resource type="Script" uid="uid://csxarxwi5hnax" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="13_qn8nl"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_x1o37"]
 [ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="15_epv0q"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="15_fwxk5"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mix7l"]
 texture = ExtResource("4_o1u76")

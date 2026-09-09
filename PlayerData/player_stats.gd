@@ -72,6 +72,7 @@ var player: Player
 @export var sword_abilities: Array[PlayerAbility]
 @export var passive_abilities: Array[PlayerAbility]
 @export var release_abilities: Array[PlayerAbility]
+@export var draw_abilities: Array[PlayerAbility]
 @export var active_ability: ActiveAbility
 
 

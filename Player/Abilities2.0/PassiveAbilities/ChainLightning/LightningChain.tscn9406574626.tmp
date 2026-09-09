@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bf4okr84ysm2p"]
+
+[ext_resource type="Script" uid="uid://dyqhi7oqu5goq" path="res://Player/Abilities2.0/PassiveAbilities/ChainLightning/lightning_chain.gd" id="1_q20iu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q20iu"]
+radius = 43.011627
+
+[node name="LightningChain" type="Node2D" unique_id=1806886690]
+script = ExtResource("1_q20iu")
+
+[node name="SearchArea" type="Area2D" parent="." unique_id=261095626]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchArea" unique_id=1771916860]
+shape = SubResource("CircleShape2D_q20iu")
+
+[node name="ChainTimer" type="Timer" parent="." unique_id=1691891811]
+wait_time = 0.2
+
+[connection signal="timeout" from="ChainTimer" to="." method="_on_chain_timer_timeout"]

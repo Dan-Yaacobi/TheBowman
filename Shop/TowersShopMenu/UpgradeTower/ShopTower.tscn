@@ -1,14 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://dacqmp7mkkawr"]
+[gd_scene format=3 uid="uid://dacqmp7mkkawr"]
 
-[ext_resource type="Script" path="res://Shop/TowersShopMenu/UpgradeTower/shop_tower.gd" id="1_ac06i"]
+[ext_resource type="Script" uid="uid://3wscy0exbl5f" path="res://Shop/TowersShopMenu/UpgradeTower/shop_tower.gd" id="1_ac06i"]
 [ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="1_ir2mt"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_ds2g7"]
-[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="3_gu2wy"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Items/Equipments/Quivers/BasicArrow/BasicArrow.tscn" id="2_ds2g7"]
+[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="3_gu2wy"]
 [ext_resource type="PackedScene" uid="uid://5ja4joi88e24" path="res://Shop/TowersShopMenu/UpgradeTower/UpgradeTowerButton.tscn" id="4_fmpho"]
 [ext_resource type="Texture2D" uid="uid://cggdcuxxgrs5e" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/NextArrowBasic.png" id="6_d33dl"]
 [ext_resource type="Texture2D" uid="uid://f3bqmnlbkom7" path="res://Tower/Sprites/LeechTower.png" id="7_ajbpp"]
 [ext_resource type="Texture2D" uid="uid://c3extlrrj174j" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/NextArrowPressed.png" id="11_7mypu"]
 [ext_resource type="Texture2D" uid="uid://ckecmomv3c7ve" path="res://Shop/TowersShopMenu/UpgradeTower/Sprites/NextArrowHover.png" id="12_rte50"]
+
 
 [sub_resource type="Resource" id="Resource_8jn82"]
 resource_local_to_scene = true

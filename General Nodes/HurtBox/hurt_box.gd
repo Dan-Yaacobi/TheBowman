@@ -6,6 +6,8 @@ const DEFAULT_COMBAT_TEXT_COLOR = Color.WHITE
 const DEFAULT_HIT_EFFECT_COLOR = Color("ba0000")
 
 var damage: int  = 1
+var base_damage: int = 1
+var damage_multiplier: float = 1.0
 
 var knockback_power: float
 var knockback_dir: Vector2
@@ -22,6 +24,7 @@ func AreaEnetered(a: Area2D) -> void:
 		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 		effect_color = DEFAULT_HIT_EFFECT_COLOR
 		knockback_dir = -(a.global_position - self.global_position).normalized()
+		damage = roundi(base_damage * damage_multiplier)
 		a.TakeDamage(self)
 	if a.get_parent() is GameEntity:
 		_apply_effects(a.get_parent())

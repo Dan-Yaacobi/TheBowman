@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://b2cvy3spvx0ny" path="res://NPC/Pedestal/pedestal_npc.gd" id="1_pn02k"]
 [ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://Shop/BowsShop/Sprites/Pedestal.png" id="2_7kftm"]
 [ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_adyf7"]
-[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/WoodenBow.tres" id="2_umogo"]
+[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="2_umogo"]
 [ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_5uod6"]
 [ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_adyf7"]
 [ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_4b8kh"]
 [ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_mlx16"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_mlx16"]
+
 
 [sub_resource type="Resource" id="Resource_4mk7i"]
 script = ExtResource("2_adyf7")

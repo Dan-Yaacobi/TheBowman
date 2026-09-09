@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://ccba2h0jl7u2d"]
+
+[ext_resource type="Script" uid="uid://b017awe3d5am0" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_gauge_passive_ability.gd" id="1_ko7s8"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_1hbja"]
+[ext_resource type="Texture2D" uid="uid://ged8d4po736b" path="res://Items/Equipments/Bows/Sprites/Hemorrhage.png" id="3_3rjnx"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_0wjvk"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_0wjvk"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_87yg3"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_5fexr"]
+
+[sub_resource type="Resource" id="Resource_dpy2w"]
+script = ExtResource("1_ko7s8")
+metadata/_custom_type_script = "uid://b017awe3d5am0"
+
+[sub_resource type="Resource" id="Resource_nxm3p"]
+script = ExtResource("7_5fexr")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_87yg3"]
+script = ExtResource("6_87yg3")
+stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_nxm3p")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("4_0wjvk")
+display_name = "Hemorrhage"
+texture = ExtResource("3_3rjnx")
+equipped_texture = ExtResource("3_3rjnx")
+dropped_scale = 0.3
+equipped_scale = Vector2(0.6, 0.6)
+ability = SubResource("Resource_dpy2w")
+tiers = Array[Object]([SubResource("Resource_87yg3")])
+equipment_scene = ExtResource("2_1hbja")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

@@ -29,7 +29,7 @@ func _ready() -> void:
 		return
 	global_position = _target.global_position
 	_apply_stun(_target)
-	_target.take_damage(damage)
+	_target.take_damage(null, damage)
 	_target.show_damage(damage, Color.YELLOW)
 	_target.take_hit_effect()
 	_draw_lightning(_from_position, _target.global_position)

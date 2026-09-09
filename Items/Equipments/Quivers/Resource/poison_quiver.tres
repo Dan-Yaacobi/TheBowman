@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://b0xrhmoo5uvk0"]
+
+[ext_resource type="Texture2D" uid="uid://2k08i7rod8ti" path="res://Items/Equipments/Quivers/Sprites/Arrows/PoisonArrow.png" id="1_agcba"]
+[ext_resource type="Script" uid="uid://bdieor8kxf02t" path="res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability_not_perfect.gd" id="1_pya73"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_6gp7j"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_by6s1"]
+[ext_resource type="Texture2D" uid="uid://b6th5fykp34sr" path="res://Items/Equipments/Quivers/Sprites/Quiver_Poison.png" id="3_eeu5w"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_jwe8m"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_snq3k"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_2vdcl"]
+
+[sub_resource type="Resource" id="Resource_30xy1"]
+script = ExtResource("1_pya73")
+trigger_type = 1
+metadata/_custom_type_script = "uid://bdieor8kxf02t"
+
+[sub_resource type="Resource" id="Resource_od0aq"]
+script = ExtResource("7_snq3k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("2_by6s1")
+display_name = "Poison Darts"
+texture = ExtResource("3_eeu5w")
+equipped_texture = ExtResource("1_agcba")
+dropped_scale = 0.3
+slot = 1
+ability = SubResource("Resource_30xy1")
+tiers = Array[Object]([SubResource("Resource_od0aq")])
+equipment_scene = ExtResource("2_6gp7j")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

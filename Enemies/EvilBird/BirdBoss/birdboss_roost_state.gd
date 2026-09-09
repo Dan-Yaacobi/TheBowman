@@ -15,7 +15,7 @@ func Enter() -> void:
 	roost_detector.monitoring = true
 	enemy.animation_player.play("Land")
 	enemy.velocity = Vector2.ZERO
-	enemy.set_damage_multiplier(1.5)
+	enemy.set_damage_taken_multiplier(0.5,Stat.buff_type.ADDITIVE)
 	(enemy as BirdBoss).call_birds_to_roost()
 	whirlwind_timer.start()
 	roost_timer.start()
@@ -24,7 +24,7 @@ func Exit() -> void:
 	roost_detector.monitoring = false
 	enemy.wind.disable()
 	roost_timer.stop()
-	enemy.set_damage_multiplier(1.0)
+	enemy.remove_damage_taken_multiplier(0.5,Stat.buff_type.ADDITIVE)
 	(enemy as BirdBoss).should_roost = false
 
 func Process(_delta: float) -> EnemyState:

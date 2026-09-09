@@ -19,6 +19,8 @@ class_name EnemyData extends Resource
 @export var has_health_bar: bool = true
 @export var has_wings: bool = false
 @export var facing_player: bool = true
+@export var damage_taken_multiplier: Stat
+@export var damage_dealt_multiplier: Stat
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]

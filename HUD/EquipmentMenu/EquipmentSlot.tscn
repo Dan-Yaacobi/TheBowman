@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cqvhvd0pwv7eh"]
 
 [ext_resource type="Script" uid="uid://cfrirlku7makf" path="res://HUD/EquipmentMenu/equipment_slot.gd" id="1_ummve"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="2_qcgcp"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Items/Equipments/Bows/Sprites/Bow_1.png" id="2_qcgcp"]
+
 
 [node name="EquipmentSlot" type="Button" unique_id=1553754737]
 custom_minimum_size = Vector2(100, 120)

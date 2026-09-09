@@ -14,6 +14,7 @@ func connect_gauge() -> void:
 	EventBus.arrow_enemy_hit.connect(use_gauge)
 	EventBus.use_gauge.connect(activate_gauge_ability)
 	EventBus.sword_hit.connect(sword_hit_fill_gauge)
+	EventBus.dealt_bleed_damage.connect(bleed_damage_fill_gauge)
 	
 func disconnect_gauge() -> void:
 	PlayerManager.player.took_hit.disconnect(get_hit_fill_gauge)
@@ -21,7 +22,8 @@ func disconnect_gauge() -> void:
 	EventBus.arrow_enemy_hit.disconnect(use_gauge)
 	EventBus.use_gauge.disconnect(activate_gauge_ability)
 	EventBus.sword_hit.disconnect(sword_hit_fill_gauge)
-
+	EventBus.dealt_bleed_damage.disconnect(bleed_damage_fill_gauge)
+	
 func activate_gauge_ability(_amount: int) -> void:
 	var blood_explosion: BloodExplosion = BLOOD_EXPLOSION.instantiate()
 	blood_explosion.global_position = explosion_position
@@ -38,6 +40,9 @@ func get_hit_fill_gauge() -> void:
 	fill_gauge()
 func shot_power_fill_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	fill_gauge(_arrow.arrow_shot_power)
-
+func bleed_damage_fill_gauge(_amount: int) -> void:
+	if _amount > 0:
+		fill_gauge()
+	
 func get_tooltip() -> String:
 	return "Collect Blood. When full, a perfect shot unleashes a blood explosion."

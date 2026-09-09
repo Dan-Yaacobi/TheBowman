@@ -10,6 +10,7 @@ func set_slow_strength(_amount: float = 0.5) -> void:
 func start_debuff_effect() -> void:
 	one_shot = true
 	frostbite_effect.emitting = true
+	apply_debuff_effect()
 	
 func apply_debuff_effect() -> void:
 	var entity_speed: Stat = entity.stats.move_speed

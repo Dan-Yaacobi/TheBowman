@@ -12,7 +12,7 @@ func init() -> void:
 	summon_timer.timeout.connect(_spawn_apple)
 
 func Enter() -> void:
-	enemy.set_damage_multiplier(0.1)
+	enemy.set_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
 	amount_summoned = 0
 	enemy.velocity = Vector2.ZERO
 	summon_timer.start()
@@ -21,7 +21,8 @@ func Enter() -> void:
 func Exit() -> void:
 	enemy.modulate.a = 1.0
 	summon_timer.stop()
-	enemy.set_damage_multiplier(1)
+	enemy.remove_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
+
 
 func Process(_delta: float) -> EnemyState:
 	if finished_summoning:

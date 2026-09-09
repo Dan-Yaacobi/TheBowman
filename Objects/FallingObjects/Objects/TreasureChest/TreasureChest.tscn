@@ -1,15 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://c5o8b833xdeaf"]
+[gd_scene format=3 uid="uid://c5o8b833xdeaf"]
 
 [ext_resource type="Script" uid="uid://ck3jg0j6mgk71" path="res://Objects/FallingObjects/Objects/TreasureChest/treasure_chest.gd" id="1_d3xib"]
 [ext_resource type="Script" uid="uid://dmv8aniq5dd6u" path="res://Items/drop_data.gd" id="2_sn45b"]
-[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Diamond.tres" id="3_mk6tc"]
+[ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Other/Diamond.tres" id="3_mk6tc"]
 [ext_resource type="Script" uid="uid://csxarxwi5hnax" path="res://Objects/FallingObjects/Scripts/falling_objcets_data.gd" id="3_ugdmx"]
-[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Coin.tres" id="4_ip0xq"]
+[ext_resource type="Resource" uid="uid://b1ax10wl1o1p0" path="res://Items/Other/Coin.tres" id="4_ip0xq"]
 [ext_resource type="Texture2D" uid="uid://c4oftynas7wmn" path="res://Objects/FallingObjects/Sprites/TreasureChest.png" id="4_qrrt5"]
-[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/RedDiamond.tres" id="5_40hub"]
+[ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/Other/RedDiamond.tres" id="5_40hub"]
 [ext_resource type="Texture2D" uid="uid://cvomifa28xhvn" path="res://Objects/FallingObjects/Sprites/twinkle.png" id="8_q4k2q"]
 [ext_resource type="AudioStream" uid="uid://d2tjadsxjmphi" path="res://Objects/FallingObjects/Objects/TreasureChest/ChestOpen.wav" id="8_snum2"]
 [ext_resource type="AudioStream" uid="uid://d3uk6pw51gjcn" path="res://Objects/FallingObjects/Objects/TreasureChest/Chest Hit.wav" id="9_x28gj"]
+
 
 [sub_resource type="Resource" id="Resource_unsoy"]
 script = ExtResource("2_sn45b")

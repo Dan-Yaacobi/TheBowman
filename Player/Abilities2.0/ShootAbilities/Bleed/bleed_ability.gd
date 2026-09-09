@@ -12,6 +12,6 @@ func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 				var bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
 				bleed_debuff.bleed_damage = 2
 				_target.debuff_handler.add_debuff(bleed_debuff,5,5)
-
+				
 func get_tooltip() -> String:
 	return "Bleeding Wounds: Damaged enemies bleed on hit."

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://b2exbrwp6ofng"]
+
+[ext_resource type="Script" uid="uid://hqu465ov5673" path="res://Player/Abilities2.0/ShootAbilities/Bleed/bleed_ability.gd" id="1_n38jo"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_wi6fb"]
+[ext_resource type="Texture2D" uid="uid://cy35gvnyu51eg" path="res://Items/Equipments/Quivers/Sprites/Arrows/RedArrow.png" id="3_wi6fb"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_q237j"]
+[ext_resource type="Texture2D" uid="uid://bchin526oeubw" path="res://Items/Equipments/Quivers/Sprites/Quiver_Red.png" id="5_aie6x"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_hayf5"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_srqdb"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_yuj8v"]
+
+[sub_resource type="Resource" id="Resource_hge11"]
+script = ExtResource("1_n38jo")
+trigger_type = 1
+metadata/_custom_type_script = "uid://hqu465ov5673"
+
+[sub_resource type="Resource" id="Resource_od0aq"]
+script = ExtResource("7_srqdb")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("4_q237j")
+display_name = "Blood Quiver"
+texture = ExtResource("5_aie6x")
+equipped_texture = ExtResource("3_wi6fb")
+dropped_scale = 0.3
+slot = 1
+ability = SubResource("Resource_hge11")
+tiers = Array[Object]([SubResource("Resource_od0aq")])
+equipment_scene = ExtResource("2_wi6fb")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

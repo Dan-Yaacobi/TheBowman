@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://bc41cduiwrmb"]
+
+[ext_resource type="Script" uid="uid://uai38bs43l8y" path="res://Player/Abilities2.0/ShootAbilities/SkullAttack/skull_attack_ability.gd" id="1_w7ipp"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_pitvq"]
+[ext_resource type="Texture2D" uid="uid://ilnbfv47765s" path="res://Items/Equipments/Quivers/Sprites/Arrows/SkullArrow.png" id="2_rkn5r"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_cs5s4"]
+[ext_resource type="Texture2D" uid="uid://bilyaairp2gtq" path="res://Items/Equipments/Quivers/Sprites/Quiver_Skulls.png" id="4_w7ipp"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_lnqco"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_jr01g"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_o755v"]
+
+[sub_resource type="Resource" id="Resource_yd42x"]
+script = ExtResource("1_w7ipp")
+trigger_type = 1
+metadata/_custom_type_script = "uid://uai38bs43l8y"
+
+[sub_resource type="Resource" id="Resource_od0aq"]
+script = ExtResource("7_jr01g")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("4_cs5s4")
+display_name = "Poison Darts"
+texture = ExtResource("4_w7ipp")
+equipped_texture = ExtResource("2_rkn5r")
+dropped_scale = 0.3
+slot = 1
+ability = SubResource("Resource_yd42x")
+tiers = Array[Object]([SubResource("Resource_od0aq")])
+equipment_scene = ExtResource("2_pitvq")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

@@ -33,7 +33,10 @@ class Stat_Buff:
 	
 	func reduce_all_stack() -> void:
 		stacks = 0
-			
+	
+	func reduce_amount(_amount) -> void:
+		amount = max(0.0, amount - _amount)
+
 func value() -> float:
 	if zero:
 		return 0.0
@@ -62,6 +65,11 @@ func remove_buff_completly(id: int, type: buff_type) -> void:
 	if mod:
 		mod.reduce_all_stack()
 	array.erase(mod)
+
+func reduce_buff_amount(id: int, amount: float, type) -> void:
+	var mod: Stat_Buff = find_buff(id, type)
+	if mod:
+		mod.reduce_amount(amount)
 
 func remove_buff_stack(id: int, type: buff_type) -> void:
 	var mod: Stat_Buff = find_buff(id, type)

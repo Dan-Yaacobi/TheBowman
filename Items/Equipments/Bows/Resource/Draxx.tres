@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://ckdgrsypnombf"]
+
+[ext_resource type="Script" uid="uid://c0wqmp38atf7x" path="res://Player/Abilities2.0/ShootAbilities/DragonBite/dragon_bite_ability.gd" id="1_i2jkr"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_3wah7"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="3_dllur"]
+[ext_resource type="Texture2D" uid="uid://dnoaywmthfmta" path="res://Items/Equipments/Bows/Sprites/DragonBow.png" id="3_rg2f4"]
+
+[sub_resource type="Resource" id="Resource_i2jkr"]
+script = ExtResource("1_i2jkr")
+trigger_type = 4
+metadata/_custom_type_script = "uid://c0wqmp38atf7x"
+
+[resource]
+script = ExtResource("3_dllur")
+display_name = "Draxx"
+texture = ExtResource("3_rg2f4")
+equipped_texture = ExtResource("3_rg2f4")
+dropped_scale = 0.65
+equipped_scale = Vector2(1, 0.6)
+ability = SubResource("Resource_i2jkr")
+tiers = null
+equipment_scene = ExtResource("2_3wah7")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

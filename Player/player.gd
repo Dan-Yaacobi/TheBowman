@@ -39,12 +39,11 @@ var can_hook: bool = true
 @export var perfect_shot_effects: Dictionary[OnPerfectShotEffect,int] = {}
 @onready var buff_handler: BuffHandler = $BuffHandler
 
+const HEALTH_GAIN_EFFECT = preload("uid://d06bmrun6hlne")
 const PERMA_EFFECT: int = -1
-const HEALTH_GAIN_EFFECT = preload("res://Weapons/Effects/LeechLife/HealthGainEffect.tscn")
 var health_bar: HealthBar
 var direction: float
 var direction_side: bool = false
-var current_weapon: Weapon
 var knockback_power: Dictionary = {"direction": Vector2.ZERO,
  "power": 0}
 var active_ability_available: bool = true
@@ -237,9 +236,6 @@ func apply_gravity(delta) -> void:
 		else:
 			velocity.y += stats.up_gravity*delta
 
-func get_current_weapon() -> Weapon:
-	return current_weapon
-
 func set_new_bow() -> void:
 	if stats.bow:
 		off_hand.set_new_bow(stats.bow)
@@ -369,6 +365,7 @@ func _get_ability_array(trigger: PlayerAbility.TriggerType) -> Array:
 		PlayerAbility.TriggerType.JUMP: return stats.jump_abilities
 		PlayerAbility.TriggerType.DASH: return stats.dash_abilities
 		PlayerAbility.TriggerType.RELEASE: return stats.release_abilities
+		PlayerAbility.TriggerType.DRAW: return stats.draw_abilities
 		_: return []
 		
 func enable_jump() -> void:

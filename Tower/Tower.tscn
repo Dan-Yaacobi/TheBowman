@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3b0oqm1t2e4u"]
+[gd_scene format=3 uid="uid://b3b0oqm1t2e4u"]
 
-[ext_resource type="Script" path="res://Tower/Scripts/tower.gd" id="1_hlvis"]
+[ext_resource type="Script" uid="uid://cj3um51frphl2" path="res://Tower/Scripts/tower.gd" id="1_hlvis"]
 [ext_resource type="Texture2D" uid="uid://dr7jdvqa56tnm" path="res://Tower/Sprites/WoodTower.png" id="1_xeeax"]
-[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="2_ak20b"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_dcpbp"]
+[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="2_ak20b"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Items/Equipments/Quivers/BasicArrow/BasicArrow.tscn" id="2_dcpbp"]
 [ext_resource type="Texture2D" uid="uid://bsxu54nt67xg8" path="res://Tower/Sprites/TowerShooter.png" id="5_x2xov"]
-[ext_resource type="Script" path="res://Tower/shooter_hand.gd" id="6_37m8r"]
+[ext_resource type="Script" uid="uid://eaij1febufyr" path="res://Tower/shooter_hand.gd" id="6_37m8r"]
 [ext_resource type="Texture2D" uid="uid://dxvy1afyixc12" path="res://Player/Hand/Bows2.png" id="7_qocvw"]
-[ext_resource type="Script" path="res://Tower/tower_arrows.gd" id="8_7wolq"]
+[ext_resource type="Script" uid="uid://cwji44gt768yu" path="res://Tower/tower_arrows.gd" id="8_7wolq"]
+
 
 [sub_resource type="Resource" id="Resource_a33rr"]
 resource_local_to_scene = true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://djxch32a87fle"]
 
 [ext_resource type="Script" uid="uid://bejyhsd1kcmw2" path="res://Items/Equipments/equipment.gd" id="1_4m1mi"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="2_3qtbi"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Items/Equipments/Bows/Sprites/Bow_1.png" id="2_3qtbi"]
 [ext_resource type="Script" uid="uid://b384dgrhqpyvf" path="res://Items/Equipments/StateMachine/equipment_state_machine.gd" id="3_lss0t"]
 [ext_resource type="Script" uid="uid://b3y8euoi2151k" path="res://Items/Equipments/StateMachine/equipment_dropped_state.gd" id="4_h4v1l"]
 [ext_resource type="Script" uid="uid://c472eq0mlx3l6" path="res://Items/Equipments/StateMachine/equipment_onground_state.gd" id="5_atbo7"]

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://p65b1l6p0pp1"]
+
+[ext_resource type="Script" uid="uid://drx4o4ay76g8y" path="res://Debuffs/Weakness/weakness_debuff.gd" id="1_g2jeq"]
+[ext_resource type="Texture2D" uid="uid://dvuehdppcqy1c" path="res://Player/Abilities2.0/ShootAbilities/SkullAttack/SkullEffect.png" id="2_2wwn5"]
+
+[sub_resource type="Gradient" id="Gradient_e83u5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="WeaknessDebuff" type="Node2D" unique_id=1514378092]
+script = ExtResource("1_g2jeq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2128426912]
+amount = 1
+texture = ExtResource("2_2wwn5")
+speed_scale = 2.0
+gravity = Vector2(0, -10)
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_e83u5")

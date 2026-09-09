@@ -1,6 +1,7 @@
 class_name PlayerMainHand extends CharacterBody2D
 
 signal shot_power_amount(amount)
+signal release
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hold_position: Node2D = $HoldPosition
@@ -70,9 +71,15 @@ func draw_arrow() -> void:
 	if !current_arrow:
 		var _arrow: Arrow = arrow.instantiate()
 		add_child(_arrow)
+		var draw_abilities: Array[PlayerAbility] = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DRAW)
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
 		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
+		for ability in draw_abilities:
+			ability.activate_ability(null, _arrow)
+			if ability.has_method("draw_ended"):
+				if !release.is_connected(ability.draw_ended):
+					release.connect(ability.draw_ended)
 		
 func set_hand_direction() -> void:
 	rotation = hand_direction.angle() - PI/2
@@ -109,6 +116,7 @@ func release_arrow() -> void:
 				perfect_release_particles.emitting = true
 			fire_arrow()
 	current_arrow = null
+	release.emit()
 
 func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = hand_direction, _override_power: float = shot_power) -> void:
 	var source_arrow: Arrow = _override_arrow if _override_arrow else current_arrow

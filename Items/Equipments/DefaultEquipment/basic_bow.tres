@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_a8h2t"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_pgxsb"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Weapons/Bows/0_BasicBow/Bow_1.png" id="1_qwh4t"]
+[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Items/Equipments/Bows/Sprites/Bow_1.png" id="1_qwh4t"]
 
 [resource]
 script = ExtResource("1_a8h2t")

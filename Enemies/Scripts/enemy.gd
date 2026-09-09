@@ -26,16 +26,13 @@ var damaged_animation_player : AnimationPlayer
 var current_hp: int
 var knockback_velocity: Vector2 = Vector2.ZERO
 
-
 var is_dead: bool = false
 
-var _damage_multiplier: float = 1.0
 var invincible: bool = false
-var final_dmg: int
 
 func _ready() -> void:
 	current_hp = stats.max_hp
-	hurt_box.damage = stats.touch_damage
+	hurt_box.base_damage = stats.touch_damage
 	hurt_box.knockback_power = stats.knockback
 	hurt_box.successful_hit.connect(knockback)
 	debuff_handler.set_entity(self)
@@ -46,9 +43,16 @@ func _ready() -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).setup(stats.max_hp)
 	init_effects()
-	
+	init_damage_modifiers()
 	sprite.scale = stats.texture_scale
 	_wire_hit_effects(hurt_box, false)
+
+func init_damage_modifiers() -> void:
+	stats.damage_taken_multiplier = Stat.new()
+	stats.damage_taken_multiplier.base_value = 1.0
+	
+	stats.damage_dealt_multiplier = Stat.new()
+	stats.damage_dealt_multiplier.base_value = 1.0
 
 func init_effects() -> void:
 	for effect in stats.effects:
@@ -104,19 +108,34 @@ func take_hit_effect() -> void:
 		
 	if hit_particle_effect != null:
 		hit_particle_effect.restart()
-		
-func set_damage_multiplier(_multiplier: float) -> void:
-	_damage_multiplier = _multiplier
 
+func set_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	var id: int = CustomVariables.ENEMY_DMG_TAKEN_MULT_ID
+	stats.damage_taken_multiplier.add_buff(id,_amount,_type)
+
+func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	var id: int = CustomVariables.ENEMY_DMG_TAKEN_MULT_ID
+	stats.damage_taken_multiplier.reduce_buff_amount(id,_amount,_type)
+
+func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
+	stats.damage_dealt_multiplier.add_buff(id,_amount,_type)
+	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
+	
+func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
+	stats.damage_dealt_multiplier.reduce_buff_amount(id,_amount,_type)
+	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
 	
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
+	var final_dmg: int
 	if is_dead:
 		return
 	if _hurt_box:
-		final_dmg = roundi(_hurt_box.damage * _damage_multiplier)
+		final_dmg = roundi(_hurt_box.damage * stats.damage_taken_multiplier.value())
 	else:
-		final_dmg = raw_damage * _damage_multiplier
-	current_hp -= roundi(final_dmg * _damage_multiplier)
+		final_dmg = raw_damage * stats.damage_taken_multiplier.value()
+	current_hp -= roundi(final_dmg)
 	
 	handle_health_bar(final_dmg)	
 	if damaged_animation_player:
@@ -142,6 +161,10 @@ func enemy_died() -> void:
 	died.emit(self)
 	EventBus.enemy_died.emit(self)
 	queue_free()
+	
+func show_damage(_amount: int, color: Color) -> void:
+	var final_amount: int = _amount * stats.damage_taken_multiplier.value()
+	CombatTextSpawner.spawn(global_position, str(final_amount),color)
 	
 func knockback(_hurt_box: HurtBox) -> void:
 	if stats.can_be_knockedback:
@@ -179,6 +202,7 @@ func bullet_set_up() -> Node2D:
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.move_speed = stats.bullet_speed
 		new_bullet.was_fired = true
+		new_bullet.data.damage *= stats.damage_dealt_multiplier.value()
 		_wire_hit_effects(new_bullet.hurt_box, true)
 		return new_bullet
 	return null

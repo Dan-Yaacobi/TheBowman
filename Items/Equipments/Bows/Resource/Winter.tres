@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cf830250l4sj2"]
+
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_5beeh"]
+[ext_resource type="Script" uid="uid://dde27hwwra700" path="res://Player/Abilities2.0/ShootAbilities/FrostBreath/frost_breath_ability.gd" id="1_w6wjk"]
+[ext_resource type="Texture2D" uid="uid://dq4xhfnsjju6o" path="res://Items/Equipments/Bows/Sprites/IceBow.png" id="2_51kq0"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_ndgag"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="4_ndgag"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_vo7br"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_jq77s"]
+
+[sub_resource type="Resource" id="Resource_4jnt2"]
+script = ExtResource("1_w6wjk")
+trigger_type = 5
+metadata/_custom_type_script = "uid://dde27hwwra700"
+
+[sub_resource type="Resource" id="Resource_nxm3p"]
+script = ExtResource("6_jq77s")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_c21g4"]
+script = ExtResource("6_jq77s")
+stat_name = "perfect_shot_window"
+min_value = 2.0
+max_value = 2.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_phb7m"]
+script = ExtResource("5_vo7br")
+stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_nxm3p"), SubResource("Resource_c21g4")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_5beeh")
+display_name = "Winter"
+texture = ExtResource("2_51kq0")
+equipped_texture = ExtResource("2_51kq0")
+dropped_scale = 0.4
+equipped_scale = Vector2(0.8, 0.5)
+ability = SubResource("Resource_4jnt2")
+tiers = Array[Object]([SubResource("Resource_phb7m")])
+equipment_scene = ExtResource("2_ndgag")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

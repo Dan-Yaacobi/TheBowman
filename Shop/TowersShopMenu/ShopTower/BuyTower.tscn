@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgwfircvba322"]
+[gd_scene format=3 uid="uid://cgwfircvba322"]
 
 [ext_resource type="PackedScene" uid="uid://b3b0oqm1t2e4u" path="res://Tower/Tower.tscn" id="1_j35c3"]
-[ext_resource type="Script" path="res://Shop/TowersShopMenu/ShopTower/buy_tower.gd" id="1_q7tk3"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_ntmw4"]
-[ext_resource type="Script" path="res://Tower/Scripts/tower_data.gd" id="3_gj3jx"]
+[ext_resource type="Script" uid="uid://vei16hc2avi1" path="res://Shop/TowersShopMenu/ShopTower/buy_tower.gd" id="1_q7tk3"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Items/Equipments/Quivers/BasicArrow/BasicArrow.tscn" id="2_ntmw4"]
+[ext_resource type="Script" uid="uid://cf4almraiuh2k" path="res://Tower/Scripts/tower_data.gd" id="3_gj3jx"]
+
 
 [sub_resource type="Resource" id="Resource_npt64"]
 resource_local_to_scene = true

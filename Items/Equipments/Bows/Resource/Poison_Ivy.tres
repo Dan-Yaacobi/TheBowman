@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://dsp81oo6n6qxm"]
+
+[ext_resource type="Script" uid="uid://b8mm47joioxpj" path="res://Player/Abilities2.0/ShootAbilities/Poison/poison_ability.gd" id="1_08dl3"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_8wxky"]
+[ext_resource type="Texture2D" uid="uid://ttongjhpxb0g" path="res://Items/Equipments/Bows/Sprites/Poison_Ivy.png" id="3_cjnmb"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_4te1g"]
+
+[sub_resource type="Resource" id="Resource_ob2sq"]
+script = ExtResource("1_08dl3")
+trigger_type = 1
+metadata/_custom_type_script = "uid://b8mm47joioxpj"
+
+[resource]
+script = ExtResource("4_4te1g")
+display_name = "Poison Ivy"
+texture = ExtResource("3_cjnmb")
+equipped_texture = ExtResource("3_cjnmb")
+equipped_scale = Vector2(0.6, 0.6)
+ability = SubResource("Resource_ob2sq")
+tiers = null
+equipment_scene = ExtResource("2_8wxky")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

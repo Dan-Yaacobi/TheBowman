@@ -2,7 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_2bno1"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_ualu4"]
+[ext_resource type="Resource" uid="uid://ckdgrsypnombf" path="res://Items/Equipments/Bows/Resource/Draxx.tres" id="3_jufrr"]
+[ext_resource type="Resource" uid="uid://c70ad8a4k31lf" path="res://Items/Equipments/Bows/Resource/Hanzo.tres" id="4_rmuev"]
+[ext_resource type="Resource" uid="uid://ccba2h0jl7u2d" path="res://Items/Equipments/Bows/Resource/Hemorrhage.tres" id="5_cb1ri"]
+[ext_resource type="Resource" uid="uid://dsp81oo6n6qxm" path="res://Items/Equipments/Bows/Resource/Poison_Ivy.tres" id="6_24shk"]
+[ext_resource type="Resource" uid="uid://bid6mb2cjtouv" path="res://Items/Equipments/Bows/Resource/Rising_Feather.tres" id="7_riufi"]
+[ext_resource type="Resource" uid="uid://bu83tlwxqtx25" path="res://Items/Equipments/Bows/Resource/Soul_Harvester.tres" id="8_ekvhb"]
+[ext_resource type="Resource" uid="uid://yvr467fev1ug" path="res://Items/Equipments/Bows/Resource/Vulcan.tres" id="9_uehrl"]
+[ext_resource type="Resource" uid="uid://cf830250l4sj2" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="10_80cd0"]
+[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="11_jns84"]
+[ext_resource type="Resource" uid="uid://cnho4yuoqhjpi" path="res://Items/Equipments/Bows/Resource/Zeus.tres" id="12_dqlj4"]
 
 [resource]
 script = ExtResource("2_ualu4")
+templates = Array[ExtResource("2_2bno1")]([ExtResource("3_jufrr"), ExtResource("4_rmuev"), ExtResource("5_cb1ri"), ExtResource("6_24shk"), ExtResource("7_riufi"), ExtResource("8_ekvhb"), ExtResource("9_uehrl"), ExtResource("10_80cd0"), ExtResource("11_jns84"), ExtResource("12_dqlj4")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

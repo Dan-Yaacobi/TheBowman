@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://7vjvk5bghwkq"]
 
 [ext_resource type="Script" uid="uid://cnljqw751d587" path="res://Player/Player2.0/MainHand/player_main_hand.gd" id="1_grn42"]
-[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Weapons/Bows/0_BasicBow/BasicArrow/BasicArrow.tscn" id="2_y7ab3"]
+[ext_resource type="PackedScene" uid="uid://c8cod48iqt17m" path="res://Items/Equipments/Quivers/BasicArrow/BasicArrow.tscn" id="2_y7ab3"]
 [ext_resource type="Texture2D" uid="uid://cpra7x63k7xwo" path="res://Player/Hand/HandPull.png" id="3_5ej1j"]
 [ext_resource type="Script" uid="uid://btdlu5633ilbk" path="res://Player/Player2.0/MainHand/States/main_hand_state_machine.gd" id="3_y475i"]
 [ext_resource type="Script" uid="uid://ckwk3o5f8tfd2" path="res://Player/Player2.0/MainHand/States/m_h_idle_state.gd" id="4_24nrb"]
 [ext_resource type="Script" uid="uid://bdh8wnqs3ugce" path="res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd" id="5_ysxrx"]
 [ext_resource type="Script" uid="uid://cy0hbbl8bgqk2" path="res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd" id="6_i2jfe"]
 [ext_resource type="Script" uid="uid://ctejtc1jkqp2d" path="res://Player/Player2.0/MainHand/States/m_h_swing_state.gd" id="8_ww5t3"]
-[ext_resource type="Texture2D" uid="uid://b2ltxpnx4x6ia" path="res://Weapons/Swords/BasicSword/BasicSword.png" id="8_y7ab3"]
 [ext_resource type="Script" uid="uid://dh6oejforol0n" path="res://Player/Player2.0/MainHand/sword.gd" id="9_3cqt0"]
 [ext_resource type="Texture2D" uid="uid://3p61xqypv41m" path="res://Player/Player2.0/Sprites/SwingEffect.png" id="10_3m267"]
-[ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Weapons/Swords/sword_stats.gd" id="10_5ej1j"]
+[ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="10_5ej1j"]
 [ext_resource type="Script" uid="uid://nhynyhxyrj1r" path="res://Player/Player2.0/MainHand/slash_hurt_box.gd" id="13_5ej1j"]
 [ext_resource type="Script" uid="uid://civb0dd4jcaml" path="res://Player/Player2.0/MainHand/slash_effect.gd" id="14_30xy1"]
 
@@ -410,11 +409,14 @@ _data = {
 &"Swinging": SubResource("Animation_5ej1j")
 }
 
-[sub_resource type="Resource" id="Resource_30xy1"]
+[sub_resource type="Resource" id="Resource_3cqt0"]
 script = ExtResource("10_5ej1j")
-knockback_power = 100
-damage = 3
+knockback_power = 50
+damage = 5
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ej1j"]
+load_path = "res://.godot/imported/BasicSword.png-9a1fe71a16cd77b03770a70f3f756edb.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30xy1"]
 
@@ -519,11 +521,11 @@ position = Vector2(-0.9999999, -2)
 rotation = 1.5707964
 scale = Vector2(0.75, 0.75)
 script = ExtResource("9_3cqt0")
-stats = SubResource("Resource_30xy1")
+stats = SubResource("Resource_3cqt0")
 
 [node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1919667962]
 position = Vector2(1.3333335, -20)
-texture = ExtResource("8_y7ab3")
+texture = SubResource("CompressedTexture2D_5ej1j")
 
 [node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
 position = Vector2(1.3333321, -35.999996)

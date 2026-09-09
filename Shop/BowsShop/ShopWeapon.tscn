@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpkc7rbbp36vu"]
+[gd_scene format=3 uid="uid://bpkc7rbbp36vu"]
 
 [ext_resource type="Script" uid="uid://b6sj53e6i61f0" path="res://Shop/BowsShop/shop_weapon.gd" id="1_ohfgj"]
 [ext_resource type="Script" uid="uid://cdolf4nrn5r45" path="res://Shop/BowsShop/shop_weapon_data.gd" id="2_de5vr"]
 [ext_resource type="PackedScene" uid="uid://bjekrlb1r8icx" path="res://MainMenu/ButtonShootClick.tscn" id="2_r1lb1"]
-[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Weapons/1_BlueBow/Bow1.png" id="3_2413h"]
+[ext_resource type="Texture2D" uid="uid://clk2po5g63p46" path="res://Items/Equipments/Bows/Sprites/Bow1.png" id="3_2413h"]
 [ext_resource type="Texture2D" uid="uid://b36pvyfukpxjr" path="res://Shop/BowsShop/Sprites/BowFrame.png" id="5_pjnw0"]
 [ext_resource type="Script" uid="uid://c8kt1315rsybw" path="res://MainMenu/ButtonData/button_data.gd" id="5_u16uf"]
+
 
 [sub_resource type="Resource" id="Resource_6ah8a"]
 script = ExtResource("2_de5vr")

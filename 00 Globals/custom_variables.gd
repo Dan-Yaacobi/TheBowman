@@ -4,6 +4,8 @@ enum stats {Strength, Agility, Stamina}
 
 enum directions {Up, Left ,Down ,Right}
 
+const ENEMY_DMG_TAKEN_MULT_ID: int = 99
+const ENEMY_DMG_DEALT_MULT_ID: int = 98
 
 var rarity_colors: Array[Color] = [
 	#Color(0.62, 0.62, 0.62),  # 1 - Common (gray)

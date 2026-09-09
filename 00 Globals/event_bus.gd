@@ -33,6 +33,8 @@ signal object_destroyed_sound
 signal enemy_died_sound(_audio: AudioStream)
 signal sword_slash_sound()
 
+signal dealt_bleed_damage(_amount)
+
 signal leeched(amount: int, position: Vector2)
 
 signal exit_ui
