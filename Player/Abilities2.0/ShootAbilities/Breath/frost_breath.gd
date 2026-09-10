@@ -11,6 +11,7 @@ class_name FrostBreath extends Node2D
 @export var tick_interval: float = 0.25
 @export var tick_damage: int = 2
 @export var slow_duration: float = 1.0
+@export var abilities: Array[PlayerAbility]
 
 var active: bool = false
 var _hit_targets: Array[GameEntity] = []
@@ -24,7 +25,8 @@ func _ready() -> void:
 	hurt_box.base_damage = tick_damage
 	collision_shape.shape.size = Vector2.ZERO
 	hurt_box.add_effect(apply_slow)
-	
+	for ability in abilities:
+		hurt_box.add_effect(ability.activate_ability)
 func _on_area_entered(a: Area2D) -> void:
 	if a.get_parent() is GameEntity:
 		var entity: GameEntity = a.get_parent()

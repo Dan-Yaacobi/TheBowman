@@ -32,7 +32,6 @@ var can_hook: bool = true
 @export var target_dummy_tutorial_passed: bool = false
 
 @export var stats: PlayerStats
-@export var talents: PlayerTalents
 
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
@@ -402,7 +401,7 @@ func get_strength_shot_modifier() -> float:
 func get_arrow_ability() -> Array[ArrowAbility]:
 	return stats.arrow_abilities 
 
-func get_shoot_abilities() -> Array[PlayerAbility]:
+func get_shoot_abilities() -> Array[PlayerShootAbility]:
 	return stats.shooting_abilities
 
 func get_weapon_size() -> float:

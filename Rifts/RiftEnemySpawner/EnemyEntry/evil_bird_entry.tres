@@ -9,6 +9,7 @@ script = ExtResource("1_ll3id")
 scene = ExtResource("2_iqopj")
 data = ExtResource("1_dxbhj")
 cost = 2
+min_level = 2
 base_weight = 3.0
 weight_curve = 0.5
 spawn_zone = 1

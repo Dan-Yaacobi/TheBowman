@@ -8,6 +8,5 @@
 script = ExtResource("3_4bvvd")
 scene = ExtResource("2_5iwkg")
 data = ExtResource("1_77lxj")
-min_level = 2
 weight_curve = -0.5
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

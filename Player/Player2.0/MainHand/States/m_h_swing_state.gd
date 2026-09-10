@@ -8,16 +8,11 @@ class_name SwingMainHandState extends MainHandState
 
 var finished: bool = false
 var base_sword_scale: Vector2
-var enemies_hit: Array[Enemy] = []
 
 func init() -> void:
 	entity.animation_player.animation_finished.connect(swing_done)
 	slash_hurt_box.monitoring = false
-	slash_hurt_box.swing_state = self
 	base_sword_scale = sword.scale
-
-func _ready() -> void:
-	pass
 
 func Enter() -> void:
 	for ability in PlayerManager.player.get_sword_abilities():
@@ -41,8 +36,6 @@ func Exit() -> void:
 	slash_hurt_box.monitoring = false
 	swing_cooldown.start()
 	reset_sword_size()
-	enemies_hit.clear()
-	
 	
 func Process(_delta: float) -> MainHandState:
 	if finished:
@@ -56,11 +49,6 @@ func Physics(_delta: float) -> MainHandState:
 func HandleInput(_event: InputEvent) -> MainHandState:
 	return null
 
-func try_hit_enemy(enemy: Enemy) -> bool:
-	if enemy in enemies_hit:
-		return false
-	enemies_hit.append(enemy)
-	return true
 
 func swing_done(_anim) -> void:
 	finished = true

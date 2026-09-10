@@ -106,6 +106,7 @@ func release_arrow() -> void:
 		current_arrow.free()
 	else:
 		if current_arrow:
+			print(1)
 			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
 			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)

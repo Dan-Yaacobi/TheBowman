@@ -13,8 +13,9 @@ func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 			dragon_bite.set_damage(_arrow.damage)
 			dragon_bite.direction = _arrow.velocity.normalized()
 			dragon_bite.global_position = PlayerManager.player.global_position
+			dragon_bite.abilities = _arrow.shoot_abilities
 			_arrow.queue_free()
 			EventBus.summon_effect.emit(dragon_bite)
-
+			
 func get_tooltip() -> String:
-	return "Bleeding Wounds: Damaged enemies bleed on hit."
+	return "Turns Perfect Shots to a Dragon"

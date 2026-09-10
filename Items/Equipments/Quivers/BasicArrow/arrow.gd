@@ -2,7 +2,7 @@ class_name Arrow extends CharacterBody2D
 
 @onready var sprite: ArrowSprite = $Sprite2D
 #@onready var cpu_particles: CPUParticles2D = $CPUParticles2D
-@onready var hurt_box: ArrowHurtBox = $HurtBox
+@onready var hurt_box: HurtBox = $HurtBox
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var after_image_spawner: AfterimageSpawner = $AfterImageSpawner
 
@@ -39,17 +39,25 @@ var arrow_shot_power: float
 var texture: Texture2D
 
 func _ready() -> void:
-	#cpu_particles.emitting = false
+	
+	print("ready")
 	hurt_box.monitorable = false
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
-	hurt_box.set_arrow(self)
+	
+	hurt_box.add_before_effect(arrow_setup)
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
 	set_texture(texture)
+	hurt_box.successful_hit.connect(hit)
 
-func hit(_hit_box) -> void:
+func arrow_setup(_entity: GameEntity) -> void:
+	hurt_box.damage = damage
+	hurt_box.knockback_power = knockback
+	hurt_box.knockback_dir = velocity.normalized()
+	
+func hit(_hurt_box,_hit_box) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
 		if regular_shot:

@@ -2,12 +2,10 @@ class_name BleedAbility extends PlayerShootAbility
 
 const BLEED_DEBUFF = preload("uid://b0pv21kfxpvci")
 
-func add_ability() -> void:
-	PlayerManager.player.add_shoot_ability(self)
-
 func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
-	if _target and _arrow:
+	if _target:
 		if _target is Enemy:
+			print(_target.is_damaged(), " " , _target.current_hp, " ", _target.stats.max_hp)
 			if _target.is_damaged():
 				var bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
 				bleed_debuff.bleed_damage = 2

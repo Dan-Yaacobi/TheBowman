@@ -7,7 +7,7 @@ class_name PlayerAbility extends Resource
 var can_activate: bool = true
 
 enum Tier { COMMON, UNCOMMON, RARE, LEGENDARY }
-enum TriggerType { PASSIVE, SHOOT, JUMP, DASH, RELEASE, DRAW }
+enum TriggerType { PASSIVE, SHOOT, JUMP, DASH, RELEASE, DRAW, AFTER_HIT, BEFORE_HIT}
 
 func on_equipped() -> void:
 	pass

@@ -17,8 +17,8 @@ func AreaEnetered(a: Area2D) -> void:
 		effect_color = DEFAULT_HIT_EFFECT_COLOR
 		knockback_dir = -(PlayerManager.player.global_position - self.global_position).normalized()
 		a.TakeDamage(self)
-	if a.get_parent() is Enemy:
-		_apply_effects(a.get_parent())
+	#if a.get_parent() is Enemy:
+		#_apply_effects(a.get_parent())
 		EventBus.sword_hit.emit(a.get_parent())
 	successful_hit.emit(self)
 

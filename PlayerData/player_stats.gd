@@ -68,13 +68,14 @@ var player: Player
 @export_subgroup("Abilities")
 @export var jump_abilities: Array[PlayerAbility]
 @export var dash_abilities: Array[PlayerAbility]
-@export var shooting_abilities: Array[PlayerAbility]
+@export var shooting_abilities: Array[PlayerShootAbility]
 @export var sword_abilities: Array[PlayerAbility]
-@export var passive_abilities: Array[PlayerAbility]
+@export var passive_abilities: Array[PlayerPassiveAbility]
 @export var release_abilities: Array[PlayerAbility]
 @export var draw_abilities: Array[PlayerAbility]
 @export var active_ability: ActiveAbility
-
+@export var before_hit_abilities: Array[BeforeHitAbility]
+@export var after_hit_abilities: Array[AfterHitAbility]
 
 @export_subgroup("Sword")
 @export var sword_size: Stat

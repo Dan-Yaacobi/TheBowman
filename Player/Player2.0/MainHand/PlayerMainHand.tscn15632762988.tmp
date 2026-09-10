@@ -475,6 +475,7 @@ colors = PackedColorArray(0.43991134, 0.16710994, 0, 1, 1, 1, 1, 1)
 [node name="PlayerMainHand" type="CharacterBody2D" unique_id=1400376021]
 script = ExtResource("1_grn42")
 arrow = ExtResource("2_y7ab3")
+min_shot_power = 0.0
 max_offset = 15.0
 weak_shot_punish = 0.5
 

@@ -10,6 +10,7 @@ func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 	if _arrow:
 		_arrow.queue_free()
 	breath = FROST_BREATH.instantiate()
+	breath.abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 	breath.position = PlayerManager.player.main_hand.hold_position.position
 	PlayerManager.player.add_child(breath)
 	breath.active = true

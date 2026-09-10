@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Items/Equipments/Quivers/Sprites/Arrows/BasicArrow.png" id="2_6h8hs"]
 [ext_resource type="Script" uid="uid://cforgr3w6srvu" path="res://Items/Equipments/Quivers/BasicArrow/arrow_sprite.gd" id="3_w0mub"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_tu1em"]
-[ext_resource type="Script" uid="uid://cs8h152m2aafv" path="res://General Nodes/HurtBox/arrow_hurt_box.gd" id="5_jytiu"]
 [ext_resource type="Script" uid="uid://bne3namnmfw5v" path="res://Items/Equipments/Quivers/BasicArrow/after_image_spawner.gd" id="6_v4wrw"]
 
 [sub_resource type="Curve" id="Curve_43g4f"]
@@ -41,7 +40,6 @@ color = Color(0.643137, 0.152941, 0, 0.45098)
 
 [node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_tu1em")]
 collision_mask = 28
-script = ExtResource("5_jytiu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1725749955]
 position = Vector2(13, -5.384457e-07)

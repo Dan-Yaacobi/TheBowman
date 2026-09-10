@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="Resource" uid="uid://16kjig2icnxb" path="res://Items/Equipments/Quivers/Resource/frost_quiver.tres" id="7_nxm3p"]
-[ext_resource type="Resource" uid="uid://cf830250l4sj2" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="9_nxm3p"]
+[ext_resource type="Resource" uid="uid://b2exbrwp6ofng" path="res://Items/Equipments/Quivers/Resource/blood_quiver.tres" id="7_nxm3p"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
@@ -96,7 +95,6 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1109545810 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
-item_data = ExtResource("9_nxm3p")
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)

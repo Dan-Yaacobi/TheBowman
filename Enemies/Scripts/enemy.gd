@@ -30,6 +30,7 @@ var is_dead: bool = false
 
 var invincible: bool = false
 var stunned: bool = false
+
 func _ready() -> void:
 	current_hp = stats.max_hp
 	hurt_box.base_damage = stats.touch_damage
