@@ -4,7 +4,9 @@ class_name PlayerBody extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var eyes_sprite: Sprite2D = $Sprite2D/Eyes
 
+var facing_direction: int = 1
 func _ready() -> void:
+	print(facing_direction)
 	pass
 
 func _process(_delta: float) -> void:
@@ -16,7 +18,9 @@ func _process(_delta: float) -> void:
 	pass
 
 func change_direction(_direction: bool) -> void:
+	
 	scale.x *= -1
+	facing_direction *= -1
 
 func blink() -> void:
 	var random_chance = randi_range(0,200)

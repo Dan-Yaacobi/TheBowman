@@ -30,8 +30,7 @@ func Enter() -> void:
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()
 	player.can_dash = false
-	#player.body.update_animation("Jump")
-	dash_direction = calculate_direction_to_cursor()
+	dash_direction = get_dash_direction() # Change this to calculate_direction_to_cursor() for 360 cursor dash
 	dust.emitting = true
 
 	player.velocity = dash_direction * player.stats.dash_power.value()
@@ -64,6 +63,16 @@ func go_to_walking() -> void:
 func can_dash_again() -> void:
 	player.can_dash = true
 
+func get_dash_direction() -> Vector2:
+	var direction: Vector2
+	if Input.is_action_pressed("up"):
+		direction = Vector2(0,-1)
+	elif state_machine.prev_state is PlayerIdleState:
+		direction = Vector2(player.body.facing_direction, 0)
+	elif state_machine.prev_state is PlayerWalkingState:
+		direction = Vector2(player.direction, 0)
+	return direction
+		
 func calculate_direction_to_cursor() -> Vector2:
 	var mouse_pos = player.get_global_mouse_position()
 	var direction = mouse_pos - PlayerManager.player.global_position

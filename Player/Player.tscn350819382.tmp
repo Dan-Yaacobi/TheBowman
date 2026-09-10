@@ -1,0 +1,467 @@
+[gd_scene format=3 uid="uid://cesvb1a1eu8yq"]
+
+[ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
+[ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
+[ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
+[ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
+[ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="7_bgaaw"]
+[ext_resource type="PackedScene" uid="uid://cd1qmsp2wywey" path="res://Player/Player Actions/Jump/Jump.tscn" id="7_kkejo"]
+[ext_resource type="Script" uid="uid://b2d7006fh8q1n" path="res://Player/Abilities2.0/player_ability.gd" id="7_yf47d"]
+[ext_resource type="Script" uid="uid://b67fe3xjto43p" path="res://Player/camera_2d.gd" id="8_qvxki"]
+[ext_resource type="PackedScene" uid="uid://cakf7lhpfqg2w" path="res://Player/Player2.0/Body/PlayerBody.tscn" id="9_x70vp"]
+[ext_resource type="PackedScene" uid="uid://7vjvk5bghwkq" path="res://Player/Player2.0/MainHand/PlayerMainHand.tscn" id="10_wo5nf"]
+[ext_resource type="PackedScene" uid="uid://dxk6tfmffd8bb" path="res://Player/Player2.0/OffHand/PlayerOffHand.tscn" id="11_croik"]
+[ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
+[ext_resource type="Script" uid="uid://bawb3ysex0r03" path="res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd" id="15_o1b5h"]
+[ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
+[ext_resource type="Resource" uid="uid://ck8ck21kjw4n2" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres" id="16_7w4lt"]
+[ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
+[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="22_bgaaw"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
+[ext_resource type="Script" uid="uid://5aetuiovci75" path="res://Player/grappling_state.gd" id="23_gv3fu"]
+[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
+[ext_resource type="Script" uid="uid://rdxrjtmc6byw" path="res://Player/hook.gd" id="25_4n5ed"]
+[ext_resource type="Texture2D" uid="uid://eve74ii5oe07" path="res://Player/Player2.0/Sprites/grappling_hook.png" id="25_78fhc"]
+[ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
+[ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
+[ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
+[ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
+[ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
+[ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="40_rqaa0"]
+[ext_resource type="Script" uid="uid://bssc4pin0y0q2" path="res://Player/spawn_handler.gd" id="41_7w4lt"]
+
+[sub_resource type="Resource" id="Resource_i325y"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_eu7rt"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_nm06d"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_xehjw"]
+script = ExtResource("4_yf47d")
+base_value = 0.6
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_vhfjx"]
+script = ExtResource("4_yf47d")
+base_value = 150.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_ustk3"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_x2ho1"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_1ylbe"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_sqgfh"]
+script = ExtResource("4_yf47d")
+base_value = 1.5
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_7w4lt"]
+script = ExtResource("4_yf47d")
+base_value = 950.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_e03cv"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_808i2"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_ww5s2"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_d3djb"]
+script = ExtResource("4_yf47d")
+base_value = 280.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_o1b5h"]
+script = ExtResource("4_yf47d")
+base_value = 3.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_kveqs"]
+script = ExtResource("4_yf47d")
+base_value = 100.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_1a3po"]
+script = ExtResource("4_yf47d")
+base_value = 1.5
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_eennk"]
+script = ExtResource("4_yf47d")
+base_value = 0.75
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_yyr8h"]
+script = ExtResource("4_yf47d")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_r04tr"]
+script = ExtResource("4_yf47d")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_lre2g"]
+script = ExtResource("4_yf47d")
+base_value = 5.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_rqaa0"]
+script = ExtResource("4_yf47d")
+base_value = 1.5
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_sedti"]
+script = ExtResource("2_2aet8")
+hp = 10
+max_hp = 10
+knockback_resistance = SubResource("Resource_o1b5h")
+max_minions = 3
+invinc_duration = SubResource("Resource_ww5s2")
+extra_gold = SubResource("Resource_808i2")
+extra_drop_chance = SubResource("Resource_e03cv")
+down_gravity = 1500
+up_gravity = 650
+max_down_gravity = 400
+ground_dec = 2400
+ground_acc = 1800
+air_dec = 600
+air_acc = 900
+dash_power = SubResource("Resource_7w4lt")
+move_speed = SubResource("Resource_kveqs")
+max_jumps = 1
+jump_height = SubResource("Resource_d3djb")
+basic_shot_power = 120.0
+perfect_shot_window = SubResource("Resource_eennk")
+perfect_shot_bonus = SubResource("Resource_1a3po")
+arrow_damage = SubResource("Resource_eu7rt")
+arrow_speed = SubResource("Resource_vhfjx")
+arrow_count = SubResource("Resource_i325y")
+arrow_pierce = SubResource("Resource_nm06d")
+pull_speed = SubResource("Resource_yyr8h")
+pushback_power = SubResource("Resource_r04tr")
+arrow_weight = SubResource("Resource_ustk3")
+can_pass_walls = true
+crit_chance = SubResource("Resource_1ylbe")
+crit_modifier = SubResource("Resource_sqgfh")
+arrow_size = SubResource("Resource_xehjw")
+bleed_damage = 3
+sword_size = SubResource("Resource_rqaa0")
+base_sword_cooldown = SubResource("Resource_x2ho1")
+sword_damage = SubResource("Resource_lre2g")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nowa"]
+size = Vector2(18, 3)
+
+[sub_resource type="Curve" id="Curve_gv3fu"]
+_limits = [0.0, 0.5, 0.0, 1.0]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mb5q"]
+size = Vector2(26, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fpcy"]
+size = Vector2(26, 4.0833426)
+
+[sub_resource type="Curve" id="Curve_g8oqh"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
+size = Vector2(26, 40)
+
+[sub_resource type="Curve" id="Curve_croik"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 6.138935), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wqenp"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.51923084, 0.17399032), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_u4yfg"]
+colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 0.64705884)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4n5ed"]
+radius = 9.421122
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1b5h"]
+size = Vector2(367, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w4lt"]
+size = Vector2(42, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww5s2"]
+size = Vector2(367, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xw4su"]
+size = Vector2(42, 200)
+
+[node name="Player" type="CharacterBody2D" unique_id=1253253931]
+scale = Vector2(0.5, 0.5)
+collision_layer = 65
+collision_mask = 17
+script = ExtResource("1_4bii6")
+target_dummy_tutorial_passed = true
+stats = SubResource("Resource_sedti")
+perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
+ExtResource("16_7w4lt"): -1
+})
+
+[node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("7_bgaaw")]
+position = Vector2(43.421265, 6.9632263)
+
+[node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+
+[node name="Quiver" type="Sprite2D" parent="PlayerBody" unique_id=557666127]
+z_index = -1
+position = Vector2(-12, 14)
+rotation = -0.34906584
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("40_rqaa0")
+
+[node name="PlayerMainHand" parent="." unique_id=1400376021 instance=ExtResource("10_wo5nf")]
+position = Vector2(-8, 14)
+
+[node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
+position = Vector2(6, 14)
+collision_layer = 0
+collision_mask = 0
+
+[node name="OffHandShoulder" type="Node2D" parent="." unique_id=1530002589]
+position = Vector2(6, 14)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1994014699]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+script = ExtResource("8_qvxki")
+random_strength = 5.0
+shake_fade = 10.0
+base_zoom = Vector2(3.5, 3.5)
+
+[node name="PlayerStateMachine" parent="." unique_id=1204656686 instance=ExtResource("4_tfnw6")]
+
+[node name="Idle" type="Node2D" parent="PlayerStateMachine" unique_id=424752262]
+script = ExtResource("5_kcllr")
+
+[node name="Walking" type="Node2D" parent="PlayerStateMachine" unique_id=1189973943]
+script = ExtResource("6_vo15m")
+
+[node name="Slam" type="Node2D" parent="PlayerStateMachine" unique_id=2130948580]
+script = ExtResource("14_nepur")
+
+[node name="GroundDetector" type="Area2D" parent="PlayerStateMachine/Slam" unique_id=670631579]
+position = Vector2(0, 1)
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStateMachine/Slam/GroundDetector" unique_id=1587100838]
+position = Vector2(-1, 14)
+shape = SubResource("RectangleShape2D_6nowa")
+debug_color = Color(0.805724, 0.20071, 0.88746, 0.42)
+
+[node name="Dead" type="Node2D" parent="PlayerStateMachine" unique_id=1457544463]
+script = ExtResource("15_qho0y")
+
+[node name="Dash" type="Node2D" parent="PlayerStateMachine" unique_id=1253471932]
+script = ExtResource("16_lcihm")
+
+[node name="Dust" type="CPUParticles2D" parent="PlayerStateMachine/Dash" unique_id=1550651360]
+position = Vector2(-1, 5)
+emitting = false
+amount = 5
+texture = ExtResource("22_bgaaw")
+one_shot = true
+preprocess = 0.3
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(2, -20)
+scale_amount_curve = SubResource("Curve_gv3fu")
+color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
+
+[node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash" unique_id=1018166173]
+
+[node name="Grappling" type="Node2D" parent="PlayerStateMachine" unique_id=452980340]
+script = ExtResource("23_gv3fu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=11877925]
+position = Vector2(-1, 12)
+shape = SubResource("RectangleShape2D_0mb5q")
+
+[node name="JumpReset" type="Area2D" parent="." unique_id=1946683667]
+position = Vector2(0, 32)
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpReset" unique_id=841087047]
+position = Vector2(-1, -0.041671753)
+shape = SubResource("RectangleShape2D_7fpcy")
+debug_color = Color(0, 0.648432, 0.180981, 0.42)
+
+[node name="JumpAction" parent="." unique_id=975901094 instance=ExtResource("7_kkejo")]
+
+[node name="JumpParticles" type="CPUParticles2D" parent="JumpAction" unique_id=1493980358]
+position = Vector2(-1, 16)
+emitting = false
+amount = 5
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+gravity = Vector2(0, 50)
+scale_amount_curve = SubResource("Curve_g8oqh")
+color = Color(0.831239, 0.712185, 0.672638, 1)
+
+[node name="HitBox" parent="." unique_id=1751345076 instance=ExtResource("22_x70vp")]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=90149864]
+position = Vector2(-1, 12)
+shape = SubResource("RectangleShape2D_4o0d0")
+debug_color = Color(0.96965665, 0, 0.46305597, 0.41960785)
+
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=513053942]
+
+[node name="DamagedParticles" type="CPUParticles2D" parent="." unique_id=1150190285]
+emitting = false
+amount = 3
+texture = ExtResource("23_wo5nf")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 50)
+radial_accel_max = 20.0
+radial_accel_curve = SubResource("Curve_croik")
+scale_amount_curve = SubResource("Curve_wqenp")
+color_ramp = SubResource("Gradient_u4yfg")
+
+[node name="DeathAnimationTimer" type="Timer" parent="." unique_id=1957289314]
+one_shot = true
+
+[node name="ActiveAbilityCooldown" type="Timer" parent="." unique_id=2037916886]
+
+[node name="BuffTooltipControl" type="Node2D" parent="." unique_id=109648080]
+script = ExtResource("26_8kdbo")
+
+[node name="Debuffs" type="Node2D" parent="." unique_id=638474099]
+
+[node name="Slow" type="Node2D" parent="Debuffs" unique_id=1200710417]
+script = ExtResource("29_b4moh")
+
+[node name="Timer" type="Timer" parent="Debuffs/Slow" unique_id=629961226]
+wait_time = 1.5
+
+[node name="Abilities" type="Node2D" parent="." unique_id=737411167]
+script = ExtResource("26_s0mko")
+
+[node name="ShootAbilities" type="Node2D" parent="Abilities" unique_id=1501929022]
+
+[node name="PeriodicAbilities" type="Node2D" parent="Abilities" unique_id=382239454]
+
+[node name="ActiveAbilities" type="Node2D" parent="Abilities" unique_id=404174291]
+
+[node name="GrappleHook" type="Node2D" parent="." unique_id=1409160597]
+script = ExtResource("33_yf47d")
+
+[node name="HookString" type="Line2D" parent="GrappleHook" unique_id=152630332]
+texture_repeat = 2
+position = Vector2(0, 8)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(0.52156866, 0.26666668, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hook" type="Area2D" parent="GrappleHook" unique_id=1542797305]
+position = Vector2(25, -1)
+rotation = -0.7853982
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("25_4n5ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/Hook" unique_id=1816862064]
+position = Vector2(2, -2)
+rotation = 2.3177972
+scale = Vector2(0.6000012, 1)
+shape = SubResource("CapsuleShape2D_4n5ed")
+
+[node name="Sprite2D" type="Sprite2D" parent="GrappleHook/Hook" unique_id=1653132328]
+texture = ExtResource("25_78fhc")
+
+[node name="LinePoint" type="Node2D" parent="GrappleHook/Hook" unique_id=387021048]
+position = Vector2(-6, 6)
+
+[node name="BuffHandler" parent="." unique_id=2096724640 instance=ExtResource("39_vtj8b")]
+
+[node name="SpawnHandler" type="Node2D" parent="." unique_id=740437101]
+script = ExtResource("41_7w4lt")
+
+[node name="TopArea" type="Area2D" parent="SpawnHandler" unique_id=317396116]
+position = Vector2(0, -232)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="SpawnHandler/TopArea" unique_id=1529187984]
+shape = SubResource("RectangleShape2D_o1b5h")
+
+[node name="LeftArea" type="Area2D" parent="SpawnHandler" unique_id=1542286843]
+position = Vector2(-408, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="SpawnHandler/LeftArea" unique_id=437739359]
+shape = SubResource("RectangleShape2D_7w4lt")
+
+[node name="BottomArea" type="Area2D" parent="SpawnHandler" unique_id=950332450]
+position = Vector2(0, 232)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Bottom" type="CollisionShape2D" parent="SpawnHandler/BottomArea" unique_id=1183575682]
+shape = SubResource("RectangleShape2D_ww5s2")
+
+[node name="RightArea" type="Area2D" parent="SpawnHandler" unique_id=1879686107]
+position = Vector2(409, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Right" type="CollisionShape2D" parent="SpawnHandler/RightArea" unique_id=204597838]
+shape = SubResource("RectangleShape2D_xw4su")
+
+[connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]
