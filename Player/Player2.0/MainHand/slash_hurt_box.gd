@@ -27,4 +27,4 @@ func apply_bleed(a: Enemy) -> void:
 	if try_bleed < sword.get_bleed_chance():
 		var new_bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
 		new_bleed_debuff.set_damage(max(floor(PlayerManager.player.get_strength() / 10), 1))
-		a.apply_debuff(new_bleed_debuff, 5, 5)
+		a.apply_debuff(new_bleed_debuff,CustomVariables.BLEED_DEBUFF_ID, 5, 5)

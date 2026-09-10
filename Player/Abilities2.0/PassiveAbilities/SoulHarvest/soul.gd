@@ -18,7 +18,7 @@ var _spiral_radius: float = 0.0
 var _spiral_origin: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	hurt_box.damage = roundi(PlayerManager.player.stats.arrow_damage.value())
+	hurt_box.base_damage = roundi(PlayerManager.player.stats.arrow_damage.value())
 	
 func set_homing() -> void:
 	_mode = Mode.HOMING

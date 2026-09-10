@@ -1,6 +1,4 @@
-class_name StunDebuff extends Debuff
-
-@onready var stunned_effect: CPUParticles2D = $StunnedEffect
+class_name FreezeDebuff extends Debuff
 
 func start_debuff_effect() -> void:
 	one_shot = true
@@ -8,7 +6,6 @@ func start_debuff_effect() -> void:
 	
 func apply_debuff_effect() -> void:
 	entity.stun(true, true)
-	stunned_effect.emitting = true
 	
 func extra_end_debuff_methods() -> void:
 	entity.stun(false)

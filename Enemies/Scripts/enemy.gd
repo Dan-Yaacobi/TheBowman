@@ -29,7 +29,7 @@ var knockback_velocity: Vector2 = Vector2.ZERO
 var is_dead: bool = false
 
 var invincible: bool = false
-
+var stunned: bool = false
 func _ready() -> void:
 	current_hp = stats.max_hp
 	hurt_box.base_damage = stats.touch_damage
@@ -128,6 +128,7 @@ func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> vo
 	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
 	
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
+	
 	var final_dmg: int
 	if is_dead:
 		return
@@ -136,7 +137,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
 	else:
 		final_dmg = raw_damage * stats.damage_taken_multiplier.value()
 	current_hp -= roundi(final_dmg)
-	
+	frostbitten_hit()
 	handle_health_bar(final_dmg)	
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
@@ -191,9 +192,10 @@ func can_be_stunned() -> bool:
 	return not stats.stun_immune
 	
 func shoot() -> void:
-	var bullet = bullet_set_up()
-	get_parent().add_child(bullet)
-
+	if !stunned:
+		var bullet = bullet_set_up()
+		get_parent().add_child(bullet)
+	
 func bullet_set_up() -> Node2D:
 	if stats.bullet != null:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
@@ -202,7 +204,7 @@ func bullet_set_up() -> Node2D:
 		new_bullet.data.knockback = stats.knockback
 		new_bullet.data.move_speed = stats.bullet_speed
 		new_bullet.was_fired = true
-		new_bullet.data.damage *= stats.damage_dealt_multiplier.value()
+		new_bullet.data.damage = stats.touch_damage * stats.damage_dealt_multiplier.value()
 		_wire_hit_effects(new_bullet.hurt_box, true)
 		return new_bullet
 	return null
@@ -216,10 +218,33 @@ func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> vo
 			continue
 		target_hurt_box.add_effect(effect.apply)
 		
-func stun(_activate: bool) -> void:
+func stun(_activate: bool, _electric: bool = false) -> void:
+	stunned = _activate
+	if _activate:
+		stop_animations()
+	else:
+		continue_animations()
 	state_machine.cause_pause(_activate)
 	set_physics_process(!_activate)
-	if _activate:
+	if _activate and _electric:
 		EventBus.enemy_stunned.emit(self)
 	knockback_velocity = Vector2.ZERO
 		
+func stop_animations() -> void:
+	if animation_player:
+		animation_player.pause()
+	stop_extra_animation_players()
+
+func continue_animations() -> void:
+	if animation_player:
+		animation_player.play()
+	continue_extra_animation_players()
+	
+func continue_extra_animation_players() -> void:
+	pass
+func stop_extra_animation_players() -> void:
+	pass
+
+func frostbitten_hit() -> void:
+	if debuff_handler.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID):
+		EventBus.enemy_frostbitten_hit.emit(self)

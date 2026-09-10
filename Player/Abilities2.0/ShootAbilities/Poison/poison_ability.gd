@@ -10,7 +10,7 @@ func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 		if _target is Enemy and _arrow.perfect_shot:
 			var poison_debuff: Debuff = POISON_DEBUFF.instantiate()
 			poison_debuff.poison_damage = 2
-			_target.debuff_handler.add_debuff(poison_debuff,5,5 )
+			_target.debuff_handler.add_debuff(poison_debuff,CustomVariables.POISON_DEBUFF_ID,5,5 )
 			
 func get_tooltip() -> String:
 	return "Perfect shots inflict poison."

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://16kjig2icnxb"]
+
+[ext_resource type="Script" uid="uid://yp12igtlwhbu" path="res://Player/Abilities2.0/ShootAbilities/Frost/frost_ability.gd" id="1_i7hju"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_mcopa"]
+[ext_resource type="Texture2D" uid="uid://c2qmsn1c60vik" path="res://Items/Equipments/Quivers/Sprites/Arrows/IceShrapnel.png" id="3_mcopa"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_recig"]
+[ext_resource type="Texture2D" uid="uid://cw1432bcghfkd" path="res://Items/Equipments/Quivers/Sprites/Quiver_Ice.png" id="5_bimiw"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_yc3ty"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_hm5pd"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_33b56"]
+
+[sub_resource type="Resource" id="Resource_d0ww2"]
+script = ExtResource("1_i7hju")
+trigger_type = 1
+metadata/_custom_type_script = "uid://yp12igtlwhbu"
+
+[sub_resource type="Resource" id="Resource_od0aq"]
+script = ExtResource("7_hm5pd")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("4_recig")
+display_name = "Ice Shards"
+texture = ExtResource("5_bimiw")
+equipped_texture = ExtResource("3_mcopa")
+dropped_scale = 0.3
+slot = 1
+ability = SubResource("Resource_d0ww2")
+tiers = Array[Object]([SubResource("Resource_od0aq")])
+equipment_scene = ExtResource("2_mcopa")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

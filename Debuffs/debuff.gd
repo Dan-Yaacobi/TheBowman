@@ -3,6 +3,7 @@ class_name Debuff extends Node2D
 signal debuff_over(id: int)
 
 @export var ID: int
+@export var can_stack: bool = true
 
 var time_accumulator: float
 var tick_interval: float

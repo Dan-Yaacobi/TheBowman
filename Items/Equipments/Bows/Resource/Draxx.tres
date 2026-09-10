@@ -4,11 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_3wah7"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="3_dllur"]
 [ext_resource type="Texture2D" uid="uid://dnoaywmthfmta" path="res://Items/Equipments/Bows/Sprites/DragonBow.png" id="3_rg2f4"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_air27"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_s3cxq"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_760i3"]
 
 [sub_resource type="Resource" id="Resource_i2jkr"]
 script = ExtResource("1_i2jkr")
 trigger_type = 4
 metadata/_custom_type_script = "uid://c0wqmp38atf7x"
+
+[sub_resource type="Resource" id="Resource_gv3fu"]
+script = ExtResource("7_760i3")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_bgaaw"]
+script = ExtResource("6_s3cxq")
+stat_rolls = Array[ExtResource("7_760i3")]([SubResource("Resource_gv3fu")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("3_dllur")
@@ -18,6 +33,6 @@ equipped_texture = ExtResource("3_rg2f4")
 dropped_scale = 0.65
 equipped_scale = Vector2(1, 0.6)
 ability = SubResource("Resource_i2jkr")
-tiers = null
+tiers = Array[Object]([SubResource("Resource_bgaaw")])
 equipment_scene = ExtResource("2_3wah7")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

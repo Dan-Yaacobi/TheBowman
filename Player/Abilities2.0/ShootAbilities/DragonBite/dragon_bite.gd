@@ -8,9 +8,12 @@ var distance: float = 75
 var damage: int
 
 func _ready() -> void:
-	hurt_box.damage = damage
+	hurt_box.base_damage = damage
 	visual_handler()
 	
+func set_damage(_dmg: int) -> void:
+	damage = _dmg
+
 func visual_handler() -> void:
 	var angle: float = direction.angle()
 	rotation = angle

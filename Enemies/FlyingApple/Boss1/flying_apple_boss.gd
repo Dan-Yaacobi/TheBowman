@@ -21,7 +21,7 @@ func extra_ready_functions() -> void:
 		wings_animation.play("Fly")
 	animation_player.play("Move")
 	hurt_box.knockback_power = stats.knockback
-	hurt_box.damage = stats.touch_damage
+	hurt_box.base_damage = stats.touch_damage
 	player = PlayerManager.player
 	hit_box.set_enemy(self)
 	sprite.texture = stats.skin

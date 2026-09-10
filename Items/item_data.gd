@@ -7,6 +7,5 @@ class_name ItemData extends Resource
 
 func activate_abilities(_item) -> void:
 	value = _item.value
-	print(value)
 	for effect in effects:
 		effect.activate_ability(self)

@@ -23,3 +23,11 @@ func extra_ready_functions() -> void:
 func _physics_process(_delta: float) -> void:
 	face_the_player()
 	move_and_slide()
+	
+func continue_extra_animation_players() -> void:
+	if wings_animation:
+		wings_animation.play()
+
+func stop_extra_animation_players() -> void:
+	if wings_animation:
+		wings_animation.pause()

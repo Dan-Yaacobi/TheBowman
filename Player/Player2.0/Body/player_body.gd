@@ -6,7 +6,6 @@ class_name PlayerBody extends CharacterBody2D
 
 var facing_direction: int = 1
 func _ready() -> void:
-	print(facing_direction)
 	pass
 
 func _process(_delta: float) -> void:

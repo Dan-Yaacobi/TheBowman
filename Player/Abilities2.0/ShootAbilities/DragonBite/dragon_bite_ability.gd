@@ -10,7 +10,7 @@ func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
 	if _arrow:
 		if _arrow.perfect_shot:
 			var dragon_bite: DragonBite = DRAGON_BITE.instantiate()
-			dragon_bite.damage = _arrow.damage
+			dragon_bite.set_damage(_arrow.damage)
 			dragon_bite.direction = _arrow.velocity.normalized()
 			dragon_bite.global_position = PlayerManager.player.global_position
 			_arrow.queue_free()

@@ -19,6 +19,9 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> EnemyState:
+	return null
+#what happens during _physics_process update in this state
+func Physics(_delta: float) -> EnemyState:
 	enemy.face_the_player()
 	
 	var target_y = PlayerManager.player.global_position.y - height_above_player
@@ -29,9 +32,5 @@ func Process(_delta: float) -> EnemyState:
 	
 	enemy.velocity = enemy.calculate_direction_to_player(Vector2(0, -height_above_player)) * enemy.stats.move_speed.value()
 	
-	return null
-	
-#what happens during _physics_process update in this state
-func Physics(_delta: float) -> EnemyState:
 	return null
 	

@@ -15,7 +15,7 @@ func start_debuff_effect() -> void:
 func apply_debuff_effect() -> void:
 	var entity_speed: Stat = entity.stats.move_speed
 	entity_speed.add_buff(ID,-slow_multiplier,Stat.buff_type.MULTIPLICATIVE)
-
+	
 func extra_end_debuff_methods() -> void:
 	var entity_speed: Stat = entity.stats.move_speed
 	entity_speed.remove_buff_stack(ID,Stat.buff_type.MULTIPLICATIVE)

@@ -10,8 +10,14 @@ func take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
 func show_damage(_amount: int, color: Color) -> void:
 	CombatTextSpawner.spawn(global_position, str(_amount),color)
 	
-func apply_debuff(_debuff: Debuff, _duration: float, _ticks: int) -> void:
-	debuff_handler.add_debuff(_debuff, _duration, _ticks)
+func apply_debuff(_debuff: Debuff, ID: int, _duration: float, _ticks: int) -> void:
+	debuff_handler.add_debuff(_debuff, ID, _duration, _ticks)
 
+func has_debuff(id: int) -> bool:
+	return debuff_handler.has_debuff(id)
+
+func end_debuff(id: int) -> void:
+	debuff_handler.end_debuff(id)
+	
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage) -> void:
 	pass

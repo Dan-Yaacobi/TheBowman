@@ -13,7 +13,7 @@ var damage: int = 1
 
 func _ready() -> void:
 	velocity = speed * direction
-	hurt_box.damage = damage
+	hurt_box.base_damage = damage
 	hurt_box.add_effect(apply_burn)
 	visible_on_screen_notifier.screen_exited.connect(attempt_to_queue_free)
 	visible_on_screen_notifier.screen_entered.connect(stop_exiting)
@@ -33,4 +33,4 @@ func attempt_to_queue_free() -> void:
 func apply_burn(enemy: Enemy) -> void:
 	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 	burn_debuff.set_damage(roundi(damage*0.2))
-	enemy.apply_debuff(burn_debuff,5,5)
+	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,5,5)

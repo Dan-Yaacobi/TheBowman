@@ -160,9 +160,6 @@ height = 17.203896
 radius = 5.570913
 height = 18.842201
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nboip"]
-size = Vector2(24, 10)
-
 [node name="EvilBird" type="CharacterBody2D" unique_id=196136335]
 collision_layer = 4
 script = ExtResource("1_jdshu")
@@ -210,14 +207,6 @@ script = ExtResource("11_w4iuy")
 script = ExtResource("12_w4iuy")
 
 [node name="EggAttackTimer" type="Timer" parent="EnemyStateMachine/EggAttack" unique_id=347636976]
-
-[node name="GroundDetector" type="Area2D" parent="EnemyStateMachine/EggAttack" unique_id=178459828]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine/EggAttack/GroundDetector" unique_id=1286028758]
-position = Vector2(1, 9)
-shape = SubResource("RectangleShape2D_nboip")
 
 [node name="PreDive" type="Node2D" parent="EnemyStateMachine" unique_id=768638697]
 script = ExtResource("12_lkeh4")

@@ -11,4 +11,4 @@ func apply(_target: GameEntity) -> void:
 		return
 	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 	burn_debuff.fire_damage = fire_damage
-	_target.debuff_handler.add_debuff(burn_debuff, duration, ticks)
+	_target.debuff_handler.add_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID, duration, ticks)

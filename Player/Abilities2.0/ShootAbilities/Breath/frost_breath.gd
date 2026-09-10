@@ -21,7 +21,7 @@ const FROST_BITE_DEBUFF = preload("uid://d56gf1x11e6x")
 func _ready() -> void:
 	hurt_box.area_entered.connect(_on_area_entered)
 	hurt_box.area_exited.connect(_on_area_exited)
-	hurt_box.damage = tick_damage
+	hurt_box.base_damage = tick_damage
 	collision_shape.shape.size = Vector2.ZERO
 	hurt_box.add_effect(apply_slow)
 	
@@ -77,5 +77,6 @@ func calc_direction() -> Vector2:
 	return Vector2(mouse_pos[0] - player_pos[0], mouse_pos[1] - player_pos[1])
 
 func apply_slow(entity: GameEntity) -> void:
-	var frostbite_debuff: FrostBiteDebuff = FROST_BITE_DEBUFF.instantiate()
-	entity.apply_debuff(frostbite_debuff,slow_duration,1)
+	if !entity.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
+		var frostbite_debuff: FrostBiteDebuff = FROST_BITE_DEBUFF.instantiate()
+		entity.apply_debuff(frostbite_debuff,CustomVariables.FROSTBITE_DEBUFF_ID,slow_duration,1)

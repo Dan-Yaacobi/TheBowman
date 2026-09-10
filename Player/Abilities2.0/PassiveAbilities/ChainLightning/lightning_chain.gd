@@ -40,7 +40,7 @@ func _on_chain_timer_timeout() -> void:
 
 func _apply_stun(_enemy: Enemy) -> void:
 	var stun: StunDebuff = STUN_DEBUFF.instantiate()
-	_enemy.apply_debuff(stun, stun_duration, 1)
+	_enemy.apply_debuff(stun,CustomVariables.STUN_DEBUFF_ID, stun_duration, 1)
 
 func _draw_lightning(_from: Vector2, _to: Vector2) -> void:
 	var local_from: Vector2 = _from - global_position

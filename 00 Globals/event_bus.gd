@@ -91,6 +91,7 @@ signal disable_gauge()
 signal sword_hit(_enemy: Enemy)
 
 signal enemy_stunned(_enemy: Enemy)
+signal enemy_frostbitten_hit(_enemy: Enemy)
 
 signal player_died(_death_screen: bool)
 

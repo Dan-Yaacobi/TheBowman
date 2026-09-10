@@ -36,12 +36,12 @@ func apply_burn(_enemy: Enemy) -> void:
 	if _enemy:
 		var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 		burn_debuff.fire_damage = patch_damage
-		_enemy.debuff_handler.add_debuff(burn_debuff, 6, 3)
+		_enemy.debuff_handler.add_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID, 6, 3)
 
 func _apply_burn(entity: GameEntity) -> void:
 		if entity:
 			var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 			burn_debuff.fire_damage = patch_damage
-			entity.debuff_handler.add_debuff(burn_debuff, 6, 3)
+			entity.debuff_handler.add_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID, 6, 3)
 
 	

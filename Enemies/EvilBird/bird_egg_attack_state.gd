@@ -3,7 +3,6 @@ class_name BirdEggAttackState extends EnemyState
 @onready var seek: BirdSeekState = $"../Seek"
 @onready var pre_dive: BirdPreDiveState = $"../PreDive"
 @onready var egg_attack_timer: Timer = $EggAttackTimer
-@onready var ground_detector: Area2D = $GroundDetector
 
 @export var egg_attack_min_time: float = 1.0
 @export var egg_attack_max_time: float = 2.0
@@ -17,12 +16,10 @@ class_name BirdEggAttackState extends EnemyState
 var fly_direction: int
 var right_end: float
 var left_end: float
-var egg_blocked: bool = false
 
 func init() -> void:
-	egg_attack_timer.timeout.connect(shoot)
-	ground_detector.body_shape_entered.connect(disable_shoot)
-	ground_detector.body_shape_exited.connect(enable_shoot)
+	egg_attack_timer.timeout.connect(enemy.shoot)
+
 	
 func Enter() -> void:
 	fly_direction = [-1, 1].pick_random()
@@ -73,28 +70,3 @@ func is_too_far() -> bool:
 	var x_dist = abs(enemy.global_position.x - PlayerManager.player.global_position.x)
 	var y_dist = abs(enemy.global_position.y - PlayerManager.player.global_position.y)
 	return x_dist > too_far_x or y_dist > too_far_y
-
-# --- Shooting ---
-
-func shoot() -> void:
-	if enemy.stats.bullet == null:
-		return
-	if not egg_blocked:
-		var new_bullet: EnemyBullet = enemy.stats.bullet.instantiate()
-		new_bullet.global_position = enemy.global_position
-		new_bullet.scale *= 0.7
-		new_bullet.data.damage = enemy.stats.touch_damage
-		@warning_ignore("integer_division")
-		new_bullet.data.knockback = enemy.stats.knockback / 2
-		enemy.get_parent().call_deferred("add_child", new_bullet)
-		new_bullet.set_texture(enemy.stats.bullet_sprite)
-	else:
-		egg_attack_timer.stop()
-
-func disable_shoot(_m1,_m2,_m3,_m4) -> void:
-	egg_blocked = true
-	
-func enable_shoot(_m1,_m2,_m3,_m4) -> void:
-	egg_blocked = false
-	shoot()
-	egg_attack_timer.start()

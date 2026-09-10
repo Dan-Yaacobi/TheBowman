@@ -7,6 +7,14 @@ enum directions {Up, Left ,Down ,Right}
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98
 
+const FROSTBITE_DEBUFF_ID: int = 105
+const FREEZE_DEBUFF_ID: int = 106
+const BURN_DEBUFF_ID: int = 107
+const BLEED_DEBUFF_ID: int = 108
+const POISON_DEBUFF_ID: int = 109
+const STUN_DEBUFF_ID: int = 110
+
+
 var rarity_colors: Array[Color] = [
 	#Color(0.62, 0.62, 0.62),  # 1 - Common (gray)
 	Color(1.0, 1.0, 1.0),     # 2 - Uncommon (white)
