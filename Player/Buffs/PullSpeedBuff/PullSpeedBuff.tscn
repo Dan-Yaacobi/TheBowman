@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://baq16kh45t3dw"]
+
+[ext_resource type="Script" uid="uid://bq6bbjdydajyy" path="res://Player/Buffs/PullSpeedBuff/pull_speed_buff.gd" id="1_i7mmn"]
+[ext_resource type="Texture2D" uid="uid://58w61gh3amg3" path="res://Player/Buffs/Sprites/PullSpeedBuff.png" id="2_qsg08"]
+
+[node name="PullSpeedBuff" type="Node2D" unique_id=221364498]
+script = ExtResource("1_i7mmn")
+texture = ExtResource("2_qsg08")
+tooltip = "Pull Speed Increase"
+max_stacks = 1
+constant_buff = true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b0rkuhj5ip8qu"]
 
 [ext_resource type="PackedScene" uid="uid://b15cqm8hlwgog" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn" id="1_8b6vg"]
-[ext_resource type="Script" uid="uid://d2brexplt4eam" path="res://Player/Abilities2.0/ShootAbilities/AfterHit/small_poison_cloud.gd" id="1_pptqf"]
+[ext_resource type="Script" uid="uid://d2brexplt4eam" path="res://Player/Abilities2.0/ShootAbilities/AfterHit/SmallPoisonCloud/small_poison_cloud.gd" id="1_pptqf"]
 
 [sub_resource type="Curve" id="Curve_pptqf"]
 _limits = [0.0, 1.5, 0.0, 1.0]

@@ -26,11 +26,10 @@ func Enter() -> void:
 	PlayerManager.player.shooting = true
 	entity.shot_power = 0
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))
-	charge_rate = PlayerManager.player.get_pull_speed()
+	#charge_rate = PlayerManager.player.get_pull_speed()
 	entity.animation_player.speed_scale = charge_rate
 	finished_pulling = false
 	EventBus.string_pull_sound.emit(charge_rate)
-	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
@@ -41,6 +40,7 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
+	charge_rate = PlayerManager.player.get_pull_speed()
 	entity.arrow_setup()
 	entity.shot_power += _delta * charge_rate
 	return null

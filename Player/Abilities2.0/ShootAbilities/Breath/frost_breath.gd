@@ -27,6 +27,7 @@ func _ready() -> void:
 	hurt_box.add_effect(apply_slow)
 	for ability in abilities:
 		hurt_box.add_effect(ability.activate_ability)
+		
 func _on_area_entered(a: Area2D) -> void:
 	if a.get_parent() is GameEntity:
 		var entity: GameEntity = a.get_parent()

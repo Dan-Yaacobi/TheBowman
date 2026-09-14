@@ -1,6 +1,7 @@
 class_name DashBuff extends Buff
 
 var end: bool = false
+
 func start_buff_effect() -> void:
 	PlayerManager.player.stats.dash_power.add_buff(ID,100,Stat.buff_type.ADDITIVE)
 	EventBus.in_main_menu.connect(end_buff)

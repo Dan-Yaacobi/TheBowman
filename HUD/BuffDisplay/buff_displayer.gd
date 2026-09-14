@@ -12,7 +12,7 @@ func _ready() -> void:
 func add_buff(_buff: Buff) -> void:
 	if buffs.has(_buff.ID):
 		buffs[_buff.ID].add_stack(1,_buff.duration)
-		
+
 	else:
 		var new_buff_display: BuffDisplay = BUFF_DISPLAY.instantiate()
 		new_buff_display.texture = _buff.texture

@@ -14,6 +14,7 @@ const BLEED_DEBUFF_ID: int = 108
 const POISON_DEBUFF_ID: int = 109
 const STUN_DEBUFF_ID: int = 110
 
+const PULL_SPEED_BUFF_ID: int = 77
 
 var rarity_colors: Array[Color] = [
 	#Color(0.62, 0.62, 0.62),  # 1 - Common (gray)

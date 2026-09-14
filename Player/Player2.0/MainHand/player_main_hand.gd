@@ -2,6 +2,7 @@ class_name PlayerMainHand extends CharacterBody2D
 
 signal shot_power_amount(amount)
 signal release
+signal drawing_arrow
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hold_position: Node2D = $HoldPosition
@@ -72,12 +73,9 @@ func draw_arrow() -> void:
 		var _arrow: Arrow = arrow.instantiate()
 		var before_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT)
 		var after_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT)
-		print("player after hit ",after_hit_abilities )
 		for ability in before_hit_abilities:
-			print("an ability before play ststa ", ability )
 			_arrow.add_before_ability(ability)
 		for ability in after_hit_abilities:
-			print("an ability after play ststa ", ability )
 
 			_arrow.add_after_ability(ability)
 		add_child(_arrow)
@@ -86,7 +84,6 @@ func draw_arrow() -> void:
 		current_arrow = _arrow
 		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
 
-		
 		for ability in draw_abilities:
 			ability.activate_ability(null, _arrow)
 			if ability.has_method("draw_ended"):
@@ -120,9 +117,7 @@ func release_arrow() -> void:
 		if current_arrow:
 			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
-			#current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
-			if shot_power >= 1.0:
-				
+			if shot_power >= 1.0:				
 				EventBus.camera_shake.emit(2.0,10.0)
 				EventBus.apply_player_knockback.emit(-hand_direction,50)
 				perfect_release_particles.emitting = true
