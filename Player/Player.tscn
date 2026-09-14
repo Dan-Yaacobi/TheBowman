@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
-[ext_resource type="Script" uid="uid://bsxn4bgifdbt6" path="res://Player/Abilities2.0/ShootAbilities/AfterHit/after_hit_ability.gd" id="2_4n5ed"]
-[ext_resource type="Script" uid="uid://ch3emf0k61ngg" path="res://Player/Abilities2.0/ShootAbilities/BeforeHit/before_hit_ability.gd" id="4_jvfa1"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]

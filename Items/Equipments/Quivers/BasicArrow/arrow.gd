@@ -14,8 +14,8 @@ const CRIT = preload("uid://dvpa8tuvsardc")
 const HIT_SOUND = preload("uid://bomaal61jofg4")
 
 var hit_effects: Array[OnHitEffect] = []
-var shoot_abilities: Array = []
-
+var after_hit_abilities: Array[PlayerAbility]
+var before_hit_abilities: Array[PlayerAbility]
 var direction: Vector2
 var regular_shot: bool = true
 var can_pierce: bool = false
@@ -39,32 +39,42 @@ var arrow_shot_power: float
 var texture: Texture2D
 
 func _ready() -> void:
-	
-	print("ready")
 	hurt_box.monitorable = false
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
 	
-	hurt_box.add_before_effect(arrow_setup)
+	hurt_box_setup()
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
 	visible_on_screen_notifier.screen_exited.connect(missed)
 	set_texture(texture)
 	hurt_box.successful_hit.connect(hit)
 
-func arrow_setup(_entity: GameEntity) -> void:
-	hurt_box.damage = damage
+
+func hurt_box_setup() -> void:
+	hurt_box.add_before_effect(hurt_box_stats)
+	for ability in after_hit_abilities:
+		hurt_box.add_after_effect(ability.activate_ability)
+	for ability in before_hit_abilities:
+		hurt_box.add_before_effect(ability.activate_ability)
+
+func hurt_box_stats(_var1) -> void:
+	hurt_box.base_damage = damage
 	hurt_box.knockback_power = knockback
 	hurt_box.knockback_dir = velocity.normalized()
 	
-func hit(_hurt_box,_hit_box) -> void:
+func add_after_ability(ability: PlayerAbility) -> void:
+	after_hit_abilities.append(ability)
+
+func add_before_ability(ability: PlayerAbility) -> void:
+	before_hit_abilities.append(ability)
+	
+func hit(_hurt_box,_hit_box, _result) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
 		if regular_shot:
 			if crit:
 				crit_effect(body)
-			for ability in shoot_abilities:
-				ability.activate_ability(body,self)
 			succesfuly_hit = true
 			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
 	pierce_count += 1

@@ -50,11 +50,14 @@ var player: Player
 @export_subgroup("Special")
 @export var stun_duration: float = 2.0
 @export var bleed_damage: int = 1
-@export var bleed_duration: float = 2.0
+@export var bleed_duration: float = 10.0
+@export var bleed_ticks: int = 5
 @export var burn_damage: int = 1
-@export var burn_duration: float = 2.0
+@export var burn_duration: float = 10.0
+@export var burn_ticks: int = 5
 @export var poison_damage: int = 1
-@export var poison_duration: float = 2.0
+@export var poison_duration: float = 10.0
+@export var poison_ticks : int = 5
 @export var arrow_texture_override: Texture2D
 
 @export_subgroup("Player Items")
@@ -74,8 +77,8 @@ var player: Player
 @export var release_abilities: Array[PlayerAbility]
 @export var draw_abilities: Array[PlayerAbility]
 @export var active_ability: ActiveAbility
-@export var before_hit_abilities: Array[BeforeHitAbility]
-@export var after_hit_abilities: Array[AfterHitAbility]
+@export var before_hit_abilities: Array[PlayerAbility]
+@export var after_hit_abilities: Array[PlayerAbility]
 
 @export_subgroup("Sword")
 @export var sword_size: Stat

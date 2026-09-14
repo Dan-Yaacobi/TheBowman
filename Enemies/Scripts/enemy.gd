@@ -91,9 +91,9 @@ func calculate_direction_to_player(offset: Vector2 = Vector2.ZERO) -> Vector2:
 func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
-func hit(_hurt_box: HurtBox) -> void:
+func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
 	
-	take_damage(_hurt_box)
+	take_damage(_hurt_box, 0, _result)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box)
 	take_hit_effect()	
@@ -128,7 +128,7 @@ func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> vo
 	stats.damage_dealt_multiplier.reduce_buff_amount(id,_amount,_type)
 	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
 	
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0, result: DamageResult = null) -> void:
 	
 	var final_dmg: int
 	if is_dead:
@@ -148,7 +148,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0) -> void:
 		activate_death_ability()
 		enemy_died()
 		drop_item()
-
+		result.killed = true
 func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)

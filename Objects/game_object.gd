@@ -17,7 +17,7 @@ func _ready() -> void:
 		
 	hit_box.Damaged.connect(break_item)
 	
-func break_item(_hurt_box: HurtBox) -> void:
+func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult = null) -> void:
 	if data.interactable and not got_hit:
 		EventBus.object_destroyed_sound.emit()
 		got_hit = true

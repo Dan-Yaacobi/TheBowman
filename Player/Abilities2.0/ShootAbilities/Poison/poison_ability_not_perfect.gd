@@ -5,7 +5,7 @@ const POISON_DEBUFF = preload("uid://dw404fcvhcw52")
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _target:
 		if _target is Enemy and not _arrow.perfect_shot:
 			var poison_debuff: Debuff = POISON_DEBUFF.instantiate()

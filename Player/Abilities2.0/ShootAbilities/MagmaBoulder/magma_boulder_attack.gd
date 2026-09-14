@@ -5,7 +5,7 @@ const MAGMA_BOULDER = preload("uid://esq83otc8iu8")
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _arrow:
 		if _arrow.perfect_shot:
 			var magma_boulder: MagmaBoulder = MAGMA_BOULDER.instantiate()

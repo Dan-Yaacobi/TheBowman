@@ -266,7 +266,7 @@ func reset_minions() -> void:
 func emit_crit() -> void:
 	critical_hit.emit()
 
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int, _result: DamageResult = null) -> void:
 	if not invincible:
 		took_hit.emit()
 		EventBus.damaged_flash.emit()
@@ -365,6 +365,8 @@ func _get_ability_array(trigger: PlayerAbility.TriggerType) -> Array:
 		PlayerAbility.TriggerType.DASH: return stats.dash_abilities
 		PlayerAbility.TriggerType.RELEASE: return stats.release_abilities
 		PlayerAbility.TriggerType.DRAW: return stats.draw_abilities
+		PlayerAbility.TriggerType.BEFORE_HIT: return stats.before_hit_abilities
+		PlayerAbility.TriggerType.AFTER_HIT: return stats.after_hit_abilities
 		_: return []
 		
 func enable_jump() -> void:

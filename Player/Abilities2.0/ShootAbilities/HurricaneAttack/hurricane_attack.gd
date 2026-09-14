@@ -5,7 +5,7 @@ const HURRICANE = preload("uid://cxycop4k7jhcy")
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _arrow:
 		if _arrow.perfect_shot:
 			var hurricane: Hurricane = HURRICANE.instantiate()

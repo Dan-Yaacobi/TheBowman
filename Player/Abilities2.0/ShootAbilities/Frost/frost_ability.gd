@@ -9,7 +9,7 @@ func on_equipped() -> void:
 func on_unequipped() -> void:
 	EventBus.enemy_frostbitten_hit.disconnect(apply_freeze)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _target:
 		if _target is Enemy:
 			if !_target.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID) and !_target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):

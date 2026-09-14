@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="Resource" uid="uid://b2exbrwp6ofng" path="res://Items/Equipments/Quivers/Resource/blood_quiver.tres" id="7_nxm3p"]
+[ext_resource type="Resource" uid="uid://cpvhbkc7ir2di" path="res://Items/Equipments/Quivers/Resource/poison_quiver2.tres" id="7_nre7b"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
@@ -54,7 +54,7 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island12" unique_id=844129433 instance=ExtResource("13_gej64")]
 position = Vector2(2, -18)
-item_data = ExtResource("7_nxm3p")
+item_data = ExtResource("7_nre7b")
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
 position = Vector2(205, 119)

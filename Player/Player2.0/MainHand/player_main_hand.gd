@@ -70,11 +70,23 @@ func arrow_setup() -> void:
 func draw_arrow() -> void:
 	if !current_arrow:
 		var _arrow: Arrow = arrow.instantiate()
+		var before_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT)
+		var after_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT)
+		print("player after hit ",after_hit_abilities )
+		for ability in before_hit_abilities:
+			print("an ability before play ststa ", ability )
+			_arrow.add_before_ability(ability)
+		for ability in after_hit_abilities:
+			print("an ability after play ststa ", ability )
+
+			_arrow.add_after_ability(ability)
 		add_child(_arrow)
 		var draw_abilities: Array[PlayerAbility] = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DRAW)
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
 		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
+
+		
 		for ability in draw_abilities:
 			ability.activate_ability(null, _arrow)
 			if ability.has_method("draw_ended"):
@@ -106,10 +118,9 @@ func release_arrow() -> void:
 		current_arrow.free()
 	else:
 		if current_arrow:
-			print(1)
 			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
-			current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+			#current_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 			if shot_power >= 1.0:
 				
 				EventBus.camera_shake.emit(2.0,10.0)
@@ -158,7 +169,7 @@ func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = ha
 		fired_arrow.set_shot_power_mod(effective_power)
 		fired_arrow.calc_dmg(effective_power)
 		fired_arrow.calc_knockback(effective_power)
-		fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
+		#fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 		var release_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.RELEASE)
 		for ability in release_abilities:
 			ability.activate_ability(null, fired_arrow)

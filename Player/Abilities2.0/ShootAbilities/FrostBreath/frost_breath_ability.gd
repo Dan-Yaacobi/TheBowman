@@ -6,7 +6,7 @@ var breath: FrostBreath
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 	
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _arrow:
 		_arrow.queue_free()
 	breath = FROST_BREATH.instantiate()

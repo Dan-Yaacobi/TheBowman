@@ -2,7 +2,7 @@ class_name Chest extends GameObject
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func break_item(_hurt_box: HurtBox) -> void:
+func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, result: DamageResult = null) -> void:
 	if data.interactable and not got_hit:
 		got_hit = true
 		animation_player.play("Open")

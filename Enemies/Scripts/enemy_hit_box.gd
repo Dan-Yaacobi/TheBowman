@@ -8,8 +8,8 @@ func set_enemy(_enemy: Enemy) -> void:
 		enemy = _enemy
 	pass
 
-func TakeDamage(hurt_box: HurtBox) -> void:
-	Damaged.emit(hurt_box)
+func TakeDamage(hurt_box: HurtBox, _result: DamageResult = null) -> void:
+	Damaged.emit(hurt_box, _result)
 	if enemy:
 		enemy_hit_effect.hit()
 		change_effect_color(hurt_box.effect_color)

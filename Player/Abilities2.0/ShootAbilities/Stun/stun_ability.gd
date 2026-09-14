@@ -2,7 +2,7 @@ class_name StunAbility extends PlayerShootAbility
 
 const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null) -> void:
+func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
 	if _target and _arrow:
 		if _target is Enemy:
 			if _target.full_health() and _target.can_be_stunned():

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b0rkuhj5ip8qu"]
+
+[ext_resource type="PackedScene" uid="uid://b15cqm8hlwgog" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/PoisonCloud.tscn" id="1_8b6vg"]
+[ext_resource type="Script" uid="uid://d2brexplt4eam" path="res://Player/Abilities2.0/ShootAbilities/AfterHit/small_poison_cloud.gd" id="1_pptqf"]
+
+[sub_resource type="Curve" id="Curve_pptqf"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(0.18654434, 0.8661423), 0.0, 0.0, 0, 0, Vector2(0.36697245, 1.5), 0.0, 0.0, 0, 0, Vector2(0.669173, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="SmallPoisonCloud" type="Node2D" unique_id=181304366]
+script = ExtResource("1_pptqf")
+
+[node name="PoisonCloud" parent="." unique_id=1121914065 instance=ExtResource("1_8b6vg")]
+position = Vector2(0, 0)
+lifetime = 3.0
+speed_scale = 1.0
+emission_sphere_radius = 10.0
+scale_amount_curve = SubResource("Curve_pptqf")
+max_radius = 20.0
+start_radius = 10.0
+
+[editable path="PoisonCloud"]
