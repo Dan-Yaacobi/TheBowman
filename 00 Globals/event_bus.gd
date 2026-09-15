@@ -100,3 +100,4 @@ signal active_ability_used(cooldown: float)
 signal active_ability_ready()
 signal show_active_ability_picker(pool: Array[ActiveAbility])
 signal active_ability_cleared
+signal reduce_active_ability_cooldown(_amount: float)

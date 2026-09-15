@@ -13,7 +13,7 @@ const BURN_DEBUFF_ID: int = 107
 const BLEED_DEBUFF_ID: int = 108
 const POISON_DEBUFF_ID: int = 109
 const STUN_DEBUFF_ID: int = 110
-
+const ARROW_PIERCE_ID: int = 5
 const PULL_SPEED_BUFF_ID: int = 77
 
 var rarity_colors: Array[Color] = [

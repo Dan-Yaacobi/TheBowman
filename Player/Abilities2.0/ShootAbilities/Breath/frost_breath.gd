@@ -11,22 +11,28 @@ class_name FrostBreath extends Node2D
 @export var tick_interval: float = 0.25
 @export var tick_damage: int = 2
 @export var slow_duration: float = 1.0
-@export var abilities: Array[PlayerAbility]
 
 var active: bool = false
 var _hit_targets: Array[GameEntity] = []
 var _tick_timer: float = 0.0
+var after_hit_abilities: Array[PlayerAbility]
+var before_hit_abilities: Array[PlayerAbility]
 
+var power: float
+var passed_min_threshold: bool = false
 const FROST_BITE_DEBUFF = preload("uid://d56gf1x11e6x")
 
 func _ready() -> void:
 	hurt_box.area_entered.connect(_on_area_entered)
 	hurt_box.area_exited.connect(_on_area_exited)
 	hurt_box.base_damage = tick_damage
+
 	collision_shape.shape.size = Vector2.ZERO
-	hurt_box.add_effect(apply_slow)
-	for ability in abilities:
-		hurt_box.add_effect(ability.activate_ability)
+	hurt_box.add_before_effect(apply_slow)
+	for ability in after_hit_abilities:
+		hurt_box.add_after_effect(ability.activate_ability)
+	for ability in before_hit_abilities:
+		hurt_box.add_before_effect(ability.activate_ability)
 		
 func _on_area_entered(a: Area2D) -> void:
 	if a.get_parent() is GameEntity:
@@ -41,10 +47,12 @@ func _on_area_exited(a: Area2D) -> void:
 func _process(delta: float) -> void:
 	if active:
 		frost_breath_effect.emitting = true
-		var power: float = PlayerManager.player.get_curr_shot_power()
+		power = PlayerManager.player.get_curr_shot_power()
 		handle_breath(calc_direction(), power, delta)
 		_tick_damage(delta)
-		if power <= 0:
+		if power > PlayerManager.player.main_hand.min_shot_power and !passed_min_threshold:
+			passed_min_threshold = true
+		if PlayerManager.player.get_curr_shot_power() <= PlayerManager.player.main_hand.min_shot_power and passed_min_threshold:
 			queue_free()
 	else:
 		frost_breath_effect.emitting = false
@@ -56,10 +64,12 @@ func _tick_damage(delta: float) -> void:
 	if _tick_timer >= tick_interval:
 		_tick_timer = 0.0
 		for entity in _hit_targets:
-			if is_instance_valid(entity):
-				entity.take_damage(hurt_box)
-				entity.show_damage(hurt_box.damage,Color.AQUA)
-				apply_slow(entity)
+			if is_instance_valid(entity) and entity is Enemy:
+				hurt_box.set_text_color(Color.AQUA)
+				hurt_box.AreaEnetered(entity.hit_box)
+				#entity.take_damage(hurt_box)
+				#entity.show_damage(hurt_box.damage,Color.AQUA)
+				#apply_slow(entity)
 				
 func handle_breath(_direction: Vector2, shot_power: float, delta: float) -> void:
 	var dir: Vector2 = _direction.normalized()

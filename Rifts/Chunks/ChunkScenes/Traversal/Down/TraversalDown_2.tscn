@@ -9,7 +9,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gsmw"]
 resource_local_to_scene = true
-size = Vector2(113, 131.5)
+size = Vector2(158, 135)
 
 [node name="TraversalDown_2" type="Node2D" unique_id=2089775676]
 script = ExtResource("1_7bo17")
@@ -20,44 +20,43 @@ position = Vector2(9, 12)
 [node name="Island6" parent="." unique_id=1847265216 instance=ExtResource("1_amtnu")]
 position = Vector2(-44, 42)
 
-[node name="Island7" parent="." unique_id=1856484189 instance=ExtResource("1_amtnu")]
-position = Vector2(-25, 119)
-
 [node name="Island8" parent="." unique_id=310419607 instance=ExtResource("1_amtnu")]
 position = Vector2(24, 78)
 
+[node name="Island12" parent="." unique_id=421082827 instance=ExtResource("1_amtnu")]
+position = Vector2(-23, 122)
+
 [node name="Island9" parent="." unique_id=1855814059 instance=ExtResource("1_amtnu")]
-position = Vector2(42, 41)
+position = Vector2(63, 41)
 
 [node name="EntryMarker" parent="." unique_id=1299577293 instance=ExtResource("5_1627o")]
 position = Vector2(8, -4)
 
 [node name="ExitMarker" parent="." unique_id=984499939 instance=ExtResource("6_jtlme")]
-position = Vector2(-21, 179)
+position = Vector2(-19, 202)
 direction = 2
 
 [node name="ExitMarker3" parent="." unique_id=1840487134 instance=ExtResource("6_jtlme")]
-position = Vector2(98, 156)
+position = Vector2(112, 165)
 direction = 3
 
 [node name="ExitMarker2" parent="." unique_id=1744546824 instance=ExtResource("6_jtlme")]
-position = Vector2(-110, 143)
+position = Vector2(-133, 149)
 direction = 1
 
 [node name="Bounds" parent="." unique_id=172410571 instance=ExtResource("7_wwkyr")]
-visible = false
 position = Vector2(5, 61)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-position = Vector2(-3.5, 6.75)
+position = Vector2(-2, 8.5)
 shape = SubResource("RectangleShape2D_7gsmw")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=1844313603]
 
 [node name="SpawnMarker" parent="SpawnMarkers" unique_id=21452960 instance=ExtResource("21_e5hgq")]
-position = Vector2(-96, 38)
+position = Vector2(-133, 18)
 
 [node name="SpawnMarker2" parent="SpawnMarkers" unique_id=1474049999 instance=ExtResource("21_e5hgq")]
-position = Vector2(104, 40)
+position = Vector2(136, 49)
 
 [editable path="Bounds"]

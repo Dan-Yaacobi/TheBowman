@@ -15,6 +15,7 @@ script = ExtResource("4_fssex")
 display_name = "Vulcan"
 texture = ExtResource("3_fssex")
 equipped_texture = ExtResource("3_fssex")
+dropped_scale = 0.4
 equipped_scale = Vector2(0.5, 0.7)
 ability = SubResource("Resource_fklrd")
 tiers = null

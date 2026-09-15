@@ -58,7 +58,8 @@ func build_main_path(_curr_level: int) -> void:
 				reset()
 				generate(_curr_level)
 				return
-		build_all_side_paths(2, main_path_chunks)
+		@warning_ignore("integer_division")
+		build_all_side_paths(roundi(data.main_path_length), main_path_chunks)
 		rift_created.emit(rift_level)
 		add_death_area()
 		EventBus.finished_loading.emit()
@@ -76,7 +77,8 @@ func build_all_side_paths(amount: int, chunks: Array[RiftChunk]) -> void:
 
 func build_side_path(_start_chunk: RiftChunk) -> bool:
 	## length needs better adjustments
-	var length: int = int(data.main_path_length)
+	@warning_ignore("integer_division")
+	var length: int = roundi(data.main_path_length / 2)
 	var last_chunk: RiftChunk = build_path(length,_start_chunk, false)
 	if !last_chunk:
 		return false

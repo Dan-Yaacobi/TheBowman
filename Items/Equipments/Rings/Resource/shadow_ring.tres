@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cbtba141lnv2q"]
+
+[ext_resource type="Script" uid="uid://df6a74iaoc5u2" path="res://Player/Abilities2.0/PassiveAbilities/ShadowAbility/shadow_ability.gd" id="1_1d58u"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_mfdn7"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_rdl4d"]
+[ext_resource type="Texture2D" uid="uid://5i34kvfexfn7" path="res://Items/Equipments/Rings/Sprites/Ring_1.png" id="2_1d58u"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="4_1rpkk"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_wvfbt"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_jh7vt"]
+
+[sub_resource type="Resource" id="Resource_lsx3f"]
+script = ExtResource("1_1d58u")
+metadata/_custom_type_script = "uid://df6a74iaoc5u2"
+
+[sub_resource type="Resource" id="Resource_slge3"]
+script = ExtResource("5_wvfbt")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_rdl4d")
+display_name = "Shadow Ring"
+texture = ExtResource("2_1d58u")
+equipped_texture = ExtResource("2_1d58u")
+dropped_scale = 0.35
+slot = 2
+ability = SubResource("Resource_lsx3f")
+tiers = Array[Object]([SubResource("Resource_slge3")])
+equipment_scene = ExtResource("1_mfdn7")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

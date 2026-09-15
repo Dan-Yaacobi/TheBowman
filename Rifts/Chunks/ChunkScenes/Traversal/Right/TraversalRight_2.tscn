@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_a4vpk"]
 [ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="8_aedd6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2ow1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4vpk"]
 resource_local_to_scene = true
 size = Vector2(254.125, 94.625)
 
@@ -29,12 +29,11 @@ position = Vector2(257, 72)
 direction = 2
 
 [node name="Bounds" parent="." unique_id=1351310043 instance=ExtResource("6_2pxwo")]
-visible = false
 position = Vector2(105, -6)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(-4.0625, -0.3125)
-shape = SubResource("RectangleShape2D_t2ow1")
+shape = SubResource("RectangleShape2D_a4vpk")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=437726143]
 

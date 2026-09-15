@@ -14,6 +14,7 @@ script = ExtResource("4_uv6fp")
 display_name = "SoulHarvester"
 texture = ExtResource("3_uv6fp")
 equipped_texture = ExtResource("3_uv6fp")
+dropped_scale = 0.4
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_2acew")
 tiers = null

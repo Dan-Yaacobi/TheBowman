@@ -9,15 +9,15 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ls0ry"]
 resource_local_to_scene = true
-size = Vector2(216.125, 45)
+size = Vector2(224.125, 54)
 
 [node name="TraversalLeft_1" type="Node2D" unique_id=536173250]
 script = ExtResource("1_oqcm6")
 
-[node name="Island" parent="." unique_id=1805751211 instance=ExtResource("1_2qhlc")]
-position = Vector2(9, 12)
+[node name="Island3" parent="." unique_id=393498399 instance=ExtResource("1_2qhlc")]
+position = Vector2(-1, 33)
 
-[node name="Island5" parent="." unique_id=1847265216 instance=ExtResource("1_2qhlc")]
+[node name="Island5" parent="." unique_id=1298330993 instance=ExtResource("1_2qhlc")]
 position = Vector2(75, 1)
 
 [node name="Island6" parent="." unique_id=312434180 instance=ExtResource("1_2qhlc")]
@@ -30,30 +30,29 @@ position = Vector2(131, 23)
 position = Vector2(183, -13)
 
 [node name="ExitMarker" parent="." unique_id=1059835599 instance=ExtResource("6_btrv3")]
-position = Vector2(-33, -49)
+position = Vector2(-12, -49)
 
 [node name="ExitMarker2" parent="." unique_id=1763701161 instance=ExtResource("6_btrv3")]
-position = Vector2(-81, 1)
+position = Vector2(-74, 1)
 direction = 1
 
 [node name="ExitMarker3" parent="." unique_id=939365777 instance=ExtResource("6_btrv3")]
-position = Vector2(-34, 66)
+position = Vector2(-26, 74)
 direction = 2
 
 [node name="Bounds" parent="." unique_id=421505583 instance=ExtResource("7_1xldk")]
-visible = false
 position = Vector2(90, 7)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-position = Vector2(5.0625, 5.5)
+position = Vector2(1.0625, 10)
 shape = SubResource("RectangleShape2D_ls0ry")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=795683889]
 
 [node name="SpawnMarker" parent="SpawnMarkers" unique_id=2059374326 instance=ExtResource("9_4ew4u")]
-position = Vector2(130, -41)
+position = Vector2(100, 80)
 
 [node name="SpawnMarker2" parent="SpawnMarkers" unique_id=746798607 instance=ExtResource("9_4ew4u")]
-position = Vector2(42, -41)
+position = Vector2(97, -50)
 
 [editable path="Bounds"]

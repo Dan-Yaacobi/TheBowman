@@ -42,7 +42,8 @@ func _ready() -> void:
 	hurt_box.monitorable = false
 	hurt_box.monitoring = false
 	hurt_box.body_shape_entered.connect(hit_wall)
-	
+	for effect in PlayerManager.player.stats.arrow_visual_effects:
+		effect.apply_effect(self)
 	hurt_box_setup()
 	hit_effects += PlayerManager.player.use_effects()
 	hurt_box.set_collision_layer_value(5, true)
@@ -50,7 +51,7 @@ func _ready() -> void:
 	set_texture(texture)
 	hurt_box.successful_hit.connect(hit)
 
-
+# arrow replacement is a node that will take the arrow's abilities
 func hurt_box_setup() -> void:
 	hurt_box.add_before_effect(hurt_box_stats)
 	for ability in after_hit_abilities:

@@ -59,6 +59,7 @@ var player: Player
 @export var poison_duration: float = 10.0
 @export var poison_ticks : int = 5
 @export var arrow_texture_override: Texture2D
+@export var arrow_visual_effects: Array[ArrowEffect]
 
 @export_subgroup("Player Items")
 @export var money: int

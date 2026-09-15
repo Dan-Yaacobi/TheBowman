@@ -148,7 +148,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0, result: Damage
 		activate_death_ability()
 		enemy_died()
 		drop_item()
-		result.killed = true
+		if result:
+			result.killed = true
 func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)

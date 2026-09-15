@@ -112,7 +112,7 @@ func new_arrow(_arrow: PackedScene) -> void:
 
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	if shot_power < min_shot_power:
+	if shot_power < min_shot_power and current_arrow:
 		current_arrow.free()
 	else:
 		if current_arrow:

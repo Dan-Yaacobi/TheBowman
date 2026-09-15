@@ -9,7 +9,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axx8a"]
 resource_local_to_scene = true
-size = Vector2(74, 86)
+size = Vector2(101, 125)
 
 [node name="TraversalDown_1" type="Node2D" unique_id=921126862]
 script = ExtResource("1_aiuh3")
@@ -17,8 +17,11 @@ script = ExtResource("1_aiuh3")
 [node name="Island" parent="." unique_id=1831148029 instance=ExtResource("1_phg8v")]
 position = Vector2(9, 12)
 
-[node name="Island2" parent="." unique_id=1847265216 instance=ExtResource("1_phg8v")]
-position = Vector2(21, 74)
+[node name="Island5" parent="." unique_id=1407432416 instance=ExtResource("1_phg8v")]
+position = Vector2(47, 109)
+
+[node name="Island6" parent="." unique_id=1995024351 instance=ExtResource("1_phg8v")]
+position = Vector2(-7, 75)
 
 [node name="Island4" parent="." unique_id=943816742 instance=ExtResource("1_phg8v")]
 position = Vector2(47, 39)
@@ -27,28 +30,27 @@ position = Vector2(47, 39)
 position = Vector2(8, -4)
 
 [node name="ExitMarker" parent="." unique_id=105349585 instance=ExtResource("6_o0ds8")]
-position = Vector2(-62, 82)
+position = Vector2(-62, 139)
 direction = 1
 
 [node name="ExitMarker2" parent="." unique_id=502915715 instance=ExtResource("6_o0ds8")]
-position = Vector2(19, 117)
+position = Vector2(19, 174)
 direction = 2
 
 [node name="ExitMarker3" parent="." unique_id=1541199850 instance=ExtResource("6_o0ds8")]
-position = Vector2(98, 80)
+position = Vector2(98, 137)
 direction = 3
 
 [node name="Bounds" parent="." unique_id=1398200696 instance=ExtResource("7_m5l1s")]
-visible = false
 position = Vector2(19, 43)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-position = Vector2(4, 0)
+position = Vector2(1.5, 19.5)
 shape = SubResource("RectangleShape2D_axx8a")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=2040471731]
 
 [node name="SpawnMarker" parent="SpawnMarkers" unique_id=890542923 instance=ExtResource("20_u7ert")]
-position = Vector2(108, 39)
+position = Vector2(119, 7)
 
 [editable path="Bounds"]

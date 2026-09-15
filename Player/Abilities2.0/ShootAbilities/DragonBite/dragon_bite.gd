@@ -6,12 +6,15 @@ class_name DragonBite extends Node2D
 var direction: Vector2
 var distance: float = 75
 var damage: int
-var abilities: Array[PlayerAbility]
+var after_hit_abilities: Array[PlayerAbility]
+var before_hit_abilities: Array[PlayerAbility]
 
 func _ready() -> void:
 	hurt_box.base_damage = damage
-	for ability in abilities:
-		hurt_box.add_effect(ability.activate_ability)
+	for ability in after_hit_abilities:
+		hurt_box.add_after_effect(ability.activate_ability)
+	for ability in before_hit_abilities:
+		hurt_box.add_before_effect(ability.activate_ability)
 	visual_handler()
 	
 func set_damage(_dmg: int) -> void:

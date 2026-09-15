@@ -12,7 +12,9 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		dragon_bite.set_damage(_activator.damage)
 		dragon_bite.direction = _activator.velocity.normalized()
 		dragon_bite.global_position = PlayerManager.player.global_position
-		dragon_bite.abilities = _activator.shoot_abilities
+		dragon_bite.after_hit_abilities = _activator.after_hit_abilities
+		dragon_bite.before_hit_abilities = _activator.before_hit_abilities
+		
 		_activator.queue_free()
 		EventBus.summon_effect.emit(dragon_bite)
 

@@ -15,6 +15,7 @@ script = ExtResource("4_4te1g")
 display_name = "Poison Ivy"
 texture = ExtResource("3_cjnmb")
 equipped_texture = ExtResource("3_cjnmb")
+dropped_scale = 0.3
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_ob2sq")
 tiers = null

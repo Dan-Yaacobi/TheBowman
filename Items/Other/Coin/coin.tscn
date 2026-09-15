@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bx61whsw25xrp" path="res://Items/Other/Coin/coin_visuals.gd" id="3_5yd7k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
-radius = 15.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5yd7k"]
 radius = 3.0

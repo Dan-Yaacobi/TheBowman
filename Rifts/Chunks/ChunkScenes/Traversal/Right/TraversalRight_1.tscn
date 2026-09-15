@@ -44,7 +44,6 @@ direction = 2
 position = Vector2(89, -3)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-visible = false
 shape = SubResource("RectangleShape2D_djn6b")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=354843865]

@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://c4jty1bhlinxr" path="res://Rifts/Chunks/Utility/Bounds/Bounds.tscn" id="6_t0bht"]
 [ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="8_5i4cy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ky60y"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbddi"]
 resource_local_to_scene = true
-size = Vector2(225.75, 90)
+size = Vector2(241.75, 100)
 
 [node name="TraversalRight_3" type="Node2D" unique_id=1184573796]
 script = ExtResource("1_c4wlx")
@@ -18,31 +18,30 @@ script = ExtResource("1_c4wlx")
 position = Vector2(-1, -9)
 
 [node name="ExitMarker" parent="." unique_id=1470790171 instance=ExtResource("5_t0bht")]
-position = Vector2(240, -11)
+position = Vector2(257, -8)
 
 [node name="ExitMarker2" parent="." unique_id=91022344 instance=ExtResource("5_t0bht")]
-position = Vector2(269, 71)
+position = Vector2(279, 74)
 direction = 3
 
 [node name="ExitMarker3" parent="." unique_id=241362472 instance=ExtResource("5_t0bht")]
-position = Vector2(196, 141)
+position = Vector2(232, 144)
 direction = 2
 
 [node name="Bounds" parent="." unique_id=1027126337 instance=ExtResource("6_t0bht")]
-visible = false
 position = Vector2(92, 37)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-position = Vector2(-6.875, 6)
-shape = SubResource("RectangleShape2D_ky60y")
+position = Vector2(1.125, 11)
+shape = SubResource("RectangleShape2D_qbddi")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=23310332]
 
 [node name="SpawnMarker" parent="SpawnMarkers" unique_id=1758705381 instance=ExtResource("8_5i4cy")]
-position = Vector2(123, 3)
+position = Vector2(129, -27)
 
 [node name="Island3" parent="." unique_id=1847265216 instance=ExtResource("6_qbddi")]
-position = Vector2(181, 56)
+position = Vector2(193, 59)
 
 [node name="Island6" parent="." unique_id=819648715 instance=ExtResource("6_qbddi")]
 position = Vector2(112, 80)

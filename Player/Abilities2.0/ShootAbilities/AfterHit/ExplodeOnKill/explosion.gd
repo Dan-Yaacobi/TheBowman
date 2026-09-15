@@ -5,6 +5,7 @@ class_name Explosion extends Node2D
 @export var damage: int = 1
 @onready var after_explosion: CPUParticles2D = $AfterExplosion
 @onready var collision_shape: CollisionShape2D = $HurtBox/CollisionShape2D
+@onready var smoke: CPUParticles2D = $Smoke
 
 func _ready() -> void:
 	collision_shape.shape.radius = 17.5
@@ -17,9 +18,17 @@ func _ready() -> void:
 func set_damage(_damage: int) -> void:
 	damage = _damage
 
+
+	
 func next_emitting() -> void:
 	after_explosion.emitting = true
-	collision_shape.shape.radius *= 1.75
-	after_explosion.finished.connect(finished)
+	collision_shape.shape.radius *= 2
+	after_explosion.finished.connect(smoke_emitting)
+	
+func smoke_emitting() -> void:
+	smoke.emitting = true
+	hurt_box.monitoring = false
+	smoke.finished.connect(finished)
+	
 func finished() -> void:
 	queue_free()

@@ -1,15 +1,38 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="Resource" uid="uid://cpvhbkc7ir2di" path="res://Items/Equipments/Quivers/Resource/poison_quiver2.tres" id="7_nre7b"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="6_qvidt"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="7_5lv0r"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="8_167x7"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="9_24r6y"]
+[ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="10_guwyo"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
+[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/DefaultEquipment/basic_quiver.tres" id="12_qvidt"]
+[ext_resource type="Resource" uid="uid://cbtba141lnv2q" path="res://Items/Equipments/Rings/Resource/shadow_ring.tres" id="13_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
+
+[sub_resource type="Resource" id="Resource_vd7t3"]
+script = ExtResource("8_167x7")
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_c1m2a"]
+script = ExtResource("9_24r6y")
+max_hp = 10000000
+move_speed = SubResource("Resource_vd7t3")
+skin = ExtResource("10_guwyo")
+avg_coins_dropped = 1000
+can_be_knockedback = false
+drop_chance = 100.0
+has_health_bar = false
+equip_amount = 15
+rarity_skew = 5.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lv0r"]
 size = Vector2(10949, 680)
@@ -23,7 +46,7 @@ position = Vector2(208, 83)
 [node name="Islands" type="Node2D" parent="." unique_id=2124960339]
 
 [node name="Island" parent="Islands" unique_id=1797598660 instance=ExtResource("14_7t2hb")]
-position = Vector2(459, 77)
+position = Vector2(486, 78)
 use_fixed_frame = true
 fixed_frame_index = 4
 
@@ -46,6 +69,7 @@ fixed_frame_index = 4
 
 [node name="TargetDummy" parent="Islands/Island16" unique_id=603628097 instance=ExtResource("17_5lv0r")]
 position = Vector2(0, -21)
+stats = SubResource("Resource_c1m2a")
 
 [node name="Island12" parent="Islands" unique_id=297227350 instance=ExtResource("14_7t2hb")]
 position = Vector2(318, 109)
@@ -54,13 +78,22 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island12" unique_id=844129433 instance=ExtResource("13_gej64")]
 position = Vector2(2, -18)
-item_data = ExtResource("7_nre7b")
+item_data = ExtResource("12_qvidt")
+
+[node name="Island17" parent="Islands" unique_id=987538156 instance=ExtResource("14_7t2hb")]
+position = Vector2(375, 109)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Islands/Island17" unique_id=1109545810 instance=ExtResource("13_gej64")]
+position = Vector2(2, -18)
+item_data = ExtResource("13_5lv0r")
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
 position = Vector2(205, 119)
 
 [node name="Island15" parent="Islands" unique_id=420497880 instance=ExtResource("14_7t2hb")]
-position = Vector2(395, 85)
+position = Vector2(431, 85)
 
 [node name="ArrowSign5" type="Sprite2D" parent="Islands/Island15" unique_id=548771561]
 position = Vector2(2, -18)
@@ -93,7 +126,7 @@ position = Vector2(264, 110)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Islands/Island14" unique_id=1109545810 instance=ExtResource("13_gej64")]
+[node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]

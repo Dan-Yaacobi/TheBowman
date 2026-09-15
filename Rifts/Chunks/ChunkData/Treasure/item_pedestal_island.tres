@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3 uid="uid://yq37lreo0htb"]
+
+[ext_resource type="PackedScene" uid="uid://bjvdjvlavo3gm" path="res://Rifts/Chunks/ChunkScenes/Reward/ItemPedestalIsland.tscn" id="1_wqb6s"]
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_yo8l5"]
+
+[resource]
+script = ExtResource("1_yo8l5")
+scene = ExtResource("1_wqb6s")
+type = 3
+id = "item_pedestal_island"
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"

@@ -9,7 +9,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ooqxd"]
 resource_local_to_scene = true
-size = Vector2(173.5, 62)
+size = Vector2(174, 62)
 
 [node name="TraversalLeft_2" type="Node2D" unique_id=969443992]
 script = ExtResource("1_nyavj")
@@ -17,7 +17,7 @@ script = ExtResource("1_nyavj")
 [node name="Island" parent="." unique_id=1822219399 instance=ExtResource("1_a2f80")]
 position = Vector2(4, 15)
 
-[node name="Island3" parent="." unique_id=1847265216 instance=ExtResource("1_a2f80")]
+[node name="Island3" parent="." unique_id=1397800553 instance=ExtResource("1_a2f80")]
 position = Vector2(136, 14)
 
 [node name="Island6" parent="." unique_id=101258889 instance=ExtResource("1_a2f80")]
@@ -30,27 +30,26 @@ position = Vector2(82, -4)
 position = Vector2(136, 3)
 
 [node name="ExitMarker" parent="." unique_id=1583147654 instance=ExtResource("6_l11jf")]
-position = Vector2(-80, 12)
+position = Vector2(-87, 9)
 direction = 1
 
 [node name="ExitMarker2" parent="." unique_id=968657300 instance=ExtResource("6_l11jf")]
-position = Vector2(-31, 66)
+position = Vector2(-38, 63)
 direction = 2
 
 [node name="ExitMarker3" parent="." unique_id=2092221257 instance=ExtResource("6_l11jf")]
-position = Vector2(-30, -30)
+position = Vector2(-37, -33)
 
 [node name="Bounds" parent="." unique_id=1475421375 instance=ExtResource("7_o5j0p")]
 position = Vector2(75, 1)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
-visible = false
-position = Vector2(-5.75, 16)
+position = Vector2(-6, 16)
 shape = SubResource("RectangleShape2D_ooqxd")
 
 [node name="SpawnMarkers" type="Node2D" parent="." unique_id=233731037]
 
 [node name="SpawnMarker" parent="SpawnMarkers" unique_id=906766495 instance=ExtResource("20_xqc1t")]
-position = Vector2(55, -43)
+position = Vector2(64, -49)
 
 [editable path="Bounds"]
