@@ -18,6 +18,10 @@ metadata/_custom_type_script = "uid://bdieor8kxf02t"
 script = ExtResource("7_snq3k")
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_6q3hh"]
+script = ExtResource("7_snq3k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [resource]
 script = ExtResource("2_by6s1")
 display_name = "Poison Darts"
@@ -26,6 +30,6 @@ equipped_texture = ExtResource("1_agcba")
 dropped_scale = 0.3
 slot = 1
 ability = SubResource("Resource_30xy1")
-tiers = Array[Object]([SubResource("Resource_od0aq")])
+tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_6q3hh")])
 equipment_scene = ExtResource("2_6gp7j")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

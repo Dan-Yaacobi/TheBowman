@@ -4,10 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://bj0vflr3cftf0" path="res://Items/Equipments/Bows/Sprites/Zeus.png" id="2_6v1vm"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_d7umq"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="3_dprp6"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_rtioj"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_epb0m"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_8utte"]
 
 [sub_resource type="Resource" id="Resource_6v1vm"]
 script = ExtResource("1_dprp6")
 metadata/_custom_type_script = "uid://royi3wayekwd"
+
+[sub_resource type="Resource" id="Resource_ijd54"]
+script = ExtResource("6_epb0m")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_i3160"]
+script = ExtResource("6_epb0m")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("3_dprp6")
@@ -17,6 +28,6 @@ equipped_texture = ExtResource("2_6v1vm")
 dropped_scale = 0.4
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_6v1vm")
-tiers = null
+tiers = Array[Object]([SubResource("Resource_ijd54"), SubResource("Resource_i3160")])
 equipment_scene = ExtResource("2_d7umq")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

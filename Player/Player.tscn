@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://flmfp3uvj0cb" path="res://Player/player.gd" id="1_4bii6"]
 [ext_resource type="Script" uid="uid://c85r3b0u686w2" path="res://PlayerData/player_stats.gd" id="2_2aet8"]
+[ext_resource type="Script" uid="uid://bj5s3g5acsss6" path="res://Player/Effects/arrow_effect.gd" id="4_78fhc"]
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
@@ -240,7 +241,6 @@ ExtResource("16_7w4lt"): -1
 })
 
 [node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("7_bgaaw")]
-position = Vector2(43.421265, 6.9632263)
 
 [node name="PlayerBody" parent="." unique_id=2097940942 instance=ExtResource("9_x70vp")]
 z_index = 1

@@ -24,6 +24,10 @@ script = ExtResource("6_87yg3")
 stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_nxm3p")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_6q3hh"]
+script = ExtResource("6_87yg3")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [resource]
 script = ExtResource("4_0wjvk")
 display_name = "Hemorrhage"
@@ -32,6 +36,6 @@ equipped_texture = ExtResource("3_3rjnx")
 dropped_scale = 0.3
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_dpy2w")
-tiers = Array[Object]([SubResource("Resource_87yg3")])
+tiers = Array[Object]([SubResource("Resource_87yg3"), SubResource("Resource_6q3hh")])
 equipment_scene = ExtResource("2_1hbja")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

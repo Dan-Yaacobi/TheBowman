@@ -4,11 +4,22 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_37o2c"]
 [ext_resource type="Texture2D" uid="uid://crd0dh71xfr7f" path="res://Items/Equipments/Bows/Sprites/MagmaBow.png" id="3_fssex"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_fssex"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_rkw83"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_rtvtt"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_tqlsv"]
 
 [sub_resource type="Resource" id="Resource_fklrd"]
 script = ExtResource("1_6i61w")
 trigger_type = 4
 metadata/_custom_type_script = "uid://cofo70ibb0g01"
+
+[sub_resource type="Resource" id="Resource_lk575"]
+script = ExtResource("6_rtvtt")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_tcyps"]
+script = ExtResource("6_rtvtt")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("4_fssex")
@@ -18,6 +29,6 @@ equipped_texture = ExtResource("3_fssex")
 dropped_scale = 0.4
 equipped_scale = Vector2(0.5, 0.7)
 ability = SubResource("Resource_fklrd")
-tiers = null
+tiers = Array[Object]([SubResource("Resource_lk575"), SubResource("Resource_tcyps")])
 equipment_scene = ExtResource("1_37o2c")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

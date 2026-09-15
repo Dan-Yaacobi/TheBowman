@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_a5xjm"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_v12hp"]
+[ext_resource type="Resource" uid="uid://b2exbrwp6ofng" path="res://Items/Equipments/Quivers/Resource/blood_quiver.tres" id="3_7typt"]
+[ext_resource type="Resource" uid="uid://bc41cduiwrmb" path="res://Items/Equipments/Quivers/Resource/cursed_quiver.tres" id="4_u1e4n"]
+[ext_resource type="Resource" uid="uid://dpv1dh6cp576d" path="res://Items/Equipments/Quivers/Resource/electric_quiver.tres" id="5_2aujr"]
+[ext_resource type="Resource" uid="uid://16kjig2icnxb" path="res://Items/Equipments/Quivers/Resource/frost_quiver.tres" id="6_0mpld"]
+[ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="7_hauan"]
 
 [resource]
 script = ExtResource("2_a5xjm")
 slot = 1
+templates = Array[ExtResource("2_v12hp")]([ExtResource("3_7typt"), ExtResource("4_u1e4n"), ExtResource("5_2aujr"), ExtResource("6_0mpld"), ExtResource("7_hauan")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

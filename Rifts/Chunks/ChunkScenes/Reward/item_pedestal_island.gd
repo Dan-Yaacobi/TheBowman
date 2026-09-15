@@ -10,9 +10,15 @@ func extra_ready_functions() -> void:
 	pedestals.append(pedestal_npc)
 	pedestals.append(pedestal_npc_2)
 	pedestals.append(pedestal_npc_3)
-	
+
 	for pedestal in pedestals:
 		pedestal.picked.connect(reset_pedestals)
+
+	call_deferred("_try_set_items")
+
+func _try_set_items() -> void:
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	set_items()
 	
 func reset_pedestals(pedestal_picked: PedestalNPC) -> void:

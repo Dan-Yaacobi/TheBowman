@@ -14,10 +14,10 @@ func on_equipped() -> void:
 func on_unequipped() -> void:
 	PlayerManager.player.modulate = Color.WHITE
 	PlayerManager.player.stats.arrow_visual_effects.erase(arrow_effect)
-
 	if is_instance_valid(new_effect):
 		new_effect.queue_free()
 		new_effect = null
 	PlayerManager.player.stats.arrow_pierce.remove_buff_stack(CustomVariables.ARROW_PIERCE_ID, Stat.buff_type.ADDITIVE)
+	
 func get_tooltip() -> String:
 	return "You and your arrow are made of shadows"

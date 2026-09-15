@@ -24,7 +24,9 @@ func _ready() -> void:
 	area_entered.connect(AreaEnetered)
 	use_default_color = true
 	
-func AreaEnetered(a: HitBox) -> void:
+func AreaEnetered(a: Area2D) -> void:
+	if not a is HitBox:
+		return
 	if use_default_color:
 		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 	effect_color = DEFAULT_HIT_EFFECT_COLOR

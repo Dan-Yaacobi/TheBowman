@@ -25,11 +25,11 @@ func _remove_stats_from_player() -> void:
 	equipment.unequip_from_player()
 	
 func _reparent_to_world() -> void:
+	_remove_stats_from_player()
 	EventBus.equipment_dropped.emit(equipment.data,PlayerManager.player.global_position, equipment)
-
+	
 func _disable_player_interaction() -> void:
 	equipment.interaction_area.monitoring = false
-	
 	equipment.interaction_area.body_exited.connect(_on_player_exited, CONNECT_ONE_SHOT)
 	
 func _on_player_exited(_body: Node2D) -> void:

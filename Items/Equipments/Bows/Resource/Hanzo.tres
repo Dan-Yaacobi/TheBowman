@@ -16,6 +16,10 @@ metadata/_custom_type_script = "uid://tun528ejf2j7"
 script = ExtResource("6_ueus0")
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_wsg6i"]
+script = ExtResource("6_ueus0")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [resource]
 script = ExtResource("1_j70d1")
 display_name = "Hanzo"
@@ -24,6 +28,6 @@ equipped_texture = ExtResource("2_71sxo")
 dropped_scale = 0.3
 equipped_scale = Vector2(0.6, 0.5)
 ability = SubResource("Resource_bgaaw")
-tiers = Array[Object]([SubResource("Resource_g1826")])
+tiers = Array[Object]([SubResource("Resource_g1826"), SubResource("Resource_wsg6i")])
 equipment_scene = ExtResource("1_k8xai")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

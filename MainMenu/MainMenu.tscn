@@ -52,9 +52,8 @@ fixed_frame_index = 4
 
 [node name="RiftPortal" parent="Islands/Island" unique_id=593788380 instance=ExtResource("13_npjie")]
 z_index = 1
-position = Vector2(-1, -21)
+position = Vector2(-331, 16)
 destination = 2
-flip_h = true
 
 [node name="Island10" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
 position = Vector2(38, 94)

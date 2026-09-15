@@ -4,11 +4,22 @@
 [ext_resource type="Script" uid="uid://bako5t6ufu6rr" path="res://Player/Abilities2.0/ShootAbilities/HurricaneAttack/hurricane_attack.gd" id="1_yxblh"]
 [ext_resource type="Texture2D" uid="uid://cqg2ervgm8l8j" path="res://Items/Equipments/Bows/Sprites/Rising Feather.png" id="3_b2fkq"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_b2fkq"]
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_vkddt"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_u3of4"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_6vekb"]
 
 [sub_resource type="Resource" id="Resource_6gh2q"]
 script = ExtResource("1_yxblh")
 trigger_type = 4
 metadata/_custom_type_script = "uid://bako5t6ufu6rr"
+
+[sub_resource type="Resource" id="Resource_p1agp"]
+script = ExtResource("6_u3of4")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_qpoct"]
+script = ExtResource("6_u3of4")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("4_b2fkq")
@@ -18,6 +29,6 @@ equipped_texture = ExtResource("3_b2fkq")
 dropped_scale = 0.5
 equipped_scale = Vector2(0.5, 0.7)
 ability = SubResource("Resource_6gh2q")
-tiers = null
+tiers = Array[Object]([SubResource("Resource_p1agp"), SubResource("Resource_qpoct")])
 equipment_scene = ExtResource("1_a12vy")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

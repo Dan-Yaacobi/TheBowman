@@ -18,6 +18,10 @@ metadata/_custom_type_script = "uid://yp12igtlwhbu"
 script = ExtResource("7_hm5pd")
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_wsg6i"]
+script = ExtResource("7_hm5pd")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [resource]
 script = ExtResource("4_recig")
 display_name = "Ice Shards"
@@ -26,6 +30,6 @@ equipped_texture = ExtResource("3_mcopa")
 dropped_scale = 0.3
 slot = 1
 ability = SubResource("Resource_d0ww2")
-tiers = Array[Object]([SubResource("Resource_od0aq")])
+tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_wsg6i")])
 equipment_scene = ExtResource("2_mcopa")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

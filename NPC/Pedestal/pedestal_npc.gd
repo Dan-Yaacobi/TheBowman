@@ -25,8 +25,9 @@ func set_item(data: EquipmentData) -> void:
 
 func _setup_item_visual() -> void:
 	item_sprite.texture = item_data.texture
+	item_sprite.scale = Vector2(1,1)
 	item_sprite.scale *= item_data.dropped_scale
-	item_sprite.position = item_position.position
+	item_sprite.global_position = item_position.global_position
 	_start_float()
 	
 func action(_index: int) -> void:
@@ -40,6 +41,8 @@ func _get_item() -> void:
 	picked.emit(self)
 	
 func _start_float() -> void:
+	if _float_tween:
+		_float_tween.kill()
 	_float_tween = create_tween()
 	_float_tween.set_loops()
 	_float_tween.set_trans(Tween.TRANS_SINE)

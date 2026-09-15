@@ -9,17 +9,10 @@ func on_equipped() -> void:
 func on_unequipped() -> void:
 	EventBus.enemy_frostbitten_hit.disconnect(apply_freeze)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
-	if _target:
-		if _target is Enemy:
-			if !_target.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID) and !_target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
-					apply_frostbite(_target)
-			#else:
-				#if _target.can_be_stunned():
-					#apply_freeze(_target)
-				#else: # if it cant freeze it applies frostbite again
-					#apply_frostbite(_target)
-
+func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	if _target and _target is Enemy:
+		if !_target.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID) and !_target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
+				apply_frostbite(_target)
 func apply_freeze(_target: Enemy) -> void:
 	if _target.can_be_stunned():
 		var debuff: Debuff = FREEZE_DEBUFF.instantiate()

@@ -32,6 +32,10 @@ script = ExtResource("5_vo7br")
 stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_nxm3p"), SubResource("Resource_c21g4")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_jxlm4"]
+script = ExtResource("5_vo7br")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [resource]
 script = ExtResource("1_5beeh")
 display_name = "Winter"
@@ -40,6 +44,6 @@ equipped_texture = ExtResource("2_51kq0")
 dropped_scale = 0.4
 equipped_scale = Vector2(0.8, 0.5)
 ability = SubResource("Resource_4jnt2")
-tiers = Array[Object]([SubResource("Resource_phb7m")])
+tiers = Array[Object]([SubResource("Resource_phb7m"), SubResource("Resource_jxlm4")])
 equipment_scene = ExtResource("2_ndgag")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
