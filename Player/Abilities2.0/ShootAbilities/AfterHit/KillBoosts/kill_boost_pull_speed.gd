@@ -4,7 +4,7 @@ const PULL_SPEED_BUFF = preload("uid://baq16kh45t3dw")
 
 @export var pull_speed_increase: float = 0.5
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
+func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	if _target:
 		if _target is Enemy:
 			if _result:

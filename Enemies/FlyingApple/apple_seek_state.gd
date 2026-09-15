@@ -87,7 +87,7 @@ func _get_avoidance_direction(desired_dir: Vector2) -> Vector2:
 		return desired_dir
 	return _avoidance_dir
 
-func hit_player(_var) -> void:
+func hit_player(_var, _var2, _var3) -> void:
 	if state_machine.curr_state != self:
 		return
 	hit_counter += 1

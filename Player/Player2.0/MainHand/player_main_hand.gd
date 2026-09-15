@@ -70,6 +70,7 @@ func arrow_setup() -> void:
 	
 func draw_arrow() -> void:
 	if !current_arrow:
+		drawing_arrow.emit()
 		var _arrow: Arrow = arrow.instantiate()
 		var before_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT)
 		var after_hit_abilities: Array = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT)

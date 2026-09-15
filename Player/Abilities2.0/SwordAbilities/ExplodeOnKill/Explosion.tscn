@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c8xxhiavn7s50"]
+
+[ext_resource type="Script" uid="uid://ba7g7pla1tyfb" path="res://Player/Abilities2.0/SwordAbilities/ExplodeOnKill/explosion.gd" id="2_34n86"]
+[ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="3_g3sfy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hcmi0"]
+radius = 17.5
+
+[sub_resource type="Curve" id="Curve_34n86"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.8165137, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_g3sfy"]
+offsets = PackedFloat32Array(0, 0.19601329, 0.38538206, 0.75415283, 0.8604651, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.85, 0, 1, 1, 0.6, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="Explosion" type="Node2D" unique_id=1635212171]
+z_index = 2
+script = ExtResource("2_34n86")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=640211130]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("3_g3sfy")
+metadata/_custom_type_script = "uid://b4s4fndrtcgwn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1503992530]
+shape = SubResource("CircleShape2D_hcmi0")
+
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=904064046]
+emitting = false
+amount = 500
+lifetime = 0.5
+one_shot = true
+speed_scale = 6.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_34n86")
+color_ramp = SubResource("Gradient_g3sfy")
+
+[node name="AfterExplosion" type="CPUParticles2D" parent="." unique_id=119373951]
+emitting = false
+amount = 150
+lifetime = 1.2
+one_shot = true
+preprocess = 0.35
+speed_scale = 3.0
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2(0, 0)
+radial_accel_min = 50.0
+radial_accel_max = 50.0
+scale_amount_curve = SubResource("Curve_34n86")
+color_ramp = SubResource("Gradient_g3sfy")

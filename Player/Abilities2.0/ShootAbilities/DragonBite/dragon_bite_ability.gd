@@ -6,16 +6,15 @@ const DRAGON_BITE = preload("uid://cmv8qrto4g6en")
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
-	if _arrow:
-		if _arrow.perfect_shot:
-			var dragon_bite: DragonBite = DRAGON_BITE.instantiate()
-			dragon_bite.set_damage(_arrow.damage)
-			dragon_bite.direction = _arrow.velocity.normalized()
-			dragon_bite.global_position = PlayerManager.player.global_position
-			dragon_bite.abilities = _arrow.shoot_abilities
-			_arrow.queue_free()
-			EventBus.summon_effect.emit(dragon_bite)
-			
+func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	if _activator and _activator is Arrow and _activator.perfect_shot:
+		var dragon_bite: DragonBite = DRAGON_BITE.instantiate()
+		dragon_bite.set_damage(_activator.damage)
+		dragon_bite.direction = _activator.velocity.normalized()
+		dragon_bite.global_position = PlayerManager.player.global_position
+		dragon_bite.abilities = _activator.shoot_abilities
+		_activator.queue_free()
+		EventBus.summon_effect.emit(dragon_bite)
+
 func get_tooltip() -> String:
 	return "Turns Perfect Shots to a Dragon"

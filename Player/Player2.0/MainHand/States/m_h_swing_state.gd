@@ -15,8 +15,13 @@ func init() -> void:
 	base_sword_scale = sword.scale
 
 func Enter() -> void:
-	for ability in PlayerManager.player.get_sword_abilities():
-		ability.activate_ability()
+
+	for ability in PlayerManager.player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT):
+			slash_hurt_box.add_before_effect(ability.activate_ability)
+
+	for ability in PlayerManager.player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT):
+			slash_hurt_box.add_after_effect(ability.activate_ability)
+
 	EventBus.apply_player_knockback.emit(entity.hand_direction,75)
 	EventBus.sword_slash_sound.emit()
 	set_sword_size()

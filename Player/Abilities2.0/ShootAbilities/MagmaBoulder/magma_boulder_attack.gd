@@ -5,14 +5,13 @@ const MAGMA_BOULDER = preload("uid://esq83otc8iu8")
 func add_ability() -> void:
 	PlayerManager.player.add_shoot_ability(self)
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
-	if _arrow:
-		if _arrow.perfect_shot:
+func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	if _activator and _activator is Arrow and _activator.perfect_shot:
 			var magma_boulder: MagmaBoulder = MAGMA_BOULDER.instantiate()
-			magma_boulder.damage = roundi(_arrow.damage * 1.2)
-			magma_boulder.direction = _arrow.velocity.normalized()
+			magma_boulder.damage = roundi(_activator.damage * 1.2)
+			magma_boulder.direction = _activator.velocity.normalized()
 			magma_boulder.global_position = PlayerManager.player.global_position
-			_arrow.queue_free()
+			_activator.queue_free()
 			EventBus.summon_effect.emit(magma_boulder)
 
 

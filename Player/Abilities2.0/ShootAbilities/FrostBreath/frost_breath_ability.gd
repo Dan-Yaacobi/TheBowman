@@ -3,9 +3,9 @@ class_name FrostBreathAbility extends PlayerShootAbility
 const FROST_BREATH = preload("uid://cn3n10s62mfsj")
 var breath: FrostBreath
 
-func activate_ability(_target: Node2D = null , _arrow: Arrow = null, _result: DamageResult = null) -> void:
-	if _arrow:
-		_arrow.queue_free()
+func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	if _activator and _activator is Arrow:
+		_activator.queue_free()
 	breath = FROST_BREATH.instantiate()
 	breath.abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
 	breath.position = PlayerManager.player.main_hand.hold_position.position

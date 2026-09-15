@@ -95,7 +95,7 @@ func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
 	
 	take_damage(_hurt_box, 0, _result)
 	extra_hit_functions(_hurt_box)
-	knockback(_hurt_box)
+	knockback(_hurt_box, null, _result)
 	take_hit_effect()	
 
 func extra_hit_functions(_hurt_box: HurtBox) -> void:
@@ -168,7 +168,7 @@ func show_damage(_amount: int, color: Color) -> void:
 	var final_amount: int = _amount * stats.damage_taken_multiplier.value()
 	CombatTextSpawner.spawn(global_position, str(final_amount),color)
 	
-func knockback(_hurt_box: HurtBox) -> void:
+func knockback(_hurt_box: HurtBox, _hit_box, _result) -> void:
 	if stats.can_be_knockedback:
 		knockback_velocity += _hurt_box.knockback_dir * _hurt_box.knockback_power
 
