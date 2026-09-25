@@ -1,4 +1,5 @@
 class_name HealthBar extends TextureProgressBar
+
 @onready var ghost_bar: TextureProgressBar = $"../GhostBar"
 
 var health: int = 0: set = _set_health

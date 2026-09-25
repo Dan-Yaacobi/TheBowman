@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://chhklq8k7ecbr" path="res://Enemies/Spider/Sprites/SpiderWalking.png" id="2_44sm3"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_rnln2"]
 [ext_resource type="Texture2D" uid="uid://dnqqaaj0yfhfy" path="res://Enemies/Spider/Sprites/SpiderDrop.png" id="3_x2dl3"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_8csjq"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_mob8f"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_soewm"]
 [ext_resource type="Script" uid="uid://cdg4y771vfg1d" path="res://Enemies/Spider/spider_dropping_state.gd" id="5_lrwbi"]

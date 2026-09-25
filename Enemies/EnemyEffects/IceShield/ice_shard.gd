@@ -10,7 +10,6 @@ func extra_ready_function() -> void:
 	if !was_fired:
 		frost_particles.emitting = false
 		sprite.frame = randi_range(0, sprite.hframes * sprite.vframes - 2)
-		body_shape_entered.disconnect(hit_wall)
 		visible_on_screen_notifier.screen_exited.disconnect(clear_shot)
 		
 func _physics_process(delta: float) -> void:
@@ -18,6 +17,6 @@ func _physics_process(delta: float) -> void:
 		global_position += direction * data.move_speed * delta
 	rotate(delta * rotation_speed)
 	
-func clear_shot(_h = null) -> void:
+func clear_shot(_var1, _var, _var3) -> void:
 	shard_destroyed.emit()
 	queue_free()

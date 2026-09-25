@@ -32,7 +32,7 @@ func sword_slash_sound() -> void:
 func object_destroyed_sound() -> void:
 	_play_oneshot(object_destroyed.stream, 0.5,1.5, -10)
 	
-func arrow_release_sound(pitch: float) -> void:
+func arrow_release_sound(_pitch: float) -> void:
 	arrow_release.play()
 
 func string_pull_sound(pitch: float) -> void:

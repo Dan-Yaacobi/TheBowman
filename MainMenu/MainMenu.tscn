@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
-[ext_resource type="Resource" uid="uid://yvr467fev1ug" path="res://Items/Equipments/Bows/Resource/Vulcan.tres" id="15_5lv0r"]
+[ext_resource type="Resource" uid="uid://ccba2h0jl7u2d" path="res://Items/Equipments/Bows/Resource/Hemorrhage.tres" id="15_167x7"]
 [ext_resource type="Script" uid="uid://bgqqc5p3ma7t6" path="res://Level/PlayGround/falling_death.gd" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 
@@ -133,7 +133,7 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
-item_data = ExtResource("15_5lv0r")
+item_data = ExtResource("15_167x7")
 
 [node name="FallingDeath" type="Area2D" parent="." unique_id=1462536797]
 position = Vector2(227, 107)

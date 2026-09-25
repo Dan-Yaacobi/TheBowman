@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://be4tnd7a8wnjb"]
+
+[ext_resource type="Texture2D" uid="uid://byikbseemb6tq" path="res://Player/HealthBar/EmptyHeart.png" id="1_qnaxo"]
+[ext_resource type="Script" uid="uid://bk1o1qctgt5qr" path="res://HealthBar/health_bar.gd" id="2_uxvyn"]
+[ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="2_w50o0"]
+[ext_resource type="Texture2D" uid="uid://cg1fein05sc7r" path="res://Player/HealthBar/GhostHeart.png" id="3_w50o0"]
+
+[node name="HeartContainer" type="Control" unique_id=938707690]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 17.0
+offset_bottom = 13.0
+scale = Vector2(2, 2)
+
+[node name="GhostBar" type="TextureProgressBar" parent="." unique_id=1151939629]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 13.0
+max_value = 4.0
+fill_mode = 3
+texture_under = ExtResource("1_qnaxo")
+texture_progress = ExtResource("3_w50o0")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=438332030]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 13.0
+max_value = 4.0
+value = 4.0
+fill_mode = 3
+texture_progress = ExtResource("2_w50o0")
+script = ExtResource("2_uxvyn")

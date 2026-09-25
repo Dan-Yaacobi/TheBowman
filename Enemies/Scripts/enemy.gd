@@ -120,8 +120,10 @@ func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> vo
 
 func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
+	print("setting damage dealt multi: " ,_amount)
 	stats.damage_dealt_multiplier.add_buff(id,_amount,_type)
 	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
+	print("hurt box dmgmulti: ", hurt_box.damage_multiplier)
 	
 func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
@@ -137,10 +139,11 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		final_dmg = _hurt_box.damage
 		dmg_color = _hurt_box.combat_text_color
 	else:
+		@warning_ignore("narrowing_conversion")
 		final_dmg = raw_damage * stats.damage_taken_multiplier.value()
 	current_hp -= roundi(final_dmg)
 	frostbitten_hit()
-	handle_health_bar(final_dmg)	
+	handle_health_bar(final_dmg)
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
 	show_damage(final_dmg,dmg_color)
@@ -205,8 +208,10 @@ func bullet_set_up() -> Node2D:
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
 		new_bullet.data.knockback = stats.knockback
+		@warning_ignore("narrowing_conversion")
 		new_bullet.data.move_speed = stats.bullet_speed
 		new_bullet.was_fired = true
+		@warning_ignore("narrowing_conversion")
 		new_bullet.data.damage = stats.touch_damage * stats.damage_dealt_multiplier.value()
 		_wire_hit_effects(new_bullet.hurt_box, true)
 		return new_bullet

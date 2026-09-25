@@ -10,4 +10,5 @@ scene = ExtResource("2_1n0af")
 data = ExtResource("1_yn470")
 cost = 2
 min_level = 5
+max_level = 6
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

@@ -8,6 +8,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [node name="WeaknessDebuff" type="Node2D" unique_id=1514378092]
 script = ExtResource("1_g2jeq")
+can_stack = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2128426912]
 amount = 1

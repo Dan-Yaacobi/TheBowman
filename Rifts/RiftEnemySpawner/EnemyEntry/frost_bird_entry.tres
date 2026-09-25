@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://cmu6ys571rlng"]
+
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_mr0e3"]
+[ext_resource type="Resource" uid="uid://ct28n3svf4ruo" path="res://Enemies/EnemyData/EnemyValues/EvilBirds/frost_bird.tres" id="1_si1or"]
+[ext_resource type="PackedScene" uid="uid://cdtin5d5lhmfi" path="res://Enemies/EvilBird/EvilBird.tscn" id="2_pui8l"]
+
+[resource]
+script = ExtResource("1_mr0e3")
+scene = ExtResource("2_pui8l")
+data = ExtResource("1_si1or")
+min_level = 3
+max_level = 4
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

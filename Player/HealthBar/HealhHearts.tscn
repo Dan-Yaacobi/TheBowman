@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ccm60fajm4yy6"]
+
+[ext_resource type="Script" uid="uid://c4ww4ljwvu542" path="res://Player/HealthBar/health_hearts.gd" id="1_odx4d"]
+[ext_resource type="PackedScene" uid="uid://be4tnd7a8wnjb" path="res://Player/HealthBar/Heart.tscn" id="2_ecus1"]
+
+[node name="HealthHearts" type="Control" unique_id=1572092662]
+layout_mode = 3
+anchor_right = 0.286
+anchor_bottom = 0.083000004
+offset_right = 0.39996338
+offset_bottom = 0.29999542
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+script = ExtResource("1_odx4d")
+heart_scene = ExtResource("2_ecus1")
+
+[node name="FlowContainer" type="FlowContainer" parent="." unique_id=1183012900]
+layout_mode = 0
+offset_right = 168.0
+offset_bottom = 36.0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 16

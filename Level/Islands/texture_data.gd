@@ -23,6 +23,7 @@ func get_random_sprite() -> AtlasTexture:
 	var frame_width: float = texture.get_width() / float(hframes)
 	var frame_height: float = texture.get_height() / float(vframes)
 	var col: int = frame_index % hframes
+	@warning_ignore("integer_division")
 	var row: int = frame_index / hframes
 
 	var atlas: AtlasTexture = AtlasTexture.new()
@@ -39,6 +40,7 @@ func get_sprite_at(frame_index: int) -> AtlasTexture:
 	var frame_width: float = texture.get_width() / float(hframes)
 	var frame_height: float = texture.get_height() / float(vframes)
 	var col: int = clamped_index % hframes
+	@warning_ignore("integer_division")
 	var row: int = clamped_index / hframes
 
 	var atlas: AtlasTexture = AtlasTexture.new()

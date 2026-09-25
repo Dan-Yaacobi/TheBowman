@@ -1,4 +1,4 @@
-class_name ExplodeOnSwordKill extends PlayerSwordAbility
+class_name ExplodeOnKill extends MinorAbility
 
 const EXPLOSION = preload("uid://c8xxhiavn7s50")
 
@@ -15,3 +15,6 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 				
 func get_tooltip() -> String:
 	return "Cause enemies to explode upon death"
+	
+func get_type() -> TriggerType:
+	return TriggerType.AFTER_HIT

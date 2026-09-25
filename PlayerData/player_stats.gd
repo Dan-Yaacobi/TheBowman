@@ -5,6 +5,7 @@ var player: Player
 @export_subgroup("Basic Stats")
 @export var hp: int
 @export var max_hp: int
+@export var extra_hp: int = 0
 @export var knockback_resistance: Stat
 @export var reset_upgrades: bool = false
 @export var max_minions: int 
@@ -50,7 +51,7 @@ var player: Player
 @export_subgroup("Special")
 @export var stun_duration: Stat
 @export var bleed_damage: Stat
-@export var bleed_duration:Stat
+@export var bleed_duration: Stat
 @export var bleed_ticks: Stat
 @export var burn_damage: Stat
 @export var burn_duration: Stat
@@ -58,6 +59,8 @@ var player: Player
 @export var poison_damage: Stat
 @export var poison_duration: Stat
 @export var poison_ticks: Stat
+@export var frostbite_duration: Stat
+@export var freeze_duration: Stat
 @export var arrow_texture_override: Texture2D
 @export var arrow_visual_effects: Array[ArrowEffect]
 
@@ -85,6 +88,7 @@ var player: Player
 @export var sword_size: Stat
 @export var base_sword_cooldown: Stat
 @export var sword_damage: Stat
+@export var extra_sword_knockback: Stat
 
 @export_subgroup("Rift")
 @export var rift_level: int = 1

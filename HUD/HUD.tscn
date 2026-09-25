@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
+[ext_resource type="PackedScene" uid="uid://ccm60fajm4yy6" path="res://Player/HealthBar/HealhHearts.tscn" id="2_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bsuxrgl8shr8m" path="res://HUD/ActiveAbility/ActiveAbilityPicker.tscn" id="2_fjfvf"]
-[ext_resource type="Texture2D" uid="uid://x12v3yoxmaxf" path="res://Player/HealthBar/Heart.png" id="3_33tmu"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
@@ -78,22 +78,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HealthBar" parent="Control" unique_id=1431315462 instance=ExtResource("1_b7ubu")]
-custom_minimum_size = Vector2(50, 20)
+[node name="HealthHearts" parent="Control" unique_id=1572092662 instance=ExtResource("2_65vjf")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.004
-anchor_top = 0.86
-anchor_right = 0.22800002
-anchor_bottom = 0.97200006
-offset_left = -0.12000036
-offset_top = 0.7999878
-offset_right = -286.77603
-offset_bottom = -80.00006
-grow_vertical = 0
-scale = Vector2(5, 5)
-mouse_filter = 2
-texture = ExtResource("3_33tmu")
+offset_left = 4.0
+offset_top = 786.0
+offset_right = -219.10004
+offset_bottom = 737.8
 
 [node name="BossHealthBar" parent="Control" unique_id=828899742 instance=ExtResource("1_b7ubu")]
 custom_minimum_size = Vector2(50, 20)

@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_8iawy"]
 script = ExtResource("5_lw5aq")
-base_value = 40.0
+base_value = 32.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
@@ -29,6 +29,7 @@ texture_scale = Vector2(0.75, 0.75)
 move_animation = "Move"
 avg_coins_dropped = 1
 touch_damage = 2
+knockback_decay = 0.055
 drop_chance = 25.0
 has_wings = true
 facing_player = false

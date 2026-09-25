@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("4_cs5s4")
-display_name = "Poison Darts"
+display_name = "Cursed Skulls"
 texture = ExtResource("4_w7ipp")
 equipped_texture = ExtResource("2_rkn5r")
 dropped_scale = 0.3

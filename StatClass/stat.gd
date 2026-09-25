@@ -13,7 +13,7 @@ class Stat_Buff:
 	var amount: float
 	var stacks: int = 0
 	
-	func _init(_id: int, _amount: float, _type: buff_type) -> void:
+	func _init(_id: int, _amount: float) -> void:
 		id = _id
 		amount = _amount
 		increase_stack()
@@ -53,20 +53,14 @@ func add_buff(id: int, amount: float, type: buff_type) -> void:
 	if mod:
 		mod.increase_stack()
 	else:
-		var new_buff: Stat_Buff = Stat_Buff.new(id,amount,type)
+		var new_buff: Stat_Buff = Stat_Buff.new(id, amount)
 		find_array(type).append(new_buff)
 
 func remove_buff_completly(id: int, type: buff_type) -> void:
 	var mod: Stat_Buff = find_buff(id, type)
-	var array = find_array(type)
 	if mod:
 		mod.reduce_all_stack()
-	array.erase(mod)
-
-func reduce_buff_amount(id: int, amount: float, type) -> void:
-	var mod: Stat_Buff = find_buff(id, type)
-	if mod:
-		mod.reduce_amount(amount)
+		find_array(type).erase(mod)
 
 func remove_buff_stack(id: int, type: buff_type) -> void:
 	var mod: Stat_Buff = find_buff(id, type)
@@ -86,9 +80,7 @@ func find_array(type: buff_type) -> Array[Stat_Buff]:
 func find_buff(id: int, type: buff_type) -> Stat_Buff:
 	var array: Array[Stat_Buff] = find_array(type)
 	
-	var res: Stat_Buff = null
 	for mod in array:
 		if mod.id == id:
-			res = mod
-			return res
+			return mod
 	return null
