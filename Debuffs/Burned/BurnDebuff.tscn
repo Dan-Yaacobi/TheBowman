@@ -5,7 +5,6 @@
 
 [node name="BurnDebuff" type="Node2D" unique_id=780100279]
 script = ExtResource("1_11k1u")
-ID = null
 
 [node name="BurnedEffect" parent="." unique_id=1507663576 instance=ExtResource("2_66oai")]
 position = Vector2(0, -6)

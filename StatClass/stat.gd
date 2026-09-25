@@ -34,9 +34,6 @@ class Stat_Buff:
 	func reduce_all_stack() -> void:
 		stacks = 0
 	
-	func reduce_amount(_amount) -> void:
-		amount = max(0.0, amount - _amount)
-
 func value() -> float:
 	if zero:
 		return 0.0

@@ -10,11 +10,19 @@ var gravity: int = 120
 var speed: float = 100
 var direction: Vector2
 var damage: int = 1
+var after_hit_abilities: Array
+var before_hit_abilities: Array
+var knockback_power: float
 
 func _ready() -> void:
 	velocity = speed * direction
 	hurt_box.base_damage = damage
-	hurt_box.add_effect(apply_burn)
+	for ability in after_hit_abilities:
+		hurt_box.add_after_effect(ability.activate_ability)
+	for ability in before_hit_abilities:
+		hurt_box.add_before_effect(ability.activate_ability)
+	hurt_box.add_after_effect(apply_burn)
+	hurt_box.knockback_power = knockback_power
 	visible_on_screen_notifier.screen_exited.connect(attempt_to_queue_free)
 	visible_on_screen_notifier.screen_entered.connect(stop_exiting)
 	queue_free_timer.timeout.connect(queue_free)
@@ -30,7 +38,9 @@ func stop_exiting() -> void:
 func attempt_to_queue_free() -> void:
 	queue_free_timer.start()
 	
-func apply_burn(enemy: Enemy) -> void:
+func apply_burn(enemy: Enemy, _parent, _result) -> void:
 	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
-	burn_debuff.set_damage(roundi(damage*0.2))
-	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,5,5)
+	burn_debuff.set_damage(roundi(PlayerManager.player.stats.burn_damage.value()))
+	var duration = PlayerManager.player.stats.burn_duration.value()
+	var ticks = PlayerManager.player.stats.burn_ticks.value()
+	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,duration,ticks)

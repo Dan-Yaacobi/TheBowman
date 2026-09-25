@@ -121,6 +121,7 @@ _data = {
 radius = 20.024984
 
 [node name="SkullAttack" type="Node2D" unique_id=964962389]
+z_index = -10
 script = ExtResource("1_yd42x")
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=1986382452]

@@ -7,6 +7,7 @@ enum directions {Up, Left ,Down ,Right}
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98
 
+const WEAKNESS_DEBUFF_ID: int = 104
 const FROSTBITE_DEBUFF_ID: int = 105
 const FREEZE_DEBUFF_ID: int = 106
 const BURN_DEBUFF_ID: int = 107

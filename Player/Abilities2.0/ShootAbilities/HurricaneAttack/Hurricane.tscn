@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yhgtq"]
 radius = 17.0
-height = 104.0
+height = 80.0
 
 [node name="Hurricane" type="Node2D" unique_id=1566311333]
 script = ExtResource("1_tqqog")
@@ -22,9 +22,5 @@ spawn_rate = 80.0
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=735846482]
-visible = false
-position = Vector2(0, -51)
+position = Vector2(0, -40)
 shape = SubResource("CapsuleShape2D_yhgtq")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=272281333]
-zoom = Vector2(4, 4)

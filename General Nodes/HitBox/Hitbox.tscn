@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="1_kod6q"]
 [ext_resource type="PackedScene" uid="uid://ce1cc1624pef1" path="res://General Nodes/EnemyHitEffect/EnemyHitParticles.tscn" id="2_u7qom"]
 
-
-[node name="HitBox" type="Area2D"]
+[node name="HitBox" type="Area2D" unique_id=2063195317]
 script = ExtResource("1_kod6q")
 
-[node name="EnemyHitEffect" parent="." instance=ExtResource("2_u7qom")]
+[node name="EnemyHitEffect" parent="." unique_id=1376373160 instance=ExtResource("2_u7qom")]

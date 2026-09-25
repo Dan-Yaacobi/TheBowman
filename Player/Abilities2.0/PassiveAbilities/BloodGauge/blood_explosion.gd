@@ -9,7 +9,7 @@ func _ready() -> void:
 func _on_enemy_detector_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		var bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
-		bleed_debuff.bleed_damage = PlayerManager.player.stats.bleed_damage
+		bleed_debuff.bleed_damage = PlayerManager.player.stats.bleed_damage.value()
 		body.apply_debuff(bleed_debuff,6,6)
 
 func _on_finished() -> void:

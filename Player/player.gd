@@ -244,7 +244,8 @@ func set_new_arrow() -> void:
 	if stats.arrow_texture_override:
 		main_hand.arrow_texture = stats.arrow_texture_override
 	else:
-		main_hand.arrow_texture = stats.arrow.equipped_texture
+		if stats.arrow:
+			main_hand.arrow_texture = stats.arrow.equipped_texture
 
 func set_new_quiver(_texture: Texture2D) -> void:
 	if _texture:
@@ -266,20 +267,21 @@ func reset_minions() -> void:
 func emit_crit() -> void:
 	critical_hit.emit()
 
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int, _result: DamageResult = null) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	if not invincible:
 		took_hit.emit()
 		EventBus.damaged_flash.emit()
 		damaged_particles.emitting = true
 		var dmg_taken: int = 0
+		var dmg_color = _alter_dmg_color
 		if _hurt_box:
 			start_invincibilty()
 			dmg_taken = _hurt_box.damage
 			apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
-			show_damage(_hurt_box.damage, Color.RED)
+			dmg_color = _hurt_box.combat_text_color
 		else:
 			dmg_taken = raw_damage
-			
+		show_damage(dmg_taken, dmg_color)
 		stats.hp -= dmg_taken
 		health_bar.reduce_health(dmg_taken)
 
@@ -447,13 +449,15 @@ func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) 
 			EquipmentData.slots.BOW:
 				stats.bow = _new_item
 				set_new_bow()
+				set_new_arrow()
 			EquipmentData.slots.ARROW:
 				stats.arrow = _new_item
 				set_new_arrow()
 				set_new_quiver(stats.arrow.texture)
 			EquipmentData.slots.RING:
 				stats.ring = _new_item
-
+				set_new_arrow()
+				
 func equip_item(_equip: Equipment, _slot: EquipmentData.slots) -> void:
 	if _equip and _slot >= 0:
 		equipped_nodes[_slot] = _equip

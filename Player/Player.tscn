@@ -68,6 +68,36 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
+[sub_resource type="Resource" id="Resource_5q68d"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_igawg"]
+script = ExtResource("4_yf47d")
+base_value = 6.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_jewlj"]
+script = ExtResource("4_yf47d")
+base_value = 4.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_34rs8"]
+script = ExtResource("4_yf47d")
+base_value = 3.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_quirc"]
+script = ExtResource("4_yf47d")
+base_value = 6.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_5y1fs"]
+script = ExtResource("4_yf47d")
+base_value = 3.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
 [sub_resource type="Resource" id="Resource_1ylbe"]
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
@@ -120,6 +150,21 @@ script = ExtResource("4_yf47d")
 base_value = 0.75
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
+[sub_resource type="Resource" id="Resource_wqtw3"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_126e2"]
+script = ExtResource("4_yf47d")
+base_value = 6.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_vba2m"]
+script = ExtResource("4_yf47d")
+base_value = 6.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
 [sub_resource type="Resource" id="Resource_yyr8h"]
 script = ExtResource("4_yf47d")
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
@@ -127,6 +172,11 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 [sub_resource type="Resource" id="Resource_r04tr"]
 script = ExtResource("4_yf47d")
 base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_lhg51"]
+script = ExtResource("4_yf47d")
+base_value = 2.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_lre2g"]
@@ -173,7 +223,16 @@ can_pass_walls = true
 crit_chance = SubResource("Resource_1ylbe")
 crit_modifier = SubResource("Resource_sqgfh")
 arrow_size = SubResource("Resource_xehjw")
-bleed_damage = 3
+stun_duration = SubResource("Resource_lhg51")
+bleed_damage = SubResource("Resource_5q68d")
+bleed_duration = SubResource("Resource_igawg")
+bleed_ticks = SubResource("Resource_jewlj")
+burn_damage = SubResource("Resource_34rs8")
+burn_duration = SubResource("Resource_quirc")
+burn_ticks = SubResource("Resource_5y1fs")
+poison_damage = SubResource("Resource_wqtw3")
+poison_duration = SubResource("Resource_126e2")
+poison_ticks = SubResource("Resource_vba2m")
 sword_size = SubResource("Resource_rqaa0")
 base_sword_cooldown = SubResource("Resource_x2ho1")
 sword_damage = SubResource("Resource_lre2g")

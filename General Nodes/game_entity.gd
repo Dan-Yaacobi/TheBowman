@@ -3,8 +3,8 @@ class_name GameEntity extends CharacterBody2D
 # for example for applying debuff handler on both the player and the enemies without duplicating code
 @onready var debuff_handler: DebuffHandler = $DebuffHandler
 
-func take_damage(_hurt_box: HurtBox, raw_damage: int = 0, _result: DamageResult = null) -> void:
-	_handle_take_damage(_hurt_box, raw_damage, _result)
+func take_damage(_hurt_box: HurtBox, raw_damage: int = 0, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
+	_handle_take_damage(_hurt_box, raw_damage, _result, _alter_dmg_color)
 	pass
 	
 func show_damage(_amount: int, color: Color) -> void:
@@ -19,5 +19,5 @@ func has_debuff(id: int) -> bool:
 func end_debuff(id: int) -> void:
 	debuff_handler.end_debuff(id)
 	
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
 	pass

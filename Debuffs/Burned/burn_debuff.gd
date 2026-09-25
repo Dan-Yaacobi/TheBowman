@@ -6,5 +6,4 @@ func set_damage(_dmg: int) -> void:
 	fire_damage = _dmg
 	
 func apply_debuff_effect() -> void:
-	entity.take_damage(null, fire_damage)
-	entity.show_damage(fire_damage,Color.RED)
+	entity.take_damage(null, fire_damage,null, Color.RED)

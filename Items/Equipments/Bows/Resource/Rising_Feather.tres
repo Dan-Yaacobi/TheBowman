@@ -13,8 +13,16 @@ script = ExtResource("1_yxblh")
 trigger_type = 4
 metadata/_custom_type_script = "uid://bako5t6ufu6rr"
 
+[sub_resource type="Resource" id="Resource_tqqog"]
+script = ExtResource("7_6vekb")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_p1agp"]
 script = ExtResource("6_u3of4")
+stat_rolls = Array[ExtResource("7_6vekb")]([SubResource("Resource_tqqog")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_qpoct"]
@@ -26,8 +34,8 @@ script = ExtResource("4_b2fkq")
 display_name = "Rising Feather"
 texture = ExtResource("3_b2fkq")
 equipped_texture = ExtResource("3_b2fkq")
-dropped_scale = 0.5
-equipped_scale = Vector2(0.5, 0.7)
+dropped_scale = 0.3
+equipped_scale = Vector2(0.4, 0.6)
 ability = SubResource("Resource_6gh2q")
 tiers = Array[Object]([SubResource("Resource_p1agp"), SubResource("Resource_qpoct")])
 equipment_scene = ExtResource("1_a12vy")

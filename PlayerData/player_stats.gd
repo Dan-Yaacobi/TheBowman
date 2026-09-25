@@ -48,16 +48,16 @@ var player: Player
 @export var arrow_size: Stat
 
 @export_subgroup("Special")
-@export var stun_duration: float = 2.0
-@export var bleed_damage: int = 1
-@export var bleed_duration: float = 10.0
-@export var bleed_ticks: int = 5
-@export var burn_damage: int = 1
-@export var burn_duration: float = 10.0
-@export var burn_ticks: int = 5
-@export var poison_damage: int = 1
-@export var poison_duration: float = 10.0
-@export var poison_ticks : int = 5
+@export var stun_duration: Stat
+@export var bleed_damage: Stat
+@export var bleed_duration:Stat
+@export var bleed_ticks: Stat
+@export var burn_damage: Stat
+@export var burn_duration: Stat
+@export var burn_ticks: Stat
+@export var poison_damage: Stat
+@export var poison_duration: Stat
+@export var poison_ticks: Stat
 @export var arrow_texture_override: Texture2D
 @export var arrow_visual_effects: Array[ArrowEffect]
 

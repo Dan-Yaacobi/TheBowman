@@ -30,6 +30,7 @@ var is_dead: bool = false
 
 var invincible: bool = false
 var stunned: bool = false
+var captured_by: Node2D
 
 func _ready() -> void:
 	current_hp = stats.max_hp
@@ -92,7 +93,6 @@ func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
 func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
-	
 	take_damage(_hurt_box, 0, _result)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box, null, _result)
@@ -116,7 +116,7 @@ func set_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 
 func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_TAKEN_MULT_ID
-	stats.damage_taken_multiplier.reduce_buff_amount(id,_amount,_type)
+	stats.damage_taken_multiplier.remove_buff_stack(id, _type)
 
 func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
@@ -125,16 +125,17 @@ func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	
 func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
-	stats.damage_dealt_multiplier.reduce_buff_amount(id,_amount,_type)
+	stats.damage_dealt_multiplier.remove_buff_stack(id, _type)
 	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
 	
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0, result: DamageResult = null) -> void:
-	
+func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	var final_dmg: int
+	var dmg_color: Color = _alter_dmg_color
 	if is_dead:
 		return
 	if _hurt_box:
-		final_dmg = roundi(_hurt_box.damage * stats.damage_taken_multiplier.value())
+		final_dmg = _hurt_box.damage
+		dmg_color = _hurt_box.combat_text_color
 	else:
 		final_dmg = raw_damage * stats.damage_taken_multiplier.value()
 	current_hp -= roundi(final_dmg)
@@ -142,14 +143,15 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int = 0, result: Damage
 	handle_health_bar(final_dmg)	
 	if damaged_animation_player:
 		damaged_animation_player.play("Damaged")
-	
+	show_damage(final_dmg,dmg_color)
 	if current_hp <= 0:
 		is_dead = true
 		activate_death_ability()
 		enemy_died()
 		drop_item()
-		if result:
-			result.killed = true
+		if _result:
+			_result.killed = true
+			
 func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)
@@ -166,8 +168,7 @@ func enemy_died() -> void:
 	queue_free()
 	
 func show_damage(_amount: int, color: Color) -> void:
-	var final_amount: int = _amount * stats.damage_taken_multiplier.value()
-	CombatTextSpawner.spawn(global_position, str(final_amount),color)
+	CombatTextSpawner.spawn(global_position, str(_amount),color)
 	
 func knockback(_hurt_box: HurtBox, _hit_box, _result) -> void:
 	if stats.can_be_knockedback:
@@ -212,7 +213,6 @@ func bullet_set_up() -> Node2D:
 	return null
 	
 func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> void:
-
 	for effect in stats.hit_effects:
 		if projectile and not effect.applies_to_projectiles:
 			continue
@@ -250,3 +250,18 @@ func stop_extra_animation_players() -> void:
 func frostbitten_hit() -> void:
 	if debuff_handler.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID):
 		EventBus.enemy_frostbitten_hit.emit(self)
+
+func attempt_capture(_new_parent: Node2D) -> bool:
+	if stats.capture_immune or captured_by != null:
+		return false
+	captured_by = _new_parent
+	state_machine.cause_pause(true)
+	set_physics_process(false)
+	if self is CharacterBody2D:
+		velocity = Vector2.ZERO
+	return true
+	
+func release_capture() -> void:
+	captured_by = null
+	state_machine.cause_pause(false)
+	set_physics_process(true)

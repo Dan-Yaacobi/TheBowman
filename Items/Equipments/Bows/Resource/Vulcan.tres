@@ -13,8 +13,16 @@ script = ExtResource("1_6i61w")
 trigger_type = 4
 metadata/_custom_type_script = "uid://cofo70ibb0g01"
 
+[sub_resource type="Resource" id="Resource_167x7"]
+script = ExtResource("7_tqlsv")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_lk575"]
 script = ExtResource("6_rtvtt")
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_167x7")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_tcyps"]
@@ -27,7 +35,7 @@ display_name = "Vulcan"
 texture = ExtResource("3_fssex")
 equipped_texture = ExtResource("3_fssex")
 dropped_scale = 0.4
-equipped_scale = Vector2(0.5, 0.7)
+equipped_scale = Vector2(0.7, 0.7)
 ability = SubResource("Resource_fklrd")
 tiers = Array[Object]([SubResource("Resource_lk575"), SubResource("Resource_tcyps")])
 equipment_scene = ExtResource("1_37o2c")
