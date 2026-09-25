@@ -9,6 +9,7 @@ var patch_damage: int
 func set_arrow(_arrow: Arrow) -> void:
 	if _arrow:
 		arrow = _arrow
+		@warning_ignore("integer_division")
 		patch_damage = floori(arrow.damage / 4)
 
 func _physics_process(_delta: float) -> void:
@@ -26,6 +27,7 @@ func spawn_patch() -> void:
 	patch.global_position = global_position
 	var owner_ref = weakref(self)
 	patch.setup(patch_damage, func(enemy: Enemy):
+		@warning_ignore("shadowed_variable_base_class")
 		var owner = owner_ref.get_ref()
 		if is_instance_valid(owner):
 			owner.apply_burn(enemy)
@@ -41,7 +43,10 @@ func apply_burn(_enemy: Enemy) -> void:
 func _apply_burn(entity: GameEntity) -> void:
 		if entity:
 			var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
-			burn_debuff.fire_damage = patch_damage
-			entity.debuff_handler.add_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID, 6, 3)
+			@warning_ignore("narrowing_conversion")
+			burn_debuff.fire_damage = PlayerManager.player.stats.burn_damage.value()
+			var duration = PlayerManager.player.stats.burn_duration.value()
+			var ticks = PlayerManager.player.stats.burn_ticks.valeu()
+			entity.debuff_handler.add_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID, duration, ticks)
 
 	

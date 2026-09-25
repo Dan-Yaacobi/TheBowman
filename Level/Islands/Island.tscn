@@ -52,3 +52,6 @@ one_way_collision = true
 
 [node name="ObjectsSpawnMarkers" parent="." unique_id=1079830238 instance=ExtResource("3_yan88")]
 position = Vector2(0, -5)
+
+[node name="RespawnMarker" type="Marker2D" parent="." unique_id=1470085494]
+position = Vector2(0, -25)

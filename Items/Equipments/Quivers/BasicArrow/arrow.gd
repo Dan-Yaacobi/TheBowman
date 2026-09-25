@@ -80,6 +80,7 @@ func hit(_hurt_box,_hit_box, _result) -> void:
 			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
 	pierce_count += 1
 	clear_shot()
+	GeneralFunctions.hit_freeze(0.03)
 			
 func crit_effect(_body: Enemy) -> void:
 	var _crit_effect = CRIT.instantiate()

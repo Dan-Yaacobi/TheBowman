@@ -37,7 +37,7 @@ vframes = 3
 totalframes = 7
 metadata/_custom_type_script = "uid://gnexyll2mtpb"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocb72"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c75oe"]
 resource_local_to_scene = true
 size = Vector2(49, 40)
 
@@ -64,6 +64,6 @@ position = Vector2(-14.999998, -19)
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(0.5, -12)
-shape = SubResource("RectangleShape2D_ocb72")
+shape = SubResource("RectangleShape2D_c75oe")
 
 [editable path="Bounds"]

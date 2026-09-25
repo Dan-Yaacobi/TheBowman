@@ -71,7 +71,7 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
 	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep, bounded growth
 	var rift_stat_scalar: float = 1.0 + s * rift_stat_scale
-
+	
 	for tier_index in range(rarity + 1):
 		var tier: RarityTier = data.tiers[tier_index]
 		for def in tier.stat_rolls:
@@ -80,7 +80,7 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
 			data.add_modifier(def.stat_name, amount, def.type)
 		if tier.minor_roll_count > 0 and not tier.minor_ability_pool.is_empty():
-			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, 0.0))
+			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, 0.0, rarity))
 
 ## Guaranteed tier floor based on rift level, with a small chance to roll one tier above it.
 ## Rarity is never randomly rolled below the current rift-level band.
@@ -108,7 +108,7 @@ func _pick_template(pool: ItemPool) -> EquipmentData:
 			return template
 	return pool.templates.back()
 
-func _roll_minors(available: Array[MinorAbility], count: int, shift: float) -> Array[MinorAbility]:
+func _roll_minors(available: Array[MinorAbility], count: int, shift: float, rarity: int) -> Array[MinorAbility]:
 	var result: Array[MinorAbility] = []
 	var remaining: Array[MinorAbility] = available.duplicate()
 	for i in count:
@@ -123,6 +123,7 @@ func _roll_minors(available: Array[MinorAbility], count: int, shift: float) -> A
 			cumulative += 1.0 / minor.rarity_weight
 			if roll <= cumulative:
 				var rolled: MinorAbility = minor.duplicate()
+				rolled.roll_values(rarity)
 				rolled.apply_shift(shift)
 				result.append(rolled)
 				remaining.erase(minor)

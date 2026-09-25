@@ -19,7 +19,6 @@ var left_end: float
 
 func init() -> void:
 	egg_attack_timer.timeout.connect(enemy.shoot)
-
 	
 func Enter() -> void:
 	fly_direction = [-1, 1].pick_random()

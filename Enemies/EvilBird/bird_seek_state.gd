@@ -20,6 +20,7 @@ func Exit() -> void:
 #what happens during process update in this state
 func Process(_delta: float) -> EnemyState:
 	return null
+	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> EnemyState:
 	enemy.face_the_player()

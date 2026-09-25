@@ -4,6 +4,7 @@ class_name EvilBird extends Enemy
 
 func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
+	damaged_animation_player = $Sprite2D/DamagedAnimation
 	state_machine.Initialize(self)
 	
 func _physics_process(_delta: float) -> void:

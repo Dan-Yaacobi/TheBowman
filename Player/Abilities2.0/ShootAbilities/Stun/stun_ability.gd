@@ -7,7 +7,8 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		if _activator and _activator is Arrow:
 			if _target.full_health() and _target.can_be_stunned():
 				var stun_debuff: Debuff = STUN_DEBUFF.instantiate()
-				_target.debuff_handler.add_debuff(stun_debuff,CustomVariables.STUN_DEBUFF_ID,3,1)
+				var duration = PlayerManager.player.stats.stun_duration.value()
+				_target.debuff_handler.add_debuff(stun_debuff,CustomVariables.STUN_DEBUFF_ID,duration,1)
 				
 func get_tooltip() -> String:
 	return "Arrows stun full-health enemies"

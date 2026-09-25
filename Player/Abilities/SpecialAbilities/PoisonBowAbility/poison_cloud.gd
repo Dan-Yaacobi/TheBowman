@@ -34,9 +34,10 @@ func _start_lifetime_timer() -> void:
 func poison_damage(_body) -> void:
 	if _body is Enemy:
 		var poison: PoisonDebuff = POISON_DEBUFF.instantiate()
-		poison.poison_damage = PlayerManager.player.stats.poison_damage
-		var duration: float = PlayerManager.player.stats.poison_duration
-		var ticks: int = PlayerManager.player.stats.poison_ticks
+		@warning_ignore("narrowing_conversion")
+		poison.poison_damage = PlayerManager.player.stats.poison_damage.value()
+		var duration: float = PlayerManager.player.stats.poison_duration.value()
+		var ticks: float = PlayerManager.player.stats.poison_ticks.value()
 		_body.apply_debuff(poison,CustomVariables.POISON_DEBUFF_ID, duration,ticks)
 
 func _physics_process(delta: float) -> void:

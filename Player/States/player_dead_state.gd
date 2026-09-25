@@ -14,8 +14,9 @@ func Exit() -> void:
 	player.debuff_handler.reset_debuffs()
 	if player.stats.reset_upgrades:
 		player.reset_to_base_stats()
-	player.stats.hp = player.stats.max_hp
-	player.health_bar._set_health(player.stats.max_hp)
+	player.stats.max_hp = player.initial_max_hp
+	player.stats.hp = player.max_hp_value()
+	player.health_bar.init_health(0,false)
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	EventBus.player_died.emit(display_death_screen)
 	reset_active_ability()

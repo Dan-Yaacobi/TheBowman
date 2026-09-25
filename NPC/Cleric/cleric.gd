@@ -1,6 +1,5 @@
 class_name Cleric extends NPC
 
-@export var max_hp_increase: int = 3
 @export var bless_cost: int = 25
 
 var buying: bool = false
@@ -14,7 +13,7 @@ func _bless() -> void:
 	if not buying:
 		buying = true
 		if PlayerManager.player.buy(bless_cost):
-			PlayerManager.player.increase_max_hp(max_hp_increase, true)
+			PlayerManager.player.increase_max_hp(true)
 			show_post_action_line()
 			action_taken = true
 		buying = false

@@ -2,6 +2,7 @@ class_name GameWorld extends Node2D
 
 var effects: Array[Node2D] = []
 var current_enemies: Array[Enemy] = []
+var has_respawns: bool = false
 
 func set_world() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)

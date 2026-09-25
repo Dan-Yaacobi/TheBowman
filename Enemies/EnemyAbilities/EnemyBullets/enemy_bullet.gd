@@ -13,8 +13,7 @@ var direction: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	if sprite.texture:
 		sprite.texture = data.texture
-	visible_on_screen_notifier.screen_exited.connect(clear_shot)
-	body_shape_entered.connect(hit_wall)
+	visible_on_screen_notifier.screen_exited.connect(queue_free)
 	hurt_box.base_damage = data.damage
 	hurt_box.knockback_power = data.knockback
 	hit_box.Damaged.connect(clear_shot)
@@ -30,9 +29,5 @@ func _physics_process(delta: float) -> void:
 	rotation += randf_range(0.02,0.04)
 	pass
 
-func hit_wall(_v1,_v2,_v3,_v4) -> void:
-	if _v2 is Island:
-		clear_shot()
-	
-func clear_shot(_h = null) -> void:
+func clear_shot(_var1, _var, _var3) -> void:
 	queue_free()

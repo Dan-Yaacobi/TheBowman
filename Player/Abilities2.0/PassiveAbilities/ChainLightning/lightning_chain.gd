@@ -5,7 +5,6 @@ const LIGHTNING_CHAIN = preload("uid://bf4okr84ysm2p")
 
 @export var max_chains: int = 3
 @export var chain_radius: float = 200.0
-@export var stun_duration: float = 2.0
 @export var damage: int = 4
 
 @onready var search_area: Area2D = $SearchArea
@@ -40,7 +39,7 @@ func _on_chain_timer_timeout() -> void:
 
 func _apply_stun(_enemy: Enemy) -> void:
 	var stun: StunDebuff = STUN_DEBUFF.instantiate()
-	_enemy.apply_debuff(stun,CustomVariables.STUN_DEBUFF_ID, stun_duration, 1)
+	_enemy.apply_debuff(stun,CustomVariables.STUN_DEBUFF_ID, PlayerManager.player.stats.stun_duration.value(), 1)
 
 func _draw_lightning(_from: Vector2, _to: Vector2) -> void:
 	var local_from: Vector2 = _from - global_position

@@ -9,6 +9,7 @@ class_name Island extends StaticBody2D
 @export var use_fixed_frame: bool = false
 @export var fixed_frame_index: int = 0
 @export var textures: Array[TextureData]
+@onready var respawn_marker: Marker2D = $RespawnMarker
 
 
 var start_point: Vector2
@@ -86,3 +87,8 @@ func _on_player_interact() -> void:
 	_dip_tween = create_tween()
 	_dip_tween.tween_property(self, "position", original_position + dip_offset, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	_dip_tween.tween_property(self, "position", original_position, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	var world = PlayerManager.player.get_parent()
+	if world is GameWorld and world.has_respawns:
+		EventBus.rift_respawn_position.emit(get_respawn_position())
+func get_respawn_position() -> Vector2:
+	return respawn_marker.global_position

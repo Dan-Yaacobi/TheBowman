@@ -40,7 +40,7 @@ var can_hook: bool = true
 
 const HEALTH_GAIN_EFFECT = preload("uid://d06bmrun6hlne")
 const PERMA_EFFECT: int = -1
-var health_bar: HealthBar
+var health_bar: HealthHearts
 var direction: float
 var direction_side: bool = false
 var knockback_power: Dictionary = {"direction": Vector2.ZERO,
@@ -75,13 +75,15 @@ var equipped_nodes: Dictionary = {
 	EquipmentData.slots.RING: null,
 }
 var sprite: Sprite2D
+var initial_max_hp: int
 
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
-	stats.hp = stats.max_hp
-	health_bar.init_health(stats.max_hp)
+	stats.hp = max_hp_value()
+	initial_max_hp = stats.max_hp
+	health_bar.init_health(max_hp_value())
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(take_damage)
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
@@ -101,7 +103,7 @@ func _ready() -> void:
 	sprite = body.sprite
 	debuff_handler.set_entity(self)
 	activate_passive_abilities() 
-
+	
 
 var enemies_killed: int = 0
 
@@ -282,7 +284,6 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage: int, _result: DamageRes
 			
 		stats.hp -= dmg_taken
 		health_bar.reduce_health(dmg_taken)
-
 		if stats.hp <= 0:
 			kill()
 
@@ -298,19 +299,32 @@ func invincibility_over() -> void:
 	self.modulate.a = 1
 	hit_box.monitoring = true
 
+func max_hp_value() -> int:
+	return stats.max_hp + stats.extra_hp
+	
 func can_heal(amount: int) -> bool:
-	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
+	var amount_healed: int = min(amount, max_hp_value() - stats.hp)
 	return amount_healed > 0
 
-func increase_max_hp(_amount: int, _heal: bool) -> void:
-	stats.max_hp += _amount
-	health_bar.increase_max_hp(stats.max_hp)
+func increase_max_hp(_heal: bool) -> void:
+	stats.extra_hp += CustomVariables.HP_PER_HEART
+	health_bar.gain_heart_container(_heal)
 	if _heal:
 		heal(999)
 
+func lose_heart() -> bool:
+	health_bar.lose_heart_container()
+	if stats.extra_hp <= 0:
+		stats.max_hp -= CustomVariables.HP_PER_HEART
+		if stats.max_hp <= 0:
+			return true
+	else:
+		stats.extra_hp -= CustomVariables.HP_PER_HEART
+	stats.hp = min(stats.hp, max_hp_value())
+	return false
 	
 func heal(amount: int, _flash: bool = true) -> bool:
-	var amount_healed: int = min(amount, stats.max_hp - stats.hp)
+	var amount_healed: int = min(amount, max_hp_value() - stats.hp)
 	if can_heal(amount):
 		stats.hp += amount_healed
 		health_bar.heal(amount_healed)
@@ -347,11 +361,11 @@ func buy(price: int) -> bool:
 	return false
 	
 func register_ability(ability: PlayerAbility) -> void:
-	_get_ability_array(ability.trigger_type).append(ability)
+	_get_ability_array(ability.get_type()).append(ability)
 	ability.on_equipped()
 
 func unregister_ability(ability: PlayerAbility) -> void:
-	_get_ability_array(ability.trigger_type).erase(ability)
+	_get_ability_array(ability.get_type()).erase(ability)
 	ability.on_unequipped()
 
 func get_abilities(trigger: PlayerAbility.TriggerType) -> Array:

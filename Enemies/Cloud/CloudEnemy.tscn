@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_y73ug"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_jj0fl"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="4_ws7tv"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_308mo"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="5_aq55l"]
 [ext_resource type="Shader" uid="uid://bkedesuwvo27x" path="res://Enemies/Cloud/CloudEnemy.gdshader" id="6_51br6"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="6_ra6dr"]
@@ -45,7 +46,7 @@ shader_parameter/pulse_speed = 4.8850002320375
 
 [sub_resource type="Animation" id="Animation_g87bp"]
 resource_name = "Damaged"
-length = 0.4
+length = 0.19999999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,10 +54,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+"values": [Color(5.912981, 5.912981, 5.912981, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -65,10 +66,10 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4]
+"values": [4, 0]
 }
 
 [sub_resource type="Animation" id="Animation_ig0ik"]
@@ -198,7 +199,6 @@ script = ExtResource("1_1hdfk")
 stats = SubResource("Resource_ra6dr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2052737311]
-visible = false
 z_index = 1
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_nts66")
@@ -210,7 +210,7 @@ texture = ExtResource("1_07fyk")
 hframes = 4
 vframes = 2
 
-[node name="DamagedAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=934303259]
+[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=934303259]
 libraries/ = SubResource("AnimationLibrary_82i05")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=704762273]

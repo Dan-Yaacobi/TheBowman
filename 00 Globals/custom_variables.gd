@@ -4,6 +4,8 @@ enum stats {Strength, Agility, Stamina}
 
 enum directions {Up, Left ,Down ,Right}
 
+const HP_PER_HEART: int = 4
+
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98
 
@@ -15,6 +17,8 @@ const POISON_DEBUFF_ID: int = 109
 const STUN_DEBUFF_ID: int = 110
 const ARROW_PIERCE_ID: int = 5
 const PULL_SPEED_BUFF_ID: int = 77
+const WEAKNESS_DEBUFF_ID: int = 50
+var buff_id_counter: int = 0
 
 var rarity_colors: Array[Color] = [
 	#Color(0.62, 0.62, 0.62),  # 1 - Common (gray)
@@ -39,3 +43,7 @@ func rarity_color(rarity: float) -> Color:
 		return Color.ORANGE.lerp(Color(0.0, 0.90, 1.0), overflow)
 
 	return colors[clampi(roundi(rarity) - 1, 0, colors.size() - 1)]
+
+func get_buff_id() -> int:
+	buff_id_counter += 1
+	return buff_id_counter

@@ -4,13 +4,13 @@ class_name HUD extends CanvasLayer
 @onready var rift_level_label: Label = $RiftLevel
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
-@onready var health_bar: Control = $Control/HealthBar
 @onready var boss_health_bar: Control = $Control/BossHealthBar
 @onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
 @onready var equipment_menu: EquipmentMenu = $EquipmentMenu
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var active_ability_picker: ActiveAbilityPicker = $ActiveAbilityPicker
 @onready var coin_animation: AnimationPlayer = $Control/CurrentMoney/Coin/CoinAnimation
+@onready var health_hearts: HealthHearts = $Control/HealthHearts
 
 var current_view_item: Equipment
 var flash_tween: Tween
@@ -50,8 +50,8 @@ func apply_heal_flash() -> void:
 	flash_tween.tween_property(heal_flash, "modulate", Color(1, 0, 0, 0.0), 0.3)
 
 
-func get_health_bar() -> HealthBar:
-	return health_bar.get_child(1)
+func get_health_bar() -> HealthHearts:
+	return health_hearts
 
 
 func send_boss_health_bar() -> void:

@@ -5,9 +5,13 @@ class_name PlayerAbility extends Resource
 @export var rarity_weight: float = 1.0
 
 var can_activate: bool = true
+var dynamic_debuff_id: int
 
 enum Tier { COMMON, UNCOMMON, RARE, LEGENDARY }
 enum TriggerType { PASSIVE, SHOOT, JUMP, DASH, RELEASE, DRAW, AFTER_HIT, BEFORE_HIT}
+
+func set_up() -> void:
+	pass
 
 func on_equipped() -> void:
 	pass
@@ -29,3 +33,6 @@ func reactivate_ability() -> void:
 
 func get_tooltip() -> String:
 	return ""
+
+func get_type() -> TriggerType:
+	return trigger_type

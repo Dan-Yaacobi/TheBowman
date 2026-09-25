@@ -30,9 +30,7 @@ func AreaEnetered(a: Area2D) -> void:
 	if use_default_color:
 		combat_text_color = DEFAULT_COMBAT_TEXT_COLOR
 	effect_color = DEFAULT_HIT_EFFECT_COLOR
-	knockback_dir = -(a.global_position - self.global_position).normalized()
-	
-	
+	knockback_dir = (a.global_position - self.global_position).normalized()	
 	if a.get_parent() is GameEntity:
 		_apply_before_effects(a.get_parent())
 	damage = roundi(base_damage * damage_multiplier)

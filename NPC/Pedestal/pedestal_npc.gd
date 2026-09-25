@@ -19,8 +19,8 @@ func extra_ready_functions() -> void:
 	if item_data:
 		_setup_item_visual()
 
-func set_item(data: EquipmentData) -> void:
-	item_data = data
+func set_item(_data: EquipmentData) -> void:
+	item_data = _data
 	_setup_item_visual()
 
 func _setup_item_visual() -> void:

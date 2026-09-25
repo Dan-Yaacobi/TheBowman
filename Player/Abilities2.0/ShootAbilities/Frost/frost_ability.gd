@@ -16,12 +16,14 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 func apply_freeze(_target: Enemy) -> void:
 	if _target.can_be_stunned():
 		var debuff: Debuff = FREEZE_DEBUFF.instantiate()
-		_target.debuff_handler.add_debuff(debuff,CustomVariables.FREEZE_DEBUFF_ID,3,1)
+		var duration = PlayerManager.player.stats.freeze_duration.value()
+		_target.debuff_handler.add_debuff(debuff,CustomVariables.FREEZE_DEBUFF_ID,duration,1)
 		_target.end_debuff(CustomVariables.FROSTBITE_DEBUFF_ID)
 
 func apply_frostbite(_target: Enemy) -> void:
 	var debuff: Debuff = FROST_BITE_DEBUFF.instantiate()
-	_target.debuff_handler.add_debuff(debuff,CustomVariables.FROSTBITE_DEBUFF_ID,5,1)
+	var duration = PlayerManager.player.stats.frostbite_duration.value()
+	_target.debuff_handler.add_debuff(debuff,CustomVariables.FROSTBITE_DEBUFF_ID,duration,1)
 
 func get_tooltip() -> String:
 	return "Applies Frostbite on hit, and Freezes Frostbitten Enemies"

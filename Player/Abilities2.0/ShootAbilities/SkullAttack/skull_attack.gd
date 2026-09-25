@@ -19,4 +19,4 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 	var entity = _area.get_parent()
 	if entity is Enemy:
 		var debuff: WeaknessDebuff = WEAKNESS_DEBUFF.instantiate()
-		entity.apply_debuff(debuff,duration,1)
+		entity.apply_debuff(debuff,CustomVariables.WEAKNESS_DEBUFF_ID,duration,1)

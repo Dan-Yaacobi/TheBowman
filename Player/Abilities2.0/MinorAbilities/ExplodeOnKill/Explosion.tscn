@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://c8xxhiavn7s50"]
 
-[ext_resource type="Script" uid="uid://ba7g7pla1tyfb" path="res://Player/Abilities2.0/ShootAbilities/AfterHit/ExplodeOnKill/explosion.gd" id="2_34n86"]
+[ext_resource type="Script" uid="uid://ba7g7pla1tyfb" path="res://Player/Abilities2.0/MinorAbilities/ExplodeOnKill/explosion.gd" id="2_34n86"]
 [ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="3_g3sfy"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="3_s75ii"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hcmi0"]
 radius = 35.0

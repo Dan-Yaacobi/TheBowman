@@ -20,7 +20,7 @@ func extra_ready_function() -> void:
 	scale*= 0.4
 	bullet_sprite.texture = new_texture
 	
-func clear_shot(_h = null) -> void:
+func clear_shot(_var1, _var, _var3) -> void:
 	explosion.emitting = true
 	explosion_detector.monitoring = true
 	sprite.visible = false

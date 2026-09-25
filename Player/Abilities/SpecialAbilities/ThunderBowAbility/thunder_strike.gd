@@ -8,7 +8,7 @@ class_name ThunderStrike extends CPUParticles2D
 const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
 
 func _ready() -> void:
-	stun_duration = PlayerManager.player.stats.stun_duration
+	stun_duration = PlayerManager.player.stats.stun_duration.value()
 	area.body_entered.connect(thunder_hit)
 	area.monitoring = true
 	monitoring_timer.wait_time = lifetime

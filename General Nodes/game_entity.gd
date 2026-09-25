@@ -19,5 +19,5 @@ func has_debuff(id: int) -> bool:
 func end_debuff(id: int) -> void:
 	debuff_handler.end_debuff(id)
 	
-func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null) -> void:
+func _handle_take_damage(_hurt_box: HurtBox, _raw_damage, _result: DamageResult = null) -> void:
 	pass

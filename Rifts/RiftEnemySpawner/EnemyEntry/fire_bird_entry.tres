@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://b5lbs5gsdj1he"]
+
+[ext_resource type="Resource" uid="uid://cljbqr34nft1t" path="res://Enemies/EnemyData/EnemyValues/EvilBirds/fire_bird.tres" id="1_0qwrb"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_c2wmi"]
+[ext_resource type="PackedScene" uid="uid://cdtin5d5lhmfi" path="res://Enemies/EvilBird/EvilBird.tscn" id="2_58ytu"]
+
+[resource]
+script = ExtResource("1_c2wmi")
+scene = ExtResource("2_58ytu")
+data = ExtResource("1_0qwrb")
+min_level = 5
+max_level = 6
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

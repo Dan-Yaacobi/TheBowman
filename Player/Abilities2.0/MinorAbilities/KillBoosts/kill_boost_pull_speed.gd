@@ -1,4 +1,4 @@
-class_name KillBoostPullSpeed extends AfterHitAbility
+class_name KillBoostPullSpeed extends MinorAbility
 
 const PULL_SPEED_BUFF = preload("uid://baq16kh45t3dw")
 
@@ -12,3 +12,6 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 				
 func get_tooltip() -> String:
 	return "Boosts your pull speedby ${pull_speed_increase} after killing an enemy with your main arrow"
+
+func get_type() -> TriggerType:
+	return TriggerType.AFTER_HIT

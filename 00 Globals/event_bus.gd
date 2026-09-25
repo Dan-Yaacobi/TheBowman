@@ -101,3 +101,6 @@ signal active_ability_ready()
 signal show_active_ability_picker(pool: Array[ActiveAbility])
 signal active_ability_cleared
 signal reduce_active_ability_cooldown(_amount: float)
+
+signal rift_respawn_position(position: Vector2)
+signal respawn_player

@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_yd42x"]
 script = ExtResource("1_w7ipp")
-trigger_type = 1
+trigger_type = 6
 metadata/_custom_type_script = "uid://uai38bs43l8y"
 
 [sub_resource type="Resource" id="Resource_od0aq"]
@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("4_cs5s4")
-display_name = "Poison Darts"
+display_name = "Cursed Skulls"
 texture = ExtResource("4_w7ipp")
 equipped_texture = ExtResource("2_rkn5r")
 dropped_scale = 0.3
