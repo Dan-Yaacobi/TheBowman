@@ -12,6 +12,7 @@ offset_bottom = 0.29999542
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
+mouse_filter = 2
 script = ExtResource("1_odx4d")
 heart_scene = ExtResource("2_ecus1")
 

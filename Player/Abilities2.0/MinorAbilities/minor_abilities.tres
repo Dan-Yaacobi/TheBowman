@@ -1,0 +1,84 @@
+[gd_resource type="Resource" script_class="MinorAbilityLibrary" format=3 uid="uid://bgld2uy7yoyj5"]
+
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="1_ssjb6"]
+[ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="2_8f2rp"]
+[ext_resource type="Script" uid="uid://cw60pxuol5tdm" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_damage.gd" id="2_p0y55"]
+[ext_resource type="Script" uid="uid://d0uegg23plq7k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_duration.gd" id="3_lop6a"]
+[ext_resource type="Script" uid="uid://dws60jn37857t" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_ticks.gd" id="4_ids7n"]
+[ext_resource type="Script" uid="uid://dptapbe5ulhvs" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_damage.gd" id="5_xpk16"]
+[ext_resource type="Script" uid="uid://cqf14kh2rdk5s" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_duration.gd" id="6_osb8g"]
+[ext_resource type="Script" uid="uid://k44eaeh7n0hr" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_ticks.gd" id="7_lv5t2"]
+[ext_resource type="Script" uid="uid://b4mr46civfucj" path="res://Player/Abilities2.0/MinorAbilities/ExplodeOnKill/explode_on_kill.gd" id="8_qj2g8"]
+[ext_resource type="Script" uid="uid://c4m6hdflutj03" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/frostbite_duration.gd" id="9_n4sdc"]
+[ext_resource type="Script" uid="uid://dd276i6af46so" path="res://Player/Abilities2.0/MinorAbilities/KillBoosts/kill_boost_pull_speed.gd" id="10_vnrcp"]
+[ext_resource type="Script" uid="uid://cok0b6xhp4gtg" path="res://Player/Abilities2.0/MinorAbilities/SmallPoisonCloud/poison_cloud_death.gd" id="11_d5ovb"]
+[ext_resource type="Script" uid="uid://sqv71jkptw5k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_damage.gd" id="12_7joq8"]
+[ext_resource type="Script" uid="uid://cvbglmlpl5ful" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_duration.gd" id="13_pnrbh"]
+[ext_resource type="Script" uid="uid://b80kyurvqvsj1" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_ticks.gd" id="14_4wbjh"]
+[ext_resource type="Script" uid="uid://b25ol1a8tybnw" path="res://Player/Abilities2.0/MinorAbilities/ReduceActiveCD/reduce_active_cd_ability.gd" id="15_s7bdq"]
+[ext_resource type="Script" uid="uid://bjb034qc7jw4r" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/stun_duration.gd" id="16_q43u3"]
+
+[sub_resource type="Resource" id="Resource_0n2x6"]
+script = ExtResource("2_p0y55")
+metadata/_custom_type_script = "uid://cw60pxuol5tdm"
+
+[sub_resource type="Resource" id="Resource_byuiu"]
+script = ExtResource("3_lop6a")
+metadata/_custom_type_script = "uid://d0uegg23plq7k"
+
+[sub_resource type="Resource" id="Resource_3ojgd"]
+script = ExtResource("4_ids7n")
+metadata/_custom_type_script = "uid://dws60jn37857t"
+
+[sub_resource type="Resource" id="Resource_twmwe"]
+script = ExtResource("5_xpk16")
+metadata/_custom_type_script = "uid://dptapbe5ulhvs"
+
+[sub_resource type="Resource" id="Resource_b274v"]
+script = ExtResource("6_osb8g")
+metadata/_custom_type_script = "uid://cqf14kh2rdk5s"
+
+[sub_resource type="Resource" id="Resource_nub70"]
+script = ExtResource("7_lv5t2")
+metadata/_custom_type_script = "uid://k44eaeh7n0hr"
+
+[sub_resource type="Resource" id="Resource_ueb6o"]
+script = ExtResource("8_qj2g8")
+metadata/_custom_type_script = "uid://b4mr46civfucj"
+
+[sub_resource type="Resource" id="Resource_d2xfg"]
+script = ExtResource("9_n4sdc")
+metadata/_custom_type_script = "uid://c4m6hdflutj03"
+
+[sub_resource type="Resource" id="Resource_p8oxk"]
+script = ExtResource("10_vnrcp")
+metadata/_custom_type_script = "uid://dd276i6af46so"
+
+[sub_resource type="Resource" id="Resource_myct2"]
+script = ExtResource("11_d5ovb")
+metadata/_custom_type_script = "uid://cok0b6xhp4gtg"
+
+[sub_resource type="Resource" id="Resource_7e3t8"]
+script = ExtResource("12_7joq8")
+metadata/_custom_type_script = "uid://sqv71jkptw5k"
+
+[sub_resource type="Resource" id="Resource_nkwck"]
+script = ExtResource("13_pnrbh")
+metadata/_custom_type_script = "uid://cvbglmlpl5ful"
+
+[sub_resource type="Resource" id="Resource_eayr5"]
+script = ExtResource("14_4wbjh")
+metadata/_custom_type_script = "uid://b80kyurvqvsj1"
+
+[sub_resource type="Resource" id="Resource_p0y55"]
+script = ExtResource("15_s7bdq")
+metadata/_custom_type_script = "uid://b25ol1a8tybnw"
+
+[sub_resource type="Resource" id="Resource_lop6a"]
+script = ExtResource("16_q43u3")
+metadata/_custom_type_script = "uid://bjb034qc7jw4r"
+
+[resource]
+script = ExtResource("2_8f2rp")
+abilities = Array[ExtResource("1_ssjb6")]([SubResource("Resource_0n2x6"), SubResource("Resource_byuiu"), SubResource("Resource_3ojgd"), SubResource("Resource_twmwe"), SubResource("Resource_b274v"), SubResource("Resource_nub70"), SubResource("Resource_ueb6o"), SubResource("Resource_d2xfg"), SubResource("Resource_p8oxk"), SubResource("Resource_myct2"), SubResource("Resource_7e3t8"), SubResource("Resource_nkwck"), SubResource("Resource_eayr5"), SubResource("Resource_p0y55"), SubResource("Resource_lop6a")])
+metadata/_custom_type_script = "uid://dnf0fea71aaqf"

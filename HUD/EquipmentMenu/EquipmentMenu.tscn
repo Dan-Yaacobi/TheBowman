@@ -76,12 +76,14 @@ size_flags_horizontal = 3
 
 [node name="CloseButton" type="Button" parent="Control" unique_id=766304629]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 217.0
-offset_top = 392.0
-offset_right = 323.0
-offset_bottom = 460.0
+anchors_preset = -1
+anchor_left = 0.85700005
+anchor_top = 1.1750001
+anchor_right = 1.013
+anchor_bottom = 1.376
+offset_left = 0.09698486
+offset_top = -0.15002441
+offset_right = 0.17297363
+offset_bottom = -0.088012695
 grow_horizontal = 0
 text = "close"

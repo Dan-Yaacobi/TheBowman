@@ -117,13 +117,11 @@ func set_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_TAKEN_MULT_ID
 	stats.damage_taken_multiplier.remove_buff_stack(id, _type)
-
+	
 func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
-	print("setting damage dealt multi: " ,_amount)
 	stats.damage_dealt_multiplier.add_buff(id,_amount,_type)
 	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
-	print("hurt box dmgmulti: ", hurt_box.damage_multiplier)
 	
 func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
@@ -140,7 +138,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		dmg_color = _hurt_box.combat_text_color
 	else:
 		@warning_ignore("narrowing_conversion")
-		final_dmg = raw_damage * stats.damage_taken_multiplier.value()
+		final_dmg = raw_damage
+	final_dmg *= stats.damage_taken_multiplier.value()
 	current_hp -= roundi(final_dmg)
 	frostbitten_hit()
 	handle_health_bar(final_dmg)

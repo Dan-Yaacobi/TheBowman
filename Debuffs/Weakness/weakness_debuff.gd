@@ -1,7 +1,6 @@
 class_name WeaknessDebuff extends Debuff
 
 func start_debuff_effect() -> void:
-	print("applied weakness")
 	if entity is Enemy:
 		entity.modulate = Color("a86fffff")
 		one_shot = true
@@ -9,7 +8,6 @@ func start_debuff_effect() -> void:
 		entity.set_damage_taken_multiplier(0.5,Stat.buff_type.MULTIPLICATIVE)
 		
 func extra_end_debuff_methods() -> void:
-	print("ending weakness")
 	entity.modulate = Color(1.0, 1.0, 1.0)
 	entity.remove_damage_dealt_multiplier(0.5,Stat.buff_type.MULTIPLICATIVE)
 	entity.remove_damage_taken_multiplier(0.5,Stat.buff_type.MULTIPLICATIVE)

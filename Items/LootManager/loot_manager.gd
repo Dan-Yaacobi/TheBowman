@@ -79,8 +79,11 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 			var scaled_max: float = def.max_value * rift_stat_scalar
 			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
 			data.add_modifier(def.stat_name, amount, def.type)
-		if tier.minor_roll_count > 0 and not tier.minor_ability_pool.is_empty():
-			data.bonus_abilities.append_array(_roll_minors(tier.minor_ability_pool, tier.minor_roll_count, 0.0, rarity))
+		var minor_abilities: Array[MinorAbility]
+		if tier.minor_abilities:
+			minor_abilities = tier.minor_abilities.get_abilities()
+		if tier.minor_roll_count > 0 and not minor_abilities.is_empty():
+			data.bonus_abilities.append_array(_roll_minors(minor_abilities, tier.minor_roll_count, 0.0, rarity))
 
 ## Guaranteed tier floor based on rift level, with a small chance to roll one tier above it.
 ## Rarity is never randomly rolled below the current rift-level band.
@@ -108,7 +111,7 @@ func _pick_template(pool: ItemPool) -> EquipmentData:
 			return template
 	return pool.templates.back()
 
-func _roll_minors(available: Array[MinorAbility], count: int, shift: float, rarity: int) -> Array[MinorAbility]:
+func _roll_minors(available: Array[MinorAbility], count: int, _shift: float, rarity: int) -> Array[MinorAbility]:
 	var result: Array[MinorAbility] = []
 	var remaining: Array[MinorAbility] = available.duplicate()
 	for i in count:
@@ -124,7 +127,7 @@ func _roll_minors(available: Array[MinorAbility], count: int, shift: float, rari
 			if roll <= cumulative:
 				var rolled: MinorAbility = minor.duplicate()
 				rolled.roll_values(rarity)
-				rolled.apply_shift(shift)
+				#rolled.apply_shift(_shift)
 				result.append(rolled)
 				remaining.erase(minor)
 				break
@@ -161,7 +164,7 @@ func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> Eq
 	_apply_rarity_rolls(data, rarity)
 	return data
 	
-func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 0) -> void:
+func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 1) -> void:
 	var item: EquipmentData = template.duplicate()
 	if item.ability:
 		item.ability = item.ability.duplicate()

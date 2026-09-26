@@ -34,5 +34,8 @@ func reactivate_ability() -> void:
 func get_tooltip() -> String:
 	return ""
 
+func get_tooltip_color() -> Color:
+	return Color.WHITE
+	
 func get_type() -> TriggerType:
 	return trigger_type

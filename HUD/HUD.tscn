@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://c2cmn2xqaux53" path="res://HealthBar/HealthBar.tscn" id="1_b7ubu"]
 [ext_resource type="Script" uid="uid://dwtesce1w1yj1" path="res://HUD/hud.gd" id="1_ja1d4"]
+[ext_resource type="PackedScene" uid="uid://cexsx62s0ag5i" path="res://HUD/ItemCard/ItemComparisonScreen.tscn" id="2_2gu3h"]
 [ext_resource type="PackedScene" uid="uid://ccm60fajm4yy6" path="res://Player/HealthBar/HealhHearts.tscn" id="2_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bsuxrgl8shr8m" path="res://HUD/ActiveAbility/ActiveAbilityPicker.tscn" id="2_fjfvf"]
+[ext_resource type="PackedScene" uid="uid://bbbjwbqooljwf" path="res://HUD/ItemCard/ItemInspectPrompt.tscn" id="3_iob2k"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
 [ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
 [ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
@@ -16,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://xqcywwa8lpnn" path="res://HUD/ActiveAbility/ActiveAbilityIndicator.tscn" id="18_65vjf"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
-[ext_resource type="PackedScene" uid="uid://doat5doem53a8" path="res://Items/Equipments/UI/InteractionUI.tscn" id="19_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
 
@@ -61,6 +62,22 @@ _data = {
 
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
+
+[node name="ItemComparisonLayer" type="CanvasLayer" parent="." unique_id=705740621]
+layer = 10
+
+[node name="ItemComparisonScreen" parent="ItemComparisonLayer" unique_id=558180153 instance=ExtResource("2_2gu3h")]
+
+[node name="ItemInspectPrompt" parent="." unique_id=748730644 instance=ExtResource("3_iob2k")]
+anchors_preset = -1
+anchor_left = 0.78800005
+anchor_top = 0.17300001
+anchor_right = 0.78800005
+anchor_bottom = 0.17300001
+offset_left = 0.19995117
+offset_top = 0.2999878
+offset_right = 0.19995117
+offset_bottom = 0.2999878
 
 [node name="Label" type="Label" parent="." unique_id=325342012]
 offset_left = 3.0
@@ -202,18 +219,6 @@ offset_right = -0.20007324
 offset_bottom = 158.9
 grow_horizontal = 0
 scale = Vector2(4, 4)
-
-[node name="InteractionUi" parent="." unique_id=1611403518 instance=ExtResource("19_fjfvf")]
-stat_names_dict = Dictionary[String, String]({
-"arrow_damage": "Damage",
-"arrow_size": "Size",
-"arrow_speed": "Velocity",
-"arrow_weight": "Weight",
-"crit_chance": "Crit Chance",
-"perfect_shot_bonus": "Perfect Shot Bonus",
-"perfect_shot_window": "Perfect Shot Window",
-"pull_speed": "Pull Speed"
-})
 
 [node name="RiftLevel" type="Label" parent="." unique_id=1835615876]
 anchors_preset = -1

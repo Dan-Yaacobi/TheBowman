@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cbp3gxjtkl6yn"]
+
+[ext_resource type="Script" uid="uid://cgn6toemyd4ia" path="res://HUD/ItemCard/item_card.gd" id="1_6gro3"]
+
+[node name="ItemCard" type="PanelContainer" unique_id=1588527009]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6gro3")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=239361470]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer" unique_id=1983848727]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/Content" unique_id=466701685]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Content/Header" unique_id=1590210290]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Content/Header" unique_id=1485164595]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/Content/Header/VBoxContainer" unique_id=1681553012]
+layout_mode = 2
+
+[node name="TagLabel" type="Label" parent="MarginContainer/Content/Header/VBoxContainer" unique_id=94807206]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Content" unique_id=438871839]
+layout_mode = 2
+
+[node name="AbilitiesHeader" type="Label" parent="MarginContainer/Content" unique_id=1491827861]
+layout_mode = 2
+text = "Abilities"
+
+[node name="Abilities" type="VBoxContainer" parent="MarginContainer/Content" unique_id=991035601]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/Content" unique_id=506368413]
+layout_mode = 2
+
+[node name="StatHeader" type="Label" parent="MarginContainer/Content" unique_id=1204080547]
+layout_mode = 2
+text = "Stats"
+
+[node name="Stats" type="GridContainer" parent="MarginContainer/Content" unique_id=492019487]
+layout_mode = 2
+
+[node name="EmptyLabel" type="Label" parent="MarginContainer/Content" unique_id=1208200075]
+visible = false
+layout_mode = 2
+text = "Empty"

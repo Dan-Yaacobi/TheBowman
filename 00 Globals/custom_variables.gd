@@ -18,7 +18,7 @@ const POISON_DEBUFF_ID: int = 109
 const STUN_DEBUFF_ID: int = 110
 const ARROW_PIERCE_ID: int = 5
 const PULL_SPEED_BUFF_ID: int = 77
-const WEAKNESS_DEBUFF_ID: int = 50
+
 var buff_id_counter: int = 0
 
 var rarity_colors: Array[Color] = [

@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cexsx62s0ag5i"]
+
+[ext_resource type="Script" uid="uid://j7dlgqugac7t" path="res://HUD/ItemCard/item_comparison_screen.gd" id="1_0w21i"]
+[ext_resource type="PackedScene" uid="uid://cbp3gxjtkl6yn" path="res://HUD/ItemCard/ItemCard.tscn" id="2_4sitj"]
+
+[node name="ItemComparisonScreen" type="Control" unique_id=558180153]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0w21i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1658189880]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13866666, 0, 0.26, 0.7176471)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=366504261]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 127.0
+offset_right = 795.0
+offset_bottom = 279.0
+scale = Vector2(2, 2)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1241957029]
+layout_mode = 2
+
+[node name="Cards" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=640595688]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="NewCard" parent="CenterContainer/VBoxContainer/Cards" unique_id=1588527009 instance=ExtResource("2_4sitj")]
+layout_mode = 2
+
+[node name="CurrentCard" parent="CenterContainer/VBoxContainer/Cards" unique_id=306600969 instance=ExtResource("2_4sitj")]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=448854862]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/Buttons" unique_id=456591583]
+layout_mode = 2
+
+[node name="EquipButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons/CenterContainer" unique_id=1751749864]
+layout_mode = 2
+text = "Equip"
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer/Buttons" unique_id=2113633032]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Buttons/CenterContainer2" unique_id=2119876401]
+layout_mode = 2
+text = "E / Esc - Close"

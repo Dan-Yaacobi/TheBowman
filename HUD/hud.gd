@@ -5,7 +5,8 @@ class_name HUD extends CanvasLayer
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
 @onready var boss_health_bar: Control = $Control/BossHealthBar
-@onready var interaction_ui: EquipmentInteractionUI = $InteractionUi
+@onready var item_prompt: ItemInspectPrompt = $ItemInspectPrompt
+@onready var comparison_screen: ItemComparisonScreen = $ItemComparisonLayer/ItemComparisonScreen
 @onready var equipment_menu: EquipmentMenu = $EquipmentMenu
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var active_ability_picker: ActiveAbilityPicker = $ActiveAbilityPicker
@@ -16,13 +17,11 @@ var current_view_item: Equipment
 var flash_tween: Tween
 
 func _ready() -> void:
-	interaction_ui.visible = false
 	PlayerManager.player.money_changed.connect(update_money)
 	coin_animation.play("Rotate")
 	EventBus.equipment_interaction_enter.connect(show_equip_interaction_ui)
 	EventBus.equipment_interaction_exit.connect(hide_equip_interaction_ui)
-	interaction_ui.equip_new_item.connect(equip_item)
-	interaction_ui.destory_new_item.connect(destory_item)
+	comparison_screen.equip_pressed.connect(equip_item)
 	EventBus.entered_rift.connect(show_rift_label)
 	rift_level_label.modulate.a = 0
 	EventBus.damaged_flash.connect(apply_damage_flash)
@@ -67,26 +66,20 @@ func update_money(amount: Variant) -> void:
 
 
 func show_equip_interaction_ui(equipment: Equipment) -> void:
-	var screen_pos: Vector2 = equipment.get_viewport().get_canvas_transform() * equipment.position
-	interaction_ui.global_position = screen_pos + Vector2(0, -50)
-	interaction_ui.visible = true
-	interaction_ui.set_items(equipment)
 	current_view_item = equipment
+	item_prompt.show_for(equipment)
+	comparison_screen.set_target(equipment)
 
 
 func hide_equip_interaction_ui(_equip: Equipment) -> void:
-	interaction_ui.visible = false
+	item_prompt.clear()
+	comparison_screen.clear_target()
 	current_view_item = null
 
 
 func equip_item() -> void:
 	if current_view_item:
 		EventBus.equip_item.emit(current_view_item)
-
-
-func destory_item() -> void:
-	if current_view_item:
-		EventBus.destory_view_item.emit(current_view_item)
 
 
 func show_rift_label() -> void:

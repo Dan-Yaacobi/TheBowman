@@ -5,13 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://c68idtngmkr2w" path="res://Items/Equipments/Quivers/Sprites/Arrows/ElectricJolt.png" id="3_mtcc6"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_y2whj"]
 [ext_resource type="Texture2D" uid="uid://crvdoxt74tjqg" path="res://Items/Equipments/Quivers/Sprites/Quiver_Electric.png" id="5_fidps"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_uf0u5"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_jeqdj"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_oyjwa"]
 
 [sub_resource type="Resource" id="Resource_1tkvm"]
 script = ExtResource("1_7gwao")
-trigger_type = 1
+trigger_type = 6
 metadata/_custom_type_script = "uid://6v84ocdux8dl"
 
 [sub_resource type="Resource" id="Resource_od0aq"]

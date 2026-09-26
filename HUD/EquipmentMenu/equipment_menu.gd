@@ -13,7 +13,6 @@ var _is_open: bool = false
 
 func _ready() -> void:
 	close_button.pressed.connect(_on_close)
-	ring_slot.pressed.connect(_on_unequip.bind("ring"))
 	bow_slot.mouse_entered.connect(_on_hover.bind("bow"))
 	quiver_slot.mouse_entered.connect(_on_hover.bind("arrow"))
 	ring_slot.mouse_entered.connect(_on_hover.bind("ring"))
@@ -64,21 +63,6 @@ func _on_close() -> void:
 	_is_open = false
 	get_tree().paused = false
 	hide()
-
-
-func _on_unequip(slot: String) -> void:
-	var slot_enum: EquipmentData.slots
-	match slot:
-		"bow": slot_enum = EquipmentData.slots.BOW
-		"arrow": slot_enum = EquipmentData.slots.ARROW
-		"ring": slot_enum = EquipmentData.slots.RING
-
-	var equipped_node: Equipment = PlayerManager.player.get_equipped_node_in_slot(slot_enum)
-	if equipped_node == null:
-		return
-	equipped_node.become_unequipped()
-	_refresh_slots()
-	_refresh_stats()
 
 
 func _on_hover(slot: String) -> void:
@@ -174,22 +158,19 @@ func _refresh_abilities(hovered_item: EquipmentData = null) -> void:
 	header.text = "— Abilities —"
 	abilities_panel.add_child(header)
 
+	var items: Array[EquipmentData] = []
 	if hovered_item != null:
-		var line: Label = Label.new()
-		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		line.text = hovered_item.ability.get_tooltip() if hovered_item.ability != null else "None"
-		abilities_panel.add_child(line)
-		return
+		items.append(hovered_item)
+	else:
+		for slot: EquipmentData in [_stats.bow, _stats.arrow, _stats.ring]:
+			if slot != null:
+				items.append(slot)
 
 	var any: bool = false
-	for slot: EquipmentData in [_stats.bow, _stats.arrow, _stats.ring]:
-		if slot == null or slot.ability == null:
-			continue
-		any = true
-		var line: Label = Label.new()
-		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		line.text = slot.ability.get_tooltip()
-		abilities_panel.add_child(line)
+	for item: EquipmentData in items:
+		for ability: PlayerAbility in _get_item_abilities(item):
+			any = true
+			abilities_panel.add_child(_make_ability_label(ability))
 
 	if not any:
 		var line: Label = Label.new()
@@ -197,19 +178,33 @@ func _refresh_abilities(hovered_item: EquipmentData = null) -> void:
 		abilities_panel.add_child(line)
 
 
+func _get_item_abilities(item: EquipmentData) -> Array[PlayerAbility]:
+	var result: Array[PlayerAbility] = []
+	if item.ability:
+		result.append(item.ability)
+	for bonus: MinorAbility in item.bonus_abilities:
+		if bonus:
+			result.append(bonus)
+	return result
+
+
+func _make_ability_label(ability: PlayerAbility) -> Label:
+	var line: Label = Label.new()
+	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	line.text = ability.get_tooltip()
+	line.add_theme_color_override("font_color", ability.get_tooltip_color())
+	return line
+	
 func _format_stat_rich(stat: Stat) -> String:
 	var base: float = stat.base_value
 	var total: float = stat.value()
-	var bonus: float = total - base
-	var base_str: String = _format_float(base)
+	var total_str: String = _format_float(total)
 
-	if absf(bonus) < 0.001:
-		return base_str
+	if absf(total - base) < 0.001:
+		return total_str
 
-	var sign_str: String = "+" if bonus > 0 else ""
-	var color: String = "green" if bonus > 0 else "red"
-	return base_str + " [color=" + color + "]" + sign_str + _format_float(bonus) + "[/color]"
-
+	var color: Color = ItemCard.COLOR_UPGRADE if total > base else ItemCard.COLOR_DOWNGRADE
+	return "[color=#" + color.to_html(false) + "]" + total_str + "[/color]"
 
 func _format_float(val: float) -> String:
 	var _snapped: float = snappedf(val, 0.0001)
