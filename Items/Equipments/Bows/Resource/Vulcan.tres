@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_37o2c"]
 [ext_resource type="Texture2D" uid="uid://crd0dh71xfr7f" path="res://Items/Equipments/Bows/Sprites/MagmaBow.png" id="3_fssex"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_fssex"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_rkw83"]
+[ext_resource type="Resource" uid="uid://bbsjhtbjigoim" path="res://Player/Abilities2.0/MinorAbilities/burn_minor_abilities.tres" id="5_rtvtt"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_rtvtt"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_tqlsv"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="8_tqlsv"]
 
 [sub_resource type="Resource" id="Resource_fklrd"]
 script = ExtResource("1_6i61w")
@@ -16,17 +17,64 @@ metadata/_custom_type_script = "uid://cofo70ibb0g01"
 [sub_resource type="Resource" id="Resource_167x7"]
 script = ExtResource("7_tqlsv")
 stat_name = "pull_speed"
-min_value = 1.0
+min_value = 0.5
 max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_pqo31"]
+script = ExtResource("7_tqlsv")
+stat_name = "arrow_damage"
+min_value = 5.0
+max_value = 10.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_lk575"]
 script = ExtResource("6_rtvtt")
-stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_167x7")])
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_167x7"), SubResource("Resource_pqo31")])
+minor_abilities = ExtResource("5_rtvtt")
+minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_kcjf8"]
+script = ExtResource("7_tqlsv")
+stat_name = "pushback_power"
+min_value = 30.0
+max_value = 50.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_tcyps"]
 script = ExtResource("6_rtvtt")
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_kcjf8")])
+minor_abilities = ExtResource("5_rtvtt")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_s8qof"]
+script = ExtResource("7_tqlsv")
+stat_name = "perfect_shot_bonus"
+min_value = 0.5
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_gecvb"]
+script = ExtResource("6_rtvtt")
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_s8qof")])
+minor_abilities = ExtResource("5_rtvtt")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_ij047"]
+script = ExtResource("7_tqlsv")
+stat_name = "arrow_size"
+min_value = 0.3
+max_value = 0.6
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_61tbq"]
+script = ExtResource("6_rtvtt")
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_ij047")])
+minor_abilities = ExtResource("8_tqlsv")
+minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
@@ -37,6 +85,6 @@ equipped_texture = ExtResource("3_fssex")
 dropped_scale = 0.4
 equipped_scale = Vector2(0.7, 0.7)
 ability = SubResource("Resource_fklrd")
-tiers = Array[Object]([SubResource("Resource_lk575"), SubResource("Resource_tcyps")])
+tiers = Array[Object]([SubResource("Resource_lk575"), SubResource("Resource_tcyps"), SubResource("Resource_gecvb"), SubResource("Resource_61tbq")])
 equipment_scene = ExtResource("1_37o2c")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

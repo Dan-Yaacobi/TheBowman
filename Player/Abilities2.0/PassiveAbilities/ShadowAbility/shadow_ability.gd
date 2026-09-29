@@ -21,3 +21,6 @@ func on_unequipped() -> void:
 	
 func get_tooltip() -> String:
 	return "You and your arrow are made of shadows"
+
+func get_tooltip_color() -> Color:
+	return Color.REBECCA_PURPLE

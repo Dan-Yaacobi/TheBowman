@@ -19,6 +19,11 @@ size = Vector2(36, 6.0527344)
 [sub_resource type="CircleShape2D" id="CircleShape2D_1cu4p"]
 radius = 17.0
 
+[sub_resource type="Curve" id="Curve_nda00"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.5446428, 1.5304346), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Equipment" type="RigidBody2D" unique_id=1274195967]
 collision_layer = 256
 collision_mask = 0
@@ -73,3 +78,19 @@ script = ExtResource("8_cseru")
 
 [node name="RaritySparkle" parent="." unique_id=1851276448 instance=ExtResource("9_h4v1l")]
 z_index = -1
+amount = 10
+lifetime = 1.5
+preprocess = 0.0
+speed_scale = 1.5
+randomness = 0.0
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+spread = 45.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+radial_accel_min = 50.0
+radial_accel_max = 50.0
+scale_amount_min = 1.0
+scale_amount_max = 1.0
+scale_amount_curve = SubResource("Curve_nda00")

@@ -12,5 +12,5 @@ func refresh(equipment: EquipmentData, label: String) -> void:
 	else:
 		await get_tree().process_frame
 		slot_texture.texture = equipment.texture
-		slot_label.text = equipment.display_name
+		slot_label.text = CustomVariables.rarity_name(equipment.rarity) + " " + equipment.display_name
 		#modulate = CustomVariables.rarity_color(equipment.rarity)

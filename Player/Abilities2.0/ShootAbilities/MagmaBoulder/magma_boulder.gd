@@ -26,7 +26,7 @@ func _ready() -> void:
 	visible_on_screen_notifier.screen_exited.connect(attempt_to_queue_free)
 	visible_on_screen_notifier.screen_entered.connect(stop_exiting)
 	queue_free_timer.timeout.connect(queue_free)
-	
+	scale = Vector2(1,1) * PlayerManager.player.stats.arrow_size.value()
 func _physics_process(delta: float) -> void:
 	velocity.y += gravity*delta
 	rotate(5*delta)

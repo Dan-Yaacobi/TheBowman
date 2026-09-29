@@ -138,7 +138,7 @@ func _get_stat_display_name(prop: String) -> String:
 
 func _build_item_stats(equipment: EquipmentData) -> void:
 	var header: Label = Label.new()
-	header.text = equipment.display_name
+	header.text = CustomVariables.rarity_name(equipment.rarity) + " " + equipment.display_name
 	header.modulate = CustomVariables.rarity_color(equipment.rarity)
 	stats_panel.add_child(header)
 
@@ -193,6 +193,11 @@ func _make_ability_label(ability: PlayerAbility) -> Label:
 	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	line.text = ability.get_tooltip()
 	line.add_theme_color_override("font_color", ability.get_tooltip_color())
+	line.add_theme_constant_override("outline_size", 4)
+	line.add_theme_color_override("font_outline_color", Color(0.1, 0.05, 0.02, 1.0))
+	line.add_theme_constant_override("shadow_offset_x", 2)
+	line.add_theme_constant_override("shadow_offset_y", 2)
+	line.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.6))
 	return line
 	
 func _format_stat_rich(stat: Stat) -> String:

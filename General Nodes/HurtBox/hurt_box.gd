@@ -7,7 +7,7 @@ const DEFAULT_HIT_EFFECT_COLOR = Color("ba0000")
 
 var damage: int  = 1
 var base_damage: int = 1
-var damage_multiplier: float = 1.0
+var damage_multiplier: Array[float] = []
 
 var knockback_power: float
 var knockback_dir: Vector2
@@ -23,7 +23,6 @@ var use_default_color: bool = true
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
 	use_default_color = true
-	
 func AreaEnetered(a: Area2D) -> void:
 	if not a is HitBox:
 		return
@@ -32,15 +31,17 @@ func AreaEnetered(a: Area2D) -> void:
 	effect_color = DEFAULT_HIT_EFFECT_COLOR
 	knockback_dir = (a.global_position - self.global_position).normalized()	
 	if a.get_parent() is GameEntity:
-		_apply_before_effects(a.get_parent())
-	damage = roundi(base_damage * damage_multiplier)
-
+		_apply_before_effects(a.get_parent(), self)
+	var total_multiplier: float = 1.0
+	for multiplier in damage_multiplier:
+		total_multiplier += multiplier
+	damage = roundi(base_damage * total_multiplier)
 	var result := DamageResult.new()
 	a.TakeDamage(self,result)
 	successful_hit.emit(self, a, result)
 	
 	if a.get_parent() is GameEntity:
-		_apply_after_effects(a.get_parent(),get_parent(), result)
+		_apply_after_effects(a.get_parent(),self, result)
 	
 
 func set_text_color(_color: Color) -> void:
@@ -53,12 +54,12 @@ func add_before_effect(effect: Callable) -> void:
 func add_after_effect(effect: Callable) -> void:
 	after_effects.append(effect)
 
-func _apply_after_effects(entity: GameEntity, _parent: Node2D, result: DamageResult) -> void:
+func _apply_after_effects(entity: GameEntity, hurt_box: Node2D, result: DamageResult) -> void:
 	for effect in after_effects:
 		if effect.is_valid():
-			effect.call(entity,_parent,result)
+			effect.call(entity,hurt_box,result)
 
-func _apply_before_effects(entity: GameEntity) -> void:
+func _apply_before_effects(entity: GameEntity, hurt_box: HurtBox) -> void:
 	for effect in before_effects:
 		if effect.is_valid():
-			effect.call(entity)
+			effect.call(entity, hurt_box)

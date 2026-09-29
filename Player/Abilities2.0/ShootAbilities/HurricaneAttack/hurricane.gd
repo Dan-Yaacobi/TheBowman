@@ -22,6 +22,7 @@ func _ready() -> void:
 	_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	_noise.frequency = wander_frequency
 	_noise.seed = randi()
+	lifetime = PlayerManager.player.stats.hurricane_duration.value()
 	for ability in after_hit_abilities:
 		hurt_box.add_after_effect(ability.activate_ability)
 	for ability in before_hit_abilities:

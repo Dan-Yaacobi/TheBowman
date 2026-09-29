@@ -4,88 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_1hbja"]
 [ext_resource type="Texture2D" uid="uid://ged8d4po736b" path="res://Items/Equipments/Bows/Sprites/Hemorrhage.png" id="3_3rjnx"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_0wjvk"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="5_0wjvk"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_87yg3"]
-[ext_resource type="Script" uid="uid://cw60pxuol5tdm" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_damage.gd" id="6_sdjph"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_5fexr"]
-[ext_resource type="Script" uid="uid://d0uegg23plq7k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_duration.gd" id="7_x04fh"]
-[ext_resource type="Script" uid="uid://dws60jn37857t" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_ticks.gd" id="8_oheg3"]
-[ext_resource type="Script" uid="uid://dptapbe5ulhvs" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_damage.gd" id="9_dvndp"]
-[ext_resource type="Script" uid="uid://cqf14kh2rdk5s" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_duration.gd" id="10_dywhp"]
-[ext_resource type="Script" uid="uid://k44eaeh7n0hr" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_ticks.gd" id="11_xfqjp"]
-[ext_resource type="Script" uid="uid://b4mr46civfucj" path="res://Player/Abilities2.0/MinorAbilities/ExplodeOnKill/explode_on_kill.gd" id="12_xoyqp"]
-[ext_resource type="Script" uid="uid://c4m6hdflutj03" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/frostbite_duration.gd" id="13_mm667"]
-[ext_resource type="Script" uid="uid://dd276i6af46so" path="res://Player/Abilities2.0/MinorAbilities/KillBoosts/kill_boost_pull_speed.gd" id="14_oju4g"]
-[ext_resource type="Script" uid="uid://cok0b6xhp4gtg" path="res://Player/Abilities2.0/MinorAbilities/SmallPoisonCloud/poison_cloud_death.gd" id="15_6o7tj"]
-[ext_resource type="Script" uid="uid://sqv71jkptw5k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_damage.gd" id="16_mvo0h"]
-[ext_resource type="Script" uid="uid://cvbglmlpl5ful" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_duration.gd" id="17_5bvvg"]
-[ext_resource type="Script" uid="uid://b80kyurvqvsj1" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_ticks.gd" id="18_5erci"]
-[ext_resource type="Script" uid="uid://b25ol1a8tybnw" path="res://Player/Abilities2.0/MinorAbilities/ReduceActiveCD/reduce_active_cd_ability.gd" id="19_x01oq"]
-[ext_resource type="Script" uid="uid://bjb034qc7jw4r" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/stun_duration.gd" id="20_fk5ns"]
+[ext_resource type="Resource" uid="uid://c3gnks7bcfpu2" path="res://Player/Abilities2.0/MinorAbilities/bleed_minor_abilities.tres" id="7_87yg3"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="8_5fexr"]
 
 [sub_resource type="Resource" id="Resource_dpy2w"]
 script = ExtResource("1_ko7s8")
 metadata/_custom_type_script = "uid://b017awe3d5am0"
-
-[sub_resource type="Resource" id="Resource_eowr6"]
-script = ExtResource("6_sdjph")
-metadata/_custom_type_script = "uid://cw60pxuol5tdm"
-
-[sub_resource type="Resource" id="Resource_s8aa3"]
-script = ExtResource("7_x04fh")
-metadata/_custom_type_script = "uid://d0uegg23plq7k"
-
-[sub_resource type="Resource" id="Resource_8vxpl"]
-script = ExtResource("8_oheg3")
-metadata/_custom_type_script = "uid://dws60jn37857t"
-
-[sub_resource type="Resource" id="Resource_gorgn"]
-script = ExtResource("9_dvndp")
-metadata/_custom_type_script = "uid://dptapbe5ulhvs"
-
-[sub_resource type="Resource" id="Resource_nlwk2"]
-script = ExtResource("10_dywhp")
-metadata/_custom_type_script = "uid://cqf14kh2rdk5s"
-
-[sub_resource type="Resource" id="Resource_deuix"]
-script = ExtResource("11_xfqjp")
-metadata/_custom_type_script = "uid://k44eaeh7n0hr"
-
-[sub_resource type="Resource" id="Resource_bg7ya"]
-script = ExtResource("12_xoyqp")
-metadata/_custom_type_script = "uid://b4mr46civfucj"
-
-[sub_resource type="Resource" id="Resource_po570"]
-script = ExtResource("13_mm667")
-metadata/_custom_type_script = "uid://c4m6hdflutj03"
-
-[sub_resource type="Resource" id="Resource_48oa8"]
-script = ExtResource("14_oju4g")
-metadata/_custom_type_script = "uid://dd276i6af46so"
-
-[sub_resource type="Resource" id="Resource_52a8q"]
-script = ExtResource("15_6o7tj")
-metadata/_custom_type_script = "uid://cok0b6xhp4gtg"
-
-[sub_resource type="Resource" id="Resource_l8wuj"]
-script = ExtResource("16_mvo0h")
-metadata/_custom_type_script = "uid://sqv71jkptw5k"
-
-[sub_resource type="Resource" id="Resource_2juq1"]
-script = ExtResource("17_5bvvg")
-metadata/_custom_type_script = "uid://cvbglmlpl5ful"
-
-[sub_resource type="Resource" id="Resource_ayehr"]
-script = ExtResource("18_5erci")
-metadata/_custom_type_script = "uid://b80kyurvqvsj1"
-
-[sub_resource type="Resource" id="Resource_lxm23"]
-script = ExtResource("19_x01oq")
-metadata/_custom_type_script = "uid://b25ol1a8tybnw"
-
-[sub_resource type="Resource" id="Resource_y0iig"]
-script = ExtResource("20_fk5ns")
-metadata/_custom_type_script = "uid://bjb034qc7jw4r"
 
 [sub_resource type="Resource" id="Resource_nxm3p"]
 script = ExtResource("7_5fexr")
@@ -94,15 +20,59 @@ min_value = 0.8
 max_value = 1.2
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
+[sub_resource type="Resource" id="Resource_rqaa0"]
+script = ExtResource("7_5fexr")
+stat_name = "arrow_damage"
+min_value = 2.0
+max_value = 6.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_87yg3"]
 script = ExtResource("6_87yg3")
-stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_nxm3p")])
-minor_ability_pool = Array[ExtResource("5_0wjvk")]([SubResource("Resource_eowr6"), SubResource("Resource_s8aa3"), SubResource("Resource_8vxpl"), SubResource("Resource_gorgn"), SubResource("Resource_nlwk2"), SubResource("Resource_deuix"), SubResource("Resource_bg7ya"), SubResource("Resource_po570"), SubResource("Resource_48oa8"), SubResource("Resource_52a8q"), SubResource("Resource_l8wuj"), SubResource("Resource_2juq1"), SubResource("Resource_ayehr"), SubResource("Resource_lxm23"), SubResource("Resource_y0iig")])
+stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_nxm3p"), SubResource("Resource_rqaa0")])
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
+[sub_resource type="Resource" id="Resource_o1b5h"]
+script = ExtResource("7_5fexr")
+stat_name = "crit_chance"
+min_value = 5.0
+max_value = 10.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_6q3hh"]
 script = ExtResource("6_87yg3")
+stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_o1b5h")])
+minor_abilities = ExtResource("7_87yg3")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_ww5s2"]
+script = ExtResource("7_5fexr")
+stat_name = "arrow_count"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_7w4lt"]
+script = ExtResource("6_87yg3")
+stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_ww5s2")])
+minor_abilities = ExtResource("8_5fexr")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_x2ho1"]
+script = ExtResource("7_5fexr")
+stat_name = "perfect_shot_bonus"
+min_value = 0.5
+max_value = 0.75
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_xw4su"]
+script = ExtResource("6_87yg3")
+stat_rolls = Array[ExtResource("7_5fexr")]([SubResource("Resource_x2ho1")])
+minor_abilities = ExtResource("7_87yg3")
+minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
@@ -113,6 +83,6 @@ equipped_texture = ExtResource("3_3rjnx")
 dropped_scale = 0.3
 equipped_scale = Vector2(0.6, 0.6)
 ability = SubResource("Resource_dpy2w")
-tiers = Array[Object]([SubResource("Resource_87yg3"), SubResource("Resource_6q3hh"), null])
+tiers = Array[Object]([SubResource("Resource_87yg3"), SubResource("Resource_6q3hh"), SubResource("Resource_7w4lt"), SubResource("Resource_xw4su")])
 equipment_scene = ExtResource("2_1hbja")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

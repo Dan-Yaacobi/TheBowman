@@ -63,6 +63,7 @@ var player: Player
 @export var freeze_duration: Stat
 @export var arrow_texture_override: Texture2D
 @export var arrow_visual_effects: Array[ArrowEffect]
+@export var hurricane_duration: Stat
 
 @export_subgroup("Player Items")
 @export var money: int

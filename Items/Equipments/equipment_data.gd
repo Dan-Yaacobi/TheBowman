@@ -20,6 +20,7 @@ class StatModifier:
 
 # --- Authored identity ---
 @export var display_name: String
+@export var name_color: Color
 @export var texture: Texture2D
 @export var equipped_texture: Texture2D
 @export var dropped_scale: float = 1.0

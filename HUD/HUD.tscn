@@ -236,9 +236,9 @@ theme_override_font_sizes/font_size = 125
 text = "Rift Level:"
 
 [node name="EquipmentMenu" parent="." unique_id=74341901 instance=ExtResource("18_fjfvf")]
-visible = false
-offset = Vector2(300, 100)
-transform = Transform2D(1, 0, 0, 1, 300, 100)
+offset = Vector2(175, 0)
+scale = Vector2(1.75, 1.75)
+transform = Transform2D(1.75, 0, 0, 1.75, 175, 0)
 
 [node name="DamagedFlash" type="ColorRect" parent="." unique_id=1183764540]
 visible = false

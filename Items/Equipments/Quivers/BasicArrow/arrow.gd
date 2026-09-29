@@ -10,7 +10,6 @@ class_name Arrow extends CharacterBody2D
 @export var dmg_variance_skew: float = 2.0 
 
 const WALL_HIT_EFFECT = preload("uid://cjafbvkr7l5xk")
-const CRIT = preload("uid://dvpa8tuvsardc")
 const HIT_SOUND = preload("uid://bomaal61jofg4")
 
 var hit_effects: Array[OnHitEffect] = []
@@ -59,7 +58,7 @@ func hurt_box_setup() -> void:
 	for ability in before_hit_abilities:
 		hurt_box.add_before_effect(ability.activate_ability)
 
-func hurt_box_stats(_var1) -> void:
+func hurt_box_stats(_var1, _var2) -> void:
 	hurt_box.base_damage = damage
 	hurt_box.knockback_power = knockback
 	hurt_box.knockback_dir = velocity.normalized()
@@ -74,25 +73,13 @@ func hit(_hurt_box,_hit_box, _result) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
 		if regular_shot:
-			if crit:
-				crit_effect(body)
 			succesfuly_hit = true
 			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
 	pierce_count += 1
 	clear_shot()
 	GeneralFunctions.hit_freeze(0.03)
-			
-func crit_effect(_body: Enemy) -> void:
-	var _crit_effect = CRIT.instantiate()
-	_crit_effect.global_position = _body.global_position
-	EventBus.summon_effect.emit(_crit_effect)
 
 func calc_dmg(shot_power: float) -> void:
-	var crit_bonus = 1.0
-	if randf_range(0, 100) < crit_chance:
-		crit = true
-		crit_bonus = PlayerManager.player.stats.crit_modifier.value()
-
 	var is_perfect: bool = shot_power >= 1.0
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if is_perfect else 1.0
 
@@ -102,7 +89,7 @@ func calc_dmg(shot_power: float) -> void:
 		var roll: float = pow(randf(), dmg_variance_skew)
 		variance_mult = lerpf(floor_mult, 1.0, roll)
 
-	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * crit_bonus * variance_mult)
+	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * variance_mult)
 	
 func calc_knockback(shot_power: float) -> void:
 	if PlayerManager.player.stats.can_knockback <= 0:

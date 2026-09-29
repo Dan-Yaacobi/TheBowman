@@ -30,7 +30,6 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_bgaaw"]
 script = ExtResource("6_s3cxq")
 stat_rolls = Array[ExtResource("7_760i3")]([SubResource("Resource_gv3fu"), SubResource("Resource_s8aa3")])
-minor_abilities = ExtResource("5_air27")
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
@@ -44,10 +43,33 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_qxfns"]
 script = ExtResource("6_s3cxq")
 stat_rolls = Array[ExtResource("7_760i3")]([SubResource("Resource_8vxpl")])
+minor_abilities = ExtResource("5_air27")
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_u8kru"]
+script = ExtResource("7_760i3")
+stat_name = "Perfect Shot Window"
+min_value = 0.5
+max_value = 1.5
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_gorgn"]
 script = ExtResource("6_s3cxq")
+stat_rolls = Array[ExtResource("7_760i3")]([SubResource("Resource_u8kru")])
+minor_abilities = ExtResource("5_air27")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_atbo7"]
+script = ExtResource("7_760i3")
+stat_name = "perfect_shot_bonus"
+min_value = 0.5
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_h4v1l"]
+script = ExtResource("6_s3cxq")
+stat_rolls = Array[ExtResource("7_760i3")]([SubResource("Resource_atbo7")])
 minor_abilities = ExtResource("5_air27")
 minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
@@ -60,6 +82,6 @@ equipped_texture = ExtResource("3_rg2f4")
 dropped_scale = 0.5
 equipped_scale = Vector2(1, 0.6)
 ability = SubResource("Resource_i2jkr")
-tiers = Array[Object]([SubResource("Resource_bgaaw"), SubResource("Resource_qxfns"), SubResource("Resource_gorgn")])
+tiers = Array[Object]([SubResource("Resource_bgaaw"), SubResource("Resource_qxfns"), SubResource("Resource_gorgn"), SubResource("Resource_h4v1l")])
 equipment_scene = ExtResource("2_3wah7")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

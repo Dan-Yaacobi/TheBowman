@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MinorAbilityLibrary" format=3 uid="uid://dxaoxfaq47cqw"]
+
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="1_pngcp"]
+[ext_resource type="Script" uid="uid://sqv71jkptw5k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_damage.gd" id="2_fxi24"]
+[ext_resource type="Script" uid="uid://cvbglmlpl5ful" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_duration.gd" id="3_unat1"]
+[ext_resource type="Script" uid="uid://b80kyurvqvsj1" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_ticks.gd" id="4_g7uqh"]
+[ext_resource type="Script" uid="uid://cok0b6xhp4gtg" path="res://Player/Abilities2.0/MinorAbilities/SmallPoisonCloud/poison_cloud_death.gd" id="5_0x3kp"]
+[ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_ufehx"]
+
+[sub_resource type="Resource" id="Resource_0x3kp"]
+script = ExtResource("2_fxi24")
+metadata/_custom_type_script = "uid://sqv71jkptw5k"
+
+[sub_resource type="Resource" id="Resource_yelfa"]
+script = ExtResource("3_unat1")
+metadata/_custom_type_script = "uid://cvbglmlpl5ful"
+
+[sub_resource type="Resource" id="Resource_jiokv"]
+script = ExtResource("4_g7uqh")
+metadata/_custom_type_script = "uid://b80kyurvqvsj1"
+
+[sub_resource type="Resource" id="Resource_i2gjg"]
+script = ExtResource("5_0x3kp")
+metadata/_custom_type_script = "uid://cok0b6xhp4gtg"
+
+[resource]
+script = ExtResource("5_ufehx")
+abilities = Array[ExtResource("1_pngcp")]([SubResource("Resource_0x3kp"), SubResource("Resource_yelfa"), SubResource("Resource_jiokv"), SubResource("Resource_i2gjg")])
+metadata/_custom_type_script = "uid://dnf0fea71aaqf"

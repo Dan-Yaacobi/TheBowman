@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://xwafxvhb52cv" path="res://Items/ItemEffects/CriticalHit/crit.gd" id="1_kxrop"]
 
-
 [sub_resource type="Animation" id="Animation_1yo72"]
 resource_name = "Crit"
 length = 0.5

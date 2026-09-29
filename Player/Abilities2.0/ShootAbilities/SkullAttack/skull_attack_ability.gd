@@ -9,4 +9,4 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		EventBus.summon_effect.emit(skull_attack)
 		
 func get_tooltip() -> String:
-	return "Apply Weakness on Hit"
+	return "Apply Cursed on Hit, Cursed enemies take more damage but also deal more."

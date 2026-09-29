@@ -119,14 +119,18 @@ func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> vo
 	stats.damage_taken_multiplier.remove_buff_stack(id, _type)
 	
 func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	hurt_box.damage_multiplier.append(_amount)
+	return
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
 	stats.damage_dealt_multiplier.add_buff(id,_amount,_type)
-	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
+	hurt_box.damage_multiplier.append(stats.damage_dealt_multiplier.value())
 	
 func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
+	hurt_box.damage_multiplier.erase(_amount)
+	return
 	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
+	hurt_box.damage_multiplier.erase(stats.damage_dealt_multiplier.value())
 	stats.damage_dealt_multiplier.remove_buff_stack(id, _type)
-	hurt_box.damage_multiplier = stats.damage_dealt_multiplier.value()
 	
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	var final_dmg: int

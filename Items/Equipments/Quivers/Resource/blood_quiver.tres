@@ -5,21 +5,82 @@
 [ext_resource type="Texture2D" uid="uid://cy35gvnyu51eg" path="res://Items/Equipments/Quivers/Sprites/Arrows/RedArrow.png" id="3_wi6fb"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_q237j"]
 [ext_resource type="Texture2D" uid="uid://bchin526oeubw" path="res://Items/Equipments/Quivers/Sprites/Quiver_Red.png" id="5_aie6x"]
-[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="6_hayf5"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="7_srqdb"]
+[ext_resource type="Resource" uid="uid://c3gnks7bcfpu2" path="res://Player/Abilities2.0/MinorAbilities/bleed_minor_abilities.tres" id="8_wi6fb"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="8_yuj8v"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="9_aie6x"]
 
 [sub_resource type="Resource" id="Resource_hge11"]
 script = ExtResource("1_n38jo")
 trigger_type = 6
 metadata/_custom_type_script = "uid://hqu465ov5673"
 
+[sub_resource type="Resource" id="Resource_trdwn"]
+script = ExtResource("8_yuj8v")
+stat_name = "arrow_damage"
+min_value = 3.0
+max_value = 6.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_csunh"]
+script = ExtResource("8_yuj8v")
+stat_name = "pull_speed"
+min_value = 0.2
+max_value = 0.4
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_od0aq"]
 script = ExtResource("7_srqdb")
+stat_rolls = Array[ExtResource("8_yuj8v")]([SubResource("Resource_trdwn"), SubResource("Resource_csunh")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_wgquu"]
+script = ExtResource("8_yuj8v")
+stat_name = "crit_chance"
+min_value = 5.0
+max_value = 10.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_y73dv"]
 script = ExtResource("7_srqdb")
+stat_rolls = Array[ExtResource("8_yuj8v")]([SubResource("Resource_wgquu")])
+minor_abilities = ExtResource("8_wi6fb")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_51fo5"]
+script = ExtResource("8_yuj8v")
+stat_name = "crit_modifier"
+min_value = 0.25
+max_value = 0.5
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_84tyv"]
+script = ExtResource("7_srqdb")
+stat_rolls = Array[ExtResource("8_yuj8v")]([SubResource("Resource_51fo5")])
+minor_abilities = ExtResource("9_aie6x")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_pn0xu"]
+script = ExtResource("8_yuj8v")
+stat_name = "arrow_pierce"
+min_value = 2.0
+max_value = 2.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_xeb1f"]
+script = ExtResource("8_yuj8v")
+stat_name = "arrow_count"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_cdswp"]
+script = ExtResource("7_srqdb")
+stat_rolls = Array[ExtResource("8_yuj8v")]([SubResource("Resource_pn0xu"), SubResource("Resource_xeb1f")])
+minor_abilities = ExtResource("8_wi6fb")
+minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
@@ -30,6 +91,6 @@ equipped_texture = ExtResource("3_wi6fb")
 dropped_scale = 0.3
 slot = 1
 ability = SubResource("Resource_hge11")
-tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_y73dv")])
+tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_y73dv"), SubResource("Resource_84tyv"), SubResource("Resource_cdswp")])
 equipment_scene = ExtResource("2_wi6fb")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

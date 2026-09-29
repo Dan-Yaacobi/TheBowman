@@ -4,6 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_i7k7n"]
 [ext_resource type="Texture2D" uid="uid://dbfu1fjn72jj0" path="res://Items/Equipments/Quivers/Sprites/Arrows/BasicArrow.png" id="2_i7k7n"]
 [ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="4_n0g7u"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_mpoid"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_aonyx"]
+
+[sub_resource type="Resource" id="Resource_2vdcl"]
+script = ExtResource("6_aonyx")
+stat_name = "arrow_damage"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_snq3k"]
+script = ExtResource("5_mpoid")
+stat_rolls = Array[ExtResource("6_aonyx")]([SubResource("Resource_2vdcl")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
 script = ExtResource("1_2s8ld")
@@ -12,6 +26,6 @@ texture = ExtResource("4_n0g7u")
 equipped_texture = ExtResource("2_i7k7n")
 dropped_scale = 0.35
 slot = 1
-tiers = null
+tiers = Array[Object]([SubResource("Resource_snq3k")])
 equipment_scene = ExtResource("1_i7k7n")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

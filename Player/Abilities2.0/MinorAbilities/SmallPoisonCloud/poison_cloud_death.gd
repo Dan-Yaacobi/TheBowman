@@ -13,3 +13,6 @@ func get_tooltip() -> String:
 	
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT
+
+func get_tooltip_color() -> Color:
+	return Color.DARK_GREEN

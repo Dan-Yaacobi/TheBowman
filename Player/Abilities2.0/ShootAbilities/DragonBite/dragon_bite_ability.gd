@@ -20,3 +20,6 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 
 func get_tooltip() -> String:
 	return "Turns Perfect Shots to a Dragon"
+
+func get_tooltip_color() -> Color:
+	return Color.SEA_GREEN

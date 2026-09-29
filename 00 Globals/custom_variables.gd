@@ -9,7 +9,7 @@ const HP_PER_HEART: int = 4
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98
 
-const WEAKNESS_DEBUFF_ID: int = 104
+const CURSED_DEBUFF_ID: int = 104
 const FROSTBITE_DEBUFF_ID: int = 105
 const FREEZE_DEBUFF_ID: int = 106
 const BURN_DEBUFF_ID: int = 107
@@ -22,28 +22,32 @@ const PULL_SPEED_BUFF_ID: int = 77
 var buff_id_counter: int = 0
 
 var rarity_colors: Array[Color] = [
-	#Color(0.62, 0.62, 0.62),  # 1 - Common (gray)
-	Color(1.0, 1.0, 1.0),     # 2 - Uncommon (white)
-	Color(0.30, 0.69, 0.31),  # 3 - Rare (green)
-	Color(0.13, 0.59, 0.95),  # 4 - Epic (blue)
-	Color(0.61, 0.15, 0.69),  # 5 - Legendary (purple)
-	Color(0.96, 0.26, 0.21),  # 6 - Mythic (red)
-	Color(1.0, 0.60, 0.0),    # 7 - Ancient (orange)
-	Color(1.0, 0.84, 0.0),    # 8 - Gold
-	#Color(0.0, 0.90, 1.0),    # 9 - Prismatic (electric cyan)
-	#Color(1.0, 1.0, 1.0),     # 10 - Celestial (placeholder — animate this one)
+	Color(1.0, 1.0, 1.0),     # 1 - Common (white)
+	Color(0.13, 0.59, 0.95),  # 2 - Rare (blue)
+	Color(0.61, 0.15, 0.69),  # 3 - Epic (purple)
+	Color(1.0, 0.60, 0.0),    # 4 - Legendary (orange)
 ]
 
+var rarity_names: Array[String] = [
+	"Common",
+	"Rare",
+	"Epic",
+	"Legendary",
+	"Mythic"
+]
 var MAX_RARITY: int = rarity_colors.size()
 
+func rarity_name(rarity: float) -> String:
+	if rarity > CustomVariables.MAX_RARITY:
+		return rarity_names[-1]
+	return rarity_names[roundi(rarity)]
+	
 func rarity_color(rarity: float) -> Color:
 	var colors: Array[Color] = CustomVariables.rarity_colors
-
 	if rarity > CustomVariables.MAX_RARITY:
 		var overflow = clampf(rarity - CustomVariables.MAX_RARITY, 0.0, 1.0)
 		return Color.ORANGE.lerp(Color(0.0, 0.90, 1.0), overflow)
-
-	return colors[clampi(roundi(rarity) - 1, 0, colors.size() - 1)]
+	return colors[clampi(roundi(rarity), 0, colors.size())]
 
 func get_buff_id() -> int:
 	buff_id_counter += 1

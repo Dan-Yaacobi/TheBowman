@@ -18,7 +18,6 @@
 [ext_resource type="Resource" uid="uid://ss8moblrre6q" path="res://Player/Abilities2.0/ActiveAbilities/Resources/thunder_strike_ability.tres" id="7_iqrxt"]
 [ext_resource type="Resource" uid="uid://dwno03ntsasoi" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres" id="7_v6yg5"]
 [ext_resource type="Resource" uid="uid://cgwpaefsfrma1" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres" id="8_3f0ah"]
-[ext_resource type="Resource" uid="uid://c5eha4kqajw4m" path="res://Player/Abilities2.0/ActiveAbilities/Resources/extra_arrow_active_ability.tres" id="8_6fsb2"]
 [ext_resource type="Resource" uid="uid://bm5wpeqsqrof4" path="res://Rifts/Chunks/ChunkData/Treasure/cleric_island.tres" id="8_oe8us"]
 [ext_resource type="Resource" uid="uid://c2cyut0rfnys6" path="res://Rifts/Chunks/ChunkData/Treasure/chest_island.tres" id="8_qxt8x"]
 [ext_resource type="Resource" uid="uid://b7cryatyf3hgs" path="res://Rifts/Chunks/ChunkData/Treasure/pirate_island.tres" id="9_2cjow"]
@@ -105,7 +104,7 @@ metadata/_custom_type_script = "uid://co6xputyjmuin"
 
 [node name="Rift" type="Node2D" unique_id=371790418]
 script = ExtResource("1_hofdl")
-active_ability_pool = Array[ExtResource("2_oaj8c")]([ExtResource("3_oaj8c"), ExtResource("4_k7sga"), ExtResource("5_iqrxt"), ExtResource("6_k7sga"), ExtResource("7_iqrxt"), ExtResource("8_6fsb2")])
+active_ability_pool = Array[ExtResource("2_oaj8c")]([ExtResource("3_oaj8c"), ExtResource("4_k7sga"), ExtResource("5_iqrxt"), ExtResource("6_k7sga"), ExtResource("7_iqrxt")])
 
 [node name="RiftGenerator" parent="." unique_id=1531404571 instance=ExtResource("2_pe0ph")]
 data = SubResource("Resource_d1hhh")

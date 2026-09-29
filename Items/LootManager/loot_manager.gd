@@ -3,7 +3,7 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 @export var max_rift_level: int = 15
-
+@export var rarity_stat_bonus: Array[float] = [0.0, 0.1, 0.2, 0.3]
 # Rift level → tier thresholds. Reaching threshold N grants tier N (index into data.tiers / RarityTier arrays)
 @export var rift_level_tier_bands: Array[int] = [4, 8, 12]
 @export var tier_upgrade_chance: float = 0.15   # chance to roll one tier above your guaranteed floor
@@ -71,12 +71,14 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
 	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep, bounded growth
 	var rift_stat_scalar: float = 1.0 + s * rift_stat_scale
+	var rarity_scalar: float = 1.0 + rarity_stat_bonus[rarity]
+	var total_scalar: float = rift_stat_scalar * rarity_scalar
 	
 	for tier_index in range(rarity + 1):
 		var tier: RarityTier = data.tiers[tier_index]
 		for def in tier.stat_rolls:
-			var scaled_min: float = def.min_value * rift_stat_scalar
-			var scaled_max: float = def.max_value * rift_stat_scalar
+			var scaled_min: float = def.min_value * total_scalar
+			var scaled_max: float = def.max_value * total_scalar
 			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
 			data.add_modifier(def.stat_name, amount, def.type)
 		var minor_abilities: Array[MinorAbility]
@@ -164,7 +166,7 @@ func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> Eq
 	_apply_rarity_rolls(data, rarity)
 	return data
 	
-func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 1) -> void:
+func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 0) -> void:
 	var item: EquipmentData = template.duplicate()
 	if item.ability:
 		item.ability = item.ability.duplicate()

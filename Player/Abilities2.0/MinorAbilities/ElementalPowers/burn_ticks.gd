@@ -12,3 +12,6 @@ func get_tooltip() -> String:
 	
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE
+
+func get_tooltip_color() -> Color:
+	return Color.DARK_ORANGE

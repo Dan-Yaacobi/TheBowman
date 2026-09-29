@@ -12,6 +12,11 @@ class_name FrostBreath extends Node2D
 @export var tick_damage: int = 2
 @export var slow_duration: float = 1.0
 
+@export_group("Size Scaling")
+@export var width_size_exponent: float = 1.0    # 1 = width scales fully with arrow size
+@export var length_size_exponent: float = 0.5   # 0.5 = length grows slower (sqrt)
+@export var particle_size_exponent: float = 1.0
+
 var active: bool = false
 var _hit_targets: Array[GameEntity] = []
 var _tick_timer: float = 0.0
@@ -26,14 +31,28 @@ func _ready() -> void:
 	hurt_box.area_entered.connect(_on_area_entered)
 	hurt_box.area_exited.connect(_on_area_exited)
 	hurt_box.base_damage = tick_damage
-
+	collision_shape.shape = collision_shape.shape.duplicate()
 	collision_shape.shape.size = Vector2.ZERO
+	_apply_arrow_size()
 	hurt_box.add_before_effect(apply_slow)
 	for ability in after_hit_abilities:
 		hurt_box.add_after_effect(ability.activate_ability)
 	for ability in before_hit_abilities:
 		hurt_box.add_before_effect(ability.activate_ability)
-		
+
+func _apply_arrow_size() -> void:
+	var arrow_size: Stat = PlayerManager.player.stats.arrow_size
+	var size_ratio: float = arrow_size.value()
+	var width_mult: float = pow(size_ratio, width_size_exponent)
+	var length_mult: float = pow(size_ratio, length_size_exponent)
+	var particle_mult: float = pow(size_ratio, particle_size_exponent)
+
+	beam_width *= width_mult
+	hitbox_max_length *= length_mult
+	maximum_length *= length_mult
+	frost_breath_effect.scale_amount_min *= particle_mult
+	frost_breath_effect.scale_amount_max *= particle_mult
+	
 func _on_area_entered(a: Area2D) -> void:
 	if a.get_parent() is GameEntity:
 		var entity: GameEntity = a.get_parent()
@@ -67,9 +86,6 @@ func _tick_damage(delta: float) -> void:
 			if is_instance_valid(entity) and entity is Enemy:
 				hurt_box.set_text_color(Color.AQUA)
 				hurt_box.AreaEnetered(entity.hit_box)
-				#entity.take_damage(hurt_box)
-				#entity.show_damage(hurt_box.damage,Color.AQUA)
-				#apply_slow(entity)
 				
 func handle_breath(_direction: Vector2, shot_power: float, delta: float) -> void:
 	var dir: Vector2 = _direction.normalized()
@@ -89,7 +105,7 @@ func calc_direction() -> Vector2:
 	var player_pos = PlayerManager.player.global_position
 	return Vector2(mouse_pos[0] - player_pos[0], mouse_pos[1] - player_pos[1])
 
-func apply_slow(entity: GameEntity) -> void:
+func apply_slow(entity: GameEntity, _var2) -> void:
 	if !entity.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
 		var frostbite_debuff: FrostBiteDebuff = FROST_BITE_DEBUFF.instantiate()
 		entity.apply_debuff(frostbite_debuff,CustomVariables.FROSTBITE_DEBUFF_ID,slow_duration,1)

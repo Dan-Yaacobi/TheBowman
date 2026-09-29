@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MinorAbilityLibrary" format=3 uid="uid://c3gnks7bcfpu2"]
+
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="1_mmeaq"]
+[ext_resource type="Script" uid="uid://cw60pxuol5tdm" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_damage.gd" id="2_8olkr"]
+[ext_resource type="Script" uid="uid://d0uegg23plq7k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_duration.gd" id="3_k7any"]
+[ext_resource type="Script" uid="uid://dws60jn37857t" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_ticks.gd" id="4_tmaff"]
+[ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_slyqq"]
+
+[sub_resource type="Resource" id="Resource_uiqo8"]
+script = ExtResource("2_8olkr")
+metadata/_custom_type_script = "uid://cw60pxuol5tdm"
+
+[sub_resource type="Resource" id="Resource_kn40c"]
+script = ExtResource("3_k7any")
+metadata/_custom_type_script = "uid://d0uegg23plq7k"
+
+[sub_resource type="Resource" id="Resource_drjfm"]
+script = ExtResource("4_tmaff")
+metadata/_custom_type_script = "uid://dws60jn37857t"
+
+[resource]
+script = ExtResource("5_slyqq")
+abilities = Array[ExtResource("1_mmeaq")]([SubResource("Resource_uiqo8"), SubResource("Resource_kn40c"), SubResource("Resource_drjfm")])
+metadata/_custom_type_script = "uid://dnf0fea71aaqf"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MinorAbilityLibrary" format=3 uid="uid://bbsjhtbjigoim"]
+
+[ext_resource type="Script" uid="uid://bqxpllc3svs5p" path="res://Player/Abilities2.0/MinorAbilities/minor_ability.gd" id="1_m0dc4"]
+[ext_resource type="Script" uid="uid://dptapbe5ulhvs" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_damage.gd" id="2_m0dc4"]
+[ext_resource type="Script" uid="uid://cqf14kh2rdk5s" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_duration.gd" id="3_cofrm"]
+[ext_resource type="Script" uid="uid://k44eaeh7n0hr" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_ticks.gd" id="4_hum8f"]
+[ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_o5k3d"]
+
+[sub_resource type="Resource" id="Resource_gim1k"]
+script = ExtResource("2_m0dc4")
+metadata/_custom_type_script = "uid://dptapbe5ulhvs"
+
+[sub_resource type="Resource" id="Resource_2eggx"]
+script = ExtResource("3_cofrm")
+metadata/_custom_type_script = "uid://cqf14kh2rdk5s"
+
+[sub_resource type="Resource" id="Resource_6ukxt"]
+script = ExtResource("4_hum8f")
+metadata/_custom_type_script = "uid://k44eaeh7n0hr"
+
+[resource]
+script = ExtResource("5_o5k3d")
+abilities = Array[ExtResource("1_m0dc4")]([SubResource("Resource_gim1k"), SubResource("Resource_2eggx"), SubResource("Resource_6ukxt")])
+metadata/_custom_type_script = "uid://dnf0fea71aaqf"
