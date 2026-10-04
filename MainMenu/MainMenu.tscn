@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="8_167x7"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="9_24r6y"]
 [ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="10_guwyo"]
-[ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="12_5lv0r"]
+[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="12_5lv0r"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
@@ -76,11 +76,13 @@ position = Vector2(530, 115)
 
 [node name="Island11" parent="Islands" unique_id=538615439 instance=ExtResource("14_7t2hb")]
 position = Vector2(155, 118)
-floating = true
+use_fixed_frame = true
+fixed_frame_index = 4
 
 [node name="RiftPortal" parent="Islands/Island11" unique_id=1166811293 instance=ExtResource("13_npjie")]
 z_index = 1
-position = Vector2(2, -21)
+position = Vector2(1, -30)
+scale = Vector2(1.5, 1.5)
 destination = 2
 
 [node name="Island16" parent="Islands" unique_id=1999979479 instance=ExtResource("14_7t2hb")]
@@ -105,10 +107,6 @@ item_data = ExtResource("12_5lv0r")
 position = Vector2(375, 109)
 use_fixed_frame = true
 fixed_frame_index = 4
-
-[node name="PedestalNPC" parent="Islands/Island17" unique_id=1109545810 instance=ExtResource("13_gej64")]
-position = Vector2(2, -18)
-item_data = null
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
 position = Vector2(205, 119)

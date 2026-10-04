@@ -60,6 +60,7 @@ texture = ExtResource("4_mc0vw")
 lifetime = 0.75
 speed_scale = 0.2
 lifetime_randomness = 0.51
+local_coords = true
 emission_shape = 3
 emission_rect_extents = Vector2(7, 10)
 gravity = Vector2(0, 0)
@@ -67,6 +68,7 @@ scale_amount_curve = SubResource("Curve_444u7")
 color_ramp = SubResource("Gradient_gtw83")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2119936291]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1146710483]

@@ -4,8 +4,6 @@ class_name EnemyEntry extends Resource
 @export var data: EnemyData
 ## Pressure units. For elites, the target pressure must reach this before it can spawn
 @export var cost: int = 1
-## Elites only spawn on an empty field and block all other spawns while alive
-@export var is_elite: bool = false
 @export var min_level: int = 1
 ## -1 = no upper cap
 @export var max_level: int = -1

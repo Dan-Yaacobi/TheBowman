@@ -8,7 +8,7 @@ signal challenge_finished(success: bool)
 @onready var shrine: ChallengeShrine = $Islands/Island/ChallengeShrine
 @onready var spawner: ChallengeSpawner = $ChallengeSpawner
 @onready var exit_portal: EventPortal = $EventPortal
-@onready var falling_death: FallingDeath = $FallingDeath
+@onready var falling_death: Node2D = $FallingDeath
 @export var curse_offer_count: int = 3
 
 @onready var curse_picker: CursePicker = $CursePicker
@@ -99,7 +99,7 @@ func _finish(success: bool) -> void:
 		world.kill_all_enemies()
 
 	if success:
-		pass # reward placeholder
+		spawn_rewards(shrine.global_position, taken_curse_weight, challenge.rewards)
 	hud.show_result(success)
 	challenge_finished.emit(success)
 

@@ -30,14 +30,21 @@ layout_mode = 2
 [node name="CurseList" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=215955572]
 layout_mode = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1466504738]
+[node name="RewardHeader" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2061882482]
+layout_mode = 2
+text = "Rewards:"
+
+[node name="RewardList" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1317320815]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1466504738]
 layout_mode = 2
 alignment = 1
 
-[node name="StartButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1069044180]
+[node name="StartButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1069044180]
 layout_mode = 2
 text = "Start"
 
-[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1832920125]
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1832920125]
 layout_mode = 2
 text = "Cancel"

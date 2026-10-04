@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BoolStatCurse" format=3 uid="uid://gfv4a7rao23r"]
+
+[ext_resource type="Script" uid="uid://5mjo48ddl0tu" path="res://Level/Events/ChallengeStone/Curses/bool_stat_curse.gd" id="1_0tilu"]
+[ext_resource type="Texture2D" uid="uid://caj4kkwlpecd7" path="res://Level/Events/ChallengeStone/Curses/Sprites/ArrowCurse.png" id="1_or7jy"]
+
+[resource]
+script = ExtResource("1_0tilu")
+stat_name = "only_perfect"
+value = true
+icon = ExtResource("1_or7jy")
+display_name = "Only Perfects"
+description = "Only perfect shots are available"
+metadata/_custom_type_script = "uid://5mjo48ddl0tu"

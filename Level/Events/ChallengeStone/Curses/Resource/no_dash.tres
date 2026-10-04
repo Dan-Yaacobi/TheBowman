@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LockCurse" format=3 uid="uid://btcfetlv76rkn"]
+
+[ext_resource type="Texture2D" uid="uid://bccnsdivgxguc" path="res://Level/Events/ChallengeStone/Curses/Sprites/NoDashCurse.png" id="1_clv8o"]
+[ext_resource type="Script" uid="uid://dla5nilh0q0ha" path="res://Level/Events/ChallengeStone/Curses/lock_curse.gd" id="1_w3pkk"]
+
+[resource]
+script = ExtResource("1_w3pkk")
+icon = ExtResource("1_clv8o")
+display_name = "No Dash"
+description = "Cannot dash"
+metadata/_custom_type_script = "uid://dla5nilh0q0ha"

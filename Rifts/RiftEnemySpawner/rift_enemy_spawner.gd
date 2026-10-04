@@ -24,16 +24,8 @@ signal enemy_spawned(enemy: Enemy)
 @export var base_pressure: float = 1.0
 @export var peak_pressure: float = 4.0
 @export var pressure_per_level: float = 0.34
-## Hard cap on target pressure. An elite's cost must not exceed this.
+## Hard cap on target pressure.
 @export var max_pressure: int = 6
-
-@export_group("Elites")
-## Chance that an eligible spawn trigger starts an elite instead of a normal spawn.
-@export_range(0.0, 1.0) var elite_chance: float = 0.5
-## Seconds after an elite dies before another can start.
-@export var elite_cooldown: float = 45.0
-## Max seconds to wait for the field to clear before giving up on a pending elite.
-@export var elite_pending_timeout: float = 20.0
 
 @export_group("Spawn Tuning")
 ## Chance a spawn trigger fires at low intensity (1.0 intensity = always)
@@ -45,31 +37,16 @@ var rift_level: int
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 ## Cost of every enemy that is alive or queued to spawn
 var _committed_cost: int = 0
-## True while an elite is alive or queued.
-var _elite_active: bool = false
-## Elite waiting for the field to clear. Blocks all regular spawns.
-var _elite_pending: EnemyEntry = null
-var _pending_time_left: float = 0.0
-var _elite_cooldown_left: float = 0.0
 
+var is_suspended: bool = false
 
 func _ready() -> void:
 	if main_path_curve == null:
 		main_path_curve = _build_default_main_curve()
-	_validate_pool()
-
-
-func _process(delta: float) -> void:
-	if _elite_cooldown_left > 0.0:
-		_elite_cooldown_left = maxf(0.0, _elite_cooldown_left - delta)
-	if _elite_pending != null:
-		_pending_time_left -= delta
-		if _pending_time_left <= 0.0:
-			_elite_pending = null
 
 
 func spawn_enemy(level: int, progress: float, chunk_index: int, is_main_path: bool, is_terminal: bool) -> void:
-	if _elite_active or _elite_pending != null:
+	if is_suspended:
 		return
 	if is_main_path and chunk_index <= safe_chunks:
 		return
@@ -84,12 +61,6 @@ func spawn_enemy(level: int, progress: float, chunk_index: int, is_main_path: bo
 
 	var target: int = get_target_pressure(intensity, level)
 
-	if _elite_cooldown_left <= 0.0 and randf() < elite_chance:
-		var elite: EnemyEntry = pick_elite(level, intensity, target)
-		if elite != null:
-			_start_elite_pending(elite)
-			return
-
 	# Reward chunks always spawn the full target, ignoring what is already alive
 	var budget: int = target if is_terminal else target - _committed_cost
 	if budget <= 0:
@@ -99,12 +70,6 @@ func spawn_enemy(level: int, progress: float, chunk_index: int, is_main_path: bo
 	for entry: EnemyEntry in entries:
 		_committed_cost += entry.cost
 	_do_spawn(entries)
-
-
-## Call when the rift is torn down or the player leaves it, before killing enemies.
-func reset_elite_state() -> void:
-	_elite_pending = null
-	_pending_time_left = 0.0
 
 
 func get_base_intensity(progress: float, is_main_path: bool, is_terminal: bool) -> float:
@@ -129,68 +94,39 @@ func get_target_pressure(intensity: float, level: int) -> int:
 	return mini(roundi(target), max_pressure)
 
 
-func _start_elite_pending(entry: EnemyEntry) -> void:
-	_elite_pending = entry
-	_pending_time_left = elite_pending_timeout
-	if _committed_cost <= 0:
-		_spawn_pending_elite()
-
-
-func _spawn_pending_elite() -> void:
-	var entry: EnemyEntry = _elite_pending
-	_elite_pending = null
-	if entry == null:
-		return
-	_committed_cost += entry.cost
-	_elite_active = true
-	var entries: Array[EnemyEntry] = [entry]
-	_do_spawn(entries)
-
-
 func _do_spawn(entries: Array[EnemyEntry]) -> void:
-	for entry: EnemyEntry in entries:
+	for i: int in entries.size():
+		var entry: EnemyEntry = entries[i]
 		if not is_inside_tree():
+			return
+		if is_suspended:
+			for skipped: EnemyEntry in entries.slice(i):
+				_release(skipped.cost)
 			return
 		var new_enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_zone(
 			entry.get_factory(), entry.spawn_zone
 		)
 		if new_enemy == null:
-			_release(entry.cost, entry.is_elite)
+			_release(entry.cost)
 			continue
-		new_enemy.tree_exited.connect(_release.bind(entry.cost, entry.is_elite), CONNECT_ONE_SHOT)
+		new_enemy.tree_exited.connect(_release.bind(entry.cost), CONNECT_ONE_SHOT)
 		enemy_spawned.emit(new_enemy)
 		await get_tree().create_timer(time_between_spawns, false).timeout
 
-
-func _release(cost: int, was_elite: bool) -> void:
+func _release(cost: int) -> void:
 	_committed_cost -= cost
-	if was_elite:
-		_elite_active = false
-		_elite_cooldown_left = elite_cooldown
-	elif _elite_pending != null and _committed_cost <= 0:
-		_spawn_pending_elite()
 
 
-func get_eligible_entries(level: int, intensity: float, want_elite: bool) -> Array[EnemyEntry]:
+func get_eligible_entries(level: int, intensity: float) -> Array[EnemyEntry]:
 	return enemy_pool.filter(
-		func(e: EnemyEntry) -> bool: return e.is_elite == want_elite and e.is_eligible(level, intensity)
+		func(e: EnemyEntry) -> bool: return e.is_eligible(level, intensity)
 	)
-
-
-func pick_elite(level: int, intensity: float, target: int) -> EnemyEntry:
-	var candidates: Array[EnemyEntry] = get_eligible_entries(level, intensity, true).filter(
-		func(e: EnemyEntry) -> bool: return e.cost <= target
-	)
-	if candidates.is_empty():
-		return null
-	var weights: Array = candidates.map(func(e: EnemyEntry) -> float: return e.base_weight)
-	return candidates[rng.rand_weighted(weights)]
 
 
 func roll_enemies(budget: int, level: int, intensity: float) -> Array[EnemyEntry]:
 	var result: Array[EnemyEntry] = []
 	var remaining: int = budget
-	var pool: Array[EnemyEntry] = get_eligible_entries(level, intensity, false)
+	var pool: Array[EnemyEntry] = get_eligible_entries(level, intensity)
 	while remaining > 0:
 		var affordable: Array[EnemyEntry] = pool.filter(
 			func(e: EnemyEntry) -> bool: return e.cost <= remaining
@@ -204,12 +140,6 @@ func roll_enemies(budget: int, level: int, intensity: float) -> Array[EnemyEntry
 		result.append(rolled)
 		remaining -= rolled.cost
 	return result
-
-
-func _validate_pool() -> void:
-	for entry: EnemyEntry in enemy_pool:
-		if entry.is_elite and entry.cost > max_pressure:
-			push_warning("Elite %s costs %d, above max_pressure %d: it can never spawn." % [entry.resource_path, entry.cost, max_pressure])
 
 
 func _build_default_main_curve() -> Curve:

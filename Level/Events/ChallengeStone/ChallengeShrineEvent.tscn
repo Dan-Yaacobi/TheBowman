@@ -9,19 +9,76 @@
 [ext_resource type="PackedScene" uid="uid://cbiuoq4mm2hcm" path="res://Level/Events/ChallengeStone/ChallengeShrine.tscn" id="3_ght8p"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="4_1igmo"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="4_bmtns"]
+[ext_resource type="Resource" uid="uid://btcfetlv76rkn" path="res://Level/Events/ChallengeStone/Curses/Resource/no_dash.tres" id="4_jcsjr"]
+[ext_resource type="Resource" uid="uid://bxueaibxkvvw1" path="res://Level/Events/ChallengeStone/Curses/Resource/no_sword.tres" id="5_84n7e"]
 [ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="5_a4nvr"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_nd2yj"]
+[ext_resource type="Resource" uid="uid://dn6ewmmcdvqf3" path="res://Level/Events/ChallengeStone/Curses/Resource/slow_curse.tres" id="6_fqvne"]
 [ext_resource type="Resource" uid="uid://doosq66dn01m1" path="res://Level/Events/ChallengeStone/Goals/Resource/kill_10.tres" id="6_rknkn"]
+[ext_resource type="Resource" uid="uid://gfv4a7rao23r" path="res://Level/Events/ChallengeStone/Curses/Resource/only_perfect_curse.tres" id="7_yp28l"]
 [ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="8_rknkn"]
 [ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="12_fc5jb"]
+[ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="12_yemt6"]
+[ext_resource type="Script" uid="uid://dba23xg5cr0bo" path="res://Level/Events/Rewards/random_item_reward.gd" id="13_yp28l"]
+[ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="14_3daku"]
 [ext_resource type="PackedScene" uid="uid://cguqidpw51pcn" path="res://Level/Events/ChallengeStone/Curses/CursePicker.tscn" id="14_rknkn"]
+
+[sub_resource type="Resource" id="Resource_yemt6"]
+script = ExtResource("12_yemt6")
+item = 4
+display_name = "SkyShard"
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_3daku"]
+script = ExtResource("12_yemt6")
+display_name = "Coin"
+min_amount = 5
+max_amount = 10
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_d4ca6"]
+script = ExtResource("12_yemt6")
+item = 2
+display_name = "Essence"
+min_amount = 3
+max_amount = 10
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_q2r7a"]
+script = ExtResource("12_yemt6")
+item = 3
+display_name = "Wood"
+min_amount = 5
+max_amount = 15
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_yp28l"]
+script = ExtResource("13_yp28l")
+options = Array[ExtResource("12_yemt6")]([SubResource("Resource_3daku"), SubResource("Resource_d4ca6"), SubResource("Resource_q2r7a")])
+min_weight = 1
+metadata/_custom_type_script = "uid://dba23xg5cr0bo"
+
+[sub_resource type="Resource" id="Resource_32gdo"]
+script = ExtResource("12_yemt6")
+item = 4
+display_name = "SkyShard"
+min_weight = 2
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_hl8p6"]
+script = ExtResource("14_3daku")
+forced_rarity = 1
+min_weight = 3
+metadata/_custom_type_script = "uid://c06t2awg17dkp"
 
 [sub_resource type="Resource" id="Resource_5lv0r"]
 script = ExtResource("2_pdae7")
 display_name = "Kill 10 apples"
 description = "Kill 10 apples before the timer runs out"
 goal = ExtResource("6_rknkn")
+rewards = Array[ExtResource("8_rknkn")]([SubResource("Resource_yemt6"), SubResource("Resource_yp28l"), SubResource("Resource_32gdo"), SubResource("Resource_hl8p6")])
 enemy_pool = Array[ExtResource("4_1igmo")]([ExtResource("5_a4nvr")])
+curse_pool = Array[ExtResource("3_a4nvr")]([ExtResource("4_jcsjr"), ExtResource("5_84n7e"), ExtResource("6_fqvne"), ExtResource("7_yp28l")])
 metadata/_custom_type_script = "uid://02y3s3xcuf5r"
 
 [node name="ChallengeStoneEvent" type="Node2D" unique_id=721896813]

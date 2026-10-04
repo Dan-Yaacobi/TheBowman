@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatCurse" format=3 uid="uid://dn6ewmmcdvqf3"]
+
+[ext_resource type="Texture2D" uid="uid://wxkjt56p8b1o" path="res://Level/Events/ChallengeStone/Curses/Sprites/SlowCurse.png" id="1_5oe81"]
+[ext_resource type="Script" uid="uid://dewr60c6g8sqd" path="res://Level/Events/ChallengeStone/Curses/stat_curse.gd" id="1_qgbqr"]
+
+[resource]
+script = ExtResource("1_qgbqr")
+stat_name = "move_speed"
+amount = -0.25
+icon = ExtResource("1_5oe81")
+display_name = "Slowed"
+description = "Reduce movement speed by 25%"
+metadata/_custom_type_script = "uid://dewr60c6g8sqd"

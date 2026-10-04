@@ -62,6 +62,7 @@ func go_to_walking() -> void:
 
 func can_dash_again() -> void:
 	player.can_dash -= 1
+	dash_cooldown.stop()
 	
 func get_dash_direction() -> Vector2:
 	var direction: Vector2

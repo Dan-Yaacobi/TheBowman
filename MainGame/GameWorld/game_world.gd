@@ -21,8 +21,6 @@ func set_world() -> void:
 
 	extra_set_world_functions()
 
-
-	
 func exit_world() -> void:
 	EventBus.enemy_summoned.disconnect(add_enemy)
 	EventBus.enemy_died.disconnect(remove_enemy)
@@ -30,9 +28,9 @@ func exit_world() -> void:
 	EventBus.equipment_dropped.disconnect(drop_equipment)
 	EventBus.respawn_player.disconnect(respawn)
 	EventBus.rift_respawn_position.disconnect(set_respawn_pos)
-
-	_clear_event()
+	
 	remove_effects()
+	_clear_event()
 	extra_exit_world_functions() 
 
 func extra_set_world_functions() -> void:
@@ -55,10 +53,11 @@ func summon_effect(effect: Node2D) -> void:
 	if effect.get_parent():
 		effect.reparent(self)
 	else:
-		call_deferred("add_child" ,effect)
+		call_deferred("add_child", effect)
 
+		
 func remove_effects() -> void:
-	for effect: Node2D in effects.duplicate():
+	for effect in effects.duplicate():
 		if is_instance_valid(effect):
 			effect.queue_free()
 	effects.clear()

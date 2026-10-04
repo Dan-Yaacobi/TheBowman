@@ -51,9 +51,14 @@ func spawn_position() -> Vector2:
 	return rift_levels[0].starting_chunk.spawn_position()
 
 func _on_portal_entered() -> void:
-	rift_enemy_spawner.reset_elite_state()
 	for level in rift_levels:
 		level.queue_free()
 	rift_levels.clear()
 	kill_all_enemies()
 	set_world()
+	
+func extra_enter_event_functions() -> void:
+	rift_enemy_spawner.is_suspended = true
+
+func extra_exit_event_functions() -> void:
+	rift_enemy_spawner.is_suspended = false

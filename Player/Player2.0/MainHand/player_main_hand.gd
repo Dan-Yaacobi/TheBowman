@@ -112,7 +112,12 @@ func new_arrow(_arrow: PackedScene) -> void:
 
 func release_arrow() -> void:
 	PlayerManager.player.set_shooting(false)
-	if shot_power < min_shot_power and current_arrow:
+	var perfect_threshold_check: float
+	if PlayerManager.player.stats.only_perfect:
+		perfect_threshold_check = 0.99
+	else:
+		perfect_threshold_check = min_shot_power
+	if shot_power < perfect_threshold_check and current_arrow:
 		current_arrow.free()
 	else:
 		if current_arrow:
@@ -193,6 +198,7 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 
 func swing_off_cooldown() -> void:
 	can_swing -= 1
+	swing_cooldown.stop()
 	
 func is_swinging() -> bool:
 	return main_hand_state_machine.curr_state is SwingMainHandState

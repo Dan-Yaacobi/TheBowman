@@ -7,7 +7,8 @@ func on_equipped() -> void:
 	EventBus.enemy_frostbitten_hit.connect(apply_freeze)
 
 func on_unequipped() -> void:
-	EventBus.enemy_frostbitten_hit.disconnect(apply_freeze)
+	if EventBus.enemy_frostbitten_hit.is_connected(apply_freeze):
+		EventBus.enemy_frostbitten_hit.disconnect(apply_freeze)
 
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	if _target and _target is Enemy:
@@ -27,3 +28,9 @@ func apply_frostbite(_target: Enemy) -> void:
 
 func get_tooltip() -> String:
 	return "Applies Frostbite on hit, and Freezes Frostbitten Enemies"
+
+func get_tooltip_color() -> Color:
+	return Color.AQUA
+
+func get_type() -> TriggerType:
+	return TriggerType.AFTER_HIT

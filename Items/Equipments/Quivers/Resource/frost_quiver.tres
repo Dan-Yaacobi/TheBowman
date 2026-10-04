@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_d0ww2"]
 script = ExtResource("1_i7hju")
-trigger_type = 1
+trigger_type = 6
 metadata/_custom_type_script = "uid://yp12igtlwhbu"
 
 [sub_resource type="Resource" id="Resource_13vys"]
