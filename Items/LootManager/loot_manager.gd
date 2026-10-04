@@ -21,36 +21,31 @@ func _enter_tree() -> void:
 	GameStateManager.current_loot_manager = self
 	
 func set_up() -> void:
-	EventBus.try_drop.connect(drop_random_item)
-	EventBus.drop_coins.connect(drop_coins)
-	EventBus.drop_potion.connect(drop_potion)
+	EventBus.try_drop.connect(drop_random_equipment)
 	EventBus.drop_specific_item.connect(drop_specific)
+	EventBus.drop_item.connect(drop_item)
 	
 func unset_up() -> void:
-	EventBus.try_drop.disconnect(drop_random_item)
-	EventBus.drop_coins.disconnect(drop_coins)
-	EventBus.drop_potion.disconnect(drop_potion)
+	EventBus.try_drop.disconnect(drop_random_equipment)
 	EventBus.drop_specific_item.disconnect(drop_specific)
-	
-func drop_item(slot: Slot, forced_rarity: int = -1) -> EquipmentData:
+	EventBus.drop_item.disconnect(drop_item)
+
+func drop_equipment(slot: Slot, forced_rarity: int = -1) -> EquipmentData:
 	match slot:
-		Slot.BOW: return roll_item(bow_pool, forced_rarity)
-		Slot.QUIVER: return roll_item(quiver_pool, forced_rarity)
-		Slot.RING: return roll_item(ring_pool, forced_rarity)
+		Slot.BOW: return roll_equipment(bow_pool, forced_rarity)
+		Slot.QUIVER: return roll_equipment(quiver_pool, forced_rarity)
+		Slot.RING: return roll_equipment(ring_pool, forced_rarity)
 	return null
 
-func drop_random_item(_position: Vector2, _chance: float, forced_rarity: int = -1) -> void:
+func drop_random_equipment(_position: Vector2, _chance: float, forced_rarity: int = -1) -> void:
 	if randf_range(0, 100) <= _chance:
-		var item: EquipmentData = drop_item(randi_range(0, 2) as Slot, forced_rarity)
-		EventBus.equipment_dropped.emit(item, _position, null)
+		var equipment: EquipmentData = drop_equipment(randi_range(0, 2) as Slot, forced_rarity)
+		EventBus.equipment_dropped.emit(equipment, _position, null)
 
-func drop_coins(_position: Vector2, _amount: int) -> void:
-	ItemDropManager.drop_coins(_position, _amount)
+func drop_item(_item: CustomVariables.items, _position: Vector2, _chance: float, _amount: int) -> void:
+	ItemDropManager.drop_item(_item,_position,_chance,_amount)
 
-func drop_potion(_position: Vector2, _chance: float) -> void:
-	ItemDropManager.drop_potion(_position, _chance)
-
-func roll_item(pool: ItemPool, forced_rarity: int = -1) -> EquipmentData:
+func roll_equipment(pool: ItemPool, forced_rarity: int = -1) -> EquipmentData:
 	var template: EquipmentData = _pick_template(pool)
 	if template == null:
 		push_error("ItemPool has no templates: " + str(pool.resource_path))
@@ -59,8 +54,8 @@ func roll_item(pool: ItemPool, forced_rarity: int = -1) -> EquipmentData:
 
 ## Rerolls an already-owned item fully at a specific rarity — used by the wizard NPC.
 ## Fully replaces modifiers/minors; nothing from the previous roll is preserved.
-func wizard_reroll(item: EquipmentData, new_rarity: int) -> void:
-	_apply_rarity_rolls(item, new_rarity)
+func wizard_reroll(equipment: EquipmentData, new_rarity: int) -> void:
+	_apply_rarity_rolls(equipment, new_rarity)
 
 func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	data.rarity = rarity

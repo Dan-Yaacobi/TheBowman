@@ -9,3 +9,7 @@ func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult =
 		await animation_player.animation_finished
 		drop_items()
 		queue_free()
+
+func drop_items() -> void:
+	EventBus.drop_item.emit(CustomVariables.items.COIN, global_position, 100,avg_coin_drop)
+	EventBus.try_drop.emit(global_position, 100)

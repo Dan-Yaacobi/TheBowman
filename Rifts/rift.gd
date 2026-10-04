@@ -10,7 +10,7 @@ enum Type{DIRT, SNOW, HELL}
 @onready var loot_manager: LootManager = $LootManager
 
 var rift_levels: Array[RiftLevel]
-var respawn_position: Vector2
+
 
 func add_rift_level(_rift: RiftLevel) -> void:
 	if _rift:
@@ -27,8 +27,6 @@ func extra_set_world_functions() -> void:
 	rift_level.reparent(self)
 	rift_level.get_summon_enemy.connect(call_enemy_spawner)
 	has_respawns = true
-	EventBus.respawn_player.connect(respawn)
-	EventBus.rift_respawn_position.connect(set_respawn_pos)
 	
 func _on_world_ready() -> void:
 	if PlayerManager.player.stats.rift_level == 1 and active_ability_pool.size() >= 3:
@@ -59,9 +57,3 @@ func _on_portal_entered() -> void:
 	rift_levels.clear()
 	kill_all_enemies()
 	set_world()
-
-func set_respawn_pos(_position: Vector2) -> void:
-	respawn_position = _position
-	
-func respawn() -> void:
-	PlayerManager.player.global_position = respawn_position

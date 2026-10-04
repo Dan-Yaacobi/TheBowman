@@ -4,7 +4,10 @@ enum stats {Strength, Agility, Stamina}
 
 enum directions {Up, Left ,Down ,Right}
 
+enum items{COIN,POTION, ESSENCE, WOOD, SKYSHARD}
+
 const HP_PER_HEART: int = 4
+const RIFTS_PER_TYPE: int = 2
 
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98

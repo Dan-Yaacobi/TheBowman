@@ -61,7 +61,7 @@ var shooting: bool = false
 var current_arrow: Arrow
 
 var current_portal: Portal
-var can_dash: bool = true
+var can_dash: int = 0
 
 var equipment_interacted: Equipment = null
 
@@ -342,10 +342,6 @@ func leech_heal(amount: int,enemy_position: Vector2) -> void:
 	health_gain_effect.heal_amount = amount
 	get_parent().call_deferred("add_child", health_gain_effect)
 	
-func collect_money(amount: int) -> void:
-	stats.money += amount
-	money_changed.emit(stats.money)
-
 func set_camera(tile_limit: Rect2i,tile_size: int) -> void:
 	camera.limit_top = tile_limit.position[0] * tile_size
 	camera.limit_left = tile_limit.position[1] * tile_size
@@ -357,8 +353,9 @@ func slow_player(slow_time: float,effect: Node2D) -> void:
 	slow.slow_player(slow_time,effect)
 
 func buy(price: int) -> bool:
-	if stats.money >= price:
-		collect_money(-price)
+	if stats.items[CustomVariables.items.COIN] >= price:
+		stats.items[CustomVariables.items.COIN] -= price
+		money_changed.emit(stats.items[CustomVariables.items.COIN])
 		return true
 	return false
 	
@@ -544,3 +541,9 @@ func reset_shot_streak() -> void:
 	
 func reset_perfect_shot_streak() -> void:
 	stats.perfect_shot_streak = 0
+
+func collect_item(item: CustomVariables.items, _amount: int) -> void:
+	if _amount > 0 and stats.items.has(item):
+		stats.items[item] += _amount
+		if item == CustomVariables.items.COIN:
+			money_changed.emit(stats.items[item])

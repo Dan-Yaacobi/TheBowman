@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://0t26boa1g5jg"]
+
+[ext_resource type="Script" uid="uid://qocat2riv5sk" path="res://Level/Events/ChallengeStone/challenge_spawner.gd" id="1_ojidd"]
+
+[node name="ChallengeSpawner" type="Node2D" unique_id=1138546475]
+script = ExtResource("1_ojidd")

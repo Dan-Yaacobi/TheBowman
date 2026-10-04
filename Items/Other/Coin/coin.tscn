@@ -1,8 +1,47 @@
 [gd_scene format=3 uid="uid://drwcrh5hyijoj"]
 
-[ext_resource type="Texture2D" uid="uid://blfxj36023kfj" path="res://Items/Other/Coin/Coin.png" id="1_64xu8"]
-[ext_resource type="Script" uid="uid://cp73q3m5w2tpo" path="res://Items/Other/Coin/coin.gd" id="1_mcakf"]
-[ext_resource type="Script" uid="uid://bx61whsw25xrp" path="res://Items/Other/Coin/coin_visuals.gd" id="3_5yd7k"]
+[ext_resource type="Script" uid="uid://cp73q3m5w2tpo" path="res://Items/Other/Coin/coin.gd" id="1_64xu8"]
+[ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="2_5yd7k"]
+[ext_resource type="AudioStream" uid="uid://ddd4tt73l1lxp" path="res://Audio/Player/coin_drop.mp3" id="2_y6rwh"]
+
+[sub_resource type="Animation" id="Animation_y6rwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5ct1f"]
+resource_name = "Spin"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tx6gx"]
+_data = {
+&"RESET": SubResource("Animation_y6rwh"),
+&"Spin": SubResource("Animation_5ct1f")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
 radius = 20.0
@@ -11,13 +50,20 @@ radius = 20.0
 radius = 3.0
 
 [node name="Coin" type="Node2D" unique_id=967061751]
-script = ExtResource("1_mcakf")
+scale = Vector2(3, 3)
+script = ExtResource("1_64xu8")
+magnet_force = 150.0
+text = "Coin +1"
+color = Color(1, 0.7176471, 0, 1)
+collected_sound = ExtResource("2_y6rwh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_64xu8")
-script = ExtResource("3_5yd7k")
-spin_speed = 3.0
+texture = ExtResource("2_5yd7k")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1472080039]
+libraries/ = SubResource("AnimationLibrary_tx6gx")
 
 [node name="MagnetArea" type="Area2D" parent="." unique_id=1129579687]
 collision_layer = 0

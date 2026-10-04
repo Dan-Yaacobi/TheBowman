@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="KillQuotaGoal" format=3 uid="uid://doosq66dn01m1"]
+
+[ext_resource type="Script" uid="uid://ddlvhn8t5trut" path="res://Level/Events/ChallengeStone/Goals/kill_quota_goal.gd" id="1_h4t0w"]
+
+[resource]
+script = ExtResource("1_h4t0w")
+kills_required = 10
+time_limit = 30.0
+metadata/_custom_type_script = "uid://ddlvhn8t5trut"

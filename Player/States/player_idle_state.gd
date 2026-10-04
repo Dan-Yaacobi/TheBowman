@@ -31,6 +31,6 @@ func Physics(_delta: float) -> State:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> State:
-	if _event.is_action_pressed("dash") and player.can_dash:
+	if _event.is_action_pressed("dash") and player.can_dash <= 0:
 		return dash
 	return null

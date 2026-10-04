@@ -32,6 +32,7 @@ signal arrow_release_sound(pitch: float)
 signal object_destroyed_sound
 signal enemy_died_sound(_audio: AudioStream)
 signal sword_slash_sound()
+signal play_any(_audio: AudioStream, pich_min: float, pitch_max: float, volume: float)
 
 signal dealt_bleed_damage(_amount)
 
@@ -61,9 +62,11 @@ signal add_arrow_effect(_effect: Effect)
 signal entered_rift_portal
 
 signal try_drop(position: Vector2, _chance: float)
+signal drop_item(item: CustomVariables.items, position: Vector2, _chance: float, _amount: int)
 signal drop_coins(position: Vector2, _amount: int)
 signal drop_potion(position: Vector2, _chance: float)
 signal drop_specific_item(item: EquipmentData, position: Vector2)
+signal drop_essence(position: Vector2, chance: float)
 
 signal equipment_dropped(equip_data: EquipmentData, position: Vector2, _existing_equipment: Equipment)
 
@@ -104,3 +107,6 @@ signal reduce_active_ability_cooldown(_amount: float)
 
 signal rift_respawn_position(position: Vector2)
 signal respawn_player
+signal event_enter_requested(event_scene: PackedScene, return_position: Vector2)
+signal event_exit_requested()
+signal event_exited()

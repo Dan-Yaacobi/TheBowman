@@ -160,7 +160,8 @@ size = Vector2(32, 32)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_sl7t1")
 data = SubResource("Resource_qhhqe")
-avg_coin_drop = 2
+item_drop = 3
+item_drop_chance = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
 material = SubResource("ShaderMaterial_ct031")

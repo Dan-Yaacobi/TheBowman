@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://dwoo7pueeenah"]
+
+[ext_resource type="Script" uid="uid://dqabiud5tkm8l" path="res://Level/Events/ChallengeStone/challenge_shrine_event.gd" id="1_xup44"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_2elm0"]
+[ext_resource type="PackedScene" uid="uid://0t26boa1g5jg" path="res://Level/Events/ChallengeStone/ChallengeSpawner.tscn" id="2_ght8p"]
+[ext_resource type="Script" uid="uid://02y3s3xcuf5r" path="res://Level/Events/ChallengeStone/challenge_def.gd" id="2_pdae7"]
+[ext_resource type="Script" uid="uid://cx2fwggfjovcc" path="res://Level/Events/ChallengeStone/challenge_curse.gd" id="3_a4nvr"]
+[ext_resource type="Script" uid="uid://xf3ijwjxn5jp" path="res://Level/Events/ChallengeStone/challenge_modifier.gd" id="3_fc5jb"]
+[ext_resource type="PackedScene" uid="uid://cbiuoq4mm2hcm" path="res://Level/Events/ChallengeStone/ChallengeShrine.tscn" id="3_ght8p"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="4_1igmo"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="4_bmtns"]
+[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="5_a4nvr"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_nd2yj"]
+[ext_resource type="Resource" uid="uid://doosq66dn01m1" path="res://Level/Events/ChallengeStone/Goals/Resource/kill_10.tres" id="6_rknkn"]
+[ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="8_rknkn"]
+[ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="12_fc5jb"]
+[ext_resource type="PackedScene" uid="uid://cguqidpw51pcn" path="res://Level/Events/ChallengeStone/Curses/CursePicker.tscn" id="14_rknkn"]
+
+[sub_resource type="Resource" id="Resource_5lv0r"]
+script = ExtResource("2_pdae7")
+display_name = "Kill 10 apples"
+description = "Kill 10 apples before the timer runs out"
+goal = ExtResource("6_rknkn")
+enemy_pool = Array[ExtResource("4_1igmo")]([ExtResource("5_a4nvr")])
+metadata/_custom_type_script = "uid://02y3s3xcuf5r"
+
+[node name="ChallengeStoneEvent" type="Node2D" unique_id=721896813]
+script = ExtResource("1_xup44")
+challenge_pool = Array[ExtResource("2_pdae7")]([SubResource("Resource_5lv0r")])
+
+[node name="ChallengeSpawner" parent="." unique_id=1138546475 instance=ExtResource("2_ght8p")]
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=1973727419]
+position = Vector2(-53, -94)
+
+[node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("4_bmtns")]
+position = Vector2(-59.000004, -87)
+
+[node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("5_nd2yj")]
+position = Vector2(6, 601)
+costs_heart = false
+
+[node name="Islands" type="Node2D" parent="." unique_id=1632513392]
+
+[node name="Island" parent="Islands" unique_id=1847265216 instance=ExtResource("2_2elm0")]
+position = Vector2(27, -26)
+
+[node name="ChallengeShrine" parent="Islands/Island" unique_id=1989733529 instance=ExtResource("3_ght8p")]
+position = Vector2(1, -19)
+scale = Vector2(0.5, 0.5)
+
+[node name="Island2" parent="Islands" unique_id=85797293 instance=ExtResource("2_2elm0")]
+position = Vector2(-51, -49)
+
+[node name="Island3" parent="Islands" unique_id=1021241661 instance=ExtResource("2_2elm0")]
+position = Vector2(-45, 34)
+
+[node name="Island8" parent="Islands" unique_id=1533649583 instance=ExtResource("2_2elm0")]
+position = Vector2(193, 63)
+
+[node name="Island9" parent="Islands" unique_id=916898413 instance=ExtResource("2_2elm0")]
+position = Vector2(0, 147)
+
+[node name="Island10" parent="Islands" unique_id=1722750836 instance=ExtResource("2_2elm0")]
+position = Vector2(113, 94)
+
+[node name="Island11" parent="Islands" unique_id=1667237244 instance=ExtResource("2_2elm0")]
+position = Vector2(38, 74)
+
+[node name="Island12" parent="Islands" unique_id=635518619 instance=ExtResource("2_2elm0")]
+position = Vector2(-137, 48)
+
+[node name="Island13" parent="Islands" unique_id=1696553448 instance=ExtResource("2_2elm0")]
+position = Vector2(117, 25)
+
+[node name="Island14" parent="Islands" unique_id=539371478 instance=ExtResource("2_2elm0")]
+position = Vector2(279, -7)
+
+[node name="Island4" parent="Islands" unique_id=482922203 instance=ExtResource("2_2elm0")]
+position = Vector2(133, 155)
+
+[node name="Island6" parent="Islands" unique_id=1892655974 instance=ExtResource("2_2elm0")]
+position = Vector2(42, 204)
+
+[node name="Island7" parent="Islands" unique_id=1457292819 instance=ExtResource("2_2elm0")]
+position = Vector2(-70, 130)
+
+[node name="Island5" parent="Islands" unique_id=974074416 instance=ExtResource("2_2elm0")]
+position = Vector2(185, -14)
+
+[node name="ChallengeHUD" parent="." unique_id=80608584 instance=ExtResource("12_fc5jb")]
+
+[node name="CursePicker" parent="." unique_id=1664238793 instance=ExtResource("14_rknkn")]

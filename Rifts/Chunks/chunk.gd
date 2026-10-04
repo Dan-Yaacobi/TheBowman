@@ -13,7 +13,6 @@ var visited: bool = false
 var is_side_path_terminal: bool = false
 
 func _ready() -> void:
-
 	free_exits()
 	extra_ready_functions()
 

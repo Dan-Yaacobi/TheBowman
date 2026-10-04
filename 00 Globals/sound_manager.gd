@@ -22,7 +22,8 @@ func _ready() -> void:
 	EventBus.object_destroyed_sound.connect(object_destroyed_sound)
 	EventBus.enemy_died_sound.connect(enemy_died_sound)
 	EventBus.sword_slash_sound.connect(sword_slash_sound)
-
+	EventBus.play_any.connect(play_any)
+	
 func enemy_died_sound(_audio: AudioStream) -> void:
 	_play_oneshot(_audio,0.5,0.5,-3)
 	
@@ -56,6 +57,9 @@ func arrow_shot_sound() -> void:
 
 func button_click_sound() -> void:
 	_play_oneshot(click.stream,1.0,1.0,30)
+
+func play_any(stream: AudioStream, pitch_min: float, pitch_max: float, volume: float) -> void:
+	_play_oneshot(stream,pitch_min, pitch_max, volume)
 	
 func _play_oneshot(stream: AudioStream, pitch_min: float = 1.0, pitch_max: float = 1.0, volume: float = 0.0) -> void:
 	var player := AudioStreamPlayer2D.new()

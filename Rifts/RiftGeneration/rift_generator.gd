@@ -2,6 +2,7 @@ class_name RiftGenerator extends Node2D
 
 @export var data: GeneratorData
 @export var library: RiftChunkLibrary
+@export var event_portal_scene: PackedScene
 
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
 const BOUNDS_LAYER: int = 15
@@ -60,6 +61,7 @@ func build_main_path(_curr_level: int) -> void:
 				return
 		@warning_ignore("integer_division")
 		build_all_side_paths(roundi(data.main_path_length), main_path_chunks)
+		place_event_portal()
 		rift_created.emit(rift_level)
 		add_death_area()
 		EventBus.finished_loading.emit()
@@ -260,3 +262,25 @@ func spawn_enemies() -> void:
 
 func reset() -> void:
 	rift_level.queue_free()
+
+func place_event_portal() -> void:
+	if data.event_pool.is_empty() or rng.randf() > data.event_chance:
+		return
+	
+	var last_index: int = main_path_chunks.size() - data.event_skip_end_chunks
+	var candidates: Array[TraversalChunk] = []
+	for i: int in range(data.event_skip_start_chunks, last_index):
+		var candidate: TraversalChunk = main_path_chunks[i] as TraversalChunk
+		if candidate and not candidate.islands.is_empty():
+			candidates.append(candidate)
+
+	if candidates.is_empty():
+		return
+
+	var chunk: TraversalChunk = candidates[rng.randi_range(0, candidates.size() - 1)]
+	var island: Island = chunk.islands[rng.randi_range(0, chunk.islands.size() - 1)]
+
+	var portal: EventPortal = event_portal_scene.instantiate()
+	portal.event_scene = data.event_pool[rng.randi_range(0, data.event_pool.size() - 1)]
+	rift_level.add_child(portal)
+	portal.global_position = island.get_event_portal_position()

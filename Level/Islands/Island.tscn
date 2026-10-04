@@ -55,3 +55,6 @@ position = Vector2(0, -5)
 
 [node name="RespawnMarker" type="Marker2D" parent="." unique_id=1470085494]
 position = Vector2(0, -25)
+
+[node name="EventPortalPosition" type="Marker2D" parent="." unique_id=1999151806]
+position = Vector2(0, -31)

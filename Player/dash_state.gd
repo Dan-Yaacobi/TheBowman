@@ -29,7 +29,7 @@ func Enter() -> void:
 	EventBus.dash_preformed.emit()
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()
-	player.can_dash = false
+	player.can_dash += 1
 	dash_direction = get_dash_direction() # Change this to calculate_direction_to_cursor() for 360 cursor dash
 	dust.emitting = true
 
@@ -61,8 +61,8 @@ func go_to_walking() -> void:
 	state_machine.ChangeState(walking)
 
 func can_dash_again() -> void:
-	player.can_dash = true
-
+	player.can_dash -= 1
+	
 func get_dash_direction() -> Vector2:
 	var direction: Vector2
 	if Input.is_action_pressed("up"):

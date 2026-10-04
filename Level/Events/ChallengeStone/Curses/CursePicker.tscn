@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cguqidpw51pcn"]
+
+[ext_resource type="Script" uid="uid://cbdkcosp2k8fa" path="res://Level/Events/ChallengeStone/Curses/curse_picker.gd" id="1_gjw81"]
+
+[node name="CursePicker" type="CanvasLayer" unique_id=1664238793]
+layer = 2
+script = ExtResource("1_gjw81")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1772499402]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=667943898]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=2107396118]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=197697100]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2103625811]
+layout_mode = 2
+
+[node name="CurseList" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=215955572]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1466504738]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1069044180]
+layout_mode = 2
+text = "Start"
+
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1832920125]
+layout_mode = 2
+text = "Cancel"

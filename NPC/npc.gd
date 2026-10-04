@@ -47,3 +47,11 @@ func action(_index: int) -> void:
 
 func show_post_action_line() -> void:
 	chat_box.show_line(data.post_action_lines.pick_random())
+
+## True keeps the NPC in Interacted after action(0) instead of going straight to Gone.
+func holds_interaction() -> bool:
+	return false
+
+## Called when the Interacted state exits.
+func on_interaction_closed() -> void:
+	pass

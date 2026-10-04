@@ -18,4 +18,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 
 
 func get_tooltip() -> String:
-	return "Bleeding Wounds: Damaged enemies bleed on hit."
+	return "Turns your perfect shots into an Hurricane"
+
+func get_tooltip_color() -> Color:
+	return Color.DARK_ORANGE

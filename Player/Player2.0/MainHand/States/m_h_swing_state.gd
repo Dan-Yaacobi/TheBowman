@@ -26,7 +26,7 @@ func Enter() -> void:
 	EventBus.sword_slash_sound.emit()
 	set_sword_size()
 	swing_cooldown.wait_time = PlayerManager.player.get_sword_cd()
-	entity.can_swing = false
+	entity.can_swing += 1
 	finished = false
 	slash_hurt_box.base_damage = floor(PlayerManager.player.stats.sword_damage.value())
 	slash_animation_player.play("SlashEffect")

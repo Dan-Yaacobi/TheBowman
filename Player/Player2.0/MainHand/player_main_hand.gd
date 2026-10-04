@@ -27,7 +27,7 @@ var pulling: bool = false
 var shot_power: float
 var off_hand: PlayerOffHand
 var shot_offset: float = 0
-var can_swing: bool = true
+var can_swing: int = 0
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
@@ -191,9 +191,8 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var final_value = _shot_power * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
 
-
 func swing_off_cooldown() -> void:
-	can_swing = true
+	can_swing -= 1
 	
 func is_swinging() -> bool:
 	return main_hand_state_machine.curr_state is SwingMainHandState

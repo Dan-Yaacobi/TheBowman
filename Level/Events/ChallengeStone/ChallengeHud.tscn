@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cgrgw6t0l71a1"]
+
+[ext_resource type="Script" uid="uid://bk12ylcl60x0r" path="res://Level/Events/ChallengeStone/challenge_hud.gd" id="1_scpht"]
+
+[node name="ChallengeHUD" type="CanvasLayer" unique_id=80608584]
+script = ExtResource("1_scpht")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1328098593]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 68.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=841628224]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=390173090]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1251106014]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=580588727]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1

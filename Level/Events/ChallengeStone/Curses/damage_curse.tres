@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatCurse" format=3 uid="uid://jhl30kfbruon"]
+
+[ext_resource type="Script" uid="uid://dewr60c6g8sqd" path="res://Level/Events/ChallengeStone/Curses/stat_curse.gd" id="1_vxbwo"]
+
+[resource]
+script = ExtResource("1_vxbwo")
+stat_name = "arrow_damage"
+display_name = "Weakness"
+description = "Reduce damage dealt by 50%"
+metadata/_custom_type_script = "uid://dewr60c6g8sqd"

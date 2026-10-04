@@ -67,6 +67,7 @@ var player: Player
 
 @export_subgroup("Player Items")
 @export var money: int
+@export var items: Dictionary[CustomVariables.items,int]
 @export var weapon_scene: PackedScene
 @export var arrow: EquipmentData
 @export var arrow_scene: PackedScene

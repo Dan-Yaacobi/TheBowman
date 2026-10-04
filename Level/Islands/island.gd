@@ -2,7 +2,7 @@ class_name Island extends StaticBody2D
 
 @onready var objects_spawn_markers: ObjectSpawnMarkers = $ObjectsSpawnMarkers
 @export var start_island: bool = false
-@export var floating: bool
+@export var floating: bool = false
 @export var moving_island: bool = false
 @export var end_point: Vector2
 @onready var sprite: Sprite2D = $Sprite2D
@@ -10,6 +10,7 @@ class_name Island extends StaticBody2D
 @export var fixed_frame_index: int = 0
 @export var textures: Array[TextureData]
 @onready var respawn_marker: Marker2D = $RespawnMarker
+@onready var event_portal_position: Marker2D = $EventPortalPosition
 
 
 var start_point: Vector2
@@ -21,7 +22,6 @@ var _move_tween: Tween
 var _dip_tween: Tween
 
 func _ready() -> void:
-	floating = false
 	base_height = global_position.y
 	float_speed *= randf_range(0.5, 1.5)
 	float_amplitude *= randf_range(0.5, 1.5)
@@ -29,7 +29,20 @@ func _ready() -> void:
 	if moving_island:
 		floating = false
 		_start_moving()
+	setup(get_rift_type())
+	
+func get_rift_type() -> Rift.Type:
+	var lvl: int = PlayerManager.player.stats.rift_level
+	if lvl < 1 or CustomVariables.RIFTS_PER_TYPE <= 0:
+		return Rift.Type.DIRT
 
+	@warning_ignore("integer_division")
+	var index: int = (lvl - 1) / CustomVariables.RIFTS_PER_TYPE
+
+	if index >= Rift.Type.size():
+		return Rift.Type.DIRT
+
+	return index as Rift.Type
 func _process(_delta: float) -> void:
 	if floating:
 		global_position.y = base_height + sin(Time.get_ticks_msec() * 0.001 * float_speed) * float_amplitude
@@ -90,5 +103,9 @@ func _on_player_interact() -> void:
 	var world = PlayerManager.player.get_parent()
 	if world is GameWorld and world.has_respawns:
 		EventBus.rift_respawn_position.emit(get_respawn_position())
+		
 func get_respawn_position() -> Vector2:
 	return respawn_marker.global_position
+	
+func get_event_portal_position() -> Vector2:
+	return event_portal_position.global_position

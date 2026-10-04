@@ -28,7 +28,7 @@ func Physics(_delta: float) -> MainHandState:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
-	if _event.is_action_pressed("swing") and entity.can_swing:
+	if _event.is_action_pressed("swing") and entity.can_swing <= 0:
 		state_machine.ChangeState(swing)
 	return null
 	

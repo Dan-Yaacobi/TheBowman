@@ -5,9 +5,9 @@ class_name GameObject extends Node2D
 @onready var placement_marker: Marker2D = $PlacementMarker
 
 @export var data: ObjectData
-@export var avg_coin_drop: int = 1
-@export_range(0.0,100.0,0.1,"suffix:%") var potion_drop_chance: float = 20.0
-@export_range(0.0,100.0,0.1,"suffix:%") var equip_drop_chance: float = 0.0
+@export var avg_coin_drop: int = 0
+@export var item_drop: CustomVariables.items
+@export_range(0.0,100.0,0.1,"suffix:%") var item_drop_chance
 
 var got_hit: bool = false
 
@@ -33,16 +33,23 @@ func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult =
 		queue_free()
 
 func drop_items() -> void:
-	drop_coins()
-	drop_equip()
-	drop_potion()
-	
-func drop_coins() -> void:
-	EventBus.drop_coins.emit(global_position,avg_coin_drop)
-	
-func drop_potion() -> void:
-	EventBus.drop_potion.emit(global_position, potion_drop_chance)
+	var amount: int = 1
+	if item_drop == CustomVariables.items.COIN and avg_coin_drop > 0:
+		amount = avg_coin_drop
+	EventBus.drop_item.emit(item_drop, global_position, item_drop_chance,amount)
 
-func drop_equip() -> void:
-	EventBus.try_drop.emit(global_position, equip_drop_chance)
-	
+	#drop_coins()
+	#drop_equip()
+	#drop_potion()
+#
+#func drop_item() -> void:
+	#pass
+#func drop_coins() -> void:
+	#EventBus.drop_coins.emit(global_position,avg_coin_drop)
+	#
+#func drop_potion() -> void:
+	#EventBus.drop_potion.emit(global_position, potion_drop_chance)
+#
+#func drop_equip() -> void:
+	#EventBus.try_drop.emit(global_position, equip_drop_chance)
+	#

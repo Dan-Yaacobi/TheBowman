@@ -80,8 +80,6 @@ scale = Vector2(0.4, 0.4)
 script = ExtResource("1_526wg")
 data = SubResource("Resource_yy256")
 avg_coin_drop = 10
-potion_drop_chance = 50.0
-equip_drop_chance = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1568725658]
 texture = ExtResource("3_526wg")

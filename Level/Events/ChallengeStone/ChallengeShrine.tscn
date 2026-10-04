@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cbiuoq4mm2hcm"]
+
+[ext_resource type="Script" uid="uid://bn4nufam1nrrn" path="res://Level/Events/ChallengeStone/challenge_shrine.gd" id="1_o6p7o"]
+[ext_resource type="Texture2D" uid="uid://b8hrls2ff3c1a" path="res://Level/Events/ChallengeStone/ChallengeShrine.png" id="2_2tb1d"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_5he16"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="3_5he16"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="4_oioxp"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="5_eabo4"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="6_cb4kg"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="7_2tb1d"]
+
+[sub_resource type="Resource" id="Resource_2tb1d"]
+script = ExtResource("2_5he16")
+npc_name = "Challenge Shrine"
+has_chat = false
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6p7o"]
+size = Vector2(128, 48)
+
+[node name="ChallengeShrine" type="Node2D" unique_id=1989733529]
+script = ExtResource("1_o6p7o")
+data = SubResource("Resource_2tb1d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1038344102]
+texture = ExtResource("2_2tb1d")
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=1638816901]
+script = ExtResource("3_5he16")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=585485979]
+script = ExtResource("4_oioxp")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=1382193948]
+script = ExtResource("5_eabo4")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=645274558]
+script = ExtResource("6_cb4kg")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=250608824]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1117822460]
+shape = SubResource("RectangleShape2D_o6p7o")
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("7_2tb1d")]
+offset_left = -7.0
+offset_top = -57.0
+offset_right = -7.0
+offset_bottom = -57.0
+scale = Vector2(0.5, 0.5)

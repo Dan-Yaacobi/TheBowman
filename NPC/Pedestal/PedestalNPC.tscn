@@ -48,9 +48,10 @@ script = ExtResource("7_mlx16")
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_top = 17.0
-offset_right = 0.0
-offset_bottom = 17.0
+offset_left = -6.9999995
+offset_top = 12.0
+offset_right = -6.9999995
+offset_bottom = 12.0
 scale = Vector2(0.4, 0.4)
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1216373148]

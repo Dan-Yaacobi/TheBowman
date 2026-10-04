@@ -2,9 +2,7 @@ class_name MainMenu extends GameWorld
 
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 @onready var islands: Node2D = $Islands
-@onready var falling_death: FallingDeath = $FallingDeath
 @onready var loot_manager: LootManager = $LootManager
-
 @onready var rift_portal: Portal = $Islands/Island11/RiftPortal
 
 @export var item_data: EquipmentData
@@ -17,7 +15,9 @@ func extra_set_world_functions() -> void:
 	EventBus.tutorial_done.connect(tutorial_done)
 	
 	for island in islands.get_children():
-		island.setup(Rift.Type.DIRT)
+		if island is Island:
+			island.setup(Rift.Type.DIRT)
+	has_respawns = true
 func tutorial_done() -> void:
 	rift_portal.enable()
 	
@@ -26,8 +26,3 @@ func extra_exit_world_functions() -> void:
 	
 func spawn_position() -> Vector2:
 	return player_spawn.global_position
-
-func _on_falling_death_body_entered(body: Node2D) -> void:
-	if body is Player:
-		body.kill(false)
-		

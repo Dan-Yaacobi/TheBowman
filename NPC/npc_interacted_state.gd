@@ -10,11 +10,13 @@ func Enter() -> void:
 		npc.chat_box.open(npc)
 	else:
 		npc.action(0)
-		state_machine.ChangeState(gone)
+		if not npc.holds_interaction():
+			state_machine.ChangeState(gone)
 
 func Exit() -> void:
 	if npc.data.has_chat:
 		npc.chat_box.close()
+	npc.on_interaction_closed()
 	
 func Process(_delta: float) -> NPCState:
 	if not idle._player_in_range:

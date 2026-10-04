@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://brkaxihp0lubd"]
+
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="1_rblip"]
+
+[node name="EliteEvent" type="Node2D" unique_id=1036295488]
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("1_rblip")]
+position = Vector2(0, 12)

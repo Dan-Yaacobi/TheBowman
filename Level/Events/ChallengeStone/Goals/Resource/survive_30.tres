@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SurviveGoal" format=3 uid="uid://7rl57qa8get6"]
+
+[ext_resource type="Script" uid="uid://kn7nkj41b645" path="res://Level/Events/ChallengeStone/Goals/survive_goal.gd" id="1_mgcq5"]
+
+[resource]
+script = ExtResource("1_mgcq5")
+duration = 30.0
+metadata/_custom_type_script = "uid://kn7nkj41b645"

@@ -15,7 +15,12 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 	else:
 		breath.queue_free()
 
+func get_tooltip() -> String:
+	return "Turns your arrows into a Frosty Breath"
 
+func get_tooltip_color() -> Color:
+	return Color.AQUA
+	
 func draw_ended() -> void:
 	if is_instance_valid(breath):
 		breath.queue_free()

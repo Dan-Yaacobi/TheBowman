@@ -30,6 +30,8 @@
 [ext_resource type="Resource" uid="uid://yq37lreo0htb" path="res://Rifts/Chunks/ChunkData/Treasure/item_pedestal_island.tres" id="17_qxt8x"]
 [ext_resource type="PackedScene" uid="uid://8rh3qbsi0iv6" path="res://Rifts/RiftEnemySpawner/RiftEnemySpawner.tscn" id="19_4xrky"]
 [ext_resource type="Script" uid="uid://cvnoq8op35u2" path="res://Rifts/RiftEnemySpawner/rift_enemy_spawner.gd" id="20_5l72e"]
+[ext_resource type="PackedScene" uid="uid://dwoo7pueeenah" path="res://Level/Events/ChallengeStone/ChallengeShrineEvent.tscn" id="29_2cjow"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="30_j75h4"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="31_5icp2"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="34_y5ptd"]
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="35_qxt8x"]
@@ -45,6 +47,8 @@
 script = ExtResource("3_jukhk")
 main_path_length = 5
 probability_decay = 1.25
+event_pool = Array[PackedScene]([ExtResource("29_2cjow")])
+event_chance = 1.0
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
 [sub_resource type="Resource" id="Resource_if34p"]
@@ -109,6 +113,7 @@ active_ability_pool = Array[ExtResource("2_oaj8c")]([ExtResource("3_oaj8c"), Ext
 [node name="RiftGenerator" parent="." unique_id=1531404571 instance=ExtResource("2_pe0ph")]
 data = SubResource("Resource_d1hhh")
 library = SubResource("Resource_clqlo")
+event_portal_scene = ExtResource("30_j75h4")
 
 [node name="RiftEnemySpawner" parent="." unique_id=1673800169 instance=ExtResource("19_4xrky")]
 script = ExtResource("20_5l72e")

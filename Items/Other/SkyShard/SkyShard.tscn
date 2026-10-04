@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dm42ccxdb1uwa"]
+
+[ext_resource type="Script" uid="uid://ds6gd5ktnjtgq" path="res://Items/Other/SkyShard/sky_shard.gd" id="1_12jpd"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="2_12jpd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
+radius = 11.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5yd7k"]
+radius = 3.0
+
+[node name="SkyShard" type="Node2D" unique_id=967061751]
+scale = Vector2(2, 2)
+script = ExtResource("1_12jpd")
+fade_duration = 1.0
+magnet_force = 25.0
+item_type = 4
+text = "SkyShard +1"
+color = Color(0.7647059, 0.7411765, 1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_12jpd")
+
+[node name="MagnetArea" type="Area2D" parent="." unique_id=1129579687]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=344677100]
+shape = SubResource("CircleShape2D_y6rwh")
+debug_color = Color(0.77325535, 0.44298598, 0, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=521789860]
+
+[node name="LifetimeTimer" type="Timer" parent="." unique_id=96067277]
+
+[node name="LandingDetector" type="Area2D" parent="." unique_id=1415796400]
+collision_layer = 0
+collision_mask = 16
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LandingDetector" unique_id=620379657]
+shape = SubResource("CircleShape2D_5yd7k")
+
+[connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]
+[connection signal="body_exited" from="MagnetArea" to="." method="_on_magnet_area_body_exited"]
