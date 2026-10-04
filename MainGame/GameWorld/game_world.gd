@@ -22,6 +22,8 @@ func set_world() -> void:
 	extra_set_world_functions()
 
 func exit_world() -> void:
+	if is_instance_valid(current_event):
+			current_event.on_event_exited()
 	EventBus.enemy_summoned.disconnect(add_enemy)
 	EventBus.enemy_died.disconnect(remove_enemy)
 	EventBus.summon_effect.disconnect(summon_effect)

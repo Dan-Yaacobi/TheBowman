@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
-[ext_resource type="PackedScene" uid="uid://dwoo7pueeenah" path="res://Level/Events/ChallengeStone/ChallengeShrineEvent.tscn" id="15_5lv0r"]
+[ext_resource type="PackedScene" uid="uid://blj0hgahvaj0c" path="res://Level/Events/MovingTargetsEvent/MovingTargetsEvent.tscn" id="15_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="16_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]

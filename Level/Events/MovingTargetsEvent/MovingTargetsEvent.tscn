@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://blj0hgahvaj0c"]
+
+[ext_resource type="Script" uid="uid://0os6i67wdbux" path="res://Level/Events/MovingTargetsEvent/moving_targets_event.gd" id="1_vhcul"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="2_4d5ls"]
+[ext_resource type="Script" uid="uid://02y3s3xcuf5r" path="res://Level/Events/ChallengeStone/challenge_def.gd" id="2_q744v"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="3_knjff"]
+[ext_resource type="Script" uid="uid://cx2fwggfjovcc" path="res://Level/Events/ChallengeStone/challenge_curse.gd" id="3_wmf47"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_0fq42"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="4_ypkpv"]
+[ext_resource type="Resource" uid="uid://dbsl0libqn666" path="res://Level/Events/ChallengeStone/Goals/Resource/moving_target_5.tres" id="5_ixiw6"]
+[ext_resource type="Script" uid="uid://xf3ijwjxn5jp" path="res://Level/Events/ChallengeStone/challenge_modifier.gd" id="5_iyr1v"]
+[ext_resource type="PackedScene" uid="uid://bo22u4lyjlatl" path="res://Level/Events/MovingTargetsEvent/TargetRoute.tscn" id="6_0fq42"]
+[ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="6_a50aq"]
+[ext_resource type="PackedScene" uid="uid://cbiuoq4mm2hcm" path="res://Level/Events/ChallengeStone/ChallengeShrine.tscn" id="6_knjff"]
+[ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="8_nih8x"]
+[ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="8_vn5l6"]
+[ext_resource type="Script" uid="uid://dba23xg5cr0bo" path="res://Level/Events/Rewards/random_item_reward.gd" id="9_ltlrn"]
+[ext_resource type="PackedScene" uid="uid://cguqidpw51pcn" path="res://Level/Events/ChallengeStone/Curses/CursePicker.tscn" id="9_q744v"]
+[ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="10_81c71"]
+[ext_resource type="PackedScene" uid="uid://0t26boa1g5jg" path="res://Level/Events/ChallengeStone/ChallengeSpawner.tscn" id="10_wmf47"]
+
+[sub_resource type="Resource" id="Resource_wfe2k"]
+script = ExtResource("8_nih8x")
+item = 4
+display_name = "SkyShard"
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_nih8x"]
+script = ExtResource("8_nih8x")
+display_name = "Coin"
+min_amount = 10
+max_amount = 20
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_ltlrn"]
+script = ExtResource("8_nih8x")
+item = 2
+display_name = "Essence"
+min_amount = 5
+max_amount = 15
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_81c71"]
+script = ExtResource("8_nih8x")
+item = 3
+display_name = "Wood"
+min_amount = 11
+max_amount = 20
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_eb2ja"]
+script = ExtResource("9_ltlrn")
+options = Array[ExtResource("8_nih8x")]([SubResource("Resource_nih8x"), SubResource("Resource_ltlrn"), SubResource("Resource_81c71")])
+min_weight = 1
+metadata/_custom_type_script = "uid://dba23xg5cr0bo"
+
+[sub_resource type="Resource" id="Resource_06gnm"]
+script = ExtResource("8_nih8x")
+item = 4
+display_name = "SkySHard"
+min_weight = 2
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
+[sub_resource type="Resource" id="Resource_8wiu1"]
+script = ExtResource("10_81c71")
+forced_rarity = 2
+min_weight = 3
+metadata/_custom_type_script = "uid://c06t2awg17dkp"
+
+[sub_resource type="Resource" id="Resource_ypkpv"]
+script = ExtResource("2_q744v")
+display_name = "Hit the Targets"
+description = "Hit all targets before time runs out"
+goal = ExtResource("5_ixiw6")
+rewards = Array[ExtResource("6_a50aq")]([SubResource("Resource_wfe2k"), SubResource("Resource_eb2ja"), SubResource("Resource_06gnm"), SubResource("Resource_8wiu1")])
+metadata/_custom_type_script = "uid://02y3s3xcuf5r"
+
+[node name="MovingTargetsEvent" type="Node2D" unique_id=1665149052]
+script = ExtResource("1_vhcul")
+challenge_pool = Array[ExtResource("2_q744v")]([SubResource("Resource_ypkpv")])
+
+[node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("2_4d5ls")]
+position = Vector2(0, -19)
+
+[node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("4_0fq42")]
+position = Vector2(-1, 443)
+
+[node name="TargetRoutes" type="Node2D" parent="." unique_id=1061219724]
+
+[node name="TargetRoute" parent="TargetRoutes" unique_id=885999509 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute" index="0" unique_id=1014234957]
+position = Vector2(-97, -105)
+
+[node name="End" parent="TargetRoutes/TargetRoute" index="1" unique_id=457288569]
+position = Vector2(230, -118)
+
+[node name="TargetRoute2" parent="TargetRoutes" unique_id=995976241 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute2" index="0" unique_id=1014234957]
+position = Vector2(316, 117)
+
+[node name="End" parent="TargetRoutes/TargetRoute2" index="1" unique_id=457288569]
+position = Vector2(162, -144)
+
+[node name="TargetRoute3" parent="TargetRoutes" unique_id=1854458060 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute3" index="0" unique_id=1014234957]
+position = Vector2(-56, 177)
+
+[node name="End" parent="TargetRoutes/TargetRoute3" index="1" unique_id=457288569]
+position = Vector2(-86, -184)
+
+[node name="TargetRoute4" parent="TargetRoutes" unique_id=25882349 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute4" index="0" unique_id=1014234957]
+position = Vector2(288, 163)
+
+[node name="End" parent="TargetRoutes/TargetRoute4" index="1" unique_id=457288569]
+position = Vector2(-129, 89)
+
+[node name="TargetRoute5" parent="TargetRoutes" unique_id=680788962 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute5" index="0" unique_id=1014234957]
+position = Vector2(8, 179)
+
+[node name="End" parent="TargetRoutes/TargetRoute5" index="1" unique_id=457288569]
+position = Vector2(-138, -116)
+
+[node name="TargetRoute6" parent="TargetRoutes" unique_id=100408755 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute6" index="0" unique_id=1014234957]
+position = Vector2(-167, -80)
+
+[node name="End" parent="TargetRoutes/TargetRoute6" index="1" unique_id=457288569]
+position = Vector2(-100, -131)
+
+[node name="TargetRoute7" parent="TargetRoutes" unique_id=1308792096 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute7" index="0" unique_id=1014234957]
+position = Vector2(-93, 157)
+
+[node name="End" parent="TargetRoutes/TargetRoute7" index="1" unique_id=457288569]
+position = Vector2(419, -25)
+
+[node name="TargetRoute8" parent="TargetRoutes" unique_id=1012212790 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute8" index="0" unique_id=1014234957]
+position = Vector2(264, -169)
+
+[node name="End" parent="TargetRoutes/TargetRoute8" index="1" unique_id=457288569]
+position = Vector2(6, -112)
+
+[node name="TargetRoute9" parent="TargetRoutes" unique_id=873586101 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute9" index="0" unique_id=1014234957]
+position = Vector2(-109, 44)
+
+[node name="End" parent="TargetRoutes/TargetRoute9" index="1" unique_id=457288569]
+position = Vector2(38, 152)
+
+[node name="TargetRoute10" parent="TargetRoutes" unique_id=359944962 instance=ExtResource("6_0fq42")]
+
+[node name="Start" parent="TargetRoutes/TargetRoute10" index="0" unique_id=1014234957]
+position = Vector2(298, -78)
+
+[node name="End" parent="TargetRoutes/TargetRoute10" index="1" unique_id=457288569]
+position = Vector2(258, 83)
+
+[node name="Islands" type="Node2D" parent="." unique_id=1888791054]
+
+[node name="Island2" parent="Islands" unique_id=1847265216 instance=ExtResource("3_knjff")]
+position = Vector2(0, 30)
+
+[node name="Island3" parent="Islands" unique_id=1766845453 instance=ExtResource("3_knjff")]
+position = Vector2(156, -22)
+
+[node name="Island4" parent="Islands" unique_id=1951671418 instance=ExtResource("3_knjff")]
+position = Vector2(55, -25)
+
+[node name="Island" parent="Islands" unique_id=178291299 instance=ExtResource("3_knjff")]
+position = Vector2(93, 30)
+
+[node name="ChallengeShrine" parent="Islands/Island" unique_id=1989733529 instance=ExtResource("6_knjff")]
+position = Vector2(0, -19)
+scale = Vector2(0.5, 0.5)
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=1086982865]
+position = Vector2(-1, -20)
+
+[node name="ChallengeHUD" parent="." unique_id=80608584 instance=ExtResource("8_vn5l6")]
+
+[node name="CursePicker" parent="." unique_id=1664238793 instance=ExtResource("9_q744v")]
+
+[node name="ChallengeSpawner" parent="." unique_id=1138546475 instance=ExtResource("10_wmf47")]
+
+[editable path="TargetRoutes/TargetRoute"]
+[editable path="TargetRoutes/TargetRoute2"]
+[editable path="TargetRoutes/TargetRoute3"]
+[editable path="TargetRoutes/TargetRoute4"]
+[editable path="TargetRoutes/TargetRoute5"]
+[editable path="TargetRoutes/TargetRoute6"]
+[editable path="TargetRoutes/TargetRoute7"]
+[editable path="TargetRoutes/TargetRoute8"]
+[editable path="TargetRoutes/TargetRoute9"]
+[editable path="TargetRoutes/TargetRoute10"]

@@ -10,6 +10,7 @@ var shake_strength: float = 0.0
 
 var moving_camera: bool = false
 var target_move: Vector2
+var _zoom_tween: Tween
 
 func _ready() -> void:
 	player.took_hit.connect(apply_shake)
@@ -55,11 +56,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom out"):
 		zoom -= Vector2(0.1,0.1)
 	pass
-	
+
 func zoom_out() -> void:
-	var tween: Tween = create_tween()
-	tween.tween_property(self, "zoom", base_zoom - Vector2(1,1), 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	_tween_zoom(base_zoom - Vector2(1, 1))
 
 func zoom_in() -> void:
-	var tween: Tween = create_tween()
-	tween.tween_property(self, "zoom", base_zoom, 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	_tween_zoom(base_zoom)
+
+func _tween_zoom(target: Vector2) -> void:
+	if _zoom_tween:
+		_zoom_tween.kill()
+	_zoom_tween = create_tween()
+	_zoom_tween.tween_property(self, "zoom", target, 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bl7efcfrplg66"]
+
+[ext_resource type="Script" uid="uid://cou8njcsxxbjq" path="res://Level/Events/FlyingTarget/flying_target.gd" id="1_36cvd"]
+[ext_resource type="Texture2D" uid="uid://cgsyavtbkkbx" path="res://Level/Events/FlyingTarget/BigWings.png" id="2_h5yyf"]
+[ext_resource type="Texture2D" uid="uid://bcrffql1g5s4x" path="res://Level/Events/FlyingTarget/Target.png" id="3_n3oki"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="4_36cvd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu2j5"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 0, 80, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x0nk"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 34, 80, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lejwt"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 68, 80, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74v32"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 102, 80, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubq75"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 136, 80, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wihhk"]
+atlas = ExtResource("2_h5yyf")
+region = Rect2(0, 170, 80, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuysd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu2j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x0nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lejwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74v32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubq75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wihhk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jmy8"]
+radius = 14.0
+
+[node name="FlyingTarget" type="CharacterBody2D" unique_id=722262044]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_36cvd")
+
+[node name="Wings" type="AnimatedSprite2D" parent="." unique_id=753114455]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_nuysd")
+autoplay = "default"
+frame_progress = 0.7796722
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=223244347]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_n3oki")
+
+[node name="HitBox" parent="." unique_id=2063195317 instance=ExtResource("4_36cvd")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=683619253]
+shape = SubResource("CircleShape2D_1jmy8")
