@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bsuxrgl8shr8m" path="res://HUD/ActiveAbility/ActiveAbilityPicker.tscn" id="2_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://bbbjwbqooljwf" path="res://HUD/ItemCard/ItemInspectPrompt.tscn" id="3_iob2k"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
-[ext_resource type="Script" uid="uid://bdgel5rhp11iw" path="res://MainGame/current_money.gd" id="9_t1yhm"]
-[ext_resource type="Texture2D" uid="uid://c8tmfoksn6xcw" path="res://HUD/Coin.png" id="11_fwgky"]
+[ext_resource type="PackedScene" uid="uid://ldmtmoroq5kr" path="res://HUD/ResourceHUD.tscn" id="4_ba18x"]
 [ext_resource type="PackedScene" uid="uid://dmnqbuvi5jrng" path="res://HUD/PullBar/PullBar.tscn" id="13_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="14_ihvjp"]
 [ext_resource type="Texture2D" uid="uid://2qa7ghob20s3" path="res://HUD/AbilityGauge.png" id="15_33ejm"]
@@ -20,45 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
-
-[sub_resource type="Animation" id="Animation_7odlb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_pd2p5"]
-resource_name = "Rotate"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwgky"]
-_data = {
-&"RESET": SubResource("Animation_7odlb"),
-&"Rotate": SubResource("Animation_pd2p5")
-}
 
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
@@ -95,6 +55,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ResourceHud" parent="Control" unique_id=980645727 instance=ExtResource("4_ba18x")]
+layout_mode = 1
+scale = Vector2(2, 2)
+mouse_filter = 2
+
 [node name="HealthHearts" parent="Control" unique_id=1572092662 instance=ExtResource("2_65vjf")]
 layout_mode = 1
 offset_left = 4.0
@@ -119,36 +84,6 @@ grow_vertical = 0
 scale = Vector2(5, 5)
 mouse_filter = 2
 texture = ExtResource("3_ktoim")
-
-[node name="CurrentMoney" type="Label" parent="Control" unique_id=1441885397]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.049000002
-anchor_top = 0.08800001
-anchor_right = 0.049000002
-anchor_bottom = 0.08800001
-offset_left = 31.599998
-offset_top = -51.200005
-offset_right = 194.6
-offset_bottom = 153.79999
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(1, 0.8, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 15
-theme_override_constants/outline_size = 30
-theme_override_font_sizes/font_size = 150
-text = "x0"
-script = ExtResource("9_t1yhm")
-
-[node name="Coin" type="Sprite2D" parent="Control/CurrentMoney" unique_id=480222187]
-position = Vector2(-102, 110)
-scale = Vector2(10, 10)
-texture = ExtResource("11_fwgky")
-hframes = 5
-
-[node name="CoinAnimation" type="AnimationPlayer" parent="Control/CurrentMoney/Coin" unique_id=102977012]
-libraries/ = SubResource("AnimationLibrary_fwgky")
 
 [node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
 visible = false

@@ -12,7 +12,7 @@ func action(_index: int) -> void:
 func _bless() -> void:
 	if not buying:
 		buying = true
-		if PlayerManager.player.buy(bless_cost):
+		if PlayerManager.player.buy(bless_cost,CustomVariables.items.COIN):
 			PlayerManager.player.increase_max_hp(true)
 			show_post_action_line()
 			action_taken = true

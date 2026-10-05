@@ -1,5 +1,6 @@
 class_name Player extends GameEntity
 
+signal item_amount_changed(amount: int, item: CustomVariables.items)
 signal money_changed
 signal took_hit
 signal critical_hit
@@ -81,9 +82,9 @@ func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
 	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
-	stats.hp = max_hp_value()
 	initial_max_hp = stats.max_hp
-	health_bar.init_health(max_hp_value())
+	MetaProgress.apply_to(stats)
+	refresh_max_hp()
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(take_damage)
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
@@ -103,10 +104,20 @@ func _ready() -> void:
 	sprite = body.sprite
 	debuff_handler.set_entity(self)
 	activate_passive_abilities() 
-	
+	SaveService.register(&"resources", _save_resources, _load_resources)
 
 var enemies_killed: int = 0
 
+func _save_resources() -> Dictionary:
+	var out: Dictionary = {}
+	for item: CustomVariables.items in stats.items:
+		out[CustomVariables.items.keys()[item]] = stats.items[item]
+	return out
+
+func _load_resources(data: Dictionary) -> void:
+	for key: String in data:
+		if CustomVariables.items.has(key):
+			stats.items[CustomVariables.items[key]] = int(data[key])
 func count_enemy_death(_enemy: Enemy) -> void:
 	enemies_killed+=1
 
@@ -126,6 +137,7 @@ func reset_equipment() -> void:
 func kill(_death_screen: bool = true) -> void:
 	if not player_state_machine.curr_state == dead:
 		dead.display_death_screen = _death_screen
+		SaveService.save_game()
 		player_state_machine.ChangeState(dead)
 
 func activate_passive_abilities() -> void:
@@ -139,6 +151,13 @@ func _process(_delta: float) -> void:
 		direction = 0
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_F7:
+			collect_item(CustomVariables.items.WOOD, 50)
+		if event.keycode == KEY_F9:
+			var track: UpgradeTrack = MetaProgress.tracks[0]
+			var bought: bool = MetaProgress.purchase(track, self)
+			print("bought: %s | level: %d | arrow damage: %s" % [bought, MetaProgress.get_level(track), stats.arrow_damage.value()])
 	if stats.hp > 0:
 
 		if event.is_action_pressed("up"):
@@ -304,6 +323,11 @@ func invincibility_over() -> void:
 func max_hp_value() -> int:
 	return stats.max_hp + stats.extra_hp
 	
+func refresh_max_hp() -> void:
+	stats.max_hp = initial_max_hp + MetaProgress.get_bonus_hearts() * CustomVariables.HP_PER_HEART
+	stats.hp = max_hp_value()
+	health_bar.init_health(max_hp_value())
+	
 func can_heal(amount: int) -> bool:
 	var amount_healed: int = min(amount, max_hp_value() - stats.hp)
 	return amount_healed > 0
@@ -352,9 +376,10 @@ func set_camera(tile_limit: Rect2i,tile_size: int) -> void:
 func slow_player(slow_time: float,effect: Node2D) -> void:
 	slow.slow_player(slow_time,effect)
 
-func buy(price: int) -> bool:
-	if stats.items[CustomVariables.items.COIN] >= price:
-		stats.items[CustomVariables.items.COIN] -= price
+func buy(price: int, item: CustomVariables.items) -> bool:
+	if stats.items[item] >= price:
+		stats.items[item] -= price
+		item_amount_changed.emit(stats.items[item],item)
 		money_changed.emit(stats.items[CustomVariables.items.COIN])
 		return true
 	return false
@@ -545,5 +570,4 @@ func reset_perfect_shot_streak() -> void:
 func collect_item(item: CustomVariables.items, _amount: int) -> void:
 	if _amount > 0 and stats.items.has(item):
 		stats.items[item] += _amount
-		if item == CustomVariables.items.COIN:
-			money_changed.emit(stats.items[item])
+		item_amount_changed.emit(stats.items[item], item)

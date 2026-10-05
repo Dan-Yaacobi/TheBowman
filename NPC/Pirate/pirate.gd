@@ -11,7 +11,7 @@ func action(_index: int) -> void:
 func _gamble() -> void:
 	if not buying:
 		buying = true
-		if PlayerManager.player.buy(gamble_cost):
+		if PlayerManager.player.buy(gamble_cost, CustomVariables.items.COIN):
 			EventBus.try_drop.emit(global_position,100,1.0)
 			show_post_action_line()
 			action_taken = true

@@ -67,7 +67,6 @@ var player: Player
 @export var hurricane_duration: Stat
 
 @export_subgroup("Player Items")
-@export var money: int
 @export var items: Dictionary[CustomVariables.items,int]
 @export var weapon_scene: PackedScene
 @export var arrow: EquipmentData

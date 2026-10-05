@@ -2,8 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://bjfdjpihrog6u" path="res://Objects/Portal/Sprites/PortalEmpty.png" id="1_g0x3d"]
 [ext_resource type="Script" uid="uid://cp6i17b4tlslg" path="res://Objects/Portal/portal.gd" id="1_goeoo"]
+[ext_resource type="Shader" uid="uid://dh7x5hxmjwfy3" path="res://Objects/Portal/portal_surface.gdshader" id="2_444u7"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="2_ucj1u"]
 [ext_resource type="Texture2D" uid="uid://blnt0yu63hgv3" path="res://Particles/star.png" id="4_mc0vw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gtw83"]
+resource_local_to_scene = true
+shader = ExtResource("2_444u7")
+shader_parameter/proximity = 0.0
+shader_parameter/phase = 0.0
+shader_parameter/deep_color = Color(0.08, 0.12, 0.4, 1)
+shader_parameter/mid_color = Color(0.18, 0.36, 0.82, 1)
+shader_parameter/bright_color = Color(0.55, 0.8, 1, 1)
+shader_parameter/rim_color = Color(0.8, 0.95, 1, 1)
+shader_parameter/center = Vector2(0.5, 0.6)
+shader_parameter/ring_density = 0.3
+shader_parameter/core_radius = 1.5
+shader_parameter/sub_pixels = 3.0
+shader_parameter/softness = 0.6
+shader_parameter/idle_rim = 0.3
+shader_parameter/near_rim = 0.9
+shader_parameter/blue_threshold = 0.12
 
 [sub_resource type="Curve" id="Curve_w7i7w"]
 _limits = [0.0, 0.2, 0.0, 1.0]
@@ -26,12 +45,20 @@ colors = PackedColorArray(0, 0.27450982, 0.6, 1, 0.52136755, 0.58518517, 1, 0.69
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goeoo"]
 size = Vector2(18, 23)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
+size = Vector2(62, 40)
+
 [node name="Portal" type="Node2D" unique_id=1166811293]
 z_index = -3
 script = ExtResource("1_goeoo")
 destination = 0
+idle_speed = null
+near_speed = null
+wake_duration = null
+sleep_duration = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1879241335]
+material = SubResource("ShaderMaterial_gtw83")
 texture = ExtResource("1_g0x3d")
 
 [node name="Spiral" type="CPUParticles2D" parent="Sprite2D" unique_id=61276510]
@@ -54,8 +81,8 @@ scale_amount_curve = SubResource("Curve_w7i7w")
 color_ramp = SubResource("Gradient_4m5hj")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D" unique_id=1033927585]
-position = Vector2(0, 2)
-amount = 30
+position = Vector2(19, 2)
+amount = 10
 texture = ExtResource("4_mc0vw")
 lifetime = 0.75
 speed_scale = 0.2
@@ -63,7 +90,9 @@ lifetime_randomness = 0.51
 local_coords = true
 emission_shape = 3
 emission_rect_extents = Vector2(7, 10)
-gravity = Vector2(0, 0)
+gravity = Vector2(-150, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
 scale_amount_curve = SubResource("Curve_444u7")
 color_ramp = SubResource("Gradient_gtw83")
 
@@ -74,6 +103,14 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1146710483]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_goeoo")
+
+[node name="ProximityArea" type="Area2D" parent="." unique_id=1846977232]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=145547963]
+shape = SubResource("RectangleShape2D_e83u5")
+debug_color = Color(0.8444513, 0.37962118, 5.7756904e-07, 0.41960785)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

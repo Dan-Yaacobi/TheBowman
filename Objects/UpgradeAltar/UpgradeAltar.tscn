@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://dq80k853nxjhq"]
+
+[ext_resource type="Script" uid="uid://cvuqf0773d670" path="res://Objects/UpgradeAltar/upgrade_altar.gd" id="1_m7pcb"]
+[ext_resource type="Texture2D" uid="uid://cb4vayv5d6d3h" path="res://Objects/UpgradeAltar/UpgradeAltar.png" id="1_ui4ie"]
+[ext_resource type="Shader" uid="uid://c6oxni4umb3m1" path="res://Objects/UpgradeAltar/skyshard_runes.gdshader" id="2_6wtg1"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_djdu7"]
+[ext_resource type="Shader" uid="uid://cposfvcox3fiy" path="res://Objects/UpgradeAltar/skyshard_pool.gdshader" id="2_jvfea"]
+[ext_resource type="Shader" uid="uid://cbanielvh2stn" path="res://Objects/UpgradeAltar/skyshard_helix.gdshader" id="3_aw8is"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="4_qgpom"]
+[ext_resource type="Shader" uid="uid://ds2txfivg3oap" path="res://Objects/UpgradeAltar/skyshard_halo.gdshader" id="4_yab73"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="8_tn0dr"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="9_djdu7"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="10_rx6rx"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="11_f3dcg"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="12_7guip"]
+
+[sub_resource type="Resource" id="Resource_fr1wk"]
+script = ExtResource("2_djdu7")
+npc_name = "UpgradeAltar"
+has_chat = false
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ejaw"]
+shader = ExtResource("2_6wtg1")
+shader_parameter/activation = 0.0
+shader_parameter/rune_glow = Color(0.5, 0.8, 1, 1)
+shader_parameter/dormant_desaturation = 0.400000019
+shader_parameter/dormant_brightness = 0.85
+shader_parameter/active_brightness = 1.6
+shader_parameter/pulse_speed = 2.0
+shader_parameter/blue_threshold = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tjwq"]
+resource_local_to_scene = true
+shader = ExtResource("2_jvfea")
+shader_parameter/activation = 0.0
+shader_parameter/core_color = Color(0.8, 0.9, 1, 1)
+shader_parameter/edge_color = Color(0.4, 0.25, 0.95, 1)
+shader_parameter/swirl_speed = 1.5
+shader_parameter/swirl_twist = 6.0
+shader_parameter/arms = 3.0
+shader_parameter/posterize_steps = 4.0
+shader_parameter/pixel_res = Vector2(20, 6)
+
+[sub_resource type="Curve" id="Curve_q0xdf"]
+_data = [Vector2(0.00826446, 0), 0.0, 0.0, 0, 0, Vector2(0.49999994, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_yx83y"]
+offsets = PackedFloat32Array(0.4398148, 1)
+colors = PackedColorArray(0.6700001, 0.55, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vbm1h"]
+resource_local_to_scene = true
+shader = ExtResource("3_aw8is")
+shader_parameter/activation = 0.0
+shader_parameter/front_layer = true
+shader_parameter/core_color = Color(0.95, 0.9, 1, 1)
+shader_parameter/glow_bottom_color = Color(0.45, 0.7, 1, 1)
+shader_parameter/glow_top_color = Color(0.75, 0.4, 1, 1)
+shader_parameter/strands = 2
+shader_parameter/turns = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/core_width = 0.04
+shader_parameter/glow_width = 0.14
+shader_parameter/glow_strength = 0.55
+shader_parameter/glow_steps = 3.0
+shader_parameter/base_radius = 0.08
+shader_parameter/top_radius = 0.42
+shader_parameter/back_brightness = 0.45
+shader_parameter/shimmer_speed = 4.0
+shader_parameter/shimmer_density = 8.0
+shader_parameter/pixel_res = Vector2(24, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwo6u"]
+resource_local_to_scene = true
+shader = ExtResource("4_yab73")
+shader_parameter/activation = 0.0
+shader_parameter/glow_color = Color(0.9386667, 0.53999996, 1, 0.74509805)
+shader_parameter/pulse_speed = 10.0
+shader_parameter/bands = 10.0
+shader_parameter/pixel_res = Vector2(24, 24)
+
+[sub_resource type="Gradient" id="Gradient_djdu7"]
+offsets = PackedFloat32Array(0.41666666, 0.5787037)
+colors = PackedColorArray(1, 1, 1, 1, 0.36959636, 0.73599684, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xj71r"]
+resource_local_to_scene = true
+shader = ExtResource("3_aw8is")
+shader_parameter/activation = 0.0
+shader_parameter/front_layer = true
+shader_parameter/core_color = Color(0.95, 0.9, 1, 1)
+shader_parameter/glow_bottom_color = Color(0.45, 0.7, 1, 1)
+shader_parameter/glow_top_color = Color(0.75, 0.4, 1, 1)
+shader_parameter/strands = 1
+shader_parameter/turns = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/core_width = 0.04
+shader_parameter/glow_width = 0.14
+shader_parameter/glow_strength = 0.55
+shader_parameter/glow_steps = 3.0
+shader_parameter/base_radius = 0.08
+shader_parameter/top_radius = 0.42
+shader_parameter/back_brightness = 1.0
+shader_parameter/shimmer_speed = 4.0
+shader_parameter/shimmer_density = 8.0
+shader_parameter/pixel_res = Vector2(24, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx6rx"]
+size = Vector2(129, 95)
+
+[node name="UpgradeAltar" type="Node2D" unique_id=1682198369 node_paths=PackedStringArray("crystal", "effect_nodes", "particles")]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_m7pcb")
+crystal = NodePath("SkyShard")
+effect_nodes = [NodePath("Sprite2D"), NodePath("Pool"), NodePath("HelixBack"), NodePath("HelixFront"), NodePath("Halo")]
+particles = [NodePath("Pool/PoolMotes"), NodePath("SkyShard/Sparkles")]
+snap_to_pixels = false
+data = SubResource("Resource_fr1wk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=233207993]
+material = SubResource("ShaderMaterial_4ejaw")
+position = Vector2(0.7500004, -0.74999803)
+texture = ExtResource("1_ui4ie")
+
+[node name="Pool" type="ColorRect" parent="." unique_id=403272083]
+material = SubResource("ShaderMaterial_5tjwq")
+offset_left = -10.25
+offset_top = -1.7499981
+offset_right = 9.75
+offset_bottom = 4.250002
+
+[node name="PoolMotes" type="CPUParticles2D" parent="Pool" unique_id=1453301328]
+position = Vector2(10.249999, 1.7499971)
+emitting = false
+amount = 15
+lifetime = 2.0
+speed_scale = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+gravity = Vector2(0, -25)
+scale_amount_curve = SubResource("Curve_q0xdf")
+color_ramp = SubResource("Gradient_yx83y")
+
+[node name="HelixBack" type="ColorRect" parent="." unique_id=1247549289]
+material = SubResource("ShaderMaterial_vbm1h")
+offset_left = -11.25
+offset_top = -39.749996
+offset_right = 12.75
+offset_bottom = 0.2500038
+
+[node name="Halo" type="ColorRect" parent="." unique_id=1636408310]
+material = SubResource("ShaderMaterial_mwo6u")
+offset_left = -11.25
+offset_top = -49.749996
+offset_right = 12.75
+offset_bottom = -25.749996
+
+[node name="SkyShard" type="Sprite2D" parent="." unique_id=1230545049]
+position = Vector2(0.7500005, -17.749998)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_qgpom")
+
+[node name="Sparkles" type="CPUParticles2D" parent="SkyShard" unique_id=970914090]
+position = Vector2(-0.9999924, 5.333331)
+scale = Vector2(1.3333334, 1.3333334)
+emitting = false
+amount = 5
+lifetime = 0.8
+speed_scale = 0.5
+emission_shape = 6
+emission_ring_inner_radius = 5.0
+emission_ring_radius = 10.0
+gravity = Vector2(0, -5)
+scale_amount_curve = SubResource("Curve_q0xdf")
+color_ramp = SubResource("Gradient_djdu7")
+
+[node name="HelixFront" type="ColorRect" parent="." unique_id=469609027]
+material = SubResource("ShaderMaterial_xj71r")
+offset_left = -11.25
+offset_top = -39.749996
+offset_right = 12.75
+offset_bottom = 0.2500038
+
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=970090550]
+script = ExtResource("8_tn0dr")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=432430639]
+script = ExtResource("9_djdu7")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=282399503]
+script = ExtResource("10_rx6rx")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=1131781794]
+script = ExtResource("11_f3dcg")
+
+[node name="KeyboardPressHelper" parent="." unique_id=1151939043 instance=ExtResource("12_7guip")]
+offset_left = -8.75
+offset_top = -68.75
+offset_right = -8.75
+offset_bottom = -68.75
+scale = Vector2(0.5, 0.5)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1467936146]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1668299346]
+position = Vector2(0.5, -3.5)
+shape = SubResource("RectangleShape2D_rx6rx")

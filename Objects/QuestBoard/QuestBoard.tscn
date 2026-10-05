@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dg8cgla4xeph4"]
+
+[ext_resource type="Texture2D" uid="uid://4rrg1ewyo26a" path="res://Objects/QuestBoard/QuestBoard.png" id="1_4h6v8"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_7evo4"]
+[ext_resource type="Shader" uid="uid://c75bye61hl7rt" path="res://Objects/QuestBoard/quest_board.gdshader" id="2_nbaj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdoxg"]
+shader = ExtResource("2_nbaj0")
+shader_parameter/proximity = 0.0
+shader_parameter/idle_flicker = 0.08
+shader_parameter/near_flicker = 0.25
+shader_parameter/near_lantern_boost = 0.35
+shader_parameter/lantern_tint = Color(1, 0.85, 0.5, 1)
+shader_parameter/shine_color = Color(1, 1, 0.95, 1)
+shader_parameter/shine_strength = 0.55
+shader_parameter/sweep_interval = 4.0
+shader_parameter/sweep_duration = 0.7
+shader_parameter/sweep_width = 0.04
+shader_parameter/outline_color = Color(1, 0.95, 0.75, 1)
+shader_parameter/debug_masks = false
+shader_parameter/lantern_min_red = 0.75
+shader_parameter/lantern_max_blue = 0.45
+shader_parameter/paper_min_brightness = 0.62
+shader_parameter/emblem_min_blue = 0.6
+shader_parameter/emblem_blue_margin = 0.12
+
+[node name="QuestBoard" type="Node2D" unique_id=1013168596]
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("2_7evo4")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Island" unique_id=1060599460]
+material = SubResource("ShaderMaterial_fdoxg")
+position = Vector2(0, -23.999998)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_4h6v8")

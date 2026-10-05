@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://ldmtmoroq5kr"]
+
+[ext_resource type="Script" uid="uid://b4tx132oeg6im" path="res://HUD/resource_hud.gd" id="1_h4icc"]
+[ext_resource type="PackedScene" uid="uid://c5sbtn45yu5dc" path="res://HUD/ItemHud.tscn" id="2_1a8yl"]
+[ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="2_h4icc"]
+[ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="3_p4433"]
+[ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="4_anr2b"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="5_sudpg"]
+
+[node name="ResourceHud" type="Control" unique_id=980645727]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4icc")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="." unique_id=1005735060]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Coin" parent="HBoxContainer5" unique_id=612387959 instance=ExtResource("2_1a8yl")]
+layout_mode = 2
+text_color = Color(1, 0.7176471, 0, 1)
+texture = ExtResource("2_h4icc")
+gain_scale = 1.3
+loss_scale = 0.85
+pop_duration = 0.18
+gain_flash = Color(1.6, 1.6, 1.6, 1)
+loss_flash = Color(1, 0.4, 0.4, 1)
+count_duration = 0.25
+
+[node name="Wood" parent="HBoxContainer5" unique_id=229769407 instance=ExtResource("2_1a8yl")]
+layout_mode = 2
+text_color = Color(0.49, 0.23683335, 0, 1)
+texture = ExtResource("3_p4433")
+gain_scale = 1.3
+loss_scale = 0.85
+pop_duration = 0.18
+gain_flash = Color(1.6, 1.6, 1.6, 1)
+loss_flash = Color(1, 0.4, 0.4, 1)
+count_duration = 0.25
+
+[node name="Essence" parent="HBoxContainer5" unique_id=2076644291 instance=ExtResource("2_1a8yl")]
+layout_mode = 2
+text_color = Color(0.69800687, 0.32137558, 1, 1)
+texture = ExtResource("4_anr2b")
+gain_scale = 1.3
+loss_scale = 0.85
+pop_duration = 0.18
+gain_flash = Color(1.6, 1.6, 1.6, 1)
+loss_flash = Color(1, 0.4, 0.4, 1)
+count_duration = 0.25
+
+[node name="SkyShard" parent="HBoxContainer5" unique_id=1411770331 instance=ExtResource("2_1a8yl")]
+layout_mode = 2
+text_color = Color(0.068483464, 0.9999996, 0.8254371, 1)
+texture = ExtResource("5_sudpg")
+gain_scale = 1.3
+loss_scale = 0.85
+pop_duration = 0.18
+gain_flash = Color(1.6, 1.6, 1.6, 1)
+loss_flash = Color(1, 0.4, 0.4, 1)
+count_duration = 0.25

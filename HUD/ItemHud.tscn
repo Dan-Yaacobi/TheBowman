@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c5sbtn45yu5dc"]
+
+[ext_resource type="Script" uid="uid://b6wryik8phsg7" path="res://HUD/item_hud.gd" id="1_n1vw6"]
+[ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="2_dqpvv"]
+
+[node name="Coins" type="HBoxContainer" unique_id=612387959]
+script = ExtResource("1_n1vw6")
+text_color = Color(0, 0, 0, 1)
+gain_scale = null
+loss_scale = null
+pop_duration = null
+gain_flash = null
+loss_flash = null
+count_duration = null
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=27104882]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_dqpvv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="." unique_id=71210662]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "x0"

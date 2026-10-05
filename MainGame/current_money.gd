@@ -1,4 +1,4 @@
-class_name CurrentMoney extends Label
+extends Label
 
-func update_current_money(amount: int) -> void:
+func update_amount(amount: int) -> void:
 	text = "x"  + str(amount)

@@ -269,7 +269,8 @@ hurricane_duration = SubResource("Resource_vuo2u")
 items = Dictionary[int, int]({
 0: 0,
 2: 0,
-3: 0
+3: 0,
+4: 0
 })
 before_hit_abilities = Array[ExtResource("7_yf47d")]([SubResource("Resource_bibgm")])
 after_hit_abilities = Array[ExtResource("7_yf47d")]([SubResource("Resource_4n5ed")])

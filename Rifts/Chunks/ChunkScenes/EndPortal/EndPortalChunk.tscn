@@ -19,9 +19,10 @@ script = ExtResource("1_1i8qb")
 z_index = 0
 position = Vector2(1, -29)
 scale = Vector2(1.5, 1.5)
-color = Color(1, 0, 0, 1)
 destination = 3
 is_rift_portal = true
+wake_duration = 0.5
+sleep_duration = 1.0
 
 [node name="EntryMarker" parent="." unique_id=176897598 instance=ExtResource("4_vmfpc")]
 
