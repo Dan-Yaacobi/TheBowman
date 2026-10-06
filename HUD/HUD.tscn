@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cexsx62s0ag5i" path="res://HUD/ItemCard/ItemComparisonScreen.tscn" id="2_2gu3h"]
 [ext_resource type="PackedScene" uid="uid://ccm60fajm4yy6" path="res://Player/HealthBar/HealhHearts.tscn" id="2_65vjf"]
 [ext_resource type="PackedScene" uid="uid://bsuxrgl8shr8m" path="res://HUD/ActiveAbility/ActiveAbilityPicker.tscn" id="2_fjfvf"]
+[ext_resource type="PackedScene" uid="uid://cb34xn1yrefor" path="res://Objects/Constructs/UpgradeAltar/UpgradeMenu.tscn" id="2_iob2k"]
 [ext_resource type="PackedScene" uid="uid://bbbjwbqooljwf" path="res://HUD/ItemCard/ItemInspectPrompt.tscn" id="3_iob2k"]
 [ext_resource type="Texture2D" uid="uid://lu4rtbe5umth" path="res://Player/HealthBar/Skull.png" id="3_ktoim"]
 [ext_resource type="PackedScene" uid="uid://ldmtmoroq5kr" path="res://HUD/ResourceHUD.tscn" id="4_ba18x"]
@@ -17,11 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://xqcywwa8lpnn" path="res://HUD/ActiveAbility/ActiveAbilityIndicator.tscn" id="18_65vjf"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
+[ext_resource type="Texture2D" uid="uid://bod4jyw2injnl" path="res://UI/Theme/Corner.png" id="20_2gu3h"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
 
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
+
+[node name="UpgradeMenu" parent="." unique_id=765910775 instance=ExtResource("2_iob2k")]
 
 [node name="ItemComparisonLayer" type="CanvasLayer" parent="." unique_id=705740621]
 layer = 10
@@ -57,6 +61,10 @@ mouse_filter = 2
 
 [node name="ResourceHud" parent="Control" unique_id=980645727 instance=ExtResource("4_ba18x")]
 layout_mode = 1
+offset_left = 44.0
+offset_top = 18.0
+offset_right = 44.0
+offset_bottom = 18.0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
@@ -295,5 +303,64 @@ offset_bottom = 14.199982
 grow_horizontal = 2
 grow_vertical = 2
 text = "I promise to do better"
+
+[node name="Corners" type="Control" parent="." unique_id=10360099]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Corners" unique_id=1600993712]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1507.0
+offset_top = -4.0
+offset_right = 1566.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("20_2gu3h")
+
+[node name="TextureRect2" type="TextureRect" parent="Corners" unique_id=1347926709]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_top = -6.0
+offset_right = 16.0
+offset_bottom = 38.0
+grow_horizontal = 0
+texture = ExtResource("20_2gu3h")
+flip_h = true
+
+[node name="TextureRect3" type="TextureRect" parent="Corners" unique_id=205423029]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_top = 861.0
+offset_right = 16.0
+offset_bottom = 905.0
+grow_horizontal = 0
+texture = ExtResource("20_2gu3h")
+flip_h = true
+flip_v = true
+
+[node name="TextureRect4" type="TextureRect" parent="Corners" unique_id=1608668079]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1507.0
+offset_top = 860.0
+offset_right = 1566.0
+offset_bottom = 904.0
+grow_horizontal = 0
+texture = ExtResource("20_2gu3h")
+flip_v = true
 
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

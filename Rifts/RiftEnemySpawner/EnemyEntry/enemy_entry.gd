@@ -2,7 +2,6 @@ class_name EnemyEntry extends Resource
 
 @export var scene: PackedScene
 @export var data: EnemyData
-## Pressure units. For elites, the target pressure must reach this before it can spawn
 @export var cost: int = 1
 @export var min_level: int = 1
 ## -1 = no upper cap

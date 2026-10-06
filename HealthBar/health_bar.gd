@@ -35,6 +35,18 @@ func _set_ghost_value(val: float) -> void:
 	
 func heal(amount: int) -> void:
 	health += amount
-
+	if _ghost_tween:
+		_ghost_tween.kill()
+	ghost_bar.value = maxf(ghost_bar.value, float(health))
+	
 func update_tooltip() -> void:
 	tooltip_text = str(int(value)) + " / " + str(int(max_value))
+
+func set_instant(new_health: int, new_max: int) -> void:
+	if _ghost_tween:
+		_ghost_tween.kill()
+		_ghost_tween = null
+	max_value = new_max
+	health = new_health
+	ghost_bar.max_value = new_max
+	ghost_bar.value = health

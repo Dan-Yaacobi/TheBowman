@@ -8,3 +8,6 @@ func apply(_challenge: ChallengeStoneEvent) -> void:
 
 func remove(_challenge: ChallengeStoneEvent) -> void:
 	pass
+	
+func on_enemy_spawned(_challenge: ChallengeStoneEvent, _enemy: Enemy) -> void:
+	pass

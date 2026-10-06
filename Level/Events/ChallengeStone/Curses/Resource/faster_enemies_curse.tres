@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyDataCurse" format=3 uid="uid://b5rn7qldi4ui3"]
+
+[ext_resource type="Script" uid="uid://dkg7fc0rgxg7w" path="res://Level/Events/ChallengeStone/Curses/enemy_data_curse.gd" id="1_h00ky"]
+[ext_resource type="Texture2D" uid="uid://dvh7fxkud5uqd" path="res://Level/Events/ChallengeStone/Curses/Sprites/EnemySpeedCurse.png" id="1_s771e"]
+
+[resource]
+script = ExtResource("1_h00ky")
+property_name = "move_speed"
+multiplier = 1.25
+icon = ExtResource("1_s771e")
+display_name = "Faster!"
+description = "Enemies move 25% faster."
+metadata/_custom_type_script = "uid://dkg7fc0rgxg7w"

@@ -15,10 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://blj0hgahvaj0c" path="res://Level/Events/MovingTargetsEvent/MovingTargetsEvent.tscn" id="15_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="16_5lv0r"]
-[ext_resource type="PackedScene" uid="uid://dq80k853nxjhq" path="res://Objects/UpgradeAltar/UpgradeAltar.tscn" id="16_167x7"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
-[ext_resource type="PackedScene" uid="uid://dg8cgla4xeph4" path="res://Objects/QuestBoard/QuestBoard.tscn" id="19_24r6y"]
+[ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
+[ext_resource type="PackedScene" uid="uid://clbbs2m6t4pjb" path="res://Objects/Constructs/QuestBoard/QuestBoardSite.tscn" id="19_24r6y"]
 
 [sub_resource type="Resource" id="Resource_vd7t3"]
 script = ExtResource("8_167x7")
@@ -158,8 +158,8 @@ position = Vector2(-1, -18)
 position = Vector2(209, 93)
 event_scene = ExtResource("15_5lv0r")
 
-[node name="UpgradeAltar" parent="Islands" unique_id=1682198369 instance=ExtResource("16_167x7")]
-position = Vector2(115, 177)
+[node name="AltarSite" parent="Islands" unique_id=345220663 instance=ExtResource("17_guwyo")]
+position = Vector2(116, 175)
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("13_7t2hb")]
 
@@ -167,5 +167,5 @@ position = Vector2(115, 177)
 position = Vector2(-39, 558)
 costs_heart = false
 
-[node name="QuestBoard" parent="." unique_id=1013168596 instance=ExtResource("19_24r6y")]
-position = Vector2(371, 47)
+[node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
+position = Vector2(377, 67)

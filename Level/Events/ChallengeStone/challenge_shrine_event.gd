@@ -60,7 +60,7 @@ func start_challenge(curses: Array[ChallengeCurse]) -> void:
 		active_modifiers.append(curse.duplicate(true))
 	for modifier: ChallengeModifier in active_modifiers:
 		modifier.apply(self)
-
+	spawner.enemy_created.connect(_on_enemy_created)
 	EventBus.enemy_died.connect(_on_enemy_died)
 	if goal.uses_continuous_spawn():
 		spawner.start_continuous(challenge.enemy_pool, challenge.spawn_interval, challenge.max_alive)
@@ -85,7 +85,9 @@ func _finish(success: bool) -> void:
 		return
 	is_running = false
 	is_finished = true
-
+	if spawner.enemy_created.is_connected(_on_enemy_created):
+		spawner.enemy_created.disconnect(_on_enemy_created)
+		
 	if EventBus.enemy_died.is_connected(_on_enemy_died):
 		EventBus.enemy_died.disconnect(_on_enemy_died)
 	spawner.stop()
@@ -121,3 +123,9 @@ func _roll_curse_offer() -> void:
 	offered_curses.clear()
 	for i: int in mini(curse_offer_count, pool.size()):
 		offered_curses.append(pool[i])
+
+func _on_enemy_created(enemy: Enemy) -> void:
+	if not is_running:
+		return
+	for modifier: ChallengeModifier in active_modifiers:
+		modifier.on_enemy_spawned(self, enemy)

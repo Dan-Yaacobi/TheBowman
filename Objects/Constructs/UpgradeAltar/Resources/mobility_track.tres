@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://bbyyl0qbesdf4"]
+
+[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_75rcp"]
+[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_o6nio"]
+
+[resource]
+script = ExtResource("2_o6nio")
+metadata/_custom_type_script = "uid://dyao83mt4xqfn"

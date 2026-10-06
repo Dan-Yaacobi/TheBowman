@@ -152,4 +152,5 @@ func set_respawn_pos(_position: Vector2) -> void:
 	respawn_position = _position
 	
 func respawn() -> void:
-	PlayerManager.player.global_position = respawn_position
+	EventBus.relocate_player.emit(respawn_position)
+	PlayerManager.player.start_invincibilty()

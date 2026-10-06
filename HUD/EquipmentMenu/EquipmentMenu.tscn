@@ -1,18 +1,7 @@
 [gd_scene format=3 uid="uid://evjdwqf178k4"]
 
 [ext_resource type="Script" uid="uid://bjrp4c34jdala" path="res://HUD/EquipmentMenu/equipment_menu.gd" id="1_6fhqs"]
-[ext_resource type="Shader" uid="uid://dsjd8llvoqwdm" path="res://Items/Equipments/UI/wooden_UI.gdshader" id="2_haiy6"]
 [ext_resource type="PackedScene" uid="uid://cqvhvd0pwv7eh" path="res://HUD/EquipmentMenu/EquipmentSlot.tscn" id="3_lqv2w"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqv2w"]
-shader = ExtResource("2_haiy6")
-shader_parameter/transparency = 0.85
-shader_parameter/wood_light = Color(0.6, 0.4, 0.2, 1)
-shader_parameter/wood_dark = Color(0.3, 0.18, 0.08, 1)
-shader_parameter/grain_scale = 6.0
-shader_parameter/grain_distortion = 0.098000004655
-shader_parameter/border_width = 0.03
-shader_parameter/border_color = Color(0.15, 0.08, 0.02, 1)
 
 [node name="EquipmentMenu" type="CanvasLayer" unique_id=74341901]
 process_mode = 3
@@ -30,7 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="PanelContainer" parent="Control" unique_id=1312415784]
-material = SubResource("ShaderMaterial_lqv2w")
 layout_mode = 0
 offset_right = 708.0
 offset_bottom = 478.0
@@ -81,9 +69,9 @@ anchor_left = 0.85700005
 anchor_top = 1.1750001
 anchor_right = 1.013
 anchor_bottom = 1.376
-offset_left = 0.09698486
-offset_top = -0.15002441
-offset_right = 0.17297363
-offset_bottom = -0.088012695
+offset_left = -45.903015
+offset_top = 28.849976
+offset_right = -1.8270264
+offset_bottom = -7.0880127
 grow_horizontal = 0
 text = "close"

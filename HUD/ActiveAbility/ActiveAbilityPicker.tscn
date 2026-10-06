@@ -3,14 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bxbaaxg5eifvu" path="res://HUD/ActiveAbility/ActiveAbilityButton.tscn" id="1_311ke"]
 [ext_resource type="Script" uid="uid://cwlc5ajcjtxrw" path="res://HUD/ActiveAbility/active_ability_picker.gd" id="1_btv3d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btv3d"]
-bg_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.2901961, 0.2901961, 0.5411765, 1)
-
 [node name="ActiveAbilityPicker" type="Control" unique_id=31872962]
 process_mode = 3
 layout_mode = 3
@@ -44,7 +36,6 @@ offset_right = 391.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_btv3d")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=219419504]
 layout_mode = 2
@@ -63,7 +54,7 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1982561559]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"TitleLabel"
 text = "Choose your active ability:
 "
 horizontal_alignment = 1

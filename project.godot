@@ -51,6 +51,7 @@ window/stretch/mode="viewport"
 [gui]
 
 timers/tooltip_delay_sec=0.0
+theme/custom="uid://lwm8wj2l75xw"
 theme/custom_font="uid://b7lpukcfa8uxr"
 
 [input]

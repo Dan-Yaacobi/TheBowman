@@ -4,12 +4,20 @@ extends Node
 
 signal levels_changed
 
+signal construct_built(id: StringName)
+
+
 const SAVE_SECTION: StringName = &"meta"
 
 var tracks: Array[UpgradeTrack] = [
-	preload("res://Objects/UpgradeAltar/Resources/power_track.tres"),
+	preload("res://Objects/Constructs/UpgradeAltar/Resources/power_track.tres"),
+	preload("res://Objects/Constructs/UpgradeAltar/Resources/sword_track.tres"),
+	preload("res://Objects/Constructs/UpgradeAltar/Resources/hp_track.tres")
+
 ]
 var levels: Dictionary[StringName, int] = {}
+
+var built: Array[StringName] = []
 
 func _ready() -> void:
 	SaveService.register(SAVE_SECTION, _save, _load)
@@ -84,16 +92,42 @@ func get_bonus_hearts() -> int:
 
 func _buff_id(track: UpgradeTrack, step: UpgradeStep) -> int:
 	return ("meta/%s/%s/%d" % [track.id, step.stat_name, step.type]).hash()
+	
+func is_built(id: StringName) -> bool:
+	return built.has(id)
 
+func can_pay(cost: Dictionary[CustomVariables.items, int], stats: PlayerStats) -> bool:
+	for item: CustomVariables.items in cost:
+		if stats.items.get(item, 0) < cost[item]:
+			return false
+	return true
+
+## Pays and marks the construct as built. Returns false if already built or unaffordable.
+func build(id: StringName, cost: Dictionary[CustomVariables.items, int], player: Player) -> bool:
+	if is_built(id) or not can_pay(cost, player.stats):
+		return false
+	for item: CustomVariables.items in cost:
+		player.buy(cost[item], item)
+	built.append(id)
+	SaveService.save_game()
+	construct_built.emit(id)
+	return true
+	
 func _save() -> Dictionary:
 	var out: Dictionary = {}
 	for id: StringName in levels:
 		out[String(id)] = levels[id]
-	return {"levels": out}
+	var built_out: Array[String] = []
+	for id: StringName in built:
+		built_out.append(String(id))
+	return {"levels": out, "built": built_out}
 
 func _load(data: Dictionary) -> void:
 	levels.clear()
 	var saved: Dictionary = data.get("levels", {})
 	for key: String in saved:
 		levels[StringName(key)] = int(saved[key])
+	built.clear()
+	for id: Variant in data.get("built", []):
+		built.append(StringName(str(id)))
 	levels_changed.emit()

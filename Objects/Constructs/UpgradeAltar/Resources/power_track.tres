@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://kw6pc22jygv3"]
+
+[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ralak"]
+[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_08rf8"]
+
+[sub_resource type="Resource" id="Resource_5i4eu"]
+script = ExtResource("1_ralak")
+stat_name = &"arrow_damage"
+max_applications = 50
+display_text = "Arrow Damage +1"
+
+[sub_resource type="Resource" id="Resource_1f24j"]
+script = ExtResource("1_ralak")
+stat_name = &"crit_chance"
+amount = 5.0
+max_applications = 20
+display_text = "Crit Chance +5%"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[sub_resource type="Resource" id="Resource_ppbhg"]
+script = ExtResource("1_ralak")
+stat_name = &"arrow_damage"
+max_applications = 50
+display_text = "Arrow Damage +1"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[sub_resource type="Resource" id="Resource_rlg28"]
+script = ExtResource("1_ralak")
+stat_name = &"crit_modifier"
+amount = 0.5
+max_applications = 15
+display_text = "Crit Damage +5%"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[resource]
+script = ExtResource("2_08rf8")
+id = &"power"
+display_name = "Power"
+cycle = Array[ExtResource("1_ralak")]([SubResource("Resource_5i4eu"), SubResource("Resource_1f24j"), SubResource("Resource_ppbhg"), SubResource("Resource_rlg28")])
+base_cost = Dictionary[int, int]({
+0: 10,
+3: 5
+})
+milestone_cost = Dictionary[int, int]({
+4: 1
+})

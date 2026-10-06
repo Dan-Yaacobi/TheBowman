@@ -106,6 +106,7 @@ func _ready() -> void:
 	activate_passive_abilities() 
 	SaveService.register(&"resources", _save_resources, _load_resources)
 
+	
 var enemies_killed: int = 0
 
 func _save_resources() -> Dictionary:
@@ -154,6 +155,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F7:
 			collect_item(CustomVariables.items.WOOD, 50)
+			collect_item(CustomVariables.items.COIN, 50)
+			collect_item(CustomVariables.items.ESSENCE, 50)
+
 		if event.keycode == KEY_F9:
 			var track: UpgradeTrack = MetaProgress.tracks[0]
 			var bought: bool = MetaProgress.purchase(track, self)

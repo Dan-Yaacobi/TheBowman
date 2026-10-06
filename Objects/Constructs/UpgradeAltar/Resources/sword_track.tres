@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://vv1huk0ado0s"]
+
+[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ljyyh"]
+[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_xw5hj"]
+
+[sub_resource type="Resource" id="Resource_ila4o"]
+script = ExtResource("1_ljyyh")
+stat_name = &"sword_damage"
+max_applications = 50
+display_text = "Sword Damage +1"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[sub_resource type="Resource" id="Resource_4t6ih"]
+script = ExtResource("1_ljyyh")
+stat_name = &"extra_sword_knockback"
+amount = 0.1
+type = 1
+max_applications = 10
+display_text = "Sword Knockback +10%"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[sub_resource type="Resource" id="Resource_wusd3"]
+script = ExtResource("1_ljyyh")
+stat_name = &"sword_size"
+amount = 0.1
+type = 1
+max_applications = 5
+display_text = "Sword Size +10%"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[resource]
+script = ExtResource("2_xw5hj")
+id = &"sword_track"
+display_name = "Sword"
+cycle = Array[ExtResource("1_ljyyh")]([SubResource("Resource_ila4o"), SubResource("Resource_4t6ih"), SubResource("Resource_wusd3")])
+base_cost = Dictionary[int, int]({
+0: 5,
+2: 5
+})
+cost_growth = 1.3
+milestone_cost = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dyao83mt4xqfn"

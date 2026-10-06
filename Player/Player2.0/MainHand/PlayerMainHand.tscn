@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://3p61xqypv41m" path="res://Player/Player2.0/Sprites/SwingEffect.png" id="10_3m267"]
 [ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="10_5ej1j"]
 [ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="11_5ej1j"]
+[ext_resource type="Texture2D" uid="uid://b2ltxpnx4x6ia" path="res://Items/Equipments/Swords/Sprites/BasicSword.png" id="11_30xy1"]
 [ext_resource type="Script" uid="uid://civb0dd4jcaml" path="res://Player/Player2.0/MainHand/slash_effect.gd" id="14_30xy1"]
 
 [sub_resource type="Animation" id="Animation_8g0cn"]
@@ -415,9 +416,6 @@ knockback_power = 50
 damage = 5
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ej1j"]
-load_path = "res://.godot/imported/BasicSword.png-9a1fe71a16cd77b03770a70f3f756edb.ctex"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_30xy1"]
 
 [sub_resource type="Curve" id="Curve_sgu6n"]
@@ -524,7 +522,7 @@ stats = SubResource("Resource_3cqt0")
 
 [node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1919667962]
 position = Vector2(1.3333335, -20)
-texture = SubResource("CompressedTexture2D_5ej1j")
+texture = ExtResource("11_30xy1")
 
 [node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
 position = Vector2(1.3333321, -35.999996)

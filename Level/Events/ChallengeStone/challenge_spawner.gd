@@ -2,6 +2,8 @@ class_name ChallengeSpawner extends Node
 
 @export var time_between_enemy_spawns: float = 0.4
 
+signal enemy_created(enemy: Enemy)
+
 var alive_count: int = 0
 var is_spawning: bool = false
 
@@ -41,15 +43,20 @@ func spawn_wave(entries: Array[EnemyEntry]) -> void:
 	is_spawning = false
 
 func _spawn(entry: EnemyEntry) -> void:
+	var factory: Callable = entry.get_factory()
+	var cursed_factory: Callable = func() -> Enemy:
+		var created: Enemy = factory.call()
+		enemy_created.emit(created)
+		return created
 	var enemy: Enemy = PlayerManager.player.spawn_handler.spawn_from_zone(
-		entry.get_factory(), entry.spawn_zone
+		cursed_factory, entry.spawn_zone
 	)
 	if enemy == null:
 		return
 	alive_count += 1
 	enemy.tree_exited.connect(_on_enemy_gone, CONNECT_ONE_SHOT)
 	EventBus.enemy_summoned.emit(enemy)
-
+	
 func _on_enemy_gone() -> void:
 	alive_count -= 1
 

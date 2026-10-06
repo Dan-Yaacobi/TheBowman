@@ -43,7 +43,6 @@ func _ready() -> void:
 
 	_set_state(PauseState.CLOSED)
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("ui_cancel"):
 		return

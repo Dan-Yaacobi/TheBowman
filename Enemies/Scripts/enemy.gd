@@ -46,7 +46,7 @@ func _ready() -> void:
 		enemy_health_bar.get_child(1).setup(stats.max_hp)
 	init_effects()
 	init_damage_modifiers()
-	sprite.scale = stats.texture_scale
+	scale = Vector2(1,1) * stats.size
 	_wire_hit_effects(hurt_box, false)
 
 func init_damage_modifiers() -> void:

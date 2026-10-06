@@ -78,15 +78,14 @@ func _rebuild_hearts() -> void:
 		bar.init_health(CustomVariables.HP_PER_HEART)
 		hearts.append(bar)
 
-
 func _refresh_all() -> void:
 	var remaining: int = hp
 	for i in hearts.size():
 		var heart_max: int = _heart_max_hp(i)
 		var heart_hp: int = clampi(remaining, 0, heart_max)
-		hearts[i].max_value = heart_max
-		hearts[i].health = heart_hp
+		hearts[i].set_instant(heart_hp, heart_max)
 		remaining -= heart_hp
+		
 
 
 func _heart_max_hp(index: int) -> int:

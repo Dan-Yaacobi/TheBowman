@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://6535rn5jaahj"]
+
+[ext_resource type="Script" uid="uid://d2x0hytonh8jc" path="res://Objects/Constructs/UpgradeAltar/upgrade_row.gd" id="1_qn4nm"]
+[ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="2_8781y"]
+[ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="3_ku0kj"]
+[ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="4_modeg"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="5_xwd33"]
+
+[node name="UpgradeRow" type="PanelContainer" unique_id=1932598785]
+offset_right = 322.0
+offset_bottom = 76.0
+theme_type_variation = &"RowPanel"
+script = ExtResource("1_qn4nm")
+item_icons = Dictionary[int, Texture2D]({
+0: ExtResource("2_8781y"),
+2: ExtResource("3_ku0kj"),
+3: ExtResource("4_modeg"),
+4: ExtResource("5_xwd33")
+})
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1394125555]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Info" type="VBoxContainer" parent="HBoxContainer" unique_id=1361813191]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/Info" unique_id=53443166]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Power"
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer/Info" unique_id=1019018928]
+layout_mode = 2
+theme_type_variation = &"DimLabel"
+
+[node name="EffectLabel" type="Label" parent="HBoxContainer" unique_id=552698273]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1 Arrow Damage"
+
+[node name="CostBox" type="HBoxContainer" parent="HBoxContainer" unique_id=1344951587]
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="HBoxContainer" unique_id=567147067]
+custom_minimum_size = Vector2(120, 20)
+layout_mode = 2
+text = "Upgrade"

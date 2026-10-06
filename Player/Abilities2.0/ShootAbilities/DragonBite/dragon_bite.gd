@@ -4,13 +4,15 @@ class_name DragonBite extends Node2D
 @onready var hurt_box: HurtBox = $HurtBox
 
 var direction: Vector2
-var distance: float = 75
+var distance: float = 60
 var damage: int
 var after_hit_abilities: Array[PlayerAbility]
 var before_hit_abilities: Array[PlayerAbility]
+var knockback: float
 
 func _ready() -> void:
 	hurt_box.base_damage = damage
+	hurt_box.knockback_power = knockback
 	for ability in after_hit_abilities:
 		hurt_box.add_after_effect(ability.activate_ability)
 	for ability in before_hit_abilities:

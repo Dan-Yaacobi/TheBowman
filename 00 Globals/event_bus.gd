@@ -110,3 +110,9 @@ signal respawn_player
 signal event_enter_requested(event_scene: PackedScene, return_position: Vector2)
 signal event_exit_requested()
 signal event_exited()
+
+signal open_upgrade_menu
+signal upgrade_menu_closed
+signal close_upgrade_menu
+
+signal relocate_player(_position: Vector2)

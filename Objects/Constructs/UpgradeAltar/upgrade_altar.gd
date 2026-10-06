@@ -22,6 +22,17 @@ var _crystal_base: Vector2
 var _bob_time: float = 0.0
 var _fx_tween: Tween
 
+func action(_index: int) -> void:
+	EventBus.open_upgrade_menu.emit()
+
+## Keeps the altar from going to Gone after opening the menu.
+func holds_interaction() -> bool:
+	return true
+
+func _on_menu_closed() -> void:
+	if npc_state_machine.curr_state is NPCInteractedState:
+		npc_state_machine.ChangeState($NpcStateMachine/Idle)
+		
 func extra_ready_functions() -> void:
 	_crystal_base = crystal.position
 	interaction_area.body_entered.connect(_on_body_entered)
@@ -29,7 +40,8 @@ func extra_ready_functions() -> void:
 	for p: CPUParticles2D in particles:
 		p.emitting = false
 	_apply_activation(0.0)
-
+	EventBus.upgrade_menu_closed.connect(_on_menu_closed)
+	
 func extra_process_function(delta: float) -> void:
 	_bob_time += delta
 	var lift: Vector2 = rest_offset.lerp(hover_offset, ease(activation, -2.0))
@@ -60,3 +72,6 @@ func _apply_activation(value: float) -> void:
 		if mat:
 			mat.set_shader_parameter(&"activation", value)
 	crystal.modulate = dormant_modulate.lerp(Color.WHITE, value)
+	
+func on_interaction_closed() -> void:
+	EventBus.close_upgrade_menu.emit()

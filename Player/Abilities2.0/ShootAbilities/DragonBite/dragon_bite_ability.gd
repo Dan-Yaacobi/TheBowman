@@ -11,6 +11,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		var dragon_bite: DragonBite = DRAGON_BITE.instantiate()
 		dragon_bite.set_damage(_activator.damage)
 		dragon_bite.direction = _activator.velocity.normalized()
+		dragon_bite.knockback = _activator.knockback
 		dragon_bite.global_position = PlayerManager.player.global_position
 		dragon_bite.after_hit_abilities = _activator.after_hit_abilities
 		dragon_bite.before_hit_abilities = _activator.before_hit_abilities

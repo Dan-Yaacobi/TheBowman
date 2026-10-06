@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyDataCurse" format=3 uid="uid://blkmilctj6wbs"]
+
+[ext_resource type="Script" uid="uid://dkg7fc0rgxg7w" path="res://Level/Events/ChallengeStone/Curses/enemy_data_curse.gd" id="1_s0nel"]
+[ext_resource type="Texture2D" uid="uid://dc3ug7047e703" path="res://Level/Events/ChallengeStone/Curses/Sprites/EnemySizeReduceCurse.png" id="1_t5uvp"]
+
+[resource]
+script = ExtResource("1_s0nel")
+property_name = "size"
+multiplier = 0.75
+icon = ExtResource("1_t5uvp")
+display_name = "Small Enemies"
+description = "Reduce Enemie's Size by 25%"
+metadata/_custom_type_script = "uid://dkg7fc0rgxg7w"

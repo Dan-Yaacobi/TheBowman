@@ -22,6 +22,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=197697100]
 layout_mode = 2
+theme_type_variation = &"TitleLabel"
 horizontal_alignment = 1
 
 [node name="DescriptionLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2103625811]

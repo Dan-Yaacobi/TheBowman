@@ -12,5 +12,5 @@ func _barrage(_player: Player) -> void:
 		var direction: Vector2 = (_player.get_global_mouse_position() - _player.global_position).normalized()
 		if not is_instance_valid(_player):
 			return
-		_player.main_hand.fire_at(direction, 1.0)
+		_player.main_hand.fire_at(direction, 0.99)
 		await _player.get_tree().create_timer(interval).timeout

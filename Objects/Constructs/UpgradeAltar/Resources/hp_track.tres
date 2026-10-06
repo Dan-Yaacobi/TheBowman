@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://cuu18ugbxbxtp"]
+
+[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_4fma3"]
+[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_idk0m"]
+
+[sub_resource type="Resource" id="Resource_peqsn"]
+script = ExtResource("1_4fma3")
+stat_name = &"hearts"
+max_applications = 5
+display_text = "+1 Max Hearts"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[resource]
+script = ExtResource("2_idk0m")
+id = &"hp_track"
+display_name = "Health"
+cycle = Array[ExtResource("1_4fma3")]([SubResource("Resource_peqsn")])
+max_level = 5
+base_cost = Dictionary[int, int]({
+2: 30,
+4: 1
+})
+cost_growth = 2.0
+metadata/_custom_type_script = "uid://dyao83mt4xqfn"

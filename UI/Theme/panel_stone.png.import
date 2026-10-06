@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4rrg1ewyo26a"
-path="res://.godot/imported/QuestBoard.png-868727bb66feb08034dacf4538b4f3fe.ctex"
+uid="uid://d36gwf48kdi6x"
+path="res://.godot/imported/panel_stone.png-40c7f44892797920fc485220ba01cfc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/QuestBoard/QuestBoard.png"
-dest_files=["res://.godot/imported/QuestBoard.png-868727bb66feb08034dacf4538b4f3fe.ctex"]
+source_file="res://UI/Theme/panel_stone.png"
+dest_files=["res://.godot/imported/panel_stone.png-40c7f44892797920fc485220ba01cfc5.ctex"]
 
 [params]
 

@@ -20,7 +20,8 @@ func _ready() -> void:
 	EventBus.entered_rift_portal.connect(_on_portal_entered)
 	EventBus.event_enter_requested.connect(_on_event_enter_requested)
 	EventBus.event_exit_requested.connect(_on_event_exit_requested)
-
+	EventBus.relocate_player.connect(_place_player_and_resume)
+	
 func _on_portal_entered() -> void:
 	var rift_level: int = PlayerManager.player.stats.rift_level
 	if rift_level % 2 == 0 and not curr_world is BossArena1:

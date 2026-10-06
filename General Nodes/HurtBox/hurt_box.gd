@@ -63,3 +63,7 @@ func _apply_before_effects(entity: GameEntity, hurt_box: HurtBox) -> void:
 	for effect in before_effects:
 		if effect.is_valid():
 			effect.call(entity, hurt_box)
+
+func clear_effects() -> void:
+	before_effects.clear()
+	after_effects.clear()

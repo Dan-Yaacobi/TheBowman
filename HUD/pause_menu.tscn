@@ -16,10 +16,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Control" unique_id=1165528634]
+custom_minimum_size = Vector2(500, 550)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -37,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="Control/MainPanel" unique_id=1291008095]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,25 +57,26 @@ theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Control/MainPanel/VBox" unique_id=1597923587]
 layout_mode = 2
+theme_type_variation = &"TitleLabel"
 text = "PAUSED"
 
 [node name="ResumeButton" type="Button" parent="Control/MainPanel/VBox" unique_id=860901286]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Resume"
 
 [node name="StatsButton" type="Button" parent="Control/MainPanel/VBox" unique_id=781115130]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Stats"
 
 [node name="HowToPlayButton" type="Button" parent="Control/MainPanel/VBox" unique_id=1538382147]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "How To Play"
 
 [node name="SettingsButton" type="Button" parent="Control/MainPanel/VBox" unique_id=366728644]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Settings
 "
@@ -174,9 +178,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -97.5
-offset_right = 97.5
-offset_bottom = 28.0
+offset_left = -108.0
+offset_top = 184.0
+offset_right = 99.0
+offset_bottom = 212.0
 grow_horizontal = 2
 text = "Send Feedback/Report a Bug"
 

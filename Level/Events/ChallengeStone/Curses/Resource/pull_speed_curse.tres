@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatCurse" format=3 uid="uid://dye27qacpi3uj"]
+
+[ext_resource type="Script" uid="uid://dewr60c6g8sqd" path="res://Level/Events/ChallengeStone/Curses/stat_curse.gd" id="1_s4rrj"]
+[ext_resource type="Texture2D" uid="uid://be2nug0wspegv" path="res://Level/Events/ChallengeStone/Curses/Sprites/PullSpeedCurse.png" id="1_vvthv"]
+
+[resource]
+script = ExtResource("1_s4rrj")
+stat_name = "pull_speed"
+amount = -0.25
+icon = ExtResource("1_vvthv")
+display_name = "Slow Drawer"
+description = "Pull speed is reduced by 25%"
+metadata/_custom_type_script = "uid://dewr60c6g8sqd"

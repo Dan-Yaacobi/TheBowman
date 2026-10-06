@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cb34xn1yrefor"]
+
+[ext_resource type="Script" uid="uid://btfvmadbrsjbp" path="res://Objects/Constructs/UpgradeAltar/upgrade_menu.gd" id="1_0qpot"]
+[ext_resource type="PackedScene" uid="uid://6535rn5jaahj" path="res://Objects/Constructs/UpgradeAltar/UpgradeRow.tscn" id="2_52yrw"]
+
+[node name="UpgradeMenu" type="Control" unique_id=765910775]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0qpot")
+row_scene = ExtResource("2_52yrw")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=63160056]
+custom_minimum_size = Vector2(560, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -200.0
+offset_right = 280.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=2121451814]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox" unique_id=870458595]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/VBox" unique_id=1113188976]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Rows" type="VBoxContainer" parent="Panel/VBox/Scroll" unique_id=284202682]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CloseButton" type="Button" parent="Panel/VBox" unique_id=305210654]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Close"

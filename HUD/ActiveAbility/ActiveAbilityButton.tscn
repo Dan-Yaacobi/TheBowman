@@ -3,22 +3,6 @@
 [ext_resource type="Script" uid="uid://bkvxgiowtvo8j" path="res://HUD/ActiveAbility/active_ability_button.gd" id="1_h7mhv"]
 [ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="2_fg5ha"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg5ha"]
-bg_color = Color(0.08627451, 0.12941177, 0.24313726, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.2901961, 0.2901961, 0.5411765, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krcdd"]
-bg_color = Color(0.9137255, 0.27058825, 0.3764706, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_detail = 4
-
 [node name="ActiveAbilityButton" type="PanelContainer" unique_id=1861053749]
 custom_minimum_size = Vector2(220, 200)
 anchors_preset = 15
@@ -28,7 +12,6 @@ offset_right = -1354.0
 offset_bottom = -598.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fg5ha")
 script = ExtResource("1_h7mhv")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1082979691]
@@ -69,7 +52,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_hover_color = Color(0.05882353, 0.20392157, 0.3764706, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_krcdd")
 text = "Choose"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ChooseButton" to="." method="_on_choose_button_pressed"]

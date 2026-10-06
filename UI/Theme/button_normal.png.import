@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb4vayv5d6d3h"
-path="res://.godot/imported/UpgradeAltar.png-c7bacabe61cd2b121417a5cfa9998c93.ctex"
+uid="uid://cfj1dah6pw8ra"
+path="res://.godot/imported/button_normal.png-50d1d8122516d98f19c1e5e6a0006dde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/UpgradeAltar/UpgradeAltar.png"
-dest_files=["res://.godot/imported/UpgradeAltar.png-c7bacabe61cd2b121417a5cfa9998c93.ctex"]
+source_file="res://UI/Theme/button_normal.png"
+dest_files=["res://.godot/imported/button_normal.png-50d1d8122516d98f19c1e5e6a0006dde.ctex"]
 
 [params]
 

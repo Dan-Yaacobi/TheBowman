@@ -6,12 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="3_knjff"]
 [ext_resource type="Script" uid="uid://cx2fwggfjovcc" path="res://Level/Events/ChallengeStone/challenge_curse.gd" id="3_wmf47"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_0fq42"]
+[ext_resource type="Resource" uid="uid://dye27qacpi3uj" path="res://Level/Events/ChallengeStone/Curses/Resource/pull_speed_curse.tres" id="4_81c71"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="4_ypkpv"]
+[ext_resource type="Resource" uid="uid://b5rn7qldi4ui3" path="res://Level/Events/ChallengeStone/Curses/Resource/faster_enemies_curse.tres" id="5_06gnm"]
 [ext_resource type="Resource" uid="uid://dbsl0libqn666" path="res://Level/Events/ChallengeStone/Goals/Resource/moving_target_5.tres" id="5_ixiw6"]
 [ext_resource type="Script" uid="uid://xf3ijwjxn5jp" path="res://Level/Events/ChallengeStone/challenge_modifier.gd" id="5_iyr1v"]
 [ext_resource type="PackedScene" uid="uid://bo22u4lyjlatl" path="res://Level/Events/MovingTargetsEvent/TargetRoute.tscn" id="6_0fq42"]
 [ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="6_a50aq"]
 [ext_resource type="PackedScene" uid="uid://cbiuoq4mm2hcm" path="res://Level/Events/ChallengeStone/ChallengeShrine.tscn" id="6_knjff"]
+[ext_resource type="Resource" uid="uid://blkmilctj6wbs" path="res://Level/Events/ChallengeStone/Curses/Resource/enemy_size_decrease_curse.tres" id="6_l6220"]
 [ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="8_nih8x"]
 [ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="8_vn5l6"]
 [ext_resource type="Script" uid="uid://dba23xg5cr0bo" path="res://Level/Events/Rewards/random_item_reward.gd" id="9_ltlrn"]
@@ -73,6 +76,7 @@ display_name = "Hit the Targets"
 description = "Hit all targets before time runs out"
 goal = ExtResource("5_ixiw6")
 rewards = Array[ExtResource("6_a50aq")]([SubResource("Resource_wfe2k"), SubResource("Resource_eb2ja"), SubResource("Resource_06gnm"), SubResource("Resource_8wiu1")])
+curse_pool = Array[ExtResource("3_wmf47")]([ExtResource("4_81c71"), ExtResource("5_06gnm"), ExtResource("6_l6220")])
 metadata/_custom_type_script = "uid://02y3s3xcuf5r"
 
 [node name="MovingTargetsEvent" type="Node2D" unique_id=1665149052]

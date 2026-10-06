@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dg8cgla4xeph4"]
 
-[ext_resource type="Texture2D" uid="uid://4rrg1ewyo26a" path="res://Objects/QuestBoard/QuestBoard.png" id="1_4h6v8"]
+[ext_resource type="Texture2D" uid="uid://4rrg1ewyo26a" path="res://Objects/Constructs/QuestBoard/QuestBoard.png" id="1_4h6v8"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_7evo4"]
-[ext_resource type="Shader" uid="uid://c75bye61hl7rt" path="res://Objects/QuestBoard/quest_board.gdshader" id="2_nbaj0"]
+[ext_resource type="Shader" uid="uid://c75bye61hl7rt" path="res://Objects/Constructs/QuestBoard/quest_board.gdshader" id="2_nbaj0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fdoxg"]
 shader = ExtResource("2_nbaj0")

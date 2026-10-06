@@ -25,49 +25,45 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=1062812586]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -255.0
-offset_right = 255.0
-offset_bottom = 150.0
+anchors_preset = -1
+anchor_left = 0.469
+anchor_right = 0.469
+offset_left = -271.40002
+offset_top = 19.0
+offset_right = -135.40002
+offset_bottom = 59.5
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.7176471, 0.29411766, 0.13333334, 1)
-theme_override_colors/font_shadow_color = Color(0.36078373, 0.12983996, 0.04099472, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/outline_size = 10
-theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("2_w0qft")
-theme_override_font_sizes/font_size = 120
+scale = Vector2(4, 4)
+theme_type_variation = &"TitleLabel"
 text = "Sky Archer"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1655116290]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -306.0
-offset_top = 186.0
-offset_right = 330.0
-offset_bottom = 332.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -239.0
+offset_right = 91.0
+offset_bottom = -93.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=841085659]
+custom_maximum_size = Vector2(200, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w0qft")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 34
 text = "Start Game
 "
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1948348554]
+custom_maximum_size = Vector2(200, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w0qft")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 34
 text = "Exit Game
 "
 

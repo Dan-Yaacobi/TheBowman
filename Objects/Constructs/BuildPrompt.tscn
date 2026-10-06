@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://evpv05u2cdsm"]
+
+[ext_resource type="Script" uid="uid://b4i0r6qefrhek" path="res://Objects/Constructs/build_prompt.gd" id="1_776oc"]
+[ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="2_f0c6u"]
+[ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="3_cdtjw"]
+[ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="4_771yd"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="5_tm40e"]
+
+[node name="BuildPrompt" type="PanelContainer" unique_id=1810781386]
+scale = Vector2(0.3, 0.3)
+theme_type_variation = &"RowPanel"
+script = ExtResource("1_776oc")
+item_icons = Dictionary[int, Texture2D]({
+0: ExtResource("2_f0c6u"),
+2: ExtResource("3_cdtjw"),
+3: ExtResource("4_771yd"),
+4: ExtResource("5_tm40e")
+})
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1879646738]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer" unique_id=1039757465]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer" unique_id=531878445]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_type_variation = &"DimLabel"
+autowrap_mode = 2
+
+[node name="CostBox" type="HBoxContainer" parent="VBoxContainer" unique_id=1410917885]
+layout_mode = 2
+alignment = 1
+
+[node name="BuildButton" type="Button" parent="VBoxContainer" unique_id=1821805869]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Build"

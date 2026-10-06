@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cfrirlku7makf" path="res://HUD/EquipmentMenu/equipment_slot.gd" id="1_ummve"]
 [ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Items/Equipments/Bows/Sprites/Bow_1.png" id="2_qcgcp"]
 
-[node name="EquipmentSlot" type="Button" unique_id=1553754737]
+[node name="EquipmentSlot" type="Panel" unique_id=1211850593]
 custom_minimum_size = Vector2(100, 120)
 offset_right = 100.0
-offset_bottom = 100.0
+offset_bottom = 120.0
 script = ExtResource("1_ummve")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1746063438]

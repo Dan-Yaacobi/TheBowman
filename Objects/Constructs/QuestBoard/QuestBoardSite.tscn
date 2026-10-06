@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://clbbs2m6t4pjb"]
+
+[ext_resource type="PackedScene" uid="uid://dg8cgla4xeph4" path="res://Objects/Constructs/QuestBoard/QuestBoard.tscn" id="1_2558k"]
+[ext_resource type="Script" uid="uid://cpicdc1bc3or4" path="res://Objects/Constructs/construct_site.gd" id="1_isad6"]
+[ext_resource type="PackedScene" uid="uid://evpv05u2cdsm" path="res://Objects/Constructs/BuildPrompt.tscn" id="3_galeq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wysxn"]
+radius = 44.011364
+
+[node name="QuestBoardSite" type="Node2D" unique_id=492641276 node_paths=PackedStringArray("construct", "build_prompt", "proximity_area")]
+script = ExtResource("1_isad6")
+id = &"quest_board"
+display_name = "Quest Board"
+cost = Dictionary[int, int]({
+0: 999
+})
+construct = NodePath("QuestBoard")
+build_prompt = NodePath("BuildPrompt")
+proximity_area = NodePath("ProximityArea")
+
+[node name="QuestBoard" parent="." unique_id=1013168596 instance=ExtResource("1_2558k")]
+
+[node name="ProximityArea" type="Area2D" parent="." unique_id=1761649709]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=1561829800]
+shape = SubResource("CircleShape2D_wysxn")
+
+[node name="BuildPrompt" parent="." unique_id=1810781386 instance=ExtResource("3_galeq")]
+offset_left = -22.0
+offset_top = -23.000002
+offset_right = 130.0
+offset_bottom = 89.0

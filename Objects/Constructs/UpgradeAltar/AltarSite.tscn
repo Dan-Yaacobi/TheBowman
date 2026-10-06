@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bvmhxaunilahd"]
+
+[ext_resource type="PackedScene" uid="uid://dq80k853nxjhq" path="res://Objects/Constructs/UpgradeAltar/UpgradeAltar.tscn" id="1_32l63"]
+[ext_resource type="Script" uid="uid://cpicdc1bc3or4" path="res://Objects/Constructs/construct_site.gd" id="1_twdkf"]
+[ext_resource type="PackedScene" uid="uid://evpv05u2cdsm" path="res://Objects/Constructs/BuildPrompt.tscn" id="2_hjpox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e83u5"]
+radius = 59.3043
+
+[node name="AltarSite" type="Node2D" unique_id=345220663 node_paths=PackedStringArray("construct", "build_prompt", "proximity_area")]
+script = ExtResource("1_twdkf")
+id = &"altar"
+display_name = "Upgrade Altar"
+cost = Dictionary[int, int]({
+0: 10,
+3: 10
+})
+construct = NodePath("UpgradeAltar")
+build_prompt = NodePath("BuildPrompt")
+proximity_area = NodePath("ProximityArea")
+
+[node name="UpgradeAltar" parent="." unique_id=1682198369 instance=ExtResource("1_32l63")]
+
+[node name="ProximityArea" type="Area2D" parent="." unique_id=1464784489]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=1773105104]
+shape = SubResource("CircleShape2D_e83u5")
+
+[node name="BuildPrompt" parent="." unique_id=1289331517 instance=ExtResource("2_hjpox")]
+offset_left = -24.0
+offset_top = -23.0
+offset_right = 128.0
+offset_bottom = 89.0
+scale = Vector2(0.3, 0.3)

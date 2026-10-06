@@ -1,4 +1,4 @@
-class_name EquipmentSlot extends Button
+class_name EquipmentSlot extends Panel
 
 @onready var slot_texture: TextureRect = $VBoxContainer/SlotTexture
 @onready var slot_label: Label = $VBoxContainer/SlotLabel

@@ -12,6 +12,13 @@ uniform float pulse_speed = 2.0;
 // Raise if non-rune pixels get caught, lower if runes are missed.
 uniform float blue_threshold = 0.12;
 
+// Keeps the node's modulate (e.g. the construct ghost tint) working.
+varying vec4 node_modulate;
+
+void vertex() {
+	node_modulate = COLOR;
+}
+
 void fragment() {
 	vec4 tex = texture(TEXTURE, UV);
 	float blueness = tex.b - max(tex.r, tex.g);
@@ -24,5 +31,5 @@ void fragment() {
 	vec3 active_col = tex.rgb * active_brightness * pulse + rune_glow.rgb * 0.2 * pulse;
 
 	vec3 rune_col = mix(dormant_col, active_col, activation);
-	COLOR = vec4(mix(tex.rgb, rune_col, is_rune), tex.a);
+	COLOR = vec4(mix(tex.rgb, rune_col, is_rune), tex.a) * node_modulate;
 }
