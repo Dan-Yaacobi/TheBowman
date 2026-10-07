@@ -4,30 +4,32 @@
 [ext_resource type="Script" uid="uid://idaw1wr5uqqd" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_explosion.gd" id="2_urnw4"]
 
 [sub_resource type="Curve" id="Curve_3ljpm"]
-_limits = [0.0, 0.5, 0.0, 1.0]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_t5ppl"]
 colors = PackedColorArray(0.5176471, 0, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k76qx"]
-radius = 30.0
+radius = 68.007355
 
 [node name="BloodExplosion" type="CPUParticles2D" unique_id=2086761620]
 emitting = false
-amount = 40
+amount = 150
 texture = ExtResource("1_hbriq")
-lifetime = 1.5
+lifetime = 1.4000000000000001
 one_shot = true
 preprocess = 0.2
-speed_scale = 2.0
-explosiveness = 1.0
+speed_scale = 3.0
+explosiveness = 0.5
 emission_shape = 1
 emission_sphere_radius = 10.0
-gravity = Vector2(0, 25)
+gravity = Vector2(0, 0)
 radial_accel_min = 50.0
-radial_accel_max = 50.0
+radial_accel_max = 80.0
+tangential_accel_min = 80.0
+tangential_accel_max = 80.0
 scale_amount_curve = SubResource("Curve_3ljpm")
 color_ramp = SubResource("Gradient_t5ppl")
 script = ExtResource("2_urnw4")

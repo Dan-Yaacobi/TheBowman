@@ -1,11 +1,6 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="6_qvidt"]
-[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="7_5lv0r"]
-[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="8_167x7"]
-[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="9_24r6y"]
-[ext_resource type="Texture2D" uid="uid://yjx6phdtvdm6" path="res://Objects/Sprites/TargetDummy.png" id="10_guwyo"]
 [ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="12_5lv0r"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
@@ -19,23 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" uid="uid://clbbs2m6t4pjb" path="res://Objects/Constructs/QuestBoard/QuestBoardSite.tscn" id="19_24r6y"]
-
-[sub_resource type="Resource" id="Resource_vd7t3"]
-script = ExtResource("8_167x7")
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_c1m2a"]
-script = ExtResource("9_24r6y")
-max_hp = 10000000
-move_speed = SubResource("Resource_vd7t3")
-skin = ExtResource("10_guwyo")
-avg_coins_dropped = 1000
-can_be_knockedback = false
-drop_chance = 100.0
-has_health_bar = false
-equip_amount = 15
-rarity_skew = 5.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
@@ -56,25 +34,25 @@ use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="Island10" parent="Islands" unique_id=880183015 instance=ExtResource("14_7t2hb")]
-position = Vector2(38, 94)
+position = Vector2(40, 100)
 
 [node name="Island18" parent="Islands" unique_id=218020803 instance=ExtResource("14_7t2hb")]
-position = Vector2(173, 184)
+position = Vector2(168, 214)
 
 [node name="Island19" parent="Islands" unique_id=1340097104 instance=ExtResource("14_7t2hb")]
-position = Vector2(235, 163)
+position = Vector2(212, 201)
 
 [node name="Island20" parent="Islands" unique_id=364912047 instance=ExtResource("14_7t2hb")]
-position = Vector2(295, 140)
+position = Vector2(258, 189)
 
 [node name="Island21" parent="Islands" unique_id=1517430875 instance=ExtResource("14_7t2hb")]
-position = Vector2(358, 153)
+position = Vector2(305, 176)
 
 [node name="Island23" parent="Islands" unique_id=1398825867 instance=ExtResource("14_7t2hb")]
-position = Vector2(441, 137)
+position = Vector2(348, 156)
 
 [node name="Island24" parent="Islands" unique_id=1202727799 instance=ExtResource("14_7t2hb")]
-position = Vector2(530, 115)
+position = Vector2(393, 130)
 
 [node name="Island11" parent="Islands" unique_id=538615439 instance=ExtResource("14_7t2hb")]
 position = Vector2(155, 118)
@@ -98,10 +76,9 @@ fixed_frame_index = 4
 
 [node name="TargetDummy" parent="Islands/Island16" unique_id=603628097 instance=ExtResource("17_5lv0r")]
 position = Vector2(0, -21)
-stats = SubResource("Resource_c1m2a")
 
 [node name="Island12" parent="Islands" unique_id=297227350 instance=ExtResource("14_7t2hb")]
-position = Vector2(318, 109)
+position = Vector2(293, 118)
 use_fixed_frame = true
 fixed_frame_index = 4
 
@@ -110,17 +87,18 @@ position = Vector2(2, -18)
 item_data = ExtResource("12_5lv0r")
 
 [node name="Island17" parent="Islands" unique_id=987538156 instance=ExtResource("14_7t2hb")]
-position = Vector2(375, 109)
+position = Vector2(340, 89)
 use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
-position = Vector2(205, 119)
+position = Vector2(201, 118)
 
 [node name="Island15" parent="Islands" unique_id=420497880 instance=ExtResource("14_7t2hb")]
 position = Vector2(431, 85)
 
 [node name="ArrowSign5" type="Sprite2D" parent="Islands/Island15" unique_id=548771561]
+visible = false
 position = Vector2(2, -18)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("12_a6mvh")
@@ -147,7 +125,7 @@ text = "Rifts"
 metadata/_edit_use_anchors_ = true
 
 [node name="Island14" parent="Islands" unique_id=115139399 instance=ExtResource("14_7t2hb")]
-position = Vector2(264, 110)
+position = Vector2(247, 118)
 use_fixed_frame = true
 fixed_frame_index = 4
 
@@ -159,7 +137,7 @@ position = Vector2(209, 93)
 event_scene = ExtResource("15_5lv0r")
 
 [node name="AltarSite" parent="Islands" unique_id=345220663 instance=ExtResource("17_guwyo")]
-position = Vector2(116, 175)
+position = Vector2(109, 211)
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("13_7t2hb")]
 

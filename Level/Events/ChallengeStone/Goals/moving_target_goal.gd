@@ -1,14 +1,14 @@
 class_name MovingTargetGoal extends ChallengeGoal
 
-@export var target_scene: PackedScene
+@export var target_entry: EnemyEntry
 @export var targets_required: int = 5
 @export var time_limit: float = 45.0
 ## Each target is this many percent faster than the base speed, per target already hit.
 @export var speed_per_hit: float = 20.0
 ## Random +/- percent added to each target's speed.
 @export var speed_variance: float = 10.0
-## Path from the event root to the node holding the TargetRoute children.
 
+var _challenge: MovingTargetEvent  # new
 var _routes: Array[TargetRoute] = []
 var _route_bag: Array[int] = []
 var _last_route: int = -1
@@ -19,17 +19,17 @@ var _done: bool = false
 
 func uses_continuous_spawn() -> bool:
 	return false
-	
+
 func start(challenge: ChallengeStoneEvent) -> void:
-	var event: MovingTargetEvent = challenge as MovingTargetEvent
-	if event == null:
-		push_warning("TargetPracticeGoal must run in a MovingTargetEvent.")
+	_challenge = challenge as MovingTargetEvent
+	if _challenge == null:
+		push_warning("MovingTargetGoal must run in a MovingTargetEvent.")
 		failed.emit("Wrong event")
 		return
 
-	_routes = event.get_routes()
+	_routes = _challenge.get_routes()
 	if _routes.is_empty():
-		push_warning("TargetPracticeGoal: no TargetRoute nodes under TargetRoutes.")
+		push_warning("MovingTargetGoal: no TargetRoute nodes under TargetRoutes.")
 		failed.emit("No routes")
 		return
 
@@ -39,11 +39,22 @@ func start(challenge: ChallengeStoneEvent) -> void:
 	_last_route = -1
 	_done = false
 	_spawn_next()
-	
+
 func tick(delta: float) -> void:
 	_time_left -= delta
 	if _time_left <= 0.0:
 		failed.emit("Out of time")
+
+# new: hits are counted from enemy deaths, replacing target_hit
+func on_enemy_killed(enemy: Enemy) -> void:
+	if _done or enemy != _current:
+		return
+	_hits += 1
+	_current = null
+	if _hits >= targets_required:
+		completed.emit()
+	else:
+		_spawn_next()
 
 func stop() -> void:
 	_done = true
@@ -56,32 +67,23 @@ func get_progress_text() -> String:
 
 func _spawn_next() -> void:
 	var route: TargetRoute = _routes[_next_route_index()]
-	var target: FlyingTarget = target_scene.instantiate()
-
+	var from: Vector2 = route.get_start()
+	var to: Vector2 = route.get_end()
 	if randf() < 0.5:
-		target.start_position = route.get_start()
-		target.end_position = route.get_end()
-	else:
-		target.start_position = route.get_end()
-		target.end_position = route.get_start()
+		from = route.get_end()
+		to = route.get_start()
 
-	var speed_percent: float = speed_per_hit * _hits + randf_range(-speed_variance, speed_variance)
-	target.ready.connect(target.scale_speed.bind(speed_percent), CONNECT_ONE_SHOT)
-	target.target_hit.connect(_on_target_hit)
-
-	_current = target
-	EventBus.summon_effect.emit(target)
-
-func _on_target_hit(target: FlyingTarget) -> void:
-	if _done:
+	var target: FlyingTarget = _challenge.spawner.spawn_at(target_entry, from) as FlyingTarget
+	if target == null:
+		push_warning("MovingTargetGoal: target_entry's scene is not a FlyingTarget.")
+		failed.emit("Bad target")
 		return
-	_hits += 1
-	target.queue_free()
-	_current = null
-	if _hits >= targets_required:
-		completed.emit()
-	else:
-		_spawn_next()
+
+	target.start_position = from
+	target.end_position = to
+	var speed_percent: float = speed_per_hit * _hits + randf_range(-speed_variance, speed_variance)
+	target.stats.move_speed.add_buff(get_instance_id(), speed_percent / 100.0, Stat.buff_type.MULTIPLICATIVE)
+	_current = target
 
 ## Shuffled bag of route indices: no repeats until every route has been used, never the same route twice in a row.
 func _next_route_index() -> int:

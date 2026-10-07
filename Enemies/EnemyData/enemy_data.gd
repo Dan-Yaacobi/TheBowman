@@ -14,7 +14,6 @@ class_name EnemyData extends Resource
 @export var knockback_threshold: float = 0.2
 @export var knockback_decay: float = 0.05
 @export var can_be_knockedback: bool = true
-@export_range(0, 100, 0.1, "suffix:%") var drop_chance: float = 20.0
 @export var stun_immune: bool = false
 @export var capture_immune: bool = false
 @export var has_health_bar: bool = true
@@ -45,5 +44,7 @@ class_name EnemyData extends Resource
 @export var ranged_trigger_distance: float = 150.0
 
 @export_subgroup("Loot")
+@export var can_drop_essence: bool = true
+@export_range(0, 100, 0.1, "suffix:%") var drop_chance: float = 20.0
 @export var equip_amount: int = 1
 @export var rarity_skew: float = 0.0

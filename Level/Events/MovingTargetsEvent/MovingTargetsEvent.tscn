@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="6_a50aq"]
 [ext_resource type="PackedScene" uid="uid://cbiuoq4mm2hcm" path="res://Level/Events/ChallengeStone/ChallengeShrine.tscn" id="6_knjff"]
 [ext_resource type="Resource" uid="uid://blkmilctj6wbs" path="res://Level/Events/ChallengeStone/Curses/Resource/enemy_size_decrease_curse.tres" id="6_l6220"]
+[ext_resource type="Resource" uid="uid://bqtsrrua5vtub" path="res://Level/Events/ChallengeStone/Curses/Resource/time_limit_curse_30.tres" id="7_06gnm"]
 [ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="8_nih8x"]
 [ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="8_vn5l6"]
 [ext_resource type="Script" uid="uid://dba23xg5cr0bo" path="res://Level/Events/Rewards/random_item_reward.gd" id="9_ltlrn"]
@@ -76,7 +77,7 @@ display_name = "Hit the Targets"
 description = "Hit all targets before time runs out"
 goal = ExtResource("5_ixiw6")
 rewards = Array[ExtResource("6_a50aq")]([SubResource("Resource_wfe2k"), SubResource("Resource_eb2ja"), SubResource("Resource_06gnm"), SubResource("Resource_8wiu1")])
-curse_pool = Array[ExtResource("3_wmf47")]([ExtResource("4_81c71"), ExtResource("5_06gnm"), ExtResource("6_l6220")])
+curse_pool = Array[ExtResource("3_wmf47")]([ExtResource("4_81c71"), ExtResource("5_06gnm"), ExtResource("6_l6220"), ExtResource("7_06gnm")])
 metadata/_custom_type_script = "uid://02y3s3xcuf5r"
 
 [node name="MovingTargetsEvent" type="Node2D" unique_id=1665149052]
@@ -84,7 +85,7 @@ script = ExtResource("1_vhcul")
 challenge_pool = Array[ExtResource("2_q744v")]([SubResource("Resource_ypkpv")])
 
 [node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("2_4d5ls")]
-position = Vector2(0, -19)
+position = Vector2(0, -13)
 
 [node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("4_0fq42")]
 position = Vector2(-1, 443)
@@ -129,12 +130,12 @@ position = Vector2(-129, 89)
 position = Vector2(8, 179)
 
 [node name="End" parent="TargetRoutes/TargetRoute5" index="1" unique_id=457288569]
-position = Vector2(-138, -116)
+position = Vector2(-142, -25)
 
 [node name="TargetRoute6" parent="TargetRoutes" unique_id=100408755 instance=ExtResource("6_0fq42")]
 
 [node name="Start" parent="TargetRoutes/TargetRoute6" index="0" unique_id=1014234957]
-position = Vector2(-167, -80)
+position = Vector2(-171, -64)
 
 [node name="End" parent="TargetRoutes/TargetRoute6" index="1" unique_id=457288569]
 position = Vector2(-100, -131)
@@ -176,14 +177,11 @@ position = Vector2(258, 83)
 [node name="Island2" parent="Islands" unique_id=1847265216 instance=ExtResource("3_knjff")]
 position = Vector2(0, 30)
 
-[node name="Island3" parent="Islands" unique_id=1766845453 instance=ExtResource("3_knjff")]
-position = Vector2(156, -22)
-
-[node name="Island4" parent="Islands" unique_id=1951671418 instance=ExtResource("3_knjff")]
-position = Vector2(55, -25)
+[node name="Island3" parent="Islands" unique_id=1464198909 instance=ExtResource("3_knjff")]
+position = Vector2(46, 30)
 
 [node name="Island" parent="Islands" unique_id=178291299 instance=ExtResource("3_knjff")]
-position = Vector2(93, 30)
+position = Vector2(92, 30)
 
 [node name="ChallengeShrine" parent="Islands/Island" unique_id=1989733529 instance=ExtResource("6_knjff")]
 position = Vector2(0, -19)

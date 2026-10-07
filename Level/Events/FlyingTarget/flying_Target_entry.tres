@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://b75sj25u8rxsn"]
+
+[ext_resource type="Resource" uid="uid://biwaxq1dxa0ji" path="res://Level/Events/FlyingTarget/flying_target_Data.tres" id="1_6wus5"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_fublq"]
+[ext_resource type="PackedScene" uid="uid://bl7efcfrplg66" path="res://Level/Events/FlyingTarget/FlyingTarget.tscn" id="2_8jk7h"]
+
+[resource]
+script = ExtResource("1_fublq")
+scene = ExtResource("2_8jk7h")
+data = ExtResource("1_6wus5")
+cost = 0
+min_level = 0
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

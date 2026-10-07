@@ -56,6 +56,16 @@ func _spawn(entry: EnemyEntry) -> void:
 	alive_count += 1
 	enemy.tree_exited.connect(_on_enemy_gone, CONNECT_ONE_SHOT)
 	EventBus.enemy_summoned.emit(enemy)
+
+## Spawns an enemy at a fixed position and hands it to the world.
+func spawn_at(entry: EnemyEntry, position: Vector2) -> Enemy:
+	var enemy: Enemy = entry.get_factory().call()
+	enemy.global_position = position
+	enemy_created.emit(enemy)
+	alive_count += 1
+	enemy.tree_exited.connect(_on_enemy_gone, CONNECT_ONE_SHOT)
+	EventBus.enemy_summoned.emit(enemy)
+	return enemy
 	
 func _on_enemy_gone() -> void:
 	alive_count -= 1

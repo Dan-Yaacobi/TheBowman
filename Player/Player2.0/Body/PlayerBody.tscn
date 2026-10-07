@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://cakf7lhpfqg2w"]
 
 [ext_resource type="Script" uid="uid://dneg123ik38n1" path="res://Player/Player2.0/Body/player_body.gd" id="1_x4lrk"]
+[ext_resource type="Shader" uid="uid://br1hv33ge3dv2" path="res://Player/Body/burning.gdshader" id="2_3c58h"]
 [ext_resource type="Texture2D" uid="uid://ngmgxpxrkp3y" path="res://Player/Body/NewArcher.png" id="2_x4lrk"]
 [ext_resource type="Texture2D" uid="uid://pohraps2ktvo" path="res://Player/Player2.0/Sprites/Eyes.png" id="3_ydejg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2cxg5"]
+resource_local_to_scene = true
+shader = ExtResource("2_3c58h")
+shader_parameter/strength = 0.0
+shader_parameter/ember_color = Color(0.55, 0.08, 0.02, 1)
+shader_parameter/flame_color = Color(1, 0.45, 0.05, 1)
+shader_parameter/core_color = Color(1, 0.9, 0.45, 1)
+shader_parameter/body_tint = 0.45
+shader_parameter/noise_scale = 0.27100001124256
+shader_parameter/rise_speed = 6.0
+shader_parameter/fps = 30.0
 
 [sub_resource type="Animation" id="Animation_x4lrk"]
 resource_name = "Dead"
@@ -213,10 +226,23 @@ _data = {
 &"Walk": SubResource("Animation_jt2tw")
 }
 
+[sub_resource type="Gradient" id="Gradient_1jmy8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nuysd"]
+gradient = SubResource("Gradient_1jmy8")
+width = 2
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_tsc8u"]
+offsets = PackedFloat32Array(0, 0.34860557, 0.7270916, 1)
+colors = PackedColorArray(1, 0.9019608, 0.4509804, 1, 1, 0.4509804, 0.050980393, 1, 0.54901963, 0.078431375, 0.019607844, 1, 1, 1, 1, 0)
+
 [node name="PlayerBody" type="CharacterBody2D" unique_id=356659750]
 script = ExtResource("1_x4lrk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1746225688]
+material = SubResource("ShaderMaterial_2cxg5")
 texture = ExtResource("2_x4lrk")
 hframes = 4
 vframes = 2
@@ -228,3 +254,24 @@ hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1808518498]
 libraries/ = SubResource("AnimationLibrary_cglcq")
+
+[node name="EmberParticles" type="CPUParticles2D" parent="." unique_id=1368904533]
+z_index = -1
+position = Vector2(0, 7)
+emitting = false
+amount = 15
+texture = SubResource("GradientTexture2D_nuysd")
+lifetime = 1.4000000000000001
+randomness = 0.4
+emission_shape = 3
+emission_rect_extents = Vector2(6, 14)
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+tangential_accel_min = -10.0
+tangential_accel_max = 10.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_tsc8u")

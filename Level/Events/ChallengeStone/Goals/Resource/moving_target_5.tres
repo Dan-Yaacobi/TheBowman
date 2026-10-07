@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="MovingTargetGoal" format=3 uid="uid://dbsl0libqn666"]
 
 [ext_resource type="Script" uid="uid://dax1q7cw3dyv0" path="res://Level/Events/ChallengeStone/Goals/moving_target_goal.gd" id="1_slwun"]
-[ext_resource type="PackedScene" uid="uid://bl7efcfrplg66" path="res://Level/Events/FlyingTarget/FlyingTarget.tscn" id="2_8md1j"]
+[ext_resource type="Resource" uid="uid://b75sj25u8rxsn" path="res://Level/Events/FlyingTarget/flying_Target_entry.tres" id="2_slwun"]
 
 [resource]
 script = ExtResource("1_slwun")
-target_scene = ExtResource("2_8md1j")
+target_entry = ExtResource("2_slwun")
 metadata/_custom_type_script = "uid://dax1q7cw3dyv0"

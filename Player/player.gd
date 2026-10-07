@@ -87,6 +87,7 @@ func _ready() -> void:
 	refresh_max_hp()
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(take_damage)
+	hit_box.Damaged.connect(body.apply_touch_effects)
 	off_hand.connect_hands(main_hand, off_hand_shoulder)
 	main_hand.connect_hands(off_hand)
 	EventBus.invisible_hands.connect(show_hands)

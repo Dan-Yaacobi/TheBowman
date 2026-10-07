@@ -46,7 +46,7 @@ func _ready() -> void:
 		enemy_health_bar.get_child(1).setup(stats.max_hp)
 	init_effects()
 	init_damage_modifiers()
-	scale = Vector2(1,1) * stats.size
+	scale = Vector2(1.0,1.0) * stats.size
 	_wire_hit_effects(hurt_box, false)
 
 func init_damage_modifiers() -> void:
@@ -188,7 +188,8 @@ func drop_item() -> void:
 		for item in stats.equip_amount:
 			EventBus.try_drop.emit(global_position, drop_chance,stats.rarity_skew)
 	#EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
-	EventBus.drop_item.emit(CustomVariables.items.ESSENCE,global_position, 30, 1)
+	if stats.can_drop_essence:
+		EventBus.drop_item.emit(CustomVariables.items.ESSENCE,global_position, stats.drop_chance, 1)
 		
 func disable_drops() -> void:
 	no_drops = true
