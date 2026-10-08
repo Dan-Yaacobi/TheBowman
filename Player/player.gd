@@ -164,7 +164,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			var bought: bool = MetaProgress.purchase(track, self)
 			print("bought: %s | level: %d | arrow damage: %s" % [bought, MetaProgress.get_level(track), stats.arrow_damage.value()])
 	if stats.hp > 0:
-
+		
+		if event.is_action_pressed("test"):
+			$IslandAttack.activate_attack()
 		if event.is_action_pressed("up"):
 			if current_portal:
 				current_portal.enter()

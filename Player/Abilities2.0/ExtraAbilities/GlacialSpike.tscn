@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bn6206vs3rar"]
+
+[ext_resource type="Texture2D" uid="uid://cjnjcin001snr" path="res://Player/Abilities2.0/GlaciarSpike.png" id="1_4qbrd"]
+[ext_resource type="Script" uid="uid://dujy3a4hdgpx0" path="res://Player/Abilities2.0/ExtraAbilities/glacial_spike.gd" id="1_44fug"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_ywwc7"]
+
+[sub_resource type="Animation" id="Animation_gnsbo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_44fug"]
+resource_name = "Rise"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ywwc7"]
+_data = {
+&"RESET": SubResource("Animation_gnsbo"),
+&"Rise": SubResource("Animation_44fug")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
+size = Vector2(48, 22)
+
+[node name="GlacialSpike" type="Node2D" unique_id=1721425683]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_44fug")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=673776450]
+position = Vector2(0, -46)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_4qbrd")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1613277766]
+libraries/ = SubResource("AnimationLibrary_ywwc7")
+
+[node name="HurtBox" parent="." unique_id=582724020 instance=ExtResource("3_ywwc7")]
+position = Vector2(0, -21)
+collision_mask = 140
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1472111675]
+shape = SubResource("RectangleShape2D_e83u5")
+
+[node name="Tip" type="Marker2D" parent="." unique_id=1982606244]
+position = Vector2(0, -90)

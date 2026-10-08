@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
 [ext_resource type="Script" uid="uid://cnpq0wrrjls50" path="res://Player/slow.gd" id="29_b4moh"]
 [ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
+[ext_resource type="PackedScene" uid="uid://rgcqp56lkbsw" path="res://Player/Abilities2.0/ExtraAbilities/IslandAttack.tscn" id="37_jvfa1"]
 [ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
 [ext_resource type="Texture2D" uid="uid://bedugkkq4smkc" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="40_rqaa0"]
 [ext_resource type="Script" uid="uid://bssc4pin0y0q2" path="res://Player/spawn_handler.gd" id="41_7w4lt"]
@@ -567,5 +568,7 @@ collision_mask = 0
 
 [node name="Right" type="CollisionShape2D" parent="SpawnHandler/RightArea" unique_id=204597838]
 shape = SubResource("RectangleShape2D_xw4su")
+
+[node name="IslandAttack" parent="." unique_id=2101026419 instance=ExtResource("37_jvfa1")]
 
 [connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]

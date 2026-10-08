@@ -105,7 +105,9 @@ func _on_player_interact() -> void:
 		EventBus.rift_respawn_position.emit(get_respawn_position())
 		
 func get_respawn_position() -> Vector2:
-	return respawn_marker.global_position
+	if respawn_marker:
+		return respawn_marker.global_position
+	return Vector2.ZERO
 	
 func get_event_portal_position() -> Vector2:
 	return event_portal_position.global_position

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://rgcqp56lkbsw"]
+
+[ext_resource type="Script" uid="uid://dth7gw6gpmd8" path="res://Player/Abilities2.0/ExtraAbilities/glacial_spike_attack.gd" id="1_43smn"]
+[ext_resource type="PackedScene" uid="uid://bn6206vs3rar" path="res://Player/Abilities2.0/ExtraAbilities/GlacialSpike.tscn" id="2_5cp4r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e83u5"]
+radius = 249.0
+
+[node name="IslandAttack" type="Node2D" unique_id=2101026419]
+script = ExtResource("1_43smn")
+attack_effect = ExtResource("2_5cp4r")
+
+[node name="IslandDetector" type="Area2D" parent="." unique_id=726241423]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IslandDetector" unique_id=1564575940]
+shape = SubResource("CircleShape2D_e83u5")
+
+[connection signal="body_entered" from="IslandDetector" to="." method="_on_island_detector_body_entered"]
+[connection signal="body_exited" from="IslandDetector" to="." method="_on_island_detector_body_exited"]
