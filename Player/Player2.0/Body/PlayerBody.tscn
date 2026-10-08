@@ -1,20 +1,24 @@
 [gd_scene format=3 uid="uid://cakf7lhpfqg2w"]
 
 [ext_resource type="Script" uid="uid://dneg123ik38n1" path="res://Player/Player2.0/Body/player_body.gd" id="1_x4lrk"]
-[ext_resource type="Shader" uid="uid://br1hv33ge3dv2" path="res://Player/Body/burning.gdshader" id="2_3c58h"]
+[ext_resource type="Shader" uid="uid://c1k1qqjhs2axr" path="res://Player/Body/thunder.gdshader" id="2_2cxg5"]
+[ext_resource type="Shader" uid="uid://dl8nl0pf7u1tn" path="res://Player/Body/blood.gdshader" id="2_oqagq"]
 [ext_resource type="Texture2D" uid="uid://ngmgxpxrkp3y" path="res://Player/Body/NewArcher.png" id="2_x4lrk"]
-[ext_resource type="Texture2D" uid="uid://pohraps2ktvo" path="res://Player/Player2.0/Sprites/Eyes.png" id="3_ydejg"]
+[ext_resource type="Shader" uid="uid://bgr6j58j84j1j" path="res://Player/Body/soul.gdshader" id="4_5tes5"]
+[ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="5_yg58g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cxg5"]
 resource_local_to_scene = true
-shader = ExtResource("2_3c58h")
+shader = ExtResource("4_5tes5")
 shader_parameter/strength = 0.0
-shader_parameter/ember_color = Color(0.55, 0.08, 0.02, 1)
-shader_parameter/flame_color = Color(1, 0.45, 0.05, 1)
-shader_parameter/core_color = Color(1, 0.9, 0.45, 1)
-shader_parameter/body_tint = 0.45
-shader_parameter/noise_scale = 0.27100001124256
-shader_parameter/rise_speed = 6.0
+shader_parameter/soul_dark = Color(0.09, 0.42, 0.36, 1)
+shader_parameter/soul_color = Color(0.42, 0.91, 0.73, 1)
+shader_parameter/soul_core = Color(0.86, 1, 0.95, 1)
+shader_parameter/body_tint = 0.4
+shader_parameter/transparency = 0.646000030685
+shader_parameter/wobble_pixels = 1.0
+shader_parameter/wobble_speed = 3.0
+shader_parameter/rise_speed = 4.0
 shader_parameter/fps = 30.0
 
 [sub_resource type="Animation" id="Animation_x4lrk"]
@@ -238,19 +242,24 @@ height = 2
 offsets = PackedFloat32Array(0, 0.34860557, 0.7270916, 1)
 colors = PackedColorArray(1, 0.9019608, 0.4509804, 1, 1, 0.4509804, 0.050980393, 1, 0.54901963, 0.078431375, 0.019607844, 1, 1, 1, 1, 0)
 
+[sub_resource type="Curve" id="Curve_e83u5"]
+_limits = [0.0, 0.5, 0.0, 1.0]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="PlayerBody" type="CharacterBody2D" unique_id=356659750]
 script = ExtResource("1_x4lrk")
+charge_shaders = Dictionary[int, Shader]({
+0: ExtResource("2_oqagq"),
+1: ExtResource("2_2cxg5"),
+2: ExtResource("4_5tes5")
+})
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1746225688]
 material = SubResource("ShaderMaterial_2cxg5")
 texture = ExtResource("2_x4lrk")
 hframes = 4
 vframes = 2
-
-[node name="Eyes" type="Sprite2D" parent="Sprite2D" unique_id=1818232780]
-visible = false
-texture = ExtResource("3_ydejg")
-hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1808518498]
 libraries/ = SubResource("AnimationLibrary_cglcq")
@@ -261,7 +270,7 @@ position = Vector2(0, 7)
 emitting = false
 amount = 15
 texture = SubResource("GradientTexture2D_nuysd")
-lifetime = 1.4000000000000001
+lifetime = 1.4
 randomness = 0.4
 emission_shape = 3
 emission_rect_extents = Vector2(6, 14)
@@ -275,3 +284,19 @@ tangential_accel_max = 10.0
 scale_amount_min = 0.5
 scale_amount_max = 1.5
 color_ramp = SubResource("Gradient_tsc8u")
+
+[node name="Charge" type="CPUParticles2D" parent="." unique_id=1484701195]
+emitting = false
+amount = 100
+texture = ExtResource("5_yg58g")
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 1.0
+emission_shape = 6
+emission_ring_inner_radius = 25.0
+emission_ring_radius = 30.0
+gravity = Vector2(0, 0)
+radial_accel_min = -50.0
+scale_amount_curve = SubResource("Curve_e83u5")
+color = Color(0.50980395, 0, 0, 1)

@@ -89,9 +89,10 @@ signal fill_gauge(_amount: int)
 signal request_gauge(_only_full: bool)
 signal use_gauge(_amount: int)
 signal setup_gauge(_max_value: int, _texture: Texture, _tint: Color)
-signal disable_gauge()
-
-signal sword_hit(_enemy: Enemy)
+signal disable_gauge
+signal charge_gauge(color: Color, type: PlayerBody.Charges)
+signal gauge_charge_used
+signal sword_hit(_target: Node2D)
 
 signal enemy_stunned(_enemy: Enemy)
 signal enemy_frostbitten_hit(_enemy: Enemy)
@@ -114,5 +115,7 @@ signal event_exited()
 signal open_upgrade_menu
 signal upgrade_menu_closed
 signal close_upgrade_menu
+
+signal activate_gauge
 
 signal relocate_player(_position: Vector2)

@@ -1,12 +1,16 @@
 class_name PlayerGaugeAbility extends PlayerPassiveAbility
 
+@export var charge_color: Color
+@export var charge_type: PlayerBody.Charges
+
+var gauge_active: bool = false
 var max_gauge: int
 var gauge_texture: Texture
 var gauge_tint: Color
 
 func on_equipped() -> void:
 	connect_gauge()
-	EventBus.setup_gauge.emit(max_gauge, gauge_texture, gauge_tint)
+	EventBus.setup_gauge.emit(max_gauge, gauge_texture, gauge_tint, charge_color, charge_type)
 
 func on_unequipped() -> void:
 	EventBus.disable_gauge.emit()
@@ -26,3 +30,6 @@ func set_gauge_color() -> void:
 
 func set_gauge_sprite() -> void:
 	pass
+
+func gauge_activated(_amount: int, _color: Color, _charge_type: PlayerBody.Charges) -> void:
+	gauge_active = true

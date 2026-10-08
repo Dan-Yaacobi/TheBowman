@@ -12,23 +12,25 @@ func connect_gauge() -> void:
 	gauge_tint = Color.ORANGE
 	EventBus.arrow_enemy_hit.connect(_on_arrow_hit)
 	EventBus.enemy_stunned.connect(_on_enemy_stunned)
-	EventBus.use_gauge.connect(activate_gauge_ability)
+	EventBus.charge_gauge.connect(gauge_activated)
 
 func disconnect_gauge() -> void:
 	EventBus.arrow_enemy_hit.disconnect(_on_arrow_hit)
 	EventBus.enemy_stunned.disconnect(_on_enemy_stunned)
-	EventBus.use_gauge.disconnect(activate_gauge_ability)
+	EventBus.charge_gauge.disconnect(gauge_activated)
 
 func _on_arrow_hit(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	if _perfect and is_instance_valid(_enemy):
-		_hit_enemy = _enemy
 		_hit_position = _arrow.global_position
-		EventBus.request_gauge.emit(true)
-		fill_gauge()
-		
+		_hit_enemy = _enemy
+		if gauge_active:
+			activate_gauge_ability(max_gauge)
+			gauge_active = false
+			EventBus.gauge_charge_used.emit()
+		else:
+			fill_gauge()
 		
 func _on_enemy_stunned(_enemy: Enemy) -> void:
-	_hit_enemy = _enemy
 	fill_gauge()
 
 func activate_gauge_ability(_amount: int) -> void:

@@ -7,17 +7,17 @@ const SOUL_TEXTURE = preload("uid://cal23t1ka4qvt")
 var explosion_position: Vector2
 
 func connect_gauge() -> void:
-	max_gauge = 7
+	max_gauge = 5
 	gauge_texture = SOUL_TEXTURE
 	gauge_tint = Color.AQUAMARINE
 	EventBus.enemy_died.connect(summon_soul)
 	EventBus.arrow_enemy_hit.connect(use_gauge)
-	EventBus.use_gauge.connect(activate_gauge_ability)
+	EventBus.charge_gauge.connect(gauge_activated)
 
 func disconnect_gauge() -> void:
 	EventBus.enemy_died.disconnect(summon_soul)
 	EventBus.arrow_enemy_hit.disconnect(use_gauge)
-	EventBus.use_gauge.disconnect(activate_gauge_ability)
+	EventBus.charge_gauge.disconnect(gauge_activated)
 
 func activate_gauge_ability(_amount: int) -> void:
 	var new_explosion: SoulExplosion = SOULS_EXPLOSION.instantiate()
@@ -26,9 +26,11 @@ func activate_gauge_ability(_amount: int) -> void:
 	new_explosion.global_position = explosion_position
 
 func use_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
-	if _arrow and _enemy and _perfect:
+	if gauge_active and _arrow and _enemy and _perfect:
 		explosion_position = _arrow.global_position
-		EventBus.request_gauge.emit(false)
+		activate_gauge_ability(max_gauge)
+		gauge_active = false
+		EventBus.gauge_charge_used.emit()
 		
 func summon_soul(_enemy: Enemy ) -> void:
 	var new_soul: Soul = SOUL.instantiate()

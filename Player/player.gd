@@ -181,7 +181,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 		if event.is_action_pressed("active"):
 			use_active_ability()
-
+		
+		if event.is_action_pressed("Gauge Activate"):
+			EventBus.request_gauge.emit()
+			
 func shoot() -> void:
 	EventBus.start_shooting.emit()
 	

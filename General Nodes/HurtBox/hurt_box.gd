@@ -23,6 +23,7 @@ var use_default_color: bool = true
 func _ready() -> void:
 	area_entered.connect(AreaEnetered)
 	use_default_color = true
+	
 func AreaEnetered(a: Area2D) -> void:
 	if not a is HitBox:
 		return

@@ -10,6 +10,8 @@
 
 [sub_resource type="Resource" id="Resource_6v1vm"]
 script = ExtResource("1_dprp6")
+charge_color = Color(1, 0.76862746, 0, 1)
+charge_type = 1
 metadata/_custom_type_script = "uid://royi3wayekwd"
 
 [sub_resource type="Resource" id="Resource_ona2a"]

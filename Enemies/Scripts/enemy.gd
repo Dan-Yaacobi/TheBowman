@@ -93,7 +93,7 @@ func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
 func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
-	take_damage(_hurt_box, 0, _result)
+	take_damage(_hurt_box,0, _result)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box, null, _result)
 	take_hit_effect()	
@@ -120,17 +120,9 @@ func remove_damage_taken_multiplier(_amount: float, _type: Stat.buff_type) -> vo
 	
 func set_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	hurt_box.damage_multiplier.append(_amount)
-	return
-	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
-	stats.damage_dealt_multiplier.add_buff(id,_amount,_type)
-	hurt_box.damage_multiplier.append(stats.damage_dealt_multiplier.value())
-	
+
 func remove_damage_dealt_multiplier(_amount: float, _type: Stat.buff_type) -> void:
 	hurt_box.damage_multiplier.erase(_amount)
-	return
-	var id: int = CustomVariables.ENEMY_DMG_DEALT_MULT_ID
-	hurt_box.damage_multiplier.erase(stats.damage_dealt_multiplier.value())
-	stats.damage_dealt_multiplier.remove_buff_stack(id, _type)
 	
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	var final_dmg: int

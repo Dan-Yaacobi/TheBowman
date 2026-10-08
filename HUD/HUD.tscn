@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dmnqbuvi5jrng" path="res://HUD/PullBar/PullBar.tscn" id="13_fjfvf"]
 [ext_resource type="Texture2D" uid="uid://b4myl3t06uac5" path="res://Player/HealthBar/HealthBar Under.png" id="14_ihvjp"]
 [ext_resource type="Texture2D" uid="uid://2qa7ghob20s3" path="res://HUD/AbilityGauge.png" id="15_33ejm"]
+[ext_resource type="Shader" uid="uid://82opdwykc4w1" path="res://HUD/gauge_aura.gdshader" id="15_iob2k"]
 [ext_resource type="Script" uid="uid://c8fejmjhqikma" path="res://HUD/gauge.gd" id="16_33ejm"]
 [ext_resource type="Texture2D" uid="uid://cal23t1ka4qvt" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/Soul.png" id="17_fjfvf"]
 [ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
@@ -21,6 +22,21 @@
 [ext_resource type="Texture2D" uid="uid://bod4jyw2injnl" path="res://UI/Theme/Corner.png" id="20_2gu3h"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g452r"]
+shader = ExtResource("15_iob2k")
+shader_parameter/strength = 1.0
+shader_parameter/glow_color = Color(1, 0.6, 0.2, 1)
+shader_parameter/rect_size = Vector2(32, 64)
+shader_parameter/bar_min = Vector2(8, 16)
+shader_parameter/bar_max = Vector2(24, 56)
+shader_parameter/glow_reach = 4.0
+shader_parameter/top_squash = 0.4
+shader_parameter/inset = 0.0
+shader_parameter/noise_scale = 0.3
+shader_parameter/rise_speed = 7.0
+shader_parameter/hot_brightness = 0.6
+shader_parameter/fps = 12.0
 
 [node name="Hud" type="CanvasLayer" unique_id=1321554530]
 script = ExtResource("1_ja1d4")
@@ -130,9 +146,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_bottom = 0.5
+offset_left = 29.0
 offset_top = 135.0
-offset_right = 64.0
-offset_bottom = 167.0
+offset_right = 93.0
+offset_bottom = 145.0
 grow_vertical = 2
 rotation = -1.5707964
 scale = Vector2(4, 4)
@@ -144,10 +161,24 @@ tint_progress = Color(0.4745098, 1, 1, 1)
 script = ExtResource("16_33ejm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Gauge" unique_id=564933444]
-position = Vector2(64, 22.500002)
+position = Vector2(64, 11.000002)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_fjfvf")
+
+[node name="Aura" type="ColorRect" parent="Control/Gauge" unique_id=2022825380]
+z_index = -1
+material = SubResource("ShaderMaterial_g452r")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.555
+anchor_top = 0.5
+anchor_right = 0.555
+anchor_bottom = 0.5
+offset_left = -0.020000458
+offset_top = -0.2499981
+offset_right = -0.020000458
+offset_bottom = -0.2499981
 
 [node name="PullBar" parent="Control" unique_id=1052703624 instance=ExtResource("13_fjfvf")]
 layout_mode = 1
@@ -215,6 +246,7 @@ grow_horizontal = 0
 text = "Alpha v1.2.1"
 
 [node name="ActiveAbilityPicker" parent="." unique_id=31872962 instance=ExtResource("2_fjfvf")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

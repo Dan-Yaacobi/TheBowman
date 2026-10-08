@@ -6,40 +6,48 @@ const BLOOD_DROP = preload("uid://dsb2mepij6kgu")
 var explosion_position: Vector2
 
 func connect_gauge() -> void:
-	max_gauge = 5
+	max_gauge = 10
 	gauge_texture = BLOOD_DROP
 	gauge_tint = Color.DARK_RED
 	EventBus.arrow_enemy_hit.connect(shot_power_fill_gauge)
 	PlayerManager.player.took_hit.connect(get_hit_fill_gauge)
 	EventBus.arrow_enemy_hit.connect(use_gauge)
-	EventBus.use_gauge.connect(activate_gauge_ability)
 	EventBus.sword_hit.connect(sword_hit_fill_gauge)
 	EventBus.dealt_bleed_damage.connect(bleed_damage_fill_gauge)
-	
+	EventBus.activate_gauge.connect(activate_gauge_ability)
+	EventBus.charge_gauge.connect(gauge_activated)
+
 func disconnect_gauge() -> void:
 	PlayerManager.player.took_hit.disconnect(get_hit_fill_gauge)
 	EventBus.arrow_enemy_hit.disconnect(shot_power_fill_gauge)
 	EventBus.arrow_enemy_hit.disconnect(use_gauge)
-	EventBus.use_gauge.disconnect(activate_gauge_ability)
 	EventBus.sword_hit.disconnect(sword_hit_fill_gauge)
 	EventBus.dealt_bleed_damage.disconnect(bleed_damage_fill_gauge)
-	
+	EventBus.activate_gauge.disconnect(activate_gauge_ability)
+	EventBus.charge_gauge.disconnect(gauge_activated)
+
 func activate_gauge_ability(_amount: int) -> void:
 	var blood_explosion: BloodExplosion = BLOOD_EXPLOSION.instantiate()
 	blood_explosion.global_position = explosion_position
 	EventBus.summon_effect.emit(blood_explosion)
 
 func use_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
-	if _arrow and _enemy and _perfect:
+	if gauge_active and _arrow and _enemy and _perfect:
 		explosion_position = _arrow.global_position
-		EventBus.request_gauge.emit(true)
+		activate_gauge_ability(max_gauge)
+		gauge_active = false
+		EventBus.gauge_charge_used.emit()
 		
-func sword_hit_fill_gauge(_enemy: Enemy) -> void:
-	fill_gauge(0.5)
+func sword_hit_fill_gauge(_target: Node2D) -> void:
+	if _target is Enemy:
+		fill_gauge(0.5)
+	
 func get_hit_fill_gauge() -> void:
 	fill_gauge()
+	
 func shot_power_fill_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	fill_gauge(_arrow.arrow_shot_power)
+	
 func bleed_damage_fill_gauge(_amount: int) -> void:
 	if _amount > 0:
 		fill_gauge()

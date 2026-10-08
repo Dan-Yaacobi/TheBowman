@@ -10,6 +10,8 @@
 
 [sub_resource type="Resource" id="Resource_2acew"]
 script = ExtResource("1_02524")
+charge_color = Color(0.41960785, 0.9098039, 0.7294118, 1)
+charge_type = 2
 metadata/_custom_type_script = "uid://c1qxjyjyf6hps"
 
 [sub_resource type="Resource" id="Resource_26ul3"]

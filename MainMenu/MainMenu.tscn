@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
+[ext_resource type="Resource" uid="uid://cnho4yuoqhjpi" path="res://Items/Equipments/Bows/Resource/Zeus.tres" id="9_gej64"]
 [ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="12_5lv0r"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
@@ -131,6 +132,7 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
+item_data = ExtResource("9_gej64")
 
 [node name="EventPortal" parent="Islands" unique_id=620797059 instance=ExtResource("16_5lv0r")]
 position = Vector2(209, 93)
