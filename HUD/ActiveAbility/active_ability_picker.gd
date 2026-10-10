@@ -6,6 +6,7 @@ class_name ActiveAbilityPicker extends Control
 
 func _ready() -> void:
 	hide()
+	return
 	EventBus.show_active_ability_picker.connect(setup)
 
 func setup(_pool: Array[ActiveAbility]) -> void:

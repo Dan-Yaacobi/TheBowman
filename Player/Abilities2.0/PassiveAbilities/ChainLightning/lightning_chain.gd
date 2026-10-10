@@ -39,6 +39,7 @@ func _on_chain_timer_timeout() -> void:
 
 func _apply_stun(_enemy: Enemy) -> void:
 	var stun: StunDebuff = STUN_DEBUFF.instantiate()
+	stun.can_stack = false
 	_enemy.apply_debuff(stun,CustomVariables.STUN_DEBUFF_ID, PlayerManager.player.stats.stun_duration.value(), 1)
 
 func _draw_lightning(_from: Vector2, _to: Vector2) -> void:

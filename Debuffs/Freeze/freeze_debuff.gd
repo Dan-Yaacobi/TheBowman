@@ -5,7 +5,7 @@ func start_debuff_effect() -> void:
 	apply_debuff_effect()
 	
 func apply_debuff_effect() -> void:
-	entity.stun(true, true)
+	entity.stun()
 	
 func extra_end_debuff_methods() -> void:
-	entity.stun(false)
+	entity.end_stun()

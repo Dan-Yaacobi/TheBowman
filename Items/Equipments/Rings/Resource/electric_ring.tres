@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://bk8inko0dm7d0"]
+
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_qosvq"]
+[ext_resource type="Script" uid="uid://cxedlcen3w1nb" path="res://Player/Abilities2.0/PassiveAbilities/ElectricOrbs/electric_orb_ability.gd" id="1_vg1vj"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_qs4pi"]
+[ext_resource type="Texture2D" uid="uid://5178dmlgirto" path="res://Items/Equipments/Rings/Sprites/ElectricRing.png" id="4_ak36i"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_yeno6"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_yfn8c"]
+
+[sub_resource type="Resource" id="Resource_tevmh"]
+script = ExtResource("1_vg1vj")
+metadata/_custom_type_script = "uid://cxedlcen3w1nb"
+
+[sub_resource type="Resource" id="Resource_33kb6"]
+script = ExtResource("5_yeno6")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_y33tn"]
+script = ExtResource("5_yeno6")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_pqp3w"]
+script = ExtResource("5_yeno6")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_vg1vj"]
+script = ExtResource("5_yeno6")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_qosvq")
+display_name = "Electric Ring"
+name_color = Color(1, 0.8627451, 0, 1)
+texture = ExtResource("4_ak36i")
+dropped_scale = 0.1
+slot = 2
+ability = SubResource("Resource_tevmh")
+tiers = Array[Object]([SubResource("Resource_33kb6"), SubResource("Resource_y33tn"), SubResource("Resource_pqp3w"), SubResource("Resource_vg1vj")])
+equipment_scene = ExtResource("2_qs4pi")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

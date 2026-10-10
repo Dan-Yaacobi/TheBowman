@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://crtombw7sghj6"]
+
+[ext_resource type="Script" uid="uid://djs1ny83aq3av" path="res://Player/Abilities2.0/PassiveAbilities/ElectricOrbs/electric_orb.gd" id="1_gdfxs"]
+[ext_resource type="Shader" uid="uid://bh3h3kr0ltlnh" path="res://Player/Abilities2.0/PassiveAbilities/ElectricOrbs/electric_orb.gdshader" id="1_ilqkm"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_gdfxs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eg14o"]
+shader = ExtResource("1_ilqkm")
+shader_parameter/core_color = Color(0.95, 0.98, 1, 1)
+shader_parameter/glow_color = Color(0.35, 0.7, 1, 1)
+shader_parameter/tip_color = Color(0.62, 0.6, 1, 1)
+shader_parameter/main_count = 16
+shader_parameter/branch_count = 40
+shader_parameter/hair_count = 80
+shader_parameter/jag_amount = 0.1
+shader_parameter/core_width = 1.4
+shader_parameter/glow_width = 3.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/bloom_size = 0.13
+shader_parameter/bloom_strength = 1.4
+shader_parameter/hot_size = 0.07
+shader_parameter/layout_rate = 2.0
+shader_parameter/crackle_fps = 14.0
+shader_parameter/rotate_speed = 0.3
+
+[sub_resource type="Gradient" id="Gradient_oe7vx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xrivr"]
+gradient = SubResource("Gradient_oe7vx")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 19.026299
+
+[node name="ElectricOrb" type="Node2D" unique_id=443212827]
+script = ExtResource("1_gdfxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1261044672]
+material = SubResource("ShaderMaterial_eg14o")
+position = Vector2(-22, -19.999998)
+scale = Vector2(0.6875, 0.640625)
+texture = SubResource("GradientTexture2D_xrivr")
+offset = Vector2(32, 32)
+
+[node name="HurtBox" parent="." unique_id=1862833115 instance=ExtResource("2_gdfxs")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=734572753]
+visible = false
+shape = SubResource("CircleShape2D_xrivr")

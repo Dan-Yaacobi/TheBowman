@@ -4,11 +4,12 @@ class_name StunDebuff extends Debuff
 
 func start_debuff_effect() -> void:
 	one_shot = true
+	can_stack = false
 	apply_debuff_effect()
 	
 func apply_debuff_effect() -> void:
-	entity.stun(true, true)
+	entity.stun(true)
 	stunned_effect.emitting = true
 	
 func extra_end_debuff_methods() -> void:
-	entity.stun(false)
+	entity.end_stun()

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://clp03ayegk4n6"]
+
+[ext_resource type="Script" uid="uid://nlyxcc7rr48c" path="res://Player/Abilities2.0/PassiveAbilities/ElectricOrbs/orb_controller.gd" id="1_b4xxw"]
+
+[node name="OrbController" type="Node2D" unique_id=131854168]
+script = ExtResource("1_b4xxw")
+max_orbs = 3
+spawn_interval = 5.0
+orbit_radius = 46.0

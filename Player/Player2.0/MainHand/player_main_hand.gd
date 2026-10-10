@@ -193,7 +193,10 @@ func fire_at(_direction: Vector2, _power: float, _position: Vector2 = arrow_posi
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0
-	var final_value = _shot_power * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
+	var _shot_power_value: float = _shot_power
+	if PlayerManager.player.stats.always_max_velocity:
+		_shot_power_value = 1.0
+	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
 
 func swing_off_cooldown() -> void:

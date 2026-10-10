@@ -18,6 +18,7 @@ func _ready() -> void:
 func thunder_hit(body) -> void:
 	if body is Enemy:
 		var stun: StunDebuff = STUN_DEBUFF.instantiate()
+		stun.can_stack = false
 		body.apply_debuff(stun,CustomVariables.STUN_DEBUFF_ID, stun_duration,1)
 
 func stop_monitoring() -> void:

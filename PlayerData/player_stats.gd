@@ -48,6 +48,7 @@ var player: Player
 @export var crit_modifier: Stat
 @export var arrow_size: Stat
 @export var only_perfect: bool = false
+@export var always_max_velocity: bool = false
 
 @export_subgroup("Special")
 @export var stun_duration: Stat

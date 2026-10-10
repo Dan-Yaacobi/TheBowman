@@ -221,18 +221,23 @@ func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> vo
 			continue
 		target_hurt_box.add_effect(effect.apply)
 		
-func stun(_activate: bool, _electric: bool = false) -> void:
-	stunned = _activate
-	if _activate:
-		stop_animations()
-	else:
-		continue_animations()
-	state_machine.cause_pause(_activate)
-	set_physics_process(!_activate)
-	if _activate and _electric:
+func stun(_electric: bool = false) -> void:
+	if stunned:
+		return
+	stunned = true
+	stop_animations()
+	state_machine.cause_pause(true)
+	set_physics_process(false)
+	if _electric:
 		EventBus.enemy_stunned.emit(self)
 	knockback_velocity = Vector2.ZERO
-		
+
+func end_stun() -> void:
+	continue_animations()
+	state_machine.cause_pause(false)
+	set_physics_process(true)
+	stunned = false
+
 func stop_animations() -> void:
 	if animation_player:
 		animation_player.pause()
