@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://comiq2aa57e0f"]
+
+[ext_resource type="Script" uid="uid://bydt2v6uyd4fs" path="res://Player/Abilities2.0/PassiveAbilities/VampiricLeech/vampiric_leech_ability.gd" id="1_qmxhn"]
+[ext_resource type="Shader" uid="uid://bi00flfkvr3o7" path="res://Player/Abilities2.0/PassiveAbilities/VampiricLeech/bleed_drain.gdshader" id="1_wwpqw"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="2_wwpqw"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="3_cmubc"]
+[ext_resource type="Texture2D" uid="uid://mllcmqjmb5u0" path="res://Items/Equipments/Rings/Sprites/VampiricRing.png" id="4_wwpqw"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_ltpbr"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_055v2"]
+
+[sub_resource type="Resource" id="Resource_noy82"]
+script = ExtResource("1_qmxhn")
+heal_chance = 5
+drain_shader = ExtResource("1_wwpqw")
+metadata/_custom_type_script = "uid://bydt2v6uyd4fs"
+
+[sub_resource type="Resource" id="Resource_33kb6"]
+script = ExtResource("5_ltpbr")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_y33tn"]
+script = ExtResource("5_ltpbr")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_pqp3w"]
+script = ExtResource("5_ltpbr")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_vg1vj"]
+script = ExtResource("5_ltpbr")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("3_cmubc")
+display_name = "Vampiric Ring"
+name_color = Color(0.54248, 1.347661e-06, 3.3691526e-07, 1)
+texture = ExtResource("4_wwpqw")
+dropped_scale = 0.1
+slot = 2
+ability = SubResource("Resource_noy82")
+tiers = Array[Object]([SubResource("Resource_33kb6"), SubResource("Resource_y33tn"), SubResource("Resource_pqp3w"), SubResource("Resource_vg1vj")])
+equipment_scene = ExtResource("2_wwpqw")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

@@ -43,6 +43,7 @@ func Enter() -> void:
 #what happens when the player exits this state
 func Exit() -> void:
 	player.enable_jump()
+	EventBus.dash_ended.emit()
 	pass
 	
 #what happens during process update in this state

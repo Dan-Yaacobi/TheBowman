@@ -48,7 +48,7 @@ func get_hit_fill_gauge() -> void:
 func shot_power_fill_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
 	fill_gauge(_arrow.arrow_shot_power)
 	
-func bleed_damage_fill_gauge(_amount: int) -> void:
+func bleed_damage_fill_gauge(_amount: int, _entity: GameEntity) -> void:
 	if _amount > 0:
 		fill_gauge()
 	

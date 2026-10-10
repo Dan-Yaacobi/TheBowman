@@ -5,7 +5,7 @@ func _ready() -> void:
 
 signal tutorial_done
 signal dash_preformed
-
+signal dash_ended
 signal start_shooting
 signal arrow(_arrow: Arrow)
 

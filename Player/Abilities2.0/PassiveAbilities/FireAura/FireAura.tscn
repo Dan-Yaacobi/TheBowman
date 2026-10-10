@@ -1,33 +1,29 @@
 [gd_scene format=3 uid="uid://b0dj5ub6j4qqg"]
 
-[ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="1_nmda3"]
+[ext_resource type="Shader" uid="uid://c8pg73pywbl24" path="res://Player/Abilities2.0/PassiveAbilities/FireAura/fire_aura.gdshader" id="1_nmda3"]
+[ext_resource type="Script" uid="uid://dewcj6m1f36f4" path="res://Player/Abilities2.0/PassiveAbilities/FireAura/fire_aura.gd" id="2_8iila"]
 
-[sub_resource type="Curve" id="Curve_tsc8u"]
-_limits = [-0.5, 1.0, 0.0, 1.0]
-_data = [Vector2(0, -0.5), 0.0, 0.0, 0, 0, Vector2(0.5105634, 1), 0.0, 0.0, 0, 0, Vector2(1, -0.5), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iila"]
+shader = ExtResource("1_nmda3")
+shader_parameter/strength = 1.0
+shader_parameter/ember_color = Color(0.6, 0.06, 0.02, 1)
+shader_parameter/flame_color = Color(1, 0.42, 0.05, 1)
+shader_parameter/core_color = Color(1, 0.93, 0.6, 1)
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/radius = 0.32
+shader_parameter/tail_length = 0.55
+shader_parameter/noise_scale = 5.0
+shader_parameter/noise_amount = 0.55
+shader_parameter/flow_speed = 3.0
+shader_parameter/glow_strength = 0.6
+shader_parameter/glow_falloff = 7.0
 
-[sub_resource type="Curve" id="Curve_1jmy8"]
-_limits = [0.0, 0.5, 0.0, 1.0]
-_data = [Vector2(0, 0.31785712), 0.0, 0.0, 0, 0, Vector2(0.50352114, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.1428571), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="Gradient" id="Gradient_wfgoh"]
 
-[sub_resource type="Gradient" id="Gradient_nuysd"]
-offsets = PackedFloat32Array(0, 0.33665338, 0.5796813, 0.7828685, 0.97808766)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.7166667, 0, 1, 1, 0.9333334, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xrivr"]
+gradient = SubResource("Gradient_wfgoh")
 
-[node name="FireAura" type="Node2D" unique_id=1907858220]
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1587069150]
-amount = 500
-texture = ExtResource("1_nmda3")
-speed_scale = 0.5
-emission_shape = 6
-emission_ring_inner_radius = 13.0
-emission_ring_radius = 15.0
-gravity = Vector2(0, -25)
-orbit_velocity_min = -0.5
-orbit_velocity_max = 0.5
-orbit_velocity_curve = SubResource("Curve_tsc8u")
-scale_amount_curve = SubResource("Curve_1jmy8")
-color_ramp = SubResource("Gradient_nuysd")
+[node name="FireAura" type="Sprite2D" unique_id=1812087518]
+material = SubResource("ShaderMaterial_8iila")
+texture = SubResource("GradientTexture2D_xrivr")
+script = ExtResource("2_8iila")

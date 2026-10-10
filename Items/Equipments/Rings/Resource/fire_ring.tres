@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://bne12vsibkgqs"]
+
+[ext_resource type="Shader" uid="uid://c8pg73pywbl24" path="res://Player/Abilities2.0/PassiveAbilities/FireAura/fire_aura.gdshader" id="1_1oliu"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_wi0de"]
+[ext_resource type="Script" uid="uid://cvcccmmmedxkr" path="res://Player/Abilities2.0/DashAbilities/FireDash/fire_dash_ability.gd" id="2_g0ax4"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="3_sm0nm"]
+[ext_resource type="Texture2D" uid="uid://b8jsbeu701g0v" path="res://Items/Equipments/Rings/Sprites/InfernoRing.png" id="5_lhmcp"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_k7j8k"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="7_2kwci"]
+
+[sub_resource type="Resource" id="Resource_p5475"]
+script = ExtResource("2_g0ax4")
+aura_shader = ExtResource("1_1oliu")
+trigger_type = 3
+metadata/_custom_type_script = "uid://cvcccmmmedxkr"
+
+[sub_resource type="Resource" id="Resource_8x10n"]
+script = ExtResource("6_k7j8k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_cdfru"]
+script = ExtResource("6_k7j8k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_aepo3"]
+script = ExtResource("6_k7j8k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_my23a"]
+script = ExtResource("6_k7j8k")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_wi0de")
+display_name = "Fire Ring"
+name_color = Color(1, 0.34509805, 0, 1)
+texture = ExtResource("5_lhmcp")
+dropped_scale = 0.2
+slot = 2
+ability = SubResource("Resource_p5475")
+tiers = Array[Object]([SubResource("Resource_8x10n"), SubResource("Resource_cdfru"), SubResource("Resource_aepo3"), SubResource("Resource_my23a")])
+equipment_scene = ExtResource("3_sm0nm")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

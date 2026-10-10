@@ -7,20 +7,6 @@
 [ext_resource type="Shader" uid="uid://bgr6j58j84j1j" path="res://Player/Body/soul.gdshader" id="4_5tes5"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="5_yg58g"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2cxg5"]
-resource_local_to_scene = true
-shader = ExtResource("4_5tes5")
-shader_parameter/strength = 0.0
-shader_parameter/soul_dark = Color(0.09, 0.42, 0.36, 1)
-shader_parameter/soul_color = Color(0.42, 0.91, 0.73, 1)
-shader_parameter/soul_core = Color(0.86, 1, 0.95, 1)
-shader_parameter/body_tint = 0.4
-shader_parameter/transparency = 0.646000030685
-shader_parameter/wobble_pixels = 1.0
-shader_parameter/wobble_speed = 3.0
-shader_parameter/rise_speed = 4.0
-shader_parameter/fps = 30.0
-
 [sub_resource type="Animation" id="Animation_x4lrk"]
 resource_name = "Dead"
 length = 0.4
@@ -256,7 +242,6 @@ charge_shaders = Dictionary[int, Shader]({
 })
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1746225688]
-material = SubResource("ShaderMaterial_2cxg5")
 texture = ExtResource("2_x4lrk")
 hframes = 4
 vframes = 2
