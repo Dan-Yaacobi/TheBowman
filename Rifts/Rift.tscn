@@ -34,13 +34,15 @@
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="30_j75h4"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="31_5icp2"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="34_y5ptd"]
+[ext_resource type="Resource" uid="uid://cqe13gumgyp78" path="res://Rifts/RiftEnemySpawner/EnemyEntry/green_apple_entry.tres" id="35_nkchs"]
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="35_qxt8x"]
 [ext_resource type="Resource" uid="uid://cmu6ys571rlng" path="res://Rifts/RiftEnemySpawner/EnemyEntry/frost_bird_entry.tres" id="36_2cjow"]
+[ext_resource type="Resource" uid="uid://6qhqe4m5itkx" path="res://Rifts/RiftEnemySpawner/EnemyEntry/pink_apple_entry.tres" id="36_4phns"]
 [ext_resource type="Resource" uid="uid://dp1tucfijhf6u" path="res://Rifts/RiftEnemySpawner/EnemyEntry/flaming_skull_entry.tres" id="36_qxt8x"]
 [ext_resource type="Resource" uid="uid://1ptx2w5bw665" path="res://Rifts/RiftEnemySpawner/EnemyEntry/frost_orb_entry.tres" id="37_u3v33"]
 [ext_resource type="Resource" uid="uid://ogdqqlqr3glj" path="res://Rifts/RiftEnemySpawner/EnemyEntry/cloud_entry.tres" id="37_vwcbb"]
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="38_oe8us"]
-[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="38_vwcbb"]
+[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="38_vwcbb"]
 [ext_resource type="Resource" uid="uid://b5lbs5gsdj1he" path="res://Rifts/RiftEnemySpawner/EnemyEntry/fire_bird_entry.tres" id="39_j75h4"]
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
@@ -117,6 +119,6 @@ event_portal_scene = ExtResource("30_j75h4")
 
 [node name="RiftEnemySpawner" parent="." unique_id=1673800169 instance=ExtResource("19_4xrky")]
 script = ExtResource("20_5l72e")
-enemy_pool = Array[ExtResource("34_y5ptd")]([ExtResource("38_vwcbb"), ExtResource("35_qxt8x"), ExtResource("37_u3v33"), ExtResource("36_2cjow"), ExtResource("37_vwcbb"), ExtResource("36_qxt8x"), ExtResource("39_j75h4"), ExtResource("38_oe8us")])
+enemy_pool = Array[ExtResource("34_y5ptd")]([ExtResource("38_vwcbb"), ExtResource("35_nkchs"), ExtResource("36_4phns"), ExtResource("35_qxt8x"), ExtResource("37_u3v33"), ExtResource("36_2cjow"), ExtResource("37_vwcbb"), ExtResource("36_qxt8x"), ExtResource("39_j75h4"), ExtResource("38_oe8us")])
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("31_5icp2")]

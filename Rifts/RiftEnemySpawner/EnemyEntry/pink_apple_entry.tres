@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3 uid="uid://6qhqe4m5itkx"]
+
+[ext_resource type="Resource" uid="uid://jefyxs3opnai" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/pink_apple.tres" id="1_ie3xr"]
+[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="2_phwmq"]
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="3_eqgg8"]
+
+[resource]
+script = ExtResource("3_eqgg8")
+scene = ExtResource("2_phwmq")
+data = ExtResource("1_ie3xr")
+max_level = 2
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

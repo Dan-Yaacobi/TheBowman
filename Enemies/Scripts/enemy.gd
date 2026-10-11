@@ -203,6 +203,7 @@ func bullet_set_up() -> Node2D:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
+		new_bullet.target_position = PlayerManager.player.global_position
 		new_bullet.data.knockback = stats.knockback
 		@warning_ignore("narrowing_conversion")
 		new_bullet.data.move_speed = stats.bullet_speed

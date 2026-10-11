@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="4_bmtns"]
 [ext_resource type="Resource" uid="uid://btcfetlv76rkn" path="res://Level/Events/ChallengeStone/Curses/Resource/no_dash.tres" id="4_jcsjr"]
 [ext_resource type="Resource" uid="uid://bxueaibxkvvw1" path="res://Level/Events/ChallengeStone/Curses/Resource/no_sword.tres" id="5_84n7e"]
-[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_flying_apple_entry.tres" id="5_a4nvr"]
+[ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="5_a4nvr"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_nd2yj"]
 [ext_resource type="Resource" uid="uid://dn6ewmmcdvqf3" path="res://Level/Events/ChallengeStone/Curses/Resource/slow_curse.tres" id="6_fqvne"]
 [ext_resource type="Resource" uid="uid://doosq66dn01m1" path="res://Level/Events/ChallengeStone/Goals/Resource/kill_10.tres" id="6_rknkn"]

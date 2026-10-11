@@ -39,6 +39,7 @@ func Enter() -> void:
 
 func Exit() -> void:
 	slash_hurt_box.monitoring = false
+	slash_hurt_box.clear_effects()
 	swing_cooldown.start()
 	reset_sword_size()
 	

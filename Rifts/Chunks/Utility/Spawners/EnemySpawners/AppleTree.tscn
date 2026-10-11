@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://tpty2gvjhn30"]
+[gd_scene format=3 uid="uid://tpty2gvjhn30"]
 
 [ext_resource type="Script" uid="uid://bdra8cct7n3xx" path="res://Objects/Trees/apple_tree.gd" id="1_a3uie"]
 [ext_resource type="Texture2D" uid="uid://6sqe4r4sncof" path="res://Objects/Trees/sprites/Tree_2.png" id="2_h37ha"]
@@ -11,11 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="9_f1s8b"]
 [ext_resource type="PackedScene" uid="uid://cfyfy4cii21yn" path="res://Enemies/EnemyAbilities/EnemyBullets/BlueBullet.tscn" id="10_rhris"]
 [ext_resource type="Texture2D" uid="uid://bdon8uf4agx6q" path="res://Enemies/Sprites/Blue Apple.png" id="11_dgboc"]
-[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/green_flying_apple.tres" id="12_1wt2n"]
+[ext_resource type="Resource" uid="uid://d2ua6hue6crj6" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/green_apple.tres" id="12_1wt2n"]
 [ext_resource type="Texture2D" uid="uid://dewibjwg0glxq" path="res://Enemies/Sprites/ColorlessApple.png" id="13_hw8fy"]
 [ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="14_nwj3p"]
 [ext_resource type="Script" uid="uid://cpc01laocnq5u" path="res://Rifts/Chunks/Utility/Spawners/EnemySpawners/enemy_spawner_data.gd" id="15_yakjg"]
 [ext_resource type="PackedScene" uid="uid://b506vw0hbtcju" path="res://Level/Islands/Island4.tscn" id="16_fpkb1"]
+
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
 script = ExtResource("8_atnhr")

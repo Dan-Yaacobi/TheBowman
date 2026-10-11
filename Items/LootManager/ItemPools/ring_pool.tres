@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="2_3iipa"]
 [ext_resource type="Script" uid="uid://c3nyacwk8rnd6" path="res://Items/LootManager/item_pool.gd" id="2_epixh"]
-[ext_resource type="Resource" uid="uid://cbtba141lnv2q" path="res://Items/Equipments/Rings/Resource/shadow_ring.tres" id="3_epixh"]
+[ext_resource type="Resource" uid="uid://bk8inko0dm7d0" path="res://Items/Equipments/Rings/Resource/electric_ring.tres" id="3_bxmvx"]
+[ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="4_jhxf4"]
+[ext_resource type="Resource" uid="uid://comiq2aa57e0f" path="res://Items/Equipments/Rings/Resource/vampiric_ring.tres" id="5_jm3m4"]
 
 [resource]
 script = ExtResource("2_epixh")
 slot = 2
-templates = Array[ExtResource("2_3iipa")]([ExtResource("3_epixh")])
+templates = Array[ExtResource("2_3iipa")]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4"), ExtResource("5_jm3m4")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"
