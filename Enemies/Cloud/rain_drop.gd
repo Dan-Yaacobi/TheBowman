@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 func wall_pop(_var1,_var2,_var3,_var4) -> void:
 	pop(hurt_box)
 	
-func pop(_hurt_box: HurtBox) -> void:
+func pop(_hurt_box: HurtBox, _hit_box: Area2D = null, _result: DamageResult = null) -> void:
 	pop_particles.reparent(get_parent())
 	pop_particles.amount = randi_range(5,10)
 	pop_particles.emitting = true

@@ -1,7 +1,5 @@
 class_name FireDashAbility extends PlayerAbility
 
-# Set the trigger type to DASH in the inspector, like your other dash abilities.
-
 @export var aura_shader: Shader
 # Size of the fireball. Raise until it wraps the player.
 @export var aura_scale: float = 3.5
@@ -25,7 +23,7 @@ func on_equipped() -> void:
 	
 func on_unequipped() -> void:
 	PlayerManager.player.stats.dash_power.remove_buff_completly(id,Stat.buff_type.MULTIPLICATIVE)
-	PlayerManager.player.stats.dash_power.remove_buff_completly(cd_id,Stat.buff_type.MULTIPLICATIVE)
+	PlayerManager.player.stats.dash_cooldown.remove_buff_completly(cd_id,Stat.buff_type.MULTIPLICATIVE)
 	EventBus.dash_ended.disconnect(_on_dash_ended)
 	if is_instance_valid(aura):
 		aura.queue_free()
@@ -41,9 +39,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 	if is_instance_valid(aura):
 		aura.ignite()
 		PlayerManager.player.start_invincibilty()
-	# Turn on invulnerability here, using whatever your hit-invulnerability uses.
 
 func _on_dash_ended() -> void:
 	if is_instance_valid(aura):
 		aura.extinguish()
-	# Turn invulnerability off here.

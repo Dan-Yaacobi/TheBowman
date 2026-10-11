@@ -40,7 +40,9 @@ func _process(_delta: float) -> void:
 
 func reset(_m: bool) -> void:
 	main_hand_state_machine.ChangeState(idle)
-
+	current_arrow.queue_free()
+	current_arrow = null
+	
 func connect_hands(_off_hand) -> void:
 	if _off_hand:
 		off_hand = _off_hand
@@ -123,8 +125,8 @@ func release_arrow() -> void:
 		if current_arrow:
 			EventBus.arrow_release_sound.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
-			if shot_power >= 1.0:				
-				EventBus.camera_shake.emit(2.0,10.0)
+			if shot_power >= 1.0:
+				EventBus.camera_shake.emit(1.0,10.0)
 				EventBus.apply_player_knockback.emit(-hand_direction,50)
 				perfect_release_particles.emitting = true
 			fire_arrow()

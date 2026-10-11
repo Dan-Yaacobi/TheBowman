@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="7_gej64"]
 [ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="8_qvidt"]
+[ext_resource type="Resource" uid="uid://c70ad8a4k31lf" path="res://Items/Equipments/Bows/Resource/Hanzo.tres" id="10_qvidt"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
@@ -30,7 +31,7 @@ use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="Island3" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
-position = Vector2(563, 78)
+position = Vector2(534, 105)
 use_fixed_frame = true
 fixed_frame_index = 4
 
@@ -136,6 +137,7 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
 position = Vector2(-1, -18)
+item_data = ExtResource("10_qvidt")
 
 [node name="EventPortal" parent="Islands" unique_id=620797059 instance=ExtResource("16_5lv0r")]
 position = Vector2(209, 93)
@@ -151,4 +153,4 @@ position = Vector2(-39, 558)
 costs_heart = false
 
 [node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
-position = Vector2(377, 67)
+position = Vector2(383, 67)

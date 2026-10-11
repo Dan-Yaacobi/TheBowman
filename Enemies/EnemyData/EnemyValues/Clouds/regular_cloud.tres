@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bynspn631rmvd" path="res://Audio/Player/death whoosh.mp3" id="3_d61jl"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_irhfm"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_wu36e"]
+[ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Cloud/Sprites/Cloud Enemy.png" id="8_n1dms"]
 
 [sub_resource type="Resource" id="Resource_n1dms"]
 script = ExtResource("2_kq75w")
@@ -23,6 +24,7 @@ script = ExtResource("2_0ngfg")
 max_hp = 300
 move_speed = SubResource("Resource_wu36e")
 knockback = 20
+skin = ExtResource("8_n1dms")
 avg_coins_dropped = 5
 touch_damage = 3
 death_ability = Array[ExtResource("1_4c4qa")]([SubResource("Resource_n1dms")])

@@ -364,6 +364,7 @@ texture = ExtResource("40_rqaa0")
 
 [node name="PlayerMainHand" parent="." unique_id=1400376021 instance=ExtResource("10_wo5nf")]
 position = Vector2(-8, 14)
+min_shot_power = 0.1
 
 [node name="PlayerOffHand" parent="." unique_id=182914193 instance=ExtResource("11_croik")]
 position = Vector2(6, 14)

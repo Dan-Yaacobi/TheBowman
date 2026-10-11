@@ -8,5 +8,6 @@
 script = ExtResource("3_eqgg8")
 scene = ExtResource("2_phwmq")
 data = ExtResource("1_ie3xr")
+min_level = 2
 max_level = 2
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

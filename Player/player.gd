@@ -81,7 +81,7 @@ var initial_max_hp: int
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
-	jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
+	#jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	initial_max_hp = stats.max_hp
 	MetaProgress.apply_to(stats)
 	refresh_max_hp()

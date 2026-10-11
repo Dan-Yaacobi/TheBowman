@@ -46,7 +46,7 @@ shader_parameter/pulse_speed = 4.8850002320375
 
 [sub_resource type="Animation" id="Animation_g87bp"]
 resource_name = "Damaged"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
