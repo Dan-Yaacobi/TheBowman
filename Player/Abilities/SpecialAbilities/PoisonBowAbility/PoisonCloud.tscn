@@ -23,7 +23,7 @@ offsets = PackedFloat32Array(0.00671141, 1)
 colors = PackedColorArray(0.2475, 0.44, 0.11, 0.654902, 0.5874, 0.88, 0.3784, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kkjx2"]
-radius = 45.0
+radius = 80.0
 
 [node name="PoisonCloud" type="CPUParticles2D" unique_id=1121914065]
 z_index = -2
@@ -49,7 +49,6 @@ tangential_accel_max = 10.0
 scale_amount_curve = SubResource("Curve_sxk83")
 color_ramp = SubResource("Gradient_67lwf")
 script = ExtResource("1_ygj8s")
-poison_dmg = 3
 
 [node name="Area2D" type="Area2D" parent="." unique_id=787814130]
 collision_layer = 2

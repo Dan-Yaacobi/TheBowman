@@ -90,7 +90,7 @@ signal request_gauge(_only_full: bool)
 signal use_gauge(_amount: int)
 signal setup_gauge(_max_value: int, _texture: Texture, _tint: Color)
 signal disable_gauge
-signal charge_gauge(color: Color, type: PlayerBody.Charges)
+signal charge_gauge()
 signal gauge_charge_used
 signal sword_hit(_target: Node2D)
 
@@ -119,3 +119,5 @@ signal close_upgrade_menu
 signal activate_gauge
 
 signal relocate_player(_position: Vector2)
+
+signal poison_damage_dealt

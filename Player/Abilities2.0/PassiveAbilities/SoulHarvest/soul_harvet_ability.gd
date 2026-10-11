@@ -11,13 +11,13 @@ func connect_gauge() -> void:
 	gauge_texture = SOUL_TEXTURE
 	gauge_tint = Color.AQUAMARINE
 	EventBus.enemy_died.connect(summon_soul)
-	EventBus.arrow_enemy_hit.connect(use_gauge)
-	EventBus.charge_gauge.connect(gauge_activated)
+	#EventBus.arrow_enemy_hit.connect(use_gauge)
+	EventBus.charge_gauge.connect(use_gauge)
 
 func disconnect_gauge() -> void:
 	EventBus.enemy_died.disconnect(summon_soul)
-	EventBus.arrow_enemy_hit.disconnect(use_gauge)
-	EventBus.charge_gauge.disconnect(gauge_activated)
+	#EventBus.arrow_enemy_hit.disconnect(use_gauge)
+	EventBus.charge_gauge.disconnect(use_gauge)
 
 func activate_gauge_ability(_amount: int) -> void:
 	var new_explosion: SoulExplosion = SOULS_EXPLOSION.instantiate()
@@ -25,12 +25,11 @@ func activate_gauge_ability(_amount: int) -> void:
 	new_explosion.setup(_amount)
 	new_explosion.global_position = explosion_position
 
-func use_gauge(_perfect: bool, _arrow: Arrow, _enemy: Enemy) -> void:
-	if gauge_active and _arrow and _enemy and _perfect:
-		explosion_position = _arrow.global_position
-		activate_gauge_ability(max_gauge)
-		gauge_active = false
-		EventBus.gauge_charge_used.emit()
+func use_gauge() -> void:
+	explosion_position = PlayerManager.player.global_position
+	activate_gauge_ability(max_gauge)
+	gauge_active = false
+	EventBus.gauge_charge_used.emit()
 		
 func summon_soul(_enemy: Enemy ) -> void:
 	var new_soul: Soul = SOUL.instantiate()

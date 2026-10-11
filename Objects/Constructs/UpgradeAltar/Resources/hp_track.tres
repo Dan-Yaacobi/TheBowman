@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://cuu18ugbxbxtp"]
 
 [ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_4fma3"]
+[ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_7swan"]
 [ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_idk0m"]
 
 [sub_resource type="Resource" id="Resource_peqsn"]

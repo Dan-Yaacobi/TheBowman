@@ -19,7 +19,8 @@ func _ready() -> void:
 	EventBus.disable_gauge.connect(disable)
 	aura.show_behind_parent = true
 	aura.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+	EventBus.gauge_charge_used.connect(_successfull_drain)
+	
 func setup(_max_value: int, _texture: Texture = null, _tint: Color = Color.WHITE, _charge_color: Color = Color.WHITE, _charge_type: PlayerBody.Charges = PlayerBody.Charges.BLOOD) -> void:
 	max_value = _max_value
 	value = 0
@@ -58,14 +59,15 @@ func drain(_only_full: bool = true) -> void:
 
 	if _only_full and _amount < max_value:
 		return
+	EventBus.charge_gauge.emit()
 
+func _successfull_drain() -> void:
 	_set_glow(0.0)
 	if _tween:
 		_tween.kill()
 	_tween = create_tween()
 	_tween.tween_property(self, "value", 0, 0.3)
-	EventBus.charge_gauge.emit(_amount, charge_color, charge_type)
-
+	
 func _layout_aura() -> void:
 	# Size the aura to the bar plus margins, and tell the shader where the bar is inside it.
 	var offset: Vector2 = Vector2(aura_side_margin, aura_top_margin)

@@ -31,5 +31,5 @@ func set_gauge_color() -> void:
 func set_gauge_sprite() -> void:
 	pass
 
-func gauge_activated(_amount: int, _color: Color, _charge_type: PlayerBody.Charges) -> void:
+func gauge_activated() -> void:
 	gauge_active = true

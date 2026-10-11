@@ -337,6 +337,9 @@ size = Vector2(367, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xw4su"]
 size = Vector2(42, 200)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 192.35
+
 [node name="Player" type="CharacterBody2D" unique_id=1253253931]
 scale = Vector2(0.5, 0.5)
 collision_layer = 65
@@ -578,4 +581,13 @@ shape = SubResource("RectangleShape2D_xw4su")
 
 [node name="IslandAttack" parent="." unique_id=2101026419 instance=ExtResource("37_jvfa1")]
 
+[node name="NearbyEnemiesDetector" type="Area2D" parent="." unique_id=1269142360]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearbyEnemiesDetector" unique_id=1276309011]
+shape = SubResource("CircleShape2D_xrivr")
+
 [connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]
+[connection signal="body_entered" from="NearbyEnemiesDetector" to="." method="_on_nearby_enemies_detector_body_entered"]
+[connection signal="body_exited" from="NearbyEnemiesDetector" to="." method="_on_nearby_enemies_detector_body_exited"]

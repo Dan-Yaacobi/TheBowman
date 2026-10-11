@@ -27,6 +27,7 @@ signal dash_finished
 @onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var quiver: Sprite2D = $PlayerBody/Quiver
 @onready var dead: PlayerDeadState = $PlayerStateMachine/Dead
+@onready var nearby_enemies_detector: Area2D = $NearbyEnemiesDetector
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
@@ -77,6 +78,8 @@ var equipped_nodes: Dictionary = {
 }
 var sprite: Sprite2D
 var initial_max_hp: int
+
+var nearby_enemies: Array[Enemy]
 
 func _ready() -> void:
 	stats.player = self
@@ -582,3 +585,19 @@ func collect_item(item: CustomVariables.items, _amount: int) -> void:
 	if _amount > 0 and stats.items.has(item):
 		stats.items[item] += _amount
 		item_amount_changed.emit(stats.items[item], item)
+
+func get_nearby_enemies() -> Array[Enemy]:
+	return nearby_enemies
+
+func _on_nearby_enemies_detector_body_entered(_body: Node2D) -> void:
+	if _body is Enemy:
+		nearby_enemies.append(_body)
+		_body.died.connect(erase_nearby_enemy)
+
+func _on_nearby_enemies_detector_body_exited(_body: Node2D) -> void:
+	if _body is Enemy:
+		_body.died.disconnect(erase_nearby_enemy)
+		erase_nearby_enemy(_body)
+
+func erase_nearby_enemy(_enemy: Enemy) -> void:
+	nearby_enemies.erase(_enemy)

@@ -16,8 +16,9 @@ var charge_tween: Tween
 
 
 func _ready() -> void:
-	EventBus.charge_gauge.connect(gauge_activated)
-	EventBus.gauge_charge_used.connect(clear_charge)
+	pass
+	#EventBus.charge_gauge.connect(gauge_activated)
+	#EventBus.gauge_charge_used.connect(clear_charge)
 func _process(_delta: float) -> void:
 	pass
 

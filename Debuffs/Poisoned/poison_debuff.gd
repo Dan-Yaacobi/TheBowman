@@ -10,7 +10,7 @@ func set_damage(_dmg: int) -> void:
 	
 func apply_debuff_effect() -> void:
 	entity.take_damage(null, poison_damage)
-	entity.show_damage(poison_damage,Color.GREEN)
-
+	EventBus.poison_damage_dealt.emit()
+	
 func extra_end_debuff_methods() -> void:
 	entity.modulate = Color(1.0, 1.0, 1.0)
