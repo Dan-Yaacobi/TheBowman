@@ -25,6 +25,7 @@ var player: Player
 
 @export_subgroup("Movement")
 @export var dash_power: Stat
+@export var dash_cooldown: Stat
 @export var move_speed: Stat
 @export var max_jumps: int
 @export var jump_height: Stat

@@ -4,6 +4,8 @@ class_name FireAura extends Sprite2D
 # FireDashAbility, so the player scene doesn't need it.
 # The tail follows the player's actual velocity, so it also trails nicely
 # while fading out after the dash ends.
+const BURN_DEBUFF = preload("uid://caiebherwxilx")
+@onready var hurt_box: HurtBox = $HurtBox
 
 var fade_in: float = 0.05
 var fade_out: float = 0.15
@@ -23,17 +25,22 @@ func setup(_shader: Shader, _scale: float, _offset: Vector2) -> void:
 	scale = Vector2.ONE * _scale
 	position = _offset
 	# Draw behind the player so the flames surround him rather than cover him.
-	show_behind_parent = true
+	show_behind_parent = false
 
+	
 func _ready() -> void:
 	set_process(false)
-
+	hurt_box.base_damage = roundi(PlayerManager.player.stats.burn_damage.value())
+	hurt_box.add_after_effect(apply_burn)
+	
 func ignite() -> void:
+	hurt_box.monitoring = true
 	set_process(true)
 	_update_direction()
 	_fade_to(1.0, fade_in)
 
 func extinguish() -> void:
+	hurt_box.monitoring = false
 	_fade_to(0.0, fade_out)
 	tween.tween_callback(set_process.bind(false))
 
@@ -51,3 +58,10 @@ func _fade_to(target: float, duration: float) -> void:
 		tween.kill()
 	tween = create_tween()
 	tween.tween_property(mat, "shader_parameter/strength", target, duration)
+	
+func apply_burn(enemy: Enemy, _parent, _result) -> void:
+	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
+	burn_debuff.set_damage(roundi(PlayerManager.player.stats.burn_damage.value()))
+	var duration = PlayerManager.player.stats.burn_duration.value()
+	var ticks = PlayerManager.player.stats.burn_ticks.value()
+	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,duration,ticks)

@@ -37,6 +37,7 @@ func Enter() -> void:
 	var tween = player.create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_property(player, "velocity", dash_direction * player.stats.dash_power.value()*0.1,0.2)
 	tween.finished.connect(go_to_walking)
+	dash_cooldown.wait_time = PlayerManager.player.stats.dash_cooldown.value()
 	dash_cooldown.start()
 	pass
 	

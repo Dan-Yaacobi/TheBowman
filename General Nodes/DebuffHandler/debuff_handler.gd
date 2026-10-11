@@ -13,7 +13,6 @@ func add_debuff(_debuff: Debuff,ID: int, _duration: float, _ticks: int) -> void:
 	
 	if debuffs.has(ID):
 		if _debuff.can_stack:
-			print("it in fact can stack")
 			curr_debuff = debuffs[ID]
 			curr_debuff.ticks += _ticks
 	else:

@@ -7,6 +7,8 @@
 [ext_resource type="Shader" uid="uid://bgr6j58j84j1j" path="res://Player/Body/soul.gdshader" id="4_5tes5"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="5_yg58g"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvfa1"]
+
 [sub_resource type="Animation" id="Animation_x4lrk"]
 resource_name = "Dead"
 length = 0.4
@@ -242,6 +244,7 @@ charge_shaders = Dictionary[int, Shader]({
 })
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1746225688]
+material = SubResource("ShaderMaterial_jvfa1")
 texture = ExtResource("2_x4lrk")
 hframes = 4
 vframes = 2

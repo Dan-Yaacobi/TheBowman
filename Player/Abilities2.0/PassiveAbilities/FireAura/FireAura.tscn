@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://c8pg73pywbl24" path="res://Player/Abilities2.0/PassiveAbilities/FireAura/fire_aura.gdshader" id="1_nmda3"]
 [ext_resource type="Script" uid="uid://dewcj6m1f36f4" path="res://Player/Abilities2.0/PassiveAbilities/FireAura/fire_aura.gd" id="2_8iila"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_wfgoh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8iila"]
 shader = ExtResource("1_nmda3")
@@ -10,20 +11,30 @@ shader_parameter/ember_color = Color(0.6, 0.06, 0.02, 1)
 shader_parameter/flame_color = Color(1, 0.42, 0.05, 1)
 shader_parameter/core_color = Color(1, 0.93, 0.6, 1)
 shader_parameter/direction = Vector2(1, 0)
-shader_parameter/radius = 0.32
-shader_parameter/tail_length = 0.55
-shader_parameter/noise_scale = 5.0
-shader_parameter/noise_amount = 0.55
+shader_parameter/radius = 0.40300001751256
+shader_parameter/tail_length = 0.0
+shader_parameter/noise_scale = 5.9410002346975
+shader_parameter/noise_amount = 0.0
 shader_parameter/flow_speed = 3.0
-shader_parameter/glow_strength = 0.6
-shader_parameter/glow_falloff = 7.0
+shader_parameter/glow_strength = 2.0
+shader_parameter/glow_falloff = 20.0
 
 [sub_resource type="Gradient" id="Gradient_wfgoh"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xrivr"]
 gradient = SubResource("Gradient_wfgoh")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e83u5"]
+radius = 15.033297
+
 [node name="FireAura" type="Sprite2D" unique_id=1812087518]
+z_index = 15
 material = SubResource("ShaderMaterial_8iila")
 texture = SubResource("GradientTexture2D_xrivr")
 script = ExtResource("2_8iila")
+
+[node name="HurtBox" parent="." unique_id=1666250764 instance=ExtResource("3_wfgoh")]
+collision_mask = 140
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=539616658]
+shape = SubResource("CircleShape2D_e83u5")

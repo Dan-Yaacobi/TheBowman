@@ -22,6 +22,7 @@ class_name EnemyData extends Resource
 @export var damage_taken_multiplier: Stat
 @export var damage_dealt_multiplier: Stat
 @export var size: float = 1.0
+@export var can_split: bool = false
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]

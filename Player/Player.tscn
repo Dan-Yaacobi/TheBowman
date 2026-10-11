@@ -119,6 +119,11 @@ script = ExtResource("4_yf47d")
 base_value = 0.25
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
+[sub_resource type="Resource" id="Resource_d4hlt"]
+script = ExtResource("4_yf47d")
+base_value = 1.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
 [sub_resource type="Resource" id="Resource_7w4lt"]
 script = ExtResource("4_yf47d")
 base_value = 950.0
@@ -237,6 +242,7 @@ ground_acc = 1800
 air_dec = 600
 air_acc = 900
 dash_power = SubResource("Resource_7w4lt")
+dash_cooldown = SubResource("Resource_d4hlt")
 move_speed = SubResource("Resource_kveqs")
 max_jumps = 1
 jump_height = SubResource("Resource_d3djb")
