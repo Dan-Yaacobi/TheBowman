@@ -26,6 +26,13 @@ class_name UpgradeTrack extends Resource
 @export var milestone_cost: Dictionary[CustomVariables.items, int] = {}
 @export var milestone_cost_growth: float = 1.5
 
+## Rewards offered at milestones, 3 at a time, without repeats.
+@export var milestone_pool: Array[MilestoneReward] = []
+## Granted instead when the pool has nothing left to offer.
+@export var milestone_fallback_step: UpgradeStep
+## How many rewards each milestone offers.
+@export var offers_per_milestone: int = 3
+
 func is_maxed(level: int) -> bool:
 	return max_level > 0 and level >= max_level
 
@@ -93,3 +100,20 @@ func _milestones_up_to(level: int) -> int:
 	if milestone_every <= 0:
 		return 0
 	return level / milestone_every
+
+## The rewards to offer at the next milestone.
+## 1 offer = linear path: the first available reward in pool order.
+## More = a random selection for the player to choose from.
+func roll_offers(owned_ids: Array[StringName]) -> Array[MilestoneReward]:
+	var available: Array[MilestoneReward] = available_rewards(owned_ids)
+	if offers_per_milestone <= 1:
+		return available.slice(0, 1)
+	available.shuffle()
+	return available.slice(0, offers_per_milestone)
+	
+func available_rewards(owned_ids: Array[StringName]) -> Array[MilestoneReward]:
+	var result: Array[MilestoneReward] = []
+	for reward: MilestoneReward in milestone_pool:
+		if reward.is_available(owned_ids):
+			result.append(reward)
+	return result

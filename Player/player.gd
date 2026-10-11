@@ -104,7 +104,8 @@ func _ready() -> void:
 	#reset_equipment()
 	sprite = body.sprite
 	debuff_handler.set_entity(self)
-	activate_passive_abilities() 
+	activate_passive_abilities()
+	MetaProgress.apply_abilities(self)
 	SaveService.register(&"resources", _save_resources, _load_resources)
 
 	
@@ -158,7 +159,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			collect_item(CustomVariables.items.WOOD, 50)
 			collect_item(CustomVariables.items.COIN, 50)
 			collect_item(CustomVariables.items.ESSENCE, 50)
-
+			collect_item(CustomVariables.items.SKYSHARD, 50)
 		if event.keycode == KEY_F9:
 			var track: UpgradeTrack = MetaProgress.tracks[0]
 			var bought: bool = MetaProgress.purchase(track, self)

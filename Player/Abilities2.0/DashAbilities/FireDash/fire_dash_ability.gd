@@ -38,8 +38,7 @@ func get_tooltip_color() -> Color:
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	if is_instance_valid(aura):
 		aura.ignite()
-		PlayerManager.player.start_invincibilty()
-
+		
 func _on_dash_ended() -> void:
 	if is_instance_valid(aura):
 		aura.extinguish()

@@ -47,8 +47,10 @@ func refresh() -> void:
 		upgrade_button.disabled = true
 		return
 
-	if track.is_milestone(level + 1):
-		effect_label.text = "Milestone: new ability"
+	if MetaProgress.has_pending(track):
+		effect_label.text = "Choose your reward"
+	elif track.is_milestone(level + 1):
+		effect_label.text = _milestone_text()
 	else:
 		var step: UpgradeStep = track.get_next_step(level)
 		effect_label.text = step.get_display_text() if step else ""
@@ -56,6 +58,20 @@ func refresh() -> void:
 	_build_costs(MetaProgress.get_cost(track), stats)
 	upgrade_button.text = "Upgrade"
 	upgrade_button.disabled = not MetaProgress.can_afford(track, stats)
+
+## What the next milestone grants: the known reward (linear path), a choice, or the fallback step.
+func _milestone_text() -> String:
+	var reward: MilestoneReward = MetaProgress.get_next_milestone_reward(track)
+	if reward:
+		return "%s\n%s" % [reward.display_name, reward.description]
+	var available: Array[MilestoneReward] = track.available_rewards(MetaProgress.get_owned_ids(track))
+	if available.size() == 1:
+		return "%s\n%s" % [available[0].display_name, available[0].description]
+	if available.size() > 1:
+		return "Choose 1 of %d rewards" % mini(available.size(), track.offers_per_milestone)
+	if track.milestone_fallback_step:
+		return track.milestone_fallback_step.get_display_text()
+	return ""
 
 func _build_costs(cost: Dictionary[CustomVariables.items, int], stats: PlayerStats) -> void:
 	_clear_costs()

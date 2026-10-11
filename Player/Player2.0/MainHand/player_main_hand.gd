@@ -40,7 +40,6 @@ func _process(_delta: float) -> void:
 
 func reset(_m: bool) -> void:
 	main_hand_state_machine.ChangeState(idle)
-	current_arrow.queue_free()
 	current_arrow = null
 	
 func connect_hands(_off_hand) -> void:

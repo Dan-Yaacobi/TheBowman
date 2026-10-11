@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ralak"]
 [ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_08rf8"]
+[ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_iggld"]
 
 [sub_resource type="Resource" id="Resource_5i4eu"]
 script = ExtResource("1_ralak")
@@ -32,6 +33,21 @@ max_applications = 15
 display_text = "Crit Damage +5%"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"
 
+[sub_resource type="Resource" id="Resource_p37hm"]
+script = ExtResource("1_ralak")
+stat_name = &"arrow_pierce"
+max_applications = 10
+display_text = "Pierces 1 additional enemy"
+metadata/_custom_type_script = "uid://brkui3qsiuklr"
+
+[sub_resource type="Resource" id="Resource_twdkf"]
+script = ExtResource("2_iggld")
+id = &"pierce_1"
+display_name = "Piercing Shot"
+description = "Your arrows pierce 1 additional enemy"
+stat_step = SubResource("Resource_p37hm")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
 [resource]
 script = ExtResource("2_08rf8")
 id = &"power"
@@ -44,3 +60,5 @@ base_cost = Dictionary[int, int]({
 milestone_cost = Dictionary[int, int]({
 4: 1
 })
+milestone_pool = Array[ExtResource("2_iggld")]([SubResource("Resource_twdkf")])
+offers_per_milestone = 1
