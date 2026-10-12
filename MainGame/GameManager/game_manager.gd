@@ -1,10 +1,8 @@
 class_name GameManager extends Node2D
 
-@export var boss_entries: Array[EnemyEntry]
+@export var boss_encounters: Array[PackedScene]
 
-const BOSS_ARENAS = {
-	1: GameWorlds.worlds.Boss_Arena_1,
-}
+var _remaining_bosses: Array[PackedScene] = []
 
 var curr_world: GameWorld
 var prev_world: GameWorld
@@ -21,13 +19,25 @@ func _ready() -> void:
 	EventBus.event_enter_requested.connect(_on_event_enter_requested)
 	EventBus.event_exit_requested.connect(_on_event_exit_requested)
 	EventBus.relocate_player.connect(_place_player_and_resume)
+	EventBus.boss_portal_entered.connect(func() -> void: change_to_scene(_draw_boss()))
 	
 func _on_portal_entered() -> void:
 	var rift_level: int = PlayerManager.player.stats.rift_level
-	if rift_level % 2 == 0 and not curr_world is BossArena1:
-		change_game_world(GameWorlds.worlds.Boss_Arena_1)
+	if rift_level % CustomVariables.RIFTS_PER_TYPE == 0 and not curr_world is BossArena:
+		change_to_scene(_draw_boss())
 	else:
 		change_game_world(GameWorlds.worlds.Rift_1)
+
+func _draw_boss() -> PackedScene:
+	if _remaining_bosses.is_empty():
+		_reset_boss_pool()
+	if _remaining_bosses.is_empty():
+		return null
+	return _remaining_bosses.pop_back()
+
+func _reset_boss_pool() -> void:
+	_remaining_bosses = boss_encounters.duplicate()
+	_remaining_bosses.shuffle()
 
 func set_game(_game: Game) -> void:
 	if _game:
@@ -39,7 +49,6 @@ func spawn_player(_pos: Vector2 = Vector2.ZERO) -> void:
 	PlayerManager.player.velocity = Vector2.ZERO
 	PlayerManager.player.global_position = _pos
 	PlayerManager.player.camera.force_update_scroll()
-
 
 # --- Shared transition halves ---
 
@@ -65,30 +74,43 @@ func _place_player_and_resume(_pos: Vector2) -> void:
 func change_game_world(_new: GameWorlds.worlds) -> void:
 	if _is_transitioning:
 		return
+	var next_world: GameWorld = GameWorlds.get_world(_new)
+	if next_world == null:
+		return
+	await _transition_to(next_world)
+
+func change_to_scene(scene: PackedScene) -> void:
+	if _is_transitioning or scene == null:
+		return
+	var next_world: GameWorld = scene.instantiate() as GameWorld
+	if next_world == null:
+		push_error("Scene %s root is not a GameWorld" % scene.resource_path)
+		return
+	await _transition_to(next_world)
+
+func _transition_to(next_world: GameWorld) -> void:
 	_is_transitioning = true
-	if _new is GameWorlds.worlds:
-		await _fade_out_and_pause()
+	await _fade_out_and_pause()
 
-		var next_world = GameWorlds.get_world(_new)
-		if next_world is MainMenu:
-			PlayerManager.player.stats.rift_level = 0
+	if next_world is MainMenu:
+		PlayerManager.player.stats.rift_level = 0
+		_reset_boss_pool()
 
-		prev_world = curr_world
-		curr_world = next_world
+	prev_world = curr_world
+	curr_world = next_world
 
-		game.add_child(curr_world)
-		curr_world.set_world()
-		if prev_world:
-			prev_world.exit_world()
-			game.remove_child(prev_world)
+	game.add_child(curr_world)
+	curr_world.set_world()
+	if prev_world:
+		prev_world.exit_world()
+		game.remove_child(prev_world)
 
-		PlayerManager.player.reparent(curr_world)
-		await _place_player_and_resume(curr_world.spawn_position())
+	PlayerManager.player.reparent(curr_world)
+	await _place_player_and_resume(curr_world.spawn_position())
 
-		curr_world.on_world_ready()
-		EventBus.world_ready.emit()
-		_is_transitioning = false
-
+	curr_world.on_world_ready()
+	EventBus.world_ready.emit()
+	_is_transitioning = false
 
 # --- Events ---
 

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://d0sw7tr3lvjoy"]
+
+[ext_resource type="Script" uid="uid://cryh0nhl8q82m" path="res://Enemies/WizardBoss/FireWizard/meteor.gd" id="1_88isd"]
+[ext_resource type="Texture2D" uid="uid://c3ub8vahh37tm" path="res://Enemies/WizardBoss/FireWizard/Meteor.png" id="1_ybejm"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_88isd"]
+[ext_resource type="PackedScene" uid="uid://bftpdwkjw3s0r" path="res://Enemies/WizardBoss/FireWizard/BurningIslandEffect.tscn" id="2_q4o55"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e83u5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88isd"]
+
+[node name="Meteor" type="Node2D" unique_id=192939039]
+script = ExtResource("1_88isd")
+island_burn_scene = ExtResource("2_q4o55")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=3468313]
+texture = ExtResource("1_ybejm")
+
+[node name="HurtBox" parent="." unique_id=1848462194 instance=ExtResource("2_88isd")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=139825185]
+position = Vector2(0, 22)
+shape = SubResource("CircleShape2D_e83u5")
+
+[node name="GroundDetector" type="Area2D" parent="." unique_id=364407259]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GroundDetector" unique_id=1370119882]
+position = Vector2(0, 22)
+shape = SubResource("CircleShape2D_88isd")
+debug_color = Color(1.5883148e-06, 0.6378433, 0.39088297, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1525640915]
+
+[node name="ScreenExitedTimer" type="Timer" parent="VisibleOnScreenNotifier2D" unique_id=87350347]
+wait_time = 5.0
+
+[connection signal="body_shape_entered" from="GroundDetector" to="." method="_on_ground_detector_body_shape_entered"]

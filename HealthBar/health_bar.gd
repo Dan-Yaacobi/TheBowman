@@ -50,3 +50,9 @@ func set_instant(new_health: int, new_max: int) -> void:
 	health = new_health
 	ghost_bar.max_value = new_max
 	ghost_bar.value = health
+
+func set_current(new_health: int) -> void:
+	if new_health < health:
+		reduce_health(health - new_health)
+	elif new_health > health:
+		heal(new_health - health)

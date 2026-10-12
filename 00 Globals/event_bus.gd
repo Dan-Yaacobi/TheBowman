@@ -79,12 +79,10 @@ signal destory_view_item(equip: Equipment)
 signal arrow_enemy_hit(_perfect: bool, _arrow: Arrow, _target: Enemy)
 signal arrow_missed
 
-signal boss_health_bar(_bar: HealthBar)
-signal request_boss_health_bar
 signal hide_boss_health_bar
-
+signal boss_fight_started(boss: Boss)
 signal in_main_menu
-
+signal boss_portal_entered
 signal fill_gauge(_amount: int)
 signal request_gauge(_only_full: bool)
 signal use_gauge(_amount: int)

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://c48tkg5iwqxfo"]
 
 [ext_resource type="Script" uid="uid://cbkfbpkwj365g" path="res://MainGame/GameManager/game_manager.gd" id="1_awshh"]
+[ext_resource type="PackedScene" uid="uid://c76xmtewx7c7w" path="res://Level/BossArena/FireWizardBossArena.tscn" id="2_7oabr"]
 
 [node name="GameManager" type="Node2D" unique_id=1727547770]
 script = ExtResource("1_awshh")
+boss_encounters = Array[PackedScene]([ExtResource("2_7oabr")])

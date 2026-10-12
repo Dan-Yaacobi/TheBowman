@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bftpdwkjw3s0r"]
+
+[ext_resource type="Script" uid="uid://wefj28mu04ie" path="res://Enemies/WizardBoss/FireWizard/burning_island_effect.gd" id="1_12m5e"]
+[ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="2_w6lta"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_jld7f"]
+
+[sub_resource type="Curve" id="Curve_q0xdf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.38157895, 0.59482753), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_e83u5"]
+offsets = PackedFloat32Array(0, 0.33093524, 0.67266184, 0.92086333)
+colors = PackedColorArray(1, 0.8000001, 0, 1, 1, 0.43333334, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0.49411765)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
+size = Vector2(25, 18)
+
+[node name="BurningIslandEffect" type="Node2D" unique_id=1170307969]
+script = ExtResource("1_12m5e")
+field_lifetime = 3.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1930271714]
+amount = 500
+texture = ExtResource("2_w6lta")
+lifetime = 2.0
+speed_scale = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(12, 1)
+gravity = Vector2(0, -20)
+scale_amount_curve = SubResource("Curve_q0xdf")
+color_ramp = SubResource("Gradient_e83u5")
+
+[node name="HurtBox" parent="." unique_id=1844507648 instance=ExtResource("3_jld7f")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1594316018]
+position = Vector2(0.5, -7)
+shape = SubResource("RectangleShape2D_e83u5")

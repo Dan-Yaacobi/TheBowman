@@ -4,6 +4,7 @@ class_name HUD extends CanvasLayer
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
 @onready var boss_health_bar: Control = $Control/BossHealthBar
+@onready var boss_bar: HealthBar = $Control/BossHealthBar/HealthBar  # drag the actual node in to get the right path
 @onready var item_prompt: ItemInspectPrompt = $ItemInspectPrompt
 @onready var comparison_screen: ItemComparisonScreen = $ItemComparisonLayer/ItemComparisonScreen
 @onready var equipment_menu: EquipmentMenu = $EquipmentMenu
@@ -27,7 +28,7 @@ func _ready() -> void:
 	damaged_flash.modulate.a = 0.0
 	heal_flash.modulate.a = 0.0
 	boss_health_bar.hide()
-	EventBus.request_boss_health_bar.connect(send_boss_health_bar)
+	EventBus.boss_fight_started.connect(_on_boss_fight_started)
 	EventBus.hide_boss_health_bar.connect(hide_boss_health_bar)
 	pause_menu.setup(equipment_menu)
 	
@@ -51,9 +52,15 @@ func get_health_bar() -> HealthHearts:
 	return health_hearts
 
 
-func send_boss_health_bar() -> void:
-	EventBus.boss_health_bar.emit(boss_health_bar.get_child(1))
+func _on_boss_fight_started(boss: Boss) -> void:
+	boss_bar.set_instant(boss.current_hp, boss.stats.max_hp)
+	boss.health_changed.connect(boss_bar.set_current)
+	boss.died.connect(_on_boss_died, CONNECT_ONE_SHOT)
 	boss_health_bar.show()
+
+
+func _on_boss_died(_boss: Enemy) -> void:
+	boss_health_bar.hide()
 
 
 func hide_boss_health_bar() -> void:

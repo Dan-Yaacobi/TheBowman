@@ -14,5 +14,5 @@ func _on_grounddetector_body_shape_entered(_body_rid: RID, _body: Node2D, _body_
 	if _body is Island:
 		crack_egg()
 
-func destroyed(_hurt_box: HurtBox) -> void:
+func destroyed(_hurt_box: HurtBox,_var2,_var3) -> void:
 	queue_free()

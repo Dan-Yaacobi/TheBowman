@@ -1,5 +1,6 @@
 @tool
 class_name Portal extends Node2D
+@export var is_boss_portal: bool = false
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area_2d: Area2D = $Area2D
@@ -82,12 +83,14 @@ func _on_proximity_exited(body: Node2D) -> void:
 	if body is Player:
 		_set_awake(false)
 
-func enter() -> void:
-	if is_rift_portal:
-		EventBus.entered_rift_portal.emit()
-	elif destination is GameWorlds.worlds:
-		EventBus.changed_scene.emit(destination)
 
+func enter() -> void:
+	if is_boss_portal:
+		EventBus.boss_portal_entered.emit()
+	elif is_rift_portal:
+		EventBus.entered_rift_portal.emit()
+	else:
+		EventBus.changed_scene.emit(destination)
 func _set_awake(awake: bool) -> void:
 	if _fx_tween:
 		_fx_tween.kill()

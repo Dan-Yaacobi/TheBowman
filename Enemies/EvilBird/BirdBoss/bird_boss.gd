@@ -17,8 +17,6 @@ func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
 	_remaining_thresholds = ROOST_THRESHOLDS.duplicate()
 	state_machine.Initialize(self)
-	if boss_health_bar:
-		boss_health_bar.init_health(stats.max_hp)
 		
 func fly_direction() -> float:
 	return fly._direction

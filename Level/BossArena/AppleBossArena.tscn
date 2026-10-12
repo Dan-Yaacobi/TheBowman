@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://c7nlxg7p7m3vl"]
+
+[ext_resource type="Script" uid="uid://2o1j6u5p0oao" path="res://Level/BossArena/boss_arena.gd" id="1_b3gpm"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="2_kupvl"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="3_c6qoj"]
+[ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="4_gfqgv"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_ndsc0"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_hfdrk"]
+[ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/FlyingApple/Boss1/FlyingAppleBoss.tscn" id="7_o8usx"]
+
+[node name="BossArena" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
+script = ExtResource("1_b3gpm")
+boss = NodePath("")
+
+[node name="PlayerSpawn" parent="." unique_id=1835078092 instance=ExtResource("2_kupvl")]
+position = Vector2(1, -40)
+
+[node name="Portal" parent="." unique_id=1166811293 instance=ExtResource("3_c6qoj")]
+z_index = 0
+position = Vector2(14, 190)
+destination = 3
+is_rift_portal = true
+idle_speed = 0.5
+near_speed = 1.4
+wake_duration = 0.3
+sleep_duration = 1.0
+
+[node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("4_gfqgv")]
+
+[node name="BossIncomingLabel" type="Label" parent="." unique_id=1530353532]
+offset_left = -87.0
+offset_top = -111.0
+offset_right = 489.0
+offset_bottom = 14.0
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 100
+text = "Boss Incoming"
+
+[node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("5_ndsc0")]
+position = Vector2(2, 560)
+
+[node name="Islands" type="Node2D" parent="." unique_id=1025895520]
+
+[node name="Island" parent="Islands" unique_id=1847265216 instance=ExtResource("6_hfdrk")]
+position = Vector2(322, -28)
+
+[node name="Island3" parent="Islands" unique_id=2026436174 instance=ExtResource("6_hfdrk")]
+position = Vector2(194, 67)
+
+[node name="Island4" parent="Islands" unique_id=163082524 instance=ExtResource("6_hfdrk")]
+position = Vector2(370, -61)
+
+[node name="Island5" parent="Islands" unique_id=2002063557 instance=ExtResource("6_hfdrk")]
+position = Vector2(-41, 146)
+
+[node name="Island6" parent="Islands" unique_id=1670576261 instance=ExtResource("6_hfdrk")]
+position = Vector2(281, 0)
+
+[node name="Island7" parent="Islands" unique_id=81475756 instance=ExtResource("6_hfdrk")]
+position = Vector2(41, 146)
+
+[node name="Island8" parent="Islands" unique_id=265084079 instance=ExtResource("6_hfdrk")]
+position = Vector2(100, 128)
+
+[node name="Island10" parent="Islands" unique_id=833483648 instance=ExtResource("6_hfdrk")]
+position = Vector2(-129, 69)
+
+[node name="Island11" parent="Islands" unique_id=238016116 instance=ExtResource("6_hfdrk")]
+position = Vector2(0, 146)
+
+[node name="Island12" parent="Islands" unique_id=1255789111 instance=ExtResource("6_hfdrk")]
+position = Vector2(-90, 107)
+
+[node name="Island13" parent="Islands" unique_id=1090055131 instance=ExtResource("6_hfdrk")]
+position = Vector2(154, 103)
+
+[node name="Island14" parent="Islands" unique_id=387369012 instance=ExtResource("6_hfdrk")]
+position = Vector2(237, 27)
+
+[node name="Island15" parent="Islands" unique_id=500121401 instance=ExtResource("6_hfdrk")]
+position = Vector2(-287, -74)
+
+[node name="Island16" parent="Islands" unique_id=1696593571 instance=ExtResource("6_hfdrk")]
+position = Vector2(-238, -46)
+
+[node name="Island17" parent="Islands" unique_id=1377083701 instance=ExtResource("6_hfdrk")]
+position = Vector2(409, -90)
+
+[node name="Island18" parent="Islands" unique_id=1518699914 instance=ExtResource("6_hfdrk")]
+position = Vector2(-209, -4)
+
+[node name="Island9" parent="Islands" unique_id=65748527 instance=ExtResource("6_hfdrk")]
+position = Vector2(-173, 33)
+
+[node name="Island2" parent="Islands" unique_id=389278333 instance=ExtResource("6_hfdrk")]
+position = Vector2(13, 211)
+
+[node name="FlyingAppleBoss" parent="." unique_id=613350604 instance=ExtResource("7_o8usx")]
+position = Vector2(20, -165)

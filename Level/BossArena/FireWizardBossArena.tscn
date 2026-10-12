@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://c76xmtewx7c7w"]
+
+[ext_resource type="Script" uid="uid://2o1j6u5p0oao" path="res://Level/BossArena/boss_arena.gd" id="1_pv647"]
+[ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="2_ffcpw"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="3_yad5n"]
+[ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="4_5d562"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_diqrl"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_2a8j3"]
+[ext_resource type="PackedScene" uid="uid://cxfs4xfpqye45" path="res://Enemies/WizardBoss/FireWizard/WizardFireBoss.tscn" id="7_pv647"]
+[ext_resource type="Script" uid="uid://gxf7gafwlrfm" path="res://Level/BossArena/named_marker.gd" id="8_ffcpw"]
+
+[node name="FireWizardBossArena" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
+script = ExtResource("1_pv647")
+boss = NodePath("WizardFireBoss")
+
+[node name="PlayerSpawn" parent="." unique_id=1835078092 instance=ExtResource("2_ffcpw")]
+position = Vector2(-39, 99)
+
+[node name="Portal" parent="." unique_id=1166811293 instance=ExtResource("3_yad5n")]
+z_index = 0
+position = Vector2(193, 149)
+destination = 3
+is_rift_portal = true
+idle_speed = 0.5
+near_speed = 1.4
+wake_duration = 0.3
+sleep_duration = 1.0
+
+[node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("4_5d562")]
+
+[node name="BossIncomingLabel" type="Label" parent="." unique_id=1530353532]
+offset_left = -78.0
+offset_top = 27.0
+offset_right = 498.0
+offset_bottom = 152.0
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 100
+text = "Boss Incoming"
+
+[node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("5_diqrl")]
+position = Vector2(2, 560)
+
+[node name="Islands" type="Node2D" parent="." unique_id=1025895520]
+
+[node name="Island5" parent="Islands" unique_id=2002063557 instance=ExtResource("6_2a8j3")]
+position = Vector2(-41, 146)
+
+[node name="Island8" parent="Islands" unique_id=1847265216 instance=ExtResource("6_2a8j3")]
+position = Vector2(-96, 146)
+
+[node name="Island6" parent="Islands" unique_id=1670576261 instance=ExtResource("6_2a8j3")]
+position = Vector2(140, 66)
+
+[node name="Island7" parent="Islands" unique_id=81475756 instance=ExtResource("6_2a8j3")]
+position = Vector2(82, 146)
+
+[node name="Island11" parent="Islands" unique_id=238016116 instance=ExtResource("6_2a8j3")]
+position = Vector2(22, 146)
+
+[node name="Island14" parent="Islands" unique_id=387369012 instance=ExtResource("6_2a8j3")]
+position = Vector2(161, -15)
+
+[node name="Island15" parent="Islands" unique_id=500121401 instance=ExtResource("6_2a8j3")]
+position = Vector2(-193, -10)
+
+[node name="Island18" parent="Islands" unique_id=1518699914 instance=ExtResource("6_2a8j3")]
+position = Vector2(-153, 85)
+
+[node name="Island2" parent="Islands" unique_id=389278333 instance=ExtResource("6_2a8j3")]
+position = Vector2(192, 170)
+
+[node name="WizardFireBoss" parent="." unique_id=505457552 node_paths=PackedStringArray("teleport_points", "markers") instance=ExtResource("7_pv647")]
+position = Vector2(2.0000076, 99.999985)
+teleport_points = [NodePath("../Markers/WizardSpawn"), NodePath("../Markers/WizardSpawn2"), NodePath("../Markers/WizardSpawn3"), NodePath("../Markers/WizardSpawn4")]
+markers = [NodePath("../MeteorMarker")]
+
+[node name="Markers" type="Node2D" parent="." unique_id=69241897]
+
+[node name="WizardSpawn" type="Marker2D" parent="Markers" unique_id=694497376]
+position = Vector2(163, -40)
+
+[node name="WizardSpawn2" type="Marker2D" parent="Markers" unique_id=1833535446]
+position = Vector2(138, 41)
+
+[node name="WizardSpawn3" type="Marker2D" parent="Markers" unique_id=1125013702]
+position = Vector2(-151, 53)
+
+[node name="WizardSpawn4" type="Marker2D" parent="Markers" unique_id=120603705]
+position = Vector2(-193, -36)
+
+[node name="MeteorMarker" type="Marker2D" parent="." unique_id=1356588990]
+position = Vector2(0, -19)
+script = ExtResource("8_ffcpw")
