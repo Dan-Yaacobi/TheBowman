@@ -5,7 +5,6 @@ class_name GameEntity extends CharacterBody2D
 
 func take_damage(_hurt_box: HurtBox, raw_damage: int = 0, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
 	_handle_take_damage(_hurt_box, raw_damage, _result, _alter_dmg_color)
-	pass
 	
 func show_damage(_amount: int, color: Color) -> void:
 	CombatTextSpawner.spawn(global_position, str(_amount),color)

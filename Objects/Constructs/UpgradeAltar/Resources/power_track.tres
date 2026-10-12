@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://brkui3qsiuklr"
 [sub_resource type="Resource" id="Resource_rlg28"]
 script = ExtResource("1_ralak")
 stat_name = &"crit_modifier"
-amount = 0.5
+amount = 0.05
 max_applications = 15
 display_text = "Crit Damage +5%"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"

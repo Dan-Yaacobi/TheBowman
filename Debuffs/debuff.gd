@@ -37,3 +37,6 @@ func debuff_end() -> void:
 
 func extra_end_debuff_methods() -> void:
 	pass
+	
+func merge(_incoming: Debuff, _incoming_ticks: int) -> void:
+	ticks += _incoming_ticks

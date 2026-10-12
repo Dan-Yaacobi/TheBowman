@@ -8,24 +8,21 @@ var entity: GameEntity
 func set_entity(_entity: GameEntity) -> void:
 	entity = _entity
 	
-func add_debuff(_debuff: Debuff,ID: int, _duration: float, _ticks: int) -> void:
-	var curr_debuff: Debuff
-	
+func add_debuff(_debuff: Debuff, ID: int, _duration: float, _ticks: int) -> void:
 	if debuffs.has(ID):
 		if _debuff.can_stack:
-			curr_debuff = debuffs[ID]
-			curr_debuff.ticks += _ticks
-	else:
-		debuffs[ID] = _debuff
-		curr_debuff = _debuff
-		curr_debuff.ID = ID
-		curr_debuff.debuff_over.connect(remove_debuff)
-		curr_debuff.tick_interval = _duration / _ticks
-		curr_debuff.entity = entity
-		debuff_added.emit()
+			debuffs[ID].merge(_debuff, _ticks)
+		_debuff.queue_free()
+		return
 
-		curr_debuff.ticks = _ticks
-		entity.sprite.add_child(curr_debuff)
+	debuffs[ID] = _debuff
+	_debuff.ID = ID
+	_debuff.debuff_over.connect(remove_debuff)
+	_debuff.tick_interval = _duration / _ticks
+	_debuff.entity = entity
+	_debuff.ticks = _ticks
+	debuff_added.emit()
+	entity.sprite.add_child(_debuff)
 
 func has_debuff(id: int) -> bool:
 	return debuffs.has(id)
