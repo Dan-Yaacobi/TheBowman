@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cbrr0ymuvad2w"]
+
+[ext_resource type="Script" uid="uid://eloxsv2u5r70" path="res://Player/Abilities2.0/ShootAbilities/FireBall/fire_ball_ability.gd" id="1_dvkt0"]
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_ikbvu"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_ta2eq"]
+[ext_resource type="Texture2D" uid="uid://b6ulwr4lbhd00" path="res://Items/Equipments/Bows/Sprites/FireBow.png" id="3_j1m5o"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_j1m5o"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_t41h2"]
+
+[sub_resource type="Resource" id="Resource_mnna4"]
+script = ExtResource("1_dvkt0")
+trigger_type = 4
+metadata/_custom_type_script = "uid://eloxsv2u5r70"
+
+[sub_resource type="Resource" id="Resource_c1m2a"]
+script = ExtResource("6_t41h2")
+stat_name = "pull_speed"
+min_value = 1.0
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_5lv0r"]
+script = ExtResource("5_j1m5o")
+stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_c1m2a")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_167x7"]
+script = ExtResource("5_j1m5o")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_24r6y"]
+script = ExtResource("5_j1m5o")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_guwyo"]
+script = ExtResource("5_j1m5o")
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_ikbvu")
+display_name = "FireBall Bow"
+name_color = Color(1, 0.4, 0, 1)
+texture = ExtResource("3_j1m5o")
+equipped_texture = ExtResource("3_j1m5o")
+dropped_scale = 0.5
+ability = SubResource("Resource_mnna4")
+tiers = Array[Object]([SubResource("Resource_5lv0r"), SubResource("Resource_167x7"), SubResource("Resource_24r6y"), SubResource("Resource_guwyo")])
+equipment_scene = ExtResource("1_ta2eq")
+metadata/_custom_type_script = "uid://bqd150tbbmd01"

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://omda1dnp3kkq"]
+
+[ext_resource type="Shader" uid="uid://cpbhj0sf7yipn" path="res://Enemies/WizardBoss/FireWizard/fireball.gdshader" id="1_e0ggn"]
+[ext_resource type="Script" uid="uid://cr6msrt03cjfw" path="res://Enemies/WizardBoss/FireWizard/fireball.gd" id="1_xpffs"]
+[ext_resource type="Texture2D" uid="uid://ewfh20uj7pio" path="res://Enemies/WizardBoss/FireWizard/Fireball.png" id="2_xpffs"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_5goiu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptnfl"]
+shader = ExtResource("1_e0ggn")
+shader_parameter/margin_px = Vector4(6, 4, 3, 4)
+shader_parameter/head_uv = Vector2(0.72, 0.55)
+shader_parameter/flow_dir = Vector2(-1, -0.15)
+shader_parameter/trail_length_px = 28.0
+shader_parameter/wave_px = 3.5
+shader_parameter/wave_frequency = 0.22
+shader_parameter/wave_speed = 15.0
+shader_parameter/wave_tip_bias = 1.4
+shader_parameter/flow_speed = 4.0
+shader_parameter/wobble_px = 3.9490001875775
+shader_parameter/across_scale = 0.35
+shader_parameter/along_scale = 0.18
+shader_parameter/animation_fps = 60.0
+shader_parameter/pixel_snap = true
+shader_parameter/pulse_amount = 0.08
+shader_parameter/pulse_speed = 9.0
+shader_parameter/tail_breakup = 0.0
+shader_parameter/flicker = 0.0
+shader_parameter/tail_darken = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nuysd"]
+radius = 12.0
+
+[node name="Fireball" type="Node2D" unique_id=1160601652]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_xpffs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628676475]
+material = SubResource("ShaderMaterial_ptnfl")
+texture = ExtResource("2_xpffs")
+
+[node name="HurtBox" parent="." unique_id=939354403 instance=ExtResource("3_5goiu")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=41777183]
+position = Vector2(9, 3)
+shape = SubResource("CircleShape2D_nuysd")

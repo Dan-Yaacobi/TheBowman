@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="7_qvidt"]
 [ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="8_qvidt"]
-[ext_resource type="Resource" uid="uid://dsp81oo6n6qxm" path="res://Items/Equipments/Bows/Resource/Poison_Ivy.tres" id="10_qvidt"]
+[ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="10_qvidt"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]

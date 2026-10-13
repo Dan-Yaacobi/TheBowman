@@ -9,7 +9,7 @@ class_name Meteor extends Node2D
 ## Higher = slower start, sharper ramp
 @export var ramp_curve: float = 2.5
 ## Upward lift added to the sideways knockback (0 = purely horizontal)
-@export var knockback_lift: float = 0.4
+@export var knockback_lift: float = 0
 @export var impact_scene: PackedScene
 @export var island_burn_scene: PackedScene
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D

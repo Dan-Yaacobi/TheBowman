@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxfs4xfpqye45"]
 
 [ext_resource type="Script" uid="uid://dsj4ljnl7t4ar" path="res://Enemies/WizardBoss/wizard_boss.gd" id="1_sooen"]
+[ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="2_cua7u"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_jyxit"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="3_hfhvd"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_cg4p7"]
@@ -10,12 +11,16 @@
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="8_810fj"]
 [ext_resource type="Script" uid="uid://bmjrv4mv2reks" path="res://Enemies/WizardBoss/wizard_idle_state.gd" id="9_ipi4i"]
 [ext_resource type="Script" uid="uid://dkcr2k7mm15eb" path="res://Enemies/WizardBoss/wizard_teleport_state.gd" id="10_kjln8"]
+[ext_resource type="PackedScene" uid="uid://cenesimsgf2vq" path="res://Enemies/WizardBoss/LingeringEffect.tscn" id="11_hfhvd"]
 [ext_resource type="Script" uid="uid://dey5acni34v7q" path="res://Enemies/WizardBoss/FireWizard/meteor_spell.gd" id="11_sooen"]
 [ext_resource type="PackedScene" uid="uid://d0sw7tr3lvjoy" path="res://Enemies/WizardBoss/FireWizard/Meteor.tscn" id="12_jyxit"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="12_m40pn"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="13_qj7nw"]
+[ext_resource type="Script" uid="uid://4qa5cqiqxjyo" path="res://Enemies/WizardBoss/FireWizard/fire_ball_spell.gd" id="14_cg4p7"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="14_ci73m"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_gf1q3"]
+[ext_resource type="PackedScene" uid="uid://omda1dnp3kkq" path="res://Enemies/WizardBoss/FireWizard/Fireball.tscn" id="15_wdanr"]
+[ext_resource type="Script" uid="uid://dpw84mdxomt4d" path="res://Enemies/WizardBoss/FireWizard/wizard_dead_State.gd" id="16_lngcg"]
 
 [sub_resource type="Resource" id="Resource_vjl12"]
 script = ExtResource("4_cg4p7")
@@ -31,6 +36,7 @@ can_be_knockedback = false
 capture_immune = true
 has_health_bar = false
 size = 0.2
+drop_chance = 100.0
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j1sa4"]
@@ -181,10 +187,13 @@ size = Vector2(84, 123)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0xdf"]
 size = Vector2(84, 124)
 
-[node name="WizardFireBoss" type="CharacterBody2D" unique_id=505457552 node_paths=PackedStringArray("spell_rotation")]
+[node name="WizardFireBoss" type="CharacterBody2D" unique_id=505457552 node_paths=PackedStringArray("spell_rotation", "dead_state")]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_sooen")
-spell_rotation = [NodePath("EnemyStateMachine/MeteorSpell")]
+spell_rotation = [NodePath("EnemyStateMachine/MeteorSpell"), NodePath("EnemyStateMachine/FireBallSpell")]
+dead_state = NodePath("EnemyStateMachine/Dead")
+item_drop = ExtResource("2_cua7u")
+total_essence_drop = 15
 stats = SubResource("Resource_6mjqb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2089913649]
@@ -206,13 +215,25 @@ script = ExtResource("9_ipi4i")
 [node name="Teleport" type="Node2D" parent="EnemyStateMachine" unique_id=528866170 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("10_kjln8")
 idle_state = NodePath("../Idle")
-in_animation = "Idle"
+sparkle_scene = ExtResource("11_hfhvd")
 
 [node name="MeteorSpell" type="Node2D" parent="EnemyStateMachine" unique_id=2134191138 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("11_sooen")
 meteor_scene = ExtResource("12_jyxit")
 interval = 3.0
 idle_state = NodePath("../Idle")
+
+[node name="FireBallSpell" type="Node2D" parent="EnemyStateMachine" unique_id=286281791 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("14_cg4p7")
+fireball_scene = ExtResource("15_wdanr")
+waves = 1
+fireballs_per_wave = 16
+shot_interval = 0.25
+wave_interval = 1.5
+idle_state = NodePath("../Idle")
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine" unique_id=546670914]
+script = ExtResource("16_lngcg")
 
 [node name="HurtBox" parent="." unique_id=1705248977 instance=ExtResource("12_m40pn")]
 collision_mask = 1

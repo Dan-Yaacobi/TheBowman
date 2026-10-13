@@ -14,9 +14,9 @@ shader_parameter/direction = Vector2(1, 0)
 shader_parameter/radius = 0.40300001751256
 shader_parameter/tail_length = 0.0
 shader_parameter/noise_scale = 5.9410002346975
-shader_parameter/noise_amount = 0.0
+shader_parameter/noise_amount = 1.0
 shader_parameter/flow_speed = 3.0
-shader_parameter/glow_strength = 2.0
+shader_parameter/glow_strength = 0.0
 shader_parameter/glow_falloff = 20.0
 
 [sub_resource type="Gradient" id="Gradient_wfgoh"]

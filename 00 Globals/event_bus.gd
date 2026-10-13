@@ -61,11 +61,11 @@ signal add_arrow_effect(_effect: Effect)
 #signals that you went to the next rift level
 signal entered_rift_portal
 
-signal try_drop(position: Vector2, _chance: float)
+signal try_drop(position: Vector2, _chance: float, forced_rarity: int)
 signal drop_item(item: CustomVariables.items, position: Vector2, _chance: float, _amount: int)
 signal drop_coins(position: Vector2, _amount: int)
 signal drop_potion(position: Vector2, _chance: float)
-signal drop_specific_item(item: EquipmentData, position: Vector2)
+signal drop_specific_item(item: EquipmentData, position: Vector2, forced_rarity: int)
 signal drop_essence(position: Vector2, chance: float)
 
 signal equipment_dropped(equip_data: EquipmentData, position: Vector2, _existing_equipment: Equipment)

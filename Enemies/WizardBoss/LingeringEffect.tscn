@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cenesimsgf2vq"]
+
+[ext_resource type="Script" uid="uid://b3geag1oaoek" path="res://Enemies/WizardBoss/lingering_effect.gd" id="1_mffgv"]
+[ext_resource type="Texture2D" uid="uid://cvjlka7kqmpx2" path="res://Particles/Twinkle.png" id="1_uegal"]
+
+[sub_resource type="Curve" id="Curve_mffgv"]
+_data = [Vector2(0, 0.4630872), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="LingeringEffect" type="CPUParticles2D" unique_id=929588661]
+emitting = false
+amount = 15
+texture = ExtResource("1_uegal")
+lifetime = 0.7
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+direction = Vector2(1, -1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_amount_curve = SubResource("Curve_mffgv")
+script = ExtResource("1_mffgv")

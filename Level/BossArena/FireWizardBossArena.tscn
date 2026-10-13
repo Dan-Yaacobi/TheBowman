@@ -14,11 +14,11 @@ script = ExtResource("1_pv647")
 boss = NodePath("WizardFireBoss")
 
 [node name="PlayerSpawn" parent="." unique_id=1835078092 instance=ExtResource("2_ffcpw")]
-position = Vector2(-91, 115)
+position = Vector2(-4, 121)
 
 [node name="Portal" parent="." unique_id=1166811293 instance=ExtResource("3_yad5n")]
 z_index = 0
-position = Vector2(193, 149)
+position = Vector2(243, 189)
 destination = 3
 is_rift_portal = true
 idle_speed = 0.5
@@ -43,54 +43,59 @@ position = Vector2(2, 560)
 [node name="Islands" type="Node2D" parent="." unique_id=1025895520]
 
 [node name="Island5" parent="Islands" unique_id=2002063557 instance=ExtResource("6_2a8j3")]
-position = Vector2(-7, 164)
+position = Vector2(-3, 159)
 
 [node name="Island10" parent="Islands" unique_id=1847265216 instance=ExtResource("6_2a8j3")]
-position = Vector2(-69, 199)
+position = Vector2(-56, 200)
 
 [node name="Island12" parent="Islands" unique_id=656758899 instance=ExtResource("6_2a8j3")]
 position = Vector2(52, 196)
 
 [node name="Island8" parent="Islands" unique_id=433250681 instance=ExtResource("6_2a8j3")]
-position = Vector2(-96, 146)
+position = Vector2(-107, 159)
 
 [node name="Island6" parent="Islands" unique_id=1670576261 instance=ExtResource("6_2a8j3")]
-position = Vector2(140, 66)
+position = Vector2(161, 97)
 
 [node name="Island7" parent="Islands" unique_id=81475756 instance=ExtResource("6_2a8j3")]
-position = Vector2(96, 146)
+position = Vector2(105, 152)
 
 [node name="Island14" parent="Islands" unique_id=387369012 instance=ExtResource("6_2a8j3")]
-position = Vector2(161, -15)
+position = Vector2(201, 35)
 
 [node name="Island15" parent="Islands" unique_id=500121401 instance=ExtResource("6_2a8j3")]
-position = Vector2(-193, -10)
+position = Vector2(-210, 40)
 
 [node name="Island18" parent="Islands" unique_id=1518699914 instance=ExtResource("6_2a8j3")]
-position = Vector2(-153, 85)
+position = Vector2(-160, 92)
 
 [node name="Island2" parent="Islands" unique_id=389278333 instance=ExtResource("6_2a8j3")]
-position = Vector2(192, 170)
+position = Vector2(242, 210)
 
 [node name="WizardFireBoss" parent="." unique_id=505457552 node_paths=PackedStringArray("teleport_points", "markers") instance=ExtResource("7_pv647")]
 position = Vector2(-4, 70)
 teleport_points = [NodePath("../Markers/WizardSpawn"), NodePath("../Markers/WizardSpawn2"), NodePath("../Markers/WizardSpawn3"), NodePath("../Markers/WizardSpawn4")]
-markers = [NodePath("../MeteorMarker")]
+markers = [NodePath("../MeteorMarker"), NodePath("../FireballMarker")]
 
 [node name="Markers" type="Node2D" parent="." unique_id=69241897]
 
 [node name="WizardSpawn" type="Marker2D" parent="Markers" unique_id=694497376]
-position = Vector2(163, -40)
+position = Vector2(199, 2)
 
 [node name="WizardSpawn2" type="Marker2D" parent="Markers" unique_id=1833535446]
-position = Vector2(138, 41)
+position = Vector2(156, 73)
 
 [node name="WizardSpawn3" type="Marker2D" parent="Markers" unique_id=1125013702]
-position = Vector2(-151, 53)
+position = Vector2(-159, 62)
 
 [node name="WizardSpawn4" type="Marker2D" parent="Markers" unique_id=120603705]
-position = Vector2(-193, -36)
+position = Vector2(-210, 14)
 
 [node name="MeteorMarker" type="Marker2D" parent="." unique_id=1356588990]
 position = Vector2(0, -19)
 script = ExtResource("8_ffcpw")
+
+[node name="FireballMarker" type="Marker2D" parent="." unique_id=1928416640]
+position = Vector2(0, 41)
+script = ExtResource("8_ffcpw")
+id = &"fireball_center"

@@ -1,9 +1,36 @@
 [gd_scene format=3 uid="uid://d0sw7tr3lvjoy"]
 
 [ext_resource type="Script" uid="uid://cryh0nhl8q82m" path="res://Enemies/WizardBoss/FireWizard/meteor.gd" id="1_88isd"]
-[ext_resource type="Texture2D" uid="uid://c3ub8vahh37tm" path="res://Enemies/WizardBoss/FireWizard/Meteor.png" id="1_ybejm"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_88isd"]
 [ext_resource type="PackedScene" uid="uid://bftpdwkjw3s0r" path="res://Enemies/WizardBoss/FireWizard/BurningIslandEffect.tscn" id="2_q4o55"]
+[ext_resource type="Shader" uid="uid://bflityi5ildro" path="res://Enemies/WizardBoss/FireWizard/meteor_trail.gdshader" id="3_u31lb"]
+[ext_resource type="Texture2D" uid="uid://b4kw6kum5w2jn" path="res://Enemies/WizardBoss/FireWizard/MeteorFlameless.png" id="4_u31lb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_frjwm"]
+shader = ExtResource("3_u31lb")
+shader_parameter/margin_px = Vector4(8, 44, 8, 6)
+shader_parameter/trail_dir = Vector2(0, -1)
+shader_parameter/head_offset_px = Vector2(0, 0)
+shader_parameter/head_radius_px = 9.0
+shader_parameter/trail_length_px = 38.0
+shader_parameter/taper = 1.2
+shader_parameter/front_squash = 0.746000011685
+shader_parameter/tail_heat = 0.45
+shader_parameter/flow_speed = 15.0
+shader_parameter/wobble_px = 2.5
+shader_parameter/across_scale = 1.0
+shader_parameter/along_scale = 0.15
+shader_parameter/turbulence = 0.8
+shader_parameter/animation_fps = 60.0
+shader_parameter/pixel_snap = true
+shader_parameter/core_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/inner_color = Color(1, 0.7, 0.18, 1)
+shader_parameter/outer_color = Color(0.91, 0.31, 0.1, 1)
+shader_parameter/edge_color = Color(0.48, 0.1, 0.07, 1)
+shader_parameter/core_threshold = 0.75
+shader_parameter/inner_threshold = 0.5
+shader_parameter/outer_threshold = 0.25
+shader_parameter/edge_threshold = 0.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e83u5"]
 
@@ -14,13 +41,14 @@ script = ExtResource("1_88isd")
 island_burn_scene = ExtResource("2_q4o55")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=3468313]
-texture = ExtResource("1_ybejm")
+material = SubResource("ShaderMaterial_frjwm")
+position = Vector2(0, -7)
+texture = ExtResource("4_u31lb")
 
 [node name="HurtBox" parent="." unique_id=1848462194 instance=ExtResource("2_88isd")]
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=139825185]
-position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_e83u5")
 
 [node name="GroundDetector" type="Area2D" parent="." unique_id=364407259]
@@ -28,7 +56,6 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="GroundDetector" unique_id=1370119882]
-position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_88isd")
 debug_color = Color(1.5883148e-06, 0.6378433, 0.39088297, 0.41960785)
 
