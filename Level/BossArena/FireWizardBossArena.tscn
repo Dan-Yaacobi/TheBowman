@@ -14,7 +14,7 @@ script = ExtResource("1_pv647")
 boss = NodePath("WizardFireBoss")
 
 [node name="PlayerSpawn" parent="." unique_id=1835078092 instance=ExtResource("2_ffcpw")]
-position = Vector2(-39, 99)
+position = Vector2(-91, 115)
 
 [node name="Portal" parent="." unique_id=1166811293 instance=ExtResource("3_yad5n")]
 z_index = 0
@@ -43,19 +43,22 @@ position = Vector2(2, 560)
 [node name="Islands" type="Node2D" parent="." unique_id=1025895520]
 
 [node name="Island5" parent="Islands" unique_id=2002063557 instance=ExtResource("6_2a8j3")]
-position = Vector2(-41, 146)
+position = Vector2(-7, 164)
 
-[node name="Island8" parent="Islands" unique_id=1847265216 instance=ExtResource("6_2a8j3")]
+[node name="Island10" parent="Islands" unique_id=1847265216 instance=ExtResource("6_2a8j3")]
+position = Vector2(-69, 199)
+
+[node name="Island12" parent="Islands" unique_id=656758899 instance=ExtResource("6_2a8j3")]
+position = Vector2(52, 196)
+
+[node name="Island8" parent="Islands" unique_id=433250681 instance=ExtResource("6_2a8j3")]
 position = Vector2(-96, 146)
 
 [node name="Island6" parent="Islands" unique_id=1670576261 instance=ExtResource("6_2a8j3")]
 position = Vector2(140, 66)
 
 [node name="Island7" parent="Islands" unique_id=81475756 instance=ExtResource("6_2a8j3")]
-position = Vector2(82, 146)
-
-[node name="Island11" parent="Islands" unique_id=238016116 instance=ExtResource("6_2a8j3")]
-position = Vector2(22, 146)
+position = Vector2(96, 146)
 
 [node name="Island14" parent="Islands" unique_id=387369012 instance=ExtResource("6_2a8j3")]
 position = Vector2(161, -15)
@@ -70,7 +73,7 @@ position = Vector2(-153, 85)
 position = Vector2(192, 170)
 
 [node name="WizardFireBoss" parent="." unique_id=505457552 node_paths=PackedStringArray("teleport_points", "markers") instance=ExtResource("7_pv647")]
-position = Vector2(2.0000076, 99.999985)
+position = Vector2(-4, 70)
 teleport_points = [NodePath("../Markers/WizardSpawn"), NodePath("../Markers/WizardSpawn2"), NodePath("../Markers/WizardSpawn3"), NodePath("../Markers/WizardSpawn4")]
 markers = [NodePath("../MeteorMarker")]
 
