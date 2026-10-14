@@ -7,7 +7,7 @@ var _hit_enemy: Enemy = null
 var _hit_position: Vector2 = Vector2.ZERO
 
 func connect_gauge() -> void:
-	max_gauge = 1
+	max_gauge = 4
 	gauge_texture = LIGHTNING
 	gauge_tint = Color.ORANGE
 	EventBus.arrow_enemy_hit.connect(_on_arrow_hit)
