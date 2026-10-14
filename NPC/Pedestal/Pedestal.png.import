@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://g615mriufvi"
-path="res://.godot/imported/Pedestal.png-6e09e997f575037eb7e86417341af9c8.ctex"
+path="res://.godot/imported/Pedestal.png-bcd81cbce38ea70fc9321017da9b37e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shop/BowsShop/Sprites/Pedestal.png"
-dest_files=["res://.godot/imported/Pedestal.png-6e09e997f575037eb7e86417341af9c8.ctex"]
+source_file="res://NPC/Pedestal/Pedestal.png"
+dest_files=["res://.godot/imported/Pedestal.png-bcd81cbce38ea70fc9321017da9b37e2.ctex"]
 
 [params]
 

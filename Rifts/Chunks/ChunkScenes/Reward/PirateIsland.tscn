@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_xchvw"]
 [ext_resource type="Script" uid="uid://csms6ex3jqmwq" path="res://Rifts/Chunks/ChunkScenes/Reward/pirate_ship.gd" id="7_xchvw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wywed"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xchvw"]
 resource_local_to_scene = true
 size = Vector2(126.5, 89)
 
@@ -29,7 +29,7 @@ script = ExtResource("7_xchvw")
 
 [node name="CollisionShape2D" parent="Bounds" index="0" unique_id=744888302]
 position = Vector2(-41.25, -20.5)
-shape = SubResource("RectangleShape2D_wywed")
+shape = SubResource("RectangleShape2D_xchvw")
 
 [node name="Island" parent="." unique_id=1847265216 instance=ExtResource("6_xchvw")]
 position = Vector2(0, -1)

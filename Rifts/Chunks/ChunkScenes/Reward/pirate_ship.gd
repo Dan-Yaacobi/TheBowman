@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@onready var pirate: Pirate = $"../Pirate"
+@onready var pirate: Pirate = $"../Island/Pirate"
 
 func _ready() -> void:
 	if pirate:

@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
 [ext_resource type="Resource" uid="uid://ck8ck21kjw4n2" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres" id="16_7w4lt"]
 [ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
+[ext_resource type="Script" uid="uid://d107jvx1qekt7" path="res://Player/hail.gd" id="18_ib3vm"]
 [ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="22_bgaaw"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
 [ext_resource type="Script" uid="uid://5aetuiovci75" path="res://Player/grappling_state.gd" id="23_gv3fu"]
@@ -384,6 +385,22 @@ script = ExtResource("8_qvxki")
 random_strength = 5.0
 shake_fade = 10.0
 base_zoom = Vector2(3.5, 3.5)
+
+[node name="Hail" type="CPUParticles2D" parent="Camera2D" unique_id=1761844785]
+position = Vector2(0, -232)
+emitting = false
+amount = 150
+lifetime = 1.5
+preprocess = 1.5
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 10)
+particle_flag_align_y = true
+direction = Vector2(0.15, 1)
+spread = 3.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 700.0
+initial_velocity_max = 900.0
+script = ExtResource("18_ib3vm")
 
 [node name="PlayerStateMachine" parent="." unique_id=1204656686 instance=ExtResource("4_tfnw6")]
 

@@ -4,13 +4,13 @@ enum Type{DIRT, SNOW, HELL}
 
 @export var rift_values: Array[float]
 @export var active_ability_pool: Array[ActiveAbility]
+@export var sky_colors: Array[SkyColors]
 
 @onready var rift_generator: RiftGenerator = $RiftGenerator
 @onready var rift_enemy_spawner: RiftEnemySpawner = $RiftEnemySpawner
 @onready var loot_manager: LootManager = $LootManager
 
 var rift_levels: Array[RiftLevel]
-
 
 func add_rift_level(_rift: RiftLevel) -> void:
 	if _rift:
@@ -27,6 +27,7 @@ func extra_set_world_functions() -> void:
 	rift_level.reparent(self)
 	rift_level.get_summon_enemy.connect(call_enemy_spawner)
 	has_respawns = true
+	EventBus.change_sky_color.emit(sky_colors[get_rift_type()])
 	
 func _on_world_ready() -> void:
 	if PlayerManager.player.stats.rift_level == 1 and active_ability_pool.size() >= 3:
@@ -62,3 +63,15 @@ func extra_enter_event_functions() -> void:
 
 func extra_exit_event_functions() -> void:
 	rift_enemy_spawner.is_suspended = false
+	
+func get_rift_type() -> Rift.Type:
+	var lvl: int = PlayerManager.player.stats.rift_level
+	if lvl < 1 or CustomVariables.RIFTS_PER_TYPE <= 0:
+		return Rift.Type.DIRT
+
+	@warning_ignore("integer_division")
+	var index: int = (lvl - 1) / CustomVariables.RIFTS_PER_TYPE
+	
+	if index >= Rift.Type.size():
+		return Rift.Type.DIRT
+	return index as Rift.Type

@@ -38,11 +38,11 @@ func get_rift_type() -> Rift.Type:
 
 	@warning_ignore("integer_division")
 	var index: int = (lvl - 1) / CustomVariables.RIFTS_PER_TYPE
-
+	
 	if index >= Rift.Type.size():
 		return Rift.Type.DIRT
-
 	return index as Rift.Type
+	
 func _process(_delta: float) -> void:
 	if floating:
 		global_position.y = base_height + sin(Time.get_ticks_msec() * 0.001 * float_speed) * float_amplitude

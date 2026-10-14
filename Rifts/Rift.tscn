@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://ss8moblrre6q" path="res://Player/Abilities2.0/ActiveAbilities/Resources/thunder_strike_ability.tres" id="7_iqrxt"]
 [ext_resource type="Resource" uid="uid://dwno03ntsasoi" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres" id="7_v6yg5"]
 [ext_resource type="Resource" uid="uid://cgwpaefsfrma1" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres" id="8_3f0ah"]
+[ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="8_hhyca"]
 [ext_resource type="Resource" uid="uid://bm5wpeqsqrof4" path="res://Rifts/Chunks/ChunkData/Treasure/cleric_island.tres" id="8_oe8us"]
 [ext_resource type="Resource" uid="uid://c2cyut0rfnys6" path="res://Rifts/Chunks/ChunkData/Treasure/chest_island.tres" id="8_qxt8x"]
 [ext_resource type="Resource" uid="uid://b7cryatyf3hgs" path="res://Rifts/Chunks/ChunkData/Treasure/pirate_island.tres" id="9_2cjow"]
@@ -44,6 +45,24 @@
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="38_oe8us"]
 [ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="38_vwcbb"]
 [ext_resource type="Resource" uid="uid://b5lbs5gsdj1he" path="res://Rifts/RiftEnemySpawner/EnemyEntry/fire_bird_entry.tres" id="39_j75h4"]
+
+[sub_resource type="Resource" id="Resource_4phns"]
+script = ExtResource("8_hhyca")
+top_color = Color(0.2, 0.4, 0.8, 1)
+bottom_color = Color(0.6, 0.8509804, 1, 1)
+metadata/_custom_type_script = "uid://viwygaov6sfn"
+
+[sub_resource type="Resource" id="Resource_hhyca"]
+script = ExtResource("8_hhyca")
+top_color = Color(0.58, 0.68, 0.78, 1)
+bottom_color = Color(0.92, 0.95, 0.97, 1)
+metadata/_custom_type_script = "uid://viwygaov6sfn"
+
+[sub_resource type="Resource" id="Resource_c6uaq"]
+script = ExtResource("8_hhyca")
+top_color = Color(0.8, 0, 0.01333313, 1)
+bottom_color = Color(0.21960784, 0.21960784, 0.21960784, 1)
+metadata/_custom_type_script = "uid://viwygaov6sfn"
 
 [sub_resource type="Resource" id="Resource_d1hhh"]
 script = ExtResource("3_jukhk")
@@ -111,6 +130,7 @@ metadata/_custom_type_script = "uid://co6xputyjmuin"
 [node name="Rift" type="Node2D" unique_id=371790418]
 script = ExtResource("1_hofdl")
 active_ability_pool = Array[ExtResource("2_oaj8c")]([ExtResource("3_oaj8c"), ExtResource("4_k7sga"), ExtResource("5_iqrxt"), ExtResource("6_k7sga"), ExtResource("7_iqrxt")])
+sky_colors = Array[ExtResource("8_hhyca")]([SubResource("Resource_4phns"), SubResource("Resource_hhyca"), SubResource("Resource_c6uaq")])
 
 [node name="RiftGenerator" parent="." unique_id=1531404571 instance=ExtResource("2_pe0ph")]
 data = SubResource("Resource_d1hhh")

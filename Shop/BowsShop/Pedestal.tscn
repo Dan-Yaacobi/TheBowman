@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcgks5a8huff6"]
+[gd_scene format=3 uid="uid://bcgks5a8huff6"]
 
 [ext_resource type="Script" uid="uid://c36trchugsnlo" path="res://Shop/BowsShop/pedestal.gd" id="1_hrklu"]
-[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://Shop/BowsShop/Sprites/Pedestal.png" id="2_htf41"]
+[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://NPC/Pedestal/Pedestal.png" id="2_htf41"]
 [ext_resource type="PackedScene" uid="uid://djpo5x6fupy0e" path="res://Level/Islands/Island2.tscn" id="3_pgjq2"]
 [ext_resource type="Script" uid="uid://7dat2p3rgwiy" path="res://Shop/BowsShop/pedestal_bow.gd" id="4_pgjq2"]
 [ext_resource type="PackedScene" uid="uid://cqafvtw74thf0" path="res://Shop/BowsShop/BuyBowMenu.tscn" id="6_a5bpj"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw43u"]
 size = Vector2(42, 40)

@@ -7,6 +7,10 @@ const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var cloud_timer: Timer = $CloudTimer
 @onready var hud: HUD = $Hud
 
+@onready var sky: ColorRect = $CanvasLayer/ColorRect
+@export var base_top_color: Color = Color(0.2, 0.4, 0.8, 1.0)
+@export var base_bottom_color: Color = Color(0.6, 0.851, 1.0)
+
 const MAIN_MENU = preload("uid://cnhbrpo4htp2y")
 var main_menu: PackedScene = MAIN_MENU
 
@@ -25,7 +29,8 @@ func _ready() -> void:
 	cloud_timer.timeout.connect(summon_cloud)
 	cloud_timer.start()
 	add_child(PlayerManager.player)
-
+	EventBus.change_sky_color.connect(change_sky_colors)
+	
 func summon_cloud() -> void:
 	var new_cloud: Cloud = CLOUD.instantiate()
 	new_cloud.global_position = PlayerManager.player.global_position + Vector2(-500, randf_range(-200, -50))
@@ -42,3 +47,11 @@ func music_on_off() -> void:
 		game_music.play()
 	else:
 		game_music.stop()
+
+func change_sky_colors(sky_colors: SkyColors) -> void:
+	var mat: ShaderMaterial = sky.material as ShaderMaterial
+	if mat == null:
+		push_warning("Sky ColorRect has no ShaderMaterial")
+		return
+	mat.set_shader_parameter("color_top", sky_colors.top_color)
+	mat.set_shader_parameter("color_bottom", sky_colors.bottom_color)
