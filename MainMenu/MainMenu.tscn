@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
+[ext_resource type="PackedScene" uid="uid://bncp67mtk6hg1" path="res://NPC/Island Spirit/IslandSpirit.tscn" id="5_5lv0r"]
 [ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="7_qvidt"]
 [ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="8_qvidt"]
 [ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="10_qvidt"]
@@ -63,13 +64,8 @@ fixed_frame_index = 4
 
 [node name="RiftPortal" parent="Islands/Island11" unique_id=1166811293 instance=ExtResource("13_npjie")]
 z_index = 1
-position = Vector2(1, -30)
-scale = Vector2(1.5, 1.5)
+position = Vector2(0, -28)
 destination = 2
-idle_speed = 0.5
-near_speed = 1.4
-wake_duration = 0.3
-sleep_duration = 1.0
 
 [node name="Island16" parent="Islands" unique_id=1999979479 instance=ExtResource("14_7t2hb")]
 position = Vector2(96, 102)
@@ -154,3 +150,6 @@ costs_heart = false
 
 [node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
 position = Vector2(383, 67)
+
+[node name="IslandSpirit" parent="." unique_id=891332474 instance=ExtResource("5_5lv0r")]
+position = Vector2(41, 77)

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bncp67mtk6hg1"]
+
+[ext_resource type="Texture2D" uid="uid://bwxjgnmxbyl86" path="res://NPC/Island Spirit/IslandSpirit.png" id="1_ijths"]
+[ext_resource type="Shader" uid="uid://bkh4p2ojdl4u2" path="res://NPC/Island Spirit/guide_spirit.gdshader" id="1_lfpro"]
+[ext_resource type="Texture2D" uid="uid://ki2xfjx1im60" path="res://NPC/Island Spirit/Golden Pixel Exclamation Icon.png" id="3_rymdt"]
+[ext_resource type="Shader" uid="uid://8q032ylbfikn" path="res://NPC/Island Spirit/icon_glow.gdshader" id="3_yv3wb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yv3wb"]
+shader = ExtResource("1_lfpro")
+shader_parameter/bob_amount = 5.0
+shader_parameter/bob_speed = 2.0
+shader_parameter/tail_start = 0.0
+shader_parameter/tail_amount = 1.5
+shader_parameter/tail_speed = 4.0
+shader_parameter/tail_frequency = 60.0
+shader_parameter/glow_color = Color(0.4, 1, 1, 1)
+shader_parameter/glow_threshold = 0.1070000050825
+shader_parameter/glow_strength = 0.5
+shader_parameter/glow_speed = 2.0
+shader_parameter/pending = 0.0
+shader_parameter/flash = 0.0
+shader_parameter/pixel_snap = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d75ou"]
+shader = ExtResource("3_yv3wb")
+shader_parameter/glow_color = Color(1, 0.8, 0.3, 1)
+shader_parameter/glow_radius = 5.0
+shader_parameter/glow_min = 0.2
+shader_parameter/glow_max = 0.7
+shader_parameter/brighten = 0.25
+shader_parameter/pulse_speed = 5.0
+
+[node name="IslandSpirit" type="Node2D" unique_id=891332474]
+scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=191569572]
+material = SubResource("ShaderMaterial_yv3wb")
+texture = ExtResource("1_ijths")
+
+[node name="Exclamation" type="Sprite2D" parent="." unique_id=1469433644]
+material = SubResource("ShaderMaterial_d75ou")
+position = Vector2(5, -160)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_rymdt")

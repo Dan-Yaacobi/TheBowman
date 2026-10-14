@@ -14,15 +14,15 @@ size = Vector2(41.75, 53.25)
 script = ExtResource("1_1i8qb")
 
 [node name="Island" parent="." unique_id=384425143 instance=ExtResource("3_vmfpc")]
+use_fixed_frame = true
+fixed_frame_index = 4
 
 [node name="Portal" parent="Island" unique_id=1887135002 instance=ExtResource("2_8k06k")]
 z_index = 0
-position = Vector2(1, -29)
-scale = Vector2(1.5, 1.5)
+position = Vector2(0, -27)
 destination = 3
 is_rift_portal = true
 wake_duration = 0.5
-sleep_duration = 1.0
 
 [node name="EntryMarker" parent="." unique_id=176897598 instance=ExtResource("4_vmfpc")]
 
