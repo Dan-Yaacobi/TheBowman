@@ -24,7 +24,6 @@ func Enter() -> void:
 	entity.animation_player.play("Pull")
 	charge_rate = PlayerManager.player.get_pull_speed()
 	entity.draw_arrow()
-	PlayerManager.player.shooting = true
 	entity.shot_power = 0
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))
 	entity.animation_player.speed_scale = charge_rate
@@ -53,15 +52,7 @@ func Physics(_delta: float) -> MainHandState:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
-	if _event.is_action_released("shoot",true):
-		release()
 	return null
-
-func release() -> void:
-	PlayerManager.player.set_shooting(true)
-	entity.release_arrow()
-	PlayerManager.player.shooting = false
-	state_machine.ChangeState(idle)
 
 func finished(_animation_name) -> void:
 	if _animation_name == 'Pull':

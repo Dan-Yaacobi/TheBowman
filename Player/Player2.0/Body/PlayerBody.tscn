@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ngmgxpxrkp3y" path="res://Player/Body/NewArcher.png" id="2_x4lrk"]
 [ext_resource type="Shader" uid="uid://bgr6j58j84j1j" path="res://Player/Body/soul.gdshader" id="4_5tes5"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="5_yg58g"]
+[ext_resource type="Texture2D" uid="uid://b2ltxpnx4x6ia" path="res://Items/Equipments/Swords/Sprites/BasicSword.png" id="7_oqagq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvfa1"]
 
@@ -89,6 +90,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_2ber8"]
 resource_name = "Jump"
@@ -100,10 +113,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 3, 4]
+"values": [3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_oroft"]
@@ -156,6 +169,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwordSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-25, -16)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SwordSprite:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.56199604]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SwordSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wjd1q"]
 resource_name = "Shoot"
@@ -175,7 +224,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_pqocj"]
 resource_name = "Swing"
-length = 0.35
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -183,10 +232,46 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.14598304, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-25, -16), Vector2(-18, -4), Vector2(-1, -26), Vector2(28, 20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.14598304, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-0.56199604, -2.2444935, -0.8918632, 1.977458]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_jt2tw"]
@@ -247,7 +332,7 @@ charge_shaders = Dictionary[int, Shader]({
 material = SubResource("ShaderMaterial_jvfa1")
 texture = ExtResource("2_x4lrk")
 hframes = 4
-vframes = 2
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1808518498]
 libraries/ = SubResource("AnimationLibrary_cglcq")
@@ -288,3 +373,9 @@ gravity = Vector2(0, 0)
 radial_accel_min = -50.0
 scale_amount_curve = SubResource("Curve_e83u5")
 color = Color(0.50980395, 0, 0, 1)
+
+[node name="SwordSprite" type="Sprite2D" parent="." unique_id=1022882695]
+visible = false
+position = Vector2(-25, -16)
+rotation = -0.56199604
+texture = ExtResource("7_oqagq")

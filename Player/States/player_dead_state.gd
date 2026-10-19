@@ -19,6 +19,7 @@ func Exit() -> void:
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	EventBus.player_died.emit(display_death_screen)
 	reset_active_ability()
+	player.reset_hands()
 	
 func reset_active_ability() -> void:
 	var ability: ActiveAbility = PlayerManager.player.stats.active_ability

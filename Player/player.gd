@@ -12,6 +12,8 @@ signal dash_finished
 @onready var jump_action: JumpAction = $JumpAction
 @onready var camera: Camera2D = $Camera2D
 @onready var hit_box: HitBox = $HitBox
+@onready var off_hand: PlayerOffHand = $PlayerOffHand
+@onready var main_hand: PlayerMainHand = $PlayerMainHand
 
 @onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -28,6 +30,8 @@ signal dash_finished
 @onready var quiver: Sprite2D = $PlayerBody/Quiver
 @onready var dead: PlayerDeadState = $PlayerStateMachine/Dead
 @onready var nearby_enemies_detector: Area2D = $NearbyEnemiesDetector
+@onready var sword_attack: SwordAttackState = $PlayerStateMachine/SwordAttack
+@onready var swing_cooldown: Timer = $PlayerBody/SwingCooldown
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
 var can_hook: bool = true
@@ -55,9 +59,6 @@ var current_minions: Array[Companion] = []
 
 var invincible: bool = false
 
-@onready var main_hand: PlayerMainHand = $PlayerMainHand
-@onready var off_hand: PlayerOffHand = $PlayerOffHand
-@onready var off_hand_shoulder: Node2D = $OffHandShoulder
 
 var shooting: bool = false
 var current_arrow: Arrow
@@ -80,19 +81,20 @@ var sprite: Sprite2D
 var initial_max_hp: int
 
 var nearby_enemies: Array[Enemy]
+var enemies_killed: int = 0
+var can_swing: int = 0
+var aim_direction: Vector2 = Vector2.ZERO
+var in_jump: bool = false
 
 func _ready() -> void:
 	stats.player = self
 	player_state_machine.Initialize(self)
-	#jump_reset.body_shape_entered.connect(jump_action.reset_jumps)
 	initial_max_hp = stats.max_hp
 	MetaProgress.apply_to(stats)
 	refresh_max_hp()
 	invincibility_timer.timeout.connect(invincibility_over)
 	hit_box.Damaged.connect(take_damage)
 	hit_box.Damaged.connect(body.apply_touch_effects)
-	off_hand.connect_hands(main_hand, off_hand_shoulder)
-	main_hand.connect_hands(off_hand)
 	EventBus.invisible_hands.connect(show_hands)
 	EventBus.leeched.connect(leech_heal)
 	buff_handler.set_entity(self)
@@ -104,16 +106,19 @@ func _ready() -> void:
 	EventBus.apply_player_knockback.connect(apply_knockback)
 	EventBus.active_ability_ready.connect(active_ability_ready)
 	quiver.hide()
-	#reset_equipment()
 	sprite = body.sprite
 	debuff_handler.set_entity(self)
 	activate_passive_abilities()
 	MetaProgress.apply_abilities(self)
 	SaveService.register(&"resources", _save_resources, _load_resources)
-
+	main_hand.drawing_arrow.connect(_on_main_hand_drawing)
+	main_hand.release.connect(_on_main_hand_released)
+	off_hand.rest(body.off_hand_shoulder)
+	main_hand.set_anchor(body.main_hand_shoulder)
+	swing_cooldown.timeout.connect(_on_swing_cooldown_timeout)
+	jump_action.jumped.connect(_on_jumped)
+	jump_action.landed.connect(_on_landed)
 	
-var enemies_killed: int = 0
-
 func _save_resources() -> Dictionary:
 	var out: Dictionary = {}
 	for item: CustomVariables.items in stats.items:
@@ -155,6 +160,8 @@ func _process(_delta: float) -> void:
 		direction = Input.get_axis("Left","Right")
 	else:
 		direction = 0
+	_update_aim_and_facing()
+	_update_body_animation()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -167,10 +174,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			var track: UpgradeTrack = MetaProgress.tracks[0]
 			var bought: bool = MetaProgress.purchase(track, self)
 			print("bought: %s | level: %d | arrow damage: %s" % [bought, MetaProgress.get_level(track), stats.arrow_damage.value()])
+	
 	if stats.hp > 0:
-		
 		if event.is_action_pressed("test"):
 			$IslandAttack.activate_attack()
+			
 		if event.is_action_pressed("up"):
 			if current_portal:
 				current_portal.enter()
@@ -180,10 +188,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		if event.is_action_released("Jump"):
 			jump_action.release_jump()
-
-		if event.is_action_pressed("shoot",true):
+			
+		if event.is_action_pressed("shoot"):
 			if stats.bow and stats.arrow:
 				shoot()
+
+		if event.is_action_released("shoot"):
+			release_shot()
 			
 		if event.is_action_pressed("active"):
 			use_active_ability()
@@ -192,7 +203,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			EventBus.request_gauge.emit()
 			
 func shoot() -> void:
-	EventBus.start_shooting.emit()
+	if is_swinging():
+		return
+	main_hand.start_draw()
+
+func release_shot() -> void:
+	main_hand.release_draw()
 	
 func use_active_ability() -> void:
 	if stats.active_ability == null:
@@ -225,6 +241,19 @@ func show_hands(yes: bool) -> void:
 	main_hand.visible = yes
 	off_hand.visible = yes
 	
+func _on_main_hand_drawing() -> void:
+	shooting = true
+	off_hand.hold(main_hand.hold_position, main_hand, get_pull_speed())
+
+func _on_main_hand_released() -> void:
+	shooting = false
+	off_hand.rest(body.off_hand_shoulder)
+
+func reset_hands() -> void:
+	shooting = false
+	main_hand.reset()
+	off_hand.rest(body.off_hand_shoulder)
+
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
@@ -253,16 +282,25 @@ func reset_knockback() -> void:
 	knockback = Vector2.ZERO
 	
 func update_direction(_new_side: bool) -> void:
-	if _new_side != direction_side and not main_hand.is_swinging():
+	if _new_side != direction_side and not is_swinging():
 		direction_side = _new_side
 		body.change_direction(_new_side)
 		main_hand.change_direction()
-		off_hand_shoulder.position.x *= -1
-		off_hand.position = off_hand_shoulder.position
-
-func update_body_animation(_anim: String) -> void:
-	body.update_animation(_anim)
-
+		
+func _update_aim_and_facing() -> void:
+	var aim: Vector2 = get_global_mouse_position() - main_hand.global_position
+	aim_direction = aim
+	main_hand.set_aim(aim)
+	if is_swinging():
+		return
+	if main_hand.is_drawing() or is_idle():
+		if aim.x > 4.0:
+			update_direction(false)
+		elif aim.x < -4.0:
+			update_direction(true)
+	elif is_walking():
+		update_direction(direction < 0)
+		
 func apply_gravity(delta) -> void:
 		if velocity.y > 0:
 			velocity.y += stats.down_gravity*delta
@@ -426,10 +464,22 @@ func enable_jump() -> void:
 
 func disable_jump() -> void:
 	jump_action.can_jump = false
+	
+func _on_swing_cooldown_timeout() -> void:
+	can_swing -= 1
 
+func can_start_swing() -> bool:
+	return can_swing <= 0 and not main_hand.is_drawing()
+
+func is_swinging() -> bool:
+	return player_state_machine.curr_state is SwordAttackState
+	
 ############# IS METHODS #############
 func is_idle() -> bool:
 	return player_state_machine.curr_state is PlayerIdleState
+	
+func is_walking() -> bool:
+	return player_state_machine.curr_state is PlayerWalkingState
 	
 func is_dash() -> bool:
 	return player_state_machine.curr_state is PlayerDashState
@@ -471,8 +521,7 @@ func get_sword_size() -> float:
 func get_sword_abilities() -> Array[PlayerAbility]:
 	return stats.sword_abilities
 
-func get_sword() -> Sword:
-	return main_hand.sword
+
 	
 func get_equipped_in_slot(_slot: EquipmentData.slots) -> EquipmentData:
 	match _slot:
@@ -601,3 +650,17 @@ func _on_nearby_enemies_detector_body_exited(_body: Node2D) -> void:
 
 func erase_nearby_enemy(_enemy: Enemy) -> void:
 	nearby_enemies.erase(_enemy)
+func _on_jumped() -> void:
+	in_jump = true
+	body.restart_animation("Jump")
+
+func _on_landed() -> void:
+	in_jump = false
+
+func _update_body_animation() -> void:
+	if is_swinging() or in_jump:
+		return
+	if is_walking():
+		body.play_if_not_playing("Walk")
+	elif is_idle():
+		body.play_if_not_playing("Idle")

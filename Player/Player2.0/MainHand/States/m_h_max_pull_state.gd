@@ -24,9 +24,7 @@ func Enter() -> void:
 	pass
 	
 func Exit() -> void:
-	entity.release_arrow()
 	hold_time = 0
-	PlayerManager.player.shooting = false
 
 func Process(_delta: float) -> MainHandState:
 	entity.arrow_setup()
@@ -45,8 +43,6 @@ func Physics(_delta: float) -> MainHandState:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
-	if _event.is_action_released("shoot",true):
-		return idle
 	return null
 
 func getting_tired() -> void:

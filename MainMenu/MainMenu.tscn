@@ -64,7 +64,7 @@ fixed_frame_index = 4
 
 [node name="RiftPortal" parent="Islands/Island11" unique_id=1166811293 instance=ExtResource("13_npjie")]
 z_index = 1
-position = Vector2(0, -28)
+position = Vector2(0, -26)
 destination = 2
 
 [node name="Island16" parent="Islands" unique_id=1999979479 instance=ExtResource("14_7t2hb")]
@@ -81,7 +81,7 @@ use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island12" unique_id=844129433 instance=ExtResource("13_gej64")]
-position = Vector2(2, -18)
+position = Vector2(2, -16)
 item_data = ExtResource("7_qvidt")
 
 [node name="Island17" parent="Islands" unique_id=987538156 instance=ExtResource("14_7t2hb")]
@@ -90,7 +90,7 @@ use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="PedestalNPC2" parent="Islands/Island17" unique_id=1109545810 instance=ExtResource("13_gej64")]
-position = Vector2(-1, -17)
+position = Vector2(0, -16)
 item_data = ExtResource("8_qvidt")
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
@@ -132,7 +132,7 @@ use_fixed_frame = true
 fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
-position = Vector2(-1, -18)
+position = Vector2(-1, -16)
 item_data = ExtResource("10_qvidt")
 
 [node name="EventPortal" parent="Islands" unique_id=620797059 instance=ExtResource("16_5lv0r")]

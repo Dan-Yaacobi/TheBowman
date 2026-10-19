@@ -1,10 +1,17 @@
-class_name PlayerBody extends CharacterBody2D
+class_name PlayerBody extends Node2D
 
 @export var charge_shaders: Dictionary[Charges,Shader] = {}
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var charge: CPUParticles2D = $Charge
+@onready var sword_sprite: Sprite2D = $SwordSprite
+@onready var off_hand_shoulder: Node2D = $OffHandShoulder
+@onready var main_hand_shoulder: Node2D = $MainHandShoulder
+
+@onready var slash_animation_player: AnimationPlayer = $SlashEffect/SlashAnimationPlayer
+@onready var slash_hurt_box: HurtBox = $Sword/SlashHurtBox
+@onready var sword: Sword = $Sword
 
 enum Charges{BLOOD,THUNDER,SOUL,FIRE}
 
@@ -13,7 +20,6 @@ const BLOOD = preload("uid://dl8nl0pf7u1tn")
 var touch_effects: Array[Callable] = []
 var facing_direction: int = 1
 var charge_tween: Tween
-
 
 func _ready() -> void:
 	pass
@@ -73,3 +79,11 @@ func set_charge(charge: Charges) -> void:
 func charge_effect(color: Color) -> void:
 	charge.color = color
 	charge.emitting = true
+
+func play_if_not_playing(anim: String) -> void:
+	if animation_player.current_animation != anim:
+		animation_player.play(anim)
+
+func restart_animation(anim: String) -> void:
+	animation_player.stop()
+	animation_player.play(anim)

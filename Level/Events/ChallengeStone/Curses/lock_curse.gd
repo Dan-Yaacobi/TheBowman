@@ -16,4 +16,4 @@ func _change_lock(amount: int) -> void:
 		Lock.DASH:
 			player.can_dash += amount
 		Lock.SWORD:
-			player.main_hand.can_swing += amount
+			player.can_swing += amount

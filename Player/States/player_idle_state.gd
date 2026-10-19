@@ -4,13 +4,12 @@ class_name PlayerIdleState extends State
 @onready var slam: PlayerSlamState = $"../Slam"
 @onready var dead: PlayerDeadState = $"../Dead"
 @onready var dash: PlayerDashState = $"../Dash"
-
+@onready var sword_attack: SwordAttackState = $"../SwordAttack"
 func _ready() -> void:
 	pass
 
 #what happens when the player enters this state
 func Enter() -> void:
-	player.body.update_animation("Idle")
 	pass
 	
 #what happens when the player exits this state
@@ -33,4 +32,6 @@ func Physics(_delta: float) -> State:
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("dash") and player.can_dash <= 0:
 		return dash
+	if _event.is_action_pressed("swing") and player.can_start_swing():
+		return sword_attack
 	return null

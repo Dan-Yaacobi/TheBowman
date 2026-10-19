@@ -10,63 +10,44 @@ signal drawing_arrow
 @onready var max_pull_state: MaxPullMainHandState = $MainHandStateMachine/MaxPull
 @onready var arrow_position: Node2D = $ArrowPosition
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var swing_cooldown: Timer = $MainHandStateMachine/Swing/SwingCooldown
+@onready var pulling: PullingMainHandState = $MainHandStateMachine/Pulling
 
 @export var arrow: PackedScene
 @export var arrow_texture: Texture
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
-@onready var sword: Sword = $MainHandStateMachine/Swing/Sword
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
 var current_arrow: Arrow = null
 var hand_direction: Vector2
-var pulling: bool = false
 var shot_power: float
 var off_hand: PlayerOffHand
+var body: PlayerBody
 var shot_offset: float = 0
-var can_swing: int = 0
+var anchor: Node2D = null
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
-	swing_cooldown.timeout.connect(swing_off_cooldown)
-	EventBus.player_died.connect(reset)
 	
 func _process(_delta: float) -> void:
-	if PlayerManager.player.is_idle(): # and not GlobalPlayer.is_prev_jump():
-		calculate_direction_to_cursor()
+	if anchor:
+		global_position = anchor.global_position
 
-func reset(_m: bool) -> void:
+func set_anchor(_anchor: Node2D) -> void:
+	anchor = _anchor
+
+func set_aim(direction: Vector2) -> void:
+	hand_direction = direction
+	
+func reset() -> void:
 	main_hand_state_machine.ChangeState(idle)
+	if current_arrow:
+		current_arrow.queue_free()
 	current_arrow = null
-	
-func connect_hands(_off_hand) -> void:
-	if _off_hand:
-		off_hand = _off_hand
-		
-func calculate_direction_to_cursor() -> void:
-	var mouse_pos = get_global_mouse_position()
-	var player_pos = global_position
-	hand_direction = Vector2(mouse_pos[0] - player_pos[0],mouse_pos[1] - player_pos[1])
-
-	if mouse_pos.x > player_pos.x + 4:
-		PlayerManager.player.update_direction(false)
-	elif mouse_pos.x < player_pos.x - 4:
-		PlayerManager.player.update_direction(true)
-
-	
-func set_swing_direction(_side: bool) -> void:
-	if _side:
-		if scale.x > 0:
-			scale.x *= -1
-	else:
-		if scale.x < 0:
-			scale.x *= -1
 
 func arrow_setup() -> void:
-	calculate_direction_to_cursor()
 	set_hand_direction()
 	
 func draw_arrow() -> void:
@@ -105,14 +86,12 @@ func where_to_hold_arrow() -> Vector2:
 	
 func change_direction() -> void:
 	scale.x *= - 1
-	position.x *= - 1
 
 func new_arrow(_arrow: PackedScene) -> void:
 	if arrow.instantiate() is Arrow:
 		arrow = _arrow
 
 func release_arrow() -> void:
-	PlayerManager.player.set_shooting(false)
 	var perfect_threshold_check: float
 	if PlayerManager.player.stats.only_perfect:
 		perfect_threshold_check = 0.99
@@ -200,12 +179,17 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
 
-func swing_off_cooldown() -> void:
-	can_swing -= 1
-	swing_cooldown.stop()
-	
-func is_swinging() -> bool:
-	return main_hand_state_machine.curr_state is SwingMainHandState
+func is_drawing() -> bool:
+	return main_hand_state_machine.curr_state is PullingMainHandState or main_hand_state_machine.curr_state is MaxPullMainHandState
+
+func start_draw() -> void:
+	if is_idle():
+		main_hand_state_machine.ChangeState(pulling)
+
+func release_draw() -> void:
+	if is_drawing():
+		release_arrow()
+		main_hand_state_machine.ChangeState(idle)
 
 func set_time_for_perfect_shot(amount: float) -> void:
 	if amount > 0:

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cq1lw1j5im8pg"]
+
+[ext_resource type="Script" uid="uid://h6dixtoafmt" path="res://Objects/Scenes/decorations.gd" id="1_svn5c"]
+[ext_resource type="Texture2D" uid="uid://b5fvk0un30x6p" path="res://Objects/Sprites/DirtIslandDecorations.png" id="2_llfvs"]
+[ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="3_w2f7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbjd8"]
+size = Vector2(32, 32)
+
+[node name="Decoration" type="Node2D" unique_id=1273996650]
+script = ExtResource("1_svn5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=95672446]
+texture = ExtResource("2_llfvs")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1675098230]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_w2f7y")
+metadata/_custom_type_script = "uid://dypeadprx6irb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1098084835]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_lbjd8")
+
+[node name="PlacementMarker" type="Marker2D" parent="." unique_id=1300577183]
+position = Vector2(0, 10)

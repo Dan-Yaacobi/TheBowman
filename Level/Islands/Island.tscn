@@ -2,15 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dd5uq7un0y3cu" path="res://Level/Islands/island.gd" id="1_jyikq"]
 [ext_resource type="Script" uid="uid://gnexyll2mtpb" path="res://Level/Islands/texture_data.gd" id="2_ahai6"]
-[ext_resource type="Texture2D" uid="uid://b3vdsckuxxnv8" path="res://ZZ_Sprites in progress/DirtIsland.png" id="3_7mf8l"]
+[ext_resource type="Texture2D" uid="uid://fsv1js3gy3p2" path="res://Level/Islands/sprites/DirtIslands.png" id="3_c8r62"]
 [ext_resource type="Texture2D" uid="uid://dmbb60iq3h813" path="res://Level/Islands/sprites/Snow Islands.png" id="3_mg7j2"]
 [ext_resource type="PackedScene" uid="uid://dlxcc0gk5mdes" path="res://Level/Islands/ObjectsSpawnMarkers.tscn" id="3_yan88"]
 [ext_resource type="Texture2D" uid="uid://de8dpxqxqs63y" path="res://Level/Islands/sprites/Hell Islands.png" id="4_c8r62"]
+[ext_resource type="Texture2D" uid="uid://cqs1rxmt8hjo6" path="res://Level/Islands/sprites/island.png" id="6_mg7j2"]
 
 [sub_resource type="Resource" id="Resource_ahai6"]
 script = ExtResource("2_ahai6")
-texture = ExtResource("3_7mf8l")
-totalframes = 1
+texture = ExtResource("3_c8r62")
+hframes = 4
+vframes = 5
+totalframes = 20
 metadata/_custom_type_script = "uid://gnexyll2mtpb"
 
 [sub_resource type="Resource" id="Resource_g8eam"]
@@ -32,7 +35,7 @@ totalframes = 7
 metadata/_custom_type_script = "uid://gnexyll2mtpb"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp085"]
-size = Vector2(40, 10)
+size = Vector2(43, 8)
 
 [node name="Island" type="StaticBody2D" unique_id=1847265216]
 z_index = -4
@@ -42,10 +45,11 @@ textures = Array[ExtResource("2_ahai6")]([SubResource("Resource_ahai6"), SubReso
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131090441]
 position = Vector2(0, 3)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_7mf8l")
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_mg7j2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1568231833]
+position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_sp085")
 one_way_collision = true
 

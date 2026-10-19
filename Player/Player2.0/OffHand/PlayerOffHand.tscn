@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dd6ry72lmjepc" path="res://Player/Player2.0/OffHand/player_off_hand.gd" id="1_dyut0"]
 [ext_resource type="Texture2D" uid="uid://cpaprvhmflxbd" path="res://Player/Hand/Hand_2.png" id="2_dyut0"]
-[ext_resource type="Script" uid="uid://c8s38ngop7fkj" path="res://Player/Player2.0/OffHand/States/off_hand_state_machine.gd" id="2_hdxbw"]
-[ext_resource type="Script" uid="uid://cew0nfmkvmt6e" path="res://Player/Player2.0/OffHand/States/o_h_idle_state.gd" id="3_b6f1e"]
-[ext_resource type="Script" uid="uid://b5d11u4vmlib8" path="res://Player/Player2.0/OffHand/States/o_h_shooting_state.gd" id="4_dyut0"]
 
 [sub_resource type="Animation" id="Animation_o0dpc"]
 resource_name = "Pull"
@@ -65,15 +62,6 @@ libraries/ = SubResource("AnimationLibrary_t6bga")
 
 [node name="MidStringPos" type="Node2D" parent="." unique_id=671594613]
 position = Vector2(0, 1.66667)
-
-[node name="OffHandStateMachine" type="Node2D" parent="." unique_id=428536854]
-script = ExtResource("2_hdxbw")
-
-[node name="Idle" type="Node2D" parent="OffHandStateMachine" unique_id=1705695474]
-script = ExtResource("3_b6f1e")
-
-[node name="Shooting" type="Node2D" parent="OffHandStateMachine" unique_id=1960188921]
-script = ExtResource("4_dyut0")
 
 [node name="Bow" type="Node2D" parent="." unique_id=235911937]
 

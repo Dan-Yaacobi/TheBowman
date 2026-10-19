@@ -1,9 +1,6 @@
 class_name IdleMainHandState extends MainHandState
-@onready var pulling: PullingMainHandState = $"../Pulling"
-@onready var swing: SwingMainHandState = $"../Swing"
 
 func init() -> void:
-	EventBus.start_shooting.connect(change_to_pulling)
 	pass
 	
 func _ready() -> void:
@@ -28,11 +25,4 @@ func Physics(_delta: float) -> MainHandState:
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> MainHandState:
-	if _event.is_action_pressed("swing") and entity.can_swing <= 0:
-		state_machine.ChangeState(swing)
 	return null
-	
-func change_to_pulling() -> void:
-	if not entity.is_swinging():
-		state_machine.ChangeState(pulling)
-	

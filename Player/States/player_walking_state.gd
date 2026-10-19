@@ -4,18 +4,18 @@ class_name PlayerWalkingState extends State
 @onready var slam: PlayerSlamState = $"../Slam"
 @onready var dead: PlayerDeadState = $"../Dead"
 @onready var dash: PlayerDashState = $"../Dash"
+@onready var sword_attack: SwordAttackState = $"../SwordAttack"
 
 func _ready() -> void:
 	pass
 
 #what happens when the player enters this state
 func Enter() -> void:
-	player.body.update_animation("Walk")
 	pass
 	
 #what happens when the player exits this state
 func Exit() -> void:
-	player.body.update_animation("")
+	pass
 
 #what happens during process update in this state
 func Process(_delta: float) -> State:
@@ -28,12 +28,14 @@ func Process(_delta: float) -> State:
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> State:
-	player.update_direction(player.direction < 0)
 	return null
 	
 #what happens during input events in this state
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("dash") and player.can_dash <= 0:
 		return dash
+		
+	if _event.is_action_pressed("swing") and player.can_start_swing():
+		return sword_attack
 	return null
 	

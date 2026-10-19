@@ -1,5 +1,8 @@
 class_name JumpAction extends Node2D
 
+signal jumped
+signal landed
+
 @onready var player: Player = $".."
 @onready var jump_particles: CPUParticles2D = $JumpParticles
 
@@ -38,6 +41,7 @@ func _check_landing() -> void:
 	var on_floor: bool = player.is_on_floor()
 	if on_floor and not was_on_floor:
 		coyote_timer = 0.0
+		landed.emit()
 		_on_landed()
 	elif was_on_floor and not on_floor and player.velocity.y >= 0:
 		# Left the ground without jumping (walked off or dropped through)
@@ -105,6 +109,7 @@ func jump() -> void:
 	player.velocity.y = -player.stats.jump_height.value()
 	hold_time = 0.0
 	is_holding = true
+	jumped.emit()
 
 func release_jump() -> void:
 	is_holding = false

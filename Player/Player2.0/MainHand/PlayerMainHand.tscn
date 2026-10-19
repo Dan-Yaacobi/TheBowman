@@ -7,13 +7,6 @@
 [ext_resource type="Script" uid="uid://ckwk3o5f8tfd2" path="res://Player/Player2.0/MainHand/States/m_h_idle_state.gd" id="4_24nrb"]
 [ext_resource type="Script" uid="uid://bdh8wnqs3ugce" path="res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd" id="5_ysxrx"]
 [ext_resource type="Script" uid="uid://cy0hbbl8bgqk2" path="res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd" id="6_i2jfe"]
-[ext_resource type="Script" uid="uid://ctejtc1jkqp2d" path="res://Player/Player2.0/MainHand/States/m_h_swing_state.gd" id="8_ww5t3"]
-[ext_resource type="Script" uid="uid://dh6oejforol0n" path="res://Player/Player2.0/MainHand/sword.gd" id="9_3cqt0"]
-[ext_resource type="Texture2D" uid="uid://3p61xqypv41m" path="res://Player/Player2.0/Sprites/SwingEffect.png" id="10_3m267"]
-[ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="10_5ej1j"]
-[ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="11_5ej1j"]
-[ext_resource type="Texture2D" uid="uid://b2ltxpnx4x6ia" path="res://Items/Equipments/Swords/Sprites/BasicSword.png" id="11_30xy1"]
-[ext_resource type="Script" uid="uid://civb0dd4jcaml" path="res://Player/Player2.0/MainHand/slash_effect.gd" id="14_30xy1"]
 
 [sub_resource type="Animation" id="Animation_8g0cn"]
 resource_name = "Idle"
@@ -43,18 +36,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MainHandStateMachine/Swing/Sword:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_e83k8"]
@@ -138,18 +119,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(-7, -2)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MainHandStateMachine/Swing/Sword:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_25jve"]
 length = 0.001
@@ -205,50 +174,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MainHandStateMachine/Swing/Sword:visible")
+tracks/4/path = NodePath(".:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MainHandStateMachine/Swing/Sword:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_6jul4"]
@@ -258,62 +191,26 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MainHandStateMachine/Swing/Sword:visible")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-1.5707963267948966, 1.5707963267948966]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MainHandStateMachine/Swing/Sword:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_30xy1"]
@@ -323,62 +220,26 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MainHandStateMachine/Swing/Sword:visible")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.5707963267948966, -1.5707963267948966]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MainHandStateMachine/Swing/Sword:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MainHandStateMachine/Swing/Sword/SlashHurtBox:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_5ej1j"]
@@ -410,56 +271,10 @@ _data = {
 &"Swinging": SubResource("Animation_5ej1j")
 }
 
-[sub_resource type="Resource" id="Resource_3cqt0"]
-script = ExtResource("10_5ej1j")
-knockback_power = 50
-damage = 5
-metadata/_custom_type_script = "uid://bymwdo1ku6acd"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_30xy1"]
-
 [sub_resource type="Curve" id="Curve_sgu6n"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1e-05, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="Animation" id="Animation_rg8yt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_u8r4h"]
-resource_name = "SlashEffect"
-length = 0.3
-step = 0.03
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.060606062, 0.121212125, 0.18181819, 0.24242425),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5orw7"]
-_data = {
-&"RESET": SubResource("Animation_rg8yt"),
-&"SlashEffect": SubResource("Animation_u8r4h")
-}
 
 [sub_resource type="Curve" id="Curve_dqcxd"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -473,7 +288,6 @@ colors = PackedColorArray(0.43991134, 0.16710994, 0, 1, 1, 1, 1, 1)
 [node name="PlayerMainHand" type="CharacterBody2D" unique_id=1400376021]
 script = ExtResource("1_grn42")
 arrow = ExtResource("2_y7ab3")
-min_shot_power = null
 max_offset = 15.0
 weak_shot_punish = 0.5
 
@@ -508,37 +322,6 @@ script = ExtResource("6_i2jfe")
 [node name="PerfectShotWindow" type="Timer" parent="MainHandStateMachine/MaxPull" unique_id=1097164913]
 wait_time = 0.5
 
-[node name="Swing" type="Node2D" parent="MainHandStateMachine" unique_id=245290404]
-position = Vector2(-5.68248e-07, 13)
-script = ExtResource("8_ww5t3")
-
-[node name="Sword" type="Node2D" parent="MainHandStateMachine/Swing" unique_id=1686774002]
-visible = false
-z_index = 1
-position = Vector2(-0.9999999, -2)
-rotation = 1.5707964
-scale = Vector2(0.75, 0.75)
-script = ExtResource("9_3cqt0")
-stats = SubResource("Resource_3cqt0")
-
-[node name="SwordSprite" type="Sprite2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1919667962]
-position = Vector2(1.3333335, -20)
-texture = ExtResource("11_30xy1")
-
-[node name="SlashHurtBox" type="Area2D" parent="MainHandStateMachine/Swing/Sword" unique_id=1352763536]
-position = Vector2(1.3333321, -35.999996)
-scale = Vector2(2, 2)
-collision_layer = 0
-collision_mask = 140
-script = ExtResource("11_5ej1j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHandStateMachine/Swing/Sword/SlashHurtBox" unique_id=623930274]
-position = Vector2(-1.9073486e-06, 1.9073486e-06)
-shape = SubResource("CircleShape2D_30xy1")
-debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)
-
-[node name="SwingCooldown" type="Timer" parent="MainHandStateMachine/Swing" unique_id=1585976196]
-
 [node name="PerfectAimParticles" type="CPUParticles2D" parent="." unique_id=490070079]
 z_index = 2
 position = Vector2(0, 5)
@@ -560,18 +343,6 @@ initial_velocity_max = 50.0
 scale_amount_min = 2.0
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_sgu6n")
-
-[node name="SlashEffect" type="Sprite2D" parent="." unique_id=1901214077]
-top_level = true
-z_index = 2
-position = Vector2(33, -41)
-texture = ExtResource("10_3m267")
-hframes = 5
-frame = 4
-script = ExtResource("14_30xy1")
-
-[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="SlashEffect" unique_id=1107291960]
-libraries/ = SubResource("AnimationLibrary_5orw7")
 
 [node name="PerfectReleaseParticles" type="CPUParticles2D" parent="." unique_id=368785878]
 z_index = 3
