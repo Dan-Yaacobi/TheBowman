@@ -1,1 +1,1 @@
-class_name Decoration extends Object
+class_name Decoration extends GameObject

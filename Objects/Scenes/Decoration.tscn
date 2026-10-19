@@ -2,15 +2,33 @@
 
 [ext_resource type="Script" uid="uid://h6dixtoafmt" path="res://Objects/Scenes/decorations.gd" id="1_svn5c"]
 [ext_resource type="Texture2D" uid="uid://b5fvk0un30x6p" path="res://Objects/Sprites/DirtIslandDecorations.png" id="2_llfvs"]
+[ext_resource type="Script" uid="uid://dpi6xu2twbnpw" path="res://Objects/object_data.gd" id="2_w2f7y"]
+[ext_resource type="Script" uid="uid://gnexyll2mtpb" path="res://Level/Islands/texture_data.gd" id="3_m4p7x"]
 [ext_resource type="Script" uid="uid://dypeadprx6irb" path="res://General Nodes/HitBox/hit_box.gd" id="3_w2f7y"]
+
+[sub_resource type="Resource" id="Resource_bc7jc"]
+script = ExtResource("2_w2f7y")
+metadata/_custom_type_script = "uid://dpi6xu2twbnpw"
+
+[sub_resource type="Resource" id="Resource_6prse"]
+script = ExtResource("3_m4p7x")
+texture = ExtResource("2_llfvs")
+hframes = 4
+vframes = 4
+totalframes = 16
+metadata/_custom_type_script = "uid://gnexyll2mtpb"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbjd8"]
 size = Vector2(32, 32)
 
 [node name="Decoration" type="Node2D" unique_id=1273996650]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_svn5c")
+data = SubResource("Resource_bc7jc")
+textures = Array[ExtResource("3_m4p7x")]([SubResource("Resource_6prse")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=95672446]
+position = Vector2(0, -4)
 texture = ExtResource("2_llfvs")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1675098230]
