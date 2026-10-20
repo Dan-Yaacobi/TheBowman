@@ -11,14 +11,13 @@ offset_right = 0.39996338
 offset_bottom = 0.29999542
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
 mouse_filter = 2
 script = ExtResource("1_odx4d")
 heart_scene = ExtResource("2_ecus1")
 
 [node name="FlowContainer" type="FlowContainer" parent="." unique_id=1183012900]
 layout_mode = 0
-offset_right = 168.0
-offset_bottom = 36.0
-theme_override_constants/h_separation = 20
+offset_right = 195.0
+offset_bottom = 56.0
+theme_override_constants/h_separation = 64
 theme_override_constants/v_separation = 16

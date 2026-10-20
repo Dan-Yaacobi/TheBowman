@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gnbl7aytsugq"
-path="res://.godot/imported/ChatGPT Image Jul 16, 2026, 05_06_42 PM.png-9a69ae4da2bbf739a155df4559d12595.ctex"
+uid="uid://b7o15ganjg35m"
+path="res://.godot/imported/Archer.png-c12c28764027faa2afb866e2f0b6471e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ZZ_Sprites in progress/ChatGPT Image Jul 16, 2026, 05_06_42 PM.png"
-dest_files=["res://.godot/imported/ChatGPT Image Jul 16, 2026, 05_06_42 PM.png-9a69ae4da2bbf739a155df4559d12595.ctex"]
+source_file="res://ZZ_Sprites in progress/Archer/Archer.png"
+dest_files=["res://.godot/imported/Archer.png-c12c28764027faa2afb866e2f0b6471e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://71kx8643ttk4"
-path="res://.godot/imported/ChatGPT Image Jul 16, 2026, 04_59_01 PM.png-b17c360c24f0385b059ac5e0ea714c35.ctex"
+uid="uid://dti58v4uqohxr"
+path="res://.godot/imported/walk.png-769775149c132310942cb43c080ad809.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ZZ_Sprites in progress/ChatGPT Image Jul 16, 2026, 04_59_01 PM.png"
-dest_files=["res://.godot/imported/ChatGPT Image Jul 16, 2026, 04_59_01 PM.png-b17c360c24f0385b059ac5e0ea714c35.ctex"]
+source_file="res://ZZ_Sprites in progress/Archer/walk.png"
+dest_files=["res://.godot/imported/walk.png-769775149c132310942cb43c080ad809.ctex"]
 
 [params]
 
