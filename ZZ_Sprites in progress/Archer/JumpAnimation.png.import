@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gddcop52wqk3"
-path="res://.godot/imported/ChatGPT Image Jul 16, 2026, 05_21_49 PM.png-6e99b8a23857136da529424c982d941f.ctex"
+uid="uid://c1j1vb5yymer7"
+path="res://.godot/imported/JumpAnimation.png-1ddbfea47a8b637643464f7f86a88a79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ZZ_Sprites in progress/ChatGPT Image Jul 16, 2026, 05_21_49 PM.png"
-dest_files=["res://.godot/imported/ChatGPT Image Jul 16, 2026, 05_21_49 PM.png-6e99b8a23857136da529424c982d941f.ctex"]
+source_file="res://ZZ_Sprites in progress/Archer/JumpAnimation.png"
+dest_files=["res://.godot/imported/JumpAnimation.png-1ddbfea47a8b637643464f7f86a88a79.ctex"]
 
 [params]
 
