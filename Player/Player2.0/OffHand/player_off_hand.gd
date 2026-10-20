@@ -11,9 +11,10 @@ func _ready() -> void:
 	hide_bow()
 
 func _process(_delta: float) -> void:
+	hide()
 	if position_target:
 		global_position = position_target.global_position
-	rotation = rotation_target.rotation if rotation_target else 0.0
+	rotation = rotation_target.rotation - PI/2 if rotation_target else 0.0
 
 func rest(shoulder: Node2D) -> void:
 	position_target = shoulder

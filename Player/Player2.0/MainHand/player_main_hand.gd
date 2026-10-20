@@ -74,7 +74,7 @@ func draw_arrow() -> void:
 					release.connect(ability.draw_ended)
 		
 func set_hand_direction() -> void:
-	rotation = hand_direction.angle() - PI/2
+	rotation = hand_direction.angle()
 	if current_arrow:
 		current_arrow.global_position = where_to_hold_arrow()
 		

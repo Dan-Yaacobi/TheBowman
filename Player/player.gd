@@ -484,6 +484,9 @@ func is_walking() -> bool:
 func is_dash() -> bool:
 	return player_state_machine.curr_state is PlayerDashState
 
+func is_shooting() -> bool:
+	return shooting
+
 func is_moving() -> bool:
 	return direction != 0
 ############# GET METHODS #############
