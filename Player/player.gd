@@ -156,14 +156,16 @@ func activate_passive_abilities() -> void:
 		ability.on_equipped()
 	
 func _process(_delta: float) -> void:
-	if stats.hp > 0:
+	if stats.hp > 0 and not is_dead():
 		direction = Input.get_axis("Left","Right")
 	else:
 		direction = 0
 	_update_aim_and_facing()
-	_update_body_animation()
+	_update_animations()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_dead():
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F7:
 			collect_item(CustomVariables.items.WOOD, 50)
@@ -243,8 +245,8 @@ func show_hands(yes: bool) -> void:
 	
 func _on_main_hand_drawing() -> void:
 	shooting = true
-	off_hand.hold(main_hand.hold_position, main_hand, get_pull_speed())
-
+	off_hand.hold(main_hand, main_hand.arrow_position)
+		
 func _on_main_hand_released() -> void:
 	shooting = false
 	off_hand.rest(body.off_hand_shoulder)
@@ -285,7 +287,8 @@ func update_direction(_new_side: bool) -> void:
 	if _new_side != direction_side and not is_swinging():
 		direction_side = _new_side
 		body.change_direction(_new_side)
-		main_hand.change_direction()
+		main_hand.set_facing(_new_side)
+		off_hand.set_facing(_new_side)
 		
 func _update_aim_and_facing() -> void:
 	var aim: Vector2 = get_global_mouse_position() - main_hand.global_position
@@ -478,6 +481,9 @@ func is_swinging() -> bool:
 func is_idle() -> bool:
 	return player_state_machine.curr_state is PlayerIdleState
 	
+func is_dead() -> bool:
+	return player_state_machine.curr_state is PlayerDeadState
+	
 func is_walking() -> bool:
 	return player_state_machine.curr_state is PlayerWalkingState
 	
@@ -660,10 +666,14 @@ func _on_jumped() -> void:
 func _on_landed() -> void:
 	in_jump = false
 
-func _update_body_animation() -> void:
+func _update_animations() -> void:
+	var stage: String = main_hand.get_draw_stage()
+	off_hand.play_stage(stage, get_pull_speed())
+	_update_body_animation(stage)
+
+func _update_body_animation(stage: String) -> void:
 	if is_swinging() or in_jump:
 		return
-	if is_walking():
-		body.play_if_not_playing("Walk")
-	elif is_idle():
-		body.play_if_not_playing("Idle")
+	if not is_walking() and not is_idle():
+		return
+	body.play_stance(stage, is_walking(), get_pull_speed())

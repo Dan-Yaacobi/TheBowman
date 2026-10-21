@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_eqap5"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_lw5aq"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_kicpw"]
-[ext_resource type="Texture2D" uid="uid://mppvwjsxg31l" path="res://Enemies/Sprites/RedApple.png" id="7_vd8ox"]
+[ext_resource type="Texture2D" uid="uid://w25xrqq4gns8" path="res://ZZ_Sprites in progress/apple flying.png" id="8_7y37l"]
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
 script = ExtResource("4_g624p")
@@ -24,13 +24,12 @@ script = ExtResource("6_kicpw")
 max_hp = 23
 move_speed = SubResource("Resource_8iawy")
 knockback = 75
-skin = ExtResource("7_vd8ox")
+skin = ExtResource("8_7y37l")
 move_animation = "Move"
 touch_damage = 1
 knockback_decay = 0.055
 has_wings = true
-facing_player = false
-size = 0.75
+size = 0.45
 can_split = true
 death_ability = Array[ExtResource("2_eqap5")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("1_yc51p")

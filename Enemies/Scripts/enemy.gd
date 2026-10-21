@@ -1,5 +1,8 @@
 class_name Enemy extends GameEntity
 
+@export var damaged_state: EnemyDamagedState
+@export var dead_state: EnemyDeadState
+
 @export var stats: EnemyData
 @onready var hit_box: EnemyHitBox = $HitBox
 @onready var sprite: Sprite2D = $Sprite2D
@@ -31,6 +34,7 @@ var is_dead: bool = false
 var invincible: bool = false
 var stunned: bool = false
 var captured_by: Node2D
+
 
 func _ready() -> void:
 	current_hp = stats.max_hp
@@ -66,7 +70,7 @@ func full_health() -> bool:
 	
 func face_the_player() -> void:
 	if stats.facing_player:
-		sprite.flip_h = PlayerManager.player.global_position.x > global_position.x
+		sprite.flip_h = PlayerManager.player.global_position.x < global_position.x
 
 func heal(_amount: int) -> void:
 	current_hp = mini(current_hp + _amount, stats.max_hp)
@@ -139,8 +143,6 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	current_hp -= roundi(final_dmg)
 	frostbitten_hit()
 	handle_health_bar(final_dmg)
-	if damaged_animation_player:
-		damaged_animation_player.play("Damaged")
 	show_damage(final_dmg,dmg_color)
 	if current_hp <= 0:
 		is_dead = true
@@ -149,7 +151,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		drop_item()
 		if _result:
 			_result.killed = true
-			
+	else:
+		enter_damaged_state()
 func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)
@@ -163,7 +166,10 @@ func activate_death_ability() -> void:
 func enemy_died() -> void:
 	died.emit(self)
 	EventBus.enemy_died.emit(self)
-	queue_free()
+	if dead_state:
+		state_machine.ChangeState(dead_state)
+	else:
+		queue_free()
 	
 func show_damage(_amount: int, color: Color) -> void:
 	CombatTextSpawner.spawn(global_position, str(_amount),color)
@@ -223,7 +229,7 @@ func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> vo
 		target_hurt_box.add_effect(effect.apply)
 		
 func stun(_electric: bool = false) -> void:
-	if stunned:
+	if stunned or is_dead:
 		return
 	stunned = true
 	stop_animations()
@@ -259,7 +265,7 @@ func frostbitten_hit() -> void:
 		EventBus.enemy_frostbitten_hit.emit(self)
 
 func attempt_capture(_new_parent: Node2D) -> bool:
-	if stats.capture_immune or captured_by != null:
+	if stats.capture_immune or captured_by != null or is_dead:
 		return false
 	captured_by = _new_parent
 	state_machine.cause_pause(true)
@@ -272,3 +278,11 @@ func release_capture() -> void:
 	captured_by = null
 	state_machine.cause_pause(false)
 	set_physics_process(true)
+	
+func enter_damaged_state() -> void:
+	if damaged_state == null:
+		return
+	if state_machine.curr_state == damaged_state:
+		damaged_state.restart()
+	else:
+		state_machine.ChangeState(damaged_state)

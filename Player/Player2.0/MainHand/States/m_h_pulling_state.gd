@@ -40,9 +40,8 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
-	
 	entity.arrow_setup()
-	entity.shot_power += _delta * charge_rate
+	entity.shot_power = minf(entity.animation_player.current_animation_position / full_pull_duration, 1.0)
 	return null
 	
 #what happens during _physics_process update in this state

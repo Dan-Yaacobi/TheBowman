@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cdtin5d5lhmfi"]
 
 [ext_resource type="Script" uid="uid://d2y3mpjq3t166" path="res://Enemies/EvilBird/evil_bird.gd" id="1_jdshu"]
-[ext_resource type="Texture2D" uid="uid://diwdma6y7rhxh" path="res://Enemies/EvilBird/Sprites/FireEvilBird.png" id="2_lkeh4"]
+[ext_resource type="Texture2D" uid="uid://dhad08bcbg6em" path="res://ZZ_Sprites in progress/Bird.png" id="2_lkeh4"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="8_40b5k"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="9_7k2vi"]
+[ext_resource type="Script" uid="uid://baxh6ix1g81b" path="res://Enemies/EvilBird/enemy_damaged_state.gd" id="10_40b5k"]
 [ext_resource type="Script" uid="uid://ddr1kknnnh0jp" path="res://Enemies/EvilBird/bird_seek_state.gd" id="11_w4iuy"]
-[ext_resource type="Script" uid="uid://c830rgsysfpf7" path="res://Enemies/EvilBird/bird_pre_dive_state.gd" id="12_lkeh4"]
+[ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="12_40b5k"]
 [ext_resource type="Script" uid="uid://by1511sk08ncs" path="res://Enemies/EvilBird/bird_egg_attack_state.gd" id="12_w4iuy"]
 [ext_resource type="Script" uid="uid://wcfu7frk1ny2" path="res://Enemies/EvilBird/bird_dive_attack_state.gd" id="13_lkeh4"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_nboip"]
@@ -14,37 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="16_vr884"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_j7d4o"]
 
-[sub_resource type="Animation" id="Animation_qmrug"]
-resource_name = "Damaged"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(3.2944162, 3.2944162, 3.2944162, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_w4iuy"]
-resource_name = "Dive"
+resource_name = "Attack"
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -53,10 +26,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [2]
+"values": [9, 10, 11, 12]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -71,9 +44,67 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_qmrug"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [18, 19, 20, 21]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(3.2944162, 3.2944162, 3.2944162, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_40b5k"]
+resource_name = "Dead"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [27, 28, 29, 30, 31, 32, 33, 34, 35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.27058825)]
+}
+
 [sub_resource type="Animation" id="Animation_sngn8"]
 resource_name = "Move"
-length = 0.75
+length = 0.9
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -83,22 +114,22 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0, 1, 2]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_jqhj0"]
@@ -118,22 +149,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -142,131 +161,42 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jiyox"]
 _data = {
+&"Attack": SubResource("Animation_w4iuy"),
 &"Damaged": SubResource("Animation_qmrug"),
-&"Dive": SubResource("Animation_w4iuy"),
+&"Dead": SubResource("Animation_40b5k"),
 &"Move": SubResource("Animation_sngn8"),
 &"RESET": SubResource("Animation_jqhj0")
 }
 
-[sub_resource type="Animation" id="Animation_rcut7"]
-resource_name = "Damaged"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(7.9112988, 7.9112988, 7.9112988, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lgrm0"]
-resource_name = "Damaged_OLD"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.745098), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4jjxd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lkeh4"]
-_data = {
-&"Damaged": SubResource("Animation_rcut7"),
-&"Damaged_OLD": SubResource("Animation_lgrm0"),
-&"RESET": SubResource("Animation_4jjxd")
-}
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82j1c"]
-radius = 3.60461
-height = 12.7801
+radius = 7.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpa61"]
-radius = 4.99705
-height = 17.203896
+radius = 9.0
+height = 19.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vrf4a"]
-radius = 5.570913
-height = 18.842201
+radius = 9.0
+height = 19.0
 
-[node name="EvilBird" type="CharacterBody2D" unique_id=196136335]
+[node name="EvilBird" type="CharacterBody2D" unique_id=196136335 node_paths=PackedStringArray("damaged_state", "dead_state")]
 collision_layer = 4
 script = ExtResource("1_jdshu")
+damaged_state = NodePath("EnemyStateMachine/Damaged")
+dead_state = NodePath("EnemyStateMachine/Dead")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1713613863]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_lkeh4")
-hframes = 3
-vframes = 2
+flip_h = true
+hframes = 9
+vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=205774334]
 libraries/ = SubResource("AnimationLibrary_jiyox")
 
-[node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=907587334]
-libraries/ = SubResource("AnimationLibrary_lkeh4")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1001681620]
-rotation = 2.18166
 shape = SubResource("CapsuleShape2D_82j1c")
 
 [node name="HitBox" parent="." unique_id=744493708 instance=ExtResource("16_sqrbk")]
@@ -275,7 +205,6 @@ collision_mask = 0
 script = ExtResource("8_40b5k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=141246783]
-rotation = 2.18166
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_wpa61")
 debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
@@ -284,7 +213,6 @@ debug_color = Color(0.700341, 0.491548, 0.0382955, 0.42)
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=555656013]
-rotation = 2.18166
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_vrf4a")
 debug_color = Color(1, 0, 0.0166664, 0.419608)
@@ -300,14 +228,17 @@ script = ExtResource("12_w4iuy")
 
 [node name="EggAttackTimer" type="Timer" parent="EnemyStateMachine/EggAttack" unique_id=347636976]
 
-[node name="PreDive" type="Node2D" parent="EnemyStateMachine" unique_id=768638697]
-script = ExtResource("12_lkeh4")
+[node name="Damaged" type="Node2D" parent="EnemyStateMachine" unique_id=310321425]
+script = ExtResource("10_40b5k")
 
 [node name="DiveAttack" type="Node2D" parent="EnemyStateMachine" unique_id=835197878]
 script = ExtResource("13_lkeh4")
 
 [node name="FlyToRoost" type="Node2D" parent="EnemyStateMachine" unique_id=1505147968]
 script = ExtResource("15_sqrbk")
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine" unique_id=1126600634]
+script = ExtResource("12_40b5k")
 
 [node name="DebuffHandler" parent="." unique_id=1513628500 instance=ExtResource("15_nboip")]
 

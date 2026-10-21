@@ -9,7 +9,6 @@ func _ready() -> void:
 func Enter() -> void:
 	Input.set_custom_mouse_cursor(null)
 	entity.animation_player.play("Idle")
-	entity.rotation = 0
 	pass
 	
 func Exit() -> void:

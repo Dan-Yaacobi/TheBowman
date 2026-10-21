@@ -19,7 +19,7 @@ func Enter() -> void:
 	#perfect_aim_particles.emitting = true
 	hold_time = 0
 	max_pull.emit()
-	entity.animation_player.play("Max_Pull")
+	entity.animation_player.play("Max Pull")
 	perfect_shot_window.start()
 	pass
 	

@@ -98,15 +98,15 @@ region = Rect2(704, 160, 64, 80)
 atlas = ExtResource("1_ye1h1")
 region = Rect2(576, 240, 64, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1k14"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye1h1"]
 atlas = ExtResource("1_ye1h1")
 region = Rect2(64, 0, 64, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qqh2l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1k14"]
 atlas = ExtResource("1_ye1h1")
 region = Rect2(128, 0, 64, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ollt0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqh2l"]
 atlas = ExtResource("1_ye1h1")
 region = Rect2(192, 0, 64, 80)
 
@@ -250,17 +250,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ye1h1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_v1k14")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qqh2l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ollt0")
 }],
 "loop": 0,
 "name": &"Hover",
-"speed": 30.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -305,5 +305,4 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2065281985]
 sprite_frames = SubResource("SpriteFrames_xrivr")
-animation = &"Hover"
-speed_scale = 0.5
+animation = &"Dead"

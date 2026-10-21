@@ -4,7 +4,6 @@ class_name WizardBoss extends Boss
 @export var teleport_points: Array[Marker2D]
 @export var spell_rotation: Array[WizardSpellState]
 @export var markers: Array[NamedMarker]
-@export var dead_state: WizardDeadState
 @export var item_drop: EquipmentData
 @export var total_essence_drop: int
 ## When true, the wizard keeps his current facing (e.g. during a directional spell)

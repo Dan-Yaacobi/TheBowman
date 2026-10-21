@@ -21,7 +21,7 @@ func init() -> void:
 func Enter() -> void:
 	succesfull_hit = false
 	hit_counter = 0
-	
+	enemy.animation_player.play("Move")
 func Exit() -> void:
 	succesfull_hit = false
 

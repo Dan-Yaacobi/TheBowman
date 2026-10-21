@@ -4,10 +4,13 @@ class_name EvilBird extends Enemy
 
 func extra_ready_functions() -> void:
 	animation_player = $Sprite2D/AnimationPlayer
-	damaged_animation_player = $Sprite2D/DamagedAnimation
 	state_machine.Initialize(self)
 	
 func _physics_process(_delta: float) -> void:
+	if not velocity.is_finite():
+		push_error("Non-finite velocity in state: %s | velocity: %s | knockback: %s" % [state_machine.curr_state.name, velocity, knockback_velocity])
+		velocity = Vector2.ZERO
+		knockback_velocity = Vector2.ZERO
 	move_and_slide()
 
 func fly_to_roost(_position: Vector2) -> void:

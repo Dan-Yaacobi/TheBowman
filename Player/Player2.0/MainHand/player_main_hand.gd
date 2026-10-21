@@ -1,4 +1,4 @@
-class_name PlayerMainHand extends CharacterBody2D
+class_name PlayerMainHand extends Node2D
 
 signal shot_power_amount(amount)
 signal release
@@ -27,6 +27,7 @@ var off_hand: PlayerOffHand
 var body: PlayerBody
 var shot_offset: float = 0
 var anchor: Node2D = null
+var facing_left: bool = false
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
@@ -34,7 +35,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if anchor:
 		global_position = anchor.global_position
+	if not is_drawing():
+		rotation = PI if facing_left else 0.0
 
+func set_facing(_facing_left: bool) -> void:
+	facing_left = _facing_left
+	scale.x = absf(scale.x)
+	scale.y = -absf(scale.y) if facing_left else absf(scale.y)
+	
 func set_anchor(_anchor: Node2D) -> void:
 	anchor = _anchor
 
@@ -66,7 +74,7 @@ func draw_arrow() -> void:
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
 		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
-
+		current_arrow.rotate(-PI/2)
 		for ability in draw_abilities:
 			ability.activate_ability(null, _arrow)
 			if ability.has_method("draw_ended"):
@@ -84,9 +92,6 @@ func where_to_hold_string() -> Vector2:
 func where_to_hold_arrow() -> Vector2:
 	return arrow_position.global_position
 	
-func change_direction() -> void:
-	scale.x *= - 1
-
 func new_arrow(_arrow: PackedScene) -> void:
 	if arrow.instantiate() is Arrow:
 		arrow = _arrow
@@ -197,4 +202,10 @@ func set_time_for_perfect_shot(amount: float) -> void:
 
 func is_idle() -> bool:
 	return main_hand_state_machine.curr_state is IdleMainHandState
-	
+
+func get_draw_stage() -> String:
+	if main_hand_state_machine.curr_state is PullingMainHandState:
+		return "Pull"
+	if main_hand_state_machine.curr_state is MaxPullMainHandState:
+		return "MaxPull"
+	return ""

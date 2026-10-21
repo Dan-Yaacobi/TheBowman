@@ -11,18 +11,17 @@ var direction: Vector2
 func init() -> void:
 	pass
 
-#what happens when the player enters this state
 func Enter() -> void:
-	
 	direction = enemy.calculate_direction_to_player()
 	target_pos = PlayerManager.player.global_position + direction * 10
-	enemy.rotation = enemy.calculate_direction_to_player().angle()
-	enemy.animation_player.play("Dive")
-	
-#what happens when the player exits this state
+	enemy.sprite.flip_h = false
+	enemy.rotation = direction.angle()
+	enemy.sprite.flip_v = direction.x < 0.0
+	enemy.animation_player.play("Attack")
+
 func Exit() -> void:
-	enemy.rotation = 0
-	pass
+	enemy.rotation = 0.0
+	enemy.sprite.flip_v = false
 	
 #what happens during process update in this state
 func Process(_delta: float) -> EnemyState:

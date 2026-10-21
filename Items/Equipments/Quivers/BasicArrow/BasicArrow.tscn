@@ -11,24 +11,25 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m802n"]
-size = Vector2(4, 4)
+size = Vector2(5.5999994, 7)
 
 [node name="BasicArrow" type="CharacterBody2D" unique_id=142696300]
 z_index = 1
 z_as_relative = false
 rotation = 1.5707964
+scale = Vector2(1.5, 1)
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_ytww7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=899441193]
-position = Vector2(7, -3.059797e-07)
+position = Vector2(13.6, -1.4861873e-06)
 texture = ExtResource("2_6h8hs")
 script = ExtResource("3_w0mub")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1614479728]
 z_index = -1
-position = Vector2(-9, 3.934025e-07)
+position = Vector2(-0.39999962, 4.3711395e-08)
 emitting = false
 amount = 1
 texture = ExtResource("2_6h8hs")
@@ -39,13 +40,15 @@ scale_amount_curve = SubResource("Curve_43g4f")
 color = Color(0.643137, 0.152941, 0, 0.45098)
 
 [node name="HurtBox" parent="." unique_id=1321720996 instance=ExtResource("4_tu1em")]
+position = Vector2(26.800001, -1.000003)
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1725749955]
-position = Vector2(13, -5.384457e-07)
+position = Vector2(-0.80000114, 0.50000054)
 shape = SubResource("RectangleShape2D_m802n")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=4300824]
+position = Vector2(9.2, -1.005362e-06)
 
 [node name="ExitScreenTimer" type="Timer" parent="." unique_id=1115311203]
 

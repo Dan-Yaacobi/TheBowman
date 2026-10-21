@@ -1,8 +1,8 @@
 class_name BirdEggAttackState extends EnemyState
 
 @onready var seek: BirdSeekState = $"../Seek"
-@onready var pre_dive: BirdPreDiveState = $"../PreDive"
 @onready var egg_attack_timer: Timer = $EggAttackTimer
+@onready var dive_attack: BirdDiveAttackState = $"../DiveAttack"
 
 @export var egg_attack_min_time: float = 1.0
 @export var egg_attack_max_time: float = 2.0
@@ -21,8 +21,10 @@ func init() -> void:
 	egg_attack_timer.timeout.connect(enemy.shoot)
 	
 func Enter() -> void:
+	enemy.animation_player.play("Move")
+
 	fly_direction = [-1, 1].pick_random()
-	enemy.sprite.flip_h = fly_direction == 1
+	enemy.sprite.flip_h = fly_direction == -1
 	
 	right_end = randf_range(min_end, max_end)
 	left_end = -right_end
@@ -47,7 +49,7 @@ func update_horizontal_movement() -> void:
 	var bound = PlayerManager.player.global_position.x + (right_end if fly_direction == 1 else left_end)
 	if fly_direction * enemy.global_position.x > fly_direction * bound:
 		fly_direction *= -1
-		enemy.sprite.flip_h = fly_direction == 1
+		enemy.sprite.flip_h = fly_direction == -1
 
 # --- Transition checks ---
 
@@ -55,7 +57,7 @@ func check_transitions() -> EnemyState:
 	if is_player_above() or is_too_close():
 		return seek
 	if is_too_far():
-		return pre_dive
+		return dive_attack
 	return null
 
 func is_player_above() -> bool:

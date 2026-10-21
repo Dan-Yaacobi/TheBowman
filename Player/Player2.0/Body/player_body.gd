@@ -17,9 +17,19 @@ enum Charges{BLOOD,THUNDER,SOUL,FIRE}
 
 const BLOOD = preload("uid://dl8nl0pf7u1tn")
 
+const STANCE_ANIMATIONS: Dictionary = {
+	"": {false: "Idle", true: "Walk"},
+	"Pull": {false: "Pull", true: "Pull Walking"},
+	"MaxPull": {false: "Max Pull Idle", true: "Max Pull Walking"},
+}
+
+var current_stage: String = ""
+
 var touch_effects: Array[Callable] = []
 var facing_direction: int = 1
 var charge_tween: Tween
+
+
 
 func _ready() -> void:
 	pass
@@ -32,11 +42,6 @@ func change_direction(_direction: bool) -> void:
 	scale.x *= -1
 	facing_direction *= -1
 
-func update_animation(anim: String) -> void:
-	if anim == "":
-		animation_player.stop()
-	else:
-		animation_player.play(anim)
 
 func apply_touch_effects(_hurt_box: HurtBox, _damage, _result) -> void:
 	return
@@ -80,10 +85,28 @@ func charge_effect(color: Color) -> void:
 	charge.color = color
 	charge.emitting = true
 
-func play_if_not_playing(anim: String) -> void:
-	if animation_player.current_animation != anim:
-		animation_player.play(anim)
+func play_stance(stage: String, walking: bool, pull_speed: float) -> void:
+	var anim: String = STANCE_ANIMATIONS[stage][walking]
+	if animation_player.assigned_animation == anim:
+		return
+	var keep_position: bool = stage != "" and stage == current_stage and animation_player.is_playing()
+	var position_to_keep: float = animation_player.current_animation_position if keep_position else 0.0
+	current_stage = stage
+	animation_player.speed_scale = pull_speed if stage == "Pull" else 1.0
+	animation_player.play(anim)
+	if keep_position:
+		animation_player.seek(position_to_keep, true)
 
 func restart_animation(anim: String) -> void:
+	current_stage = "-"
+	animation_player.speed_scale = 1.0
 	animation_player.stop()
 	animation_player.play(anim)
+
+func update_animation(anim: String) -> void:
+	current_stage = "-"
+	animation_player.speed_scale = 1.0
+	if anim == "":
+		animation_player.stop()
+	else:
+		animation_player.play(anim)
