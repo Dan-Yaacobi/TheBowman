@@ -64,7 +64,6 @@ fixed_frame_index = 4
 [node name="RiftPortal" parent="Islands/Island11" unique_id=1166811293 instance=ExtResource("13_npjie")]
 z_index = 1
 position = Vector2(0, -26)
-is_boss_portal = true
 destination = 2
 
 [node name="Island16" parent="Islands" unique_id=1999979479 instance=ExtResource("14_7t2hb")]

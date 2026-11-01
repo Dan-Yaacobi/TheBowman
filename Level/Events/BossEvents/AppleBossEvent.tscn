@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7nlxg7p7m3vl"]
 
-[ext_resource type="Script" path="res://Level/Events/BossEvents/boss_event.gd" id="1_b3gpm"]
+[ext_resource type="Script" uid="uid://dx7tegtdgsdj0" path="res://Level/Events/BossEvents/boss_event.gd" id="1_b3gpm"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_c6qoj"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_ndsc0"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_hfdrk"]

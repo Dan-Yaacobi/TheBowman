@@ -29,7 +29,6 @@ move_animation = "Move"
 effects = Array[PackedScene]([ExtResource("3_3bld3"), ExtResource("4_54cry")])
 avg_coins_dropped = 5
 touch_damage = 3
-size = 1.0
 death_ability = Array[ExtResource("1_rb1i3")]([SubResource("Resource_m8shd")])
 shooter = true
 bullet = ExtResource("1_3bld3")

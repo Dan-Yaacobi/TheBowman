@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ddhffywfb4gs"]
 
-[ext_resource type="Script" path="res://Level/Events/BossEvents/boss_event.gd" id="1_6ky67"]
+[ext_resource type="Script" uid="uid://dx7tegtdgsdj0" path="res://Level/Events/BossEvents/boss_event.gd" id="1_6ky67"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_cwjv1"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_0m50s"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_u4e5w"]
@@ -15,7 +15,7 @@ boss = NodePath("BirdBoss")
 position = Vector2(1, -40)
 
 [node name="EventPortal" parent="." unique_id=1166811293 instance=ExtResource("3_cwjv1")]
-position = Vector2(-183, 13)
+position = Vector2(0, -20)
 
 [node name="BossIncomingLabel" type="Label" parent="." unique_id=1530353532]
 offset_left = -87.0
@@ -133,9 +133,6 @@ position = Vector2(9, 41)
 
 [node name="Island9" parent="Islands" unique_id=65748527 instance=ExtResource("6_u4e5w")]
 position = Vector2(-63, 41)
-
-[node name="Island2" parent="Islands" unique_id=389278333 instance=ExtResource("6_u4e5w")]
-position = Vector2(-184, 34)
 
 [node name="BirdBoss" parent="." unique_id=1166316920 instance=ExtResource("7_4tnen")]
 position = Vector2(186, -133)
