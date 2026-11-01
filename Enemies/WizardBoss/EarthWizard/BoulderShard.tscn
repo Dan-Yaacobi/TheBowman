@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/boulder_shard.gd" id="1_shd"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_shd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hurt"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ground"]
+radius = 3.0
+
+[node name="BoulderShard" type="Node2D"]
+script = ExtResource("1_shd")
+
+[node name="Visual" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+
+[node name="HurtBox" parent="." instance=ExtResource("2_shd")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_hurt")
+
+[node name="GroundDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+shape = SubResource("CircleShape2D_ground")

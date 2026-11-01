@@ -6,12 +6,27 @@ class_name PlayerAbility extends Resource
 
 var can_activate: bool = true
 var dynamic_debuff_id: int
+## Color of the item this ability came from, stamped by EquipmentData.equip().
+## NONE for abilities that don't come from an item (they don't scale).
+var color: CustomVariables.ItemColor = CustomVariables.ItemColor.NONE
 
 enum Tier { COMMON, UNCOMMON, RARE, LEGENDARY }
 enum TriggerType { PASSIVE, SHOOT, JUMP, DASH, RELEASE, DRAW, AFTER_HIT, BEFORE_HIT}
 
 func set_up() -> void:
 	pass
+
+## Multiplier for this ability's damage and effect strength, from its item's color level.
+## Looked up at runtime on purpose: this base class must not depend on Player, ColorLevels
+## or EventBus, or MetaProgress (which preloads abilities through its tracks) stops compiling.
+func power() -> float:
+	var tree: SceneTree = Engine.get_main_loop() as SceneTree
+	var manager: Node = tree.root.get_node_or_null("PlayerManager") if tree else null
+	var player: Object = manager.get("player") if manager else null
+	var levels: Object = player.get("color_levels") if player else null
+	if levels == null:
+		return 1.0
+	return levels.call("get_power", color)
 
 func on_equipped() -> void:
 	pass

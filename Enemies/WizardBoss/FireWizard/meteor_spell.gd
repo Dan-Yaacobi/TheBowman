@@ -7,6 +7,8 @@ class_name MeteorSpell extends WizardSpellState
 ## Seconds into the Cast animation when the meteor is released
 @export var release_delay: float = 0.35
 @export var height_marker_id: StringName = &"meteor_height"
+## Half an island's width, used to find the island under a meteor's landing spot
+@export var island_half_width: float = 21.5
 
 var _casts_started: int = 0
 var _fired: int = 0
@@ -45,4 +47,16 @@ func _fire_meteor() -> void:
 	var start_y: float = marker.global_position.y if marker else wizard.global_position.y
 	var meteor: Meteor = meteor_scene.instantiate()
 	EventBus.summon_effect.emit(meteor)
-	meteor.launch(Vector2(player_pos.x, start_y))
+	meteor.launch(Vector2(player_pos.x, start_y), _island_below(player_pos.x, start_y))
+
+# The first island a meteor dropped at x would land on (null if it falls into the void)
+func _island_below(x: float, from_y: float) -> Island:
+	var best: Island = null
+	for island: Island in wizard.get_islands():
+		if absf(island.global_position.x - x) > island_half_width:
+			continue
+		if island.global_position.y < from_y:
+			continue
+		if best == null or island.global_position.y < best.global_position.y:
+			best = island
+	return best

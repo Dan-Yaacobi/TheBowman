@@ -12,6 +12,7 @@ signal drawing_arrow
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var pulling: PullingMainHandState = $MainHandStateMachine/Pulling
 
+@onready var bow_grip: Node2D = $BowGrip
 @export var arrow: PackedScene
 @export var arrow_texture: Texture
 @export var min_shot_power: float = 0.1

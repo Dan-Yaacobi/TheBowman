@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bp2bqtrgmd3to" path="res://Debuffs/Stun/stun_debuff.gd" id="1_a6ee4"]
 [ext_resource type="PackedScene" uid="uid://f3gi3n3nq0ia" path="res://Enemies/EnemyEffects/Stunned/stunned_effect.tscn" id="2_qmo66"]
-[ext_resource type="PackedScene" uid="uid://bj2ua5b17bpjx" path="res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn" id="3_j7ngs"]
+[ext_resource type="PackedScene" uid="uid://bj2ua5b17bpjx" path="res://Debuffs/Stun/StunArrowEffect.tscn" id="3_j7ngs"]
+
 
 [node name="StunDebuff" type="Node2D" unique_id=1518228069]
 script = ExtResource("1_a6ee4")

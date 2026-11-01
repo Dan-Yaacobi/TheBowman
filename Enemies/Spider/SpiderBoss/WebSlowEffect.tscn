@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmtl86stch1ww"]
+[gd_scene format=3 uid="uid://bmtl86stch1ww"]
 
-[ext_resource type="Texture2D" uid="uid://thwjuku6pbie" path="res://Enemies/Spider/Sprites/SpiderWeb.png" id="1_7jd14"]
-[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/web_slow_effect.gd" id="2_v2fkt"]
+[ext_resource type="Texture2D" uid="uid://thwjuku6pbie" path="res://Enemies/Sprites/SpiderWeb.png" id="1_7jd14"]
+[ext_resource type="Script" uid="uid://bve015xs2h0xo" path="res://Enemies/Spider/SpiderBoss/web_slow_effect.gd" id="2_v2fkt"]
+
 
 [sub_resource type="Animation" id="Animation_whlyo"]
 resource_name = "effect"

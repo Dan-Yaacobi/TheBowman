@@ -8,6 +8,8 @@ signal disappear
 @onready var keyboard_press_helper: KeyBoardHelper = $KeyboardPressHelper
 
 @export var data: NPCData
+## Optional. Plays "idle" by default and "talk" while the chat box is typing.
+@export var animation_player: AnimationPlayer
 
 var action_taken: bool = false
 var facing_direction: int = 1
@@ -24,6 +26,7 @@ func face_the_player() -> void:
 func _ready() -> void:
 	if data.has_chat:
 		chat_box = $ChatBox
+	_setup_animation()
 
 	npc_state_machine.Initialize(self)
 	keyboard_press_helper.set_up()
@@ -33,6 +36,23 @@ func _process(_delta: float) -> void:
 	face_the_player()
 	extra_process_function(_delta)
 	
+func _setup_animation() -> void:
+	if animation_player == null:
+		return
+	if chat_box:
+		chat_box.typing_started.connect(_play_animation.bind("talk"))
+		chat_box.typing_finished.connect(_play_animation.bind("idle"))
+	_play_animation("idle")
+
+## Keeps the playback position so shared tracks (e.g. a float) don't snap when switching.
+func _play_animation(anim_name: String) -> void:
+	if not animation_player.has_animation(anim_name):
+		return
+	var position_before: float = animation_player.current_animation_position if animation_player.is_playing() else 0.0
+	animation_player.play(anim_name)
+	var length: float = animation_player.get_animation(anim_name).length
+	animation_player.seek(fmod(position_before, length), true)
+
 func extra_process_function(_delta: float) -> void:
 	pass
 	

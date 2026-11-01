@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnqx58hrgjg7y"]
+[gd_scene format=3 uid="uid://bnqx58hrgjg7y"]
 
-[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="1_et4u6"]
+[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/DustBall.png" id="1_et4u6"]
+
 
 [sub_resource type="Curve" id="Curve_yfyxj"]
 _limits = [0.0, 0.5, 0.0, 1.0]

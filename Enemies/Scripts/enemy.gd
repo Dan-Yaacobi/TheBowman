@@ -12,7 +12,7 @@ class_name Enemy extends GameEntity
 
 const ITEM_PICK_UP = preload("res://Items/ItemPickUp.tscn")
 const HIT_PARTICLES = preload("res://Enemies/EnemyEffects/EnemyHit/HitParticles.tscn")
-const STUN_ARROW_EFFECT = preload("res://Player/Abilities/ShootAbilities/StunAbility/StunArrowEffect.tscn")
+const STUN_ARROW_EFFECT = preload("uid://bj2ua5b17bpjx")
 
 signal died(enemy: Enemy)
 signal took_damage

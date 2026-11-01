@@ -26,6 +26,8 @@ class StatModifier:
 @export var dropped_scale: float = 1.0
 @export var equipped_scale: Vector2 = Vector2(1.0, 1.0)
 @export var slot: slots
+## Which run color level scales this item.
+@export var color: CustomVariables.ItemColor = CustomVariables.ItemColor.NONE
 @export var pick_weight: float = 1.0
 @export var ability: PlayerAbility
 @export var tiers: Array[RarityTier]  = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
@@ -41,16 +43,21 @@ func add_modifier(stat_name: String, amount: float, _type: Stat.buff_type) -> vo
 	modifiers.append(StatModifier.new(amount, stat_name, _type))
 
 func equip(player_stats: PlayerStats) -> void:
+	if color == CustomVariables.ItemColor.NONE:
+		push_warning("EquipmentData: '%s' has no color assigned" % display_name)
 	for mod in modifiers:
 		var stat: Stat = player_stats.get(mod.stat_name)
 		if stat == null:
 			push_error("Unknown stat: " + mod.stat_name)
 			continue
 		stat.add_buff(mod.id, mod.amount, mod.stat_type)
+	# Abilities are duplicated per rolled item, so stamping the color here is safe.
 	if ability:
+		ability.color = color
 		PlayerManager.player.register_ability(ability)
 	for bonus in bonus_abilities:
 		if bonus:
+			bonus.color = color
 			PlayerManager.player.register_ability(bonus)
 
 func unequip(player_stats: PlayerStats) -> void:

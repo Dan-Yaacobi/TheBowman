@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2ag7d2j5mctf"]
 
 [ext_resource type="Script" uid="uid://7ira1qek0c3v" path="res://Enemies/Cloud/cloud_enemy.gd" id="1_1hdfk"]
-[ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Cloud/Sprites/Cloud Enemy.png" id="1_07fyk"]
+[ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Sprites/Cloud Enemy.png" id="1_07fyk"]
 [ext_resource type="PackedScene" uid="uid://he5b02nm11v5" path="res://Enemies/Cloud/RainDrop.tscn" id="2_g87bp"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_ws7tv"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_aq55l"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cqstctojgygpv" path="res://Enemies/Cloud/lightning.gd" id="15_vs4ks"]
 [ext_resource type="AudioStream" uid="uid://bndhi0n2ycg2q" path="res://Audio/Player/thunder_strike.mp3" id="16_nbmpm"]
 [ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="19_jo2yr"]
+
 
 [sub_resource type="Resource" id="Resource_vs4ks"]
 script = ExtResource("4_jj0fl")

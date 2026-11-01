@@ -23,7 +23,7 @@ func Physics(_delta: float) -> EnemyState:
 		if not ground_ray.is_colliding():
 			_dropping = true
 			enemy.velocity.x = 0.0
-			enemy.sprite.flip_h = PlayerManager.player.global_position.x > enemy.global_position.x
+			enemy.sprite.flip_h = PlayerManager.player.global_position.x < enemy.global_position.x
 		else:
 			enemy.velocity.x = enemy.stats.move_speed.value() * enemy.fly_direction()
 			enemy.velocity.y = 0.0

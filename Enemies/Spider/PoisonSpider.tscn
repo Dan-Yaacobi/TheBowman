@@ -1,14 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://kn3ngqcl2eex"]
+[gd_scene format=3 uid="uid://kn3ngqcl2eex"]
 
-[ext_resource type="Script" path="res://Enemies/Spider/spider.gd" id="1_tyc6v"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_jsu2j"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_0sfr2"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_p58nw"]
-[ext_resource type="Texture2D" uid="uid://cqb7hgqentrwu" path="res://Enemies/Spider/Sprites/PoisonSpiderWalk.png" id="5_wddkt"]
-[ext_resource type="Texture2D" uid="uid://dls8dee0kv4et" path="res://Enemies/Spider/Sprites/PoisonSpiderDrop.png" id="6_0rnjm"]
-[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="7_kfhm0"]
-[ext_resource type="Script" path="res://Enemies/Spider/spider_dropping_state.gd" id="8_tgpuq"]
-[ext_resource type="Script" path="res://Enemies/Spider/spider_walking_state.gd" id="9_52m05"]
+[ext_resource type="Script" uid="uid://dqcn4fvcowbk8" path="res://Enemies/Spider/spider.gd" id="1_tyc6v"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_jsu2j"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_0sfr2"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_p58nw"]
+[ext_resource type="Texture2D" uid="uid://cqb7hgqentrwu" path="res://Enemies/Sprites/PoisonSpiderWalk.png" id="5_wddkt"]
+[ext_resource type="Texture2D" uid="uid://dls8dee0kv4et" path="res://Enemies/Sprites/PoisonSpiderDrop.png" id="6_0rnjm"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="7_kfhm0"]
+[ext_resource type="Script" uid="uid://cdg4y771vfg1d" path="res://Enemies/Spider/spider_dropping_state.gd" id="8_tgpuq"]
+[ext_resource type="Script" uid="uid://c8wnkfyix4jj1" path="res://Enemies/Spider/spider_walking_state.gd" id="9_52m05"]
+
 
 [sub_resource type="Resource" id="Resource_0ucdh"]
 resource_local_to_scene = true

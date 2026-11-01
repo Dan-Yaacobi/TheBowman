@@ -5,6 +5,7 @@ const POTION_SCENE: String = "res://Items/Other/Potion/Potion.tscn"
 const MAGIC_ESSENCE: String = "res://Items/Other/Magic Essence/MagicEssence.tscn"
 const WOOD: String = "res://Items/Other/Wood/Wood.tscn"
 const SKY_SHARD: String = "res://Items/Other/SkyShard/SkyShard.tscn"
+const COLOR_SCROLL: String = "res://Items/Other/ColorScroll/ColorScroll.tscn"
 
 @export var spread_angle: float = 50.0
 @export var impulse_min: float = 10.0
@@ -17,7 +18,8 @@ var items_dic: Dictionary ={
 	CustomVariables.items.POTION: POTION_SCENE,
 	CustomVariables.items.ESSENCE: MAGIC_ESSENCE,
 	CustomVariables.items.WOOD: WOOD,
-	CustomVariables.items.SKYSHARD: SKY_SHARD
+	CustomVariables.items.SKYSHARD: SKY_SHARD,
+	CustomVariables.items.COLOR_SCROLL: COLOR_SCROLL
 }
 
 func drop_coins(_position: Vector2, _amount: int) -> void:

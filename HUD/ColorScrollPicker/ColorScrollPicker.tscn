@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://HUD/ColorScrollPicker/color_scroll_picker.gd" id="1_cspick"]
+[ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollCard.tscn" id="2_card"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="3_prec"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/tempo_scroll.png" id="4_temp"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/elemental_scroll.png" id="5_elem"]
+
+[node name="ColorScrollPicker" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cspick")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Choose a color"
+horizontal_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PrecisionCard" parent="Panel/Margin/VBox/Options" instance=ExtResource("2_card")]
+layout_mode = 2
+color = 1
+display_name = "Precision"
+texture = ExtResource("3_prec")
+tint = Color(0.6, 0.8, 1, 1)
+bonus_text = "Wider perfect release window"
+
+[node name="TempoCard" parent="Panel/Margin/VBox/Options" instance=ExtResource("2_card")]
+layout_mode = 2
+color = 2
+display_name = "Tempo"
+texture = ExtResource("4_temp")
+tint = Color(1, 0.75, 0.3, 1)
+bonus_text = "Faster pull"
+
+[node name="ElementalCard" parent="Panel/Margin/VBox/Options" instance=ExtResource("2_card")]
+layout_mode = 2
+color = 3
+display_name = "Elemental"
+texture = ExtResource("5_elem")
+tint = Color(0.85, 0.45, 0.95, 1)
+bonus_text = "Longer debuffs"

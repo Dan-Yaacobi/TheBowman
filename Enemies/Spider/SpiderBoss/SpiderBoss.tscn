@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhaxev16o5grd"]
+[gd_scene format=3 uid="uid://bhaxev16o5grd"]
 
-[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/spider_boss.gd" id="1_38w7o"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nd0g2"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_70c0k"]
-[ext_resource type="Script" path="res://Enemies/EnemyData/enemy_data.gd" id="4_r1ia3"]
-[ext_resource type="Texture2D" uid="uid://dnqqaaj0yfhfy" path="res://Enemies/Spider/Sprites/SpiderDrop.png" id="5_1u6kn"]
-[ext_resource type="Script" path="res://Enemies/Scripts/enemy_state_machine.gd" id="6_ewgjo"]
-[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/slide_state.gd" id="7_40q0m"]
-[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/fight_state.gd" id="8_s7lyh"]
-[ext_resource type="Script" path="res://Enemies/Spider/SpiderBoss/retreat_state.gd" id="9_6m8jb"]
+[ext_resource type="Script" uid="uid://dnsxgkkkwttbd" path="res://Enemies/Spider/SpiderBoss/spider_boss.gd" id="1_38w7o"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_nd0g2"]
+[ext_resource type="Script" uid="uid://btvkujye65n70" path="res://Enemies/EnemyData/enemy_effect.gd" id="3_70c0k"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="4_r1ia3"]
+[ext_resource type="Texture2D" uid="uid://dnqqaaj0yfhfy" path="res://Enemies/Sprites/SpiderDrop.png" id="5_1u6kn"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="6_ewgjo"]
+[ext_resource type="Script" uid="uid://dwupq6bph87ab" path="res://Enemies/Spider/SpiderBoss/slide_state.gd" id="7_40q0m"]
+[ext_resource type="Script" uid="uid://bdmdeiit8mdhw" path="res://Enemies/Spider/SpiderBoss/fight_state.gd" id="8_s7lyh"]
+[ext_resource type="Script" uid="uid://cqbrspxqcxmp7" path="res://Enemies/Spider/SpiderBoss/retreat_state.gd" id="9_6m8jb"]
+
 
 [sub_resource type="Resource" id="Resource_56yp3"]
 script = ExtResource("4_r1ia3")

@@ -17,7 +17,11 @@ class_name Meteor extends Node2D
 
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var ground_detector: Area2D = $GroundDetector
+@onready var target_mark: Node2D = $TargetMark
+@onready var shadow: ColorRect = $TargetMark/Shadow
 
+var _target: Island
+var _fall_distance: float = 1.0
 var _time: float = 0.0
 var _launched: bool = false
 var _impacted: bool = false
@@ -30,12 +34,18 @@ func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_entered.connect(screen_enter)
 	hurt_box.successful_hit.connect(impact)
 
-func launch(start: Vector2) -> void:
+## target = the island it will land on, for the warning shadow (null = no shadow)
+func launch(start: Vector2, target: Island = null) -> void:
 	if not is_node_ready():
 		await ready
 	global_position = start
 	_time = 0.0
 	_launched = true
+	_target = target
+	if is_instance_valid(_target):
+		_fall_distance = maxf(_target.global_position.y - start.y, 1.0)
+		target_mark.visible = true
+		_update_mark()
 
 func _physics_process(delta: float) -> void:
 	if not _launched or _impacted:
@@ -45,6 +55,19 @@ func _physics_process(delta: float) -> void:
 	var speed: float = lerpf(start_speed, max_speed, ease(t, ramp_curve))
 	global_position += Vector2.DOWN * speed * delta
 	_update_knockback_dir()
+	_update_mark()
+
+# The shadow sits on the landing island under the meteor and grows as it closes in
+func _update_mark() -> void:
+	if not is_instance_valid(_target):
+		target_mark.visible = false
+		return
+	target_mark.global_position = Vector2(global_position.x, _target.global_position.y)
+	var remaining: float = _target.global_position.y - global_position.y
+	var progress: float = clampf(1.0 - remaining / _fall_distance, 0.0, 1.0)
+	var mat: ShaderMaterial = shadow.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("progress", progress)
 
 func _update_knockback_dir() -> void:
 	var side: float = signf(PlayerManager.player.global_position.x - global_position.x)

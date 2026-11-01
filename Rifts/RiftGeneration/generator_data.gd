@@ -12,3 +12,9 @@ class_name GeneratorData extends Resource
 @export_range(0.0, 1.0) var event_chance: float = 0.5
 @export var event_skip_start_chunks: int = 2
 @export var event_skip_end_chunks: int = 2
+
+@export_subgroup("Scroll Pedestals")
+@export_range(0, 10) var scroll_pedestals_min: int = 1
+@export_range(0, 10) var scroll_pedestals_max: int = 3
+## Added to the island's EventPortalPosition marker so the pedestal stands on the surface.
+@export var scroll_pedestal_offset: Vector2 = Vector2(0, 14)

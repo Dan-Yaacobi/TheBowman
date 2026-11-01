@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpu3iqolrrqt4"]
-
-[ext_resource type="Script" path="res://Player/Upgrades/StatsUpgrades/HP/hp_upgrade.gd" id="1_40uhi"]
-
-[node name="HpUpgrade" type="Node2D"]
-script = ExtResource("1_40uhi")

@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://c48tkg5iwqxfo"]
 
 [ext_resource type="Script" uid="uid://cbkfbpkwj365g" path="res://MainGame/GameManager/game_manager.gd" id="1_awshh"]
-[ext_resource type="PackedScene" uid="uid://c76xmtewx7c7w" path="res://Level/BossArena/FireWizardBossArena.tscn" id="2_7oabr"]
+[ext_resource type="PackedScene" path="res://Level/BossArena/EarthWizardBossArena.tscn" id="2_7oabr"]
+[ext_resource type="PackedScene" path="res://Level/BossArena/FrostWizardBossArena.tscn" id="3_frost"]
+[ext_resource type="PackedScene" uid="uid://c76xmtewx7c7w" path="res://Level/BossArena/FireWizardBossArena.tscn" id="4_fire"]
 
 [node name="GameManager" type="Node2D" unique_id=1727547770]
 script = ExtResource("1_awshh")
-boss_encounters = Array[PackedScene]([ExtResource("2_7oabr")])
+biome_bosses = Dictionary[int, PackedScene]({
+0: ExtResource("2_7oabr"),
+1: ExtResource("3_frost"),
+2: ExtResource("4_fire")
+})

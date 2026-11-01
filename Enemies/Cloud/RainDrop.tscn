@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dicvvc5jtp083" path="res://Enemies/Cloud/rain_drop.gd" id="1_5yjxy"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_etmxi"]
-[ext_resource type="Texture2D" uid="uid://b5sarxeghvvnc" path="res://Enemies/Cloud/Sprites/RainDrop.png" id="2_iaohl"]
+[ext_resource type="Texture2D" uid="uid://b5sarxeghvvnc" path="res://Enemies/Sprites/RainDrop.png" id="2_iaohl"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iaohl"]
 radius = 6.6666665

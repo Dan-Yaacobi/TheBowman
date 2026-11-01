@@ -38,7 +38,8 @@ func rest(shoulder: Node2D) -> void:
 	string_pull_target = null
 	z_index = -2
 
-func hold(hand: Node2D, string_point: Node2D) -> void:
+func hold(hand: Node2D, string_point: Node2D, grip: Node2D) -> void:
+	position_target = grip
 	rotation_target = hand
 	string_pull_target = string_point
 	z_index = 0

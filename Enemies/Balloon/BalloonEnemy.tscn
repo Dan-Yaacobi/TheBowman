@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8lmb4nmal22g"]
 
 [ext_resource type="Script" uid="uid://qoo6oygbach4" path="res://Enemies/Balloon/balloon_enemy.gd" id="1_sn7vl"]
-[ext_resource type="Texture2D" uid="uid://cipxforpdgkwa" path="res://Enemies/Balloon/Sprites/Balloon.png" id="2_58m4j"]
+[ext_resource type="Texture2D" uid="uid://cipxforpdgkwa" path="res://Enemies/Sprites/Balloon.png" id="2_58m4j"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="3_3rnvt"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_tb2nn"]
 [ext_resource type="Script" uid="uid://bg5f7x52k78va" path="res://Enemies/Balloon/balloon_idle_state.gd" id="5_l5fvy"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="10_q28kg"]
 [ext_resource type="PackedScene" uid="uid://dh0wik5pjscau" path="res://Enemies/Balloon/Wind.tscn" id="11_p8jtg"]
 [ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="13_47m3o"]
+
 
 [sub_resource type="Animation" id="Animation_47m3o"]
 resource_name = "Blow"

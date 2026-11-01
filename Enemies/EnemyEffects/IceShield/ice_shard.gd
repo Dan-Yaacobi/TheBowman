@@ -10,7 +10,7 @@ func extra_ready_function() -> void:
 	if !was_fired:
 		frost_particles.emitting = false
 		sprite.frame = randi_range(0, sprite.hframes * sprite.vframes - 2)
-		visible_on_screen_notifier.screen_exited.disconnect(clear_shot)
+		visible_on_screen_notifier.screen_exited.disconnect(queue_free)
 		
 func _physics_process(delta: float) -> void:
 	if was_fired:

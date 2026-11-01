@@ -38,11 +38,12 @@ var can_hook: bool = true
 @export var target_dummy_tutorial_passed: bool = false
 
 @export var stats: PlayerStats
-
+@export var fall_animation_threshold: float = 20.0
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
 @export var perfect_shot_effects: Dictionary[OnPerfectShotEffect,int] = {}
 @onready var buff_handler: BuffHandler = $BuffHandler
+@onready var color_levels: ColorLevels = $ColorLevels
 
 const HEALTH_GAIN_EFFECT = preload("uid://d06bmrun6hlne")
 const PERMA_EFFECT: int = -1
@@ -55,7 +56,6 @@ var active_ability_available: bool = true
 var dropping_down: bool = false
 
 var base_stats: PlayerStats
-var current_minions: Array[Companion] = []
 
 var invincible: bool = false
 
@@ -84,7 +84,10 @@ var nearby_enemies: Array[Enemy]
 var enemies_killed: int = 0
 var can_swing: int = 0
 var aim_direction: Vector2 = Vector2.ZERO
+## Surfaces currently changing ground grip (e.g. SlipperySurface) -> their traction
+var _traction_sources: Dictionary[Node, float] = {}
 var in_jump: bool = false
+var fall_after_jump: bool = false
 
 func _ready() -> void:
 	stats.player = self
@@ -118,7 +121,7 @@ func _ready() -> void:
 	swing_cooldown.timeout.connect(_on_swing_cooldown_timeout)
 	jump_action.jumped.connect(_on_jumped)
 	jump_action.landed.connect(_on_landed)
-	
+	body.animation_player.animation_finished.connect(_on_body_animation_finished)
 func _save_resources() -> Dictionary:
 	var out: Dictionary = {}
 	for item: CustomVariables.items in stats.items:
@@ -172,6 +175,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			collect_item(CustomVariables.items.COIN, 50)
 			collect_item(CustomVariables.items.ESSENCE, 50)
 			collect_item(CustomVariables.items.SKYSHARD, 50)
+		if event.keycode == KEY_F6:
+			EventBus.drop_item.emit(CustomVariables.items.COLOR_SCROLL, global_position + Vector2(40, -10), 100.0, 1)
 		if event.keycode == KEY_F9:
 			var track: UpgradeTrack = MetaProgress.tracks[0]
 			var bought: bool = MetaProgress.purchase(track, self)
@@ -245,8 +250,7 @@ func show_hands(yes: bool) -> void:
 	
 func _on_main_hand_drawing() -> void:
 	shooting = true
-	off_hand.hold(main_hand, main_hand.arrow_position)
-		
+	off_hand.hold(main_hand, main_hand.arrow_position, main_hand.bow_grip)		
 func _on_main_hand_released() -> void:
 	shooting = false
 	off_hand.rest(body.off_hand_shoulder)
@@ -262,6 +266,32 @@ func _physics_process(delta: float) -> void:
 	velocity += knockback
 	move_and_slide()
 	velocity -= knockback
+
+## Ground grip: 1 = normal, lower = slippery. The weakest active source wins.
+func get_ground_traction() -> float:
+	var traction: float = 1.0
+	for source: Node in _traction_sources.keys():
+		if not is_instance_valid(source):
+			_traction_sources.erase(source)
+			continue
+		traction = minf(traction, _traction_sources[source])
+	return traction
+
+func add_traction_source(source: Node, traction: float) -> void:
+	_traction_sources[source] = traction
+
+func remove_traction_source(source: Node) -> void:
+	_traction_sources.erase(source)
+
+func get_move_acceleration() -> float:
+	if is_on_floor():
+		return stats.ground_acc * get_ground_traction()
+	return stats.air_acc
+
+func get_move_deceleration() -> float:
+	if is_on_floor():
+		return stats.ground_dec * get_ground_traction()
+	return stats.air_dec
 
 func is_equipment_interaction() -> bool:
 	return equipment_interacted != null
@@ -332,13 +362,7 @@ func set_arrow_scene() -> void:
 	if stats.arrow_scene:
 		main_hand.new_arrow(stats.arrow_scene)
 
-func can_summon() -> bool:
-	return current_minions.size() < stats.max_minions
 
-func reset_minions() -> void:
-	for minion in current_minions:
-		minion.queue_free()
-		current_minions.erase(minion)
 
 func emit_crit() -> void:
 	critical_hit.emit()
@@ -353,7 +377,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		if _hurt_box:
 			start_invincibilty()
 			dmg_taken = _hurt_box.damage
-			apply_knockback(-_hurt_box.knockback_dir,_hurt_box.knockback_power)
+			apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback_power)
 			dmg_color = _hurt_box.combat_text_color
 		else:
 			dmg_taken = raw_damage
@@ -511,8 +535,6 @@ func get_pull_speed() -> float:
 func get_strength_shot_modifier() -> float:
 	return stats.basic_shot_power
 	
-func get_arrow_ability() -> Array[ArrowAbility]:
-	return stats.arrow_abilities 
 
 func get_shoot_abilities() -> Array[PlayerShootAbility]:
 	return stats.shooting_abilities
@@ -659,12 +681,20 @@ func _on_nearby_enemies_detector_body_exited(_body: Node2D) -> void:
 
 func erase_nearby_enemy(_enemy: Enemy) -> void:
 	nearby_enemies.erase(_enemy)
+	
 func _on_jumped() -> void:
 	in_jump = true
+	fall_after_jump = false
 	body.restart_animation("Jump")
 
 func _on_landed() -> void:
 	in_jump = false
+	fall_after_jump = false
+
+func _on_body_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Jump" or anim_name == "Swing":
+		in_jump = false
+		fall_after_jump = not is_on_floor()
 
 func _update_animations() -> void:
 	var stage: String = main_hand.get_draw_stage()
@@ -675,5 +705,8 @@ func _update_body_animation(stage: String) -> void:
 	if is_swinging() or in_jump:
 		return
 	if not is_walking() and not is_idle():
+		return
+	if not is_on_floor() and (fall_after_jump or velocity.y > fall_animation_threshold):
+		body.update_animation("Falling")
 		return
 	body.play_stance(stage, is_walking(), get_pull_speed())

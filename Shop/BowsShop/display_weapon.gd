@@ -1,1 +1,0 @@
-class_name DisplayWeapon extends Node2D

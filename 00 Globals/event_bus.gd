@@ -121,3 +121,6 @@ signal relocate_player(_position: Vector2)
 signal poison_damage_dealt
 
 signal change_sky_color(top_color: Color, bottom_color: Color)
+
+signal color_level_changed(color: CustomVariables.ItemColor, level: int)
+signal color_scroll_collected

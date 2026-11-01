@@ -1,5 +1,8 @@
 class_name ChatBox extends CanvasLayer
 
+signal typing_started
+signal typing_finished
+
 @onready var chat_panel: PanelContainer = $Control/ChatPanel
 @onready var name_label: Label = $Control/ChatPanel/VBoxContainer/NameLabel
 @onready var dialogue_label: RichTextLabel = $Control/ChatPanel/VBoxContainer/DialogueLabel
@@ -33,6 +36,9 @@ func open(npc: NPC) -> void:
 func close() -> void:
 	chat_panel.visible = false
 	_kill_tween()
+	if _is_typing:
+		_is_typing = false
+		typing_finished.emit()
 	_lines = []
 	_current_line_index = 0
 	is_last_line = false
@@ -63,6 +69,7 @@ func _show_line(line: String) -> void:
 	buttons_container.visible = false
 	continue_hint.visible = false
 	_is_typing = true
+	typing_started.emit()
 	_kill_tween()
 	var duration: float = line.length() / chars_per_second
 	_tween = create_tween()
@@ -77,6 +84,7 @@ func _snap_to_full() -> void:
 
 func _on_typing_finished() -> void:
 	_is_typing = false
+	typing_finished.emit()
 	buttons_container.visible = buttons_container.get_child_count() > 0
 	continue_hint.visible = true
 	continue_hint.text = "[E] Close" if is_last_line else "[E] Continue"

@@ -13,7 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://b8ha1ki2kcf1f" path="res://Items/Sprites/Coin.png" id="11_cnxy2"]
 [ext_resource type="Script" uid="uid://chfcjmpmpeon0" path="res://Items/item_data.gd" id="12_ir4xl"]
 [ext_resource type="Resource" uid="uid://d2y7btr0r5s71" path="res://Items/Other/Diamond.tres" id="14_4s8ns"]
-[ext_resource type="Texture2D" uid="uid://cl46kareymfb2" path="res://Enemies/EvilBird/Sprites/BlueEvilBird.png" id="15_snmq2"]
+[ext_resource type="Texture2D" uid="uid://cl46kareymfb2" path="res://Enemies/Sprites/BlueEvilBird.png" id="15_snmq2"]
+
 
 
 [sub_resource type="Resource" id="Resource_ivvup"]

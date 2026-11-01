@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cn76h3jplsrfn"]
 
 [ext_resource type="Script" uid="uid://bdrugdsefekfx" path="res://Enemies/FlyingApple/flying_apple.gd" id="1_whfbk"]
-[ext_resource type="Texture2D" uid="uid://w25xrqq4gns8" path="res://ZZ_Sprites in progress/apple flying.png" id="2_ocbeu"]
+[ext_resource type="Texture2D" uid="uid://w25xrqq4gns8" path="res://Enemies/Sprites/apple flying.png" id="2_ocbeu"]
 [ext_resource type="Script" uid="uid://baxh6ix1g81b" path="res://Enemies/EvilBird/enemy_damaged_state.gd" id="10_er6rk"]
 [ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="11_er6rk"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_h5knc"]
@@ -15,7 +15,7 @@
 
 [sub_resource type="Animation" id="Animation_kl176"]
 resource_name = "Attack"
-length = 0.39999999999999997
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false

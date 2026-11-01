@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://HUD/ColorLevels/color_levels_hud.gd" id="1_clhud"]
+
+[node name="ColorLevelsHud" type="HBoxContainer"]
+mouse_filter = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_clhud")
+
+[node name="PrecisionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "P 0"
+
+[node name="TempoLabel" type="Label" parent="."]
+layout_mode = 2
+text = "T 0"
+
+[node name="ElementalLabel" type="Label" parent="."]
+layout_mode = 2
+text = "E 0"

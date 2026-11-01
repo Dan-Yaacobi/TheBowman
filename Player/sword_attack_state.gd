@@ -42,7 +42,7 @@ func Exit() -> void:
 func Process(_delta: float) -> State:
 	if finished:
 		return idle
-	var deceleration: float = player.stats.ground_dec if player.is_on_floor() else player.stats.air_dec
+	var deceleration: float = player.get_move_deceleration()
 	player.velocity.x = move_toward(player.velocity.x, 0, deceleration * _delta)
 	return null
 

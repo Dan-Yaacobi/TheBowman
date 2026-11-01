@@ -47,7 +47,7 @@ func _spawn_bird(_position: Vector2) -> void:
 		bird_boss.active_birds.append(bird)
 		bird.died.connect(func(_e: Enemy) -> void: bird_boss.active_birds.erase(bird))
 		bird.global_position = _position
-		enemy.get_parent().call_deferred("add_child", bird)
+		EventBus.enemy_summoned.emit(bird)
 		
 func _drop_egg() -> void:
 	var egg: Egg = EGG.instantiate()

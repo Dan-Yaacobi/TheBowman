@@ -38,7 +38,7 @@ func _spawn_apple() -> void:
 		enemy.flying_apple_entry.spawn_zone
 	)
 	if apple != null:
-		enemy.get_parent().call_deferred("add_child", apple)
+		EventBus.enemy_summoned.emit(apple)
 	amount_summoned += 1
 	if amount_summoned >= total_summons:
 		finished_summoning = true

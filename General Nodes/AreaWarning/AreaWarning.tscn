@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://General Nodes/AreaWarning/area_warning.gd" id="1_awr"]
+[ext_resource type="Shader" path="res://General Nodes/AreaWarning/area_warning.gdshader" id="2_awr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awr"]
+resource_local_to_scene = true
+shader = ExtResource("2_awr")
+shader_parameter/progress = 0.0
+shader_parameter/pulse = 0.0
+shader_parameter/pixel_grid = Vector2(160, 160)
+shader_parameter/rim_color = Color(1, 0.55, 0.15, 1)
+shader_parameter/rim_dim_color = Color(0.62, 0.12, 0.06, 1)
+shader_parameter/outline_color = Color(0.18, 0.03, 0.02, 1)
+shader_parameter/fill_color = Color(0.95, 0.3, 0.08, 0.2)
+shader_parameter/front_color = Color(1, 0.7, 0.25, 0.6)
+shader_parameter/rim_width = 2.0
+shader_parameter/front_width = 2.0
+
+[node name="AreaWarning" type="Node2D"]
+z_index = 1
+script = ExtResource("1_awr")
+
+[node name="Area" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_awr")
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+mouse_filter = 2

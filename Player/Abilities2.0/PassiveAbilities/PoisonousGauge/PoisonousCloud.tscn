@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dml4cxyxwod76"]
 
-[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="1_b5ug4"]
-[ext_resource type="Script" uid="uid://dp6wlw8ej7ve1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/poison_cloud.gd" id="2_f05u2"]
+[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/DustBall.png" id="1_b5ug4"]
+[ext_resource type="Script" uid="uid://dp6wlw8ej7ve1" path="res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/poison_cloud.gd" id="2_f05u2"]
 
 [sub_resource type="Curve" id="Curve_yr32b"]
 _limits = [0.0, 50.0, 0.0, 1.0]

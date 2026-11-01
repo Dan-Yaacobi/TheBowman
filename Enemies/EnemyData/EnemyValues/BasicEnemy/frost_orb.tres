@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_3y3v2"]
 [ext_resource type="PackedScene" uid="uid://bpkemriujrtun" path="res://Enemies/EnemyEffects/FrostParticles.tscn" id="4_54cry"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_bjdpv"]
-[ext_resource type="Texture2D" uid="uid://ck6a84jirt5y4" path="res://Enemies/Sprites/FrostOrb.png" id="8_nbips"]
+[ext_resource type="Texture2D" uid="uid://bgv7wb3kgjt58" path="res://Enemies/Sprites/FrostOrb.png" id="8_nbips"]
 
 [sub_resource type="Resource" id="Resource_m8shd"]
 script = ExtResource("2_xr67v")
@@ -25,17 +25,16 @@ max_hp = 50
 move_speed = SubResource("Resource_0pd27")
 acceleration = 100.0
 skin = ExtResource("8_nbips")
-texture_scale = Vector2(0.5, 0.5)
-move_animation = "OrbMove"
+move_animation = "Move"
 effects = Array[PackedScene]([ExtResource("3_3bld3"), ExtResource("4_54cry")])
 avg_coins_dropped = 5
 touch_damage = 3
-size = 0.5
+size = 1.0
 death_ability = Array[ExtResource("1_rb1i3")]([SubResource("Resource_m8shd")])
 shooter = true
 bullet = ExtResource("1_3bld3")
 shot_cooldown = 2.5
-bullet_speed = 25.0
+bullet_speed = 70.0
 pure_ranged_mode = true
 drop_chance = 0.0
 metadata/_custom_type_script = "uid://rlvenynllobd"

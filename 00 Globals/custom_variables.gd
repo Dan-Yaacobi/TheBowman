@@ -4,7 +4,10 @@ enum stats {Strength, Agility, Stamina}
 
 enum directions {Up, Left ,Down ,Right}
 
-enum items{COIN,POTION, ESSENCE, WOOD, SKYSHARD}
+enum items{COIN,POTION, ESSENCE, WOOD, SKYSHARD, COLOR_SCROLL}
+
+## Scaling color of a bow, quiver or ring. NONE is temporary: every item should get a color.
+enum ItemColor {NONE, PRECISION, TEMPO, ELEMENTAL}
 
 const HP_PER_HEART: int = 4
 const RIFTS_PER_TYPE: int = 2

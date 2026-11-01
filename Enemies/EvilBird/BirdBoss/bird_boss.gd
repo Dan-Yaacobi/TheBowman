@@ -32,7 +32,7 @@ func extra_hit_functions(_hurt_box: HurtBox) -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	if velocity.x != 0:
-		sprite.flip_h = velocity.x > 0
+		sprite.flip_h = velocity.x < 0
 		
 func _check_roost_threshold() -> void:
 	if _remaining_thresholds.is_empty():

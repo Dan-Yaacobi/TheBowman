@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dak6g1yna54nl" path="res://Player/Abilities2.0/ShootAbilities/HurricaneAttack/hurricane.gd" id="1_tqqog"]
 [ext_resource type="Script" uid="uid://c6y1iuomnygy0" path="res://hurricane.gd" id="2_tpt0m"]
-[ext_resource type="Texture2D" uid="uid://d1cx73j10b7eg" path="res://Enemies/EvilBird/Sprites/Feather.png" id="3_eowr6"]
+[ext_resource type="Texture2D" uid="uid://d1cx73j10b7eg" path="res://Enemies/Sprites/Feather.png" id="3_eowr6"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_s8aa3"]
+
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yhgtq"]
 radius = 17.0

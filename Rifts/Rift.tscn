@@ -1,21 +1,15 @@
 [gd_scene format=3 uid="uid://iitxisrr6wi5"]
 
 [ext_resource type="Script" uid="uid://d1nuc00qfn6v8" path="res://Rifts/rift.gd" id="1_hofdl"]
-[ext_resource type="Script" uid="uid://dnc5hf4828qbd" path="res://Player/Abilities2.0/ActiveAbilities/active_ability.gd" id="2_oaj8c"]
 [ext_resource type="PackedScene" uid="uid://daqty3s8xq8df" path="res://Rifts/RiftGeneration/RiftGenerator.tscn" id="2_pe0ph"]
 [ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="3_clqlo"]
 [ext_resource type="Script" uid="uid://b7p0flr2uopwv" path="res://Rifts/RiftGeneration/generator_data.gd" id="3_jukhk"]
-[ext_resource type="Resource" uid="uid://dv07o8cjlc0eo" path="res://Player/Abilities2.0/ActiveAbilities/Resources/barrage_ability.tres" id="3_oaj8c"]
 [ext_resource type="Resource" uid="uid://c3plkncaygns5" path="res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_1.tres" id="4_cv4sj"]
-[ext_resource type="Resource" uid="uid://cyvclfscuikhl" path="res://Player/Abilities2.0/ActiveAbilities/Resources/circle_shot_ability.tres" id="4_k7sga"]
 [ext_resource type="Script" uid="uid://rxohwem0g1cv" path="res://Rifts/Chunks/chunk_bucket.gd" id="4_v6yg5"]
-[ext_resource type="Resource" uid="uid://b78u1bttthctm" path="res://Player/Abilities2.0/ActiveAbilities/Resources/frenzy_ability.tres" id="5_iqrxt"]
 [ext_resource type="Resource" uid="uid://b45tkbqikmw0w" path="res://Rifts/Chunks/ChunkData/Traversal/Down/traversal_down_2.tres" id="5_jukhk"]
 [ext_resource type="Resource" uid="uid://cqxxa2a2mtpei" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_1.tres" id="6_d1hhh"]
-[ext_resource type="Resource" uid="uid://0ce5hj6jep6p" path="res://Player/Abilities2.0/ActiveAbilities/Resources/poison_cloud_ability.tres" id="6_k7sga"]
 [ext_resource type="Resource" uid="uid://0kfokxymkgwt" path="res://Rifts/Chunks/ChunkData/End/end_portal_data.tres" id="6_v6yg5"]
 [ext_resource type="Resource" uid="uid://dj8i0e2574b5s" path="res://Rifts/Chunks/ChunkData/Intro/intro_1.tres" id="7_3f0ah"]
-[ext_resource type="Resource" uid="uid://ss8moblrre6q" path="res://Player/Abilities2.0/ActiveAbilities/Resources/thunder_strike_ability.tres" id="7_iqrxt"]
 [ext_resource type="Resource" uid="uid://dwno03ntsasoi" path="res://Rifts/Chunks/ChunkData/Traversal/Left/traversal_left_2.tres" id="7_v6yg5"]
 [ext_resource type="Resource" uid="uid://cgwpaefsfrma1" path="res://Rifts/Chunks/ChunkData/Traversal/Right/traversal_right_1.tres" id="8_3f0ah"]
 [ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="8_hhyca"]
@@ -45,6 +39,10 @@
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="38_oe8us"]
 [ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="38_vwcbb"]
 [ext_resource type="Resource" uid="uid://b5lbs5gsdj1he" path="res://Rifts/RiftEnemySpawner/EnemyEntry/fire_bird_entry.tres" id="39_j75h4"]
+[ext_resource type="PackedScene" uid="uid://blj0hgahvaj0c" path="res://Level/Events/MovingTargetsEvent/MovingTargetsEvent.tscn" id="40_mvtgt"]
+[ext_resource type="PackedScene" uid="uid://c7nlxg7p7m3vl" path="res://Level/Events/BossEvents/AppleBossEvent.tscn" id="41_aplbs"]
+[ext_resource type="PackedScene" uid="uid://ddhffywfb4gs" path="res://Level/Events/BossEvents/BirdBossEvent.tscn" id="42_brdbs"]
+[ext_resource type="PackedScene" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="43_scrpd"]
 
 [sub_resource type="Resource" id="Resource_4phns"]
 script = ExtResource("8_hhyca")
@@ -68,7 +66,7 @@ metadata/_custom_type_script = "uid://viwygaov6sfn"
 script = ExtResource("3_jukhk")
 main_path_length = 5
 probability_decay = 1.25
-event_pool = Array[PackedScene]([ExtResource("29_2cjow")])
+event_pool = Array[PackedScene]([ExtResource("29_2cjow"), ExtResource("40_mvtgt"), ExtResource("41_aplbs"), ExtResource("42_brdbs")])
 event_chance = 1.0
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
@@ -129,13 +127,13 @@ metadata/_custom_type_script = "uid://co6xputyjmuin"
 
 [node name="Rift" type="Node2D" unique_id=371790418]
 script = ExtResource("1_hofdl")
-active_ability_pool = Array[ExtResource("2_oaj8c")]([ExtResource("3_oaj8c"), ExtResource("4_k7sga"), ExtResource("5_iqrxt"), ExtResource("6_k7sga"), ExtResource("7_iqrxt")])
 sky_colors = Array[ExtResource("8_hhyca")]([SubResource("Resource_4phns"), SubResource("Resource_hhyca"), SubResource("Resource_c6uaq")])
 
 [node name="RiftGenerator" parent="." unique_id=1531404571 instance=ExtResource("2_pe0ph")]
 data = SubResource("Resource_d1hhh")
 library = SubResource("Resource_clqlo")
 event_portal_scene = ExtResource("30_j75h4")
+scroll_pedestal_scene = ExtResource("43_scrpd")
 
 [node name="RiftEnemySpawner" parent="." unique_id=1673800169 instance=ExtResource("19_4xrky")]
 script = ExtResource("20_5l72e")

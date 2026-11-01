@@ -89,7 +89,9 @@ func calc_dmg(shot_power: float) -> void:
 		var roll: float = pow(randf(), dmg_variance_skew)
 		variance_mult = lerpf(floor_mult, 1.0, roll)
 
-	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * variance_mult)
+	# Only the bow's color scales the arrow hit; quivers and rings scale their own effects.
+	var bow_power: float = PlayerManager.player.color_levels.get_bow_power()
+	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * variance_mult * bow_power)
 	
 func calc_knockback(shot_power: float) -> void:
 	if PlayerManager.player.stats.can_knockback <= 0:

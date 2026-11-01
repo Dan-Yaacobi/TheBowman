@@ -9,6 +9,7 @@ class_name BossArena extends GameWorld
 @onready var portal: Portal = $Portal
 @onready var loot_manager: LootManager = $LootManager
 @onready var boss_incoming_label: Label = $BossIncomingLabel
+@onready var falling_death: FallingDeath = $FallingDeath
 
 func _ready() -> void:
 	_set_boss_dormant(true)
@@ -60,3 +61,5 @@ func _set_boss_dormant(dormant: bool) -> void:
 
 func _on_boss_died(_boss: Enemy) -> void:
 	portal.enable()
+	# The fight is won; falling now only respawns the player
+	falling_death.costs_heart = false

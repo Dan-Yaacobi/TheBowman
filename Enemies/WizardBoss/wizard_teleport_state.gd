@@ -10,6 +10,9 @@ enum Phase {CAST, FADE_OUT, HIDDEN, FADE_IN}
 @export var arrival_delay: float = 0.6
 @export var sparkle_scene: PackedScene
 
+## The spell to cast on arrival, chosen by idle before entering this state
+var queued_spell: WizardSpellState
+
 var wizard: WizardBoss
 var _phase: Phase = Phase.CAST
 var _elapsed: float = 0.0
@@ -23,7 +26,8 @@ func init() -> void:
 		push_error("%s has no idle_state set" % name)
 
 func Enter() -> void:
-	_next_spell = wizard.next_spell()
+	_next_spell = queued_spell
+	queued_spell = null
 	_destination = _pick_destination()
 	_start_phase(Phase.CAST)
 

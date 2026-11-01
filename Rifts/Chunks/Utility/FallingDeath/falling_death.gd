@@ -1,4 +1,4 @@
-extends Area2D
+class_name FallingDeath extends Area2D
 
 signal player_fell
 

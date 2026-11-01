@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/WizardBoss/FrostWizard/frost_shell.gd" id="1_fsh"]
+[ext_resource type="Shader" path="res://Enemies/WizardBoss/FrostWizard/ice_shell.gdshader" id="2_fsh"]
+[ext_resource type="PackedScene" path="res://Debuffs/Freeze/FreezeDebuff.tscn" id="3_fsh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fsh"]
+resource_local_to_scene = true
+shader = ExtResource("2_fsh")
+shader_parameter/form = 0.0
+shader_parameter/cracks = 0.0
+shader_parameter/hit_flash = 0.0
+shader_parameter/pixel_grid = Vector2(76, 92)
+shader_parameter/fill_color = Color(0.6, 0.88, 1, 0.25)
+shader_parameter/rim_color = Color(0.78, 0.96, 1, 0.85)
+shader_parameter/outline_color = Color(0.12, 0.24, 0.45, 1)
+shader_parameter/crack_color = Color(1, 1, 1, 1)
+shader_parameter/shine_color = Color(1, 1, 1, 0.9)
+shader_parameter/rim_width = 4.0
+shader_parameter/max_cracks = 7
+
+[sub_resource type="Gradient" id="Gradient_shards"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.66, 0.93, 1, 1, 0.4, 0.75, 1, 0)
+
+[node name="FrostShell" type="Node2D"]
+script = ExtResource("1_fsh")
+freeze_scene = ExtResource("3_fsh")
+
+[node name="Shell" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fsh")
+offset_left = -38.0
+offset_top = -42.0
+offset_right = 38.0
+offset_bottom = 50.0
+mouse_filter = 2
+
+[node name="Shatter" type="CPUParticles2D" parent="."]
+position = Vector2(0, 4)
+emitting = false
+amount = 24
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_shards")

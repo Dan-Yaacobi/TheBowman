@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bcj03f1mlqj3k" path="res://Enemies/EvilBird/BirdBoss/bird_boss.gd" id="1_1bv40"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="1_2nha2"]
 [ext_resource type="Script" uid="uid://cmfjrfdosiduu" path="res://Enemies/EvilBird/BirdBoss/birdboss_fly_state.gd" id="2_8t6au"]
-[ext_resource type="Texture2D" uid="uid://ckbu41ee0pbv7" path="res://Enemies/EvilBird/Sprites/EvilRedBird.png" id="2_crum6"]
+[ext_resource type="Texture2D" uid="uid://dhad08bcbg6em" path="res://Enemies/Sprites/Bird.png" id="2_crum6"]
 [ext_resource type="Resource" uid="uid://bf5pvysjc4wpt" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="2_fudsp"]
 [ext_resource type="Script" uid="uid://cudmckx55i501" path="res://Enemies/EvilBird/BirdBoss/birdboss_transition_state.gd" id="3_u4pmd"]
 [ext_resource type="Script" uid="uid://kgutkxewiout" path="res://Enemies/EvilBird/BirdBoss/birdboss_roost_state.gd" id="4_1ecm4"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="8_541n7"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="11_u2mfl"]
 [ext_resource type="PackedScene" uid="uid://dh0wik5pjscau" path="res://Enemies/Balloon/Wind.tscn" id="13_u2mfl"]
+[ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="14_dead1"]
+
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmu3r"]
 radius = 4.992012
@@ -20,7 +22,7 @@ height = 16.398891
 
 [sub_resource type="Animation" id="Animation_85s0q"]
 resource_name = "Fly"
-length = 0.7
+length = 0.9
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -30,26 +32,28 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -5), Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_wausn"]
 resource_name = "Land"
+length = 0.3
+loop_mode = 0
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -58,26 +62,88 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [2]
+"values": [30, 29, 28]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sutn6"]
+resource_name = "Whirlwind"
+length = 0.15
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dead1"]
+resource_name = "Dead"
+length = 1.2
+loop_mode = 0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31, 32, 33, 34, 35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_541n7"]
 length = 0.001
+loop_mode = 0
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,48 +159,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_sutn6"]
-resource_name = "Whirlwind"
-length = 0.15
-loop_mode = 2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fudsp"]
 _data = {
+&"Dead": SubResource("Animation_dead1"),
 &"Fly": SubResource("Animation_85s0q"),
 &"Land": SubResource("Animation_wausn"),
 &"RESET": SubResource("Animation_541n7"),
@@ -152,21 +189,23 @@ height = 23.141338
 [sub_resource type="CircleShape2D" id="CircleShape2D_fudsp"]
 radius = 14.700718
 
-[node name="BirdBoss" type="CharacterBody2D" unique_id=1166316920]
+[node name="BirdBoss" type="CharacterBody2D" unique_id=1166316920 node_paths=PackedStringArray("dead_state")]
 scale = Vector2(3, 3)
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_1bv40")
 bird_entry = ExtResource("2_fudsp")
+dead_state = NodePath("EnemyStateMachine/Dead")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=764500894]
 rotation = -0.8707603
 shape = SubResource("CapsuleShape2D_jmu3r")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1259847978]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_crum6")
-hframes = 3
-vframes = 2
+hframes = 9
+vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=74293756]
 libraries/ = SubResource("AnimationLibrary_fudsp")
@@ -193,6 +232,9 @@ script = ExtResource("4_1ecm4")
 
 [node name="RoostTimer" type="Timer" parent="EnemyStateMachine/Roost" unique_id=1936075264]
 wait_time = 15.0
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine" unique_id=1588203161]
+script = ExtResource("14_dead1")
 
 [node name="HitBox" parent="." unique_id=1795985863 instance=ExtResource("6_crum6")]
 collision_layer = 4

@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://NPC/Pedestal/scroll_pedestal_npc.gd" id="1_scrpd"]
+[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://NPC/Pedestal/Pedestal.png" id="2_7kftm"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_adyf7"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="3_prec"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/tempo_scroll.png" id="3_temp"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/elemental_scroll.png" id="3_elem"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_5uod6"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_adyf7"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_4b8kh"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_mlx16"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_mlx16"]
+
+[sub_resource type="Resource" id="Resource_scrpd"]
+script = ExtResource("2_adyf7")
+has_chat = false
+disappears = false
+idle = true
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e83u5"]
+size = Vector2(28, 31)
+
+[node name="ScrollPedestal" type="Node2D"]
+script = ExtResource("1_scrpd")
+scroll_textures = Array[Texture2D]([ExtResource("3_prec"), ExtResource("3_temp"), ExtResource("3_elem")])
+data = SubResource("Resource_scrpd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_7kftm")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+position = Vector2(-1, -26)
+scale = Vector2(0.4, 0.4)
+
+[node name="NpcStateMachine" type="Node2D" parent="."]
+script = ExtResource("4_5uod6")
+
+[node name="Idle" type="Node2D" parent="NpcStateMachine"]
+script = ExtResource("5_4b8kh")
+
+[node name="Interacted" type="Node2D" parent="NpcStateMachine"]
+script = ExtResource("6_mlx16")
+
+[node name="Gone" type="Node2D" parent="NpcStateMachine"]
+script = ExtResource("7_mlx16")
+
+[node name="KeyboardPressHelper" parent="." instance=ExtResource("4_adyf7")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -6.9999995
+offset_top = 12.0
+offset_right = -6.9999995
+offset_bottom = 12.0
+scale = Vector2(0.4, 0.4)
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_e83u5")
+
+[node name="TopFloatMarker" type="Marker2D" parent="."]
+position = Vector2(-1, -34)
+
+[node name="BottomFloatMarker" type="Marker2D" parent="."]
+position = Vector2(-1, -20)

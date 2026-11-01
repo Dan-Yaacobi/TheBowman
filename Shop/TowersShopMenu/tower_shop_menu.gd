@@ -1,1 +1,0 @@
-class_name TowerShopMenu extends Node2D

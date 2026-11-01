@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dfqptnmqklf0q"]
 
-[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities/SpecialAbilities/PoisonBowAbility/DustBall.png" id="1_hbriq"]
+[ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/DustBall.png" id="1_hbriq"]
 [ext_resource type="Script" uid="uid://idaw1wr5uqqd" path="res://Player/Abilities2.0/PassiveAbilities/BloodGauge/blood_explosion.gd" id="2_urnw4"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_urnw4"]
+
 
 [sub_resource type="Curve" id="Curve_3ljpm"]
 _limits = [0.0, 2.0, 0.0, 1.0]

@@ -25,6 +25,9 @@ func Exit() -> void:
 	if player.stats.reset_upgrades:
 		player.reset_to_base_stats()
 	MetaProgress.apply_to(player.stats)
+	# Run-only heart containers (cleric, color scrolls) don't carry into the next run.
+	player.stats.extra_hp = 0
+	player.color_levels.reset()
 	player.refresh_max_hp()
 	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
 	EventBus.player_died.emit(display_death_screen)

@@ -29,11 +29,10 @@ func _physics_process(_delta: float) -> void:
 	
 func summon_spider() -> void:
 	var pg = get_parent()
-	if pg is PlayGround:
-		pg.summon_spider()
-		spider_summon_timer.wait_time = randf_range(3.0,5.0)
-		if enraged:
-			spider_summon_timer.wait_time /= 2
+	pg.summon_spider()
+	spider_summon_timer.wait_time = randf_range(3.0,5.0)
+	if enraged:
+		spider_summon_timer.wait_time /= 2
 
 func shoot_web() -> void:
 	var web_projectile: SpiderWebProjectile = SPIDER_WEB_PROJECTILE.instantiate()

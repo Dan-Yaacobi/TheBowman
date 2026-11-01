@@ -16,7 +16,7 @@ func init() -> void:
 
 #what happens when the player enters this state
 func Enter() -> void:
-	enemy.wings_animation.play("Slam")
+	enemy.animation_player.play("Attack")
 	slam_particles.emitting = true
 	slam_done = false
 	enemy.velocity = Vector2.ZERO
@@ -26,7 +26,7 @@ func Enter() -> void:
 func Exit() -> void:
 	slam_particles.emitting = false
 	enemy.velocity = Vector2([1,-1].pick_random()*5,-enemy.stats.move_speed.value()/4)
-	enemy.wings_animation.play("Fly")
+	enemy.animation_player.play("Move")
 	pass
 	
 #what happens during process update in this state

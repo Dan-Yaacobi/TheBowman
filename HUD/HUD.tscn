@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bod4jyw2injnl" path="res://UI/Theme/Corner.png" id="20_2gu3h"]
 [ext_resource type="PackedScene" uid="uid://b7f5hqch7fnns" path="res://HUD/pause_menu.tscn" id="20_65vjf"]
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
+[ext_resource type="PackedScene" path="res://HUD/ColorLevels/ColorLevelsHud.tscn" id="22_clhud"]
+[ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g452r"]
 shader = ExtResource("15_iob2k")
@@ -83,6 +85,12 @@ offset_right = 44.0
 offset_bottom = 18.0
 scale = Vector2(2, 2)
 mouse_filter = 2
+
+[node name="ColorLevelsHud" parent="Control" instance=ExtResource("22_clhud")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 100.0
+scale = Vector2(2, 2)
 
 [node name="HealthHearts" parent="Control" unique_id=1572092662 instance=ExtResource("2_65vjf")]
 layout_mode = 1
@@ -394,5 +402,7 @@ offset_bottom = 904.0
 grow_horizontal = 0
 texture = ExtResource("20_2gu3h")
 flip_v = true
+
+[node name="ColorScrollPicker" parent="." instance=ExtResource("23_cspick")]
 
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

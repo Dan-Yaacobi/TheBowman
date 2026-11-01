@@ -7,7 +7,29 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_diqrl"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_2a8j3"]
 [ext_resource type="PackedScene" uid="uid://cxfs4xfpqye45" path="res://Enemies/WizardBoss/FireWizard/WizardFireBoss.tscn" id="7_pv647"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="8_e85c2"]
 [ext_resource type="Script" uid="uid://gxf7gafwlrfm" path="res://Level/BossArena/named_marker.gd" id="8_ffcpw"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="9_0xdyt"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="10_5jtty"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="11_0u7cg"]
+[ext_resource type="Texture2D" uid="uid://jrilthu4grmo" path="res://Enemies/Sprites/HellfireWizard.png" id="12_7exy4"]
+
+[sub_resource type="Resource" id="Resource_vjl12"]
+script = ExtResource("10_5jtty")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_7ihfl"]
+script = ExtResource("11_0u7cg")
+max_hp = 150
+move_speed = SubResource("Resource_vjl12")
+skin = ExtResource("12_7exy4")
+can_be_knockedback = false
+capture_immune = true
+has_health_bar = false
+size = 0.6
+drop_chance = 100.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [node name="FireWizardBossArena" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
 script = ExtResource("1_pv647")
@@ -21,10 +43,6 @@ z_index = 0
 position = Vector2(243, 189)
 destination = 3
 is_rift_portal = true
-idle_speed = 0.5
-near_speed = 1.4
-wake_duration = 0.3
-sleep_duration = 1.0
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("4_5d562")]
 
@@ -72,10 +90,13 @@ position = Vector2(-160, 92)
 [node name="Island2" parent="Islands" unique_id=389278333 instance=ExtResource("6_2a8j3")]
 position = Vector2(242, 210)
 
-[node name="WizardFireBoss" parent="." unique_id=505457552 node_paths=PackedStringArray("teleport_points", "markers") instance=ExtResource("7_pv647")]
+[node name="WizardFireBoss" parent="." unique_id=505457552 node_paths=PackedStringArray("teleport_points", "markers", "island_root") instance=ExtResource("7_pv647")]
 position = Vector2(-4, 70)
+scale = Vector2(1, 1)
 teleport_points = [NodePath("../Markers/WizardSpawn"), NodePath("../Markers/WizardSpawn2"), NodePath("../Markers/WizardSpawn3"), NodePath("../Markers/WizardSpawn4")]
 markers = [NodePath("../MeteorMarker"), NodePath("../FireballMarker")]
+island_root = NodePath("../Islands")
+stats = SubResource("Resource_7ihfl")
 
 [node name="Markers" type="Node2D" parent="." unique_id=69241897]
 

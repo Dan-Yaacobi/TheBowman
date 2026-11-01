@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://dqg0q26d6mrf5" path="res://Enemies/EnemyData/EnemyValues/BasicEnemy/frost_orb.tres" id="1_byrcy"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_ooral"]
-[ext_resource type="PackedScene" uid="uid://cn76h3jplsrfn" path="res://Enemies/FlyingApple/FlyingApple.tscn" id="2_j3lv3"]
+[ext_resource type="PackedScene" uid="uid://t8apaldqiigp" path="res://Enemies/FrozenOrb/FrozenOrb.tscn" id="2_j3lv3"]
 
 [resource]
 script = ExtResource("1_ooral")

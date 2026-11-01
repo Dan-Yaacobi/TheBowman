@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7mbeynvkpc26"]
+[gd_scene format=3 uid="uid://b7mbeynvkpc26"]
 
 [ext_resource type="Script" uid="uid://btpafd3s6icv0" path="res://Player/Body/body.gd" id="1_32ny8"]
-[ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/Archer.png" id="2_bskum"]
+[ext_resource type="Texture2D" uid="uid://d0b64wj245r47" path="res://Player/Body/oldArcher.png" id="2_bskum"]
+
 
 [sub_resource type="Animation" id="Animation_ijub2"]
 resource_name = "Dash"

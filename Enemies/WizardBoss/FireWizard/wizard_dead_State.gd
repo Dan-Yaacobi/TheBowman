@@ -1,4 +1,4 @@
-class_name WizardDeadState extends EnemyState
+class_name WizardDeadState extends EnemyDeadState
 
 @export var dead_animation: String = "Dead"
 

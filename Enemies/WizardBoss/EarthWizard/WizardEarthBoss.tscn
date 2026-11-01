@@ -1,0 +1,443 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://dsj4ljnl7t4ar" path="res://Enemies/WizardBoss/wizard_boss.gd" id="1_0ii0y"]
+[ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="2_6c8ac"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_rwvie"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_dqkua"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_nuuj8"]
+[ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_23dev"]
+[ext_resource type="Texture2D" path="res://Enemies/WizardBoss/EarthWizard/Sprites/EarthWizard.png" id="7_bhfl0"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="8_dcawe"]
+[ext_resource type="Script" uid="uid://bmjrv4mv2reks" path="res://Enemies/WizardBoss/wizard_idle_state.gd" id="9_nbbis"]
+[ext_resource type="Script" uid="uid://dkcr2k7mm15eb" path="res://Enemies/WizardBoss/wizard_teleport_state.gd" id="10_uxgo3"]
+[ext_resource type="PackedScene" uid="uid://cenesimsgf2vq" path="res://Enemies/WizardBoss/LingeringEffect.tscn" id="11_p8olu"]
+[ext_resource type="Script" uid="uid://dpw84mdxomt4d" path="res://Enemies/WizardBoss/FireWizard/wizard_dead_State.gd" id="16_1nmst"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="17_844n6"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="18_utapp"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="19_5mt6m"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="20_0gg1d"]
+[ext_resource type="Shader" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="27_glow"]
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/earthquake_spell.gd" id="28_eqk"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/QuakeDust.tscn" id="29_eqk"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/QuakePulse.tscn" id="30_eqk"]
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/boulder_spell.gd" id="31_bld"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/Boulder.tscn" id="32_bld"]
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/crumble_spell.gd" id="33_crm"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/CrumbleBurst.tscn" id="34_crm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_castglow"]
+shader = ExtResource("27_glow")
+shader_parameter/glow_amount = 0.0
+shader_parameter/glow_color = Color(0.63, 0.72, 0.26, 1)
+shader_parameter/core_color = Color(0.95, 0.98, 0.39, 1)
+shader_parameter/glow_radius_px = 8
+shader_parameter/spill = 0.35
+shader_parameter/band_alpha = Vector3(0.85, 0.5, 0.22)
+shader_parameter/hand_threshold = 0.8
+shader_parameter/pulse_speed = 6.0
+shader_parameter/pulse_amount = 0.15
+shader_parameter/frames_h = 13
+shader_parameter/frames_v = 5
+
+[sub_resource type="Resource" id="Resource_vjl12"]
+script = ExtResource("5_nuuj8")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_6mjqb"]
+script = ExtResource("6_23dev")
+max_hp = 150
+move_speed = SubResource("Resource_vjl12")
+skin = ExtResource("7_bhfl0")
+can_be_knockedback = false
+capture_immune = true
+has_health_bar = false
+size = 0.7
+drop_chance = 100.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
+
+[sub_resource type="Animation" id="Animation_5ty67"]
+resource_name = "Cast"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [39, 40, 41, 42, 43, 44, 45, 46]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kociy"]
+resource_name = "CastForward"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 38]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wdanr"]
+resource_name = "CastForwardHold"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(7.450581e-09, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36, 37]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_63os2"]
+resource_name = "Damaged"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [53, 54, 55, 56, 57, 58, 59]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6gc8g"]
+resource_name = "Dead"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18, 19]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.14117648)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_52pam"]
+resource_name = "Idle"
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xbav4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5.671796)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xev3"]
+_data = {
+&"Cast": SubResource("Animation_5ty67"),
+&"CastForward": SubResource("Animation_kociy"),
+&"CastForwardHold": SubResource("Animation_wdanr"),
+&"Damaged": SubResource("Animation_63os2"),
+&"Dead": SubResource("Animation_6gc8g"),
+&"Idle": SubResource("Animation_52pam"),
+&"RESET": SubResource("Animation_xbav4")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cua7u"]
+radius = 15.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lngcg"]
+radius = 15.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdanr"]
+radius = 14.999998
+height = 49.999996
+
+[node name="WizardEarthBoss" type="CharacterBody2D" unique_id=505457552 node_paths=PackedStringArray("spell_rotation", "dead_state")]
+script = ExtResource("1_0ii0y")
+element_color = Color(0.6, 0.72, 0.26, 1)
+spell_rotation = [NodePath("EnemyStateMachine/Earthquake"), NodePath("EnemyStateMachine/Boulder"), NodePath("EnemyStateMachine/Crumble")]
+item_drop = ExtResource("2_6c8ac")
+total_essence_drop = 15
+dead_state = NodePath("EnemyStateMachine/Dead")
+stats = SubResource("Resource_6mjqb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2089913649]
+material = SubResource("ShaderMaterial_castglow")
+position = Vector2(0, -5.671796)
+texture = ExtResource("7_bhfl0")
+hframes = 13
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=238802017]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_2xev3")
+
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=585988100]
+script = ExtResource("8_dcawe")
+
+[node name="Idle" type="Node2D" parent="EnemyStateMachine" unique_id=907452499]
+script = ExtResource("9_nbbis")
+
+[node name="Teleport" type="Node2D" parent="EnemyStateMachine" unique_id=528866170 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("10_uxgo3")
+idle_state = NodePath("../Idle")
+sparkle_scene = ExtResource("11_p8olu")
+
+[node name="Earthquake" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("28_eqk")
+dust_scene = ExtResource("29_eqk")
+pulse_scene = ExtResource("30_eqk")
+idle_state = NodePath("../Idle")
+
+[node name="Boulder" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("31_bld")
+boulder_scene = ExtResource("32_bld")
+idle_state = NodePath("../Idle")
+cast_animation = "CastForward"
+
+[node name="Crumble" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("33_crm")
+dust_scene = ExtResource("29_eqk")
+crumble_scene = ExtResource("34_crm")
+idle_state = NodePath("../Idle")
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine" unique_id=546670914]
+script = ExtResource("16_1nmst")
+
+[node name="HurtBox" parent="." unique_id=1705248977 instance=ExtResource("17_844n6")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1277399290]
+position = Vector2(0, -4.9999995)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("CapsuleShape2D_cua7u")
+
+[node name="HitBox" parent="." unique_id=2063195317 instance=ExtResource("18_utapp")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("19_5mt6m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=503930116]
+position = Vector2(0, -5)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_lngcg")
+debug_color = Color(0.98125535, 0, 0.3767128, 0.41960785)
+
+[node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("20_0gg1d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1752601762]
+position = Vector2(0, -4.9999995)
+shape = SubResource("CapsuleShape2D_wdanr")

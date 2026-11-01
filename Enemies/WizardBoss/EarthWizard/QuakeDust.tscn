@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://b3geag1oaoek" path="res://Enemies/WizardBoss/lingering_effect.gd" id="1_lng"]
+
+[sub_resource type="Gradient" id="Gradient_dirt"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.75)
+colors = PackedColorArray(0.31764707, 0.21960784, 0.19215687, 1, 0.5411765, 0.3529412, 0.21960784, 1, 0.48235294, 0.5803922, 0.21960784, 1)
+
+[node name="QuakeDust" type="CPUParticles2D"]
+emitting = false
+amount = 8
+lifetime = 0.7
+emission_shape = 3
+emission_rect_extents = Vector2(16, 1)
+direction = Vector2(0, 1)
+spread = 10.0
+gravity = Vector2(0, 250)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_initial_ramp = SubResource("Gradient_dirt")
+script = ExtResource("1_lng")

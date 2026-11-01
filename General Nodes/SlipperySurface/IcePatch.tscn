@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://General Nodes/SlipperySurface/ice_patch.gd" id="1_icep"]
+[ext_resource type="Shader" path="res://General Nodes/SlipperySurface/ice_sheet.gdshader" id="2_icep"]
+[ext_resource type="Script" path="res://General Nodes/SlipperySurface/slippery_surface.gd" id="3_icep"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icep"]
+resource_local_to_scene = true
+shader = ExtResource("2_icep")
+shader_parameter/ice_amount = 1.0
+shader_parameter/pixel_grid = Vector2(44, 6)
+shader_parameter/rim_color = Color(0.93, 0.99, 1, 1)
+shader_parameter/base_color = Color(0.62, 0.86, 0.96, 0.9)
+shader_parameter/shade_color = Color(0.36, 0.62, 0.84, 0.9)
+shader_parameter/edge_color = Color(0.16, 0.3, 0.48, 1)
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 0.5
+shader_parameter/shine_width = 0.06
+shader_parameter/jagged_chance = 0.3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_icep"]
+size = Vector2(43, 10)
+
+[node name="IcePatch" type="Node2D"]
+script = ExtResource("1_icep")
+
+[node name="Sheet" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_icep")
+offset_left = -22.0
+offset_top = 1.0
+offset_right = 22.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="SlipperySurface" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_icep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlipperySurface"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_icep")
+debug_color = Color(0.4, 0.8, 1, 0.42)

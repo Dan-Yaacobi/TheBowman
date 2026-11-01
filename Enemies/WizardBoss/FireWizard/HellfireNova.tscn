@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/WizardBoss/FireWizard/hellfire_nova.gd" id="1_nova"]
+[ext_resource type="PackedScene" path="res://General Nodes/HurtBox/HurtBox.tscn" id="2_nova"]
+[ext_resource type="PackedScene" path="res://Debuffs/Burned/BurnDebuff.tscn" id="3_nova"]
+[ext_resource type="Texture2D" path="res://Enemies/WizardBoss/FireWizard/Sprites/HellfireNova.png" id="4_nova"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nova"]
+resource_local_to_scene = true
+radius = 80.0
+
+[node name="HellfireNova" type="Node2D"]
+z_index = 2
+script = ExtResource("1_nova")
+burn_scene = ExtResource("3_nova")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_nova")
+hframes = 4
+vframes = 3
+
+[node name="HurtBox" parent="." instance=ExtResource("2_nova")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_nova")

@@ -1,8 +1,7 @@
 class_name GameManager extends Node2D
 
-@export var boss_encounters: Array[PackedScene]
-
-var _remaining_bosses: Array[PackedScene] = []
+## Boss arena entered after the last rift of each biome.
+@export var biome_bosses: Dictionary[Rift.Type, PackedScene] = {}
 
 var curr_world: GameWorld
 var prev_world: GameWorld
@@ -28,16 +27,16 @@ func _on_portal_entered() -> void:
 	else:
 		change_game_world(GameWorlds.worlds.Rift_1)
 
+## Picks the boss matching the biome of the rift the player is leaving.
 func _draw_boss() -> PackedScene:
-	if _remaining_bosses.is_empty():
-		_reset_boss_pool()
-	if _remaining_bosses.is_empty():
+	var biome: Rift.Type = Rift.Type.DIRT
+	var rift: Rift = curr_world as Rift
+	if rift:
+		biome = rift.get_rift_type()
+	if not biome_bosses.has(biome):
+		push_error("No boss assigned for biome %s" % Rift.Type.keys()[biome])
 		return null
-	return _remaining_bosses.pop_back()
-
-func _reset_boss_pool() -> void:
-	_remaining_bosses = boss_encounters.duplicate()
-	_remaining_bosses.shuffle()
+	return biome_bosses[biome]
 
 func set_game(_game: Game) -> void:
 	if _game:
@@ -94,7 +93,6 @@ func _transition_to(next_world: GameWorld) -> void:
 
 	if next_world is MainMenu:
 		PlayerManager.player.stats.rift_level = 0
-		_reset_boss_pool()
 
 	prev_world = curr_world
 	curr_world = next_world

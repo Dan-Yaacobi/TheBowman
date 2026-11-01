@@ -22,7 +22,7 @@ func Process(_delta: float) -> State:
 	if player.direction == 0:
 		return idle
 	var target_x = player.direction * player.get_move_speed()
-	var acceleration = player.stats.ground_acc if player.is_on_floor() else player.stats.air_acc
+	var acceleration: float = player.get_move_acceleration()
 	player.velocity.x = move_toward(player.velocity.x, target_x, acceleration * _delta)
 	return null
 	

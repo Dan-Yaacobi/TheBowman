@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/boulder.gd" id="1_bld"]
+[ext_resource type="Texture2D" path="res://Enemies/WizardBoss/EarthWizard/Sprites/Boulder.png" id="2_bld"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="3_bld"]
+[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/boulder_hit_box.gd" id="4_bld"]
+[ext_resource type="Shader" path="res://Enemies/WizardBoss/FrostWizard/drop_shadow.gdshader" id="5_bld"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/QuakePulse.tscn" id="6_bld"]
+[ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/BoulderShard.tscn" id="7_bld"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+resource_local_to_scene = true
+shader = ExtResource("5_bld")
+shader_parameter/progress = 0.0
+shader_parameter/pixel_grid = Vector2(24, 6)
+shader_parameter/shadow_color = Color(0.18, 0.12, 0.1, 1)
+shader_parameter/core_color = Color(0.09, 0.06, 0.06, 1)
+shader_parameter/min_scale = 0.35
+shader_parameter/min_alpha = 0.25
+shader_parameter/max_alpha = 0.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hurt"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ground"]
+radius = 6.0
+
+[node name="Boulder" type="Node2D"]
+script = ExtResource("1_bld")
+break_scene = ExtResource("6_bld")
+shard_scene = ExtResource("7_bld")
+
+[node name="Visual" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_bld")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_bld")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_bld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_hit")
+
+[node name="GroundDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+shape = SubResource("CircleShape2D_ground")
+
+[node name="TargetMark" type="Node2D" parent="."]
+visible = false
+top_level = true
+
+[node name="Shadow" type="ColorRect" parent="TargetMark"]
+material = SubResource("ShaderMaterial_shadow")
+offset_left = -12.0
+offset_top = -6.0
+offset_right = 12.0
+mouse_filter = 2

@@ -3,6 +3,7 @@ class_name RiftGenerator extends Node2D
 @export var data: GeneratorData
 @export var library: RiftChunkLibrary
 @export var event_portal_scene: PackedScene
+@export var scroll_pedestal_scene: PackedScene
 
 const RIFT_LEVEL = preload("uid://dye8vshx06jjw")
 const BOUNDS_LAYER: int = 15
@@ -20,6 +21,7 @@ var rng = RandomNumberGenerator.new()
 var placed_bounds: Array[Bounds]
 var side_path_terminal_chunks: Array[RiftChunk] = []
 var lowest_chunk: RiftChunk
+var _event_portal_island: Island
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
@@ -62,6 +64,7 @@ func build_main_path(_curr_level: int) -> void:
 		@warning_ignore("integer_division")
 		build_all_side_paths(roundi(data.main_path_length), main_path_chunks)
 		place_event_portal()
+		place_scroll_pedestals()
 		rift_created.emit(rift_level)
 		add_death_area()
 		EventBus.finished_loading.emit()
@@ -264,6 +267,7 @@ func reset() -> void:
 	rift_level.queue_free()
 
 func place_event_portal() -> void:
+	_event_portal_island = null
 	if data.event_pool.is_empty() or rng.randf() > data.event_chance:
 		return
 	
@@ -284,3 +288,36 @@ func place_event_portal() -> void:
 	portal.event_scene = data.event_pool[rng.randi_range(0, data.event_pool.size() - 1)]
 	rift_level.add_child(portal)
 	portal.global_position = island.get_event_portal_position()
+	_event_portal_island = island
+
+## Puts scroll pedestals on distinct random islands of placed traversal chunks (main and side paths).
+## Islands without game objects are preferred; the event portal's island is skipped.
+func place_scroll_pedestals() -> void:
+	if scroll_pedestal_scene == null:
+		return
+	var amount: int = rng.randi_range(data.scroll_pedestals_min, data.scroll_pedestals_max)
+	if amount <= 0:
+		return
+
+	var free_islands: Array[Island] = []
+	var busy_islands: Array[Island] = []
+	for child: Node in rift_level.get_children():
+		var chunk: TraversalChunk = child as TraversalChunk
+		if chunk == null or chunk.is_queued_for_deletion():
+			continue
+		for island: Island in chunk.islands:
+			if island == _event_portal_island or island.event_portal_position == null:
+				continue
+			if island.has_game_object:
+				busy_islands.append(island)
+			else:
+				free_islands.append(island)
+	free_islands.shuffle()
+	busy_islands.shuffle()
+	var candidates: Array[Island] = free_islands + busy_islands
+
+	for i: int in mini(amount, candidates.size()):
+		var island: Island = candidates[i]
+		var pedestal: ScrollPedestalNPC = scroll_pedestal_scene.instantiate()
+		island.add_child(pedestal)
+		pedestal.global_position = island.get_event_portal_position() + data.scroll_pedestal_offset
