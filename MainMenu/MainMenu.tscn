@@ -20,6 +20,9 @@
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
 
+[node name="WorldSpirit" parent="." unique_id=406161502 instance=ExtResource("14_gej64")]
+position = Vector2(-12, 68)
+
 [node name="PlayerSpawn" parent="." unique_id=1049349633 instance=ExtResource("12_g1826")]
 position = Vector2(208, 83)
 
@@ -144,9 +147,6 @@ costs_heart = false
 
 [node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
 position = Vector2(383, 67)
-
-[node name="WorldSpirit" parent="." unique_id=406161502 instance=ExtResource("14_gej64")]
-position = Vector2(-12, 68)
 
 [node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("15_qvidt")]
 position = Vector2(212, 174)
