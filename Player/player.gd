@@ -692,7 +692,7 @@ func _on_landed() -> void:
 	fall_after_jump = false
 
 func _on_body_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Jump" or anim_name == "Swing":
+	if anim_name == "Jump" or sword_attack.is_attack_animation(anim_name):
 		in_jump = false
 		fall_after_jump = not is_on_floor()
 

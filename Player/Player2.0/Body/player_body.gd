@@ -5,7 +5,6 @@ class_name PlayerBody extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var charge: CPUParticles2D = $Charge
-@onready var sword_sprite: Sprite2D = $SwordSprite
 @onready var off_hand_shoulder: Node2D = $OffHandShoulder
 @onready var main_hand_shoulder: Node2D = $MainHandShoulder
 

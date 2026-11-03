@@ -2,43 +2,50 @@ class_name SwordAttackState extends State
 
 @onready var idle: PlayerIdleState = $"../Idle"
 
+## Body animations played in order, one per swing. Each one keys the sword socket and the hit area.
+@export var attack_animations: Array[StringName] = [&"Swing1", &"Swing2", &"Stab"]
+## Seconds after a swing ends before the combo starts over from the first attack.
+@export var combo_reset_time: float = 1.0
+
 var finished: bool = false
-var base_sword_scale: Vector2
+var combo_index: int = 0
+var last_attack_end_msec: int = -1000000
+var current_animation: StringName = &""
 
 func init() -> void:
 	player.body.animation_player.animation_finished.connect(_on_body_animation_finished)
-	player.body.slash_hurt_box.monitoring = false
-	base_sword_scale = player.body.sword.scale
 
 func Enter() -> void:
 	finished = false
 	player.disable_jump()
 	player.show_hands(false)
-	player.body.update_animation("Swing")
+	var since_last_attack: float = (Time.get_ticks_msec() - last_attack_end_msec) / 1000.0
+	if since_last_attack > combo_reset_time:
+		combo_index = 0
+	current_animation = attack_animations[combo_index]
+	combo_index = (combo_index + 1) % attack_animations.size()
+	player.body.update_animation(current_animation)
 	var hurt_box: HurtBox = player.body.slash_hurt_box
 	for ability in player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT):
 		hurt_box.add_before_effect(ability.activate_ability)
 	for ability in player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT):
 		hurt_box.add_after_effect(ability.activate_ability)
 	hurt_box.base_damage = floor(player.stats.sword_damage.value())
-	player.body.sword.scale = base_sword_scale * player.get_sword_size()
+	player.body.sword.apply_size(player.get_sword_size())
 	player.apply_knockback(player.aim_direction, 75)
 	EventBus.sword_slash_sound.emit()
 	player.body.slash_animation_player.play("SlashEffect")
 	player.can_swing += 1
-	hurt_box.monitoring = true
 
 func Exit() -> void:
-	var hurt_box: HurtBox = player.body.slash_hurt_box
-	hurt_box.monitoring = false
-	hurt_box.clear_effects()
-	player.body.sword.scale = base_sword_scale
+	player.body.slash_hurt_box.clear_effects()
+	player.body.sword.end_attack()
+	last_attack_end_msec = Time.get_ticks_msec()
 	player.show_hands(true)
 	player.enable_jump()
 	player.swing_cooldown.wait_time = player.get_sword_cd()
 	player.swing_cooldown.start()
-	player.body.sword_sprite.visible = false
-	
+
 func Process(_delta: float) -> State:
 	if finished:
 		return idle
@@ -52,6 +59,9 @@ func Physics(_delta: float) -> State:
 func HandleInput(_event: InputEvent) -> State:
 	return null
 
+func is_attack_animation(anim_name: StringName) -> bool:
+	return anim_name in attack_animations
+
 func _on_body_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Swing":
+	if anim_name == current_animation:
 		finished = true
