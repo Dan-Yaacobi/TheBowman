@@ -538,6 +538,7 @@ script = ExtResource("24_d3djb")
 knockback_power = 50
 damage = 5
 texture = ExtResource("19_nm06d")
+grip_position = Vector2(16, 50)
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6prse"]
@@ -2554,7 +2555,7 @@ visible = false
 [node name="Blade" type="Sprite2D" parent="PlayerBody/Sword/SwordSocket" unique_id=438502876]
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("19_nm06d")
-offset = Vector2(0.5, -21)
+offset = Vector2(0, -18)
 
 [node name="OffHandShoulder" type="Node2D" parent="PlayerBody" unique_id=1530002589]
 position = Vector2(2, 6)

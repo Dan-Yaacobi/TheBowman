@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SwordStats" format=3]
+
+[ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="1_stats"]
+[ext_resource type="Texture2D" path="res://Items/Equipments/Swords/Sprites/RoyalSword.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_stats")
+knockback_power = 50
+damage = 5
+texture = ExtResource("2_tex")
+grip_position = Vector2(16, 49)
