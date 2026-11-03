@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b80kyurvqvsj1" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_ticks.gd" id="4_g7uqh"]
 [ext_resource type="Script" uid="uid://cok0b6xhp4gtg" path="res://Player/Abilities2.0/MinorAbilities/SmallPoisonCloud/poison_cloud_death.gd" id="5_0x3kp"]
 [ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_ufehx"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MinorAbilities/DotExtend/dot_extend.gd" id="roster_dot_extend"]
 
 [sub_resource type="Resource" id="Resource_0x3kp"]
 script = ExtResource("2_fxi24")
@@ -23,7 +24,13 @@ metadata/_custom_type_script = "uid://b80kyurvqvsj1"
 script = ExtResource("5_0x3kp")
 metadata/_custom_type_script = "uid://cok0b6xhp4gtg"
 
+[sub_resource type="Resource" id="Resource_roster_dot_extend"]
+script = ExtResource("roster_dot_extend")
+min_value = 1
+max_value = 2
+value_per_quality = 1
+
 [resource]
 script = ExtResource("5_ufehx")
-abilities = Array[ExtResource("1_pngcp")]([SubResource("Resource_0x3kp"), SubResource("Resource_yelfa"), SubResource("Resource_jiokv"), SubResource("Resource_i2gjg")])
+abilities = Array[ExtResource("1_pngcp")]([SubResource("Resource_0x3kp"), SubResource("Resource_yelfa"), SubResource("Resource_jiokv"), SubResource("Resource_i2gjg"), SubResource("Resource_roster_dot_extend")])
 metadata/_custom_type_script = "uid://dnf0fea71aaqf"

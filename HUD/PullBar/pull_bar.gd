@@ -3,6 +3,8 @@ class_name PullBar extends TextureProgressBar
 const PERFECT_THRESHOLD: float = 1.0
 const OVERCHARGE_COLOR: Color = Color(0.62, 0.35, 0.95)
 const OVERCHARGE_FLASH_PERIOD: float = 0.2
+## The next shot is guaranteed perfect (Telegraphed shot).
+const CHARGED_SHOT_COLOR: Color = Color(1.0, 0.82, 0.25)
 
 @export var release_speed: float = 5
 @export var fade_speed: float = 0.1
@@ -26,7 +28,7 @@ func _process(delta: float) -> void:
 			tint_progress = Color.WHITE if full_flash else OVERCHARGE_COLOR
 		else:
 			value = shot_power
-			tint_progress = _color_for_power(shot_power)
+			tint_progress = CHARGED_SHOT_COLOR if PlayerManager.player.main_hand.next_shot_perfect else _color_for_power(shot_power)
 	else:
 		value = lerpf(value, 0.0, release_speed * delta)
 

@@ -1,5 +1,6 @@
 class_name RiftFist extends Node2D
-## A demonic fist that flies out of a Riftbow portal and punches the first enemy it reaches with huge knockback.
+## A straight punch projectile: flies along direction and hits the first enemy it reaches, then fades.
+## Riftbow's demonic fist by default; other abilities reuse it with their own sprite (e.g. Shatter's ice shards).
 
 const FIST_PATH: String = "res://Player/Abilities2.0/ShootAbilities/Riftbow/Sprites/DemonFist.png"
 const ENEMY_MASK: int = 28
@@ -9,6 +10,10 @@ const ENEMY_MASK: int = 28
 @export var hit_radius: float = 9.0
 
 var damage: int = 1
+var texture_path: String = FIST_PATH
+var sprite_scale: float = 0.5
+## An enemy this projectile never hits (e.g. the one it bursts out of).
+var ignore: Enemy
 var knockback: float = 400.0
 var direction: Vector2 = Vector2.RIGHT
 var _travelled: float = 0.0
@@ -19,10 +24,12 @@ func _ready() -> void:
 	z_index = 3
 	rotation = direction.angle()
 	var sprite: Sprite2D = Sprite2D.new()
-	sprite.texture = load(FIST_PATH)
-	sprite.scale = Vector2(0.5, 0.5)
+	sprite.texture = load(texture_path)
+	sprite.scale = Vector2(sprite_scale, sprite_scale)
 	add_child(sprite)
-	_hurt_box = HurtBox.new()
+	var fist_box: FistHurtBox = FistHurtBox.new()
+	fist_box.ignore = ignore
+	_hurt_box = fist_box
 	_hurt_box.collision_layer = 0
 	_hurt_box.collision_mask = ENEMY_MASK
 	_hurt_box.base_damage = damage
@@ -59,3 +66,12 @@ func _finish() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.15)
 	tween.tween_callback(queue_free)
+
+## Skips the ignored enemy, otherwise a normal HurtBox.
+class FistHurtBox extends HurtBox:
+	var ignore: Enemy
+
+	func AreaEnetered(a: Area2D) -> void:
+		if a is EnemyHitBox and is_instance_valid(ignore) and (a as EnemyHitBox).get_enemy() == ignore:
+			return
+		super.AreaEnetered(a)

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://d0uegg23plq7k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_duration.gd" id="3_k7any"]
 [ext_resource type="Script" uid="uid://dws60jn37857t" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/bleed_ticks.gd" id="4_tmaff"]
 [ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_slyqq"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MinorAbilities/DotExtend/dot_extend.gd" id="roster_dot_extend"]
 
 [sub_resource type="Resource" id="Resource_uiqo8"]
 script = ExtResource("2_8olkr")
@@ -18,7 +19,13 @@ metadata/_custom_type_script = "uid://d0uegg23plq7k"
 script = ExtResource("4_tmaff")
 metadata/_custom_type_script = "uid://dws60jn37857t"
 
+[sub_resource type="Resource" id="Resource_roster_dot_extend"]
+script = ExtResource("roster_dot_extend")
+min_value = 1
+max_value = 2
+value_per_quality = 1
+
 [resource]
 script = ExtResource("5_slyqq")
-abilities = Array[ExtResource("1_mmeaq")]([SubResource("Resource_uiqo8"), SubResource("Resource_kn40c"), SubResource("Resource_drjfm")])
+abilities = Array[ExtResource("1_mmeaq")]([SubResource("Resource_uiqo8"), SubResource("Resource_kn40c"), SubResource("Resource_drjfm"), SubResource("Resource_roster_dot_extend")])
 metadata/_custom_type_script = "uid://dnf0fea71aaqf"

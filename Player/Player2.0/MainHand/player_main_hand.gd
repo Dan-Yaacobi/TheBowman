@@ -36,6 +36,9 @@ var overcharge_enabled: bool = false
 var overcharge: float = 0.0
 ## Move speed multiplier while overcharging.
 var overcharge_move_mult: float = 1.0
+## The next release fires as a perfect shot whatever the draw (Telegraphed shot, Clean Kill...).
+## Shown on the bow (glow) and the pull bar (gold) while set.
+var next_shot_perfect: bool = false
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
@@ -108,6 +111,9 @@ func new_arrow(_arrow: PackedScene) -> void:
 		arrow = _arrow
 
 func release_arrow() -> void:
+	if next_shot_perfect and current_arrow:
+		next_shot_perfect = false
+		shot_power = 1.0
 	var perfect_threshold_check: float
 	if PlayerManager.player.stats.only_perfect:
 		perfect_threshold_check = 0.99

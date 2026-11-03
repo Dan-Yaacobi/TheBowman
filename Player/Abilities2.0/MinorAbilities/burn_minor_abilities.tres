@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://cqf14kh2rdk5s" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_duration.gd" id="3_cofrm"]
 [ext_resource type="Script" uid="uid://k44eaeh7n0hr" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/burn_ticks.gd" id="4_hum8f"]
 [ext_resource type="Script" uid="uid://dnf0fea71aaqf" path="res://Player/Abilities2.0/MinorAbilities/minor_ability_library.gd" id="5_o5k3d"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MinorAbilities/BurnSpread/burn_spread.gd" id="roster_burn_spread"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MinorAbilities/DotExtend/dot_extend.gd" id="roster_dot_extend"]
 
 [sub_resource type="Resource" id="Resource_gim1k"]
 script = ExtResource("2_m0dc4")
@@ -18,7 +20,19 @@ metadata/_custom_type_script = "uid://cqf14kh2rdk5s"
 script = ExtResource("4_hum8f")
 metadata/_custom_type_script = "uid://k44eaeh7n0hr"
 
+[sub_resource type="Resource" id="Resource_roster_burn_spread"]
+script = ExtResource("roster_burn_spread")
+min_value = 45
+max_value = 60
+value_per_quality = 10
+
+[sub_resource type="Resource" id="Resource_roster_dot_extend"]
+script = ExtResource("roster_dot_extend")
+min_value = 1
+max_value = 2
+value_per_quality = 1
+
 [resource]
 script = ExtResource("5_o5k3d")
-abilities = Array[ExtResource("1_m0dc4")]([SubResource("Resource_gim1k"), SubResource("Resource_2eggx"), SubResource("Resource_6ukxt")])
+abilities = Array[ExtResource("1_m0dc4")]([SubResource("Resource_gim1k"), SubResource("Resource_2eggx"), SubResource("Resource_6ukxt"), SubResource("Resource_roster_burn_spread"), SubResource("Resource_roster_dot_extend")])
 metadata/_custom_type_script = "uid://dnf0fea71aaqf"

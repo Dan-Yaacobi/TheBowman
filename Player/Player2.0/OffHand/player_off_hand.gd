@@ -30,6 +30,9 @@ var string_glow: Line2D
 var _crackle_timer: float = 0.0
 var _crackle_offsets: PackedFloat32Array = PackedFloat32Array()
 var _time: float = 0.0
+## Gold glow and sparks on the bow while the next shot is guaranteed perfect.
+const CHARGED_GLOW: Color = Color(1.6, 1.35, 0.6)
+var _charged_sparks: CPUParticles2D
 
 var position_target: Node2D = null
 var rotation_target: Node2D = null
@@ -44,6 +47,8 @@ func _ready() -> void:
 	string_glow.end_cap_mode = Line2D.LINE_CAP_ROUND
 	string_glow.visible = false
 	string.add_child(string_glow)
+	_charged_sparks = _make_charged_sparks()
+	bow_sprite.add_child(_charged_sparks)
 	hide_bow()
 
 func _process(_delta: float) -> void:
@@ -56,6 +61,7 @@ func _process(_delta: float) -> void:
 	else:
 		rotation = PI if facing_left else 0.0
 	_update_string(_delta)
+	_update_charged_glow()
 	
 func set_facing(_facing_left: bool) -> void:
 	facing_left = _facing_left
@@ -107,6 +113,32 @@ func _crackle(points: PackedVector2Array, delta: float) -> PackedVector2Array:
 			out.append(from.lerp(to, i / float(CRACKLE_SEGMENTS)) + normal * _crackle_offsets[half * CRACKLE_SEGMENTS + i])
 		out.append(to)
 	return out
+
+func _update_charged_glow() -> void:
+	var player: Player = PlayerManager.player
+	var charged: bool = player != null and player.main_hand.next_shot_perfect and bow_sprite.visible
+	_charged_sparks.emitting = charged
+	if charged:
+		bow_sprite.modulate = Color.WHITE.lerp(CHARGED_GLOW, 0.5 + 0.5 * sin(_time * 8.0))
+	else:
+		bow_sprite.modulate = Color.WHITE
+
+func _make_charged_sparks() -> CPUParticles2D:
+	var sparks: CPUParticles2D = CPUParticles2D.new()
+	sparks.emitting = false
+	sparks.amount = 10
+	sparks.lifetime = 0.5
+	sparks.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	sparks.emission_rect_extents = Vector2(24, 8)
+	sparks.direction = Vector2(0, -1)
+	sparks.spread = 60.0
+	sparks.gravity = Vector2.ZERO
+	sparks.initial_velocity_min = 15.0
+	sparks.initial_velocity_max = 35.0
+	sparks.scale_amount_min = 1.0
+	sparks.scale_amount_max = 2.0
+	sparks.color = Color(1.0, 0.85, 0.35)
+	return sparks
 
 func _apply_string_look(_data: EquipmentData) -> void:
 	string.default_color = _data.string_color
