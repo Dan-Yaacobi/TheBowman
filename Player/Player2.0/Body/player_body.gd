@@ -8,7 +8,7 @@ class_name PlayerBody extends Node2D
 @onready var off_hand_shoulder: Node2D = $OffHandShoulder
 @onready var main_hand_shoulder: Node2D = $MainHandShoulder
 
-@onready var slash_animation_player: AnimationPlayer = $SlashEffect/SlashAnimationPlayer
+@onready var slash_vfx: Sprite2D = $SlashVfx
 @onready var slash_hurt_box: HurtBox = $Sword/SlashHurtBox
 @onready var sword: Sword = $Sword
 

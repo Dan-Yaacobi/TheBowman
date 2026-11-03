@@ -34,12 +34,12 @@ func Enter() -> void:
 	player.body.sword.apply_size(player.get_sword_size())
 	player.apply_knockback(player.aim_direction, 75)
 	EventBus.sword_slash_sound.emit()
-	player.body.slash_animation_player.play("SlashEffect")
 	player.can_swing += 1
 
 func Exit() -> void:
 	player.body.slash_hurt_box.clear_effects()
 	player.body.sword.end_attack()
+	player.body.slash_vfx.visible = false
 	last_attack_end_msec = Time.get_ticks_msec()
 	player.show_hands(true)
 	player.enable_jump()
