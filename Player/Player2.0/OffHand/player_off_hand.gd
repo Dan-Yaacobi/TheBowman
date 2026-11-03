@@ -9,11 +9,20 @@ class_name PlayerOffHand extends Node2D
 
 var string_pull_target: Node2D = null
 @export var hold_rotation_offset_degrees: float = 0.0
+## Distance between the two bow tips in hand, for bows with fit data. Every such bow is scaled to this span.
+@export var bow_tip_span: float = 39.0
+
+var default_bow_top: Vector2
+var default_bow_bottom: Vector2
+var default_bow_offset: Vector2
 
 var position_target: Node2D = null
 var rotation_target: Node2D = null
 var facing_left: bool = false
 func _ready() -> void:
+	default_bow_top = bow_top.position
+	default_bow_bottom = bow_bottom.position
+	default_bow_offset = bow_sprite.offset
 	hide_bow()
 
 func _process(_delta: float) -> void:
@@ -66,9 +75,26 @@ func play_stage(stage: String, pull_speed: float) -> void:
 func set_new_bow(_data: EquipmentData) -> void:
 	if _data:
 		bow_sprite.texture = _data.texture
-		bow_sprite.scale = _data.equipped_scale
+		if _data.string_tip != Vector2.ZERO and _data.texture:
+			_fit_bow(_data)
+		else:
+			bow_sprite.scale = _data.equipped_scale
+			bow_sprite.offset = default_bow_offset
+			bow_top.position = default_bow_top
+			bow_bottom.position = default_bow_bottom
 		string.show()
 		bow_sprite.show()
+
+## Same size, grip on the hand, string on the tips - for any bow sprite with fit data.
+func _fit_bow(_data: EquipmentData) -> void:
+	var size: Vector2 = _data.texture.get_size()
+	var right_tip: Vector2 = _data.string_tip
+	var left_tip: Vector2 = Vector2(size.x - right_tip.x, right_tip.y)
+	var bow_scale: float = bow_tip_span / maxf(right_tip.x - left_tip.x, 1.0)
+	bow_sprite.scale = Vector2(bow_scale, bow_scale)
+	bow_sprite.offset = size / 2.0 - _data.grip_point
+	bow_top.position = bow_sprite.transform * (right_tip - _data.grip_point)
+	bow_bottom.position = bow_sprite.transform * (left_tip - _data.grip_point)
 
 func hide_bow() -> void:
 	string.hide()

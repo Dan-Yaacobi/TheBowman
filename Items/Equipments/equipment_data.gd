@@ -25,6 +25,12 @@ class StatModifier:
 @export var equipped_texture: Texture2D
 @export var dropped_scale: float = 1.0
 @export var equipped_scale: Vector2 = Vector2(1.0, 1.0)
+@export_group("Bow fit")
+## Pixel in the texture where the right bow tip holds the string (left tip is mirrored). Zero = use equipped_scale and the fixed string points.
+@export var string_tip: Vector2 = Vector2.ZERO
+## Pixel in the texture the hand holds. The bow is placed so this point sits on the hand.
+@export var grip_point: Vector2 = Vector2.ZERO
+@export_group("")
 @export var slot: slots
 ## Which run color level scales this item.
 @export var color: CustomVariables.ItemColor = CustomVariables.ItemColor.NONE
