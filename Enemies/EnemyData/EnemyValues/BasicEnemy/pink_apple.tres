@@ -29,7 +29,6 @@ move_animation = "Move"
 touch_damage = 2
 knockback_decay = 0.055
 has_wings = true
-facing_player = false
 size = 0.4
 death_ability = Array[ExtResource("2_tsqqm")]([SubResource("Resource_3u2p4")])
 shooter = true

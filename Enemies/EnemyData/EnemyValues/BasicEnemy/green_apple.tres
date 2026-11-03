@@ -31,7 +31,6 @@ skin = ExtResource("8_p46yn")
 move_animation = "Move"
 touch_damage = 1
 has_wings = true
-facing_player = false
 size = 0.55
 can_split = true
 death_ability = Array[ExtResource("2_wqiec")]([SubResource("Resource_3wtwp"), SubResource("Resource_wfgoh")])
