@@ -18,6 +18,19 @@ var default_bow_top: Vector2
 var default_bow_bottom: Vector2
 var default_bow_offset: Vector2
 
+const CRACKLE_SEGMENTS: int = 6
+const CRACKLE_JITTER: float = 1.2
+const CRACKLE_REFRESH: float = 0.05
+const PULSE_SPEED: float = 4.0
+
+## Current bow's string look (EquipmentData "Bow fit" group).
+var string_style: EquipmentData.StringStyle = EquipmentData.StringStyle.PLAIN
+var string_glow_color: Color = Color(1, 1, 1, 0)
+var string_glow: Line2D
+var _crackle_timer: float = 0.0
+var _crackle_offsets: PackedFloat32Array = PackedFloat32Array()
+var _time: float = 0.0
+
 var position_target: Node2D = null
 var rotation_target: Node2D = null
 var facing_left: bool = false
@@ -25,6 +38,12 @@ func _ready() -> void:
 	default_bow_top = bow_top.position
 	default_bow_bottom = bow_bottom.position
 	default_bow_offset = bow_sprite.offset
+	string_glow = Line2D.new()
+	string_glow.show_behind_parent = true
+	string_glow.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	string_glow.end_cap_mode = Line2D.LINE_CAP_ROUND
+	string_glow.visible = false
+	string.add_child(string_glow)
 	hide_bow()
 
 func _process(_delta: float) -> void:
@@ -36,7 +55,7 @@ func _process(_delta: float) -> void:
 		rotation = rotation_target.rotation + (-offset if facing_left else offset)
 	else:
 		rotation = PI if facing_left else 0.0
-	_update_string()
+	_update_string(_delta)
 	
 func set_facing(_facing_left: bool) -> void:
 	facing_left = _facing_left
@@ -55,13 +74,48 @@ func hold(hand: Node2D, string_point: Node2D, grip: Node2D) -> void:
 	string_pull_target = string_point
 	z_index = 0
 
-func _update_string() -> void:
+func _update_string(delta: float = 0.0) -> void:
 	var top: Vector2 = string.to_local(bow_top.global_position)
 	var bottom: Vector2 = string.to_local(bow_bottom.global_position)
 	var middle: Vector2 = (top + bottom) / 2.0
 	if string_pull_target:
 		middle = string.to_local(string_pull_target.global_position)
-	string.points = PackedVector2Array([top, middle, bottom])
+	var points: PackedVector2Array = PackedVector2Array([top, middle, bottom])
+	if string_style == EquipmentData.StringStyle.CRACKLE:
+		points = _crackle(points, delta)
+	string.points = points
+	string_glow.points = points
+	_time += delta
+	if string_style == EquipmentData.StringStyle.PULSE:
+		var pulse: float = 0.55 + 0.45 * sin(_time * PULSE_SPEED)
+		string_glow.default_color = Color(string_glow_color, string_glow_color.a * pulse)
+
+## Splits each half of the string into jittering segments, re-rolled a few times a second.
+func _crackle(points: PackedVector2Array, delta: float) -> PackedVector2Array:
+	_crackle_timer -= delta
+	if _crackle_timer <= 0.0 or _crackle_offsets.size() != CRACKLE_SEGMENTS * 2:
+		_crackle_timer = CRACKLE_REFRESH
+		_crackle_offsets.resize(CRACKLE_SEGMENTS * 2)
+		for i in _crackle_offsets.size():
+			_crackle_offsets[i] = randf_range(-CRACKLE_JITTER, CRACKLE_JITTER)
+	var out: PackedVector2Array = PackedVector2Array([points[0]])
+	for half in 2:
+		var from: Vector2 = points[half]
+		var to: Vector2 = points[half + 1]
+		var normal: Vector2 = (to - from).orthogonal().normalized()
+		for i in range(1, CRACKLE_SEGMENTS):
+			out.append(from.lerp(to, i / float(CRACKLE_SEGMENTS)) + normal * _crackle_offsets[half * CRACKLE_SEGMENTS + i])
+		out.append(to)
+	return out
+
+func _apply_string_look(_data: EquipmentData) -> void:
+	string.default_color = _data.string_color
+	string.width = _data.string_width
+	string_style = _data.string_style
+	string_glow_color = _data.string_glow_color
+	string_glow.default_color = _data.string_glow_color
+	string_glow.width = _data.string_glow_width
+	string_glow.visible = _data.string_style != EquipmentData.StringStyle.PLAIN and _data.string_glow_color.a > 0.0
 
 func play_stage(stage: String, pull_speed: float) -> void:
 	var anim: String = "Idle"
@@ -84,6 +138,7 @@ func set_new_bow(_data: EquipmentData) -> void:
 			bow_sprite.offset = default_bow_offset
 			bow_top.position = default_bow_top
 			bow_bottom.position = default_bow_bottom
+		_apply_string_look(_data)
 		string.show()
 		bow_sprite.show()
 

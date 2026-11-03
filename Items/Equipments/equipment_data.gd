@@ -30,7 +30,15 @@ class StatModifier:
 @export var string_tip: Vector2 = Vector2.ZERO
 ## Pixel in the texture the hand holds. The bow is placed so this point sits on the hand.
 @export var grip_point: Vector2 = Vector2.ZERO
+@export var string_color: Color = Color(1, 0.76, 0.66)
+@export var string_width: float = 0.5
+@export var string_style: StringStyle = StringStyle.PLAIN
+## Softer, wider line behind the string. Fully transparent = no glow.
+@export var string_glow_color: Color = Color(1, 1, 1, 0)
+@export var string_glow_width: float = 2.0
 @export_group("")
+
+enum StringStyle { PLAIN, GLOW, PULSE, CRACKLE }
 @export var slot: slots
 ## Which run color level scales this item.
 @export var color: CustomVariables.ItemColor = CustomVariables.ItemColor.NONE
