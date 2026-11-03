@@ -30,6 +30,13 @@ var shot_offset: float = 0
 var anchor: Node2D = null
 var facing_left: bool = false
 
+## Overcharge (Longing): a second fill after a full draw. Turned on by the equipped ability.
+var overcharge_enabled: bool = false
+## 0..1 progress of the second fill; 1 = overcharged.
+var overcharge: float = 0.0
+## Move speed multiplier while overcharging.
+var overcharge_move_mult: float = 1.0
+
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
 	
@@ -184,6 +191,12 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 		_shot_power_value = 1.0
 	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
+
+func is_overcharging() -> bool:
+	return overcharge_enabled and main_hand_state_machine.curr_state is MaxPullMainHandState
+
+func is_overcharged() -> bool:
+	return overcharge_enabled and overcharge >= 1.0
 
 func is_drawing() -> bool:
 	return main_hand_state_machine.curr_state is PullingMainHandState or main_hand_state_machine.curr_state is MaxPullMainHandState

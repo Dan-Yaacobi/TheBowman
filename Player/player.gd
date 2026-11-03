@@ -527,6 +527,8 @@ var C: int = 200 ## controls how fast you upgrade movement speed via agility
 ## asymptotic increase towards max speed
 
 func get_move_speed() -> float:
+	if main_hand.is_overcharging():
+		return stats.move_speed.value() * main_hand.overcharge_move_mult
 	return stats.move_speed.value()
 	
 func get_pull_speed() -> float:
@@ -567,6 +569,10 @@ func get_equipped_in_slot(_slot: EquipmentData.slots) -> EquipmentData:
 
 func get_curr_shot_power() -> float:
 	return main_hand.shot_power
+
+## 0..1 overcharge fill (Longing); 0 when overcharge isn't active.
+func get_curr_overcharge() -> float:
+	return main_hand.overcharge if main_hand.overcharge_enabled else 0.0
 	
 ############# SET METHODS #############
 func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) -> void:
