@@ -1982,7 +1982,7 @@ material = SubResource("ShaderMaterial_jvfa1")
 position = Vector2(0, -10)
 texture = ExtResource("22_ustk3")
 hframes = 9
-vframes = 9
+vframes = 12
 region_rect = Rect2(0, 353.5, 592, 62.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBody" unique_id=1808518498]
