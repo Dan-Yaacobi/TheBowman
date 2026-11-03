@@ -85,6 +85,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_y2whj")
 display_name = "Electros"
+color = 3
 texture = ExtResource("5_fidps")
 equipped_texture = ExtResource("3_mtcc6")
 dropped_scale = 0.3

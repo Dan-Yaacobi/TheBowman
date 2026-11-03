@@ -39,6 +39,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_ikbvu")
 display_name = "FireBall Bow"
+color = 3
 name_color = Color(1, 0.4, 0, 1)
 texture = ExtResource("3_j1m5o")
 equipped_texture = ExtResource("3_j1m5o")

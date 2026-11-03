@@ -85,6 +85,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_recig")
 display_name = "Ice Shards"
+color = 3
 texture = ExtResource("5_bimiw")
 equipped_texture = ExtResource("3_mcopa")
 dropped_scale = 0.3

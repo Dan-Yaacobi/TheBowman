@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("3_cmubc")
 display_name = "Vampiric Ring"
+color = 3
 name_color = Color(0.54248, 1.347661e-06, 3.3691526e-07, 1)
 texture = ExtResource("4_wwpqw")
 dropped_scale = 0.328

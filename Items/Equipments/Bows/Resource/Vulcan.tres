@@ -80,6 +80,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_fssex")
 display_name = "Vulcan"
+color = 3
 texture = ExtResource("3_fssex")
 equipped_texture = ExtResource("3_fssex")
 dropped_scale = 0.333

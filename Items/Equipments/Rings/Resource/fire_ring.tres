@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_wi0de")
 display_name = "Fire Ring"
+color = 2
 name_color = Color(1, 0.34509805, 0, 1)
 texture = ExtResource("5_lhmcp")
 dropped_scale = 0.178

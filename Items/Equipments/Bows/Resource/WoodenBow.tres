@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("2_onctg")
 display_name = "Wooden Bow"
+color = 2
 texture = ExtResource("2_lese3")
 equipped_texture = ExtResource("2_lese3")
 dropped_scale = 0.41

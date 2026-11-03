@@ -85,6 +85,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("3_dprp6")
 display_name = "Zeus"
+color = 3
 texture = ExtResource("2_6v1vm")
 equipped_texture = ExtResource("2_6v1vm")
 dropped_scale = 0.396

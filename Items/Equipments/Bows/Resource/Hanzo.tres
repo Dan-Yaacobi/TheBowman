@@ -76,6 +76,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_j70d1")
 display_name = "Hanzo"
+color = 2
 texture = ExtResource("2_71sxo")
 equipped_texture = ExtResource("2_71sxo")
 dropped_scale = 0.443

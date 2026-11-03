@@ -69,6 +69,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_5beeh")
 display_name = "Winter"
+color = 3
 texture = ExtResource("2_51kq0")
 equipped_texture = ExtResource("2_51kq0")
 dropped_scale = 0.438

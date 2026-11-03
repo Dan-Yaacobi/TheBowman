@@ -79,6 +79,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_0wjvk")
 display_name = "Hemorrhage"
+color = 3
 texture = ExtResource("3_3rjnx")
 equipped_texture = ExtResource("3_3rjnx")
 dropped_scale = 0.364

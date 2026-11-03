@@ -85,6 +85,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_uv6fp")
 display_name = "SoulHarvester"
+color = 1
 texture = ExtResource("3_uv6fp")
 equipped_texture = ExtResource("3_uv6fp")
 dropped_scale = 0.322

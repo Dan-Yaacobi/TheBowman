@@ -22,6 +22,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_rdl4d")
 display_name = "Shadow Ring"
+color = 1
 texture = ExtResource("2_1d58u")
 equipped_texture = ExtResource("2_1d58u")
 dropped_scale = 0.24

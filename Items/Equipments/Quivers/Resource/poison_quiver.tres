@@ -79,6 +79,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("2_by6s1")
 display_name = "Poison Darts"
+color = 3
 texture = ExtResource("3_eeu5w")
 equipped_texture = ExtResource("1_agcba")
 dropped_scale = 0.3

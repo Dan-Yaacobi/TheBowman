@@ -78,6 +78,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_4te1g")
 display_name = "Poison Ivy"
+color = 3
 texture = ExtResource("3_cjnmb")
 equipped_texture = ExtResource("3_cjnmb")
 dropped_scale = 0.367
