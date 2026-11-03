@@ -39,6 +39,9 @@ var overcharge_move_mult: float = 1.0
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
+	var draw_vfx: BowDrawVfx = BowDrawVfx.new()
+	draw_vfx.main_hand = self
+	add_child(draw_vfx)
 	
 func _process(_delta: float) -> void:
 	if anchor:
