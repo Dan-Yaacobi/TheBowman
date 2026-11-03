@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm0fxurse0mvf"
-path="res://.godot/imported/PerfectRelease.png-dfae807f5704e8537979a053efb19146.ctex"
+uid="uid://dl4gx5doulb6"
+path="res://.godot/imported/ReleasePop.png-ff8f066caff6bf4081f98d1eb465940b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Player2.0/Sprites/BowVfx/PerfectRelease.png"
-dest_files=["res://.godot/imported/PerfectRelease.png-dfae807f5704e8537979a053efb19146.ctex"]
+source_file="res://Player/Player2.0/Sprites/BowVfx/ReleasePop.png"
+dest_files=["res://.godot/imported/ReleasePop.png-ff8f066caff6bf4081f98d1eb465940b.ctex"]
 
 [params]
 

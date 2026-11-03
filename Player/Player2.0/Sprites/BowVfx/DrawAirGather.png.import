@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t8knxtselyo6"
-path="res://.godot/imported/DrawCharge.png-9bf0f7a9d57489a2639521804e34f6ee.ctex"
+uid="uid://cjwmm1to2ocm5"
+path="res://.godot/imported/DrawAirGather.png-88ac217d2616f318ef588a855ce4f48f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Player2.0/Sprites/BowVfx/DrawCharge.png"
-dest_files=["res://.godot/imported/DrawCharge.png-9bf0f7a9d57489a2639521804e34f6ee.ctex"]
+source_file="res://Player/Player2.0/Sprites/BowVfx/DrawAirGather.png"
+dest_files=["res://.godot/imported/DrawAirGather.png-88ac217d2616f318ef588a855ce4f48f.ctex"]
 
 [params]
 
