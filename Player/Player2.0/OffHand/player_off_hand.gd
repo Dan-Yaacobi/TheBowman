@@ -9,8 +9,10 @@ class_name PlayerOffHand extends Node2D
 
 var string_pull_target: Node2D = null
 @export var hold_rotation_offset_degrees: float = 0.0
-## Distance between the two bow tips in hand, for bows with fit data. Every such bow is scaled to this span.
-@export var bow_tip_span: float = 39.0
+## In-hand size for bows with fit data. Each bow is scaled so its visible art (mostly width, some height) matches this.
+@export var bow_size: float = 31.0
+
+const BOW_WIDTH_WEIGHT: float = 0.65
 
 var default_bow_top: Vector2
 var default_bow_bottom: Vector2
@@ -90,11 +92,16 @@ func _fit_bow(_data: EquipmentData) -> void:
 	var size: Vector2 = _data.texture.get_size()
 	var right_tip: Vector2 = _data.string_tip
 	var left_tip: Vector2 = Vector2(size.x - right_tip.x, right_tip.y)
-	var bow_scale: float = bow_tip_span / maxf(right_tip.x - left_tip.x, 1.0)
+	var bow_scale: float = bow_size / _bow_art_size(_data.texture)
 	bow_sprite.scale = Vector2(bow_scale, bow_scale)
 	bow_sprite.offset = size / 2.0 - _data.grip_point
 	bow_top.position = bow_sprite.transform * (right_tip - _data.grip_point)
 	bow_bottom.position = bow_sprite.transform * (left_tip - _data.grip_point)
+
+## Visible art size in pixels: mostly width, some height, so wide and tall bows read about the same size.
+func _bow_art_size(texture: Texture2D) -> float:
+	var used: Rect2i = texture.get_image().get_used_rect()
+	return maxf(pow(used.size.x, BOW_WIDTH_WEIGHT) * pow(used.size.y, 1.0 - BOW_WIDTH_WEIGHT), 1.0)
 
 func hide_bow() -> void:
 	string.hide()
