@@ -11,7 +11,7 @@ Fast, snappy archer roguelite on floating sky islands. Godot 4 + GDScript, solo 
 - Prefer empirical testing: get it running, let results decide.
 - Minimal structural changes — don't add nodes or new systems unless architecturally necessary.
 - Ask before: creating new autoloads, changing project settings, deleting files, or spending PixelLab credits on batches.
-- Don't commit. I review diffs and commit in GitHub Desktop.
+- In cloud sessions, commit and push to the working branch; I review in GitHub Desktop. otherwise don't commit.
 
 ---
 
