@@ -542,7 +542,7 @@ grip_position = Vector2(16, 50)
 metadata/_custom_type_script = "uid://bymwdo1ku6acd"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6prse"]
-radius = 14.0
+radius = 22.0
 height = 59.396973
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvfa1"]
@@ -2544,7 +2544,7 @@ collision_mask = 140
 script = ExtResource("25_lre2g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/Sword/SlashHurtBox" unique_id=1580988101]
-position = Vector2(36, -2)
+position = Vector2(26, -2)
 shape = SubResource("CapsuleShape2D_6prse")
 disabled = true
 debug_color = Color(0.9604005, 0, 0.5189599, 0.41960785)

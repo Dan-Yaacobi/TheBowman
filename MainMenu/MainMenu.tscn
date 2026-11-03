@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="15_qvidt"]
-[ext_resource type="PackedScene" uid="uid://ddhffywfb4gs" path="res://Level/Events/BossEvents/BirdBossEvent.tscn" id="16_qvidt"]
+[ext_resource type="PackedScene" uid="uid://l84og620rtdb" path="res://Level/Events/ChestsEvent.tscn" id="16_qvidt"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]

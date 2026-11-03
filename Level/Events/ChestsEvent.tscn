@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://l84og620rtdb"]
+
+[ext_resource type="Script" uid="uid://c0xori8c2rs0y" path="res://Level/Events/event.gd" id="1_ksx8j"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_oi57y"]
+[ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="3_rwwsi"]
+[ext_resource type="Resource" uid="uid://ccba2h0jl7u2d" path="res://Items/Equipments/Bows/Resource/Hemorrhage.tres" id="4_slweh"]
+[ext_resource type="Resource" uid="uid://dsp81oo6n6qxm" path="res://Items/Equipments/Bows/Resource/Poison_Ivy.tres" id="5_5ccy2"]
+[ext_resource type="Resource" uid="uid://bid6mb2cjtouv" path="res://Items/Equipments/Bows/Resource/Rising_Feather.tres" id="6_62she"]
+[ext_resource type="Resource" uid="uid://bu83tlwxqtx25" path="res://Items/Equipments/Bows/Resource/Soul_Harvester.tres" id="7_8by2p"]
+[ext_resource type="Resource" uid="uid://c70ad8a4k31lf" path="res://Items/Equipments/Bows/Resource/Hanzo.tres" id="8_kvjwp"]
+[ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="9_swn12"]
+[ext_resource type="Resource" uid="uid://ckdgrsypnombf" path="res://Items/Equipments/Bows/Resource/Draxx.tres" id="10_h7ifw"]
+[ext_resource type="Resource" uid="uid://yvr467fev1ug" path="res://Items/Equipments/Bows/Resource/Vulcan.tres" id="11_qekju"]
+[ext_resource type="Resource" uid="uid://cf830250l4sj2" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="12_i03bs"]
+[ext_resource type="Resource" uid="uid://cnho4yuoqhjpi" path="res://Items/Equipments/Bows/Resource/Zeus.tres" id="13_b5mui"]
+[ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="14_rwwsi"]
+
+[node name="Tresures" type="Node2D" unique_id=1094064033]
+script = ExtResource("1_ksx8j")
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=1181122514]
+position = Vector2(-1, -20)
+
+[node name="Island14" parent="." unique_id=1847265216 instance=ExtResource("2_oi57y")]
+position = Vector2(0, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island14" unique_id=1109545810 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("4_slweh")
+
+[node name="Island15" parent="." unique_id=987211503 instance=ExtResource("2_oi57y")]
+position = Vector2(49, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island15" unique_id=1757051523 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("5_5ccy2")
+
+[node name="Island16" parent="." unique_id=1951703855 instance=ExtResource("2_oi57y")]
+position = Vector2(97, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island16" unique_id=431257483 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("6_62she")
+
+[node name="Island17" parent="." unique_id=1520680232 instance=ExtResource("2_oi57y")]
+position = Vector2(145, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island17" unique_id=992984410 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("7_8by2p")
+
+[node name="Island18" parent="." unique_id=650262001 instance=ExtResource("2_oi57y")]
+position = Vector2(-47, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island18" unique_id=5394346 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("8_kvjwp")
+
+[node name="Island19" parent="." unique_id=769256570 instance=ExtResource("2_oi57y")]
+position = Vector2(-95, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island19" unique_id=1788400744 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("9_swn12")
+
+[node name="Island20" parent="." unique_id=1826647668 instance=ExtResource("2_oi57y")]
+position = Vector2(-143, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island20" unique_id=106146981 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("10_h7ifw")
+
+[node name="Island21" parent="." unique_id=373649214 instance=ExtResource("2_oi57y")]
+position = Vector2(-143, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island21" unique_id=1110432127 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("11_qekju")
+
+[node name="Island22" parent="." unique_id=619650616 instance=ExtResource("2_oi57y")]
+position = Vector2(-95, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island22" unique_id=1373217888 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("12_i03bs")
+
+[node name="Island23" parent="." unique_id=512934584 instance=ExtResource("2_oi57y")]
+position = Vector2(-47, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island23" unique_id=1197625815 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("13_b5mui")
+
+[node name="Island24" parent="." unique_id=1717102492 instance=ExtResource("2_oi57y")]
+position = Vector2(1, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island24" unique_id=1111200822 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+
+[node name="Island25" parent="." unique_id=1162935193 instance=ExtResource("2_oi57y")]
+position = Vector2(49, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island25" unique_id=431708361 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+
+[node name="Island26" parent="." unique_id=906918761 instance=ExtResource("2_oi57y")]
+position = Vector2(97, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island26" unique_id=715204944 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+
+[node name="Island27" parent="." unique_id=323264843 instance=ExtResource("2_oi57y")]
+position = Vector2(145, 117)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island27" unique_id=2015831181 instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+
+[node name="Island28" parent="." unique_id=1607111994 instance=ExtResource("2_oi57y")]
+position = Vector2(-214, 82)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="TargetDummy" parent="." unique_id=603628097 instance=ExtResource("14_rwwsi")]
+position = Vector2(-214, 62)
