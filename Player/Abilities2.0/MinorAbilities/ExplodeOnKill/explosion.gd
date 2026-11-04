@@ -3,6 +3,8 @@ class_name Explosion extends Node2D
 @onready var explosion = $Explosion
 @onready var hurt_box = $HurtBox
 @export var damage: int = 1
+## Push away from the center. Also makes the explosion flinch enemies.
+@export var knockback: float = 60.0
 @onready var after_explosion: CPUParticles2D = $AfterExplosion
 @onready var collision_shape: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var smoke: CPUParticles2D = $Smoke
@@ -11,6 +13,7 @@ func _ready() -> void:
 	collision_shape.shape.radius = 17.5
 	hurt_box.set_text_color(Color.DARK_ORANGE)
 	hurt_box.base_damage = damage
+	hurt_box.knockback_power = knockback
 	hurt_box.monitoring = true
 	explosion.emitting = true
 	explosion.finished.connect(next_emitting)
