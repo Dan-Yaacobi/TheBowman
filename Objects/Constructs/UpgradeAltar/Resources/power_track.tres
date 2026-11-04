@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ralak"]
 [ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_08rf8"]
 [ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_iggld"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Power/steady_hands_ability.gd" id="3_steady"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Power/clean_kill_ability.gd" id="4_clean"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Power/opportunist_ability.gd" id="5_opport"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Power/twin_fletch_ability.gd" id="6_twin"]
 
 [sub_resource type="Resource" id="Resource_5i4eu"]
 script = ExtResource("1_ralak")
@@ -48,6 +52,50 @@ description = "Your arrows pierce 1 additional enemy"
 stat_step = SubResource("Resource_p37hm")
 metadata/_custom_type_script = "uid://qxs18xid7iir"
 
+[sub_resource type="Resource" id="Resource_steady_ab"]
+script = ExtResource("3_steady")
+
+[sub_resource type="Resource" id="Resource_steady_rw"]
+script = ExtResource("2_iggld")
+id = &"steady_hands"
+display_name = "Steady Hands"
+description = "Each perfect hit widens your perfect window a little, until you miss"
+ability = SubResource("Resource_steady_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_clean_ab"]
+script = ExtResource("4_clean")
+
+[sub_resource type="Resource" id="Resource_clean_rw"]
+script = ExtResource("2_iggld")
+id = &"clean_kill"
+display_name = "Clean Kill"
+description = "Killing an enemy with a perfect shot makes your next arrow perfect"
+ability = SubResource("Resource_clean_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_opport_ab"]
+script = ExtResource("5_opport")
+
+[sub_resource type="Resource" id="Resource_opport_rw"]
+script = ExtResource("2_iggld")
+id = &"opportunist"
+display_name = "Opportunist"
+description = "+25% damage against debuffed enemies"
+ability = SubResource("Resource_opport_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_twin_ab"]
+script = ExtResource("6_twin")
+
+[sub_resource type="Resource" id="Resource_twin_rw"]
+script = ExtResource("2_iggld")
+id = &"twin_fletch"
+display_name = "Twin Fletch"
+description = "Every 10th arrow fires a second arrow"
+ability = SubResource("Resource_twin_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
 [resource]
 script = ExtResource("2_08rf8")
 id = &"power"
@@ -60,5 +108,5 @@ base_cost = Dictionary[int, int]({
 milestone_cost = Dictionary[int, int]({
 4: 1
 })
-milestone_pool = Array[ExtResource("2_iggld")]([SubResource("Resource_twdkf")])
+milestone_pool = Array[ExtResource("2_iggld")]([SubResource("Resource_twdkf"), SubResource("Resource_steady_rw"), SubResource("Resource_clean_rw"), SubResource("Resource_opport_rw"), SubResource("Resource_twin_rw")])
 offers_per_milestone = 1

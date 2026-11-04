@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_4fma3"]
 [ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_7swan"]
 [ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_idk0m"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Health/safety_net_ability.gd" id="3_safety"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Health/clerics_blessing_ability.gd" id="4_cleric"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Health/adrenaline_ability.gd" id="5_adren"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Health/second_skin_ability.gd" id="6_skin"]
 
 [sub_resource type="Resource" id="Resource_peqsn"]
 script = ExtResource("1_4fma3")
@@ -11,15 +15,65 @@ max_applications = 5
 display_text = "+1 Max Hearts"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"
 
+[sub_resource type="Resource" id="Resource_safety_ab"]
+script = ExtResource("3_safety")
+
+[sub_resource type="Resource" id="Resource_safety_rw"]
+script = ExtResource("2_7swan")
+id = &"safety_net"
+display_name = "Safety Net"
+description = "Your first fall in each biome costs no heart"
+ability = SubResource("Resource_safety_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_cleric_ab"]
+script = ExtResource("4_cleric")
+
+[sub_resource type="Resource" id="Resource_cleric_rw"]
+script = ExtResource("2_7swan")
+id = &"clerics_blessing"
+display_name = "Cleric's Blessing"
+description = "Heal 1 when you exit a rift"
+ability = SubResource("Resource_cleric_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_adren_ab"]
+script = ExtResource("5_adren")
+
+[sub_resource type="Resource" id="Resource_adren_rw"]
+script = ExtResource("2_7swan")
+id = &"adrenaline"
+display_name = "Adrenaline"
+description = "You draw faster while on your last heart"
+ability = SubResource("Resource_adren_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_skin_ab"]
+script = ExtResource("6_skin")
+
+[sub_resource type="Resource" id="Resource_skin_rw"]
+script = ExtResource("2_7swan")
+id = &"second_skin"
+display_name = "Second Skin"
+description = "A shield bubble blocks one hit, and returns after 30s without taking damage"
+ability = SubResource("Resource_skin_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
 [resource]
 script = ExtResource("2_idk0m")
 id = &"hp_track"
 display_name = "Health"
 cycle = Array[ExtResource("1_4fma3")]([SubResource("Resource_peqsn")])
-max_level = 5
+max_level = 8
 base_cost = Dictionary[int, int]({
 2: 30,
 4: 1
 })
 cost_growth = 2.0
+milestone_every = 2
+milestone_cost = Dictionary[int, int]({
+4: 1
+})
+milestone_pool = Array[ExtResource("2_7swan")]([SubResource("Resource_safety_rw"), SubResource("Resource_cleric_rw"), SubResource("Resource_adren_rw"), SubResource("Resource_skin_rw")])
+offers_per_milestone = 1
 metadata/_custom_type_script = "uid://dyao83mt4xqfn"

@@ -24,8 +24,9 @@ func _ready() -> void:
 	hit_box.Damaged.connect(clear_shot)
 	hurt_box.successful_hit.connect(clear_shot)
 	_init_velocity()
-	
+
 	extra_ready_function()
+	ProjectileGlow.attach(self)
 	
 func extra_ready_function() -> void:
 	pass

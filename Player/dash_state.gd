@@ -29,7 +29,7 @@ func Enter() -> void:
 	EventBus.dash_preformed.emit()
 	player.disable_jump()
 	started_on_floor = player.is_on_floor()
-	player.can_dash += 1
+	player.dashes_spent += 1
 	dash_direction = get_dash_direction() # Change this to calculate_direction_to_cursor() for 360 cursor dash
 	dust.emitting = true
 
@@ -62,8 +62,9 @@ func HandleInput(_event: InputEvent) -> State:
 func go_to_walking() -> void:
 	state_machine.ChangeState(walking)
 
+## Every dash restarts the cooldown; when it runs out, all dashes come back at once.
 func can_dash_again() -> void:
-	player.can_dash -= 1
+	player.dashes_spent = 0
 	dash_cooldown.stop()
 	
 func get_dash_direction() -> Vector2:

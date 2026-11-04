@@ -3,6 +3,12 @@ class_name StunAbility extends PlayerShootAbility
 const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
 
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	apply_quiver_debuff(_target)
+
+func applies_quiver_debuff() -> bool:
+	return true
+
+func apply_quiver_debuff(_target: Node2D) -> void:
 	if _target and _target is Enemy:
 		if _target.full_health() and _target.can_be_stunned():
 			var stun_debuff: Debuff = STUN_DEBUFF.instantiate()

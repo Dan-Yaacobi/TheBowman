@@ -11,10 +11,13 @@ const SAVE_SECTION: StringName = &"meta"
 ## Marks a milestone that granted the track's fallback step (pool was empty).
 const FALLBACK_ID: StringName = &"__fallback"
 
+# load(), not preload(): the tracks pull in milestone ability scripts that depend on Player,
+# which would make this autoload part of a compile-order cycle.
 var tracks: Array[UpgradeTrack] = [
-	preload("res://Objects/Constructs/UpgradeAltar/Resources/power_track.tres"),
-	preload("res://Objects/Constructs/UpgradeAltar/Resources/sword_track.tres"),
-	preload("res://Objects/Constructs/UpgradeAltar/Resources/hp_track.tres"),
+	load("res://Objects/Constructs/UpgradeAltar/Resources/power_track.tres"),
+	load("res://Objects/Constructs/UpgradeAltar/Resources/sword_track.tres"),
+	load("res://Objects/Constructs/UpgradeAltar/Resources/hp_track.tres"),
+	load("res://Objects/Constructs/UpgradeAltar/Resources/mobility_track.tres"),
 ]
 
 var levels: Dictionary[StringName, int] = {}

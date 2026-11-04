@@ -26,6 +26,8 @@ var player: Player
 @export_subgroup("Movement")
 @export var dash_power: Stat
 @export var dash_cooldown: Stat
+## Dashes available before the cooldown has to run out (Second Dash adds one).
+@export var max_dashes: int = 1
 @export var move_speed: Stat
 @export var max_jumps: int
 @export var jump_height: Stat

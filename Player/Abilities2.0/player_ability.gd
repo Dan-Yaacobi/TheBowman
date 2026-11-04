@@ -51,6 +51,15 @@ func deactivate_ability() -> void:
 func reactivate_ability() -> void:
 	can_activate = true
 
+## True for quiver abilities whose identity is a debuff (bleed, burn, poison...). The base sword
+## skips these; Coated Blade applies them on sword hits through apply_quiver_debuff().
+func applies_quiver_debuff() -> bool:
+	return false
+
+## Applies this quiver's debuff to the target, whatever hit it.
+func apply_quiver_debuff(_target: Node2D) -> void:
+	pass
+
 func get_tooltip() -> String:
 	return ""
 

@@ -33,6 +33,7 @@ func _ready() -> void:
 	screen_exited_timer.timeout.connect(queue_free)
 	visible_on_screen_notifier_2d.screen_entered.connect(screen_enter)
 	hurt_box.successful_hit.connect(impact)
+	ProjectileGlow.attach(self)
 
 ## target = the island it will land on, for the warning shadow (null = no shadow)
 func launch(start: Vector2, target: Island = null) -> void:

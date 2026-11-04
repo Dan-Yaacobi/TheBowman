@@ -9,7 +9,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if body.velocity.length() > 0:
 			player_fell.emit()
-			if not costs_heart:
+			if not costs_heart or body.use_free_fall():
 				EventBus.respawn_player.emit()
 				return
 			var dead: bool = body.lose_heart()

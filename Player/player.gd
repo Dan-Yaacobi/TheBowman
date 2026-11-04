@@ -7,6 +7,10 @@ signal critical_hit
 signal dash_finished
 ## A hit was dodged (dodge_chance) and dealt no damage.
 signal dodged
+## A hit was blocked by a hit shield (Second Skin) and dealt no damage.
+signal shield_blocked
+## Every sword swing, once its hit area is set up (Cleave Wave).
+signal sword_swung
 
 @onready var body: PlayerBody = $PlayerBody
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
@@ -59,6 +63,14 @@ var invincible: bool = false
 ## Chance (0-1) that a hit passes through harmlessly. Set by abilities (Shadow Ring).
 var dodge_chance: float = 0.0
 const DODGE_INVINCIBILITY: float = 0.3
+## Each shield blocks one whole hit (Second Skin).
+var hit_shields: int = 0
+## Knockback taken from hits while airborne is multiplied by this (Steady Footing).
+var air_knockback_taken: float = 1.0
+## Falls that cost no heart (Safety Net). FallingDeath spends them.
+var free_falls: int = 0
+## Dashes used since the dash cooldown last finished. Dashing is allowed while below stats.max_dashes.
+var dashes_spent: int = 0
 
 
 var shooting: bool = false
@@ -377,6 +389,12 @@ func emit_crit() -> void:
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	if not invincible and dodge_chance > 0.0 and randf() < dodge_chance:
 		_dodge()
+		dodged.emit()
+		return
+	if not invincible and hit_shields > 0:
+		hit_shields -= 1
+		_dodge()
+		shield_blocked.emit()
 		return
 	if not invincible:
 		took_hit.emit()
@@ -387,7 +405,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		if _hurt_box:
 			start_invincibilty()
 			dmg_taken = _hurt_box.damage
-			apply_knockback(_hurt_box.knockback_dir,_hurt_box.knockback_power)
+			var knockback_mult: float = 1.0 if is_on_floor() else air_knockback_taken
+			apply_knockback(_hurt_box.knockback_dir, _hurt_box.knockback_power * knockback_mult)
 			dmg_color = _hurt_box.combat_text_color
 		else:
 			dmg_taken = raw_damage
@@ -402,7 +421,16 @@ func _dodge() -> void:
 	invincible = true
 	invincibility_timer.wait_time = DODGE_INVINCIBILITY
 	invincibility_timer.start()
-	dodged.emit()
+
+func can_start_dash() -> bool:
+	return can_dash <= 0 and dashes_spent < stats.max_dashes
+
+## Spends a free fall if there is one. Returns true if the fall costs no heart.
+func use_free_fall() -> bool:
+	if free_falls <= 0:
+		return false
+	free_falls -= 1
+	return true
 
 func start_invincibilty() -> void:
 	modulate.a = 0.5

@@ -10,7 +10,8 @@ var direction: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	body_entered.connect(hit)
 	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
-	
+	ProjectileGlow.attach(self)
+
 func _physics_process(delta: float) -> void:
 	global_position += direction * move_speed * delta
 	pass

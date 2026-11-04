@@ -1,8 +1,98 @@
-[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://bbyyl0qbesdf4"]
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://vv1huk0ado0s"]
 
-[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_75rcp"]
-[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_o6nio"]
+[ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ljyyh"]
+[ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_hvg0w"]
+[ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_xw5hj"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/PassiveAbilities/DoubleJump/double_jump_ability.gd" id="3_djump"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Mobility/air_draw_ability.gd" id="4_airdraw"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Mobility/second_dash_ability.gd" id="5_dash"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Mobility/steady_footing_ability.gd" id="6_footing"]
+
+[sub_resource type="Resource" id="Resource_move_a"]
+script = ExtResource("1_ljyyh")
+stat_name = &"move_speed"
+amount = 0.03
+type = 1
+max_applications = 5
+display_text = "Move Speed +3%"
+
+[sub_resource type="Resource" id="Resource_dash_cd"]
+script = ExtResource("1_ljyyh")
+stat_name = &"dash_cooldown"
+amount = -0.05
+type = 1
+max_applications = 8
+display_text = "Dash Cooldown -5%"
+
+[sub_resource type="Resource" id="Resource_move_b"]
+script = ExtResource("1_ljyyh")
+stat_name = &"move_speed"
+amount = 0.03
+type = 1
+max_applications = 5
+display_text = "Move Speed +3%"
+
+[sub_resource type="Resource" id="Resource_dash_pw"]
+script = ExtResource("1_ljyyh")
+stat_name = &"dash_power"
+amount = 0.03
+type = 1
+max_applications = 10
+display_text = "Dash Distance +3%"
+
+[sub_resource type="Resource" id="Resource_djump_ab"]
+script = ExtResource("3_djump")
+
+[sub_resource type="Resource" id="Resource_djump_rw"]
+script = ExtResource("2_hvg0w")
+id = &"double_jump"
+display_name = "Double Jump"
+description = "Jump once more in midair"
+ability = SubResource("Resource_djump_ab")
+
+[sub_resource type="Resource" id="Resource_airdraw_ab"]
+script = ExtResource("4_airdraw")
+
+[sub_resource type="Resource" id="Resource_airdraw_rw"]
+script = ExtResource("2_hvg0w")
+id = &"air_draw"
+display_name = "Air Draw"
+description = "You draw 30% faster while airborne"
+ability = SubResource("Resource_airdraw_ab")
+
+[sub_resource type="Resource" id="Resource_dash_ab"]
+script = ExtResource("5_dash")
+
+[sub_resource type="Resource" id="Resource_dash_rw"]
+script = ExtResource("2_hvg0w")
+id = &"second_dash"
+display_name = "Second Dash"
+description = "One extra dash before the cooldown"
+ability = SubResource("Resource_dash_ab")
+
+[sub_resource type="Resource" id="Resource_footing_ab"]
+script = ExtResource("6_footing")
+
+[sub_resource type="Resource" id="Resource_footing_rw"]
+script = ExtResource("2_hvg0w")
+id = &"steady_footing"
+display_name = "Steady Footing"
+description = "You take 40% less knockback while airborne"
+ability = SubResource("Resource_footing_ab")
 
 [resource]
-script = ExtResource("2_o6nio")
+script = ExtResource("2_xw5hj")
+id = &"mobility"
+display_name = "Mobility"
+cycle = Array[ExtResource("1_ljyyh")]([SubResource("Resource_move_a"), SubResource("Resource_dash_cd"), SubResource("Resource_move_b"), SubResource("Resource_dash_pw")])
+base_cost = Dictionary[int, int]({
+0: 8,
+3: 5
+})
+cost_growth = 1.2
+milestone_cost = Dictionary[int, int]({
+4: 1
+})
+milestone_pool = Array[ExtResource("2_hvg0w")]([SubResource("Resource_djump_rw"), SubResource("Resource_airdraw_rw"), SubResource("Resource_dash_rw"), SubResource("Resource_footing_rw")])
+offers_per_milestone = 1
 metadata/_custom_type_script = "uid://dyao83mt4xqfn"

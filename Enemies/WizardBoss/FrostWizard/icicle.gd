@@ -50,6 +50,7 @@ func _ready() -> void:
 			visual.texture = variant
 	_set_dangerous(false)
 	ground_detector.body_entered.connect(_on_ground_detector_body_entered)
+	ProjectileGlow.attach(self)
 
 ## Hang at start for hang_time seconds, then drop straight down onto target
 func drop_onto(target: Island, start: Vector2, hang_time: float) -> void:

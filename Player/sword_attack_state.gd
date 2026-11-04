@@ -26,15 +26,22 @@ func Enter() -> void:
 	combo_index = (combo_index + 1) % attack_animations.size()
 	player.body.update_animation(current_animation)
 	var hurt_box: HurtBox = player.body.slash_hurt_box
+	# The quiver's debuff stays on arrows; the sword only applies it through Coated Blade.
+	var quiver_ability: PlayerAbility = player.stats.arrow.ability if player.stats.arrow else null
 	for ability in player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT):
+		if ability == quiver_ability and ability.applies_quiver_debuff():
+			continue
 		hurt_box.add_before_effect(ability.activate_ability)
 	for ability in player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT):
+		if ability == quiver_ability and ability.applies_quiver_debuff():
+			continue
 		hurt_box.add_after_effect(ability.activate_ability)
 	hurt_box.base_damage = floor(player.stats.sword_damage.value())
 	player.body.sword.apply_size(player.get_sword_size())
 	player.apply_knockback(player.aim_direction, 75)
 	EventBus.sword_slash_sound.emit()
 	player.can_swing += 1
+	player.sword_swung.emit()
 
 func Exit() -> void:
 	player.body.slash_hurt_box.clear_effects()

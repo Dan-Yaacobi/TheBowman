@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://vv1huk0ado0s"]
+[gd_resource type="Resource" script_class="UpgradeTrack" format=3 uid="uid://bbyyl0qbesdf4"]
 
 [ext_resource type="Script" uid="uid://brkui3qsiuklr" path="res://Objects/Constructs/UpgradeAltar/upgrade_step.gd" id="1_ljyyh"]
 [ext_resource type="Script" uid="uid://qxs18xid7iir" path="res://Objects/Constructs/UpgradeAltar/milestone_reward.gd" id="2_hvg0w"]
 [ext_resource type="Script" uid="uid://dyao83mt4xqfn" path="res://Objects/Constructs/UpgradeAltar/upgrade_track.gd" id="2_xw5hj"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Sword/parry_ability.gd" id="3_parry"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Sword/cleave_wave_ability.gd" id="4_cleave"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Sword/coated_blade_ability.gd" id="5_coated"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/MilestoneAbilities/Sword/reload_ability.gd" id="6_reload"]
 
 [sub_resource type="Resource" id="Resource_ila4o"]
 script = ExtResource("1_ljyyh")
@@ -29,6 +33,50 @@ max_applications = 5
 display_text = "Sword Size +10%"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"
 
+[sub_resource type="Resource" id="Resource_parry_ab"]
+script = ExtResource("3_parry")
+
+[sub_resource type="Resource" id="Resource_parry_rw"]
+script = ExtResource("2_hvg0w")
+id = &"parry"
+display_name = "Parry"
+description = "Your sword destroys enemy projectiles"
+ability = SubResource("Resource_parry_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_cleave_ab"]
+script = ExtResource("4_cleave")
+
+[sub_resource type="Resource" id="Resource_cleave_rw"]
+script = ExtResource("2_hvg0w")
+id = &"cleave_wave"
+display_name = "Cleave Wave"
+description = "Each sword swing sends out a crescent that flies past the blade"
+ability = SubResource("Resource_cleave_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_coated_ab"]
+script = ExtResource("5_coated")
+
+[sub_resource type="Resource" id="Resource_coated_rw"]
+script = ExtResource("2_hvg0w")
+id = &"coated_blade"
+display_name = "Coated Blade"
+description = "Your sword applies your quiver's debuff"
+ability = SubResource("Resource_coated_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
+[sub_resource type="Resource" id="Resource_reload_ab"]
+script = ExtResource("6_reload")
+
+[sub_resource type="Resource" id="Resource_reload_rw"]
+script = ExtResource("2_hvg0w")
+id = &"reload"
+display_name = "Reload"
+description = "Sword hits give you a short pull speed boost"
+ability = SubResource("Resource_reload_ab")
+metadata/_custom_type_script = "uid://qxs18xid7iir"
+
 [resource]
 script = ExtResource("2_xw5hj")
 id = &"sword_track"
@@ -42,4 +90,6 @@ cost_growth = 1.3
 milestone_cost = Dictionary[int, int]({
 2: 1
 })
+milestone_pool = Array[ExtResource("2_hvg0w")]([SubResource("Resource_parry_rw"), SubResource("Resource_cleave_rw"), SubResource("Resource_coated_rw"), SubResource("Resource_reload_rw")])
+offers_per_milestone = 1
 metadata/_custom_type_script = "uid://dyao83mt4xqfn"

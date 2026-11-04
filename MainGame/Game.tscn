@@ -4,6 +4,9 @@
 [ext_resource type="Shader" uid="uid://4frdirbit1jm" path="res://Player/background.gdshader" id="4_jcge4"]
 [ext_resource type="PackedScene" uid="uid://c48tkg5iwqxfo" path="res://MainGame/GameManager/GameManager.tscn" id="7_ygsly"]
 [ext_resource type="PackedScene" uid="uid://bju1rx12kx8oe" path="res://HUD/HUD.tscn" id="9_yk4gd"]
+[ext_resource type="AudioStream" path="res://MainGame/Music/MainMenuMusic.mp3" id="10_menumusic"]
+[ext_resource type="AudioStream" path="res://MainGame/Music/AdventurersPath.mp3" id="11_riftmusic"]
+[ext_resource type="AudioStream" path="res://MainGame/Music/EpicBossBattle.wav" id="12_bossmusic"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835gg"]
 shader = ExtResource("4_jcge4")
@@ -14,9 +17,12 @@ shader_parameter/color_bottom = Color(0.6, 0.85, 1, 1)
 script = ExtResource("1_iteqa")
 base_top_color = Color(0.8, 0.2, 0.20999984, 1)
 base_bottom_color = Color(0, 0, 0, 1)
+menu_music = ExtResource("10_menumusic")
+rift_music = ExtResource("11_riftmusic")
+boss_music = ExtResource("12_bossmusic")
 
-[node name="GameMusic" type="AudioStreamPlayer2D" parent="." unique_id=1809560062]
-visible = false
+[node name="GameMusic" type="AudioStreamPlayer" parent="." unique_id=1809560062]
+process_mode = 3
 
 [node name="CloudTimer" type="Timer" parent="." unique_id=249615843]
 

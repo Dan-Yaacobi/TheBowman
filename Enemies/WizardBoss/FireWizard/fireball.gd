@@ -43,7 +43,9 @@ func _ready() -> void:
 		hurt_box.add_before_effect(effect.activate_ability)
 	if can_burn:
 		hurt_box.add_after_effect(apply_burn)
-		
+	if enemy_owned:
+		ProjectileGlow.attach(self)
+
 func launch(start: Vector2, dir: Vector2) -> void:
 	if not is_node_ready():
 		await ready

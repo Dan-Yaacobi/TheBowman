@@ -12,6 +12,14 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 		# Deferred: we're inside the hit's physics callback, where new areas can't be added.
 		EmberSpreader.attach.call_deferred(enemy, self)
 
+func applies_quiver_debuff() -> bool:
+	return true
+
+func apply_quiver_debuff(_target: Node2D) -> void:
+	var enemy: Enemy = _target as Enemy
+	if enemy and not enemy.is_dead:
+		apply_burn(enemy)
+
 ## Same burn as the other fire abilities, scaled by this item's color level.
 func apply_burn(enemy: Enemy) -> void:
 	var stats: PlayerStats = PlayerManager.player.stats

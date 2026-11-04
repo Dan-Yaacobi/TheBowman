@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bayac3vjejf8n" path="res://StartMenu/start_menu.gd" id="1_d5kqr"]
 [ext_resource type="Texture2D" uid="uid://dgtlu5xnvsvap" path="res://StartMenu/StartScreenBG_3.png" id="2_7tu02"]
 [ext_resource type="FontFile" uid="uid://b7lpukcfa8uxr" path="res://Fonts/Jaro-Regular-VariableFont_opsz.ttf" id="2_w0qft"]
+[ext_resource type="AudioStream" path="res://MainGame/Music/MainMenuMusic.mp3" id="3_menumusic"]
 
 [node name="StartMenu" type="Control" unique_id=971797917]
 layout_mode = 3
@@ -67,5 +68,12 @@ theme_override_font_sizes/font_size = 34
 text = "Exit Game
 "
 
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_menumusic")
+volume_db = -8.0
+autoplay = true
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

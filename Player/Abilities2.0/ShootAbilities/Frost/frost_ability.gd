@@ -11,6 +11,12 @@ func on_unequipped() -> void:
 		EventBus.enemy_frostbitten_hit.disconnect(apply_freeze)
 
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
+	apply_quiver_debuff(_target)
+
+func applies_quiver_debuff() -> bool:
+	return true
+
+func apply_quiver_debuff(_target: Node2D) -> void:
 	if _target and _target is Enemy:
 		if !_target.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID) and !_target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
 				apply_frostbite(_target)

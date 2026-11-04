@@ -5,6 +5,7 @@ enum Type{DIRT, SNOW, HELL}
 @export var rift_values: Array[float]
 @export var active_ability_pool: Array[ActiveAbility]
 @export var sky_colors: Array[SkyColors]
+@export var extra_level: int = 0
 
 @onready var rift_generator: RiftGenerator = $RiftGenerator
 @onready var rift_enemy_spawner: RiftEnemySpawner = $RiftEnemySpawner
@@ -21,7 +22,7 @@ func extra_set_world_functions() -> void:
 	rift_enemy_spawner.enemy_spawned.connect(add_enemy)
 	rift_generator.rift_created.connect(add_rift_level)
 	
-	PlayerManager.player.stats.rift_level += 1
+	PlayerManager.player.stats.rift_level += 1 + extra_level
 	var rift_level: RiftLevel = rift_generator.generate(PlayerManager.player.stats.rift_level)
 	rift_levels.append(rift_level)	
 	rift_level.reparent(self)

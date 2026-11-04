@@ -23,7 +23,14 @@ func _ready() -> void:
 	EventBus.enemy_died_sound.connect(enemy_died_sound)
 	EventBus.sword_slash_sound.connect(sword_slash_sound)
 	EventBus.play_any.connect(play_any)
-	
+
+## The players here are 2D and fade with distance from the camera. Events sit far from the
+## world origin (GameWorld.event_offset), so staying at the camera keeps every sound audible.
+func _process(_delta: float) -> void:
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	if camera:
+		global_position = camera.get_screen_center_position()
+
 func enemy_died_sound(_audio: AudioStream) -> void:
 	_play_oneshot(_audio,0.5,0.5,-3)
 	
