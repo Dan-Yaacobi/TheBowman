@@ -9,28 +9,34 @@ const SHATTER_ANIMATION: StringName = &"Shatter"
 @onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 
 var _is_destroyed: bool = false
+## True when the egg broke on the ground: the bird hatches once the crack animation ends.
+var _hatching: bool = false
 
 func _ready() -> void:
 	hit_box.Damaged.connect(destroyed)
 	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 
+## Landed: play the crack animation, then hatch the bird (see _on_animation_player_animation_finished).
 func crack_egg() -> void:
 	if _is_destroyed:
 		return
 	# Landing can touch several island shapes in one frame; crack (and hatch) only once.
-	_is_destroyed = true
-	cracked.emit(global_position)
-	queue_free()
+	_hatching = true
+	_break_shell()
 
 func _on_grounddetector_body_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if _body is Island:
 		crack_egg()
 
+## Shot by the player: breaks without hatching.
 func destroyed(_hurt_box: HurtBox, _var2, _var3) -> void:
 	if _is_destroyed:
 		return
+	_break_shell()
+
+func _break_shell() -> void:
 	_is_destroyed = true
-	# Stop it from falling, being hit again or hatching while the shell breaks apart
+	# Stop it from falling, being hit again or landing twice while the shell breaks apart
 	set_deferred("freeze", true)
 	linear_velocity = Vector2.ZERO
 	hit_box.set_deferred("monitorable", false)
@@ -40,4 +46,6 @@ func destroyed(_hurt_box: HurtBox, _var2, _var3) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == SHATTER_ANIMATION:
+		if _hatching:
+			cracked.emit(global_position)
 		queue_free()

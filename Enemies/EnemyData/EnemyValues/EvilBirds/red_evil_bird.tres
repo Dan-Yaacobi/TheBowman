@@ -8,9 +8,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_wf6k0"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="6_teh2a"]
 [ext_resource type="Texture2D" uid="uid://dhad08bcbg6em" path="res://Enemies/Sprites/Bird.png" id="8_07lg4"]
-
-[sub_resource type="Resource" id="Resource_teh2a"]
-metadata/__load_path__ = "res://Enemies/EvilBird/Sprites/Egg.png"
+[ext_resource type="Texture2D" path="res://Enemies/Sprites/Egg.png" id="egg_texture"]
 
 [sub_resource type="Resource" id="Resource_07lg4"]
 script = ExtResource("3_wf6k0")
@@ -32,6 +30,6 @@ avg_coins_dropped = 3
 touch_damage = 2
 death_ability = Array[ExtResource("1_v6xfy")]([SubResource("Resource_07lg4")])
 bullet = ExtResource("1_pkjfs")
-bullet_sprite = SubResource("Resource_teh2a")
+bullet_sprite = ExtResource("egg_texture")
 drop_chance = 35.0
 metadata/_custom_type_script = "uid://rlvenynllobd"
