@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bxbaaxg5eifvu"]
 
 [ext_resource type="Script" uid="uid://bkvxgiowtvo8j" path="res://HUD/ActiveAbility/active_ability_button.gd" id="1_h7mhv"]
-[ext_resource type="Texture2D" uid="uid://c86vyty6mwq30" path="res://Player/Upgrades/Abilities/StunUpgrade/StunUpgrade1.png" id="2_fg5ha"]
 
 [node name="ActiveAbilityButton" type="PanelContainer" unique_id=1861053749]
 custom_minimum_size = Vector2(220, 200)
@@ -28,7 +27,6 @@ theme_override_constants/separation = 8
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1366868220]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture = ExtResource("2_fg5ha")
 expand_mode = 2
 stretch_mode = 5
 

@@ -21,10 +21,8 @@
 [ext_resource type="Script" uid="uid://c6sn01moq68g3" path="res://Player/States/player_slam_state.gd" id="14_nepur"]
 [ext_resource type="Texture2D" uid="uid://dsnwsij6hv48u" path="res://Player/Hand/offHandfullAim.png" id="14_vuo2u"]
 [ext_resource type="Texture2D" uid="uid://carxbajjmokl6" path="res://Items/Equipments/Bows/Sprites/Wooden_Bow_2.png" id="15_8agqw"]
-[ext_resource type="Script" uid="uid://bawb3ysex0r03" path="res://Player/Effects/OnPerfectShotEffects/on_perfect_shot_effect.gd" id="15_o1b5h"]
 [ext_resource type="Script" uid="uid://c1qbnewlsl4s4" path="res://Player/States/player_dead_state.gd" id="15_qho0y"]
 [ext_resource type="Shader" uid="uid://c1k1qqjhs2axr" path="res://Player/Body/thunder.gdshader" id="15_yyr8h"]
-[ext_resource type="Resource" uid="uid://ck8ck21kjw4n2" path="res://Player/Effects/OnPerfectShotEffects/Resources/burn_arrow.tres" id="16_7w4lt"]
 [ext_resource type="Shader" uid="uid://bgr6j58j84j1j" path="res://Player/Body/soul.gdshader" id="16_i325y"]
 [ext_resource type="Script" uid="uid://5c3tdo6kmvrp" path="res://Player/dash_state.gd" id="16_lcihm"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="18_eu7rt"]
@@ -2469,9 +2467,6 @@ collision_mask = 17
 script = ExtResource("1_4bii6")
 target_dummy_tutorial_passed = true
 stats = SubResource("Resource_sedti")
-perfect_shot_effects = Dictionary[ExtResource("15_o1b5h"), int]({
-ExtResource("16_7w4lt"): -1
-})
 
 [node name="DebuffHandler" parent="." unique_id=435665992 instance=ExtResource("7_bgaaw")]
 
