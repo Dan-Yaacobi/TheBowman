@@ -1,20 +1,22 @@
 class_name RiftPortal extends Node2D
-## Opens near an enemy already painted in the colour of what it rolled, pulses, then fires that at the enemy and closes.
+## Opens near an enemy from four rune stones, painted in the colour of what it rolled. It swirls and pulses,
+## fires that at the enemy, then folds back into the runes and closes.
 
 enum Roll { FIREBALL, FIST, POISON }
 
 const SPRITES_DIR: String = "res://Player/Abilities2.0/ShootAbilities/Riftbow/Sprites/"
 const ROLL_SHEETS: Dictionary[Roll, String] = {Roll.FIREBALL: "RiftPortalFire.png", Roll.FIST: "RiftPortalFist.png", Roll.POISON: "RiftPortalPoison.png"}
-const PORTAL_FRAMES: int = 16
+## Sheet layout: opening frames first (closed runes -> fully open), then the swirl loop.
+const OPEN_FRAMES: int = 9
+const SWIRL_FRAMES: int = 16
 const FIREBALL_PATH: String = "res://Enemies/WizardBoss/FireWizard/Fireball.tscn"
 const POISON_CLOUD_PATH: String = "res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/PoisonousCloud.tscn"
-const ROLL_COLORS: Dictionary[Roll, Color] = {Roll.FIREBALL: Color(1.0, 0.55, 0.15), Roll.FIST: Color(1.0, 0.2, 0.2), Roll.POISON: Color(0.4, 1.0, 0.3)}
+const PULSE_COLOR: Color = Color(1.6, 1.6, 1.6)
 
-@export var open_time: float = 0.15
+@export var open_time: float = 0.35
 @export var flash_time: float = 0.45
-@export var close_time: float = 0.2
-@export var portal_scale: float = 0.6
-## Faster than the event portal (12) so it feels more violent.
+@export var close_time: float = 0.25
+@export var portal_scale: float = 0.45
 @export var swirl_fps: float = 18.0
 
 var target: Enemy
@@ -26,14 +28,16 @@ var knockback: float = 200.0
 var fist_knockback: float = 500.0
 var _last_target_position: Vector2
 var _sprite: Sprite2D
+var _swirling: bool = false
 var _swirl_time: float = 0.0
 
 func _ready() -> void:
 	z_index = 2
 	_sprite = Sprite2D.new()
 	_sprite.texture = load(SPRITES_DIR + ROLL_SHEETS[roll])
-	_sprite.hframes = PORTAL_FRAMES
-	_sprite.scale = Vector2.ZERO
+	_sprite.hframes = OPEN_FRAMES + SWIRL_FRAMES
+	_sprite.frame = 0
+	_sprite.scale = Vector2.ONE * portal_scale
 	add_child(_sprite)
 	_last_target_position = target_position
 	if is_instance_valid(target) and not target.is_dead:
@@ -41,22 +45,31 @@ func _ready() -> void:
 	_run()
 
 func _process(delta: float) -> void:
-	_swirl_time += delta
-	_sprite.frame = int(_swirl_time * swirl_fps) % PORTAL_FRAMES
+	if _swirling:
+		_swirl_time += delta
+		_sprite.frame = OPEN_FRAMES + int(_swirl_time * swirl_fps) % SWIRL_FRAMES
 	if is_instance_valid(target) and not target.is_dead:
 		_last_target_position = target.global_position
 
 func _run() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(_sprite, "scale", Vector2.ONE * portal_scale, open_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_method(_set_open_frame, 0.0, 1.0, open_time)
+	tween.tween_callback(_set_swirling.bind(true))
 	# Telegraph: the sheet already shows what was rolled; pulse it before firing.
-	var flash_color: Color = ROLL_COLORS[roll]
 	for i in 3:
-		tween.tween_property(_sprite, "modulate", flash_color * 1.6, flash_time / 6.0)
+		tween.tween_property(_sprite, "modulate", PULSE_COLOR, flash_time / 6.0)
 		tween.tween_property(_sprite, "modulate", Color.WHITE, flash_time / 6.0)
 	tween.tween_callback(_fire)
-	tween.tween_property(_sprite, "scale", Vector2.ZERO, close_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(_set_swirling.bind(false))
+	tween.tween_method(_set_open_frame, 1.0, 0.0, close_time)
 	tween.tween_callback(queue_free)
+
+## 0 = closed runes, 1 = fully open.
+func _set_open_frame(progress: float) -> void:
+	_sprite.frame = clampi(roundi(progress * (OPEN_FRAMES - 1)), 0, OPEN_FRAMES - 1)
+
+func _set_swirling(value: bool) -> void:
+	_swirling = value
 
 func _fire() -> void:
 	var to_target: Vector2 = (_last_target_position - global_position).normalized()
