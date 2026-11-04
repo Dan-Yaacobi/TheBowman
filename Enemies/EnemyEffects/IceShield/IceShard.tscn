@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cde2ouylndf60"]
 
 [ext_resource type="Script" uid="uid://dlclj0qb06ujc" path="res://Enemies/EnemyEffects/IceShield/ice_shard.gd" id="1_8v4sn"]
-[ext_resource type="Texture2D" uid="uid://nl83pcn7wfch" path="res://Enemies/Sprites/IceShards.png" id="1_gv06g"]
+[ext_resource type="Texture2D" path="res://Enemies/Sprites/FrozenOrbShards.png" id="1_gv06g"]
 [ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_jrail"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_x253l"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="4_wavya"]
@@ -28,8 +28,9 @@ script = ExtResource("1_8v4sn")
 data = SubResource("Resource_wavya")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=991155400]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_gv06g")
-hframes = 7
+hframes = 2
 
 [node name="HitBox" parent="." unique_id=461261477 instance=ExtResource("3_x253l")]
 collision_layer = 4
@@ -37,7 +38,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1327875591]
 rotation = 0.7853982
-scale = Vector2(0.4399997, 0.5199999)
+scale = Vector2(0.88, 1.04)
 shape = SubResource("CapsuleShape2D_q0xdf")
 debug_color = Color(0.34111378, 0.6215308, 3.85046e-07, 0.41960785)
 
@@ -46,7 +47,7 @@ collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=839309333]
 rotation = 0.7853982
-scale = Vector2(0.4399997, 0.5199999)
+scale = Vector2(0.88, 1.04)
 shape = SubResource("CapsuleShape2D_q0xdf")
 debug_color = Color(0.99059623, 0, 0.28211293, 0.41960785)
 

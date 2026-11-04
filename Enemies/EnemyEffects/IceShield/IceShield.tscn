@@ -4,5 +4,5 @@
 
 [node name="IceShield" type="Node2D" unique_id=287436052]
 script = ExtResource("1_5vwtw")
-radius = 20.0
+radius = 28.0
 angular_speed = 1.5
