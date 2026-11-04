@@ -1,6 +1,7 @@
 class_name RiftbowAbility extends PlayerAbility
 ## A perfect hit opens a wizard portal near the enemy. The portal flashes what it rolled, then fires it at that
-## enemy: a burning fireball, a demonic fist with huge knockback, or a poison cloud. No portal if the hit killed it.
+## enemy: a burning fireball, a demonic fist with huge knockback, or a poison cloud. If the hit killed the enemy,
+## the portal still opens and fires at where it died.
 
 ## How far from the enemy the portal opens.
 @export var portal_distance: float = 45.0
@@ -11,13 +12,14 @@ class_name RiftbowAbility extends PlayerAbility
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var enemy: Enemy = _target as Enemy
 	var hurt_box: HurtBox = _activator as HurtBox
-	if enemy == null or hurt_box == null or enemy.is_dead:
+	if enemy == null or hurt_box == null:
 		return
 	var arrow: Arrow = hurt_box.get_parent() as Arrow
 	if arrow == null or not arrow.perfect_shot:
 		return
 	var portal: RiftPortal = RiftPortal.new()
 	portal.target = enemy
+	portal.target_position = enemy.global_position
 	portal.roll = RiftPortal.Roll.values().pick_random()
 	portal.damage = maxi(1, roundi(hurt_box.damage * damage_mult * power()))
 	portal.knockback = hurt_box.knockback_power

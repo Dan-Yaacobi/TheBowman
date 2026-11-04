@@ -3,7 +3,8 @@ class_name RiftPortal extends Node2D
 
 enum Roll { FIREBALL, FIST, POISON }
 
-const PORTAL_PATH: String = "res://Player/Abilities2.0/ShootAbilities/Riftbow/Sprites/RiftPortal.png"
+const PORTAL_PATH: String = "res://Objects/Portal/Sprites/EventPortalSwirl.png"
+const PORTAL_FRAMES: int = 16
 const FIREBALL_PATH: String = "res://Enemies/WizardBoss/FireWizard/Fireball.tscn"
 const POISON_CLOUD_PATH: String = "res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/PoisonousCloud.tscn"
 const ROLL_COLORS: Dictionary[Roll, Color] = {Roll.FIREBALL: Color(1.0, 0.55, 0.15), Roll.FIST: Color(1.0, 0.2, 0.2), Roll.POISON: Color(0.4, 1.0, 0.3)}
@@ -11,28 +12,35 @@ const ROLL_COLORS: Dictionary[Roll, Color] = {Roll.FIREBALL: Color(1.0, 0.55, 0.
 @export var open_time: float = 0.15
 @export var flash_time: float = 0.45
 @export var close_time: float = 0.2
-@export var portal_scale: float = 0.45
+@export var portal_scale: float = 0.6
+@export var swirl_fps: float = 12.0
 
 var target: Enemy
+## Where to fire if the target is dead or gone; follows the target while it lives.
+var target_position: Vector2
 var roll: Roll = Roll.FIREBALL
 var damage: int = 1
 var knockback: float = 200.0
 var fist_knockback: float = 500.0
 var _last_target_position: Vector2
 var _sprite: Sprite2D
+var _swirl_time: float = 0.0
 
 func _ready() -> void:
 	z_index = 2
 	_sprite = Sprite2D.new()
 	_sprite.texture = load(PORTAL_PATH)
+	_sprite.hframes = PORTAL_FRAMES
 	_sprite.scale = Vector2.ZERO
 	add_child(_sprite)
-	if is_instance_valid(target):
+	_last_target_position = target_position
+	if is_instance_valid(target) and not target.is_dead:
 		_last_target_position = target.global_position
 	_run()
 
 func _process(delta: float) -> void:
-	_sprite.rotation += delta * 3.0
+	_swirl_time += delta
+	_sprite.frame = int(_swirl_time * swirl_fps) % PORTAL_FRAMES
 	if is_instance_valid(target) and not target.is_dead:
 		_last_target_position = target.global_position
 
