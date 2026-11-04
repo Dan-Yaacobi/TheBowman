@@ -1,9 +1,11 @@
 class_name PerfectStreakMinor extends MinorAbility
-## After 3 perfect shots in a row your next arrow explodes on hit (the Explode on Kill explosion).
+## After 3 perfect shots in a row that hit an enemy, your next arrow explodes on hit (the Explode on Kill explosion).
+## A missed or non-perfect shot breaks the streak.
 ## Streak pips above the archer show progress. value = explosion damage.
 
 const EXPLOSION_PATH: String = "res://Player/Abilities2.0/MinorAbilities/ExplodeOnKill/Explosion.tscn"
 const EXPLOSIVE_META: StringName = &"perfect_streak_explosive"
+const COUNTED_META: StringName = &"perfect_streak_counted"
 
 @export var streak_needed: int = 3
 
@@ -14,6 +16,10 @@ func on_equipped() -> void:
 	var player: Player = PlayerManager.player
 	if not player.main_hand.release.is_connected(_on_release):
 		player.main_hand.release.connect(_on_release)
+	if not EventBus.arrow_enemy_hit.is_connected(_on_arrow_enemy_hit):
+		EventBus.arrow_enemy_hit.connect(_on_arrow_enemy_hit)
+	if not EventBus.arrow_missed.is_connected(_on_arrow_missed):
+		EventBus.arrow_missed.connect(_on_arrow_missed)
 	if not is_instance_valid(_pips):
 		_pips = StreakPips.new()
 		_pips.needed = streak_needed
@@ -23,20 +29,38 @@ func on_unequipped() -> void:
 	var main_hand: PlayerMainHand = PlayerManager.player.main_hand
 	if main_hand.release.is_connected(_on_release):
 		main_hand.release.disconnect(_on_release)
+	if EventBus.arrow_enemy_hit.is_connected(_on_arrow_enemy_hit):
+		EventBus.arrow_enemy_hit.disconnect(_on_arrow_enemy_hit)
+	if EventBus.arrow_missed.is_connected(_on_arrow_missed):
+		EventBus.arrow_missed.disconnect(_on_arrow_missed)
 	if is_instance_valid(_pips):
 		_pips.queue_free()
 
+## Arms the arrow once the streak is full. Perfect releases don't count yet: only their hits do.
 func _on_release() -> void:
 	var player: Player = PlayerManager.player
 	if _streak >= streak_needed:
 		if is_instance_valid(player.current_arrow):
 			player.current_arrow.set_meta(EXPLOSIVE_META, true)
-		_streak = 0
-	elif player.main_hand.shot_power >= 1.0:
-		_streak += 1
-	else:
-		_streak = 0
-	_pips.set_count(_streak)
+		_set_streak(0)
+	elif player.main_hand.shot_power < 1.0:
+		_set_streak(0)
+
+func _on_arrow_enemy_hit(perfect: bool, arrow: Arrow, _target: Enemy) -> void:
+	# One count per arrow (piercing arrows hit several times); the explosive arrow itself never counts.
+	if not perfect or not is_instance_valid(arrow) or arrow.has_meta(EXPLOSIVE_META) or arrow.has_meta(COUNTED_META):
+		return
+	arrow.set_meta(COUNTED_META, true)
+	_set_streak(mini(_streak + 1, streak_needed))
+
+func _on_arrow_missed() -> void:
+	if _streak < streak_needed:
+		_set_streak(0)
+
+func _set_streak(count: int) -> void:
+	_streak = count
+	if is_instance_valid(_pips):
+		_pips.set_count(_streak)
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var arrow: Arrow = MinorHitHelpers.arrow_of(_activator)
@@ -49,7 +73,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	EventBus.summon_effect.emit(explosion)
 
 func get_tooltip() -> String:
-	return "After %d perfect shots in a row, your next arrow explodes for %d damage" % [streak_needed, roundi(value * power())]
+	return "After %d perfect hits in a row, your next arrow explodes for %d damage" % [streak_needed, roundi(value * power())]
 
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT
