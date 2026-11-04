@@ -20,9 +20,26 @@
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/FrostWizard/Icicle.tscn" id="22_icr"]
 [ext_resource type="Script" uid="uid://cgbhde61shm8w" path="res://Enemies/WizardBoss/FrostWizard/frost_ray_spell.gd" id="23_fry"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/FrostWizard/FrostRay.tscn" id="24_fry"]
-[ext_resource type="Script" path="res://Enemies/WizardBoss/FrostWizard/frost_shell_spell.gd" id="25_fsh"]
+[ext_resource type="Script" uid="uid://dr0waru15kdp" path="res://Enemies/WizardBoss/FrostWizard/frost_shell_spell.gd" id="25_fsh"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/FrostWizard/FrostShell.tscn" id="26_fsh"]
-[ext_resource type="Shader" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="27_glow"]
+[ext_resource type="Shader" uid="uid://c7yf1dg8eh2ne" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="27_glow"]
+
+[sub_resource type="Resource" id="Resource_vjl12"]
+script = ExtResource("5_nuuj8")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_6mjqb"]
+script = ExtResource("6_23dev")
+max_hp = 1000
+move_speed = SubResource("Resource_vjl12")
+skin = ExtResource("7_bhfl0")
+can_be_knockedback = false
+capture_immune = true
+has_health_bar = false
+size = 0.7
+drop_chance = 100.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_castglow"]
 shader = ExtResource("27_glow")
@@ -33,27 +50,11 @@ shader_parameter/glow_radius_px = 8
 shader_parameter/spill = 0.35
 shader_parameter/band_alpha = Vector3(0.85, 0.5, 0.22)
 shader_parameter/hand_threshold = 0.8
+shader_parameter/hand_min_neighbors = 9
 shader_parameter/pulse_speed = 6.0
 shader_parameter/pulse_amount = 0.15
 shader_parameter/frames_h = 13
 shader_parameter/frames_v = 5
-
-[sub_resource type="Resource" id="Resource_vjl12"]
-script = ExtResource("5_nuuj8")
-base_value = 50.0
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_6mjqb"]
-script = ExtResource("6_23dev")
-max_hp = 150
-move_speed = SubResource("Resource_vjl12")
-skin = ExtResource("7_bhfl0")
-can_be_knockedback = false
-capture_immune = true
-has_health_bar = false
-size = 0.7
-drop_chance = 100.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Animation" id="Animation_5ty67"]
 resource_name = "Cast"
@@ -408,7 +409,7 @@ turn_speed_deg = 10.0
 idle_state = NodePath("../Idle")
 cast_animation = "CastForward"
 
-[node name="FrostShell" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="FrostShell" type="Node2D" parent="EnemyStateMachine" unique_id=352093608 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("25_fsh")
 shell_scene = ExtResource("26_fsh")
 idle_state = NodePath("../Idle")

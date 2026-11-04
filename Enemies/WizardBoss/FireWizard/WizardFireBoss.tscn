@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="3_hfhvd"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_cg4p7"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="5_wdanr"]
-[ext_resource type="Texture2D" path="res://Enemies/Sprites/HellfireWizard.png" id="7_lngcg"]
+[ext_resource type="Texture2D" uid="uid://jrilthu4grmo" path="res://Enemies/Sprites/HellfireWizard.png" id="7_lngcg"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="8_810fj"]
 [ext_resource type="Script" uid="uid://bmjrv4mv2reks" path="res://Enemies/WizardBoss/wizard_idle_state.gd" id="9_ipi4i"]
 [ext_resource type="Script" uid="uid://dkcr2k7mm15eb" path="res://Enemies/WizardBoss/wizard_teleport_state.gd" id="10_kjln8"]
@@ -20,10 +20,27 @@
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="15_gf1q3"]
 [ext_resource type="PackedScene" uid="uid://omda1dnp3kkq" path="res://Enemies/WizardBoss/FireWizard/Fireball.tscn" id="15_wdanr"]
 [ext_resource type="Script" uid="uid://dpw84mdxomt4d" path="res://Enemies/WizardBoss/FireWizard/wizard_dead_State.gd" id="16_lngcg"]
-[ext_resource type="Script" path="res://Enemies/WizardBoss/FireWizard/fire_nova_spell.gd" id="17_nova"]
+[ext_resource type="Script" uid="uid://b2jvjf8bjlr4p" path="res://Enemies/WizardBoss/FireWizard/fire_nova_spell.gd" id="17_nova"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/FireWizard/HellfireNova.tscn" id="18_nova"]
 [ext_resource type="PackedScene" path="res://General Nodes/AreaWarning/AreaWarning.tscn" id="19_nova"]
-[ext_resource type="Shader" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="20_glow"]
+[ext_resource type="Shader" uid="uid://c7yf1dg8eh2ne" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="20_glow"]
+
+[sub_resource type="Resource" id="Resource_vjl12"]
+script = ExtResource("4_cg4p7")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_6mjqb"]
+script = ExtResource("5_wdanr")
+max_hp = 1500
+move_speed = SubResource("Resource_vjl12")
+skin = ExtResource("7_lngcg")
+can_be_knockedback = false
+capture_immune = true
+has_health_bar = false
+size = 0.2
+drop_chance = 100.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_castglow"]
 shader = ExtResource("20_glow")
@@ -34,30 +51,11 @@ shader_parameter/glow_radius_px = 8
 shader_parameter/spill = 0.35
 shader_parameter/band_alpha = Vector3(0.85, 0.5, 0.22)
 shader_parameter/hand_threshold = 0.7
+shader_parameter/hand_min_neighbors = 9
 shader_parameter/pulse_speed = 6.0
 shader_parameter/pulse_amount = 0.15
 shader_parameter/frames_h = 13
 shader_parameter/frames_v = 5
-
-[sub_resource type="Resource" id="Resource_vjl12"]
-script = ExtResource("4_cg4p7")
-base_value = 50.0
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_wdanr"]
-metadata/__load_path__ = "res://ZZ_Sprites in progress/Wizard_inprog.png"
-
-[sub_resource type="Resource" id="Resource_6mjqb"]
-script = ExtResource("5_wdanr")
-max_hp = 150
-move_speed = SubResource("Resource_vjl12")
-skin = SubResource("Resource_wdanr")
-can_be_knockedback = false
-capture_immune = true
-has_health_bar = false
-size = 0.2
-drop_chance = 100.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Animation" id="Animation_5ty67"]
 resource_name = "Cast"
@@ -414,7 +412,7 @@ shot_interval = 0.25
 wave_interval = 1.5
 idle_state = NodePath("../Idle")
 
-[node name="FireNova" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="FireNova" type="Node2D" parent="EnemyStateMachine" unique_id=181590175 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("17_nova")
 nova_scene = ExtResource("18_nova")
 warning_scene = ExtResource("19_nova")

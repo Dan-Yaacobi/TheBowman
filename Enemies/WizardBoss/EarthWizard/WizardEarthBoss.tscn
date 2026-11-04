@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dtdgmienssen5"]
 
 [ext_resource type="Script" uid="uid://dsj4ljnl7t4ar" path="res://Enemies/WizardBoss/wizard_boss.gd" id="1_0ii0y"]
 [ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="2_6c8ac"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_dqkua"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_nuuj8"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="6_23dev"]
-[ext_resource type="Texture2D" path="res://Enemies/WizardBoss/EarthWizard/Sprites/EarthWizard.png" id="7_bhfl0"]
+[ext_resource type="Texture2D" uid="uid://cj7rxpaeoykfg" path="res://Enemies/WizardBoss/EarthWizard/Sprites/EarthWizard.png" id="7_bhfl0"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="8_dcawe"]
 [ext_resource type="Script" uid="uid://bmjrv4mv2reks" path="res://Enemies/WizardBoss/wizard_idle_state.gd" id="9_nbbis"]
 [ext_resource type="Script" uid="uid://dkcr2k7mm15eb" path="res://Enemies/WizardBoss/wizard_teleport_state.gd" id="10_uxgo3"]
@@ -16,14 +16,31 @@
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="18_utapp"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="19_5mt6m"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="20_0gg1d"]
-[ext_resource type="Shader" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="27_glow"]
-[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/earthquake_spell.gd" id="28_eqk"]
+[ext_resource type="Shader" uid="uid://c7yf1dg8eh2ne" path="res://Enemies/WizardBoss/wizard_cast_glow.gdshader" id="27_glow"]
+[ext_resource type="Script" uid="uid://cml85fd2234dc" path="res://Enemies/WizardBoss/EarthWizard/earthquake_spell.gd" id="28_eqk"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/QuakeDust.tscn" id="29_eqk"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/QuakePulse.tscn" id="30_eqk"]
-[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/boulder_spell.gd" id="31_bld"]
+[ext_resource type="Script" uid="uid://xnf3qmredvvk" path="res://Enemies/WizardBoss/EarthWizard/boulder_spell.gd" id="31_bld"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/Boulder.tscn" id="32_bld"]
-[ext_resource type="Script" path="res://Enemies/WizardBoss/EarthWizard/crumble_spell.gd" id="33_crm"]
+[ext_resource type="Script" uid="uid://c747l28usadcd" path="res://Enemies/WizardBoss/EarthWizard/crumble_spell.gd" id="33_crm"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/CrumbleBurst.tscn" id="34_crm"]
+
+[sub_resource type="Resource" id="Resource_vjl12"]
+script = ExtResource("5_nuuj8")
+base_value = 50.0
+metadata/_custom_type_script = "uid://kxsprfrlwgfb"
+
+[sub_resource type="Resource" id="Resource_6mjqb"]
+script = ExtResource("6_23dev")
+max_hp = 450
+move_speed = SubResource("Resource_vjl12")
+skin = ExtResource("7_bhfl0")
+can_be_knockedback = false
+capture_immune = true
+has_health_bar = false
+size = 0.7
+drop_chance = 100.0
+metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_castglow"]
 shader = ExtResource("27_glow")
@@ -34,27 +51,11 @@ shader_parameter/glow_radius_px = 8
 shader_parameter/spill = 0.35
 shader_parameter/band_alpha = Vector3(0.85, 0.5, 0.22)
 shader_parameter/hand_threshold = 0.8
+shader_parameter/hand_min_neighbors = 9
 shader_parameter/pulse_speed = 6.0
 shader_parameter/pulse_amount = 0.15
 shader_parameter/frames_h = 13
 shader_parameter/frames_v = 5
-
-[sub_resource type="Resource" id="Resource_vjl12"]
-script = ExtResource("5_nuuj8")
-base_value = 50.0
-metadata/_custom_type_script = "uid://kxsprfrlwgfb"
-
-[sub_resource type="Resource" id="Resource_6mjqb"]
-script = ExtResource("6_23dev")
-max_hp = 150
-move_speed = SubResource("Resource_vjl12")
-skin = ExtResource("7_bhfl0")
-can_be_knockedback = false
-capture_immune = true
-has_health_bar = false
-size = 0.7
-drop_chance = 100.0
-metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="Animation" id="Animation_5ty67"]
 resource_name = "Cast"
@@ -396,19 +397,19 @@ script = ExtResource("10_uxgo3")
 idle_state = NodePath("../Idle")
 sparkle_scene = ExtResource("11_p8olu")
 
-[node name="Earthquake" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Earthquake" type="Node2D" parent="EnemyStateMachine" unique_id=1403211187 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("28_eqk")
 dust_scene = ExtResource("29_eqk")
 pulse_scene = ExtResource("30_eqk")
 idle_state = NodePath("../Idle")
 
-[node name="Boulder" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Boulder" type="Node2D" parent="EnemyStateMachine" unique_id=1034975712 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("31_bld")
 boulder_scene = ExtResource("32_bld")
 idle_state = NodePath("../Idle")
 cast_animation = "CastForward"
 
-[node name="Crumble" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Crumble" type="Node2D" parent="EnemyStateMachine" unique_id=460046373 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("33_crm")
 dust_scene = ExtResource("29_eqk")
 crumble_scene = ExtResource("34_crm")
