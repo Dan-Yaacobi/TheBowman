@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c0jkdyxcsf0pq" path="res://Player/HealthBar/Heart2.png" id="3_erpfx"]
 
 [node name="HeartContainer" type="Control" unique_id=938707690]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 62.0

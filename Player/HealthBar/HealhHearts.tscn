@@ -16,8 +16,15 @@ script = ExtResource("1_odx4d")
 heart_scene = ExtResource("2_ecus1")
 
 [node name="FlowContainer" type="FlowContainer" parent="." unique_id=1183012900]
-layout_mode = 0
-offset_right = 195.0
-offset_bottom = 56.0
-theme_override_constants/h_separation = 64
-theme_override_constants/v_separation = 16
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 320.0
+offset_bottom = 37.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = -6
+reverse_fill = true
