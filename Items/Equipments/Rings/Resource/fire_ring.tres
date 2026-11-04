@@ -18,8 +18,8 @@ metadata/_custom_type_script = "uid://cvcccmmmedxkr"
 [sub_resource type="Resource" id="Resource_t0r0"]
 script = ExtResource("7_2kwci")
 stat_name = "move_speed"
-min_value = 25.0
-max_value = 50.0
+min_value = 10.0
+max_value = 20.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0"]
