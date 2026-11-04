@@ -11,15 +11,18 @@ class_name ColorLevels extends Node
 ## Precision: perfect shot power (perfect_shot_bonus).
 @export var perfect_power_per_level: float = 0.05
 @export var pull_speed_per_level: float = 0.08
-## Elemental: applied to every stat in DEBUFF_STATS (damage and duration).
+## Elemental: % added to every stat in DEBUFF_DURATION_STATS.
 @export var debuff_per_level: float = 0.05
+## Elemental: flat damage added to every stat in DEBUFF_DAMAGE_STATS. Flat, because debuff damage
+## is a small whole number and a % bonus would round away.
+@export var debuff_damage_per_level: float = 1.0
 
 @export_group("Scrolls")
 ## Every Nth scroll (all colors counted) also gives a heart container and a full heal.
 @export var scrolls_per_heart: int = 3
 
-const DEBUFF_STATS: Array[String] = [
-	"bleed_damage", "burn_damage", "poison_damage",
+const DEBUFF_DAMAGE_STATS: Array[String] = ["bleed_damage", "burn_damage", "poison_damage"]
+const DEBUFF_DURATION_STATS: Array[String] = [
 	"bleed_duration", "burn_duration", "poison_duration",
 	"frostbite_duration", "freeze_duration", "stun_duration",
 ]
@@ -73,7 +76,7 @@ func bonus_text(color: CustomVariables.ItemColor) -> String:
 		CustomVariables.ItemColor.TEMPO:
 			return "+%d%% pull speed" % roundi(pull_speed_per_level * 100.0)
 		CustomVariables.ItemColor.ELEMENTAL:
-			return "+%d%% debuff damage and duration" % roundi(debuff_per_level * 100.0)
+			return "+%d debuff damage, +%d%% debuff duration" % [roundi(debuff_damage_per_level), roundi(debuff_per_level * 100.0)]
 	return ""
 
 ## Equipped items of this color (the ones a scroll of it makes stronger).
@@ -97,14 +100,17 @@ func _apply_secondary(color: CustomVariables.ItemColor) -> void:
 			stat_names = ["pull_speed"]
 		CustomVariables.ItemColor.ELEMENTAL:
 			per_level = debuff_per_level
-			stat_names = DEBUFF_STATS
-	var level: int = get_level(color)
+			stat_names = DEBUFF_DURATION_STATS
+			_set_level_buffs(DEBUFF_DAMAGE_STATS, debuff_damage_per_level, get_level(color), Stat.buff_type.ADDITIVE)
+	_set_level_buffs(stat_names, per_level, get_level(color), Stat.buff_type.MULTIPLICATIVE)
+
+func _set_level_buffs(stat_names: Array[String], per_level: float, level: int, type: Stat.buff_type) -> void:
 	for stat_name: String in stat_names:
 		var stat: Stat = player.stats.get(stat_name) as Stat
 		if stat == null:
 			push_warning("ColorLevels: '%s' is not a Stat on PlayerStats" % stat_name)
 			continue
 		var buff_id: int = ("color/%s" % stat_name).hash()
-		stat.remove_buff_completly(buff_id, Stat.buff_type.MULTIPLICATIVE)
+		stat.remove_buff_completly(buff_id, type)
 		if level > 0:
-			stat.add_buff(buff_id, per_level * level, Stat.buff_type.MULTIPLICATIVE)
+			stat.add_buff(buff_id, per_level * level, type)
