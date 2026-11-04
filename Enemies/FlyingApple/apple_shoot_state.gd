@@ -21,6 +21,9 @@ func init() -> void:
 		
 #what happens when the player enters this state
 func Enter() -> void:
+	# Re-entering from the damaged state must restart the idle loop, or the hurt frame sticks.
+	if enemy.stats.move_animation != "":
+		enemy.animation_player.play(enemy.stats.move_animation)
 	_shoot()
 	if enemy.stats.pure_ranged_mode:
 		enemy.velocity = Vector2.ZERO
