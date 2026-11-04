@@ -1,4 +1,4 @@
-class_name ThornRingAbility extends PlayerAbility
+class_name ThornRingAbility extends PlayerPassiveAbility
 ## Taking damage fires a ring of arrows around you. They carry your quiver's on-hit effects (its debuff).
 
 @export var arrow_count: int = 8

@@ -1,4 +1,4 @@
-class_name RiposteAbility extends PlayerAbility
+class_name RiposteAbility extends PlayerPassiveAbility
 ## A sword hit makes your next arrow within the window fully drawn and perfect.
 ## The bow glows while it's ready (the same charged-shot glow as Telegraphed Shot).
 

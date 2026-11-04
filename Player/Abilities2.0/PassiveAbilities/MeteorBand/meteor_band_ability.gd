@@ -1,4 +1,4 @@
-class_name MeteorBandAbility extends PlayerAbility
+class_name MeteorBandAbility extends PlayerPassiveAbility
 ## Hold Down in the air to fast-fall. Slamming into the ground or an enemy sends out a knockback shockwave.
 
 @export var fall_speed_mult: float = 2.2

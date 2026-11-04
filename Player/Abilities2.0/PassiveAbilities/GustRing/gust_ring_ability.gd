@@ -1,4 +1,4 @@
-class_name GustRingAbility extends PlayerAbility
+class_name GustRingAbility extends PlayerPassiveAbility
 ## Every jump, double jump included, releases a gust that pushes nearby enemies away.
 
 @export var radius: float = 60.0

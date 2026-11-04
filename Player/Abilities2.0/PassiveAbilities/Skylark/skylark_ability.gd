@@ -1,4 +1,4 @@
-class_name SkylarkAbility extends PlayerAbility
+class_name SkylarkAbility extends PlayerPassiveAbility
 ## Drawing in mid-air slows your fall. A perfect shot in mid-air pushes you away from your aim, like a rocket jump.
 
 ## Fall speed cap while drawing in the air, as a fraction of the normal max fall speed.

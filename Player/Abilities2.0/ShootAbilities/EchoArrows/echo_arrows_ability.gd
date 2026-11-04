@@ -1,4 +1,4 @@
-class_name EchoArrowsAbility extends PlayerAbility
+class_name EchoArrowsAbility extends PlayerPassiveAbility
 ## A perfect shot is repeated by a faint ghost arrow a moment later, from where you released it.
 ## The ghost carries your on-hit effects and deals a share of the perfect arrow's damage.
 

@@ -1,4 +1,4 @@
-class_name QuickstepAbility extends PlayerAbility
+class_name QuickstepAbility extends PlayerPassiveAbility
 ## Perfect shots give a short burst of move speed, shown with a wind trail on the player.
 
 ## Move speed bonus (0.35 = +35%).
