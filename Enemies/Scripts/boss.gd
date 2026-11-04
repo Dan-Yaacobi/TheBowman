@@ -19,6 +19,10 @@ func _on_fight_began() -> void:
 func handle_health_bar(_dmg: int = 0) -> void:
 	health_changed.emit(current_hp)
 
+## Bosses without a damaged state just flash, so every damage source (DoT included) still shows it.
+func _causes_flinch(_hurt_box: HurtBox) -> bool:
+	return damaged_state == null or super(_hurt_box)
+
 ## Bosses flash instead of entering a damaged state, so hits never interrupt their attack pattern.
 func enter_damaged_state() -> void:
 	if damaged_state:

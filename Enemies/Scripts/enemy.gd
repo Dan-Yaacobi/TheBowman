@@ -151,8 +151,13 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		drop_item()
 		if _result:
 			_result.killed = true
-	else:
+	elif _causes_flinch(_hurt_box):
 		enter_damaged_state()
+
+## Only hits that push the enemy flinch it. DoT ticks and zero-knockback hits (e.g. Hanzo) don't.
+func _causes_flinch(_hurt_box: HurtBox) -> bool:
+	return _hurt_box != null and _hurt_box.knockback_power > 0.0
+
 func handle_health_bar(_dmg: int = 0) -> void:
 	if stats.has_health_bar:
 		enemy_health_bar.get_child(1).show_damage(current_hp)
