@@ -33,12 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://dvkk15aw1kym1" path="res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/DustBall.png" id="22_bgaaw"]
 [ext_resource type="Texture2D" uid="uid://b7o15ganjg35m" path="res://Player/Body/Archer.png" id="22_ustk3"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
-[ext_resource type="Script" uid="uid://5aetuiovci75" path="res://Player/grappling_state.gd" id="23_gv3fu"]
 [ext_resource type="Script" uid="uid://dh6oejforol0n" path="res://Player/Player2.0/MainHand/sword.gd" id="23_kveqs"]
 [ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
 [ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="24_d3djb"]
-[ext_resource type="Script" uid="uid://rdxrjtmc6byw" path="res://Player/hook.gd" id="25_4n5ed"]
-[ext_resource type="Texture2D" uid="uid://eve74ii5oe07" path="res://Player/Player2.0/Sprites/grappling_hook.png" id="25_78fhc"]
 [ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="25_lre2g"]
 [ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
 [ext_resource type="Script" uid="uid://dkitwx8jcncbd" path="res://Player/abilities.gd" id="26_s0mko"]
@@ -50,7 +47,6 @@
 [ext_resource type="Script" uid="uid://btdlu5633ilbk" path="res://Player/Player2.0/MainHand/States/main_hand_state_machine.gd" id="31_xehjw"]
 [ext_resource type="Script" uid="uid://ckwk3o5f8tfd2" path="res://Player/Player2.0/MainHand/States/m_h_idle_state.gd" id="32_27xwf"]
 [ext_resource type="Script" uid="uid://bdh8wnqs3ugce" path="res://Player/Player2.0/MainHand/States/m_h_pulling_state.gd" id="33_808i2"]
-[ext_resource type="Script" uid="uid://5o72m85mxihi" path="res://Player/grapple_hook.gd" id="33_yf47d"]
 [ext_resource type="Script" uid="uid://cy0hbbl8bgqk2" path="res://Player/Player2.0/MainHand/States/m_h_max_pull_state.gd" id="34_kde38"]
 [ext_resource type="PackedScene" uid="uid://rgcqp56lkbsw" path="res://Player/Abilities2.0/ExtraAbilities/IslandAttack.tscn" id="37_jvfa1"]
 [ext_resource type="PackedScene" uid="uid://6d0ft152lsby" path="res://General Nodes/BuffHandler/BuffHandler.tscn" id="39_vtj8b"]
@@ -2451,10 +2447,6 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_u4yfg"]
 colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 0.64705884)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4n5ed"]
-radius = 9.421122
-height = 20.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1b5h"]
 size = Vector2(367, 28)
 
@@ -2775,9 +2767,6 @@ color = Color(0.3765035, 0.23385003, 0.07915277, 0.6745098)
 
 [node name="DashCooldown" type="Timer" parent="PlayerStateMachine/Dash" unique_id=1018166173]
 
-[node name="Grappling" type="Node2D" parent="PlayerStateMachine" unique_id=452980340]
-script = ExtResource("23_gv3fu")
-
 [node name="SwordAttack" type="Node2D" parent="PlayerStateMachine" unique_id=951469180]
 script = ExtResource("28_rqaa0")
 
@@ -2860,40 +2849,6 @@ script = ExtResource("26_s0mko")
 
 [node name="ActiveAbilities" type="Node2D" parent="Abilities" unique_id=404174291]
 
-[node name="GrappleHook" type="Node2D" parent="." unique_id=1409160597]
-visible = false
-script = ExtResource("33_yf47d")
-
-[node name="HookString" type="Line2D" parent="GrappleHook" unique_id=152630332]
-texture_repeat = 2
-position = Vector2(0, 8)
-points = PackedVector2Array(0, 0, 0, 0)
-width = 1.0
-default_color = Color(0.52156866, 0.26666668, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Hook" type="Area2D" parent="GrappleHook" unique_id=1542797305]
-position = Vector2(25, -1)
-rotation = -0.7853982
-scale = Vector2(0.5, 0.5)
-collision_layer = 0
-collision_mask = 16
-script = ExtResource("25_4n5ed")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleHook/Hook" unique_id=1816862064]
-position = Vector2(2, -2)
-rotation = 2.3177972
-scale = Vector2(0.6000012, 1)
-shape = SubResource("CapsuleShape2D_4n5ed")
-
-[node name="Sprite2D" type="Sprite2D" parent="GrappleHook/Hook" unique_id=1653132328]
-texture = ExtResource("25_78fhc")
-
-[node name="LinePoint" type="Node2D" parent="GrappleHook/Hook" unique_id=387021048]
-position = Vector2(-6, 6)
-
 [node name="BuffHandler" parent="." unique_id=2096724640 instance=ExtResource("39_vtj8b")]
 
 [node name="SpawnHandler" type="Node2D" parent="." unique_id=740437101]
@@ -2945,6 +2900,5 @@ shape = SubResource("CircleShape2D_xrivr")
 [node name="ColorLevels" type="Node" parent="." unique_id=2123471370]
 script = ExtResource("42_colorlv")
 
-[connection signal="body_entered" from="GrappleHook/Hook" to="." method="_on_hook_body_entered"]
 [connection signal="body_entered" from="NearbyEnemiesDetector" to="." method="_on_nearby_enemies_detector_body_entered"]
 [connection signal="body_exited" from="NearbyEnemiesDetector" to="." method="_on_nearby_enemies_detector_body_exited"]

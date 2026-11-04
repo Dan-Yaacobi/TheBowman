@@ -21,6 +21,7 @@ func activate_ability(_enemy: Enemy) -> void:
 		var random_offset: Vector2 = Vector2.from_angle(angle) * randf_range(offset_radius * 0.5, offset_radius)
 		var target_position: Vector2 = spawn_position + random_offset
 		var target_scale: Vector2 = new_enemy.scale * 0.5
+		@warning_ignore("narrowing_conversion")
 		new_enemy.stats.max_hp *= 0.75
 		new_enemy.global_position = spawn_position
 		new_enemy.process_mode = Node.PROCESS_MODE_DISABLED

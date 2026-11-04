@@ -21,6 +21,7 @@ func _on_enemy_died(enemy: Enemy) -> void:
 		# Same burn as the fire abilities apply.
 		var burn: BurnDebuff = load(BURN_DEBUFF_PATH).instantiate()
 		burn.set_damage(roundi(stats.burn_damage.value()))
+		@warning_ignore("narrowing_conversion")
 		other.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.burn_ticks.value())
 
 func get_tooltip() -> String:

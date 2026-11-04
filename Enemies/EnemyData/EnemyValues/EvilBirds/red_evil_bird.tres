@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_wf6k0"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="6_teh2a"]
 [ext_resource type="Texture2D" uid="uid://dhad08bcbg6em" path="res://Enemies/Sprites/Bird.png" id="8_07lg4"]
-[ext_resource type="Texture2D" path="res://Enemies/Sprites/Egg.png" id="egg_texture"]
+[ext_resource type="Texture2D" uid="uid://cf1ypxn3drbpd" path="res://Enemies/Sprites/Egg.png" id="egg_texture"]
 
 [sub_resource type="Resource" id="Resource_07lg4"]
 script = ExtResource("3_wf6k0")

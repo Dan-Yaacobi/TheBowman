@@ -71,9 +71,9 @@ func clear_charge() -> void:
 	charge_tween.tween_property(mat, "shader_parameter/strength", 0.0, 0.3)
 	charge_tween.tween_callback(func() -> void: mat.shader = null)
 	
-func set_charge(charge: Charges) -> void:
+func set_charge(_charge: Charges) -> void:
 	var mat: ShaderMaterial = sprite.material as ShaderMaterial
-	mat.shader = charge_shaders[charge]
+	mat.shader = charge_shaders[_charge]
 	mat.set_shader_parameter("strength", 0.0)
 	if charge_tween:
 		charge_tween.kill()

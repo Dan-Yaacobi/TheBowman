@@ -25,9 +25,6 @@ signal dodged
 @onready var idle_state: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
-@onready var grapple_hook: GrappleHook = $GrappleHook
-@onready var grappling_state: PlayerGrapplingState = $PlayerStateMachine/Grappling
-@onready var hook: Hook = $GrappleHook/Hook
 @onready var idle: PlayerIdleState = $PlayerStateMachine/Idle
 @onready var quiver: Sprite2D = $PlayerBody/Quiver
 @onready var dead: PlayerDeadState = $PlayerStateMachine/Dead
@@ -36,7 +33,6 @@ signal dodged
 @onready var swing_cooldown: Timer = $PlayerBody/SwingCooldown
 
 @onready var spawn_handler: SpawnHandler = $SpawnHandler
-var can_hook: bool = true
 @export var target_dummy_tutorial_passed: bool = false
 
 @export var stats: PlayerStats
@@ -237,19 +233,6 @@ func use_active_ability() -> void:
 func active_ability_ready() -> void:
 	active_ability_available = true
 
-func grapple() -> void:
-	if not player_state_machine.curr_state is PlayerGrapplingState:
-		grapple_hook.activate_hook()
-		hook.call_deferred("reparent",get_parent())
-
-func _on_hook_body_entered(_body: Node2D) -> void:
-	if _body is Island:
-		hook.is_active = false
-		player_state_machine.ChangeState(grappling_state)
-		grappling_state.hook_pos = hook.global_position
-		hook.call_deferred("reparent",_body)
-		jump_action.set_jumps()
-		
 func show_hands(yes: bool) -> void:
 	main_hand.visible = yes
 	off_hand.visible = yes

@@ -8,6 +8,7 @@ func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	hurt_box.use_default_color = false
 	hurt_box.combat_text_color = Color.DARK_RED
+	@warning_ignore("narrowing_conversion")
 	hurt_box.base_damage = PlayerManager.player.stats.bleed_damage.value()
 	hurt_box.add_before_effect(apply_bleed)
 	

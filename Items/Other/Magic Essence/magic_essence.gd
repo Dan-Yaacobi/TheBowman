@@ -5,11 +5,6 @@ class_name MagicEssence extends Item
 @export var min_turn_speed: float = 5.0
 
 
-var _last_position: Vector2 = Vector2.ZERO
-var _has_last_position: bool = false
-var _move_angle: float = -PI / 2.0
-var _move_speed: float = 0.0
-
 func extra_ready_functions() -> void:
 	return
 
