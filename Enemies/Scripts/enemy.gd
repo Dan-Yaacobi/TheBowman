@@ -32,6 +32,8 @@ var knockback_velocity: Vector2 = Vector2.ZERO
 var is_dead: bool = false
 
 var invincible: bool = false
+## While true, new debuffs are ignored (e.g. a boss's immune phase).
+var debuff_immune: bool = false
 var stunned: bool = false
 var captured_by: Node2D
 
@@ -200,6 +202,9 @@ func disable_drops() -> void:
 func update_animation(_animation: String, _position: float = 0.0) -> void:
 	if animation_player != null and _animation != "":
 		animation_player.play_section(_animation, _position)
+
+func is_debuff_immune() -> bool:
+	return debuff_immune
 
 func can_be_stunned() -> bool:
 	return not stats.stun_immune

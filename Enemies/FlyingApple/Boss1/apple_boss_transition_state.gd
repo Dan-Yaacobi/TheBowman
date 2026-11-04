@@ -13,6 +13,8 @@ func init() -> void:
 
 func Enter() -> void:
 	enemy.set_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
+	enemy.debuff_immune = true
+	enemy.debuff_handler.reset_debuffs()
 	amount_summoned = 0
 	enemy.velocity = Vector2.ZERO
 	summon_timer.start()
@@ -22,6 +24,7 @@ func Exit() -> void:
 	enemy.modulate.a = 1.0
 	summon_timer.stop()
 	enemy.remove_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
+	enemy.debuff_immune = false
 
 
 func Process(_delta: float) -> EnemyState:

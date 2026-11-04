@@ -9,6 +9,9 @@ func set_entity(_entity: GameEntity) -> void:
 	entity = _entity
 	
 func add_debuff(_debuff: Debuff, ID: int, _duration: float, _ticks: int) -> void:
+	if entity.is_debuff_immune():
+		_debuff.queue_free()
+		return
 	if debuffs.has(ID):
 		if _debuff.can_stack:
 			debuffs[ID].merge(_debuff, _ticks)

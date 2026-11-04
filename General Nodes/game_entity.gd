@@ -17,6 +17,9 @@ func has_debuff(id: int) -> bool:
 
 func end_debuff(id: int) -> void:
 	debuff_handler.end_debuff(id)
+
+func is_debuff_immune() -> bool:
+	return false
 	
 func _handle_take_damage(_hurt_box: HurtBox, _raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
 	pass
