@@ -28,3 +28,16 @@ mouse_filter = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = -6
 reverse_fill = true
+
+[node name="HPLabel" type="Label" parent="." unique_id=1183012901]
+layout_mode = 0
+offset_left = 328.0
+offset_top = -12.0
+offset_right = 448.0
+offset_bottom = 28.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.08, 0.06, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "12 / 12"
+vertical_alignment = 1
