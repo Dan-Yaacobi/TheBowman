@@ -57,10 +57,15 @@ func _fade_out_and_pause() -> void:
 	get_tree().paused = true
 
 func _place_player_and_resume(_pos: Vector2) -> void:
+	PlayerManager.player.collision_shape.disabled = true
 	spawn_player(_pos)
 	await get_tree().physics_frame
 	EventBus.invisible_hands.emit(true)
 	get_tree().paused = false
+	# Unpausing re-adds the player to physics at its last position for one step, so collision
+	# stays off until it has synced to the new spot (see _transition_to).
+	await get_tree().physics_frame
+	PlayerManager.player.collision_shape.disabled = false
 	game.hud.visible = true
 	PlayerManager.player.visible = true
 	PlayerManager.player.camera.position_smoothing_enabled = true
@@ -97,6 +102,9 @@ func _transition_to(next_world: GameWorld) -> void:
 	prev_world = curr_world
 	curr_world = next_world
 
+	# The player still stands at its old position while the new world loads in. Without this,
+	# areas there (e.g. a boss arena's FallingDeath) register the player and cost a heart.
+	PlayerManager.player.collision_shape.disabled = true
 	game.add_child(curr_world)
 	curr_world.set_world()
 	if prev_world:
