@@ -80,7 +80,7 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 		if tier.minor_abilities:
 			minor_abilities = tier.minor_abilities.get_abilities()
 		if tier.minor_roll_count > 0 and not minor_abilities.is_empty():
-			data.bonus_abilities.append_array(_roll_minors(minor_abilities, tier.minor_roll_count, 0.0, rarity))
+			data.bonus_abilities.append_array(_roll_minors(minor_abilities, tier.minor_roll_count, 0.0, rarity, data.bonus_abilities))
 
 ## Guaranteed tier floor based on rift level, with a small chance to roll one tier above it.
 ## Rarity is never randomly rolled below the current rift-level band.
@@ -108,9 +108,14 @@ func _pick_template(pool: ItemPool) -> EquipmentData:
 			return template
 	return pool.templates.back()
 
-func _roll_minors(available: Array[MinorAbility], count: int, _shift: float, rarity: int) -> Array[MinorAbility]:
+## Minors are unique per item: anything already rolled on the item (any tier, any library) is skipped.
+func _roll_minors(available: Array[MinorAbility], count: int, _shift: float, rarity: int, already_rolled: Array[MinorAbility] = []) -> Array[MinorAbility]:
 	var result: Array[MinorAbility] = []
-	var remaining: Array[MinorAbility] = available.duplicate()
+	var taken: Array[Script] = []
+	for rolled_minor: MinorAbility in already_rolled:
+		if rolled_minor:
+			taken.append(rolled_minor.get_script())
+	var remaining: Array[MinorAbility] = available.filter(func(m: MinorAbility) -> bool: return m != null and not m.get_script() in taken)
 	for i in count:
 		if remaining.is_empty():
 			break

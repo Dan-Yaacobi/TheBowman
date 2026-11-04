@@ -28,7 +28,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 		MinorHitHelpers.add_damage_for_hit(hurt_box, value / 100.0 * power())
 
 func get_tooltip() -> String:
-	return "Enemies hit by your sword take +%d%% arrow damage for %.0fs" % [value, duration]
+	return "Enemies hit by your sword take +%d%% arrow damage for %.0fs" % [roundi(value * power()), duration]
 
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT

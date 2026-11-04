@@ -49,7 +49,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	EventBus.summon_effect.emit(explosion)
 
 func get_tooltip() -> String:
-	return "After %d perfect shots in a row, your next arrow explodes for %d damage" % [streak_needed, value]
+	return "After %d perfect shots in a row, your next arrow explodes for %d damage" % [streak_needed, roundi(value * power())]
 
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT

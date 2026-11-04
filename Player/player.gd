@@ -104,6 +104,7 @@ func _ready() -> void:
 	EventBus.equipment_interaction_enter.connect(equipment_interaction_begin)
 	EventBus.equipment_interaction_exit.connect(equipment_interaction_end)
 	EventBus.enemy_died.connect(count_enemy_death)
+	EventBus.color_level_changed.connect(_on_color_level_changed)
 	EventBus.arrow_enemy_hit.connect(add_shot_streak)
 	EventBus.arrow_missed.connect(reset_shot_streak)
 	EventBus.apply_player_knockback.connect(apply_knockback)
@@ -575,6 +576,12 @@ func get_curr_overcharge() -> float:
 	return main_hand.overcharge if main_hand.overcharge_enabled else 0.0
 	
 ############# SET METHODS #############
+## A color scroll raised a level: equipped items of that color re-apply their scaled stats.
+func _on_color_level_changed(color: CustomVariables.ItemColor, _level: int) -> void:
+	for item: EquipmentData in [stats.bow, stats.arrow, stats.ring]:
+		if item and item.color == color:
+			item.refresh_power(stats)
+
 func set_equipped_in_slot(_slot: EquipmentData.slots, _new_item: EquipmentData) -> void:
 	if _slot != null and _new_item:
 		var current = get_equipped_in_slot(_slot)

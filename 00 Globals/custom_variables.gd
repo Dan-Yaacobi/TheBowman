@@ -55,6 +55,22 @@ func rarity_color(rarity: float) -> Color:
 		return Color.ORANGE.lerp(Color(0.0, 0.90, 1.0), overflow)
 	return colors[clampi(roundi(rarity), 0, colors.size())]
 
+## Same tints as the color levels HUD.
+const ITEM_COLOR_TINTS: Dictionary[ItemColor, Color] = {
+	ItemColor.NONE: Color(0.6, 0.6, 0.6),
+	ItemColor.PRECISION: Color(0.55, 0.75, 0.95),
+	ItemColor.TEMPO: Color(0.95, 0.75, 0.3),
+	ItemColor.ELEMENTAL: Color(0.75, 0.4, 0.85),
+}
+
+func item_color_name(color: ItemColor) -> String:
+	if color == ItemColor.NONE:
+		return "No color"
+	return str(ItemColor.keys()[color]).capitalize()
+
+func item_color_tint(color: ItemColor) -> Color:
+	return ITEM_COLOR_TINTS.get(color, Color.WHITE)
+
 func get_buff_id() -> int:
 	buff_id_counter += 1
 	return buff_id_counter

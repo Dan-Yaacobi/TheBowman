@@ -17,7 +17,7 @@ func _on_dash() -> void:
 	EventBus.add_player_buff.emit(buff)
 
 func get_tooltip() -> String:
-	return "Your first draw after a dash is %d%% faster" % value
+	return "Your first draw after a dash is %d%% faster" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE

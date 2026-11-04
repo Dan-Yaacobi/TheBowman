@@ -9,7 +9,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	MinorHitHelpers.scale_knockback_for_hit(hurt_box, 1.0 + value / 100.0 * power())
 
 func get_tooltip() -> String:
-	return "Debuffed enemies take +%d%% knockback" % value
+	return "Debuffed enemies take +%d%% knockback" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT

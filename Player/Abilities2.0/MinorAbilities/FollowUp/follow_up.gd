@@ -13,7 +13,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 		MinorHitHelpers.add_damage_for_hit(hurt_box, value / 100.0 * power())
 
 func get_tooltip() -> String:
-	return "Enemies take +%d%% damage while knocked back" % value
+	return "Enemies take +%d%% damage while knocked back" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT

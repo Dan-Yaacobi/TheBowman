@@ -141,12 +141,17 @@ func _build_item_stats(equipment: EquipmentData) -> void:
 	header.text = CustomVariables.rarity_name(equipment.rarity) + " " + equipment.display_name
 	header.modulate = CustomVariables.rarity_color(equipment.rarity)
 	stats_panel.add_child(header)
+	var color_line: Label = Label.new()
+	color_line.text = equipment.color_label()
+	color_line.modulate = CustomVariables.item_color_tint(equipment.color)
+	stats_panel.add_child(color_line)
 
 	for mod: EquipmentData.StatModifier in equipment.modifiers:
 		var line: Label = Label.new()
-		var _sign: String = "+" if mod.amount >= 0 else ""
+		var amount: float = equipment.scaled_amount(mod)
+		var _sign: String = "+" if amount >= 0 else ""
 		var type_label: String = " (x)" if mod.stat_type == Stat.buff_type.MULTIPLICATIVE else ""
-		line.text = _get_stat_display_name(mod.stat_name) + ": " + _sign + _format_float(mod.amount) + type_label
+		line.text = _get_stat_display_name(mod.stat_name) + ": " + _sign + _format_float(amount) + type_label
 		stats_panel.add_child(line)
 
 

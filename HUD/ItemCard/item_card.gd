@@ -55,7 +55,8 @@ func show_item(data: EquipmentData, tag: String, rows: Array[StatRow]) -> void:
 	icon.texture = data.texture
 	name_label.text = data.display_name
 	name_label.add_theme_color_override("font_color", CustomVariables.rarity_color(data.rarity))
-	tag_label.text = tag
+	tag_label.text = tag + "  ·  " + data.color_label()
+	tag_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(data.color))
 
 	if data.ability:
 		_add_ability(data.ability)

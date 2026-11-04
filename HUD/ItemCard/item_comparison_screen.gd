@@ -73,8 +73,9 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 		var display: String = _display_name(stat_name)
 		var new_mod: EquipmentData.StatModifier = _find_modifier(new_data, stat_name)
 		var cur_mod: EquipmentData.StatModifier = _find_modifier(current_data, stat_name)
-		var new_amount: float = new_mod.amount if new_mod else 0.0
-		var cur_amount: float = cur_mod.amount if cur_mod else 0.0
+		# Shown after each item's color level (scrolls).
+		var new_amount: float = new_data.scaled_amount(new_mod) if new_mod else 0.0
+		var cur_amount: float = current_data.scaled_amount(cur_mod) if cur_mod else 0.0
 		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_mod != null, new_amount - cur_amount, true))
 		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_mod != null, 0.0, false))
 

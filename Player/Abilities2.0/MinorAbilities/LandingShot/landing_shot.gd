@@ -28,7 +28,7 @@ func _remove_buff() -> void:
 	PlayerManager.player.stats.perfect_shot_window.remove_buff_completly(_buff_id, Stat.buff_type.MULTIPLICATIVE)
 
 func get_tooltip() -> String:
-	return "Your first shot after landing has a %d%% wider perfect window" % value
+	return "Your first shot after landing has a %d%% wider perfect window" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE

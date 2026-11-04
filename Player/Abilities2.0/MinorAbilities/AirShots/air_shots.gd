@@ -8,7 +8,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	arrow.damage = roundi(arrow.damage * (1.0 + value / 100.0 * power()))
 
 func get_tooltip() -> String:
-	return "Shots fired in mid-air deal +%d%% damage" % value
+	return "Shots fired in mid-air deal +%d%% damage" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.RELEASE

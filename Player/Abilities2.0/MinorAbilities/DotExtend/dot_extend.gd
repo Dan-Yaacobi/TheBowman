@@ -15,7 +15,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 				debuff.ticks += ceili(value * power() / debuff.tick_interval)
 
 func get_tooltip() -> String:
-	return "Non-perfect hits extend burn, bleed and poison by %ds" % value
+	return "Non-perfect hits extend burn, bleed and poison by %ds" % roundi(value * power())
 
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT

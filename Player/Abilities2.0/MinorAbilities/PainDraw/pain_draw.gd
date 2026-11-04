@@ -35,7 +35,7 @@ func _remove_buff() -> void:
 	PlayerManager.player.stats.pull_speed.remove_buff_completly(_buff_id, Stat.buff_type.MULTIPLICATIVE)
 
 func get_tooltip() -> String:
-	return "Taking damage gives +%d%% pull speed for %.0fs" % [value, duration]
+	return "Taking damage gives +%d%% pull speed for %.0fs" % [roundi(value * power()), duration]
 
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE

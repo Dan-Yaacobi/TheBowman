@@ -33,6 +33,11 @@ func on_equipped() -> void:
 
 func on_unequipped() -> void:
 	pass
+
+## Called when this ability's color level changes while it is equipped. Abilities that read power()
+## when they fire need nothing; ones that bake power() in when equipped (stat buffs) re-apply here.
+func refresh_power() -> void:
+	pass
 	
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	pass
