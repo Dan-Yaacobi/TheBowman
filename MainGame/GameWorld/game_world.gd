@@ -79,7 +79,9 @@ func remove_enemy(_enemy: Enemy) -> void:
 	current_enemies.erase(_enemy)
 	
 func kill_all_enemies() -> void:
-	for enemy: Enemy in current_enemies.duplicate():
+	# Untyped loop variable: the list can hold enemies that were already freed, and assigning
+	# a freed instance to a typed (Enemy) variable crashes before is_instance_valid runs.
+	for enemy in current_enemies.duplicate():
 		if is_instance_valid(enemy):
 			enemy.queue_free()
 	current_enemies.clear()

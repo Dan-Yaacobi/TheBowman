@@ -17,6 +17,8 @@ func _ready() -> void:
 func crack_egg() -> void:
 	if _is_destroyed:
 		return
+	# Landing can touch several island shapes in one frame; crack (and hatch) only once.
+	_is_destroyed = true
 	cracked.emit(global_position)
 	queue_free()
 

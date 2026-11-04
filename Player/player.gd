@@ -359,10 +359,28 @@ func set_new_arrow() -> void:
 		if stats.arrow:
 			main_hand.arrow_texture = stats.arrow.equipped_texture
 
+## Visible height (pixels) every quiver sprite is fitted to on the back, so quivers whose art
+## doesn't fill the canvas show at the same size as the rest.
+const QUIVER_ART_HEIGHT: float = 60.0
+var _quiver_base_scale: Vector2 = Vector2.ZERO
+
 func set_new_quiver(_texture: Texture2D) -> void:
 	if _texture:
+		if _quiver_base_scale == Vector2.ZERO:
+			_quiver_base_scale = quiver.scale
 		quiver.texture = _texture
+		_fit_quiver(_texture)
 		quiver.show()
+
+## Scales the quiver so its visible art matches QUIVER_ART_HEIGHT and centers that art on the node.
+func _fit_quiver(_texture: Texture2D) -> void:
+	var used: Rect2i = _texture.get_image().get_used_rect()
+	if used.size.y <= 0:
+		quiver.scale = _quiver_base_scale
+		quiver.offset = Vector2.ZERO
+		return
+	quiver.scale = _quiver_base_scale * (QUIVER_ART_HEIGHT / used.size.y)
+	quiver.offset = _texture.get_size() / 2.0 - Vector2(used.get_center())
 		
 func set_arrow_scene() -> void:
 	if stats.arrow_scene:
