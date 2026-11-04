@@ -7,9 +7,16 @@
 [ext_resource type="Resource" uid="uid://dpv1dh6cp576d" path="res://Items/Equipments/Quivers/Resource/electric_quiver.tres" id="5_2aujr"]
 [ext_resource type="Resource" uid="uid://16kjig2icnxb" path="res://Items/Equipments/Quivers/Resource/frost_quiver.tres" id="6_0mpld"]
 [ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="7_hauan"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/echo_arrows.tres" id="new_echo_arrows"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/heartseeker.tres" id="new_heartseeker"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/long_shot.tres" id="new_long_shot"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/seeker_darts.tres" id="new_seeker_darts"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/splitting_tips.tres" id="new_splitting_tips"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/sticky_charges.tres" id="new_sticky_charges"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/ember_quiver.tres" id="new_ember_quiver"]
 
 [resource]
 script = ExtResource("2_a5xjm")
 slot = 1
-templates = Array[ExtResource("2_v12hp")]([ExtResource("3_7typt"), ExtResource("4_u1e4n"), ExtResource("5_2aujr"), ExtResource("6_0mpld"), ExtResource("7_hauan")])
+templates = Array[ExtResource("2_v12hp")]([ExtResource("3_7typt"), ExtResource("4_u1e4n"), ExtResource("5_2aujr"), ExtResource("6_0mpld"), ExtResource("7_hauan"), ExtResource("new_echo_arrows"), ExtResource("new_heartseeker"), ExtResource("new_long_shot"), ExtResource("new_seeker_darts"), ExtResource("new_splitting_tips"), ExtResource("new_sticky_charges"), ExtResource("new_ember_quiver")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"

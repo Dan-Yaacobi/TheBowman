@@ -11,8 +11,16 @@
 [ext_resource type="Resource" uid="uid://yvr467fev1ug" path="res://Items/Equipments/Bows/Resource/Vulcan.tres" id="9_uehrl"]
 [ext_resource type="Resource" uid="uid://cf830250l4sj2" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="10_80cd0"]
 [ext_resource type="Resource" uid="uid://cnho4yuoqhjpi" path="res://Items/Equipments/Bows/Resource/Zeus.tres" id="12_dqlj4"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Hummingbird.tres" id="new_hummingbird"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/HuntersMark.tres" id="new_huntersmark"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Longing.tres" id="new_longing"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/RamsHorn.tres" id="new_ramshorn"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Riftbow.tres" id="new_riftbow"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Skylark.tres" id="new_skylark"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Stormcaller.tres" id="new_stormcaller"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Undertow.tres" id="new_undertow"]
 
 [resource]
 script = ExtResource("2_ualu4")
-templates = Array[ExtResource("2_2bno1")]([ExtResource("3_jufrr"), ExtResource("4_rmuev"), ExtResource("5_cb1ri"), ExtResource("6_24shk"), ExtResource("7_riufi"), ExtResource("8_ekvhb"), ExtResource("9_uehrl"), ExtResource("10_80cd0"), ExtResource("12_dqlj4")])
+templates = Array[ExtResource("2_2bno1")]([ExtResource("3_jufrr"), ExtResource("4_rmuev"), ExtResource("5_cb1ri"), ExtResource("6_24shk"), ExtResource("7_riufi"), ExtResource("8_ekvhb"), ExtResource("9_uehrl"), ExtResource("10_80cd0"), ExtResource("12_dqlj4"), ExtResource("new_hummingbird"), ExtResource("new_huntersmark"), ExtResource("new_longing"), ExtResource("new_ramshorn"), ExtResource("new_riftbow"), ExtResource("new_skylark"), ExtResource("new_stormcaller"), ExtResource("new_undertow")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"
