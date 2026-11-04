@@ -6,34 +6,80 @@
 [ext_resource type="Texture2D" uid="uid://b6ulwr4lbhd00" path="res://Items/Equipments/Bows/Sprites/FireBow.png" id="3_j1m5o"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_j1m5o"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_t41h2"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="minors_minor_abilities"]
+[ext_resource type="Resource" uid="uid://bbsjhtbjigoim" path="res://Player/Abilities2.0/MinorAbilities/burn_minor_abilities.tres" id="minors_burn_minor_abilities"]
 
 [sub_resource type="Resource" id="Resource_mnna4"]
 script = ExtResource("1_dvkt0")
 trigger_type = 4
 metadata/_custom_type_script = "uid://eloxsv2u5r70"
 
-[sub_resource type="Resource" id="Resource_c1m2a"]
+[sub_resource type="Resource" id="Resource_t0r0"]
 script = ExtResource("6_t41h2")
 stat_name = "pull_speed"
-min_value = 1.0
+min_value = 0.5
 max_value = 1.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
-[sub_resource type="Resource" id="Resource_5lv0r"]
+[sub_resource type="Resource" id="Resource_t0r1"]
+script = ExtResource("6_t41h2")
+stat_name = "arrow_damage"
+min_value = 2.0
+max_value = 4.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t0"]
 script = ExtResource("5_j1m5o")
-stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_c1m2a")])
+stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_t0r0"), SubResource("Resource_t0r1")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
-[sub_resource type="Resource" id="Resource_167x7"]
+[sub_resource type="Resource" id="Resource_t1r0"]
+script = ExtResource("6_t41h2")
+stat_name = "burn_damage"
+min_value = 1.0
+max_value = 2.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t1"]
 script = ExtResource("5_j1m5o")
+stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_t1r0")])
+minor_abilities = ExtResource("minors_burn_minor_abilities")
+minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
-[sub_resource type="Resource" id="Resource_24r6y"]
+[sub_resource type="Resource" id="Resource_t2r0"]
+script = ExtResource("6_t41h2")
+stat_name = "perfect_shot_bonus"
+min_value = 0.5
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t2"]
 script = ExtResource("5_j1m5o")
+stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_t2r0")])
+minor_abilities = ExtResource("minors_minor_abilities")
+minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
-[sub_resource type="Resource" id="Resource_guwyo"]
+[sub_resource type="Resource" id="Resource_t3r0"]
+script = ExtResource("6_t41h2")
+stat_name = "arrow_damage"
+min_value = 3.0
+max_value = 6.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t3r1"]
+script = ExtResource("6_t41h2")
+stat_name = "burn_duration"
+min_value = 0.5
+max_value = 1.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t3"]
 script = ExtResource("5_j1m5o")
+stat_rolls = Array[ExtResource("6_t41h2")]([SubResource("Resource_t3r0"), SubResource("Resource_t3r1")])
+minor_abilities = ExtResource("minors_burn_minor_abilities")
+minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [resource]
@@ -53,6 +99,6 @@ string_style = 2
 string_glow_color = Color(1, 0.45, 0.1, 0.55)
 string_glow_width = 2.4
 ability = SubResource("Resource_mnna4")
-tiers = Array[Object]([SubResource("Resource_5lv0r"), SubResource("Resource_167x7"), SubResource("Resource_24r6y"), SubResource("Resource_guwyo")])
+tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
 equipment_scene = ExtResource("1_ta2eq")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
