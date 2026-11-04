@@ -1,15 +1,29 @@
 [gd_scene format=3 uid="uid://c7nlxg7p7m3vl"]
 
 [ext_resource type="Script" uid="uid://dx7tegtdgsdj0" path="res://Level/Events/BossEvents/boss_event.gd" id="1_b3gpm"]
+[ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="2_ofsa7"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_c6qoj"]
+[ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="3_tcdyl"]
+[ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="4_rw82h"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_ndsc0"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_hfdrk"]
 [ext_resource type="PackedScene" uid="uid://c2eppdxet4q8c" path="res://Enemies/FlyingApple/Boss1/FlyingAppleBoss.tscn" id="7_o8usx"]
 [ext_resource type="Resource" uid="uid://fly5qy0bkee4" path="res://Enemies/EnemyData/EnemyValues/Boss/red_apple_boss.tres" id="8_rabst"]
 
+[sub_resource type="Resource" id="Resource_5q68d"]
+script = ExtResource("3_tcdyl")
+forced_rarity = 1
+metadata/_custom_type_script = "uid://c06t2awg17dkp"
+
+[sub_resource type="Resource" id="Resource_jewlj"]
+script = ExtResource("4_rw82h")
+item = 5
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
 [node name="AppleBossEvent" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
 script = ExtResource("1_b3gpm")
 boss = NodePath("FlyingAppleBoss")
+rewards = Array[ExtResource("2_ofsa7")]([SubResource("Resource_5q68d"), SubResource("Resource_jewlj")])
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1835078092]
 position = Vector2(1, -40)

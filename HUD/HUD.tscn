@@ -15,7 +15,6 @@
 [ext_resource type="Shader" uid="uid://82opdwykc4w1" path="res://HUD/gauge_aura.gdshader" id="15_iob2k"]
 [ext_resource type="Script" uid="uid://c8fejmjhqikma" path="res://HUD/gauge.gd" id="16_33ejm"]
 [ext_resource type="Texture2D" uid="uid://cal23t1ka4qvt" path="res://Player/Abilities2.0/PassiveAbilities/SoulHarvest/Soul.png" id="17_fjfvf"]
-[ext_resource type="PackedScene" uid="uid://bfwugrpdftgjh" path="res://HUD/Upgrades/upgrade_buttons.tscn" id="17_ihvjp"]
 [ext_resource type="PackedScene" uid="uid://d2b305rore0wx" path="res://HUD/BuffDisplay/BuffDisplayer.tscn" id="18_33ejm"]
 [ext_resource type="PackedScene" uid="uid://xqcywwa8lpnn" path="res://HUD/ActiveAbility/ActiveAbilityIndicator.tscn" id="18_65vjf"]
 [ext_resource type="PackedScene" uid="uid://evjdwqf178k4" path="res://HUD/EquipmentMenu/EquipmentMenu.tscn" id="18_fjfvf"]
@@ -86,7 +85,7 @@ offset_bottom = 18.0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
-[node name="ColorLevelsHud" parent="Control" instance=ExtResource("22_clhud")]
+[node name="ColorLevelsHud" parent="Control" unique_id=901565753 instance=ExtResource("22_clhud")]
 layout_mode = 0
 offset_left = 44.0
 offset_top = 100.0
@@ -116,20 +115,6 @@ grow_vertical = 0
 scale = Vector2(5, 5)
 mouse_filter = 2
 texture = ExtResource("3_ktoim")
-
-[node name="UpgradeButtons" parent="Control" unique_id=2011474943 instance=ExtResource("17_ihvjp")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-scale = Vector2(5, 5)
 
 [node name="BuffDisplayer" parent="Control" unique_id=866180409 instance=ExtResource("18_33ejm")]
 layout_mode = 1
@@ -403,6 +388,6 @@ grow_horizontal = 0
 texture = ExtResource("20_2gu3h")
 flip_v = true
 
-[node name="ColorScrollPicker" parent="." instance=ExtResource("23_cspick")]
+[node name="ColorScrollPicker" parent="." unique_id=1836766117 instance=ExtResource("23_cspick")]
 
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]

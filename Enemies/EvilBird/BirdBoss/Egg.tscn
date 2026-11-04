@@ -1,9 +1,38 @@
 [gd_scene format=3 uid="uid://yvo6lok0c6eh"]
 
 [ext_resource type="Script" uid="uid://b6xou1jwtdyxa" path="res://Enemies/EvilBird/BirdBoss/egg.gd" id="1_sxihi"]
-[ext_resource type="Texture2D" path="res://Enemies/Sprites/BossEgg.png" id="2_nk72s"]
+[ext_resource type="Texture2D" uid="uid://b4sytqek3hb34" path="res://Enemies/Sprites/BossEgg.png" id="2_nk72s"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_of1w8"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_of1w8"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_rst01"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_shtr1"]
 resource_name = "Shatter"
@@ -34,47 +63,18 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_rst01"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egg01"]
 _data = {
 &"RESET": SubResource("Animation_rst01"),
 &"Shatter": SubResource("Animation_shtr1")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_of1w8"]
-radius = 13.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_nk72s"]
 radius = 13.038404
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r756p"]
-radius = 13.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guwyo"]
+radius = 19.0
+height = 50.0
 
 [node name="Egg" type="RigidBody2D" unique_id=1702711853]
 collision_layer = 0
@@ -106,7 +106,8 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1248628689]
-shape = SubResource("CircleShape2D_r756p")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_guwyo")
 debug_color = Color(0.9733754, 0, 0.4378033, 0.41960785)
 
 [connection signal="body_shape_entered" from="Grounddetector" to="." method="_on_grounddetector_body_shape_entered"]

@@ -1,15 +1,29 @@
 [gd_scene format=3 uid="uid://ddhffywfb4gs"]
 
 [ext_resource type="Script" uid="uid://dx7tegtdgsdj0" path="res://Level/Events/BossEvents/boss_event.gd" id="1_6ky67"]
+[ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="2_qlstg"]
+[ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="3_74hb8"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_cwjv1"]
+[ext_resource type="Script" uid="uid://ccqmdbs3nwmrv" path="res://Level/Events/Rewards/item_reward.gd" id="4_7v1cr"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="5_0m50s"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="6_u4e5w"]
 [ext_resource type="PackedScene" uid="uid://c1j7lretee7ip" path="res://Enemies/EvilBird/BirdBoss/BirdBoss.tscn" id="7_4tnen"]
 [ext_resource type="Resource" uid="uid://rumdyo1hbaet" path="res://Enemies/EvilBird/BirdBoss/birdboss_data.tres" id="8_ig6oi"]
 
+[sub_resource type="Resource" id="Resource_34rs8"]
+script = ExtResource("3_74hb8")
+forced_rarity = 1
+metadata/_custom_type_script = "uid://c06t2awg17dkp"
+
+[sub_resource type="Resource" id="Resource_quirc"]
+script = ExtResource("4_7v1cr")
+item = 5
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
 [node name="BirdBossEvent" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
 script = ExtResource("1_6ky67")
 boss = NodePath("BirdBoss")
+rewards = Array[ExtResource("2_qlstg")]([SubResource("Resource_34rs8"), SubResource("Resource_quirc")])
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1835078092]
 position = Vector2(1, -40)

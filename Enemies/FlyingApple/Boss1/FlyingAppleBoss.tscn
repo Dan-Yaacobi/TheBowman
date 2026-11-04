@@ -257,6 +257,7 @@ script = ExtResource("18_52sys")
 
 [node name="Transition" type="Node2D" parent="EnemyStateMachine" unique_id=1753354188]
 script = ExtResource("11_x8b2o")
+total_summons = 10
 
 [node name="SummonTimer" type="Timer" parent="EnemyStateMachine/Transition" unique_id=856608342]
 wait_time = 1.5
