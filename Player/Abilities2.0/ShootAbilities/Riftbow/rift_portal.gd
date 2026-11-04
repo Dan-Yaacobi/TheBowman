@@ -1,9 +1,10 @@
 class_name RiftPortal extends Node2D
-## Opens near an enemy, flashes the colour of what it rolled, then fires that at the enemy and closes.
+## Opens near an enemy already painted in the colour of what it rolled, pulses, then fires that at the enemy and closes.
 
 enum Roll { FIREBALL, FIST, POISON }
 
-const PORTAL_PATH: String = "res://Objects/Portal/Sprites/EventPortalSwirl.png"
+const SPRITES_DIR: String = "res://Player/Abilities2.0/ShootAbilities/Riftbow/Sprites/"
+const ROLL_SHEETS: Dictionary[Roll, String] = {Roll.FIREBALL: "RiftPortalFire.png", Roll.FIST: "RiftPortalFist.png", Roll.POISON: "RiftPortalPoison.png"}
 const PORTAL_FRAMES: int = 16
 const FIREBALL_PATH: String = "res://Enemies/WizardBoss/FireWizard/Fireball.tscn"
 const POISON_CLOUD_PATH: String = "res://Player/Abilities2.0/PassiveAbilities/PoisonousGauge/PoisonousCloud.tscn"
@@ -13,7 +14,8 @@ const ROLL_COLORS: Dictionary[Roll, Color] = {Roll.FIREBALL: Color(1.0, 0.55, 0.
 @export var flash_time: float = 0.45
 @export var close_time: float = 0.2
 @export var portal_scale: float = 0.6
-@export var swirl_fps: float = 12.0
+## Faster than the event portal (12) so it feels more violent.
+@export var swirl_fps: float = 18.0
 
 var target: Enemy
 ## Where to fire if the target is dead or gone; follows the target while it lives.
@@ -29,7 +31,7 @@ var _swirl_time: float = 0.0
 func _ready() -> void:
 	z_index = 2
 	_sprite = Sprite2D.new()
-	_sprite.texture = load(PORTAL_PATH)
+	_sprite.texture = load(SPRITES_DIR + ROLL_SHEETS[roll])
 	_sprite.hframes = PORTAL_FRAMES
 	_sprite.scale = Vector2.ZERO
 	add_child(_sprite)
@@ -47,7 +49,7 @@ func _process(delta: float) -> void:
 func _run() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(_sprite, "scale", Vector2.ONE * portal_scale, open_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	# Telegraph: flash what was rolled.
+	# Telegraph: the sheet already shows what was rolled; pulse it before firing.
 	var flash_color: Color = ROLL_COLORS[roll]
 	for i in 3:
 		tween.tween_property(_sprite, "modulate", flash_color * 1.6, flash_time / 6.0)
