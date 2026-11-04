@@ -85,11 +85,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_recig")
 display_name = "Ice Shards"
-color = 3
 texture = ExtResource("5_bimiw")
 equipped_texture = ExtResource("3_mcopa")
 dropped_scale = 0.3
 slot = 1
+color = 3
 ability = SubResource("Resource_d0ww2")
 tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_wsg6i"), SubResource("Resource_o614m"), SubResource("Resource_idre4")])
 equipment_scene = ExtResource("2_mcopa")

@@ -85,7 +85,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("3_dprp6")
 display_name = "Zeus"
-color = 3
 texture = ExtResource("2_6v1vm")
 equipped_texture = ExtResource("2_6v1vm")
 dropped_scale = 0.396
@@ -95,6 +94,7 @@ grip_point = Vector2(32, 30.5)
 string_color = Color(1, 0.9, 0.4, 1)
 string_style = 3
 string_glow_color = Color(1, 0.85, 0.2, 0.5)
+color = 3
 ability = SubResource("Resource_6v1vm")
 tiers = Array[Object]([SubResource("Resource_ijd54"), SubResource("Resource_i3160"), SubResource("Resource_mkdii"), SubResource("Resource_2n2fu")])
 equipment_scene = ExtResource("2_d7umq")

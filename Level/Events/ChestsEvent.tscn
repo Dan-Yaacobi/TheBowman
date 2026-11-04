@@ -14,37 +14,37 @@
 [ext_resource type="Resource" uid="uid://cf830250l4sj2" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="12_i03bs"]
 [ext_resource type="Resource" uid="uid://cnho4yuoqhjpi" path="res://Items/Equipments/Bows/Resource/Zeus.tres" id="13_b5mui"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="14_rwwsi"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/HuntersMark.tres" id="eq_huntersmark"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Longing.tres" id="eq_longing"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/RamsHorn.tres" id="eq_ramshorn"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Riftbow.tres" id="eq_riftbow"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Hummingbird.tres" id="eq_hummingbird"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Skylark.tres" id="eq_skylark"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Undertow.tres" id="eq_undertow"]
-[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="eq_woodenbow"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Stormcaller.tres" id="eq_stormcaller"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="46_v0esg"]
+[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="eq_basic_quiver"]
+[ext_resource type="Resource" uid="uid://b2exbrwp6ofng" path="res://Items/Equipments/Quivers/Resource/blood_quiver.tres" id="eq_blood_quiver"]
 [ext_resource type="Resource" uid="uid://bc41cduiwrmb" path="res://Items/Equipments/Quivers/Resource/cursed_quiver.tres" id="eq_cursed_quiver"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/echo_arrows.tres" id="eq_echo_arrows"]
+[ext_resource type="Resource" uid="uid://dpv1dh6cp576d" path="res://Items/Equipments/Quivers/Resource/electric_quiver.tres" id="eq_electric_quiver"]
+[ext_resource type="Resource" uid="uid://bk8inko0dm7d0" path="res://Items/Equipments/Rings/Resource/electric_ring.tres" id="eq_electric_ring"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/ember_quiver.tres" id="eq_ember_quiver"]
+[ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="eq_fire_ring"]
+[ext_resource type="Resource" uid="uid://16kjig2icnxb" path="res://Items/Equipments/Quivers/Resource/frost_quiver.tres" id="eq_frost_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/gust_ring.tres" id="eq_gust_ring"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/heartseeker.tres" id="eq_heartseeker"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Hummingbird.tres" id="eq_hummingbird"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/HuntersMark.tres" id="eq_huntersmark"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Longing.tres" id="eq_longing"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/long_shot.tres" id="eq_long_shot"]
-[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="eq_basic_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/meteor_band.tres" id="eq_meteor_band"]
+[ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="eq_poison_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/quickstep.tres" id="eq_quickstep"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/RamsHorn.tres" id="eq_ramshorn"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Riftbow.tres" id="eq_riftbow"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/riposte.tres" id="eq_riposte"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/seeker_darts.tres" id="eq_seeker_darts"]
+[ext_resource type="Resource" uid="uid://cbtba141lnv2q" path="res://Items/Equipments/Rings/Resource/shadow_ring.tres" id="eq_shadow_ring"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Skylark.tres" id="eq_skylark"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/spillover_band.tres" id="eq_spillover_band"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/splitting_tips.tres" id="eq_splitting_tips"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/sticky_charges.tres" id="eq_sticky_charges"]
-[ext_resource type="Resource" uid="uid://b2exbrwp6ofng" path="res://Items/Equipments/Quivers/Resource/blood_quiver.tres" id="eq_blood_quiver"]
-[ext_resource type="Resource" uid="uid://dpv1dh6cp576d" path="res://Items/Equipments/Quivers/Resource/electric_quiver.tres" id="eq_electric_quiver"]
-[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/ember_quiver.tres" id="eq_ember_quiver"]
-[ext_resource type="Resource" uid="uid://16kjig2icnxb" path="res://Items/Equipments/Quivers/Resource/frost_quiver.tres" id="eq_frost_quiver"]
-[ext_resource type="Resource" uid="uid://b0xrhmoo5uvk0" path="res://Items/Equipments/Quivers/Resource/poison_quiver.tres" id="eq_poison_quiver"]
-[ext_resource type="Resource" uid="uid://cbtba141lnv2q" path="res://Items/Equipments/Rings/Resource/shadow_ring.tres" id="eq_shadow_ring"]
-[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/spillover_band.tres" id="eq_spillover_band"]
-[ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="eq_fire_ring"]
-[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/gust_ring.tres" id="eq_gust_ring"]
-[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/meteor_band.tres" id="eq_meteor_band"]
-[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/quickstep.tres" id="eq_quickstep"]
-[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/riposte.tres" id="eq_riposte"]
-[ext_resource type="Resource" uid="uid://bk8inko0dm7d0" path="res://Items/Equipments/Rings/Resource/electric_ring.tres" id="eq_electric_ring"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Stormcaller.tres" id="eq_stormcaller"]
 [ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/thorn_ring.tres" id="eq_thorn_ring"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Undertow.tres" id="eq_undertow"]
 [ext_resource type="Resource" uid="uid://comiq2aa57e0f" path="res://Items/Equipments/Rings/Resource/vampiric_ring.tres" id="eq_vampiric_ring"]
 
 [node name="Tresures" type="Node2D" unique_id=1094064033]
@@ -159,7 +159,6 @@ fixed_frame_index = 4
 
 [node name="PedestalNPC" parent="Island25" unique_id=431708361 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
-item_data = ExtResource("eq_woodenbow")
 
 [node name="Island26" parent="." unique_id=906918761 instance=ExtResource("2_oi57y")]
 position = Vector2(97, 117)
@@ -179,255 +178,255 @@ fixed_frame_index = 4
 position = Vector2(-1, -16)
 item_data = ExtResource("4_slweh")
 
-[node name="Island29" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island29" parent="." unique_id=1725972256 instance=ExtResource("2_oi57y")]
 position = Vector2(-143, 189)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island29" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island29" unique_id=1444258425 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("5_5ccy2")
 
-[node name="Island30" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island30" parent="." unique_id=335480619 instance=ExtResource("2_oi57y")]
 position = Vector2(-95, 189)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island30" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island30" unique_id=1364086032 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_stormcaller")
 
-[node name="Island31" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island31" parent="." unique_id=226455506 instance=ExtResource("2_oi57y")]
 position = Vector2(-47, 189)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island31" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island31" unique_id=458949491 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("11_qekju")
 
-[node name="Island32" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island32" parent="." unique_id=48226456 instance=ExtResource("2_oi57y")]
 position = Vector2(0, 189)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island32" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island32" unique_id=1393154514 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("12_i03bs")
 
-[node name="Island33" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island33" parent="." unique_id=1685456465 instance=ExtResource("2_oi57y")]
 position = Vector2(49, 189)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island33" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island33" unique_id=1533856487 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("13_b5mui")
 
-[node name="Island34" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island34" parent="." unique_id=953650831 instance=ExtResource("2_oi57y")]
 position = Vector2(-143, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island34" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island34" unique_id=382302690 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_cursed_quiver")
 
-[node name="Island35" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island35" parent="." unique_id=423260261 instance=ExtResource("2_oi57y")]
 position = Vector2(-95, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island35" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island35" unique_id=1235108837 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_echo_arrows")
 
-[node name="Island36" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island36" parent="." unique_id=852617582 instance=ExtResource("2_oi57y")]
 position = Vector2(-47, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island36" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island36" unique_id=1937116067 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_heartseeker")
 
-[node name="Island37" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island37" parent="." unique_id=1345424885 instance=ExtResource("2_oi57y")]
 position = Vector2(0, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island37" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island37" unique_id=1201374777 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_long_shot")
 
-[node name="Island38" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island38" parent="." unique_id=396178212 instance=ExtResource("2_oi57y")]
 position = Vector2(49, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island38" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island38" unique_id=1125218371 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_basic_quiver")
 
-[node name="Island39" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island39" parent="." unique_id=778515485 instance=ExtResource("2_oi57y")]
 position = Vector2(97, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island39" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island39" unique_id=1061949165 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_seeker_darts")
 
-[node name="Island40" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island40" parent="." unique_id=668643349 instance=ExtResource("2_oi57y")]
 position = Vector2(145, 261)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island40" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island40" unique_id=1899272206 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_splitting_tips")
 
-[node name="Island41" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island41" parent="." unique_id=711551131 instance=ExtResource("2_oi57y")]
 position = Vector2(-143, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island41" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island41" unique_id=1682643145 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_sticky_charges")
 
-[node name="Island42" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island42" parent="." unique_id=1809274770 instance=ExtResource("2_oi57y")]
 position = Vector2(-95, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island42" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island42" unique_id=1772447551 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_blood_quiver")
 
-[node name="Island43" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island43" parent="." unique_id=822620179 instance=ExtResource("2_oi57y")]
 position = Vector2(-47, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island43" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island43" unique_id=1895717269 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_electric_quiver")
 
-[node name="Island44" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island44" parent="." unique_id=2146776254 instance=ExtResource("2_oi57y")]
 position = Vector2(0, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island44" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island44" unique_id=1267096888 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_ember_quiver")
 
-[node name="Island45" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island45" parent="." unique_id=1078776104 instance=ExtResource("2_oi57y")]
 position = Vector2(49, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island45" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island45" unique_id=1295225937 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_frost_quiver")
 
-[node name="Island46" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island46" parent="." unique_id=1710941087 instance=ExtResource("2_oi57y")]
 position = Vector2(97, 333)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island46" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island46" unique_id=160866361 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_poison_quiver")
 
-[node name="Island47" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island47" parent="." unique_id=1035681628 instance=ExtResource("2_oi57y")]
 position = Vector2(-143, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island47" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island47" unique_id=1435946061 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_shadow_ring")
 
-[node name="Island48" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island48" parent="." unique_id=1510952720 instance=ExtResource("2_oi57y")]
 position = Vector2(-95, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island48" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island48" unique_id=1910500727 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_spillover_band")
 
-[node name="Island49" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island49" parent="." unique_id=1149633311 instance=ExtResource("2_oi57y")]
 position = Vector2(-47, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island49" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island49" unique_id=802733721 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_fire_ring")
 
-[node name="Island50" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island50" parent="." unique_id=1203831352 instance=ExtResource("2_oi57y")]
 position = Vector2(0, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island50" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island50" unique_id=967589566 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_gust_ring")
 
-[node name="Island51" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island51" parent="." unique_id=497073048 instance=ExtResource("2_oi57y")]
 position = Vector2(49, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island51" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island51" unique_id=563302146 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_meteor_band")
 
-[node name="Island52" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island52" parent="." unique_id=1143761058 instance=ExtResource("2_oi57y")]
 position = Vector2(97, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island52" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island52" unique_id=478437658 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_quickstep")
 
-[node name="Island53" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island53" parent="." unique_id=2092715865 instance=ExtResource("2_oi57y")]
 position = Vector2(145, 405)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island53" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island53" unique_id=431220674 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_riposte")
 
-[node name="Island54" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island54" parent="." unique_id=1779103497 instance=ExtResource("2_oi57y")]
 position = Vector2(-143, 477)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island54" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island54" unique_id=1290036727 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_electric_ring")
 
-[node name="Island55" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island55" parent="." unique_id=1065121563 instance=ExtResource("2_oi57y")]
 position = Vector2(-95, 477)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island55" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island55" unique_id=491452492 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_thorn_ring")
 
-[node name="Island56" parent="." instance=ExtResource("2_oi57y")]
+[node name="Island56" parent="." unique_id=2115105755 instance=ExtResource("2_oi57y")]
 position = Vector2(-47, 477)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Island56" instance=ExtResource("3_rwwsi")]
+[node name="PedestalNPC" parent="Island56" unique_id=783118551 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_vampiric_ring")
 
@@ -438,3 +437,6 @@ fixed_frame_index = 4
 
 [node name="TargetDummy" parent="." unique_id=603628097 instance=ExtResource("14_rwwsi")]
 position = Vector2(-214, 62)
+
+[node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("46_v0esg")]
+position = Vector2(-246, 53)

@@ -28,7 +28,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("2_onctg")
 display_name = "Wooden Bow"
-color = 2
 texture = ExtResource("2_lese3")
 equipped_texture = ExtResource("2_lese3")
 dropped_scale = 0.41
@@ -36,6 +35,7 @@ equipped_scale = Vector2(0.717, 0.717)
 string_tip = Vector2(60.5, 17.5)
 grip_point = Vector2(32, 39)
 string_color = Color(0.86, 0.78, 0.6, 1)
+color = 2
 tiers = Array[Object]([SubResource("Resource_onctg")])
 equipment_scene = ExtResource("1_onctg")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

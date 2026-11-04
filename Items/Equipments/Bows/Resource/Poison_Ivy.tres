@@ -78,7 +78,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_4te1g")
 display_name = "Poison Ivy"
-color = 3
 texture = ExtResource("3_cjnmb")
 equipped_texture = ExtResource("3_cjnmb")
 dropped_scale = 0.367
@@ -90,6 +89,7 @@ string_width = 0.6
 string_style = 1
 string_glow_color = Color(0.5, 1, 0.3, 0.3)
 string_glow_width = 1.8
+color = 3
 ability = SubResource("Resource_uhtbk")
 tiers = Array[Object]([SubResource("Resource_jxlm4"), SubResource("Resource_0pcrf"), SubResource("Resource_puovh"), SubResource("Resource_pxexn")])
 equipment_scene = ExtResource("2_8wxky")

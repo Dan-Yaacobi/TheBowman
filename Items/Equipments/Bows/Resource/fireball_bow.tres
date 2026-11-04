@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b6ulwr4lbhd00" path="res://Items/Equipments/Bows/Sprites/FireBow.png" id="3_j1m5o"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="5_j1m5o"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="6_t41h2"]
-[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="minors_minor_abilities"]
 [ext_resource type="Resource" uid="uid://bbsjhtbjigoim" path="res://Player/Abilities2.0/MinorAbilities/burn_minor_abilities.tres" id="minors_burn_minor_abilities"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="minors_minor_abilities"]
 
 [sub_resource type="Resource" id="Resource_mnna4"]
 script = ExtResource("1_dvkt0")
@@ -85,7 +85,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_ikbvu")
 display_name = "FireBall Bow"
-color = 3
 name_color = Color(1, 0.4, 0, 1)
 texture = ExtResource("3_j1m5o")
 equipped_texture = ExtResource("3_j1m5o")
@@ -98,6 +97,7 @@ string_width = 0.6
 string_style = 2
 string_glow_color = Color(1, 0.45, 0.1, 0.55)
 string_glow_width = 2.4
+color = 3
 ability = SubResource("Resource_mnna4")
 tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
 equipment_scene = ExtResource("1_ta2eq")

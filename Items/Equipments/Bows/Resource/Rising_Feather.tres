@@ -84,7 +84,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_b2fkq")
 display_name = "Rising Feather"
-color = 1
 texture = ExtResource("3_b2fkq")
 equipped_texture = ExtResource("3_b2fkq")
 dropped_scale = 0.37
@@ -95,6 +94,7 @@ string_color = Color(0.25, 0.8, 0.8, 1)
 string_style = 1
 string_glow_color = Color(1, 0.6, 0.2, 0.3)
 string_glow_width = 1.6
+color = 1
 ability = SubResource("Resource_6gh2q")
 tiers = Array[Object]([SubResource("Resource_p1agp"), SubResource("Resource_qpoct"), SubResource("Resource_d0p0s"), SubResource("Resource_qd6sl")])
 equipment_scene = ExtResource("1_a12vy")

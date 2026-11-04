@@ -86,11 +86,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_q237j")
 display_name = "Blood Quiver"
-color = 3
 texture = ExtResource("5_aie6x")
 equipped_texture = ExtResource("3_wi6fb")
 dropped_scale = 0.3
 slot = 1
+color = 3
 ability = SubResource("Resource_hge11")
 tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_y73dv"), SubResource("Resource_84tyv"), SubResource("Resource_cdswp")])
 equipment_scene = ExtResource("2_wi6fb")

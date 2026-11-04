@@ -79,11 +79,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("2_by6s1")
 display_name = "Poison Darts"
-color = 3
 texture = ExtResource("3_eeu5w")
 equipped_texture = ExtResource("1_agcba")
 dropped_scale = 0.3
 slot = 1
+color = 3
 ability = SubResource("Resource_30xy1")
 tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_6q3hh"), SubResource("Resource_vbiee"), SubResource("Resource_hwxhd")])
 equipment_scene = ExtResource("2_6gp7j")

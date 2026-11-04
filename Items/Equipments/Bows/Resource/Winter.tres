@@ -69,7 +69,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_5beeh")
 display_name = "Winter"
-color = 3
 texture = ExtResource("2_51kq0")
 equipped_texture = ExtResource("2_51kq0")
 dropped_scale = 0.438
@@ -80,6 +79,7 @@ string_color = Color(0.85, 0.95, 1, 1)
 string_width = 0.45
 string_style = 1
 string_glow_color = Color(0.5, 0.8, 1, 0.45)
+color = 3
 ability = SubResource("Resource_4jnt2")
 tiers = Array[Object]([SubResource("Resource_phb7m"), SubResource("Resource_jxlm4"), SubResource("Resource_75s1r"), SubResource("Resource_1pnom")])
 equipment_scene = ExtResource("2_ndgag")

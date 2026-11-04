@@ -76,11 +76,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_rdl4d")
 display_name = "Shadow Ring"
-color = 1
 texture = ExtResource("2_1d58u")
 equipped_texture = ExtResource("2_1d58u")
 dropped_scale = 0.24
 slot = 2
+color = 1
 ability = SubResource("Resource_lsx3f")
 tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
 equipment_scene = ExtResource("1_mfdn7")

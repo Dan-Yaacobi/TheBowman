@@ -79,7 +79,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_0wjvk")
 display_name = "Hemorrhage"
-color = 3
 texture = ExtResource("3_3rjnx")
 equipped_texture = ExtResource("3_3rjnx")
 dropped_scale = 0.364
@@ -91,6 +90,7 @@ string_width = 0.6
 string_style = 2
 string_glow_color = Color(1, 0.1, 0.15, 0.55)
 string_glow_width = 2.2
+color = 3
 ability = SubResource("Resource_dpy2w")
 tiers = Array[Object]([SubResource("Resource_87yg3"), SubResource("Resource_6q3hh"), SubResource("Resource_7w4lt"), SubResource("Resource_xw4su")])
 equipment_scene = ExtResource("2_1hbja")

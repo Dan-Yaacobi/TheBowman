@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="EquipmentData" format=3]
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://ddcvx11001i2p"]
 
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_data"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="2_tier"]
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="3_roll"]
 [ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="4_minor"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="5_scene"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Bows/Sprites/RamsHorn.png" id="6_tex"]
-[ext_resource type="Script" path="res://Player/Abilities2.0/ShootAbilities/RamsHorn/rams_horn_ability.gd" id="7_ability"]
+[ext_resource type="Texture2D" uid="uid://di60pixyr3b3j" path="res://Items/Equipments/Bows/Sprites/RamsHorn.png" id="6_tex"]
+[ext_resource type="Script" uid="uid://ch7nu7rko6qhv" path="res://Player/Abilities2.0/ShootAbilities/RamsHorn/rams_horn_ability.gd" id="7_ability"]
 
 [sub_resource type="Resource" id="Resource_ability"]
 script = ExtResource("7_ability")

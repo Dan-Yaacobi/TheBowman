@@ -79,11 +79,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_wi0de")
 display_name = "Fire Ring"
-color = 2
 name_color = Color(1, 0.34509805, 0, 1)
 texture = ExtResource("5_lhmcp")
 dropped_scale = 0.178
 slot = 2
+color = 2
 ability = SubResource("Resource_p5475")
 tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
 equipment_scene = ExtResource("3_sm0nm")

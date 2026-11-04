@@ -85,11 +85,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_y2whj")
 display_name = "Electros"
-color = 3
 texture = ExtResource("5_fidps")
 equipped_texture = ExtResource("3_mtcc6")
 dropped_scale = 0.3
 slot = 1
+color = 3
 ability = SubResource("Resource_1tkvm")
 tiers = Array[Object]([SubResource("Resource_od0aq"), SubResource("Resource_qxfns"), SubResource("Resource_5avha"), SubResource("Resource_ktwmn")])
 equipment_scene = ExtResource("2_mtcc6")

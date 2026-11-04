@@ -22,11 +22,11 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_2s8ld")
 display_name = "Basic Quiver"
-color = 2
 texture = ExtResource("4_n0g7u")
 equipped_texture = ExtResource("2_i7k7n")
 dropped_scale = 0.35
 slot = 1
+color = 2
 tiers = Array[Object]([SubResource("Resource_snq3k")])
 equipment_scene = ExtResource("1_i7k7n")
 metadata/_custom_type_script = "uid://bqd150tbbmd01"
