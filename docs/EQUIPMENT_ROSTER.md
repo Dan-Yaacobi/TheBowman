@@ -9,9 +9,9 @@ Each color's run bonus decides where an item belongs: the item goes in the color
 
 | Color | Run-level bonus (`ColorLevels`) | Items that belong here |
 |---|---|---|
-| **Precision** | Wider perfect window | Pay off on perfect shots, big single hits, focus on one target |
+| **Precision** | Stronger perfect shots | Pay off on perfect shots, big single hits, focus on one target |
 | **Tempo** | Faster pull | Pay off on shot volume, quick or non-perfect shots, movement, the sword loop |
-| **Elemental** | Longer debuffs (bleed, burn, poison, frostbite, freeze, stun) | Built around applying or using debuffs |
+| **Elemental** | Stronger and longer debuffs (bleed, burn, poison damage; all debuff durations) | Built around applying or using debuffs |
 
 ## Design constraints (from review feedback)
 

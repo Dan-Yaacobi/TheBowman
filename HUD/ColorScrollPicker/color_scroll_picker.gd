@@ -41,7 +41,7 @@ func _refresh() -> void:
 	var levels: ColorLevels = PlayerManager.player.color_levels
 	var power_pct: int = roundi(levels.power_per_level * 100.0)
 	for card: ColorScrollCard in _cards:
-		card.setup(levels.get_level(card.color), power_pct)
+		card.setup(levels.get_level(card.color), power_pct, levels.bonus_text(card.color), levels.items_of_color(card.color))
 		card.set_selectable(false)
 	await get_tree().create_timer(input_delay, true).timeout
 	if not is_inside_tree() or not _is_open:

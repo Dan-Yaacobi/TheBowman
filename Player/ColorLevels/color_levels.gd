@@ -3,21 +3,23 @@ class_name ColorLevels extends Node
 ## Each level makes items of that color stronger and gives the color's secondary bonus.
 ## Reset when the run ends. Abilities read it through PlayerAbility.power().
 
-## Item power gained per level (0.15 = +15% per level).
-@export var power_per_level: float = 0.15
+## Item power gained per level (0.05 = +5% per level).
+@export var power_per_level: float = 0.05
 
 @export_group("Secondary bonuses")
-## Per level, as a fraction of the stat (0.1 = +10%). Adds to other % buffs on the same stat.
-@export var perfect_window_per_level: float = 0.1
+## Per level, as a fraction of the stat (0.05 = +5%). Adds to other % buffs on the same stat.
+## Precision: perfect shot power (perfect_shot_bonus).
+@export var perfect_power_per_level: float = 0.05
 @export var pull_speed_per_level: float = 0.08
-## Applied to every stat in DEBUFF_DURATION_STATS.
-@export var debuff_duration_per_level: float = 0.1
+## Elemental: applied to every stat in DEBUFF_STATS (damage and duration).
+@export var debuff_per_level: float = 0.05
 
 @export_group("Scrolls")
 ## Every Nth scroll (all colors counted) also gives a heart container and a full heal.
 @export var scrolls_per_heart: int = 3
 
-const DEBUFF_DURATION_STATS: Array[String] = [
+const DEBUFF_STATS: Array[String] = [
+	"bleed_damage", "burn_damage", "poison_damage",
 	"bleed_duration", "burn_duration", "poison_duration",
 	"frostbite_duration", "freeze_duration", "stun_duration",
 ]
@@ -63,20 +65,39 @@ func reset() -> void:
 		_apply_secondary(color)
 		EventBus.color_level_changed.emit(color, 0)
 
+## The color's secondary bonus for one level, for the scroll picker.
+func bonus_text(color: CustomVariables.ItemColor) -> String:
+	match color:
+		CustomVariables.ItemColor.PRECISION:
+			return "+%d%% perfect shot power" % roundi(perfect_power_per_level * 100.0)
+		CustomVariables.ItemColor.TEMPO:
+			return "+%d%% pull speed" % roundi(pull_speed_per_level * 100.0)
+		CustomVariables.ItemColor.ELEMENTAL:
+			return "+%d%% debuff damage and duration" % roundi(debuff_per_level * 100.0)
+	return ""
+
+## Equipped items of this color (the ones a scroll of it makes stronger).
+func items_of_color(color: CustomVariables.ItemColor) -> Array[EquipmentData]:
+	var result: Array[EquipmentData] = []
+	for item: EquipmentData in [player.stats.bow, player.stats.arrow, player.stats.ring]:
+		if item and item.color == color:
+			result.append(item)
+	return result
+
 ## Sets the color's stat buffs to match its current level (level 0 removes them).
 func _apply_secondary(color: CustomVariables.ItemColor) -> void:
 	var per_level: float = 0.0
 	var stat_names: Array[String] = []
 	match color:
 		CustomVariables.ItemColor.PRECISION:
-			per_level = perfect_window_per_level
-			stat_names = ["perfect_shot_window"]
+			per_level = perfect_power_per_level
+			stat_names = ["perfect_shot_bonus"]
 		CustomVariables.ItemColor.TEMPO:
 			per_level = pull_speed_per_level
 			stat_names = ["pull_speed"]
 		CustomVariables.ItemColor.ELEMENTAL:
-			per_level = debuff_duration_per_level
-			stat_names = DEBUFF_DURATION_STATS
+			per_level = debuff_per_level
+			stat_names = DEBUFF_STATS
 	var level: int = get_level(color)
 	for stat_name: String in stat_names:
 		var stat: Stat = player.stats.get(stat_name) as Stat
