@@ -7,6 +7,14 @@ class_name Hurricane extends Node2D
 @onready var hurt_box: HurtBox = $HurtBox
 @export var orbit_speed: float = 1.5       # radians/sec
 @export var orbit_squash: float = 0.35     # vertical compression (1.0 = circle, lower = flatter oval)
+@export_group("Damage")
+## Seconds between grinding ticks.
+@export var tick_interval: float = 0.5
+## Each tick, enemies spinning in the hurricane take base_damage x this.
+@export var orbit_tick_mult: float = 0.3
+## Each tick, enemies it can't pick up (capture immune) take base_damage x this while inside it.
+@export var immune_tick_mult: float = 0.6
+@export var tick_color: Color = Color.LIGHT_CYAN
 
 var direction: Vector2 = Vector2.RIGHT
 var _base_heading: float = 0.0
@@ -16,6 +24,9 @@ var after_hit_abilities: Array
 var before_hit_abilities: Array
 var knockback_power: float
 var enemies_picked: Dictionary[GameEntity, Dictionary] = {}  # value = {radius, angle}
+## Damage of the perfect arrow that made this hurricane. 0 = fall back to the arrow_damage stat.
+var base_damage: int = 0
+var _tick_time: float = 0.0
 
 func _ready() -> void:
 	_base_heading = direction.angle()
@@ -28,7 +39,9 @@ func _ready() -> void:
 	for ability in before_hit_abilities:
 		hurt_box.add_before_effect(ability.activate_ability)
 
-	hurt_box.base_damage = roundi(PlayerManager.player.stats.arrow_damage.value())
+	if base_damage <= 0:
+		base_damage = roundi(PlayerManager.player.stats.arrow_damage.value())
+	hurt_box.base_damage = base_damage
 	hurt_box.add_after_effect(pick_enemy)
 	
 
@@ -55,6 +68,24 @@ func _process(delta: float) -> void:
 		)
 		enemy.global_position = global_position + local_offset
 		enemy.z_index = -1 if sin(orbit.angle) < 0 else 1
+
+	_tick_time += delta
+	if _tick_time >= tick_interval:
+		_tick_time -= tick_interval
+		_grind()
+
+## Damages everything spinning in the hurricane, and hits enemies it can't lift harder.
+func _grind() -> void:
+	for enemy in enemies_picked.keys():
+		if is_instance_valid(enemy) and not enemy.is_dead:
+			enemy.take_damage(null, maxi(1, roundi(base_damage * orbit_tick_mult)), null, tick_color)
+	for area in hurt_box.get_overlapping_areas():
+		var hit_box: EnemyHitBox = area as EnemyHitBox
+		if hit_box == null:
+			continue
+		var enemy: Enemy = hit_box.get_enemy()
+		if enemy and not enemy.is_dead and enemy.stats.capture_immune:
+			enemy.take_damage(null, maxi(1, roundi(base_damage * immune_tick_mult)), null, tick_color)
 func pick_enemy(entity: GameEntity, _parent: Node2D, _result: DamageResult) -> void:
 	if not entity is Enemy:
 		return

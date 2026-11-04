@@ -13,6 +13,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		hurricane.after_hit_abilities = _activator.after_hit_abilities
 		hurricane.before_hit_abilities = _activator.before_hit_abilities
 		hurricane.knockback_power = _activator.knockback
+		hurricane.base_damage = _activator.damage
 		_activator.queue_free()
 		EventBus.summon_effect.emit(hurricane)
 
