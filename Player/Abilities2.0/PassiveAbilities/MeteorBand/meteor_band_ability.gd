@@ -97,7 +97,8 @@ class MeteorHelper extends Node:
 			slam_time = 0.0
 			_base_max_fall = player.stats.max_down_gravity
 			player.stats.max_down_gravity = roundi(_base_max_fall * ability.fall_speed_mult)
-			_trail.emitting = true
+			if is_instance_valid(_trail):
+				_trail.emitting = true
 		slam_time += delta
 		player.velocity.y = maxf(player.velocity.y, 0.0) + ability.fall_accel * delta
 		if slam_time >= ability.min_slam_time:
@@ -117,7 +118,10 @@ class MeteorHelper extends Node:
 		if is_instance_valid(_trail):
 			_trail.emitting = false
 
+	# Also fires when the player is reparented to a new world, so only stop here; the trail goes with the player.
 	func _exit_tree() -> void:
 		stop()
-		if is_instance_valid(_trail):
+
+	func _notification(what: int) -> void:
+		if what == NOTIFICATION_PREDELETE and is_instance_valid(_trail):
 			_trail.queue_free()
