@@ -4,7 +4,8 @@ class_name PainDrawMinor extends MinorAbility
 @export var duration: float = 3.0
 
 var _buff_id: int = -1
-var _expires_at: float = 0.0
+## Bumped on every refresh; only the newest timer may end the buff.
+var _token: int = 0
 
 func on_equipped() -> void:
 	var player: Player = PlayerManager.player
@@ -23,12 +24,12 @@ func _on_took_hit() -> void:
 	var player: Player = PlayerManager.player
 	_remove_buff()
 	player.stats.pull_speed.add_buff(_buff_id, value / 100.0 * power(), Stat.buff_type.MULTIPLICATIVE)
-	_expires_at = Time.get_ticks_msec() / 1000.0 + duration
-	player.get_tree().create_timer(duration).timeout.connect(_on_timer_done)
+	_token += 1
+	player.get_tree().create_timer(duration).timeout.connect(_on_timer_done.bind(_token))
 
 ## Timers only guard the exit: the buff ends when its time is really up (a newer hit pushes it back).
-func _on_timer_done() -> void:
-	if Time.get_ticks_msec() / 1000.0 >= _expires_at - 0.01:
+func _on_timer_done(token: int) -> void:
+	if token == _token:
 		_remove_buff()
 
 func _remove_buff() -> void:

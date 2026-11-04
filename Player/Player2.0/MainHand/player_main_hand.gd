@@ -133,7 +133,9 @@ func release_arrow() -> void:
 	current_arrow = null
 	release.emit()
 
-func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = hand_direction, _override_power: float = shot_power) -> void:
+## run_release_abilities: false for extra arrows spawned by abilities (echoes, splits...), so release
+## effects meant for the player's own shot don't trigger again.
+func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = hand_direction, _override_power: float = shot_power, run_release_abilities: bool = true) -> void:
 	var source_arrow: Arrow = _override_arrow if _override_arrow else current_arrow
 	var direction: Vector2 = _override_direction.normalized()
 	var effective_power: float = lerpf(0.0, 1.0, pow(_override_power, weak_shot_punish))
@@ -163,7 +165,7 @@ func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = ha
 		
 		var spread_direction = direction.rotated(angle_offset)
 		
-		if shot_power >= 1.0:
+		if _override_power >= 1.0:
 			fired_arrow.perfect_shot = true
 		fired_arrow.arrow_shot_power = effective_power
 		fired_arrow.velocity = calc_shot_velocity(effective_power, spread_direction)
@@ -173,25 +175,43 @@ func fire_arrow(_override_arrow: Arrow = null, _override_direction: Vector2 = ha
 		fired_arrow.calc_dmg(effective_power)
 		fired_arrow.calc_knockback(effective_power)
 		#fired_arrow.shoot_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.SHOOT)
-		var release_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.RELEASE)
-		for ability in release_abilities:
-			ability.activate_ability(null, fired_arrow)
+		if run_release_abilities:
+			var release_abilities = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.RELEASE)
+			for ability in release_abilities:
+				ability.activate_ability(null, fired_arrow)
 		
 		EventBus.summon_effect.emit(fired_arrow)
 	EventBus.arrow_shot_sound.emit()
 	PlayerManager.player.current_arrow = source_arrow
 	
-func draw_arrow_instance() -> Arrow:
+## hit_abilities: BEFORE_HIT / AFTER_HIT abilities this arrow carries (none by default).
+func draw_arrow_instance(hit_abilities: Array[PlayerAbility] = []) -> Arrow:
 	var _arrow: Arrow = arrow.instantiate()
+	for ability in hit_abilities:
+		if ability.get_type() == PlayerAbility.TriggerType.BEFORE_HIT:
+			_arrow.add_before_ability(ability)
+		elif ability.get_type() == PlayerAbility.TriggerType.AFTER_HIT:
+			_arrow.add_after_ability(ability)
 	add_child(_arrow)
 	_arrow.set_texture(arrow_texture)
 	_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
 	return _arrow
 	
-func fire_at(_direction: Vector2, _power: float, _position: Vector2 = arrow_position.global_position) -> void:
-	var _arrow: Arrow = draw_arrow_instance()
+## Fires an extra arrow. Abilities pass hit_abilities and run_release_abilities = false for arrows that copy effects.
+func fire_at(_direction: Vector2, _power: float, _position: Vector2 = arrow_position.global_position, hit_abilities: Array[PlayerAbility] = [], run_release_abilities: bool = true) -> Arrow:
+	var _arrow: Arrow = draw_arrow_instance(hit_abilities)
 	_arrow.global_position = _position
-	fire_arrow(_arrow, _direction, _power)
+	fire_arrow(_arrow, _direction, _power, run_release_abilities)
+	return _arrow
+
+## Every BEFORE_HIT and AFTER_HIT ability the player has, for extra arrows that copy on-hit effects.
+func get_hit_abilities() -> Array[PlayerAbility]:
+	var result: Array[PlayerAbility] = []
+	for ability in PlayerManager.player.get_abilities(PlayerAbility.TriggerType.BEFORE_HIT):
+		result.append(ability)
+	for ability in PlayerManager.player.get_abilities(PlayerAbility.TriggerType.AFTER_HIT):
+		result.append(ability)
+	return result
 	
 func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var perfect_bonus = PlayerManager.player.stats.perfect_shot_bonus.value() if _shot_power >= 1.0 else 1.0

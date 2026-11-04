@@ -5,6 +5,8 @@ signal money_changed
 signal took_hit
 signal critical_hit
 signal dash_finished
+## A hit was dodged (dodge_chance) and dealt no damage.
+signal dodged
 
 @onready var body: PlayerBody = $PlayerBody
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
@@ -58,6 +60,9 @@ var dropping_down: bool = false
 var base_stats: PlayerStats
 
 var invincible: bool = false
+## Chance (0-1) that a hit passes through harmlessly. Set by abilities (Shadow Ring).
+var dodge_chance: float = 0.0
+const DODGE_INVINCIBILITY: float = 0.3
 
 
 var shooting: bool = false
@@ -369,6 +374,9 @@ func emit_crit() -> void:
 	critical_hit.emit()
 
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
+	if not invincible and dodge_chance > 0.0 and randf() < dodge_chance:
+		_dodge()
+		return
 	if not invincible:
 		took_hit.emit()
 		EventBus.damaged_flash.emit()
@@ -387,6 +395,13 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		health_bar.reduce_health(dmg_taken)
 		if stats.hp <= 0:
 			kill()
+
+## Short invincibility so the same contact doesn't hit again on the next frame.
+func _dodge() -> void:
+	invincible = true
+	invincibility_timer.wait_time = DODGE_INVINCIBILITY
+	invincibility_timer.start()
+	dodged.emit()
 
 func start_invincibilty() -> void:
 	modulate.a = 0.5
