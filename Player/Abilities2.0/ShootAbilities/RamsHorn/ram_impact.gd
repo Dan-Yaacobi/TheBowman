@@ -4,6 +4,7 @@ class_name RamImpact extends HurtBox
 ## Lives while the carrier is still flying; the lifetime is only a safety guard.
 
 const ENEMY_MASK: int = 28
+const META_KEY: StringName = &"ram_impact"
 
 ## Below this knockback speed the enemy stops counting as a projectile (never below its own knockback threshold).
 @export var min_carry_speed: float = 25.0
@@ -19,9 +20,11 @@ var _dust: CPUParticles2D
 static func attach(_carrier: Enemy, _damage: int, _knockback: float, _chain_left: int, _falloff: float, _already_hit: Array[Enemy]) -> RamImpact:
 	if _carrier == null or _carrier.is_dead or _carrier.hit_box == null or _carrier.hit_box.collision == null:
 		return null
-	for child in _carrier.get_children():
-		if child is RamImpact:
-			child.queue_free()
+	# Tracked in meta, not children: the add is deferred, so an impact from earlier this frame isn't a child yet.
+	if _carrier.has_meta(META_KEY):
+		var old: Variant = _carrier.get_meta(META_KEY)
+		if is_instance_valid(old):
+			(old as RamImpact).queue_free()
 	var impact: RamImpact = RamImpact.new()
 	impact.carrier = _carrier
 	impact.base_damage = maxi(1, _damage)
@@ -37,8 +40,18 @@ static func attach(_carrier: Enemy, _damage: int, _knockback: float, _chain_left
 	shape.transform = _carrier.hit_box.collision.transform
 	impact.add_child(shape)
 	impact.position = _carrier.hit_box.position
-	_carrier.add_child(impact)
+	_carrier.set_meta(META_KEY, impact)
+	# Deferred: attach runs inside area_entered, where physics state can't change.
+	_add_to_carrier.call_deferred(_carrier, impact)
 	return impact
+
+static func _add_to_carrier(_carrier: Enemy, impact: RamImpact) -> void:
+	if not is_instance_valid(impact) or impact.is_queued_for_deletion():
+		return
+	if not is_instance_valid(_carrier) or _carrier.is_dead:
+		impact.free()
+		return
+	_carrier.add_child(impact)
 
 func _ready() -> void:
 	super._ready()
