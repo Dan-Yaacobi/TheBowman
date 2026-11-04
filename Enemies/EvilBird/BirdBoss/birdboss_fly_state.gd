@@ -43,7 +43,7 @@ func _spawn_bird(_position: Vector2) -> void:
 		bird_boss.bird_entry.get_factory(),
 		bird_boss.bird_entry.spawn_zone
 	)
-	if bird != null:
+	if bird != null and bird_boss != null:
 		bird_boss.active_birds.append(bird)
 		bird.died.connect(func(_e: Enemy) -> void: bird_boss.active_birds.erase(bird))
 		bird.global_position = _position
