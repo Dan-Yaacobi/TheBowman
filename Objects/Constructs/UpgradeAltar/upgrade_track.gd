@@ -44,6 +44,7 @@ func get_cost(current_level: int) -> Dictionary[CustomVariables.items, int]:
 	var next_level: int = current_level + 1
 	var result: Dictionary[CustomVariables.items, int] = {}
 	if is_milestone(next_level):
+		@warning_ignore("integer_division")
 		var milestone_index: int = next_level / milestone_every - 1
 		var mult: float = pow(milestone_cost_growth, milestone_index)
 		for item: CustomVariables.items in milestone_cost:
@@ -99,6 +100,7 @@ func _resolve_step(step: UpgradeStep, counts: Dictionary[UpgradeStep, int]) -> U
 func _milestones_up_to(level: int) -> int:
 	if milestone_every <= 0:
 		return 0
+	@warning_ignore("integer_division")
 	return level / milestone_every
 
 ## The rewards to offer at the next milestone.

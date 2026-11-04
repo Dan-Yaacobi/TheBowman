@@ -69,7 +69,7 @@ func setup(rift_type: Rift.Type) -> void:
 		sprite.texture = new_sprite
 		
 func _get_texture_data_for_type(rift_type: Rift.Type) -> TextureData:
-	for data: TextureData in textures:
-		if data.type == rift_type:
-			return data
+	for _data: TextureData in textures:
+		if _data.type == rift_type:
+			return _data
 	return null
