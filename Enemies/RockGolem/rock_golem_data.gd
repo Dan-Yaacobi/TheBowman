@@ -71,7 +71,7 @@ class_name RockGolemData extends EnemyData
 @export var boulder_knockback: float = 260.0
 ## Seconds from release to landing
 @export var boulder_flight_time: float = 1.1
-## The golem's own boulder art, so the thrown boulder is the one it was holding
+## Optional art override for the boulder; empty = the boulder scene's own art
 @export var boulder_texture: Texture2D
-## Pixel scale of the golem's art (its Sprite2D scale), so the boulder matches it
+## Pixel scale used with boulder_texture (the golem's Sprite2D scale)
 @export var boulder_sprite_scale: float = 0.4

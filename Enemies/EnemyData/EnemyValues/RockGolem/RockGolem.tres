@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_stat"]
 [ext_resource type="Texture2D" path="res://Enemies/RockGolem/Sprites/RockGolem.png" id="5_skin"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/Boulder.tscn" id="6_boulder"]
-[ext_resource type="Texture2D" path="res://Enemies/RockGolem/Sprites/GolemBoulder.png" id="7_boulder_tex"]
 
 [sub_resource type="Resource" id="Resource_death"]
 script = ExtResource("3_death")
@@ -33,4 +32,3 @@ wake_range = 80.0
 dormant_damage_multiplier = 0.4
 knockback_resistance = 0.75
 boulder_scene = ExtResource("6_boulder")
-boulder_texture = ExtResource("7_boulder_tex")

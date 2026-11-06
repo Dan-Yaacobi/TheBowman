@@ -37,6 +37,8 @@ var punch_cooldown_left: float = 0.0
 var is_leaping: bool = false
 ## Seconds awake since its last landed punch or throw; at throw_delay it throws a boulder
 var time_without_hit: float = 0.0
+## Visual scale of the held boulder once it's back in the world
+var _boulder_world_scale: Vector2 = Vector2.ONE
 var _last_floor_y: float = 0.0
 var _flash_tween: Tween
 
@@ -101,8 +103,17 @@ func pick_up_boulder() -> Boulder:
 	boulder_hold.add_child(boulder)
 	if golem_data.boulder_texture:
 		boulder.visual.texture = golem_data.boulder_texture
-	boulder.visual.scale = Vector2.ONE * golem_data.boulder_sprite_scale
+	_boulder_world_scale = _boulder_visual_scale(boulder)
+	# Held under the scaled-up golem: divide it out so the boulder keeps its real size
+	boulder.visual.scale = _boulder_world_scale / scale.x
 	return boulder
+
+
+## Visual scale the boulder should have in the world.
+func _boulder_visual_scale(boulder: Boulder) -> Vector2:
+	if golem_data.boulder_texture:
+		return Vector2.ONE * golem_data.boulder_sprite_scale * golem_data.awake_size
+	return boulder.visual.scale
 
 
 ## Lets go of the held boulder: it moves to the world exactly where it is and flies at
@@ -113,10 +124,10 @@ func throw_boulder(boulder: Boulder) -> void:
 		return
 	var start: Vector2 = boulder.global_position
 	boulder.reparent(get_parent())
-	# Normal size in the world: the art keeps the golem's pixel size, hit areas stay boulder-sized
+	# Back to its normal size in the world
 	boulder.scale = Vector2.ONE
 	boulder.rotation = 0.0
-	boulder.visual.scale = Vector2.ONE * golem_data.boulder_sprite_scale * scale.x
+	boulder.visual.scale = _boulder_world_scale
 	var landing: Vector2 = PlayerManager.player.global_position
 	var island: Island = get_player_island()
 	if island:
