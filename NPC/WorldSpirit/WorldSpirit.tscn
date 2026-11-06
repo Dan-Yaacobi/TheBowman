@@ -1,14 +1,15 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bfv1vlm08klwk"]
 
-[ext_resource type="Script" path="res://NPC/npc.gd" id="1_npc"]
-[ext_resource type="Script" path="res://NPC/npc_data.gd" id="2_data"]
-[ext_resource type="Texture2D" path="res://NPC/WorldSpirit/Sprites/world_spirit_talk.png" id="3_tex"]
-[ext_resource type="Script" path="res://NPC/npc_state_machine.gd" id="4_sm"]
-[ext_resource type="Script" path="res://NPC/npc_idle_state.gd" id="5_idle"]
-[ext_resource type="Script" path="res://NPC/npc_interacted_state.gd" id="6_inter"]
-[ext_resource type="Script" path="res://NPC/npc_gone_state.gd" id="7_gone"]
-[ext_resource type="PackedScene" path="res://NPC/ChatBox.tscn" id="8_chat"]
-[ext_resource type="PackedScene" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="9_key"]
+[ext_resource type="Script" uid="uid://b74jx05jchyj4" path="res://NPC/WorldSpirit/world_spirit.gd" id="1_npc"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_data"]
+[ext_resource type="Texture2D" uid="uid://dhbvpkkn1qan4" path="res://NPC/WorldSpirit/Sprites/world_spirit_talk.png" id="3_tex"]
+[ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_sm"]
+[ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_idle"]
+[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_inter"]
+[ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_gone"]
+[ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="8_chat"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="9_key"]
+[ext_resource type="Shader" uid="uid://bd8svm88u7aj4" path="res://NPC/WorldSpirit/spirit_glow.gdshader" id="10_glow"]
 
 [sub_resource type="Resource" id="Resource_data"]
 script = ExtResource("2_data")
@@ -16,6 +17,14 @@ npc_name = "Spirit of the World"
 dialogue_lines = Array[String](["The islands drift apart, but they remember being whole. So do I.", "Every rift is a wound in the world. Each one you cross, I feel a little less scattered.", "You are the last of the archers. The bows of your people still wait somewhere in the void.", "When the void grows too strong for you, it will send you back to me. Rest, then rise again.", "I am what remains of this world's heart. Help me mend it."])
 disappears = false
 idle = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glow"]
+shader = ExtResource("10_glow")
+shader_parameter/glow_strength = 0.0
+shader_parameter/glow_color = Color(0.45, 0.95, 1, 1)
+shader_parameter/glow_radius = 3
+shader_parameter/pulse_speed = 3.0
+shader_parameter/inner_tint = 0.2
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -86,7 +95,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
@@ -114,41 +123,56 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
 size = Vector2(120, 80)
 
-[node name="WorldSpirit" type="Node2D" node_paths=PackedStringArray("animation_player")]
+[node name="WorldSpirit" type="Node2D" unique_id=1723921817 node_paths=PackedStringArray("schematic_marker", "animation_player")]
 script = ExtResource("1_npc")
+schematic_marker = NodePath("SchematicMarker")
 data = SubResource("Resource_data")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=212601656]
+material = SubResource("ShaderMaterial_glow")
 texture = ExtResource("3_tex")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=729850549]
 libraries/ = SubResource("AnimationLibrary_spirit")
 
-[node name="NpcStateMachine" type="Node2D" parent="."]
+[node name="NpcStateMachine" type="Node2D" parent="." unique_id=645308846]
 script = ExtResource("4_sm")
 
-[node name="Idle" type="Node2D" parent="NpcStateMachine"]
+[node name="Idle" type="Node2D" parent="NpcStateMachine" unique_id=534126512]
 script = ExtResource("5_idle")
 
-[node name="Interacted" type="Node2D" parent="NpcStateMachine"]
+[node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=2141216124]
 script = ExtResource("6_inter")
 
-[node name="Gone" type="Node2D" parent="NpcStateMachine"]
+[node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=1679162906]
 script = ExtResource("7_gone")
 
-[node name="ChatBox" parent="." instance=ExtResource("8_chat")]
+[node name="ChatBox" parent="." unique_id=1379355327 instance=ExtResource("8_chat")]
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1622476350]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=576371678]
 shape = SubResource("RectangleShape2D_area")
 
-[node name="KeyboardPressHelper" parent="." instance=ExtResource("9_key")]
-offset_left = -14.0
-offset_top = -64.0
-offset_right = -14.0
-offset_bottom = -64.0
+[node name="KeyboardPressHelper" parent="." unique_id=1397521660 instance=ExtResource("9_key")]
+offset_left = -6.0
+offset_top = 31.0
+offset_right = -6.0
+offset_bottom = 31.0
 scale = Vector2(0.5, 0.5)
+
+[node name="SchematicMarker" type="Label" parent="." unique_id=1050697158]
+visible = false
+offset_left = -6.0
+offset_top = -62.0
+offset_right = 6.0
+offset_bottom = -42.0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.06, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "!"
+horizontal_alignment = 1

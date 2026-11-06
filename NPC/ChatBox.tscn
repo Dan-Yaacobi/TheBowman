@@ -18,14 +18,10 @@ mouse_filter = 2
 [node name="ChatPanel" type="PanelContainer" parent="Control" unique_id=54706152]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.282
-anchor_top = 0.717
-anchor_right = 0.703
-anchor_bottom = 0.9620001
-offset_left = -0.44000244
-offset_top = -0.35998535
-offset_right = -0.76000977
-offset_bottom = 0.23999023
+anchor_left = 0.22
+anchor_top = 0.64
+anchor_right = 0.78
+anchor_bottom = 0.965
 grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/ChatPanel" unique_id=1893089023]
@@ -34,6 +30,7 @@ alignment = 1
 
 [node name="NameLabel" type="Label" parent="Control/ChatPanel/VBoxContainer" unique_id=18760952]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 
 [node name="HSeparator" type="HSeparator" parent="Control/ChatPanel/VBoxContainer" unique_id=1050074615]
 layout_mode = 2
@@ -42,10 +39,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
 bbcode_enabled = true
 
 [node name="ContinueHint" type="Label" parent="Control/ChatPanel/VBoxContainer" unique_id=1556275817]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="Control/ChatPanel/VBoxContainer" unique_id=88407215]
 layout_mode = 2

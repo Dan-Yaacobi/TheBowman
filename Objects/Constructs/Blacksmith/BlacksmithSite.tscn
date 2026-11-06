@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Objects/Constructs/construct_site.gd" id="1_site"]
+[ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/Blacksmith.tscn" id="2_smith"]
+[ext_resource type="PackedScene" path="res://Objects/Constructs/BuildPrompt.tscn" id="3_prompt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prox"]
+radius = 44.0
+
+[node name="BlacksmithSite" type="Node2D" node_paths=PackedStringArray("construct", "build_prompt", "proximity_area")]
+script = ExtResource("1_site")
+id = &"blacksmith"
+display_name = "Blacksmith"
+description = "Forge known schematics into gear for your next run."
+cost = Dictionary[int, int]({
+3: 50,
+2: 20
+})
+construct = NodePath("Blacksmith")
+build_prompt = NodePath("BuildPrompt")
+proximity_area = NodePath("ProximityArea")
+
+[node name="Blacksmith" parent="." instance=ExtResource("2_smith")]
+
+[node name="ProximityArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea"]
+shape = SubResource("CircleShape2D_prox")
+
+[node name="BuildPrompt" parent="." instance=ExtResource("3_prompt")]
+offset_left = -22.0
+offset_top = -23.0
+offset_right = 130.0
+offset_bottom = 89.0

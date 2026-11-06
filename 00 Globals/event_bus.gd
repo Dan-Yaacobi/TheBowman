@@ -113,6 +113,9 @@ signal event_exited()
 signal open_upgrade_menu
 signal upgrade_menu_closed
 signal close_upgrade_menu
+signal open_craft_menu(drop_position: Vector2)
+signal craft_menu_closed
+signal close_craft_menu
 
 signal activate_gauge
 

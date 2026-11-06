@@ -46,6 +46,9 @@ enum StringStyle { PLAIN, GLOW, PULSE, CRACKLE }
 @export var ability: PlayerAbility
 @export var tiers: Array[RarityTier]  = [RarityTier.new(), RarityTier.new(), RarityTier.new(), RarityTier.new()]
 @export var equipment_scene: PackedScene
+## Crafting at the blacksmith: 1 Skyshard plus this much of the slot's material
+## (bow = wood, quiver = gold, ring = essence). See Crafting.get_craft_cost().
+@export var craft_material_amount: int = 10
 
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---

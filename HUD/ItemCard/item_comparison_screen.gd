@@ -2,6 +2,9 @@ class_name ItemComparisonScreen extends Control
 
 signal equip_pressed
 
+## Upper bound on frames to wait for the cards' layout to settle before syncing heights.
+const MAX_LAYOUT_FRAMES: int = 6
+
 @export var stat_names_dict: Dictionary[String, String] = {}
 @onready var new_card: ItemCard = $CenterContainer/VBoxContainer/Cards/NewCard
 @onready var current_card: ItemCard = $CenterContainer/VBoxContainer/Cards/CurrentCard
@@ -112,11 +115,21 @@ func _display_name(stat_name: String) -> String:
 func _slot_name(slot: EquipmentData.slots) -> String:
 	return str(EquipmentData.slots.keys()[slot]).capitalize()
 
-# Wait one frame for layout, then match header/ability heights so stat rows line up.
+# Wait for layout to settle, then match header/ability heights so stat rows line up.
+# Autowrapped ability labels first measure at zero width (one word per line, very tall)
+# and only get their real height a pass or two later, so one frame isn't enough.
 func _sync_card_sections() -> void:
 	new_card.modulate.a = 0.0
 	current_card.modulate.a = 0.0
-	await get_tree().process_frame
+	var last_height: float = -1.0
+	for i: int in MAX_LAYOUT_FRAMES:
+		await get_tree().process_frame
+		if not is_inside_tree():
+			return
+		var height_now: float = new_card.get_combined_minimum_size().y + current_card.get_combined_minimum_size().y
+		if is_equal_approx(height_now, last_height):
+			break
+		last_height = height_now
 	if not current_card.is_empty:
 		var new_sections: Array[Control] = new_card.get_sync_sections()
 		var current_sections: Array[Control] = current_card.get_sync_sections()

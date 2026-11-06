@@ -101,4 +101,5 @@ color = 3
 ability = SubResource("Resource_mnna4")
 tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
 equipment_scene = ExtResource("1_ta2eq")
+craft_material_amount = 12
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

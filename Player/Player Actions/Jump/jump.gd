@@ -34,7 +34,8 @@ func _physics_process(delta: float) -> void:
 	if buffer_timer > 0:
 		buffer_timer -= delta
 		try_jump()
-	if dropping and player.position.y > drop_start_y + DROP_CLEAR_DISTANCE:
+	# Clear once fallen far enough, or once standing again (short drop or failed drop) so it can't latch
+	if dropping and (player.is_on_floor() or player.position.y > drop_start_y + DROP_CLEAR_DISTANCE):
 		dropping = false
 
 func _check_landing() -> void:

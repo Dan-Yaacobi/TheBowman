@@ -49,3 +49,5 @@ class_name EnemyData extends Resource
 @export_range(0, 100, 0.1, "suffix:%") var drop_chance: float = 20.0
 @export var equip_amount: int = 1
 @export var rarity_skew: float = 0.0
+## Schematic drop chance (%). Negative = use Crafting.BASE_SCHEMATIC_CHANCE.
+@export var schematic_chance_override: float = -1.0

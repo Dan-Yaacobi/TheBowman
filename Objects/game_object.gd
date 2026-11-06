@@ -1,7 +1,8 @@
 class_name GameObject extends Node2D
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var hit_box: HitBox = $HitBox
+## Optional: objects opened another way (e.g. chests) have no HitBox.
+@onready var hit_box: HitBox = get_node_or_null(^"HitBox") as HitBox
 @onready var placement_marker: Marker2D = $PlacementMarker
 @export var data: ObjectData
 @export var avg_coin_drop: int = 0
@@ -16,10 +17,10 @@ class_name GameObject extends Node2D
 var got_hit: bool = false
 
 func _ready() -> void:
-	if not data.interactable:
-		hit_box.monitorable = false
-		
-	hit_box.Damaged.connect(break_item)
+	if hit_box:
+		if not data.interactable:
+			hit_box.monitorable = false
+		hit_box.Damaged.connect(break_item)
 	setup(get_rift_type())
 	
 func get_rift_type() -> Rift.Type:

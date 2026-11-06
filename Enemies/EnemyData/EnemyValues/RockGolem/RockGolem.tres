@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="RockGolemData" format=3]
+[gd_resource type="Resource" script_class="RockGolemData" format=3 uid="uid://if458ki11yhx"]
 
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="1_abil"]
-[ext_resource type="Script" path="res://Enemies/RockGolem/rock_golem_data.gd" id="2_data"]
+[ext_resource type="Script" uid="uid://botbtjos030cw" path="res://Enemies/RockGolem/rock_golem_data.gd" id="2_data"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="3_death"]
+[ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_44eh1"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_stat"]
-[ext_resource type="Texture2D" path="res://Enemies/RockGolem/Sprites/RockGolem.png" id="5_skin"]
+[ext_resource type="Texture2D" uid="uid://cbckg2vyhufhy" path="res://Enemies/RockGolem/Sprites/RockGolem.png" id="5_skin"]
 [ext_resource type="PackedScene" path="res://Enemies/WizardBoss/EarthWizard/Boulder.tscn" id="6_boulder"]
 
 [sub_resource type="Resource" id="Resource_death"]
@@ -18,6 +19,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("2_data")
+boulder_scene = ExtResource("6_boulder")
 max_hp = 250
 move_speed = SubResource("Resource_speed")
 knockback = 260
@@ -28,7 +30,3 @@ knockback_decay = 0.1
 capture_immune = true
 death_ability = Array[ExtResource("1_abil")]([SubResource("Resource_death")])
 drop_chance = 50.0
-wake_range = 80.0
-dormant_damage_multiplier = 0.4
-knockback_resistance = 0.75
-boulder_scene = ExtResource("6_boulder")

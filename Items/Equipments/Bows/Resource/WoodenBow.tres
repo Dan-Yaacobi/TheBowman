@@ -38,4 +38,5 @@ string_color = Color(0.86, 0.78, 0.6, 1)
 color = 2
 tiers = Array[Object]([SubResource("Resource_onctg")])
 equipment_scene = ExtResource("1_onctg")
+craft_material_amount = 14
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

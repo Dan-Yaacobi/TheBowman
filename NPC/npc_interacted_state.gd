@@ -8,6 +8,7 @@ func init() -> void:
 func Enter() -> void:
 	if npc.data.has_chat:
 		npc.chat_box.open(npc)
+		npc.on_interaction_opened()
 	else:
 		npc.action(0)
 		if not npc.holds_interaction():

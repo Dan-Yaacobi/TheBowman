@@ -2,27 +2,24 @@
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
 [ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="7_qvidt"]
-[ext_resource type="Resource" uid="uid://bne12vsibkgqs" path="res://Items/Equipments/Rings/Resource/fire_ring.tres" id="8_qvidt"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
-[ext_resource type="PackedScene" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
-[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="15_qvidt"]
-[ext_resource type="PackedScene" uid="uid://l84og620rtdb" path="res://Level/Events/ChestsEvent.tscn" id="16_qvidt"]
+[ext_resource type="PackedScene" uid="uid://bfv1vlm08klwk" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
-[ext_resource type="PackedScene" uid="uid://ddhffywfb4gs" path="res://Level/Events/BossEvents/BirdBossEvent.tscn" id="17_24r6y"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" uid="uid://clbbs2m6t4pjb" path="res://Objects/Constructs/QuestBoard/QuestBoardSite.tscn" id="19_24r6y"]
+[ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]
 
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
 
 [node name="WorldSpirit" parent="." unique_id=406161502 instance=ExtResource("14_gej64")]
-position = Vector2(-12, 68)
+position = Vector2(43, 68)
 
 [node name="PlayerSpawn" parent="." unique_id=1049349633 instance=ExtResource("12_g1826")]
 position = Vector2(208, 83)
@@ -34,13 +31,13 @@ position = Vector2(486, 78)
 use_fixed_frame = true
 fixed_frame_index = 4
 
+[node name="TargetDummy" parent="Islands/Island" unique_id=603628097 instance=ExtResource("17_5lv0r")]
+position = Vector2(-1, -18)
+
 [node name="Island3" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
 position = Vector2(534, 105)
 use_fixed_frame = true
 fixed_frame_index = 4
-
-[node name="Island10" parent="Islands" unique_id=880183015 instance=ExtResource("14_7t2hb")]
-position = Vector2(40, 100)
 
 [node name="Island18" parent="Islands" unique_id=218020803 instance=ExtResource("14_7t2hb")]
 position = Vector2(168, 214)
@@ -60,6 +57,9 @@ position = Vector2(348, 156)
 [node name="Island24" parent="Islands" unique_id=1202727799 instance=ExtResource("14_7t2hb")]
 position = Vector2(393, 130)
 
+[node name="Island25" parent="Islands" unique_id=1800421460 instance=ExtResource("14_7t2hb")]
+position = Vector2(421, 160)
+
 [node name="Island11" parent="Islands" unique_id=538615439 instance=ExtResource("14_7t2hb")]
 position = Vector2(155, 118)
 use_fixed_frame = true
@@ -75,9 +75,6 @@ position = Vector2(96, 102)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="TargetDummy" parent="Islands/Island16" unique_id=603628097 instance=ExtResource("17_5lv0r")]
-position = Vector2(0, -21)
-
 [node name="Island12" parent="Islands" unique_id=297227350 instance=ExtResource("14_7t2hb")]
 position = Vector2(293, 118)
 use_fixed_frame = true
@@ -91,10 +88,6 @@ item_data = ExtResource("7_qvidt")
 position = Vector2(340, 89)
 use_fixed_frame = true
 fixed_frame_index = 4
-
-[node name="PedestalNPC2" parent="Islands/Island17" unique_id=1109545810 instance=ExtResource("13_gej64")]
-position = Vector2(0, -16)
-item_data = ExtResource("8_qvidt")
 
 [node name="Island13" parent="Islands" unique_id=1913911205 instance=ExtResource("14_7t2hb")]
 position = Vector2(201, 118)
@@ -147,12 +140,7 @@ position = Vector2(-39, 558)
 costs_heart = false
 
 [node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
-position = Vector2(383, 67)
+position = Vector2(466, 148)
 
-[node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("15_qvidt")]
-position = Vector2(212, 174)
-event_scene = ExtResource("16_qvidt")
-
-[node name="EventPortal2" parent="." unique_id=1622461768 instance=ExtResource("15_qvidt")]
-position = Vector2(259, 162)
-event_scene = ExtResource("17_24r6y")
+[node name="BlacksmithSite" parent="." unique_id=1990333479 instance=ExtResource("20_smith")]
+position = Vector2(387, 59)

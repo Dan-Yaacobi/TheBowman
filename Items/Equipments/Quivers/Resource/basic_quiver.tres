@@ -29,4 +29,5 @@ slot = 1
 color = 2
 tiers = Array[Object]([SubResource("Resource_snq3k")])
 equipment_scene = ExtResource("1_i7k7n")
+craft_material_amount = 40
 metadata/_custom_type_script = "uid://bqd150tbbmd01"

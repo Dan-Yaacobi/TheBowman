@@ -4,7 +4,8 @@ signal disappear
 
 @onready var npc_state_machine: NPCStateMachine = $NpcStateMachine
 @onready var interaction_area: Area2D = $InteractionArea
-@onready var sprite: Sprite2D = $Sprite2D
+## Optional: constructs like the forge keep their sprite on their island instead.
+@onready var sprite: Sprite2D = get_node_or_null(^"Sprite2D") as Sprite2D
 @onready var keyboard_press_helper: KeyBoardHelper = $KeyboardPressHelper
 
 @export var data: NPCData
@@ -16,7 +17,7 @@ var facing_direction: int = 1
 var chat_box: ChatBox
 
 func face_the_player() -> void:
-	if not data.idle:
+	if not data.idle and sprite:
 		var player_x: float = PlayerManager.player.global_position.x
 		var dir: int = 1 if player_x > global_position.x else -1
 		if dir != facing_direction:
@@ -68,9 +69,17 @@ func action(_index: int) -> void:
 func show_post_action_line() -> void:
 	chat_box.show_line(data.post_action_lines.pick_random())
 
+## False makes the interact key ignore this NPC (e.g. a locked forge).
+func can_interact() -> bool:
+	return true
+
 ## True keeps the NPC in Interacted after action(0) instead of going straight to Gone.
 func holds_interaction() -> bool:
 	return false
+
+## Called when the Interacted state enters, after the chat box opened.
+func on_interaction_opened() -> void:
+	pass
 
 ## Called when the Interacted state exits.
 func on_interaction_closed() -> void:

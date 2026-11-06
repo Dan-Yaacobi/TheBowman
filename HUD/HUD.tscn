@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://db37eajjp6vrw" path="res://HUD/death_screen.gd" id="21_2gu3h"]
 [ext_resource type="PackedScene" path="res://HUD/ColorLevels/ColorLevelsHud.tscn" id="22_clhud"]
 [ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
+[ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/CraftMenu.tscn" id="24_craft"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g452r"]
 shader = ExtResource("15_iob2k")
@@ -43,6 +44,8 @@ shader_parameter/fps = 12.0
 script = ExtResource("1_ja1d4")
 
 [node name="UpgradeMenu" parent="." unique_id=765910775 instance=ExtResource("2_iob2k")]
+
+[node name="CraftMenu" parent="." instance=ExtResource("24_craft")]
 
 [node name="ItemComparisonLayer" type="CanvasLayer" parent="." unique_id=705740621]
 layer = 10

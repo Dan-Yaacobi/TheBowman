@@ -10,6 +10,7 @@ signal typing_finished
 @onready var continue_hint: Label = $Control/ChatPanel/VBoxContainer/ContinueHint
 
 @export var chars_per_second: float = 40.0
+@export var button_font_size: int = 22
 
 var _lines: Array[String] = []
 var _current_line_index: int = 0
@@ -97,6 +98,7 @@ func _build_buttons(npc: NPC) -> void:
 	for i in npc.data.action_button_labels.size():
 		var btn := Button.new()
 		btn.text = npc.data.action_button_labels[i]
+		btn.add_theme_font_size_override("font_size", button_font_size)
 		btn.pressed.connect(npc.action.bind(i))
 		buttons_container.add_child(btn)
 

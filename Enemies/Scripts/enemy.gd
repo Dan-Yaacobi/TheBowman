@@ -192,6 +192,8 @@ func drop_item() -> void:
 			100)
 		for item in stats.equip_amount:
 			EventBus.try_drop.emit(global_position, drop_chance,stats.rarity_skew)
+	# Outside no_drops: that flag only gates gear (enemies drop essence, not gear).
+	Crafting.try_drop_schematic(global_position, stats.schematic_chance_override)
 	#EventBus.drop_coins.emit(global_position, stats.avg_coins_dropped)
 	if stats.can_drop_essence:
 		EventBus.drop_item.emit(CustomVariables.items.ESSENCE,global_position, stats.drop_chance, 1)

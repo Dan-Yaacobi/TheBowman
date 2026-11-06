@@ -22,7 +22,7 @@ func Physics(_delta: float) -> NPCState:
 
 func HandleInput(_event: InputEvent) -> NPCState:
 	if _event.is_action_pressed("Interact"):
-		if _player_in_range:
+		if _player_in_range and npc.can_interact():
 			return interacted
 	return null
 

@@ -191,6 +191,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			collect_item(CustomVariables.items.SKYSHARD, 50)
 		if event.keycode == KEY_F6:
 			EventBus.drop_item.emit(CustomVariables.items.COLOR_SCROLL, global_position + Vector2(40, -10), 100.0, 1)
+		if event.keycode == KEY_F8:
+			Crafting.try_drop_schematic(global_position + Vector2(40, -10), 100.0)
+		if event.keycode == KEY_F10:
+			Crafting.crafted_this_run = false
+			print("forge unlocked")
 		if event.keycode == KEY_F9:
 			var track: UpgradeTrack = MetaProgress.tracks[0]
 			var bought: bool = MetaProgress.purchase(track, self)

@@ -81,6 +81,16 @@ Start in the hub → enter a rift → traverse islands, fight, find chests and a
 Resources collected during runs are kept, even on death → spent in the hub on buildings, stat upgrades and crafting → future runs start stronger and with more options.
 - Meta power is deliberately **smaller than what gear does**. Gear defines the run; meta smooths the floor.
 
+### Crafting
+Lets the player start a run with one chosen item, without replacing what the run finds.
+1. **Schematics drop in rifts.** Enemies and chests have a small chance (one global base value, optional per-enemy/per-chest override). They're picked up **unidentified** and kept even on death.
+2. **The spirit reveals them.** The spirit shows a "!" while schematics are waiting. Talking to it reveals each one into a permanently known recipe. Schematics only ever reveal recipes you don't know yet; once every recipe is known, they stop dropping.
+3. **The blacksmith crafts.** A hub building (forge station, no NPC). Its menu lists known recipes. Crafting is mouse-only (Design Rule 9).
+- **Cost:** 1 Skyshard + a slot material: bows → wood, quivers → gold, rings → essence. The amount differs slightly per item.
+- **One craft per run.** The forge locks after a craft and unlocks when the player dies in a rift and returns to the hub, or loads a saved game. Falling in the hub doesn't unlock it.
+- **Crafted items are always Common.** Run loot stays the stronger source of gear.
+- The crafted item drops at the forge. Not picked up before leaving = lost. Dying destroys it like any other item.
+
 ---
 
 ## 4. Design Rules
@@ -91,7 +101,7 @@ Hard constraints. Every new feature must respect these unless the rule itself is
 2. **Falling never ends a run by itself.** It costs a heart container. (Exception: challenge shrines, where a fall is an instant fail of *that challenge only*.)
 3. **Every gauge fills through combat interaction** (hits, kills, damage taken, debuffs applied), never through something the player can do alone.
 4. **Every item has an ability.** No stat-only items.
-5. **Enemies drop essence, not gear.** Equipment comes from chests, NPCs, events and bosses.
+5. **Enemies drop essence, not gear.** Equipment comes from chests, NPCs, events and bosses. (Schematics are not gear: they only become a recipe in the hub.)
 6. **One event per rift**, entered through a portal into its own contained scene.
 7. **No refunds, no loadouts.** Meta choices are permanent and always active. The game is about enjoying what you got, not min-maxing.
 8. **DoTs (bleed, burn, poison) share one model.** Same tick, damage and duration rules. They differ in flavour and source, not mechanics. Modifiers are unified ("increase DoT damage"), not per element.
@@ -106,7 +116,7 @@ The goal is a game that is **finished enough**: a complete, winnable loop with e
 **The game is finished when:**
 - **A full run is winnable.** ~15 rifts across biomes (3 per biome), a boss at the end of each biome, and killing the final wizard boss wins.
 - **Bosses:** 5 total, drawn from a pool, the 5th being the final wizard.
-- **Hub:** 3 buildings working end to end: the upgrade altar (with its milestone abilities), the quest board, and the blacksmith (recipes → craft starting gear for the next run). Unlocked through schematics handed to the guide.
+- **Hub:** 3 buildings working end to end: the upgrade altar (with its milestone abilities), the quest board, and the blacksmith (known recipes → craft one starting item for the next run). Buildings appear in the hub as unbuilt sites and are paid for to build. Recipes come from schematics handed to the guide (see Crafting below).
 - **Equipment:** a pool somewhat bigger than today's, enough that runs feel different.
 - **Enemies:** a few more than today, enough that each biome has its own roster.
 - **Events:** at least the ones already spawning, each giving real choices and rewards.
@@ -182,7 +192,7 @@ Gaps are acceptable. The story doesn't need to explain everything for the game t
 - Bosses and arenas
 - World: rift generation, biomes, chunks, side paths
 - Events: framework, challenge shrine, Golden Apple, others
-- Hub and meta progression: buildings, guide NPC, schematics, upgrade altar tracks and milestones, blacksmith, quest board
+- Hub and meta progression: buildings, guide NPC, upgrade altar tracks and milestones, quest board (crafting is covered under Core Loops → Crafting)
 - Economy: wood, essence, gold, Skyshard; sources and sinks
 - Art and audio direction
 - Open questions
