@@ -1,22 +1,18 @@
 class_name RockGolemJumpState extends EnemyState
 ## A solid rock hopping: it never squashes or stretches.
-## Slow to start and stop, sudden in between: rumbles in place, then a quick low hop under
+## Slow to start and stop, sudden in between: stands still a moment, then a quick low hop under
 ## heavy gravity, slams into the island (camera shake, the island sinks under it) and
 ## stands still for a moment. The arc is scripted (not physics) so it lands exactly.
 
 @export var land_state: EnemyState
 ## Small downward speed on landing so the body settles onto the island
 const LANDING_SETTLE_SPEED: float = 40.0
-## How often the rumble changes side (seconds)
-const RUMBLE_STEP: float = 0.05
 
 enum Phase { WINDUP, AIR, RECOVER }
 
 var golem: RockGolem
 var _phase: Phase = Phase.WINDUP
 var _time_left: float = 0.0
-var _rumble_left: float = 0.0
-var _rumble_side: float = 1.0
 var _air_time: float = 0.0
 var _rise_time: float = 0.0
 var _fall_time: float = 0.0
@@ -33,7 +29,6 @@ func Enter() -> void:
 	golem.move_x = 0.0
 	_phase = Phase.WINDUP
 	_time_left = golem.golem_data.jump_windup
-	_rumble_left = 0.0
 	golem.update_animation("Idle")
 	if golem.jump_target:
 		golem.face_x(golem.jump_target.get_top_center().x)
@@ -42,7 +37,6 @@ func Enter() -> void:
 func Exit() -> void:
 	golem.is_leaping = false
 	golem.move_x = 0.0
-	golem.sprite.position = Vector2.ZERO
 	golem.jump_cooldown_left = golem.golem_data.jump_cooldown
 
 
@@ -51,7 +45,6 @@ func Physics(delta: float) -> EnemyState:
 		Phase.WINDUP:
 			if not _target_valid():
 				return land_state
-			_rumble(delta)
 			_time_left -= delta
 			if _time_left <= 0.0:
 				_launch()
@@ -80,19 +73,9 @@ func _target_valid() -> bool:
 		and golem.jump_target.is_solid()
 
 
-## Shakes side to side in place, like a boulder about to come loose.
-func _rumble(delta: float) -> void:
-	_rumble_left -= delta
-	if _rumble_left <= 0.0:
-		_rumble_left = RUMBLE_STEP
-		_rumble_side = -_rumble_side
-		golem.sprite.position.x = _rumble_side * golem.golem_data.jump_rumble
-
-
 func _launch() -> void:
 	var data: RockGolemData = golem.golem_data
 	var landing: Vector2 = golem.get_landing_point(golem.jump_target)
-	golem.sprite.position = Vector2.ZERO
 	_start = golem.global_position
 	_landing_x = landing.x
 	var arc: float = data.jump_arc_height + data.jump_arc_per_distance * absf(landing.x - _start.x)

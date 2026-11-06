@@ -51,11 +51,24 @@ func _ready() -> void:
 	hit_box.struck.connect(_on_hit_box_struck)
 	ground_detector.body_entered.connect(_on_ground_detector_body_entered)
 
+## While held (e.g. in the rock golem's hands) it hits nothing and can't be hit.
+## Safe to call before the boulder is in the tree.
+func set_held(held: bool) -> void:
+	for path: String in ["HurtBox", "HitBox", "GroundDetector"]:
+		var area: Area2D = get_node(path) as Area2D
+		if is_inside_tree():
+			area.set_deferred("monitoring", not held)
+			area.set_deferred("monitorable", not held)
+		else:
+			area.monitoring = not held
+			area.monitorable = not held
+
 ## Fly from start so it reaches landing after flight_time seconds.
 ## target = the island under the landing spot, for the warning shadow (null = no shadow)
 func launch(start: Vector2, landing: Vector2, flight_time: float, thrower: Node2D, target: Island) -> void:
 	if not is_node_ready():
 		await ready
+	set_held(false)
 	global_position = start
 	_flight_time = maxf(flight_time, 0.1)
 	_velocity = (landing - start) / _flight_time - Vector2(0.0, 0.5 * gravity * _flight_time)

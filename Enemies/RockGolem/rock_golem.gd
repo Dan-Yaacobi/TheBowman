@@ -15,6 +15,9 @@ const ISLAND_MASK: int = 16
 
 @onready var punch_hurt_box: HurtBox = $PunchHurtBox
 @onready var _fist_shape: CollisionShape2D = $PunchHurtBox/CollisionShape2D
+## Mirrors with facing; the Throw animation moves BoulderHold along with its hands
+@onready var hand_pivot: Node2D = $HandPivot
+@onready var boulder_hold: Marker2D = $HandPivot/BoulderHold
 
 var golem_data: RockGolemData
 var is_dormant: bool = true
@@ -65,6 +68,7 @@ func face_x(x: float) -> void:
 	sprite.offset.x = -BODY_OFFSET_X if sprite.flip_h else BODY_OFFSET_X
 	# The fist is always in front
 	_fist_shape.position.x = absf(_fist_shape.position.x) * facing_sign()
+	hand_pivot.scale.x = facing_sign()
 
 
 func facing_sign() -> float:
@@ -87,20 +91,36 @@ func wants_to_throw() -> bool:
 		and calculate_distance_to_player() <= golem_data.throw_range
 
 
-## Lobs a boulder at where the player is standing (or straight at them over the void).
-func throw_boulder() -> void:
+## Puts a real boulder in its hands. It rides BoulderHold (behind the sprite, so the
+## fingers stay in front) until throw_boulder hands it to the world.
+func pick_up_boulder() -> Boulder:
+	var boulder: Boulder = golem_data.boulder_scene.instantiate()
+	boulder.damage = golem_data.boulder_damage
+	boulder.knockback = golem_data.boulder_knockback
+	boulder.set_held(true)
+	boulder_hold.add_child(boulder)
+	if golem_data.boulder_texture:
+		boulder.visual.texture = golem_data.boulder_texture
+	boulder.visual.scale = Vector2.ONE * golem_data.boulder_sprite_scale
+	return boulder
+
+
+## Lets go of the held boulder: it moves to the world exactly where it is and flies at
+## where the player is standing (or straight at them over the void).
+func throw_boulder(boulder: Boulder) -> void:
 	time_without_hit = 0.0
-	var hand: Vector2 = golem_data.throw_hand_offset * scale
-	hand.x *= facing_sign()
-	var start: Vector2 = global_position + hand
+	if not is_instance_valid(boulder):
+		return
+	var start: Vector2 = boulder.global_position
+	boulder.reparent(get_parent())
+	# Normal size in the world: the art keeps the golem's pixel size, hit areas stay boulder-sized
+	boulder.scale = Vector2.ONE
+	boulder.rotation = 0.0
+	boulder.visual.scale = Vector2.ONE * golem_data.boulder_sprite_scale * scale.x
 	var landing: Vector2 = PlayerManager.player.global_position
 	var island: Island = get_player_island()
 	if island:
 		landing.y = island.get_top_y()
-	var boulder: Boulder = golem_data.boulder_scene.instantiate()
-	boulder.damage = golem_data.boulder_damage
-	boulder.knockback = golem_data.boulder_knockback
-	EventBus.summon_effect.emit(boulder)
 	boulder.launch(start, landing, golem_data.boulder_flight_time, self, island)
 
 

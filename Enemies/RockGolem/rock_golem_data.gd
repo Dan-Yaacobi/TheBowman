@@ -32,10 +32,8 @@ class_name RockGolemData extends EnemyData
 @export var jump_gravity: float = 1400.0
 ## Extra pull on the way down so it slams into the island
 @export var jump_fall_gravity_multiplier: float = 1.6
-## Rumbles in place before take-off (the player's warning)
+## Stands still before take-off (the player's warning)
 @export var jump_windup: float = 0.6
-## How far the rumble shakes the body (pixels)
-@export var jump_rumble: float = 0.75
 ## Stands still after landing before it can act (longer if the island is still bouncing)
 @export var jump_land_recovery: float = 0.4
 ## How far the island sinks when it lands
@@ -73,5 +71,7 @@ class_name RockGolemData extends EnemyData
 @export var boulder_knockback: float = 260.0
 ## Seconds from release to landing
 @export var boulder_flight_time: float = 1.1
-## Where the boulder leaves its hands, facing right, at rock size (scales with the golem)
-@export var throw_hand_offset: Vector2 = Vector2(18, -26)
+## The golem's own boulder art, so the thrown boulder is the one it was holding
+@export var boulder_texture: Texture2D
+## Pixel scale of the golem's art (its Sprite2D scale), so the boulder matches it
+@export var boulder_sprite_scale: float = 0.4
