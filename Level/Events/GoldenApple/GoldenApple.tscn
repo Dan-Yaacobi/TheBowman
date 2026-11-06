@@ -25,7 +25,7 @@ script = ExtResource("1_script")
 stats = ExtResource("2_data")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.85, 0.2, 1)
+scale = Vector2(0.45, 0.45)
 
 [node name="HitBox" parent="." instance=ExtResource("3_hitbox")]
 collision_layer = 4
