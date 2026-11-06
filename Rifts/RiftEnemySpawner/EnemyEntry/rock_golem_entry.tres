@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3]
+
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_entry"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/RockGolem/RockGolem.tres" id="2_data"]
+[ext_resource type="PackedScene" path="res://Enemies/RockGolem/RockGolem.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_entry")
+scene = ExtResource("3_scene")
+data = ExtResource("2_data")
+cost = 2
+max_level = 2
+base_weight = 8.0
+spawn_zone = 5
+metadata/_custom_type_script = "uid://lq0131vpkgfn"

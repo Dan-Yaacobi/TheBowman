@@ -1,5 +1,8 @@
 class_name Island extends StaticBody2D
 
+## Every island joins this group so spawners can find islands with free object spots
+const GROUP: StringName = &"islands"
+
 @onready var objects_spawn_markers: ObjectSpawnMarkers = $ObjectsSpawnMarkers
 @export var start_island: bool = false
 @export var floating: bool = false
@@ -22,6 +25,7 @@ var _move_tween: Tween
 var _dip_tween: Tween
 
 func _ready() -> void:
+	add_to_group(GROUP)
 	base_height = global_position.y
 	float_speed *= randf_range(0.5, 1.5)
 	float_amplitude *= randf_range(0.5, 1.5)
@@ -91,6 +95,17 @@ func spawn_game_object() -> bool:
 		obj.global_position = spawn_pos - marker_offset
 		has_game_object = true
 	return true
+
+func has_free_object_spot() -> bool:
+	return objects_spawn_markers.get_total_possible_spawns() > 0
+
+## Takes one free object spot (e.g. for a ground enemy) and returns its position.
+func claim_object_spot() -> Vector2:
+	return objects_spawn_markers.get_spawn_position()
+
+## False while the island is crumbled/disabled.
+func is_solid() -> bool:
+	return get_collision_layer_value(5)
 
 func _on_player_interact() -> void:
 	if _dip_tween != null and _dip_tween.is_running():
