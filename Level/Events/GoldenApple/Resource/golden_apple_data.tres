@@ -30,6 +30,7 @@ script = ExtResource("3_data")
 max_hp = 5
 move_speed = SubResource("Resource_move_speed")
 skin = ExtResource("5_skin")
+avg_coins_dropped = 6
 can_be_knockedback = false
 stun_immune = true
 capture_immune = true
