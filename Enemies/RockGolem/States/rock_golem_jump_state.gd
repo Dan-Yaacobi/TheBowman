@@ -1,12 +1,14 @@
 class_name RockGolemJumpState extends EnemyState
 ## A solid rock hopping: it never squashes or stretches.
-## Slow to start and stop, sudden in between: stands still a moment, then a quick low hop under
-## heavy gravity, slams into the island (camera shake, the island sinks under it) and
-## stands still for a moment. The arc is scripted (not physics) so it lands exactly.
+## Stands still a moment, then follows an arc planned at take-off from start to landing,
+## speeding up into a slam on the island (camera shake, the island sinks under it), and
+## stands still for a moment. Scripted, not physics, so it lands exactly.
 
 @export var land_state: EnemyState
 ## Small downward speed on landing so the body settles onto the island
 const LANDING_SETTLE_SPEED: float = 40.0
+## Samples along the arc for even speed (arc-length table)
+const ARC_SAMPLES: int = 32
 
 enum Phase { WINDUP, AIR, RECOVER }
 
@@ -14,11 +16,13 @@ var golem: RockGolem
 var _phase: Phase = Phase.WINDUP
 var _time_left: float = 0.0
 var _air_time: float = 0.0
-var _rise_time: float = 0.0
-var _fall_time: float = 0.0
+var _duration: float = 1.0
 var _start: Vector2 = Vector2.ZERO
+var _control: Vector2 = Vector2.ZERO
 var _landing_x: float = 0.0
-var _peak_y: float = 0.0
+## Arc length travelled at each sample t = i / ARC_SAMPLES, normalised to 0-1
+var _arc_lengths: PackedFloat32Array = PackedFloat32Array()
+var _arc_total: float = 0.0
 
 
 func init() -> void:
@@ -53,9 +57,10 @@ func Physics(delta: float) -> EnemyState:
 				# Island gone mid-air: drop and let gravity decide
 				golem.is_leaping = false
 				return land_state
-			_air_time = minf(_air_time + delta, _rise_time + _fall_time)
-			golem.global_position = _arc_point(_air_time)
-			if _air_time >= _rise_time + _fall_time:
+			_air_time = minf(_air_time + delta, _duration)
+			var travelled: float = pow(_air_time / _duration, golem.golem_data.jump_ease_power)
+			golem.global_position = _bezier(_t_at_length(travelled))
+			if _air_time >= _duration:
 				_land()
 		Phase.RECOVER:
 			# Ride the island while it sinks and springs back, so it can't slip through it
@@ -78,11 +83,15 @@ func _launch() -> void:
 	var landing: Vector2 = golem.get_landing_point(golem.jump_target)
 	_start = golem.global_position
 	_landing_x = landing.x
-	var arc: float = data.jump_arc_height + data.jump_arc_per_distance * absf(landing.x - _start.x)
-	_peak_y = minf(_start.y, landing.y) - arc
-	# Real projectile timing: t = sqrt(2h / g), with the heavier pull on the way down
-	_rise_time = sqrt(2.0 * (_start.y - _peak_y) / data.jump_gravity)
-	_fall_time = sqrt(2.0 * (landing.y - _peak_y) / (data.jump_gravity * data.jump_fall_gravity_multiplier))
+	# Quadratic bezier: the control point sits above the middle at twice the wanted
+	# peak height, so the curve peaks `arc` above the higher end
+	var distance: float = _start.distance_to(landing)
+	var arc: float = clampf(distance * data.jump_arc_ratio, data.jump_arc_min, data.jump_arc_max)
+	var peak_y: float = minf(_start.y, landing.y) - arc
+	var mid_y: float = (_start.y + landing.y) * 0.5
+	_control = Vector2((_start.x + landing.x) * 0.5, mid_y + 2.0 * (peak_y - mid_y))
+	_build_arc_lengths(landing)
+	_duration = clampf(_arc_total / data.jump_speed, data.jump_min_time, data.jump_max_time)
 	_air_time = 0.0
 	_phase = Phase.AIR
 	golem.is_leaping = true
@@ -91,19 +100,39 @@ func _launch() -> void:
 	golem.update_animation("Walk")
 
 
-## Constant speed across; a parabola up into the peak, then a harder parabola down.
-## The island's height is read live because islands bob.
-func _arc_point(t: float) -> Vector2:
-	var total: float = _rise_time + _fall_time
-	var x: float = lerpf(_start.x, _landing_x, t / total)
-	var y: float
-	if t < _rise_time:
-		var left: float = (_rise_time - t) / _rise_time
-		y = lerpf(_peak_y, _start.y, left * left)
-	else:
-		var fallen: float = (t - _rise_time) / _fall_time
-		y = lerpf(_peak_y, golem.jump_target.get_top_y(), fallen * fallen)
-	return Vector2(x, y)
+func _build_arc_lengths(landing: Vector2) -> void:
+	_arc_lengths.resize(ARC_SAMPLES + 1)
+	_arc_lengths[0] = 0.0
+	var previous: Vector2 = _start
+	var total: float = 0.0
+	for i: int in range(1, ARC_SAMPLES + 1):
+		var point: Vector2 = _bezier_to(float(i) / ARC_SAMPLES, landing)
+		total += previous.distance_to(point)
+		_arc_lengths[i] = total
+		previous = point
+	_arc_total = maxf(total, 0.001)
+	for i: int in range(ARC_SAMPLES + 1):
+		_arc_lengths[i] /= _arc_total
+
+
+## Curve parameter t where the given share (0-1) of the arc length has been travelled.
+func _t_at_length(share: float) -> float:
+	for i: int in range(1, ARC_SAMPLES + 1):
+		if _arc_lengths[i] >= share:
+			var a: float = _arc_lengths[i - 1]
+			var span: float = maxf(_arc_lengths[i] - a, 0.0001)
+			return (float(i - 1) + (share - a) / span) / ARC_SAMPLES
+	return 1.0
+
+
+## Point on the arc. The landing height is read live because islands bob.
+func _bezier(t: float) -> Vector2:
+	return _bezier_to(t, Vector2(_landing_x, golem.jump_target.get_top_y()))
+
+
+func _bezier_to(t: float, landing: Vector2) -> Vector2:
+	var u: float = 1.0 - t
+	return u * u * _start + 2.0 * u * t * _control + t * t * landing
 
 
 func _land() -> void:

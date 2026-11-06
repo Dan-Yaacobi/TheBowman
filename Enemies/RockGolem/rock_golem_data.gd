@@ -24,14 +24,18 @@ class_name RockGolemData extends EnemyData
 @export var jump_reach_x: float = 150.0
 @export var jump_reach_up: float = 90.0
 @export var jump_reach_down: float = 220.0
-## Peak height above the higher of take-off and landing, plus a little per pixel of distance.
+## Arc height (above the higher end) = this share of the jump distance, kept between min and max.
 ## Kept low: it hops, it doesn't fly
-@export var jump_arc_height: float = 10.0
-@export var jump_arc_per_distance: float = 0.1
-## Gravity of the arc. High = short, sudden hop (heavy). Sets the time in the air
-@export var jump_gravity: float = 1400.0
-## Extra pull on the way down so it slams into the island
-@export var jump_fall_gravity_multiplier: float = 1.6
+@export var jump_arc_ratio: float = 0.15
+@export var jump_arc_min: float = 8.0
+@export var jump_arc_max: float = 18.0
+## Speed along the arc (pixels/s); sets how long the jump takes
+@export var jump_speed: float = 150.0
+## Shortest / longest time in the air (seconds)
+@export var jump_min_time: float = 0.5
+@export var jump_max_time: float = 1.0
+## >1: leaves the ground steadily and speeds up into the landing (heavier). 1 = even speed
+@export var jump_ease_power: float = 1.4
 ## Stands still before take-off (the player's warning)
 @export var jump_windup: float = 0.6
 ## Stands still after landing before it can act (longer if the island is still bouncing)
