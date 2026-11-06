@@ -22,10 +22,22 @@ class_name RockGolemData extends EnemyData
 @export var jump_reach_x: float = 150.0
 @export var jump_reach_up: float = 90.0
 @export var jump_reach_down: float = 220.0
-## Horizontal speed in the air; sets how long a jump takes
-@export var jump_speed_x: float = 170.0
+## Average horizontal speed in the air; sets how long a jump takes
+@export var jump_speed_x: float = 110.0
+## Shortest / longest time in the air (seconds)
+@export var jump_min_time: float = 0.7
+@export var jump_max_time: float = 1.3
+## How high the arc rises above the higher of take-off and landing
+@export var jump_arc_height: float = 28.0
+## Godot ease() curve for the flight: negative = ease in and out, more negative = heavier
+@export var jump_ease: float = -2.2
 ## Crouch before take-off (the player's warning)
-@export var jump_windup: float = 0.3
+@export var jump_windup: float = 0.5
+## Stays squashed after landing before it can act
+@export var jump_land_recovery: float = 0.3
+## Camera shake on landing, only when the player is within shake range
+@export var land_shake_strength: float = 1.2
+@export var land_shake_range: float = 250.0
 ## Wait after landing before it may jump again
 @export var jump_cooldown: float = 0.8
 

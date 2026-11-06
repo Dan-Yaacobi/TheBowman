@@ -178,7 +178,7 @@ size = Vector2(18, 20)
 size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fist"]
-size = Vector2(12, 12)
+size = Vector2(18, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(20, 20)
@@ -252,7 +252,7 @@ collision_mask = 1
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchHurtBox"]
-position = Vector2(16, -16)
+position = Vector2(12, -14)
 shape = SubResource("RectangleShape2D_fist")
 debug_color = Color(0.9, 0.45, 0.1, 0.42)
 

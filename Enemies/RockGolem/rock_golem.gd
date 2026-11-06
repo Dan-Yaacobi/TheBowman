@@ -30,6 +30,8 @@ var jump_target: Island
 var jump_cooldown_left: float = 0.0
 ## Counts down in the idle state; set when a punch ends
 var punch_cooldown_left: float = 0.0
+## While true the jump state moves the golem along its arc; gravity and knockback are off
+var is_leaping: bool = false
 var _last_floor_y: float = 0.0
 var _flash_tween: Tween
 
@@ -82,6 +84,8 @@ func is_player_in_punch_range() -> bool:
 
 
 func _physics_process(delta: float) -> void:
+	if is_leaping:
+		return
 	velocity.y += gravity * delta
 	_decay_knockback(delta)
 	velocity.x = move_x + knockback_velocity.x
