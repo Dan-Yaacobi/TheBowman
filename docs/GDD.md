@@ -183,7 +183,33 @@ Gaps are acceptable. The story doesn't need to explain everything for the game t
 
 ---
 
-## 8. Sections still to write
+## 8. Events
+
+### Golden Apple [DRAFT]
+
+**Fantasy:** a snitch chase. A rare, skittish golden apple darts around a cluster of islands. It is hard to catch, and catching it pays big.
+
+**Arena:** a contained event scene with several `Island.tscn` instances scattered apart (only `Island.tscn`, not Island2–5). The gaps between them are the risk: chasing it means jumping and dashing across open sky. Falling follows Design Rule 2 (costs a heart).
+
+**The apple:**
+- **Look:** a golden apple with an oblivious expression, sparkling gold.
+- **Movement:** darts between random points around the islands with sudden direction changes. Every so often it hovers obliviously for a beat, which is the opening to shoot. When hit, it bursts away fast. The chase gets harder as it goes.
+- **Harmless:** no touch damage, no attacks. The only threats are the edge and the clock.
+- **Health:** 5 hits. Every direct hit (arrow or sword) deals exactly 1 damage, regardless of gear. DoT ticks don't count.
+- **Immune** to all debuffs, stun, capture and knockback.
+- **Each hit drops some gold.**
+
+**Time limit:** a visible countdown starts when the chase starts. When it runs out, the apple becomes immune, flies off the scene and vanishes. Gold already dropped is kept.
+
+**Kill reward:** a decent pile of gold plus one equipment piece: guaranteed Epic, with a chance to roll Legendary instead.
+
+**Exit:** the exit portal is available the whole time, so the player can walk away. [DRAFT]
+
+**Placeholders (tune in playtesting):** time limit, gold per hit, kill gold, Legendary chance, movement speeds, hover duration.
+
+---
+
+## 9. Sections still to write
 
 - Player: controls, movement values, health, sword, dash
 - Combat: damage model, knockback, debuffs and DoTs
@@ -191,7 +217,7 @@ Gaps are acceptable. The story doesn't need to explain everything for the game t
 - Enemies: roles, roster per biome, ground vs. flying, elites
 - Bosses and arenas
 - World: rift generation, biomes, chunks, side paths
-- Events: framework, challenge shrine, Golden Apple, others
+- Events: framework, challenge shrine, others (Golden Apple is in section 8)
 - Hub and meta progression: buildings, guide NPC, upgrade altar tracks and milestones, quest board (crafting is covered under Core Loops → Crafting)
 - Economy: wood, essence, gold, Skyshard; sources and sinks
 - Art and audio direction
