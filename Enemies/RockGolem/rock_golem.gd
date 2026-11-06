@@ -4,6 +4,9 @@ class_name RockGolem extends Enemy
 
 ## Stat buff id for the dormant damage reduction
 const DORMANT_ARMOR_ID: int = 120
+## The body sits this many texture pixels left of the frame centre.
+## The sprite offset is mirrored on flip so the body doesn't jump when turning.
+const BODY_OFFSET_X: float = 5.0
 
 @export var gravity: float = 600.0
 
@@ -24,6 +27,11 @@ func extra_ready_functions() -> void:
 	# Deferred so the dormant state's damage reduction is added after
 	# init_damage_modifiers() builds the multiplier stat
 	state_machine.Initialize.call_deferred(self)
+
+
+func face_the_player() -> void:
+	super()
+	sprite.offset.x = -BODY_OFFSET_X if sprite.flip_h else BODY_OFFSET_X
 
 
 func _physics_process(delta: float) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/RockGolem/rock_golem.gd" id="1_golem"]
 [ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/RockGolem/RockGolem.tres" id="2_data"]
-[ext_resource type="Texture2D" uid="uid://b5fvk0un30x6p" path="res://Objects/Sprites/DirtIslandDecorations.png" id="3_tex"]
+[ext_resource type="Texture2D" path="res://Enemies/RockGolem/Sprites/RockGolem.png" id="3_tex"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="4_sm"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_dormant_state.gd" id="5_dormant"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_wake_state.gd" id="6_wake"]
@@ -26,31 +26,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -8.4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.4, 0.4)]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_dormant"]
@@ -67,36 +43,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -8.4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.4, 0.4)]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_wake"]
 resource_name = "Wake"
-length = 0.6
+length = 1.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -105,39 +57,15 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -8.4), Vector2(-1, -8.4), Vector2(1, -8.4), Vector2(-1, -8.4), Vector2(1, -8.4), Vector2(-1, -8.4), Vector2(1, -8.4), Vector2(-1, -8.4), Vector2(0, -8.4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.4, 0.4), Vector2(0.44, 0.36), Vector2(0.37, 0.46), Vector2(0.4, 0.4)]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 }
 
 [sub_resource type="Animation" id="Animation_idle"]
 resource_name = "Idle"
-length = 0.8
+length = 0.9
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -147,52 +75,83 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8]
+"values": [13, 14, 15, 16, 17, 18]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -8.4)]
+
+[sub_resource type="Animation" id="Animation_walk"]
+resource_name = "Walk"
+length = 0.9
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 34]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.4, 0.4), Vector2(0.41, 0.42), Vector2(0.4, 0.4)]
+
+[sub_resource type="Animation" id="Animation_punch"]
+resource_name = "Punch"
+length = 1.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.65, 0.7, 0.85, 0.9, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+}
+
+[sub_resource type="Animation" id="Animation_throw"]
+resource_name = "Throw"
+length = 1.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_golem"]
 _data = {
 &"Dormant": SubResource("Animation_dormant"),
 &"Idle": SubResource("Animation_idle"),
+&"Punch": SubResource("Animation_punch"),
 &"RESET": SubResource("Animation_reset"),
-&"Wake": SubResource("Animation_wake")
+&"Throw": SubResource("Animation_throw"),
+&"Wake": SubResource("Animation_wake"),
+&"Walk": SubResource("Animation_walk")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(18, 16)
+size = Vector2(18, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
-size = Vector2(20, 16)
+size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
-size = Vector2(20, 17)
+size = Vector2(20, 20)
 
 [node name="RockGolem" type="CharacterBody2D" node_paths=PackedStringArray("dead_state")]
 collision_layer = 4
@@ -202,18 +161,17 @@ dead_state = NodePath("EnemyStateMachine/Dead")
 stats = ExtResource("2_data")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_tex")
-hframes = 4
-vframes = 4
-frame = 8
+offset = Vector2(5, -46)
+hframes = 13
+vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries/ = SubResource("AnimationLibrary_golem")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="EnemyStateMachine" type="Node2D" parent="."]
@@ -240,7 +198,7 @@ collision_mask = 1
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_hurt")
 debug_color = Color(0.567316, 0.523189, 0.530331, 0.42)
 
@@ -250,13 +208,13 @@ collision_mask = 0
 script = ExtResource("12_hitscript")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, -8.5)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_hit")
 debug_color = Color(0.954369, 0, 0.548779, 0.42)
 
 [node name="EnemyHealthBar" parent="." instance=ExtResource("13_hp")]
 offset_left = -8.0
-offset_top = -24.0
+offset_top = -32.0
 offset_right = 56.0
-offset_bottom = 8.0
+offset_bottom = 0.0
 scale = Vector2(0.25, 0.25)
