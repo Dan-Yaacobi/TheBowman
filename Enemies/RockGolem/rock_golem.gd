@@ -135,8 +135,17 @@ func get_walk_target_x() -> float:
 	var target_x: float = PlayerManager.player.global_position.x
 	if current_island == null:
 		return global_position.x
-	var span: Vector2 = current_island.get_top_span()
-	return clampf(target_x, span.x + golem_data.edge_margin, span.y - golem_data.edge_margin)
+	return clamp_to_island(current_island, target_x)
+
+
+## x kept edge_margin away from the island's ends (the middle if the island is too narrow).
+func clamp_to_island(island: Island, x: float) -> float:
+	var span: Vector2 = island.get_top_span()
+	var left: float = span.x + golem_data.edge_margin
+	var right: float = span.y - golem_data.edge_margin
+	if left > right:
+		return (span.x + span.y) * 0.5
+	return clampf(x, left, right)
 
 
 func can_jump_to(island: Island) -> bool:
@@ -168,12 +177,10 @@ func get_next_island(target: Island) -> Island:
 
 ## Where to land on island: next to the player if they're on it, else the middle.
 func get_landing_point(island: Island) -> Vector2:
-	var span: Vector2 = island.get_top_span()
 	var x: float = island.get_top_center().x
 	if island == get_player_island():
 		x = PlayerManager.player.global_position.x
-	x = clampf(x, span.x + golem_data.edge_margin, span.y - golem_data.edge_margin)
-	return Vector2(x, island.get_top_y())
+	return Vector2(clamp_to_island(island, x), island.get_top_y())
 
 
 func _decay_knockback(delta: float) -> void:

@@ -127,15 +127,23 @@ func is_solid() -> bool:
 func _on_player_interact() -> void:
 	if _dip_tween != null and _dip_tween.is_running():
 		return
-	var original_position: Vector2 = position
-	var dip_offset: Vector2 = Vector2(0, 2)
-	_dip_tween = create_tween()
-	_dip_tween.tween_property(self, "position", original_position + dip_offset, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_dip_tween.tween_property(self, "position", original_position, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	dip()
 	var world = PlayerManager.player.get_parent()
 	if world is GameWorld and world.has_respawns:
 		EventBus.rift_respawn_position.emit(get_respawn_position())
 		
+## Sinks a little and springs back, e.g. when something lands on it. depth in pixels.
+func dip(depth: float = 2.0) -> void:
+	if _dip_tween != null and _dip_tween.is_running():
+		return
+	var original_position: Vector2 = position
+	_dip_tween = create_tween()
+	_dip_tween.tween_property(self, "position", original_position + Vector2(0, depth), 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_dip_tween.tween_property(self, "position", original_position, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func is_dipping() -> bool:
+	return _dip_tween != null and _dip_tween.is_running()
+
 func get_respawn_position() -> Vector2:
 	if respawn_marker:
 		return respawn_marker.global_position
