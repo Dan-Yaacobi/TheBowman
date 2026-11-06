@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_idle_state.gd" id="7_idle"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_chase_state.gd" id="14_chase"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_jump_state.gd" id="15_jump"]
+[ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_punch_state.gd" id="16_punch"]
 [ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="8_dead"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="9_debuff"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="10_hurt"]
@@ -29,6 +30,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PunchHurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_dormant"]
@@ -117,6 +130,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PunchHurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.65, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_throw"]
 resource_name = "Throw"
@@ -151,6 +176,9 @@ size = Vector2(18, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
 size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fist"]
+size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(20, 20)
@@ -187,10 +215,11 @@ wake_state = NodePath("../Wake")
 script = ExtResource("6_wake")
 next_state = NodePath("../Idle")
 
-[node name="Idle" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("chase_state", "jump_state")]
+[node name="Idle" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("chase_state", "jump_state", "punch_state")]
 script = ExtResource("7_idle")
 chase_state = NodePath("../Chase")
 jump_state = NodePath("../Jump")
+punch_state = NodePath("../Punch")
 
 [node name="Chase" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("14_chase")
@@ -199,6 +228,10 @@ idle_state = NodePath("../Idle")
 [node name="Jump" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("land_state")]
 script = ExtResource("15_jump")
 land_state = NodePath("../Idle")
+
+[node name="Punch" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("16_punch")
+idle_state = NodePath("../Idle")
 
 [node name="Dead" type="Node2D" parent="EnemyStateMachine"]
 script = ExtResource("8_dead")
@@ -213,6 +246,15 @@ monitoring = false
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_hurt")
 debug_color = Color(0.567316, 0.523189, 0.530331, 0.42)
+
+[node name="PunchHurtBox" parent="." instance=ExtResource("10_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchHurtBox"]
+position = Vector2(16, -16)
+shape = SubResource("RectangleShape2D_fist")
+debug_color = Color(0.9, 0.45, 0.1, 0.42)
 
 [node name="HitBox" parent="." instance=ExtResource("11_hit")]
 collision_layer = 4

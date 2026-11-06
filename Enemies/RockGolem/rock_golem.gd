@@ -13,6 +13,9 @@ const ISLAND_MASK: int = 16
 
 @export var gravity: float = 600.0
 
+@onready var punch_hurt_box: HurtBox = $PunchHurtBox
+@onready var _fist_shape: CollisionShape2D = $PunchHurtBox/CollisionShape2D
+
 var golem_data: RockGolemData
 var is_dormant: bool = true
 ## Set by a hit while dormant; the dormant state reads it to wake up
@@ -25,6 +28,8 @@ var current_island: Island
 var jump_target: Island
 ## Counts down in the idle state; set when a jump ends
 var jump_cooldown_left: float = 0.0
+## Counts down in the idle state; set when a punch ends
+var punch_cooldown_left: float = 0.0
 var _last_floor_y: float = 0.0
 var _flash_tween: Tween
 
@@ -35,6 +40,11 @@ func extra_ready_functions() -> void:
 		push_error("RockGolem needs RockGolemData as its stats")
 	animation_player = $Sprite2D/AnimationPlayer
 	_last_floor_y = global_position.y
+	punch_hurt_box.base_damage = golem_data.punch_damage
+	punch_hurt_box.knockback_power = golem_data.punch_knockback
+	# Share the body's damage multipliers so damage buffs/curses apply to the punch too
+	punch_hurt_box.damage_multiplier = hurt_box.damage_multiplier
+	punch_hurt_box.add_before_effect(_aim_punch_knockback)
 	# Deferred so the dormant state's damage reduction is added after
 	# init_damage_modifiers() builds the multiplier stat
 	state_machine.Initialize.call_deferred(self)
@@ -48,6 +58,27 @@ func face_the_player() -> void:
 func face_x(x: float) -> void:
 	sprite.flip_h = x < global_position.x
 	sprite.offset.x = -BODY_OFFSET_X if sprite.flip_h else BODY_OFFSET_X
+	# The fist is always in front
+	_fist_shape.position.x = absf(_fist_shape.position.x) * facing_sign()
+
+
+func facing_sign() -> float:
+	return -1.0 if sprite.flip_h else 1.0
+
+
+## Runs just before the punch lands: launch forward and up instead of along the overlap.
+func _aim_punch_knockback(_entity: GameEntity, _hurt_box: HurtBox) -> void:
+	var dir: Vector2 = golem_data.punch_launch_direction
+	punch_hurt_box.knockback_dir = Vector2(dir.x * facing_sign(), dir.y).normalized()
+
+
+## Player is on this island, close enough horizontally and at about the same height.
+func is_player_in_punch_range() -> bool:
+	if current_island == null or get_player_island() != current_island:
+		return false
+	var offset: Vector2 = PlayerManager.player.global_position - global_position
+	return absf(offset.x) <= golem_data.punch_range \
+		and absf(offset.y) <= golem_data.punch_height_tolerance
 
 
 func _physics_process(delta: float) -> void:

@@ -32,3 +32,15 @@ class_name RockGolemData extends EnemyData
 @export_subgroup("Falling")
 ## Dies after falling this far below where it last stood
 @export var fall_death_depth: float = 400.0
+
+@export_subgroup("Punch")
+## Starts a punch when the player is this close horizontally (fist reach)
+@export var punch_range: float = 24.0
+## ...and no further apart vertically than this
+@export var punch_height_tolerance: float = 20.0
+@export var punch_damage: int = 4
+@export var punch_knockback: float = 350.0
+## Launch direction for a punch facing right (mirrored when facing left); up is negative y
+@export var punch_launch_direction: Vector2 = Vector2(1.0, -0.4)
+## Wait after a punch before the next one
+@export var punch_cooldown: float = 1.2

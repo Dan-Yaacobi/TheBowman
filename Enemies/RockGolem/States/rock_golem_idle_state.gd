@@ -3,6 +3,7 @@ class_name RockGolemIdleState extends EnemyState
 
 @export var chase_state: EnemyState
 @export var jump_state: EnemyState
+@export var punch_state: EnemyState
 
 var golem: RockGolem
 
@@ -19,8 +20,11 @@ func Enter() -> void:
 func Physics(delta: float) -> EnemyState:
 	golem.face_the_player()
 	golem.jump_cooldown_left = maxf(golem.jump_cooldown_left - delta, 0.0)
+	golem.punch_cooldown_left = maxf(golem.punch_cooldown_left - delta, 0.0)
 	if not golem.is_on_floor():
 		return null
+	if golem.punch_cooldown_left <= 0.0 and golem.is_player_in_punch_range():
+		return punch_state
 	var player_island: Island = golem.get_player_island()
 	if player_island == null:
 		return null
