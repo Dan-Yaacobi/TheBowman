@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="5_hurtbox"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="6_debuff"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="7_state_machine"]
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_hover_state.gd" id="8_hover"]
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_dart_state.gd" id="9_dart"]
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_flee_state.gd" id="10_flee"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
 radius = 10.0
@@ -44,3 +47,12 @@ disabled = true
 
 [node name="EnemyStateMachine" type="Node2D" parent="."]
 script = ExtResource("7_state_machine")
+
+[node name="Hover" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("8_hover")
+
+[node name="Dart" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("9_dart")
+
+[node name="Flee" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("10_flee")
