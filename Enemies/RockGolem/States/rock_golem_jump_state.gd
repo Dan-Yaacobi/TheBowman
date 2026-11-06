@@ -1,8 +1,8 @@
 class_name RockGolemJumpState extends EnemyState
 ## A solid rock hopping: it never squashes or stretches.
-## Rumbles in place, pushes off into a low arc, drops like a stone and lands with a thud
-## (camera shake, the island sinks under it), then stands still for a moment.
-## The arc is scripted (not physics) so the timing is exact.
+## Slow to start and stop, sudden in between: rumbles in place, then a quick low hop under
+## heavy gravity, slams into the island (camera shake, the island sinks under it) and
+## stands still for a moment. The arc is scripted (not physics) so it lands exactly.
 
 @export var land_state: EnemyState
 ## Small downward speed on landing so the body settles onto the island
@@ -17,13 +17,12 @@ var _phase: Phase = Phase.WINDUP
 var _time_left: float = 0.0
 var _rumble_left: float = 0.0
 var _rumble_side: float = 1.0
-var _progress: float = 0.0
-var _duration: float = 1.0
+var _air_time: float = 0.0
+var _rise_time: float = 0.0
+var _fall_time: float = 0.0
 var _start: Vector2 = Vector2.ZERO
 var _landing_x: float = 0.0
 var _peak_y: float = 0.0
-## Share of the flight spent rising; the rest is the fall
-var _rise_share: float = 0.5
 
 
 func init() -> void:
@@ -61,9 +60,9 @@ func Physics(delta: float) -> EnemyState:
 				# Island gone mid-air: drop and let gravity decide
 				golem.is_leaping = false
 				return land_state
-			_progress = minf(_progress + delta / _duration, 1.0)
-			golem.global_position = _arc_point(_progress)
-			if _progress >= 1.0:
+			_air_time = minf(_air_time + delta, _rise_time + _fall_time)
+			golem.global_position = _arc_point(_air_time)
+			if _air_time >= _rise_time + _fall_time:
 				_land()
 		Phase.RECOVER:
 			# Ride the island while it sinks and springs back, so it can't slip through it
@@ -96,13 +95,12 @@ func _launch() -> void:
 	golem.sprite.position = Vector2.ZERO
 	_start = golem.global_position
 	_landing_x = landing.x
-	_duration = clampf(absf(landing.x - _start.x) / data.jump_speed_x, data.jump_min_time, data.jump_max_time)
-	_peak_y = minf(_start.y, landing.y) - data.jump_arc_height
-	# Split the time like gravity would: time to rise or fall goes with sqrt(height)
-	var rise_time: float = sqrt(_start.y - _peak_y)
-	var fall_time: float = sqrt(landing.y - _peak_y)
-	_rise_share = clampf(rise_time / (rise_time + fall_time), 0.2, 0.8)
-	_progress = 0.0
+	var arc: float = data.jump_arc_height + data.jump_arc_per_distance * absf(landing.x - _start.x)
+	_peak_y = minf(_start.y, landing.y) - arc
+	# Real projectile timing: t = sqrt(2h / g), with the heavier pull on the way down
+	_rise_time = sqrt(2.0 * (_start.y - _peak_y) / data.jump_gravity)
+	_fall_time = sqrt(2.0 * (landing.y - _peak_y) / (data.jump_gravity * data.jump_fall_gravity_multiplier))
+	_air_time = 0.0
 	_phase = Phase.AIR
 	golem.is_leaping = true
 	golem.velocity = Vector2.ZERO
@@ -110,20 +108,18 @@ func _launch() -> void:
 	golem.update_animation("Walk")
 
 
-## Constant speed across. Up: a push that slows into the peak. Down: exponential, so it
-## hits the island at full speed. The island's height is read live because islands bob.
+## Constant speed across; a parabola up into the peak, then a harder parabola down.
+## The island's height is read live because islands bob.
 func _arc_point(t: float) -> Vector2:
-	var data: RockGolemData = golem.golem_data
-	var x: float = lerpf(_start.x, _landing_x, t)
+	var total: float = _rise_time + _fall_time
+	var x: float = lerpf(_start.x, _landing_x, t / total)
 	var y: float
-	if t < _rise_share:
-		var rise: float = t / _rise_share
-		y = lerpf(_start.y, _peak_y, 1.0 - (1.0 - rise) * (1.0 - rise))
+	if t < _rise_time:
+		var left: float = (_rise_time - t) / _rise_time
+		y = lerpf(_peak_y, _start.y, left * left)
 	else:
-		var fall: float = (t - _rise_share) / (1.0 - _rise_share)
-		var k: float = data.jump_fall_sharpness
-		var drop: float = (exp(k * fall) - 1.0) / (exp(k) - 1.0)
-		y = lerpf(_peak_y, golem.jump_target.get_top_y(), drop)
+		var fallen: float = (t - _rise_time) / _fall_time
+		y = lerpf(_peak_y, golem.jump_target.get_top_y(), fallen * fallen)
 	return Vector2(x, y)
 
 

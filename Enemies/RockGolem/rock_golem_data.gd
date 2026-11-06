@@ -24,21 +24,20 @@ class_name RockGolemData extends EnemyData
 @export var jump_reach_x: float = 150.0
 @export var jump_reach_up: float = 90.0
 @export var jump_reach_down: float = 220.0
-## Horizontal speed in the air (constant, like a thrown rock); sets how long a jump takes
-@export var jump_speed_x: float = 120.0
-## Shortest / longest time in the air (seconds)
-@export var jump_min_time: float = 0.55
-@export var jump_max_time: float = 1.0
-## Peak height above the higher of take-off and landing. Kept low: it hops, it doesn't fly
+## Peak height above the higher of take-off and landing, plus a little per pixel of distance.
+## Kept low: it hops, it doesn't fly
 @export var jump_arc_height: float = 10.0
-## How sharply the fall speeds up (exponential). Higher = drops like a stone
-@export var jump_fall_sharpness: float = 3.0
+@export var jump_arc_per_distance: float = 0.1
+## Gravity of the arc. High = short, sudden hop (heavy). Sets the time in the air
+@export var jump_gravity: float = 1400.0
+## Extra pull on the way down so it slams into the island
+@export var jump_fall_gravity_multiplier: float = 1.6
 ## Rumbles in place before take-off (the player's warning)
-@export var jump_windup: float = 0.5
+@export var jump_windup: float = 0.6
 ## How far the rumble shakes the body (pixels)
 @export var jump_rumble: float = 0.75
 ## Stands still after landing before it can act (longer if the island is still bouncing)
-@export var jump_land_recovery: float = 0.3
+@export var jump_land_recovery: float = 0.4
 ## How far the island sinks when it lands
 @export var land_island_dip: float = 4.0
 ## Camera shake on landing, only when the player is within shake range
