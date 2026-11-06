@@ -14,6 +14,7 @@ const GROUP: StringName = &"islands"
 @export var textures: Array[TextureData]
 @onready var respawn_marker: Marker2D = $RespawnMarker
 @onready var event_portal_position: Marker2D = $EventPortalPosition
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
 var start_point: Vector2
@@ -102,6 +103,22 @@ func has_free_object_spot() -> bool:
 ## Takes one free object spot (e.g. for a ground enemy) and returns its position.
 func claim_object_spot() -> Vector2:
 	return objects_spawn_markers.get_spawn_position()
+
+## Walkable top edge in global coords: x = left end, y = right end.
+func get_top_span() -> Vector2:
+	var rect: Rect2 = collision_shape.shape.get_rect()
+	var xf: Transform2D = collision_shape.global_transform
+	var a: float = (xf * rect.position).x
+	var b: float = (xf * Vector2(rect.end.x, rect.position.y)).x
+	return Vector2(minf(a, b), maxf(a, b))
+
+func get_top_y() -> float:
+	var rect: Rect2 = collision_shape.shape.get_rect()
+	return (collision_shape.global_transform * rect.position).y
+
+func get_top_center() -> Vector2:
+	var span: Vector2 = get_top_span()
+	return Vector2((span.x + span.y) * 0.5, get_top_y())
 
 ## False while the island is crumbled/disabled.
 func is_solid() -> bool:

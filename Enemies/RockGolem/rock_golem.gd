@@ -8,6 +8,9 @@ const DORMANT_ARMOR_ID: int = 120
 ## The sprite offset is mirrored on flip so the body doesn't jump when turning.
 const BODY_OFFSET_X: float = 5.0
 
+## Islands' collision layer (5)
+const ISLAND_MASK: int = 16
+
 @export var gravity: float = 600.0
 
 var golem_data: RockGolemData
@@ -16,6 +19,13 @@ var is_dormant: bool = true
 var was_hit_while_dormant: bool = false
 ## Horizontal speed the current state wants; knockback is added on top
 var move_x: float = 0.0
+## The island it last stood on
+var current_island: Island
+## Set by the idle state for the jump state to use
+var jump_target: Island
+## Counts down in the idle state; set when a jump ends
+var jump_cooldown_left: float = 0.0
+var _last_floor_y: float = 0.0
 var _flash_tween: Tween
 
 
@@ -24,13 +34,19 @@ func extra_ready_functions() -> void:
 	if golem_data == null:
 		push_error("RockGolem needs RockGolemData as its stats")
 	animation_player = $Sprite2D/AnimationPlayer
+	_last_floor_y = global_position.y
 	# Deferred so the dormant state's damage reduction is added after
 	# init_damage_modifiers() builds the multiplier stat
 	state_machine.Initialize.call_deferred(self)
 
 
 func face_the_player() -> void:
-	super()
+	if stats.facing_player and PlayerManager.player:
+		face_x(PlayerManager.player.global_position.x)
+
+
+func face_x(x: float) -> void:
+	sprite.flip_h = x < global_position.x
 	sprite.offset.x = -BODY_OFFSET_X if sprite.flip_h else BODY_OFFSET_X
 
 
@@ -39,6 +55,90 @@ func _physics_process(delta: float) -> void:
 	_decay_knockback(delta)
 	velocity.x = move_x + knockback_velocity.x
 	move_and_slide()
+	_update_ground()
+
+
+func _update_ground() -> void:
+	if is_on_floor():
+		_last_floor_y = global_position.y
+		var island: Island = _get_floor_island()
+		if island:
+			current_island = island
+	elif not is_dead and global_position.y > _last_floor_y + golem_data.fall_death_depth:
+		_die_from_fall()
+
+
+func _get_floor_island() -> Island:
+	for i: int in get_slide_collision_count():
+		var collision: KinematicCollision2D = get_slide_collision(i)
+		if collision.get_normal().y < -0.5 and collision.get_collider() is Island:
+			return collision.get_collider() as Island
+	return null
+
+
+## Knocked into the void: dies like other enemies, no drops.
+func _die_from_fall() -> void:
+	is_dead = true
+	enemy_died()
+
+
+## The island the player is standing on or above, or null over the void.
+func get_player_island() -> Island:
+	if PlayerManager.player == null:
+		return null
+	var from: Vector2 = PlayerManager.player.global_position
+	var to: Vector2 = from + Vector2(0.0, golem_data.player_ground_search_depth)
+	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(from, to, ISLAND_MASK)
+	var hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return null
+	return hit["collider"] as Island
+
+
+## Player's x, kept inside the walkable part of the current island.
+func get_walk_target_x() -> float:
+	var target_x: float = PlayerManager.player.global_position.x
+	if current_island == null:
+		return global_position.x
+	var span: Vector2 = current_island.get_top_span()
+	return clampf(target_x, span.x + golem_data.edge_margin, span.y - golem_data.edge_margin)
+
+
+func can_jump_to(island: Island) -> bool:
+	var offset: Vector2 = island.get_top_center() - global_position
+	return absf(offset.x) <= golem_data.jump_reach_x \
+		and offset.y >= -golem_data.jump_reach_up \
+		and offset.y <= golem_data.jump_reach_down
+
+
+## The island to jump to next on the way to target: target itself when in reach,
+## otherwise the reachable island closest to it. Null if nothing gets it closer.
+func get_next_island(target: Island) -> Island:
+	if target == null or current_island == null or target == current_island:
+		return null
+	if can_jump_to(target):
+		return target
+	var best: Island = null
+	var best_distance: float = current_island.global_position.distance_to(target.global_position)
+	for node: Node in get_tree().get_nodes_in_group(Island.GROUP):
+		var island: Island = node as Island
+		if island == null or island == current_island or not island.is_solid() or not can_jump_to(island):
+			continue
+		var distance: float = island.global_position.distance_to(target.global_position)
+		if distance < best_distance:
+			best = island
+			best_distance = distance
+	return best
+
+
+## Where to land on island: next to the player if they're on it, else the middle.
+func get_landing_point(island: Island) -> Vector2:
+	var span: Vector2 = island.get_top_span()
+	var x: float = island.get_top_center().x
+	if island == get_player_island():
+		x = PlayerManager.player.global_position.x
+	x = clampf(x, span.x + golem_data.edge_margin, span.y - golem_data.edge_margin)
+	return Vector2(x, island.get_top_y())
 
 
 func _decay_knockback(delta: float) -> void:
