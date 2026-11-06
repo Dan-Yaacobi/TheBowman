@@ -26,14 +26,14 @@ class_name RockGolemData extends EnemyData
 @export var jump_reach_down: float = 220.0
 ## Arc height (above the higher end) = this share of the jump distance, kept between min and max.
 ## Kept low: it hops, it doesn't fly
-@export var jump_arc_ratio: float = 0.15
-@export var jump_arc_min: float = 8.0
-@export var jump_arc_max: float = 18.0
+@export var jump_arc_ratio: float = 0.3
+@export var jump_arc_min: float = 14.0
+@export var jump_arc_max: float = 36.0
 ## Speed along the arc (pixels/s); sets how long the jump takes
 @export var jump_speed: float = 150.0
 ## Shortest / longest time in the air (seconds)
 @export var jump_min_time: float = 0.5
-@export var jump_max_time: float = 1.0
+@export var jump_max_time: float = 1.2
 ## >1: leaves the ground steadily and speeds up into the landing (heavier). 1 = even speed
 @export var jump_ease_power: float = 1.4
 ## Stands still before take-off (the player's warning)
