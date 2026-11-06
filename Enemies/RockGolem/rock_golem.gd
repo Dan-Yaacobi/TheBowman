@@ -32,6 +32,8 @@ var jump_cooldown_left: float = 0.0
 var punch_cooldown_left: float = 0.0
 ## While true the jump state moves the golem along its arc; gravity and knockback are off
 var is_leaping: bool = false
+## Seconds awake since its last landed punch or throw; at throw_delay it throws a boulder
+var time_without_hit: float = 0.0
 var _last_floor_y: float = 0.0
 var _flash_tween: Tween
 
@@ -47,6 +49,7 @@ func extra_ready_functions() -> void:
 	# Share the body's damage multipliers so damage buffs/curses apply to the punch too
 	punch_hurt_box.damage_multiplier = hurt_box.damage_multiplier
 	punch_hurt_box.add_before_effect(_aim_punch_knockback)
+	punch_hurt_box.successful_hit.connect(_on_punch_hurt_box_successful_hit)
 	# Deferred so the dormant state's damage reduction is added after
 	# init_damage_modifiers() builds the multiplier stat
 	state_machine.Initialize.call_deferred(self)
@@ -74,6 +77,33 @@ func _aim_punch_knockback(_entity: GameEntity, _hurt_box: HurtBox) -> void:
 	punch_hurt_box.knockback_dir = Vector2(dir.x * facing_sign(), dir.y).normalized()
 
 
+func _on_punch_hurt_box_successful_hit(_hurt_box: HurtBox, _hit_box: Area2D, _result: DamageResult) -> void:
+	time_without_hit = 0.0
+
+
+func wants_to_throw() -> bool:
+	return golem_data.boulder_scene != null \
+		and time_without_hit >= golem_data.throw_delay \
+		and calculate_distance_to_player() <= golem_data.throw_range
+
+
+## Lobs a boulder at where the player is standing (or straight at them over the void).
+func throw_boulder() -> void:
+	time_without_hit = 0.0
+	var hand: Vector2 = golem_data.throw_hand_offset * scale
+	hand.x *= facing_sign()
+	var start: Vector2 = global_position + hand
+	var landing: Vector2 = PlayerManager.player.global_position
+	var island: Island = get_player_island()
+	if island:
+		landing.y = island.get_top_y()
+	var boulder: Boulder = golem_data.boulder_scene.instantiate()
+	boulder.damage = golem_data.boulder_damage
+	boulder.knockback = golem_data.boulder_knockback
+	EventBus.summon_effect.emit(boulder)
+	boulder.launch(start, landing, golem_data.boulder_flight_time, self, island)
+
+
 ## Player is on this island, close enough horizontally and at about the same height.
 func is_player_in_punch_range() -> bool:
 	if current_island == null or get_player_island() != current_island:
@@ -84,6 +114,8 @@ func is_player_in_punch_range() -> bool:
 
 
 func _physics_process(delta: float) -> void:
+	if not is_dormant:
+		time_without_hit += delta
 	if is_leaping:
 		return
 	velocity.y += gravity * delta

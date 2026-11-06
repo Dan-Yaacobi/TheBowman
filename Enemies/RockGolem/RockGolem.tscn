@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_chase_state.gd" id="14_chase"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_jump_state.gd" id="15_jump"]
 [ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_punch_state.gd" id="16_punch"]
+[ext_resource type="Script" path="res://Enemies/RockGolem/States/rock_golem_throw_state.gd" id="17_throw"]
 [ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="8_dead"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="9_debuff"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="10_hurt"]
@@ -215,11 +216,12 @@ wake_state = NodePath("../Wake")
 script = ExtResource("6_wake")
 next_state = NodePath("../Idle")
 
-[node name="Idle" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("chase_state", "jump_state", "punch_state")]
+[node name="Idle" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("chase_state", "jump_state", "punch_state", "throw_state")]
 script = ExtResource("7_idle")
 chase_state = NodePath("../Chase")
 jump_state = NodePath("../Jump")
 punch_state = NodePath("../Punch")
+throw_state = NodePath("../Throw")
 
 [node name="Chase" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("14_chase")
@@ -231,6 +233,10 @@ land_state = NodePath("../Idle")
 
 [node name="Punch" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("16_punch")
+idle_state = NodePath("../Idle")
+
+[node name="Throw" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("17_throw")
 idle_state = NodePath("../Idle")
 
 [node name="Dead" type="Node2D" parent="EnemyStateMachine"]

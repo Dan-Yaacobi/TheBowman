@@ -61,3 +61,17 @@ class_name RockGolemData extends EnemyData
 @export var punch_launch_direction: Vector2 = Vector2(1.0, -0.4)
 ## Wait after a punch before the next one
 @export var punch_cooldown: float = 1.2
+
+@export_subgroup("Throw")
+## Throws a boulder when it hasn't landed a punch for this long (seconds awake)
+@export var throw_delay: float = 10.0
+## Only throws when the player is this close
+@export var throw_range: float = 300.0
+## Boulder scene (the earth wizard's boulder)
+@export var boulder_scene: PackedScene
+@export var boulder_damage: int = 3
+@export var boulder_knockback: float = 260.0
+## Seconds from release to landing
+@export var boulder_flight_time: float = 1.1
+## Where the boulder leaves its hands, facing right, at rock size (scales with the golem)
+@export var throw_hand_offset: Vector2 = Vector2(18, -26)

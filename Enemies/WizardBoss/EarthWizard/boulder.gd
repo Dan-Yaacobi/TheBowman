@@ -1,7 +1,8 @@
 class_name Boulder extends Node2D
-## Lobbed in an arc by the earth wizard; hits the player with knockback and breaks on landing.
-## A perfect arrow shatters it into shards that fly back at the wizard. The shards
-## leave with a fixed speed, so they only reach him while the boulder is still close to him.
+## Lobbed in an arc by the earth wizard or the rock golem; hits the player with knockback and
+## breaks on landing. A perfect arrow shatters it into shards that fly back at the thrower.
+## The shards leave with a fixed speed, so they only reach the thrower while the boulder is
+## still close to it.
 
 @export var damage: int = 2
 @export var knockback: float = 220.0
@@ -23,7 +24,7 @@ class_name Boulder extends Node2D
 @export var shard_gravity: float = 500.0
 ## Angle between neighbouring shards, in degrees
 @export var shard_spread_deg: float = 6.0
-## Where on the wizard the shards aim, relative to his origin
+## Where on the thrower the shards aim, relative to its origin
 @export var wizard_aim_offset: Vector2 = Vector2(0, -5)
 
 @onready var visual: Sprite2D = $Visual
@@ -34,7 +35,7 @@ class_name Boulder extends Node2D
 @onready var shadow: ColorRect = $TargetMark/Shadow
 
 var _velocity: Vector2 = Vector2.ZERO
-var _wizard: WizardBoss
+var _thrower: Node2D
 var _target: Island
 var _landing_x: float = 0.0
 var _flight_time: float = 1.0
@@ -52,13 +53,13 @@ func _ready() -> void:
 
 ## Fly from start so it reaches landing after flight_time seconds.
 ## target = the island under the landing spot, for the warning shadow (null = no shadow)
-func launch(start: Vector2, landing: Vector2, flight_time: float, wizard: WizardBoss, target: Island) -> void:
+func launch(start: Vector2, landing: Vector2, flight_time: float, thrower: Node2D, target: Island) -> void:
 	if not is_node_ready():
 		await ready
 	global_position = start
 	_flight_time = maxf(flight_time, 0.1)
 	_velocity = (landing - start) / _flight_time - Vector2(0.0, 0.5 * gravity * _flight_time)
-	_wizard = wizard
+	_thrower = thrower
 	_target = target
 	_landing_x = landing.x
 	_time = 0.0
@@ -108,8 +109,8 @@ func _on_ground_detector_body_entered(body: Node2D) -> void:
 	_break()
 
 func _shatter() -> void:
-	if shard_scene and is_instance_valid(_wizard):
-		var aim: Vector2 = _wizard.global_position + wizard_aim_offset
+	if shard_scene and is_instance_valid(_thrower):
+		var aim: Vector2 = _thrower.global_position + wizard_aim_offset
 		var base: Vector2 = _shard_velocity(aim)
 		for i: int in shard_count:
 			var offset: float = (i - (shard_count - 1) * 0.5) * deg_to_rad(shard_spread_deg)
