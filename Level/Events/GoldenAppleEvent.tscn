@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_portal"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_falling_death"]
 [ext_resource type="PackedScene" path="res://Level/Events/GoldenApple/GoldenApple.tscn" id="5_golden_apple"]
+[ext_resource type="PackedScene" uid="uid://cgrgw6t0l71a1" path="res://Level/Events/ChallengeStone/ChallengeHud.tscn" id="6_hud"]
 
 [node name="GoldenAppleEvent" type="Node2D" unique_id=207856871 node_paths=PackedStringArray("golden_apple")]
 script = ExtResource("1_event")
@@ -47,3 +48,5 @@ position = Vector2(0, 443)
 
 [node name="GoldenApple" parent="." instance=ExtResource("5_golden_apple")]
 position = Vector2(110, -70)
+
+[node name="ChallengeHUD" parent="." instance=ExtResource("6_hud")]

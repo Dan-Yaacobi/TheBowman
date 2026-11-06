@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_hover_state.gd" id="8_hover"]
 [ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_dart_state.gd" id="9_dart"]
 [ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_flee_state.gd" id="10_flee"]
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_escape_state.gd" id="11_escape"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
 radius = 10.0
@@ -56,3 +57,6 @@ script = ExtResource("9_dart")
 
 [node name="Flee" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_flee")
+
+[node name="Escape" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("11_escape")

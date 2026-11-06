@@ -4,6 +4,9 @@ class_name GoldenApple extends Enemy
 ## Every direct hit deals exactly 1 damage regardless of gear and drops gold
 ## (stats.avg_coins_dropped per hit). DoT ticks are ignored.
 ## Movement: Hover -> Dart legs -> (hit) Flee burst. Gets harder with every hit.
+## escape() (time's up) makes it immune and it flies off the scene.
+
+signal escaped
 
 const HIT_DAMAGE: int = 1
 const HIT_TEXT_COLOR: Color = Color.GOLD
@@ -28,7 +31,14 @@ const HIT_TEXT_COLOR: Color = Color.GOLD
 ## and one more dart candidate sampled (it picks the one farthest from the player).
 @export var difficulty_per_hit: float = 0.15
 
+@export_group("Escape")
+@export var escape_duration: float = 1.5
+## Speed at the end of the escape, as a multiple of flight speed.
+@export var escape_speed_multiplier: float = 4.0
+
 @onready var flee_state: GoldenAppleFleeState = $EnemyStateMachine/Flee
+@onready var escape_state: GoldenAppleEscapeState = $EnemyStateMachine/Escape
+@onready var hit_box_shape: CollisionShape2D = $HitBox/CollisionShape2D
 
 var _home: Vector2 = Vector2.ZERO
 
@@ -44,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 
 func _handle_take_damage(_hurt_box: HurtBox, _raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
 	# DoT ticks come in without a hurt box; only direct hits count
-	if is_dead or _hurt_box == null:
+	if is_dead or invincible or _hurt_box == null:
 		return
 	current_hp -= HIT_DAMAGE
 	show_damage(HIT_DAMAGE, HIT_TEXT_COLOR)
@@ -63,6 +73,20 @@ func _flee() -> void:
 		flee_state.restart()
 	else:
 		state_machine.ChangeState(flee_state)
+
+## Time's up: immune, arrows pass through, flies off and frees itself.
+func escape() -> void:
+	if is_dead or invincible:
+		return
+	invincible = true
+	hit_box_shape.set_deferred("disabled", true)
+	state_machine.ChangeState(escape_state)
+
+func finish_escape() -> void:
+	if is_queued_for_deletion():
+		return
+	escaped.emit()
+	queue_free()
 
 func hits_taken() -> int:
 	return stats.max_hp - current_hp
