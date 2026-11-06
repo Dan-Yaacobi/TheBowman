@@ -1,3 +1,49 @@
 [gd_scene format=3 uid="uid://c5q5y48xrce31"]
 
-[node name="GoldenAppleEvent" type="Node2D" unique_id=207856871]
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_event.gd" id="1_event"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_island"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_portal"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_falling_death"]
+[ext_resource type="PackedScene" path="res://Level/Events/GoldenApple/GoldenApple.tscn" id="5_golden_apple"]
+
+[node name="GoldenAppleEvent" type="Node2D" unique_id=207856871 node_paths=PackedStringArray("golden_apple")]
+script = ExtResource("1_event")
+golden_apple = NodePath("GoldenApple")
+
+[node name="Islands" type="Node2D" parent="."]
+
+[node name="StartIsland" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(0, 30)
+
+[node name="Island2" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(-110, -10)
+
+[node name="Island3" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(110, -20)
+
+[node name="Island4" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(220, 40)
+
+[node name="Island5" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(-200, 70)
+
+[node name="Island6" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(30, -100)
+
+[node name="Island7" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(320, -40)
+
+[node name="Island8" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(100, 110)
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, -20)
+
+[node name="EventPortal" parent="." instance=ExtResource("3_portal")]
+position = Vector2(-10, -13)
+
+[node name="FallingDeath" parent="." instance=ExtResource("4_falling_death")]
+position = Vector2(0, 443)
+
+[node name="GoldenApple" parent="." instance=ExtResource("5_golden_apple")]
+position = Vector2(110, -70)

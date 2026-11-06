@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple.gd" id="1_script"]
+[ext_resource type="Resource" path="res://Level/Events/GoldenApple/Resource/golden_apple_data.tres" id="2_data"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_hitbox"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="4_hitbox_script"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="5_hurtbox"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="6_debuff"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="7_state_machine"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hurtbox"]
+radius = 6.0
+
+[node name="GoldenApple" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_script")
+stats = ExtResource("2_data")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.85, 0.2, 1)
+
+[node name="HitBox" parent="." instance=ExtResource("3_hitbox")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_hitbox_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_hitbox")
+
+[node name="HurtBox" parent="." instance=ExtResource("5_hurtbox")]
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+shape = SubResource("CircleShape2D_hurtbox")
+disabled = true
+
+[node name="DebuffHandler" parent="." instance=ExtResource("6_debuff")]
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("7_state_machine")
