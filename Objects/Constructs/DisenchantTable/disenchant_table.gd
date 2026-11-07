@@ -3,21 +3,25 @@ class_name DisenchantTable extends NPC
 ## one by one; each item's resources fly to the HUD and are paid when they land.
 ## Interacting again while it runs skips to the end. The game doesn't pause.
 ## With an empty tally, interacting shows lifetime progress toward the next milestone instead.
-## Runes on the table light up one per milestone reached (placeholder visuals).
+## The carved runes on the table light up one per milestone reached.
 
 ## Placeholder look of a tallied item on the table (the tally only knows slot and rarity).
 @export var slot_icons: Dictionary[EquipmentData.slots, Texture2D] = {}
 ## Where the first item sits. The rest fill rows to the right and upward.
 @export var items_origin: Marker2D
 @export var info_label: Label
-## Runes are built here in code, one per milestone, left to right.
+## Centre of the carved runes on the sprite. One cover per milestone is built here in code,
+## left to right, darkening the runes not reached yet.
 @export var runes_origin: Node2D
 
 @export_group("Runes")
-@export var rune_spacing: float = 6.0
-@export var rune_size: float = 1.5
-@export var rune_unlit_color: Color = Color(0.2, 0.16, 0.25, 1.0)
-@export var rune_lit_color: Color = Color(0.75, 0.55, 1.0, 1.0)
+## In the sprite's pixels (the covers are children of the scaled sprite).
+@export var rune_spacing: float = 11.0
+@export var rune_size: Vector2 = Vector2(6.0, 9.0)
+## Covers an unreached rune, so it reads as dark carved stone.
+@export var rune_unlit_color: Color = Color(0.22, 0.23, 0.26, 0.85)
+## Flash when a rune lights up, fading out to reveal the glowing rune in the art.
+@export var rune_flash_color: Color = Color(0.7, 1.0, 1.0, 0.9)
 
 @export_group("Layout")
 @export var item_scale: float = 0.25
@@ -50,6 +54,7 @@ var _running: bool = false
 var _sequence_tween: Tween
 var _info_tween: Tween
 var _runes: Array[Polygon2D] = []
+var _rune_lit: Array[bool] = []
 ## Set when a milestone is reached during the sequence, so the end shows it instead of progress.
 var _milestone_text: String = ""
 
@@ -220,27 +225,29 @@ func _on_event_bus_disenchant_milestone_reached(level: int) -> void:
 func _build_runes() -> void:
 	var count: int = Disenchanting.get_milestones().size()
 	var start_x: float = -(count - 1) * rune_spacing / 2.0
-	var r: float = rune_size
+	var half: Vector2 = rune_size / 2.0
 	for i: int in count:
 		var rune: Polygon2D = Polygon2D.new()
-		rune.polygon = PackedVector2Array([Vector2(0, -r), Vector2(r, 0), Vector2(0, r), Vector2(-r, 0)])
+		rune.polygon = PackedVector2Array([-half, Vector2(half.x, -half.y), half, Vector2(-half.x, half.y)])
 		rune.position = Vector2(start_x + i * rune_spacing, 0.0)
 		runes_origin.add_child(rune)
 		_runes.append(rune)
+		_rune_lit.append(false)
 	_update_runes(false)
 
-## Lights one rune per milestone reached. Newly lit runes flash.
+## Uncovers one rune per milestone reached. Newly lit runes flash.
 func _update_runes(animate: bool) -> void:
 	var level: int = Disenchanting.get_milestone_level()
 	for i: int in _runes.size():
 		var rune: Polygon2D = _runes[i]
 		var lit: bool = i < level
-		var target: Color = rune_lit_color if lit else rune_unlit_color
-		if animate and lit and rune.color != rune_lit_color:
-			rune.color = Color(3.0, 3.0, 3.0, 1.0)
-			rune.scale = Vector2.ONE * 2.0
+		var target: Color = Color(rune_flash_color, 0.0) if lit else rune_unlit_color
+		if animate and lit and not _rune_lit[i]:
+			rune.color = rune_flash_color
+			rune.scale = Vector2.ONE * 1.6
 			var tween: Tween = rune.create_tween().set_parallel(true)
-			tween.tween_property(rune, "color", target, 0.6)
+			tween.tween_property(rune, "color", target, 0.8)
 			tween.tween_property(rune, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		else:
 			rune.color = target
+		_rune_lit[i] = lit

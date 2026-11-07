@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" path="res://Items/Equipments/Bows/Sprites/Skylark.png" id="9_bow"]
 [ext_resource type="Texture2D" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="10_quiver"]
 [ext_resource type="Texture2D" path="res://Items/Equipments/Rings/Sprites/Ring_1.png" id="11_ring"]
+[ext_resource type="Texture2D" path="res://Objects/Constructs/DisenchantTable/Sprites/DisenchantTable.png" id="12_sprite"]
 
 [sub_resource type="Resource" id="Resource_table"]
 script = ExtResource("3_data")
@@ -31,35 +32,26 @@ slot_icons = Dictionary[int, Object]({
 })
 items_origin = NodePath("ItemsOrigin")
 info_label = NodePath("InfoLabel")
-runes_origin = NodePath("Island/Placeholder/RunesOrigin")
+runes_origin = NodePath("Island/TableSprite/RunesOrigin")
+rune_spacing = 11.0
+rune_size = Vector2(6, 9)
+item_scale = 0.15
+columns = 5
+item_spacing = Vector2(5, -4)
 data = SubResource("Resource_table")
 
 [node name="Island" parent="." instance=ExtResource("2_island")]
 
-[node name="Placeholder" type="Node2D" parent="Island"]
-position = Vector2(0, -3)
+[node name="TableSprite" type="Sprite2D" parent="Island"]
+position = Vector2(0, -17)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_sprite")
 
-[node name="LegLeft" type="Polygon2D" parent="Island/Placeholder"]
-color = Color(0.29, 0.19, 0.12, 1)
-polygon = PackedVector2Array(-14, -10, -11, -10, -11, 0, -14, 0)
-
-[node name="LegRight" type="Polygon2D" parent="Island/Placeholder"]
-color = Color(0.29, 0.19, 0.12, 1)
-polygon = PackedVector2Array(11, -10, 14, -10, 14, 0, 11, 0)
-
-[node name="Top" type="Polygon2D" parent="Island/Placeholder"]
-color = Color(0.45, 0.31, 0.2, 1)
-polygon = PackedVector2Array(-18, -15, 18, -15, 18, -9, -18, -9)
-
-[node name="RuneCloth" type="Polygon2D" parent="Island/Placeholder"]
-color = Color(0.42, 0.28, 0.6, 1)
-polygon = PackedVector2Array(-13, -14, 13, -14, 13, -10, -13, -10)
-
-[node name="RunesOrigin" type="Node2D" parent="Island/Placeholder"]
-position = Vector2(0, -12)
+[node name="RunesOrigin" type="Node2D" parent="Island/TableSprite"]
+position = Vector2(4.5, 25)
 
 [node name="ItemsOrigin" type="Marker2D" parent="."]
-position = Vector2(-22, -22)
+position = Vector2(-7, -19)
 
 [node name="InfoLabel" type="Label" parent="."]
 offset_left = -100.0
@@ -87,9 +79,9 @@ script = ExtResource("7_gone")
 
 [node name="KeyboardPressHelper" parent="." instance=ExtResource("8_key")]
 offset_left = -8.0
-offset_top = -44.0
+offset_top = -50.0
 offset_right = -8.0
-offset_bottom = -44.0
+offset_bottom = -50.0
 scale = Vector2(0.5, 0.5)
 
 [node name="InteractionArea" type="Area2D" parent="."]
