@@ -35,5 +35,6 @@ size = 0.55
 can_split = true
 death_ability = Array[ExtResource("2_wqiec")]([SubResource("Resource_3wtwp"), SubResource("Resource_wfgoh")])
 bullet = ExtResource("1_o03ag")
+can_ram = true
 equip_amount = 0
 metadata/_custom_type_script = "uid://rlvenynllobd"

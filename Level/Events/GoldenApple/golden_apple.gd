@@ -10,6 +10,8 @@ signal escaped
 
 const HIT_DAMAGE: int = 1
 const HIT_TEXT_COLOR: Color = Color.GOLD
+const FLY_ANIMATION: StringName = &"Fly"
+const HIT_ANIMATION: StringName = &"Hit"
 
 @export_group("Flight")
 ## Area the apple flies in, relative to where it starts.
@@ -30,6 +32,15 @@ const HIT_TEXT_COLOR: Color = Color.GOLD
 ## Per hit taken: +this fraction of speed, hovers shortened by the same factor,
 ## and one more dart candidate sampled (it picks the one farthest from the player).
 @export var difficulty_per_hit: float = 0.15
+## After a hit it blinks and arrows pass through for this long.
+@export var hit_immunity_duration: float = 2.0
+@export var immunity_blink_interval: float = 0.1
+
+@export_group("Wing Flap Speed")
+@export var hover_flap_speed: float = 0.7
+@export var dart_flap_speed: float = 1.0
+@export var flee_flap_speed: float = 1.5
+@export var escape_flap_speed: float = 2.0
 
 @export_group("Escape")
 @export var escape_duration: float = 1.5
@@ -41,11 +52,19 @@ const HIT_TEXT_COLOR: Color = Color.GOLD
 @onready var hit_box_shape: CollisionShape2D = $HitBox/CollisionShape2D
 
 var _home: Vector2 = Vector2.ZERO
+var _hit_immune: bool = false
+var _immunity_tween: Tween
 
 func extra_ready_functions() -> void:
 	debuff_immune = true
 	_home = global_position
+	animation_player = $Sprite2D/AnimationPlayer
+	animation_player.play(FLY_ANIMATION)
 	state_machine.Initialize(self)
+
+## Wing flap speed; each flight state sets its own.
+func set_flap_speed(speed_scale: float) -> void:
+	animation_player.speed_scale = speed_scale
 
 func _physics_process(_delta: float) -> void:
 	if not is_zero_approx(velocity.x):
@@ -54,7 +73,7 @@ func _physics_process(_delta: float) -> void:
 
 func _handle_take_damage(_hurt_box: HurtBox, _raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.WHITE) -> void:
 	# DoT ticks come in without a hurt box; only direct hits count
-	if is_dead or invincible or _hurt_box == null:
+	if is_dead or invincible or _hit_immune or _hurt_box == null:
 		return
 	current_hp -= HIT_DAMAGE
 	show_damage(HIT_DAMAGE, HIT_TEXT_COLOR)
@@ -67,6 +86,9 @@ func _handle_take_damage(_hurt_box: HurtBox, _raw_damage, _result: DamageResult 
 			_result.killed = true
 	else:
 		_flee()
+		_start_hit_immunity()
+		animation_player.play(HIT_ANIMATION)
+		animation_player.queue(FLY_ANIMATION)
 
 func _flee() -> void:
 	if state_machine.curr_state == flee_state:
@@ -74,10 +96,35 @@ func _flee() -> void:
 	else:
 		state_machine.ChangeState(flee_state)
 
+## Separate from `invincible` so escape() still works mid-immunity.
+func _start_hit_immunity() -> void:
+	_stop_hit_immunity()
+	_hit_immune = true
+	hit_box_shape.set_deferred("disabled", true)
+	var blinks: int = maxi(1, roundi(hit_immunity_duration / (immunity_blink_interval * 2.0)))
+	_immunity_tween = create_tween()
+	_immunity_tween.set_loops(blinks)
+	_immunity_tween.tween_property(sprite, "self_modulate:a", 0.25, immunity_blink_interval)
+	_immunity_tween.tween_property(sprite, "self_modulate:a", 1.0, immunity_blink_interval)
+	_immunity_tween.finished.connect(_end_hit_immunity)
+
+func _end_hit_immunity() -> void:
+	_stop_hit_immunity()
+	if not is_dead and not invincible:
+		hit_box_shape.set_deferred("disabled", false)
+
+func _stop_hit_immunity() -> void:
+	if _immunity_tween:
+		_immunity_tween.kill()
+		_immunity_tween = null
+	_hit_immune = false
+	sprite.self_modulate.a = 1.0
+
 ## Time's up: immune, arrows pass through, flies off and frees itself.
 func escape() -> void:
 	if is_dead or invincible:
 		return
+	_stop_hit_immunity()
 	invincible = true
 	hit_box_shape.set_deferred("disabled", true)
 	state_machine.ChangeState(escape_state)

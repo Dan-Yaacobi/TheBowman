@@ -4,10 +4,11 @@ class_name AppleSeekState extends EnemyState
 @onready var ray_cast_up: RayCast2D = $"../../RayCastUp"
 @onready var ray_cast_down: RayCast2D = $"../../RayCastDown"
 @onready var ray_cast_forward: RayCast2D = $"../../RayCastForward"
+## Optional: only scenes with a Ram state (and stats.can_ram) charge the player.
+@onready var ram: AppleRamState = get_node_or_null("../Ram")
 
 var hit_counter: int
 var direction: Vector2
-var distance_to_strike: int = 30
 var succesfull_hit: bool
 var ray_length: float = 10.0
 
@@ -33,9 +34,8 @@ func Process(_delta: float) -> EnemyState:
 	return null
 
 func Physics(_delta: float) -> EnemyState:
-	var modifier: int = 1
-	if enemy.calculate_distance_to_player() <= distance_to_strike:
-		modifier = 2
+	if ram and ram.can_start():
+		return ram
 	if enemy.stats.pure_ranged_mode:
 		if enemy.calculate_distance_to_player() < enemy.stats.ranged_trigger_distance:
 			succesfull_hit = true
@@ -43,7 +43,7 @@ func Physics(_delta: float) -> EnemyState:
 		return shoot
 	else:
 		var move_dir: Vector2 = _get_avoidance_direction(direction)
-		var target_velocity: Vector2 = move_dir * enemy.stats.move_speed.value() * modifier
+		var target_velocity: Vector2 = move_dir * enemy.stats.move_speed.value()
 		if enemy.stats.acceleration <= 0.0:
 			enemy.velocity = target_velocity
 		else:

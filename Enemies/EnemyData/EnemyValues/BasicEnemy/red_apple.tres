@@ -34,5 +34,6 @@ can_split = true
 death_ability = Array[ExtResource("2_eqap5")]([SubResource("Resource_3u2p4")])
 bullet = ExtResource("1_yc51p")
 bullet_speed = 45.0
+can_ram = true
 drop_chance = 100.0
 metadata/_custom_type_script = "uid://rlvenynllobd"

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_data"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="4_death"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_yuv12"]
-[ext_resource type="Texture2D" uid="uid://c3qwmgfn8he04" path="res://Level/Events/GoldenApple/Sprites/golden_apple.png" id="5_skin"]
+[ext_resource type="Texture2D" uid="uid://dkiw5m0fsfwjb" path="res://Level/Events/GoldenApple/Sprites/golden_apple_sheet.png" id="5_skin"]
 
 [sub_resource type="Resource" id="Resource_dmg_dealt"]
 script = ExtResource("1_stat")

@@ -13,6 +13,7 @@ func init() -> void:
 func Enter() -> void:
 	_time_left = apple.escape_duration
 	_direction = _get_escape_direction()
+	apple.set_flap_speed(apple.escape_flap_speed)
 	var tween: Tween = apple.create_tween()
 	tween.tween_property(apple, "modulate:a", 0.0, apple.escape_duration).set_ease(Tween.EASE_IN)
 

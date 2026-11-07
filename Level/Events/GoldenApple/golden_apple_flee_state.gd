@@ -12,6 +12,7 @@ func init() -> void:
 	apple = enemy as GoldenApple
 
 func Enter() -> void:
+	apple.set_flap_speed(apple.flee_flap_speed)
 	restart()
 
 ## Called when hit again mid-flee.

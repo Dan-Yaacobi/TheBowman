@@ -17,8 +17,8 @@ allowed_spawn = false
 [node name="Island" parent="." unique_id=1847265216 instance=ExtResource("2_kochp")]
 position = Vector2(1, -1)
 
-[node name="Chest" parent="." unique_id=84532828 instance=ExtResource("2_1w66f")]
-position = Vector2(2.3841858e-07, -13)
+[node name="Chest" parent="Island" unique_id=84532828 instance=ExtResource("2_1w66f")]
+position = Vector2(-1, -10)
 
 [node name="EntryMarker" parent="." unique_id=1822512370 instance=ExtResource("5_kochp")]
 

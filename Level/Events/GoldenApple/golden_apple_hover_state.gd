@@ -17,6 +17,7 @@ func init() -> void:
 func Enter() -> void:
 	_time_left = apple.hover_time()
 	_bob_time = 0.0
+	apple.set_flap_speed(apple.hover_flap_speed)
 
 func Physics(delta: float) -> EnemyState:
 	_bob_time += delta

@@ -13,6 +13,7 @@ func init() -> void:
 
 func Enter() -> void:
 	_target = apple.pick_dart_target()
+	apple.set_flap_speed(apple.dart_flap_speed)
 
 func Physics(delta: float) -> EnemyState:
 	var speed: float = apple.flight_speed()

@@ -167,9 +167,13 @@ func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> Eq
 	return data
 	
 func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: int = 0) -> void:
+	EventBus.equipment_dropped.emit(create_specific(template, forced_rarity), _position, null)
+
+## Builds a rolled copy of a template without dropping it.
+func create_specific(template: EquipmentData, forced_rarity: int = 0) -> EquipmentData:
 	var item: EquipmentData = template.duplicate()
 	if item.ability:
 		item.ability = item.ability.duplicate()
 	item.equipment_scene = template.equipment_scene
 	_apply_rarity_rolls(item, forced_rarity)
-	EventBus.equipment_dropped.emit(item, _position, null)
+	return item

@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bn7i8btunjcni" path="res://Enemies/FlyingApple/apple_seek_state.gd" id="13_whfbk"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="14_dilap"]
 [ext_resource type="Script" uid="uid://djtg8frtkr2at" path="res://Enemies/FlyingApple/apple_shoot_state.gd" id="15_0birg"]
+[ext_resource type="Script" path="res://Enemies/FlyingApple/apple_ram_state.gd" id="16_ram"]
 
 [sub_resource type="Animation" id="Animation_kl176"]
 resource_name = "Attack"
@@ -250,6 +251,9 @@ script = ExtResource("15_0birg")
 
 [node name="ShootTimer" type="Timer" parent="EnemyStateMachine/Shoot" unique_id=382980169]
 wait_time = 1.5
+
+[node name="Ram" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("16_ram")
 
 [node name="Damaged" type="Node2D" parent="EnemyStateMachine" unique_id=2070260157 node_paths=PackedStringArray("fallback_state")]
 script = ExtResource("10_er6rk")

@@ -43,6 +43,8 @@ class_name EnemyData extends Resource
 @export var hits_required: int = 1
 @export var pure_ranged_mode: bool = false
 @export var ranged_trigger_distance: float = 150.0
+## Flying apples: charges the player when close (needs a Ram state in the scene).
+@export var can_ram: bool = false
 
 @export_subgroup("Loot")
 @export var can_drop_essence: bool = true

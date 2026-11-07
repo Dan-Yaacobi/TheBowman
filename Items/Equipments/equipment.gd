@@ -55,5 +55,10 @@ func set_data() -> void:
 	if data and sprite:
 		sprite.texture = data.texture
 
+## Skips the drop/pickup flow and goes straight to the player's slot (e.g. starting gear).
+func equip_directly() -> void:
+	freeze_body()
+	state_machine.ChangeState(state_machine.get_node("Equipped") as EquipmentEquippedState)
+
 func become_unequipped() -> void:
 	state_machine.ChangeState(un_equipped_state)

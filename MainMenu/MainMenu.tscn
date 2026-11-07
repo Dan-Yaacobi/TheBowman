@@ -1,23 +1,24 @@
 [gd_scene format=3 uid="uid://cnhbrpo4htp2y"]
 
 [ext_resource type="Script" uid="uid://u8tfro4qp4ts" path="res://MainMenu/main_menu.gd" id="1_4xjwr"]
-[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="7_qvidt"]
 [ext_resource type="Texture2D" uid="uid://c8xvliip7pqim" path="res://MainMenu/Sprites/Arrow Sign.png" id="12_a6mvh"]
 [ext_resource type="PackedScene" uid="uid://cmq0egwvp55s2" path="res://General Nodes/PlayerSpawn.tscn" id="12_g1826"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="13_7t2hb"]
-[ext_resource type="PackedScene" uid="uid://dg1mbyn5h3dgf" path="res://NPC/Pedestal/PedestalNPC.tscn" id="13_gej64"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://bfv1vlm08klwk" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
 [ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
-[ext_resource type="PackedScene" uid="uid://clbbs2m6t4pjb" path="res://Objects/Constructs/QuestBoard/QuestBoardSite.tscn" id="19_24r6y"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/DisenchantTable/DisenchantTableSite.tscn" id="21_disenchant"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="22_startbow"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="23_startquiver"]
 
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
+starting_bow = ExtResource("22_startbow")
+starting_quiver = ExtResource("23_startquiver")
 
 [node name="WorldSpirit" parent="." unique_id=406161502 instance=ExtResource("14_gej64")]
 position = Vector2(43, 68)
@@ -81,10 +82,6 @@ position = Vector2(293, 118)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Islands/Island12" unique_id=844129433 instance=ExtResource("13_gej64")]
-position = Vector2(2, -16)
-item_data = ExtResource("7_qvidt")
-
 [node name="Island17" parent="Islands" unique_id=987538156 instance=ExtResource("14_7t2hb")]
 position = Vector2(340, 89)
 use_fixed_frame = true
@@ -128,9 +125,6 @@ position = Vector2(247, 118)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="PedestalNPC" parent="Islands/Island14" unique_id=1419604949 instance=ExtResource("13_gej64")]
-position = Vector2(-1, -16)
-
 [node name="AltarSite" parent="Islands" unique_id=345220663 instance=ExtResource("17_guwyo")]
 position = Vector2(109, 211)
 
@@ -140,11 +134,8 @@ position = Vector2(109, 211)
 position = Vector2(-39, 558)
 costs_heart = false
 
-[node name="QuestBoardSite" parent="." unique_id=492641276 instance=ExtResource("19_24r6y")]
-position = Vector2(466, 148)
-
 [node name="BlacksmithSite" parent="." unique_id=1990333479 instance=ExtResource("20_smith")]
-position = Vector2(387, 59)
+position = Vector2(386, 68)
 
-[node name="DisenchantTableSite" parent="." instance=ExtResource("21_disenchant")]
-position = Vector2(585, 80)
+[node name="DisenchantTableSite" parent="." unique_id=140269765 instance=ExtResource("21_disenchant")]
+position = Vector2(469, 151)

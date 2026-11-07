@@ -48,21 +48,21 @@ allowed_spawn = false
 textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
 
 [node name="PedestalNPC3" parent="Island" unique_id=1109823043 instance=ExtResource("3_sdeih")]
-position = Vector2(1, -17)
+position = Vector2(1, -15)
 
 [node name="Island2" parent="." unique_id=320074861 instance=ExtResource("1_jtxco")]
 position = Vector2(-57, 0)
 textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
 
 [node name="PedestalNPC2" parent="Island2" unique_id=762115268 instance=ExtResource("3_sdeih")]
-position = Vector2(0, -17)
+position = Vector2(0, -15)
 
 [node name="Island3" parent="." unique_id=1839574235 instance=ExtResource("1_jtxco")]
 position = Vector2(59, 0)
 textures = Array[ExtResource("2_m4xme")]([SubResource("Resource_ahai6"), SubResource("Resource_g8eam"), SubResource("Resource_7mf8l")])
 
 [node name="PedestalNPC" parent="Island3" unique_id=1109545810 instance=ExtResource("3_sdeih")]
-position = Vector2(1, -17)
+position = Vector2(1, -15)
 
 [node name="Bounds" parent="." unique_id=1128394681 instance=ExtResource("2_kq8s8")]
 
