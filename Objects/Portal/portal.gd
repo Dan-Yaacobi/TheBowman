@@ -90,7 +90,7 @@ func _on_proximity_exited(body: Node2D) -> void:
 
 func enter() -> void:
 	if _leads_into_rift() and not _has_bow_and_quiver():
-		CombatTextSpawner.spawn(global_position, "Equip a bow and quiver first", Color.WHITE)
+		CombatTextSpawner.spawn(global_position, _missing_gear_message(), Color.WHITE)
 		return
 	if is_boss_portal:
 		EventBus.boss_portal_entered.emit()
@@ -119,6 +119,15 @@ func _has_bow_and_quiver() -> bool:
 		return true
 	var stats: PlayerStats = PlayerManager.player.stats
 	return stats.bow != null and stats.arrow != null
+
+## Names whichever of bow / quiver is still empty.
+func _missing_gear_message() -> String:
+	var stats: PlayerStats = PlayerManager.player.stats
+	if stats.bow == null and stats.arrow == null:
+		return "Equip a bow and quiver first"
+	if stats.bow == null:
+		return "Equip a bow first"
+	return "Equip a quiver first"
 
 func _set_awake(awake: bool) -> void:
 	if _fx_tween:
