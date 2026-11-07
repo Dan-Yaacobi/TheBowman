@@ -6,6 +6,7 @@ extends Node
 const SAVE_SECTION: StringName = &"disenchanting"
 ## Construct id of the hub table. Saved in the save file. Never rename.
 const TABLE_ID: StringName = &"disenchanting_table"
+const CONFIG_PATH: String = "res://Objects/Constructs/DisenchantTable/Resources/disenchant_config.tres"
 
 ## One found item: all the table needs to work out its yield.
 class FoundItem:
@@ -17,8 +18,13 @@ class FoundItem:
 		rarity = _rarity
 
 var tally: Array[FoundItem] = []
+## Yield table (slot → material, amount per rarity, Skyshard chance). Edit the .tres in the inspector.
+var config: DisenchantConfig
 
 func _ready() -> void:
+	config = load(CONFIG_PATH) as DisenchantConfig
+	if config == null:
+		push_error("Disenchanting: missing config at %s" % CONFIG_PATH)
 	SaveService.register(SAVE_SECTION, _save, _load)
 	EventBus.equipment_inspected.connect(_on_event_bus_equipment_inspected)
 	MetaProgress.construct_built.connect(_on_meta_progress_construct_built)
@@ -41,6 +47,29 @@ func _on_event_bus_equipment_inspected(data: EquipmentData) -> void:
 	tally.append(FoundItem.new(data.slot, roundi(data.rarity)))
 	SaveService.save_game()
 	EventBus.found_items_changed.emit(get_count())
+
+# --- Disenchanting --------------------------------------------------------
+
+## Rolls what one tallied item gives. Doesn't change the tally; claim_next() pays it out.
+func roll_yield(item: FoundItem) -> Dictionary[CustomVariables.items, int]:
+	if config == null:
+		return {}
+	return config.roll_yield(item.slot, item.rarity)
+
+## Removes the first tallied item and pays its rolled yield to the player, in one step,
+## so an item is never removed without being paid. The table breaks items in tally order.
+func claim_next(rewards: Dictionary[CustomVariables.items, int]) -> void:
+	if tally.is_empty():
+		return
+	tally.pop_front()
+	var player: Player = PlayerManager.player
+	for item: CustomVariables.items in rewards:
+		player.collect_item(item, rewards[item])
+	EventBus.found_items_changed.emit(get_count())
+
+## Called by the table once a sequence ends (finished or skipped). Saves once for the whole batch.
+func finish_disenchanting() -> void:
+	SaveService.save_game()
 
 ## The hub resets rift_level to 0; rifts, events and boss arenas are all above it.
 func _is_in_run() -> bool:

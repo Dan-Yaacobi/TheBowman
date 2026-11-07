@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DisenchantConfig" format=3]
+
+[ext_resource type="Script" path="res://Objects/Constructs/DisenchantTable/disenchant_config.gd" id="1_cfg"]
+
+[resource]
+script = ExtResource("1_cfg")
+slot_materials = Dictionary[int, int]({
+0: 3,
+1: 2,
+2: 0
+})
+amount_per_rarity = Array[int]([2, 4, 8, 15])
+legendary_skyshard_chance = 5.0
+skyshards_per_drop = 1
