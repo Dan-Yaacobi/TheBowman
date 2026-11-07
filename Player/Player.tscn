@@ -113,7 +113,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_ib3vm"]
 script = ExtResource("4_yf47d")
-base_value = 5.0
+base_value = 3.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_vtj8b"]
@@ -123,7 +123,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_rqaa0"]
 script = ExtResource("4_yf47d")
-base_value = 3.0
+base_value = 6.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_1ylbe"]

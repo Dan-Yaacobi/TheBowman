@@ -11,8 +11,9 @@
 [sub_resource type="Resource" id="Resource_gim1k"]
 script = ExtResource("2_m0dc4")
 min_value = 1
-max_value = 2
-value_per_quality = 0
+max_value = 1
+value_per_quality = 1
+quality_step = 3
 metadata/_custom_type_script = "uid://dptapbe5ulhvs"
 
 [sub_resource type="Resource" id="Resource_2eggx"]

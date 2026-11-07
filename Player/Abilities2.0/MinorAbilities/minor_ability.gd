@@ -6,9 +6,12 @@ class_name MinorAbility extends PlayerAbility
 @export var max_value: int = 3
 ## Added to both min and max per quality tier. 0 = rarity has no effect.
 @export var value_per_quality: int = 1
+## Rarity tiers per bonus step: 1 = every tier adds value_per_quality, 3 = only Legendary does.
+@export var quality_step: int = 1
 
 var value: int = 1
 
 func roll_values(quality: int) -> void:
-	var bonus: int = quality * value_per_quality
+	@warning_ignore("integer_division")
+	var bonus: int = (quality / maxi(quality_step, 1)) * value_per_quality
 	value = randi_range(min_value + bonus, max_value + bonus)
