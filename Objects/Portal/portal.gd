@@ -88,9 +88,17 @@ func enter() -> void:
 	if is_boss_portal:
 		EventBus.boss_portal_entered.emit()
 	elif is_rift_portal:
+		if not _has_bow_and_quiver():
+			CombatTextSpawner.spawn(global_position, "Equip a bow and quiver first", Color.WHITE)
+			return
 		EventBus.entered_rift_portal.emit()
 	else:
 		EventBus.changed_scene.emit(destination)
+
+func _has_bow_and_quiver() -> bool:
+	var stats: PlayerStats = PlayerManager.player.stats
+	return stats.bow != null and stats.arrow != null
+
 func _set_awake(awake: bool) -> void:
 	if _fx_tween:
 		_fx_tween.kill()

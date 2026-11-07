@@ -81,6 +81,11 @@ layout_mode = 2
 text = "Settings
 "
 
+[node name="RestartButton" type="Button" parent="Control/MainPanel/VBox"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "Restart"
+
 [node name="HowToPlayPanel" type="Control" parent="Control" unique_id=994840626]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 1

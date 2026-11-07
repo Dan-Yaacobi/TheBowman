@@ -6,6 +6,7 @@ class_name PauseMenu extends CanvasLayer
 @onready var stats_button: Button = $Control/MainPanel/VBox/StatsButton
 @onready var how_to_play_button: Button = $Control/MainPanel/VBox/HowToPlayButton
 @onready var settings_button: Button = $Control/MainPanel/VBox/SettingsButton
+@onready var restart_button: Button = $Control/MainPanel/VBox/RestartButton
 
 # --- How To Play panel ---
 @onready var how_to_play_panel: Control = $Control/HowToPlayPanel
@@ -34,6 +35,7 @@ func _ready() -> void:
 	stats_button.pressed.connect(_open_stats)
 	how_to_play_button.pressed.connect(_set_state.bind(PauseState.HOW_TO_PLAY))
 	settings_button.pressed.connect(_set_state.bind(PauseState.SETTINGS))
+	restart_button.pressed.connect(_on_restart_button_pressed)
 
 	how_to_play_back.pressed.connect(_set_state.bind(PauseState.MAIN))
 	settings_back.pressed.connect(_set_state.bind(PauseState.MAIN))
@@ -73,10 +75,19 @@ func _set_state(new_state: PauseState) -> void:
 
 	if _state == PauseState.SETTINGS:
 		_sync_settings_ui()
+	if _state == PauseState.MAIN:
+		# Only offered during a run; in the hub there is nothing to abandon.
+		restart_button.visible = not PlayerManager.player.get_parent() is MainMenu
 
 
 func _close() -> void:
 	_set_state(PauseState.CLOSED)
+
+
+## Ends the run through the regular death flow (same as dying).
+func _on_restart_button_pressed() -> void:
+	_close()
+	PlayerManager.player.kill()
 
 
 func _open_stats() -> void:
