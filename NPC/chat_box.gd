@@ -2,6 +2,8 @@ class_name ChatBox extends CanvasLayer
 
 signal typing_started
 signal typing_finished
+## play_lines() ended: true when finish_lines() was called, false when the box closed first.
+signal lines_finished(completed: bool)
 
 @onready var chat_panel: PanelContainer = $Control/ChatPanel
 @onready var name_label: Label = $Control/ChatPanel/VBoxContainer/NameLabel
@@ -17,6 +19,10 @@ var _current_line_index: int = 0
 var _is_typing: bool = false
 var _tween: Tween
 var is_last_line: bool = false
+## False for prompts that sit above a menu (no "[E] Close" hint).
+var _show_hint: bool = true
+## True between play_lines() and lines_finished.
+var _playing_lines: bool = false
 
 
 func _ready() -> void:
@@ -43,6 +49,8 @@ func close() -> void:
 	_lines = []
 	_current_line_index = 0
 	is_last_line = false
+	_show_hint = true
+	_end_lines(false)
 
 
 func advance() -> void:
@@ -53,6 +61,44 @@ func advance() -> void:
 		return
 	_current_line_index += 1
 	_show_line(_lines[_current_line_index])
+
+## Plays lines one at a time (advance() steps). Call finish_lines() after the last one.
+func play_lines(speaker: String, lines: Array[String]) -> void:
+	_end_lines(false)
+	_clear_buttons()
+	name_label.text = speaker
+	chat_panel.visible = true
+	_show_hint = true
+	_lines = lines.duplicate()
+	_current_line_index = 0
+	_playing_lines = true
+	_show_line(_lines[0])
+
+## One line with no continue hint, e.g. a greeting above a menu.
+func show_prompt(speaker: String, line: String) -> void:
+	_end_lines(false)
+	_clear_buttons()
+	name_label.text = speaker
+	chat_panel.visible = true
+	_show_hint = false
+	_lines = [line]
+	_current_line_index = 0
+	_show_line(line)
+
+## Ends play_lines() after its last line was read.
+func finish_lines() -> void:
+	_end_lines(true)
+
+func _end_lines(completed: bool) -> void:
+	if not _playing_lines:
+		return
+	_playing_lines = false
+	lines_finished.emit(completed)
+
+func _clear_buttons() -> void:
+	for child in buttons_container.get_children():
+		child.queue_free()
+	buttons_container.visible = false
 
 func show_line(line: String) -> void:
 	for child in buttons_container.get_children():
@@ -87,7 +133,7 @@ func _on_typing_finished() -> void:
 	_is_typing = false
 	typing_finished.emit()
 	buttons_container.visible = buttons_container.get_child_count() > 0
-	continue_hint.visible = true
+	continue_hint.visible = _show_hint
 	continue_hint.text = "[E] Close" if is_last_line else "[E] Continue"
 
 

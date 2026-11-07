@@ -127,3 +127,5 @@ signal change_sky_color(top_color: Color, bottom_color: Color)
 
 signal color_level_changed(color: CustomVariables.ItemColor, level: int)
 signal color_scroll_collected
+
+signal lore_item_found(item: LoreItemData)
