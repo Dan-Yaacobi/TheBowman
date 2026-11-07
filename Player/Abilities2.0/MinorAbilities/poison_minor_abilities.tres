@@ -10,14 +10,23 @@
 
 [sub_resource type="Resource" id="Resource_0x3kp"]
 script = ExtResource("2_fxi24")
+min_value = 1
+max_value = 2
+value_per_quality = 0
 metadata/_custom_type_script = "uid://sqv71jkptw5k"
 
 [sub_resource type="Resource" id="Resource_yelfa"]
 script = ExtResource("3_unat1")
+min_value = 10
+max_value = 20
+value_per_quality = 5
 metadata/_custom_type_script = "uid://cvbglmlpl5ful"
 
 [sub_resource type="Resource" id="Resource_jiokv"]
 script = ExtResource("4_g7uqh")
+min_value = 10
+max_value = 20
+value_per_quality = 5
 metadata/_custom_type_script = "uid://b80kyurvqvsj1"
 
 [sub_resource type="Resource" id="Resource_i2gjg"]

@@ -14,7 +14,7 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 		var poison_debuff: Debuff = POISON_DEBUFF.instantiate()
 		poison_debuff.poison_damage = PlayerManager.player.stats.poison_damage.value()
 		var poison_duration = PlayerManager.player.stats.poison_duration.value()
-		var poison_ticks = PlayerManager.player.stats.poison_ticks.value()
+		var poison_ticks = PlayerManager.player.stats.dot_ticks("poison")
 		_target.debuff_handler.add_debuff(poison_debuff,CustomVariables.POISON_DEBUFF_ID,poison_duration,poison_ticks )
 		
 func get_tooltip() -> String:

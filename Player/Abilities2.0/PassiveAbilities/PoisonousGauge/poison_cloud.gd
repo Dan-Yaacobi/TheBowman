@@ -37,7 +37,7 @@ func poison_damage(_body) -> void:
 		@warning_ignore("narrowing_conversion")
 		poison.poison_damage = PlayerManager.player.stats.poison_damage.value()
 		var duration: float = PlayerManager.player.stats.poison_duration.value()
-		var ticks: float = PlayerManager.player.stats.poison_ticks.value()
+		var ticks: float = PlayerManager.player.stats.dot_ticks("poison")
 		_body.apply_debuff(poison,CustomVariables.POISON_DEBUFF_ID, duration,ticks)
 
 func _physics_process(delta: float) -> void:

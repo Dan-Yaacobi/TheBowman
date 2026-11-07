@@ -42,5 +42,5 @@ func apply_burn(enemy: Enemy, _parent, _result) -> void:
 	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
 	burn_debuff.set_damage(roundi(PlayerManager.player.stats.burn_damage.value()))
 	var duration = PlayerManager.player.stats.burn_duration.value()
-	var ticks = PlayerManager.player.stats.burn_ticks.value()
+	var ticks = PlayerManager.player.stats.dot_ticks("burn")
 	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,duration,ticks)

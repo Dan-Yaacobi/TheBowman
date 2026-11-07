@@ -26,7 +26,7 @@ func apply_burn(enemy: Enemy) -> void:
 	var burn: BurnDebuff = load(BURN_DEBUFF_PATH).instantiate()
 	burn.set_damage(maxi(1, roundi(stats.burn_damage.value() * power())))
 	@warning_ignore("narrowing_conversion")
-	enemy.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.burn_ticks.value())
+	enemy.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.dot_ticks("burn"))
 
 func get_tooltip() -> String:
 	return "Arrows burn. Burning enemies knocked into others spread the burn"

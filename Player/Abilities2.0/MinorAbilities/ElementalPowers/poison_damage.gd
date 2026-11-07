@@ -15,7 +15,7 @@ func on_unequipped() -> void:
 	PlayerManager.player.stats.poison_damage.remove_buff_completly(dynamic_debuff_id,Stat.buff_type.ADDITIVE)
 
 func get_tooltip() -> String:
-	return "Increase Poison Damage By %s" % String.num(snappedf(value * power(), 0.1)).trim_suffix(".0")
+	return "+%d Poison Damage per tick" % roundi(value * power())
 	
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE

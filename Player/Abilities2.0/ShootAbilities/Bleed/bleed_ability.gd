@@ -14,7 +14,7 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 		@warning_ignore("narrowing_conversion")
 		bleed_debuff.bleed_damage = PlayerManager.player.stats.bleed_damage.value()
 		var duration: float = PlayerManager.player.stats.bleed_duration.value()
-		var ticks: float = PlayerManager.player.stats.bleed_ticks.value()
+		var ticks: float = PlayerManager.player.stats.dot_ticks("bleed")
 		_target.debuff_handler.add_debuff(bleed_debuff,CustomVariables.BLEED_DEBUFF_ID,duration,ticks)
 		
 func get_tooltip() -> String:

@@ -19,7 +19,7 @@ func apply_bleed(_target: GameEntity, _var2) -> void:
 		@warning_ignore("narrowing_conversion")
 		bleed_debuff.bleed_damage = PlayerManager.player.stats.bleed_damage.value()
 		var duration = PlayerManager.player.stats.bleed_duration.value()
-		var ticks = PlayerManager.player.stats.bleed_ticks.value()
+		var ticks = PlayerManager.player.stats.dot_ticks("bleed")
 		_target.apply_debuff(bleed_debuff,CustomVariables.get_buff_id(),duration,ticks)
 
 func _on_finished() -> void:

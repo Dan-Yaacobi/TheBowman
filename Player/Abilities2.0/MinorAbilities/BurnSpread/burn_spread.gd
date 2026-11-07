@@ -22,7 +22,7 @@ func _on_enemy_died(enemy: Enemy) -> void:
 		var burn: BurnDebuff = load(BURN_DEBUFF_PATH).instantiate()
 		burn.set_damage(roundi(stats.burn_damage.value()))
 		@warning_ignore("narrowing_conversion")
-		other.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.burn_ticks.value())
+		other.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.dot_ticks("burn"))
 
 func get_tooltip() -> String:
 	return "Burning enemies spread burn when they die"

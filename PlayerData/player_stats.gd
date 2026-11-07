@@ -138,6 +138,14 @@ static var DISPLAY_STATS: Array = [
 
 static var HIDE_WHEN_ZERO_GROUPS: Array[String] = ["Effects"]
 
+## Ticks for a damage-over-time debuff ("bleed", "burn" or "poison"). Tick rate stays the same as
+## duration grows, so +50% duration means +50% ticks and damage, not the same damage spread thinner.
+func dot_ticks(kind: String) -> int:
+	var ticks: Stat = get(kind + "_ticks")
+	var duration: Stat = get(kind + "_duration")
+	var duration_scale: float = 1.0 if is_zero_approx(duration.base_value) else duration.value() / duration.base_value
+	return maxi(1, roundi(ticks.value() * duration_scale))
+
 ## How an item-rolled stat is rolled, applied and shown. Rolls are always whole numbers.
 ## FLAT: the roll is added as-is (Arrow Damage +3).
 ## PERCENT: the roll is a percent of the stat's base, applied multiplicatively (Pull Speed +20%).
