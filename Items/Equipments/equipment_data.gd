@@ -55,6 +55,8 @@ enum StringStyle { PLAIN, GLOW, PULSE, CRACKLE }
 var rarity: float
 var modifiers: Array[StatModifier] = []                      # StatModifier list, rolled from guaranteed_stats
 var bonus_abilities: Array[MinorAbility] = []    # minor abilities picked from possible_modifiers
+## Set the first time the comparison window opens for this item, so it joins the run tally once.
+var tallied: bool = false
 
 func add_modifier(stat_name: String, amount: float, _type: Stat.buff_type) -> void:
 	modifiers.append(StatModifier.new(amount, stat_name, _type))

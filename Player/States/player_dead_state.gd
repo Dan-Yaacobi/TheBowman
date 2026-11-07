@@ -22,8 +22,6 @@ func Exit() -> void:
 	player.enable_jump()
 	player.reset_equipment()
 	player.debuff_handler.reset_debuffs()
-	if player.stats.reset_upgrades:
-		player.reset_to_base_stats()
 	MetaProgress.apply_to(player.stats)
 	# Run-only heart containers (cleric, color scrolls) don't carry into the next run.
 	player.stats.extra_hp = 0
