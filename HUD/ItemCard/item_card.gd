@@ -103,7 +103,7 @@ func _add_stat_row(row: StatRow) -> void:
 
 	var delta_text: String = ""
 	var delta_color: Color = COLOR_NEUTRAL
-	if row.show_delta and not is_zero_approx(row.delta):
+	if row.show_delta and roundi(row.delta) != 0:
 		delta_text = ("+" if row.delta > 0.0 else "") + _format(row.delta)
 		delta_color = COLOR_UPGRADE if row.delta > 0.0 else COLOR_DOWNGRADE
 	var delta_cell: Label = _make_label(delta_text, delta_color, LABEL_FONT_SIZE)
@@ -128,4 +128,4 @@ func _style_label(label: Label, font_size: int, color: Color) -> void:
 	label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.8))
 
 func _format(amount: float) -> String:
-	return String.num(snappedf(amount, 0.01))
+	return str(roundi(amount))

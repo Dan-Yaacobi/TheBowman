@@ -217,7 +217,4 @@ func _format_stat_rich(stat: Stat) -> String:
 	return "[color=#" + color.to_html(false) + "]" + total_str + "[/color]"
 
 func _format_float(val: float) -> String:
-	var _snapped: float = snappedf(val, 0.0001)
-	if _snapped == int(_snapped):
-		return str(int(_snapped))
-	return str(_snapped)
+	return str(roundi(val))

@@ -74,7 +74,7 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 		for def in tier.stat_rolls:
 			var scaled_min: float = def.min_value * total_scalar
 			var scaled_max: float = def.max_value * total_scalar
-			var amount: float = snappedf(randf_range(scaled_min, scaled_max), 0.1)
+			var amount: int = roundi(randf_range(scaled_min, scaled_max))
 			data.add_modifier(def.stat_name, amount, def.type)
 		var minor_abilities: Array[MinorAbility]
 		if tier.minor_abilities:
