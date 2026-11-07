@@ -85,15 +85,18 @@ func _on_proximity_exited(body: Node2D) -> void:
 
 
 func enter() -> void:
+	if _leads_into_rift() and not _has_bow_and_quiver():
+		CombatTextSpawner.spawn(global_position, "Equip a bow and quiver first", Color.WHITE)
+		return
 	if is_boss_portal:
 		EventBus.boss_portal_entered.emit()
 	elif is_rift_portal:
-		if not _has_bow_and_quiver():
-			CombatTextSpawner.spawn(global_position, "Equip a bow and quiver first", Color.WHITE)
-			return
 		EventBus.entered_rift_portal.emit()
 	else:
 		EventBus.changed_scene.emit(destination)
+
+func _leads_into_rift() -> bool:
+	return is_boss_portal or is_rift_portal or destination != GameWorlds.worlds.Main_Menu
 
 func _has_bow_and_quiver() -> bool:
 	var stats: PlayerStats = PlayerManager.player.stats
