@@ -1,0 +1,58 @@
+add telegraph before apple ram
+increase stats menu text size
+bow hover display gets really long the first time you look at it but only happened with hunters mark?
+Vulcan shows the wrong ability
+make event portal impossible to go through unless event is over
+
+make a better looking pedestal
+
+active ability minor ability needs to be removed
+
+better looking clouds
+
+islands small and far away in the distance for visual effect
+
+golem should drop something
+
+some minor abilities don't make sense to have (like shatter on fireball bow)
+
+update cleric and pirates sprites
+
+add more tally to your death
+
+enlarge the upgrade window or go down lines
+max jump height always
+
+change equipment stat numbers to full rounded
+
+nerf echo arrows to 25%
+green apples don't have death sound effect
+
+the kill 10 apples need more variants of just "kill all enemies before time runs out" and the rift level alters which enemies can spawn
+limit to only 1 cleric in a rift level
+
+unlock an ability to disenchant items you don't wnat during a rift for extra resources
+different guaernteed drop from wizards
+
+equipment which cause something to stick on the target (like sticky charges quiver or stormcaller) should disappear once target is killed, and also when the wizards teleport they don't immediately teleport with them.
+
+add gold vases, but with lower priority to spawn them (probably need priority system that doesn't exist atm)
+
+crates and barrels need to drop their wood (if it drops) quicker
+
+make event bosses and wizard bosses also drop a sky shard
+
+fire ring should just make your normal dash into a fireball and not touch its range or cooldown
+equipment tiering up needs to ramp up quicker with rifts
+balancing:
+heart seeker is too strong
+
+sound and music:
+jumping sound effect
+add walking sound effect
+change menu music
+make event music
+draw sound effect
+chest opening sound
+picking up sound - different for every item
+dropped sound - different for every item
