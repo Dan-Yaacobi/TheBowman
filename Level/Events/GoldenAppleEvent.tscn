@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5q5y48xrce31"]
 
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_event.gd" id="1_event"]
+[ext_resource type="Script" uid="uid://bgx2vmcxe5k0q" path="res://Level/Events/GoldenApple/golden_apple_event.gd" id="1_event"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_island"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_portal"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_falling_death"]
@@ -26,45 +26,76 @@ metadata/_custom_type_script = "uid://c06t2awg17dkp"
 
 [node name="GoldenAppleEvent" type="Node2D" unique_id=207856871 node_paths=PackedStringArray("golden_apple")]
 script = ExtResource("1_event")
-rewards = Array[ExtResource("7_event_reward")]([SubResource("Resource_kill_gold"), SubResource("Resource_kill_gear")])
 golden_apple = NodePath("GoldenApple")
+chase_duration = 40.0
+rewards = Array[ExtResource("7_event_reward")]([SubResource("Resource_kill_gold"), SubResource("Resource_kill_gear")])
 
-[node name="Islands" type="Node2D" parent="."]
+[node name="Islands" type="Node2D" parent="." unique_id=181850228]
 
-[node name="StartIsland" parent="Islands" instance=ExtResource("2_island")]
+[node name="StartIsland" parent="Islands" unique_id=42734773 instance=ExtResource("2_island")]
 position = Vector2(0, 30)
 
-[node name="Island2" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island2" parent="Islands" unique_id=328929455 instance=ExtResource("2_island")]
 position = Vector2(-110, -10)
 
-[node name="Island3" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island3" parent="Islands" unique_id=378496502 instance=ExtResource("2_island")]
 position = Vector2(110, -20)
 
-[node name="Island4" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island4" parent="Islands" unique_id=785710724 instance=ExtResource("2_island")]
 position = Vector2(220, 40)
 
-[node name="Island5" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island5" parent="Islands" unique_id=266091956 instance=ExtResource("2_island")]
 position = Vector2(-200, 70)
 
-[node name="Island6" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island6" parent="Islands" unique_id=1419584088 instance=ExtResource("2_island")]
 position = Vector2(30, -100)
 
-[node name="Island7" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island7" parent="Islands" unique_id=1422184938 instance=ExtResource("2_island")]
 position = Vector2(320, -40)
 
-[node name="Island8" parent="Islands" instance=ExtResource("2_island")]
+[node name="Island8" parent="Islands" unique_id=396922230 instance=ExtResource("2_island")]
 position = Vector2(100, 110)
 
-[node name="SpawnMarker" type="Marker2D" parent="."]
+[node name="Island9" parent="Islands" unique_id=1847265216 instance=ExtResource("2_island")]
+position = Vector2(44, 74)
+
+[node name="Island10" parent="Islands" unique_id=839107249 instance=ExtResource("2_island")]
+position = Vector2(129, 44)
+
+[node name="Island11" parent="Islands" unique_id=1145776369 instance=ExtResource("2_island")]
+position = Vector2(48, -46)
+
+[node name="Island12" parent="Islands" unique_id=764103653 instance=ExtResource("2_island")]
+position = Vector2(-70, 42)
+
+[node name="Island13" parent="Islands" unique_id=340338454 instance=ExtResource("2_island")]
+position = Vector2(-143, 69)
+
+[node name="Island14" parent="Islands" unique_id=1755457737 instance=ExtResource("2_island")]
+position = Vector2(-53, -57)
+
+[node name="Island15" parent="Islands" unique_id=289346083 instance=ExtResource("2_island")]
+position = Vector2(212, -49)
+
+[node name="Island16" parent="Islands" unique_id=1942764965 instance=ExtResource("2_island")]
+position = Vector2(283, 27)
+
+[node name="Island17" parent="Islands" unique_id=78945364 instance=ExtResource("2_island")]
+position = Vector2(-36, 105)
+
+[node name="Island18" parent="Islands" unique_id=527729596 instance=ExtResource("2_island")]
+position = Vector2(165, 2)
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=391364660]
 position = Vector2(0, -20)
 
-[node name="EventPortal" parent="." instance=ExtResource("3_portal")]
+[node name="EventPortal" parent="." unique_id=1034048582 instance=ExtResource("3_portal")]
 position = Vector2(-10, -13)
 
-[node name="FallingDeath" parent="." instance=ExtResource("4_falling_death")]
+[node name="FallingDeath" parent="." unique_id=296828545 instance=ExtResource("4_falling_death")]
 position = Vector2(0, 443)
 
-[node name="GoldenApple" parent="." instance=ExtResource("5_golden_apple")]
+[node name="GoldenApple" parent="." unique_id=906973531 instance=ExtResource("5_golden_apple")]
 position = Vector2(110, -70)
 
-[node name="ChallengeHUD" parent="." instance=ExtResource("6_hud")]
+[node name="ChallengeHUD" parent="." unique_id=1262604735 instance=ExtResource("6_hud")]

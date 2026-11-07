@@ -1,48 +1,48 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cmgxlvjm5003t"]
 
-[ext_resource type="Script" path="res://Level/Events/SacrificialAltar/sacrificial_altar_event.gd" id="1_event"]
-[ext_resource type="Script" path="res://Level/Events/Rewards/equipment_reward.gd" id="2_reward"]
-[ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="3_island"]
-[ext_resource type="PackedScene" path="res://Level/Islands/Island3.tscn" id="4_island3"]
-[ext_resource type="PackedScene" path="res://Objects/Portal/EventPortal.tscn" id="5_portal"]
-[ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="6_fall"]
+[ext_resource type="Script" uid="uid://bxmdtlxj0yumu" path="res://Level/Events/SacrificialAltar/sacrificial_altar_event.gd" id="1_event"]
+[ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="2_reward"]
+[ext_resource type="Script" uid="uid://b228vj27fbqyi" path="res://Level/Events/Rewards/event_reward.gd" id="2_yuhfx"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="3_island"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="5_portal"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="6_fall"]
 [ext_resource type="PackedScene" path="res://Level/Events/SacrificialAltar/SacrificialAltar.tscn" id="7_altar"]
 
 [sub_resource type="Resource" id="Resource_epic_reward"]
 script = ExtResource("2_reward")
 forced_rarity = 2
 
-[node name="SacrificialAltarEvent" type="Node2D"]
+[node name="SacrificialAltarEvent" type="Node2D" unique_id=804664833]
 script = ExtResource("1_event")
-rewards = Array[ExtResource("2_reward")]([SubResource("Resource_epic_reward")])
+rewards = Array[ExtResource("2_yuhfx")]([SubResource("Resource_epic_reward")])
 
-[node name="SpawnMarker" type="Marker2D" parent="."]
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=1861955822]
 position = Vector2(-1, -20)
 
-[node name="EventPortal" parent="." instance=ExtResource("5_portal")]
+[node name="EventPortal" parent="." unique_id=470110127 instance=ExtResource("5_portal")]
 position = Vector2(0, -13)
 
-[node name="FallingDeath" parent="." instance=ExtResource("6_fall")]
+[node name="FallingDeath" parent="." unique_id=675269100 instance=ExtResource("6_fall")]
 position = Vector2(-1, 443)
 
-[node name="Islands" type="Node2D" parent="."]
+[node name="Islands" type="Node2D" parent="." unique_id=1894016687]
 
-[node name="StartIsland" parent="Islands" instance=ExtResource("3_island")]
+[node name="StartIsland" parent="Islands" unique_id=776529729 instance=ExtResource("3_island")]
 position = Vector2(0, 30)
 
-[node name="StepIsland" parent="Islands" instance=ExtResource("4_island3")]
-position = Vector2(58, 18)
+[node name="StepIsland" parent="Islands" unique_id=1847265216 instance=ExtResource("3_island")]
+position = Vector2(51, 15)
 
-[node name="AltarIsland" parent="Islands" instance=ExtResource("3_island")]
+[node name="AltarIsland" parent="Islands" unique_id=1773890716 instance=ExtResource("3_island")]
 position = Vector2(118, 6)
 
-[node name="SacrificialAltar" parent="Islands/AltarIsland" instance=ExtResource("7_altar")]
+[node name="SacrificialAltar" parent="Islands/AltarIsland" unique_id=450029644 instance=ExtResource("7_altar")]
 unique_name_in_owner = true
-position = Vector2(0, -18)
+position = Vector2(0, -14)
 
-[node name="AltarIsland2" parent="Islands" instance=ExtResource("3_island")]
+[node name="AltarIsland2" parent="Islands" unique_id=769619931 instance=ExtResource("3_island")]
 position = Vector2(161, 6)
 
-[node name="RewardMarker" type="Marker2D" parent="Islands/AltarIsland2"]
+[node name="RewardMarker" type="Marker2D" parent="Islands/AltarIsland2" unique_id=1468399499]
 unique_name_in_owner = true
 position = Vector2(0, -16)
