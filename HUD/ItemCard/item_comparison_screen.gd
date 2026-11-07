@@ -41,19 +41,14 @@ func close() -> void:
 	get_tree().paused = false
 
 # Opening: only when an item is targeted and nothing else has paused the game.
-# Empty slot → equip directly, no comparison needed.
+# Always opens, even with an empty slot (the current card shows as empty).
 func _unhandled_input(event: InputEvent) -> void:
 	if is_open or target == null or get_tree().paused:
 		return
 	if event.is_action_pressed("Interact"):
 		get_viewport().set_input_as_handled()
-		if _is_slot_empty():
-			equip_pressed.emit()
-		else:
-			open()
+		open()
 
-func _is_slot_empty() -> bool:
-	return PlayerManager.player.get_equipped_in_slot(target.data.slot) == null
 # Closing: _input runs before PauseMenu's _unhandled_input, so Esc closes this
 # screen without also opening the pause menu.
 func _input(event: InputEvent) -> void:
