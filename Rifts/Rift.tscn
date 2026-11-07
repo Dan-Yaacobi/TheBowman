@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://ddhffywfb4gs" path="res://Level/Events/BossEvents/BirdBossEvent.tscn" id="42_brdbs"]
 [ext_resource type="PackedScene" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="43_scrpd"]
 [ext_resource type="Resource" uid="uid://cyhpbr7clxxlp" path="res://Rifts/RiftEnemySpawner/EnemyEntry/rock_golem_entry.tres" id="44_rkglm"]
+[ext_resource type="PackedScene" uid="uid://c5q5y48xrce31" path="res://Level/Events/GoldenAppleEvent.tscn" id="45_gldap"]
 
 [sub_resource type="Resource" id="Resource_4phns"]
 script = ExtResource("8_hhyca")
@@ -67,7 +68,7 @@ metadata/_custom_type_script = "uid://viwygaov6sfn"
 script = ExtResource("3_jukhk")
 main_path_length = 5
 probability_decay = 1.25
-event_pool = Array[PackedScene]([ExtResource("29_2cjow"), ExtResource("40_mvtgt"), ExtResource("41_aplbs"), ExtResource("42_brdbs")])
+event_pool = Array[PackedScene]([ExtResource("29_2cjow"), ExtResource("40_mvtgt"), ExtResource("41_aplbs"), ExtResource("42_brdbs"), ExtResource("45_gldap")])
 event_chance = 1.0
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
