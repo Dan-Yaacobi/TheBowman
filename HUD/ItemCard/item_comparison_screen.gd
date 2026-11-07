@@ -33,6 +33,7 @@ func open() -> void:
 	is_open = true
 	show()
 	get_tree().paused = true
+	EventBus.equipment_inspected.emit(target.data)
 	_sync_card_sections()
 
 func close() -> void:

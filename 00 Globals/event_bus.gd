@@ -117,6 +117,11 @@ signal open_craft_menu(drop_position: Vector2)
 signal craft_menu_closed
 signal close_craft_menu
 
+## The comparison window opened for this item. Disenchanting counts it toward the run tally.
+signal equipment_inspected(data: EquipmentData)
+## Items in the run tally (found, not yet disenchanted).
+signal found_items_changed(count: int)
+
 signal activate_gauge
 
 signal relocate_player(_position: Vector2)

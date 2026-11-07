@@ -37,6 +37,7 @@ GameStateManager="*uid://dbs3exo42qa43"
 SaveService="*uid://cw52nbrmjspcx"
 MetaProgress="*uid://bq7wt46xqx5tg"
 Crafting="*res://00 Globals/crafting.gd"
+Disenchanting="*res://00 Globals/disenchanting.gd"
 
 [debug]
 
