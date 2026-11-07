@@ -1,6 +1,6 @@
 class_name LoreItemPickup extends Item
-## A hand-placed lore item. Grants its LoreItemData once, ever: if it was already found,
-## it removes itself on load. The flavor line is shown by the HUD (EventBus.lore_item_found).
+## A hand-placed lore item. Grants its LoreItemData once, ever. Removes itself on load if the
+## item was already found or its requirement (campaign progress) isn't met yet. The flavor line is shown by the HUD (EventBus.lore_item_found).
 
 @export var lore_item: LoreItemData
 @export var bob_speed: float = 2.0
@@ -20,7 +20,7 @@ func extra_ready_functions() -> void:
 		push_warning("LoreItemPickup '%s' has no lore_item" % name)
 		queue_free()
 		return
-	if Lore.has_found(lore_item.id):
+	if not Lore.can_obtain(lore_item):
 		queue_free()
 		return
 	if lore_item.icon:

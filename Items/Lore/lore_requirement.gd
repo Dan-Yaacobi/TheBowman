@@ -1,9 +1,7 @@
 class_name LoreRequirement extends Resource
-## Gate on a lore item's explanation. This base always passes (campaign quests don't exist yet);
-## subclass and override is_met() for real conditions.
-
-## What the spirit says while the requirement isn't met.
-@export var locked_line: String = "I can't remember... not yet."
+## Gate on obtaining a lore item, e.g. campaign progress. Pickups of a gated item don't
+## appear until it's met, so the spirit can always explain anything the player carries.
+## This base always passes (campaign quests don't exist yet); subclass and override is_met().
 
 func is_met() -> bool:
 	return true

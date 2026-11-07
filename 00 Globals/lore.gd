@@ -32,12 +32,16 @@ func find(id: StringName) -> LoreItemData:
 func has_found(id: StringName) -> bool:
 	return carried.has(id) or explained.has(id)
 
+## Not found yet and its requirement is met. Pickups (and later rift spawning) check this.
+func can_obtain(item: LoreItemData) -> bool:
+	return item != null and item.id != &"" and item.is_unlocked() and not has_found(item.id)
+
 func is_explained(id: StringName) -> bool:
 	return explained.has(id)
 
-## Saved right away, like schematics. Returns false if it was already found.
+## Saved right away, like schematics. Returns false if it can't be obtained (found or gated).
 func add(item: LoreItemData) -> bool:
-	if item == null or item.id == &"" or has_found(item.id):
+	if not can_obtain(item):
 		return false
 	carried.append(item.id)
 	SaveService.save_game()
