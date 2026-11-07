@@ -8,9 +8,6 @@
 [ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_inter"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_gone"]
 [ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="8_key"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Bows/Sprites/Skylark.png" id="9_bow"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Quivers/Sprites/Quiver_Wooden.png" id="10_quiver"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Rings/Sprites/Ring_1.png" id="11_ring"]
 [ext_resource type="Texture2D" path="res://Objects/Constructs/DisenchantTable/Sprites/DisenchantTable.png" id="12_sprite"]
 
 [sub_resource type="Resource" id="Resource_table"]
@@ -23,21 +20,14 @@ idle = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_table"]
 size = Vector2(60, 40)
 
-[node name="DisenchantTable" type="Node2D" node_paths=PackedStringArray("items_origin", "info_label", "runes_origin")]
+[node name="DisenchantTable" type="Node2D" node_paths=PackedStringArray("table_sprite", "spark_origin", "info_label", "runes_origin")]
 script = ExtResource("1_table")
-slot_icons = Dictionary[int, Object]({
-0: ExtResource("9_bow"),
-1: ExtResource("10_quiver"),
-2: ExtResource("11_ring")
-})
-items_origin = NodePath("ItemsOrigin")
+table_sprite = NodePath("Island/TableSprite")
+spark_origin = NodePath("SparkOrigin")
 info_label = NodePath("InfoLabel")
 runes_origin = NodePath("Island/TableSprite/RunesOrigin")
 rune_spacing = 11.0
 rune_size = Vector2(6, 9)
-item_scale = 0.15
-columns = 5
-item_spacing = Vector2(5, -4)
 data = SubResource("Resource_table")
 
 [node name="Island" parent="." instance=ExtResource("2_island")]
@@ -50,8 +40,8 @@ texture = ExtResource("12_sprite")
 [node name="RunesOrigin" type="Node2D" parent="Island/TableSprite"]
 position = Vector2(4.5, 25)
 
-[node name="ItemsOrigin" type="Marker2D" parent="."]
-position = Vector2(-7, -19)
+[node name="SparkOrigin" type="Marker2D" parent="."]
+position = Vector2(1, -15)
 
 [node name="InfoLabel" type="Label" parent="."]
 offset_left = -100.0

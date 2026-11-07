@@ -9,8 +9,10 @@ class_name ResourceHud extends Control
 
 @export_group("Flying icons")
 ## At most this many icons fly per reward, however big the amount.
-@export var max_flying_icons: int = 5
-@export var flying_icon_size: Vector2 = Vector2(30, 30)
+@export var max_flying_icons: int = 3
+@export var flying_icon_size: Vector2 = Vector2(18, 18)
+## Icons start this small at the source and grow to full size during the burst.
+@export var flying_start_scale: float = 0.4
 ## Icons first burst outward this far (screen px), then home in on the counter.
 @export var burst_radius: float = 40.0
 ## Share of the flight spent bursting out.
@@ -71,11 +73,13 @@ func _fly_icon(hud: ItemHud, start: Vector2, duration: float) -> void:
 	add_child(icon)
 	var half: Vector2 = flying_icon_size / 2.0
 	icon.position = start - half
+	icon.scale = Vector2.ONE * flying_start_scale
 	var burst_to: Vector2 = start + Vector2.from_angle(randf() * TAU) * randf_range(0.4, 1.0) * burst_radius - half
 
 	var tween: Tween = icon.create_tween()
 	tween.tween_property(icon, "position", burst_to, duration * burst_share) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(icon, "scale", Vector2.ONE, duration * burst_share)
 	# The counter's position is read when homing starts, so it stays right if the HUD moves.
 	tween.tween_method(_home_icon.bind(icon, hud), 0.0, 1.0, duration * (1.0 - burst_share)) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
