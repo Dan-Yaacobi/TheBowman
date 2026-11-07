@@ -16,20 +16,15 @@ class_name DisenchantConfig extends Resource
 ## Lifetime milestones. Any order; sorted by threshold when used.
 @export var milestones: Array[DisenchantMilestone] = []
 
-## Rolls the yield of one item with the given bonuses. Each call rolls the Skyshard chance again.
-func roll_yield(slot: EquipmentData.slots, rarity: int, bonuses: Array[DisenchantBonus]) -> Dictionary[CustomVariables.items, int]:
+## Rolls the yield of one item. Each call rolls the Skyshard chance again.
+func roll_yield(slot: EquipmentData.slots, rarity: int) -> Dictionary[CustomVariables.items, int]:
 	var result: Dictionary[CustomVariables.items, int] = {}
 	if slot_materials.has(slot) and not amount_per_rarity.is_empty():
 		var amount: int = amount_per_rarity[clampi(rarity, 0, amount_per_rarity.size() - 1)]
-		for bonus: DisenchantBonus in bonuses:
-			amount = bonus.modify_yield_amount(amount, slot, rarity)
 		if amount > 0:
 			result[slot_materials[slot]] = amount
 	if rarity >= EquipmentData.Rarity.LEGENDARY:
-		var chance: float = legendary_skyshard_chance
-		for bonus: DisenchantBonus in bonuses:
-			chance = bonus.modify_skyshard_chance(chance)
-		if randf_range(0.0, 100.0) < chance:
+		if randf_range(0.0, 100.0) < legendary_skyshard_chance:
 			var item: CustomVariables.items = CustomVariables.items.SKYSHARD
 			result[item] = result.get(item, 0) + skyshards_per_drop
 	return result

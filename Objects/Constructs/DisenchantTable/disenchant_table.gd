@@ -46,8 +46,6 @@ class_name DisenchantTable extends NPC
 ## Tallied items being broken, in tally order.
 var _items: Array[Disenchanting.FoundItem] = []
 ## Rolled yield per item (Dictionary[CustomVariables.items, int]), null until it breaks.
-## Rolled at break time against the lifetime count it will be paid at, so a milestone
-## reached mid-sequence boosts exactly the items after it.
 var _rewards: Array = []
 var _pulse_tween: Tween
 ## Items paid so far. Everything from here on is still owed to the player.
@@ -116,7 +114,7 @@ func _break_item(index: int) -> void:
 
 func _get_rewards(index: int) -> Dictionary[CustomVariables.items, int]:
 	if _rewards[index] == null:
-		_rewards[index] = Disenchanting.roll_yield(_items[index], index - _paid)
+		_rewards[index] = Disenchanting.roll_yield(_items[index])
 	return _rewards[index]
 
 func _pay_next() -> void:

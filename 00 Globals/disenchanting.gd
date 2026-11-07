@@ -23,8 +23,6 @@ var tally: Array[FoundItem] = []
 var config: DisenchantConfig
 ## Every item ever disenchanted. Drives the milestones.
 var lifetime_disenchanted: int = 0
-## True once this run's first equipment drop has rolled. Cleared whenever a world loads outside a run (the hub).
-var _first_drop_rolled: bool = false
 
 func _ready() -> void:
 	config = load(CONFIG_PATH) as DisenchantConfig
@@ -57,12 +55,10 @@ func _on_event_bus_equipment_inspected(data: EquipmentData) -> void:
 # --- Disenchanting --------------------------------------------------------
 
 ## Rolls what one tallied item gives. Doesn't change the tally; claim_next() pays it out.
-## items_ahead: items already rolled but not yet claimed, so bonuses match the lifetime count
-## this item will be disenchanted at (a milestone takes effect exactly at the next item).
-func roll_yield(item: FoundItem, items_ahead: int = 0) -> Dictionary[CustomVariables.items, int]:
+func roll_yield(item: FoundItem) -> Dictionary[CustomVariables.items, int]:
 	if config == null:
 		return {}
-	return config.roll_yield(item.slot, item.rarity, get_active_bonuses(lifetime_disenchanted + items_ahead))
+	return config.roll_yield(item.slot, item.rarity)
 
 ## Removes the first tallied item and pays its rolled yield to the player, in one step,
 ## so an item is never removed without being paid. The table breaks items in tally order.
@@ -117,18 +113,6 @@ func get_next_threshold() -> int:
 	var next: DisenchantMilestone = get_next_milestone()
 	return next.get_next_threshold(lifetime_disenchanted) if next else -1
 
-## Bonuses unlocked at a lifetime count (default: the current one), once per stack.
-func get_active_bonuses(lifetime: int = -1) -> Array[DisenchantBonus]:
-	if lifetime < 0:
-		lifetime = lifetime_disenchanted
-	var bonuses: Array[DisenchantBonus] = []
-	for milestone: DisenchantMilestone in get_milestones():
-		if milestone.bonus == null:
-			continue
-		for i: int in milestone.get_stacks(lifetime):
-			bonuses.append(milestone.bonus)
-	return bonuses
-
 ## Safe to call any number of times: clears every milestone stat bonus, then re-adds the current stacks.
 func apply_to(stats: PlayerStats) -> void:
 	if stats == null:
@@ -149,33 +133,9 @@ func _apply_to_player() -> void:
 	if player:
 		apply_to(player.stats)
 
-# --- Loot hooks (called by LootManager) -----------------------------------
-
-## Chance (%) for a chance-based equipment drop, after bonuses. Only changed inside a run.
-func modify_equipment_drop_chance(chance: float) -> float:
-	if not _is_in_run():
-		return chance
-	for bonus: DisenchantBonus in get_active_bonuses():
-		chance = bonus.modify_equipment_drop_chance(chance)
-	return chance
-
-## Raises the rarity of the first equipment rolled in a run to the bonus minimum, if any.
-## Every later roll in the run is returned unchanged.
-func apply_first_drop_rarity(rarity: int) -> int:
-	if _first_drop_rolled or not _is_in_run():
-		return rarity
-	_first_drop_rolled = true
-	var min_rarity: int = -1
-	for bonus: DisenchantBonus in get_active_bonuses():
-		min_rarity = bonus.modify_first_drop_min_rarity(min_rarity)
-	return maxi(rarity, min_rarity)
-
-## Death, a won run and a loaded game all land in the hub, so the next run starts fresh.
-## Also re-applies stat bonuses, in case a death reset the player's stats.
+## Re-applies stat bonuses after every world change, in case a death reset the player's stats.
 func _on_event_bus_world_ready() -> void:
 	_apply_to_player()
-	if not _is_in_run():
-		_first_drop_rolled = false
 
 ## The hub resets rift_level to 0; rifts, events and boss arenas are all above it.
 func _is_in_run() -> bool:
@@ -197,7 +157,6 @@ func _save() -> Dictionary:
 ## Entries with an unknown slot are skipped, so a removed slot never breaks a save.
 func _load(data: Dictionary) -> void:
 	lifetime_disenchanted = int(data.get("lifetime", 0))
-	_first_drop_rolled = false
 	tally.clear()
 	for raw: Variant in data.get("tally", []):
 		if not raw is Dictionary:

@@ -38,7 +38,7 @@ func drop_equipment(slot: Slot, forced_rarity: int = -1) -> EquipmentData:
 	return null
 
 func drop_random_equipment(_position: Vector2, _chance: float, forced_rarity: int = -1) -> void:
-	if randf_range(0, 100) <= Disenchanting.modify_equipment_drop_chance(_chance):
+	if randf_range(0, 100) <= _chance:
 		var equipment: EquipmentData = drop_equipment(randi_range(0, 2) as Slot, forced_rarity)
 		EventBus.equipment_dropped.emit(equipment, _position, null)
 
@@ -163,8 +163,6 @@ func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> Eq
 		data.ability = data.ability.duplicate()
 	data.equipment_scene = template.equipment_scene
 	var rarity: int = forced_rarity if forced_rarity >= 0 else _rarity_for_rift_level(PlayerManager.player.stats.rift_level)
-	# drop_specific (crafting, pedestals) skips this on purpose: crafted items stay Common.
-	rarity = Disenchanting.apply_first_drop_rarity(rarity)
 	_apply_rarity_rolls(data, rarity)
 	return data
 	
