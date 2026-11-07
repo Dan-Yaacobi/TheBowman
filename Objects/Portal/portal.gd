@@ -38,6 +38,7 @@ class_name Portal extends Node2D
 var _proximity: float = 0.0
 var _phase: float = 0.0
 var _fx_tween: Tween
+var _is_blocked_look: bool = false
 
 func _ready() -> void:
 	_update_flip()
@@ -100,7 +101,15 @@ func enter() -> void:
 
 func _update_blocked_look() -> void:
 	var blocked: bool = _leads_into_rift() and not _has_bow_and_quiver()
-	sprite.self_modulate = blocked_tint if blocked else Color.WHITE
+	if blocked == _is_blocked_look:
+		return
+	_is_blocked_look = blocked
+	var tint: Color = blocked_tint if blocked else Color.WHITE
+	sprite.self_modulate = tint
+	# Particles are children of the sprite; self_modulate doesn't reach them.
+	for child: Node in sprite.get_children():
+		if child is CPUParticles2D:
+			(child as CPUParticles2D).self_modulate = tint
 
 func _leads_into_rift() -> bool:
 	return is_boss_portal or is_rift_portal or destination != GameWorlds.worlds.Main_Menu
