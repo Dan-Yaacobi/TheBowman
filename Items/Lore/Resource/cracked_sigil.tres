@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://Items/Lore/lore_requirement.gd" id="2_req"]
+[ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="3_icon"]
+
+[sub_resource type="Resource" id="Resource_req"]
+script = ExtResource("2_req")
+
+[resource]
+script = ExtResource("1_data")
+id = &"cracked_sigil"
+display_name = "Cracked Sigil"
+icon = ExtResource("3_icon")
+pickup_line = "A wizard's mark, split clean down the middle."
+spirit_lines = Array[String](["This mark was pressed by a wizard's hand. Once, such marks meant a promise.", "Wizards sealed their gifts to the archers with sigils like this one.", "Someone broke it on purpose. A promise, taken back."])
+requires = SubResource("Resource_req")
