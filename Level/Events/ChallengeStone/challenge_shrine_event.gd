@@ -104,6 +104,14 @@ func _finish(success: bool) -> void:
 		spawn_rewards(shrine.global_position, taken_curse_weight, challenge.rewards)
 	hud.show_result(success)
 	challenge_finished.emit(success)
+	report_finished(success)
+
+func get_display_name() -> String:
+	if not display_name.is_empty():
+		return display_name
+	if challenge and not challenge.display_name.is_empty():
+		return challenge.display_name
+	return ""
 
 func on_event_exited() -> void:
 	if is_running:

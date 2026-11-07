@@ -1,6 +1,8 @@
 class_name Event extends Node2D
 
 @onready var spawn_marker: Marker2D = $SpawnMarker
+## Name shown in the run tally. Empty = derived from the scene file name.
+@export var display_name: String = ""
 @export var rewards: Array[EventReward] = []
 ## Horizontal gap between separate rewards so their pickups don't pile up.
 @export var reward_spacing: float = 16.0
@@ -15,6 +17,13 @@ func spawn_rewards(at_position: Vector2, weight: int = 0, reward_list: Array[Eve
 		eligible[i].spawn(at_position + Vector2(start_x + reward_spacing * i, 0.0))
 func get_event_spawn() -> Vector2:
 	return spawn_marker.global_position
+
+## Events with a win/lose outcome call this once when it's decided.
+func report_finished(success: bool) -> void:
+	EventBus.rift_event_finished.emit(self, success)
+
+func get_display_name() -> String:
+	return display_name
 
 ## Called after the player has arrived.
 func on_event_entered() -> void:

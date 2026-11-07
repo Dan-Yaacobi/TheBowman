@@ -74,3 +74,4 @@ func _on_boss_died(_boss: Enemy) -> void:
 	# The fight is won; falling now only respawns the player
 	falling_death.costs_heart = false
 	spawn_rewards(exit_portal.global_position)
+	report_finished(true)

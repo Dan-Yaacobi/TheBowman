@@ -5,6 +5,8 @@ class_name GameObject extends Node2D
 @onready var hit_box: HitBox = get_node_or_null(^"HitBox") as HitBox
 @onready var placement_marker: Marker2D = $PlacementMarker
 @export var data: ObjectData
+## Name shown in the run tally. Empty = derived from the scene file name.
+@export var display_name: String = ""
 @export var avg_coin_drop: int = 0
 @export var item_drop: CustomVariables.items
 @export_range(0.0,100.0,0.1,"suffix:%") var item_drop_chance
@@ -38,6 +40,7 @@ func get_rift_type() -> Rift.Type:
 func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult = null) -> void:
 	if data.interactable and not got_hit:
 		EventBus.object_destroyed_sound.emit()
+		EventBus.object_destroyed.emit(self)
 		got_hit = true
 		EventBus.camera_shake.emit(2.0,25.0)
 		if sprite.material:

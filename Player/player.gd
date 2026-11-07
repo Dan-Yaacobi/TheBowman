@@ -272,6 +272,17 @@ func _physics_process(delta: float) -> void:
 	velocity += knockback
 	move_and_slide()
 	velocity -= knockback
+	_check_island_contact()
+
+## Reports each island the first time the player stands on it (run tally).
+func _check_island_contact() -> void:
+	if not is_on_floor():
+		return
+	for i: int in get_slide_collision_count():
+		var island: Island = get_slide_collision(i).get_collider() as Island
+		if island and not island.stepped_on:
+			island.stepped_on = true
+			EventBus.island_stepped_on.emit(island)
 
 ## Ground grip: 1 = normal, lower = slippery. The weakest active source wins.
 func get_ground_traction() -> float:
@@ -727,6 +738,7 @@ func collect_item(item: CustomVariables.items, _amount: int) -> void:
 	if _amount > 0 and stats.items.has(item):
 		stats.items[item] += _amount
 		item_amount_changed.emit(stats.items[item], item)
+		EventBus.resource_collected.emit(item, _amount)
 
 func get_nearby_enemies() -> Array[Enemy]:
 	return nearby_enemies

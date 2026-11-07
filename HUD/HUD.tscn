@@ -25,6 +25,30 @@
 [ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/CraftMenu.tscn" id="24_craft"]
 [ext_resource type="PackedScene" path="res://HUD/LoreToast/LoreToast.tscn" id="25_loretoast"]
+[ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="26_ds_coin"]
+[ext_resource type="Texture2D" uid="uid://xgeldnxbx2tv" path="res://Items/Other/Potion/Potion.png" id="27_ds_potion"]
+[ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="28_ds_ess"]
+[ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="29_ds_wood"]
+[ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="30_ds_shard"]
+[ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="31_ds_scroll"]
+[ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="32_ds_schem"]
+[ext_resource type="Texture2D" path="res://Objects/Sprites/GrandChest.png" id="33_ds_chest"]
+
+[sub_resource type="Gradient" id="Gradient_ds_vignette"]
+offsets = PackedFloat32Array(0.45, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.85)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ds_vignette"]
+gradient = SubResource("Gradient_ds_vignette")
+width = 160
+height = 90
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1.05, 1.05)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds_chest"]
+atlas = ExtResource("33_ds_chest")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g452r"]
 shader = ExtResource("15_iob2k")
@@ -266,71 +290,147 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("21_2gu3h")
+item_icons = Dictionary[int, Texture2D]({
+0: ExtResource("26_ds_coin"),
+1: ExtResource("27_ds_potion"),
+2: ExtResource("28_ds_ess"),
+3: ExtResource("29_ds_wood"),
+4: ExtResource("30_ds_shard"),
+5: ExtResource("31_ds_scroll")
+})
+schematic_icon = ExtResource("32_ds_schem")
+chest_icon = SubResource("AtlasTexture_ds_chest")
 
-[node name="ColorRect" type="ColorRect" parent="DeathScreen" unique_id=493062055]
+[node name="Backdrop" type="ColorRect" parent="DeathScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.33333334, 0, 0, 1)
+color = Color(0.09, 0.035, 0.045, 1)
 
-[node name="Label" type="Label" parent="DeathScreen" unique_id=1384030250]
+[node name="Vignette" type="TextureRect" parent="DeathScreen/Backdrop"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.42100003
-anchor_top = 0.40600002
-anchor_right = 0.42100003
-anchor_bottom = 0.40600002
-offset_left = 0.11993408
-offset_top = -31.320007
-offset_right = 181.11993
-offset_bottom = 31.679993
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "You Died"
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ds_vignette")
+expand_mode = 1
 
-[node name="Tally" type="Label" parent="DeathScreen" unique_id=1845898578]
+[node name="Margin" type="MarginContainer" parent="DeathScreen"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.42200002
-anchor_top = 0.47200003
-anchor_right = 0.42200002
-anchor_bottom = 0.47200003
-offset_left = -0.16003418
-offset_top = -9.840027
-offset_right = 136.83997
-offset_bottom = 10.159973
-text = "total enemies killed: "
-
-[node name="RiftLevel" type="Label" parent="DeathScreen" unique_id=995812714]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.423
-anchor_top = 0.5
-anchor_right = 0.423
-anchor_bottom = 0.5
-offset_left = -0.44000244
-offset_top = -11.0
-offset_right = 179.56
-offset_bottom = 9.0
-text = "You have reached rift level:"
-
-[node name="Button" type="Button" parent="DeathScreen" unique_id=1252187196]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.54
-anchor_right = 0.5
-anchor_bottom = 0.54
-offset_left = -107.0
-offset_top = -13.800018
-offset_right = 108.0
-offset_bottom = 14.199982
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 32
+
+[node name="Layout" type="VBoxContainer" parent="DeathScreen/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="DeathScreen/Margin/Layout"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_colors/font_color = Color(0.88, 0.28, 0.22, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 80
+text = "YOU DIED"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="DeathScreen/Margin/Layout"]
+layout_mode = 2
+theme_type_variation = &"DimLabel"
+theme_override_font_sizes/font_size = 32
+text = "Your journey ended on rift level 0"
+horizontal_alignment = 1
+
+[node name="Summary" type="HBoxContainer" parent="DeathScreen/Margin/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Columns" type="HBoxContainer" parent="DeathScreen/Margin/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="SlainPanel" type="PanelContainer" parent="DeathScreen/Margin/Layout/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RowPanel"
+
+[node name="Margin" type="MarginContainer" parent="DeathScreen/Margin/Layout/Columns/SlainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Scroll" type="ScrollContainer" parent="DeathScreen/Margin/Layout/Columns/SlainPanel/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="SlainList" type="VBoxContainer" parent="DeathScreen/Margin/Layout/Columns/SlainPanel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="LootPanel" type="PanelContainer" parent="DeathScreen/Margin/Layout/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RowPanel"
+
+[node name="Margin" type="MarginContainer" parent="DeathScreen/Margin/Layout/Columns/LootPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Scroll" type="ScrollContainer" parent="DeathScreen/Margin/Layout/Columns/LootPanel/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="LootList" type="VBoxContainer" parent="DeathScreen/Margin/Layout/Columns/LootPanel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="JourneyPanel" type="PanelContainer" parent="DeathScreen/Margin/Layout/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RowPanel"
+
+[node name="Margin" type="MarginContainer" parent="DeathScreen/Margin/Layout/Columns/JourneyPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Scroll" type="ScrollContainer" parent="DeathScreen/Margin/Layout/Columns/JourneyPanel/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="JourneyList" type="VBoxContainer" parent="DeathScreen/Margin/Layout/Columns/JourneyPanel/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Button" type="Button" parent="DeathScreen/Margin/Layout"]
+custom_minimum_size = Vector2(340, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
 text = "I promise to do better"
 
 [node name="Corners" type="Control" parent="." unique_id=10360099]
@@ -396,4 +496,4 @@ flip_v = true
 
 [node name="LoreToast" parent="." instance=ExtResource("25_loretoast")]
 
-[connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="DeathScreen/Margin/Layout/Button" to="DeathScreen" method="_on_button_pressed"]

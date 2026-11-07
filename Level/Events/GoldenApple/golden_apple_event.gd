@@ -74,6 +74,7 @@ func _end_chase(caught: bool) -> void:
 	_chasing = false
 	set_process(false)
 	hud.show_result(caught, CAUGHT_TEXT if caught else ESCAPED_TEXT)
+	report_finished(caught)
 
 func _on_golden_apple_died(_apple: Enemy) -> void:
 	if not _chasing:

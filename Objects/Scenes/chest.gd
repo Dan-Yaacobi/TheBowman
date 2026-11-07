@@ -32,6 +32,7 @@ func open() -> void:
 	if _opened:
 		return
 	_opened = true
+	EventBus.chest_opened.emit(self)
 	key_prompt.hide()
 	interaction_area.set_deferred(&"monitoring", false)
 	EventBus.camera_shake.emit(open_shake_strength, open_shake_fade)

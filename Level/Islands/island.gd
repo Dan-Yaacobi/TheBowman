@@ -22,6 +22,8 @@ var float_amplitude: float = 3.0
 var float_speed: float = 2.0
 var base_height: float
 var has_game_object: bool = false
+## Set by the player the first time they land here.
+var stepped_on: bool = false
 var _move_tween: Tween
 var _dip_tween: Tween
 

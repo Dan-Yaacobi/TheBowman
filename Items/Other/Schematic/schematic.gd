@@ -65,6 +65,7 @@ func _collect() -> void:
 		return
 	_claiming = true
 	Crafting.add_schematic()
+	EventBus.schematic_found.emit()
 	lifetime_timer.stop()
 	if _tween:
 		_tween.kill()

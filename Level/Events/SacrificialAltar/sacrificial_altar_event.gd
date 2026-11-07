@@ -8,3 +8,4 @@ func _ready() -> void:
 
 func _on_altar_sacrificed() -> void:
 	spawn_rewards(reward_marker.global_position)
+	report_finished(true)

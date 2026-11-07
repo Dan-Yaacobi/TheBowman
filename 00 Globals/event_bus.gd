@@ -140,3 +140,15 @@ signal color_level_changed(color: CustomVariables.ItemColor, level: int)
 signal color_scroll_collected
 
 signal lore_item_found(item: LoreItemData)
+
+# --- Run tally (death screen) ---
+## A resource pickup was added to the player's stash.
+signal resource_collected(item: CustomVariables.items, amount: int)
+## A breakable world object (crate, vase...) was destroyed.
+signal object_destroyed(object: GameObject)
+signal chest_opened(chest: Chest)
+signal schematic_found
+## Fired once per island, the first time the player stands on it.
+signal island_stepped_on(island: Island)
+## An event with a win/lose outcome ended (challenge shrine, golden apple, boss event...).
+signal rift_event_finished(event: Event, success: bool)

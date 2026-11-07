@@ -1,5 +1,8 @@
 class_name EnemyData extends Resource
 
+## Name shown in the run tally. Empty = derived from the resource or scene file name.
+@export var display_name: String = ""
+
 @export_subgroup("Stats")
 @export var max_hp: int
 @export var move_speed: Stat = Stat.new()
