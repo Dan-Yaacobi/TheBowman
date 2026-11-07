@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="3_p4433"]
 [ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="4_anr2b"]
 [ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="5_sudpg"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Bows/Sprites/Skylark.png" id="6_found"]
+[ext_resource type="Texture2D" path="res://HUD/Sprites/FoundItems.png" id="6_found"]
 
 [node name="ResourceHud" type="Control" unique_id=980645727]
 layout_mode = 3
