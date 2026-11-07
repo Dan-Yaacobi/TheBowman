@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" path="res://HUD/ColorLevels/ColorLevelsHud.tscn" id="22_clhud"]
 [ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/CraftMenu.tscn" id="24_craft"]
+[ext_resource type="PackedScene" path="res://HUD/LoreToast/LoreToast.tscn" id="25_loretoast"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g452r"]
 shader = ExtResource("15_iob2k")
@@ -392,5 +393,7 @@ texture = ExtResource("20_2gu3h")
 flip_v = true
 
 [node name="ColorScrollPicker" parent="." unique_id=1836766117 instance=ExtResource("23_cspick")]
+
+[node name="LoreToast" parent="." instance=ExtResource("25_loretoast")]
 
 [connection signal="pressed" from="DeathScreen/Button" to="DeathScreen" method="_on_button_pressed"]
