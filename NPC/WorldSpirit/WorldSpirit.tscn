@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://dhbvpkkn1qan4" path="res://NPC/WorldSpirit/Sprites/world_spirit_talk.png" id="3_tex"]
 [ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_sm"]
 [ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_idle"]
-[ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_inter"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_gone"]
 [ext_resource type="PackedScene" uid="uid://bau7d57l7vxjj" path="res://NPC/ChatBox.tscn" id="8_chat"]
 [ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="9_key"]
 [ext_resource type="Shader" uid="uid://bd8svm88u7aj4" path="res://NPC/WorldSpirit/spirit_glow.gdshader" id="10_glow"]
+[ext_resource type="Script" path="res://NPC/WorldSpirit/spirit_interacted_state.gd" id="11_spirit_state"]
+[ext_resource type="PackedScene" path="res://NPC/WorldSpirit/SpiritMenu/SpiritMenu.tscn" id="12_menu"]
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Options/talk_option.gd" id="13_talk"]
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Options/schematic_option.gd" id="14_schem"]
 
 [sub_resource type="Resource" id="Resource_data"]
 script = ExtResource("2_data")
@@ -123,9 +126,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
 size = Vector2(120, 80)
 
-[node name="WorldSpirit" type="Node2D" unique_id=1723921817 node_paths=PackedStringArray("schematic_marker", "animation_player")]
+[node name="WorldSpirit" type="Node2D" unique_id=1723921817 node_paths=PackedStringArray("turn_in_marker", "animation_player")]
 script = ExtResource("1_npc")
-schematic_marker = NodePath("SchematicMarker")
+turn_in_marker = NodePath("TurnInMarker")
+greeting_line = "The world stirs as you draw near."
 data = SubResource("Resource_data")
 animation_player = NodePath("AnimationPlayer")
 
@@ -144,7 +148,7 @@ script = ExtResource("4_sm")
 script = ExtResource("5_idle")
 
 [node name="Interacted" type="Node2D" parent="NpcStateMachine" unique_id=2141216124]
-script = ExtResource("6_inter")
+script = ExtResource("11_spirit_state")
 
 [node name="Gone" type="Node2D" parent="NpcStateMachine" unique_id=1679162906]
 script = ExtResource("7_gone")
@@ -164,7 +168,7 @@ offset_right = -6.0
 offset_bottom = 31.0
 scale = Vector2(0.5, 0.5)
 
-[node name="SchematicMarker" type="Label" parent="." unique_id=1050697158]
+[node name="TurnInMarker" type="Label" parent="." unique_id=1050697158]
 visible = false
 offset_left = -6.0
 offset_top = -62.0
@@ -176,3 +180,14 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "!"
 horizontal_alignment = 1
+
+[node name="SpiritMenu" parent="." instance=ExtResource("12_menu")]
+
+[node name="Options" type="Node" parent="."]
+
+[node name="Talk" type="Node" parent="Options"]
+script = ExtResource("13_talk")
+
+[node name="Schematics" type="Node" parent="Options"]
+script = ExtResource("14_schem")
+priority = 100
