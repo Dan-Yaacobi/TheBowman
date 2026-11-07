@@ -99,23 +99,43 @@ var player: Player
 @export var rift_level: int = 1
 
 
+## Stats shown in the equipment menu: everything items (rolls or abilities) can change.
+## [group, display name, property]. Groups listed in HIDE_WHEN_ZERO_GROUPS only show non-zero rows.
 static var DISPLAY_STATS: Array = [
+	["Offense", "Arrow Damage", "arrow_damage"],
+	["Offense", "Arrow Count", "arrow_count"],
+	["Offense", "Arrow Pierce", "arrow_pierce"],
+	["Offense", "Arrow Speed", "arrow_speed"],
+	["Offense", "Arrow Size", "arrow_size"],
+	["Offense", "Arrow Weight", "arrow_weight"],
+	["Offense", "Pushback", "pushback_power"],
+	["Offense", "Crit Chance", "crit_chance"],
+	["Offense", "Crit Damage", "crit_modifier"],
+	["Draw", "Pull Speed", "pull_speed"],
+	["Draw", "Perfect Window", "perfect_shot_window"],
+	["Draw", "Perfect Bonus", "perfect_shot_bonus"],
+	["Defense", "Max HP", "max_hp"],
+	["Defense", "Knockback Resist", "knockback_resistance"],
 	["Movement", "Move Speed", "move_speed"],
 	["Movement", "Max Jumps", "max_jumps"],
 	["Movement", "Dash Power", "dash_power"],
-	["Shooting", "Arrow Damage", "arrow_damage"],
-	["Shooting", "Arrow Speed", "arrow_speed"],
-	["Shooting", "Pull Speed", "pull_speed"],
-	["Shooting", "Arrow Count", "arrow_count"],
-	["Shooting", "Arrow Pierce", "arrow_pierce"],
-	["Shooting", "Perfect Window", "perfect_shot_window"],
-	["Shooting", "Perfect Bonus", "perfect_shot_bonus"],
-	["Shooting", "Crit Chance", "crit_chance"],
-	["Defense", "Max HP", "max_hp"],
-	["Defense", "Knockback Resist", "knockback_resistance"],
+	["Movement", "Dash Cooldown", "dash_cooldown"],
+	["Effects", "Burn Damage", "burn_damage"],
+	["Effects", "Burn Duration", "burn_duration"],
+	["Effects", "Bleed Damage", "bleed_damage"],
+	["Effects", "Bleed Duration", "bleed_duration"],
+	["Effects", "Poison Damage", "poison_damage"],
+	["Effects", "Poison Duration", "poison_duration"],
+	["Effects", "Stun Duration", "stun_duration"],
+	["Effects", "Frostbite Duration", "frostbite_duration"],
+	["Effects", "Hurricane Duration", "hurricane_duration"],
 	["Sword", "Sword Damage", "sword_damage"],
+	["Sword", "Sword Size", "sword_size"],
 	["Sword", "Sword Cooldown", "base_sword_cooldown"],
+	["Loot", "Drop Chance", "extra_drop_chance"],
 ]
+
+static var HIDE_WHEN_ZERO_GROUPS: Array[String] = ["Effects"]
 
 static var ABILITY_GROUPS: Array = [
 	["Jump", "jump_abilities"],

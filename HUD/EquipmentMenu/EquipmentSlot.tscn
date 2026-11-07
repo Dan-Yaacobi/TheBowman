@@ -1,33 +1,39 @@
 [gd_scene format=3 uid="uid://cqvhvd0pwv7eh"]
 
 [ext_resource type="Script" uid="uid://cfrirlku7makf" path="res://HUD/EquipmentMenu/equipment_slot.gd" id="1_ummve"]
-[ext_resource type="Texture2D" uid="uid://8smj4t6bgyg1" path="res://Items/Equipments/Bows/Sprites/Bow_1.png" id="2_qcgcp"]
 
 [node name="EquipmentSlot" type="Panel" unique_id=1211850593]
-custom_minimum_size = Vector2(100, 120)
-offset_right = 100.0
-offset_bottom = 120.0
+custom_minimum_size = Vector2(96, 96)
+offset_right = 96.0
+offset_bottom = 96.0
 script = ExtResource("1_ummve")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1746063438]
+[node name="SlotTexture" type="TextureRect" parent="." unique_id=430588476]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="SlotTexture" type="TextureRect" parent="VBoxContainer" unique_id=430588476]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("2_qcgcp")
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SlotLabel" type="Label" parent="VBoxContainer" unique_id=1971432579]
-clip_contents = true
-layout_mode = 2
+[node name="SlotLabel" type="Label" parent="." unique_id=1971432579]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 2.0
+offset_right = 20.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_type_variation = &"DimLabel"
 horizontal_alignment = 1
