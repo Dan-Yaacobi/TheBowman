@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://sqv71jkptw5k" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_damage.gd" id="12_7joq8"]
 [ext_resource type="Script" uid="uid://cvbglmlpl5ful" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_duration.gd" id="13_pnrbh"]
 [ext_resource type="Script" uid="uid://b80kyurvqvsj1" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/poison_ticks.gd" id="14_4wbjh"]
-[ext_resource type="Script" uid="uid://b25ol1a8tybnw" path="res://Player/Abilities2.0/MinorAbilities/ReduceActiveCD/reduce_active_cd_ability.gd" id="15_s7bdq"]
 [ext_resource type="Script" uid="uid://bjb034qc7jw4r" path="res://Player/Abilities2.0/MinorAbilities/ElementalPowers/stun_duration.gd" id="16_q43u3"]
 [ext_resource type="Script" uid="uid://dl4ek2v717wfq" path="res://Player/Abilities2.0/MinorAbilities/AirKillLift/air_kill_lift.gd" id="roster_air_kill_lift"]
 [ext_resource type="Script" uid="uid://bai2ngncrqocs" path="res://Player/Abilities2.0/MinorAbilities/AirShots/air_shots.gd" id="roster_air_shots"]
@@ -83,10 +82,6 @@ metadata/_custom_type_script = "uid://cvbglmlpl5ful"
 [sub_resource type="Resource" id="Resource_eayr5"]
 script = ExtResource("14_4wbjh")
 metadata/_custom_type_script = "uid://b80kyurvqvsj1"
-
-[sub_resource type="Resource" id="Resource_p0y55"]
-script = ExtResource("15_s7bdq")
-metadata/_custom_type_script = "uid://b25ol1a8tybnw"
 
 [sub_resource type="Resource" id="Resource_lop6a"]
 script = ExtResource("16_q43u3")
@@ -175,5 +170,5 @@ value_per_quality = 5
 
 [resource]
 script = ExtResource("2_8f2rp")
-abilities = Array[ExtResource("1_ssjb6")]([SubResource("Resource_0n2x6"), SubResource("Resource_byuiu"), SubResource("Resource_3ojgd"), SubResource("Resource_twmwe"), SubResource("Resource_b274v"), SubResource("Resource_nub70"), SubResource("Resource_ueb6o"), SubResource("Resource_d2xfg"), SubResource("Resource_p8oxk"), SubResource("Resource_myct2"), SubResource("Resource_7e3t8"), SubResource("Resource_nkwck"), SubResource("Resource_eayr5"), SubResource("Resource_p0y55"), SubResource("Resource_lop6a"), SubResource("Resource_roster_telegraphed_shot"), SubResource("Resource_roster_perfect_streak"), SubResource("Resource_roster_air_shots"), SubResource("Resource_roster_dash_draw"), SubResource("Resource_roster_air_kill_lift"), SubResource("Resource_roster_sword_opener"), SubResource("Resource_roster_debuff_knockback"), SubResource("Resource_roster_crit_the_helpless"), SubResource("Resource_roster_pain_draw"), SubResource("Resource_roster_landing_shot"), SubResource("Resource_roster_dot_extend"), SubResource("Resource_roster_burn_spread"), SubResource("Resource_roster_shatter"), SubResource("Resource_roster_follow_up")])
+abilities = Array[ExtResource("1_ssjb6")]([SubResource("Resource_0n2x6"), SubResource("Resource_byuiu"), SubResource("Resource_3ojgd"), SubResource("Resource_twmwe"), SubResource("Resource_b274v"), SubResource("Resource_nub70"), SubResource("Resource_ueb6o"), SubResource("Resource_d2xfg"), SubResource("Resource_p8oxk"), SubResource("Resource_myct2"), SubResource("Resource_7e3t8"), SubResource("Resource_nkwck"), SubResource("Resource_eayr5"), SubResource("Resource_lop6a"), SubResource("Resource_roster_telegraphed_shot"), SubResource("Resource_roster_perfect_streak"), SubResource("Resource_roster_air_shots"), SubResource("Resource_roster_dash_draw"), SubResource("Resource_roster_air_kill_lift"), SubResource("Resource_roster_sword_opener"), SubResource("Resource_roster_debuff_knockback"), SubResource("Resource_roster_crit_the_helpless"), SubResource("Resource_roster_pain_draw"), SubResource("Resource_roster_landing_shot"), SubResource("Resource_roster_dot_extend"), SubResource("Resource_roster_burn_spread"), SubResource("Resource_roster_shatter"), SubResource("Resource_roster_follow_up")])
 metadata/_custom_type_script = "uid://dnf0fea71aaqf"

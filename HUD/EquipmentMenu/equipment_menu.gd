@@ -270,9 +270,8 @@ func _get_native_abilities(exclude: Array[PlayerAbility]) -> Array[PlayerAbility
 		for ability: PlayerAbility in list:
 			if ability and not exclude.has(ability) and not result.has(ability):
 				result.append(ability)
-	if _stats.active_ability and not exclude.has(_stats.active_ability):
-		result.append(_stats.active_ability)
-	return result
+	# Abilities without a tooltip are core mechanics (crit roll/reset), not something to list.
+	return result.filter(func(ability: PlayerAbility) -> bool: return not ability.get_tooltip().is_empty())
 
 
 func _add_section_header(text: String) -> void:

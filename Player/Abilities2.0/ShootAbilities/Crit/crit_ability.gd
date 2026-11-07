@@ -9,8 +9,9 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 			_activator.combat_text_color = Color.PURPLE
 			crit_effect(_target)
 			
+## Core mechanic, not a player-facing ability: no tooltip, so menus leave it out.
 func get_tooltip() -> String:
-	return "Crit Chance: "  + "%"
+	return ""
 
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT

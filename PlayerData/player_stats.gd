@@ -82,7 +82,8 @@ var player: Player
 @export var dash_abilities: Array[PlayerAbility]
 @export var shooting_abilities: Array[PlayerShootAbility]
 @export var sword_abilities: Array[PlayerAbility]
-@export var passive_abilities: Array[PlayerPassiveAbility]
+## Any ability whose trigger is PASSIVE, including passive minor abilities from items.
+@export var passive_abilities: Array[PlayerAbility]
 @export var release_abilities: Array[PlayerAbility]
 @export var draw_abilities: Array[PlayerAbility]
 @export var active_ability: ActiveAbility

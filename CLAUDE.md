@@ -79,7 +79,7 @@ res://
 ├── Items/           # Equipments/, LootManager/, pickups, currencies
 ├── Debuffs/         # one folder per debuff
 ├── Rifts/           # rift scenes, generator, chunks, enemy spawner
-├── Level/           # islands, events, boss arena, Testing/
+├── Level/           # islands, events, boss arena
 ├── General Nodes/   # reusable components (HitBox, HurtBox, Buff/DebuffHandler)
 ├── HUD/, UI/        # HUD widgets, theme
 ├── NPC/, Objects/, Quests/, MainGame/, MainMenu/, StartMenu/
@@ -149,7 +149,7 @@ Generate → show me → save to project → wire into scene (path-only referenc
 
 ## Running & testing (Godot MCP)
 - Main scene: `res://StartMenu/StartMenu.tscn`
-- Test scenes for isolated testing: `res://Level/Testing/TestingArea.tscn`
+- Test scene: `res://MainGame/Game.tscn` (no dedicated isolated test scene)
 - After code or asset changes: run headless import, run the project, check debug output for errors before reporting done.
 
 ---

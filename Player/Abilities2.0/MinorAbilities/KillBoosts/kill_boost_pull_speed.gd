@@ -11,7 +11,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 		EventBus.add_player_buff.emit(buff)
 				
 func get_tooltip() -> String:
-	return "Boosts your pull speed by %f after killing an enemy with your main arrow" %pull_speed_increase
+	return "After killing an enemy with your main arrow, your next draw is %d%% faster" % roundi(pull_speed_increase * 100.0)
 
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT
