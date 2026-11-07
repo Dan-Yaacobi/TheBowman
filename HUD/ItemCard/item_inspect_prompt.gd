@@ -16,8 +16,7 @@ func show_for(equipment: Equipment) -> void:
 
 	name_label.text = CustomVariables.rarity_name(equipment.data.rarity) + " " + equipment.data.display_name
 	name_label.add_theme_color_override("font_color", CustomVariables.rarity_color(equipment.data.rarity))
-	var slot_empty: bool = PlayerManager.player.get_equipped_in_slot(equipment.data.slot) == null
-	action_label.text = "Equip" if slot_empty else "Inspect"
+	action_label.text = "Inspect"
 	show()
 	_update_position()
 	

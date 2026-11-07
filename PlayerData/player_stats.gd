@@ -7,7 +7,6 @@ var player: Player
 @export var max_hp: int
 @export var extra_hp: int = 0
 @export var knockback_resistance: Stat
-@export var reset_upgrades: bool = false
 @export var max_minions: int 
 @export var invinc_duration: Stat
 @export var extra_gold: Stat
