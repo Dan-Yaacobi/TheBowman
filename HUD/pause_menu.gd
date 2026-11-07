@@ -18,9 +18,14 @@ class_name PauseMenu extends CanvasLayer
 @onready var fullscreen_toggle: CheckButton = $Control/SettingsPanel/VBox/FullscreenToggle
 @onready var mute_toggle: CheckButton = $Control/SettingsPanel/VBox/MuteToggle
 
+# --- Restart confirm panel ---
+@onready var restart_confirm_panel: Control = $Control/RestartConfirmPanel
+@onready var restart_yes: Button = $Control/RestartConfirmPanel/VBox/YesButton
+@onready var restart_no: Button = $Control/RestartConfirmPanel/VBox/NoButton
+
 # ---
 
-enum PauseState { CLOSED, MAIN, HOW_TO_PLAY, SETTINGS }
+enum PauseState { CLOSED, MAIN, HOW_TO_PLAY, SETTINGS, RESTART_CONFIRM }
 
 var _state: PauseState = PauseState.CLOSED
 var _equipment_menu: EquipmentMenu
@@ -35,7 +40,9 @@ func _ready() -> void:
 	stats_button.pressed.connect(_open_stats)
 	how_to_play_button.pressed.connect(_set_state.bind(PauseState.HOW_TO_PLAY))
 	settings_button.pressed.connect(_set_state.bind(PauseState.SETTINGS))
-	restart_button.pressed.connect(_on_restart_button_pressed)
+	restart_button.pressed.connect(_set_state.bind(PauseState.RESTART_CONFIRM))
+	restart_yes.pressed.connect(_on_restart_yes_pressed)
+	restart_no.pressed.connect(_set_state.bind(PauseState.MAIN))
 
 	how_to_play_back.pressed.connect(_set_state.bind(PauseState.MAIN))
 	settings_back.pressed.connect(_set_state.bind(PauseState.MAIN))
@@ -56,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_set_state(PauseState.MAIN)
 		PauseState.MAIN:
 			_close()
-		PauseState.HOW_TO_PLAY, PauseState.SETTINGS:
+		PauseState.HOW_TO_PLAY, PauseState.SETTINGS, PauseState.RESTART_CONFIRM:
 			_set_state(PauseState.MAIN)
 
 	get_viewport().set_input_as_handled()
@@ -68,6 +75,7 @@ func _set_state(new_state: PauseState) -> void:
 	main_panel.visible = (_state == PauseState.MAIN)
 	how_to_play_panel.visible = (_state == PauseState.HOW_TO_PLAY)
 	settings_panel.visible = (_state == PauseState.SETTINGS)
+	restart_confirm_panel.visible = (_state == PauseState.RESTART_CONFIRM)
 
 	var is_open: bool = (_state != PauseState.CLOSED)
 	visible = is_open
@@ -85,7 +93,7 @@ func _close() -> void:
 
 
 ## Ends the run through the regular death flow (same as dying).
-func _on_restart_button_pressed() -> void:
+func _on_restart_yes_pressed() -> void:
 	_close()
 	PlayerManager.player.kill()
 

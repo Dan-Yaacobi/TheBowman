@@ -178,6 +178,55 @@ custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Back"
 
+[node name="RestartConfirmPanel" type="Control" parent="Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/RestartConfirmPanel"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/RestartConfirmPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Are you sure?"
+
+[node name="SubLabel" type="Label" parent="Control/RestartConfirmPanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Your current run will end."
+
+[node name="YesButton" type="Button" parent="Control/RestartConfirmPanel/VBox"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="Control/RestartConfirmPanel/VBox"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "No"
+
 [node name="Feedback" type="Button" parent="Control" unique_id=458119951]
 layout_mode = 1
 anchors_preset = 5
