@@ -22,7 +22,7 @@ idle = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_table"]
 size = Vector2(60, 40)
 
-[node name="DisenchantTable" type="Node2D" node_paths=PackedStringArray("items_origin", "info_label")]
+[node name="DisenchantTable" type="Node2D" node_paths=PackedStringArray("items_origin", "info_label", "runes_origin")]
 script = ExtResource("1_table")
 slot_icons = Dictionary[int, Object]({
 0: ExtResource("9_bow"),
@@ -31,6 +31,7 @@ slot_icons = Dictionary[int, Object]({
 })
 items_origin = NodePath("ItemsOrigin")
 info_label = NodePath("InfoLabel")
+runes_origin = NodePath("Island/Placeholder/RunesOrigin")
 data = SubResource("Resource_table")
 
 [node name="Island" parent="." instance=ExtResource("2_island")]
@@ -48,24 +49,29 @@ polygon = PackedVector2Array(11, -10, 14, -10, 14, 0, 11, 0)
 
 [node name="Top" type="Polygon2D" parent="Island/Placeholder"]
 color = Color(0.45, 0.31, 0.2, 1)
-polygon = PackedVector2Array(-18, -14, 18, -14, 18, -10, -18, -10)
+polygon = PackedVector2Array(-18, -15, 18, -15, 18, -9, -18, -9)
 
 [node name="RuneCloth" type="Polygon2D" parent="Island/Placeholder"]
 color = Color(0.42, 0.28, 0.6, 1)
-polygon = PackedVector2Array(-8, -14, 8, -14, 8, -11, -8, -11)
+polygon = PackedVector2Array(-13, -14, 13, -14, 13, -10, -13, -10)
+
+[node name="RunesOrigin" type="Node2D" parent="Island/Placeholder"]
+position = Vector2(0, -12)
 
 [node name="ItemsOrigin" type="Marker2D" parent="."]
 position = Vector2(-22, -22)
 
 [node name="InfoLabel" type="Label" parent="."]
-offset_left = -60.0
-offset_top = -62.0
-offset_right = 60.0
-offset_bottom = -48.0
+offset_left = -100.0
+offset_top = -72.0
+offset_right = 300.0
+offset_bottom = -24.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="NpcStateMachine" type="Node2D" parent="."]
 script = ExtResource("4_sm")

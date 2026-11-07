@@ -121,6 +121,8 @@ signal close_craft_menu
 signal equipment_inspected(data: EquipmentData)
 ## Items in the run tally (found, not yet disenchanted).
 signal found_items_changed(count: int)
+## Lifetime disenchanted items reached a new milestone. level = milestones reached so far.
+signal disenchant_milestone_reached(level: int)
 ## Cosmetic: resource icons fly from a world position to their HUD counter over duration seconds.
 ## The resource itself is paid separately, when they land.
 signal resource_flight_started(item: CustomVariables.items, amount: int, from_world: Vector2, duration: float)

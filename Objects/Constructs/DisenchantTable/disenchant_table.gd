@@ -2,13 +2,22 @@ class_name DisenchantTable extends NPC
 ## Hub construct. Interacting with items in the run tally lays them on the table and breaks them
 ## one by one; each item's resources fly to the HUD and are paid when they land.
 ## Interacting again while it runs skips to the end. The game doesn't pause.
-## With an empty tally, interacting shows the info label instead.
+## With an empty tally, interacting shows lifetime progress toward the next milestone instead.
+## Runes on the table light up one per milestone reached (placeholder visuals).
 
 ## Placeholder look of a tallied item on the table (the tally only knows slot and rarity).
 @export var slot_icons: Dictionary[EquipmentData.slots, Texture2D] = {}
 ## Where the first item sits. The rest fill rows to the right and upward.
 @export var items_origin: Marker2D
 @export var info_label: Label
+## Runes are built here in code, one per milestone, left to right.
+@export var runes_origin: Node2D
+
+@export_group("Runes")
+@export var rune_spacing: float = 6.0
+@export var rune_size: float = 1.5
+@export var rune_unlit_color: Color = Color(0.2, 0.16, 0.25, 1.0)
+@export var rune_lit_color: Color = Color(0.75, 0.55, 1.0, 1.0)
 
 @export_group("Layout")
 @export var item_scale: float = 0.25
@@ -24,20 +33,30 @@ class_name DisenchantTable extends NPC
 @export var break_duration: float = 0.15
 ## Flight time of resource icons to the HUD. Each item is paid when its icons land.
 @export var fly_duration: float = 0.55
-@export var info_duration: float = 1.8
+@export var info_duration: float = 2.2
+## Longer, so the new bonus can be read.
+@export var milestone_info_duration: float = 3.5
 
-## Tallied items being broken, in tally order, with their rolled yields.
+## Tallied items being broken, in tally order.
 var _items: Array[Disenchanting.FoundItem] = []
-var _rewards: Array[Dictionary] = []
+## Rolled yield per item (Dictionary[CustomVariables.items, int]), null until it breaks.
+## Rolled at break time against the lifetime count it will be paid at, so a milestone
+## reached mid-sequence boosts exactly the items after it.
+var _rewards: Array = []
 var _sprites: Array[Sprite2D] = []
 ## Items paid so far. Everything from here on is still owed to the player.
 var _paid: int = 0
 var _running: bool = false
 var _sequence_tween: Tween
 var _info_tween: Tween
+var _runes: Array[Polygon2D] = []
+## Set when a milestone is reached during the sequence, so the end shows it instead of progress.
+var _milestone_text: String = ""
 
 func extra_ready_functions() -> void:
 	info_label.modulate.a = 0.0
+	_build_runes()
+	EventBus.disenchant_milestone_reached.connect(_on_event_bus_disenchant_milestone_reached)
 
 ## Keeps the state machine in Interacted for one frame; _return_to_idle() hands control back.
 func holds_interaction() -> bool:
@@ -49,7 +68,7 @@ func action(_index: int) -> void:
 	elif Disenchanting.get_count() > 0:
 		_start()
 	else:
-		_show_info()
+		_show_info(_progress_text(), info_duration)
 	# Back to Idle right away, so the next interact press (skip) reaches action() again.
 	_return_to_idle.call_deferred()
 
@@ -69,10 +88,10 @@ func _start() -> void:
 	_paid = 0
 	# The items cover the prompt; it comes back when the table is clear.
 	keyboard_press_helper.hide()
+	_milestone_text = ""
 	_items = Disenchanting.tally.duplicate()
 	_rewards.clear()
-	for item: Disenchanting.FoundItem in _items:
-		_rewards.append(Disenchanting.roll_yield(item))
+	_rewards.resize(_items.size())
 	_lay_out_items()
 
 	# Parallel timeline: break i at t_i, pay i when its icons land at t_i + fly_duration.
@@ -103,7 +122,7 @@ func _break_item(index: int) -> void:
 	var sprite: Sprite2D = _sprites[index]
 	if not is_instance_valid(sprite):
 		return
-	var rewards: Dictionary = _rewards[index]
+	var rewards: Dictionary[CustomVariables.items, int] = _get_rewards(index)
 	for item: CustomVariables.items in rewards:
 		EventBus.resource_flight_started.emit(item, rewards[item], sprite.global_position, fly_duration)
 	_spawn_break_burst(sprite.global_position, CustomVariables.rarity_color(_items[index].rarity))
@@ -112,18 +131,22 @@ func _break_item(index: int) -> void:
 	tween.tween_property(sprite, "modulate", Color(2.0, 2.0, 2.0, 0.0), break_duration)
 	tween.chain().tween_callback(sprite.queue_free)
 
+func _get_rewards(index: int) -> Dictionary[CustomVariables.items, int]:
+	if _rewards[index] == null:
+		_rewards[index] = Disenchanting.roll_yield(_items[index], index - _paid)
+	return _rewards[index]
+
 func _pay_next() -> void:
-	if _paid >= _rewards.size():
+	if _paid >= _items.size():
 		return
-	var rewards: Dictionary[CustomVariables.items, int] = _rewards[_paid]
-	Disenchanting.claim_next(rewards)
+	Disenchanting.claim_next(_get_rewards(_paid))
 	_paid += 1
 
 ## Pays everything still owed at once and clears the table.
 func _skip() -> void:
 	if _sequence_tween:
 		_sequence_tween.kill()
-	while _paid < _rewards.size():
+	while _paid < _items.size():
 		_pay_next()
 	_finish()
 
@@ -139,6 +162,10 @@ func _finish() -> void:
 	_rewards.clear()
 	keyboard_press_helper.show()
 	Disenchanting.finish_disenchanting()
+	if _milestone_text != "":
+		_show_info(_milestone_text, milestone_info_duration)
+	else:
+		_show_info(_progress_text(), info_duration)
 
 ## Placeholder burst: a one-shot puff of rarity-colored pixels.
 func _spawn_break_burst(at: Vector2, color: Color) -> void:
@@ -163,10 +190,57 @@ func _spawn_break_burst(at: Vector2, color: Color) -> void:
 
 # --- Info -----------------------------------------------------------------
 
-func _show_info() -> void:
-	info_label.text = "Nothing to disenchant"
+func _show_info(text: String, duration: float) -> void:
+	info_label.text = text
 	if _info_tween:
 		_info_tween.kill()
 	_info_tween = create_tween()
 	_info_tween.tween_property(info_label, "modulate:a", 1.0, 0.15)
-	_info_tween.tween_property(info_label, "modulate:a", 0.0, 0.3).set_delay(info_duration)
+	_info_tween.tween_property(info_label, "modulate:a", 0.0, 0.3).set_delay(duration)
+
+## e.g. "Disenchanted 23 / 25\nNext: +5% Skyshard chance from legendaries".
+func _progress_text() -> String:
+	var lifetime: int = Disenchanting.lifetime_disenchanted
+	var next: DisenchantMilestone = Disenchanting.get_next_milestone()
+	if next == null:
+		return "Disenchanted %d\nAll milestones reached" % lifetime
+	return "Disenchanted %d / %d\nNext: %s" % [lifetime, next.threshold, next.get_description()]
+
+func _on_event_bus_disenchant_milestone_reached(level: int) -> void:
+	var milestones: Array[DisenchantMilestone] = Disenchanting.get_milestones()
+	if level > 0 and level <= milestones.size():
+		_milestone_text = "Milestone reached!\n%s" % milestones[level - 1].get_description()
+		# Shown right away when skipping too; _finish() shows it again after a full sequence.
+		if not _running:
+			_show_info(_milestone_text, milestone_info_duration)
+	_update_runes(true)
+
+# --- Runes (placeholder visual growth) ------------------------------------
+
+func _build_runes() -> void:
+	var count: int = Disenchanting.get_milestones().size()
+	var start_x: float = -(count - 1) * rune_spacing / 2.0
+	var r: float = rune_size
+	for i: int in count:
+		var rune: Polygon2D = Polygon2D.new()
+		rune.polygon = PackedVector2Array([Vector2(0, -r), Vector2(r, 0), Vector2(0, r), Vector2(-r, 0)])
+		rune.position = Vector2(start_x + i * rune_spacing, 0.0)
+		runes_origin.add_child(rune)
+		_runes.append(rune)
+	_update_runes(false)
+
+## Lights one rune per milestone reached. Newly lit runes flash.
+func _update_runes(animate: bool) -> void:
+	var level: int = Disenchanting.get_milestone_level()
+	for i: int in _runes.size():
+		var rune: Polygon2D = _runes[i]
+		var lit: bool = i < level
+		var target: Color = rune_lit_color if lit else rune_unlit_color
+		if animate and lit and rune.color != rune_lit_color:
+			rune.color = Color(3.0, 3.0, 3.0, 1.0)
+			rune.scale = Vector2.ONE * 2.0
+			var tween: Tween = rune.create_tween().set_parallel(true)
+			tween.tween_property(rune, "color", target, 0.6)
+			tween.tween_property(rune, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		else:
+			rune.color = target
