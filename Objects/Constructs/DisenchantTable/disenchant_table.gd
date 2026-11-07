@@ -10,11 +10,13 @@ class_name DisenchantTable extends NPC
 ## Middle of the slab's top. Sparks rise from random points along it.
 @export var spark_origin: Marker2D
 @export var info_label: Label
-## Centre of the carved runes on the sprite. One cover per milestone is built here in code,
-## left to right, darkening the runes not reached yet.
+## Centre of the carved runes on the sprite. One cover per rune is built here in code,
+## left to right, darkening the runes not lit yet.
 @export var runes_origin: Node2D
 
 @export_group("Runes")
+## Carved runes on the sprite. One lights per milestone reached (repeats count), until all are lit.
+@export var rune_count: int = 4
 ## In the sprite's pixels (the covers are children of the scaled sprite).
 @export var rune_spacing: float = 11.0
 @export var rune_size: Vector2 = Vector2(6.0, 9.0)
@@ -191,21 +193,19 @@ func _progress_text() -> String:
 	var next: DisenchantMilestone = Disenchanting.get_next_milestone()
 	if next == null:
 		return "Disenchanted %d\nAll milestones reached" % lifetime
-	return "Disenchanted %d / %d\nNext: %s" % [lifetime, next.threshold, next.get_description()]
+	return "Disenchanted %d / %d\nNext: %s" % [lifetime, Disenchanting.get_next_threshold(), next.get_description()]
 
-func _on_event_bus_disenchant_milestone_reached(level: int) -> void:
-	var milestones: Array[DisenchantMilestone] = Disenchanting.get_milestones()
-	if level > 0 and level <= milestones.size():
-		_milestone_text = "Milestone reached!\n%s" % milestones[level - 1].get_description()
-		# Shown right away when skipping too; _finish() shows it again after a full sequence.
-		if not _running:
-			_show_info(_milestone_text, milestone_info_duration)
+func _on_event_bus_disenchant_milestone_reached(_level: int, milestone: DisenchantMilestone) -> void:
+	_milestone_text = "Milestone reached!\n%s" % milestone.get_description()
+	# Shown right away when skipping too; _finish() shows it again after a full sequence.
+	if not _running:
+		_show_info(_milestone_text, milestone_info_duration)
 	_update_runes(true)
 
 # --- Runes (visual growth) -----------------------------------------------
 
 func _build_runes() -> void:
-	var count: int = Disenchanting.get_milestones().size()
+	var count: int = rune_count
 	var start_x: float = -(count - 1) * rune_spacing / 2.0
 	var half: Vector2 = rune_size / 2.0
 	for i: int in count:

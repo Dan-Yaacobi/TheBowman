@@ -73,12 +73,12 @@ func claim_next(rewards: Dictionary[CustomVariables.items, int]) -> void:
 	var player: Player = PlayerManager.player
 	for item: CustomVariables.items in rewards:
 		player.collect_item(item, rewards[item])
-	var level_before: int = get_milestone_level()
 	lifetime_disenchanted += 1
 	EventBus.found_items_changed.emit(get_count())
-	var level: int = get_milestone_level()
-	if level > level_before:
-		EventBus.disenchant_milestone_reached.emit(level)
+	for milestone: DisenchantMilestone in get_milestones():
+		if milestone.get_stacks(lifetime_disenchanted) > milestone.get_stacks(lifetime_disenchanted - 1):
+			_apply_to_player()
+			EventBus.disenchant_milestone_reached.emit(get_milestone_level(), milestone)
 
 ## Called by the table once a sequence ends (finished or skipped). Saves once for the whole batch.
 func finish_disenchanting() -> void:
@@ -91,30 +91,63 @@ func get_milestones() -> Array[DisenchantMilestone]:
 		return []
 	return config.get_sorted_milestones()
 
-## How many milestones are reached. Drives the table's visual growth (runes lit).
-func get_milestone_level() -> int:
+## Times milestones were reached in total (a repeating milestone counts every time).
+## Drives the table's visual growth (runes lit).
+func get_milestone_level(lifetime: int = -1) -> int:
+	if lifetime < 0:
+		lifetime = lifetime_disenchanted
 	var level: int = 0
 	for milestone: DisenchantMilestone in get_milestones():
-		if lifetime_disenchanted >= milestone.threshold:
-			level += 1
+		level += milestone.get_stacks(lifetime)
 	return level
 
-## The next milestone to reach, or null once all are reached.
+## The milestone reached next, or null once none is left.
 func get_next_milestone() -> DisenchantMilestone:
+	var best: DisenchantMilestone = null
+	var best_at: int = -1
 	for milestone: DisenchantMilestone in get_milestones():
-		if lifetime_disenchanted < milestone.threshold:
-			return milestone
-	return null
+		var at: int = milestone.get_next_threshold(lifetime_disenchanted)
+		if at >= 0 and (best == null or at < best_at):
+			best = milestone
+			best_at = at
+	return best
 
-## Bonuses unlocked at a lifetime count (default: the current one).
+## Lifetime count of the next milestone, or -1 once none is left.
+func get_next_threshold() -> int:
+	var next: DisenchantMilestone = get_next_milestone()
+	return next.get_next_threshold(lifetime_disenchanted) if next else -1
+
+## Bonuses unlocked at a lifetime count (default: the current one), once per stack.
 func get_active_bonuses(lifetime: int = -1) -> Array[DisenchantBonus]:
 	if lifetime < 0:
 		lifetime = lifetime_disenchanted
 	var bonuses: Array[DisenchantBonus] = []
 	for milestone: DisenchantMilestone in get_milestones():
-		if lifetime >= milestone.threshold and milestone.bonus:
+		if milestone.bonus == null:
+			continue
+		for i: int in milestone.get_stacks(lifetime):
 			bonuses.append(milestone.bonus)
 	return bonuses
+
+## Safe to call any number of times: clears every milestone stat bonus, then re-adds the current stacks.
+func apply_to(stats: PlayerStats) -> void:
+	if stats == null:
+		return
+	for milestone: DisenchantMilestone in get_milestones():
+		if milestone.bonus == null:
+			continue
+		var buff_id: int = _buff_id(milestone)
+		milestone.bonus.clear_from_stats(stats, buff_id)
+		for i: int in milestone.get_stacks(lifetime_disenchanted):
+			milestone.bonus.apply_to_stats(stats, buff_id)
+
+func _buff_id(milestone: DisenchantMilestone) -> int:
+	return ("disenchant/%s" % milestone.resource_path).hash()
+
+func _apply_to_player() -> void:
+	var player: Player = PlayerManager.player
+	if player:
+		apply_to(player.stats)
 
 # --- Loot hooks (called by LootManager) -----------------------------------
 
@@ -138,7 +171,9 @@ func apply_first_drop_rarity(rarity: int) -> int:
 	return maxi(rarity, min_rarity)
 
 ## Death, a won run and a loaded game all land in the hub, so the next run starts fresh.
+## Also re-applies stat bonuses, in case a death reset the player's stats.
 func _on_event_bus_world_ready() -> void:
+	_apply_to_player()
 	if not _is_in_run():
 		_first_drop_rolled = false
 
@@ -172,4 +207,5 @@ func _load(data: Dictionary) -> void:
 			push_warning("Disenchanting: unknown slot %d in saved tally" % slot)
 			continue
 		tally.append(FoundItem.new(slot as EquipmentData.slots, int(raw.get("rarity", 0))))
+	_apply_to_player()
 	EventBus.found_items_changed.emit(get_count())

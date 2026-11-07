@@ -28,3 +28,11 @@ func modify_equipment_drop_chance(chance: float) -> float:
 ## Lowest rarity (EquipmentData.Rarity) the first equipment drop of each run can roll. -1 = no minimum.
 func modify_first_drop_min_rarity(min_rarity: int) -> int:
 	return min_rarity
+
+## Permanent player stat bonus. Called once per stack; buff_id is unique to this bonus.
+func apply_to_stats(_stats: PlayerStats, _buff_id: int) -> void:
+	pass
+
+## Removes everything apply_to_stats added under buff_id.
+func clear_from_stats(_stats: PlayerStats, _buff_id: int) -> void:
+	pass

@@ -1,11 +1,8 @@
 [gd_resource type="Resource" script_class="DisenchantConfig" format=3]
 
 [ext_resource type="Script" path="res://Objects/Constructs/DisenchantTable/disenchant_config.gd" id="1_cfg"]
-[ext_resource type="Script" path="res://Objects/Constructs/DisenchantTable/Milestones/disenchant_milestone.gd" id="6_ms"]
-[ext_resource type="Resource" path="res://Objects/Constructs/DisenchantTable/Resources/Milestones/milestone_10_yield.tres" id="2_m10"]
-[ext_resource type="Resource" path="res://Objects/Constructs/DisenchantTable/Resources/Milestones/milestone_25_skyshard.tres" id="3_m25"]
-[ext_resource type="Resource" path="res://Objects/Constructs/DisenchantTable/Resources/Milestones/milestone_50_drop_chance.tres" id="4_m50"]
-[ext_resource type="Resource" path="res://Objects/Constructs/DisenchantTable/Resources/Milestones/milestone_100_first_drop.tres" id="5_m100"]
+[ext_resource type="Script" path="res://Objects/Constructs/DisenchantTable/Milestones/disenchant_milestone.gd" id="2_ms"]
+[ext_resource type="Resource" path="res://Objects/Constructs/DisenchantTable/Resources/Milestones/milestone_every_20_arrow_damage.tres" id="3_m20"]
 
 [resource]
 script = ExtResource("1_cfg")
@@ -14,7 +11,7 @@ slot_materials = Dictionary[int, int]({
 1: 2,
 2: 0
 })
-amount_per_rarity = Array[int]([2, 4, 8, 15])
-legendary_skyshard_chance = 5.0
+amount_per_rarity = Array[int]([1, 1, 2, 3])
+legendary_skyshard_chance = 2.0
 skyshards_per_drop = 1
-milestones = Array[ExtResource("6_ms")]([ExtResource("2_m10"), ExtResource("3_m25"), ExtResource("4_m50"), ExtResource("5_m100")])
+milestones = Array[ExtResource("2_ms")]([ExtResource("3_m20")])

@@ -9,9 +9,9 @@ class_name DisenchantConfig extends Resource
 	EquipmentData.slots.RING: CustomVariables.items.COIN,
 }
 ## Material amount per rarity, indexed by EquipmentData.Rarity (common, rare, epic, legendary).
-@export var amount_per_rarity: Array[int] = [2, 4, 8, 15]
+@export var amount_per_rarity: Array[int] = [1, 1, 2, 3]
 ## Chance (%) that a legendary also gives a Skyshard.
-@export_range(0.0, 100.0, 0.1, "suffix:%") var legendary_skyshard_chance: float = 5.0
+@export_range(0.0, 100.0, 0.1, "suffix:%") var legendary_skyshard_chance: float = 2.0
 @export var skyshards_per_drop: int = 1
 ## Lifetime milestones. Any order; sorted by threshold when used.
 @export var milestones: Array[DisenchantMilestone] = []
