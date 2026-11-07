@@ -119,7 +119,8 @@ func _apply_modifiers(player_stats: PlayerStats) -> void:
 			push_error("Unknown stat: " + mod.stat_name)
 			continue
 		stat.remove_buff_completly(mod.id, mod.stat_type)
-		stat.add_buff(mod.id, scaled_amount(mod), mod.stat_type)
+		# Rolls are stored in display units (e.g. 20 for +20%); the Stat gets the real amount.
+		stat.add_buff(mod.id, scaled_amount(mod) * PlayerStats.apply_scale(mod.stat_name), mod.stat_type)
 
 func unequip(player_stats: PlayerStats) -> void:
 	for mod in modifiers:

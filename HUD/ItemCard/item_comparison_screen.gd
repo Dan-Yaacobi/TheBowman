@@ -75,8 +75,9 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 		# Shown after each item's color level (scrolls).
 		var new_amount: float = new_data.scaled_amount(new_mod) if new_mod else 0.0
 		var cur_amount: float = current_data.scaled_amount(cur_mod) if cur_mod else 0.0
-		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_mod != null, new_amount - cur_amount, true))
-		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_mod != null, 0.0, false))
+		var suffix: String = PlayerStats.unit_suffix(stat_name)
+		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_mod != null, new_amount - cur_amount, true, suffix))
+		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_mod != null, 0.0, false, suffix))
 
 	var slot_name: String = _slot_name(new_data.slot)
 	new_card.show_item(new_data, slot_name, new_rows)

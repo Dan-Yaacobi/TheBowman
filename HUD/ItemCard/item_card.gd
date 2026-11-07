@@ -6,13 +6,15 @@ class StatRow:
 	var present: bool
 	var delta: float
 	var show_delta: bool
+	var suffix: String
 
-	func _init(_display_name: String, _amount: float, _present: bool, _delta: float, _show_delta: bool) -> void:
+	func _init(_display_name: String, _amount: float, _present: bool, _delta: float, _show_delta: bool, _suffix: String = "") -> void:
 		display_name = _display_name
 		amount = _amount
 		present = _present
 		delta = _delta
 		show_delta = _show_delta
+		suffix = _suffix
 
 const COLOR_NEUTRAL: Color = Color(0.95, 0.88, 0.75)
 const COLOR_UPGRADE: Color = Color(0.4, 0.9, 0.3)
@@ -97,14 +99,14 @@ func _add_stat_row(row: StatRow) -> void:
 	name_cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	var value_color: Color = COLOR_NEUTRAL if row.present else COLOR_MISSING
-	var value_text: String = _format(row.amount) if row.present else "0"
+	var value_text: String = _format(row.amount) + row.suffix if row.present else "0"
 	var value_cell: Label = _make_label(value_text, value_color, LABEL_FONT_SIZE)
 	value_cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 	var delta_text: String = ""
 	var delta_color: Color = COLOR_NEUTRAL
 	if row.show_delta and roundi(row.delta) != 0:
-		delta_text = ("+" if row.delta > 0.0 else "") + _format(row.delta)
+		delta_text = ("+" if row.delta > 0.0 else "") + _format(row.delta) + row.suffix
 		delta_color = COLOR_UPGRADE if row.delta > 0.0 else COLOR_DOWNGRADE
 	var delta_cell: Label = _make_label(delta_text, delta_color, LABEL_FONT_SIZE)
 	delta_cell.custom_minimum_size.x = 48.0

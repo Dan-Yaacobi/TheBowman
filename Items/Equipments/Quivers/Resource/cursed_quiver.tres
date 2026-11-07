@@ -17,15 +17,15 @@ metadata/_custom_type_script = "uid://uai38bs43l8y"
 [sub_resource type="Resource" id="Resource_tr6o2"]
 script = ExtResource("8_o755v")
 stat_name = "pull_speed"
-min_value = 0.3
-max_value = 0.6
+min_value = 30.0
+max_value = 60.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_m3lbu"]
 script = ExtResource("8_o755v")
 stat_name = "perfect_shot_window"
-min_value = 0.5
-max_value = 1.5
+min_value = 67.0
+max_value = 200.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_od0aq"]
@@ -36,8 +36,8 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [sub_resource type="Resource" id="Resource_wxety"]
 script = ExtResource("8_o755v")
 stat_name = "arrow_size"
-min_value = 0.3
-max_value = 0.6
+min_value = 50.0
+max_value = 100.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_gsigf"]
@@ -71,8 +71,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_gck34"]
 script = ExtResource("8_o755v")
 stat_name = "perfect_shot_bonus"
-min_value = 0.3
-max_value = 0.8
+min_value = 20.0
+max_value = 53.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_xke1f"]

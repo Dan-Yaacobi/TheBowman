@@ -17,8 +17,8 @@ metadata/_custom_type_script = "uid://b017awe3d5am0"
 [sub_resource type="Resource" id="Resource_nxm3p"]
 script = ExtResource("7_5fexr")
 stat_name = "pull_speed"
-min_value = 0.8
-max_value = 1.2
+min_value = 80.0
+max_value = 120.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_rqaa0"]
@@ -65,8 +65,8 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [sub_resource type="Resource" id="Resource_x2ho1"]
 script = ExtResource("7_5fexr")
 stat_name = "perfect_shot_bonus"
-min_value = 0.5
-max_value = 0.75
+min_value = 33.0
+max_value = 50.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_xw4su"]

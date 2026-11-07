@@ -138,6 +138,63 @@ static var DISPLAY_STATS: Array = [
 
 static var HIDE_WHEN_ZERO_GROUPS: Array[String] = ["Effects"]
 
+## How an item-rolled stat is rolled, applied and shown. Rolls are always whole numbers.
+## FLAT: the roll is added as-is (Arrow Damage +3).
+## PERCENT: the roll is a percent of the stat's base, applied multiplicatively (Pull Speed +20%).
+## PERCENT_POINTS: the stat itself is a fraction; the roll adds percentage points (Crit Damage +25%).
+## PERCENT_NATIVE: the stat is already stored in percent; the roll is added as-is (Crit Chance +5%).
+enum StatUnit { FLAT, PERCENT, PERCENT_POINTS, PERCENT_NATIVE }
+
+static var STAT_UNITS: Dictionary[String, StatUnit] = {
+	"pull_speed": StatUnit.PERCENT,
+	"perfect_shot_window": StatUnit.PERCENT,
+	"perfect_shot_bonus": StatUnit.PERCENT,
+	"arrow_size": StatUnit.PERCENT,
+	"arrow_speed": StatUnit.PERCENT,
+	"stun_duration": StatUnit.PERCENT,
+	"burn_duration": StatUnit.PERCENT,
+	"bleed_duration": StatUnit.PERCENT,
+	"poison_duration": StatUnit.PERCENT,
+	"frostbite_duration": StatUnit.PERCENT,
+	"crit_modifier": StatUnit.PERCENT_POINTS,
+	"crit_chance": StatUnit.PERCENT_NATIVE,
+	"extra_drop_chance": StatUnit.PERCENT_NATIVE,
+}
+
+static func unit_of(stat_name: String) -> StatUnit:
+	return STAT_UNITS.get(stat_name, StatUnit.FLAT)
+
+## Buff type a rolled modifier uses. Percent-of-base rolls are always multiplicative.
+static func roll_buff_type(stat_name: String, default_type: Stat.buff_type) -> Stat.buff_type:
+	match unit_of(stat_name):
+		StatUnit.PERCENT:
+			return Stat.buff_type.MULTIPLICATIVE
+		StatUnit.PERCENT_POINTS:
+			return Stat.buff_type.ADDITIVE
+		_:
+			return default_type
+
+## Factor from a stored roll (whole number) to the amount added to the Stat.
+static func apply_scale(stat_name: String) -> float:
+	match unit_of(stat_name):
+		StatUnit.PERCENT, StatUnit.PERCENT_POINTS:
+			return 0.01
+		_:
+			return 1.0
+
+static func unit_suffix(stat_name: String) -> String:
+	return "" if unit_of(stat_name) == StatUnit.FLAT else "%"
+
+## A stat's current total in the same units its rolls use: percent of base for PERCENT stats.
+static func display_total(stat_name: String, stat: Stat) -> float:
+	match unit_of(stat_name):
+		StatUnit.PERCENT:
+			return stat.value() / stat.base_value * 100.0 if not is_zero_approx(stat.base_value) else stat.value()
+		StatUnit.PERCENT_POINTS:
+			return stat.value() * 100.0
+		_:
+			return stat.value()
+
 static var ABILITY_GROUPS: Array = [
 	["Jump", "jump_abilities"],
 	["Dash", "dash_abilities"],

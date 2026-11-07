@@ -23,8 +23,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_t0r1"]
 script = ExtResource("3_roll")
 stat_name = "arrow_speed"
-min_value = 0.1
-max_value = 0.3
+min_value = 10.0
+max_value = 30.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0"]
@@ -35,8 +35,8 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [sub_resource type="Resource" id="Resource_t1r0"]
 script = ExtResource("3_roll")
 stat_name = "arrow_speed"
-min_value = 0.1
-max_value = 0.3
+min_value = 10.0
+max_value = 30.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t1"]
@@ -49,8 +49,8 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [sub_resource type="Resource" id="Resource_t2r0"]
 script = ExtResource("3_roll")
 stat_name = "perfect_shot_bonus"
-min_value = 0.2
-max_value = 0.4
+min_value = 13.0
+max_value = 27.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t2"]

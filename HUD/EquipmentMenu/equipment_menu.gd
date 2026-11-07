@@ -110,7 +110,7 @@ func _item_contributions(equipment: EquipmentData) -> Dictionary[String, float]:
 func _show_tooltip(slot: EquipmentSlot, equipment: EquipmentData, contributions: Dictionary[String, float]) -> void:
 	var rows: Array[ItemCard.StatRow] = []
 	for stat_name: String in contributions:
-		rows.append(ItemCard.StatRow.new(_get_stat_display_name(stat_name), contributions[stat_name], true, 0.0, false))
+		rows.append(ItemCard.StatRow.new(_get_stat_display_name(stat_name), contributions[stat_name], true, 0.0, false, PlayerStats.unit_suffix(stat_name)))
 	var slot_name: String = str(EquipmentData.slots.keys()[equipment.slot]).capitalize()
 	item_tooltip.show_item(equipment, slot_name, rows)
 	item_tooltip.reset_size()
@@ -174,7 +174,7 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 		value_label.fit_content = true
 		value_label.scroll_active = false
 		value_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-		value_label.text = _format_stat_rich(value) if value is Stat else _format_float(total)
+		value_label.text = _format_stat_rich(prop, value) if value is Stat else _format_float(total)
 		stats_grid.add_child(value_label)
 
 		var share_label: Label = _make_label("")
@@ -182,7 +182,7 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 		share_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if highlighted:
 			var share: float = contributions[prop]
-			share_label.text = ("+" if share >= 0.0 else "") + _format_float(share)
+			share_label.text = ("+" if share >= 0.0 else "") + _format_float(share) + PlayerStats.unit_suffix(prop)
 			share_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(hovered.color))
 		stats_grid.add_child(share_label)
 
@@ -203,11 +203,12 @@ func _get_stat_display_name(prop: String) -> String:
 	return prop.capitalize()
 
 
-func _format_stat_rich(stat: Stat) -> String:
+## Total in the stat's display units (percent of base for percent stats), colored against base.
+func _format_stat_rich(prop: String, stat: Stat) -> String:
 	var base: float = stat.base_value
 	var total: float = stat.value()
-	var total_str: String = _format_float(total)
-	if roundi(total) == roundi(base):
+	var total_str: String = _format_float(PlayerStats.display_total(prop, stat)) + PlayerStats.unit_suffix(prop)
+	if is_equal_approx(total, base):
 		return total_str
 	var color: Color = ItemCard.COLOR_UPGRADE if total > base else ItemCard.COLOR_DOWNGRADE
 	return "[color=#" + color.to_html(false) + "]" + total_str + "[/color]"
