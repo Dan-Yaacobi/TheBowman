@@ -32,6 +32,8 @@ class_name Portal extends Node2D
 @export var near_speed: float = 1.4
 @export var wake_duration: float = 0.3
 @export var sleep_duration: float = 1.0
+## Tint applied while the portal is blocked (missing bow or quiver).
+@export var blocked_tint: Color = Color(0.45, 0.45, 0.45, 0.8)
 
 var _proximity: float = 0.0
 var _phase: float = 0.0
@@ -51,6 +53,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+	_update_blocked_look()
 	_phase = fmod(_phase + delta * lerpf(idle_speed, near_speed, _proximity), 1000.0)
 	var mat: ShaderMaterial = sprite.material as ShaderMaterial
 	if mat:
@@ -95,10 +98,16 @@ func enter() -> void:
 	else:
 		EventBus.changed_scene.emit(destination)
 
+func _update_blocked_look() -> void:
+	var blocked: bool = _leads_into_rift() and not _has_bow_and_quiver()
+	sprite.self_modulate = blocked_tint if blocked else Color.WHITE
+
 func _leads_into_rift() -> bool:
 	return is_boss_portal or is_rift_portal or destination != GameWorlds.worlds.Main_Menu
 
 func _has_bow_and_quiver() -> bool:
+	if not PlayerManager.player:
+		return true
 	var stats: PlayerStats = PlayerManager.player.stats
 	return stats.bow != null and stats.arrow != null
 
