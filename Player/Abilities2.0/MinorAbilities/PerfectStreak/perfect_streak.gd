@@ -1,6 +1,7 @@
 class_name PerfectStreakMinor extends MinorAbility
 ## After 3 perfect shots in a row that hit an enemy, your next arrow explodes on hit (the Explode on Kill explosion).
-## A missed or non-perfect shot breaks the streak.
+## A missed or non-perfect shot breaks the streak. Once full, the charge is only spent when an armed arrow
+## actually hits: armed arrows that miss leave it ready for the next shot.
 ## Streak pips above the archer show progress. value = explosion damage.
 
 const EXPLOSION_PATH: String = "res://Player/Abilities2.0/MinorAbilities/ExplodeOnKill/Explosion.tscn"
@@ -11,6 +12,8 @@ const COUNTED_META: StringName = &"perfect_streak_counted"
 
 var _streak: int = 0
 var _pips: StreakPips
+## The arrow carrying the charge while it's in flight. Only one at a time.
+var _armed_arrow: Arrow
 
 func on_equipped() -> void:
 	var player: Player = PlayerManager.player
@@ -40,9 +43,9 @@ func on_unequipped() -> void:
 func _on_release() -> void:
 	var player: Player = PlayerManager.player
 	if _streak >= streak_needed:
-		if is_instance_valid(player.current_arrow):
-			player.current_arrow.set_meta(EXPLOSIVE_META, true)
-		_set_streak(0)
+		if not is_instance_valid(_armed_arrow) and is_instance_valid(player.current_arrow):
+			_armed_arrow = player.current_arrow
+			_armed_arrow.set_meta(EXPLOSIVE_META, true)
 	elif player.main_hand.shot_power < 1.0:
 		_set_streak(0)
 
@@ -67,6 +70,8 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	if arrow == null or not arrow.has_meta(EXPLOSIVE_META) or _target == null:
 		return
 	arrow.remove_meta(EXPLOSIVE_META)
+	_armed_arrow = null
+	_set_streak(0)
 	var explosion: Explosion = load(EXPLOSION_PATH).instantiate()
 	explosion.global_position = _target.global_position
 	explosion.set_damage(roundi(value * power()))

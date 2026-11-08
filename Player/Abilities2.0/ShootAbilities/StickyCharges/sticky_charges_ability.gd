@@ -34,7 +34,7 @@ func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT
 
 ## A stuck arrow that follows its enemy, blinks faster as the fuse runs out, then explodes.
-## Explodes where the enemy was if it dies first.
+## Disappears without exploding if the enemy dies first. Fades with the enemy's sprite (wizard teleports).
 class StickyCharge extends Node2D:
 	var carrier: Enemy
 	var stick_offset: Vector2
@@ -43,6 +43,7 @@ class StickyCharge extends Node2D:
 	var blast_scale: float = 1.0
 	var _time: float = 0.0
 	var _sprite: Sprite2D
+	var _removing: bool = false
 
 	func _ready() -> void:
 		z_index = 3
@@ -51,11 +52,26 @@ class StickyCharge extends Node2D:
 		_sprite.scale = Vector2(0.6, 0.6)
 		_sprite.offset = Vector2(-8, 0)
 		add_child(_sprite)
+		if is_instance_valid(carrier):
+			carrier.died.connect(_on_carrier_died, CONNECT_ONE_SHOT)
+
+	func _on_carrier_died(_enemy: Enemy) -> void:
+		if _removing:
+			return
+		_removing = true
+		set_physics_process(false)
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "modulate:a", 0.0, 0.15)
+		tween.tween_callback(queue_free)
 
 	func _physics_process(delta: float) -> void:
 		_time += delta
-		if is_instance_valid(carrier) and not carrier.is_dead:
-			global_position = carrier.global_position + stick_offset
+		if not is_instance_valid(carrier) or carrier.is_dead:
+			_on_carrier_died(null)
+			return
+		global_position = carrier.global_position + stick_offset
+		if carrier.sprite:
+			modulate.a = carrier.sprite.modulate.a
 		var left: float = maxf(fuse - _time, 0.0)
 		var blink_speed: float = lerpf(4.0, 20.0, 1.0 - left / maxf(fuse, 0.01))
 		_sprite.modulate = Color.WHITE.lerp(Color(1.8, 0.5, 0.3), 0.5 + 0.5 * sin(_time * blink_speed * TAU))

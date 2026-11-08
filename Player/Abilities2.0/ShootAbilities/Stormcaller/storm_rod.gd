@@ -1,5 +1,6 @@
 class_name StormRod extends Node2D
-## A lightning rod stuck in an enemy. Owned by the enemy, so it disappears with it.
+## A lightning rod stuck in an enemy. Owned by the enemy: it's spent the moment the enemy dies,
+## and fades with the enemy's sprite (wizard teleports).
 
 const ROD_PATH: String = "res://Player/Abilities2.0/ShootAbilities/Stormcaller/Sprites/LightningRod.png"
 
@@ -25,6 +26,15 @@ func _ready() -> void:
 	add_child(_sprite)
 	scale = Vector2(1.6, 1.6)
 	create_tween().tween_property(self, "scale", Vector2.ONE, 0.12)
+	if is_instance_valid(enemy):
+		enemy.died.connect(_on_enemy_died, CONNECT_ONE_SHOT)
+
+func _on_enemy_died(_enemy: Enemy) -> void:
+	spend()
+
+func _process(_delta: float) -> void:
+	if not spent and is_instance_valid(enemy) and enemy.sprite:
+		modulate.a = enemy.sprite.modulate.a
 
 func is_alive() -> bool:
 	return not spent and not is_queued_for_deletion() and is_instance_valid(enemy) and not enemy.is_dead
