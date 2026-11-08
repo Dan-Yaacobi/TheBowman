@@ -16,7 +16,8 @@ class_name PauseMenu extends CanvasLayer
 @onready var settings_panel: Control = $Control/SettingsPanel
 @onready var settings_back: Button = $Control/SettingsPanel/VBox/BackButton
 @onready var fullscreen_toggle: CheckButton = $Control/SettingsPanel/VBox/FullscreenToggle
-@onready var mute_toggle: CheckButton = $Control/SettingsPanel/VBox/MuteToggle
+@onready var music_toggle: CheckButton = $Control/SettingsPanel/VBox/MusicToggle
+@onready var sfx_toggle: CheckButton = $Control/SettingsPanel/VBox/SfxToggle
 
 # --- Restart confirm panel ---
 @onready var restart_confirm_panel: Control = $Control/RestartConfirmPanel
@@ -48,7 +49,8 @@ func _ready() -> void:
 	settings_back.pressed.connect(_set_state.bind(PauseState.MAIN))
 
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
-	mute_toggle.toggled.connect(_on_mute_toggled)
+	music_toggle.toggled.connect(_on_music_toggled)
+	sfx_toggle.toggled.connect(_on_sfx_toggled)
 
 	_set_state(PauseState.CLOSED)
 
@@ -107,20 +109,25 @@ func _open_stats() -> void:
 
 func _sync_settings_ui() -> void:
 	# Block signals so setting button_pressed doesn't fire toggled callbacks
-	fullscreen_toggle.set_block_signals(true)
-	mute_toggle.set_block_signals(true)
+	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle]:
+		toggle.set_block_signals(true)
 	fullscreen_toggle.button_pressed = SettingsManager.is_fullscreen()
-	mute_toggle.button_pressed = SettingsManager.is_muted()
-	fullscreen_toggle.set_block_signals(false)
-	mute_toggle.set_block_signals(false)
+	music_toggle.button_pressed = SettingsManager.is_music_enabled()
+	sfx_toggle.button_pressed = SettingsManager.is_sfx_enabled()
+	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle]:
+		toggle.set_block_signals(false)
 
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
 	SettingsManager.set_fullscreen(enabled)
 
 
-func _on_mute_toggled(muted: bool) -> void:
-	SettingsManager.set_muted(muted)
+func _on_music_toggled(enabled: bool) -> void:
+	SettingsManager.set_music_enabled(enabled)
+
+
+func _on_sfx_toggled(enabled: bool) -> void:
+	SettingsManager.set_sfx_enabled(enabled)
 
 
 func _on_feedback_pressed() -> void:

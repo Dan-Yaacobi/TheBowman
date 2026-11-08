@@ -16,6 +16,13 @@ extends Node2D
 @export var footstep_streams: Array[AudioStream] = []
 @export var footstep_volume_db: float = -14.0
 @export var click_volume_db: float = -4.0
+@export var draw_volume_db: float = -4.0
+## Pitch limits when stretching the draw sound to the draw time (very fast/slow draws).
+@export var draw_pitch_min: float = 0.6
+@export var draw_pitch_max: float = 2.0
+@export var draw_fade_out: float = 0.08
+
+var _draw_tween: Tween
 
 func _ready() -> void:
 	EventBus.arrow_hit_sound.connect(arrow_hit_sound)
@@ -52,12 +59,24 @@ func object_destroyed_sound() -> void:
 func arrow_release_sound(_pitch: float) -> void:
 	arrow_release.play()
 
-func string_pull_sound(pitch: float) -> void:
-	string_pull.pitch_scale = pitch
-	_play_oneshot(string_pull.stream,pitch,pitch)
+## Plays the draw over exactly the draw time: faster pulls play it quicker and higher.
+func string_pull_sound(draw_duration: float) -> void:
+	if _draw_tween:
+		_draw_tween.kill()
+	var length: float = string_pull.stream.get_length()
+	string_pull.pitch_scale = clampf(length / maxf(draw_duration, 0.01), draw_pitch_min, draw_pitch_max)
+	string_pull.volume_db = draw_volume_db
+	string_pull.play()
 
+## Released or cancelled mid-draw: short fade so it doesn't click.
 func string_pull_stop() -> void:
-	string_pull.stop()
+	if not string_pull.playing:
+		return
+	if _draw_tween:
+		_draw_tween.kill()
+	_draw_tween = create_tween()
+	_draw_tween.tween_property(string_pull, "volume_db", -40.0, draw_fade_out)
+	_draw_tween.tween_callback(string_pull.stop)
 	
 func coin_drop_sound() -> void:
 	_play_oneshot(coin_drop.stream, 0.9, 1.2)

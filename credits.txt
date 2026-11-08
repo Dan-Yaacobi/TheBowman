@@ -40,7 +40,7 @@ SOUND EFFECTS
 by Kenney (www.kenney.nl)
 https://opengameart.org/content/50-rpg-sound-effects
 CC0 (public domain)
-Used for: jump, footsteps, bow draw, coin / wood / color scroll / schematic sounds
+Used for: jump, footsteps, coin / wood / color scroll / schematic sounds
 
 Interface Sounds
 by Kenney (www.kenney.nl)
@@ -59,3 +59,9 @@ by Bobjt
 https://opengameart.org/content/gem-collect-sfx
 CC0 (public domain)
 Used for: magic essence pickup
+
+Fantasy SFX Pack Vol 1
+by JC Sounds
+https://opengameart.org/content/jc-sounds-fantasy-sfx-pack-vol-1
+CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+Used for: bow draw ("Bow_Arrow_Draw_02", volume normalized)

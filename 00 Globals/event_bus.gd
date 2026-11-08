@@ -26,7 +26,8 @@ signal arrow_shot_sound
 signal coin_drop_sound
 signal button_click_sound
 signal arrow_hit_wall_sound
-signal string_pull_sound(pitch: float)
+## Seconds the draw takes at the current pull speed; the draw sound is stretched to match.
+signal string_pull_sound(draw_duration: float)
 signal string_pull_stop
 signal arrow_release_sound(pitch: float)
 signal object_destroyed_sound

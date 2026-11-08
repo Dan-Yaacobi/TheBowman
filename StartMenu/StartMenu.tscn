@@ -73,6 +73,7 @@ process_mode = 3
 stream = ExtResource("3_menumusic")
 volume_db = -8.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]

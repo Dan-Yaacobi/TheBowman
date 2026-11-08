@@ -28,7 +28,7 @@ func Enter() -> void:
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))
 	entity.animation_player.speed_scale = charge_rate
 	finished_pulling = false
-	EventBus.string_pull_sound.emit(charge_rate)
+	EventBus.string_pull_sound.emit(full_pull_duration / charge_rate)
 	
 	
 #what happens when the player exits this state

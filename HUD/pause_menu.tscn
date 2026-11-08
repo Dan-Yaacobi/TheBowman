@@ -168,10 +168,15 @@ custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "FullScreen"
 
-[node name="MuteToggle" type="CheckButton" parent="Control/SettingsPanel/VBox" unique_id=1091439517]
+[node name="MusicToggle" type="CheckButton" parent="Control/SettingsPanel/VBox" unique_id=1091439517]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
-text = "Mute"
+text = "Music"
+
+[node name="SfxToggle" type="CheckButton" parent="Control/SettingsPanel/VBox"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Sound Effects"
 
 [node name="BackButton" type="Button" parent="Control/SettingsPanel/VBox" unique_id=150435436]
 custom_minimum_size = Vector2(300, 50)
