@@ -40,19 +40,13 @@ SOUND EFFECTS
 by Kenney (www.kenney.nl)
 https://opengameart.org/content/50-rpg-sound-effects
 CC0 (public domain)
-Used for: jump, footsteps, coin / wood / color scroll / schematic sounds
+Used for: jump, footsteps, chest latch, coin / wood / color scroll / schematic sounds
 
 Interface Sounds
 by Kenney (www.kenney.nl)
 https://opengameart.org/content/interface-sounds
 CC0 (public domain)
 Used for: menu click, potion / essence / sky shard / schematic / lore item sounds
-
-Open Chest SFX
-by Oiboo
-https://opengameart.org/content/open-chest-sfx
-CC0 (public domain)
-Used for: chest opening
 
 Gem Collect SFX
 by Bobjt
@@ -64,4 +58,14 @@ Fantasy SFX Pack Vol 1
 by JC Sounds
 https://opengameart.org/content/jc-sounds-fantasy-sfx-pack-vol-1
 CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-Used for: bow draw ("Bow_Arrow_Draw_02", volume normalized)
+Used for: bow draw ("Bow_Arrow_Draw_02"), portal entering ("Teleport_Out"),
+chime layer in the chest and scroll sounds ("Healing Chime"). Volume normalized / mixed.
+
+Pirate Pack Vol 1
+by JC Sounds
+https://opengameart.org/content/jc-sounds-pirate-pack-vol-1
+CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+Used for: scroll interaction ("sfx_map_handle_01", mixed with a chime)
+
+Chest choir ("aah" chord)
+Synthesized for this game

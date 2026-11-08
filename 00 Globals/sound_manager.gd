@@ -16,6 +16,11 @@ extends Node2D
 @export var footstep_streams: Array[AudioStream] = []
 @export var footstep_volume_db: float = -14.0
 @export var click_volume_db: float = -4.0
+@export var portal_stream: AudioStream
+@export var portal_volume_db: float = -4.0
+## Holding "up" at a portal re-triggers enter(); one sound per this many seconds.
+const PORTAL_SOUND_COOLDOWN_MS: int = 1000
+var _last_portal_sound_ms: int = -PORTAL_SOUND_COOLDOWN_MS
 @export var draw_volume_db: float = -4.0
 ## Pitch limits when stretching the draw sound to the draw time (very fast/slow draws).
 @export var draw_pitch_min: float = 0.6
@@ -39,6 +44,7 @@ func _ready() -> void:
 	EventBus.play_any.connect(play_any)
 	EventBus.jump_sound.connect(jump_sound)
 	EventBus.footstep_sound.connect(footstep_sound)
+	EventBus.portal_entered_sound.connect(portal_entered_sound)
 
 ## The players here are 2D and fade with distance from the camera. Events sit far from the
 ## world origin (GameWorld.event_offset), so staying at the camera keeps every sound audible.
@@ -100,6 +106,13 @@ func footstep_sound() -> void:
 	if footstep_streams.is_empty():
 		return
 	_play_oneshot(footstep_streams.pick_random(), 0.9, 1.1, footstep_volume_db)
+
+func portal_entered_sound() -> void:
+	var now: int = Time.get_ticks_msec()
+	if now - _last_portal_sound_ms < PORTAL_SOUND_COOLDOWN_MS:
+		return
+	_last_portal_sound_ms = now
+	_play_oneshot(portal_stream, 0.97, 1.03, portal_volume_db)
 
 func play_any(stream: AudioStream, pitch_min: float, pitch_max: float, volume: float) -> void:
 	_play_oneshot(stream,pitch_min, pitch_max, volume)

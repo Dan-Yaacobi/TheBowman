@@ -8,9 +8,11 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_frn8k"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_v1be1"]
 [ext_resource type="Texture2D" uid="uid://crc138ov0go7v" path="res://Enemies/Sprites/Green Apple.png" id="8_p46yn"]
+[ext_resource type="AudioStream" uid="uid://cj0snhdhhq2ju" path="res://Audio/Player/AppleDead.wav" id="9_deadsnd"]
 
 [sub_resource type="Resource" id="Resource_3wtwp"]
 script = ExtResource("3_bsayd")
+death_sound = ExtResource("9_deadsnd")
 metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_wfgoh"]

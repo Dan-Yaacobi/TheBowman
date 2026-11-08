@@ -30,6 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		teleport_player()
 
 func teleport_player() -> void:
+	EventBus.portal_entered_sound.emit()
 	if event_scene:
 		if one_shot:
 			is_used = true

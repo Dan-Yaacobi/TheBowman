@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ce6wr3l7gcmgh" path="res://Audio/Player/ArrowRelease.wav" id="8_d5k4q"]
 [ext_resource type="AudioStream" uid="uid://bqgdu0jfx5wo8" path="res://Audio/Player/SwordSlash.wav" id="9_4ts0x"]
 [ext_resource type="AudioStream" path="res://Audio/Player/jump.ogg" id="10_jump"]
+[ext_resource type="AudioStream" path="res://Audio/Objects/portal_enter.ogg" id="12_portal"]
 [ext_resource type="AudioStream" path="res://Audio/Player/Footsteps/footstep_00.ogg" id="11_step0"]
 [ext_resource type="AudioStream" path="res://Audio/Player/Footsteps/footstep_01.ogg" id="11_step1"]
 [ext_resource type="AudioStream" path="res://Audio/Player/Footsteps/footstep_02.ogg" id="11_step2"]
@@ -25,6 +26,7 @@ process_thread_group_order = 0
 process_thread_messages = 0
 script = ExtResource("1_2asnt")
 jump_stream = ExtResource("10_jump")
+portal_stream = ExtResource("12_portal")
 footstep_streams = Array[AudioStream]([ExtResource("11_step0"), ExtResource("11_step1"), ExtResource("11_step2"), ExtResource("11_step3"), ExtResource("11_step4")])
 
 [node name="ArrowShot" type="AudioStreamPlayer2D" parent="." unique_id=469219128]

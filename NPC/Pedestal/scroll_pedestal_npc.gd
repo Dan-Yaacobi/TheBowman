@@ -6,6 +6,8 @@ class_name ScrollPedestalNPC extends NPC
 @export var scroll_textures: Array[Texture2D] = []
 @export var cycle_interval: float = 0.5
 @export var float_duration: float = 2.0
+@export var interact_sound: AudioStream
+@export var interact_volume_db: float = -4.0
 
 @onready var item_sprite: Sprite2D = $ItemSprite
 @onready var top_float_marker: Marker2D = $TopFloatMarker
@@ -33,6 +35,8 @@ func action(_index: int) -> void:
 	if action_taken:
 		return
 	action_taken = true
+	if interact_sound:
+		EventBus.play_any.emit(interact_sound, 1.0, 1.0, interact_volume_db)
 	EventBus.color_scroll_collected.emit()
 
 ## Local positions so the float follows the island this pedestal sits on.

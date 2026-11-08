@@ -35,6 +35,7 @@ signal enemy_died_sound(_audio: AudioStream)
 signal sword_slash_sound()
 signal jump_sound
 signal footstep_sound
+signal portal_entered_sound
 signal play_any(_audio: AudioStream, pich_min: float, pitch_max: float, volume: float)
 
 signal dealt_bleed_damage(_amount)

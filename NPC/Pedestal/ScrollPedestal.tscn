@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dwxutfnb41odx" path="res://NPC/npc_state_machine.gd" id="4_5uod6"]
 [ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_adyf7"]
 [ext_resource type="Script" uid="uid://bkkgwbf1hadoc" path="res://NPC/npc_idle_state.gd" id="5_4b8kh"]
+[ext_resource type="AudioStream" path="res://Audio/Objects/scroll_interact.ogg" id="9_scrollsnd"]
 [ext_resource type="Script" uid="uid://do2tuyol1nc72" path="res://NPC/npc_interacted_state.gd" id="6_mlx16"]
 [ext_resource type="Script" uid="uid://b08wmnjwkacl4" path="res://NPC/npc_gone_state.gd" id="7_mlx16"]
 
@@ -27,6 +28,7 @@ size = Vector2(28, 31)
 script = ExtResource("1_scrpd")
 scroll_textures = Array[Texture2D]([ExtResource("3_prec"), ExtResource("3_temp"), ExtResource("3_elem")])
 data = SubResource("Resource_scrpd")
+interact_sound = ExtResource("9_scrollsnd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1679536637]
 texture = ExtResource("2_7kftm")

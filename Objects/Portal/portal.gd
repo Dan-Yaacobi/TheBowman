@@ -92,6 +92,7 @@ func enter() -> void:
 	if _leads_into_rift() and not _has_bow_and_quiver():
 		CombatTextSpawner.spawn(global_position, _missing_gear_message(), Color.WHITE)
 		return
+	EventBus.portal_entered_sound.emit()
 	if is_boss_portal:
 		EventBus.boss_portal_entered.emit()
 	elif is_rift_portal:
