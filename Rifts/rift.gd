@@ -28,7 +28,9 @@ func extra_set_world_functions() -> void:
 	rift_level.reparent(self)
 	rift_level.get_summon_enemy.connect(call_enemy_spawner)
 	has_respawns = true
-	#EventBus.change_sky_color.emit(sky_colors[get_rift_type()])
+	var biome: int = get_rift_type()
+	if biome < sky_colors.size():
+		EventBus.change_sky_color.emit(sky_colors[biome])
 	
 func _on_world_ready() -> void:
 	if PlayerManager.player.stats.rift_level == 1 and active_ability_pool.size() >= 3:

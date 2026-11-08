@@ -8,8 +8,6 @@ const CLOUD = preload("res://MainGame/Clouds/Cloud.tscn")
 @onready var hud: HUD = $Hud
 
 @onready var sky: ColorRect = $CanvasLayer/ColorRect
-@export var base_top_color: Color = Color(0.2, 0.4, 0.8, 1.0)
-@export var base_bottom_color: Color = Color(0.6, 0.851, 1.0)
 
 const MAIN_MENU = preload("uid://cnhbrpo4htp2y")
 var main_menu: PackedScene = MAIN_MENU
@@ -39,13 +37,13 @@ var player: Player
 var last_scene: Node
 
 func _ready() -> void:
+	EventBus.change_sky_color.connect(change_sky_colors)
 	game_manager.set_game(self)
 	game_manager.change_game_world(GameWorlds.worlds.Main_Menu)
 	PlayerManager.player.health_bar = hud.get_health_bar()
 	cloud_timer.timeout.connect(summon_cloud)
 	cloud_timer.start()
 	add_child(PlayerManager.player)
-	EventBus.change_sky_color.connect(change_sky_colors)
 	EventBus.world_ready.connect(_play_world_music)
 	EventBus.event_exited.connect(_play_world_music)
 	EventBus.boss_fight_started.connect(_on_boss_fight_started)
@@ -124,3 +122,15 @@ func change_sky_colors(sky_colors: SkyColors) -> void:
 		return
 	mat.set_shader_parameter("color_top", sky_colors.top_color)
 	mat.set_shader_parameter("color_bottom", sky_colors.bottom_color)
+	_set_clouds_enabled(sky_colors.show_clouds)
+
+## Off clears the clouds already in the sky (sky changes happen behind the transition fade).
+func _set_clouds_enabled(enabled: bool) -> void:
+	if enabled:
+		if cloud_timer.is_stopped():
+			cloud_timer.start()
+		return
+	cloud_timer.stop()
+	for child: Node in get_children():
+		if child is Cloud:
+			child.queue_free()

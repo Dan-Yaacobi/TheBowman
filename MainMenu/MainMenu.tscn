@@ -14,9 +14,17 @@
 [ext_resource type="PackedScene" path="res://Objects/Constructs/DisenchantTable/DisenchantTableSite.tscn" id="21_disenchant"]
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="22_startbow"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="23_startquiver"]
+[ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="24_skycolors"]
+
+[sub_resource type="Resource" id="Resource_hubsky"]
+script = ExtResource("24_skycolors")
+top_color = Color(0.2, 0.4, 0.8, 1)
+bottom_color = Color(0.6, 0.8509804, 1, 1)
+metadata/_custom_type_script = "uid://viwygaov6sfn"
 
 [node name="MainMenu" type="Node2D" unique_id=446236842]
 script = ExtResource("1_4xjwr")
+sky_colors = SubResource("Resource_hubsky")
 starting_bow = ExtResource("22_startbow")
 starting_quiver = ExtResource("23_startquiver")
 

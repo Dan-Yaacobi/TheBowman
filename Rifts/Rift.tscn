@@ -55,14 +55,15 @@ metadata/_custom_type_script = "uid://viwygaov6sfn"
 
 [sub_resource type="Resource" id="Resource_hhyca"]
 script = ExtResource("8_hhyca")
-top_color = Color(0.58, 0.68, 0.78, 1)
-bottom_color = Color(0.92, 0.95, 0.97, 1)
+top_color = Color(0.36, 0.5, 0.7, 1)
+bottom_color = Color(0.78, 0.86, 0.94, 1)
 metadata/_custom_type_script = "uid://viwygaov6sfn"
 
 [sub_resource type="Resource" id="Resource_c6uaq"]
 script = ExtResource("8_hhyca")
-top_color = Color(0.8, 0, 0.01333313, 1)
-bottom_color = Color(0.21960784, 0.21960784, 0.21960784, 1)
+top_color = Color(0.16, 0.04, 0.06, 1)
+bottom_color = Color(0.72, 0.26, 0.1, 1)
+show_clouds = false
 metadata/_custom_type_script = "uid://viwygaov6sfn"
 
 [sub_resource type="Resource" id="Resource_d1hhh"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dr883x3lhveo0"]
 
 [ext_resource type="Script" uid="uid://cr3hdp5q4ytvc" path="res://MainGame/Clouds/cloud.gd" id="1_kehg7"]
-[ext_resource type="Texture2D" uid="uid://upqfr2pidroy" path="res://MainGame/Clouds/Clouds.png" id="2_7thou"]
+[ext_resource type="Texture2D" path="res://MainGame/Clouds/Sprites/PuffyClouds.png" id="2_7thou"]
 
 [node name="Cloud" type="CharacterBody2D" unique_id=438643090]
 modulate = Color(1, 1, 1, 0.713726)
@@ -11,8 +11,8 @@ move_speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1547334974]
 texture = ExtResource("2_7thou")
-hframes = 4
-vframes = 3
+hframes = 11
+vframes = 2
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2027424451]
 

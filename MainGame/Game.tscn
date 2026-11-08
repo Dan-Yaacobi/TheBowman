@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" path="res://MainGame/Music/MainMenuMusic.mp3" id="10_menumusic"]
 [ext_resource type="AudioStream" path="res://MainGame/Music/AdventurersPath.mp3" id="11_riftmusic"]
 [ext_resource type="AudioStream" path="res://MainGame/Music/EpicBossBattle.wav" id="12_bossmusic"]
+[ext_resource type="Script" path="res://MainGame/DistantIslands/distant_islands.gd" id="13_distisl"]
+[ext_resource type="Texture2D" path="res://MainGame/DistantIslands/Sprites/DistantIslands.png" id="14_distisltex"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835gg"]
 shader = ExtResource("4_jcge4")
@@ -15,8 +17,6 @@ shader_parameter/color_bottom = Color(0.6, 0.85, 1, 1)
 
 [node name="Game" type="Node2D" unique_id=1108030155]
 script = ExtResource("1_iteqa")
-base_top_color = Color(0.8, 0.2, 0.20999984, 1)
-base_bottom_color = Color(0, 0, 0, 1)
 menu_music = ExtResource("10_menumusic")
 rift_music = ExtResource("11_riftmusic")
 boss_music = ExtResource("12_bossmusic")
@@ -43,6 +43,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="DistantIslands" type="Node2D" parent="."]
+script = ExtResource("13_distisl")
+island_textures = Array[Texture2D]([ExtResource("14_distisltex")])
+island_hframes = 4
+island_vframes = 4
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1989653480]
 color = Color(0.95468724, 0.95468724, 0.95468724, 1)

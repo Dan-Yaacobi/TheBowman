@@ -1,7 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://NPC/Pedestal/scroll_pedestal_npc.gd" id="1_scrpd"]
-[ext_resource type="Texture2D" uid="uid://g615mriufvi" path="res://NPC/Pedestal/Pedestal.png" id="2_7kftm"]
+[ext_resource type="Texture2D" path="res://NPC/Pedestal/Sprites/Pedestals.png" id="2_7kftm"]
+[ext_resource type="Script" path="res://NPC/Pedestal/pedestal_sprite.gd" id="2_pedspr"]
 [ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="2_adyf7"]
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="3_prec"]
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/tempo_scroll.png" id="3_temp"]
@@ -30,6 +31,10 @@ data = SubResource("Resource_scrpd")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_7kftm")
+hframes = 16
+vframes = 4
+script = ExtResource("2_pedspr")
+style_column = 5
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
 position = Vector2(-1, -26)
