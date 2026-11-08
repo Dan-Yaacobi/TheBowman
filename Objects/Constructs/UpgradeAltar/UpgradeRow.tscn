@@ -23,7 +23,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Info" type="VBoxContainer" parent="HBoxContainer" unique_id=1361813191]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="HBoxContainer/Info" unique_id=53443166]
