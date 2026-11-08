@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"muster_roll"
+display_name = "Muster Roll"
+pickup_line = "The roll for the archers' last stand. Your name is struck through, in another hand."
+spirit_lines = Array[String](["Your name was here, and then someone decided it shouldn't be."])

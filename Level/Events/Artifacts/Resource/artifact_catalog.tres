@@ -1,0 +1,212 @@
+[gd_resource type="Resource" script_class="ArtifactCatalog" format=3]
+
+[ext_resource type="Script" path="res://Level/Events/Artifacts/artifact_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" path="res://Level/Events/Artifacts/artifact_batch.gd" id="2_batch"]
+[ext_resource type="Script" path="res://Level/Events/Artifacts/artifact_entry.gd" id="3_entry"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/house_key.tres" id="i_house_key"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/HouseKey/HouseKeyEvent.tscn" id="e_house_key"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/frozen_hourglass.tres" id="i_frozen_hourglass"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/FrozenHourglass/FrozenHourglassEvent.tscn" id="e_frozen_hourglass"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/warriors_shield.tres" id="i_warriors_shield"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/WarriorsShield/WarriorsShieldEvent.tscn" id="e_warriors_shield"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/confiscation_ledger.tres" id="i_confiscation_ledger"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/ConfiscationLedger/ConfiscationLedgerEvent.tscn" id="e_confiscation_ledger"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/hearthstone.tres" id="i_hearthstone"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/Hearthstone/HearthstoneEvent.tscn" id="e_hearthstone"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/spiral_buckle.tres" id="i_spiral_buckle"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/SpiralBuckle/SpiralBuckleEvent.tscn" id="e_spiral_buckle"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/monastery_bell.tres" id="i_monastery_bell"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/MonasteryBell/MonasteryBellEvent.tscn" id="e_monastery_bell"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/unanswered_offering.tres" id="i_unanswered_offering"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/UnansweredOffering/UnansweredOfferingEvent.tscn" id="e_unanswered_offering"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/zeus_plaque.tres" id="i_zeus_plaque"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/ZeusPlaque/ZeusPlaqueEvent.tscn" id="e_zeus_plaque"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/defectors_staff.tres" id="i_defectors_staff"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/DefectorsStaff/DefectorsStaffEvent.tscn" id="e_defectors_staff"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/initiates_mask.tres" id="i_initiates_mask"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/InitiatesMask/InitiatesMaskEvent.tscn" id="e_initiates_mask"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/two_needle_compass.tres" id="i_two_needle_compass"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/TwoNeedleCompass/TwoNeedleCompassEvent.tscn" id="e_two_needle_compass"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/wrong_accusation.tres" id="i_wrong_accusation"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/WrongAccusation/WrongAccusationEvent.tscn" id="e_wrong_accusation"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/unsent_letter.tres" id="i_unsent_letter"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/UnsentLetter/UnsentLetterEvent.tscn" id="e_unsent_letter"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/fletching_in_fallen_archer.tres" id="i_fletching_in_fallen_archer"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/FletchingInFallenArcher/FletchingInFallenArcherEvent.tscn" id="e_fletching_in_fallen_archer"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/on_thin_blood.tres" id="i_on_thin_blood"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/OnThinBlood/OnThinBloodEvent.tscn" id="e_on_thin_blood"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/scratched_portrait.tres" id="i_scratched_portrait"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/ScratchedPortrait/ScratchedPortraitEvent.tscn" id="e_scratched_portrait"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/split_practice_target.tres" id="i_split_practice_target"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/SplitPracticeTarget/SplitPracticeTargetEvent.tscn" id="e_split_practice_target"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/safe_passage_seal.tres" id="i_safe_passage_seal"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/SafePassageSeal/SafePassageSealEvent.tscn" id="e_safe_passage_seal"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/muster_roll.tres" id="i_muster_roll"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/MusterRoll/MusterRollEvent.tscn" id="e_muster_roll"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/pirate_appraisal_slip.tres" id="i_pirate_appraisal_slip"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/PirateAppraisalSlip/PirateAppraisalSlipEvent.tscn" id="e_pirate_appraisal_slip"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/first_portal_shard.tres" id="i_first_portal_shard"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/hollow_ring.tres" id="i_hollow_ring"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/whittled_arrow.tres" id="i_whittled_arrow"]
+
+[sub_resource type="Resource" id="Entry_house_key"]
+script = ExtResource("3_entry")
+item = ExtResource("i_house_key")
+event_scene = ExtResource("e_house_key")
+
+[sub_resource type="Resource" id="Entry_frozen_hourglass"]
+script = ExtResource("3_entry")
+item = ExtResource("i_frozen_hourglass")
+event_scene = ExtResource("e_frozen_hourglass")
+
+[sub_resource type="Resource" id="Entry_warriors_shield"]
+script = ExtResource("3_entry")
+item = ExtResource("i_warriors_shield")
+event_scene = ExtResource("e_warriors_shield")
+
+[sub_resource type="Resource" id="Batch_1"]
+script = ExtResource("2_batch")
+title = "The Aftermath"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_house_key"), SubResource("Entry_frozen_hourglass"), SubResource("Entry_warriors_shield")])
+
+[sub_resource type="Resource" id="Entry_confiscation_ledger"]
+script = ExtResource("3_entry")
+item = ExtResource("i_confiscation_ledger")
+event_scene = ExtResource("e_confiscation_ledger")
+
+[sub_resource type="Resource" id="Entry_hearthstone"]
+script = ExtResource("3_entry")
+item = ExtResource("i_hearthstone")
+event_scene = ExtResource("e_hearthstone")
+
+[sub_resource type="Resource" id="Entry_spiral_buckle"]
+script = ExtResource("3_entry")
+item = ExtResource("i_spiral_buckle")
+event_scene = ExtResource("e_spiral_buckle")
+
+[sub_resource type="Resource" id="Batch_2"]
+script = ExtResource("2_batch")
+title = "Your People"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_confiscation_ledger"), SubResource("Entry_hearthstone"), SubResource("Entry_spiral_buckle")])
+
+[sub_resource type="Resource" id="Entry_monastery_bell"]
+script = ExtResource("3_entry")
+item = ExtResource("i_monastery_bell")
+event_scene = ExtResource("e_monastery_bell")
+
+[sub_resource type="Resource" id="Entry_unanswered_offering"]
+script = ExtResource("3_entry")
+item = ExtResource("i_unanswered_offering")
+event_scene = ExtResource("e_unanswered_offering")
+
+[sub_resource type="Resource" id="Entry_zeus_plaque"]
+script = ExtResource("3_entry")
+item = ExtResource("i_zeus_plaque")
+event_scene = ExtResource("e_zeus_plaque")
+
+[sub_resource type="Resource" id="Batch_3"]
+script = ExtResource("2_batch")
+title = "The Others and the Gods"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_monastery_bell"), SubResource("Entry_unanswered_offering"), SubResource("Entry_zeus_plaque")])
+
+[sub_resource type="Resource" id="Entry_defectors_staff"]
+script = ExtResource("3_entry")
+item = ExtResource("i_defectors_staff")
+event_scene = ExtResource("e_defectors_staff")
+
+[sub_resource type="Resource" id="Entry_initiates_mask"]
+script = ExtResource("3_entry")
+item = ExtResource("i_initiates_mask")
+event_scene = ExtResource("e_initiates_mask")
+
+[sub_resource type="Resource" id="Entry_two_needle_compass"]
+script = ExtResource("3_entry")
+item = ExtResource("i_two_needle_compass")
+event_scene = ExtResource("e_two_needle_compass")
+
+[sub_resource type="Resource" id="Batch_4"]
+script = ExtResource("2_batch")
+title = "The Wicked"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_defectors_staff"), SubResource("Entry_initiates_mask"), SubResource("Entry_two_needle_compass")])
+
+[sub_resource type="Resource" id="Entry_wrong_accusation"]
+script = ExtResource("3_entry")
+item = ExtResource("i_wrong_accusation")
+event_scene = ExtResource("e_wrong_accusation")
+
+[sub_resource type="Resource" id="Entry_unsent_letter"]
+script = ExtResource("3_entry")
+item = ExtResource("i_unsent_letter")
+event_scene = ExtResource("e_unsent_letter")
+
+[sub_resource type="Resource" id="Entry_fletching_in_fallen_archer"]
+script = ExtResource("3_entry")
+item = ExtResource("i_fletching_in_fallen_archer")
+event_scene = ExtResource("e_fletching_in_fallen_archer")
+
+[sub_resource type="Resource" id="Batch_5"]
+script = ExtResource("2_batch")
+title = "The Accusations"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_wrong_accusation"), SubResource("Entry_unsent_letter"), SubResource("Entry_fletching_in_fallen_archer")])
+
+[sub_resource type="Resource" id="Entry_on_thin_blood"]
+script = ExtResource("3_entry")
+item = ExtResource("i_on_thin_blood")
+event_scene = ExtResource("e_on_thin_blood")
+
+[sub_resource type="Resource" id="Entry_scratched_portrait"]
+script = ExtResource("3_entry")
+item = ExtResource("i_scratched_portrait")
+event_scene = ExtResource("e_scratched_portrait")
+
+[sub_resource type="Resource" id="Entry_split_practice_target"]
+script = ExtResource("3_entry")
+item = ExtResource("i_split_practice_target")
+event_scene = ExtResource("e_split_practice_target")
+
+[sub_resource type="Resource" id="Batch_6"]
+script = ExtResource("2_batch")
+title = "Who He Was"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_on_thin_blood"), SubResource("Entry_scratched_portrait"), SubResource("Entry_split_practice_target")])
+
+[sub_resource type="Resource" id="Entry_safe_passage_seal"]
+script = ExtResource("3_entry")
+item = ExtResource("i_safe_passage_seal")
+event_scene = ExtResource("e_safe_passage_seal")
+
+[sub_resource type="Resource" id="Entry_muster_roll"]
+script = ExtResource("3_entry")
+item = ExtResource("i_muster_roll")
+event_scene = ExtResource("e_muster_roll")
+
+[sub_resource type="Resource" id="Entry_pirate_appraisal_slip"]
+script = ExtResource("3_entry")
+item = ExtResource("i_pirate_appraisal_slip")
+event_scene = ExtResource("e_pirate_appraisal_slip")
+
+[sub_resource type="Resource" id="Batch_7"]
+script = ExtResource("2_batch")
+title = "The Net Closes"
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_safe_passage_seal"), SubResource("Entry_muster_roll"), SubResource("Entry_pirate_appraisal_slip")])
+
+[sub_resource type="Resource" id="Entry_first_portal_shard"]
+script = ExtResource("3_entry")
+item = ExtResource("i_first_portal_shard")
+
+[sub_resource type="Resource" id="Entry_hollow_ring"]
+script = ExtResource("3_entry")
+item = ExtResource("i_hollow_ring")
+
+[sub_resource type="Resource" id="Entry_whittled_arrow"]
+script = ExtResource("3_entry")
+item = ExtResource("i_whittled_arrow")
+
+[sub_resource type="Resource" id="Batch_8"]
+script = ExtResource("2_batch")
+title = "The Tower"
+spawns_in_rifts = false
+entries = Array[ExtResource("3_entry")]([SubResource("Entry_first_portal_shard"), SubResource("Entry_hollow_ring"), SubResource("Entry_whittled_arrow")])
+
+[resource]
+script = ExtResource("1_catalog")
+batches = Array[ExtResource("2_batch")]([SubResource("Batch_1"), SubResource("Batch_2"), SubResource("Batch_3"), SubResource("Batch_4"), SubResource("Batch_5"), SubResource("Batch_6"), SubResource("Batch_7"), SubResource("Batch_8")])

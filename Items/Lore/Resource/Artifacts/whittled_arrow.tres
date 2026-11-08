@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://Items/Lore/lore_found_requirement.gd" id="2_found"]
+
+[sub_resource type="Resource" id="Resource_requires"]
+script = ExtResource("2_found")
+ids = Array[StringName]([&"safe_passage_seal", &"muster_roll", &"pirate_appraisal_slip"])
+
+[resource]
+script = ExtResource("1_data")
+id = &"whittled_arrow"
+display_name = "Whittled Arrow"
+pickup_line = "A child's toy arrow. Two names, one gouged out. A wobbly spiral near the tip."
+spirit_lines = Array[String](["The mark. Smaller, clumsier. A child made this."])
+requires = SubResource("Resource_requires")

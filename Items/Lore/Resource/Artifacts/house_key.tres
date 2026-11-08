@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"house_key"
+display_name = "House Key"
+pickup_line = "An iron house key on a cord. A name is scratched into its bow."
+spirit_lines = Array[String](["It opens a door that isn't anywhere anymore. Someone carried it anyway, as if they might go home."])

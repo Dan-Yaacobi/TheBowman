@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"initiates_mask"
+display_name = "Initiate's Mask"
+pickup_line = "A plain cult mask. Rows of tally marks are scratched inside the brim."
+spirit_lines = Array[String](["Someone counted something, many times. Creatures count what they're waiting for."])

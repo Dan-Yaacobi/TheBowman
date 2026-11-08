@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"unanswered_offering"
+display_name = "Unanswered Offering"
+pickup_line = "A stone altar bowl. The fruit in it has never rotted."
+spirit_lines = Array[String](["Someone gave this to the gods. Nothing has come to take it. Nothing has answered anything since the break."])

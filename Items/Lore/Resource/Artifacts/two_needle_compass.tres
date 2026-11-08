@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"two_needle_compass"
+display_name = "Two-Needle Compass"
+pickup_line = "The case turns, but both needles hold still, pointing in opposite directions."
+spirit_lines = Array[String](["Two doors opened in the same place. Nothing could stand where they met. Not even me."])

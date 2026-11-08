@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
+
+[sub_resource type="Resource" id="Resource_after"]
+script = ExtResource("3_flag")
+flag = &"spirit_discovery"
+
+[resource]
+script = ExtResource("1_data")
+id = &"split_practice_target"
+display_name = "Split Practice Target"
+pickup_line = "One half scorched, the other full of arrow holes."
+spirit_lines = Array[String](["An archer and a wizard fought here. Fire against arrows. Did the archer win?"])
+after_lines = Array[String](["No one fought here. Did they?"])
+after_requires = SubResource("Resource_after")

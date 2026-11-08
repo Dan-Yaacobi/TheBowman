@@ -5,6 +5,8 @@ class_name LoreItemPickup extends Item
 @export var lore_item: LoreItemData
 @export var bob_speed: float = 2.0
 @export var bob_height: float = 3.0
+## Degrees per second the sprite turns in place. 0 = still.
+@export var spin_speed: float = 0.0
 @export_group("Claim")
 @export var rise_height: float = 16.0
 @export var claim_duration: float = 0.4
@@ -33,6 +35,8 @@ func extra_process_functions(delta: float) -> void:
 		return
 	_bob_time += delta
 	position.y += sin(_bob_time * bob_speed) * bob_height * delta
+	if spin_speed != 0.0:
+		sprite.rotation_degrees += spin_speed * delta
 
 ## Rare and placed on purpose, so it never despawns.
 func initiate_despawn() -> void:

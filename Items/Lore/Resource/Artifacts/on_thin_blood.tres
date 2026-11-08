@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
+
+[sub_resource type="Resource" id="Resource_after"]
+script = ExtResource("3_flag")
+flag = &"spirit_discovery"
+
+[resource]
+script = ExtResource("1_data")
+id = &"on_thin_blood"
+display_name = "\"On Thin Blood\""
+pickup_line = "A few surviving pages of a calm, careful treatise. One exempts \"certain archers.\""
+spirit_lines = Array[String](["He writes as if the world were a garden and most of it weeds."])
+after_lines = Array[String](["Certain archers. One."])
+after_requires = SubResource("Resource_after")

@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Level/Events/Artifacts/artifact_event.gd" id="1_event"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_island"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_portal"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
+[ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/scratched_portrait.tres" id="6_item"]
+
+[node name="ScratchedPortraitEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+script = ExtResource("1_event")
+pickup = NodePath("Islands/WallIsland/LoreItemPickup")
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, -20)
+
+[node name="EventPortal" parent="." instance=ExtResource("3_portal")]
+position = Vector2(0, -13)
+
+[node name="FallingDeath" parent="." instance=ExtResource("4_fall")]
+position = Vector2(0, 443)
+
+[node name="Islands" type="Node2D" parent="."]
+
+[node name="StartIsland" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(0, 30)
+
+[node name="Island2" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(-60, 35)
+
+[node name="WallIsland" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(-120, 25)
+
+[node name="Island4" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(-180, 40)
+
+[node name="CollapsedWall" type="Sprite2D" parent="Islands/WallIsland"]
+editor_description = "Set piece, sprite TODO: A collapsed wall."
+position = Vector2(-6, -10)
+
+[node name="Rubble" type="Sprite2D" parent="Islands/WallIsland"]
+editor_description = "Set piece, sprite TODO: Rubble. The portrait lies face-down in it, its frame cracked."
+position = Vector2(2, -4)
+
+[node name="LoreItemPickup" parent="Islands/WallIsland" instance=ExtResource("5_pickup")]
+position = Vector2(4, -8)
+lore_item = ExtResource("6_item")
+bob_speed = 2.0
+bob_height = 0.0
