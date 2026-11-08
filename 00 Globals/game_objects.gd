@@ -10,8 +10,15 @@ const ROCKS_1 = preload("uid://dfyy18crd3gd0")
 const ROCKS_2 = preload("uid://453b1cwdxo20")
 const DECORATION = preload("uid://cq1lw1j5im8pg")
 
-var objects: Array[PackedScene] = [BARREL,CRATE,DECORATION]
+## Objects islands can spawn, with their spawn weights (higher = more common).
+## Gold vases are a rare treat.
+var objects: Array[PackedScene] = [BARREL, CRATE, DECORATION, VASE]
+var object_weights: PackedFloat32Array = [1.0, 1.0, 1.0, 0.2]
 
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+func _ready() -> void:
+	_rng.randomize()
 
 func get_random_object() -> PackedScene:
-	return objects.pick_random()
+	return objects[_rng.rand_weighted(object_weights)]

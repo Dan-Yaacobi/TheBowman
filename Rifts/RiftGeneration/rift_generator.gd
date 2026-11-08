@@ -22,12 +22,15 @@ var placed_bounds: Array[Bounds]
 var side_path_terminal_chunks: Array[RiftChunk] = []
 var lowest_chunk: RiftChunk
 var _event_portal_island: Island
+## How many times each capped chunk was placed in the current rift level.
+var _chunk_counts: Dictionary[ChunkData, int] = {}
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
 func generate(_curr_level: int) -> RiftLevel:
 	main_path_chunks = []
 	placed_bounds = []
+	_chunk_counts.clear()
 	rift_level = RIFT_LEVEL.instantiate()
 	add_child(rift_level)
 	build_main_path(_curr_level)
@@ -217,7 +220,10 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 		chunks.shuffle()
 		
 	while chunks.size() > 0:
-		var chunk_node: RiftChunk = chunks.pop_back().scene.instantiate()
+		var chunk_data: ChunkData = chunks.pop_back()
+		if _is_capped(chunk_data):
+			continue
+		var chunk_node: RiftChunk = chunk_data.scene.instantiate()
 		rift_level.add_child(chunk_node)
 		
 		if not is_instance_valid(_exit):
@@ -231,6 +237,8 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 		
 		if not overlaps:
 			placed_bounds.append(chunk_node.bounds)
+			if chunk_data.max_per_rift > 0:
+				_chunk_counts[chunk_data] = _chunk_counts.get(chunk_data, 0) + 1
 			chunk_node.set_rift_level(rift_level)
 			if lowest_chunk == null or chunk_node.global_position.y > lowest_chunk.global_position.y:
 				manage_lowest_chunk(chunk_node)
@@ -239,6 +247,9 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 			chunk_node.queue_free()
 	
 	return null
+
+func _is_capped(chunk_data: ChunkData) -> bool:
+	return chunk_data.max_per_rift > 0 and _chunk_counts.get(chunk_data, 0) >= chunk_data.max_per_rift
 
 func place_treasure_island(last_chunk: RiftChunk) -> bool:
 	for exit in last_chunk.get_exit_markers():
