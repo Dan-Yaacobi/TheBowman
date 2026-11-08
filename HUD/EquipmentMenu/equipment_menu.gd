@@ -4,12 +4,24 @@ const CHARACTER_AREA: String = "Control/CenterContainer/Window/VBox/Columns/Char
 const TOOLTIP_GAP: float = 12.0
 const ITEM_ICON_SIZE: float = 28.0
 const COLOR_HIGHLIGHT: Color = Color("ffcf5a")
+const COLOR_ROW_STRIPE: Color = Color(1.0, 1.0, 1.0, 0.05)
+const COLOR_ROW_HIGHLIGHT: Color = Color(1.0, 0.81, 0.35, 0.12)
+
+@export_group("Stats Text")
+@export var stat_font_size: int = 22
+@export var stat_group_font_size: int = 26
+@export var panel_title_font_size: int = 30
+## Width of the value and item-share columns, so numbers line up on the right.
+@export var stat_value_width: float = 80.0
+@export var stat_share_width: float = 70.0
 
 @onready var close_button: Button = $Control/CenterContainer/Window/VBox/Footer/CloseButton
 @onready var bow_slot: EquipmentSlot = get_node(CHARACTER_AREA + "BowSlot")
 @onready var quiver_slot: EquipmentSlot = get_node(CHARACTER_AREA + "QuiverSlot")
 @onready var ring_slot: EquipmentSlot = get_node(CHARACTER_AREA + "RingSlot")
-@onready var stats_grid: GridContainer = $Control/CenterContainer/Window/VBox/Columns/StatsPanel/VBox/Scroll/StatsGrid
+@onready var stats_list: VBoxContainer = $Control/CenterContainer/Window/VBox/Columns/StatsPanel/VBox/Scroll/StatsList
+@onready var stats_title: Label = $Control/CenterContainer/Window/VBox/Columns/StatsPanel/VBox/Header
+@onready var abilities_title: Label = $Control/CenterContainer/Window/VBox/Columns/AbilitiesPanel/VBox/Header
 @onready var abilities_list: VBoxContainer = $Control/CenterContainer/Window/VBox/Columns/AbilitiesPanel/VBox/Scroll/AbilitiesList
 @onready var item_tooltip: ItemCard = $Control/ItemTooltip
 @onready var root_control: Control = $Control
@@ -17,9 +29,13 @@ const COLOR_HIGHLIGHT: Color = Color("ffcf5a")
 
 var _stats: PlayerStats
 var _is_open: bool = false
+## Bumped on every hover so a stale tooltip placement stops after its await.
+var _tooltip_request: int = 0
 
 func _ready() -> void:
 	close_button.pressed.connect(_on_close)
+	stats_title.add_theme_font_size_override("font_size", panel_title_font_size)
+	abilities_title.add_theme_font_size_override("font_size", panel_title_font_size)
 	for entry: Array in [[bow_slot, "bow"], [quiver_slot, "arrow"], [ring_slot, "ring"]]:
 		var slot: EquipmentSlot = entry[0]
 		slot.mouse_entered.connect(_on_slot_mouse_entered.bind(slot, entry[1]))
@@ -93,6 +109,7 @@ func _on_slot_mouse_entered(slot: EquipmentSlot, prop: String) -> void:
 
 
 func _on_slot_mouse_exited() -> void:
+	_tooltip_request += 1
 	item_tooltip.hide()
 	_build_stats()
 
@@ -113,17 +130,25 @@ func _show_tooltip(slot: EquipmentSlot, equipment: EquipmentData, contributions:
 		rows.append(ItemCard.StatRow.new(_get_stat_display_name(stat_name), contributions[stat_name], true, 0.0, false, PlayerStats.unit_suffix(stat_name)))
 	var slot_name: String = str(EquipmentData.slots.keys()[equipment.slot]).capitalize()
 	item_tooltip.show_item(equipment, slot_name, rows)
-	item_tooltip.reset_size()
 	item_tooltip.show()
-	_place_tooltip.call_deferred(slot)
+	_place_tooltip(slot)
 
 
 ## Kept over the character panel so the stats summary stays visible: side slots open toward
 ## the character, the bottom slot opens upward. Clamped to the screen.
+## Wrapped labels measure one word per line on the first layout pass, so the card is hidden
+## until its height settles (same approach as ItemComparisonScreen).
 func _place_tooltip(slot: EquipmentSlot) -> void:
-	if not item_tooltip.visible:
-		return
+	_tooltip_request += 1
+	var request: int = _tooltip_request
+	item_tooltip.modulate.a = 0.0
+	for i: int in 3:
+		item_tooltip.reset_size()
+		await get_tree().process_frame
+		if not is_inside_tree() or request != _tooltip_request or not item_tooltip.visible:
+			return
 	item_tooltip.reset_size()
+	item_tooltip.modulate.a = 1.0
 	var screen: Vector2 = root_control.size
 	var slot_rect: Rect2 = slot.get_global_rect()
 	var area_rect: Rect2 = character_area.get_global_rect()
@@ -145,8 +170,9 @@ func _place_tooltip(slot: EquipmentSlot) -> void:
 
 ## Rebuilds the stat list. With a hovered item, the stats it adds are highlighted with its share.
 func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[String, float] = {}) -> void:
-	_clear(stats_grid)
+	_clear(stats_list)
 	var current_group: String = ""
+	var row_index: int = 0
 	for entry: Array in PlayerStats.DISPLAY_STATS:
 		var group: String = entry[0]
 		var display: String = entry[1]
@@ -160,40 +186,73 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 
 		if group != current_group:
 			current_group = group
+			row_index = 0
 			_add_group_header(group)
 
 		var highlighted: bool = contributions.has(prop)
-		var name_label: Label = _make_label(display)
+		var row_color: Color = COLOR_ROW_HIGHLIGHT if highlighted else (COLOR_ROW_STRIPE if row_index % 2 == 0 else Color.TRANSPARENT)
+		var row: HBoxContainer = _make_stat_row(row_color)
+		row_index += 1
+
+		var name_label: Label = _make_stat_label(display)
 		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if highlighted:
 			name_label.add_theme_color_override("font_color", COLOR_HIGHLIGHT)
-		stats_grid.add_child(name_label)
+		row.add_child(name_label)
 
-		var value_label: RichTextLabel = RichTextLabel.new()
-		value_label.bbcode_enabled = true
-		value_label.fit_content = true
-		value_label.scroll_active = false
-		value_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-		value_label.text = _format_stat_rich(prop, value) if value is Stat else _format_float(total)
-		stats_grid.add_child(value_label)
+		var value_label: Label = _make_stat_label(_format_stat_total(prop, value, total))
+		value_label.custom_minimum_size.x = stat_value_width
+		value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		if value is Stat:
+			var stat: Stat = value
+			if not is_equal_approx(stat.value(), stat.base_value):
+				value_label.add_theme_color_override("font_color", ItemCard.COLOR_UPGRADE if stat.value() > stat.base_value else ItemCard.COLOR_DOWNGRADE)
+		row.add_child(value_label)
 
-		var share_label: Label = _make_label("")
-		share_label.custom_minimum_size.x = 48.0
+		var share_label: Label = _make_stat_label("")
+		share_label.custom_minimum_size.x = stat_share_width
 		share_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if highlighted:
 			var share: float = contributions[prop]
 			share_label.text = ("+" if share >= 0.0 else "") + _format_float(share) + PlayerStats.unit_suffix(prop)
 			share_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(hovered.color))
-		stats_grid.add_child(share_label)
+		row.add_child(share_label)
+
+
+## A row is a tinted panel holding name | value | item share.
+func _make_stat_row(color: Color) -> HBoxContainer:
+	var panel: PanelContainer = PanelContainer.new()
+	var box: StyleBoxFlat = StyleBoxFlat.new()
+	box.bg_color = color
+	box.set_corner_radius_all(3)
+	box.content_margin_left = 6.0
+	box.content_margin_right = 6.0
+	box.content_margin_top = 1.0
+	box.content_margin_bottom = 1.0
+	panel.add_theme_stylebox_override("panel", box)
+	stats_list.add_child(panel)
+	var row: HBoxContainer = HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	panel.add_child(row)
+	return row
 
 
 func _add_group_header(group: String) -> void:
-	# A header spans the grid by filling all three columns.
 	var header: Label = _make_label(group)
 	header.theme_type_variation = &"HeaderLabel"
-	stats_grid.add_child(header)
-	stats_grid.add_child(Control.new())
-	stats_grid.add_child(Control.new())
+	header.add_theme_font_size_override("font_size", stat_group_font_size)
+	if stats_list.get_child_count() > 0:
+		# Breathing room above every group but the first.
+		var spacer: Control = Control.new()
+		spacer.custom_minimum_size.y = 8.0
+		stats_list.add_child(spacer)
+	stats_list.add_child(header)
+
+
+func _make_stat_label(text: String) -> Label:
+	var label: Label = _make_label(text)
+	label.add_theme_font_size_override("font_size", stat_font_size)
+	return label
 
 
 func _get_stat_display_name(prop: String) -> String:
@@ -203,15 +262,11 @@ func _get_stat_display_name(prop: String) -> String:
 	return prop.capitalize()
 
 
-## Total in the stat's display units (percent of base for percent stats), colored against base.
-func _format_stat_rich(prop: String, stat: Stat) -> String:
-	var base: float = stat.base_value
-	var total: float = stat.value()
-	var total_str: String = _format_float(PlayerStats.display_total(prop, stat)) + PlayerStats.unit_suffix(prop)
-	if is_equal_approx(total, base):
-		return total_str
-	var color: Color = ItemCard.COLOR_UPGRADE if total > base else ItemCard.COLOR_DOWNGRADE
-	return "[color=#" + color.to_html(false) + "]" + total_str + "[/color]"
+## Total in the stat's display units (percent of base for percent stats).
+func _format_stat_total(prop: String, value: Variant, total: float) -> String:
+	if value is Stat:
+		return _format_float(PlayerStats.display_total(prop, value)) + PlayerStats.unit_suffix(prop)
+	return _format_float(total)
 
 
 func _format_float(val: float) -> String:

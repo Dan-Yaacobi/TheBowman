@@ -98,7 +98,7 @@ offset_right = 259.0
 offset_bottom = 496.0
 
 [node name="StatsPanel" type="PanelContainer" parent="Control/CenterContainer/Window/VBox/Columns" unique_id=1584720931]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 theme_type_variation = &"RowPanel"
 
@@ -116,14 +116,13 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="StatsGrid" type="GridContainer" parent="Control/CenterContainer/Window/VBox/Columns/StatsPanel/VBox/Scroll" unique_id=1475839201]
+[node name="StatsList" type="VBoxContainer" parent="Control/CenterContainer/Window/VBox/Columns/StatsPanel/VBox/Scroll" unique_id=1475839201]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 12
-columns = 3
+theme_override_constants/separation = 0
 
 [node name="AbilitiesPanel" type="PanelContainer" parent="Control/CenterContainer/Window/VBox/Columns" unique_id=1847362910]
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 theme_type_variation = &"RowPanel"
 
