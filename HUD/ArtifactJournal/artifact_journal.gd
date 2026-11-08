@@ -11,6 +11,10 @@ signal closed
 @export var unknown_name: String = "???"
 @export var unexplained_hint: String = "Bring this to the spirit."
 @export var flip_duration: float = 0.16
+## Picture frame beside each artifact; the sprite is drawn inside it.
+@export var icon_size: Vector2 = Vector2(112, 112)
+@export var frame_color: Color = Color(0.84, 0.76, 0.56)
+@export var frame_border_color: Color = Color(0.6, 0.48, 0.3)
 
 @export_group("Ink")
 @export var ink_color: Color = Color("3b2614")
@@ -22,7 +26,6 @@ signal closed
 @export var turning_shade: Color = Color(0.7, 0.65, 0.58)
 @export_group("")
 
-const ICON_SIZE: Vector2 = Vector2(64, 64)
 
 @onready var count_label: Label = %CountLabel
 @onready var book: PanelContainer = %Book
@@ -143,12 +146,15 @@ func _fill_page(content: VBoxContainer, page_index: int) -> void:
 	header.text = batch.title
 	content.add_child(header)
 	content.add_child(HSeparator.new())
+	# Each artifact gets an equal share of the page.
+	var first: bool = true
 	for entry: ArtifactEntry in batch.entries:
-		if entry and entry.item:
-			content.add_child(_build_entry(entry.item))
-	var spacer: Control = Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(spacer)
+		if entry == null or entry.item == null:
+			continue
+		if not first:
+			content.add_child(HSeparator.new())
+		first = false
+		content.add_child(_build_entry(entry.item))
 	var number: Label = Label.new()
 	number.theme_type_variation = &"DimLabel"
 	number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -158,20 +164,13 @@ func _fill_page(content: VBoxContainer, page_index: int) -> void:
 func _build_entry(item: LoreItemData) -> Control:
 	var found: bool = Lore.has_found(item.id)
 	var row: HBoxContainer = HBoxContainer.new()
-	row.add_theme_constant_override("separation", 14)
-	var icon: TextureRect = TextureRect.new()
-	icon.custom_minimum_size = ICON_SIZE
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	icon.texture = item.icon if found else null
-	# No sprite yet: skip the slot rather than leave a gap.
-	icon.visible = item.icon != null
-	row.add_child(icon)
+	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", 20)
+	row.add_child(_build_frame(item.icon if found else null))
 	var column: VBoxContainer = VBoxContainer.new()
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_theme_constant_override("separation", 2)
+	column.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	column.add_theme_constant_override("separation", 4)
 	var name_label: Label = Label.new()
 	name_label.theme_type_variation = &"TitleInkLabel" if found else &"DimLabel"
 	name_label.text = item.display_name if found else unknown_name
@@ -186,6 +185,27 @@ func _build_entry(item: LoreItemData) -> Control:
 		column.add_child(text)
 	row.add_child(column)
 	return row
+
+## A parchment frame holding the artifact's sprite. Empty until the artifact is found
+## (or until it has a sprite).
+func _build_frame(texture: Texture2D) -> Control:
+	var frame: PanelContainer = PanelContainer.new()
+	frame.custom_minimum_size = icon_size
+	frame.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var box: StyleBoxFlat = StyleBoxFlat.new()
+	box.bg_color = frame_color
+	box.border_color = frame_border_color
+	box.set_border_width_all(2)
+	box.set_corner_radius_all(3)
+	box.set_content_margin_all(6)
+	frame.add_theme_stylebox_override("panel", box)
+	var icon: TextureRect = TextureRect.new()
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.texture = texture
+	frame.add_child(icon)
+	return frame
 
 func _entry_text(item: LoreItemData) -> String:
 	var parts: Array[String] = [item.pickup_line]
@@ -214,6 +234,10 @@ func _build_ink_theme() -> Theme:
 	t.set_color("font_color", &"TitleInkLabel", title_color)
 	t.set_type_variation(&"DimLabel", &"Label")
 	t.set_color("font_color", &"DimLabel", ink_dim_color)
+	var line: StyleBoxLine = StyleBoxLine.new()
+	line.color = frame_border_color
+	line.thickness = 1
+	t.set_stylebox("separator", &"HSeparator", line)
 	return t
 
 func _on_back_button_pressed() -> void:
