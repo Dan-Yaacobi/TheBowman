@@ -3,6 +3,48 @@
 [ext_resource type="Script" path="res://HUD/ArtifactJournal/artifact_journal.gd" id="1_journal"]
 [ext_resource type="Resource" path="res://Level/Events/Artifacts/Resource/artifact_catalog.tres" id="2_catalog"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBox_cover"]
+content_margin_left = 18.0
+content_margin_top = 18.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.36, 0.22, 0.13, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.17, 0.1, 0.06, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_page_left"]
+content_margin_left = 30.0
+content_margin_top = 24.0
+content_margin_right = 26.0
+content_margin_bottom = 16.0
+bg_color = Color(0.91, 0.85, 0.68, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.66, 0.55, 0.37, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_page_right"]
+content_margin_left = 26.0
+content_margin_top = 24.0
+content_margin_right = 30.0
+content_margin_bottom = 16.0
+bg_color = Color(0.91, 0.85, 0.68, 1)
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.66, 0.55, 0.37, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+
 [node name="ArtifactJournal" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -14,95 +56,105 @@ mouse_filter = 2
 script = ExtResource("1_journal")
 catalog = ExtResource("2_catalog")
 
-[node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(1000, 680)
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.03, 0.02, 0.6)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(1240, 720)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -340.0
-offset_right = 500.0
-offset_bottom = 340.0
+offset_left = -620.0
+offset_top = -360.0
+offset_right = 620.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="TitleRow" type="HBoxContainer" parent="Panel/VBox"]
+[node name="TitleRow" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Panel/VBox/TitleRow"]
+[node name="Title" type="Label" parent="VBox/TitleRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"TitleLabel"
 text = "ARTIFACTS"
+horizontal_alignment = 1
 
-[node name="CountLabel" type="Label" parent="Panel/VBox/TitleRow"]
+[node name="CountLabel" type="Label" parent="VBox/TitleRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_type_variation = &"DimLabel"
 text = "Found 0 / 0"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
-layout_mode = 2
-
-[node name="Body" type="HBoxContainer" parent="Panel/VBox"]
+[node name="Book" type="PanelContainer" parent="VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_cover")
+
+[node name="Pages" type="HBoxContainer" parent="VBox/Book"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftPage" type="PanelContainer" parent="VBox/Book/Pages"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_page_left")
+
+[node name="LeftContent" type="VBoxContainer" parent="VBox/Book/Pages/LeftPage"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Spine" type="ColorRect" parent="VBox/Book/Pages"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+color = Color(0.45, 0.34, 0.2, 1)
+
+[node name="RightPage" type="PanelContainer" parent="VBox/Book/Pages"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_page_right")
+
+[node name="RightContent" type="VBoxContainer" parent="VBox/Book/Pages/RightPage"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="NavRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
 theme_override_constants/separation = 24
 
-[node name="ListScroll" type="ScrollContainer" parent="Panel/VBox/Body"]
-custom_minimum_size = Vector2(340, 0)
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="List" type="VBoxContainer" parent="Panel/VBox/Body/ListScroll"]
+[node name="PrevButton" type="Button" parent="VBox/NavRow"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 6
+focus_mode = 0
+text = "Prev"
 
-[node name="Detail" type="VBoxContainer" parent="Panel/VBox/Body"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 12
-
-[node name="DetailIcon" type="TextureRect" parent="Panel/VBox/Body/Detail"]
+[node name="BackButton" type="Button" parent="VBox/NavRow"]
 unique_name_in_owner = true
-texture_filter = 1
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-expand_mode = 1
-stretch_mode = 5
-
-[node name="DetailName" type="Label" parent="Panel/VBox/Body/Detail"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"HeaderLabel"
-
-[node name="DetailText" type="RichTextLabel" parent="Panel/VBox/Body/Detail"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-bbcode_enabled = true
-
-[node name="EmptyLabel" type="Label" parent="Panel/VBox/Body/Detail"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"DimLabel"
-text = "Nothing found yet."
-autowrap_mode = 3
-
-[node name="BackButton" type="Button" parent="Panel/VBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-size_flags_horizontal = 4
 text = "Back"
+
+[node name="NextButton" type="Button" parent="VBox/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+focus_mode = 0
+text = "Next"
