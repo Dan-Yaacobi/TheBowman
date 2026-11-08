@@ -18,6 +18,9 @@ class_name GameObject extends Node2D
 
 var got_hit: bool = false
 
+## Sheet frames cut into standalone textures, shared by every object (key: sheet path + region).
+static var _frame_cache: Dictionary[String, Texture2D] = {}
+
 func _ready() -> void:
 	if hit_box:
 		if not data.interactable:
@@ -70,7 +73,14 @@ func setup(rift_type: Rift.Type) -> void:
 	else:
 		new_sprite = matching.get_random_sprite()
 	if new_sprite != null:
-		sprite.texture = new_sprite
+		# The break shader reads UV 0-1 as the whole sprite; an atlas frame would shatter its neighbours
+		sprite.texture = _standalone(new_sprite) if sprite.material else new_sprite
+
+static func _standalone(frame: AtlasTexture) -> Texture2D:
+	var key: String = "%s|%s" % [frame.atlas.resource_path, frame.region]
+	if not _frame_cache.has(key):
+		_frame_cache[key] = ImageTexture.create_from_image(frame.get_image())
+	return _frame_cache[key]
 		
 func _get_texture_data_for_type(rift_type: Rift.Type) -> TextureData:
 	for _data: TextureData in textures:
