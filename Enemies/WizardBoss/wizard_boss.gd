@@ -117,3 +117,4 @@ func drop_item() -> void:
 		EventBus.drop_specific_item.emit(item_drop,global_position, 2)
 	EventBus.try_drop.emit(global_position,100, 1)	
 	EventBus.drop_item.emit(CustomVariables.items.ESSENCE,global_position,100,total_essence_drop)
+	EventBus.drop_item.emit(CustomVariables.items.SKYSHARD,global_position,100,1)

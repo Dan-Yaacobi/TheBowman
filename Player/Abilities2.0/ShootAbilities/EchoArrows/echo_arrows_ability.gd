@@ -4,7 +4,7 @@ class_name EchoArrowsAbility extends PlayerPassiveAbility
 
 @export var delay: float = 0.4
 ## Ghost damage and knockback as a share of the perfect arrow's.
-@export var damage_share: float = 0.5
+@export var damage_share: float = 0.25
 
 const GHOST_TINT: Color = Color(0.65, 0.85, 1.0, 0.55)
 

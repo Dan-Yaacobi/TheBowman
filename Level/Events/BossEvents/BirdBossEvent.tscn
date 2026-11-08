@@ -20,10 +20,16 @@ script = ExtResource("4_7v1cr")
 item = 5
 metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
 
+[sub_resource type="Resource" id="Resource_skysh"]
+script = ExtResource("4_7v1cr")
+item = 4
+display_name = "Skyshard"
+metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
+
 [node name="BirdBossEvent" type="Node2D" unique_id=1246578200 node_paths=PackedStringArray("boss")]
 script = ExtResource("1_6ky67")
 boss = NodePath("BirdBoss")
-rewards = Array[ExtResource("2_qlstg")]([SubResource("Resource_34rs8"), SubResource("Resource_quirc")])
+rewards = Array[ExtResource("2_qlstg")]([SubResource("Resource_34rs8"), SubResource("Resource_quirc"), SubResource("Resource_skysh")])
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1835078092]
 position = Vector2(1, -40)

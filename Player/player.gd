@@ -212,9 +212,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("Jump"):
 			jump_action.request_jump()
 
-		if event.is_action_released("Jump"):
-			jump_action.release_jump()
-			
 		if event.is_action_pressed("shoot"):
 			if stats.bow and stats.arrow:
 				shoot()

@@ -7,8 +7,6 @@ class_name FireDashAbility extends PlayerAbility
 @export var aura_offset: Vector2 = Vector2(0, 4)
 
 var aura: FireAura
-var id: int
-var cd_id: int
 const FIRE_AURA = preload("uid://b0dj5ub6j4qqg")
 
 func on_equipped() -> void:
@@ -16,14 +14,8 @@ func on_equipped() -> void:
 	aura.setup(aura_shader, aura_scale, aura_offset)
 	PlayerManager.player.add_child(aura)
 	EventBus.dash_ended.connect(_on_dash_ended)
-	id = CustomVariables.get_buff_id()
-	cd_id = CustomVariables.get_buff_id()
-	PlayerManager.player.stats.dash_power.add_buff(id,1,Stat.buff_type.MULTIPLICATIVE)
-	PlayerManager.player.stats.dash_cooldown.add_buff(cd_id,1,Stat.buff_type.MULTIPLICATIVE)
-	
+
 func on_unequipped() -> void:
-	PlayerManager.player.stats.dash_power.remove_buff_completly(id,Stat.buff_type.MULTIPLICATIVE)
-	PlayerManager.player.stats.dash_cooldown.remove_buff_completly(cd_id,Stat.buff_type.MULTIPLICATIVE)
 	EventBus.dash_ended.disconnect(_on_dash_ended)
 	if is_instance_valid(aura):
 		aura.queue_free()

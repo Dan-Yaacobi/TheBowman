@@ -19,4 +19,7 @@ func activate_ability(_target: Node2D = null , _activator: Node2D = null, _resul
 
 
 func get_tooltip() -> String:
-	return "Bleeding Wounds: Damaged enemies bleed on hit."
+	return "Perfect shots become a magma boulder that burns enemies"
+
+func get_tooltip_color() -> Color:
+	return Color.DARK_ORANGE

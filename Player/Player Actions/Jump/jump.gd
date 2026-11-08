@@ -8,14 +8,11 @@ signal landed
 
 const DROP_CLEAR_DISTANCE: float = 32.0
 const BUFFER_WINDOW: float = 0.1
-const MAX_HOLD: float = 0.3
 const COYOTE_TIME: float = 0.1
 
 var dropping: bool = false
 var drop_start_y: float = 0.0
 var jumps: int = 1
-var hold_time: float = 0.0
-var is_holding: bool = false
 var buffer_timer: float = 0.0
 var can_jump: bool = true
 var was_on_floor: bool = false
@@ -29,8 +26,6 @@ func _physics_process(delta: float) -> void:
 	# Landing check first, so a buffered jump on the landing frame uses the refilled jumps
 	_check_landing()
 	_update_coyote(delta)
-	if is_holding:
-		hold_time += delta
 	if buffer_timer > 0:
 		buffer_timer -= delta
 		try_jump()
@@ -108,12 +103,4 @@ func try_jump() -> void:
 func jump() -> void:
 	coyote_timer = 0.0
 	player.velocity.y = -player.stats.jump_height.value()
-	hold_time = 0.0
-	is_holding = true
 	jumped.emit()
-
-func release_jump() -> void:
-	is_holding = false
-	if player.velocity.y < 0:
-		var hold_ratio: float = clampf(hold_time / MAX_HOLD, 0.0, 1.0)
-		player.velocity.y *= lerpf(0.2, 1.0, hold_ratio)

@@ -43,6 +43,7 @@ func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult =
 		EventBus.object_destroyed.emit(self)
 		got_hit = true
 		EventBus.camera_shake.emit(2.0,25.0)
+		drop_items()
 		if sprite.material:
 			sprite.material = sprite.material.duplicate()
 			var tween: Tween = create_tween()
@@ -51,7 +52,6 @@ func break_item(_hurt_box: HurtBox,_raw_damage: int = 0, _result: DamageResult =
 				0.0, 1.0, 0.4
 			).set_trans(Tween.TRANS_LINEAR)
 			await tween.finished
-		drop_items()
 		queue_free()
 
 func drop_items() -> void:
