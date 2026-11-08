@@ -6,6 +6,7 @@ class_name ColorScrollPicker extends Control
 @export var input_delay: float = 0.3
 
 @onready var options: HBoxContainer = $Panel/Margin/VBox/Options
+@onready var heart_progress: ScrollHeartProgress = $Panel/Margin/VBox/HeartProgress
 
 var _cards: Array[ColorScrollCard] = []
 var _pending: int = 0
@@ -40,6 +41,9 @@ func _close() -> void:
 func _refresh() -> void:
 	var levels: ColorLevels = PlayerManager.player.color_levels
 	var power_pct: int = roundi(levels.power_per_level * 100.0)
+	heart_progress.visible = levels.scrolls_per_heart > 0
+	if heart_progress.visible:
+		heart_progress.setup(levels.scrolls_collected % levels.scrolls_per_heart, levels.scrolls_per_heart)
 	for card: ColorScrollCard in _cards:
 		card.setup(levels.get_level(card.color), power_pct, levels.bonus_text(card.color), levels.items_of_color(card.color))
 		card.set_selectable(false)

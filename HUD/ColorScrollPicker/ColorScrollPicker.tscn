@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="3_prec"]
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/tempo_scroll.png" id="4_temp"]
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/elemental_scroll.png" id="5_elem"]
+[ext_resource type="Script" path="res://HUD/ColorScrollPicker/scroll_heart_progress.gd" id="6_heart"]
 
 [node name="ColorScrollPicker" type="Control"]
 process_mode = 3
@@ -79,3 +80,7 @@ display_name = "Elemental"
 texture = ExtResource("5_elem")
 tint = Color(0.85, 0.45, 0.95, 1)
 bonus_text = "Longer debuffs"
+
+[node name="HeartProgress" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+script = ExtResource("6_heart")

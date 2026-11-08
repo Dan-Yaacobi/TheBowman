@@ -21,6 +21,9 @@ class_name ColorLevels extends Node
 ## Every Nth scroll (all colors counted) also gives a heart container and a full heal.
 @export var scrolls_per_heart: int = 3
 
+const HEART_GAIN_SOUND_PATH: String = "res://Audio/Player/heart_container_gain.ogg"
+const HEART_GAIN_TEXT_COLOR: Color = Color(1.0, 0.35, 0.4)
+
 const DEBUFF_DAMAGE_STATS: Array[String] = ["bleed_damage", "burn_damage", "poison_damage"]
 const DEBUFF_DURATION_STATS: Array[String] = [
 	"bleed_duration", "burn_duration", "poison_duration",
@@ -58,6 +61,8 @@ func apply_scroll(color: CustomVariables.ItemColor) -> void:
 	scrolls_collected += 1
 	if scrolls_per_heart > 0 and scrolls_collected % scrolls_per_heart == 0:
 		player.increase_max_hp(true)
+		EventBus.play_any.emit(load(HEART_GAIN_SOUND_PATH), 1.0, 1.0, -2.0)
+		CombatTextSpawner.spawn(player.global_position + Vector2(0, -24), "+1 Heart", HEART_GAIN_TEXT_COLOR)
 
 func reset() -> void:
 	_levels.clear()

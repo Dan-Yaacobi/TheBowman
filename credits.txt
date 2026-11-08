@@ -69,3 +69,5 @@ Used for: scroll interaction ("sfx_map_handle_01", mixed with a chime)
 
 Chest choir ("aah" chord)
 Synthesized for this game
+Heart container gain sound
+Synthesized for this game
