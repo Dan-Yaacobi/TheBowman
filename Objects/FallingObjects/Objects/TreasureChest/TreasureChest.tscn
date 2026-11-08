@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c4oftynas7wmn" path="res://Objects/FallingObjects/Sprites/TreasureChest.png" id="4_qrrt5"]
 [ext_resource type="Resource" uid="uid://d0coedohrill3" path="res://Items/Other/RedDiamond.tres" id="5_40hub"]
 [ext_resource type="Texture2D" uid="uid://cvomifa28xhvn" path="res://Objects/FallingObjects/Sprites/twinkle.png" id="8_q4k2q"]
-[ext_resource type="AudioStream" uid="uid://d2tjadsxjmphi" path="res://Objects/FallingObjects/Objects/TreasureChest/ChestOpen.wav" id="8_snum2"]
+[ext_resource type="AudioStream" path="res://Audio/Objects/chest_open.ogg" id="8_snum2"]
 [ext_resource type="AudioStream" uid="uid://d3uk6pw51gjcn" path="res://Objects/FallingObjects/Objects/TreasureChest/Chest Hit.wav" id="9_x28gj"]
 
 

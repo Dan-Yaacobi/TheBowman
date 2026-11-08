@@ -6,12 +6,18 @@ class_name PlayerWalkingState extends State
 @onready var dash: PlayerDashState = $"../Dash"
 @onready var sword_attack: SwordAttackState = $"../SwordAttack"
 
+## Ground distance between footstep sounds (~2 steps per Walk loop at base speed).
+@export var footstep_distance: float = 30.0
+
+var _step_progress: float = 0.0
+
 func _ready() -> void:
 	pass
 
 #what happens when the player enters this state
 func Enter() -> void:
-	pass
+	# First step lands right away.
+	_step_progress = footstep_distance
 	
 #what happens when the player exits this state
 func Exit() -> void:
@@ -24,7 +30,18 @@ func Process(_delta: float) -> State:
 	var target_x = player.direction * player.get_move_speed()
 	var acceleration: float = player.get_move_acceleration()
 	player.velocity.x = move_toward(player.velocity.x, target_x, acceleration * _delta)
+	_update_footsteps(_delta)
 	return null
+
+func _update_footsteps(delta: float) -> void:
+	if not player.is_on_floor():
+		# Next step plays on landing.
+		_step_progress = footstep_distance
+		return
+	_step_progress += absf(player.velocity.x) * delta
+	if _step_progress >= footstep_distance:
+		_step_progress = 0.0
+		EventBus.footstep_sound.emit()
 	
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> State:

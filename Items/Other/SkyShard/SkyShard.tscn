@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ds6gd5ktnjtgq" path="res://Items/Other/SkyShard/sky_shard.gd" id="1_12jpd"]
 [ext_resource type="Texture2D" uid="uid://bcf3c3ber6hlg" path="res://Items/Other/SkyShard/SkyShard.png" id="2_12jpd"]
+[ext_resource type="AudioStream" path="res://Audio/Items/sky_shard_pickup.ogg" id="snd_pick"]
+[ext_resource type="AudioStream" path="res://Audio/Items/sky_shard_drop.ogg" id="snd_drop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
 radius = 11.5
@@ -17,6 +19,8 @@ magnet_force = 25.0
 item_type = 4
 text = "SkyShard +1"
 color = Color(0.7647059, 0.7411765, 1, 1)
+collected_sound = ExtResource("snd_pick")
+dropped_sound = ExtResource("snd_drop")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
 scale = Vector2(0.2, 0.2)

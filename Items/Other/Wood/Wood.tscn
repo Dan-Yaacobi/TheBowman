@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bvif8g7h07prn" path="res://Items/Other/item.gd" id="1_uje2l"]
 [ext_resource type="Texture2D" uid="uid://c8w7ra2bx751u" path="res://Items/Other/Wood/Wood.png" id="2_hao3l"]
+[ext_resource type="AudioStream" path="res://Audio/Items/wood_pickup.ogg" id="snd_pick"]
+[ext_resource type="AudioStream" path="res://Audio/Items/wood_drop.ogg" id="snd_drop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
 radius = 15.0
@@ -15,6 +17,8 @@ script = ExtResource("1_uje2l")
 item_type = 3
 text = "Wood +1"
 color = Color(0.3764706, 0.23137255, 0.16470589, 1)
+collected_sound = ExtResource("snd_pick")
+dropped_sound = ExtResource("snd_drop")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
 scale = Vector2(0.2, 0.2)

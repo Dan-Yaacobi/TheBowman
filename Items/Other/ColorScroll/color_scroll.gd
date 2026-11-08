@@ -43,5 +43,6 @@ func initiate_despawn() -> void:
 	pass
 
 func _collect() -> void:
+	play_collected_sound()
 	EventBus.color_scroll_collected.emit()
 	queue_free()

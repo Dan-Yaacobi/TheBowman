@@ -23,4 +23,5 @@ func extra_process_functions(_delta: float) -> void:
 	
 func _collect() -> void:
 	if _player.heal(heal_amount):
+		play_collected_sound()
 		queue_free()

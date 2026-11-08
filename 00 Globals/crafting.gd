@@ -119,6 +119,7 @@ func try_drop_schematic(position: Vector2, chance_override: float = -1.0) -> voi
 	EventBus.summon_effect.emit(schematic)
 	schematic.global_position = position
 	schematic.call(&"launch", position)
+	schematic.call(&"play_dropped_sound")
 
 func add_schematic() -> void:
 	unidentified += 1

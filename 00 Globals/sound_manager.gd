@@ -10,6 +10,13 @@ extends Node2D
 @onready var sword_slash: AudioStreamPlayer2D = $SwordSlash
 @onready var click: AudioStreamPlayer2D = $Click
 
+@export var jump_stream: AudioStream
+@export var jump_volume_db: float = -6.0
+## One is picked at random per step.
+@export var footstep_streams: Array[AudioStream] = []
+@export var footstep_volume_db: float = -14.0
+@export var click_volume_db: float = -4.0
+
 func _ready() -> void:
 	EventBus.arrow_hit_sound.connect(arrow_hit_sound)
 	EventBus.arrow_shot_sound.connect(arrow_shot_sound)
@@ -23,6 +30,8 @@ func _ready() -> void:
 	EventBus.enemy_died_sound.connect(enemy_died_sound)
 	EventBus.sword_slash_sound.connect(sword_slash_sound)
 	EventBus.play_any.connect(play_any)
+	EventBus.jump_sound.connect(jump_sound)
+	EventBus.footstep_sound.connect(footstep_sound)
 
 ## The players here are 2D and fade with distance from the camera. Events sit far from the
 ## world origin (GameWorld.event_offset), so staying at the camera keeps every sound audible.
@@ -63,12 +72,22 @@ func arrow_shot_sound() -> void:
 	_play_oneshot(arrow_shot.stream)
 
 func button_click_sound() -> void:
-	_play_oneshot(click.stream,1.0,1.0,30)
+	_play_oneshot(click.stream, 0.95, 1.05, click_volume_db)
+
+func jump_sound() -> void:
+	_play_oneshot(jump_stream, 0.95, 1.1, jump_volume_db)
+
+func footstep_sound() -> void:
+	if footstep_streams.is_empty():
+		return
+	_play_oneshot(footstep_streams.pick_random(), 0.9, 1.1, footstep_volume_db)
 
 func play_any(stream: AudioStream, pitch_min: float, pitch_max: float, volume: float) -> void:
 	_play_oneshot(stream,pitch_min, pitch_max, volume)
 	
 func _play_oneshot(stream: AudioStream, pitch_min: float = 1.0, pitch_max: float = 1.0, volume: float = 0.0) -> void:
+	if stream == null:
+		return
 	var player := AudioStreamPlayer2D.new()
 	add_child(player)
 	player.stream = stream

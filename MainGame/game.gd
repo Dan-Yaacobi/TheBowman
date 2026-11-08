@@ -24,6 +24,8 @@ var main_menu: PackedScene = MAIN_MENU
 @export var rift_music: AudioStream
 ## Boss arenas and boss events, from the moment the fight starts.
 @export var boss_music: AudioStream
+## Event scenes (golden apple, jump quest...). Boss events switch to boss_music once the fight starts.
+@export var event_music: AudioStream
 @export var music_volume_db: float = -8.0
 ## Seconds to fade out the old track and fade in the new one.
 @export var music_fade: float = 0.8
@@ -46,6 +48,7 @@ func _ready() -> void:
 	add_child(PlayerManager.player)
 	EventBus.world_ready.connect(_play_world_music)
 	EventBus.event_exited.connect(_play_world_music)
+	EventBus.event_entered.connect(_on_event_entered)
 	EventBus.boss_fight_started.connect(_on_boss_fight_started)
 
 func summon_cloud() -> void:
@@ -77,6 +80,9 @@ func _play_world_music() -> void:
 		_play_track(menu_music)
 	else:
 		_play_track(rift_music)
+
+func _on_event_entered() -> void:
+	_play_track(event_music)
 
 func _on_boss_fight_started(_boss: Boss) -> void:
 	_play_track(boss_music)

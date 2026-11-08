@@ -64,6 +64,7 @@ func _collect() -> void:
 	if _claiming:
 		return
 	_claiming = true
+	play_collected_sound()
 	Crafting.add_schematic()
 	EventBus.schematic_found.emit()
 	lifetime_timer.stop()

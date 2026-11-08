@@ -11,6 +11,12 @@ class_name Item extends Node2D
 @export var text: String
 @export var color: Color
 @export var collected_sound: AudioStream
+@export var collected_volume_db: float = -6.0
+
+@export_subgroup("Dropping")
+## Played when the item is dropped into the world (enemies, chests, rewards).
+@export var dropped_sound: AudioStream
+@export var dropped_volume_db: float = -10.0
 
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var lifetime_timer: Timer = $LifetimeTimer
@@ -74,7 +80,16 @@ func _process(delta: float) -> void:
 func extra_process_functions(_delta: float) -> void:
 	pass
 	
+func play_dropped_sound() -> void:
+	if dropped_sound:
+		EventBus.play_any.emit(dropped_sound, 0.9, 1.1, dropped_volume_db)
+
+func play_collected_sound() -> void:
+	if collected_sound:
+		EventBus.play_any.emit(collected_sound, 0.95, 1.05, collected_volume_db)
+
 func _collect() -> void:
+	play_collected_sound()
 	_player.collect_item(item_type, 1)
 	CombatTextSpawner.spawn(global_position, text, color)
 	queue_free()

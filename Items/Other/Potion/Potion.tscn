@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://y8qovflt4r3p" path="res://Items/Other/Potion/potion.gd" id="1_jnqfh"]
 [ext_resource type="Texture2D" uid="uid://xgeldnxbx2tv" path="res://Items/Other/Potion/Potion.png" id="2_jnqfh"]
+[ext_resource type="AudioStream" path="res://Audio/Items/potion_pickup.ogg" id="snd_pick"]
+[ext_resource type="AudioStream" path="res://Audio/Items/potion_drop.ogg" id="snd_drop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6rwh"]
 radius = 15.0
@@ -11,6 +13,8 @@ radius = 3.0
 
 [node name="Potion" type="Node2D" unique_id=967061751]
 script = ExtResource("1_jnqfh")
+collected_sound = ExtResource("snd_pick")
+dropped_sound = ExtResource("snd_drop")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166221354]
 position = Vector2(0, -3.9999998)

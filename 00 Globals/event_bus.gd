@@ -32,6 +32,8 @@ signal arrow_release_sound(pitch: float)
 signal object_destroyed_sound
 signal enemy_died_sound(_audio: AudioStream)
 signal sword_slash_sound()
+signal jump_sound
+signal footstep_sound
 signal play_any(_audio: AudioStream, pich_min: float, pitch_max: float, volume: float)
 
 signal dealt_bleed_damage(_amount)
@@ -109,6 +111,8 @@ signal respawn_player
 signal event_enter_requested(event_scene: PackedScene, return_position: Vector2)
 signal event_exit_requested()
 signal event_exited()
+## After the player is placed in the event scene and the event has started.
+signal event_entered()
 
 signal open_upgrade_menu
 signal upgrade_menu_closed

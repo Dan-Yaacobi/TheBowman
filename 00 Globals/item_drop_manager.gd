@@ -56,7 +56,7 @@ func _spawn_sequence(position: Vector2, count: int, _item: CustomVariables.items
 	for i in count:
 		var item: Item = item_scene.instantiate()
 		EventBus.summon_effect.emit(item)
-		EventBus.coin_drop_sound.emit()
+		item.play_dropped_sound()
 		item.global_position = position
 		var angle: float = lerp(-spread_angle * 0.5, spread_angle * 0.5, float(i) / max(count - 1, 1))
 		var dir: Vector2 = Vector2(sin(deg_to_rad(angle)), -1.0).normalized()

@@ -104,3 +104,4 @@ func jump() -> void:
 	coyote_timer = 0.0
 	player.velocity.y = -player.stats.jump_height.value()
 	jumped.emit()
+	EventBus.jump_sound.emit()

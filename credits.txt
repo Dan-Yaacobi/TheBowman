@@ -9,3 +9,53 @@ m6x11
 by Daniel Linssen (managore)
 https://managore.itch.io/m6x11
 Free to use with attribution
+
+
+MUSIC
+
+A Place I Call Home (hub / main menu) - from "JRPG Music Pack #4 [Calm]"
+by Juhani Junkala (SubspaceAudio)
+https://opengameart.org/content/jrpg-pack-4-calm
+CC0 (public domain)
+
+Preparing For Battle (events) - from "JRPG Music Pack #5 [Action]"
+by Juhani Junkala (SubspaceAudio)
+https://opengameart.org/content/jrpg-pack-5-action
+CC0 (public domain)
+
+Boss Battle Music (Epic Boss Battle)
+by Juhani Junkala (SubspaceAudio)
+https://opengameart.org/node/55649
+CC0 (public domain)
+
+Adventurer's Path (rifts)
+by vitalezzz
+https://opengameart.org/content/adventurers-path
+CC0 (public domain)
+
+
+SOUND EFFECTS
+
+50 RPG Sound Effects
+by Kenney (www.kenney.nl)
+https://opengameart.org/content/50-rpg-sound-effects
+CC0 (public domain)
+Used for: jump, footsteps, bow draw, coin / wood / color scroll / schematic sounds
+
+Interface Sounds
+by Kenney (www.kenney.nl)
+https://opengameart.org/content/interface-sounds
+CC0 (public domain)
+Used for: menu click, potion / essence / sky shard / schematic / lore item sounds
+
+Open Chest SFX
+by Oiboo
+https://opengameart.org/content/open-chest-sfx
+CC0 (public domain)
+Used for: chest opening
+
+Gem Collect SFX
+by Bobjt
+https://opengameart.org/content/gem-collect-sfx
+CC0 (public domain)
+Used for: magic essence pickup

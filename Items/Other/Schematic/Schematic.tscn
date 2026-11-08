@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://Items/Other/Schematic/schematic.gd" id="1_schem"]
 [ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="2_tex"]
+[ext_resource type="AudioStream" path="res://Audio/Items/schematic_pickup.ogg" id="snd_pick"]
+[ext_resource type="AudioStream" path="res://Audio/Items/schematic_drop.ogg" id="snd_drop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_magnet"]
 radius = 15.0
@@ -13,6 +15,8 @@ radius = 3.0
 script = ExtResource("1_schem")
 text = "Schematic!"
 color = Color(0.45, 0.75, 1, 1)
+collected_sound = ExtResource("snd_pick")
+dropped_sound = ExtResource("snd_drop")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)

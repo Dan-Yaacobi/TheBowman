@@ -43,6 +43,7 @@ func _collect() -> void:
 	if _claimed:
 		return
 	_claimed = true
+	play_collected_sound()
 	if Lore.add(lore_item):
 		EventBus.lore_item_found.emit(lore_item)
 	lifetime_timer.stop()

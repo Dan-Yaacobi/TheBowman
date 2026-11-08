@@ -10,6 +10,8 @@ class_name Chest extends GameObject
 @export var schematic_chance_override: float = -1.0
 @export var open_shake_strength: float = 1.5
 @export var open_shake_fade: float = 20.0
+@export var open_sound: AudioStream
+@export var open_volume_db: float = -4.0
 
 var _player_in_range: bool = false
 var _opened: bool = false
@@ -36,6 +38,8 @@ func open() -> void:
 	key_prompt.hide()
 	interaction_area.set_deferred(&"monitoring", false)
 	EventBus.camera_shake.emit(open_shake_strength, open_shake_fade)
+	if open_sound:
+		EventBus.play_any.emit(open_sound, 0.95, 1.05, open_volume_db)
 	animation_player.play("Open")
 
 ## Called from the "Open" animation, on the frame the chest bursts with light.

@@ -129,6 +129,7 @@ func _on_event_enter_requested(event_scene: PackedScene, return_position: Vector
 	await _place_player_and_resume(event_spawn)
 	curr_world.current_event.on_event_entered()
 	_is_transitioning = false
+	EventBus.event_entered.emit()
 
 func _on_event_exit_requested() -> void:
 	if _is_transitioning or not curr_world or not curr_world.current_event:
