@@ -1,12 +1,43 @@
+issues fixed that needs testing:
+
+elite bosses:
+
+
+	more variety and difficulty of enemies in the kill event, also scale event level with rift level
+	tune down apple elite damage
+	
+
+
+frozen orb shard around him are too small and dont fit the new artstyle. need to replace the sprite and adjust size
+
+scrolls increases for elemental needs to do more than just duration.
+
+
+
+death tally window bird boss is called Birdboss Data
+
+pink apple gets stuck in hurt animation (probably has no shooting animation), can just revert to regular animation after damaged but without touching the basis of how enemies work.
+
+
+more issues:
+
+
+apple not doing touch damage
+
+make it more obvious when a health container is gained, also when getting the third scroll pick mention it.
+
+the minor ability of after 3 perfect shot explode works when doing a perfect shot in the air, should only work if the perfect shot lands
+
+apples sometimes get stuck behind islands, probably something to do with their collision box and the way they detect islands
+
+going into boss arena made me lose a heart container
+
+in general reduce the amount of fights and increase the engagement per enemy, more health etc.
+
 add telegraph before apple ram
-increase stats menu text size
-bow hover display gets really long the first time you look at it but only happened with hunters mark?
-Vulcan shows the wrong ability
 make event portal impossible to go through unless event is over
 
 make a better looking pedestal
-
-active ability minor ability needs to be removed
 
 better looking clouds
 
@@ -16,36 +47,25 @@ golem should drop something
 
 some minor abilities don't make sense to have (like shatter on fireball bow)
 
-update cleric and pirates sprites
-
-add more tally to your death
-
 enlarge the upgrade window or go down lines
-max jump height always
 
-change equipment stat numbers to full rounded
-
-nerf echo arrows to 25%
 green apples don't have death sound effect
 
 the kill 10 apples need more variants of just "kill all enemies before time runs out" and the rift level alters which enemies can spawn
+
 limit to only 1 cleric in a rift level
 
-unlock an ability to disenchant items you don't wnat during a rift for extra resources
 different guaernteed drop from wizards
 
 equipment which cause something to stick on the target (like sticky charges quiver or stormcaller) should disappear once target is killed, and also when the wizards teleport they don't immediately teleport with them.
 
 add gold vases, but with lower priority to spawn them (probably need priority system that doesn't exist atm)
 
-crates and barrels need to drop their wood (if it drops) quicker
-
-make event bosses and wizard bosses also drop a sky shard
-
-fire ring should just make your normal dash into a fireball and not touch its range or cooldown
 equipment tiering up needs to ramp up quicker with rifts
+
 balancing:
 heart seeker is too strong
+
 
 sound and music:
 jumping sound effect

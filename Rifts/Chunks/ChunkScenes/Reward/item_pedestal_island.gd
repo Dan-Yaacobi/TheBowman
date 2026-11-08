@@ -1,8 +1,8 @@
 class_name ItemPedestalIsland extends RiftChunk
 
-@onready var pedestal_npc_3: PedestalNPC = $Island/PedestalNPC3
-@onready var pedestal_npc_2: PedestalNPC = $Island2/PedestalNPC2
-@onready var pedestal_npc: PedestalNPC = $Island3/PedestalNPC
+@onready var pedestal_npc_3: PedestalNPC = $Island4/PedestalNPC3
+@onready var pedestal_npc_2: PedestalNPC = $Island6/PedestalNPC2
+@onready var pedestal_npc: PedestalNPC = $Island7/PedestalNPC
 
 var pedestals: Array[PedestalNPC] = []
 

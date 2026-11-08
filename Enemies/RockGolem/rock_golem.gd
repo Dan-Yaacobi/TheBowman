@@ -187,10 +187,10 @@ func get_player_island() -> Island:
 	var from: Vector2 = PlayerManager.player.global_position
 	var to: Vector2 = from + Vector2(0.0, golem_data.player_ground_search_depth)
 	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(from, to, ISLAND_MASK)
-	var hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	var _hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
+	if _hit.is_empty():
 		return null
-	return hit["collider"] as Island
+	return _hit["collider"] as Island
 
 
 ## Player's x, kept inside the walkable part of the current island.
