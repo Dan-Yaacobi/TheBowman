@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://NPC/WorldSpirit/Options/talk_option.gd" id="13_talk"]
 [ext_resource type="Script" path="res://NPC/WorldSpirit/Options/schematic_option.gd" id="14_schem"]
 [ext_resource type="Script" path="res://NPC/WorldSpirit/Options/lore_option.gd" id="15_lore"]
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Options/journal_option.gd" id="16_journal"]
 
 [sub_resource type="Resource" id="Resource_data"]
 script = ExtResource("2_data")
@@ -196,3 +197,7 @@ priority = 100
 [node name="Lore" type="Node" parent="Options"]
 script = ExtResource("15_lore")
 priority = 90
+
+[node name="Journal" type="Node" parent="Options"]
+script = ExtResource("16_journal")
+priority = -10

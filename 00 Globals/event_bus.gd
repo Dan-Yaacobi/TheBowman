@@ -146,6 +146,10 @@ signal color_level_changed(color: CustomVariables.ItemColor, level: int)
 signal color_scroll_collected
 
 signal lore_item_found(item: LoreItemData)
+## Something outside the HUD (the spirit) asks for the artifact journal.
+signal artifact_journal_requested
+## The journal opened by artifact_journal_requested was closed.
+signal artifact_journal_closed
 
 # --- Run tally (death screen) ---
 ## A resource pickup was added to the player's stash.

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7f5hqch7fnns"]
 
 [ext_resource type="Script" uid="uid://cwjiukkamd1wl" path="res://HUD/pause_menu.gd" id="1_1f24j"]
+[ext_resource type="PackedScene" path="res://HUD/ArtifactJournal/ArtifactJournal.tscn" id="2_journal"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1041062043]
 process_mode = 3
@@ -69,6 +70,11 @@ text = "Resume"
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Stats"
+
+[node name="ArtifactsButton" type="Button" parent="Control/MainPanel/VBox"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "Artifacts"
 
 [node name="HowToPlayButton" type="Button" parent="Control/MainPanel/VBox" unique_id=1538382147]
 custom_minimum_size = Vector2(150, 50)
@@ -231,6 +237,10 @@ text = "Yes"
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "No"
+
+[node name="ArtifactJournal" parent="Control" instance=ExtResource("2_journal")]
+visible = false
+layout_mode = 1
 
 [node name="Feedback" type="Button" parent="Control" unique_id=458119951]
 layout_mode = 1
