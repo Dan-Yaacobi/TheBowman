@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/initiates_mask.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/InitiatesMask/Sprites/grass_mask.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/InitiatesMask/Sprites/grass_mask_empty.png" id="8_empty"]
 
-[node name="InitiatesMaskEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="InitiatesMaskEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/GrassIsland/LoreItemPickup")
+set_piece = NodePath("Islands/GrassIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -34,12 +38,14 @@ position = Vector2(-110, 70)
 [node name="GrassIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(-170, 60)
 
-[node name="Grass" type="Sprite2D" parent="Islands/GrassIsland"]
-editor_description = "Set piece, sprite TODO: Long grass. The mask lies face-down in it; the tallies only show once it's picked up."
-position = Vector2(0, -5)
+[node name="SetPiece" type="Sprite2D" parent="Islands/GrassIsland"]
+texture_filter = 1
+position = Vector2(-0.25, -16.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/GrassIsland" instance=ExtResource("5_pickup")]
-position = Vector2(5, -8)
+position = Vector2(0, -5.25)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

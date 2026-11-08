@@ -16,9 +16,9 @@ magnet_force = 200.0
 collected_sound = ExtResource("snd_pick")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.85, 0.45, 1)
+texture_filter = 1
 position = Vector2(0, -6)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_tex")
 
 [node name="MagnetArea" type="Area2D" parent="."]

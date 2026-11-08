@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/zeus_plaque.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/ZeusPlaque/Sprites/weapon_rack.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/ZeusPlaque/Sprites/weapon_rack_empty.png" id="8_empty"]
 
-[node name="ZeusPlaqueEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="ZeusPlaqueEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/RubbleIsland/LoreItemPickup")
+set_piece = NodePath("Islands/RubbleIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -34,16 +38,14 @@ position = Vector2(115, 20)
 [node name="Island4" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(170, 45)
 
-[node name="Rubble" type="Sprite2D" parent="Islands/RubbleIsland"]
-editor_description = "Set piece, sprite TODO: Rubble half-burying a broken weapon rack."
-position = Vector2(0, -5)
-
-[node name="WeaponRack" type="Sprite2D" parent="Islands/RubbleIsland"]
-editor_description = "Set piece, sprite TODO: A broken weapon rack. The plaque is bolted to it."
-position = Vector2(4, -11)
+[node name="SetPiece" type="Sprite2D" parent="Islands/RubbleIsland"]
+texture_filter = 1
+position = Vector2(0.0, -16.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/RubbleIsland" instance=ExtResource("5_pickup")]
-position = Vector2(4, -12)
+position = Vector2(0, -9.75)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

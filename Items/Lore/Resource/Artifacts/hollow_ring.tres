@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="LoreItemData" format=3]
 
 [ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/hollow_ring.png" id="4_icon"]
 [ext_resource type="Script" path="res://Items/Lore/lore_found_requirement.gd" id="2_found"]
 
 [sub_resource type="Resource" id="Resource_requires"]
@@ -11,6 +12,7 @@ ids = Array[StringName]([&"safe_passage_seal", &"muster_roll", &"pirate_appraisa
 script = ExtResource("1_data")
 id = &"hollow_ring"
 display_name = "Hollow Ring"
+icon = ExtResource("4_icon")
 pickup_line = "A beginner's ring with an empty setting."
 spirit_lines = Array[String](["It holds nothing. Why would anyone keep a failure this long?"])
 requires = SubResource("Resource_requires")

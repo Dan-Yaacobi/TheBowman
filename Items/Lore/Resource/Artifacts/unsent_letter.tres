@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="LoreItemData" format=3]
 
 [ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/unsent_letter.png" id="4_icon"]
 [ext_resource type="Script" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
 
 [sub_resource type="Resource" id="Resource_after"]
@@ -11,6 +12,7 @@ flag = &"spirit_discovery"
 script = ExtResource("1_data")
 id = &"unsent_letter"
 display_name = "Unsent Letter"
+icon = ExtResource("4_icon")
 pickup_line = "\"They say things about you. I don't believe them. Come home before the muster.\""
 spirit_lines = Array[String](["It was never sent. Creatures keep the words they mean most."])
 after_lines = Array[String](["They believed you. So did I."])

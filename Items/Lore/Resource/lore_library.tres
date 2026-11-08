@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Items/Lore/lore_library.gd" id="1_lib"]
 [ext_resource type="Script" path="res://Items/Lore/lore_item_data.gd" id="2_data"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/cracked_sigil.tres" id="3_sigil"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/house_key.tres" id="a0_house_key"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/frozen_hourglass.tres" id="a1_frozen_hourglass"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/warriors_shield.tres" id="a2_warriors_shield"]
@@ -29,4 +30,4 @@
 
 [resource]
 script = ExtResource("1_lib")
-items = Array[ExtResource("2_data")]([ExtResource("a0_house_key"), ExtResource("a1_frozen_hourglass"), ExtResource("a2_warriors_shield"), ExtResource("a3_confiscation_ledger"), ExtResource("a4_hearthstone"), ExtResource("a5_spiral_buckle"), ExtResource("a6_monastery_bell"), ExtResource("a7_unanswered_offering"), ExtResource("a8_zeus_plaque"), ExtResource("a9_defectors_staff"), ExtResource("a10_initiates_mask"), ExtResource("a11_two_needle_compass"), ExtResource("a12_wrong_accusation"), ExtResource("a13_unsent_letter"), ExtResource("a14_fletching_in_fallen_archer"), ExtResource("a15_on_thin_blood"), ExtResource("a16_scratched_portrait"), ExtResource("a17_split_practice_target"), ExtResource("a18_safe_passage_seal"), ExtResource("a19_muster_roll"), ExtResource("a20_pirate_appraisal_slip"), ExtResource("a21_first_portal_shard"), ExtResource("a22_hollow_ring"), ExtResource("a23_whittled_arrow")])
+items = Array[ExtResource("2_data")]([ExtResource("3_sigil"), ExtResource("a0_house_key"), ExtResource("a1_frozen_hourglass"), ExtResource("a2_warriors_shield"), ExtResource("a3_confiscation_ledger"), ExtResource("a4_hearthstone"), ExtResource("a5_spiral_buckle"), ExtResource("a6_monastery_bell"), ExtResource("a7_unanswered_offering"), ExtResource("a8_zeus_plaque"), ExtResource("a9_defectors_staff"), ExtResource("a10_initiates_mask"), ExtResource("a11_two_needle_compass"), ExtResource("a12_wrong_accusation"), ExtResource("a13_unsent_letter"), ExtResource("a14_fletching_in_fallen_archer"), ExtResource("a15_on_thin_blood"), ExtResource("a16_scratched_portrait"), ExtResource("a17_split_practice_target"), ExtResource("a18_safe_passage_seal"), ExtResource("a19_muster_roll"), ExtResource("a20_pirate_appraisal_slip"), ExtResource("a21_first_portal_shard"), ExtResource("a22_hollow_ring"), ExtResource("a23_whittled_arrow")])

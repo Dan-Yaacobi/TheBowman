@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/safe_passage_seal.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/SafePassageSeal/Sprites/waypoint_lantern.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/SafePassageSeal/Sprites/waypoint_lantern_empty.png" id="8_empty"]
 
-[node name="SafePassageSealEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="SafePassageSealEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/LanternIsland/LoreItemPickup")
+set_piece = NodePath("Islands/LanternIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -31,12 +35,14 @@ position = Vector2(58, 5)
 [node name="LanternIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(116, -20)
 
-[node name="WaypointLantern" type="Sprite2D" parent="Islands/LanternIsland"]
-editor_description = "Set piece, sprite TODO: A cult waypoint lantern. The seal hangs from a ribbon tied to it, swaying."
-position = Vector2(-4, -20)
+[node name="SetPiece" type="Sprite2D" parent="Islands/LanternIsland"]
+texture_filter = 1
+position = Vector2(0.25, -17.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/LanternIsland" instance=ExtResource("5_pickup")]
-position = Vector2(4, -26)
+position = Vector2(0, -11)
 lore_item = ExtResource("6_item")
-bob_speed = 1.2
-bob_height = 1.5
+bob_speed = 2.0
+bob_height = 0.0

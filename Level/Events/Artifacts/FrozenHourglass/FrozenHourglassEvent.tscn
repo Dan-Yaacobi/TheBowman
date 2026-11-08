@@ -34,8 +34,8 @@ position = Vector2(110, -20)
 [node name="HourglassIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(170, -40)
 
-[node name="Shimmer" type="Sprite2D" parent="Islands/HourglassIsland"]
-editor_description = "Set piece, sprite TODO: Faint shimmer around the hourglass. It hangs motionless in midair, sand suspended mid-fall."
+[node name="ShimmerMarker" type="Marker2D" parent="Islands/HourglassIsland"]
+editor_description = "Shimmer around the frozen hourglass (shader/particles TODO)."
 position = Vector2(0, -34)
 
 [node name="LoreItemPickup" parent="Islands/HourglassIsland" instance=ExtResource("5_pickup")]

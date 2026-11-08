@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/on_thin_blood.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/OnThinBlood/Sprites/lectern_stump.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/OnThinBlood/Sprites/lectern_stump_empty.png" id="8_empty"]
 
-[node name="OnThinBloodEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="OnThinBloodEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/LecternIsland/LoreItemPickup")
+set_piece = NodePath("Islands/LecternIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -31,16 +35,14 @@ position = Vector2(62, 10)
 [node name="LecternIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(124, -10)
 
-[node name="LecternStump" type="Sprite2D" parent="Islands/LecternIsland"]
-editor_description = "Set piece, sprite TODO: A lectern stump."
-position = Vector2(0, -10)
-
-[node name="CharredBook" type="Sprite2D" parent="Islands/LecternIsland"]
-editor_description = "Set piece, sprite TODO: A charred book resting on the lectern. Only a few pages survive."
-position = Vector2(0, -17)
+[node name="SetPiece" type="Sprite2D" parent="Islands/LecternIsland"]
+texture_filter = 1
+position = Vector2(-0.25, -16.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/LecternIsland" instance=ExtResource("5_pickup")]
-position = Vector2(0, -19)
+position = Vector2(0, -7.75)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

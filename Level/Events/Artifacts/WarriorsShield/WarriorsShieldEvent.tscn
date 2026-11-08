@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/warriors_shield.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/WarriorsShield/Sprites/cairn.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/WarriorsShield/Sprites/cairn_empty.png" id="8_empty"]
 
-[node name="WarriorsShieldEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="WarriorsShieldEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/GraveIsland/LoreItemPickup")
+set_piece = NodePath("Islands/GraveIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -31,12 +35,14 @@ position = Vector2(-60, 45)
 [node name="GraveIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(-125, 60)
 
-[node name="Cairn" type="Sprite2D" parent="Islands/GraveIsland"]
-editor_description = "Set piece, sprite TODO: A small cairn of stones, a warrior's grave marker. The shield leans against it."
-position = Vector2(-4, -9)
+[node name="SetPiece" type="Sprite2D" parent="Islands/GraveIsland"]
+texture_filter = 1
+position = Vector2(-0.75, -15.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/GraveIsland" instance=ExtResource("5_pickup")]
-position = Vector2(6, -11)
+position = Vector2(0, -8.75)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

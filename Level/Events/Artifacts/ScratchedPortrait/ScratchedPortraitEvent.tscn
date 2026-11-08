@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/scratched_portrait.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/ScratchedPortrait/Sprites/collapsed_wall.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/ScratchedPortrait/Sprites/collapsed_wall_empty.png" id="8_empty"]
 
-[node name="ScratchedPortraitEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="ScratchedPortraitEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/WallIsland/LoreItemPickup")
+set_piece = NodePath("Islands/WallIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -34,16 +38,14 @@ position = Vector2(-120, 25)
 [node name="Island4" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(-180, 40)
 
-[node name="CollapsedWall" type="Sprite2D" parent="Islands/WallIsland"]
-editor_description = "Set piece, sprite TODO: A collapsed wall."
-position = Vector2(-6, -10)
-
-[node name="Rubble" type="Sprite2D" parent="Islands/WallIsland"]
-editor_description = "Set piece, sprite TODO: Rubble. The portrait lies face-down in it, its frame cracked."
-position = Vector2(2, -4)
+[node name="SetPiece" type="Sprite2D" parent="Islands/WallIsland"]
+texture_filter = 1
+position = Vector2(-0.25, -17.0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/WallIsland" instance=ExtResource("5_pickup")]
-position = Vector2(4, -8)
+position = Vector2(0, -9)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

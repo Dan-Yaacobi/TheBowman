@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="LoreItemData" format=3]
 
 [ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/scratched_portrait.png" id="4_icon"]
 
 [resource]
 script = ExtResource("1_data")
 id = &"scratched_portrait"
 display_name = "Scratched Portrait"
+icon = ExtResource("4_icon")
 pickup_line = "A wizard family portrait. The father's face is scraped away. A boy stands at the front."
 spirit_lines = Array[String](["Creatures carve away what hurt them. I don't understand it, but I've seen it often."])

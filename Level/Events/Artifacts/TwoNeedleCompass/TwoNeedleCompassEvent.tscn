@@ -34,6 +34,10 @@ position = Vector2(115, 60)
 [node name="Island4" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(165, 15)
 
+[node name="SpinMarker" type="Marker2D" parent="."]
+editor_description = "Compass floats and spins here (shader/particles TODO)."
+position = Vector2(115, -5)
+
 [node name="LoreItemPickup" parent="." instance=ExtResource("5_pickup")]
 position = Vector2(115, -5)
 lore_item = ExtResource("6_item")

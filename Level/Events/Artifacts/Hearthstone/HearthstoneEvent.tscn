@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/hearthstone.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/Hearthstone/Sprites/campfire_ring.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/Hearthstone/Sprites/campfire_ring_empty.png" id="8_empty"]
 
-[node name="HearthstoneEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="HearthstoneEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/CampIsland/LoreItemPickup")
+set_piece = NodePath("Islands/CampIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -34,16 +38,18 @@ position = Vector2(130, 25)
 [node name="Island4" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(195, 35)
 
-[node name="CampfireRing" type="Sprite2D" parent="Islands/CampIsland"]
-editor_description = "Set piece, sprite TODO: A long-cold campfire ring full of ash. The stone rests in it."
-position = Vector2(0, -5)
+[node name="HeatShimmerMarker" type="Marker2D" parent="Islands/CampIsland"]
+editor_description = "Heat shimmer above the hearthstone (shader/particles TODO)."
+position = Vector2(0, -14)
 
-[node name="HeatShimmer" type="Sprite2D" parent="Islands/CampIsland"]
-editor_description = "Set piece, sprite TODO: A faint heat shimmer above the stone, the only warm thing here."
-position = Vector2(0, -18)
+[node name="SetPiece" type="Sprite2D" parent="Islands/CampIsland"]
+texture_filter = 1
+position = Vector2(0.0, -13.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/CampIsland" instance=ExtResource("5_pickup")]
-position = Vector2(0, -9)
+position = Vector2(0, -5.25)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0

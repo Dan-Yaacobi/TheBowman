@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/spiral_buckle.tres" id="6_item"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/SpiralBuckle/Sprites/dead_branch.png" id="7_full"]
+[ext_resource type="Texture2D" path="res://Level/Events/Artifacts/SpiralBuckle/Sprites/dead_branch_empty.png" id="8_empty"]
 
-[node name="SpiralBuckleEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
+[node name="SpiralBuckleEvent" type="Node2D" node_paths=PackedStringArray("pickup", "set_piece")]
 script = ExtResource("1_event")
 pickup = NodePath("Islands/EdgeIsland/LoreItemPickup")
+set_piece = NodePath("Islands/EdgeIsland/SetPiece")
+empty_texture = ExtResource("8_empty")
 
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(0, -20)
@@ -31,16 +35,14 @@ position = Vector2(60, 20)
 [node name="EdgeIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(125, 10)
 
-[node name="DeadBranch" type="Sprite2D" parent="Islands/EdgeIsland"]
-editor_description = "Set piece, sprite TODO: A dead branch at the island's edge, reaching out over the void."
-position = Vector2(20, -14)
-
-[node name="QuiverStrap" type="Sprite2D" parent="Islands/EdgeIsland"]
-editor_description = "Set piece, sprite TODO: A torn quiver strap snagged on the branch. The buckle is still attached."
-position = Vector2(24, -12)
+[node name="SetPiece" type="Sprite2D" parent="Islands/EdgeIsland"]
+texture_filter = 1
+position = Vector2(11.25, -17.0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_full")
 
 [node name="LoreItemPickup" parent="Islands/EdgeIsland" instance=ExtResource("5_pickup")]
-position = Vector2(24, -14)
+position = Vector2(12, -10)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0
