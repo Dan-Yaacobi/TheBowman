@@ -9,8 +9,9 @@ const ATTACK_ANIMATION: StringName = &"Attack"
 const PLAYER_COLLISION_LAYER: int = 1
 
 @export var trigger_distance: float = 80.0
-@export var windup_time: float = 0.25
-@export var windup_pullback_speed: float = 40.0
+@export var windup_time: float = 0.4
+## Pull-back telegraph before the charge: about speed * time / 2 pixels.
+@export var windup_pullback_speed: float = 90.0
 @export var charge_speed: float = 220.0
 ## Charge stops after this long if it misses.
 @export var max_charge_time: float = 0.5
