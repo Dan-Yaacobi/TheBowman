@@ -146,6 +146,10 @@ signal color_level_changed(color: CustomVariables.ItemColor, level: int)
 signal color_scroll_collected
 
 signal lore_item_found(item: LoreItemData)
+## The player interacted with a lore item in the world; the HUD shows it with a pick up button.
+signal lore_item_inspected(item: LoreItemData)
+## The player chose to pick up the inspected lore item.
+signal lore_item_pickup_confirmed(item: LoreItemData)
 ## Something outside the HUD (the spirit) asks for the artifact journal.
 signal artifact_journal_requested
 ## The journal opened by artifact_journal_requested was closed.

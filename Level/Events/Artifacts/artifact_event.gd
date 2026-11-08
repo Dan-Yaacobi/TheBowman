@@ -21,6 +21,9 @@ func _ready() -> void:
 		_empty_set_piece()
 	elif set_piece:
 		pickup.sprite.visible = false
+		# Key prompt above the scenery rather than inside it.
+		var prompt: Control = pickup.key_prompt
+		prompt.global_position.y = set_piece.global_position.y - set_piece.texture.get_height() * set_piece.scale.y * 0.5 - 4.0
 	# Islands here set the respawn point when landed on, which can happen before
 	# on_event_entered. Keep the rift's now, while the player hasn't arrived yet.
 	_world = get_parent() as GameWorld

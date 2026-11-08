@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://Items/Lore/lore_item_pickup.gd" id="1_lore"]
 [ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="2_tex"]
 [ext_resource type="AudioStream" path="res://Audio/Items/lore_item_pickup.ogg" id="snd_pick"]
+[ext_resource type="PackedScene" uid="uid://cnbkaef1d5h88" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_key"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_magnet"]
-radius = 15.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_land"]
 radius = 3.0
@@ -38,6 +39,13 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LandingDetector"]
 shape = SubResource("CircleShape2D_land")
+
+[node name="KeyboardPressHelper" parent="." instance=ExtResource("4_key")]
+offset_left = -8.0
+offset_top = -30.0
+offset_right = -8.0
+offset_bottom = -30.0
+scale = Vector2(0.5, 0.5)
 
 [connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]
 [connection signal="body_exited" from="MagnetArea" to="." method="_on_magnet_area_body_exited"]

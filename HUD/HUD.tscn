@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" path="res://HUD/ColorLevels/ColorLevelsHud.tscn" id="22_clhud"]
 [ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/CraftMenu.tscn" id="24_craft"]
-[ext_resource type="PackedScene" path="res://HUD/LoreToast/LoreToast.tscn" id="25_loretoast"]
+[ext_resource type="PackedScene" path="res://HUD/ArtifactPickupWindow/ArtifactPickupWindow.tscn" id="25_artwin"]
 [ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="26_ds_coin"]
 [ext_resource type="Texture2D" uid="uid://xgeldnxbx2tv" path="res://Items/Other/Potion/Potion.png" id="27_ds_potion"]
 [ext_resource type="Texture2D" uid="uid://buh16w0ltsbsq" path="res://Items/Other/Magic Essence/MagicEssence.png" id="28_ds_ess"]
@@ -491,6 +491,9 @@ flip_v = true
 
 [node name="ColorScrollPicker" parent="." unique_id=1836766117 instance=ExtResource("23_cspick")]
 
-[node name="LoreToast" parent="." instance=ExtResource("25_loretoast")]
+[node name="ArtifactPickupLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ArtifactPickupWindow" parent="ArtifactPickupLayer" instance=ExtResource("25_artwin")]
 
 [connection signal="pressed" from="DeathScreen/Margin/Layout/Button" to="DeathScreen" method="_on_button_pressed"]

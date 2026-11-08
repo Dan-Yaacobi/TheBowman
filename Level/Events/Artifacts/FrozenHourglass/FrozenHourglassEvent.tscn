@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_fall"]
 [ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="5_pickup"]
 [ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/frozen_hourglass.tres" id="6_item"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/FrozenHourglass/HourglassFrostEffect.tscn" id="9_fx"]
 
 [node name="FrozenHourglassEvent" type="Node2D" node_paths=PackedStringArray("pickup")]
 script = ExtResource("1_event")
@@ -34,12 +35,11 @@ position = Vector2(110, -20)
 [node name="HourglassIsland" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(170, -40)
 
-[node name="ShimmerMarker" type="Marker2D" parent="Islands/HourglassIsland"]
-editor_description = "Shimmer around the frozen hourglass (shader/particles TODO)."
-position = Vector2(0, -34)
-
 [node name="LoreItemPickup" parent="Islands/HourglassIsland" instance=ExtResource("5_pickup")]
 position = Vector2(0, -34)
 lore_item = ExtResource("6_item")
 bob_speed = 2.0
 bob_height = 0.0
+
+[node name="Effect" parent="Islands/HourglassIsland/LoreItemPickup" instance=ExtResource("9_fx")]
+position = Vector2(0, -6)
