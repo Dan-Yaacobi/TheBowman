@@ -29,4 +29,5 @@ touch_damage = 3
 knockback_decay = 0.1
 capture_immune = true
 death_ability = Array[ExtResource("1_abil")]([SubResource("Resource_death")])
-drop_chance = 50.0
+drop_chance = 100.0
+schematic_chance_override = 5.0

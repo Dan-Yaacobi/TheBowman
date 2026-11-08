@@ -1,8 +1,8 @@
 class_name HeartseekerAbility extends PlayerAbility
 ## Perfect shots deal bonus damage based on the enemy's missing health.
 
-## Bonus damage at (almost) zero health: 1.0 = +100%. Scales down linearly with the health left.
-@export var max_bonus: float = 1.0
+## Bonus damage at (almost) zero health: 0.5 = +50%. Scales down linearly with the health left.
+@export var max_bonus: float = 0.5
 ## Bonus above this also bursts red sparks on the enemy.
 @export var spark_threshold: float = 0.3
 

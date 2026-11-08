@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8eo58w0pxihw"]
 
 [ext_resource type="Script" uid="uid://dsj4ljnl7t4ar" path="res://Enemies/WizardBoss/wizard_boss.gd" id="1_0ii0y"]
-[ext_resource type="Resource" uid="uid://cbrr0ymuvad2w" path="res://Items/Equipments/Bows/Resource/fireball_bow.tres" id="2_6c8ac"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Winter.tres" id="2_6c8ac"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="3_rwvie"]
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="4_dqkua"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="5_nuuj8"]
