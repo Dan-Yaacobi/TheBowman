@@ -23,6 +23,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Info" type="VBoxContainer" parent="HBoxContainer" unique_id=1361813191]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="HBoxContainer/Info" unique_id=53443166]
@@ -38,6 +39,7 @@ theme_type_variation = &"DimLabel"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+1 Arrow Damage"
+autowrap_mode = 3
 
 [node name="CostBox" type="HBoxContainer" parent="HBoxContainer" unique_id=1344951587]
 layout_mode = 2
