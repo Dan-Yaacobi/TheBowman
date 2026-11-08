@@ -13,6 +13,10 @@ func _gamble() -> void:
 		buying = true
 		if PlayerManager.player.buy(gamble_cost, CustomVariables.items.COIN):
 			EventBus.try_drop.emit(global_position,100,1.0)
+			play_one_shot("action")
 			show_post_action_line()
 			action_taken = true
 		buying = false
+
+func on_interaction_opened() -> void:
+	play_one_shot("interacted")

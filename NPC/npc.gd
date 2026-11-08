@@ -15,6 +15,7 @@ signal disappear
 var action_taken: bool = false
 var facing_direction: int = 1
 var chat_box: ChatBox
+var _one_shot_playing: bool = false
 
 func face_the_player() -> void:
 	if not data.idle and sprite:
@@ -40,6 +41,7 @@ func _process(_delta: float) -> void:
 func _setup_animation() -> void:
 	if animation_player == null:
 		return
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 	if chat_box:
 		chat_box.typing_started.connect(_play_animation.bind("talk"))
 		chat_box.typing_finished.connect(_play_animation.bind("idle"))
@@ -47,12 +49,27 @@ func _setup_animation() -> void:
 
 ## Keeps the playback position so shared tracks (e.g. a float) don't snap when switching.
 func _play_animation(anim_name: String) -> void:
-	if not animation_player.has_animation(anim_name):
+	if _one_shot_playing or not animation_player.has_animation(anim_name):
 		return
 	var position_before: float = animation_player.current_animation_position if animation_player.is_playing() else 0.0
 	animation_player.play(anim_name)
 	var length: float = animation_player.get_animation(anim_name).length
 	animation_player.seek(fmod(position_before, length), true)
+
+## Plays a non-looping animation from its first frame, then returns to "idle".
+## Chat-driven animation switches are ignored until it finishes.
+func play_one_shot(anim_name: String) -> void:
+	if animation_player == null or not animation_player.has_animation(anim_name):
+		return
+	_one_shot_playing = true
+	animation_player.stop()
+	animation_player.play(anim_name)
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	if not _one_shot_playing:
+		return
+	_one_shot_playing = false
+	_play_animation("idle")
 
 func extra_process_function(_delta: float) -> void:
 	pass

@@ -14,7 +14,10 @@ func _bless() -> void:
 		buying = true
 		if PlayerManager.player.buy(bless_cost,CustomVariables.items.COIN):
 			PlayerManager.player.increase_max_hp(true)
+			play_one_shot("action")
 			show_post_action_line()
 			action_taken = true
 		buying = false
-		
+
+func on_interaction_opened() -> void:
+	play_one_shot("interacted")
