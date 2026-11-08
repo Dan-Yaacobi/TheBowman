@@ -203,7 +203,7 @@ Gaps are acceptable. The story doesn't need to explain everything for the game t
 
 **Kill reward:** a decent pile of gold plus one equipment piece: guaranteed Epic, with a chance to roll Legendary instead. Rewards spawn by the exit portal so gear never lands out over the void.
 
-**Exit:** the exit portal is available the whole time, so the player can walk away. [DRAFT]
+**Exit:** the exit portal is locked (dimmed) until the chase ends, caught or escaped. [DRAFT]
 
 **Placeholders (tune in playtesting):** time limit, gold per hit, kill gold, Legendary chance, movement speeds, hover duration.
 

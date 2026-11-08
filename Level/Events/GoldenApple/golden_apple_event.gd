@@ -1,7 +1,7 @@
 class_name GoldenAppleEvent extends Event
 
 ## Snitch-style chase: hit the golden apple 5 times before time runs out.
-## When time runs out it escapes. The exit portal is available the whole time.
+## When time runs out it escapes. The exit portal is locked until the chase ends.
 ## Kill rewards spawn by the exit portal, so gear never lands out over the void.
 
 const TITLE_TEXT: String = "Golden Apple"
@@ -49,6 +49,7 @@ func _start_chase() -> void:
 		return
 	golden_apple.died.connect(_on_golden_apple_died, CONNECT_ONE_SHOT)
 	_chasing = true
+	exit_portal.set_locked(true)
 	_time_left = chase_duration
 	hud.show_title(TITLE_TEXT)
 	hud.on_challenge_started()
@@ -73,6 +74,7 @@ func _end_chase(caught: bool) -> void:
 		return
 	_chasing = false
 	set_process(false)
+	exit_portal.set_locked(false)
 	hud.show_result(caught, CAUGHT_TEXT if caught else ESCAPED_TEXT)
 	report_finished(caught)
 

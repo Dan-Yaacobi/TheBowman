@@ -6,11 +6,15 @@ class_name EventPortal extends Node2D
 @export var vanish_duration: float = 1.0
 @export var float_height: float = 4.0
 @export var float_duration: float = 1.5
+## Tint while locked (an event is still running).
+@export var locked_modulate: Color = Color(0.35, 0.35, 0.4, 0.6)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var can_enter: bool = false
 var is_used: bool = false
+## Locked portals can't be entered. Events lock their exit portal while they run.
+var is_locked: bool = false
 
 func _ready() -> void:
 	animated_sprite_2d.play("default")
@@ -25,9 +29,13 @@ func _start_floating() -> void:
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("up") and can_enter and not is_used:
+	if event.is_action_pressed("up") and can_enter and not is_used and not is_locked:
 		get_viewport().set_input_as_handled()
 		teleport_player()
+
+func set_locked(locked: bool) -> void:
+	is_locked = locked
+	modulate = locked_modulate if locked else Color.WHITE
 
 func teleport_player() -> void:
 	EventBus.portal_entered_sound.emit()

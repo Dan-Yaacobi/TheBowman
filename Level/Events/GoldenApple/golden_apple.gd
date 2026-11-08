@@ -32,6 +32,8 @@ const HIT_ANIMATION: StringName = &"Hit"
 ## Per hit taken: +this fraction of speed, hovers shortened by the same factor,
 ## and one more dart candidate sampled (it picks the one farthest from the player).
 @export var difficulty_per_hit: float = 0.15
+## Starting difficulty bonus per rift level above 1 (same units as difficulty_per_hit).
+@export var difficulty_per_level: float = 0.05
 ## After a hit it blinks and arrows pass through for this long.
 @export var hit_immunity_duration: float = 2.0
 @export var immunity_blink_interval: float = 0.1
@@ -139,7 +141,7 @@ func hits_taken() -> int:
 	return stats.max_hp - current_hp
 
 func difficulty() -> float:
-	return 1.0 + difficulty_per_hit * hits_taken()
+	return 1.0 + difficulty_per_hit * hits_taken() + difficulty_per_level * (Event.current_rift_level() - 1)
 
 func flight_speed() -> float:
 	return stats.move_speed.value() * difficulty()

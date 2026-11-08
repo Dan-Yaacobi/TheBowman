@@ -17,3 +17,25 @@ class_name ChallengeDef extends Resource
 @export var modifiers: Array[ChallengeModifier] = []
 ## Curses the shrine can offer.
 @export var curse_pool: Array[ChallengeCurse] = []
+
+@export_group("Rift Level Scaling")
+## Extra enemies allowed alive at once, per rift level above 1.
+@export var max_alive_per_level: float = 0.5
+## Spawn interval shrinks by this fraction per rift level above 1.
+@export_range(0.0, 0.2) var interval_drop_per_level: float = 0.06
+@export var min_spawn_interval: float = 0.6
+
+## Pool entries unlocked at this rift level. max_level is ignored so the roster keeps growing
+## with the rift instead of swapping out. Falls back to the whole pool if nothing qualifies.
+func get_pool_for_level(level: int) -> Array[EnemyEntry]:
+	var pool: Array[EnemyEntry] = enemy_pool.filter(
+		func(e: EnemyEntry) -> bool: return e.min_level <= level
+	)
+	return pool if not pool.is_empty() else enemy_pool
+
+func get_max_alive(level: int) -> int:
+	return max_alive + floori(max_alive_per_level * maxi(level - 1, 0))
+
+func get_spawn_interval(level: int) -> float:
+	var scaled: float = spawn_interval * (1.0 - interval_drop_per_level * maxi(level - 1, 0))
+	return maxf(scaled, min_spawn_interval)

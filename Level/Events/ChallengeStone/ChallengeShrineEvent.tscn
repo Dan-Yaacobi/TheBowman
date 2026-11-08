@@ -22,6 +22,14 @@
 [ext_resource type="Script" uid="uid://dba23xg5cr0bo" path="res://Level/Events/Rewards/random_item_reward.gd" id="13_yp28l"]
 [ext_resource type="Script" uid="uid://c06t2awg17dkp" path="res://Level/Events/Rewards/equipment_reward.gd" id="14_3daku"]
 [ext_resource type="PackedScene" uid="uid://cguqidpw51pcn" path="res://Level/Events/ChallengeStone/Curses/CursePicker.tscn" id="14_rknkn"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/pink_apple_entry.tres" id="kill_pink_apple"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/green_apple_entry.tres" id="kill_green_apple"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/evil_bird_entry.tres" id="kill_evil_bird"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/frost_bird_entry.tres" id="kill_frost_bird"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/frost_orb_entry.tres" id="kill_frost_orb"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/fire_bird_entry.tres" id="kill_fire_bird"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/flaming_skull_entry.tres" id="kill_flaming_skull"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="kill_black_spider"]
 
 [sub_resource type="Resource" id="Resource_yemt6"]
 script = ExtResource("12_yemt6")
@@ -73,11 +81,11 @@ metadata/_custom_type_script = "uid://c06t2awg17dkp"
 
 [sub_resource type="Resource" id="Resource_5lv0r"]
 script = ExtResource("2_pdae7")
-display_name = "Kill 10 apples"
-description = "Kill 10 apples before the timer runs out"
+display_name = "Kill 10 enemies"
+description = "Kill 10 enemies before the timer runs out"
 goal = ExtResource("6_rknkn")
 rewards = Array[ExtResource("8_rknkn")]([SubResource("Resource_yemt6"), SubResource("Resource_yp28l"), SubResource("Resource_32gdo"), SubResource("Resource_hl8p6")])
-enemy_pool = Array[ExtResource("4_1igmo")]([ExtResource("5_a4nvr")])
+enemy_pool = Array[ExtResource("4_1igmo")]([ExtResource("5_a4nvr"), ExtResource("kill_pink_apple"), ExtResource("kill_green_apple"), ExtResource("kill_evil_bird"), ExtResource("kill_frost_bird"), ExtResource("kill_frost_orb"), ExtResource("kill_fire_bird"), ExtResource("kill_flaming_skull"), ExtResource("kill_black_spider")])
 curse_pool = Array[ExtResource("3_a4nvr")]([ExtResource("4_jcsjr"), ExtResource("5_84n7e"), ExtResource("6_fqvne"), ExtResource("7_yp28l")])
 metadata/_custom_type_script = "uid://02y3s3xcuf5r"
 

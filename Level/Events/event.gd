@@ -15,6 +15,12 @@ func spawn_rewards(at_position: Vector2, weight: int = 0, reward_list: Array[Eve
 	var start_x: float = -reward_spacing * (eligible.size() - 1) * 0.5
 	for i: int in eligible.size():
 		eligible[i].spawn(at_position + Vector2(start_x + reward_spacing * i, 0.0))
+## Rift level the event was entered from (at least 1). Events scale their difficulty with it.
+static func current_rift_level() -> int:
+	if PlayerManager.player == null:
+		return 1
+	return maxi(PlayerManager.player.stats.rift_level, 1)
+
 func get_event_spawn() -> Vector2:
 	return spawn_marker.global_position
 

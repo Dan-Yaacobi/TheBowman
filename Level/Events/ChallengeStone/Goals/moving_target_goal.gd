@@ -7,6 +7,8 @@ class_name MovingTargetGoal extends ChallengeGoal
 @export var speed_per_hit: float = 20.0
 ## Random +/- percent added to each target's speed.
 @export var speed_variance: float = 10.0
+## Extra percent speed for every target, per rift level above 1.
+@export var speed_per_level: float = 8.0
 
 var _challenge: MovingTargetEvent  # new
 var _routes: Array[TargetRoute] = []
@@ -81,7 +83,8 @@ func _spawn_next() -> void:
 
 	target.start_position = from
 	target.end_position = to
-	var speed_percent: float = speed_per_hit * _hits + randf_range(-speed_variance, speed_variance)
+	var level_bonus: float = speed_per_level * (Event.current_rift_level() - 1)
+	var speed_percent: float = speed_per_hit * _hits + level_bonus + randf_range(-speed_variance, speed_variance)
 	target.stats.move_speed.add_buff(get_instance_id(), speed_percent / 100.0, Stat.buff_type.MULTIPLICATIVE)
 	_current = target
 

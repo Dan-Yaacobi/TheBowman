@@ -42,6 +42,7 @@ func start_challenge(curses: Array[ChallengeCurse]) -> void:
 	if is_running or is_finished or challenge == null:
 		return
 	is_running = true
+	exit_portal.set_locked(true)
 	shrine.action_taken = true
 	shrine.end_interaction()
 	
@@ -63,7 +64,8 @@ func start_challenge(curses: Array[ChallengeCurse]) -> void:
 	spawner.enemy_created.connect(_on_enemy_created)
 	EventBus.enemy_died.connect(_on_enemy_died)
 	if goal.uses_continuous_spawn():
-		spawner.start_continuous(challenge.enemy_pool, challenge.spawn_interval, challenge.max_alive)
+		var level: int = current_rift_level()
+		spawner.start_continuous(challenge.get_pool_for_level(level), challenge.get_spawn_interval(level), challenge.get_max_alive(level))
 	goal.start(self)
 	challenge_started.emit()
 	hud.show_challenge(challenge)
@@ -85,6 +87,7 @@ func _finish(success: bool) -> void:
 		return
 	is_running = false
 	is_finished = true
+	exit_portal.set_locked(false)
 	if spawner.enemy_created.is_connected(_on_enemy_created):
 		spawner.enemy_created.disconnect(_on_enemy_created)
 		
