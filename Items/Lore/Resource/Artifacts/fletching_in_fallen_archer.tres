@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/fletching_in_fallen_archer.png" id="4_icon"]
+[ext_resource type="Script" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
+
+[sub_resource type="Resource" id="Resource_after"]
+script = ExtResource("3_flag")
+flag = &"spirit_discovery"
+
+[resource]
+script = ExtResource("1_data")
+id = &"fletching_in_fallen_archer"
+display_name = "Fletching in a Fallen Archer"
+icon = ExtResource("4_icon")
+pickup_line = "An arrow with three-colour fletching. The style looks familiar."
+spirit_lines = Array[String](["An archer's arrow inside an archer. The wicked used your own weapons against you."])
+after_lines = Array[String](["Your arrows. In your people."])
+after_requires = SubResource("Resource_after")

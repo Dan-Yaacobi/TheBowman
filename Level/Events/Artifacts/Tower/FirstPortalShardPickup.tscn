@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://Items/Lore/LoreItemPickup.tscn" id="1_pickup"]
+[ext_resource type="Resource" path="res://Items/Lore/Resource/Artifacts/first_portal_shard.tres" id="2_item"]
+[ext_resource type="PackedScene" path="res://Level/Events/Artifacts/Tower/PortalShardEffect.tscn" id="3_fx"]
+
+[node name="FirstPortalShardPickup" instance=ExtResource("1_pickup")]
+lore_item = ExtResource("2_item")
+bob_speed = 1.2
+bob_height = 2.0
+
+[node name="Effect" parent="." instance=ExtResource("3_fx")]
+position = Vector2(0, -6)

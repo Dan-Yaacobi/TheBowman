@@ -4,6 +4,7 @@ class_name PauseMenu extends CanvasLayer
 @onready var main_panel: Control = $Control/MainPanel
 @onready var resume_button: Button = $Control/MainPanel/VBox/ResumeButton
 @onready var stats_button: Button = $Control/MainPanel/VBox/StatsButton
+@onready var artifacts_button: Button = $Control/MainPanel/VBox/ArtifactsButton
 @onready var how_to_play_button: Button = $Control/MainPanel/VBox/HowToPlayButton
 @onready var settings_button: Button = $Control/MainPanel/VBox/SettingsButton
 @onready var restart_button: Button = $Control/MainPanel/VBox/RestartButton
@@ -11,6 +12,10 @@ class_name PauseMenu extends CanvasLayer
 # --- How To Play panel ---
 @onready var how_to_play_panel: Control = $Control/HowToPlayPanel
 @onready var how_to_play_back: Button = $Control/HowToPlayPanel/VBox/BackButton
+
+# --- Artifact journal ---
+@onready var artifact_journal: ArtifactJournal = $Control/ArtifactJournal
+@onready var feedback_button: Button = $Control/Feedback
 
 # --- Settings panel ---
 @onready var settings_panel: Control = $Control/SettingsPanel
@@ -26,10 +31,12 @@ class_name PauseMenu extends CanvasLayer
 
 # ---
 
-enum PauseState { CLOSED, MAIN, HOW_TO_PLAY, SETTINGS, RESTART_CONFIRM }
+enum PauseState { CLOSED, MAIN, HOW_TO_PLAY, SETTINGS, RESTART_CONFIRM, JOURNAL }
 
 var _state: PauseState = PauseState.CLOSED
 var _equipment_menu: EquipmentMenu
+## The journal was opened by the spirit: Back closes the menu instead of returning to MAIN.
+var _journal_requested: bool = false
 
 
 func setup(equipment_menu: EquipmentMenu) -> void:
@@ -40,6 +47,9 @@ func _ready() -> void:
 	resume_button.pressed.connect(_close)
 	stats_button.pressed.connect(_open_stats)
 	how_to_play_button.pressed.connect(_set_state.bind(PauseState.HOW_TO_PLAY))
+	artifacts_button.pressed.connect(_set_state.bind(PauseState.JOURNAL))
+	artifact_journal.closed.connect(_on_artifact_journal_closed)
+	EventBus.artifact_journal_requested.connect(_on_event_bus_artifact_journal_requested)
 	settings_button.pressed.connect(_set_state.bind(PauseState.SETTINGS))
 	restart_button.pressed.connect(_set_state.bind(PauseState.RESTART_CONFIRM))
 	restart_yes.pressed.connect(_on_restart_yes_pressed)
@@ -67,6 +77,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_close()
 		PauseState.HOW_TO_PLAY, PauseState.SETTINGS, PauseState.RESTART_CONFIRM:
 			_set_state(PauseState.MAIN)
+		PauseState.JOURNAL:
+			_on_artifact_journal_closed()
 
 	get_viewport().set_input_as_handled()
 
@@ -78,6 +90,8 @@ func _set_state(new_state: PauseState) -> void:
 	how_to_play_panel.visible = (_state == PauseState.HOW_TO_PLAY)
 	settings_panel.visible = (_state == PauseState.SETTINGS)
 	restart_confirm_panel.visible = (_state == PauseState.RESTART_CONFIRM)
+	artifact_journal.visible = (_state == PauseState.JOURNAL)
+	feedback_button.visible = (_state != PauseState.JOURNAL)
 
 	var is_open: bool = (_state != PauseState.CLOSED)
 	visible = is_open
@@ -85,6 +99,8 @@ func _set_state(new_state: PauseState) -> void:
 
 	if _state == PauseState.SETTINGS:
 		_sync_settings_ui()
+	if _state == PauseState.JOURNAL:
+		artifact_journal.refresh()
 	if _state == PauseState.MAIN:
 		# Only offered during a run; in the hub there is nothing to abandon.
 		restart_button.visible = not PlayerManager.player.get_parent() is MainMenu
@@ -92,6 +108,21 @@ func _set_state(new_state: PauseState) -> void:
 
 func _close() -> void:
 	_set_state(PauseState.CLOSED)
+
+
+func _on_event_bus_artifact_journal_requested() -> void:
+	_equipment_menu.close()
+	_journal_requested = true
+	_set_state(PauseState.JOURNAL)
+
+
+func _on_artifact_journal_closed() -> void:
+	if _journal_requested:
+		_journal_requested = false
+		_close()
+		EventBus.artifact_journal_closed.emit()
+	else:
+		_set_state(PauseState.MAIN)
 
 
 ## Ends the run through the regular death flow (same as dying).

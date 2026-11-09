@@ -1,0 +1,18 @@
+final wizard boss fight:
+it rotates between 2 different elemental portals, reusing abilities from previous wizards. every phase change replaces the two portals he is using and also uses a chaos portal to transition which sucks everything in including the player and spits out island but in a different formation than before and less in amount.
+
+lore items
+
+campaign quests from world spirit.
+
+
+snow world enemy roster:
+
+Frost orb: mobile aimed shooter, shielded (exists)
+Hail cloud: targeted overhead, slows (exists, needs some re work)
+Frost golem: melee knockback (exists as rock golem just needs a reskin art)
+Frozen pine tree: stationary turret, island denial, throws pines at you and attempts to swipe when you are in its physical range(needs full implementation)
+Snowflake swarm: rammer fodder, spawn as a group of 4 to 6, they fly together in a circle and when nearby the player one of them at a time attempts to ram the player while they keep orbiting.(needs full implementation)
+
+
+

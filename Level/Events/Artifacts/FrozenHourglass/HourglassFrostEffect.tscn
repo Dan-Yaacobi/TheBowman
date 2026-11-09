@@ -1,0 +1,105 @@
+[gd_scene format=3]
+
+[sub_resource type="Gradient" id="Gradient_glow"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.7, 0.9, 1.0, 0.55, 0.7, 0.9, 1.0, 0.193, 0.7, 0.9, 1.0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
+gradient = SubResource("Gradient_glow")
+width = 40
+height = 40
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_pulse"]
+resource_name = "pulse"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glow:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.0),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.55), Color(1, 1, 1, 1.0), Color(1, 1, 1, 0.55)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glow:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.0),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.95, 0.95), Vector2(1.05, 1.05), Vector2(0.95, 0.95)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fx"]
+_data = {
+&"pulse": SubResource("Animation_pulse")
+}
+
+[sub_resource type="Gradient" id="Gradient_p0"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.93, 0.85, 0.62, 0, 0.93, 0.85, 0.62, 1, 0.93, 0.85, 0.62, 1, 0.93, 0.85, 0.62, 0)
+
+[sub_resource type="Gradient" id="Gradient_p1"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(0.85, 0.97, 1, 0, 1, 1, 1, 1, 0.8, 0.95, 1, 0)
+
+[node name="HourglassFrostEffect" type="Node2D"]
+
+[node name="Glow" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_add")
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="FrozenSand" type="CPUParticles2D" parent="."]
+z_index = 0
+position = Vector2(0, 0)
+amount = 12
+lifetime = 4.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 14.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0.0)
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+scale_amount_min = 1.0
+scale_amount_max = 1.0
+color_ramp = SubResource("Gradient_p0")
+preprocess = 4.0
+
+[node name="FrostGlints" type="CPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("CanvasItemMaterial_add")
+position = Vector2(0, 0)
+amount = 5
+lifetime = 1.4
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 12.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0.0)
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_p1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("AnimationLibrary_fx")
+autoplay = "pulse"

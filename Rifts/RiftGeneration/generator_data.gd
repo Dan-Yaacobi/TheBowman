@@ -9,6 +9,9 @@ class_name GeneratorData extends Resource
 
 @export_subgroup("Events")
 @export var event_pool: Array[PackedScene] = []
+## Adds one "artifact event" slot to the pool, rolled like any other event while the current
+## artifact batch has something left to find. Which artifact appears is rolled from that batch.
+@export var artifact_catalog: ArtifactCatalog
 @export_range(0.0, 1.0) var event_chance: float = 0.5
 @export var event_skip_start_chunks: int = 2
 @export var event_skip_end_chunks: int = 2

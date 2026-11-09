@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LoreItemData" format=3]
+
+[ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
+[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/spiral_buckle.png" id="4_icon"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"spiral_buckle"
+display_name = "Spiral Buckle"
+icon = ExtResource("4_icon")
+pickup_line = "A brass quiver buckle, a small spiral engraved near the pin."
+spirit_lines = Array[String](["A maker leaves a mark the way a river leaves a bend. I don't know this maker yet."])

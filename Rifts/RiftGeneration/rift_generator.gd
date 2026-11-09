@@ -279,7 +279,9 @@ func reset() -> void:
 
 func place_event_portal() -> void:
 	_event_portal_island = null
-	if data.event_pool.is_empty() or rng.randf() > data.event_chance:
+	var has_artifact: bool = data.artifact_catalog != null and data.artifact_catalog.has_rift_event()
+	var pool_size: int = data.event_pool.size() + (1 if has_artifact else 0)
+	if pool_size == 0 or rng.randf() > data.event_chance:
 		return
 	
 	var last_index: int = main_path_chunks.size() - data.event_skip_end_chunks
@@ -296,10 +298,17 @@ func place_event_portal() -> void:
 	var island: Island = chunk.islands[rng.randi_range(0, chunk.islands.size() - 1)]
 
 	var portal: EventPortal = event_portal_scene.instantiate()
-	portal.event_scene = data.event_pool[rng.randi_range(0, data.event_pool.size() - 1)]
+	portal.event_scene = _roll_event_scene(pool_size)
 	rift_level.add_child(portal)
 	portal.global_position = island.get_event_portal_position()
 	_event_portal_island = island
+
+## The artifact event takes the slot after the regular pool.
+func _roll_event_scene(pool_size: int) -> PackedScene:
+	var index: int = rng.randi_range(0, pool_size - 1)
+	if index < data.event_pool.size():
+		return data.event_pool[index]
+	return data.artifact_catalog.roll_event(rng)
 
 ## Puts scroll pedestals on distinct random islands of placed traversal chunks (main and side paths).
 ## Islands without game objects are preferred; the event portal's island is skipped.
