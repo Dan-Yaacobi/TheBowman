@@ -100,6 +100,10 @@ signal enemy_stunned(_enemy: Enemy)
 signal enemy_frostbitten_hit(_enemy: Enemy)
 
 signal player_died(_death_screen: bool)
+## The final boss was killed. Ends the run as a win (nothing emits this yet).
+signal run_won
+## A run ended (death, win, return to hub or quit). Summary built by RunTracker.
+signal run_ended(summary: Dictionary)
 
 signal active_ability_equipped(ability: ActiveAbility)
 signal active_ability_used(cooldown: float)
