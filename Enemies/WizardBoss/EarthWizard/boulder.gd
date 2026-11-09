@@ -128,6 +128,7 @@ func _shatter() -> void:
 		for i: int in shard_count:
 			var offset: float = (i - (shard_count - 1) * 0.5) * deg_to_rad(shard_spread_deg)
 			var shard: BoulderShard = shard_scene.instantiate()
+			Enemy.copy_attack_tag(self, shard)
 			shard.texture = visual.texture
 			EventBus.summon_effect.emit(shard)
 			shard.launch(global_position, base.rotated(offset), shard_gravity, shard_damage)

@@ -59,6 +59,7 @@ func _fire(wave: int, shot: int) -> void:
 		angle += step * 0.5
 	var dir: Vector2 = Vector2.RIGHT.rotated(angle)
 	var fireball: FireBall = fireball_scene.instantiate()
+	enemy.tag_attack(fireball)
 	EventBus.summon_effect.emit(fireball)
 	fireball.launch(wizard.global_position + dir * spawn_radius, dir)
 

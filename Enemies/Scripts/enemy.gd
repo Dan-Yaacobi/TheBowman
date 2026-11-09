@@ -1,5 +1,8 @@
 class_name Enemy extends GameEntity
 
+## Meta key on spawned attacks naming the enemy that made them. Read by RunTracker.
+const ATTACK_SOURCE_META: StringName = &"attack_source"
+
 @export var damaged_state: EnemyDamagedState
 @export var dead_state: EnemyDeadState
 
@@ -217,9 +220,21 @@ func shoot() -> void:
 		var bullet = bullet_set_up()
 		get_parent().add_child(bullet)
 	
+## Tags an attack this enemy spawned (bullet, boulder, spell...) so damage it deals is
+## credited to this enemy, even though the attack isn't its child.
+func tag_attack(attack: Node) -> void:
+	if attack:
+		attack.set_meta(ATTACK_SOURCE_META, RunTally.enemy_name(self))
+
+## Passes the tag on to an attack spawned by another attack (boulder shards, burning ground).
+static func copy_attack_tag(from: Node, to: Node) -> void:
+	if from and to and from.has_meta(ATTACK_SOURCE_META):
+		to.set_meta(ATTACK_SOURCE_META, from.get_meta(ATTACK_SOURCE_META))
+
 func bullet_set_up() -> Node2D:
 	if stats.bullet != null:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
+		tag_attack(new_bullet)
 		new_bullet.direction = calculate_direction_to_player()
 		new_bullet.global_position = global_position
 		new_bullet.target_position = PlayerManager.player.global_position

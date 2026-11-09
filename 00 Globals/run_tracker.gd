@@ -10,7 +10,7 @@ const RESULT_WON: String = "won"
 const RESULT_QUIT: String = "quit"
 const RESULT_RETURNED: String = "returned_to_hub"
 ## Bumped when the summary layout changes, so the database can tell old rows apart.
-const SUMMARY_VERSION: int = 2
+const SUMMARY_VERSION: int = 3
 const CAUSE_FALL: String = "Fall"
 ## Damage with no hurt box (poison, burn...).
 const CAUSE_EFFECT: String = "Effect"
@@ -198,7 +198,10 @@ func _close_current_rift() -> void:
 func _on_event_bus_boss_fight_started(boss: Boss) -> void:
 	if not _in_run or not is_instance_valid(boss):
 		return
-	_close_current_rift()
+	# Biome bosses have their own arena. Elites (apple boss, bird boss) are fought inside a rift,
+	# so the rift stays open and the fight counts toward both.
+	if boss.arena != null:
+		_close_current_rift()
 	if not _current_boss.is_empty():
 		_close_current_boss(false)
 	_current_boss_node = weakref(boss)
@@ -397,7 +400,8 @@ func _build_summary(result: String) -> Dictionary:
 		"bosses": _bosses.duplicate(),
 	}
 
-## Readable name for whatever dealt damage: the enemy that owns the hurt box, else its scene.
+## Readable name for whatever dealt damage: the enemy that owns the hurt box or spawned the
+## attack (see Enemy.tag_attack), else the attack's own scene name.
 func _source_name(source: Node) -> String:
 	if source == null:
 		return CAUSE_EFFECT
@@ -405,11 +409,15 @@ func _source_name(source: Node) -> String:
 	while node:
 		if node is Enemy:
 			return RunTally.enemy_name(node as Enemy)
+		if node.has_meta(Enemy.ATTACK_SOURCE_META):
+			return str(node.get_meta(Enemy.ATTACK_SOURCE_META))
 		node = node.get_parent()
 	node = source
 	while node:
-		if not node.scene_file_path.is_empty():
-			return RunTally.pretty_name(node.scene_file_path)
+		var path: String = node.scene_file_path
+		# Every hurt box is an instance of the shared HurtBox scene; that name says nothing.
+		if not path.is_empty() and not path.ends_with("/HurtBox.tscn"):
+			return RunTally.pretty_name(path)
 		node = node.get_parent()
 	return RunTally.pretty_name(source.name)
 
@@ -455,13 +463,13 @@ func _count(section: Dictionary[String, int], key: String, amount: int = 1) -> v
 	if _in_run:
 		section[key] = section.get(key, 0) + amount
 
-## Adds to the open rift or boss record, whichever the player is in.
+## Adds to the open rift and boss records. During an elite fight both are open.
 func _add_to_section(key: StringName, amount: int = 1) -> void:
 	if not _in_run:
 		return
-	var section: Dictionary = _current_boss if not _current_boss.is_empty() else _current_rift
-	if section.has(key):
-		section[key] = int(section[key]) + amount
+	for section: Dictionary in [_current_rift, _current_boss]:
+		if section.has(key):
+			section[key] = int(section[key]) + amount
 
 func _elapsed_sec() -> int:
 	@warning_ignore("integer_division")

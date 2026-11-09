@@ -24,6 +24,7 @@ func shoot(_direction = null) -> void:
 			_direction = calculate_direction_to_player()
 			
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
+		tag_attack(new_bullet)
 		new_bullet.scale *= 1.5
 		new_bullet.direction = _direction #calculate_direction_to_player()
 		new_bullet.global_position = global_position

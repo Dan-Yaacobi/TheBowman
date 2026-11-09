@@ -46,6 +46,7 @@ func _fire_meteor() -> void:
 	var marker: NamedMarker = wizard.get_marker(height_marker_id)
 	var start_y: float = marker.global_position.y if marker else wizard.global_position.y
 	var meteor: Meteor = meteor_scene.instantiate()
+	enemy.tag_attack(meteor)
 	EventBus.summon_effect.emit(meteor)
 	meteor.launch(Vector2(player_pos.x, start_y), _island_below(player_pos.x, start_y))
 

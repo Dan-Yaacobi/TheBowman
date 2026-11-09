@@ -54,6 +54,7 @@ func cast_lightning(_target: Vector2) -> void:
 	
 func summon_rain_drop() -> void:
 	var new_raindrop: RainDrop = enemy.stats.bullet.instantiate()
+	enemy.tag_attack(new_raindrop)
 	new_raindrop.global_position = enemy.global_position + Vector2(randi_range(-10,10),10)
 	enemy.get_parent().add_child(new_raindrop)
 	attack_timer.wait_time = randf_range(0.5,1.5)

@@ -36,6 +36,7 @@ func summon_spider() -> void:
 
 func shoot_web() -> void:
 	var web_projectile: SpiderWebProjectile = SPIDER_WEB_PROJECTILE.instantiate()
+	tag_attack(web_projectile)
 	web_projectile.direction = calculate_direction_to_player()
 	web_projectile.global_position = global_position
 	get_parent().add_child(web_projectile)

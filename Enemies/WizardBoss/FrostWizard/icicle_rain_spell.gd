@@ -48,6 +48,7 @@ func _drop_wave(wave: int) -> void:
 		if safe.has(island):
 			continue
 		var icicle: Icicle = icicle_scene.instantiate()
+		enemy.tag_attack(icicle)
 		EventBus.summon_effect.emit(icicle)
 		icicle.drop_onto(island, Vector2(island.global_position.x, start_y), telegraph_time)
 

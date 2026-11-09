@@ -21,6 +21,7 @@ func fly_to_roost(_position: Vector2) -> void:
 func bullet_set_up() -> Node2D:
 	if stats.bullet != null:
 		var new_bullet: EnemyBullet = stats.bullet.instantiate()
+		tag_attack(new_bullet)
 		new_bullet.global_position = global_position
 		new_bullet.scale *= 0.7
 		new_bullet.data.damage = stats.touch_damage

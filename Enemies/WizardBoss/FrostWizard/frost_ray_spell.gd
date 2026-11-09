@@ -84,6 +84,7 @@ func _start_charge() -> void:
 	_aim_applied = false
 	if ray_scene:
 		_ray = ray_scene.instantiate()
+		enemy.tag_attack(_ray)
 		_ray.set_source(wizard)
 		EventBus.summon_effect.emit(_ray)
 	_set_phase(Phase.CHARGE)

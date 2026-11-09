@@ -67,6 +67,7 @@ func _blast() -> void:
 	if nova_scene == null:
 		return
 	var nova: HellfireNova = nova_scene.instantiate()
+	enemy.tag_attack(nova)
 	EventBus.summon_effect.emit(nova)
 	nova.blast(nova_radius, wizard.global_position)
 

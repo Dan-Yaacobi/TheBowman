@@ -56,6 +56,7 @@ func _throw() -> void:
 	if island:
 		landing.y = island.global_position.y - 3.0
 	var boulder: Boulder = boulder_scene.instantiate()
+	enemy.tag_attack(boulder)
 	EventBus.summon_effect.emit(boulder)
 	boulder.launch(start, landing, flight_time, wizard, island)
 

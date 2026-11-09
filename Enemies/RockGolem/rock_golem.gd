@@ -97,6 +97,7 @@ func wants_to_throw() -> bool:
 ## fingers stay in front) until throw_boulder hands it to the world.
 func pick_up_boulder() -> Boulder:
 	var boulder: Boulder = golem_data.boulder_scene.instantiate()
+	tag_attack(boulder)
 	boulder.damage = golem_data.boulder_damage
 	boulder.knockback = golem_data.boulder_knockback
 	boulder.set_held(true)

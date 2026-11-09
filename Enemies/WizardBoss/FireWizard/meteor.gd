@@ -94,6 +94,7 @@ func _on_ground_detector_body_shape_entered(_body_rid: RID, _body: Node2D, _body
 		return
 	_impacted = true
 	var island_burn = island_burn_scene.instantiate()
+	Enemy.copy_attack_tag(self, island_burn)
 	island_burn.position = _body.objects_spawn_markers.position
 	_body.call_deferred("add_child", island_burn)
 	queue_free()
