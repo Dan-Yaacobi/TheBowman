@@ -16,6 +16,7 @@ const CAUSE_FALL: String = "Fall"
 const CAUSE_EFFECT: String = "Effect"
 
 var tally: RunTally = RunTally.new()
+var uploader: RunUploader
 
 var _in_run: bool = false
 var _run_id: String = ""
@@ -52,6 +53,9 @@ var _current_boss_node: WeakRef = null
 var _pending_craft: String = ""
 
 func _ready() -> void:
+	uploader = RunUploader.new()
+	uploader.name = "RunUploader"
+	add_child(uploader)
 	EventBus.entered_rift.connect(_on_event_bus_entered_rift)
 	EventBus.in_main_menu.connect(_on_event_bus_in_main_menu)
 	EventBus.player_died.connect(_on_event_bus_player_died)
@@ -140,6 +144,7 @@ func end_run(result: String) -> void:
 	var summary: Dictionary = _build_summary(result)
 	print("[RunTracker] run ended:\n", JSON.stringify(summary, "\t"))
 	EventBus.run_ended.emit(summary)
+	uploader.submit(summary)
 
 func _on_event_bus_entered_rift() -> void:
 	if not _in_run:
@@ -345,7 +350,8 @@ func _build_summary(result: String) -> Dictionary:
 		"summary_version": SUMMARY_VERSION,
 		"run_id": _run_id,
 		"game_version": _game_version(),
-		"build_type": "dev" if OS.has_feature("editor") else "release",
+		"player_id": uploader.player_id,
+		"build_type": uploader.build_type(),
 		"platform": OS.get_name(),
 		"started_at": Time.get_datetime_string_from_unix_time(_started_unix) + "Z",
 		"ended_at": Time.get_datetime_string_from_system(true) + "Z",
