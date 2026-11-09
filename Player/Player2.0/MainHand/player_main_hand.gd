@@ -124,6 +124,7 @@ func release_arrow() -> void:
 	else:
 		if current_arrow:
 			EventBus.arrow_release_sound.emit(shot_power)
+			EventBus.arrow_released.emit(shot_power)
 			current_arrow.arrow_shot_power = shot_power
 			if shot_power >= 1.0:
 				EventBus.camera_shake.emit(1.0,10.0)

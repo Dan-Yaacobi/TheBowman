@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="TheBowman"
+config/version="0.1"
 run/main_scene="uid://bsesww0tvvo33"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
@@ -39,6 +40,7 @@ MetaProgress="*uid://bq7wt46xqx5tg"
 Crafting="*res://00 Globals/crafting.gd"
 Lore="*res://00 Globals/lore.gd"
 Disenchanting="*res://00 Globals/disenchanting.gd"
+RunTracker="*res://00 Globals/run_tracker.gd"
 
 [debug]
 

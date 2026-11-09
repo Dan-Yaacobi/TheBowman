@@ -100,6 +100,10 @@ signal enemy_stunned(_enemy: Enemy)
 signal enemy_frostbitten_hit(_enemy: Enemy)
 
 signal player_died(_death_screen: bool)
+## The final boss was killed. Ends the run as a win (nothing emits this yet).
+signal run_won
+## A run ended (death, win, return to hub or quit). Summary built by RunTracker.
+signal run_ended(summary: Dictionary)
 
 signal active_ability_equipped(ability: ActiveAbility)
 signal active_ability_used(cooldown: float)
@@ -166,3 +170,19 @@ signal schematic_found
 signal island_stepped_on(island: Island)
 ## An event with a win/lose outcome ended (challenge shrine, golden apple, boss event...).
 signal rift_event_finished(event: Event, success: bool)
+
+# --- Run tracker (analytics) ---
+## The player released a drawn arrow. power is the pull (1.0 = perfect).
+signal arrow_released(power: float)
+## The player took damage. source is the hurt box that hit, or null for damage over time.
+signal player_damaged(amount: int, source: Node)
+## The player was healed by this much (actual HP gained).
+signal player_healed(amount: int)
+## A potion was picked up and drunk.
+signal potion_used(heal_amount: int)
+## The player fell off the world. heart_lost is false for free falls and safe areas.
+signal player_fell(heart_lost: bool)
+## The player lost a heart container (falls, sacrifices).
+signal player_heart_lost
+## An enemy took damage from any source, DoT included.
+signal enemy_damaged(enemy: Enemy, amount: int)
