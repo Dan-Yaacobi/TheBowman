@@ -10,8 +10,10 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.velocity.length() > 0:
 			player_fell.emit()
 			if not costs_heart or body.use_free_fall():
+				EventBus.player_fell.emit(false)
 				EventBus.respawn_player.emit()
 				return
+			EventBus.player_fell.emit(true)
 			var dead: bool = body.lose_heart()
 			if dead:
 				body.kill()

@@ -426,6 +426,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		show_damage(dmg_taken, dmg_color)
 		stats.hp -= dmg_taken
 		health_bar.reduce_health(dmg_taken)
+		EventBus.player_damaged.emit(dmg_taken, _hurt_box)
 		if stats.hp <= 0:
 			kill()
 
@@ -477,6 +478,7 @@ func increase_max_hp(_heal: bool) -> void:
 
 func lose_heart() -> bool:
 	health_bar.lose_heart_container()
+	EventBus.player_heart_lost.emit()
 	if stats.extra_hp <= 0:
 		stats.max_hp -= CustomVariables.HP_PER_HEART
 		if stats.max_hp <= 0:
@@ -491,6 +493,7 @@ func heal(amount: int, _flash: bool = true) -> bool:
 	if can_heal(amount):
 		stats.hp += amount_healed
 		health_bar.heal(amount_healed)
+		EventBus.player_healed.emit(amount_healed)
 		if _flash:
 			EventBus.healed_flash.emit()
 			show_damage(amount_healed, Color.GREEN)

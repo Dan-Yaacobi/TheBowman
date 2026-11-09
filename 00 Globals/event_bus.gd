@@ -170,3 +170,19 @@ signal schematic_found
 signal island_stepped_on(island: Island)
 ## An event with a win/lose outcome ended (challenge shrine, golden apple, boss event...).
 signal rift_event_finished(event: Event, success: bool)
+
+# --- Run tracker (analytics) ---
+## The player released a drawn arrow. power is the pull (1.0 = perfect).
+signal arrow_released(power: float)
+## The player took damage. source is the hurt box that hit, or null for damage over time.
+signal player_damaged(amount: int, source: Node)
+## The player was healed by this much (actual HP gained).
+signal player_healed(amount: int)
+## A potion was picked up and drunk.
+signal potion_used(heal_amount: int)
+## The player fell off the world. heart_lost is false for free falls and safe areas.
+signal player_fell(heart_lost: bool)
+## The player lost a heart container (falls, sacrifices).
+signal player_heart_lost
+## An enemy took damage from any source, DoT included.
+signal enemy_damaged(enemy: Enemy, amount: int)

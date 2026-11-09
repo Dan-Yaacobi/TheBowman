@@ -143,6 +143,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	@warning_ignore("narrowing_conversion")
 	final_dmg *= stats.damage_taken_multiplier.value()
 	current_hp -= roundi(final_dmg)
+	EventBus.enemy_damaged.emit(self, final_dmg)
 	frostbitten_hit()
 	handle_health_bar(final_dmg)
 	show_damage(final_dmg,dmg_color)

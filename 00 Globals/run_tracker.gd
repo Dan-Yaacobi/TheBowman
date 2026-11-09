@@ -10,7 +10,10 @@ const RESULT_WON: String = "won"
 const RESULT_QUIT: String = "quit"
 const RESULT_RETURNED: String = "returned_to_hub"
 ## Bumped when the summary layout changes, so the database can tell old rows apart.
-const SUMMARY_VERSION: int = 1
+const SUMMARY_VERSION: int = 2
+const CAUSE_FALL: String = "Fall"
+## Damage with no hurt box (poison, burn...).
+const CAUSE_EFFECT: String = "Effect"
 
 var tally: RunTally = RunTally.new()
 
@@ -18,6 +21,8 @@ var _in_run: bool = false
 var _run_id: String = ""
 var _started_unix: int = 0
 var _start_msec: int = 0
+## Seconds of unpaused play. Menus, the death screen and scene fades don't count.
+var _active_sec: float = 0.0
 
 var _combat: Dictionary[String, int] = {}
 var _movement: Dictionary[String, int] = {}
@@ -31,6 +36,11 @@ var _color_levels: Dictionary[String, int] = {}
 var _active_ability: String = ""
 var _active_ability_uses: int = 0
 var _lore_found: int = 0
+var _death_cause: String = ""
+var _lowest_hp: int = 0
+var _max_hp_start: int = 0
+## Damage taken per source name.
+var _damage_sources: Dictionary[String, int] = {}
 
 var _rifts: Array[Dictionary] = []
 var _current_rift: Dictionary = {}
@@ -50,7 +60,7 @@ func _ready() -> void:
 	EventBus.boss_portal_entered.connect(_close_current_rift)
 	EventBus.boss_fight_started.connect(_on_event_bus_boss_fight_started)
 	EventBus.enemy_died.connect(_on_event_bus_enemy_died)
-	EventBus.arrow_release_sound.connect(_on_event_bus_arrow_release_sound)
+	EventBus.arrow_released.connect(_on_event_bus_arrow_released)
 	EventBus.arrow_enemy_hit.connect(_on_event_bus_arrow_enemy_hit)
 	EventBus.arrow_missed.connect(_on_event_bus_arrow_missed)
 	EventBus.sword_hit.connect(_on_event_bus_sword_hit)
@@ -59,11 +69,14 @@ func _ready() -> void:
 	EventBus.dealt_bleed_damage.connect(_on_event_bus_dealt_bleed_damage)
 	EventBus.poison_damage_dealt.connect(_on_event_bus_poison_damage_dealt)
 	EventBus.leeched.connect(_on_event_bus_leeched)
-	EventBus.damaged_flash.connect(_on_event_bus_damaged_flash)
-	EventBus.healed_flash.connect(_on_event_bus_healed_flash)
 	EventBus.dash_preformed.connect(_on_event_bus_dash_preformed)
 	EventBus.jump_sound.connect(_on_event_bus_jump_sound)
-	EventBus.respawn_player.connect(_on_event_bus_respawn_player)
+	EventBus.player_fell.connect(_on_event_bus_player_fell)
+	EventBus.player_heart_lost.connect(_on_event_bus_player_heart_lost)
+	EventBus.player_damaged.connect(_on_event_bus_player_damaged)
+	EventBus.player_healed.connect(_on_event_bus_player_healed)
+	EventBus.potion_used.connect(_on_event_bus_potion_used)
+	EventBus.enemy_damaged.connect(_on_event_bus_enemy_damaged)
 	EventBus.equip_item.connect(_on_event_bus_equip_item)
 	EventBus.active_ability_equipped.connect(_on_event_bus_active_ability_equipped)
 	EventBus.active_ability_used.connect(_on_event_bus_active_ability_used)
@@ -72,6 +85,10 @@ func _ready() -> void:
 	EventBus.rift_event_finished.connect(_on_event_bus_rift_event_finished)
 	EventBus.chest_opened.connect(_on_event_bus_chest_opened)
 	Crafting.crafted.connect(_on_crafting_crafted)
+
+func _process(delta: float) -> void:
+	if _in_run:
+		_active_sec += delta
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST and _in_run:
@@ -87,6 +104,12 @@ func _start_run() -> void:
 	_run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	_started_unix = int(Time.get_unix_time_from_system())
 	_start_msec = Time.get_ticks_msec()
+	_active_sec = 0.0
+	_death_cause = ""
+	_damage_sources.clear()
+	var player: Player = PlayerManager.player
+	_max_hp_start = player.max_hp_value() if player else 0
+	_lowest_hp = player.stats.hp if player else 0
 	_combat.clear()
 	_movement.clear()
 	_gear_changes.clear()
@@ -152,6 +175,8 @@ func _open_rift() -> void:
 		"duration_sec": 0,
 		"kills": 0,
 		"hits_taken": 0,
+		"damage_taken": 0,
+		"damage_dealt": 0,
 		"falls": 0,
 		"chests": 0,
 		"events_completed": 0,
@@ -178,6 +203,8 @@ func _on_event_bus_boss_fight_started(boss: Boss) -> void:
 		"started_sec": _elapsed_sec(),
 		"duration_sec": 0,
 		"hits_taken": 0,
+		"damage_taken": 0,
+		"damage_dealt": 0,
 		"falls": 0,
 		"won": false,
 	}
@@ -201,8 +228,7 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 
 # --- Combat -------------------------------------------------------------------------
 
-## Fires once per player release, with the pull power (1.0 = perfect pull).
-func _on_event_bus_arrow_release_sound(shot_power: float) -> void:
+func _on_event_bus_arrow_released(shot_power: float) -> void:
 	_count(_combat, "shots")
 	if shot_power >= 1.0:
 		_count(_combat, "perfect_shots")
@@ -233,12 +259,30 @@ func _on_event_bus_poison_damage_dealt() -> void:
 func _on_event_bus_leeched(amount: int, _position: Vector2) -> void:
 	_count(_combat, "leech_heal", amount)
 
-func _on_event_bus_damaged_flash() -> void:
+func _on_event_bus_player_damaged(amount: int, source: Node) -> void:
+	if not _in_run:
+		return
 	_count(_combat, "hits_taken")
+	_count(_combat, "damage_taken", amount)
 	_add_to_section(&"hits_taken")
+	_add_to_section(&"damage_taken", amount)
+	var source_name: String = _source_name(source)
+	_damage_sources[source_name] = _damage_sources.get(source_name, 0) + amount
+	_death_cause = source_name
+	if PlayerManager.player:
+		_lowest_hp = mini(_lowest_hp, maxi(PlayerManager.player.stats.hp, 0))
 
-func _on_event_bus_healed_flash() -> void:
+func _on_event_bus_player_healed(amount: int) -> void:
 	_count(_combat, "heals")
+	_count(_combat, "hp_healed", amount)
+
+func _on_event_bus_potion_used(heal_amount: int) -> void:
+	_count(_combat, "potions_used")
+	_count(_combat, "potion_heal", heal_amount)
+
+func _on_event_bus_enemy_damaged(_enemy: Enemy, amount: int) -> void:
+	_count(_combat, "damage_dealt", amount)
+	_add_to_section(&"damage_dealt", amount)
 
 # --- Movement -----------------------------------------------------------------------
 
@@ -248,10 +292,17 @@ func _on_event_bus_dash_preformed() -> void:
 func _on_event_bus_jump_sound() -> void:
 	_count(_movement, "jumps")
 
-## Only falls respawn the player.
-func _on_event_bus_respawn_player() -> void:
+func _on_event_bus_player_fell(heart_lost: bool) -> void:
+	if not _in_run:
+		return
 	_count(_movement, "falls")
+	if heart_lost:
+		_count(_movement, "falls_heart_lost")
+		_death_cause = CAUSE_FALL
 	_add_to_section(&"falls")
+
+func _on_event_bus_player_heart_lost() -> void:
+	_count(_movement, "hearts_lost")
 
 # --- Build --------------------------------------------------------------------------
 
@@ -299,7 +350,12 @@ func _build_summary(result: String) -> Dictionary:
 		"started_at": Time.get_datetime_string_from_unix_time(_started_unix) + "Z",
 		"ended_at": Time.get_datetime_string_from_system(true) + "Z",
 		"duration_sec": _elapsed_sec(),
+		"active_sec": roundi(_active_sec),
 		"result": result,
+		"death_cause": _death_cause if result == RESULT_DIED else "",
+		"max_hp_start": _max_hp_start,
+		"lowest_hp": _lowest_hp,
+		"damage_taken_by_source": _damage_sources.duplicate(),
 		"rift_reached": _rift_level(),
 		"biome_reached": _rifts[-1]["biome"] if not _rifts.is_empty() else "",
 		"bosses_killed": RunTally.total(tally.bosses),
@@ -334,6 +390,22 @@ func _build_summary(result: String) -> Dictionary:
 		"rifts": _rifts.duplicate(),
 		"bosses": _bosses.duplicate(),
 	}
+
+## Readable name for whatever dealt damage: the enemy that owns the hurt box, else its scene.
+func _source_name(source: Node) -> String:
+	if source == null:
+		return CAUSE_EFFECT
+	var node: Node = source
+	while node:
+		if node is Enemy:
+			return RunTally.enemy_name(node as Enemy)
+		node = node.get_parent()
+	node = source
+	while node:
+		if not node.scene_file_path.is_empty():
+			return RunTally.pretty_name(node.scene_file_path)
+		node = node.get_parent()
+	return RunTally.pretty_name(source.name)
 
 func _snapshot_gear() -> Dictionary:
 	var gear: Dictionary = {}
