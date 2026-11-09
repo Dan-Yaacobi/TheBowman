@@ -164,8 +164,13 @@ func reset_equipment() -> void:
 	
 func kill(_death_screen: bool = true) -> void:
 	if not player_state_machine.curr_state == dead:
-		dead.display_death_screen = _death_screen
-		SaveService.save_game()
+		var world: GameWorld = get_parent() as GameWorld
+		var counts_as_run: bool = world == null or world.counts_as_run
+		dead.display_death_screen = _death_screen and counts_as_run
+		dead.return_world = world.death_world if world else GameWorlds.worlds.Main_Menu
+		# Practice deaths don't save: in the tutorial that would end "new game" early.
+		if counts_as_run:
+			SaveService.save_game()
 		player_state_machine.ChangeState(dead)
 
 func activate_passive_abilities() -> void:

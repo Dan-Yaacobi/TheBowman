@@ -1,0 +1,80 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Level/Tutorial/tutorial.gd" id="1_tutorial"]
+[ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="2_sky"]
+[ext_resource type="PackedScene" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="3_spirit"]
+[ext_resource type="PackedScene" path="res://General Nodes/PlayerSpawn.tscn" id="4_spawn"]
+[ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="5_island"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="6_fall"]
+
+[sub_resource type="Resource" id="Resource_sky"]
+script = ExtResource("2_sky")
+top_color = Color(0.2, 0.4, 0.8, 1)
+bottom_color = Color(0.6, 0.8509804, 1, 1)
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_tutorial")
+sky_colors = SubResource("Resource_sky")
+intro_lines = Array[String](["You stir. Good. The void did not keep you. It lets very little go.", "I am what remains of this world's heart. When it shattered, I woke in the pieces.", "You have a bow-hand. An archer, then. The last one, I think. The wizards saw to the rest.", "You look lost. The rupture tore more than the land. Let me remind your body what it knows."])
+outro_lines = Array[String](["Your hands remember, even if your mind does not.", "Beyond here, rifts tear through what is left of the world. Each one you cross, I feel a little less scattered.", "When the void grows too strong for you, it will send you back to me. Rest, then rise again.", "Come. I will show you what remains of home."])
+
+[node name="WorldSpirit" parent="." instance=ExtResource("3_spirit")]
+position = Vector2(-40, 50)
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_spawn")]
+position = Vector2(22, 75)
+
+[node name="Islands" type="Node2D" parent="."]
+
+[node name="Start1" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(0, 100)
+
+[node name="Start2" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(44, 100)
+
+[node name="Jump1" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(130, 92)
+
+[node name="Jump2" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(174, 92)
+
+[node name="Dash1" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(320, 92)
+
+[node name="Dash2" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(364, 92)
+
+[node name="Dash3" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(408, 92)
+
+[node name="Target" parent="Islands" instance=ExtResource("5_island")]
+position = Vector2(560, 60)
+
+[node name="FallingDeath" parent="." instance=ExtResource("6_fall")]
+position = Vector2(0, 500)
+
+[node name="TutorialHud" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="GoalLabel" type="Label" parent="TutorialHud"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 80.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.08, 0.06, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="SkipButton" type="Button" parent="TutorialHud"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 70.0
+grow_horizontal = 0
+focus_mode = 0
+text = "Skip Tutorial"

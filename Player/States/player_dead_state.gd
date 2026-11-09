@@ -2,6 +2,8 @@ class_name PlayerDeadState extends State
 
 @onready var idle: PlayerIdleState = $"../Idle"
 var display_death_screen: bool = true
+## Set by Player.kill() from the world the player died in.
+var return_world: GameWorlds.worlds = GameWorlds.worlds.Main_Menu
 var death_animation_done: bool = false
 
 func init() -> void:
@@ -27,7 +29,7 @@ func Exit() -> void:
 	player.stats.extra_hp = 0
 	player.color_levels.reset()
 	player.refresh_max_hp()
-	EventBus.changed_scene.emit(GameWorlds.worlds.Main_Menu)
+	EventBus.changed_scene.emit(return_world)
 	EventBus.player_died.emit(display_death_screen)
 	reset_active_ability()
 

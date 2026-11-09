@@ -9,6 +9,10 @@ var respawn_position: Vector2
 var current_event: Event = null
 var suspended_enemies: Array[Enemy] = []
 var _event_return_position: Vector2 = Vector2.ZERO
+## Where the player is sent when they die in this world.
+var death_world: GameWorlds.worlds = GameWorlds.worlds.Main_Menu
+## False for practice worlds (the tutorial): dying there doesn't save or show the run summary.
+var counts_as_run: bool = true
 
 func set_world() -> void:
 	EventBus.enemy_summoned.connect(add_enemy)

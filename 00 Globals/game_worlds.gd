@@ -1,12 +1,14 @@
 extends Node
-enum worlds {Main_Menu=1,Rift_1=2,NextRift=3}
+enum worlds {Main_Menu=1,Rift_1=2,NextRift=3,Tutorial=4}
 
 const MAIN_MENU = preload("uid://cnhbrpo4htp2y")
 const RIFT = preload("uid://iitxisrr6wi5")
+const TUTORIAL = preload("res://Level/Tutorial/Tutorial.tscn")
 
 const worlds_dic = {
  	worlds.Main_Menu: MAIN_MENU,
 	worlds.Rift_1: RIFT,
+	worlds.Tutorial: TUTORIAL,
 	}
 
 func get_world(_new_world: worlds) -> GameWorld:

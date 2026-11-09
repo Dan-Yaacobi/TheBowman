@@ -41,7 +41,9 @@ var last_scene: Node
 func _ready() -> void:
 	EventBus.change_sky_color.connect(change_sky_colors)
 	game_manager.set_game(self)
-	game_manager.change_game_world(GameWorlds.worlds.Main_Menu)
+	# A new game (no save yet) starts in the tutorial.
+	var first_world: GameWorlds.worlds = GameWorlds.worlds.Main_Menu if SaveService.has_save() else GameWorlds.worlds.Tutorial
+	game_manager.change_game_world(first_world)
 	PlayerManager.player.health_bar = hud.get_health_bar()
 	cloud_timer.timeout.connect(summon_cloud)
 	cloud_timer.start()
@@ -74,9 +76,9 @@ func music_on_off() -> void:
 
 # --- Music ----------------------------------------------------------------
 
-## Menu track in the hub, rift track everywhere else (boss arenas start on it until the fight).
+## Menu track in the hub and tutorial, rift track everywhere else (boss arenas start on it until the fight).
 func _play_world_music() -> void:
-	if game_manager.curr_world is MainMenu:
+	if game_manager.curr_world is MainMenu or game_manager.curr_world is Tutorial:
 		_play_track(menu_music)
 	else:
 		_play_track(rift_music)
