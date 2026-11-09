@@ -1,0 +1,25 @@
+green apple ramming into player causes no knockback on the player (red does work)
+green apples after spawns aren't smaller than the original
+make constructs shine when you can build them
+give the golden apple 60 seconds and make it vulnerable to sword hits as well
+make up dash with a double W click
+the minor ability for after X arrows your next one is perfect - two notes:
+1. it counts arrows that didn't hit anything, it should only count successful hits.
+2. the having one automatically perfect telegraph is not clear enough, also it beats the rhythm of the regular shots and feels awkward. 
+in the equipment comparison window make it obvious which ability is the main defining one and which are the extra rolled minor abilities
+events need a better system to decide what you will get than random. you can sometimes get the bird boss in the first 30 seconds of your rift and it's just too brutal
+
+getting hurt during swinging cause a visual bug where the sword and its effect are visible despite not swinging
+
+make sure all item's ability texts have color and a proper one
+
+there are way too many things to break
+talking with the world spirit and selecting artifacts keeps the dialogue box above the artifact journal that is being opened
+
+vases drop too much gold as well as chests, unbalanced compared to the how much the upgrades cost - my issue is i think things should cost less and resources should be less plentiful because each run you have to break like 100+ objects which is too grindy
+
+build a database that's online and make every end of run data saved there and give me tools to view the data and make summeries like average run time etc.
+
+make the target dummy a construct you unlock by paying 5 wood
+
+have the world spirit occasionaly have something useful to tell you (after your first rift death, after every couple of deaths afterwards he will have something new to say that's a tip about the game
