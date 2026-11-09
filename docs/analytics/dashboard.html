@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sky Archer Analytics</title>
+<style>
+:root {
+	color-scheme: light;
+	--page: #f9f9f7;
+	--surface: #fcfcfb;
+	--ink: #0b0b0b;
+	--ink-2: #52514e;
+	--muted: #898781;
+	--grid: #e1e0d9;
+	--axis: #c3c2b7;
+	--border: rgba(11, 11, 11, 0.10);
+	--wash: rgba(11, 11, 11, 0.04);
+	--series-1: #2a78d6;
+	--series-1-soft: #cde2fb;
+	--good: #0ca30c;
+	--critical: #d03b3b;
+	--good-text: #006300;
+	--critical-text: #b42a2a;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		color-scheme: dark;
+		--page: #0d0d0d;
+		--surface: #1a1a19;
+		--ink: #f0efec;
+		--ink-2: #c3c2b7;
+		--muted: #898781;
+		--grid: #2c2c2a;
+		--axis: #383835;
+		--border: rgba(255, 255, 255, 0.10);
+		--wash: rgba(255, 255, 255, 0.05);
+		--series-1: #3987e5;
+		--series-1-soft: #184f95;
+		--good-text: #0ca30c;
+		--critical-text: #e66767;
+	}
+}
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--page: #0d0d0d;
+	--surface: #1a1a19;
+	--ink: #f0efec;
+	--ink-2: #c3c2b7;
+	--muted: #898781;
+	--grid: #2c2c2a;
+	--axis: #383835;
+	--border: rgba(255, 255, 255, 0.10);
+	--wash: rgba(255, 255, 255, 0.05);
+	--series-1: #3987e5;
+	--series-1-soft: #184f95;
+	--good-text: #0ca30c;
+	--critical-text: #e66767;
+}
+
+* { box-sizing: border-box; }
+body {
+	margin: 0;
+	background: var(--page);
+	color: var(--ink);
+	font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { max-width: 1240px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+h2 { font-size: 15px; margin: 0 0 2px; }
+.sub { color: var(--ink-2); margin: 0 0 12px; font-size: 13px; }
+.muted { color: var(--muted); }
+
+/* Connect + filters */
+.bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 16px 0; }
+.bar label { color: var(--ink-2); font-size: 13px; display: flex; gap: 6px; align-items: center; }
+input[type=password], select, button {
+	font: inherit; color: var(--ink); background: var(--surface);
+	border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px;
+}
+button { cursor: pointer; }
+button.primary { background: var(--series-1); color: #fff; border-color: transparent; }
+button:hover { background: var(--wash); }
+button.primary:hover { filter: brightness(1.08); background: var(--series-1); }
+#f-builds { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; user-select: none; font-size: 13px; }
+.chip input { margin: 0; }
+#status { font-size: 13px; color: var(--ink-2); }
+#status.error { color: var(--critical-text); }
+
+/* Cards */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+.card.wide { grid-column: 1 / -1; }
+@media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+
+/* Stat tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+.tile .v { font-size: 24px; font-weight: 650; }
+.tile .k { color: var(--ink-2); font-size: 12px; }
+.tile .h { color: var(--muted); font-size: 12px; }
+
+/* Horizontal bars */
+.hbars { display: grid; grid-template-columns: minmax(90px, 34%) 1fr; gap: 6px 10px; align-items: center; }
+.hbars .lab { color: var(--ink-2); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbars .track { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hbars .fill { height: 18px; background: var(--series-1); border-radius: 0 4px 4px 0; min-width: 2px; }
+.hbars .val { font-size: 12px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hbars .row-hit { display: contents; }
+
+/* Columns */
+.cols { position: relative; height: 180px; display: flex; align-items: flex-end; gap: 2px; border-bottom: 1px solid var(--axis); padding-top: 18px; }
+.cols .c { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+.cols .c .bar-v { width: min(24px, 80%); background: var(--series-1); border-radius: 4px 4px 0 0; min-height: 2px; }
+.cols .c .cap { font-size: 11px; color: var(--ink-2); margin-bottom: 2px; font-variant-numeric: tabular-nums; }
+.cols-x { display: flex; gap: 2px; margin-top: 4px; }
+.cols-x span { flex: 1 1 0; text-align: center; font-size: 11px; color: var(--muted); min-width: 0; overflow: hidden; white-space: nowrap; }
+.axis-title { font-size: 12px; color: var(--muted); margin-top: 4px; text-align: center; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--ink-2); font-weight: 600; cursor: pointer; user-select: none; position: sticky; top: 0; background: var(--surface); }
+th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+th .arrow { color: var(--muted); font-size: 10px; }
+tbody tr:hover { background: var(--wash); }
+tr.clickable { cursor: pointer; }
+.result { display: inline-flex; align-items: center; gap: 4px; }
+.result::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.result.won::before { background: var(--good); }
+.result.died::before { background: var(--critical); }
+.meter { display: inline-block; width: 48px; height: 6px; border-radius: 3px; background: var(--grid); vertical-align: middle; margin-left: 6px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--series-1); }
+
+.tabs { display: flex; gap: 6px; margin: 8px 0 10px; }
+.tabs button.on { background: var(--series-1); color: #fff; border-color: transparent; }
+.empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+
+/* Tooltip */
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--surface); font-size: 12px; padding: 6px 8px; border-radius: 6px; max-width: 280px; z-index: 50; display: none; white-space: pre-line; }
+
+/* Run detail */
+dialog { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--ink); width: min(920px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 20px; }
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+dialog h3 { margin: 16px 0 6px; font-size: 14px; }
+pre { background: var(--page); border-radius: 8px; padding: 12px; overflow: auto; max-height: 360px; font-size: 12px; }
+.close { float: right; }
+#app[hidden], #hint[hidden] { display: none; }
+</style>
+</head>
+<body>
+<main>
+	<h1>Sky Archer: run analytics</h1>
+	<p class="sub">Live from Supabase. Every finished run is one row; filters apply to everything below.</p>
+
+	<div class="bar">
+		<label>Dashboard password <input id="pw" type="password" autocomplete="current-password" size="22"></label>
+		<label><input id="remember" type="checkbox"> Remember on this computer</label>
+		<button id="load" class="primary">Load data</button>
+		<span id="status"></span>
+	</div>
+
+	<p id="hint" class="sub">Set the password once in the Supabase SQL Editor with
+		<code>select public.set_dashboard_password('…');</code> then enter it here.</p>
+
+	<div id="app" hidden>
+		<div class="bar" id="filters">
+			<label>Version <select id="f-version"></select></label>
+			<label>Period <select id="f-period">
+				<option value="0">All time</option>
+				<option value="1">Last 24 hours</option>
+				<option value="7">Last 7 days</option>
+				<option value="30">Last 30 days</option>
+			</select></label>
+			<span id="f-builds"></span>
+			<span class="muted" id="f-count"></span>
+		</div>
+
+		<div class="tiles" id="tiles"></div>
+
+		<div class="grid">
+			<section class="card">
+				<h2>Where runs end</h2>
+				<p class="sub">Number of runs by the last rift reached</p>
+				<div id="c-reach"></div>
+			</section>
+			<section class="card">
+				<h2>What ends runs</h2>
+				<p class="sub">Cause of death, share of deaths</p>
+				<div id="c-cause"></div>
+			</section>
+
+			<section class="card wide">
+				<h2>Rifts</h2>
+				<p class="sub">Averages per visit to each rift level. "Runs ended" counts deaths in that rift.</p>
+				<div id="t-rifts"></div>
+			</section>
+
+			<section class="card">
+				<h2>Bosses and elites</h2>
+				<p class="sub">Every fight, including lost ones</p>
+				<div id="t-bosses"></div>
+			</section>
+			<section class="card">
+				<h2>Gear at end of run</h2>
+				<p class="sub">How far runs got with each item equipped at the end</p>
+				<div class="tabs" id="gear-tabs"></div>
+				<div id="t-gear"></div>
+			</section>
+
+			<section class="card">
+				<h2>Enemies</h2>
+				<p class="sub">Kills, damage dealt to the player, and deaths caused</p>
+				<div id="t-enemies"></div>
+			</section>
+			<section class="card">
+				<h2>Events</h2>
+				<p class="sub">Completion rate of rift events</p>
+				<div id="t-events"></div>
+			</section>
+
+			<section class="card">
+				<h2>Economy</h2>
+				<p class="sub">Average collected per run</p>
+				<div id="c-economy"></div>
+			</section>
+			<section class="card">
+				<h2>Objects destroyed</h2>
+				<p class="sub">Average per run</p>
+				<div id="c-objects"></div>
+			</section>
+
+			<section class="card wide">
+				<h2>Runs per day</h2>
+				<p class="sub">Finished runs by end date (your local time)</p>
+				<div id="c-days"></div>
+			</section>
+
+			<section class="card wide">
+				<h2>Runs</h2>
+				<p class="sub">Newest first. Click a run for its full breakdown.</p>
+				<div id="t-runs"></div>
+			</section>
+		</div>
+	</div>
+</main>
+
+<div id="tip"></div>
+<dialog id="detail"></dialog>
+
+<script>
+// Same publishable key the game ships with. It can't read tables; the dashboard
+// functions also need the dashboard password.
+const SUPABASE_URL = "https://wqcwdqncmphblvutohdn.supabase.co";
+const SUPABASE_KEY = "sb_publishable__eJbSDTrGjQIDN1baM-Daw_8wBUcYee";
+const STORE_KEY = "skyarcher-dashboard-password";
+
+let DATA = null;
+let gearSlot = "final_bow";
+
+const $ = (id) => document.getElementById(id);
+
+// --- Storage (optional convenience) -----------------------------------------------
+function storeGet() { try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; } }
+function storeSet(v) { try { v ? localStorage.setItem(STORE_KEY, v) : localStorage.removeItem(STORE_KEY); } catch (e) {} }
+
+// --- API -----------------------------------------------------------------------------
+async function rpc(fn, body) {
+	const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+		method: "POST",
+		headers: { "apikey": SUPABASE_KEY, "Content-Type": "application/json" },
+		body: JSON.stringify(body),
+	});
+	const text = await res.text();
+	let json = null;
+	try { json = JSON.parse(text); } catch (e) {}
+	if (!res.ok) {
+		const msg = (json && json.message) || text || res.statusText;
+		if (json && json.code === "PGRST202") throw new Error("The dashboard functions aren't in the database yet. Rerun supabase_schema.sql.");
+		throw new Error(msg);
+	}
+	return json;
+}
+
+async function load() {
+	const pw = $("pw").value;
+	if (!pw) { setStatus("Enter the dashboard password.", true); return; }
+	setStatus("Loading…");
+	$("load").disabled = true;
+	try {
+		DATA = await rpc("analytics_export", { p_password: pw });
+		storeSet($("remember").checked ? pw : null);
+		setStatus(`Loaded ${DATA.runs.length} runs at ${new Date().toLocaleTimeString()}`);
+		$("hint").hidden = true;
+		$("app").hidden = false;
+		buildFilters();
+		render();
+	} catch (e) {
+		setStatus(e.message, true);
+	} finally {
+		$("load").disabled = false;
+	}
+}
+
+function setStatus(msg, isError) {
+	$("status").textContent = msg;
+	$("status").className = isError ? "error" : "";
+}
+
+// --- Formatting ----------------------------------------------------------------------
+const nf0 = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+const nf1 = new Intl.NumberFormat(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+function n0(v) { return v == null || isNaN(v) ? "–" : nf0.format(v); }
+function n1(v) { return v == null || isNaN(v) ? "–" : nf1.format(v); }
+function pct(v) { return v == null || isNaN(v) ? "–" : `${nf0.format(v * 100)}%`; }
+function dur(sec) {
+	if (sec == null || isNaN(sec)) return "–";
+	sec = Math.round(sec);
+	const m = Math.floor(sec / 60), s = sec % 60;
+	return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}:${String(s).padStart(2, "0")}`;
+}
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function avg(arr, f) { const v = arr.map(f).filter((x) => x != null && !isNaN(x)); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; }
+function sum(arr, f) { return arr.reduce((a, r) => a + (Number(f(r)) || 0), 0); }
+function median(arr, f) {
+	const v = arr.map(f).filter((x) => x != null && !isNaN(x)).sort((a, b) => a - b);
+	if (!v.length) return null;
+	const m = Math.floor(v.length / 2);
+	return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+}
+function groupBy(arr, keyFn) {
+	const m = new Map();
+	for (const r of arr) { const k = keyFn(r); if (!m.has(k)) m.set(k, []); m.get(k).push(r); }
+	return m;
+}
+
+// --- Filters -------------------------------------------------------------------------
+function buildFilters() {
+	const versions = [...new Set(DATA.runs.map((r) => r.game_version || "unversioned"))].sort().reverse();
+	const sel = $("f-version");
+	const prev = sel.value;
+	sel.innerHTML = `<option value="">All versions</option>` + versions.map((v) => `<option>${esc(v)}</option>`).join("");
+	if (versions.includes(prev)) sel.value = prev;
+
+	const builds = [...new Set(DATA.runs.map((r) => r.build_type || "unknown"))].sort();
+	const wrap = $("f-builds");
+	const checked = new Set([...wrap.querySelectorAll("input:checked")].map((i) => i.value));
+	const firstTime = wrap.children.length === 0;
+	wrap.innerHTML = builds.map((b) => {
+		const on = firstTime ? true : checked.has(b) || !wrap.dataset.known?.split(",").includes(b);
+		return `<label class="chip"><input type="checkbox" value="${esc(b)}" ${on ? "checked" : ""}> ${esc(b)}</label>`;
+	}).join(" ");
+	wrap.dataset.known = builds.join(",");
+}
+
+function filtered() {
+	const version = $("f-version").value;
+	const days = Number($("f-period").value);
+	const builds = new Set([...$("f-builds").querySelectorAll("input:checked")].map((i) => i.value));
+	const since = days ? Date.now() - days * 86400000 : 0;
+	const runs = DATA.runs.filter((r) =>
+		(!version || (r.game_version || "unversioned") === version) &&
+		builds.has(r.build_type || "unknown") &&
+		(!since || new Date(r.ended_at).getTime() >= since));
+	const ids = new Set(runs.map((r) => r.id));
+	return {
+		runs,
+		rifts: DATA.rifts.filter((x) => ids.has(x.run_id)),
+		bosses: DATA.bosses.filter((x) => ids.has(x.run_id)),
+		counts: DATA.counts.filter((x) => ids.has(x.run_id)),
+	};
+}
+
+// --- Components -----------------------------------------------------------------------
+function tiles(items) {
+	$("tiles").innerHTML = items.map((t) =>
+		`<div class="tile"><div class="k">${esc(t.k)}</div><div class="v">${esc(t.v)}</div>${t.h ? `<div class="h">${esc(t.h)}</div>` : ""}</div>`
+	).join("");
+}
+
+// rows: [{label, value, display, tip}]
+function hbars(el, rows, emptyText) {
+	if (!rows.length) { el.innerHTML = `<div class="empty">${esc(emptyText || "No data yet.")}</div>`; return; }
+	const max = Math.max(...rows.map((r) => r.value), 0) || 1;
+	el.innerHTML = `<div class="hbars">` + rows.map((r) =>
+		`<div class="lab" title="${esc(r.label)}">${esc(r.label)}</div>
+		<div class="track" data-tip="${esc(r.tip || `${r.label}: ${r.display}`)}">
+			<div class="fill" style="width:calc(${(r.value / max) * 100}% - 70px)"></div>
+			<span class="val">${esc(r.display)}</span>
+		</div>`
+	).join("") + `</div>`;
+}
+
+// rows: [{label, value, tip}]
+function columns(el, rows, xTitle, emptyText) {
+	if (!rows.length) { el.innerHTML = `<div class="empty">${esc(emptyText || "No data yet.")}</div>`; return; }
+	const max = Math.max(...rows.map((r) => r.value), 0) || 1;
+	const showCaps = rows.length <= 20;
+	el.innerHTML =
+		`<div class="cols">` + rows.map((r) =>
+			`<div class="c" data-tip="${esc(r.tip || `${r.label}: ${r.value}`)}">
+				${showCaps ? `<span class="cap">${r.value ? n0(r.value) : ""}</span>` : ""}
+				<div class="bar-v" style="height:${(r.value / max) * 85}%"></div>
+			</div>`).join("") + `</div>` +
+		`<div class="cols-x">` + rows.map((r, i) =>
+			`<span>${rows.length > 20 && i % Math.ceil(rows.length / 10) ? "" : esc(r.label)}</span>`).join("") + `</div>` +
+		(xTitle ? `<div class="axis-title">${esc(xTitle)}</div>` : "");
+}
+
+// cols: [{key, label, num, fmt, html}], rows: objects
+function table(el, cols, rows, opts = {}) {
+	if (!rows.length) { el.innerHTML = `<div class="empty">${esc(opts.empty || "No data yet.")}</div>`; return; }
+	let sortKey = el.dataset.sortKey || opts.sort || cols[0].key;
+	let sortDir = el.dataset.sortDir ? Number(el.dataset.sortDir) : (opts.dir ?? -1);
+	if (!cols.some((c) => c.key === sortKey)) { sortKey = opts.sort || cols[0].key; sortDir = opts.dir ?? -1; }
+	const sorted = [...rows].sort((a, b) => {
+		const x = a[sortKey], y = b[sortKey];
+		if (x == null && y == null) return 0;
+		if (x == null) return 1;
+		if (y == null) return -1;
+		return (x > y ? 1 : x < y ? -1 : 0) * sortDir;
+	});
+	const limit = opts.limit && !el.dataset.showAll ? opts.limit : Infinity;
+	const shown = sorted.slice(0, limit);
+	el.innerHTML = `<div class="tbl-wrap"><table><thead><tr>` +
+		cols.map((c) => `<th class="${c.num ? "num" : ""}" data-key="${c.key}">${esc(c.label)}${c.key === sortKey ? ` <span class="arrow">${sortDir > 0 ? "▲" : "▼"}</span>` : ""}</th>`).join("") +
+		`</tr></thead><tbody>` +
+		shown.map((r) => `<tr class="${opts.onRow ? "clickable" : ""}" data-id="${esc(r.id ?? "")}">` + cols.map((c) =>
+			`<td class="${c.num ? "num" : ""}">${c.html ? c.html(r) : esc(c.fmt ? c.fmt(r[c.key], r) : r[c.key] ?? "–")}</td>`).join("") + `</tr>`).join("") +
+		`</tbody></table></div>` +
+		(sorted.length > shown.length ? `<button class="more">Show all ${sorted.length}</button>` : "");
+	el.querySelectorAll("th").forEach((th) => th.onclick = () => {
+		const k = th.dataset.key;
+		el.dataset.sortDir = k === sortKey ? -sortDir : -1;
+		el.dataset.sortKey = k;
+		table(el, cols, rows, opts);
+	});
+	const more = el.querySelector(".more");
+	if (more) more.onclick = () => { el.dataset.showAll = "1"; table(el, cols, rows, opts); };
+	if (opts.onRow) el.querySelectorAll("tbody tr").forEach((tr) => tr.onclick = () => opts.onRow(tr.dataset.id));
+}
+
+function meter(v) {
+	if (v == null || isNaN(v)) return "–";
+	return `${pct(v)}<span class="meter"><i style="width:${Math.round(v * 100)}%"></i></span>`;
+}
+function resultBadge(r) { return `<span class="result ${esc(r)}">${esc(r ? r.replaceAll("_", " ") : "–")}</span>`; }
+
+// --- Render ---------------------------------------------------------------------------
+function render() {
+	const f = filtered();
+	const runs = f.runs;
+	$("f-count").textContent = `${runs.length} of ${DATA.runs.length} runs`;
+
+	const players = new Set(runs.map((r) => r.player_id)).size;
+	const hits = sum(runs, (r) => r.arrow_hits), misses = sum(runs, (r) => r.arrow_misses);
+	const shots = sum(runs, (r) => r.shots), perfect = sum(runs, (r) => r.perfect_shots);
+	const won = runs.filter((r) => r.result === "won").length;
+	tiles([
+		{ k: "Runs", v: n0(runs.length), h: `${n0(players)} player${players === 1 ? "" : "s"}` },
+		{ k: "Avg run time", v: dur(avg(runs, (r) => r.active_sec)), h: `median ${dur(median(runs, (r) => r.active_sec))}` },
+		{ k: "Avg rift reached", v: n1(avg(runs, (r) => r.rift_reached)), h: `best ${n0(Math.max(0, ...runs.map((r) => r.rift_reached || 0)))}` },
+		{ k: "Win rate", v: runs.length ? pct(won / runs.length) : "–", h: `${n0(won)} won` },
+		{ k: "Kills per run", v: n1(avg(runs, (r) => r.enemies_killed)), h: `${n1(avg(runs, (r) => r.elites_killed))} elites` },
+		{ k: "Hit rate", v: hits + misses ? pct(hits / (hits + misses)) : "–", h: "arrow hits / (hits + misses)" },
+		{ k: "Perfect pulls", v: shots ? pct(perfect / shots) : "–", h: `${n0(shots)} shots` },
+		{ k: "Damage taken per run", v: n1(avg(runs, (r) => r.damage_taken)), h: `${n1(avg(runs, (r) => r.falls))} falls` },
+		{ k: "Gold per run", v: n0(avg(runs, (r) => r.gold)), h: `${n1(avg(runs, (r) => r.chests_opened))} chests` },
+	]);
+
+	// Where runs end
+	const maxRift = Math.max(0, ...runs.map((r) => r.rift_reached || 0));
+	const reach = [];
+	for (let i = 1; i <= maxRift; i++) {
+		const n = runs.filter((r) => r.rift_reached === i).length;
+		reach.push({ label: String(i), value: n, tip: `Ended at rift ${i}: ${n} run${n === 1 ? "" : "s"} (${pct(n / runs.length)})` });
+	}
+	columns($("c-reach"), reach, "Rift level");
+
+	// Cause of death
+	const deaths = runs.filter((r) => r.result === "died");
+	const causes = [...groupBy(deaths, (r) => r.death_cause || "Unknown")].map(([k, v]) => ({
+		label: k, value: v.length, display: `${v.length} · ${pct(v.length / deaths.length)}`,
+		tip: `${k}\n${v.length} deaths (${pct(v.length / deaths.length)})`,
+	})).sort((a, b) => b.value - a.value);
+	hbars($("c-cause"), causes, "No deaths in this selection.");
+
+	// Rifts
+	const endedAt = groupBy(deaths, (r) => r.rift_reached);
+	const riftRows = [...groupBy(f.rifts, (x) => x.rift_index)].map(([idx, v]) => ({
+		rift: idx,
+		biome: [...new Set(v.map((x) => x.biome).filter(Boolean))].join(", ") || "–",
+		visits: v.length,
+		time: avg(v, (x) => x.duration_sec),
+		kills: avg(v, (x) => x.kills),
+		dmg: avg(v, (x) => x.damage_taken),
+		hits: avg(v, (x) => x.hits_taken),
+		falls: avg(v, (x) => x.falls),
+		dealt: avg(v, (x) => x.damage_dealt),
+		deaths: (endedAt.get(idx) || []).length,
+		deathRate: (endedAt.get(idx) || []).length / v.length,
+	}));
+	table($("t-rifts"), [
+		{ key: "rift", label: "Rift", num: true },
+		{ key: "biome", label: "Biome" },
+		{ key: "visits", label: "Visits", num: true, fmt: n0 },
+		{ key: "time", label: "Avg time", num: true, fmt: dur },
+		{ key: "kills", label: "Kills", num: true, fmt: n1 },
+		{ key: "dealt", label: "Dmg dealt", num: true, fmt: n0 },
+		{ key: "dmg", label: "Dmg taken", num: true, fmt: n1 },
+		{ key: "hits", label: "Hits taken", num: true, fmt: n1 },
+		{ key: "falls", label: "Falls", num: true, fmt: n1 },
+		{ key: "deaths", label: "Runs ended", num: true, fmt: n0 },
+		{ key: "deathRate", label: "Death rate", num: true, html: (r) => meter(r.deathRate) },
+	], riftRows, { sort: "rift", dir: 1 });
+
+	// Bosses
+	const bossRows = [...groupBy(f.bosses, (x) => x.name || "Unknown")].map(([name, v]) => ({
+		name, fights: v.length,
+		winRate: v.filter((x) => x.won).length / v.length,
+		time: avg(v, (x) => x.duration_sec),
+		dmg: avg(v, (x) => x.damage_taken),
+		dealt: avg(v, (x) => x.damage_dealt),
+		rift: avg(v, (x) => x.after_rift),
+	}));
+	table($("t-bosses"), [
+		{ key: "name", label: "Boss" },
+		{ key: "fights", label: "Fights", num: true, fmt: n0 },
+		{ key: "winRate", label: "Won", num: true, html: (r) => meter(r.winRate) },
+		{ key: "time", label: "Avg time", num: true, fmt: dur },
+		{ key: "dmg", label: "Dmg taken", num: true, fmt: n1 },
+		{ key: "rift", label: "At rift", num: true, fmt: n1 },
+	], bossRows, { sort: "fights" });
+
+	renderGear(runs);
+
+	// Enemies
+	const byCat = (cat) => f.counts.filter((c) => c.category === cat);
+	const kills = groupBy([...byCat("enemy"), ...byCat("elite"), ...byCat("boss")], (c) => c.name);
+	const dmgSrc = groupBy(byCat("damage_source"), (c) => c.name);
+	const deathBy = groupBy(deaths, (r) => r.death_cause);
+	const enemyNames = new Set([...kills.keys(), ...dmgSrc.keys()]);
+	enemyNames.delete("Fall"); enemyNames.delete("Effect");
+	const enemyRows = [...enemyNames].map((name) => ({
+		name,
+		kills: sum(kills.get(name) || [], (c) => c.count),
+		perRun: runs.length ? sum(kills.get(name) || [], (c) => c.count) / runs.length : null,
+		dmg: sum(dmgSrc.get(name) || [], (c) => c.count),
+		deaths: (deathBy.get(name) || []).length,
+	}));
+	table($("t-enemies"), [
+		{ key: "name", label: "Enemy" },
+		{ key: "kills", label: "Killed", num: true, fmt: n0 },
+		{ key: "perRun", label: "Per run", num: true, fmt: n1 },
+		{ key: "dmg", label: "Dmg to player", num: true, fmt: n0 },
+		{ key: "deaths", label: "Deaths caused", num: true, fmt: n0 },
+	], enemyRows, { sort: "kills" });
+
+	// Events
+	const done = groupBy(byCat("event_completed"), (c) => c.name);
+	const failed = groupBy(byCat("event_failed"), (c) => c.name);
+	const eventRows = [...new Set([...done.keys(), ...failed.keys()])].map((name) => {
+		const d = sum(done.get(name) || [], (c) => c.count), x = sum(failed.get(name) || [], (c) => c.count);
+		return { name, done: d, failed: x, total: d + x, rate: d / (d + x) };
+	});
+	table($("t-events"), [
+		{ key: "name", label: "Event" },
+		{ key: "total", label: "Played", num: true, fmt: n0 },
+		{ key: "done", label: "Completed", num: true, fmt: n0 },
+		{ key: "failed", label: "Failed", num: true, fmt: n0 },
+		{ key: "rate", label: "Success", num: true, html: (r) => meter(r.rate) },
+	], eventRows, { sort: "total" });
+
+	// Economy + objects (per run averages over all filtered runs)
+	const perRun = (cat) => [...groupBy(byCat(cat), (c) => c.name)].map(([name, v]) => {
+		const a = runs.length ? sum(v, (c) => c.count) / runs.length : 0;
+		return { label: name.charAt(0).toUpperCase() + name.slice(1), value: a, display: n1(a), tip: `${name}: ${n1(a)} per run (${n0(sum(v, (c) => c.count))} total)` };
+	}).sort((a, b) => b.value - a.value);
+	hbars($("c-economy"), perRun("resource"));
+	hbars($("c-objects"), perRun("object"));
+
+	// Runs per day
+	const byDay = groupBy(runs, (r) => new Date(r.ended_at).toLocaleDateString(undefined, { year: "numeric", month: "2-digit", day: "2-digit" }));
+	const dayRows = [];
+	if (runs.length) {
+		const times = runs.map((r) => new Date(r.ended_at));
+		const start = new Date(Math.min(...times)); start.setHours(0, 0, 0, 0);
+		const end = new Date(Math.max(...times)); end.setHours(0, 0, 0, 0);
+		for (let d = new Date(start); d <= end && dayRows.length < 400; d.setDate(d.getDate() + 1)) {
+			const key = d.toLocaleDateString(undefined, { year: "numeric", month: "2-digit", day: "2-digit" });
+			const n = (byDay.get(key) || []).length;
+			dayRows.push({ label: d.toLocaleDateString(undefined, { month: "short", day: "numeric" }), value: n, tip: `${d.toLocaleDateString()}: ${n} run${n === 1 ? "" : "s"}` });
+		}
+	}
+	columns($("c-days"), dayRows);
+
+	// Runs list
+	table($("t-runs"), [
+		{ key: "ended_at", label: "Ended", fmt: (v) => new Date(v).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) },
+		{ key: "game_version", label: "Version" },
+		{ key: "build_type", label: "Build" },
+		{ key: "result", label: "Result", html: (r) => resultBadge(r.result) },
+		{ key: "death_cause", label: "Cause" },
+		{ key: "rift_reached", label: "Rift", num: true },
+		{ key: "active_sec", label: "Time", num: true, fmt: dur },
+		{ key: "enemies_killed", label: "Kills", num: true, fmt: n0 },
+		{ key: "damage_taken", label: "Dmg taken", num: true, fmt: n0 },
+		{ key: "final_bow", label: "Bow" },
+		{ key: "final_quiver", label: "Quiver" },
+		{ key: "final_ring", label: "Ring" },
+	], runs, { sort: "ended_at", limit: 50, onRow: openRun });
+}
+
+function renderGear(runs) {
+	const slots = [["final_bow", "Bows"], ["final_quiver", "Quivers"], ["final_ring", "Rings"]];
+	$("gear-tabs").innerHTML = slots.map(([k, l]) => `<button data-k="${k}" class="${k === gearSlot ? "on" : ""}">${l}</button>`).join("");
+	$("gear-tabs").querySelectorAll("button").forEach((b) => b.onclick = () => { gearSlot = b.dataset.k; renderGear(filtered().runs); });
+	const rows = [...groupBy(runs, (r) => r[gearSlot] || "(none)")].map(([name, v]) => ({
+		name, runs: v.length,
+		rift: avg(v, (r) => r.rift_reached),
+		time: avg(v, (r) => r.active_sec),
+		winRate: v.filter((r) => r.result === "won").length / v.length,
+	}));
+	table($("t-gear"), [
+		{ key: "name", label: "Item" },
+		{ key: "runs", label: "Runs", num: true, fmt: n0 },
+		{ key: "rift", label: "Avg rift", num: true, fmt: n1 },
+		{ key: "time", label: "Avg time", num: true, fmt: dur },
+		{ key: "winRate", label: "Won", num: true, html: (r) => meter(r.winRate) },
+	], rows, { sort: "runs" });
+}
+
+// --- Run detail -----------------------------------------------------------------------
+async function openRun(id) {
+	const dlg = $("detail");
+	const run = DATA.runs.find((r) => r.id === id);
+	dlg.innerHTML = `<button class="close" onclick="this.closest('dialog').close()">Close</button><h2>Run ${esc(id.slice(0, 8))}</h2><p class="sub">Loading full summary…</p>`;
+	dlg.showModal();
+	let data = null;
+	try { data = await rpc("analytics_run", { p_password: $("pw").value, p_run_id: id }); } catch (e) {}
+	const rifts = DATA.rifts.filter((x) => x.run_id === id).sort((a, b) => a.seq - b.seq);
+	const bosses = DATA.bosses.filter((x) => x.run_id === id).sort((a, b) => a.seq - b.seq);
+	const kv = (k, v) => `<div class="tile"><div class="k">${esc(k)}</div><div class="v" style="font-size:18px">${v}</div></div>`;
+	const gear = data?.build?.gear_changes || [];
+	dlg.innerHTML = `
+		<button class="close" onclick="this.closest('dialog').close()">Close</button>
+		<h2>${resultBadge(run.result)} at rift ${esc(run.rift_reached)} ${run.death_cause ? `· ${esc(run.death_cause)}` : ""}</h2>
+		<p class="sub">${esc(new Date(run.ended_at).toLocaleString())} · v${esc(run.game_version)} · ${esc(run.build_type)} · ${esc(run.platform)} · player ${esc((run.player_id || "").slice(0, 8))}</p>
+		<div class="tiles">
+			${kv("Play time", esc(dur(run.active_sec)))}
+			${kv("Kills", esc(n0(run.enemies_killed)))}
+			${kv("Damage dealt", esc(n0(run.damage_dealt)))}
+			${kv("Damage taken", esc(n0(run.damage_taken)))}
+			${kv("Hit rate", esc(run.arrow_hits + run.arrow_misses ? pct(run.arrow_hits / (run.arrow_hits + run.arrow_misses)) : "–"))}
+			${kv("Perfect pulls", esc(run.shots ? pct(run.perfect_shots / run.shots) : "–"))}
+			${kv("Falls", esc(n0(run.falls)))}
+			${kv("Gold", esc(n0(run.gold)))}
+		</div>
+		<h3>Rifts</h3><div id="d-rifts"></div>
+		<h3>Bosses and elites</h3><div id="d-bosses"></div>
+		<h3>Gear</h3>
+		<p class="sub">Start: ${esc(Object.values(data?.build?.start_gear || {}).map((g) => g.name).join(", ") || "–")}
+			· End: ${esc([run.final_bow, run.final_quiver, run.final_ring].filter(Boolean).join(", ") || "–")}
+			${data?.build?.crafted_item ? `· Crafted: ${esc(data.build.crafted_item)}` : ""}</p>
+		<div id="d-gear"></div>
+		<details><summary>Full JSON</summary><pre>${esc(data ? JSON.stringify(data, null, 2) : "Couldn't load the full summary.")}</pre></details>`;
+	table($("d-rifts"), [
+		{ key: "rift_index", label: "Rift", num: true },
+		{ key: "biome", label: "Biome" },
+		{ key: "duration_sec", label: "Time", num: true, fmt: dur },
+		{ key: "kills", label: "Kills", num: true },
+		{ key: "damage_dealt", label: "Dmg dealt", num: true },
+		{ key: "damage_taken", label: "Dmg taken", num: true },
+		{ key: "falls", label: "Falls", num: true },
+		{ key: "chests", label: "Chests", num: true },
+		{ key: "events_completed", label: "Events won", num: true },
+	], rifts, { sort: "seq", dir: 1, empty: "No rifts recorded." });
+	table($("d-bosses"), [
+		{ key: "name", label: "Boss" },
+		{ key: "after_rift", label: "At rift", num: true },
+		{ key: "duration_sec", label: "Time", num: true, fmt: dur },
+		{ key: "damage_dealt", label: "Dmg dealt", num: true },
+		{ key: "damage_taken", label: "Dmg taken", num: true },
+		{ key: "won", label: "Result", html: (r) => resultBadge(r.won ? "won" : "died") },
+	], bosses, { sort: "seq", dir: 1, empty: "No boss fights." });
+	table($("d-gear"), [
+		{ key: "rift", label: "Rift", num: true },
+		{ key: "slot", label: "Slot", fmt: (v) => v === "arrow" ? "quiver" : v },
+		{ key: "name", label: "Item" },
+		{ key: "rarity", label: "Rarity", num: true },
+	], gear.map((g, i) => ({ ...g, seq: i })), { sort: "seq", dir: 1, empty: "No gear swaps." });
+}
+
+// --- Tooltip --------------------------------------------------------------------------
+document.addEventListener("mousemove", (e) => {
+	const tip = $("tip");
+	const t = e.target.closest("[data-tip]");
+	if (!t) { tip.style.display = "none"; return; }
+	tip.textContent = t.dataset.tip;
+	tip.style.display = "block";
+	const x = Math.min(e.clientX + 12, window.innerWidth - tip.offsetWidth - 8);
+	const y = Math.max(8, e.clientY - tip.offsetHeight - 12);
+	tip.style.left = `${x}px`;
+	tip.style.top = `${y}px`;
+});
+
+// --- Wiring ---------------------------------------------------------------------------
+$("load").onclick = load;
+$("pw").addEventListener("keydown", (e) => { if (e.key === "Enter") load(); });
+["f-version", "f-period"].forEach((id) => $(id).addEventListener("change", render));
+$("f-builds").addEventListener("change", render);
+const saved = storeGet();
+if (saved) { $("pw").value = saved; $("remember").checked = true; load(); }
+</script>
+</body>
+</html>

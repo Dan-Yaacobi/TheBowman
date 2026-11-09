@@ -298,6 +298,89 @@ revoke all on function public.json_count_total(jsonb) from anon, authenticated;
 revoke all on function public.submit_run(jsonb) from public;
 grant execute on function public.submit_run(jsonb) to anon;
 
+-- --- Dashboard access ---------------------------------------------------------------
+-- The dashboard (docs/analytics/dashboard.html) reads through these two functions with the
+-- same publishable key as the game, plus a dashboard password only you know.
+-- Set or change the password by running this line on its own in the SQL Editor:
+--     select public.set_dashboard_password('your-long-password-here');
+
+create table if not exists public.analytics_access (
+	id             int primary key default 1 check (id = 1),
+	password_hash  text not null
+);
+alter table public.analytics_access enable row level security;
+revoke all on public.analytics_access from anon, authenticated;
+
+create or replace function public.set_dashboard_password(p_password text)
+returns text
+language plpgsql
+set search_path = public
+as $$
+begin
+	if length(coalesce(p_password, '')) < 12 then
+		raise exception 'use at least 12 characters';
+	end if;
+	insert into public.analytics_access (id, password_hash)
+	values (1, encode(sha256(convert_to(p_password, 'UTF8')), 'hex'))
+	on conflict (id) do update set password_hash = excluded.password_hash;
+	return 'dashboard password set';
+end;
+$$;
+revoke all on function public.set_dashboard_password(text) from public, anon, authenticated;
+
+create or replace function public.check_dashboard_password(p_password text)
+returns void
+language plpgsql
+set search_path = public
+as $$
+begin
+	if not exists (
+		select 1 from public.analytics_access
+		where password_hash = encode(sha256(convert_to(coalesce(p_password, ''), 'UTF8')), 'hex')
+	) then
+		perform pg_sleep(1);  -- slows down guessing
+		raise exception 'wrong dashboard password' using errcode = '28P01';
+	end if;
+end;
+$$;
+revoke all on function public.check_dashboard_password(text) from public, anon, authenticated;
+
+-- Everything the dashboard needs except the raw JSON, in one call.
+create or replace function public.analytics_export(p_password text)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+	perform public.check_dashboard_password(p_password);
+	return jsonb_build_object(
+		'runs',   (select coalesce(jsonb_agg(to_jsonb(r) - 'data' order by r.ended_at desc), '[]'::jsonb) from public.runs r),
+		'rifts',  (select coalesce(jsonb_agg(to_jsonb(x)), '[]'::jsonb) from public.run_rifts x),
+		'bosses', (select coalesce(jsonb_agg(to_jsonb(x)), '[]'::jsonb) from public.run_bosses x),
+		'counts', (select coalesce(jsonb_agg(to_jsonb(x)), '[]'::jsonb) from public.run_counts x)
+	);
+end;
+$$;
+
+-- The full summary of one run, for the dashboard's run detail view.
+create or replace function public.analytics_run(p_password text, p_run_id uuid)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+	perform public.check_dashboard_password(p_password);
+	return (select data from public.runs where id = p_run_id);
+end;
+$$;
+
+revoke all on function public.analytics_export(text) from public;
+revoke all on function public.analytics_run(text, uuid) from public;
+grant execute on function public.analytics_export(text) to anon;
+grant execute on function public.analytics_run(text, uuid) to anon;
+
 -- --- Backfill -----------------------------------------------------------------------
 -- Rebuilds columns and detail rows of every stored run from its JSON. Cheap at this scale.
 
