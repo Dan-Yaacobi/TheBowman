@@ -23,6 +23,8 @@ class_name PauseMenu extends CanvasLayer
 @onready var fullscreen_toggle: CheckButton = $Control/SettingsPanel/VBox/FullscreenToggle
 @onready var music_toggle: CheckButton = $Control/SettingsPanel/VBox/MusicToggle
 @onready var sfx_toggle: CheckButton = $Control/SettingsPanel/VBox/SfxToggle
+@onready var data_toggle: CheckButton = $Control/SettingsPanel/VBox/DataToggle
+@onready var player_id_button: Button = $Control/SettingsPanel/VBox/PlayerIdButton
 
 # --- Restart confirm panel ---
 @onready var restart_confirm_panel: Control = $Control/RestartConfirmPanel
@@ -30,6 +32,8 @@ class_name PauseMenu extends CanvasLayer
 @onready var restart_no: Button = $Control/RestartConfirmPanel/VBox/NoButton
 
 # ---
+
+const COPIED_TEXT_SEC: float = 1.5
 
 enum PauseState { CLOSED, MAIN, HOW_TO_PLAY, SETTINGS, RESTART_CONFIRM, JOURNAL }
 
@@ -61,6 +65,8 @@ func _ready() -> void:
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
 	music_toggle.toggled.connect(_on_music_toggled)
 	sfx_toggle.toggled.connect(_on_sfx_toggled)
+	data_toggle.toggled.connect(_on_data_toggled)
+	player_id_button.pressed.connect(_on_player_id_button_pressed)
 
 	_set_state(PauseState.CLOSED)
 
@@ -141,13 +147,22 @@ func _open_stats() -> void:
 
 func _sync_settings_ui() -> void:
 	# Block signals so setting button_pressed doesn't fire toggled callbacks
-	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle]:
+	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle, data_toggle]:
 		toggle.set_block_signals(true)
 	fullscreen_toggle.button_pressed = SettingsManager.is_fullscreen()
 	music_toggle.button_pressed = SettingsManager.is_music_enabled()
 	sfx_toggle.button_pressed = SettingsManager.is_sfx_enabled()
-	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle]:
+	data_toggle.button_pressed = RunTracker.uploader.has_consent()
+	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle, data_toggle]:
 		toggle.set_block_signals(false)
+	_sync_player_id()
+
+
+## The ID only exists (and is only shown) while the player shares stats.
+func _sync_player_id() -> void:
+	var player_id: String = RunTracker.uploader.player_id
+	player_id_button.visible = not player_id.is_empty()
+	player_id_button.text = "Player ID (click to copy)\n" + player_id
 
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
@@ -160,6 +175,19 @@ func _on_music_toggled(enabled: bool) -> void:
 
 func _on_sfx_toggled(enabled: bool) -> void:
 	SettingsManager.set_sfx_enabled(enabled)
+
+
+func _on_data_toggled(enabled: bool) -> void:
+	RunTracker.uploader.set_consent(enabled)
+	_sync_player_id()
+
+
+func _on_player_id_button_pressed() -> void:
+	DisplayServer.clipboard_set(RunTracker.uploader.player_id)
+	player_id_button.text = "Copied!"
+	await get_tree().create_timer(COPIED_TEXT_SEC).timeout
+	if is_inside_tree() and _state == PauseState.SETTINGS:
+		_sync_player_id()
 
 
 func _on_feedback_pressed() -> void:

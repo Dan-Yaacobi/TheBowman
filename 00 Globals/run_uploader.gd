@@ -1,5 +1,6 @@
 class_name RunUploader extends Node
 ## Sends finished run summaries to Supabase. Created by RunTracker.
+## Nothing is created or sent until the player says yes on the consent screen (DataConsent).
 ## Every summary is written to disk first, then sent right away over HTTPS.
 ## The file is deleted once the server accepts it; anything that fails to send
 ## (no internet, game closed mid-request) is retried on the next launch and after each run.
@@ -16,9 +17,14 @@ const REQUEST_TIMEOUT: float = 15.0
 ## build_type for exported builds. Editor runs are always "dev". Switch to "public" for a public release.
 const EXPORT_BUILD_TYPE: String = "tester"
 
-## Anonymous, random, made on first launch. Identifies a device, not a person.
+const CONSENT_YES: String = "yes"
+const CONSENT_NO: String = "no"
+
+## Anonymous and random. Made only after the player agrees; cleared if they opt out.
 var player_id: String = ""
-var enabled: bool = true
+
+## "" until the player answers the consent screen.
+var _consent: String = ""
 
 var _http: HTTPRequest
 var _sending_path: String = ""
@@ -34,12 +40,31 @@ func _ready() -> void:
 	_load_config()
 	_send_next()
 
+## True until the player has answered the consent screen once.
+func needs_consent() -> bool:
+	return _consent.is_empty()
+
+func has_consent() -> bool:
+	return _consent == CONSENT_YES
+
+## Yes makes a player ID and starts sending. No deletes the ID and any runs waiting to be sent.
+func set_consent(accepted: bool) -> void:
+	_consent = CONSENT_YES if accepted else CONSENT_NO
+	if accepted:
+		if player_id.is_empty():
+			player_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	else:
+		player_id = ""
+		_clear_queue()
+	_save_config()
+	_send_next()
+
 func build_type() -> String:
 	return "dev" if OS.has_feature("editor") else EXPORT_BUILD_TYPE
 
 ## Queues a summary on disk and starts sending.
 func submit(summary: Dictionary) -> void:
-	if not enabled:
+	if not has_consent():
 		return
 	var path: String = "%s/%s.json" % [QUEUE_DIR, summary.get("run_id", str(Time.get_ticks_usec()))]
 	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
@@ -54,7 +79,7 @@ func submit(summary: Dictionary) -> void:
 # --- Sending ------------------------------------------------------------------------
 
 func _send_next() -> void:
-	if not enabled or not _sending_path.is_empty():
+	if not has_consent() or not _sending_path.is_empty():
 		return
 	var queued: PackedStringArray = _queued_files()
 	if queued.is_empty():
@@ -109,6 +134,12 @@ func _queued_files() -> PackedStringArray:
 			files.append(file_name)
 	return files
 
+func _clear_queue() -> void:
+	_http.cancel_request()
+	_sending_path = ""
+	for file_name: String in _queued_files():
+		DirAccess.remove_absolute("%s/%s" % [QUEUE_DIR, file_name])
+
 func _trim_queue() -> void:
 	var files: PackedStringArray = _queued_files()
 	if files.size() <= MAX_QUEUED:
@@ -124,10 +155,15 @@ func _trim_queue() -> void:
 func _load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	config.load(CONFIG_PATH)
-	player_id = str(config.get_value("analytics", "player_id", ""))
-	enabled = bool(config.get_value("analytics", "enabled", true))
-	if player_id.is_empty():
-		player_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	_consent = str(config.get_value("analytics", "consent", ""))
+	# Older builds made an ID without asking. Only keep it once the player has said yes.
+	player_id = str(config.get_value("analytics", "player_id", "")) if has_consent() else ""
+	if _consent == CONSENT_NO:
+		_clear_queue()
+
+func _save_config() -> void:
+	var config: ConfigFile = ConfigFile.new()
+	config.set_value("analytics", "consent", _consent)
+	if has_consent():
 		config.set_value("analytics", "player_id", player_id)
-		config.set_value("analytics", "enabled", enabled)
-		config.save(CONFIG_PATH)
+	config.save(CONFIG_PATH)
