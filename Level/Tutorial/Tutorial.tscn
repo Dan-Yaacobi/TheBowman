@@ -3,9 +3,13 @@
 [ext_resource type="Script" path="res://Level/Tutorial/tutorial.gd" id="1_tutorial"]
 [ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="2_sky"]
 [ext_resource type="PackedScene" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="3_spirit"]
-[ext_resource type="PackedScene" path="res://General Nodes/PlayerSpawn.tscn" id="4_spawn"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="4_bow"]
 [ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="5_island"]
 [ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="6_fall"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="7_quiver"]
+[ext_resource type="PackedScene" path="res://Objects/Scenes/Crate.tscn" id="8_crate"]
+[ext_resource type="PackedScene" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="9_dummy"]
+[ext_resource type="PackedScene" path="res://Items/LootManager/LootManager.tscn" id="10_loot"]
 
 [sub_resource type="Resource" id="Resource_sky"]
 script = ExtResource("2_sky")
@@ -15,14 +19,55 @@ bottom_color = Color(0.6, 0.8509804, 1, 1)
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_tutorial")
 sky_colors = SubResource("Resource_sky")
-intro_lines = Array[String](["You stir. Good. The void did not keep you. It lets very little go.", "I am what remains of this world's heart. When it shattered, I woke in the pieces.", "You have a bow-hand. An archer, then. The last one, I think. The wizards saw to the rest.", "You look lost. The rupture tore more than the land. Let me remind your body what it knows."])
+bow_template = ExtResource("4_bow")
+quiver_template = ExtResource("7_quiver")
+crate_scene = ExtResource("8_crate")
+intro_lines = Array[String](["You stir. Good. The void did not keep you. It lets very little go.", "I am what remains of this world's heart. When it shattered, I woke in the pieces.", "You carry yourself like an archer. The last one, I think. The wizards saw to the rest.", "You look lost. The rupture tore more than the land. Let me remind your body what it knows."])
+jump_lines = Array[String](["The ground broke when the world did. Now it drifts in pieces, trying to remember it was whole.", "Cross to the next island. The gap is small. Jump."])
+dash_lines = Array[String](["Good. Your legs remember.", "This gap is wider. Legs alone will not carry you over it.", "Archers were always quicker than the world around them. Leap, and while you are in the air, dash.", "Hold W as you dash and you will rise instead."])
+fall_lines = Array[String](["Now look down.", "There is nothing below. No ground, no bottom. Only the void.", "Step off the edge. I need you to feel it once, while I am here to watch."])
+already_fell_lines = Array[String](["You have already met the void, I see. It threw you back, as it always does."])
+after_fall_lines = Array[String](["The void does not keep what falls into it. It spits it back into the world.", "But it always takes something. Look at your hearts. One is gone.", "Every fall costs you a heart. When none remain, the void claims you, and you wake again in the haven, beside me."])
+sword_lines = Array[String](["Something drifted here from the broken places. Break it.", "Your blade is for whatever gets too close. A swing knocks it back and buys you room."])
+bow_lines = Array[String](["There. Those found their way to me after the rupture.", "A bow and a quiver. The wizards made them for your people, long ago, when wizards and archers were friends.", "Then the wizards took them back and locked them away. The rupture scattered them across the void.", "These are plain things. Stronger ones still drift out there, waiting for an archer's hand. Take these."])
+bow_hit_lines = Array[String](["Your hands know that weight. On the far island stands something that will not mind being shot.", "Hold to draw. Let go to loose. Every release flies, even a hasty one."])
+perfect_shot_lines = Array[String](["It flew. Now make it sing.", "Draw until the bow is full, and let go in that moment, before your arm tires.", "A perfect release strikes far harder than a hasty one. Your people lived by it."])
+stats_lines = Array[String](["Every artifact you carry changes you. Bows, quivers, the rings the wizards forged.", "When you want to see what you have become, look inward."])
+menu_lines = Array[String](["And when you need to stop and breathe, the world will wait for you.", "From there you can rest, look over the artifacts you have found, or change how the world feels."])
 outro_lines = Array[String](["Your hands remember, even if your mind does not.", "Beyond here, rifts tear through what is left of the world. Each one you cross, I feel a little less scattered.", "When the void grows too strong for you, it will send you back to me. Rest, then rise again.", "Come. I will show you what remains of home."])
+jump_goal = "Jump to the next island   [A] [D] move   [Space] jump"
+dash_goal = "Jump, then dash in mid-air to cross   [Shift] dash"
+fall_goal = "Step off the edge into the void"
+sword_goal = "Break the crate   [Right Mouse] sword"
+gear_goal = "Take the bow and the quiver   walk over one, press [E], click Equip"
+bow_hit_goal = "Hit the target   hold [Left Mouse] to draw, release to shoot"
+perfect_shot_goal = "Land a perfect shot   release right as the draw fills"
+stats_goal = "Press [TAB] to see your gear and stats, then close it"
+menu_goal = "Press [ESC] to open the menu, then close it"
 
 [node name="WorldSpirit" parent="." instance=ExtResource("3_spirit")]
-position = Vector2(-40, 50)
+position = Vector2(-33, 35)
 
-[node name="PlayerSpawn" parent="." instance=ExtResource("4_spawn")]
+[node name="LootManager" parent="." instance=ExtResource("10_loot")]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Start" type="Marker2D" parent="Checkpoints"]
 position = Vector2(22, 75)
+
+[node name="Jump" type="Marker2D" parent="Checkpoints"]
+position = Vector2(152, 67)
+
+[node name="Dash" type="Marker2D" parent="Checkpoints"]
+position = Vector2(364, 67)
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="CrateSpot" type="Marker2D" parent="Markers"]
+position = Vector2(408, 89)
+
+[node name="GearSpot" type="Marker2D" parent="Markers"]
+position = Vector2(350, 75)
 
 [node name="Islands" type="Node2D" parent="."]
 
@@ -49,6 +94,9 @@ position = Vector2(408, 92)
 
 [node name="Target" parent="Islands" instance=ExtResource("5_island")]
 position = Vector2(560, 60)
+
+[node name="TargetDummy" parent="Islands/Target" instance=ExtResource("9_dummy")]
+position = Vector2(-1, -18)
 
 [node name="FallingDeath" parent="." instance=ExtResource("6_fall")]
 position = Vector2(0, 500)

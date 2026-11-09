@@ -18,9 +18,6 @@ func extra_set_world_functions() -> void:
 		EventBus.change_sky_color.emit(sky_colors)
 	loot_manager.set_up()
 	_equip_starting_gear.call_deferred()
-	if not PlayerManager.player.target_dummy_tutorial_passed:
-		rift_portal.disable()
-	EventBus.tutorial_done.connect(tutorial_done)
 	
 	for island in islands.get_children():
 		if island is Island:
@@ -41,9 +38,6 @@ func _equip_starting_item(template: EquipmentData, player: Player) -> void:
 	player.add_child(new_equip)
 	new_equip.equip_directly()
 
-func tutorial_done() -> void:
-	rift_portal.enable()
-	
 func extra_exit_world_functions() -> void:
 	loot_manager.unset_up()
 	

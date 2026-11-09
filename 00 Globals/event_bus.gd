@@ -3,7 +3,6 @@ extends Node
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-signal tutorial_done
 signal dash_preformed
 signal dash_ended
 signal start_shooting

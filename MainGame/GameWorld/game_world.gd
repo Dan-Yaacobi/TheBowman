@@ -95,7 +95,8 @@ func despawn_equipments() -> void:
 		if child is Equipment:
 			child.clear_item(child)
 
-func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equip: Equipment = null) -> void:
+## Returns the dropped node (new or existing).
+func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equip: Equipment = null) -> Equipment:
 	var new_equip: Equipment
 	if _existing_equip:
 		new_equip = _existing_equip
@@ -108,6 +109,7 @@ func drop_equipment(equip_data: EquipmentData, _position: Vector2, _existing_equ
 		call_deferred("add_child",new_equip)
 	else:
 		new_equip.call_deferred("reparent", self)
+	return new_equip
 func enter_event(event_scene: PackedScene, return_position: Vector2) -> Vector2:
 	_event_return_position = return_position
 	_suspend_world()

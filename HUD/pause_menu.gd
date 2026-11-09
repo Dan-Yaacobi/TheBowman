@@ -102,8 +102,9 @@ func _set_state(new_state: PauseState) -> void:
 	if _state == PauseState.JOURNAL:
 		artifact_journal.refresh()
 	if _state == PauseState.MAIN:
-		# Only offered during a run; in the hub there is nothing to abandon.
-		restart_button.visible = not PlayerManager.player.get_parent() is MainMenu
+		# Only offered during a run; in the hub and tutorial there is nothing to abandon.
+		var world: Node = PlayerManager.player.get_parent()
+		restart_button.visible = not (world is MainMenu or world is Tutorial)
 
 
 func _close() -> void:
