@@ -62,6 +62,7 @@ func add_modifier(stat_name: String, amount: float, _type: Stat.buff_type) -> vo
 	modifiers.append(StatModifier.new(amount, stat_name, _type))
 
 ## Multiplier from this item's color level (color scrolls). Only scrolls of the same color raise it.
+## Used for the color label; abilities and the bow hit read the same level elsewhere.
 ## Looked up at runtime like PlayerAbility.power(), so this resource never depends on Player or ColorLevels.
 func power() -> float:
 	var tree: SceneTree = Engine.get_main_loop() as SceneTree
@@ -86,11 +87,11 @@ func color_label() -> String:
 		return text
 	return "%s  Lv %d (+%d%%)" % [text, level, roundi((power() - 1.0) * 100.0)]
 
-## A rolled stat's value after the item's color level.
+## A rolled stat's value as applied. Color levels don't scale stat rolls: they scale the item's
+## abilities (PlayerAbility.power) and, for bows, the arrow hit (ColorLevels.get_bow_power).
+## Scaling rolls too would count the bow's color twice on Arrow Damage.
 func scaled_amount(mod: StatModifier) -> float:
-	if PlayerStats.is_unscaled(mod.stat_name):
-		return mod.amount
-	return mod.amount * power()
+	return mod.amount
 
 func equip(player_stats: PlayerStats) -> void:
 	if color == CustomVariables.ItemColor.NONE:

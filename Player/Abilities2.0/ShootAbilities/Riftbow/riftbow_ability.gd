@@ -21,7 +21,8 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	portal.target = enemy
 	portal.target_position = enemy.global_position
 	portal.roll = RiftPortal.Roll.values().pick_random()
-	portal.damage = maxi(1, roundi(hurt_box.damage * damage_mult * power()))
+	# The arrow's damage already includes the bow's color level; scaling again would count it twice.
+	portal.damage = maxi(1, roundi(hurt_box.damage * damage_mult))
 	portal.knockback = hurt_box.knockback_power
 	portal.fist_knockback = fist_knockback * power()
 	# Open above-ish the enemy, on a random side, so the shot comes in at an angle.

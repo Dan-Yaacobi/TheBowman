@@ -76,7 +76,7 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 		var display: String = _display_name(stat_name)
 		var new_has: bool = _find_modifier(new_data, stat_name) != null
 		var cur_has: bool = _find_modifier(current_data, stat_name) != null
-		# Every roll of the stat summed (several tiers can roll it), after each item's color level.
+		# Every roll of the stat summed (several tiers can roll it).
 		var new_amount: float = _stat_total(new_data, stat_name)
 		var cur_amount: float = _stat_total(current_data, stat_name)
 		var suffix: String = PlayerStats.unit_suffix(stat_name)

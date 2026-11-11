@@ -121,7 +121,7 @@ func _on_slot_mouse_exited() -> void:
 
 # --- Item tooltip ---
 
-## Total of each stat an item adds, after its color level. Several tiers can roll the same stat.
+## Total of each stat an item adds. Several tiers can roll the same stat.
 func _item_contributions(equipment: EquipmentData) -> Dictionary[String, float]:
 	var result: Dictionary[String, float] = {}
 	for mod: EquipmentData.StatModifier in equipment.modifiers:
