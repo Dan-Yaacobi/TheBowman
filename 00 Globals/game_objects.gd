@@ -20,5 +20,11 @@ var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	_rng.randomize()
 
-func get_random_object() -> PackedScene:
+## allow_breakable false: only scenery (islands hold at most one breakable).
+func get_random_object(allow_breakable: bool = true) -> PackedScene:
+	if not allow_breakable:
+		return DECORATION
 	return objects[_rng.rand_weighted(object_weights)]
+
+func is_breakable(scene: PackedScene) -> bool:
+	return scene != DECORATION
