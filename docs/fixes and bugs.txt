@@ -23,3 +23,7 @@ build a database that's online and make every end of run data saved there and gi
 make the target dummy a construct you unlock by paying 5 wood
 
 have the world spirit occasionaly have something useful to tell you (after your first rift death, after every couple of deaths afterwards he will have something new to say that's a tip about the game
+
+if birds are left after bird boss is dead in the bird elite event it crashes the game because they try to access the boss reference which doesn't exist.
+
+bosses needs to be immune to freeze or have an immunity window after being frozen
