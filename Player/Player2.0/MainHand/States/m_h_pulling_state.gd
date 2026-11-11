@@ -41,6 +41,10 @@ func Exit() -> void:
 #what happens during process update in this state
 func Process(_delta: float) -> MainHandState:
 	entity.arrow_setup()
+	# A charged shot skips the draw: straight to full, even if it charged mid-draw.
+	if entity.has_perfect_shot():
+		entity.shot_power = 1.0
+		return max_pull
 	entity.shot_power = minf(entity.animation_player.current_animation_position / full_pull_duration, 1.0)
 	return null
 	

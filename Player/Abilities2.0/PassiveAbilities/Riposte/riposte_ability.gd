@@ -1,6 +1,6 @@
 class_name RiposteAbility extends PlayerPassiveAbility
 ## A sword hit makes your next arrow within the window fully drawn and perfect.
-## The bow glows while it's ready (the same charged-shot glow as Telegraphed Shot).
+## Uses the shared charged shot (PlayerMainHand.charge_perfect_shot).
 
 @export var window: float = 1.5
 
@@ -22,17 +22,17 @@ func on_unequipped() -> void:
 	if main_hand.release.is_connected(_on_release):
 		main_hand.release.disconnect(_on_release)
 	if _armed:
-		main_hand.next_shot_perfect = false
+		main_hand.clear_perfect_shot()
 	_armed = false
 
 func _on_sword_hit(target: Node2D) -> void:
 	if not target is Enemy:
 		return
 	var main_hand: PlayerMainHand = PlayerManager.player.main_hand
-	if main_hand.next_shot_perfect and not _armed:
+	if main_hand.has_perfect_shot() and not _armed:
 		return
 	_armed = true
-	main_hand.next_shot_perfect = true
+	main_hand.charge_perfect_shot()
 	_token += 1
 	main_hand.get_tree().create_timer(window * power(), false).timeout.connect(_on_window_done.bind(_token))
 
@@ -41,7 +41,7 @@ func _on_window_done(token: int) -> void:
 	if token != _token or not _armed:
 		return
 	_armed = false
-	PlayerManager.player.main_hand.next_shot_perfect = false
+	PlayerManager.player.main_hand.clear_perfect_shot()
 
 func _on_release() -> void:
 	_armed = false

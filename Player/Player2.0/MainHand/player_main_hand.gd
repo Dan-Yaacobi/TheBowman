@@ -3,9 +3,15 @@ class_name PlayerMainHand extends Node2D
 signal shot_power_amount(amount)
 signal release
 signal drawing_arrow
+## A charged shot became ready (see charge_perfect_shot).
+signal perfect_shot_charged
+## The charged shot was fired or cancelled.
+signal perfect_shot_cleared
 
-## Set on an arrow made perfect by next_shot_perfect (read by TelegraphedShotMinor).
+## Set on an arrow fired with the charged shot (read by TelegraphedShotMinor).
 const AUTO_PERFECT_META: StringName = &"auto_perfect"
+## Tint on the nocked arrow while it's the charged shot.
+const CHARGED_ARROW_TINT: Color = Color(1.6, 1.35, 0.6)
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hold_position: Node2D = $HoldPosition
@@ -50,9 +56,11 @@ var overcharge_enabled: bool = false
 var overcharge: float = 0.0
 ## Move speed multiplier while overcharging.
 var overcharge_move_mult: float = 1.0
-## The next release fires as a perfect shot whatever the draw (Telegraphed shot, Clean Kill...).
-## Shown on the bow (glow) and the pull bar (gold) while set.
-var next_shot_perfect: bool = false
+## Charged shot: the next draw fills instantly and fires perfect. Shared by every source
+## (Telegraphed Shot, Clean Kill, Riposte...): use charge_perfect_shot / clear_perfect_shot /
+## has_perfect_shot, never this directly. Shown on the bow (glow), the nocked arrow (gold) and
+## the pull bar (gold).
+var _next_shot_perfect: bool = false
 
 func _ready() -> void:
 	main_hand_state_machine.Initialize(self)
@@ -101,6 +109,8 @@ func draw_arrow() -> void:
 		var draw_abilities: Array[PlayerAbility] = PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DRAW)
 		_arrow.set_texture(arrow_texture)
 		current_arrow = _arrow
+		if _next_shot_perfect:
+			current_arrow.modulate = CHARGED_ARROW_TINT
 		current_arrow.global_scale *= PlayerManager.player.stats.arrow_size.value()
 		current_arrow.rotate(-PI/2)
 		for ability in draw_abilities:
@@ -125,10 +135,12 @@ func new_arrow(_arrow: PackedScene) -> void:
 		arrow = _arrow
 
 func release_arrow() -> void:
-	if next_shot_perfect and current_arrow:
-		next_shot_perfect = false
+	if _next_shot_perfect and current_arrow:
 		shot_power = 1.0
 		current_arrow.set_meta(AUTO_PERFECT_META, true)
+		# Spent, not cancelled: the fired arrow keeps its gold tint.
+		_next_shot_perfect = false
+		perfect_shot_cleared.emit()
 	var perfect_threshold_check: float
 	if PlayerManager.player.stats.only_perfect:
 		perfect_threshold_check = 0.99
@@ -267,6 +279,29 @@ func is_overcharging() -> bool:
 
 func is_overcharged() -> bool:
 	return overcharge_enabled and overcharge >= 1.0
+
+# --- Charged shot -------------------------------------------------------------------
+
+## Makes the next draw instant and perfect. Does nothing if a charge is already waiting.
+func charge_perfect_shot() -> void:
+	if _next_shot_perfect:
+		return
+	_next_shot_perfect = true
+	if current_arrow:
+		current_arrow.modulate = CHARGED_ARROW_TINT
+	perfect_shot_charged.emit()
+
+## Cancels a waiting charge (e.g. a timed window ran out). Firing clears it on its own.
+func clear_perfect_shot() -> void:
+	if not _next_shot_perfect:
+		return
+	_next_shot_perfect = false
+	if current_arrow:
+		current_arrow.modulate = Color.WHITE
+	perfect_shot_cleared.emit()
+
+func has_perfect_shot() -> bool:
+	return _next_shot_perfect
 
 func is_drawing() -> bool:
 	return main_hand_state_machine.curr_state is PullingMainHandState or main_hand_state_machine.curr_state is MaxPullMainHandState
