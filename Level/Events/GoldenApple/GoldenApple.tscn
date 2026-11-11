@@ -1,25 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://4bmyfr5fc8vu"]
 
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple.gd" id="1_script"]
-[ext_resource type="Resource" path="res://Level/Events/GoldenApple/Resource/golden_apple_data.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://6fsaoioxj8rl" path="res://Level/Events/GoldenApple/golden_apple.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://ca805k1vcr08a" path="res://Level/Events/GoldenApple/Resource/golden_apple_data.tres" id="2_data"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="3_hitbox"]
 [ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="4_hitbox_script"]
 [ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="5_hurtbox"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="6_debuff"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="7_state_machine"]
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_hover_state.gd" id="8_hover"]
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_dart_state.gd" id="9_dart"]
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_flee_state.gd" id="10_flee"]
-[ext_resource type="Script" path="res://Level/Events/GoldenApple/golden_apple_escape_state.gd" id="11_escape"]
-
-[sub_resource type="Curve" id="Curve_sparkle_scale"]
-max_value = 2.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_sparkle_color"]
-offsets = PackedFloat32Array(0, 0.6, 1)
-colors = PackedColorArray(1, 0.96, 0.6, 1, 1, 0.78, 0.15, 1, 1, 0.65, 0, 0)
+[ext_resource type="Script" uid="uid://bu4djce0e34bu" path="res://Level/Events/GoldenApple/golden_apple_hover_state.gd" id="8_hover"]
+[ext_resource type="Script" uid="uid://b64xcc71a0j6u" path="res://Level/Events/GoldenApple/golden_apple_dart_state.gd" id="9_dart"]
+[ext_resource type="Script" uid="uid://che6yn1t3gbnj" path="res://Level/Events/GoldenApple/golden_apple_flee_state.gd" id="10_flee"]
+[ext_resource type="Script" uid="uid://bxcdvnc4d12ka" path="res://Level/Events/GoldenApple/golden_apple_escape_state.gd" id="11_escape"]
 
 [sub_resource type="Animation" id="Animation_fly"]
 resource_name = "Fly"
@@ -114,27 +105,35 @@ _data = {
 &"RESET": SubResource("Animation_reset")
 }
 
+[sub_resource type="Curve" id="Curve_sparkle_scale"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_sparkle_color"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(1, 0.96, 0.6, 1, 1, 0.78, 0.15, 1, 1, 0.65, 0, 0)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
-radius = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hurtbox"]
 radius = 6.0
 
-[node name="GoldenApple" type="CharacterBody2D"]
+[node name="GoldenApple" type="CharacterBody2D" unique_id=539466729]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_script")
 stats = ExtResource("2_data")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1410779270]
 scale = Vector2(0.45, 0.45)
 hframes = 9
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1463535460]
 libraries/ = SubResource("AnimationLibrary_golden")
 
-[node name="Sparkles" type="CPUParticles2D" parent="."]
+[node name="Sparkles" type="CPUParticles2D" parent="." unique_id=1484554983]
 amount = 10
 lifetime = 0.9
 randomness = 0.5
@@ -148,36 +147,36 @@ initial_velocity_max = 12.0
 scale_amount_curve = SubResource("Curve_sparkle_scale")
 color_ramp = SubResource("Gradient_sparkle_color")
 
-[node name="HitBox" parent="." instance=ExtResource("3_hitbox")]
+[node name="HitBox" parent="." unique_id=1363731660 instance=ExtResource("3_hitbox")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("4_hitbox_script")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=399758130]
 shape = SubResource("CircleShape2D_hitbox")
 
-[node name="HurtBox" parent="." instance=ExtResource("5_hurtbox")]
+[node name="HurtBox" parent="." unique_id=981339093 instance=ExtResource("5_hurtbox")]
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2107178873]
 visible = false
 shape = SubResource("CircleShape2D_hurtbox")
 disabled = true
 
-[node name="DebuffHandler" parent="." instance=ExtResource("6_debuff")]
+[node name="DebuffHandler" parent="." unique_id=1762561250 instance=ExtResource("6_debuff")]
 
-[node name="EnemyStateMachine" type="Node2D" parent="."]
+[node name="EnemyStateMachine" type="Node2D" parent="." unique_id=2143626131]
 script = ExtResource("7_state_machine")
 
-[node name="Hover" type="Node" parent="EnemyStateMachine"]
+[node name="Hover" type="Node" parent="EnemyStateMachine" unique_id=1604946035]
 script = ExtResource("8_hover")
 
-[node name="Dart" type="Node" parent="EnemyStateMachine"]
+[node name="Dart" type="Node" parent="EnemyStateMachine" unique_id=859071266]
 script = ExtResource("9_dart")
 
-[node name="Flee" type="Node" parent="EnemyStateMachine"]
+[node name="Flee" type="Node" parent="EnemyStateMachine" unique_id=331967355]
 script = ExtResource("10_flee")
 
-[node name="Escape" type="Node" parent="EnemyStateMachine"]
+[node name="Escape" type="Node" parent="EnemyStateMachine" unique_id=1128645354]
 script = ExtResource("11_escape")

@@ -19,8 +19,8 @@ metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
 
 [sub_resource type="Resource" id="Resource_kill_gear"]
 script = ExtResource("9_equipment_reward")
-forced_rarity = 2
-upgrade_rarity = 3
+forced_rarity = 1
+upgrade_rarity = 2
 upgrade_chance = 0.2
 metadata/_custom_type_script = "uid://c06t2awg17dkp"
 
