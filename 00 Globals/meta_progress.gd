@@ -6,7 +6,7 @@ extends Node
 signal levels_changed
 signal construct_built(id: StringName)
 signal milestone_offers_ready(track: UpgradeTrack)
-## The spirit's boon offer appeared, was picked, or was used up.
+## The spirit's boon offer or tips changed (offer appeared/picked/used, death counted, tip heard).
 signal boon_state_changed
 
 const SAVE_SECTION: StringName = &"meta"
@@ -49,6 +49,10 @@ var boon_offer_pending: bool = false
 var boon_offers: Array[StringName] = []
 ## Picked boon waiting for the next run's first rift.
 var chosen_boon: StringName = &""
+## Runs that ended in death (practice deaths excluded). Drives the spirit's tips.
+var run_deaths: int = 0
+## How many of the spirit's tips the player has heard, in order.
+var tips_heard: int = 0
 ## The boon applied to the run in progress (not saved).
 var _applied_boon: SpiritBoon = null
 var _boon_buff_id: int = "meta/boon".hash()
@@ -313,11 +317,18 @@ func choose_boon(id: StringName) -> bool:
 	boon_state_changed.emit()
 	return true
 
+## The spirit told the player its next tip.
+func mark_tip_heard() -> void:
+	tips_heard += 1
+	SaveService.save_game()
+	boon_state_changed.emit()
+
 func _on_event_bus_player_died(death_screen: bool) -> void:
 	_remove_applied_boon()
 	# No death screen = practice death (tutorial), which doesn't count as a run.
 	if not death_screen:
 		return
+	run_deaths += 1
 	boon_offer_pending = true
 	boon_offers.clear()
 	boon_state_changed.emit()
@@ -362,6 +373,8 @@ func _save() -> Dictionary:
 		"boon_offer_pending": boon_offer_pending,
 		"boon_offers": boon_offers.map(func(id: StringName) -> String: return String(id)),
 		"chosen_boon": String(chosen_boon),
+		"run_deaths": run_deaths,
+		"tips_heard": tips_heard,
 	}
 
 func _load(data: Dictionary) -> void:
@@ -380,6 +393,8 @@ func _load(data: Dictionary) -> void:
 		if find_boon(StringName(str(id))):
 			boon_offers.append(StringName(str(id)))
 	chosen_boon = StringName(str(data.get("chosen_boon", "")))
+	run_deaths = int(data.get("run_deaths", 0))
+	tips_heard = int(data.get("tips_heard", 0))
 	boon_state_changed.emit()
 	# Backfills milestones reached before rewards existed, or whose reward was deleted.
 	for track: UpgradeTrack in tracks:
