@@ -157,6 +157,10 @@ signal lore_item_pickup_confirmed(item: LoreItemData)
 signal artifact_journal_requested
 ## The journal opened by artifact_journal_requested was closed.
 signal artifact_journal_closed
+## The spirit offers boons for the next run; the HUD shows the pick-1 window.
+signal boon_picker_requested(offers: Array[SpiritBoon])
+## The boon picker closed (a boon was picked).
+signal boon_picker_closed
 
 # --- Run tally (death screen) ---
 ## A resource pickup was added to the player's stash.

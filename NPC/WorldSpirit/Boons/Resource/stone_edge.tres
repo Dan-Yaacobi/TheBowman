@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpiritBoon" format=3]
+
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Boons/spirit_boon.gd" id="1_boon"]
+
+[resource]
+script = ExtResource("1_boon")
+id = &"stone_edge"
+title = "Stone Edge"
+description = "+50% sword damage for your next run."
+kind = 0
+title_color = Color(0.75, 0.75, 0.8, 1)
+stat_name = &"sword_damage"
+amount = 0.5

@@ -6,6 +6,8 @@ extends Node
 signal levels_changed
 signal construct_built(id: StringName)
 signal milestone_offers_ready(track: UpgradeTrack)
+## The spirit's boon offer appeared, was picked, or was used up.
+signal boon_state_changed
 
 const SAVE_SECTION: StringName = &"meta"
 ## Marks a milestone that granted the track's fallback step (pool was empty).
@@ -29,8 +31,33 @@ var pending: Dictionary[StringName, Array] = {}
 ## Ability instances MetaProgress registered on the player, so they can be removed cleanly.
 var _meta_abilities: Array[PlayerAbility] = []
 
+# --- Spirit boons ---
+const BOONS_OFFERED: int = 3
+## load(), not preload(): see `tracks`.
+var boon_pool: Array[SpiritBoon] = [
+	load("res://NPC/WorldSpirit/Boons/Resource/steadfast_heart.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/keen_wind.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/quick_breath.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/stone_edge.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/lost_bow.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/lost_quiver.tres"),
+	load("res://NPC/WorldSpirit/Boons/Resource/lost_ring.tres"),
+]
+## True from a run's death until the player picks a boon at the spirit.
+var boon_offer_pending: bool = false
+## The rolled offer, saved so reloading can't reroll it. Empty until first shown.
+var boon_offers: Array[StringName] = []
+## Picked boon waiting for the next run's first rift.
+var chosen_boon: StringName = &""
+## The boon applied to the run in progress (not saved).
+var _applied_boon: SpiritBoon = null
+var _boon_buff_id: int = "meta/boon".hash()
+
 func _ready() -> void:
 	SaveService.register(SAVE_SECTION, _save, _load)
+	EventBus.player_died.connect(_on_event_bus_player_died)
+	EventBus.entered_rift.connect(_on_event_bus_entered_rift)
+	EventBus.in_main_menu.connect(_on_event_bus_in_main_menu)
 
 # --- Levels ---------------------------------------------------------------
 
@@ -252,6 +279,72 @@ func build(id: StringName, cost: Dictionary[CustomVariables.items, int], player:
 	construct_built.emit(id)
 	return true
 
+# --- Spirit boons -----------------------------------------------------------
+
+## The 3 boons on offer, rolled without repeats the first time they're asked for.
+func get_boon_offers() -> Array[SpiritBoon]:
+	if boon_offers.is_empty():
+		var pool: Array[SpiritBoon] = boon_pool.duplicate()
+		pool.shuffle()
+		for boon: SpiritBoon in pool.slice(0, BOONS_OFFERED):
+			boon_offers.append(boon.id)
+		SaveService.save_game()
+	var offers: Array[SpiritBoon] = []
+	for id: StringName in boon_offers:
+		var boon: SpiritBoon = find_boon(id)
+		if boon:
+			offers.append(boon)
+	return offers
+
+func find_boon(id: StringName) -> SpiritBoon:
+	for boon: SpiritBoon in boon_pool:
+		if boon.id == id:
+			return boon
+	return null
+
+## Picks one of the offered boons for the next run.
+func choose_boon(id: StringName) -> bool:
+	if not boon_offer_pending or not boon_offers.has(id):
+		return false
+	chosen_boon = id
+	boon_offer_pending = false
+	boon_offers.clear()
+	SaveService.save_game()
+	boon_state_changed.emit()
+	return true
+
+func _on_event_bus_player_died(death_screen: bool) -> void:
+	_remove_applied_boon()
+	# No death screen = practice death (tutorial), which doesn't count as a run.
+	if not death_screen:
+		return
+	boon_offer_pending = true
+	boon_offers.clear()
+	boon_state_changed.emit()
+
+## The first rift of a run uses up the chosen boon.
+func _on_event_bus_entered_rift() -> void:
+	if _applied_boon != null or chosen_boon == &"":
+		return
+	var boon: SpiritBoon = find_boon(chosen_boon)
+	chosen_boon = &""
+	boon_state_changed.emit()
+	var player: Player = PlayerManager.player
+	if boon == null or player == null:
+		return
+	boon.apply(player, _boon_buff_id)
+	_applied_boon = boon
+
+func _on_event_bus_in_main_menu() -> void:
+	_remove_applied_boon()
+
+func _remove_applied_boon() -> void:
+	if _applied_boon == null:
+		return
+	if PlayerManager.player:
+		_applied_boon.remove(PlayerManager.player, _boon_buff_id)
+	_applied_boon = null
+
 # --- Save / load ----------------------------------------------------------
 
 func _save() -> Dictionary:
@@ -266,6 +359,9 @@ func _save() -> Dictionary:
 		"built": built_out,
 		"picks": _ids_to_save(picks),
 		"pending": _ids_to_save(pending),
+		"boon_offer_pending": boon_offer_pending,
+		"boon_offers": boon_offers.map(func(id: StringName) -> String: return String(id)),
+		"chosen_boon": String(chosen_boon),
 	}
 
 func _load(data: Dictionary) -> void:
@@ -278,6 +374,13 @@ func _load(data: Dictionary) -> void:
 		built.append(StringName(str(id)))
 	picks = _ids_from_save(data.get("picks", {}), true)
 	pending = _ids_from_save(data.get("pending", {}), false)
+	boon_offer_pending = bool(data.get("boon_offer_pending", false))
+	boon_offers.clear()
+	for id: Variant in data.get("boon_offers", []):
+		if find_boon(StringName(str(id))):
+			boon_offers.append(StringName(str(id)))
+	chosen_boon = StringName(str(data.get("chosen_boon", "")))
+	boon_state_changed.emit()
 	# Backfills milestones reached before rewards existed, or whose reward was deleted.
 	for track: UpgradeTrack in tracks:
 		_resolve_milestones(track)
