@@ -16,6 +16,11 @@ func begin_fight(_arena: BossArena) -> void:
 func _on_fight_began() -> void:
 	pass
 
+## Player abilities never freeze bosses (frostbite slows still apply).
+## A boss can still freeze itself as part of its own pattern (e.g. Frost Wizard's broken shell).
+func can_be_frozen() -> bool:
+	return false
+
 func handle_health_bar(_dmg: int = 0) -> void:
 	health_changed.emit(current_hp)
 

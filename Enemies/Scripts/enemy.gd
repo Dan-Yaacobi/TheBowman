@@ -214,6 +214,10 @@ func is_debuff_immune() -> bool:
 
 func can_be_stunned() -> bool:
 	return not stats.stun_immune
+
+## Checked by player freeze sources before applying the freeze debuff.
+func can_be_frozen() -> bool:
+	return can_be_stunned()
 	
 func shoot() -> void:
 	if !stunned:

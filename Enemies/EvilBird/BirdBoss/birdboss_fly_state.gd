@@ -45,7 +45,13 @@ func _spawn_bird(_position: Vector2) -> void:
 	)
 	if bird != null and bird_boss != null:
 		bird_boss.active_birds.append(bird)
-		bird.died.connect(func(_e: Enemy) -> void: bird_boss.active_birds.erase(bird))
+		# The bird can outlive the boss; never touch a freed boss from this callback
+		var boss_ref: WeakRef = weakref(bird_boss)
+		bird.died.connect(func(_e: Enemy) -> void:
+			var boss: BirdBoss = boss_ref.get_ref() as BirdBoss
+			if is_instance_valid(boss):
+				boss.active_birds.erase(bird)
+		)
 		bird.global_position = _position
 		EventBus.enemy_summoned.emit(bird)
 		

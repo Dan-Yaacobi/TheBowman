@@ -21,7 +21,7 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 		if !_target.has_debuff(CustomVariables.FROSTBITE_DEBUFF_ID) and !_target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
 				apply_frostbite(_target)
 func apply_freeze(_target: Enemy) -> void:
-	if _target.can_be_stunned():
+	if _target.can_be_frozen():
 		var debuff: Debuff = FREEZE_DEBUFF.instantiate()
 		var duration = PlayerManager.player.stats.freeze_duration.value()
 		_target.debuff_handler.add_debuff(debuff,CustomVariables.FREEZE_DEBUFF_ID,duration,1)

@@ -23,7 +23,7 @@ func _ready() -> void:
 	queue_free()
 
 func apply_freeze(_target: GameEntity, _var2) -> void:
-	if _target is Enemy:
+	if _target is Enemy and (_target as Enemy).can_be_frozen():
 		var debuff: Debuff = FREEZE_DEBUFF.instantiate()
 		var duration = PlayerManager.player.stats.freeze_duration.value()
 		_target.debuff_handler.add_debuff(debuff,CustomVariables.FREEZE_DEBUFF_ID,duration,1)

@@ -14,9 +14,15 @@ func get_entries() -> Array[SpiritMenuEntry]:
 	return entries
 
 ## The journal lives in the HUD's pause menu; asked for through the EventBus.
-func run(_entry: SpiritMenuEntry, _spirit: WorldSpirit) -> void:
+## The chat box draws above the pause menu, so it's hidden while the journal is open.
+func run(_entry: SpiritMenuEntry, spirit: WorldSpirit) -> void:
+	var chat_box: ChatBox = spirit.chat_box
+	if chat_box:
+		chat_box.visible = false
 	EventBus.artifact_journal_requested.emit()
 	await EventBus.artifact_journal_closed
+	if is_instance_valid(chat_box):
+		chat_box.visible = true
 
 func _on_lore_lore_changed() -> void:
 	entries_changed.emit()
