@@ -9,13 +9,16 @@ class_name ColorLevels extends Node
 @export_group("Secondary bonuses")
 ## Per level, as a fraction of the stat (0.05 = +5%). Adds to other % buffs on the same stat.
 ## Precision: perfect shot power (perfect_shot_bonus).
-@export var perfect_power_per_level: float = 0.1
+@export var perfect_power_per_level: float = 0.05
 @export var pull_speed_per_level: float = 0.12
 ## Elemental: % added to every stat in DEBUFF_DURATION_STATS.
 @export var debuff_per_level: float = 0.05
 ## Elemental: flat damage added to every stat in DEBUFF_DAMAGE_STATS. Flat, because debuff damage
 ## is a small whole number and a % bonus would round away.
 @export var debuff_damage_per_level: float = 3.0
+## Elemental: chance per level (0.04 = 4%) that any arrow hit applies Burn, Poison or Frostbite.
+## Uses the normal debuff stats, so it works without elemental gear and grows with it.
+@export var element_proc_per_level: float = 0.04
 
 @export_group("Scrolls")
 ## Every Nth scroll (all colors counted) also gives a heart container and a full heal.
@@ -25,6 +28,12 @@ const HEART_GAIN_SOUND_PATH: String = "res://Audio/Player/heart_container_gain.o
 const HEART_GAIN_TEXT_COLOR: Color = Color(1.0, 0.35, 0.4)
 
 const DEBUFF_DAMAGE_STATS: Array[String] = ["bleed_damage", "burn_damage", "poison_damage"]
+# load() in the proc, not preload: debuff scenes pull in enemy scripts.
+const BURN_DEBUFF_PATH: String = "res://Debuffs/Burned/BurnDebuff.tscn"
+const POISON_DEBUFF_PATH: String = "res://Debuffs/Poisoned/PoisonDebuff.tscn"
+const FROSTBITE_DEBUFF_PATH: String = "res://Debuffs/FrostBite/FrostBiteDebuff.tscn"
+enum ElementProc { BURN, POISON, FROSTBITE }
+
 const DEBUFF_DURATION_STATS: Array[String] = [
 	"bleed_duration", "burn_duration", "poison_duration",
 	"frostbite_duration", "freeze_duration", "stun_duration",
@@ -34,6 +43,9 @@ var scrolls_collected: int = 0
 var _levels: Dictionary[CustomVariables.ItemColor, int] = {}
 
 @onready var player: Player = get_parent() as Player
+
+func _ready() -> void:
+	EventBus.arrow_enemy_hit.connect(_on_event_bus_arrow_enemy_hit)
 
 func get_level(color: CustomVariables.ItemColor) -> int:
 	return _levels.get(color, 0)
@@ -81,7 +93,7 @@ func bonus_text(color: CustomVariables.ItemColor) -> String:
 		CustomVariables.ItemColor.TEMPO:
 			return "+%d%% pull speed" % roundi(pull_speed_per_level * 100.0)
 		CustomVariables.ItemColor.ELEMENTAL:
-			return "+%d debuff damage, +%d%% debuff duration" % [roundi(debuff_damage_per_level), roundi(debuff_per_level * 100.0)]
+			return "+%d%% chance on hit to Burn, Poison or Frostbite, +%d debuff damage, +%d%% debuff duration" % [roundi(element_proc_per_level * 100.0), roundi(debuff_damage_per_level), roundi(debuff_per_level * 100.0)]
 	return ""
 
 ## Equipped items of this color (the ones a scroll of it makes stronger).
@@ -119,3 +131,30 @@ func _set_level_buffs(stat_names: Array[String], per_level: float, level: int, t
 		stat.remove_buff_completly(buff_id, type)
 		if level > 0:
 			stat.add_buff(buff_id, per_level * level, type)
+
+## Elemental scrolls: any arrow hit may apply a random elemental debuff (same debuffs and stats
+## the elemental abilities use).
+func _on_event_bus_arrow_enemy_hit(_perfect: bool, _arrow: Arrow, target: Enemy) -> void:
+	var chance: float = element_proc_per_level * get_level(CustomVariables.ItemColor.ELEMENTAL)
+	if chance <= 0.0 or not is_instance_valid(target) or target.is_dead:
+		return
+	if randf() >= chance:
+		return
+	apply_element_proc(target, ElementProc.values().pick_random())
+
+func apply_element_proc(target: Enemy, proc: ElementProc) -> void:
+	var stats: PlayerStats = player.stats
+	match proc:
+		ElementProc.BURN:
+			var burn: BurnDebuff = load(BURN_DEBUFF_PATH).instantiate()
+			burn.set_damage(roundi(stats.burn_damage.value()))
+			target.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.dot_ticks("burn"))
+		ElementProc.POISON:
+			var poison: Debuff = load(POISON_DEBUFF_PATH).instantiate()
+			poison.poison_damage = stats.poison_damage.value()
+			target.apply_debuff(poison, CustomVariables.POISON_DEBUFF_ID, stats.poison_duration.value(), stats.dot_ticks("poison"))
+		ElementProc.FROSTBITE:
+			if target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
+				return
+			var frostbite: Debuff = load(FROSTBITE_DEBUFF_PATH).instantiate()
+			target.apply_debuff(frostbite, CustomVariables.FROSTBITE_DEBUFF_ID, stats.frostbite_duration.value(), 1)
