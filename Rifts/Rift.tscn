@@ -25,7 +25,6 @@
 [ext_resource type="Resource" uid="uid://yq37lreo0htb" path="res://Rifts/Chunks/ChunkData/Treasure/item_pedestal_island.tres" id="17_qxt8x"]
 [ext_resource type="PackedScene" uid="uid://8rh3qbsi0iv6" path="res://Rifts/RiftEnemySpawner/RiftEnemySpawner.tscn" id="19_4xrky"]
 [ext_resource type="Script" uid="uid://cvnoq8op35u2" path="res://Rifts/RiftEnemySpawner/rift_enemy_spawner.gd" id="20_5l72e"]
-[ext_resource type="PackedScene" uid="uid://dwoo7pueeenah" path="res://Level/Events/ChallengeStone/ChallengeShrineEvent.tscn" id="29_2cjow"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="30_j75h4"]
 [ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="31_5icp2"]
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="34_y5ptd"]
@@ -39,14 +38,16 @@
 [ext_resource type="Resource" uid="uid://dky6wnpla6kei" path="res://Rifts/RiftEnemySpawner/EnemyEntry/black_spider_entry.tres" id="38_oe8us"]
 [ext_resource type="Resource" uid="uid://dsa1dv61p7sdw" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="38_vwcbb"]
 [ext_resource type="Resource" uid="uid://b5lbs5gsdj1he" path="res://Rifts/RiftEnemySpawner/EnemyEntry/fire_bird_entry.tres" id="39_j75h4"]
-[ext_resource type="PackedScene" uid="uid://blj0hgahvaj0c" path="res://Level/Events/MovingTargetsEvent/MovingTargetsEvent.tscn" id="40_mvtgt"]
-[ext_resource type="PackedScene" uid="uid://c7nlxg7p7m3vl" path="res://Level/Events/BossEvents/AppleBossEvent.tscn" id="41_aplbs"]
-[ext_resource type="PackedScene" uid="uid://ddhffywfb4gs" path="res://Level/Events/BossEvents/BirdBossEvent.tscn" id="42_brdbs"]
 [ext_resource type="PackedScene" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="43_scrpd"]
 [ext_resource type="Resource" uid="uid://cyhpbr7clxxlp" path="res://Rifts/RiftEnemySpawner/EnemyEntry/rock_golem_entry.tres" id="44_rkglm"]
-[ext_resource type="PackedScene" uid="uid://c5q5y48xrce31" path="res://Level/Events/GoldenAppleEvent.tscn" id="45_gldap"]
-[ext_resource type="PackedScene" path="res://Level/Events/SacrificialAltar/SacrificialAltarEvent.tscn" id="45_sacal"]
-[ext_resource type="Resource" path="res://Level/Events/Artifacts/Resource/artifact_catalog.tres" id="46_artcat"]
+[ext_resource type="Script" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="50_evscript"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/challenge_shrine_entry.tres" id="50_evchallenge_shrine"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/moving_targets_entry.tres" id="50_evmoving_targets"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/apple_boss_entry.tres" id="50_evapple_boss"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/bird_boss_entry.tres" id="50_evbird_boss"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/golden_apple_entry.tres" id="50_evgolden_apple"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/sacrificial_altar_entry.tres" id="50_evsacrificial_altar"]
+[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/artifact_entry.tres" id="50_evartifact"]
 
 [sub_resource type="Resource" id="Resource_4phns"]
 script = ExtResource("8_hhyca")
@@ -71,8 +72,7 @@ metadata/_custom_type_script = "uid://viwygaov6sfn"
 script = ExtResource("3_jukhk")
 main_path_length = 5
 probability_decay = 1.25
-event_pool = Array[PackedScene]([ExtResource("29_2cjow"), ExtResource("40_mvtgt"), ExtResource("41_aplbs"), ExtResource("42_brdbs"), ExtResource("45_gldap"), ExtResource("45_sacal")])
-artifact_catalog = ExtResource("46_artcat")
+event_entries = Array[ExtResource("50_evscript")]([ExtResource("50_evchallenge_shrine"), ExtResource("50_evmoving_targets"), ExtResource("50_evapple_boss"), ExtResource("50_evbird_boss"), ExtResource("50_evgolden_apple"), ExtResource("50_evsacrificial_altar"), ExtResource("50_evartifact")])
 event_chance = 1.0
 metadata/_custom_type_script = "uid://b7p0flr2uopwv"
 
