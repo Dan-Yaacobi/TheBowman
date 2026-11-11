@@ -1,12 +1,18 @@
 class_name SkylarkAbility extends PlayerPassiveAbility
-## Drawing in mid-air slows your fall. A perfect shot in mid-air pushes you away from your aim, like a rocket jump.
+## Drawing in mid-air slows your fall. A perfect shot in mid-air lifts you straight up (never
+## sideways, so it can't throw you off an island). Each lift in the same airtime is weaker
+## (lift_falloff); landing resets it.
 
 ## Fall speed cap while drawing in the air, as a fraction of the normal max fall speed.
 @export var air_draw_fall_mult: float = 0.3
-## Push applied on a perfect air shot, opposite the aim (on top of the normal perfect-shot recoil).
-@export var rocket_force: float = 260.0
+## Upward speed of the first lift (jump is 280).
+@export var lift_speed: float = 160.0
+## Multiplier per lift within one airtime: 1st, 2nd, 3rd... Lifts past the end do nothing.
+@export var lift_falloff: Array[float] = [1.0, 0.6, 0.3]
 
 var _helper: SkylarkHelper
+## Lifts used since the player last stood on the ground.
+var _lifts_this_air: int = 0
 
 func on_equipped() -> void:
 	var player: Player = PlayerManager.player
@@ -29,13 +35,17 @@ func _on_main_hand_release() -> void:
 	var player: Player = PlayerManager.player
 	if player.is_on_floor() or player.main_hand.shot_power < 1.0:
 		return
-	var push: Vector2 = -player.aim_direction.normalized()
-	if push.y < 0.0:
-		player.velocity.y = minf(player.velocity.y, 0.0)
-	player.apply_knockback(push, rocket_force * power())
+	if _lifts_this_air >= lift_falloff.size():
+		return
+	var lift: float = lift_speed * lift_falloff[_lifts_this_air] * power()
+	_lifts_this_air += 1
+	player.velocity.y = minf(player.velocity.y, -lift)
+
+func on_landed() -> void:
+	_lifts_this_air = 0
 
 func get_tooltip() -> String:
-	return "Drawing in mid-air slows your fall. Perfect air shots launch you away from your aim"
+	return "Drawing in mid-air slows your fall. Perfect air shots lift you upward"
 
 func get_tooltip_color() -> Color:
 	return Color.SKY_BLUE
@@ -52,7 +62,12 @@ class SkylarkHelper extends Node:
 
 	func _physics_process(_delta: float) -> void:
 		var player: Player = get_parent() as Player
-		if player == null or player.is_on_floor() or not player.main_hand.is_drawing():
+		if player == null:
+			return
+		if player.is_on_floor():
+			ability.on_landed()
+			return
+		if not player.main_hand.is_drawing():
 			return
 		var cap: float = player.stats.max_down_gravity * ability.air_draw_fall_mult
 		player.velocity.y = minf(player.velocity.y, cap)

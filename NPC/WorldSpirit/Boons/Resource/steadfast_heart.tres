@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpiritBoon" format=3]
+
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Boons/spirit_boon.gd" id="1_boon"]
+
+[resource]
+script = ExtResource("1_boon")
+id = &"steadfast_heart"
+title = "Steadfast Heart"
+description = "+1 heart container for your next run."
+kind = 1
+title_color = Color(1, 0.45, 0.45, 1)

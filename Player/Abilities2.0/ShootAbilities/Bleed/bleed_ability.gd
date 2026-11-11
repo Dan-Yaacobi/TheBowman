@@ -19,3 +19,6 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 		
 func get_tooltip() -> String:
 	return "Applies Bleed on hit."
+
+func get_tooltip_color() -> Color:
+	return Color.CRIMSON

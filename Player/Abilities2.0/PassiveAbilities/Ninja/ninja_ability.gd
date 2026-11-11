@@ -28,4 +28,4 @@ func get_tooltip() -> String:
 	return "You arrows turn into shurikens. Insane pull speed, only Perfect shots work, reduced damage, no Knockback"
 
 func get_tooltip_color() -> Color:
-	return Color.SLATE_GRAY
+	return Color.LIGHT_SLATE_GRAY

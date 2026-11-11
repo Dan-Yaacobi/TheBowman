@@ -23,3 +23,6 @@ func heal(_damage_dealt: int, _entity: GameEntity) -> void:
 
 func get_tooltip() -> String:
 	return "Bleed damage has a %d%% chance to heal you for %d" % [heal_chance, heal_amount]
+
+func get_tooltip_color() -> Color:
+	return Color.CRIMSON

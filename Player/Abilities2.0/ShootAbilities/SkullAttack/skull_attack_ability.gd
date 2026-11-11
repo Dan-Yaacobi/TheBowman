@@ -16,3 +16,6 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 		
 func get_tooltip() -> String:
 	return "Apply Cursed on Hit, Cursed enemies take more damage but also deal more."
+
+func get_tooltip_color() -> Color:
+	return Color.MEDIUM_ORCHID

@@ -33,7 +33,7 @@ func get_tooltip() -> String:
 	return "Perfect hits open a portal that fires a fireball, a demonic fist or a poison cloud"
 
 func get_tooltip_color() -> Color:
-	return Color.DARK_VIOLET
+	return Color.VIOLET
 
 func get_type() -> TriggerType:
 	return TriggerType.AFTER_HIT

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EventEntry" format=3]
+
+[ext_resource type="Script" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_entry"]
+[ext_resource type="Resource" path="res://Level/Events/Artifacts/Resource/artifact_catalog.tres" id="2_event"]
+
+[resource]
+script = ExtResource("1_entry")
+artifact_catalog = ExtResource("2_event")
+min_level = 1

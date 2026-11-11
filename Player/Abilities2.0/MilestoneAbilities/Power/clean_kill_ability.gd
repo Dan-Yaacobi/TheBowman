@@ -1,6 +1,6 @@
 class_name CleanKillAbility extends PlayerAbility
 ## Power milestone. Killing an enemy with a perfect shot makes your next arrow perfect.
-## The bow glows while it's ready (PlayerMainHand.next_shot_perfect).
+## Uses the shared charged shot (PlayerMainHand.charge_perfect_shot).
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var arrow: Arrow = MinorHitHelpers.arrow_of(_activator)
@@ -8,7 +8,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 		return
 	if _result == null or not _result.killed:
 		return
-	PlayerManager.player.main_hand.next_shot_perfect = true
+	PlayerManager.player.main_hand.charge_perfect_shot()
 
 func get_tooltip() -> String:
 	return "Killing an enemy with a perfect shot makes your next arrow perfect"

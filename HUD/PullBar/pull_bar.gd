@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 			tint_progress = Color.WHITE if full_flash else OVERCHARGE_COLOR
 		else:
 			value = shot_power
-			tint_progress = CHARGED_SHOT_COLOR if PlayerManager.player.main_hand.next_shot_perfect else _color_for_power(shot_power)
+			tint_progress = CHARGED_SHOT_COLOR if PlayerManager.player.main_hand.has_perfect_shot() else _color_for_power(shot_power)
 	else:
 		value = lerpf(value, 0.0, release_speed * delta)
 

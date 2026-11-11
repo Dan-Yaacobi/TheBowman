@@ -52,9 +52,13 @@ var _reveal_pending: bool = false
 var _rows: Array[Control] = []
 var _tiles: Array[Control] = []
 var _reveal_tween: Tween
+## RunTracker's end-of-run summary (damage dealt, death cause). RunTracker is an autoload, so it
+## handles player_died and emits run_ended before this screen builds.
+var _run_summary: Dictionary = {}
 
 func _ready() -> void:
 	visible = false
+	EventBus.run_ended.connect(_on_event_bus_run_ended)
 	EventBus.player_died.connect(death_screen)
 	EventBus.world_ready.connect(_on_event_bus_world_ready)
 
@@ -72,6 +76,9 @@ func death_screen(_show: bool = true) -> void:
 	await get_tree().create_timer(reveal_fallback_delay, true).timeout
 	if is_inside_tree():
 		_reveal()
+
+func _on_event_bus_run_ended(run_summary: Dictionary) -> void:
+	_run_summary = run_summary
 
 func _on_event_bus_world_ready() -> void:
 	_reveal()
@@ -146,7 +153,7 @@ func _build(rift_level: int) -> void:
 			container.remove_child(child)
 			child.queue_free()
 
-	subtitle.text = "Your journey ended on rift level %d" % rift_level
+	subtitle.text = _death_line(rift_level)
 
 	var events_won: int = RunTally.total(tally.events_completed)
 	_add_tile("Rift Level", rift_level, COLOR_GOLD)
@@ -155,6 +162,8 @@ func _build(rift_level: int) -> void:
 	_add_tile("Elites", RunTally.total(tally.elites), COLOR_ELITE)
 	_add_tile("Bosses", RunTally.total(tally.bosses), COLOR_BOSS)
 	_add_tile("Events Won", events_won, COLOR_WON)
+	var combat: Dictionary = _run_summary.get("combat", {})
+	_add_tile("Damage Dealt", int(combat.get("damage_dealt", 0)), COLOR_BOSS)
 
 	_build_slain()
 	_build_loot()
@@ -232,6 +241,18 @@ func _build_journey() -> void:
 		_add_row(journey_list, entry[0], "x%d" % entry[1])
 
 # --- Widgets ----------------------------------------------------------------------
+
+## "Slain by Green Apple on rift level 3", from the last thing that hurt the player.
+func _death_line(rift_level: int) -> String:
+	var cause: String = str(_run_summary.get("death_cause", ""))
+	match cause:
+		"":
+			return "Your journey ended on rift level %d" % rift_level
+		RunTracker.CAUSE_FALL:
+			return "You fell to your death on rift level %d" % rift_level
+		RunTracker.CAUSE_EFFECT:
+			return "A lingering effect finished you on rift level %d" % rift_level
+	return "Slain by %s on rift level %d" % [cause, rift_level]
 
 func _add_tile(caption: String, value: int, color: Color, formatter: Callable = Callable()) -> void:
 	if not formatter.is_valid():

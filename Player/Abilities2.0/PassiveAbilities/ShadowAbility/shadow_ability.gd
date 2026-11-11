@@ -68,4 +68,4 @@ func get_tooltip() -> String:
 	return "Hits have a %d%% chance to pass through your shadow" % roundi(_chance() * 100.0)
 
 func get_tooltip_color() -> Color:
-	return Color.REBECCA_PURPLE
+	return Color.MEDIUM_SLATE_BLUE

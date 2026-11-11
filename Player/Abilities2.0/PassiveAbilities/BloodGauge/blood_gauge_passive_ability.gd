@@ -53,3 +53,6 @@ func bleed_damage_fill_gauge(_amount: int, _entity: GameEntity) -> void:
 	
 func get_tooltip() -> String:
 	return "Collect Blood. When full, a perfect shot unleashes a blood explosion."
+
+func get_tooltip_color() -> Color:
+	return Color.CRIMSON

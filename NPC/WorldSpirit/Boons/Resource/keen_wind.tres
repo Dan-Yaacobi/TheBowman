@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpiritBoon" format=3]
+
+[ext_resource type="Script" path="res://NPC/WorldSpirit/Boons/spirit_boon.gd" id="1_boon"]
+
+[resource]
+script = ExtResource("1_boon")
+id = &"keen_wind"
+title = "Keen Wind"
+description = "+15% arrow damage for your next run."
+kind = 0
+title_color = Color(1, 0.85, 0.45, 1)
+stat_name = &"arrow_damage"
+amount = 0.15

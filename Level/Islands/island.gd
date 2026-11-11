@@ -90,8 +90,12 @@ func enable() -> void:
 func spawn_game_object() -> bool:
 	var possible_amount: int = objects_spawn_markers.get_total_possible_spawns()
 	var final_amount: int = randi_range(1, possible_amount)
+	# At most one breakable per island; the other spots get scenery.
+	var placed_breakable: bool = false
 	for i in range(final_amount):
-		var obj: GameObject = GameObjects.get_random_object().instantiate()
+		var scene: PackedScene = GameObjects.get_random_object(not placed_breakable)
+		placed_breakable = placed_breakable or GameObjects.is_breakable(scene)
+		var obj: GameObject = scene.instantiate()
 		add_child(obj)
 		var spawn_pos: Vector2 = objects_spawn_markers.get_spawn_position()
 		var marker_offset: Vector2 = obj.placement_marker.global_position - obj.global_position

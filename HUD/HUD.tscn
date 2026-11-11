@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" path="res://Items/Other/ColorScroll/Sprites/precision_scroll.png" id="31_ds_scroll"]
 [ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="32_ds_schem"]
 [ext_resource type="Texture2D" path="res://Objects/Sprites/GrandChest.png" id="33_ds_chest"]
+[ext_resource type="PackedScene" path="res://HUD/BoonPicker/BoonPicker.tscn" id="34_boonpick"]
 
 [sub_resource type="Gradient" id="Gradient_ds_vignette"]
 offsets = PackedFloat32Array(0.45, 1)
@@ -495,5 +496,7 @@ flip_v = true
 layer = 10
 
 [node name="ArtifactPickupWindow" parent="ArtifactPickupLayer" instance=ExtResource("25_artwin")]
+
+[node name="BoonPicker" parent="." instance=ExtResource("34_boonpick")]
 
 [connection signal="pressed" from="DeathScreen/Margin/Layout/Button" to="DeathScreen" method="_on_button_pressed"]

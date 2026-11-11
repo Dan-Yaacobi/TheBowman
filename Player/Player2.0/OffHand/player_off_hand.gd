@@ -32,7 +32,13 @@ var _crackle_offsets: PackedFloat32Array = PackedFloat32Array()
 var _time: float = 0.0
 ## Gold glow and sparks on the bow while the next shot is guaranteed perfect.
 const CHARGED_GLOW: Color = Color(1.6, 1.35, 0.6)
+## The moment a charge lands: a bright flash fading into the glow, plus a burst of sparks.
+const READY_FLASH_COLOR: Color = Color(3.0, 2.6, 1.6)
+const READY_FLASH_TIME: float = 0.3
 var _charged_sparks: CPUParticles2D
+var _ready_burst: CPUParticles2D
+var _was_charged: bool = false
+var _ready_flash: float = 0.0
 
 var position_target: Node2D = null
 var rotation_target: Node2D = null
@@ -49,6 +55,8 @@ func _ready() -> void:
 	string.add_child(string_glow)
 	_charged_sparks = _make_charged_sparks()
 	bow_sprite.add_child(_charged_sparks)
+	_ready_burst = _make_ready_burst()
+	bow_sprite.add_child(_ready_burst)
 	hide_bow()
 
 func _process(_delta: float) -> void:
@@ -61,7 +69,7 @@ func _process(_delta: float) -> void:
 	else:
 		rotation = PI if facing_left else 0.0
 	_update_string(_delta)
-	_update_charged_glow()
+	_update_charged_glow(_delta)
 	
 func set_facing(_facing_left: bool) -> void:
 	facing_left = _facing_left
@@ -114,14 +122,41 @@ func _crackle(points: PackedVector2Array, delta: float) -> PackedVector2Array:
 		out.append(to)
 	return out
 
-func _update_charged_glow() -> void:
+func _update_charged_glow(delta: float) -> void:
 	var player: Player = PlayerManager.player
-	var charged: bool = player != null and player.main_hand.next_shot_perfect and bow_sprite.visible
+	var charged: bool = player != null and player.main_hand.has_perfect_shot() and bow_sprite.visible
+	if charged and not _was_charged:
+		_ready_flash = READY_FLASH_TIME
+		_ready_burst.restart()
+	_was_charged = charged
 	_charged_sparks.emitting = charged
-	if charged:
-		bow_sprite.modulate = Color.WHITE.lerp(CHARGED_GLOW, 0.5 + 0.5 * sin(_time * 8.0))
-	else:
+	if not charged:
+		_ready_flash = 0.0
 		bow_sprite.modulate = Color.WHITE
+		return
+	var glow: Color = Color.WHITE.lerp(CHARGED_GLOW, 0.5 + 0.5 * sin(_time * 8.0))
+	if _ready_flash > 0.0:
+		_ready_flash = maxf(_ready_flash - delta, 0.0)
+		glow = glow.lerp(READY_FLASH_COLOR, _ready_flash / READY_FLASH_TIME)
+	bow_sprite.modulate = glow
+
+func _make_ready_burst() -> CPUParticles2D:
+	var burst: CPUParticles2D = CPUParticles2D.new()
+	burst.emitting = false
+	burst.one_shot = true
+	burst.explosiveness = 1.0
+	burst.amount = 16
+	burst.lifetime = 0.4
+	burst.spread = 180.0
+	burst.gravity = Vector2.ZERO
+	burst.initial_velocity_min = 40.0
+	burst.initial_velocity_max = 70.0
+	burst.damping_min = 80.0
+	burst.damping_max = 120.0
+	burst.scale_amount_min = 1.0
+	burst.scale_amount_max = 2.0
+	burst.color = Color(1.0, 0.9, 0.5)
+	return burst
 
 func _make_charged_sparks() -> CPUParticles2D:
 	var sparks: CPUParticles2D = CPUParticles2D.new()

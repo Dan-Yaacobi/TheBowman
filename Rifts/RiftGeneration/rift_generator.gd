@@ -24,10 +24,16 @@ var lowest_chunk: RiftChunk
 var _event_portal_island: Island
 ## How many times each capped chunk was placed in the current rift level.
 var _chunk_counts: Dictionary[ChunkData, int] = {}
+var _current_level: int = 0
+## Times each event was picked this run. Static so it outlives the rift scene between rifts.
+static var _event_picks: Dictionary[EventEntry, int] = {}
+## Rift level of the last event roll; a lower or equal level means a new run started.
+static var _last_event_level: int = 0
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
 func generate(_curr_level: int) -> RiftLevel:
+	_current_level = _curr_level
 	main_path_chunks = []
 	placed_bounds = []
 	_chunk_counts.clear()
@@ -279,11 +285,12 @@ func reset() -> void:
 
 func place_event_portal() -> void:
 	_event_portal_island = null
-	var has_artifact: bool = data.artifact_catalog != null and data.artifact_catalog.has_rift_event()
-	var pool_size: int = data.event_pool.size() + (1 if has_artifact else 0)
-	if pool_size == 0 or rng.randf() > data.event_chance:
+	if rng.randf() > data.event_chance:
 		return
-	
+	var entry: EventEntry = _roll_event_entry()
+	if entry == null:
+		return
+
 	var last_index: int = main_path_chunks.size() - data.event_skip_end_chunks
 	var candidates: Array[TraversalChunk] = []
 	for i: int in range(data.event_skip_start_chunks, last_index):
@@ -294,21 +301,40 @@ func place_event_portal() -> void:
 	if candidates.is_empty():
 		return
 
+	var event_scene: PackedScene = entry.get_scene(rng)
+	if event_scene == null:
+		return
+	_event_picks[entry] = _event_picks.get(entry, 0) + 1
+
 	var chunk: TraversalChunk = candidates[rng.randi_range(0, candidates.size() - 1)]
 	var island: Island = chunk.islands[rng.randi_range(0, chunk.islands.size() - 1)]
 
 	var portal: EventPortal = event_portal_scene.instantiate()
-	portal.event_scene = _roll_event_scene(pool_size)
+	portal.event_scene = event_scene
 	rift_level.add_child(portal)
 	portal.global_position = island.get_event_portal_position()
 	_event_portal_island = island
 
-## The artifact event takes the slot after the regular pool.
-func _roll_event_scene(pool_size: int) -> PackedScene:
-	var index: int = rng.randi_range(0, pool_size - 1)
-	if index < data.event_pool.size():
-		return data.event_pool[index]
-	return data.artifact_catalog.roll_event(rng)
+## Weighted pick among events eligible at this level. Each earlier pick this run lowers an
+## event's weight by its repeat_penalty. Null when nothing is eligible.
+func _roll_event_entry() -> EventEntry:
+	if _current_level <= _last_event_level:
+		_event_picks.clear()
+	_last_event_level = _current_level
+
+	var eligible: Array[EventEntry] = []
+	var weights: PackedFloat32Array = []
+	for entry: EventEntry in data.event_entries:
+		if entry == null or not entry.is_eligible(_current_level):
+			continue
+		var weight: float = entry.get_weight(_event_picks.get(entry, 0))
+		if weight <= 0.0:
+			continue
+		eligible.append(entry)
+		weights.append(weight)
+	if eligible.is_empty():
+		return null
+	return eligible[rng.rand_weighted(weights)]
 
 ## Puts scroll pedestals on distinct random islands of placed traversal chunks (main and side paths).
 ## Islands without game objects are preferred; the event portal's island is skipped.

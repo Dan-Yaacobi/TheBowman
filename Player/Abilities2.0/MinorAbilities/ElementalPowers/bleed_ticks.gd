@@ -17,6 +17,9 @@ func on_unequipped() -> void:
 
 func get_tooltip() -> String:
 	return "Bleed ticks %d%% faster" % roundi(value * power())
-	
+
+func get_tooltip_color() -> Color:
+	return Color.CRIMSON
+
 func get_type() -> TriggerType:
 	return TriggerType.PASSIVE

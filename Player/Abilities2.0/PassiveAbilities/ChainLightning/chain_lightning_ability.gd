@@ -51,3 +51,6 @@ func activate_gauge_ability(_amount: int) -> void:
 
 func get_tooltip() -> String:
 	return "Perfect shots and apply stuns fill the gauge. When full, your next perfect shot chains lightning."
+
+func get_tooltip_color() -> Color:
+	return Color.YELLOW

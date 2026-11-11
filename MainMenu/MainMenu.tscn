@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://bfv1vlm08klwk" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
-[ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="17_5lv0r"]
+[ext_resource type="PackedScene" path="res://Objects/Constructs/TargetDummy/TargetDummySite.tscn" id="17_5lv0r"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]
@@ -41,7 +41,7 @@ position = Vector2(486, 78)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="TargetDummy" parent="Islands/Island" unique_id=603628097 instance=ExtResource("17_5lv0r")]
+[node name="TargetDummySite" parent="Islands/Island" instance=ExtResource("17_5lv0r")]
 position = Vector2(-1, -18)
 
 [node name="Island3" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
