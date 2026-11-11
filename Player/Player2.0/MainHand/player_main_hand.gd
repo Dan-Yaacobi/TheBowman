@@ -18,10 +18,9 @@ signal drawing_arrow
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
-## Arrow hit = (arrow_damage stat + base_arrow_damage) * arrow_damage_scale * ...
-## A bigger base makes each +1 damage from gear worth less. Keep starting damage the same by
-## lowering the scale: (2 starting gear + base) * scale ~= 18 (numbers are on a x3 scale).
-@export var base_arrow_damage: float = 12.0
+## Arrow hit = arrow_damage stat * arrow_damage_scale * ... The stat's base (12, set on the Player)
+## holds the hit's base, gear adds flat points, and % bonuses (altar, curses) multiply all of it.
+## A bigger stat base makes each +1 from gear worth less; lower the scale to keep starting damage.
 @export var arrow_damage_scale: float = 1.29
 ## Draw weight: arrow damage is multiplied by (draw_weight_ref_speed / base pull speed) ^ draw_weight_exponent.
 ## Only the base pull speed counts, so gear and buffs never lower hit damage. 0 turns it off.
@@ -241,7 +240,7 @@ func get_base_hit_damage() -> float:
 
 ## The base hit at a given Arrow Damage stat total (the stat window uses it to show an item's share).
 func base_hit_for(arrow_damage: float) -> float:
-	return (arrow_damage + base_arrow_damage) * arrow_damage_scale * get_draw_weight()
+	return arrow_damage * arrow_damage_scale * get_draw_weight()
 
 ## Damage multiplier from the base pull speed (see draw_weight_exponent).
 func get_draw_weight() -> float:

@@ -11,8 +11,10 @@
 [sub_resource type="Resource" id="Resource_5i4eu"]
 script = ExtResource("1_ralak")
 stat_name = &"arrow_damage"
+amount = 0.05
+type = 1
 max_applications = 50
-display_text = "Arrow Damage +1"
+display_text = "Arrow Damage +5%"
 
 [sub_resource type="Resource" id="Resource_1f24j"]
 script = ExtResource("1_ralak")
@@ -25,8 +27,10 @@ metadata/_custom_type_script = "uid://brkui3qsiuklr"
 [sub_resource type="Resource" id="Resource_ppbhg"]
 script = ExtResource("1_ralak")
 stat_name = &"arrow_damage"
+amount = 0.05
+type = 1
 max_applications = 50
-display_text = "Arrow Damage +1"
+display_text = "Arrow Damage +5%"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"
 
 [sub_resource type="Resource" id="Resource_rlg28"]
