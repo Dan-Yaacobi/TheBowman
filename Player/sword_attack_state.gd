@@ -1,5 +1,8 @@
 class_name SwordAttackState extends State
 
+## Swing damage lands within +/- this fraction of the sword damage stat.
+const SWORD_HIT_SPREAD: float = 0.1
+
 @onready var idle: PlayerIdleState = $"../Idle"
 
 ## Body animations played in order, one per swing. Each one keys the sword socket and the hit area.
@@ -36,7 +39,8 @@ func Enter() -> void:
 		if ability == quiver_ability and ability.applies_quiver_debuff():
 			continue
 		hurt_box.add_after_effect(ability.activate_ability)
-	hurt_box.base_damage = floor(player.stats.sword_damage.value())
+	# Same +/-10% spread as arrow hits, rolled per swing.
+	hurt_box.base_damage = floor(player.stats.sword_damage.value() * randf_range(1.0 - SWORD_HIT_SPREAD, 1.0 + SWORD_HIT_SPREAD))
 	player.body.sword.apply_size(player.get_sword_size())
 	player.apply_knockback(player.aim_direction, 75)
 	EventBus.sword_slash_sound.emit()

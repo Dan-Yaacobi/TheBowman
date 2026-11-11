@@ -8,6 +8,8 @@ class_name Arrow extends CharacterBody2D
 
 @export var dmg_variance_strength: float = 0.5
 @export var dmg_variance_skew: float = 2.0 
+## Every hit, perfect included, lands within +/- this fraction of its value (0.1 = +/-10%).
+@export var hit_spread: float = 0.1
 
 const WALL_HIT_EFFECT = preload("uid://cjafbvkr7l5xk")
 const HIT_SOUND = preload("uid://bomaal61jofg4")
@@ -92,7 +94,8 @@ func calc_dmg(shot_power: float) -> void:
 	# Only the bow's color scales the arrow hit; quivers and rings scale their own effects.
 	var bow_power: float = PlayerManager.player.color_levels.get_bow_power()
 	var base_hit: float = PlayerManager.player.main_hand.get_base_hit_damage()
-	damage = roundi(base_hit * shot_power * perfect_bonus * variance_mult * bow_power)
+	var spread: float = randf_range(1.0 - hit_spread, 1.0 + hit_spread)
+	damage = roundi(base_hit * shot_power * perfect_bonus * variance_mult * bow_power * spread)
 	
 func calc_knockback(shot_power: float) -> void:
 	if PlayerManager.player.stats.can_knockback <= 0:
