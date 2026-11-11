@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b42wwmoixjwrj" path="res://Player/States/PlayerStateMachine.tscn" id="4_tfnw6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="4_yf47d"]
 [ext_resource type="Script" uid="uid://cg4kofdwvgkso" path="res://Player/States/player_idle_state.gd" id="5_kcllr"]
-[ext_resource type="Script" uid="uid://dcyomtj13exhm" path="res://Player/Abilities2.0/PassiveAbilities/player_passive_ability.gd" id="6_ib3vm"]
 [ext_resource type="Script" uid="uid://1e2brs575f61" path="res://Player/Abilities2.0/ShootAbilities/Crit/crit_ability.gd" id="6_jvfa1"]
 [ext_resource type="Script" uid="uid://b3kd6syxg5yfq" path="res://Player/States/player_walking_state.gd" id="6_vo15m"]
 [ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="7_bgaaw"]
@@ -219,7 +218,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_yyr8h"]
 script = ExtResource("4_yf47d")
-base_value = 1.0
+base_value = 1.5
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_r04tr"]

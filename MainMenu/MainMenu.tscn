@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/DisenchantTable/DisenchantTableSite.tscn" id="21_disenchant"]
-[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="22_startbow"]
-[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="23_startquiver"]
+[ext_resource type="Resource" uid="uid://5kvnq1arpl5a" path="res://Items/Equipments/Bows/Resource/WoodenBow.tres" id="22_startbow"]
+[ext_resource type="Resource" uid="uid://dl8sslnohn8ig" path="res://Items/Equipments/Quivers/Resource/basic_quiver.tres" id="23_startquiver"]
 [ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="24_skycolors"]
 
 [sub_resource type="Resource" id="Resource_hubsky"]

@@ -188,27 +188,27 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead():
 		return
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F7:
-			collect_item(CustomVariables.items.WOOD, 50)
-			collect_item(CustomVariables.items.COIN, 50)
-			collect_item(CustomVariables.items.ESSENCE, 50)
-			collect_item(CustomVariables.items.SKYSHARD, 50)
-		if event.keycode == KEY_F6:
-			EventBus.drop_item.emit(CustomVariables.items.COLOR_SCROLL, global_position + Vector2(40, -10), 100.0, 1)
-		if event.keycode == KEY_F8:
-			Crafting.try_drop_schematic(global_position + Vector2(40, -10), 100.0)
-		if event.keycode == KEY_F10:
-			Crafting.crafted_this_run = false
-			print("forge unlocked")
-		if event.keycode == KEY_F9:
-			var track: UpgradeTrack = MetaProgress.tracks[0]
-			var bought: bool = MetaProgress.purchase(track, self)
-			print("bought: %s | level: %d | arrow damage: %s" % [bought, MetaProgress.get_level(track), stats.arrow_damage.value()])
-	
+	#if event is InputEventKey and event.pressed and not event.echo:
+		#if event.keycode == KEY_F7:
+			#collect_item(CustomVariables.items.WOOD, 50)
+			#collect_item(CustomVariables.items.COIN, 50)
+			#collect_item(CustomVariables.items.ESSENCE, 50)
+			#collect_item(CustomVariables.items.SKYSHARD, 50)
+		#if event.keycode == KEY_F6:
+			#EventBus.drop_item.emit(CustomVariables.items.COLOR_SCROLL, global_position + Vector2(40, -10), 100.0, 1)
+		#if event.keycode == KEY_F8:
+			#Crafting.try_drop_schematic(global_position + Vector2(40, -10), 100.0)
+		#if event.keycode == KEY_F10:
+			#Crafting.crafted_this_run = false
+			#print("forge unlocked")
+		#if event.keycode == KEY_F9:
+			#var track: UpgradeTrack = MetaProgress.tracks[0]
+			#var bought: bool = MetaProgress.purchase(track, self)
+			#print("bought: %s | level: %d | arrow damage: %s" % [bought, MetaProgress.get_level(track), stats.arrow_damage.value()])
+	#
 	if stats.hp > 0:
-		if event.is_action_pressed("test"):
-			$IslandAttack.activate_attack()
+		#if event.is_action_pressed("test"):
+			#$IslandAttack.activate_attack()
 			
 		if event.is_action_pressed("up"):
 			if current_portal:

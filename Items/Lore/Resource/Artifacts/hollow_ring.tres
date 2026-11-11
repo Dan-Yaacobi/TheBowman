@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="LoreItemData" format=3]
+[gd_resource type="Resource" script_class="LoreItemData" format=3 uid="uid://dfd6sbui847bc"]
 
 [ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
-[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/hollow_ring.png" id="4_icon"]
-[ext_resource type="Script" path="res://Items/Lore/lore_found_requirement.gd" id="2_found"]
+[ext_resource type="Script" uid="uid://busihu24p73go" path="res://Items/Lore/lore_found_requirement.gd" id="2_found"]
+[ext_resource type="Texture2D" uid="uid://d23ojs0poaibp" path="res://Items/Lore/Sprites/hollow_ring.png" id="4_icon"]
 
 [sub_resource type="Resource" id="Resource_requires"]
 script = ExtResource("2_found")

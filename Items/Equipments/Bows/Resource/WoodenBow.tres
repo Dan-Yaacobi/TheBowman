@@ -9,8 +9,8 @@
 [sub_resource type="Resource" id="Resource_lese3"]
 script = ExtResource("6_8qsve")
 stat_name = "pull_speed"
-min_value = 100.0
-max_value = 100.0
+min_value = 50.0
+max_value = 50.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_ctk7c"]

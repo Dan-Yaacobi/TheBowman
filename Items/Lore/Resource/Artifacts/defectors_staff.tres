@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="LoreItemData" format=3]
+[gd_resource type="Resource" script_class="LoreItemData" format=3 uid="uid://dsllc30cuskrj"]
 
 [ext_resource type="Script" uid="uid://bhsf6b4edytc1" path="res://Items/Lore/lore_item_data.gd" id="1_data"]
-[ext_resource type="Texture2D" path="res://Items/Lore/Sprites/defectors_staff.png" id="4_icon"]
-[ext_resource type="Script" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
+[ext_resource type="Script" uid="uid://cpl2doh4lxdsq" path="res://Items/Lore/lore_flag_requirement.gd" id="3_flag"]
+[ext_resource type="Texture2D" uid="uid://cfw8wh460nb5y" path="res://Items/Lore/Sprites/defectors_staff.png" id="4_icon"]
 
 [sub_resource type="Resource" id="Resource_after"]
 script = ExtResource("3_flag")
