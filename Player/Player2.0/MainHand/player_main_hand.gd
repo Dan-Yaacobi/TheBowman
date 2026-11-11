@@ -18,6 +18,11 @@ signal drawing_arrow
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
+## Arrow hit = (arrow_damage stat + base_arrow_damage) * arrow_damage_scale * ...
+## A bigger base makes each +1 damage from gear worth less. Keep starting damage the same by
+## lowering the scale: (2 starting gear + base) * scale ~= 6.
+@export var base_arrow_damage: float = 12.0
+@export var arrow_damage_scale: float = 0.43
 ## Draw weight: arrow damage is multiplied by (draw_weight_ref_speed / base pull speed) ^ draw_weight_exponent.
 ## Only the base pull speed counts, so gear and buffs never lower hit damage. 0 turns it off.
 @export var draw_weight_ref_speed: float = 1.0

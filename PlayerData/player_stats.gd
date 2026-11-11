@@ -169,6 +169,13 @@ static var STAT_UNITS: Dictionary[String, StatUnit] = {
 	"extra_drop_chance": StatUnit.PERCENT_NATIVE,
 }
 
+## Whole-number stats (arrow count, pierce): rolled as-is, never scaled by rarity, rift level or color.
+## Scaling them rounds "+1 arrow" up to +2.
+static var UNSCALED_STATS: Array[String] = ["arrow_count", "arrow_pierce"]
+
+static func is_unscaled(stat_name: String) -> bool:
+	return UNSCALED_STATS.has(stat_name)
+
 static func unit_of(stat_name: String) -> StatUnit:
 	return STAT_UNITS.get(stat_name, StatUnit.FLAT)
 

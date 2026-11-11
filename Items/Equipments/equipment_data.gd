@@ -88,6 +88,8 @@ func color_label() -> String:
 
 ## A rolled stat's value after the item's color level.
 func scaled_amount(mod: StatModifier) -> float:
+	if PlayerStats.is_unscaled(mod.stat_name):
+		return mod.amount
 	return mod.amount * power()
 
 func equip(player_stats: PlayerStats) -> void:
