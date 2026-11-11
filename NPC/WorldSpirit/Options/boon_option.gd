@@ -1,10 +1,10 @@
 class_name BoonOption extends SpiritOption
-## "Accept a blessing": after every death the spirit offers 3 boons for the next run (pick 1).
+## "Accept a blessing": after every run the spirit offers 3 boons for the next one (pick 1).
+## Choosing it opens the picker straight away.
 ## A turn-in, so it lights the "!" until a boon is picked. The picker lives in the HUD and is
 ## asked for through the EventBus.
 
 @export var label: String = "Accept a blessing"
-@export_multiline var offer_line: String = "The void sent you back to me. Take a piece of this world with you."
 
 func _ready() -> void:
 	MetaProgress.boon_state_changed.connect(_on_meta_progress_boon_state_changed)
@@ -16,8 +16,6 @@ func get_entries() -> Array[SpiritMenuEntry]:
 	return entries
 
 func run(_entry: SpiritMenuEntry, spirit: WorldSpirit) -> void:
-	if not await spirit.say([offer_line]):
-		return
 	# The chat box draws above the HUD, so it's hidden while the picker is open.
 	var chat_box: ChatBox = spirit.chat_box
 	if chat_box:

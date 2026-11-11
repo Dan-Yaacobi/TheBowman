@@ -4,8 +4,12 @@ signal equip_pressed
 
 ## Upper bound on frames to wait for the cards' layout to settle before syncing heights.
 const MAX_LAYOUT_FRAMES: int = 6
+## Arrow Damage is shown as the real hit it adds (same label as the equipment menu).
+const HIT_DAMAGE_PROP: String = "arrow_damage"
+const HIT_DAMAGE_LABEL: String = "Hit Damage"
 
 @export var stat_names_dict: Dictionary[String, String] = {}
+
 @onready var new_card: ItemCard = $CenterContainer/VBoxContainer/Cards/NewCard
 @onready var current_card: ItemCard = $CenterContainer/VBoxContainer/Cards/CurrentCard
 @onready var equip_button: Button = $CenterContainer/VBoxContainer/Buttons/CenterContainer/EquipButton
@@ -70,14 +74,19 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 
 	for stat_name: String in stat_names:
 		var display: String = _display_name(stat_name)
-		var new_mod: EquipmentData.StatModifier = _find_modifier(new_data, stat_name)
-		var cur_mod: EquipmentData.StatModifier = _find_modifier(current_data, stat_name)
-		# Shown after each item's color level (scrolls).
-		var new_amount: float = new_data.scaled_amount(new_mod) if new_mod else 0.0
-		var cur_amount: float = current_data.scaled_amount(cur_mod) if cur_mod else 0.0
+		var new_has: bool = _find_modifier(new_data, stat_name) != null
+		var cur_has: bool = _find_modifier(current_data, stat_name) != null
+		# Every roll of the stat summed (several tiers can roll it), after each item's color level.
+		var new_amount: float = _stat_total(new_data, stat_name)
+		var cur_amount: float = _stat_total(current_data, stat_name)
 		var suffix: String = PlayerStats.unit_suffix(stat_name)
-		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_mod != null, new_amount - cur_amount, true, suffix))
-		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_mod != null, 0.0, false, suffix))
+		if stat_name == HIT_DAMAGE_PROP:
+			# Shown as real damage on a full (non-perfect) draw, like the equipment menu.
+			display = HIT_DAMAGE_LABEL
+			new_amount = _hit_gain(new_amount, cur_amount, new_data)
+			cur_amount = _hit_gain(cur_amount, cur_amount, current_data)
+		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_has, new_amount - cur_amount, true, suffix))
+		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_has, 0.0, false, suffix))
 
 	var slot_name: String = _slot_name(new_data.slot)
 	new_card.show_item(new_data, slot_name, new_rows)
@@ -85,6 +94,18 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 		current_card.show_item(current_data, slot_name + "  ·  Equipped", current_rows)
 	else:
 		current_card.show_empty()
+
+## Full-draw hit damage this item's Arrow Damage roll adds, on top of everything else the
+## player has (the currently equipped item's roll taken out first).
+func _hit_gain(item_amount: float, equipped_amount: float, item: EquipmentData) -> float:
+	var player: Player = PlayerManager.player
+	var stat: Stat = player.stats.arrow_damage
+	var without: float = stat.value_without(equipped_amount, Stat.buff_type.ADDITIVE)
+	var with_item: float = stat.value_without(equipped_amount - item_amount, Stat.buff_type.ADDITIVE)
+	var bow_power: float = player.color_levels.get_bow_power()
+	if item and item.slot == EquipmentData.slots.BOW:
+		bow_power = player.color_levels.get_power(item.color)
+	return (player.main_hand.base_hit_for(with_item) - player.main_hand.base_hit_for(without)) * bow_power
 
 func _collect_stat_names(new_data: EquipmentData, current_data: EquipmentData) -> Array[String]:
 	var names: Array[String] = []
@@ -97,6 +118,15 @@ func _collect_stat_names(new_data: EquipmentData, current_data: EquipmentData) -
 				names.append(mod.stat_name)
 	names.sort_custom(func(a: String, b: String) -> bool: return _display_name(a).naturalnocasecmp_to(_display_name(b)) < 0)
 	return names
+
+func _stat_total(data: EquipmentData, stat_name: String) -> float:
+	if data == null:
+		return 0.0
+	var total: float = 0.0
+	for mod: EquipmentData.StatModifier in data.modifiers:
+		if mod.stat_name == stat_name:
+			total += data.scaled_amount(mod)
+	return total
 
 func _find_modifier(data: EquipmentData, stat_name: String) -> EquipmentData.StatModifier:
 	if data == null:

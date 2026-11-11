@@ -43,8 +43,10 @@ var boon_pool: Array[SpiritBoon] = [
 	load("res://NPC/WorldSpirit/Boons/Resource/lost_quiver.tres"),
 	load("res://NPC/WorldSpirit/Boons/Resource/lost_ring.tres"),
 ]
-## True from a run's death until the player picks a boon at the spirit.
+## True from the end of a run (death or back to the hub) until the player picks a boon.
 var boon_offer_pending: bool = false
+## True between entering a rift and the run ending. Not saved: a quit mid-run offers nothing.
+var _run_in_progress: bool = false
 ## The rolled offer, saved so reloading can't reroll it. Empty until first shown.
 var boon_offers: Array[StringName] = []
 ## Picked boon waiting for the next run's first rift.
@@ -329,12 +331,17 @@ func _on_event_bus_player_died(death_screen: bool) -> void:
 	if not death_screen:
 		return
 	run_deaths += 1
+	_offer_boon()
+
+func _offer_boon() -> void:
+	_run_in_progress = false
 	boon_offer_pending = true
 	boon_offers.clear()
 	boon_state_changed.emit()
 
 ## The first rift of a run uses up the chosen boon.
 func _on_event_bus_entered_rift() -> void:
+	_run_in_progress = true
 	if _applied_boon != null or chosen_boon == &"":
 		return
 	var boon: SpiritBoon = find_boon(chosen_boon)
@@ -346,8 +353,11 @@ func _on_event_bus_entered_rift() -> void:
 	boon.apply(player, _boon_buff_id)
 	_applied_boon = boon
 
+## Back in the hub after a run that didn't end in death (won, or left through a portal).
 func _on_event_bus_in_main_menu() -> void:
 	_remove_applied_boon()
+	if _run_in_progress:
+		_offer_boon()
 
 func _remove_applied_boon() -> void:
 	if _applied_boon == null:

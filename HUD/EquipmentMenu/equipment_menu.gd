@@ -132,7 +132,14 @@ func _item_contributions(equipment: EquipmentData) -> Dictionary[String, float]:
 func _show_tooltip(slot: EquipmentSlot, equipment: EquipmentData, contributions: Dictionary[String, float]) -> void:
 	var rows: Array[ItemCard.StatRow] = []
 	for stat_name: String in contributions:
-		rows.append(ItemCard.StatRow.new(_get_stat_display_name(stat_name), contributions[stat_name], true, 0.0, false, PlayerStats.unit_suffix(stat_name)))
+		var amount: float = contributions[stat_name]
+		var display: String = _get_stat_display_name(stat_name)
+		if stat_name == HIT_DAMAGE_PROP:
+			# The real full-draw hit this item adds, like the stat list's share column.
+			var stat: Stat = _stats.arrow_damage
+			amount = _hit_damage(stat.value()) - _hit_damage(stat.value_without(amount, Stat.buff_type.ADDITIVE))
+			display = HIT_DAMAGE_LABEL
+		rows.append(ItemCard.StatRow.new(display, amount, true, 0.0, false, PlayerStats.unit_suffix(stat_name)))
 	var slot_name: String = str(EquipmentData.slots.keys()[equipment.slot]).capitalize()
 	item_tooltip.show_item(equipment, slot_name, rows)
 	item_tooltip.show()
