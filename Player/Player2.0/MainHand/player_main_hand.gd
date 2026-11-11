@@ -4,6 +4,9 @@ signal shot_power_amount(amount)
 signal release
 signal drawing_arrow
 
+## Set on an arrow made perfect by next_shot_perfect (read by TelegraphedShotMinor).
+const AUTO_PERFECT_META: StringName = &"auto_perfect"
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hold_position: Node2D = $HoldPosition
 @onready var main_hand_state_machine: MainHandStateMachine = $MainHandStateMachine
@@ -125,6 +128,7 @@ func release_arrow() -> void:
 	if next_shot_perfect and current_arrow:
 		next_shot_perfect = false
 		shot_power = 1.0
+		current_arrow.set_meta(AUTO_PERFECT_META, true)
 	var perfect_threshold_check: float
 	if PlayerManager.player.stats.only_perfect:
 		perfect_threshold_check = 0.99

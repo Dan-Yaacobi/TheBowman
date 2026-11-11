@@ -20,17 +20,21 @@ func activate_ability(_enemy: Enemy) -> void:
 		var angle: float = base_angle + angle_step * i + jitter
 		var random_offset: Vector2 = Vector2.from_angle(angle) * randf_range(offset_radius * 0.5, offset_radius)
 		var target_position: Vector2 = spawn_position + random_offset
-		var target_scale: Vector2 = new_enemy.scale * 0.5
+		# Children come out at half the parent's size; _ready() applies stats.size as scale
+		new_enemy.stats.size = _enemy.stats.size * 0.5
+		var start_scale: Vector2 = _enemy.scale
+		var target_scale: Vector2 = Vector2.ONE * new_enemy.stats.size
 		@warning_ignore("narrowing_conversion")
 		new_enemy.stats.max_hp *= 0.75
 		new_enemy.global_position = spawn_position
 		new_enemy.process_mode = Node.PROCESS_MODE_DISABLED
-		new_enemy.ready.connect(_emerge.bind(new_enemy, target_position, target_scale), CONNECT_ONE_SHOT)
+		new_enemy.ready.connect(_emerge.bind(new_enemy, target_position, start_scale, target_scale), CONNECT_ONE_SHOT)
 		EventBus.enemy_summoned.emit(new_enemy)
 
 
-func _emerge(enemy: Enemy, target_position: Vector2, target_scale: Vector2) -> void:
+func _emerge(enemy: Enemy, target_position: Vector2, start_scale: Vector2, target_scale: Vector2) -> void:
 	enemy.modulate.a = 0.0
+	enemy.scale = start_scale
 	var tween: Tween = enemy.create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel(true)
