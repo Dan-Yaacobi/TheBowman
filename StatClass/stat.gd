@@ -38,14 +38,22 @@ func value() -> float:
 	if zero:
 		return 0.0
 		
+	return value_without(0.0, buff_type.ADDITIVE)
+
+## The value as if one modifier of this amount and type were missing (used to show an item's share).
+func value_without(amount: float, type: buff_type) -> float:
+	if zero:
+		return 0.0
 	var add_sum: float = 0.0
 	var mult_sum: float = 0.0
 	for mod in additive_mod:
 		add_sum += mod.get_amount()
-	
 	for mod in multi_mod:
 		mult_sum += mod.get_amount()
-		
+	if type == buff_type.ADDITIVE:
+		add_sum -= amount
+	else:
+		mult_sum -= amount
 	return (base_value + add_sum) * (1.0 + mult_sum)
 
 func add_buff(id: int, amount: float, type: buff_type) -> void:

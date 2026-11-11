@@ -23,7 +23,6 @@ func _ready() -> void:
 func Enter() -> void:
 	entity.animation_player.play("Pull")
 	charge_rate = PlayerManager.player.get_pull_speed()
-	entity.draw_pull_speed = charge_rate
 	entity.draw_arrow()
 	entity.shot_power = 0
 	#Input.set_custom_mouse_cursor(load("res://PlayGround/Sprites/AimCursor32.png"))

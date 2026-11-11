@@ -611,8 +611,9 @@ func get_move_speed() -> float:
 		return stats.move_speed.value() * main_hand.overcharge_move_mult
 	return stats.move_speed.value()
 	
+## Pull speed after diminishing returns (see PlayerMainHand.pull_speed_bonus_exponent).
 func get_pull_speed() -> float:
-	return stats.pull_speed.value()
+	return main_hand.effective_pull_speed(stats.pull_speed.value())
 
 func get_strength_shot_modifier() -> float:
 	return stats.basic_shot_power
