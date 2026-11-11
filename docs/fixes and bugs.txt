@@ -1,24 +1,33 @@
 green apple ramming into player causes no knockback on the player (red does work)
+
 green apples after spawns aren't smaller than the original
-make constructs shine when you can build them
+
+make constructs shine when you have the resource to build them and make sure they check it so after spending resources if you suddenly don't have enough anymore they stop glowing.
+
+controller integration - big one, the biggest caveat is making the aim. only solution i can think of is the joystick because it needs 360
+
+better early pacing in terms of enemies. feels to hard at the start.
+
 give the golden apple 60 seconds and make it vulnerable to sword hits as well
+
 make up dash with a double W click
+
 the minor ability for after X arrows your next one is perfect - two notes:
 1. it counts arrows that didn't hit anything, it should only count successful hits.
 2. the having one automatically perfect telegraph is not clear enough, also it beats the rhythm of the regular shots and feels awkward. 
 in the equipment comparison window make it obvious which ability is the main defining one and which are the extra rolled minor abilities
+
 events need a better system to decide what you will get than random. you can sometimes get the bird boss in the first 30 seconds of your rift and it's just too brutal
 
-getting hurt during swinging cause a visual bug where the sword and its effect are visible despite not swinging
+getting hurt during swinging cause a visual bug where the sword and its effect are visible despite not swinging, pretty rare bug.
 
 make sure all item's ability texts have color and a proper one
 
 there are way too many things to break
+
 talking with the world spirit and selecting artifacts keeps the dialogue box above the artifact journal that is being opened
 
 vases drop too much gold as well as chests, unbalanced compared to the how much the upgrades cost - my issue is i think things should cost less and resources should be less plentiful because each run you have to break like 100+ objects which is too grindy
-
-build a database that's online and make every end of run data saved there and give me tools to view the data and make summeries like average run time etc.
 
 make the target dummy a construct you unlock by paying 5 wood
 
@@ -27,3 +36,10 @@ have the world spirit occasionaly have something useful to tell you (after your 
 if birds are left after bird boss is dead in the bird elite event it crashes the game because they try to access the boss reference which doesn't exist.
 
 bosses needs to be immune to freeze or have an immunity window after being frozen
+
+need some more boosts early on. maybe after your first rift the world spirit has a buff for you so you can talk to him. something temporarily just to get you started better. and this can happen everytime you have a bad run perhaps. might be abused if you just walk in and die quickly you will get the buff...
+
+skylark ability that knocks you back is too harsh and often makes you fall and the benefit is awkward to use most likely completely redesign its ability
+add to the death window:
+total damage dealt
+what killed you
