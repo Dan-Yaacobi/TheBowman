@@ -5,7 +5,7 @@ const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
 
 func _ready() -> void:
 	hurt_box.add_after_effect(thunder_stun)
-	hurt_box.base_damage = roundi(PlayerManager.player.stats.arrow_damage.value() / 2)
+	hurt_box.base_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage() / 2.0)
 	hurt_box.successful_hit.connect(release_orb)
 	
 func thunder_stun(body: Node2D, _hurt_box: Node2D, _result: DamageResult) -> void:

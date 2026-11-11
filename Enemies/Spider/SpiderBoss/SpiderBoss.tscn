@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_56yp3"]
 script = ExtResource("4_r1ia3")
-hp = 500
+hp = 1500
 move_speed = 0
 knockback = 0
 skin = ExtResource("5_1u6kn")

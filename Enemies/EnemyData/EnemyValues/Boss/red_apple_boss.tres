@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 [resource]
 script = ExtResource("2_eemk7")
 display_name = "Super Apple"
-max_hp = 250
+max_hp = 750
 move_speed = SubResource("Resource_tt7aa")
 knockback = 100
 skin = ExtResource("6_86u60")

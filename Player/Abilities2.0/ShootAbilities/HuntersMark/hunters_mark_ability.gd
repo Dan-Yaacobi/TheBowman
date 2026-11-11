@@ -3,7 +3,7 @@ class_name HuntersMarkAbility extends PlayerAbility
 
 @export var max_stacks: int = 5
 ## Burst damage per spent stack.
-@export var damage_per_stack: int = 6
+@export var damage_per_stack: int = 18
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var enemy: Enemy = _target as Enemy

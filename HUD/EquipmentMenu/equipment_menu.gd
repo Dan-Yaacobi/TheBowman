@@ -2,6 +2,8 @@ class_name EquipmentMenu extends CanvasLayer
 
 const DRAW_TIME_PROP: String = "pull_speed"
 const DRAW_TIME_LABEL: String = "Draw Time"
+const HIT_DAMAGE_PROP: String = "arrow_damage"
+const HIT_DAMAGE_LABEL: String = "Hit Damage"
 
 const CHARACTER_AREA: String = "Control/CenterContainer/Window/VBox/Columns/CharacterPanel/CharacterArea/"
 const TOOLTIP_GAP: float = 12.0
@@ -199,7 +201,14 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 
 		# Pull speed shows as the draw time it gives (after diminishing returns); lower is better.
 		var is_draw_time: bool = prop == DRAW_TIME_PROP and value is Stat
-		var name_label: Label = _make_stat_label(DRAW_TIME_LABEL if is_draw_time else display)
+		# Arrow Damage shows as the hit a full draw deals, so every +damage roll is visible.
+		var is_hit_damage: bool = prop == HIT_DAMAGE_PROP and value is Stat
+		var label_text: String = display
+		if is_draw_time:
+			label_text = DRAW_TIME_LABEL
+		elif is_hit_damage:
+			label_text = HIT_DAMAGE_LABEL
+		var name_label: Label = _make_stat_label(label_text)
 		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if highlighted:
 			name_label.add_theme_color_override("font_color", COLOR_HIGHLIGHT)
@@ -215,6 +224,8 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 				value_label.add_theme_color_override("font_color", ItemCard.COLOR_UPGRADE if draw_stat.value() > draw_stat.base_value else ItemCard.COLOR_DOWNGRADE)
 		elif value is Stat:
 			var stat: Stat = value
+			if is_hit_damage:
+				value_label.text = str(roundi(_hit_damage(stat.value())))
 			if not is_equal_approx(stat.value(), stat.base_value):
 				value_label.add_theme_color_override("font_color", ItemCard.COLOR_UPGRADE if stat.value() > stat.base_value else ItemCard.COLOR_DOWNGRADE)
 		row.add_child(value_label)
@@ -229,6 +240,11 @@ func _build_stats(hovered: EquipmentData = null, contributions: Dictionary[Strin
 				var without: float = draw_stat.value_without(share * PlayerStats.apply_scale(prop), PlayerStats.roll_buff_type(prop, Stat.buff_type.MULTIPLICATIVE))
 				var time_delta: float = _draw_time(draw_stat.value()) - _draw_time(without)
 				share_label.text = ("+" if time_delta >= 0.0 else "") + _format_seconds(time_delta)
+			elif is_hit_damage:
+				var hit_stat: Stat = value
+				var hit_without: float = hit_stat.value_without(share, Stat.buff_type.ADDITIVE)
+				var hit_delta: int = roundi(_hit_damage(hit_stat.value()) - _hit_damage(hit_without))
+				share_label.text = ("+" if hit_delta >= 0 else "") + str(hit_delta)
 			else:
 				share_label.text = ("+" if share >= 0.0 else "") + _format_float(share) + PlayerStats.unit_suffix(prop)
 			share_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(hovered.color))
@@ -291,6 +307,12 @@ func _format_float(val: float) -> String:
 
 func _format_seconds(val: float) -> String:
 	return "%.2fs" % val
+
+
+## A full-draw arrow hit (with the bow's color level) at this Arrow Damage stat total.
+func _hit_damage(arrow_damage: float) -> float:
+	var player: Player = PlayerManager.player
+	return player.main_hand.base_hit_for(arrow_damage) * player.color_levels.get_bow_power()
 
 
 ## Seconds a full draw takes at this raw pull speed.

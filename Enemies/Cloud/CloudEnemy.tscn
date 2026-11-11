@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 
 [sub_resource type="Resource" id="Resource_ra6dr"]
 script = ExtResource("3_aq55l")
-max_hp = 30
+max_hp = 90
 death_ability = Array[ExtResource("2_ws7tv")]([SubResource("Resource_vs4ks")])
 bullet = ExtResource("2_g87bp")
 metadata/_custom_type_script = "uid://rlvenynllobd"

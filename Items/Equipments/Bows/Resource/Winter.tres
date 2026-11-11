@@ -27,9 +27,16 @@ min_value = 133.0
 max_value = 267.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
+[sub_resource type="Resource" id="Resource_dmg_t0"]
+script = ExtResource("6_jq77s")
+stat_name = "arrow_damage"
+min_value = 2.0
+max_value = 4.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
 [sub_resource type="Resource" id="Resource_phb7m"]
 script = ExtResource("5_vo7br")
-stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_nxm3p"), SubResource("Resource_yf47d")])
+stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_nxm3p"), SubResource("Resource_yf47d"), SubResource("Resource_dmg_t0")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_3qv0i"]

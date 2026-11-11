@@ -5,7 +5,7 @@ const LIGHTNING_CHAIN = preload("uid://bf4okr84ysm2p")
 
 @export var max_chains: int = 3
 @export var chain_radius: float = 200.0
-@export var damage: int = 4
+@export var damage: int = 12
 
 @onready var search_area: Area2D = $SearchArea
 @onready var chain_timer: Timer = $ChainTimer

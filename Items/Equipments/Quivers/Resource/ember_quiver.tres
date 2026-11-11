@@ -24,8 +24,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_t0r1"]
 script = ExtResource("3_roll")
 stat_name = "burn_damage"
-min_value = 1.0
-max_value = 2.0
+min_value = 3.0
+max_value = 6.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0"]
@@ -71,8 +71,8 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 [sub_resource type="Resource" id="Resource_t3r1"]
 script = ExtResource("3_roll")
 stat_name = "burn_damage"
-min_value = 1.0
-max_value = 3.0
+min_value = 3.0
+max_value = 9.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t3"]

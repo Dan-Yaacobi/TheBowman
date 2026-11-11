@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_fgmkt")
-max_hp = 100
+max_hp = 300
 move_speed = SubResource("Resource_dx8u3")
 knockback = 100
 skin = ExtResource("3_fgmkt")

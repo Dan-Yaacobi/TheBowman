@@ -6,8 +6,7 @@ const EXPLOSION = preload("uid://c8xxhiavn7s50")
 
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	if _target and _target is Enemy and _result and _result.killed:
-			@warning_ignore("narrowing_conversion")
-			explosion_damage = PlayerManager.player.stats.arrow_damage.value() * 2
+			explosion_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage() * 2.0)
 			var explosion: Explosion = EXPLOSION.instantiate()
 			explosion.global_position = _target.global_position
 			explosion.set_damage(explosion_damage)

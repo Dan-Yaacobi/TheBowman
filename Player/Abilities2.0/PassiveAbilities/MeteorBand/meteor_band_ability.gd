@@ -6,7 +6,7 @@ class_name MeteorBandAbility extends PlayerPassiveAbility
 ## Fast-fall must last this long before a slam counts (a tap of Down does nothing).
 @export var min_slam_time: float = 0.12
 @export var radius: float = 56.0
-@export var damage: int = 4
+@export var damage: int = 12
 @export var knockback: float = 320.0
 ## Upward speed after slamming into an enemy.
 @export var enemy_bounce: float = 200.0

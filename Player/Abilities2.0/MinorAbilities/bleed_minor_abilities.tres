@@ -9,7 +9,9 @@
 
 [sub_resource type="Resource" id="Resource_uiqo8"]
 script = ExtResource("2_8olkr")
-max_value = 1
+min_value = 3
+max_value = 3
+value_per_quality = 3
 quality_step = 3
 metadata/_custom_type_script = "uid://cw60pxuol5tdm"
 

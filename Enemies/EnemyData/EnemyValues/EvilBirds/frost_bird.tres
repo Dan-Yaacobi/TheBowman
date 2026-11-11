@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [resource]
 script = ExtResource("7_o3v4q")
-max_hp = 110
+max_hp = 330
 move_speed = SubResource("Resource_0m8if")
 knockback = 200
 skin = ExtResource("9_hhldc")

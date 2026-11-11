@@ -11,8 +11,9 @@
 [sub_resource type="Resource" id="Resource_ila4o"]
 script = ExtResource("1_ljyyh")
 stat_name = &"sword_damage"
+amount = 3.0
 max_applications = 50
-display_text = "Sword Damage +1"
+display_text = "Sword Damage +3"
 metadata/_custom_type_script = "uid://brkui3qsiuklr"
 
 [sub_resource type="Resource" id="Resource_4t6ih"]

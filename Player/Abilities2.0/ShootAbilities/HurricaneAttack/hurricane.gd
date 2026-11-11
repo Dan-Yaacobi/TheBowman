@@ -24,7 +24,7 @@ var after_hit_abilities: Array
 var before_hit_abilities: Array
 var knockback_power: float
 var enemies_picked: Dictionary[GameEntity, Dictionary] = {}  # value = {radius, angle}
-## Damage of the perfect arrow that made this hurricane. 0 = fall back to the arrow_damage stat.
+## Damage of the perfect arrow that made this hurricane. 0 = fall back to the base arrow hit.
 var base_damage: int = 0
 var _tick_time: float = 0.0
 
@@ -40,7 +40,7 @@ func _ready() -> void:
 		hurt_box.add_before_effect(ability.activate_ability)
 
 	if base_damage <= 0:
-		base_damage = roundi(PlayerManager.player.stats.arrow_damage.value())
+		base_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage())
 	hurt_box.base_damage = base_damage
 	hurt_box.add_after_effect(pick_enemy)
 	

@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 [resource]
 script = ExtResource("2_data")
 boulder_scene = ExtResource("6_boulder")
-max_hp = 250
+max_hp = 750
 move_speed = SubResource("Resource_speed")
 knockback = 260
 skin = ExtResource("5_skin")

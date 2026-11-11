@@ -3,19 +3,19 @@ class_name ColorLevels extends Node
 ## Each level makes items of that color stronger and gives the color's secondary bonus.
 ## Reset when the run ends. Abilities read it through PlayerAbility.power().
 
-## Item power gained per level (0.05 = +5% per level).
-@export var power_per_level: float = 0.05
+## Item power gained per level (0.1 = +10% per level).
+@export var power_per_level: float = 0.1
 
 @export_group("Secondary bonuses")
 ## Per level, as a fraction of the stat (0.05 = +5%). Adds to other % buffs on the same stat.
 ## Precision: perfect shot power (perfect_shot_bonus).
-@export var perfect_power_per_level: float = 0.05
-@export var pull_speed_per_level: float = 0.08
+@export var perfect_power_per_level: float = 0.1
+@export var pull_speed_per_level: float = 0.12
 ## Elemental: % added to every stat in DEBUFF_DURATION_STATS.
 @export var debuff_per_level: float = 0.05
 ## Elemental: flat damage added to every stat in DEBUFF_DAMAGE_STATS. Flat, because debuff damage
 ## is a small whole number and a % bonus would round away.
-@export var debuff_damage_per_level: float = 1.0
+@export var debuff_damage_per_level: float = 3.0
 
 @export_group("Scrolls")
 ## Every Nth scroll (all colors counted) also gives a heart container and a full heal.

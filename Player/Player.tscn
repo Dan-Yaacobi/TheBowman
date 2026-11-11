@@ -97,7 +97,7 @@ metadata/_custom_type_script = "uid://1e2brs575f61"
 
 [sub_resource type="Resource" id="Resource_4wb44"]
 script = ExtResource("4_yf47d")
-base_value = 3.0
+base_value = 9.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_yf47d"]
@@ -112,7 +112,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_ib3vm"]
 script = ExtResource("4_yf47d")
-base_value = 3.0
+base_value = 9.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_vtj8b"]
@@ -203,7 +203,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_8agqw"]
 script = ExtResource("4_yf47d")
-base_value = 2.0
+base_value = 6.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_27xwf"]
@@ -233,7 +233,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_lre2g"]
 script = ExtResource("4_yf47d")
-base_value = 5.0
+base_value = 15.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_fam5e"]

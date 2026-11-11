@@ -9,7 +9,7 @@ class_name FrostBreath extends Node2D
 @export var hitbox_growth_speed: float = 1.0
 @export var beam_width: float = 30.0
 @export var tick_interval: float = 0.25
-@export var tick_damage: int = 2
+@export var tick_damage: int = 6
 @export var slow_duration: float = 1.0
 
 @export_group("Size Scaling")

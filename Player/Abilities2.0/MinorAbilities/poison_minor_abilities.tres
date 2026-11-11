@@ -10,7 +10,9 @@
 
 [sub_resource type="Resource" id="Resource_0x3kp"]
 script = ExtResource("2_fxi24")
-max_value = 1
+min_value = 3
+max_value = 3
+value_per_quality = 3
 quality_step = 3
 metadata/_custom_type_script = "uid://sqv71jkptw5k"
 

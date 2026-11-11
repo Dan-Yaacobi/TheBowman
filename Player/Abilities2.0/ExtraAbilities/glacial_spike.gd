@@ -7,8 +7,7 @@ const FREEZE_DEBUFF = preload("uid://dewhg80xib8vt")
 
 func _ready() -> void:
 	hurt_box.add_before_effect(apply_freeze)
-	@warning_ignore("narrowing_conversion")
-	hurt_box.base_damage = PlayerManager.player.stats.arrow_damage.value()
+	hurt_box.base_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage())
 	var base_position: Vector2 = hurt_box.position
 	var duration: float = animation_player.get_animation("Rise").length / animation_player.speed_scale
 

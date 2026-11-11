@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 [sub_resource type="Resource" id="Resource_lnhjg"]
 resource_local_to_scene = true
 script = ExtResource("5_p0qsm")
-max_hp = 15
+max_hp = 45
 move_speed = 20
 knockback = 75
 skin = ExtResource("9_f1s8b")
@@ -45,7 +45,7 @@ metadata/_custom_type_script = "uid://du1epmdpcfmpv"
 [sub_resource type="Resource" id="Resource_n0xre"]
 resource_local_to_scene = true
 script = ExtResource("5_p0qsm")
-max_hp = 30
+max_hp = 90
 move_speed = 20
 knockback = 80
 skin = ExtResource("11_dgboc")
@@ -60,7 +60,7 @@ metadata/_custom_type_script = "uid://rlvenynllobd"
 [sub_resource type="Resource" id="Resource_yb32l"]
 resource_local_to_scene = true
 script = ExtResource("5_p0qsm")
-max_hp = 100
+max_hp = 300
 move_speed = 35
 knockback = 100
 skin = ExtResource("13_hw8fy")

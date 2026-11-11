@@ -20,9 +20,9 @@ signal drawing_arrow
 @export var weak_shot_punish: float = 2.0
 ## Arrow hit = (arrow_damage stat + base_arrow_damage) * arrow_damage_scale * ...
 ## A bigger base makes each +1 damage from gear worth less. Keep starting damage the same by
-## lowering the scale: (2 starting gear + base) * scale ~= 6.
+## lowering the scale: (2 starting gear + base) * scale ~= 18 (numbers are on a x3 scale).
 @export var base_arrow_damage: float = 12.0
-@export var arrow_damage_scale: float = 0.43
+@export var arrow_damage_scale: float = 1.29
 ## Draw weight: arrow damage is multiplied by (draw_weight_ref_speed / base pull speed) ^ draw_weight_exponent.
 ## Only the base pull speed counts, so gear and buffs never lower hit damage. 0 turns it off.
 @export var draw_weight_ref_speed: float = 1.0
@@ -233,6 +233,15 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 		_shot_power_value = 1.0
 	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
+
+## A full non-perfect arrow hit before the bow's color level and variance. Abilities that deal
+## "arrow damage" use this, so they scale with the arrow.
+func get_base_hit_damage() -> float:
+	return base_hit_for(PlayerManager.player.stats.arrow_damage.value())
+
+## The base hit at a given Arrow Damage stat total (the stat window uses it to show an item's share).
+func base_hit_for(arrow_damage: float) -> float:
+	return (arrow_damage + base_arrow_damage) * arrow_damage_scale * get_draw_weight()
 
 ## Damage multiplier from the base pull speed (see draw_weight_exponent).
 func get_draw_weight() -> float:

@@ -3,9 +3,9 @@ class_name StormcallerAbility extends PlayerAbility
 ## 1 rod: small zaps over time. 2 rods: a damaging lightning line between them.
 ## 3 rods: all three stunned, and the triangle between them stuns anything inside or crossing it. Then the rods are spent.
 
-@export var zap_damage: int = 2
+@export var zap_damage: int = 6
 @export var zap_interval: float = 0.6
-@export var line_damage: int = 3
+@export var line_damage: int = 9
 @export var stun_duration: float = 1.5
 @export var rod_lifetime: float = 10.0
 

@@ -5,7 +5,7 @@ class_name ShatterMinor extends MinorAbility
 const SHARD_TEXTURE_PATH: String = "res://Items/Equipments/Quivers/Sprites/Arrows/IceShrapnel.png"
 
 @export var shard_range: float = 70.0
-## Shard damage as a multiplier of your arrow damage stat.
+## Shard damage as a multiplier of your base arrow hit.
 @export var shard_damage_mult: float = 0.5
 
 func on_equipped() -> void:
@@ -19,7 +19,7 @@ func on_unequipped() -> void:
 func _on_enemy_died(enemy: Enemy) -> void:
 	if not is_instance_valid(enemy) or not enemy.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
 		return
-	var damage: int = maxi(1, roundi(PlayerManager.player.stats.arrow_damage.value() * shard_damage_mult * power()))
+	var damage: int = maxi(1, roundi(PlayerManager.player.main_hand.get_base_hit_damage() * shard_damage_mult * power()))
 	var count: int = maxi(value, 1)
 	var start_angle: float = randf() * TAU
 	for i in count:

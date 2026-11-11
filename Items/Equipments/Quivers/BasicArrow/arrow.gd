@@ -91,11 +91,8 @@ func calc_dmg(shot_power: float) -> void:
 
 	# Only the bow's color scales the arrow hit; quivers and rings scale their own effects.
 	var bow_power: float = PlayerManager.player.color_levels.get_bow_power()
-	var main_hand: PlayerMainHand = PlayerManager.player.main_hand
-	# Base pull speed sets how heavy arrows are; gear and buffs don't change it.
-	var draw_weight: float = main_hand.get_draw_weight()
-	var base_hit: float = (PlayerManager.player.stats.arrow_damage.value() + main_hand.base_arrow_damage) * main_hand.arrow_damage_scale
-	damage = roundi(base_hit * shot_power * perfect_bonus * variance_mult * bow_power * draw_weight)
+	var base_hit: float = PlayerManager.player.main_hand.get_base_hit_damage()
+	damage = roundi(base_hit * shot_power * perfect_bonus * variance_mult * bow_power)
 	
 func calc_knockback(shot_power: float) -> void:
 	if PlayerManager.player.stats.can_knockback <= 0:
