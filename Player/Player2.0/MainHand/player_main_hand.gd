@@ -18,10 +18,17 @@ signal drawing_arrow
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
+## Draw weight: faster draws fire lighter arrows, so pull speed adds DPS with diminishing returns.
+## Arrow damage is multiplied by (draw_weight_ref_speed / pull speed) ^ draw_weight_exponent.
+## Exponent 0.5 = DPS grows with the square root of pull speed; 0 turns the weight off.
+@export var draw_weight_ref_speed: float = 1.0
+@export var draw_weight_exponent: float = 0.5
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
 var current_arrow: Arrow = null
+## Pull speed the current/last draw started with (set by the pulling state).
+var draw_pull_speed: float = 1.0
 var hand_direction: Vector2
 var shot_power: float
 var off_hand: PlayerOffHand
@@ -221,6 +228,10 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 		_shot_power_value = 1.0
 	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
+
+## Damage multiplier for the current draw's pull speed (see draw_weight_exponent).
+func get_draw_weight() -> float:
+	return pow(draw_weight_ref_speed / maxf(draw_pull_speed, 0.01), draw_weight_exponent)
 
 func is_overcharging() -> bool:
 	return overcharge_enabled and main_hand_state_machine.curr_state is MaxPullMainHandState

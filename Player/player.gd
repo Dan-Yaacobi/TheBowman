@@ -96,6 +96,8 @@ var initial_max_hp: int
 var nearby_enemies: Array[Enemy]
 var enemies_killed: int = 0
 var can_swing: int = 0
+## Shoot was pressed during a sword swing; draw as soon as the swing ends.
+var _draw_buffered: bool = false
 var aim_direction: Vector2 = Vector2.ZERO
 ## Surfaces currently changing ground grip (e.g. SlipperySurface) -> their traction
 var _traction_sources: Dictionary[Node, float] = {}
@@ -184,6 +186,7 @@ func _process(_delta: float) -> void:
 		direction = 0
 	_update_aim_and_facing()
 	_update_animations()
+	_try_buffered_draw()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead():
@@ -232,11 +235,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 func shoot() -> void:
 	if is_swinging():
+		# Remember the press; the draw starts when the swing ends if shoot is still held.
+		_draw_buffered = true
 		return
 	main_hand.start_draw()
 
 func release_shot() -> void:
+	_draw_buffered = false
 	main_hand.release_draw()
+
+## Starts a draw that was pressed during a sword swing, once the swing is over.
+func _try_buffered_draw() -> void:
+	if not _draw_buffered or is_swinging():
+		return
+	_draw_buffered = false
+	if stats.hp > 0 and stats.bow and stats.arrow and Input.is_action_pressed("shoot"):
+		main_hand.start_draw()
 	
 func use_active_ability() -> void:
 	if stats.active_ability == null:

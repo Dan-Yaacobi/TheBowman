@@ -91,7 +91,9 @@ func calc_dmg(shot_power: float) -> void:
 
 	# Only the bow's color scales the arrow hit; quivers and rings scale their own effects.
 	var bow_power: float = PlayerManager.player.color_levels.get_bow_power()
-	damage = floor((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * variance_mult * bow_power)
+	# Faster draws fire lighter arrows (diminishing DPS from pull speed).
+	var draw_weight: float = PlayerManager.player.main_hand.get_draw_weight()
+	damage = roundi((PlayerManager.player.stats.arrow_damage.value() + 4) * shot_power * perfect_bonus * variance_mult * bow_power * draw_weight)
 	
 func calc_knockback(shot_power: float) -> void:
 	if PlayerManager.player.stats.can_knockback <= 0:
