@@ -18,17 +18,17 @@ signal drawing_arrow
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
-## Draw weight: faster draws fire lighter arrows, so pull speed adds DPS with diminishing returns.
-## Arrow damage is multiplied by (draw_weight_ref_speed / pull speed) ^ draw_weight_exponent.
-## Exponent 0.5 = DPS grows with the square root of pull speed; 0 turns the weight off.
+## Draw weight: arrow damage is multiplied by (draw_weight_ref_speed / base pull speed) ^ draw_weight_exponent.
+## Only the base pull speed counts, so gear and buffs never lower hit damage. 0 turns it off.
 @export var draw_weight_ref_speed: float = 1.0
 @export var draw_weight_exponent: float = 0.5
+## Pull speed above base has diminishing returns: the bonus ratio (total / base) is raised to this power.
+## 0.7: +100% pull speed draws ~62% faster. 1 turns it off. Penalties (below base) apply in full.
+@export var pull_speed_bonus_exponent: float = 0.7
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
 var current_arrow: Arrow = null
-## Pull speed the current/last draw started with (set by the pulling state).
-var draw_pull_speed: float = 1.0
 var hand_direction: Vector2
 var shot_power: float
 var off_hand: PlayerOffHand
@@ -229,9 +229,21 @@ func calc_shot_velocity(_shot_power, direction) -> Vector2:
 	var final_value = _shot_power_value * perfect_bonus * direction * (PlayerManager.player.stats.arrow_speed.value())
 	return final_value
 
-## Damage multiplier for the current draw's pull speed (see draw_weight_exponent).
+## Damage multiplier from the base pull speed (see draw_weight_exponent).
 func get_draw_weight() -> float:
-	return pow(draw_weight_ref_speed / maxf(draw_pull_speed, 0.01), draw_weight_exponent)
+	var base: float = PlayerManager.player.stats.pull_speed.base_value
+	return pow(draw_weight_ref_speed / maxf(base, 0.01), draw_weight_exponent)
+
+## Pull speed the draw actually uses, after diminishing returns on the part above base.
+func effective_pull_speed(raw: float) -> float:
+	var base: float = PlayerManager.player.stats.pull_speed.base_value
+	if base <= 0.0 or raw <= base:
+		return raw
+	return base * pow(raw / base, pull_speed_bonus_exponent)
+
+## Seconds a full draw takes at the given raw pull speed (Pull speed stat total).
+func get_draw_time(raw_pull_speed: float) -> float:
+	return animation_player.get_animation("Pull").length / maxf(effective_pull_speed(raw_pull_speed), 0.01)
 
 func is_overcharging() -> bool:
 	return overcharge_enabled and main_hand_state_machine.curr_state is MaxPullMainHandState
