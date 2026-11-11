@@ -32,6 +32,9 @@ func Physics(_delta: float) -> State:
 func HandleInput(_event: InputEvent) -> State:
 	if _event.is_action_pressed("dash") and player.can_start_dash():
 		return dash
+	if dash.is_up_double_tap(_event) and player.can_start_dash():
+		dash.force_up = true
+		return dash
 	if _event.is_action_pressed("swing") and player.can_start_swing():
 		return sword_attack
 	return null

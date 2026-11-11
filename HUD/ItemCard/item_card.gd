@@ -25,7 +25,9 @@ const NAME_FONT_SIZE: int = 19
 const TAG_FONT_SIZE: int = 13
 const SECTION_FONT_SIZE: int = 13
 const LABEL_FONT_SIZE: int = 16
-const ABILITY_FONT_SIZE: int = 16
+const MAIN_ABILITY_FONT_SIZE: int = 18
+const BONUS_ABILITY_FONT_SIZE: int = 14
+const BONUS_HEADER_TEXT: String = "BONUS"
 
 @onready var content: VBoxContainer = $MarginContainer/Content
 @onready var empty_label: Label = $MarginContainer/Content/EmptyLabel
@@ -61,10 +63,15 @@ func show_item(data: EquipmentData, tag: String, rows: Array[StatRow]) -> void:
 	tag_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(data.color))
 
 	if data.ability:
-		_add_ability(data.ability)
+		_add_main_ability(data.ability)
+	var added_bonus_header: bool = false
 	for bonus: MinorAbility in data.bonus_abilities:
-		if bonus:
-			_add_ability(bonus)
+		if not bonus:
+			continue
+		if not added_bonus_header:
+			added_bonus_header = true
+			abilities.add_child(_make_label(BONUS_HEADER_TEXT, COLOR_SECTION_HEADER, SECTION_FONT_SIZE))
+		_add_bonus_ability(bonus)
 
 	for row: StatRow in rows:
 		_add_stat_row(row)
@@ -89,8 +96,25 @@ func _reset() -> void:
 	header.custom_minimum_size.y = 0.0
 	abilities.custom_minimum_size.y = 0.0
 
-func _add_ability(ability: PlayerAbility) -> void:
-	var label: Label = _make_label(ability.get_tooltip(), ability.get_tooltip_color(), ABILITY_FONT_SIZE)
+## The item's defining ability: larger text in a frame tinted by the ability's color.
+func _add_main_ability(ability: PlayerAbility) -> void:
+	var tint: Color = ability.get_tooltip_color()
+	var frame: PanelContainer = PanelContainer.new()
+	var style: StyleBoxFlat = StyleBoxFlat.new()
+	style.bg_color = Color(tint.r, tint.g, tint.b, 0.12)
+	style.border_color = Color(tint.r, tint.g, tint.b, 0.7)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(2)
+	style.set_content_margin_all(5.0)
+	frame.add_theme_stylebox_override("panel", style)
+	var label: Label = _make_label(ability.get_tooltip(), tint, MAIN_ABILITY_FONT_SIZE)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	frame.add_child(label)
+	abilities.add_child(frame)
+
+## Rolled minor abilities: smaller, listed under the BONUS label.
+func _add_bonus_ability(ability: PlayerAbility) -> void:
+	var label: Label = _make_label("+ " + ability.get_tooltip(), ability.get_tooltip_color(), BONUS_ABILITY_FONT_SIZE)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	abilities.add_child(label)
 

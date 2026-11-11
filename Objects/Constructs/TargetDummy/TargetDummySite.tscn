@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://cpicdc1bc3or4" path="res://Objects/Constructs/construct_site.gd" id="1_site"]
+[ext_resource type="PackedScene" uid="uid://ccg8yfaghk8ga" path="res://Enemies/TargetDummy/TargetDummy.tscn" id="2_dummy"]
+[ext_resource type="PackedScene" uid="uid://evpv05u2cdsm" path="res://Objects/Constructs/BuildPrompt.tscn" id="3_prompt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dummy"]
+radius = 44.0
+
+[node name="TargetDummySite" type="Node2D" node_paths=PackedStringArray("construct", "build_prompt", "proximity_area")]
+script = ExtResource("1_site")
+id = &"target_dummy"
+display_name = "Target Dummy"
+cost = Dictionary[int, int]({
+3: 5
+})
+construct = NodePath("TargetDummy")
+build_prompt = NodePath("BuildPrompt")
+proximity_area = NodePath("ProximityArea")
+
+[node name="TargetDummy" parent="." instance=ExtResource("2_dummy")]
+
+[node name="ProximityArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea"]
+shape = SubResource("CircleShape2D_dummy")
+
+[node name="BuildPrompt" parent="." instance=ExtResource("3_prompt")]
+offset_left = -24.0
+offset_top = -23.0
+offset_right = 128.0
+offset_bottom = 89.0

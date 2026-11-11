@@ -45,4 +45,4 @@ func get_tooltip() -> String:
 	return "Fills with poison, release a big gas cloud when full. Also perfect shots inflict poison."
 
 func get_tooltip_color() -> Color:
-	return Color.DARK_GREEN
+	return Color.LIME_GREEN

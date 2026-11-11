@@ -39,3 +39,6 @@ func summon_soul(_enemy: Enemy ) -> void:
 
 func get_tooltip() -> String:
 	return "Collect enemy souls, unleash them with your Perfect Shot"
+
+func get_tooltip_color() -> Color:
+	return Color.PALE_TURQUOISE
