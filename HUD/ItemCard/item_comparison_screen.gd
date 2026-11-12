@@ -4,14 +4,20 @@ signal equip_pressed
 
 ## Upper bound on frames to wait for the cards' layout to settle before syncing heights.
 const MAX_LAYOUT_FRAMES: int = 6
+## Space (screen pixels) kept free under the buttons.
+const BOTTOM_MARGIN: float = 16.0
 ## Arrow Damage is shown as the real hit it adds (same label as the equipment menu).
 const HIT_DAMAGE_PROP: String = "arrow_damage"
 const HIT_DAMAGE_LABEL: String = "Hit Damage"
 
 @export var stat_names_dict: Dictionary[String, String] = {}
 
-@onready var new_card: ItemCard = $CenterContainer/VBoxContainer/Cards/NewCard
-@onready var current_card: ItemCard = $CenterContainer/VBoxContainer/Cards/CurrentCard
+@onready var new_card: ItemCard = $CenterContainer/VBoxContainer/CardsScroll/Cards/NewCard
+@onready var current_card: ItemCard = $CenterContainer/VBoxContainer/CardsScroll/Cards/CurrentCard
+@onready var cards_scroll: ScrollContainer = $CenterContainer/VBoxContainer/CardsScroll
+@onready var cards: HBoxContainer = $CenterContainer/VBoxContainer/CardsScroll/Cards
+@onready var buttons: Control = $CenterContainer/VBoxContainer/Buttons
+@onready var center: Control = $CenterContainer
 @onready var equip_button: Button = $CenterContainer/VBoxContainer/Buttons/CenterContainer/EquipButton
 
 var target: Equipment
@@ -164,5 +170,19 @@ func _sync_card_sections() -> void:
 			var height: float = maxf(new_sections[i].size.y, current_sections[i].size.y)
 			new_sections[i].custom_minimum_size.y = height
 			current_sections[i].custom_minimum_size.y = height
+	_fit_cards_to_screen()
 	new_card.modulate.a = 1.0
 	current_card.modulate.a = 1.0
+
+## Caps the cards' area to the screen space left above the buttons; taller cards scroll.
+func _fit_cards_to_screen() -> void:
+	var content: Vector2 = cards.get_combined_minimum_size()
+	var scale_y: float = maxf(center.scale.y, 0.01)
+	var screen_h: float = get_viewport_rect().size.y
+	var room: float = (screen_h - center.global_position.y - BOTTOM_MARGIN) / scale_y
+	room -= buttons.get_combined_minimum_size().y + 4.0
+	var height: float = clampf(content.y, 0.0, maxf(room, 80.0))
+	# Leave room for the scrollbar when the cards don't fit.
+	var bar: float = cards_scroll.get_v_scroll_bar().get_combined_minimum_size().x if content.y > height else 0.0
+	cards_scroll.custom_minimum_size = Vector2(content.x + bar, height)
+	cards_scroll.scroll_vertical = 0

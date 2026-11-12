@@ -1,19 +1,21 @@
 class_name SeekerDartsAbility extends PlayerAbility
-## Non-perfect arrows home in slightly on the nearest enemy ahead. Perfect arrows fly straight but deal more damage.
+## Non-perfect arrows home in slightly on the nearest enemy ahead. Perfect arrows fly straight and deal less
+## damage: the aim assist is the payoff. The color level scales the homing, not the penalty.
 
 ## Max turn speed (radians per second) of a homing arrow.
 @export var turn_rate: float = 2.5
 @export var seek_radius: float = 140.0
 ## Only enemies within this angle of the arrow's flight are chased.
 @export var seek_cone_degrees: float = 60.0
-@export var perfect_damage_bonus: float = 0.25
+## Perfect shot damage taken away (0.25 = -25%).
+@export var perfect_damage_penalty: float = 0.25
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var arrow: Arrow = _activator as Arrow
 	if arrow == null:
 		return
 	if arrow.perfect_shot:
-		arrow.damage = roundi(arrow.damage * (1.0 + perfect_damage_bonus * power()))
+		arrow.damage = maxi(1, roundi(arrow.damage * (1.0 - perfect_damage_penalty)))
 		return
 	var homing: SeekerHoming = SeekerHoming.new()
 	homing.turn_rate = turn_rate * power()
@@ -22,7 +24,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	arrow.add_child(homing)
 
 func get_tooltip() -> String:
-	return "Normal arrows home in slightly. Perfect arrows deal +%d%% damage" % roundi(perfect_damage_bonus * power() * 100.0)
+	return "Normal arrows home in slightly. Perfect arrows deal %d%% less damage" % roundi(perfect_damage_penalty * 100.0)
 
 func get_tooltip_color() -> Color:
 	return Color(0.55, 0.95, 0.75)

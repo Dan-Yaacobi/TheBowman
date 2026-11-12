@@ -84,6 +84,7 @@ script = ExtResource("2_pdae7")
 display_name = "Kill 10 enemies"
 description = "Kill 10 enemies before the timer runs out"
 goal = ExtResource("6_rknkn")
+spawn_interval = 4.5
 rewards = Array[ExtResource("8_rknkn")]([SubResource("Resource_yemt6"), SubResource("Resource_yp28l"), SubResource("Resource_32gdo"), SubResource("Resource_hl8p6")])
 enemy_pool = Array[ExtResource("4_1igmo")]([ExtResource("5_a4nvr"), ExtResource("kill_pink_apple"), ExtResource("kill_green_apple"), ExtResource("kill_evil_bird"), ExtResource("kill_frost_bird"), ExtResource("kill_frost_orb"), ExtResource("kill_fire_bird"), ExtResource("kill_flaming_skull"), ExtResource("kill_black_spider")])
 curse_pool = Array[ExtResource("3_a4nvr")]([ExtResource("4_jcsjr"), ExtResource("5_84n7e"), ExtResource("6_fqvne"), ExtResource("7_yp28l")])

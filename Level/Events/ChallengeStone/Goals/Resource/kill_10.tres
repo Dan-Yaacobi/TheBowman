@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_h4t0w")
 kills_required = 10
-time_limit = 30.0
+time_limit = 60.0
 metadata/_custom_type_script = "uid://ddlvhn8t5trut"
