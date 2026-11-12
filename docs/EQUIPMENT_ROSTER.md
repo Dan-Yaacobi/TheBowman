@@ -199,10 +199,22 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 |---|---|---|---|
 | **Janus** | Tempo | 0.45s | Every shot also fires a mirrored arrow straight behind you at half damage. |
 | **Hornet's Nest** | Tempo | 0.8s | A perfect release sprays 8 small arrows over 0.5s instead of one: 20% damage each, ±12° spread, no knockback, a stream of small recoil pushes. Quiver on-hit effects only trigger on the first burst arrow to hit each enemy. |
-| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds +1% damage and +1% draw time for the run: the bow bloats into a siege bow (heavier draw, harder hits, more recoil). The growing Draw Time row is the visible cost. Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. *(being redesigned: the slow-draw downside was rejected)* |
+| **The Maw** | Precision | 0.55s | A starving bow that grows by devouring souls, in 4 stages (see below). Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. |
 | **Orrery** | Precision | 0.55s | Quick (non-perfect) shots don't fly off: the arrow orbits you (up to 3), striking any enemy that comes close. A perfect shot launches every orbiting arrow at your aim along with itself. With 3 already orbiting, quick shots fire normally. |
 | **Lanternbow** | Tempo | 0.45s | Perfect shots release a wisp (up to 3, 8s each) that floats beside you and fires a weak copy of every arrow you shoot. Copies carry quiver effects. |
 | **Equinox** | Elemental | 0.55s | Arrows alternate fire and frost (the bow's color shows which is next). Frost on a burning enemy, or fire on a frostbitten one, sets off a thermal shock burst. *(on hold: a debuff-combo system to revisit later)* |
+
+#### The Maw: stages
+Souls per kill: normal enemy 1, elite 5, boss 15. A soul counter shows above the archer; each kill flashes a "devour" on the bow; the bow sprite changes per stage (4 sprites).
+
+| Stage | Souls | Effect |
+|---|---|---|
+| **Starving** | 0-19 | -30% arrow damage (the only downside, gone once it has fed) |
+| **Fed** | 20 | Normal damage. Perfect kills bite: the devoured soul lashes the nearest enemy for 50% of the killing hit. |
+| **Gorged** | 60 | +25% arrow damage. Arrows leave a faint soul trail. |
+| **Awakened** | 150 | +50% arrow damage. A perfect hit on an enemy below 20% HP devours it outright; bosses take double damage from that hit instead. |
+
+Precision scrolls scale the stage bonuses and the bite. **Thresholds are placeholders to tune in playtesting.** The game currently has 6 rifts (2 dirt, 2 snow, 2 hell), possibly 9 later (3 each); with 6 rifts, 150 souls may arrive too late, so set the thresholds as exported values.
 
 ### Quivers
 | Item | Color | Ability |
