@@ -11,9 +11,10 @@
 [ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/spillover_band.tres" id="new_spillover_band"]
 [ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/thorn_ring.tres" id="new_thorn_ring"]
 [ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/contagion_band.tres" id="new_contagion_band"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/hourglass_band.tres" id="new_hourglass_band"]
 
 [resource]
 script = ExtResource("2_epixh")
 slot = 2
-templates = Array[ExtResource("2_3iipa")]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4"), ExtResource("5_jm3m4"), ExtResource("new_spillover_band"), ExtResource("new_riposte"), ExtResource("new_gust_ring"), ExtResource("new_quickstep"), ExtResource("new_thorn_ring"), ExtResource("new_contagion_band")])
+templates = Array[ExtResource("2_3iipa")]([ExtResource("3_bxmvx"), ExtResource("4_jhxf4"), ExtResource("5_jm3m4"), ExtResource("new_spillover_band"), ExtResource("new_riposte"), ExtResource("new_gust_ring"), ExtResource("new_quickstep"), ExtResource("new_thorn_ring"), ExtResource("new_contagion_band"), ExtResource("new_hourglass_band")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"
