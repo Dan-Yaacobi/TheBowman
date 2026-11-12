@@ -1,0 +1,87 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3]
+
+[ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="1_data"]
+[ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="2_tier"]
+[ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="3_roll"]
+[ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="4_minor"]
+[ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="5_scene"]
+[ext_resource type="Texture2D" uid="uid://87sq4i0vcxxi" path="res://Items/Equipments/Bows/Sprites/Skylark.png" id="6_tex"]
+[ext_resource type="Script" path="res://Player/Abilities2.0/ShootAbilities/Lanternbow/lanternbow_ability.gd" id="7_ability"]
+
+[sub_resource type="Resource" id="Resource_ability"]
+script = ExtResource("7_ability")
+
+[sub_resource type="Resource" id="Resource_t0r1"]
+script = ExtResource("3_roll")
+stat_name = "arrow_damage"
+min_value = 2.0
+max_value = 4.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t0"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t0r1")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_t1r0"]
+script = ExtResource("3_roll")
+stat_name = "move_speed"
+min_value = 25.0
+max_value = 50.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t1"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t1r0")])
+minor_abilities = ExtResource("4_minor")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_t2r0"]
+script = ExtResource("3_roll")
+stat_name = "perfect_shot_window"
+min_value = 67.0
+max_value = 133.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t2r0")])
+minor_abilities = ExtResource("4_minor")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[sub_resource type="Resource" id="Resource_t3r1"]
+script = ExtResource("3_roll")
+stat_name = "arrow_damage"
+min_value = 3.0
+max_value = 6.0
+metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t3"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t3r1")])
+minor_abilities = ExtResource("4_minor")
+minor_roll_count = 2
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Lanternbow"
+texture = ExtResource("6_tex")
+equipped_texture = ExtResource("6_tex")
+dropped_scale = 0.382
+string_tip = Vector2(56.5, 14.5)
+grip_point = Vector2(32, 39)
+string_color = Color(0.97, 0.97, 1, 1)
+string_width = 0.35
+string_style = 1
+string_glow_color = Color(0.6, 0.85, 1, 0.3)
+string_glow_width = 1.6
+draw_time = 0.45
+color = 2
+ability = SubResource("Resource_ability")
+tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])
+equipment_scene = ExtResource("5_scene")
+craft_material_amount = 11
+metadata/_custom_type_script = "uid://bqd150tbbmd01"
