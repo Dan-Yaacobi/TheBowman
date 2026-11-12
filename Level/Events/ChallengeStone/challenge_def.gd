@@ -25,11 +25,12 @@ class_name ChallengeDef extends Resource
 @export_range(0.0, 0.2) var interval_drop_per_level: float = 0.06
 @export var min_spawn_interval: float = 0.6
 
-## Pool entries unlocked at this rift level. max_level is ignored so the roster keeps growing
-## with the rift instead of swapping out. Falls back to the whole pool if nothing qualifies.
+## Pool entries unlocked by this rift level (an enemy unlocks once the run has reached the first
+## rift it can appear in). Biome limits are ignored so the roster keeps growing instead of swapping
+## out. Falls back to the whole pool if nothing qualifies.
 func get_pool_for_level(level: int) -> Array[EnemyEntry]:
 	var pool: Array[EnemyEntry] = enemy_pool.filter(
-		func(e: EnemyEntry) -> bool: return e.min_level <= level
+		func(e: EnemyEntry) -> bool: return e.first_rift_level() <= level
 	)
 	return pool if not pool.is_empty() else enemy_pool
 

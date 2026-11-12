@@ -3,10 +3,14 @@ const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
 @export var rarity_stat_bonus: Array[float] = [0.0, 0.1, 0.2, 0.3]
-## Guaranteed rarity floor by run progress, as fractions of the run (CustomVariables.RUN_RIFT_COUNT).
-## Reaching band N grants tier N. [0.25, 0.5, 0.75] over 15 rifts = rifts 4 / 8 / 12; over 6 = 2 / 3 / 5.
-@export var tier_band_fractions: Array[float] = [0.25, 0.5, 0.75]
-@export var tier_upgrade_chance: float = 0.15   # chance to roll one tier above your guaranteed floor
+@export_group("Rarity by biome")
+## Per biome (dirt, snow, hell): the rarity every drop has at least (0 Common, 1 Uncommon, 2 Epic, 3 Legendary).
+@export var biome_base_rarity: Array[int] = [0, 1, 2]
+## Per biome: chance a drop is one rarity higher, on the biome's first rift...
+@export var biome_upgrade_chance_start: Array[float] = [0.10, 0.10, 0.03]
+## ...rising to this on the biome's last rift (follows RIFTS_PER_TYPE automatically).
+@export var biome_upgrade_chance_end: Array[float] = [0.50, 0.40, 0.15]
+@export_group("")
 
 # Rift level scaling — the only lever on stat magnitude; smoothstep over the run's length
 @export var rift_stat_scale: float = 0.5
@@ -83,24 +87,21 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 		if tier.minor_roll_count > 0 and not minor_abilities.is_empty():
 			data.bonus_abilities.append_array(_roll_minors(minor_abilities, tier.minor_roll_count, 0.0, rarity, data.bonus_abilities))
 
-## Guaranteed tier floor based on rift level, with a small chance to roll one tier above it.
-## Rarity is never randomly rolled below the current rift-level band.
+## Rarity for a drop at this rift level: the biome's base rarity, with a chance of one higher that
+## grows toward the biome's last rift.
 func _rarity_for_rift_level(rift_level: int) -> int:
-	var tier: int = 0
-	for threshold: int in get_tier_thresholds():
-		if rift_level >= threshold:
-			tier += 1
-	var max_tier: int = tier_band_fractions.size()
-	if randf() < tier_upgrade_chance:
-		tier = mini(tier + 1, max_tier)
-	return tier
+	var biome: int = CustomVariables.biome_index(rift_level)
+	var base: int = biome_base_rarity[mini(biome, biome_base_rarity.size() - 1)]
+	if randf() < get_upgrade_chance(rift_level):
+		base += 1
+	return clampi(base, 0, EquipmentData.Rarity.LEGENDARY)
 
-## The rift level each rarity band starts at, for the current run length.
-func get_tier_thresholds() -> Array[int]:
-	var thresholds: Array[int] = []
-	for fraction: float in tier_band_fractions:
-		thresholds.append(maxi(ceili(fraction * CustomVariables.RUN_RIFT_COUNT), 1))
-	return thresholds
+## Chance of one rarity above the biome's base at this rift level.
+func get_upgrade_chance(rift_level: int) -> float:
+	var biome: int = CustomVariables.biome_index(rift_level)
+	var from: float = biome_upgrade_chance_start[mini(biome, biome_upgrade_chance_start.size() - 1)]
+	var to: float = biome_upgrade_chance_end[mini(biome, biome_upgrade_chance_end.size() - 1)]
+	return lerpf(from, to, CustomVariables.biome_progress(rift_level))
 
 func _pick_template(pool: ItemPool) -> EquipmentData:
 	if pool.templates.is_empty():

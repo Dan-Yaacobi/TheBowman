@@ -6,11 +6,11 @@
 
 [resource]
 script = ExtResource("1_entry")
+biomes = 1
+from_biome_rift = 2
 scene = ExtResource("3_scene")
 data = ExtResource("2_data")
 cost = 3
-min_level = 2
-max_level = 2
 base_weight = 8.0
 spawn_zone = 5
 metadata/_custom_type_script = "uid://lq0131vpkgfn"

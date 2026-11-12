@@ -10,11 +10,30 @@ enum items{COIN,POTION, ESSENCE, WOOD, SKYSHARD, COLOR_SCROLL}
 enum ItemColor {NONE, PRECISION, TEMPO, ELEMENTAL}
 
 const HP_PER_HEART: int = 5
-const RIFTS_PER_TYPE: int = 2
+const RIFTS_PER_TYPE: int = 3
 ## Biomes per run (dirt, snow, hell), each ending in its boss. Keep in sync with Rift.Type.
 const BIOME_COUNT: int = 3
 ## Rifts in a full run. Loot rarity and stat scaling follow this.
 const RUN_RIFT_COUNT: int = RIFTS_PER_TYPE * BIOME_COUNT
+
+## Biome of a rift level: 0 = dirt, 1 = snow, 2 = hell. Levels past the last biome stay in it.
+static func biome_index(rift_level: int) -> int:
+	if rift_level < 1:
+		return 0
+	@warning_ignore("integer_division")
+	return mini((rift_level - 1) / RIFTS_PER_TYPE, BIOME_COUNT - 1)
+
+## 1-based position of a rift inside its biome (1..RIFTS_PER_TYPE).
+static func rift_in_biome(rift_level: int) -> int:
+	if rift_level < 1:
+		return 1
+	return (rift_level - 1) % RIFTS_PER_TYPE + 1
+
+## 0 on a biome's first rift, 1 on its last. Works for any RIFTS_PER_TYPE.
+static func biome_progress(rift_level: int) -> float:
+	if RIFTS_PER_TYPE <= 1:
+		return 1.0
+	return float(rift_in_biome(rift_level) - 1) / float(RIFTS_PER_TYPE - 1)
 
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98

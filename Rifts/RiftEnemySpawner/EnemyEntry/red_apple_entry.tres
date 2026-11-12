@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("3_kw8p4")
+biomes = 1
 scene = ExtResource("2_ncsw1")
 data = ExtResource("1_8f0fh")
 cost = 2
-max_level = 2
 metadata/_custom_type_script = "uid://lq0131vpkgfn"
