@@ -190,7 +190,7 @@ Hearts are expensive and the track is short, so a milestone every 5 levels doesn
 
 ---
 
-## Planned additions (agreed Nov 2026, not built yet)
+## Added Nov 2026 (built with placeholder art; real sprites still to make. Equinox on hold)
 
 Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8s, siege 1.2s); slower bows hit harder.
 
