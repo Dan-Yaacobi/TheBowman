@@ -199,10 +199,10 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 |---|---|---|---|
 | **Janus** | Tempo | 0.45s | Every shot also fires a mirrored arrow straight behind you at half damage. |
 | **Hornet's Nest** | Tempo | 0.8s | A perfect release sprays 8 small arrows over 0.5s instead of one: 20% damage each, ±12° spread, no knockback, a stream of small recoil pushes. Quiver on-hit effects only trigger on the first burst arrow to hit each enemy. |
-| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds +1% damage and +1% draw time for the run: the bow bloats into a siege bow (heavier draw, harder hits, more recoil). The growing Draw Time row is the visible cost. Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. *(downside proposed, not yet confirmed)* |
+| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds +1% damage and +1% draw time for the run: the bow bloats into a siege bow (heavier draw, harder hits, more recoil). The growing Draw Time row is the visible cost. Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. *(being redesigned: the slow-draw downside was rejected)* |
 | **Orrery** | Precision | 0.55s | Quick (non-perfect) shots don't fly off: the arrow orbits you (up to 3), striking any enemy that comes close. A perfect shot launches every orbiting arrow at your aim along with itself. With 3 already orbiting, quick shots fire normally. |
 | **Lanternbow** | Tempo | 0.45s | Perfect shots release a wisp (up to 3, 8s each) that floats beside you and fires a weak copy of every arrow you shoot. Copies carry quiver effects. |
-| **Equinox** | Elemental | 0.55s | Arrows alternate fire and frost (the bow's color shows which is next). Frost on a burning enemy, or fire on a frostbitten one, sets off a thermal shock burst. *(tentative: opens up debuff combos, still undecided)* |
+| **Equinox** | Elemental | 0.55s | Arrows alternate fire and frost (the bow's color shows which is next). Frost on a burning enemy, or fire on a frostbitten one, sets off a thermal shock burst. *(on hold: a debuff-combo system to revisit later)* |
 
 ### Quivers
 | Item | Color | Ability |
