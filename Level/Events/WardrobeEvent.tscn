@@ -48,6 +48,7 @@
 [ext_resource type="Resource" uid="uid://comiq2aa57e0f" path="res://Items/Equipments/Rings/Resource/vampiric_ring.tres" id="eq_vampiric_ring"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/chaos_quiver.tres" id="eq_chaos_quiver"]
 [ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/contagion_band.tres" id="eq_contagion_band"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/iron_heads.tres" id="eq_iron_heads"]
 
 [node name="Wardrobe" type="Node2D" unique_id=1094064033]
 script = ExtResource("1_ksx8j")
@@ -449,6 +450,15 @@ fixed_frame_index = 4
 [node name="PedestalNPC" parent="Island58" instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_contagion_band")
+
+[node name="Island59" parent="." instance=ExtResource("2_oi57y")]
+position = Vector2(145, 333)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island59" instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("eq_iron_heads")
 
 [node name="Island28" parent="." unique_id=1607111994 instance=ExtResource("2_oi57y")]
 position = Vector2(-214, 82)

@@ -15,9 +15,10 @@
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/splitting_tips.tres" id="new_splitting_tips"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/sticky_charges.tres" id="new_sticky_charges"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/chaos_quiver.tres" id="new_chaos_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/iron_heads.tres" id="new_iron_heads"]
 
 [resource]
 script = ExtResource("2_a5xjm")
 slot = 1
-templates = Array[ExtResource("2_v12hp")]([ExtResource("3_7typt"), ExtResource("4_u1e4n"), ExtResource("5_2aujr"), ExtResource("6_0mpld"), ExtResource("7_hauan"), ExtResource("new_echo_arrows"), ExtResource("new_heartseeker"), ExtResource("new_long_shot"), ExtResource("new_seeker_darts"), ExtResource("new_splitting_tips"), ExtResource("new_sticky_charges"), ExtResource("new_ember_quiver"), ExtResource("new_chaos_quiver")])
+templates = Array[ExtResource("2_v12hp")]([ExtResource("3_7typt"), ExtResource("4_u1e4n"), ExtResource("5_2aujr"), ExtResource("6_0mpld"), ExtResource("7_hauan"), ExtResource("new_echo_arrows"), ExtResource("new_heartseeker"), ExtResource("new_long_shot"), ExtResource("new_seeker_darts"), ExtResource("new_splitting_tips"), ExtResource("new_sticky_charges"), ExtResource("new_ember_quiver"), ExtResource("new_chaos_quiver"), ExtResource("new_iron_heads")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"
