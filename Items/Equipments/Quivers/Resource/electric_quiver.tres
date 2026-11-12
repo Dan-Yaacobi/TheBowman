@@ -21,16 +21,9 @@ min_value = 2.0
 max_value = 6.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
-[sub_resource type="Resource" id="Resource_uqyfw"]
-script = ExtResource("8_oyjwa")
-stat_name = "pull_speed"
-min_value = 10.0
-max_value = 40.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_od0aq"]
 script = ExtResource("7_jeqdj")
-stat_rolls = Array[ExtResource("8_oyjwa")]([SubResource("Resource_gh6gx"), SubResource("Resource_uqyfw")])
+stat_rolls = Array[ExtResource("8_oyjwa")]([SubResource("Resource_gh6gx")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_lshmm"]

@@ -14,13 +14,6 @@ script = ExtResource("1_6i61w")
 trigger_type = 4
 metadata/_custom_type_script = "uid://cofo70ibb0g01"
 
-[sub_resource type="Resource" id="Resource_167x7"]
-script = ExtResource("7_tqlsv")
-stat_name = "pull_speed"
-min_value = 50.0
-max_value = 100.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_pqo31"]
 script = ExtResource("7_tqlsv")
 stat_name = "arrow_damage"
@@ -30,7 +23,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_lk575"]
 script = ExtResource("6_rtvtt")
-stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_167x7"), SubResource("Resource_pqo31")])
+stat_rolls = Array[ExtResource("7_tqlsv")]([SubResource("Resource_pqo31")])
 minor_abilities = ExtResource("5_rtvtt")
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
@@ -80,6 +73,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_fssex")
 display_name = "Vulcan"
+draw_time = 1.5
 texture = ExtResource("3_fssex")
 equipped_texture = ExtResource("3_fssex")
 dropped_scale = 0.333

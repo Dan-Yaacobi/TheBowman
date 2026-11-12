@@ -40,6 +40,9 @@ class StatModifier:
 
 enum StringStyle { PLAIN, GLOW, PULSE, CRACKLE }
 @export var slot: slots
+## Bows only: seconds a full draw takes before pull speed bonuses. Slower bows hit harder
+## (see PlayerMainHand.draw_weight_ref_time).
+@export var draw_time: float = 0.55
 ## Which run color level scales this item.
 @export var color: CustomVariables.ItemColor = CustomVariables.ItemColor.NONE
 @export var pick_weight: float = 1.0

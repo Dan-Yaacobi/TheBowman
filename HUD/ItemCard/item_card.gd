@@ -60,6 +60,8 @@ func show_item(data: EquipmentData, tag: String, rows: Array[StatRow]) -> void:
 	name_label.text = data.display_name
 	name_label.add_theme_color_override("font_color", CustomVariables.rarity_color(data.rarity))
 	tag_label.text = tag + "  ·  " + data.color_label()
+	if data.slot == EquipmentData.slots.BOW:
+		tag_label.text += "  ·  %.2fs draw" % data.draw_time
 	tag_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(data.color))
 
 	if data.ability:

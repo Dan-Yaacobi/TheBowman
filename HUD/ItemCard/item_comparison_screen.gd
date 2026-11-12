@@ -109,9 +109,11 @@ func _hit_gain(item_amount: float, equipped_amount: float, item: EquipmentData) 
 	var without: float = stat.value_without(equipped_amount, Stat.buff_type.ADDITIVE)
 	var with_item: float = stat.value_without(equipped_amount - item_amount, Stat.buff_type.ADDITIVE)
 	var bow_power: float = player.color_levels.get_bow_power()
+	var bow_time: float = -1.0
 	if item and item.slot == EquipmentData.slots.BOW:
 		bow_power = player.color_levels.get_power(item.color)
-	return (player.main_hand.base_hit_for(with_item) - player.main_hand.base_hit_for(without)) * bow_power
+		bow_time = item.draw_time
+	return (player.main_hand.base_hit_for(with_item, bow_time) - player.main_hand.base_hit_for(without, bow_time)) * bow_power
 
 func _collect_stat_names(new_data: EquipmentData, current_data: EquipmentData) -> Array[String]:
 	var names: Array[String] = []

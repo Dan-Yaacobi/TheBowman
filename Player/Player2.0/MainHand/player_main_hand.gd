@@ -27,17 +27,27 @@ const CHARGED_ARROW_TINT: Color = Color(1.6, 1.35, 0.6)
 @export var min_shot_power: float = 0.1
 @export var max_offset: float
 @export var weak_shot_punish: float = 2.0
-## Arrow hit = arrow_damage stat * arrow_damage_scale * ... The stat's base (12, set on the Player)
-## holds the hit's base, gear adds flat points, and % bonuses (altar, curses) multiply all of it.
+## Arrow hit = arrow_damage stat * arrow_damage_scale * draw weight. The stat's base (12, set on the
+## Player) holds the hit's base, gear adds flat points, and % bonuses (altar, curses) multiply all of it.
 ## A bigger stat base makes each +1 from gear worth less; lower the scale to keep starting damage.
-@export var arrow_damage_scale: float = 1.29
-## Draw weight: arrow damage is multiplied by (draw_weight_ref_speed / base pull speed) ^ draw_weight_exponent.
-## Only the base pull speed counts, so gear and buffs never lower hit damage. 0 turns it off.
-@export var draw_weight_ref_speed: float = 1.0
+## 1.053 keeps a standard bow (draw_weight_ref_time) hitting as hard as before draw times existed.
+@export var arrow_damage_scale: float = 1.053
+
+@export_group("Draw time")
+## Seconds a full draw takes with no bow equipped. Bows set their own (EquipmentData.draw_time).
+@export var default_draw_time: float = 0.55
+## No bonus can make a draw faster than this.
+@export var min_draw_time: float = 0.2
+## Draw weight: slower bows hit harder. Arrow damage is multiplied by
+## (bow draw time / draw_weight_ref_time) ^ draw_weight_exponent. 0 turns it off.
+## Only the bow's own draw time counts, so pull speed bonuses never lower hit damage.
+@export var draw_weight_ref_time: float = 0.55
 @export var draw_weight_exponent: float = 0.5
-## Pull speed above base has diminishing returns: the bonus ratio (total / base) is raised to this power.
+## Pull speed bonuses (rings, Tempo scrolls, abilities: % of the Pull Speed stat) shorten the bow's
+## draw time with diminishing returns: the bonus ratio (total / base) is raised to this power.
 ## 0.7: +100% pull speed draws ~62% faster. 1 turns it off. Penalties (below base) apply in full.
 @export var pull_speed_bonus_exponent: float = 0.7
+@export_group("")
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
@@ -255,24 +265,35 @@ func get_base_hit_damage() -> float:
 	return base_hit_for(PlayerManager.player.stats.arrow_damage.value())
 
 ## The base hit at a given Arrow Damage stat total (the stat window uses it to show an item's share).
-func base_hit_for(arrow_damage: float) -> float:
-	return arrow_damage * arrow_damage_scale * get_draw_weight()
+## bow_draw_time: the bow to weigh the hit for; negative = the equipped bow.
+func base_hit_for(arrow_damage: float, bow_draw_time: float = -1.0) -> float:
+	return arrow_damage * arrow_damage_scale * get_draw_weight(bow_draw_time)
 
-## Damage multiplier from the base pull speed (see draw_weight_exponent).
-func get_draw_weight() -> float:
-	var base: float = PlayerManager.player.stats.pull_speed.base_value
-	return pow(draw_weight_ref_speed / maxf(base, 0.01), draw_weight_exponent)
+## Damage multiplier from the bow's draw time (see draw_weight_exponent). Negative = the equipped bow.
+func get_draw_weight(bow_draw_time: float = -1.0) -> float:
+	var time: float = bow_draw_time if bow_draw_time > 0.0 else get_bow_draw_time()
+	return pow(time / maxf(draw_weight_ref_time, 0.01), draw_weight_exponent)
 
-## Pull speed the draw actually uses, after diminishing returns on the part above base.
+## The equipped bow's base draw time, before pull speed bonuses.
+func get_bow_draw_time() -> float:
+	var bow: EquipmentData = PlayerManager.player.stats.bow
+	if bow and bow.draw_time > 0.0:
+		return bow.draw_time
+	return default_draw_time
+
+## Animation speed for the Pull animations so a full draw lasts get_draw_time(raw).
 func effective_pull_speed(raw: float) -> float:
-	var base: float = PlayerManager.player.stats.pull_speed.base_value
-	if base <= 0.0 or raw <= base:
-		return raw
-	return base * pow(raw / base, pull_speed_bonus_exponent)
+	return animation_player.get_animation("Pull").length / get_draw_time(raw)
 
-## Seconds a full draw takes at the given raw pull speed (Pull speed stat total).
-func get_draw_time(raw_pull_speed: float) -> float:
-	return animation_player.get_animation("Pull").length / maxf(effective_pull_speed(raw_pull_speed), 0.01)
+## Seconds a full draw takes at the given raw pull speed (Pull Speed stat total): the bow's draw
+## time shortened by the % bonus over base, with diminishing returns. bow_draw_time negative = equipped bow.
+func get_draw_time(raw_pull_speed: float, bow_draw_time: float = -1.0) -> float:
+	var time: float = bow_draw_time if bow_draw_time > 0.0 else get_bow_draw_time()
+	var base: float = PlayerManager.player.stats.pull_speed.base_value
+	var ratio: float = raw_pull_speed / base if base > 0.0 else 1.0
+	if ratio > 1.0:
+		ratio = pow(ratio, pull_speed_bonus_exponent)
+	return maxf(time / maxf(ratio, 0.01), min_draw_time)
 
 func is_overcharging() -> bool:
 	return overcharge_enabled and main_hand_state_machine.curr_state is MaxPullMainHandState

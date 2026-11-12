@@ -13,13 +13,6 @@ script = ExtResource("1_w6wjk")
 trigger_type = 5
 metadata/_custom_type_script = "uid://dde27hwwra700"
 
-[sub_resource type="Resource" id="Resource_nxm3p"]
-script = ExtResource("6_jq77s")
-stat_name = "pull_speed"
-min_value = 50.0
-max_value = 150.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_yf47d"]
 script = ExtResource("6_jq77s")
 stat_name = "perfect_shot_window"
@@ -36,7 +29,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_phb7m"]
 script = ExtResource("5_vo7br")
-stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_nxm3p"), SubResource("Resource_yf47d"), SubResource("Resource_dmg_t0")])
+stat_rolls = Array[ExtResource("6_jq77s")]([SubResource("Resource_yf47d"), SubResource("Resource_dmg_t0")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_3qv0i"]

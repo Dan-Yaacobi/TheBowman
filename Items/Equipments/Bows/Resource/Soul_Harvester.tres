@@ -14,13 +14,6 @@ charge_color = Color(0.41960785, 0.9098039, 0.7294118, 1)
 charge_type = 2
 metadata/_custom_type_script = "uid://c1qxjyjyf6hps"
 
-[sub_resource type="Resource" id="Resource_26ul3"]
-script = ExtResource("7_w248w")
-stat_name = "pull_speed"
-min_value = 80.0
-max_value = 120.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_d2lr8"]
 script = ExtResource("7_w248w")
 stat_name = "arrow_damage"
@@ -30,7 +23,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_5b2m2"]
 script = ExtResource("6_cjv4q")
-stat_rolls = Array[ExtResource("7_w248w")]([SubResource("Resource_26ul3"), SubResource("Resource_d2lr8")])
+stat_rolls = Array[ExtResource("7_w248w")]([SubResource("Resource_d2lr8")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_l8hbo"]

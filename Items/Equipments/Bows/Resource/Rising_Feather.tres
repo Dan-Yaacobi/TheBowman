@@ -13,13 +13,6 @@ script = ExtResource("1_yxblh")
 trigger_type = 4
 metadata/_custom_type_script = "uid://bako5t6ufu6rr"
 
-[sub_resource type="Resource" id="Resource_tqqog"]
-script = ExtResource("7_6vekb")
-stat_name = "pull_speed"
-min_value = 50.0
-max_value = 130.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_2o2em"]
 script = ExtResource("7_6vekb")
 stat_name = "hurricane_duration"
@@ -36,7 +29,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_p1agp"]
 script = ExtResource("6_u3of4")
-stat_rolls = Array[ExtResource("7_6vekb")]([SubResource("Resource_tqqog"), SubResource("Resource_2o2em"), SubResource("Resource_dmg_t0")])
+stat_rolls = Array[ExtResource("7_6vekb")]([SubResource("Resource_2o2em"), SubResource("Resource_dmg_t0")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_bcdis"]
@@ -91,6 +84,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_b2fkq")
 display_name = "Rising Feather"
+draw_time = 1.5
 texture = ExtResource("3_b2fkq")
 equipped_texture = ExtResource("3_b2fkq")
 dropped_scale = 0.37

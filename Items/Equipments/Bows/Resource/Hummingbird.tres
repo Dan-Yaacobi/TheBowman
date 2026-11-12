@@ -12,13 +12,6 @@
 script = ExtResource("7_ability")
 trigger_type = 4
 
-[sub_resource type="Resource" id="Resource_t0r0"]
-script = ExtResource("3_roll")
-stat_name = "pull_speed"
-min_value = 80.0
-max_value = 130.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_t0r1"]
 script = ExtResource("3_roll")
 stat_name = "arrow_damage"
@@ -28,7 +21,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0"]
 script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t0r0"), SubResource("Resource_t0r1")])
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t0r1")])
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_t1r0"]
@@ -45,26 +38,12 @@ minor_abilities = ExtResource("4_minor")
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
-[sub_resource type="Resource" id="Resource_t2r0"]
-script = ExtResource("3_roll")
-stat_name = "pull_speed"
-min_value = 50.0
-max_value = 100.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
-
 [sub_resource type="Resource" id="Resource_t2"]
 script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t2r0")])
+stat_rolls = Array[ExtResource("3_roll")]([])
 minor_abilities = ExtResource("4_minor")
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
-
-[sub_resource type="Resource" id="Resource_t3r0"]
-script = ExtResource("3_roll")
-stat_name = "pull_speed"
-min_value = 100.0
-max_value = 150.0
-metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t3r1"]
 script = ExtResource("3_roll")
@@ -75,7 +54,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t3"]
 script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t3r0"), SubResource("Resource_t3r1")])
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t3r1")])
 minor_abilities = ExtResource("4_minor")
 minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
@@ -83,6 +62,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_data")
 display_name = "Hummingbird"
+draw_time = 0.45
 texture = ExtResource("6_tex")
 equipped_texture = ExtResource("6_tex")
 dropped_scale = 0.421
