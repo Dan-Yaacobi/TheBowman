@@ -13,12 +13,14 @@ enum Mode { HOMING, SPIRAL }
 @export var spiral_lifetime: float = 3.0
 
 var _mode: Mode = Mode.HOMING
+## The bow's color bonus, set by whoever spawns the soul.
+var damage_mult: float = 1.0
 var _spiral_angle: float = 0.0
 var _spiral_radius: float = 0.0
 var _spiral_origin: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	hurt_box.base_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage())
+	hurt_box.base_damage = maxi(1, roundi(PlayerManager.player.main_hand.get_base_hit_damage() * damage_mult))
 	
 func set_homing() -> void:
 	_mode = Mode.HOMING

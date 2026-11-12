@@ -12,7 +12,7 @@ func applies_quiver_debuff() -> bool:
 func apply_quiver_debuff(_target: Node2D) -> void:
 	if _target and _target is Enemy:
 		var poison_debuff: Debuff = POISON_DEBUFF.instantiate()
-		poison_debuff.poison_damage = PlayerManager.player.stats.poison_damage.value()
+		poison_debuff.poison_damage = maxi(1, roundi(PlayerManager.player.stats.poison_damage.value() * power()))
 		var poison_duration = PlayerManager.player.stats.poison_duration.value()
 		var poison_ticks = PlayerManager.player.stats.dot_ticks("poison")
 		_target.debuff_handler.add_debuff(poison_debuff,CustomVariables.POISON_DEBUFF_ID,poison_duration,poison_ticks )

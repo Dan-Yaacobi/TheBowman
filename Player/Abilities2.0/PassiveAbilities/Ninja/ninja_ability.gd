@@ -9,7 +9,7 @@ func on_equipped() -> void:
 	id_1 = CustomVariables.get_buff_id()
 	id_2 = CustomVariables.get_buff_id()
 	id_3 = CustomVariables.get_buff_id()
-	PlayerManager.player.stats.pull_speed.add_buff(id_1, pull_speed_increase, Stat.buff_type.ADDITIVE)
+	PlayerManager.player.stats.pull_speed.add_buff(id_1, pull_speed_increase * power(), Stat.buff_type.ADDITIVE)
 	PlayerManager.player.stats.arrow_damage.add_buff(id_2, -0.5,Stat.buff_type.MULTIPLICATIVE)
 	PlayerManager.player.stats.perfect_shot_bonus.add_buff(id_3, -0.2, Stat.buff_type.MULTIPLICATIVE)
 	PlayerManager.player.stats.arrow_texture_override = SHURIKEN
@@ -23,6 +23,12 @@ func on_unequipped() -> void:
 	PlayerManager.player.stats.arrow_texture_override = null
 	PlayerManager.player.stats.only_perfect = false
 	PlayerManager.player.stats.can_knockback -= 1
+
+## The pull speed bonus is baked in when equipped, so re-apply it when the color level changes.
+func refresh_power() -> void:
+	var pull_speed: Stat = PlayerManager.player.stats.pull_speed
+	pull_speed.remove_buff_stack(id_1, Stat.buff_type.ADDITIVE)
+	pull_speed.add_buff(id_1, pull_speed_increase * power(), Stat.buff_type.ADDITIVE)
 
 func get_tooltip() -> String:
 	return "You arrows turn into shurikens. Insane pull speed, only Perfect shots work, reduced damage, no Knockback"

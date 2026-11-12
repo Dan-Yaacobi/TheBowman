@@ -4,6 +4,8 @@ class_name SkullAttack extends Node2D
 @onready var area: Area2D = $Area2D
 
 @export var duration: float = 5.0
+## The quiver's color bonus, set by the ability before the skull is added.
+var power_mult: float = 1.0
 
 const CURSED_DEBUFF = preload("uid://p65b1l6p0pp1")
 
@@ -19,4 +21,5 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 	var entity = _area.get_parent()
 	if entity is Enemy:
 		var debuff: CursedDebuff = CURSED_DEBUFF.instantiate()
+		debuff.damage_taken_bonus *= power_mult
 		entity.apply_debuff(debuff,CustomVariables.CURSED_DEBUFF_ID,duration,1)

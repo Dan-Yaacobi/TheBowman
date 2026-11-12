@@ -5,6 +5,7 @@ var breath: FrostBreath
 
 func activate_ability(_target: Node2D = null , _activator: Node2D = null, _result: DamageResult = null) -> void:
 	breath = FROST_BREATH.instantiate()
+	breath.tick_damage = maxi(1, roundi(breath.tick_damage * power()))
 	if _activator and _activator is Arrow:
 		breath.after_hit_abilities = _activator.after_hit_abilities
 		breath.before_hit_abilities = _activator.before_hit_abilities

@@ -11,6 +11,7 @@ const FIRE_AURA = preload("uid://b0dj5ub6j4qqg")
 
 func on_equipped() -> void:
 	aura = FIRE_AURA.instantiate()
+	aura.ability = self
 	aura.setup(aura_shader, aura_scale, aura_offset)
 	PlayerManager.player.add_child(aura)
 	EventBus.dash_ended.connect(_on_dash_ended)

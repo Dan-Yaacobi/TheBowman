@@ -6,6 +6,7 @@ var orb_reference: OrbController
 
 func on_equipped() -> void:
 	var new_orb: OrbController = ORB_CONTROLLER.instantiate()
+	new_orb.ability = self
 	orb_reference = new_orb
 	PlayerManager.player.add_child(new_orb)
 

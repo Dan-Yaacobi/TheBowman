@@ -8,6 +8,8 @@ const BURN_DEBUFF = preload("uid://caiebherwxilx")
 @onready var hurt_box: HurtBox = $HurtBox
 
 var fade_in: float = 0.05
+## The ring's ability; its power() (color bonus) scales the burn. Read on every ignite and hit.
+var ability: PlayerAbility
 var fade_out: float = 0.15
 
 var mat: ShaderMaterial
@@ -30,10 +32,11 @@ func setup(_shader: Shader, _scale: float, _offset: Vector2) -> void:
 	
 func _ready() -> void:
 	set_process(false)
-	hurt_box.base_damage = roundi(PlayerManager.player.stats.burn_damage.value())
+	hurt_box.base_damage = _burn_damage()
 	hurt_box.add_after_effect(apply_burn)
 	
 func ignite() -> void:
+	hurt_box.base_damage = _burn_damage()
 	hurt_box.monitoring = true
 	set_process(true)
 	_update_direction()
@@ -61,7 +64,11 @@ func _fade_to(target: float, duration: float) -> void:
 	
 func apply_burn(enemy: Enemy, _parent, _result) -> void:
 	var burn_debuff: BurnDebuff = BURN_DEBUFF.instantiate()
-	burn_debuff.set_damage(roundi(PlayerManager.player.stats.burn_damage.value()))
+	burn_debuff.set_damage(_burn_damage())
 	var duration = PlayerManager.player.stats.burn_duration.value()
 	var ticks = PlayerManager.player.stats.dot_ticks("burn")
 	enemy.apply_debuff(burn_debuff,CustomVariables.BURN_DEBUFF_ID,duration,ticks)
+
+func _burn_damage() -> int:
+	var mult: float = ability.power() if ability else 1.0
+	return maxi(1, roundi(PlayerManager.player.stats.burn_damage.value() * mult))

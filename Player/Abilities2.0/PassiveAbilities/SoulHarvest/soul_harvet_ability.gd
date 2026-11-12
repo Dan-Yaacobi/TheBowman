@@ -21,6 +21,7 @@ func disconnect_gauge() -> void:
 
 func activate_gauge_ability(_amount: int) -> void:
 	var new_explosion: SoulExplosion = SOULS_EXPLOSION.instantiate()
+	new_explosion.damage_mult = power()
 	EventBus.summon_effect.emit(new_explosion)
 	new_explosion.setup(_amount)
 	new_explosion.global_position = explosion_position
@@ -33,6 +34,7 @@ func use_gauge() -> void:
 		
 func summon_soul(_enemy: Enemy ) -> void:
 	var new_soul: Soul = SOUL.instantiate()
+	new_soul.damage_mult = power()
 	new_soul.global_position = _enemy.global_position
 	new_soul.set_homing()
 	EventBus.summon_effect.emit(new_soul)

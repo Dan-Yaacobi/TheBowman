@@ -11,7 +11,7 @@ func on_unequipped() -> void:
 	EventBus.dealt_bleed_damage.disconnect(heal)
 
 func heal(_damage_dealt: int, _entity: GameEntity) -> void:
-	if randf_range(0, 100) > heal_chance:
+	if randf_range(0, 100) > heal_chance * power():
 		return
 	var player: Node2D = PlayerManager.player
 	player.heal(heal_amount)
@@ -22,7 +22,7 @@ func heal(_damage_dealt: int, _entity: GameEntity) -> void:
 	player.get_tree().current_scene.add_child(line)
 
 func get_tooltip() -> String:
-	return "Bleed damage has a %d%% chance to heal you for %d" % [heal_chance, heal_amount]
+	return "Bleed damage has a %d%% chance to heal you for %d" % [roundi(heal_chance * power()), heal_amount]
 
 func get_tooltip_color() -> Color:
 	return Color.CRIMSON

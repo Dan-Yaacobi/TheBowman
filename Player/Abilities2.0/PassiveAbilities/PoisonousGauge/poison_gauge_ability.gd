@@ -28,6 +28,7 @@ func disconnect_gauge() -> void:
 
 func activate_gauge_ability(_amount: int) -> void:
 	var poison_cloud: PoisonCloud = POISONOUS_CLOUD.instantiate()
+	poison_cloud.damage_mult = power()
 	poison_cloud.global_position = cloud_position
 	poison_cloud.emitting = true
 	EventBus.summon_effect.emit(poison_cloud)

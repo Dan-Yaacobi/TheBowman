@@ -12,7 +12,7 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 	if _target and _target is Enemy:
 		var bleed_debuff: BleedDebuff = BLEED_DEBUFF.instantiate()
 		@warning_ignore("narrowing_conversion")
-		bleed_debuff.bleed_damage = PlayerManager.player.stats.bleed_damage.value()
+		bleed_debuff.bleed_damage = maxi(1, roundi(PlayerManager.player.stats.bleed_damage.value() * power()))
 		var duration: float = PlayerManager.player.stats.bleed_duration.value()
 		var ticks: float = PlayerManager.player.stats.dot_ticks("bleed")
 		_target.debuff_handler.add_debuff(bleed_debuff,CustomVariables.BLEED_DEBUFF_ID,duration,ticks)

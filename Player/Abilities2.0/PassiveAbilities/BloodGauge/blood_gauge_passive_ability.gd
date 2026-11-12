@@ -28,6 +28,7 @@ func disconnect_gauge() -> void:
 
 func activate_gauge_ability(_amount: int) -> void:
 	var blood_explosion: BloodExplosion = BLOOD_EXPLOSION.instantiate()
+	blood_explosion.damage_mult = power()
 	blood_explosion.global_position = explosion_position
 	EventBus.summon_effect.emit(blood_explosion)
 

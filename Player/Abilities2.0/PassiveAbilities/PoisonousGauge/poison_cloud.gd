@@ -15,6 +15,9 @@ class_name PoisonCloud extends CPUParticles2D
 			
 const POISON_DEBUFF = preload("uid://dw404fcvhcw52")
 
+## The bow's color bonus, set by the Poison Gauge before it's added.
+var damage_mult: float = 1.0
+
 func _ready() -> void:
 	collision_shape.shape.radius = start_radius
 	area.body_entered.connect(poison_damage)
@@ -35,7 +38,7 @@ func poison_damage(_body) -> void:
 	if _body is Enemy:
 		var poison: PoisonDebuff = POISON_DEBUFF.instantiate()
 		@warning_ignore("narrowing_conversion")
-		poison.poison_damage = PlayerManager.player.stats.poison_damage.value()
+		poison.poison_damage = maxi(1, roundi(PlayerManager.player.stats.poison_damage.value() * damage_mult))
 		var duration: float = PlayerManager.player.stats.poison_duration.value()
 		var ticks: float = PlayerManager.player.stats.dot_ticks("poison")
 		_body.apply_debuff(poison,CustomVariables.POISON_DEBUFF_ID, duration,ticks)

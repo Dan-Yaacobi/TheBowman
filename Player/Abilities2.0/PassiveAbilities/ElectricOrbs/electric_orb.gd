@@ -2,10 +2,12 @@ class_name ElectricOrb extends Node2D
 
 @onready var hurt_box: HurtBox = $HurtBox
 const STUN_DEBUFF = preload("uid://c1gcykybdcokh")
+## The ring's color bonus, set by the orb controller before the orb is added.
+var damage_mult: float = 1.0
 
 func _ready() -> void:
 	hurt_box.add_after_effect(thunder_stun)
-	hurt_box.base_damage = roundi(PlayerManager.player.main_hand.get_base_hit_damage() / 2.0)
+	hurt_box.base_damage = maxi(1, roundi(PlayerManager.player.main_hand.get_base_hit_damage() / 2.0 * damage_mult))
 	hurt_box.successful_hit.connect(release_orb)
 	
 func thunder_stun(body: Node2D, _hurt_box: Node2D, _result: DamageResult) -> void:

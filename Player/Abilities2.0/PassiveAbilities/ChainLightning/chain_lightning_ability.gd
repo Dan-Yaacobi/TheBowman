@@ -46,6 +46,7 @@ func _on_enemy_stunned(_enemy: Enemy) -> void:
 
 func activate_gauge_ability(_amount: int) -> void:
 	var chain: LightningChain = LIGHTNING_CHAIN.instantiate()
+	chain.damage = maxi(1, roundi(chain.damage * power()))
 	EventBus.summon_effect.emit(chain)
 	chain.setup(_hit_position, _hit_enemy, chain.max_chains, [])
 

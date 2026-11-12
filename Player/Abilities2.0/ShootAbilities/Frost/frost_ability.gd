@@ -23,13 +23,13 @@ func apply_quiver_debuff(_target: Node2D) -> void:
 func apply_freeze(_target: Enemy) -> void:
 	if _target.can_be_frozen():
 		var debuff: Debuff = FREEZE_DEBUFF.instantiate()
-		var duration = PlayerManager.player.stats.freeze_duration.value()
+		var duration: float = PlayerManager.player.stats.freeze_duration.value() * power()
 		_target.debuff_handler.add_debuff(debuff,CustomVariables.FREEZE_DEBUFF_ID,duration,1)
 		_target.end_debuff(CustomVariables.FROSTBITE_DEBUFF_ID)
 
 func apply_frostbite(_target: Enemy) -> void:
 	var debuff: Debuff = FROST_BITE_DEBUFF.instantiate()
-	var duration = PlayerManager.player.stats.frostbite_duration.value()
+	var duration: float = PlayerManager.player.stats.frostbite_duration.value() * power()
 	_target.debuff_handler.add_debuff(debuff,CustomVariables.FROSTBITE_DEBUFF_ID,duration,1)
 
 func get_tooltip() -> String:

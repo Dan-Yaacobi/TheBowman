@@ -10,7 +10,8 @@ func applies_quiver_debuff() -> bool:
 
 func apply_quiver_debuff(_target: Node2D) -> void:
 	if _target and _target is Enemy:
-		var skull_attack = SKULL_ATTACK.instantiate()
+		var skull_attack: SkullAttack = SKULL_ATTACK.instantiate()
+		skull_attack.power_mult = power()
 		skull_attack.global_position = _target.global_position
 		EventBus.summon_effect.emit(skull_attack)
 		

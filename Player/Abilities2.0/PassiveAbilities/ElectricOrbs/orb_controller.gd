@@ -12,6 +12,8 @@ const ELECTRIC_ORB = preload("uid://crtombw7sghj6")
 @export var appear_duration: float = 0.25
 
 var orbs: Array[ElectricOrb] = []
+## The ring's ability; its power() (color bonus) scales each orb when it spawns.
+var ability: PlayerAbility
 # Each orb's current angle around the circle, eased toward its even-spaced slot.
 var offsets: Dictionary[ElectricOrb, float] = {}
 var orbit_angle: float = 0.0
@@ -36,6 +38,7 @@ func _update_spawning(delta: float) -> void:
 
 func _spawn_orb() -> void:
 	var orb: ElectricOrb = ELECTRIC_ORB.instantiate()
+	orb.damage_mult = ability.power() if ability else 1.0
 	orbs.append(orb)
 	# Start the new orb in its own final slot; the others slide over to make room.
 	offsets[orb] = TAU * (orbs.size() - 1) / orbs.size()
