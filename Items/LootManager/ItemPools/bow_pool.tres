@@ -19,8 +19,9 @@
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Stormcaller.tres" id="new_stormcaller"]
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Undertow.tres" id="new_undertow"]
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Janus.tres" id="new_Janus"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/HornetsNest.tres" id="new_HornetsNest"]
 
 [resource]
 script = ExtResource("2_ualu4")
-templates = Array[ExtResource("2_2bno1")]([ExtResource("3_jufrr"), ExtResource("4_rmuev"), ExtResource("5_cb1ri"), ExtResource("6_24shk"), ExtResource("7_riufi"), ExtResource("8_ekvhb"), ExtResource("9_uehrl"), ExtResource("12_dqlj4"), ExtResource("new_hummingbird"), ExtResource("new_huntersmark"), ExtResource("new_longing"), ExtResource("new_ramshorn"), ExtResource("new_riftbow"), ExtResource("new_skylark"), ExtResource("new_stormcaller"), ExtResource("new_undertow"), ExtResource("new_Janus")])
+templates = Array[ExtResource("2_2bno1")]([ExtResource("3_jufrr"), ExtResource("4_rmuev"), ExtResource("5_cb1ri"), ExtResource("6_24shk"), ExtResource("7_riufi"), ExtResource("8_ekvhb"), ExtResource("9_uehrl"), ExtResource("12_dqlj4"), ExtResource("new_hummingbird"), ExtResource("new_huntersmark"), ExtResource("new_longing"), ExtResource("new_ramshorn"), ExtResource("new_riftbow"), ExtResource("new_skylark"), ExtResource("new_stormcaller"), ExtResource("new_undertow"), ExtResource("new_Janus"), ExtResource("new_HornetsNest")])
 metadata/_custom_type_script = "uid://c3nyacwk8rnd6"
