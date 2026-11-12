@@ -190,6 +190,36 @@ Hearts are expensive and the track is short, so a milestone every 5 levels doesn
 
 ---
 
+## Planned additions (agreed Nov 2026, not built yet)
+
+Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8s, siege 1.2s); slower bows hit harder.
+
+### Bows
+| Item | Color | Draw | Ability |
+|---|---|---|---|
+| **Janus** | Tempo | 0.45s | Every shot also fires a mirrored arrow straight behind you at half damage. |
+| **Hornet's Nest** | Tempo | 0.8s | A perfect release sprays 8 small arrows over 0.5s instead of one: 20% damage each, ±12° spread, no knockback, a stream of small recoil pushes. Quiver on-hit effects only trigger on the first burst arrow to hit each enemy. |
+| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds damage **and** permanently worsens something (downside under review). Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. |
+
+### Quivers
+| Item | Color | Ability |
+|---|---|---|
+| **Boomerang Quiver** | Precision | Arrows return to you at the end of their flight, hitting enemies on the way back (perfect arrows at full damage, others at 50%). |
+| **Chaos Quiver** | Elemental | 50% chance on hit to apply a random debuff: Bleed, Burn, Poison, Frostbite, Stun or Curse (never Freeze). Scales with Elemental like other debuff items. |
+| **Ricochet Quiver** | Tempo | Every hit bounces once to the nearest other enemy at 60% damage. With no enemy nearby, it bounces off in a random direction. |
+| **Vortex Quiver** | Elemental | Perfect hits open a small vortex for 1s that pulls nearby enemies together. |
+
+### Rings
+| Item | Color | Ability |
+|---|---|---|
+| **Hourglass Band** | Precision | 3 perfect hits in a row slow time to half speed for 1s. Cut in round 1; back for a feel test first (global time scale, key-triggered prototype). |
+| **Contagion Band** | Elemental | When an enemy with an elemental debuff dies, its debuffs jump to the nearest enemy. |
+
+### Cut in Nov 2026 rounds
+Kestrel, Cliffbreaker, Skipping Stone, Linebreaker, Fault Line, Plumb Line, Windrunner, Kite Line, Gravelbite, Duelist's Loop, Void Reaper, Unbroken Band, Cleric's Vow, Wellspring, Catalyst, Tally (reworked into The Maw), Twin Moon, Hailstorm, Glass Arrows, Skyfall, Kinbinder, Fixation Quiver.
+
+---
+
 ## Cut in round 1
 Climber's Ring, Gale Ring, Hourglass, Last Ledge, Pinning Bolts, Skipping Stones, Lead Fletching, Shadow Ring's infinite pierce (ring reworked), Air kill dash, Sword refunds dash, Air Dash+, Dash Reset, Momentum, Uppercut, Opening Shot.
 
