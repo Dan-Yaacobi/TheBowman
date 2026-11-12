@@ -48,6 +48,18 @@ what killed you
 
 seeker darts need to instead of increase perfect shot damage by 25% to actually reduce it by 25% because auto aim is quite strong on its own. also reduce it giving + damage
 
-nerf hurricane damage by 25% and it needs much slower base pull speed
+nerf hurricane damage by 25% and pull speed by 60%
 
+the equipment comparison can get long enough that the equip button is missing
+
+reduce the amount of scrolls, 2 per rift level that's it
+
+reduce the kill enemies time between spawns by 200% and increase the time by 100%
+
+maybe increase the base pull speed by 100% but reduce drasticly the sources of increasing it
+
+
+the maw should show its upgraded abilities
+the hornet's nest each shot has like a second of showing the arrow in my hand, also it fires too many arrows and it should be heavier in pull speed, also reduce its damage
+the hit targets and kill enemies events still drop epics even on earth biome
 
