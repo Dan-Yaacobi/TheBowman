@@ -199,7 +199,10 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 |---|---|---|---|
 | **Janus** | Tempo | 0.45s | Every shot also fires a mirrored arrow straight behind you at half damage. |
 | **Hornet's Nest** | Tempo | 0.8s | A perfect release sprays 8 small arrows over 0.5s instead of one: 20% damage each, ±12° spread, no knockback, a stream of small recoil pushes. Quiver on-hit effects only trigger on the first burst arrow to hit each enemy. |
-| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds damage **and** permanently worsens something (downside under review). Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. |
+| **The Maw** | Precision | 0.55s | Devours the souls of enemies you kill. Each soul permanently adds +1% damage and +1% draw time for the run: the bow bloats into a siege bow (heavier draw, harder hits, more recoil). The growing Draw Time row is the visible cost. Souls are stored on the bow, so unequipping and re-equipping in the same run keeps them. *(downside proposed, not yet confirmed)* |
+| **Orrery** | Precision | 0.55s | Quick (non-perfect) shots don't fly off: the arrow orbits you (up to 3), striking any enemy that comes close. A perfect shot launches every orbiting arrow at your aim along with itself. With 3 already orbiting, quick shots fire normally. |
+| **Lanternbow** | Tempo | 0.45s | Perfect shots release a wisp (up to 3, 8s each) that floats beside you and fires a weak copy of every arrow you shoot. Copies carry quiver effects. |
+| **Equinox** | Elemental | 0.55s | Arrows alternate fire and frost (the bow's color shows which is next). Frost on a burning enemy, or fire on a frostbitten one, sets off a thermal shock burst. *(tentative: opens up debuff combos, still undecided)* |
 
 ### Quivers
 | Item | Color | Ability |
@@ -208,6 +211,7 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 | **Chaos Quiver** | Elemental | 50% chance on hit to apply a random debuff: Bleed, Burn, Poison, Frostbite, Stun or Curse (never Freeze). Scales with Elemental like other debuff items. |
 | **Ricochet Quiver** | Tempo | Every hit bounces once to the nearest other enemy at 60% damage. With no enemy nearby, it bounces off in a random direction. |
 | **Vortex Quiver** | Elemental | Perfect hits open a small vortex for 1s that pulls nearby enemies together. |
+| **Iron Heads** | Precision | Arrows fly 40% slower but deal +35% damage and knockback. You have to lead your targets. |
 
 ### Rings
 | Item | Color | Ability |
@@ -216,7 +220,9 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 | **Contagion Band** | Elemental | When an enemy with an elemental debuff dies, its debuffs jump to the nearest enemy. |
 
 ### Cut in Nov 2026 rounds
-Kestrel, Cliffbreaker, Skipping Stone, Linebreaker, Fault Line, Plumb Line, Windrunner, Kite Line, Gravelbite, Duelist's Loop, Void Reaper, Unbroken Band, Cleric's Vow, Wellspring, Catalyst, Tally (reworked into The Maw), Twin Moon, Hailstorm, Glass Arrows, Skyfall, Kinbinder, Fixation Quiver.
+Kestrel, Cliffbreaker, Skipping Stone, Linebreaker, Fault Line, Plumb Line, Windrunner, Kite Line, Gravelbite, Duelist's Loop, Void Reaper, Unbroken Band, Cleric's Vow, Wellspring, Catalyst, Tally (reworked into The Maw), Twin Moon, Hailstorm, Glass Arrows, Skyfall, Kinbinder, Fixation Quiver, Metronome, Fortune's Fool, Snare Quiver, Lucky Fletching, Hex Tips, Mending Fletch.
+
+This was the last design round: the lists above are the final set to build.
 
 ---
 
