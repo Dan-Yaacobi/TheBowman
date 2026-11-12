@@ -23,7 +23,7 @@ metadata/__load_path__ = "res://Enemies/Cloud/Sprites/Cloud Enemy.png"
 
 [resource]
 script = ExtResource("2_0ngfg")
-max_hp = 900
+max_hp = 1350
 move_speed = SubResource("Resource_wu36e")
 knockback = 20
 skin = SubResource("Resource_66jkk")

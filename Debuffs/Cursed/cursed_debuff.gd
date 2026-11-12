@@ -1,7 +1,8 @@
 class_name CursedDebuff extends Debuff
 
-## Extra damage the cursed enemy takes (0.5 = +50%). Cursed Skulls scales it by its color bonus.
-var damage_taken_bonus: float = 0.5
+## Extra damage the cursed enemy takes (0.25 = +25%). Cursed Skulls scales it by its color bonus.
+## The extra damage it deals stays at +100%.
+var damage_taken_bonus: float = 0.25
 
 func start_debuff_effect() -> void:
 	if entity is Enemy:

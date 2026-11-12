@@ -3,15 +3,23 @@ class_name VortexAbility extends PlayerAbility
 ## moment. Bosses and enemies that can't be knocked back aren't pulled. The radius scales with the
 ## quiver's color level.
 
-@export var duration: float = 1.0
-@export var radius: float = 90.0
+@export var duration: float = 0.6
+@export var radius: float = 60.0
 ## Pull speed toward the center, pixels per second.
-@export var pull_speed: float = 130.0
+@export var pull_speed: float = 60.0
+## Seconds after a vortex opens before another can. Stops perfect-shot chains from stun-locking.
+@export var cooldown: float = 1.5
+
+var _ready_at_msec: int = 0
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var arrow: Arrow = MinorHitHelpers.arrow_of(_activator as HurtBox)
 	if arrow == null or not arrow.perfect_shot or _target == null or not _target.is_inside_tree():
 		return
+	var now: int = Time.get_ticks_msec()
+	if now < _ready_at_msec:
+		return
+	_ready_at_msec = now + roundi(cooldown * 1000.0)
 	var vortex: VortexField = VortexField.new()
 	vortex.global_position = _target.global_position
 	vortex.duration = duration
