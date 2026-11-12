@@ -28,12 +28,6 @@ const HEART_GAIN_SOUND_PATH: String = "res://Audio/Player/heart_container_gain.o
 const HEART_GAIN_TEXT_COLOR: Color = Color(1.0, 0.35, 0.4)
 
 const DEBUFF_DAMAGE_STATS: Array[String] = ["bleed_damage", "burn_damage", "poison_damage"]
-# load() in the proc, not preload: debuff scenes pull in enemy scripts.
-const BURN_DEBUFF_PATH: String = "res://Debuffs/Burned/BurnDebuff.tscn"
-const POISON_DEBUFF_PATH: String = "res://Debuffs/Poisoned/PoisonDebuff.tscn"
-const FROSTBITE_DEBUFF_PATH: String = "res://Debuffs/FrostBite/FrostBiteDebuff.tscn"
-enum ElementProc { BURN, POISON, FROSTBITE }
-
 const DEBUFF_DURATION_STATS: Array[String] = [
 	"bleed_duration", "burn_duration", "poison_duration",
 	"frostbite_duration", "freeze_duration", "stun_duration",
@@ -140,21 +134,4 @@ func _on_event_bus_arrow_enemy_hit(_perfect: bool, _arrow: Arrow, target: Enemy)
 		return
 	if randf() >= chance:
 		return
-	apply_element_proc(target, ElementProc.values().pick_random())
-
-func apply_element_proc(target: Enemy, proc: ElementProc) -> void:
-	var stats: PlayerStats = player.stats
-	match proc:
-		ElementProc.BURN:
-			var burn: BurnDebuff = load(BURN_DEBUFF_PATH).instantiate()
-			burn.set_damage(roundi(stats.burn_damage.value()))
-			target.apply_debuff(burn, CustomVariables.BURN_DEBUFF_ID, stats.burn_duration.value(), stats.dot_ticks("burn"))
-		ElementProc.POISON:
-			var poison: Debuff = load(POISON_DEBUFF_PATH).instantiate()
-			poison.poison_damage = stats.poison_damage.value()
-			target.apply_debuff(poison, CustomVariables.POISON_DEBUFF_ID, stats.poison_duration.value(), stats.dot_ticks("poison"))
-		ElementProc.FROSTBITE:
-			if target.has_debuff(CustomVariables.FREEZE_DEBUFF_ID):
-				return
-			var frostbite: Debuff = load(FROSTBITE_DEBUFF_PATH).instantiate()
-			target.apply_debuff(frostbite, CustomVariables.FROSTBITE_DEBUFF_ID, stats.frostbite_duration.value(), 1)
+	DebuffApplier.apply(target, DebuffApplier.ELEMENTAL.pick_random())
