@@ -47,6 +47,13 @@ const CHARGED_ARROW_TINT: Color = Color(1.6, 1.35, 0.6)
 ## draw time with diminishing returns: the bonus ratio (total / base) is raised to this power.
 ## 0.7: +100% pull speed draws ~62% faster. 1 turns it off. Penalties (below base) apply in full.
 @export var pull_speed_bonus_exponent: float = 0.7
+@export_group("Fire recoil")
+## Push back on the archer from a perfect release with a standard bow (draw_weight_ref_time).
+@export var fire_recoil: float = 50.0
+## Bows drawing this fast or faster have no recoil (Hanzo). Recoil grows linearly above it.
+@export var recoil_free_draw_time: float = 0.25
+## Recoil never exceeds fire_recoil x this.
+@export var max_recoil_mult: float = 2.5
 @export_group("")
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
@@ -165,7 +172,9 @@ func release_arrow() -> void:
 			current_arrow.arrow_shot_power = shot_power
 			if shot_power >= 1.0:
 				EventBus.camera_shake.emit(1.0,10.0)
-				EventBus.apply_player_knockback.emit(-hand_direction,50)
+				var recoil: float = get_fire_recoil()
+				if recoil > 0.0:
+					EventBus.apply_player_knockback.emit(-hand_direction, recoil)
 				perfect_release_particles.emitting = true
 			fire_arrow()
 	current_arrow = null
@@ -273,6 +282,12 @@ func base_hit_for(arrow_damage: float, bow_draw_time: float = -1.0) -> float:
 func get_draw_weight(bow_draw_time: float = -1.0) -> float:
 	var time: float = bow_draw_time if bow_draw_time > 0.0 else get_bow_draw_time()
 	return pow(time / maxf(draw_weight_ref_time, 0.01), draw_weight_exponent)
+
+## Recoil of a perfect release: heavier (slower) bows kick harder, the fastest ones not at all.
+func get_fire_recoil() -> float:
+	var span: float = maxf(draw_weight_ref_time - recoil_free_draw_time, 0.01)
+	var mult: float = clampf((get_bow_draw_time() - recoil_free_draw_time) / span, 0.0, max_recoil_mult)
+	return fire_recoil * mult
 
 ## The equipped bow's base draw time, before pull speed bonuses.
 func get_bow_draw_time() -> float:

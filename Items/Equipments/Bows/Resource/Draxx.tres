@@ -77,7 +77,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("3_dllur")
 display_name = "Draxx"
-draw_time = 0.9
+draw_time = 0.8
 texture = ExtResource("3_rg2f4")
 equipped_texture = ExtResource("3_rg2f4")
 dropped_scale = 0.343

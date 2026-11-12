@@ -140,6 +140,8 @@ func _show_tooltip(slot: EquipmentSlot, equipment: EquipmentData, contributions:
 			amount = _hit_damage(stat.value()) - _hit_damage(stat.value_without(amount, Stat.buff_type.ADDITIVE))
 			display = HIT_DAMAGE_LABEL
 		rows.append(ItemCard.StatRow.new(display, amount, true, 0.0, false, PlayerStats.unit_suffix(stat_name)))
+	if equipment.slot == EquipmentData.slots.BOW:
+		rows.append(ItemCard.draw_time_row(equipment.draw_time, 0.0, false))
 	var slot_name: String = str(EquipmentData.slots.keys()[equipment.slot]).capitalize()
 	item_tooltip.show_item(equipment, slot_name, rows)
 	item_tooltip.show()

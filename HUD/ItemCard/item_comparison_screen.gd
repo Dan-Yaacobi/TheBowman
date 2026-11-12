@@ -94,6 +94,12 @@ func _populate(new_data: EquipmentData, current_data: EquipmentData) -> void:
 		new_rows.append(ItemCard.StatRow.new(display, new_amount, new_has, new_amount - cur_amount, true, suffix))
 		current_rows.append(ItemCard.StatRow.new(display, cur_amount, cur_has, 0.0, false, suffix))
 
+	if new_data.slot == EquipmentData.slots.BOW:
+		var cur_time: float = current_data.draw_time if current_data else new_data.draw_time
+		new_rows.append(ItemCard.draw_time_row(new_data.draw_time, new_data.draw_time - cur_time, current_data != null))
+		if current_data:
+			current_rows.append(ItemCard.draw_time_row(current_data.draw_time, 0.0, false))
+
 	var slot_name: String = _slot_name(new_data.slot)
 	new_card.show_item(new_data, slot_name, new_rows)
 	if current_data:

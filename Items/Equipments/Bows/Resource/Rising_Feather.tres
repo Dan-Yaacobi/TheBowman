@@ -84,7 +84,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_b2fkq")
 display_name = "Rising Feather"
-draw_time = 1.5
+draw_time = 1.2
 texture = ExtResource("3_b2fkq")
 equipped_texture = ExtResource("3_b2fkq")
 dropped_scale = 0.37

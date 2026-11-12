@@ -76,7 +76,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_data")
 display_name = "Riftbow"
-draw_time = 0.9
+draw_time = 0.8
 texture = ExtResource("6_tex")
 equipped_texture = ExtResource("6_tex")
 dropped_scale = 0.391

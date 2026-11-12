@@ -7,6 +7,10 @@ class StatRow:
 	var delta: float
 	var show_delta: bool
 	var suffix: String
+	## Digits after the point (0 = whole numbers).
+	var decimals: int = 0
+	## For stats where less is better (draw time): a negative delta shows as an upgrade.
+	var lower_is_better: bool = false
 
 	func _init(_display_name: String, _amount: float, _present: bool, _delta: float, _show_delta: bool, _suffix: String = "") -> void:
 		display_name = _display_name
@@ -60,8 +64,6 @@ func show_item(data: EquipmentData, tag: String, rows: Array[StatRow]) -> void:
 	name_label.text = data.display_name
 	name_label.add_theme_color_override("font_color", CustomVariables.rarity_color(data.rarity))
 	tag_label.text = tag + "  ·  " + data.color_label()
-	if data.slot == EquipmentData.slots.BOW:
-		tag_label.text += "  ·  %.2fs draw" % data.draw_time
 	tag_label.add_theme_color_override("font_color", CustomVariables.item_color_tint(data.color))
 
 	if data.ability:
@@ -125,15 +127,16 @@ func _add_stat_row(row: StatRow) -> void:
 	name_cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	var value_color: Color = COLOR_NEUTRAL if row.present else COLOR_MISSING
-	var value_text: String = _format(row.amount) + row.suffix if row.present else "0"
+	var value_text: String = _format(row.amount, row.decimals) + row.suffix if row.present else "0"
 	var value_cell: Label = _make_label(value_text, value_color, LABEL_FONT_SIZE)
 	value_cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 	var delta_text: String = ""
 	var delta_color: Color = COLOR_NEUTRAL
-	if row.show_delta and roundi(row.delta) != 0:
-		delta_text = ("+" if row.delta > 0.0 else "") + _format(row.delta) + row.suffix
-		delta_color = COLOR_UPGRADE if row.delta > 0.0 else COLOR_DOWNGRADE
+	if row.show_delta and _format(row.delta, row.decimals) != _format(0.0, row.decimals):
+		delta_text = ("+" if row.delta > 0.0 else "") + _format(row.delta, row.decimals) + row.suffix
+		var better: bool = (row.delta < 0.0) if row.lower_is_better else (row.delta > 0.0)
+		delta_color = COLOR_UPGRADE if better else COLOR_DOWNGRADE
 	var delta_cell: Label = _make_label(delta_text, delta_color, LABEL_FONT_SIZE)
 	delta_cell.custom_minimum_size.x = 48.0
 	delta_cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -155,5 +158,14 @@ func _style_label(label: Label, font_size: int, color: Color) -> void:
 	label.add_theme_constant_override("shadow_offset_y", 1)
 	label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.8))
 
-func _format(amount: float) -> String:
-	return str(roundi(amount))
+func _format(amount: float, decimals: int = 0) -> String:
+	if decimals <= 0:
+		return str(roundi(amount))
+	return ("%." + str(decimals) + "f") % amount
+
+## A bow's draw time row (seconds, lower is better). delta < 0 = this bow draws faster.
+static func draw_time_row(draw_time: float, delta: float, show_delta: bool) -> StatRow:
+	var row: StatRow = StatRow.new("Draw Time", draw_time, true, delta, show_delta, "s")
+	row.decimals = 2
+	row.lower_is_better = true
+	return row

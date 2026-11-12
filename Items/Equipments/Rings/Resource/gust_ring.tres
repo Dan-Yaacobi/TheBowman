@@ -19,11 +19,6 @@ min_value = 15.0
 max_value = 30.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
-[sub_resource type="Resource" id="Resource_t0"]
-script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t0r0")])
-metadata/_custom_type_script = "uid://cvcq1wjubwojl"
-
 [sub_resource type="Resource" id="Resource_t1r0"]
 script = ExtResource("3_roll")
 stat_name = "pull_speed"
@@ -31,9 +26,14 @@ min_value = 10.0
 max_value = 30.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
+[sub_resource type="Resource" id="Resource_t0"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t0r0"), SubResource("Resource_t1r0")])
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
+
 [sub_resource type="Resource" id="Resource_t1"]
 script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t1r0")])
+stat_rolls = Array[ExtResource("3_roll")]([])
 minor_abilities = ExtResource("4_general")
 minor_roll_count = 1
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
@@ -45,19 +45,19 @@ min_value = 15.0
 max_value = 30.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
-[sub_resource type="Resource" id="Resource_t2"]
-script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t2r0")])
-minor_abilities = ExtResource("4_general")
-minor_roll_count = 1
-metadata/_custom_type_script = "uid://cvcq1wjubwojl"
-
 [sub_resource type="Resource" id="Resource_t3r0"]
 script = ExtResource("3_roll")
 stat_name = "pull_speed"
 min_value = 20.0
 max_value = 40.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
+
+[sub_resource type="Resource" id="Resource_t2"]
+script = ExtResource("2_tier")
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t2r0"), SubResource("Resource_t3r0")])
+minor_abilities = ExtResource("4_general")
+minor_roll_count = 1
+metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_t3r1"]
 script = ExtResource("3_roll")
@@ -68,7 +68,7 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t3"]
 script = ExtResource("2_tier")
-stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t3r0"), SubResource("Resource_t3r1")])
+stat_rolls = Array[ExtResource("3_roll")]([SubResource("Resource_t3r1")])
 minor_abilities = ExtResource("4_general")
 minor_roll_count = 2
 metadata/_custom_type_script = "uid://cvcq1wjubwojl"
