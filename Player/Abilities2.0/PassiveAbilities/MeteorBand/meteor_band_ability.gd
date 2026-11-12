@@ -1,5 +1,6 @@
 class_name MeteorBandAbility extends PlayerPassiveAbility
-## Hold Down in the air to fast-fall. Slamming into the ground or an enemy sends out a knockback shockwave.
+## Hold Down in the air to fast-fall. Slamming into the ground or an enemy sends out a knockback shockwave
+## that also breaks crates, barrels and vases.
 
 @export var fall_speed_mult: float = 2.2
 @export var fall_accel: float = 1600.0
@@ -41,7 +42,7 @@ func _on_landed() -> void:
 
 func slam(center: Vector2) -> void:
 	var player: Player = PlayerManager.player
-	PushWave.burst(player.get_world_2d(), center, radius, knockback * power(), maxi(1, roundi(damage * power())), WAVE_COLOR)
+	PushWave.burst(player.get_world_2d(), center, radius, knockback * power(), maxi(1, roundi(damage * power())), WAVE_COLOR, 0.3, true)
 	EventBus.camera_shake.emit(1.5, 10.0)
 
 func get_tooltip() -> String:

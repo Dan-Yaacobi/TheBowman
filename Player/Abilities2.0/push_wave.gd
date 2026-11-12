@@ -7,7 +7,10 @@ var _t: float = 0.0
 const DURATION: float = 0.3
 
 ## Pushes every living enemy within radius away from center, deals damage if > 0, and shows the ring.
-static func burst(world: World2D, center: Vector2, _radius: float, force: float, damage: int, _color: Color, upward_bias: float = 0.3) -> int:
+## break_objects: also breaks destructible world objects (crates, barrels, vases) in the radius.
+static func burst(world: World2D, center: Vector2, _radius: float, force: float, damage: int, _color: Color, upward_bias: float = 0.3, break_objects: bool = false) -> int:
+	if break_objects:
+		_break_objects(world, center, _radius)
 	var hit: int = 0
 	for enemy in MinorHitHelpers.enemies_in_radius(world, center, _radius):
 		var dir: Vector2 = enemy.global_position - center
@@ -25,6 +28,24 @@ static func burst(world: World2D, center: Vector2, _radius: float, force: float,
 	wave.global_position = center
 	EventBus.summon_effect.emit(wave)
 	return hit
+
+## Collision layer of world objects' hit boxes (value 8 = layer 4).
+const OBJECT_HITBOX_MASK: int = 8
+
+static func _break_objects(world: World2D, center: Vector2, _radius: float) -> void:
+	var circle: CircleShape2D = CircleShape2D.new()
+	circle.radius = _radius
+	var params: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	params.shape = circle
+	params.transform = Transform2D(0.0, center)
+	params.collide_with_areas = true
+	params.collide_with_bodies = false
+	params.collision_mask = OBJECT_HITBOX_MASK
+	for hit in world.direct_space_state.intersect_shape(params, 32):
+		var area: Area2D = hit.collider as Area2D
+		var object: GameObject = area.get_parent() as GameObject if area else null
+		if object and not object.got_hit:
+			object.break_item(null)
 
 func _ready() -> void:
 	z_index = 3
