@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bfv1vlm08klwk" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="16_5lv0r"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/TargetDummy/TargetDummySite.tscn" id="17_5lv0r"]
-[ext_resource type="PackedScene" uid="uid://l84og620rtdb" path="res://Level/Events/ChestsEvent.tscn" id="17_24r6y"]
+[ext_resource type="PackedScene" uid="uid://l84og620rtdb" path="res://Level/Events/WardrobeEvent.tscn" id="17_24r6y"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]

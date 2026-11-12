@@ -46,8 +46,10 @@
 [ext_resource type="Resource" uid="uid://re7toaelanl0" path="res://Items/Equipments/Rings/Resource/thorn_ring.tres" id="eq_thorn_ring"]
 [ext_resource type="Resource" uid="uid://dw2hvjwuifav4" path="res://Items/Equipments/Bows/Resource/Undertow.tres" id="eq_undertow"]
 [ext_resource type="Resource" uid="uid://comiq2aa57e0f" path="res://Items/Equipments/Rings/Resource/vampiric_ring.tres" id="eq_vampiric_ring"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/chaos_quiver.tres" id="eq_chaos_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Rings/Resource/contagion_band.tres" id="eq_contagion_band"]
 
-[node name="Tresures" type="Node2D" unique_id=1094064033]
+[node name="Wardrobe" type="Node2D" unique_id=1094064033]
 script = ExtResource("1_ksx8j")
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1181122514]
@@ -429,6 +431,24 @@ fixed_frame_index = 4
 [node name="PedestalNPC" parent="Island56" unique_id=783118551 instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_vampiric_ring")
+
+[node name="Island57" parent="." instance=ExtResource("2_oi57y")]
+position = Vector2(97, 189)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island57" instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("eq_chaos_quiver")
+
+[node name="Island58" parent="." instance=ExtResource("2_oi57y")]
+position = Vector2(145, 189)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island58" instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("eq_contagion_band")
 
 [node name="Island28" parent="." unique_id=1607111994 instance=ExtResource("2_oi57y")]
 position = Vector2(-214, 82)
