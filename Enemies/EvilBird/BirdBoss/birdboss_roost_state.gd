@@ -24,6 +24,9 @@ func Exit() -> void:
 	roost_detector.monitoring = false
 	enemy.wind.disable()
 	roost_timer.stop()
+	# Dying mid-roost: a pending whirlwind would replay its looping animation over the death one.
+	whirlwind_timer.stop()
+	wind_active = false
 	enemy.remove_damage_taken_multiplier(0.5,Stat.buff_type.ADDITIVE)
 	(enemy as BirdBoss).should_roost = false
 
@@ -36,6 +39,8 @@ func Physics(_delta: float) -> EnemyState:
 	return null
 
 func _trigger_whirlwind() -> void:
+	if enemy.is_dead or state_machine.curr_state != self:
+		return
 	enemy.animation_player.play("Whirlwind")
 	enemy.wind.face_player()
 	enemy.wind.enable(Vector2(enemy.wind.scale.x, 0))
