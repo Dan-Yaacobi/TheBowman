@@ -52,6 +52,7 @@
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Janus.tres" id="eq_janus"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/ricochet_quiver.tres" id="eq_ricochet_quiver"]
 [ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/boomerang_quiver.tres" id="eq_boomerang_quiver"]
+[ext_resource type="Resource" path="res://Items/Equipments/Quivers/Resource/vortex_quiver.tres" id="eq_vortex_quiver"]
 
 [node name="Wardrobe" type="Node2D" unique_id=1094064033]
 script = ExtResource("1_ksx8j")
@@ -489,6 +490,15 @@ fixed_frame_index = 4
 [node name="PedestalNPC" parent="Island62" instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_boomerang_quiver")
+
+[node name="Island63" parent="." instance=ExtResource("2_oi57y")]
+position = Vector2(145, 477)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island63" instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("eq_vortex_quiver")
 
 [node name="Island28" parent="." unique_id=1607111994 instance=ExtResource("2_oi57y")]
 position = Vector2(-214, 82)
