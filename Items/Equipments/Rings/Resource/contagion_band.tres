@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="3_roll"]
 [ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="4_general"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="5_scene"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Rings/Sprites/BlackRing.png" id="6_tex"]
+[ext_resource type="Texture2D" path="res://Items/Equipments/Rings/Sprites/ContagionBand.png" id="6_tex_icon"]
 [ext_resource type="Script" path="res://Player/Abilities2.0/PassiveAbilities/ContagionBand/contagion_band_ability.gd" id="7_ability"]
 
 [sub_resource type="Resource" id="Resource_ability"]
@@ -75,8 +75,8 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_data")
 display_name = "Contagion Band"
-texture = ExtResource("6_tex")
-equipped_texture = ExtResource("6_tex")
+texture = ExtResource("6_tex_icon")
+equipped_texture = ExtResource("6_tex_icon")
 dropped_scale = 0.3
 slot = 2
 color = 3

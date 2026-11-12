@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="5_scene"]
 [ext_resource type="Texture2D" uid="uid://dpflw6ng1u634" path="res://Items/Equipments/Quivers/Sprites/Arrows/EchoArrow.png" id="6_arrow"]
 [ext_resource type="Texture2D" uid="uid://drjuknm0jpts8" path="res://Items/Equipments/Quivers/Sprites/Quiver_EchoArrows.png" id="6_tex"]
+[ext_resource type="Texture2D" path="res://Items/Equipments/Quivers/Sprites/Quiver_Boomerang.png" id="6_tex_icon"]
 [ext_resource type="Script" path="res://Player/Abilities2.0/ShootAbilities/Boomerang/boomerang_ability.gd" id="7_ability"]
 
 [sub_resource type="Resource" id="Resource_ability"]
@@ -83,7 +84,7 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_data")
 display_name = "Boomerang Quiver"
-texture = ExtResource("6_tex")
+texture = ExtResource("6_tex_icon")
 equipped_texture = ExtResource("6_arrow")
 dropped_scale = 0.429
 slot = 1
