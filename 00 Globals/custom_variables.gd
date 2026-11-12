@@ -11,6 +11,10 @@ enum ItemColor {NONE, PRECISION, TEMPO, ELEMENTAL}
 
 const HP_PER_HEART: int = 5
 const RIFTS_PER_TYPE: int = 2
+## Biomes per run (dirt, snow, hell), each ending in its boss. Keep in sync with Rift.Type.
+const BIOME_COUNT: int = 3
+## Rifts in a full run. Loot rarity and stat scaling follow this.
+const RUN_RIFT_COUNT: int = RIFTS_PER_TYPE * BIOME_COUNT
 
 const ENEMY_DMG_TAKEN_MULT_ID: int = 99
 const ENEMY_DMG_DEALT_MULT_ID: int = 98

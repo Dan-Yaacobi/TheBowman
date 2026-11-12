@@ -2,13 +2,13 @@ class_name LootManager extends Node2D
 const EQUIPMENT: String = "res://Items/Equipments/Equipment.tscn"
 const COIN: String = "res://Items/Other/Coin/coin.tscn"
 
-@export var max_rift_level: int = 15
 @export var rarity_stat_bonus: Array[float] = [0.0, 0.1, 0.2, 0.3]
-# Rift level → tier thresholds. Reaching threshold N grants tier N (index into data.tiers / RarityTier arrays)
-@export var rift_level_tier_bands: Array[int] = [4, 8, 12]
+## Guaranteed rarity floor by run progress, as fractions of the run (CustomVariables.RUN_RIFT_COUNT).
+## Reaching band N grants tier N. [0.25, 0.5, 0.75] over 15 rifts = rifts 4 / 8 / 12; over 6 = 2 / 3 / 5.
+@export var tier_band_fractions: Array[float] = [0.25, 0.5, 0.75]
 @export var tier_upgrade_chance: float = 0.15   # chance to roll one tier above your guaranteed floor
 
-# Rift level scaling — the only lever on stat magnitude; bounded via smoothstep against max_rift_level
+# Rift level scaling — the only lever on stat magnitude; smoothstep over the run's length
 @export var rift_stat_scale: float = 0.5
 
 @export var bow_pool: ItemPool
@@ -63,7 +63,7 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	data.bonus_abilities = []
 
 	var rift_level: int = PlayerManager.player.stats.rift_level
-	var t: float = minf(float(rift_level) / float(max_rift_level), 1.0)
+	var t: float = minf(float(rift_level) / float(CustomVariables.RUN_RIFT_COUNT), 1.0)
 	var s: float = t * t * (3.0 - 2.0 * t)  # smoothstep, bounded growth
 	var rift_stat_scalar: float = 1.0 + s * rift_stat_scale
 	var rarity_scalar: float = 1.0 + rarity_stat_bonus[rarity]
@@ -87,13 +87,20 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 ## Rarity is never randomly rolled below the current rift-level band.
 func _rarity_for_rift_level(rift_level: int) -> int:
 	var tier: int = 0
-	for threshold in rift_level_tier_bands:
+	for threshold: int in get_tier_thresholds():
 		if rift_level >= threshold:
 			tier += 1
-	var max_tier: int = rift_level_tier_bands.size()
+	var max_tier: int = tier_band_fractions.size()
 	if randf() < tier_upgrade_chance:
 		tier = mini(tier + 1, max_tier)
 	return tier
+
+## The rift level each rarity band starts at, for the current run length.
+func get_tier_thresholds() -> Array[int]:
+	var thresholds: Array[int] = []
+	for fraction: float in tier_band_fractions:
+		thresholds.append(maxi(ceili(fraction * CustomVariables.RUN_RIFT_COUNT), 1))
+	return thresholds
 
 func _pick_template(pool: ItemPool) -> EquipmentData:
 	if pool.templates.is_empty():
