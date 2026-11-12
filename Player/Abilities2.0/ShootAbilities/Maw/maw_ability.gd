@@ -1,9 +1,11 @@
 class_name MawAbility extends PlayerAbility
 ## The Maw: a starving bow that grows by devouring the souls of enemies killed while it's equipped.
 ## Souls live on this ability (one per rolled bow), so unequipping and re-equipping keeps them.
-##   Starving: weaker arrows.        Fed: perfect kills bite the nearest enemy.
-##   Gorged: stronger arrows.        Awakened: perfect hits devour enemies below the HP threshold
-##                                   (bosses take double damage from that hit instead).
+##   Starving: weaker arrows.
+##   Fed: perfect kills bite the nearest enemy.
+##   Gorged: stronger arrows that trail souls; bites hit the 2 nearest enemies.
+##   Awakened: strongest arrows; perfect hits devour enemies below the HP threshold
+##             (bosses take double damage from that hit instead).
 ## Precision scrolls scale the positive stage bonuses and the bite, not the Starving penalty.
 
 enum Stage { STARVING, FED, GORGED, AWAKENED }
@@ -12,7 +14,7 @@ const STAGE_COLORS: Array[Color] = [Color(0.6, 0.6, 0.65), Color(0.75, 0.55, 1.0
 
 @export_group("Souls")
 ## Souls needed to reach Fed, Gorged and Awakened. Placeholders: tune by playtesting.
-@export var stage_thresholds: Array[int] = [20, 60, 150]
+@export var stage_thresholds: Array[int] = [10, 30, 70]
 @export var souls_per_enemy: int = 1
 @export var souls_per_elite: int = 5
 @export var souls_per_boss: int = 15
@@ -22,6 +24,8 @@ const STAGE_COLORS: Array[Color] = [Color(0.6, 0.6, 0.65), Color(0.75, 0.55, 1.0
 ## Bite: share of the killing hit dealt to the nearest enemy.
 @export var bite_share: float = 0.5
 @export var bite_radius: float = 200.0
+## Enemies one bite hits, per stage (Starving, Fed, Gorged, Awakened).
+@export var bite_targets: Array[int] = [0, 1, 2, 2]
 ## Devour: enemies below this share of their HP are devoured by a perfect hit (Awakened).
 @export var devour_threshold: float = 0.2
 @export_group("")
@@ -103,8 +107,15 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 		_stage = new_stage
 		_apply_stage_buff()
 		var player: Player = PlayerManager.player
-		CombatTextSpawner.spawn(player.global_position + Vector2(0, -40), "The Maw: " + STAGE_NAMES[_stage], STAGE_COLORS[_stage])
+		CombatTextSpawner.spawn(player.global_position + Vector2(0, -56), "The Maw: " + STAGE_NAMES[_stage], STAGE_COLORS[_stage])
+		EventBus.camera_shake.emit(2.0, 12.0)
+		var burst: SoulBurst = SoulBurst.new()
+		burst.color = STAGE_COLORS[_stage]
+		burst.global_position = player.global_position + Vector2(0, -12)
+		EventBus.summon_effect.emit(burst)
 	_update_counter()
+	if is_instance_valid(_counter):
+		_counter.pulse()
 
 ## Bite: a perfect kill lashes the nearest other enemy.
 func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -> void:
@@ -112,28 +123,26 @@ func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -
 		return
 	if not is_instance_valid(arrow) or not target.is_inside_tree():
 		return
-	var victim: Enemy = _nearest_other(target)
-	if victim == null:
-		return
+	var count: int = bite_targets[mini(_stage, bite_targets.size() - 1)]
 	var bite: int = maxi(1, roundi(arrow.hurt_box.damage * bite_share * power()))
-	victim.take_damage(null, bite, null, STAGE_COLORS[_stage])
-	var link: ContagionBandAbility.ContagionLink = ContagionBandAbility.ContagionLink.new()
-	link.from = target.global_position
-	link.to = victim.global_position
-	link.color = STAGE_COLORS[_stage]
-	EventBus.summon_effect.emit(link)
+	for victim: Enemy in _nearest_others(target, count):
+		victim.take_damage(null, bite, null, STAGE_COLORS[_stage])
+		var link: ContagionBandAbility.ContagionLink = ContagionBandAbility.ContagionLink.new()
+		link.from = target.global_position
+		link.to = victim.global_position
+		link.color = STAGE_COLORS[_stage]
+		link.thickness = 3.5
+		EventBus.summon_effect.emit(link)
 
-func _nearest_other(from: Enemy) -> Enemy:
-	var best: Enemy = null
-	var best_dist: float = INF
+## Up to count living enemies near from, closest first.
+func _nearest_others(from: Enemy, count: int) -> Array[Enemy]:
+	var found: Array[Enemy] = []
 	for enemy: Enemy in MinorHitHelpers.enemies_in_radius(from.get_world_2d(), from.global_position, bite_radius):
-		if enemy == from or enemy.is_dead:
-			continue
-		var dist: float = enemy.global_position.distance_squared_to(from.global_position)
-		if dist < best_dist:
-			best_dist = dist
-			best = enemy
-	return best
+		if enemy != from and not enemy.is_dead:
+			found.append(enemy)
+	found.sort_custom(func(a: Enemy, b: Enemy) -> bool:
+		return a.global_position.distance_squared_to(from.global_position) < b.global_position.distance_squared_to(from.global_position))
+	return found.slice(0, count)
 
 func _stage_for(count: int) -> Stage:
 	var result: int = 0
@@ -152,8 +161,11 @@ func _apply_stage_buff() -> void:
 		stat.add_buff(_buff_id, amount, Stat.buff_type.MULTIPLICATIVE)
 
 func _update_counter() -> void:
-	if is_instance_valid(_counter):
-		_counter.show_souls(souls, STAGE_COLORS[_stage])
+	if not is_instance_valid(_counter):
+		return
+	var floor_souls: int = 0 if _stage == Stage.STARVING else stage_thresholds[_stage - 1]
+	var next_souls: int = stage_thresholds[_stage] if _stage < Stage.AWAKENED else -1
+	_counter.show_souls(STAGE_NAMES[_stage], souls, floor_souls, next_souls, STAGE_COLORS[_stage])
 
 func get_tooltip() -> String:
 	var next: String = ""
@@ -167,26 +179,89 @@ func get_tooltip_color() -> Color:
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT
 
-## Soul count above the archer, in the stage's color.
-class SoulCounter extends Label:
+## Stage name, soul count toward the next stage and a progress bar, above the archer.
+class SoulCounter extends Node2D:
+	const BAR_SIZE: Vector2 = Vector2(40, 4)
+	var _label: Label
+	var _fill: float = 0.0
+	var _color: Color = Color.WHITE
+	var _pulse: float = 0.0
+
 	func _ready() -> void:
-		position = Vector2(-20, -52)
-		size = Vector2(40, 12)
-		horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		add_theme_font_size_override("font_size", 8)
-		add_theme_constant_override("outline_size", 2)
-		add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
+		position = Vector2(0, -50)
 		z_index = 5
+		_label = Label.new()
+		_label.position = Vector2(-40, -16)
+		_label.size = Vector2(80, 14)
+		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_label.add_theme_font_size_override("font_size", 11)
+		_label.add_theme_constant_override("outline_size", 4)
+		_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+		add_child(_label)
 
-	func show_souls(count: int, color: Color) -> void:
-		text = str(count)
-		add_theme_color_override("font_color", color)
+	func show_souls(stage_name: String, count: int, floor_souls: int, next_souls: int, color: Color) -> void:
+		_color = color
+		_label.add_theme_color_override("font_color", color)
+		if next_souls < 0:
+			_label.text = "%s  %d" % [stage_name, count]
+			_fill = 1.0
+		else:
+			_label.text = "%s  %d/%d" % [stage_name, count, next_souls]
+			_fill = clampf(float(count - floor_souls) / float(maxi(next_souls - floor_souls, 1)), 0.0, 1.0)
+		queue_redraw()
 
-## From Gorged on, arrows carry a faint soul tint.
+	## A quick bump when a soul is eaten.
+	func pulse() -> void:
+		_pulse = 1.0
+
+	func _process(delta: float) -> void:
+		if _pulse > 0.0:
+			_pulse = maxf(_pulse - delta * 4.0, 0.0)
+			scale = Vector2.ONE * (1.0 + 0.25 * _pulse)
+
+	func _draw() -> void:
+		var rect: Rect2 = Rect2(-BAR_SIZE / 2.0, BAR_SIZE)
+		draw_rect(rect.grow(1.0), Color(0, 0, 0, 0.8))
+		draw_rect(Rect2(rect.position, Vector2(BAR_SIZE.x * _fill, BAR_SIZE.y)), _color)
+
+## A one-shot ring of soul particles for a stage-up.
+class SoulBurst extends CPUParticles2D:
+	func _ready() -> void:
+		one_shot = true
+		explosiveness = 1.0
+		amount = 28
+		lifetime = 0.7
+		spread = 180.0
+		gravity = Vector2(0, -40)
+		initial_velocity_min = 50.0
+		initial_velocity_max = 110.0
+		damping_min = 60.0
+		damping_max = 90.0
+		scale_amount_min = 1.5
+		scale_amount_max = 3.0
+		z_index = 4
+		emitting = true
+		get_tree().create_timer(lifetime + 0.2, false).timeout.connect(queue_free)
+
+## From Gorged on, arrows glow with souls and leave a particle trail.
 class SoulTrail extends ArrowEffect:
-	const TINT: Color = Color(1.0, 0.8, 1.2)
+	const TINT: Color = Color(1.25, 0.8, 1.5)
 	var ability: MawAbility
 
 	func apply_effect(_arrow: Arrow) -> void:
-		if _arrow and ability and ability.stage() >= Stage.GORGED:
-			_arrow.modulate = TINT
+		if _arrow == null or ability == null or ability.stage() < Stage.GORGED:
+			return
+		_arrow.modulate = TINT
+		var trail: CPUParticles2D = CPUParticles2D.new()
+		trail.local_coords = false
+		trail.amount = 14
+		trail.lifetime = 0.35
+		trail.gravity = Vector2(0, -20)
+		trail.spread = 25.0
+		trail.direction = Vector2.LEFT
+		trail.initial_velocity_min = 5.0
+		trail.initial_velocity_max = 15.0
+		trail.scale_amount_min = 1.0
+		trail.scale_amount_max = 2.0
+		trail.color = Color(0.85, 0.45, 1.0, 0.8)
+		_arrow.add_child(trail)

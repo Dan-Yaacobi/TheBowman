@@ -209,10 +209,10 @@ Souls per kill: normal enemy 1, elite 5, boss 15. A soul counter shows above the
 
 | Stage | Souls | Effect |
 |---|---|---|
-| **Starving** | 0-19 | -30% arrow damage (the only downside, gone once it has fed) |
-| **Fed** | 20 | Normal damage. Perfect kills bite: the devoured soul lashes the nearest enemy for 50% of the killing hit. |
-| **Gorged** | 60 | +25% arrow damage. Arrows leave a faint soul trail. |
-| **Awakened** | 150 | +50% arrow damage. A perfect hit on an enemy below 20% HP devours it outright; bosses take double damage from that hit instead. |
+| **Starving** | 0-9 | -30% arrow damage (the only downside, gone once it has fed) |
+| **Fed** | 10 | Normal damage. Perfect kills bite: the devoured soul lashes the nearest enemy for 50% of the killing hit. |
+| **Gorged** | 30 | +25% arrow damage. Arrows trail souls. Bites hit the 2 nearest enemies. |
+| **Awakened** | 70 | +50% arrow damage. A perfect hit on an enemy below 20% HP devours it outright; bosses take double damage from that hit instead. |
 
 Precision scrolls scale the stage bonuses and the bite. **Thresholds are placeholders to tune in playtesting.** The game currently has 6 rifts (2 dirt, 2 snow, 2 hell), possibly 9 later (3 each); with 6 rifts, 150 souls may arrive too late, so set the thresholds as exported values.
 

@@ -58,10 +58,11 @@ class ContagionLink extends Line2D:
 	var from: Vector2
 	var to: Vector2
 	var color: Color = Color.GREEN
+	var thickness: float = 2.0
 
 	func _ready() -> void:
 		top_level = true
-		width = 2.0
+		width = thickness
 		default_color = color
 		add_point(from)
 		add_point(to)
