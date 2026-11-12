@@ -56,6 +56,7 @@
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/HornetsNest.tres" id="eq_hornets_nest"]
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Orrery.tres" id="eq_orrery"]
 [ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/Lanternbow.tres" id="eq_lanternbow"]
+[ext_resource type="Resource" path="res://Items/Equipments/Bows/Resource/TheMaw.tres" id="eq_the_maw"]
 
 [node name="Wardrobe" type="Node2D" unique_id=1094064033]
 script = ExtResource("1_ksx8j")
@@ -529,6 +530,15 @@ fixed_frame_index = 4
 [node name="PedestalNPC" parent="Island66" instance=ExtResource("3_rwwsi")]
 position = Vector2(-1, -16)
 item_data = ExtResource("eq_lanternbow")
+
+[node name="Island67" parent="." instance=ExtResource("2_oi57y")]
+position = Vector2(0, 549)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="PedestalNPC" parent="Island67" instance=ExtResource("3_rwwsi")]
+position = Vector2(-1, -16)
+item_data = ExtResource("eq_the_maw")
 
 [node name="Island28" parent="." unique_id=1607111994 instance=ExtResource("2_oi57y")]
 position = Vector2(-214, 82)
