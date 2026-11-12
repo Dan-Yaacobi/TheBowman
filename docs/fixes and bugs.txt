@@ -43,3 +43,11 @@ skylark ability that knocks you back is too harsh and often makes you fall and t
 add to the death window:
 total damage dealt
 what killed you
+
+
+
+seeker darts need to instead of increase perfect shot damage by 25% to actually reduce it by 25% because auto aim is quite strong on its own. also reduce it giving + damage
+
+nerf hurricane damage by 25% and it needs much slower base pull speed
+
+
