@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_entry")
 scene = ExtResource("2_event")
-min_level = 2
+min_level = 3
