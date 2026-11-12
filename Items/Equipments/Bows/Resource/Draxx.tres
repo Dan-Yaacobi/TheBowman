@@ -77,7 +77,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("3_dllur")
 display_name = "Draxx"
-draw_time = 0.8
 texture = ExtResource("3_rg2f4")
 equipped_texture = ExtResource("3_rg2f4")
 dropped_scale = 0.343
@@ -89,6 +88,7 @@ string_width = 0.6
 string_style = 1
 string_glow_color = Color(0.5, 0.9, 0.3, 0.35)
 string_glow_width = 1.8
+draw_time = 0.8
 color = 1
 ability = SubResource("Resource_i2jkr")
 tiers = Array[Object]([SubResource("Resource_bgaaw"), SubResource("Resource_qxfns"), SubResource("Resource_gorgn"), SubResource("Resource_h4v1l")])

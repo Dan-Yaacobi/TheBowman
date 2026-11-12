@@ -76,7 +76,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("1_data")
 display_name = "Riftbow"
-draw_time = 0.8
 texture = ExtResource("6_tex")
 equipped_texture = ExtResource("6_tex")
 dropped_scale = 0.391
@@ -86,6 +85,7 @@ string_color = Color(0.95, 0.4, 1, 1)
 string_style = 2
 string_glow_color = Color(0.6, 0.2, 1, 0.55)
 string_glow_width = 2.4
+draw_time = 0.8
 color = 1
 ability = SubResource("Resource_ability")
 tiers = Array[Object]([SubResource("Resource_t0"), SubResource("Resource_t1"), SubResource("Resource_t2"), SubResource("Resource_t3")])

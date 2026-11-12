@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="13_npjie"]
 [ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="14_7t2hb"]
 [ext_resource type="PackedScene" uid="uid://bfv1vlm08klwk" path="res://NPC/WorldSpirit/WorldSpirit.tscn" id="14_gej64"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="16_5lv0r"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/TargetDummy/TargetDummySite.tscn" id="17_5lv0r"]
+[ext_resource type="PackedScene" uid="uid://l84og620rtdb" path="res://Level/Events/ChestsEvent.tscn" id="17_24r6y"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="17_167x7"]
 [ext_resource type="PackedScene" uid="uid://bvmhxaunilahd" path="res://Objects/Constructs/UpgradeAltar/AltarSite.tscn" id="17_guwyo"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/BlacksmithSite.tscn" id="20_smith"]
@@ -41,7 +43,7 @@ position = Vector2(486, 78)
 use_fixed_frame = true
 fixed_frame_index = 4
 
-[node name="TargetDummySite" parent="Islands/Island" instance=ExtResource("17_5lv0r")]
+[node name="TargetDummySite" parent="Islands/Island" unique_id=507476458 instance=ExtResource("17_5lv0r")]
 position = Vector2(-1, -18)
 
 [node name="Island3" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
@@ -147,3 +149,7 @@ position = Vector2(386, 68)
 
 [node name="DisenchantTableSite" parent="." unique_id=140269765 instance=ExtResource("21_disenchant")]
 position = Vector2(469, 151)
+
+[node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("16_5lv0r")]
+position = Vector2(248, 86)
+event_scene = ExtResource("17_24r6y")
