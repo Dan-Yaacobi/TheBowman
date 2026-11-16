@@ -115,7 +115,7 @@ The goal is a game that is **finished enough**: a complete, winnable loop. Anyth
 
 **The game is finished when:**
 - **A full run is winnable.** 3 biomes × 3 rifts, a wizard boss per biome, then the Tower climb and the final wizard. Killing him triggers the win.
-- **The Tower:** a hand-built ascending scene. A jumping challenge with hazards and traps rather than enemies, ending in the final boss room.
+- **The Tower:** a hand-built ascending scene. A jumping challenge with hazards and traps rather than enemies, with a cleric offering healing and an extra heart for a price, ending in the final boss room. No extra reward. Full design **[OPEN]**.
 - **Final boss:** the final wizard (see `Content to build.txt`). Ending: right before he dies, he portals out.
 - **Full enemy roster per biome** (Section 9): every enemy designed, working and sprited.
 - **Story:** delivered in fragments, ending at the final boss. Gaps are fine.

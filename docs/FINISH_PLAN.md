@@ -7,9 +7,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 ---
 
 ## Open decisions
-- [ ] **Tower reward:** keep a reward before the final room (e.g. a pick-1-of-3 at the top), or none?
-- [ ] **Tower falls:** a pure jumping challenge with normal fall rules (lose a heart each fall) can drain hearts before the final boss. Options: checkpoints on ledges, a heal at the top, or falls in the Tower cost no heart (would need a Design Rule 2 exception).
-- [ ] **Tower hazards:** which traps (design round).
+- [ ] **Tower design:** layout, hazards and traps, and how falls work there. Left open for now.
 
 ## S
 - [ ] Prune `fixes and bugs.txt` down to what's still open.
@@ -17,6 +15,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [ ] Hell bird: eggs pass through islands and scorch each island's top for 3–4s (one patch per island).
 - [ ] Win plumbing: emit `EventBus.run_won`, win screen, credits, return to hub. Use a placeholder trigger until the final boss exists.
 - [ ] Hub flow after the hell boss: its portal leads to the Tower instead of another rift.
+- [ ] Cleric in the Tower: place the existing `Cleric` NPC (extra heart for coins) partway up. If a separate heal-for-a-price option is wanted, that's a small addition to `cleric.gd`.
 
 ## M
 - [ ] Flaming skull sniper.
