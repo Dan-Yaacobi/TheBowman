@@ -1,0 +1,46 @@
+# Finish Plan
+
+Everything left before the game counts as finished (see GDD §5 Definition of Finished). Ordered from least to most effort. Tick items off as they land.
+
+**Effort:** S = a few hours · M = 1–2 days · L = several days · XL = a week or more
+
+---
+
+## Open decisions
+- [ ] **Tower reward:** keep a reward before the final room (e.g. a pick-1-of-3 at the top), or none?
+- [ ] **Tower falls:** a pure jumping challenge with normal fall rules (lose a heart each fall) can drain hearts before the final boss. Options: checkpoints on ledges, a heal at the top, or falls in the Tower cost no heart (would need a Design Rule 2 exception).
+- [ ] **Tower hazards:** which traps (design round).
+
+## S
+- [ ] Prune `fixes and bugs.txt` down to what's still open.
+- [ ] Hail cloud rework: lagged follow, slowing hail, telegraphed freeze strike.
+- [ ] Hell bird: eggs pass through islands and scorch each island's top for 3–4s (one patch per island).
+- [ ] Win plumbing: emit `EventBus.run_won`, win screen, credits, return to hub. Use a placeholder trigger until the final boss exists.
+- [ ] Hub flow after the hell boss: its portal leads to the Tower instead of another rift.
+
+## M
+- [ ] Flaming skull sniper.
+- [ ] Pine tree (sets up the rooted-turret pattern).
+- [ ] Obsidian spire (reuses the turret pattern).
+- [ ] Snowflake swarm.
+- [ ] Ending text (he portals out) and batch 8 artifacts placed in the Tower.
+- [ ] Music: Tower and final boss.
+
+## L
+- [ ] Imps (grab and drag). First enemy that moves the player; fallback is kamikaze embers.
+- [ ] Tower scene: hand-built ascending climb with hazards and traps, ending at the final room.
+- [ ] Art batch: sprites and animations for the frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch.
+
+## XL
+- [ ] Final wizard boss: rotates between two elemental portals reusing earlier wizards' abilities; each phase change uses a chaos portal that pulls everything in and rebuilds the islands in a new, smaller layout. Arena, phases, sprite.
+- [ ] Full-run playthrough and balance, rift 1 to the win (last; needs everything above).
+- [ ] 1.0 release on itch.
+
+## Dependencies
+- Win plumbing is only complete once the final boss exists.
+- The batch 8 artifacts need the Tower scene.
+- Art can run alongside everything else.
+- The full-run playthrough is always last.
+
+## Not in scope (post-finish)
+Controller support, new items, an unlock for winning, challenge mode, more biomes, online saves.

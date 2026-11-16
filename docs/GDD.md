@@ -73,9 +73,9 @@ Read threats → reposition → draw → release at the right moment. When somet
 
 ### Run (one attempt)
 Start in the hub → enter a rift → traverse islands, fight, find chests and an event portal → reach the exit portal → next rift.
-- **3 rifts per biome**, boss at the end of each biome. **[DRAFT]**
-- **5 bosses** total; the 5th is the final wizard boss. Killing it wins the run. (~15 rifts) **[DRAFT]**
-- Bosses are drawn from a pool. The same boss never appears twice in one run.
+- **3 biomes** (dirt, snow, hell), **3 rifts each**, a wizard boss at the end of each biome (Earth, Frost, Fire).
+- After the hell boss: **the Tower**, a hand-built climb (not a biome) up to the final wizard's room.
+- **Killing the final wizard wins the run.** Winning is the finish line: win screen, credits, back to the hub. Nothing unlocks for now.
 
 ### Meta (across runs)
 Resources collected during runs are kept, even on death → spent in the hub on buildings, stat upgrades and crafting → future runs start stronger and with more options.
@@ -109,21 +109,18 @@ Hard constraints. Every new feature must respect these unless the rule itself is
 
 ---
 
-## 5. Definition of Finished [DRAFT]
+## 5. Definition of Finished
 
-The goal is a game that is **finished enough**: a complete, winnable loop with enough content to be worth replaying. Not every idea, not every gap filled. Anything not on this list is post-finish.
+The goal is a game that is **finished enough**: a complete, winnable loop. Anything not on this list is post-finish. Equipment and meta progression are already complete: **no new items**.
 
 **The game is finished when:**
-- **A full run is winnable.** ~15 rifts across biomes (3 per biome), a boss at the end of each biome, and killing the final wizard boss wins.
-- **Bosses:** 5 total, drawn from a pool, the 5th being the final wizard.
-- **Hub:** 3 buildings working end to end: the upgrade altar (with its milestone abilities), the quest board, and the blacksmith (known recipes → craft one starting item for the next run). Buildings appear in the hub as unbuilt sites and are paid for to build. Recipes come from schematics handed to the guide (see Crafting below).
-- **Equipment:** a pool somewhat bigger than today's, enough that runs feel different.
-- **Enemies:** a few more than today, enough that each biome has its own roster.
-- **Events:** at least the ones already spawning, each giving real choices and rewards.
-- **Story:** delivered in fragments, with an ending at the final boss. Gaps are fine.
-- **One consistent UI look** across all menus.
+- **A full run is winnable.** 3 biomes × 3 rifts, a wizard boss per biome, then the Tower climb and the final wizard. Killing him triggers the win.
+- **The Tower:** a hand-built ascending scene. A jumping challenge with hazards and traps rather than enemies, ending in the final boss room.
+- **Final boss:** the final wizard (see `Content to build.txt`). Ending: right before he dies, he portals out.
+- **Full enemy roster per biome** (Section 9): every enemy designed, working and sprited.
+- **Story:** delivered in fragments, ending at the final boss. Gaps are fine.
 
-**Not required to be finished:** challenge mode after winning, online saves, every biome on the planned list, every bow idea, full answers to the story's open questions.
+**Not required to be finished:** controller support, new items, challenge mode after winning, online saves, an unlock or reward for winning, more biomes, full answers to the story's open questions.
 
 **Rule for agents:** if a task isn't on the "finished" list and isn't a fix to something on it, ask before building it.
 
@@ -209,12 +206,39 @@ Gaps are acceptable. The story doesn't need to explain everything for the game t
 
 ---
 
-## 9. Sections still to write
+## 9. Enemy Rosters
+
+Each biome has the same five roles where possible. Exported values are placeholders.
+
+### Dirt (done)
+- **Rock golem:** walks toward you, melee hit with knockback.
+- **Bird:** patrols left and right overhead, drops eggs on a timer (not aimed).
+- **Shooter apple:** shoots at you.
+- **Rammer apple:** rams you.
+- **Splitter apple:** rams like the rammer but weaker, splits on death.
+
+### Snow
+- **Frost orb:** mobile aimed shooter, protected by icicle shields that must be broken first. (exists)
+- **Hail cloud:** follows you overhead with a slight lag; light hail that slows on hit, plus a telegraphed freeze strike. (exists, needs rework)
+- **Frost golem:** rock golem reskin, melee knockback. (needs art)
+- **Pine tree:** rooted on an island, grows arms when you're near and throws pinecones at you. (to build)
+- **Snowflake swarm:** 4–6 flakes orbiting a shared center; one at a time winds up and rams in a straight line toward you while the rest keep orbiting; shatters after ramming, one-hit kills. (to build)
+
+### Hell
+- **Flaming skull (sniper):** keeps its distance, shows a lock-on line toward you that tracks, then freezes for the last ~0.3s; fires one fast bolt with strong knockback. A perfect-shot hit during the lock-on cancels it. (to build; exists as an apple variant)
+- **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (to build on the bird)
+- **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
+- **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Glows as it charges, then bursts a ring of shards in every direction. (to build)
+- **Imps (fodder):** a group of 3 that rushes you together, one-hit kills. An imp that reaches you latches on and drags you toward the nearest edge; more imps, faster drag. A sword swing or dash shakes them off. Fallback if it feels bad: kamikaze embers. (to build)
+
+---
+
+## 10. Sections still to write
 
 - Player: controls, movement values, health, sword, dash
 - Combat: damage model, knockback, debuffs and DoTs
 - Equipment: slots, bows, quivers, rings, rarity, minor abilities, element identities
-- Enemies: roles, roster per biome, ground vs. flying, elites
+- Enemies: ground vs. flying, elites
 - Bosses and arenas
 - World: rift generation, biomes, chunks, side paths
 - Events: framework, challenge shrine, others (Golden Apple is in section 8)
