@@ -4,8 +4,10 @@ class_name AppleRamState extends EnemyState
 ## charges along that line, and recoils away on a hit. Only used when stats.can_ram is on.
 ## The line tracks the player, then locks for the last aim_lock_time of the windup:
 ## stepping off the locked line dodges the charge.
+## Chains (the flaming skull): ram_count rams in a row, each with its own windup and line,
+## then optionally dizzy for dizzy_time before seeking again.
 
-enum Phase { WINDUP, CHARGE, RECOIL }
+enum Phase { WINDUP, CHARGE, RECOIL, DIZZY }
 
 const ATTACK_ANIMATION: StringName = &"Attack"
 const PLAYER_COLLISION_LAYER: int = 1
@@ -29,6 +31,17 @@ const PLAYER_COLLISION_LAYER: int = 1
 @export var recoil_time: float = 0.35
 ## Time after a ram ends before the next one can start.
 @export var cooldown: float = 1.5
+@export_group("Chain")
+## Rams in a row before going back to seeking.
+@export_range(1, 5) var ram_count: int = 1
+## Dizzy (stays in place, open to hits) after the last ram. 0 = no dizzy.
+@export var dizzy_time: float = 0.0
+## Off: hits still deal damage but don't flinch the enemy out of the chain.
+@export var interruptible: bool = true
+## Placeholder dizzy look until there's art: the sprite wobbles side to side.
+@export var dizzy_wobble_angle: float = 0.35
+@export var dizzy_wobble_speed: float = 12.0
+@export_group("")
 
 @onready var seek: AppleSeekState = $"../Seek"
 
@@ -39,6 +52,7 @@ var _cooldown_left: float = 0.0
 var _cancelled: bool = false
 var _aim_locked: bool = false
 var _line: Line2D
+var _rams_left: int = 0
 
 func _ready() -> void:
 	_line = Line2D.new()
@@ -66,17 +80,17 @@ func Enter() -> void:
 	_cancelled = _cooldown_left > 0.0
 	if _cancelled:
 		return
-	_direction = enemy.calculate_direction_to_player()
-	_aim_locked = false
-	_set_phase(Phase.WINDUP, windup_time)
-	enemy.animation_player.play(ATTACK_ANIMATION)
-	_line.visible = true
-	_update_line()
+	_rams_left = ram_count
+	_start_windup()
 
 func Exit() -> void:
 	_cooldown_left = cooldown
 	_line.visible = false
+	enemy.sprite.rotation = 0.0
 	_set_body_blocks_player(true)
+
+func blocks_flinch() -> bool:
+	return not interruptible
 
 func Physics(delta: float) -> EnemyState:
 	if _cancelled:
@@ -101,12 +115,46 @@ func Physics(delta: float) -> EnemyState:
 			if _is_touching_player():
 				_start_recoil()
 			elif _phase_time_left <= 0.0:
-				return seek
+				return _end_ram()
 		Phase.RECOIL:
 			enemy.velocity = -_direction * recoil_speed * t
 			if _phase_time_left <= 0.0:
+				return _end_ram()
+		Phase.DIZZY:
+			_apply_knockback(delta)
+			enemy.sprite.rotation = sin(_phase_time_left * dizzy_wobble_speed) * dizzy_wobble_angle
+			if _phase_time_left <= 0.0:
 				return seek
 	return null
+
+func _start_windup() -> void:
+	_direction = enemy.calculate_direction_to_player()
+	_aim_locked = false
+	_set_phase(Phase.WINDUP, windup_time)
+	enemy.animation_player.play(ATTACK_ANIMATION)
+	_line.visible = true
+	_update_line()
+
+## One ram finished: next ram in the chain, then dizzy if set, else back to seeking.
+func _end_ram() -> EnemyState:
+	_rams_left -= 1
+	_set_body_blocks_player(true)
+	if _rams_left > 0:
+		_start_windup()
+		return null
+	if dizzy_time > 0.0:
+		enemy.velocity = Vector2.ZERO
+		_set_phase(Phase.DIZZY, dizzy_time)
+		return null
+	return seek
+
+## Hits while dizzy still push it around, the same way seeking does.
+func _apply_knockback(delta: float) -> void:
+	enemy.knockback_velocity = enemy.knockback_velocity.lerp(Vector2.ZERO, enemy.stats.knockback_decay * delta * 60.0)
+	if enemy.knockback_velocity.length() > enemy.stats.knockback_threshold:
+		enemy.velocity = enemy.knockback_velocity
+	else:
+		enemy.velocity = Vector2.ZERO
 
 ## Runs from the enemy along the charge path, as long as the charge can travel.
 ## Fades in over the windup and flashes when the aim locks.
@@ -131,6 +179,8 @@ func _current_phase_duration() -> float:
 			return windup_time
 		Phase.CHARGE:
 			return max_charge_time
+		Phase.DIZZY:
+			return dizzy_time
 	return recoil_time
 
 func _on_hurt_box_successful_hit(_hurt_box: HurtBox, _hit_box: Area2D, _result: DamageResult) -> void:

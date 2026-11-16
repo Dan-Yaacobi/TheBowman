@@ -225,7 +225,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Snowflake swarm:** 4–6 flakes orbiting a shared center; one at a time winds up and rams in a straight line toward you while the rest keep orbiting; shatters after ramming, one-hit kills. (to build)
 
 ### Hell
-- **Flaming skull (rammer):** a buffed apple ram. Rams 3 times in a row from farther away, faster and with much stronger knockback; each ram shows the same tracking-then-locked line, all the same length. Not interrupted by hits. After the third ram it's dizzy for ~1.5s and open to hits. (to build; exists as an apple variant)
+- **Flaming skull (rammer):** a buffed apple ram. Rams 3 times in a row from farther away, faster and with much stronger knockback; each ram shows the same tracking-then-locked line, all the same length. Not interrupted by hits. After the third ram it's dizzy for ~1.5s and open to hits. (done; needs art)
 - **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (done; art fine)
 - **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
 - **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Glows as it charges, then bursts a ring of shards in every direction. (to build)

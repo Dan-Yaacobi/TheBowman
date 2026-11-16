@@ -160,8 +160,11 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	elif _causes_flinch(_hurt_box):
 		enter_damaged_state()
 
-## Only hits that push the enemy flinch it. DoT ticks and zero-knockback hits (e.g. Hanzo) don't.
+## Only hits that push the enemy flinch it. DoT ticks and zero-knockback hits (e.g. Hanzo) don't,
+## and neither does anything while the current state blocks flinching (e.g. the skull's ram chain).
 func _causes_flinch(_hurt_box: HurtBox) -> bool:
+	if state_machine.curr_state and state_machine.curr_state.blocks_flinch():
+		return false
 	return _hurt_box != null and _hurt_box.knockback_power > 0.0
 
 func handle_health_bar(_dmg: int = 0) -> void:
@@ -258,7 +261,9 @@ func _wire_hit_effects(target_hurt_box: HurtBox, projectile: bool = false) -> vo
 			continue
 		if not projectile and not effect.applies_to_melee:
 			continue
-		target_hurt_box.add_effect(effect.apply)
+		# HurtBox calls after-effects with (target, hurt_box, result); hit effects only need the target
+		target_hurt_box.add_after_effect(func(target: GameEntity, _hurt_box: Node2D, _result: DamageResult) -> void:
+			effect.apply(target))
 		
 func stun(_electric: bool = false) -> void:
 	if stunned or is_dead:

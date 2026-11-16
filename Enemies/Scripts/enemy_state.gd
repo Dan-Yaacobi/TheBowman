@@ -23,4 +23,8 @@ func Process(_delta: float) -> EnemyState:
 #what happens during _physics_process update in this state
 func Physics(_delta: float) -> EnemyState:
 	return null
+
+## True while hits should not flinch the enemy out of this state (damage still lands).
+func blocks_flinch() -> bool:
+	return false
 	
