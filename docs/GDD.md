@@ -214,7 +214,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Rock golem:** walks toward you, melee hit with knockback.
 - **Bird:** patrols left and right overhead, drops eggs on a timer (not aimed).
 - **Shooter apple:** shoots at you.
-- **Rammer apple:** rams you.
+- **Rammer apple:** rams you. A line shows the charge path: it tracks you, then locks just before the charge.
 - **Splitter apple:** rams like the rammer but weaker, splits on death.
 
 ### Snow
@@ -225,7 +225,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Snowflake swarm:** 4–6 flakes orbiting a shared center; one at a time winds up and rams in a straight line toward you while the rest keep orbiting; shatters after ramming, one-hit kills. (to build)
 
 ### Hell
-- **Flaming skull (sniper):** keeps its distance, shows a lock-on line toward you that tracks, then freezes for the last ~0.3s; fires one fast bolt with strong knockback. A perfect-shot hit during the lock-on cancels it. (to build; exists as an apple variant)
+- **Flaming skull (rammer):** a buffed apple ram. Rams 3 times in a row from farther away, faster and with much stronger knockback; each ram shows the same tracking-then-locked line, all the same length. Not interrupted by hits. After the third ram it's dizzy for ~1.5s and open to hits. (to build; exists as an apple variant)
 - **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (done; art fine)
 - **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
 - **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Glows as it charges, then bursts a ring of shards in every direction. (to build)
