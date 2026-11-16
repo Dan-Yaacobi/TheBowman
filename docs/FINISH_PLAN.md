@@ -11,7 +11,6 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 
 ## S
 - [ ] Prune `fixes and bugs.txt` down to what's still open.
-- [ ] Hail cloud rework: lagged follow, slowing hail, telegraphed freeze strike.
 - [ ] Hell bird: eggs pass through islands and scorch each island's top for 3–4s (one patch per island).
 - [ ] Win plumbing: emit `EventBus.run_won`, win screen, credits, return to hub. Use a placeholder trigger until the final boss exists.
 - [ ] Hub flow after the hell boss: its portal leads to the Tower instead of another rift.
@@ -28,7 +27,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 ## L
 - [ ] Imps (grab and drag). First enemy that moves the player; fallback is kamikaze embers.
 - [ ] Tower scene: hand-built ascending climb with hazards and traps, ending at the final room.
-- [ ] Art batch: sprites and animations for the frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch.
+- [ ] Art batch: sprites and animations for the hail cloud (art fix only), frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch.
 
 ## XL
 - [ ] Final wizard boss: rotates between two elemental portals reusing earlier wizards' abilities; each phase change uses a chaos portal that pulls everything in and rebuilds the islands in a new, smaller layout. Arena, phases, sprite.
