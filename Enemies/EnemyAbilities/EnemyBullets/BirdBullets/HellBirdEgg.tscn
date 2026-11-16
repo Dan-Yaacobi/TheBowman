@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://bftpdwkjw3s0r" path="res://Enemies/WizardBoss/FireWizard/BurningIslandEffect.tscn" id="2_burn"]
+
+[node name="HellBirdEgg" instance=ExtResource("1_base")]
+island_burn_scene = ExtResource("2_burn")

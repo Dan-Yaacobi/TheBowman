@@ -226,7 +226,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 
 ### Hell
 - **Flaming skull (sniper):** keeps its distance, shows a lock-on line toward you that tracks, then freezes for the last ~0.3s; fires one fast bolt with strong knockback. A perfect-shot hit during the lock-on cancels it. (to build; exists as an apple variant)
-- **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (to build on the bird)
+- **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (done; art fine)
 - **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
 - **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Glows as it charges, then bursts a ring of shards in every direction. (to build)
 - **Imps (fodder):** a group of 3 that rushes you together, one-hit kills. An imp that reaches you latches on and drags you toward the nearest edge; more imps, faster drag. A sword swing or dash shakes them off. Fallback if it feels bad: kamikaze embers. (to build)
