@@ -12,9 +12,6 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 ## S
 - [ ] Prune `fixes and bugs.txt` down to what's still open.
 - [x] Hell bird: eggs pass through islands and scorch each island's top for 3–4s (one patch per island).
-- [ ] Win plumbing: emit `EventBus.run_won`, win screen, credits, return to hub. Use a placeholder trigger until the final boss exists.
-- [ ] Hub flow after the hell boss: its portal leads to the Tower instead of another rift.
-- [ ] Cleric in the Tower: place the existing `Cleric` NPC (extra heart for coins) partway up. If a separate heal-for-a-price option is wanted, that's a small addition to `cleric.gd`.
 
 ## M
 - [ ] Flaming skull sniper.
@@ -34,8 +31,13 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [ ] Full-run playthrough and balance, rift 1 to the win (last; needs everything above).
 - [ ] 1.0 release on itch.
 
+## Built with the Tower and final boss
+Small, but only makes sense once those exist.
+- [ ] Hell boss portal leads to the Tower instead of another rift.
+- [ ] Cleric placed in the Tower (existing `Cleric` NPC, extra heart for coins). A heal-for-a-price option would be a small addition to `cleric.gd`.
+- [ ] Win: killing the final wizard emits `EventBus.run_won`, then win screen, credits, back to the hub.
+
 ## Dependencies
-- Win plumbing is only complete once the final boss exists.
 - The batch 8 artifacts need the Tower scene.
 - Art can run alongside everything else.
 - The full-run playthrough is always last.
