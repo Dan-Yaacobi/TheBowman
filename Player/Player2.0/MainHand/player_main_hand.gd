@@ -73,6 +73,8 @@ var overcharge_enabled: bool = false
 var overcharge: float = 0.0
 ## Move speed multiplier while overcharging.
 var overcharge_move_mult: float = 1.0
+## The overcharge fill takes this many times the normal draw time (set by Longing).
+var overcharge_time_mult: float = 1.0
 ## Charged shot: the next draw fills instantly and fires perfect. Shared by every source
 ## (Telegraphed Shot, Clean Kill, Riposte...): use charge_perfect_shot / clear_perfect_shot /
 ## has_perfect_shot, never this directly. Shown on the bow (glow), the nocked arrow (gold) and

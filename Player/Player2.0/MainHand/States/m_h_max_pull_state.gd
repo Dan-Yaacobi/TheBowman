@@ -7,7 +7,8 @@ class_name MaxPullMainHandState extends MainHandState
 
 var hold_time: float = 0
 var tired: bool = false
-## Seconds the overcharge fill takes (same as the first draw at the current pull speed).
+## Seconds the overcharge fill takes: the first draw's time at the current pull speed
+## x overcharge_time_mult.
 var overcharge_duration: float = 1.0
 signal max_pull
 signal overcharged
@@ -22,7 +23,8 @@ func Enter() -> void:
 	#perfect_aim_particles.emitting = true
 	hold_time = 0
 	entity.overcharge = 0.0
-	overcharge_duration = entity.animation_player.get_animation("Pull").length / maxf(PlayerManager.player.get_pull_speed(), 0.01)
+	overcharge_duration = entity.animation_player.get_animation("Pull").length / maxf(PlayerManager.player.get_pull_speed(), 0.01) \
+		* entity.overcharge_time_mult
 	max_pull.emit()
 	entity.animation_player.play("Max Pull")
 	# With overcharge, tiredness waits until the second fill is full.

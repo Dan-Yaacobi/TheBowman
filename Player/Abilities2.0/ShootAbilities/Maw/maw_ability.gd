@@ -171,7 +171,34 @@ func get_tooltip() -> String:
 	var next: String = ""
 	if _stage < Stage.AWAKENED:
 		next = ", next stage at %d" % stage_thresholds[_stage]
-	return "Devours souls of the slain and grows stronger. %s (%d souls%s)" % [STAGE_NAMES[_stage], souls, next]
+	var lines: PackedStringArray = PackedStringArray()
+	lines.append("Devours souls of the slain and grows stronger. %s (%d souls%s)" % [STAGE_NAMES[_stage], souls, next])
+	for stage_index: int in Stage.size():
+		var marker: String = "> " if stage_index == _stage else "   "
+		lines.append("%s%s (%d): %s" % [marker, STAGE_NAMES[stage_index], _stage_threshold(stage_index), _stage_text(stage_index)])
+	return "\n".join(lines)
+
+## Souls needed to reach a stage (Starving = 0).
+func _stage_threshold(stage_index: int) -> int:
+	return 0 if stage_index == 0 else stage_thresholds[mini(stage_index - 1, stage_thresholds.size() - 1)]
+
+## What a stage adds over the one before, with the current numbers
+## (positive bonuses scaled like the ability itself).
+func _stage_text(stage_index: int) -> String:
+	var damage: float = stage_damage[mini(stage_index, stage_damage.size() - 1)]
+	if damage > 0.0:
+		damage *= power()
+	var parts: PackedStringArray = PackedStringArray()
+	parts.append("%+d%% damage" % roundi(damage * 100.0) if not is_zero_approx(damage) else "normal damage")
+	var bites: int = bite_targets[mini(stage_index, bite_targets.size() - 1)]
+	var bites_before: int = 0 if stage_index == 0 else bite_targets[mini(stage_index - 1, bite_targets.size() - 1)]
+	if bites > 0 and bites_before == 0:
+		parts.append("perfect kills bite the nearest enemy for %d%% of the hit" % roundi(bite_share * power() * 100.0))
+	elif bites > bites_before:
+		parts.append("bites hit %d enemies" % bites)
+	if stage_index == Stage.AWAKENED:
+		parts.append("perfect hits devour enemies under %d%% HP" % roundi(devour_threshold * 100.0))
+	return ", ".join(parts)
 
 func get_tooltip_color() -> Color:
 	return STAGE_COLORS[_stage]

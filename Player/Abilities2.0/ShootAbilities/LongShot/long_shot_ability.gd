@@ -1,10 +1,15 @@
 class_name LongShotAbility extends PlayerAbility
-## Arrows deal more damage the farther they fly before hitting, up to +max_bonus at full_range.
-## The arrow brightens and trails sparks as it gains damage.
+## Arrows that barely travel deal less damage; past full_damage_range they deal full damage,
+## then gain more the farther they fly, up to +max_bonus at max_range.
+## The arrow brightens and trails sparks as it gains the bonus.
 
+## Damage lost at point blank (0.4 = -40%), easing to none at full_damage_range.
+@export var short_range_penalty: float = 0.4
+## Flight distance (pixels) where arrows reach full damage and the bonus starts.
+@export var full_damage_range: float = 100.0
 @export var max_bonus: float = 0.6
 ## Flight distance (pixels) for the full bonus.
-@export var full_range: float = 220.0
+@export var max_range: float = 300.0
 
 var _trail: LongShotTrail
 
@@ -27,12 +32,21 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	var tracker: LongShotTracker = arrow.get_node_or_null(LongShotTracker.NODE_NAME) as LongShotTracker
 	if tracker == null:
 		return
-	var bonus: float = tracker.charge() * max_bonus * power()
-	if bonus > 0.0:
+	var bonus: float = damage_bonus(tracker.travelled)
+	if not is_zero_approx(bonus):
 		MinorHitHelpers.add_damage_for_hit(hurt_box, bonus)
 
+## Damage change for an arrow that flew this far: negative up close, 0 at full_damage_range,
+## rising to +max_bonus (scaled by color level) at max_range.
+func damage_bonus(distance: float) -> float:
+	if distance < full_damage_range:
+		return -short_range_penalty * (1.0 - distance / maxf(full_damage_range, 1.0))
+	var t: float = (distance - full_damage_range) / maxf(max_range - full_damage_range, 1.0)
+	return clampf(t, 0.0, 1.0) * max_bonus * power()
+
 func get_tooltip() -> String:
-	return "Arrows deal up to +%d%% damage the farther they fly" % roundi(max_bonus * power() * 100.0)
+	return "Close shots deal up to %d%% less damage. Past mid range, arrows deal up to +%d%% damage the farther they fly" % [
+		roundi(short_range_penalty * 100.0), roundi(max_bonus * power() * 100.0)]
 
 func get_tooltip_color() -> Color:
 	return Color(1.0, 0.85, 0.45)
@@ -49,14 +63,16 @@ class LongShotTrail extends ArrowEffect:
 			return
 		var tracker: LongShotTracker = LongShotTracker.new()
 		tracker.name = LongShotTracker.NODE_NAME
-		tracker.full_range = ability.full_range
+		tracker.full_damage_range = ability.full_damage_range
+		tracker.max_range = ability.max_range
 		_arrow.add_child(tracker)
 
 ## Counts how far its arrow has flown since release, and brightens the arrow with it.
 class LongShotTracker extends Node2D:
 	const NODE_NAME: String = "LongShotTracker"
 	const BRIGHT: Color = Color(1.7, 1.45, 0.8)
-	var full_range: float = 220.0
+	var full_damage_range: float = 100.0
+	var max_range: float = 300.0
 	var travelled: float = 0.0
 	var _last: Vector2
 	var _started: bool = false
@@ -78,8 +94,9 @@ class LongShotTracker extends Node2D:
 		_sparks.color = Color(1.0, 0.85, 0.45)
 		add_child(_sparks)
 
+	## 0 until full damage range, 1 at max range (drives the glow).
 	func charge() -> float:
-		return clampf(travelled / maxf(full_range, 1.0), 0.0, 1.0)
+		return clampf((travelled - full_damage_range) / maxf(max_range - full_damage_range, 1.0), 0.0, 1.0)
 
 	func _physics_process(_delta: float) -> void:
 		var arrow: Arrow = get_parent() as Arrow

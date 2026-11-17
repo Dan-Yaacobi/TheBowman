@@ -1,5 +1,6 @@
 class_name LongingAbility extends PlayerShootAbility
-## One overcharge stage: after a full draw, keep holding while a second fill (as long as the first draw) builds.
+## One overcharge stage: after a full draw, keep holding while a second fill builds
+## (overcharge_time_mult x the normal draw time).
 ## Releasing after it fills fires an overcharged shot. Moving is slower while holding.
 
 @export var overcharge_damage_mult: float = 1.8
@@ -7,18 +8,22 @@ class_name LongingAbility extends PlayerShootAbility
 @export var overcharge_scale_mult: float = 1.5
 ## Move speed while holding past a full draw.
 @export var hold_move_mult: float = 0.55
+## The overcharge fill takes this many times your normal draw time.
+@export var overcharge_time_mult: float = 2.0
 const OVERCHARGE_TINT: Color = Color(0.82, 0.62, 1.0)
 
 func on_equipped() -> void:
 	var main_hand: PlayerMainHand = PlayerManager.player.main_hand
 	main_hand.overcharge_enabled = true
 	main_hand.overcharge_move_mult = hold_move_mult
+	main_hand.overcharge_time_mult = overcharge_time_mult
 
 func on_unequipped() -> void:
 	var main_hand: PlayerMainHand = PlayerManager.player.main_hand
 	main_hand.overcharge_enabled = false
 	main_hand.overcharge = 0.0
 	main_hand.overcharge_move_mult = 1.0
+	main_hand.overcharge_time_mult = 1.0
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
 	var fired: Arrow = _activator as Arrow

@@ -68,6 +68,7 @@ metadata/_custom_type_script = "uid://ccqmdbs3nwmrv"
 [sub_resource type="Resource" id="Resource_8wiu1"]
 script = ExtResource("10_81c71")
 forced_rarity = 2
+rarity_by_biome = Array[int]([1, 2, 2])
 min_weight = 3
 metadata/_custom_type_script = "uid://c06t2awg17dkp"
 
