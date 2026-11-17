@@ -51,17 +51,14 @@ var _direction: Vector2 = Vector2.ZERO
 var _cooldown_left: float = 0.0
 var _cancelled: bool = false
 var _aim_locked: bool = false
-var _line: Line2D
+var _line: RamTelegraph
 var _rams_left: int = 0
 
 func _ready() -> void:
-	_line = Line2D.new()
-	_line.top_level = true
+	_line = RamTelegraph.new()
 	_line.width = line_width
-	_line.antialiased = false
-	_line.z_index = 1
-	_line.points = PackedVector2Array([Vector2.ZERO, Vector2.ZERO])
-	_line.visible = false
+	_line.aim_color = line_color
+	_line.locked_color = line_locked_color
 	add_child(_line)
 
 func init() -> void:
@@ -85,7 +82,7 @@ func Enter() -> void:
 
 func Exit() -> void:
 	_cooldown_left = cooldown
-	_line.visible = false
+	_line.hide_aim()
 	enemy.sprite.rotation = 0.0
 	_set_body_blocks_player(true)
 
@@ -106,7 +103,7 @@ func Physics(delta: float) -> EnemyState:
 			_update_line()
 			if _phase_time_left <= 0.0:
 				# Charge along the locked line
-				_line.visible = false
+				_line.hide_aim()
 				_set_phase(Phase.CHARGE, max_charge_time)
 				# The body normally bumps the player's body, which stops the hurt box from reaching it
 				_set_body_blocks_player(false)
@@ -132,7 +129,6 @@ func _start_windup() -> void:
 	_aim_locked = false
 	_set_phase(Phase.WINDUP, windup_time)
 	enemy.animation_player.play(ATTACK_ANIMATION)
-	_line.visible = true
 	_update_line()
 
 ## One ram finished: next ram in the chain, then dizzy if set, else back to seeking.
@@ -159,15 +155,8 @@ func _apply_knockback(delta: float) -> void:
 ## Runs from the enemy along the charge path, as long as the charge can travel.
 ## Fades in over the windup and flashes when the aim locks.
 func _update_line() -> void:
-	_line.global_position = enemy.global_position
-	_line.set_point_position(1, _direction * charge_speed * max_charge_time)
-	if _aim_locked:
-		_line.default_color = line_locked_color
-	else:
-		var progress: float = 1.0 - clampf(_phase_time_left / maxf(windup_time, 0.001), 0.0, 1.0)
-		var color: Color = line_color
-		color.a *= progress
-		_line.default_color = color
+	var progress: float = 1.0 - _phase_time_left / maxf(windup_time, 0.001)
+	_line.show_aim(enemy.global_position, _direction, charge_speed * max_charge_time, progress, _aim_locked)
 
 func _set_phase(phase: Phase, duration: float) -> void:
 	_phase = phase

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyEntry" format=3]
+
+[ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_entry"]
+[ext_resource type="PackedScene" path="res://Enemies/SnowflakeSwarm/SnowflakeSwarm.tscn" id="2_scene"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/SnowflakeSwarm/snowflake_swarm.tres" id="3_data"]
+
+[resource]
+script = ExtResource("1_entry")
+scene = ExtResource("2_scene")
+data = ExtResource("3_data")
+cost = 2
+biomes = 2

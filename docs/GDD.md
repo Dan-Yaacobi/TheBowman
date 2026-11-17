@@ -222,7 +222,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Hail cloud:** follows you overhead with a slight lag; light hail that slows on hit, plus a telegraphed freeze strike. (exists; behaviour is final, needs new art)
 - **Frost golem:** rock golem reskin, melee knockback. (needs art)
 - **Pine tree:** rooted on an island. Dormant it looks like a plain pine and is hardened (1 damage per hit, no debuffs). Grows arms when you're near, throws pinecones that lead your movement, and swipes with strong knockback if you come right up to it. Falls asleep again when you leave. (done; needs art)
-- **Snowflake swarm:** 4–6 flakes orbiting a shared center; one at a time winds up and rams in a straight line toward you while the rest keep orbiting; shatters after ramming, one-hit kills. (to build)
+- **Snowflake swarm:** 4–6 flakes orbiting a shared center; one at a time winds up and rams in a straight line toward you while the rest keep orbiting; each ram shows the same tracking-then-locked line as the apples; shatters after ramming, one-hit kills. (done; needs art)
 
 ### Hell
 - **Flaming skull (rammer):** a buffed apple ram. Rams 3 times in a row from farther away, faster and with much stronger knockback; each ram shows the same tracking-then-locked line, all the same length. Not interrupted by hits. After the third ram it's dizzy for ~1.5s and open to hits. (done; needs art)

@@ -19,7 +19,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [x] Pine tree (sets up the rooted-turret pattern). Placeholder art.
 - [x] Obsidian spire (reuses the turret pattern). Placeholder art.
 - [x] Enemy test room: debug-only hub portal, spawn any enemy entry.
-- [ ] Snowflake swarm.
+- [x] Snowflake swarm. Placeholder art.
 - [ ] Difficulty ramp, on two levels:
   - **Across the run:** the first rifts are gentle and each rift is harder than the one before.
   - **Within each rift:** a rift starts easier and gets harder as you go through it (fewer and weaker spawns early, building toward the exit).
