@@ -6,6 +6,10 @@ class_name ImpData extends EnemyData
 @export var rush_speed: float = 160.0
 ## Drag toward the nearest island edge this imp adds while latched (pixels per second)
 @export var drag_speed: float = 60.0
+## Where it holds on, relative to the player's origin (about the head)
+@export var grab_offset: Vector2 = Vector2(0.0, -7.0)
+## Sideways nudge toward the side it came from, so it doesn't cover the face exactly
+@export var grab_side_offset: float = 3.0
 ## After being thrown off (player fell, stunned), flies away this long before rushing again
 @export var recover_time: float = 1.2
 @export var recover_speed: float = 90.0

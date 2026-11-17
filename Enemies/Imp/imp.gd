@@ -49,7 +49,8 @@ func _physics_process(delta: float) -> void:
 
 func _latch(player: Player) -> void:
 	_mode = Mode.LATCHED
-	_latch_offset = (global_position - player.global_position).limit_length(10.0)
+	var side: float = signf(global_position.x - player.global_position.x)
+	_latch_offset = imp_data.grab_offset + Vector2(side * imp_data.grab_side_offset, 0.0)
 	player.add_grab(self, imp_data.drag_speed)
 
 
