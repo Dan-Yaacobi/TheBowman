@@ -37,6 +37,9 @@ var is_dead: bool = false
 var invincible: bool = false
 ## While true, new debuffs are ignored (e.g. a boss's immune phase).
 var debuff_immune: bool = false
+## While true, every hit deals exactly 1 damage and new debuffs and stuns are ignored.
+## Flipped on and off by states (e.g. a dormant pine tree).
+var hardened: bool = false
 var stunned: bool = false
 var captured_by: Node2D
 
@@ -145,6 +148,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 		final_dmg = raw_damage
 	@warning_ignore("narrowing_conversion")
 	final_dmg *= stats.damage_taken_multiplier.value()
+	if hardened:
+		final_dmg = 1
 	current_hp -= roundi(final_dmg)
 	EventBus.enemy_damaged.emit(self, final_dmg)
 	frostbitten_hit()
@@ -213,10 +218,10 @@ func update_animation(_animation: String, _position: float = 0.0) -> void:
 		animation_player.play_section(_animation, _position)
 
 func is_debuff_immune() -> bool:
-	return debuff_immune
+	return debuff_immune or hardened
 
 func can_be_stunned() -> bool:
-	return not stats.stun_immune
+	return not stats.stun_immune and not hardened
 
 ## Checked by player freeze sources before applying the freeze debuff.
 func can_be_frozen() -> bool:
