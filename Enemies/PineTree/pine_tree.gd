@@ -1,9 +1,6 @@
-class_name PineTree extends Enemy
-## Rooted on an island. Dormant it looks like a plain pine and is hardened (1 damage per hit,
-## no debuffs). Grows arms when the player comes close, throws pinecones that lead the player,
-## and swipes anyone who comes right up to it. Never moves.
-
-@export var gravity: float = 600.0
+class_name PineTree extends RootedEnemy
+## Dormant it looks like a plain pine. Grows arms when the player comes close, throws pinecones
+## that lead the player, and swipes anyone who comes right up to it.
 
 @onready var swipe_hurt_box: HurtBox = $SwipeHurtBox
 @onready var _swipe_shape: CollisionShape2D = $SwipeHurtBox/CollisionShape2D
@@ -14,26 +11,24 @@ var pine_data: PineTreeData
 var swipe_cooldown_left: float = 0.0
 
 
-func extra_ready_functions() -> void:
+func setup_rooted() -> void:
 	pine_data = stats as PineTreeData
-	if pine_data == null:
-		push_error("PineTree needs PineTreeData as its stats")
-	animation_player = $Sprite2D/AnimationPlayer
 	swipe_hurt_box.base_damage = pine_data.swipe_damage
 	swipe_hurt_box.knockback_power = pine_data.swipe_knockback
 	swipe_hurt_box.damage_multiplier = hurt_box.damage_multiplier
 	swipe_hurt_box.add_before_effect(_aim_swipe_knockback)
 	set_swipe_active(false)
-	state_machine.Initialize.call_deferred(self)
 
 
-## Only falls onto its island and rides it; knockback never moves it.
 func _physics_process(delta: float) -> void:
+	super(delta)
 	if swipe_cooldown_left > 0.0:
 		swipe_cooldown_left -= delta
-	velocity.x = 0.0
-	velocity.y += gravity * delta
-	move_and_slide()
+
+
+func on_dormant_changed(dormant: bool) -> void:
+	if dormant:
+		set_swipe_active(false)
 
 
 func face_the_player() -> void:

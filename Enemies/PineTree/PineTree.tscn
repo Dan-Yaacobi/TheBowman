@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Enemies/PineTree/pine_tree.gd" id="1_pine"]
 [ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/PineTree/pine_tree.tres" id="2_data"]
 [ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="3_sm"]
-[ext_resource type="Script" path="res://Enemies/PineTree/States/pine_dormant_state.gd" id="4_dormant"]
+[ext_resource type="Script" path="res://Enemies/Scripts/RootedEnemy/rooted_dormant_state.gd" id="4_dormant"]
 [ext_resource type="Script" path="res://Enemies/PineTree/States/pine_wake_state.gd" id="5_wake"]
 [ext_resource type="Script" path="res://Enemies/PineTree/States/pine_attack_state.gd" id="6_attack"]
 [ext_resource type="Script" path="res://Enemies/PineTree/States/pine_swipe_state.gd" id="7_swipe"]

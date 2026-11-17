@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/ObsidianSpire/obsidian_spire.gd" id="1_spire"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/ObsidianSpire/obsidian_spire.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="3_sm"]
+[ext_resource type="Script" path="res://Enemies/Scripts/RootedEnemy/rooted_dormant_state.gd" id="4_dormant"]
+[ext_resource type="Script" path="res://Enemies/ObsidianSpire/States/spire_attack_state.gd" id="5_attack"]
+[ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="6_dead"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="7_debuff"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="8_hurt"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="9_hit"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="10_hitscript"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="11_hp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(14, 32)
+
+[node name="ObsidianSpire" type="CharacterBody2D" node_paths=PackedStringArray("dead_state")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_spire")
+dead_state = NodePath("EnemyStateMachine/Dead")
+stats = ExtResource("2_data")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+offset = Vector2(0, -17)
+
+[node name="BurstPoint" type="Marker2D" parent="."]
+position = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("3_sm")
+
+[node name="Dormant" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("wake_state")]
+script = ExtResource("4_dormant")
+wake_state = NodePath("../Attack")
+
+[node name="Attack" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("sleep_state")]
+script = ExtResource("5_attack")
+sleep_state = NodePath("../Dormant")
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("6_dead")
+
+[node name="DebuffHandler" parent="." instance=ExtResource("7_debuff")]
+
+[node name="HurtBox" parent="." instance=ExtResource("8_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HitBox" parent="." instance=ExtResource("9_hit")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_hitscript")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("11_hp")]
+offset_left = -8.0
+offset_top = -46.0

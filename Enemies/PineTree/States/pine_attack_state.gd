@@ -8,7 +8,6 @@ class_name PineAttackState extends EnemyState
 var pine: PineTree
 var _throw_cooldown_left: float = 0.0
 var _windup_left: float = -1.0
-var _away_time: float = 0.0
 
 
 func init() -> void:
@@ -17,7 +16,6 @@ func init() -> void:
 
 func Enter() -> void:
 	_windup_left = -1.0
-	_away_time = 0.0
 	_throw_cooldown_left = minf(_throw_cooldown_left, pine.pine_data.throw_cooldown * 0.5)
 	pine.animation_player.play(&"Idle")
 
@@ -25,12 +23,8 @@ func Enter() -> void:
 func Physics(delta: float) -> EnemyState:
 	var data: PineTreeData = pine.pine_data
 	pine.face_the_player()
-	if pine.calculate_distance_to_player() > data.sleep_range:
-		_away_time += delta
-		if _away_time >= data.sleep_delay:
-			return sleep_state
-	else:
-		_away_time = 0.0
+	if pine.should_sleep(delta):
+		return sleep_state
 	if pine.swipe_cooldown_left <= 0.0 and pine.is_player_in_swipe_range():
 		return swipe_state
 	if _windup_left >= 0.0:

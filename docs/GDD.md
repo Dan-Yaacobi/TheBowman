@@ -228,7 +228,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Flaming skull (rammer):** a buffed apple ram. Rams 3 times in a row from farther away, faster and with much stronger knockback; each ram shows the same tracking-then-locked line, all the same length. Not interrupted by hits. After the third ram it's dizzy for ~1.5s and open to hits. (done; needs art)
 - **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (done; art fine)
 - **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
-- **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Glows as it charges, then bursts a ring of shards in every direction. (to build)
+- **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Asleep and hardened until you come close. Glows as it charges (1s), then bursts a ring of 10 shards in every direction; every other burst is turned by half a gap so the safe gaps move. (done; needs art)
 - **Imps (fodder):** a group of 3 that rushes you together, one-hit kills. An imp that reaches you latches on and drags you toward the nearest edge; more imps, faster drag. A sword swing or dash shakes them off. Fallback if it feels bad: kamikaze embers. (to build)
 
 ---
