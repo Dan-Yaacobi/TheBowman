@@ -37,8 +37,8 @@ func _on_world_ready() -> void:
 		EventBus.show_active_ability_picker.emit(active_ability_pool)
 	EventBus.entered_rift.emit()
 
-func call_enemy_spawner(level: int, _main_progress: float, chunk_index: int, is_main_path: bool, is_side_path_terminal: bool) -> void:
-	rift_enemy_spawner.spawn_enemy(level, _main_progress, chunk_index, is_main_path, is_side_path_terminal)
+func call_enemy_spawner(level: int, progress: float, is_reward_chunk: bool) -> void:
+	rift_enemy_spawner.spawn_enemy(level, progress, is_reward_chunk)
 
 func extra_exit_world_functions() -> void:
 	loot_manager.unset_up()

@@ -17,11 +17,12 @@ func get_spawn_markers() -> Array:
 	return spawn_markers.get_children()
 	
 func on_player_enter() -> void:
-	if is_main_path and not visited:
-		rift_level.main_path_visited_count += 1
-	if allowed_spawn and not visited:
-		rift_level.summon_enemy(is_main_path, is_side_path_terminal)
+	if visited:
+		return
 	visited = true
+	rift_level.new_chunks_entered += 1
+	if allowed_spawn:
+		rift_level.summon_enemy(is_side_path_terminal)
 	
 func spawn_game_objects() -> void:
 	var amount: int = randi_range(1, islands.size())

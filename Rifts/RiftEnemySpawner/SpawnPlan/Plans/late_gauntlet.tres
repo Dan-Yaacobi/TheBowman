@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpawnPlan" format=3]
+
+[ext_resource type="Script" path="res://Rifts/RiftEnemySpawner/SpawnPlan/spawn_plan.gd" id="1_plan"]
+
+[sub_resource type="Curve" id="Curve_plan"]
+_limits = [0.0, 6.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 4.0, 0, 1, Vector2(0.5, 4), 4.0, 0.0, 1, 1, Vector2(1, 4), 0.0, 0.0, 1, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_plan")
+display_name = "Gauntlet"
+curve = SubResource("Curve_plan")

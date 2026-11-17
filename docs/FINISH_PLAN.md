@@ -20,10 +20,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [x] Obsidian spire (reuses the turret pattern). Placeholder art.
 - [x] Enemy test room: debug-only hub portal, spawn any enemy entry.
 - [x] Snowflake swarm. Placeholder art.
-- [ ] Difficulty ramp, on two levels:
-  - **Across the run:** the first rifts are gentle and each rift is harder than the one before.
-  - **Within each rift:** a rift starts easier and gets harder as you go through it (fewer and weaker spawns early, building toward the exit).
-  The spawner already tracks intensity and progress, so this is likely tuning those curves rather than a new system.
+- [x] Difficulty ramp: hand-made spawn plans (curves of target enemies alive over rift progress), picked per rift from early/mid/late pools by biome. Entering a new chunk (main or side) tops up to the target. Tune the curves in `Rifts/RiftEnemySpawner/SpawnPlan/Plans/`.
 - [ ] Ending text (he portals out) and batch 8 artifacts placed in the Tower.
 - [ ] Music: Tower and final boss.
 
