@@ -2,8 +2,6 @@ class_name RockGolem extends Enemy
 ## Ground enemy that sits on an island looking like a rock.
 ## Wakes when the player gets close or hits it.
 
-## Stat buff id for the dormant damage reduction
-const DORMANT_ARMOR_ID: int = 120
 ## The body sits this many texture pixels left of the frame centre.
 ## The sprite offset is mirrored on flip so the body doesn't jump when turning.
 const BODY_OFFSET_X: float = 5.0
@@ -55,8 +53,7 @@ func extra_ready_functions() -> void:
 	punch_hurt_box.damage_multiplier = hurt_box.damage_multiplier
 	punch_hurt_box.add_before_effect(_aim_punch_knockback)
 	punch_hurt_box.successful_hit.connect(_on_punch_hurt_box_successful_hit)
-	# Deferred so the dormant state's damage reduction is added after
-	# init_damage_modifiers() builds the multiplier stat
+	# Deferred so the first state starts after Enemy._ready has finished setting up
 	state_machine.Initialize.call_deferred(self)
 
 
@@ -280,15 +277,9 @@ func enter_damaged_state() -> void:
 	pass
 
 
-func is_debuff_immune() -> bool:
-	return is_dormant or debuff_immune
-
-
-func can_be_stunned() -> bool:
-	return not is_dormant and not stats.stun_immune
-
-
+## Dormant it's hardened: 1 damage per hit, no debuffs or stuns.
 func set_dormant(_dormant: bool) -> void:
 	is_dormant = _dormant
+	hardened = _dormant
 	# A dormant rock doesn't hurt on touch
 	hurt_box.set_deferred("monitoring", not _dormant)
