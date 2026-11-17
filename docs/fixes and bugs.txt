@@ -4,11 +4,8 @@ getting hurt during swinging cause a visual bug where the sword and its effect a
 
 vases drop too much gold as well as chests, unbalanced compared to the how much the upgrades cost - my issue is i think things should cost less and resources should be less plentiful because each run you have to break like 100+ objects which is too grindy
 
-the maw should show its upgraded abilities
-
 the hornet's nest each shot has like a second of showing the arrow in my hand, also it fires too many arrows and it should be heavier in pull speed, also reduce its damage
 
-the hit targets and kill enemies events still drop epics even on earth biome
 
 
 post-finish:
