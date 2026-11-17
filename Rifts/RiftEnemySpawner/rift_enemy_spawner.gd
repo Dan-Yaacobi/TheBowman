@@ -23,6 +23,10 @@ signal enemy_spawned(enemy: Enemy)
 ## Entries with at least this cost count as heavy (birds, golems): at most one per top-up.
 @export var heavy_cost: int = 3
 
+@export_group("Debug")
+## Debug builds only: a corner readout of the plan, target and enemies alive.
+@export var show_debug_label: bool = true
+
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var is_suspended: bool = false
 ## Rolled but not spawned yet (the 1s gap between spawns)
@@ -32,10 +36,25 @@ var _queued: int = 0
 var _spawned: Array[Enemy] = []
 ## Instance ids of everything this spawner owns, kept after death so split children can be claimed
 var _owned_ids: Dictionary[int, bool] = {}
+var _last_progress: float = 0.0
+var _last_target: int = 0
+var _debug_label: Label
+var _debug_refresh: float = 0.0
 
 
 func _ready() -> void:
 	EventBus.enemy_summoned.connect(_on_event_bus_enemy_summoned)
+	if show_debug_label and OS.is_debug_build():
+		_build_debug_label()
+
+
+func _process(delta: float) -> void:
+	if _debug_label == null:
+		return
+	_debug_refresh -= delta
+	if _debug_refresh <= 0.0:
+		_debug_refresh = 0.25
+		_update_debug_label()
 var _plan: SpawnPlan
 var _plan_level: int = -1
 
@@ -53,6 +72,8 @@ func spawn_enemy(level: int, progress: float, is_reward_chunk: bool) -> void:
 	var alive: int = get_alive_count()
 	if is_reward_chunk:
 		target += reward_chunk_extra
+	_last_progress = progress
+	_last_target = target
 	var count: int = mini(target, max_alive) - alive
 	if count <= 0:
 		return
@@ -137,3 +158,36 @@ func roll_enemies(count: int, level: int) -> Array[EnemyEntry]:
 		heavy_taken = heavy_taken or rolled.cost >= heavy_cost
 		result.append(rolled)
 	return result
+
+
+# --- Debug readout ---
+
+func _build_debug_label() -> void:
+	var layer: CanvasLayer = CanvasLayer.new()
+	layer.layer = 50
+	add_child(layer)
+	_debug_label = Label.new()
+	_debug_label.anchor_left = 1.0
+	_debug_label.anchor_right = 1.0
+	_debug_label.offset_left = -170.0
+	_debug_label.offset_top = 4.0
+	_debug_label.offset_right = -4.0
+	_debug_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_debug_label.add_theme_font_size_override("font_size", 8)
+	_debug_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	_debug_label.add_theme_constant_override("outline_size", 3)
+	_debug_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(_debug_label)
+
+
+func _update_debug_label() -> void:
+	var plan_name: String = _plan.display_name if _plan else "-"
+	var world: GameWorld = get_parent() as GameWorld
+	var in_world: int = 0
+	if world:
+		for enemy: Variant in world.current_enemies:
+			if is_instance_valid(enemy) and not (enemy as Enemy).is_dead:
+				in_world += 1
+	_debug_label.text = "Rift %d  plan: %s\nprogress %.2f  target %d\nspawner alive %d  (queued %d)\nall enemies in rift %d" % [
+		_plan_level, plan_name, _last_progress, _last_target, get_alive_count(), _queued, in_world]
+
