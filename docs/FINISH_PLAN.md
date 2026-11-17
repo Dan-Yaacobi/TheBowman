@@ -10,7 +10,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [ ] **Tower design:** layout, hazards and traps, and how falls work there. Left open for now.
 
 ## S
-- [ ] Prune `fixes and bugs.txt` down to what's still open.
+- [x] Prune `fixes and bugs.txt` down to what's still open.
 - [x] Hell bird: eggs pass through islands and scorch each island's top for 3–4s (one patch per island).
 
 ## M
