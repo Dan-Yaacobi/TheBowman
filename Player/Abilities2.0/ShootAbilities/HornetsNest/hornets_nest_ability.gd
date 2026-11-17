@@ -3,10 +3,12 @@ class_name HornetsNestAbility extends PlayerAbility
 ## time along your current aim. Each deals a share of the perfect hit with no knockback, and each
 ## gives a small recoil. Quiver on-hit effects only trigger once per enemy per burst.
 
-@export var burst_count: int = 8
-@export var burst_duration: float = 0.5
+@export var burst_count: int = 5
+@export var burst_duration: float = 0.3
 ## Damage of each burst arrow as a share of the perfect arrow's.
-@export var damage_share: float = 0.2
+@export var damage_share: float = 0.15
+## Burst arrows appear this far ahead of the hand along the aim, so none sits in the hand.
+@export var spawn_ahead: float = 14.0
 @export var spread_degrees: float = 12.0
 ## Recoil per burst arrow as a share of the bow's normal perfect recoil.
 @export var recoil_share: float = 0.2
@@ -43,7 +45,8 @@ func _burst(burst_damage: int, gates: Array[PlayerAbility]) -> void:
 			break
 		var main_hand: PlayerMainHand = player.main_hand
 		var direction: Vector2 = main_hand.hand_direction.rotated(_random_spread())
-		var arrow: Arrow = main_hand.fire_at(direction, 0.99, main_hand.where_to_hold_arrow(), gates, false)
+		var spawn_at: Vector2 = main_hand.where_to_hold_arrow() + main_hand.hand_direction.normalized() * spawn_ahead
+		var arrow: Arrow = main_hand.fire_at(direction, 0.99, spawn_at, gates, false)
 		arrow.regular_shot = false
 		arrow.damage = burst_damage
 		arrow.knockback = 0.0
