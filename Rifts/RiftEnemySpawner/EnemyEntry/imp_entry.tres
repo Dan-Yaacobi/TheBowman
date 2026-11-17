@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EnemyEntry" format=3]
 
 [ext_resource type="Script" uid="uid://lq0131vpkgfn" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="1_entry"]
-[ext_resource type="PackedScene" path="res://Enemies/Imp/ImpPack.tscn" id="2_scene"]
-[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/Imp/imp_pack.tres" id="3_data"]
+[ext_resource type="PackedScene" path="res://Enemies/Imp/Imp.tscn" id="2_scene"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/Imp/imp.tres" id="3_data"]
 
 [resource]
 script = ExtResource("1_entry")

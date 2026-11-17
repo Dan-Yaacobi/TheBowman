@@ -1,7 +1,7 @@
 class_name Imp extends Enemy
-## Hell fodder. Rushes the player; on contact it latches on and drags them toward the nearest
-## island edge. While any imp holds on, the player can't walk, dash, jump or slam, but can still
-## draw and swing. Dies to one hit. Lets go when the player falls, or when it's stunned/captured.
+## Rushes the player; on contact it latches on and drags them toward the nearest island edge.
+## While it holds on, the player can't walk, dash, jump or slam, but can still draw and swing:
+## killing it is the way out. Lets go when the player falls, or when it's stunned/captured.
 
 enum Mode { RUSH, LATCHED, RECOVER }
 

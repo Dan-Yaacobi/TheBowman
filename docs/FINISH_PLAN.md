@@ -28,7 +28,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [ ] Music: Tower and final boss.
 
 ## L
-- [x] Imps (grab and drag). Placeholder art.
+- [x] Imp (grab and drag, single enemy). Placeholder art.
 - [ ] Tower scene: hand-built ascending climb with hazards and traps, ending at the final room.
 - [ ] Art batch: sprites and animations for the hail cloud (art fix only), frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch.
 

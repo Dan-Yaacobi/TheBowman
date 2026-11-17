@@ -51,7 +51,7 @@
 [ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/pine_tree_entry.tres" id="51_pinetree"]
 [ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/obsidian_spire_entry.tres" id="52_spire"]
 [ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/snowflake_swarm_entry.tres" id="53_swarm"]
-[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/imp_pack_entry.tres" id="54_imps"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/imp_entry.tres" id="54_imps"]
 
 [sub_resource type="Resource" id="Resource_4phns"]
 script = ExtResource("8_hhyca")

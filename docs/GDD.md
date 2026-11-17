@@ -229,7 +229,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Hell bird:** patrols and drops eggs that pass through islands, scorching the top of any island they cross for 3–4s (one patch per island). (done; art fine)
 - **Magma golem:** rock golem reskin, melee knockback, cosmetic fire only. (needs art)
 - **Obsidian spire (turret):** a jagged black crystal rooted on an island, lava in its cracks. Asleep and hardened until you come close. Glows as it charges (1s), then bursts a ring of 10 shards in every direction; every other burst is turned by half a gap so the safe gaps move. (done; needs art)
-- **Imps (fodder):** a group of 3 that rushes you together, one-hit kills. An imp that reaches you latches on and drags you toward the nearest edge; more imps, faster drag. While any imp holds on you can't walk, dash, jump or slam, but you can still draw and swing; kill them (one hit) to get free. They let go when you fall, and won't grab while you're invincible after a respawn. Fallback if it feels bad: kamikaze embers. (done; needs art)
+- **Imp (grabber):** a single imp with a health bar (150 HP) that rushes you. When it reaches you it latches on and drags you toward the nearest island edge. While it holds on you can't walk, dash, jump or slam, but you can still draw and swing; killing it is the way out. It lets go when you fall, and won't grab while you're invincible after a respawn. (done; needs art)
 
 ---
 
