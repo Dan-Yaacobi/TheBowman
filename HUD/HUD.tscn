@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" path="res://HUD/ColorLevels/ColorLevelsHud.tscn" id="22_clhud"]
 [ext_resource type="PackedScene" path="res://HUD/ColorScrollPicker/ColorScrollPicker.tscn" id="23_cspick"]
 [ext_resource type="PackedScene" path="res://Objects/Constructs/Blacksmith/CraftMenu.tscn" id="24_craft"]
+[ext_resource type="PackedScene" path="res://HUD/ReforgeMenu/ReforgeMenu.tscn" id="40_reforge"]
 [ext_resource type="PackedScene" path="res://HUD/ArtifactPickupWindow/ArtifactPickupWindow.tscn" id="25_artwin"]
 [ext_resource type="Texture2D" uid="uid://dy6l2rnyg3e8k" path="res://HUD/CoinSingle.png" id="26_ds_coin"]
 [ext_resource type="Texture2D" uid="uid://xgeldnxbx2tv" path="res://Items/Other/Potion/Potion.png" id="27_ds_potion"]
@@ -72,6 +73,8 @@ script = ExtResource("1_ja1d4")
 [node name="UpgradeMenu" parent="." unique_id=765910775 instance=ExtResource("2_iob2k")]
 
 [node name="CraftMenu" parent="." instance=ExtResource("24_craft")]
+
+[node name="ReforgeMenu" parent="." instance=ExtResource("40_reforge")]
 
 [node name="ItemComparisonLayer" type="CanvasLayer" parent="." unique_id=705740621]
 layer = 10

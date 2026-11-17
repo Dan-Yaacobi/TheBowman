@@ -18,3 +18,7 @@ enum biomes{
 @export var min_rift_level: int = 1
 ## Most times this chunk can appear in one rift level. 0 = no limit.
 @export var max_per_rift: int = 0
+## Most times this chunk can appear in one run. 0 = no limit.
+@export var max_per_run: int = 0
+## First biome it can appear in (0 = dirt, 1 = snow, 2 = hell).
+@export_range(0, 2) var min_biome: int = 0

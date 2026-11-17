@@ -123,6 +123,11 @@ signal open_upgrade_menu
 signal upgrade_menu_closed
 signal close_upgrade_menu
 signal open_craft_menu(drop_position: Vector2)
+## Rogue wizard reforge: the NPC opens the menu with the essence cost per target rarity,
+## the menu reports the chosen slot (EquipmentData.slots) and when it closed.
+signal open_reforge_menu(costs_by_rarity: Array[int])
+signal reforge_slot_chosen(slot: int)
+signal reforge_menu_closed
 signal craft_menu_closed
 signal close_craft_menu
 

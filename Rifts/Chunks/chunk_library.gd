@@ -18,6 +18,7 @@ func get_portal_chunk() -> Array[ChunkData]:
 func get_treasure_chunk() -> Array[ChunkData]:
 	var available_chunks: Array[ChunkData] 
 	for chunk in other_chunks[ChunkData.types.TREASURE].chunks:
-		if chunk.min_rift_level <= PlayerManager.player.stats.rift_level:
+		var level: int = PlayerManager.player.stats.rift_level
+		if chunk.min_rift_level <= level and chunk.min_biome <= CustomVariables.biome_index(level):
 			available_chunks.append(chunk)
 	return available_chunks

@@ -733,6 +733,29 @@ func unequip_item(_slot: EquipmentData.slots) -> void:
 		EventBus.equipment_dropped.emit(item.data, global_position, item)
 	equipped_nodes[_slot] = null
 	
+## Unequips the item in a slot and destroys it (no drop). Returns its data, or null if the slot
+## was empty. The slot stays empty until something else is equipped (rogue wizard reforge).
+func destroy_equipped(_slot: EquipmentData.slots) -> EquipmentData:
+	var data: EquipmentData = get_equipped_in_slot(_slot)
+	if data == null:
+		return null
+	data.unequip(stats)
+	var node: Equipment = get_equipped_node_in_slot(_slot)
+	equipped_nodes[_slot] = null
+	match _slot:
+		EquipmentData.slots.BOW:
+			stats.bow = null
+			off_hand.hide_bow()
+		EquipmentData.slots.ARROW:
+			stats.arrow = null
+			quiver.hide()
+		EquipmentData.slots.RING:
+			stats.ring = null
+	set_new_arrow()
+	if node:
+		node.queue_free()
+	return data
+
 func get_equipped_node_in_slot(_slot: EquipmentData.slots) -> Equipment:
 	if _slot >= 0:
 		var node = equipped_nodes[_slot]

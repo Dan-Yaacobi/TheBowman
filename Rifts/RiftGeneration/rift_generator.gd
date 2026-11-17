@@ -29,11 +29,19 @@ var _current_level: int = 0
 static var _event_picks: Dictionary[EventEntry, int] = {}
 ## Rift level of the last event roll; a lower or equal level means a new run started.
 static var _last_event_level: int = 0
+## Times each chunk with max_per_run was placed this run. Static so it outlives the rift scene.
+static var _run_chunk_counts: Dictionary[ChunkData, int] = {}
+## Rift level of the last generate(); a lower or equal level means a new run started.
+static var _last_generated_level: int = 0
 #Generator Invariants:
 #1. Each traversal chunk has 3 exit markers, and each exit marker has a different direction
 
-func generate(_curr_level: int) -> RiftLevel:
+## _retry: rebuilding the same level after a failed layout (doesn't count as a new run).
+func generate(_curr_level: int, _retry: bool = false) -> RiftLevel:
 	_current_level = _curr_level
+	if not _retry and _curr_level <= _last_generated_level:
+		_run_chunk_counts.clear()
+	_last_generated_level = _curr_level
 	main_path_chunks = []
 	placed_bounds = []
 	_chunk_counts.clear()
@@ -62,13 +70,13 @@ func build_main_path(_curr_level: int) -> void:
 	var last_chunk: RiftChunk = build_path(data.main_path_length, intro_chunk, true)
 	if !last_chunk:
 		reset()
-		generate(_curr_level)
+		generate(_curr_level, true)
 		return
 	else:
 		if not place_end_portal(main_path_chunks[-1]):
 			if not place_end_portal(main_path_chunks[-2]):
 				reset()
-				generate(_curr_level)
+				generate(_curr_level, true)
 				return
 		@warning_ignore("integer_division")
 		build_all_side_paths(roundi(data.main_path_length), main_path_chunks)
@@ -245,6 +253,8 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 			placed_bounds.append(chunk_node.bounds)
 			if chunk_data.max_per_rift > 0:
 				_chunk_counts[chunk_data] = _chunk_counts.get(chunk_data, 0) + 1
+			if chunk_data.max_per_run > 0:
+				_run_chunk_counts[chunk_data] = _run_chunk_counts.get(chunk_data, 0) + 1
 			chunk_node.set_rift_level(rift_level)
 			if lowest_chunk == null or chunk_node.global_position.y > lowest_chunk.global_position.y:
 				manage_lowest_chunk(chunk_node)
@@ -255,6 +265,8 @@ func try_to_add_chunk(_exit: ExitMarker, type: ChunkData.types = ChunkData.types
 	return null
 
 func _is_capped(chunk_data: ChunkData) -> bool:
+	if chunk_data.max_per_run > 0 and _run_chunk_counts.get(chunk_data, 0) >= chunk_data.max_per_run:
+		return true
 	return chunk_data.max_per_rift > 0 and _chunk_counts.get(chunk_data, 0) >= chunk_data.max_per_rift
 
 func place_treasure_island(last_chunk: RiftChunk) -> bool:

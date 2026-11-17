@@ -73,7 +73,8 @@ func _apply_rarity_rolls(data: EquipmentData, rarity: int) -> void:
 	var rarity_scalar: float = 1.0 + rarity_stat_bonus[rarity]
 	var total_scalar: float = rift_stat_scalar * rarity_scalar
 	
-	for tier_index in range(rarity + 1):
+	# Items that define fewer tiers (starter gear) only roll the tiers they have.
+	for tier_index in range(mini(rarity + 1, data.tiers.size())):
 		var tier: RarityTier = data.tiers[tier_index]
 		for def in tier.stat_rolls:
 			var scalar: float = 1.0 if PlayerStats.is_unscaled(def.stat_name) else total_scalar

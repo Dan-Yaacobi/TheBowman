@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://47n0bqohsmw6" path="res://NPC/Cleric/Cleric.tscn" id="1_cleric"]
+[ext_resource type="Script" path="res://NPC/RogueWizard/rogue_wizard.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://bmi4eqninttxo" path="res://NPC/npc_data.gd" id="3_data"]
+
+[sub_resource type="Resource" id="Resource_wizard"]
+script = ExtResource("3_data")
+npc_name = "Rogue Wizard"
+dialogue_lines = Array[String](["Not every wizard bent the knee. Some of us just learned to hide better.", "We made these for your people, long before the cult took them back. I still remember how.", "Keep your voice down. The tower has long ears, even out here.", "Your gear hums with old craft. Let me wake the rest of it."])
+fixed_line = "Give me one of your artifacts and some essence. It will come back stronger than it left."
+post_action_lines = Array[String](["There. Older craft than the cult will ever understand.", "Don't thank me. Just get to the tower."])
+action_button_labels = Array[String](["Reforge"])
+metadata/_custom_type_script = "uid://bmi4eqninttxo"
+
+[node name="RogueWizard" node_paths=PackedStringArray("drop_point") instance=ExtResource("1_cleric")]
+script = ExtResource("2_script")
+data = SubResource("Resource_wizard")
+drop_point = NodePath("DropPoint")
+
+[node name="Sprite2D" parent="."]
+modulate = Color(0.72, 0.55, 1, 1)
+
+[node name="DropPoint" type="Marker2D" parent="."]
+position = Vector2(30, -10)

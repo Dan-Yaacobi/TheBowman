@@ -128,6 +128,10 @@ func _apply_modifiers(player_stats: PlayerStats) -> void:
 		# Rolls are stored in display units (e.g. 20 for +20%); the Stat gets the real amount.
 		stat.add_buff(mod.id, scaled_amount(mod) * PlayerStats.apply_scale(mod.stat_name), mod.stat_type)
 
+## Highest rarity this item defines tiers for (starter gear only has Common).
+func max_rarity() -> int:
+	return clampi(tiers.size() - 1, 0, Rarity.LEGENDARY)
+
 func unequip(player_stats: PlayerStats) -> void:
 	for mod in modifiers:
 		var stat: Stat = player_stats.get(mod.stat_name)

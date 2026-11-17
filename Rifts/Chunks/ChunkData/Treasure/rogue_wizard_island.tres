@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ChunkData" format=3]
+
+[ext_resource type="Script" uid="uid://d1o4fpn64j8cu" path="res://Rifts/Chunks/chunk_data.gd" id="1_data"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/ChunkScenes/Reward/RogueWizardIsland.tscn" id="2_scene"]
+
+[resource]
+script = ExtResource("1_data")
+scene = ExtResource("2_scene")
+type = 3
+id = "rogue_wizard_island"
+max_per_rift = 1
+max_per_run = 1
+min_biome = 1
+metadata/_custom_type_script = "uid://d1o4fpn64j8cu"
