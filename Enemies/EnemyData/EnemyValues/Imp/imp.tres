@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ImpData" format=3]
+
+[ext_resource type="Script" path="res://Enemies/Imp/imp_data.gd" id="1_data"]
+[ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_stat"]
+[ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="4_abil"]
+[ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_death"]
+
+[sub_resource type="Resource" id="Stat_speed"]
+script = ExtResource("3_stat")
+base_value = 0.0
+
+[sub_resource type="Resource" id="Resource_death"]
+script = ExtResource("5_death")
+
+[sub_resource type="Gradient" id="Gradient_imp"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(0.95, 0.35, 0.15, 1, 0.55, 0.1, 0.1, 1, 0.25, 0.05, 0.08, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_imp"]
+gradient = SubResource("Gradient_imp")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.5, 0.4)
+fill_to = Vector2(1, 0.5)
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Imp"
+max_hp = 1
+move_speed = SubResource("Stat_speed")
+knockback = 0
+skin = SubResource("GradientTexture2D_imp")
+avg_coins_dropped = 1
+touch_damage = 1
+can_be_knockedback = false
+has_health_bar = false
+death_ability = Array[ExtResource("4_abil")]([SubResource("Resource_death")])
+drop_chance = 5.0

@@ -101,6 +101,11 @@ var _draw_buffered: bool = false
 var aim_direction: Vector2 = Vector2.ZERO
 ## Surfaces currently changing ground grip (e.g. SlipperySurface) -> their traction
 var _traction_sources: Dictionary[Node, float] = {}
+## Things holding the player (imps), each with the drag speed it adds. While any hold on,
+## walking, dashing, jumping, dropping through and the Meteor Band slam are blocked.
+var _grab_sources: Dictionary[Node, float] = {}
+## Side the grab drag pulls toward (-1 left, 1 right); picked when the first grab latches on.
+var _grab_drag_dir: float = 1.0
 var in_jump: bool = false
 var fall_after_jump: bool = false
 
@@ -180,7 +185,7 @@ func activate_passive_abilities() -> void:
 		ability.on_equipped()
 	
 func _process(_delta: float) -> void:
-	if stats.hp > 0 and not is_dead():
+	if stats.hp > 0 and not is_dead() and not is_grabbed():
 		direction = Input.get_axis("Left","Right")
 	else:
 		direction = 0
@@ -285,9 +290,10 @@ func reset_hands() -> void:
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
-	velocity += knockback
+	var drag: Vector2 = _get_grab_drag()
+	velocity += knockback + drag
 	move_and_slide()
-	velocity -= knockback
+	velocity -= knockback + drag
 	_check_island_contact()
 
 ## Reports each island the first time the player stands on it (run tally).
@@ -315,6 +321,41 @@ func add_traction_source(source: Node, traction: float) -> void:
 
 func remove_traction_source(source: Node) -> void:
 	_traction_sources.erase(source)
+
+# --- Grabs (imps) ---
+
+func add_grab(source: Node, drag_speed: float) -> void:
+	if _grab_sources.is_empty():
+		_grab_drag_dir = _nearest_edge_side()
+	_grab_sources[source] = drag_speed
+
+func remove_grab(source: Node) -> void:
+	_grab_sources.erase(source)
+
+func is_grabbed() -> bool:
+	for source: Node in _grab_sources.keys():
+		if not is_instance_valid(source):
+			_grab_sources.erase(source)
+	return not _grab_sources.is_empty()
+
+## Sideways pull toward the edge that was nearest when the first grab latched on; every grab
+## adds its speed. The side stays fixed so islands placed edge to edge can't flip it at the seam.
+func _get_grab_drag() -> Vector2:
+	if not is_grabbed():
+		return Vector2.ZERO
+	var speed: float = 0.0
+	for source: Node in _grab_sources.keys():
+		speed += _grab_sources[source]
+	return Vector2(_grab_drag_dir * speed, 0.0)
+
+## -1 if the left edge of the island underfoot is closer, 1 if the right one is.
+func _nearest_edge_side() -> float:
+	for i: int in get_slide_collision_count():
+		var island: Island = get_slide_collision(i).get_collider() as Island
+		if island:
+			var span: Vector2 = island.get_top_span()
+			return -1.0 if global_position.x - span.x < span.y - global_position.x else 1.0
+	return _grab_drag_dir
 
 func get_move_acceleration() -> float:
 	if is_on_floor():
@@ -456,7 +497,7 @@ func _dodge() -> void:
 	invincibility_timer.start()
 
 func can_start_dash() -> bool:
-	return can_dash <= 0 and dashes_spent < stats.max_dashes
+	return can_dash <= 0 and dashes_spent < stats.max_dashes and not is_grabbed()
 
 ## Spends a free fall if there is one. Returns true if the fall costs no heart.
 func use_free_fall() -> bool:

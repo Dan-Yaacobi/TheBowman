@@ -71,6 +71,8 @@ func _is_valid_ground(body: Object) -> bool:
 	return body is Island or body is TileMapLayer
 
 func request_jump() -> void:
+	if player.is_grabbed():
+		return
 	if Input.is_action_pressed("Down"):
 		drop_through_platform()
 		return
@@ -93,7 +95,7 @@ func set_jumps() -> void:
 func try_jump() -> void:
 	if buffer_timer <= 0:
 		return
-	if jumps > 0 and can_jump:
+	if jumps > 0 and can_jump and not player.is_grabbed():
 		jump()
 		handle_jumps()
 		for ability in player.stats.jump_abilities:

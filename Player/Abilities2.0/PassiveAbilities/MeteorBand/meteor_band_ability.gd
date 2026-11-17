@@ -88,7 +88,7 @@ class MeteorHelper extends Node:
 		var player: Player = get_parent() as Player
 		if player == null:
 			return
-		var wants: bool = not player.is_on_floor() and Input.is_action_pressed("Down") and not player.jump_action.dropping and not player.is_dash()
+		var wants: bool = not player.is_on_floor() and Input.is_action_pressed("Down") and not player.jump_action.dropping and not player.is_dash() and not player.is_grabbed()
 		if not wants:
 			if slamming and not player.is_on_floor():
 				stop()
