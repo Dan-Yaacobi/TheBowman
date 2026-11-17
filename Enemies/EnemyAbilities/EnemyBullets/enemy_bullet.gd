@@ -3,6 +3,9 @@ class_name EnemyBullet extends Area2D
 @export var data: EnemyBulletData
 @export var arc_height: float = 40.0
 @export var min_flight_time: float = 0.2
+## Frees itself after this many seconds even if it never left the screen (one that was never
+## on screen never "exits" it, so it would fly forever).
+@export var max_lifetime: float = 10.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
@@ -14,6 +17,7 @@ var direction: Vector2 = Vector2.ZERO
 var target_position: Vector2 = Vector2.INF
 var velocity: Vector2 = Vector2.ZERO
 var bullet_gravity: float = 0.0
+var _age: float = 0.0
 
 func _ready() -> void:
 	if sprite.texture:
@@ -30,6 +34,11 @@ func _ready() -> void:
 	
 func extra_ready_function() -> void:
 	pass
+
+func _process(delta: float) -> void:
+	_age += delta
+	if max_lifetime > 0.0 and _age >= max_lifetime:
+		queue_free()
 
 
 func _init_velocity() -> void:

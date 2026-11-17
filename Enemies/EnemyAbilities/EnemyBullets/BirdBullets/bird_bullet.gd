@@ -9,6 +9,8 @@ const ISLAND_LAYER: int = 5
 
 var new_texture: Texture2D
 @export var acceleration_rate: float = 1.0
+## Fall speed cap, so the exponential acceleration can't run away
+@export var max_fall_speed: float = 600.0
 ## Set on the hell bird's egg: the egg falls through islands and scorches the top of each one it crosses.
 @export var island_burn_scene: PackedScene
 ## How long each scorched patch burns. Re-scorching a burning island resets it to this.
@@ -19,7 +21,7 @@ var _elapsed: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	_elapsed += delta
-	var current_speed: float = data.move_speed * exp(acceleration_rate * _elapsed)
+	var current_speed: float = minf(data.move_speed * exp(acceleration_rate * _elapsed), max_fall_speed)
 	
 	global_position.y += current_speed * delta
 func set_texture(texture: Texture2D) -> void:
