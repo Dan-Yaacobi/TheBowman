@@ -19,7 +19,10 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 - [ ] Pine tree (sets up the rooted-turret pattern).
 - [ ] Obsidian spire (reuses the turret pattern).
 - [ ] Snowflake swarm.
-- [ ] Rift difficulty ramp: each rift starts easier and gets harder as you go through it (fewer and weaker spawns early, building toward the exit). The spawner already tracks intensity and progress, so this is likely tuning those curves rather than a new system.
+- [ ] Difficulty ramp, on two levels:
+  - **Across the run:** the first rifts are gentle and each rift is harder than the one before.
+  - **Within each rift:** a rift starts easier and gets harder as you go through it (fewer and weaker spawns early, building toward the exit).
+  The spawner already tracks intensity and progress, so this is likely tuning those curves rather than a new system.
 - [ ] Ending text (he portals out) and batch 8 artifacts placed in the Tower.
 - [ ] Music: Tower and final boss.
 
