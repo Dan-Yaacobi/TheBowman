@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Level/Events/EnemyTest/enemy_test_event.gd" id="1_event"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_island"]
+[ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_portal"]
+[ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_falling_death"]
+
+[node name="EnemyTestEvent" type="Node2D"]
+script = ExtResource("1_event")
+display_name = "Enemy Test"
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="Floor" type="Node2D" parent="."]
+
+[node name="Floor1" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(-176, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor2" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(-132, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor3" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(-88, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor4" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(-44, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor5" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(0, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor6" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(44, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor7" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(88, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor8" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(132, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="Floor9" parent="Floor" instance=ExtResource("2_island")]
+position = Vector2(176, 45)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="SpawnIslands" type="Node2D" parent="."]
+
+[node name="SpawnIsland1" parent="SpawnIslands" instance=ExtResource("2_island")]
+position = Vector2(-140, -40)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="SpawnIsland2" parent="SpawnIslands" instance=ExtResource("2_island")]
+position = Vector2(0, -85)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="SpawnIsland3" parent="SpawnIslands" instance=ExtResource("2_island")]
+position = Vector2(140, -40)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="SpawnIsland4" parent="SpawnIslands" instance=ExtResource("2_island")]
+position = Vector2(-270, 5)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="SpawnIsland5" parent="SpawnIslands" instance=ExtResource("2_island")]
+position = Vector2(270, 5)
+use_fixed_frame = true
+fixed_frame_index = 4
+
+[node name="EventPortal" parent="." instance=ExtResource("3_portal")]
+position = Vector2(-160, 33)
+
+[node name="FallingDeath" parent="." instance=ExtResource("4_falling_death")]
+position = Vector2(0, 443)
+costs_heart = false
