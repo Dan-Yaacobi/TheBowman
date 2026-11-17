@@ -57,7 +57,9 @@ func _fade_out_and_pause() -> void:
 	get_tree().paused = true
 
 func _place_player_and_resume(_pos: Vector2) -> void:
-	PlayerManager.player.collision_shape.disabled = true
+	# Deferred: this can run inside a physics callback (falling into the void), where
+	# changing a collision shape directly errors.
+	PlayerManager.player.collision_shape.set_deferred("disabled", true)
 	spawn_player(_pos)
 	await get_tree().physics_frame
 	EventBus.invisible_hands.emit(true)

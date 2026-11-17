@@ -12,6 +12,9 @@ func setup(damage: int, effect: Callable) -> void:
 
 func _ready() -> void:
 	hurt_box.base_damage = _damage
-	hurt_box.add_effect(_effect)
+	# HurtBox calls after-effects with (target, hurt_box, result); the burn only needs the enemy
+	hurt_box.add_after_effect(func(target: GameEntity, _hurt_box: Node2D, _result: DamageResult) -> void:
+		if target is Enemy:
+			_effect.call(target))
 	burn_timer.timeout.connect(queue_free)
 	burn_timer.start()

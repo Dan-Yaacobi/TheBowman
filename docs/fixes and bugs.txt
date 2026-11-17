@@ -1,65 +1,15 @@
-green apple ramming into player causes no knockback on the player (red does work)
-
-green apples after spawns aren't smaller than the original
-
-make constructs shine when you have the resource to build them and make sure they check it so after spending resources if you suddenly don't have enough anymore they stop glowing.
-
-controller integration - big one, the biggest caveat is making the aim. only solution i can think of is the joystick because it needs 360
-
-better early pacing in terms of enemies. feels to hard at the start.
-
-give the golden apple 60 seconds and make it vulnerable to sword hits as well
-
-make up dash with a double W click
-
-the minor ability for after X arrows your next one is perfect - two notes:
-1. it counts arrows that didn't hit anything, it should only count successful hits.
-2. the having one automatically perfect telegraph is not clear enough, also it beats the rhythm of the regular shots and feels awkward. 
-in the equipment comparison window make it obvious which ability is the main defining one and which are the extra rolled minor abilities
-
-events need a better system to decide what you will get than random. you can sometimes get the bird boss in the first 30 seconds of your rift and it's just too brutal
+golden apple: give it 60 seconds (currently 40, chase_duration on GoldenAppleEvent.tscn) and make it vulnerable to sword hits as well (not checked yet)
 
 getting hurt during swinging cause a visual bug where the sword and its effect are visible despite not swinging, pretty rare bug.
 
-make sure all item's ability texts have color and a proper one
-
-there are way too many things to break
-
-talking with the world spirit and selecting artifacts keeps the dialogue box above the artifact journal that is being opened
-
 vases drop too much gold as well as chests, unbalanced compared to the how much the upgrades cost - my issue is i think things should cost less and resources should be less plentiful because each run you have to break like 100+ objects which is too grindy
 
-make the target dummy a construct you unlock by paying 5 wood
-
-have the world spirit occasionaly have something useful to tell you (after your first rift death, after every couple of deaths afterwards he will have something new to say that's a tip about the game
-
-if birds are left after bird boss is dead in the bird elite event it crashes the game because they try to access the boss reference which doesn't exist.
-
-bosses needs to be immune to freeze or have an immunity window after being frozen
-
-need some more boosts early on. maybe after your first rift the world spirit has a buff for you so you can talk to him. something temporarily just to get you started better. and this can happen everytime you have a bad run perhaps. might be abused if you just walk in and die quickly you will get the buff...
-
-skylark ability that knocks you back is too harsh and often makes you fall and the benefit is awkward to use most likely completely redesign its ability
-add to the death window:
-total damage dealt
-what killed you
-
-
-
-seeker darts need to instead of increase perfect shot damage by 25% to actually reduce it by 25% because auto aim is quite strong on its own. also reduce it giving + damage
-
-nerf hurricane damage by 25% and pull speed by 60%
-
-the equipment comparison can get long enough that the equip button is missing
-
-reduce the amount of scrolls, 2 per rift level that's it
-
-reduce the kill enemies time between spawns by 200% and increase the time by 100%
-
-maybe increase the base pull speed by 100% but reduce drasticly the sources of increasing it
-
-
 the maw should show its upgraded abilities
+
 the hornet's nest each shot has like a second of showing the arrow in my hand, also it fires too many arrows and it should be heavier in pull speed, also reduce its damage
+
 the hit targets and kill enemies events still drop epics even on earth biome
 
+
+post-finish:
+controller integration - big one, the biggest caveat is making the aim. only solution i can think of is the joystick because it needs 360
