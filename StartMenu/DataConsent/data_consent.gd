@@ -4,6 +4,9 @@ class_name DataConsent extends Control
 
 signal answered(accepted: bool)
 
+## Off when the owner animates the panel away itself (the start menu does).
+@export var hide_on_answer: bool = true
+
 @onready var yes_button: Button = %YesButton
 @onready var no_button: Button = %NoButton
 
@@ -20,5 +23,6 @@ func _on_no_button_pressed() -> void:
 
 func _answer(accepted: bool) -> void:
 	RunTracker.uploader.set_consent(accepted)
-	hide()
+	if hide_on_answer:
+		hide()
 	answered.emit(accepted)

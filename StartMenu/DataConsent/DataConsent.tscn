@@ -61,7 +61,7 @@ autowrap_mode = 3
 [node name="Buttons" type="HBoxContainer" parent="Panel/Margin/VBox"]
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 24
+theme_override_constants/separation = 88
 
 [node name="YesButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
 unique_name_in_owner = true

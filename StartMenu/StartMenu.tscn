@@ -2,11 +2,41 @@
 
 [ext_resource type="Script" uid="uid://bayac3vjejf8n" path="res://StartMenu/start_menu.gd" id="1_d5kqr"]
 [ext_resource type="Texture2D" uid="uid://dgtlu5xnvsvap" path="res://StartMenu/StartScreenBG_3.png" id="2_7tu02"]
-[ext_resource type="FontFile" uid="uid://b7lpukcfa8uxr" path="res://Fonts/Jaro-Regular-VariableFont_opsz.ttf" id="2_w0qft"]
 [ext_resource type="AudioStream" uid="uid://bo7g2kx7bqnd7" path="res://MainGame/Music/APlaceICallHome.ogg" id="3_menumusic"]
 [ext_resource type="PackedScene" path="res://StartMenu/DataConsent/DataConsent.tscn" id="4_consent"]
+[ext_resource type="FontFile" path="res://Fonts/alagard.ttf" id="5_alagard"]
+[ext_resource type="PackedScene" path="res://StartMenu/SaveSlot/SaveSlot.tscn" id="6_slot"]
+[ext_resource type="Texture2D" path="res://Items/Equipments/Quivers/Sprites/Arrows/BasicArrow.png" id="7_arrow"]
+[ext_resource type="AudioStream" path="res://Audio/Player/arrow_shot-shorter.mp3" id="8_whoosh"]
+[ext_resource type="AudioStream" path="res://Audio/Player/arrow_hit_target.mp3" id="9_thunk"]
+[ext_resource type="AudioStream" path="res://Audio/Player/ArrowTwang.wav" id="10_twang"]
+[ext_resource type="AudioStream" path="res://Audio/UI/menu_click.ogg" id="11_click"]
 
-[node name="StartMenu" type="Control" unique_id=971797917]
+[sub_resource type="Gradient" id="Gradient_motes"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(1, 0.92, 0.75, 0, 1, 0.92, 0.75, 0.7, 1, 0.85, 0.7, 0.5, 1, 0.85, 0.7, 0)
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0.55, 1)
+colors = PackedColorArray(0.05, 0.02, 0.1, 0, 0.05, 0.02, 0.1, 0.65)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1.05, 1.05)
+
+[sub_resource type="Gradient" id="Gradient_shade"]
+colors = PackedColorArray(0.06, 0.03, 0.1, 0, 0.06, 0.03, 0.1, 0.6)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_shade"]
+gradient = SubResource("Gradient_shade")
+width = 128
+height = 8
+
+[node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,69 +45,592 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d5kqr")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1993992099]
+[node name="Backdrop" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Parallax" type="Control" parent="Backdrop"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Backdrop/Parallax"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_7tu02")
 expand_mode = 1
+stretch_mode = 6
 
-[node name="Label" type="Label" parent="." unique_id=1062812586]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.469
-anchor_right = 0.469
-offset_left = -271.40002
-offset_top = 19.0
-offset_right = -135.40002
-offset_bottom = 59.5
-grow_horizontal = 2
-scale = Vector2(4, 4)
-theme_type_variation = &"TitleLabel"
-text = "Sky Archer"
+[node name="Motes" type="CPUParticles2D" parent="Backdrop"]
+position = Vector2(800, 960)
+amount = 46
+lifetime = 16.0
+preprocess = 16.0
+emission_shape = 3
+emission_rect_extents = Vector2(820, 40)
+direction = Vector2(0.2, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_motes")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1655116290]
+[node name="Vignette" type="TextureRect" parent="Backdrop"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -239.0
-offset_right = 91.0
-offset_bottom = -93.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
 
-[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=841085659]
-custom_maximum_size = Vector2(200, 64)
+[node name="UIRoot" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleRoot" type="Control" parent="UIRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="UIRoot/TitleRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -560.0
+offset_top = 28.0
+offset_right = 560.0
+offset_bottom = 148.0
+grow_horizontal = 2
+theme_type_variation = &"TitleLabel"
+theme_override_constants/outline_size = 14
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 14
+theme_override_font_sizes/font_size = 112
+text = "Sky Archer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tagline" type="Label" parent="UIRoot/TitleRoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 146.0
+offset_right = 300.0
+offset_bottom = 186.0
+grow_horizontal = 2
+theme_type_variation = &"DimLabel"
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "~ the last archer ~"
+horizontal_alignment = 1
+
+[node name="Screens" type="Control" parent="UIRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainScreen" type="Control" parent="UIRoot/Screens"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Shade" type="TextureRect" parent="UIRoot/Screens/MainScreen"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_shade")
+expand_mode = 1
+
+[node name="MainButtons" type="VBoxContainer" parent="UIRoot/Screens/MainScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -70.0
+offset_right = -140.0
+offset_bottom = 380.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="ContinueButton" type="Button" parent="UIRoot/Screens/MainScreen/MainButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w0qft")
-theme_override_font_sizes/font_size = 34
-text = "Start Game
-"
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Continue"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1948348554]
-custom_maximum_size = Vector2(200, 64)
+[node name="PlayButton" type="Button" parent="UIRoot/Screens/MainScreen/MainButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w0qft")
-theme_override_font_sizes/font_size = 34
-text = "Exit Game
-"
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Play"
 
-[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=921354907]
+[node name="SettingsButton" type="Button" parent="UIRoot/Screens/MainScreen/MainButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="CreditsButton" type="Button" parent="UIRoot/Screens/MainScreen/MainButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="UIRoot/Screens/MainScreen/MainButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="SlotsScreen" type="Control" parent="UIRoot/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Header" type="Label" parent="UIRoot/Screens/SlotsScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 206.0
+offset_right = 400.0
+offset_bottom = 262.0
+grow_horizontal = 2
+theme_type_variation = &"TitleLabel"
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "Choose a Save"
+horizontal_alignment = 1
+
+[node name="SlotCards" type="HBoxContainer" parent="UIRoot/Screens/SlotsScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -660.0
+offset_top = 292.0
+offset_right = 660.0
+offset_bottom = 672.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="SaveSlot1" parent="UIRoot/Screens/SlotsScreen/SlotCards" instance=ExtResource("6_slot")]
+layout_mode = 2
+
+[node name="SaveSlot2" parent="UIRoot/Screens/SlotsScreen/SlotCards" instance=ExtResource("6_slot")]
+layout_mode = 2
+slot = 1
+
+[node name="SaveSlot3" parent="UIRoot/Screens/SlotsScreen/SlotCards" instance=ExtResource("6_slot")]
+layout_mode = 2
+slot = 2
+
+[node name="SlotsBackButton" type="Button" parent="UIRoot/Screens/SlotsScreen"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 714.0
+offset_right = 120.0
+offset_bottom = 774.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="EraseDialog" type="Control" parent="UIRoot/Screens/SlotsScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="UIRoot/Screens/SlotsScreen/EraseDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.02, 0.1, 0.6)
+
+[node name="ErasePanel" type="PanelContainer" parent="UIRoot/Screens/SlotsScreen/EraseDialog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -130.0
+offset_right = 300.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="EraseTitle" type="Label" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Erase Slot 1?"
+horizontal_alignment = 1
+
+[node name="EraseBody" type="Label" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "This journey will be lost for good."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 88
+alignment = 1
+
+[node name="EraseYesButton" type="Button" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Erase"
+
+[node name="EraseNoButton" type="Button" parent="UIRoot/Screens/SlotsScreen/EraseDialog/ErasePanel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Keep"
+
+[node name="SettingsScreen" type="Control" parent="UIRoot/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SettingsPanel" type="PanelContainer" parent="UIRoot/Screens/SettingsScreen"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 230.0
+offset_right = 300.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="UIRoot/Screens/SettingsScreen/SettingsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="FullscreenToggle" type="CheckButton" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Fullscreen"
+
+[node name="MusicToggle" type="CheckButton" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Music"
+
+[node name="SfxToggle" type="CheckButton" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Sound Effects"
+
+[node name="DataToggle" type="CheckButton" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "Share Gameplay Stats"
+
+[node name="Spacer" type="Control" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SettingsBackButton" type="Button" parent="UIRoot/Screens/SettingsScreen/SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="CreditsScreen" type="Control" parent="UIRoot/Screens"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CreditsPanel" type="PanelContainer" parent="UIRoot/Screens/CreditsScreen"]
+custom_minimum_size = Vector2(920, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -460.0
+offset_top = 220.0
+offset_right = 460.0
+offset_bottom = 860.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="UIRoot/Screens/CreditsScreen/CreditsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="UIRoot/Screens/CreditsScreen/CreditsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="UIRoot/Screens/CreditsScreen/CreditsPanel/Margin/VBox"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="CreditsScroll" type="ScrollContainer" parent="UIRoot/Screens/CreditsScreen/CreditsPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CreditsText" type="RichTextLabel" parent="UIRoot/Screens/CreditsScreen/CreditsPanel/Margin/VBox/CreditsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][color=#ffcf5a]A game by[/color]
+Dan Yaacobi
+
+[color=#ffcf5a]FONTS[/color]
+Alagard by Hewett Tsoi
+m6x11 by Daniel Linssen (managore)
+
+[color=#ffcf5a]MUSIC[/color]
+by Juhani Junkala (SubspaceAudio), CC0
+A Place I Call Home - JRPG Music Pack #4
+Preparing For Battle - JRPG Music Pack #5
+Epic Boss Battle
+
+Adventurer's Path by vitalezzz, CC0
+
+[color=#ffcf5a]SOUND EFFECTS[/color]
+50 RPG Sound Effects by Kenney, CC0
+Interface Sounds by Kenney, CC0
+Gem Collect SFX by Bobjt, CC0
+Fantasy SFX Pack Vol 1 by JC Sounds, CC-BY 4.0
+Pirate Pack Vol 1 by JC Sounds, CC-BY 4.0
+Chest choir and heart container sounds
+synthesized for this game
+
+[color=#bfa77f]Thank you for playing.[/color][/center]"
+fit_content = true
+
+[node name="CreditsBackButton" type="Button" parent="UIRoot/Screens/CreditsScreen/CreditsPanel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("5_alagard")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="FocusCursor" type="Sprite2D" parent="UIRoot"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("7_arrow")
+offset = Vector2(-15, 0)
+
+[node name="Arrows" type="Node2D" parent="UIRoot"]
+unique_name_in_owner = true
+texture_filter = 1
+
+[node name="DataConsent" parent="." instance=ExtResource("4_consent")]
+layout_mode = 1
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("3_menumusic")
 volume_db = -8.0
 autoplay = true
+bus = &"Music"
 
-[node name="DataConsent" parent="." unique_id=1412074051 instance=ExtResource("4_consent")]
-layout_mode = 1
+[node name="WhooshSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_whoosh")
+volume_db = -4.0
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="ThunkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_thunk")
+
+[node name="TwangSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_twang")
+volume_db = -10.0
+
+[node name="FocusSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_click")
+volume_db = -14.0
+
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]

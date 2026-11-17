@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://StartMenu/MenuArrow/menu_arrow.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Items/Equipments/Quivers/Sprites/Arrows/BasicArrow.png" id="2_arrow"]
+
+[sub_resource type="Gradient" id="Gradient_splinter"]
+offsets = PackedFloat32Array(0, 0.7, 1)
+colors = PackedColorArray(0.83, 0.62, 0.38, 1, 0.55, 0.33, 0.18, 1, 0.55, 0.33, 0.18, 0)
+
+[node name="MenuArrow" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_script")
+
+[node name="Splinters" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 14
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+direction = Vector2(-1, 0)
+spread = 70.0
+gravity = Vector2(0, 900)
+initial_velocity_min = 120.0
+initial_velocity_max = 320.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_splinter")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_arrow")
+offset = Vector2(-15, 0)
