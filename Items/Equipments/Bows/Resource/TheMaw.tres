@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="EquipmentData" format=3]
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://bcv7x0vk2emp3"]
 
-[ext_resource type="Script" path="res://Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd" id="1_02524"]
+[ext_resource type="Script" uid="uid://dw4u3q16jbmoi" path="res://Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd" id="1_02524"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="1_jljtp"]
-[ext_resource type="Texture2D" path="res://Items/Equipments/Bows/Sprites/TheMaw.png" id="3_uv6fp_icon"]
+[ext_resource type="Texture2D" uid="uid://drcbmcye4pctd" path="res://Items/Equipments/Bows/Sprites/TheMaw.png" id="3_uv6fp_icon"]
 [ext_resource type="Script" uid="uid://bqd150tbbmd01" path="res://Items/Equipments/equipment_data.gd" id="4_uv6fp"]
 [ext_resource type="Script" uid="uid://cvcq1wjubwojl" path="res://Items/Equipments/rarity_tier.gd" id="6_cjv4q"]
 [ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="7_i6wm1"]
@@ -75,7 +75,6 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 [resource]
 script = ExtResource("4_uv6fp")
 display_name = "The Maw"
-draw_time = 0.55
 texture = ExtResource("3_uv6fp_icon")
 equipped_texture = ExtResource("3_uv6fp_icon")
 dropped_scale = 0.3

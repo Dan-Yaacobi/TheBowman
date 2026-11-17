@@ -190,4 +190,3 @@ func _update_debug_label() -> void:
 				in_world += 1
 	_debug_label.text = "Rift %d  plan: %s\nprogress %.2f  target %d\nspawner alive %d  (queued %d)\nall enemies in rift %d" % [
 		_plan_level, plan_name, _last_progress, _last_target, get_alive_count(), _queued, in_world]
-
