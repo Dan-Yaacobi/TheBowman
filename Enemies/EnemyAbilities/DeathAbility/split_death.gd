@@ -1,5 +1,8 @@
 class_name EnemySplit extends EnemyAbility
 
+## Meta on each child: instance id of the enemy it split from (spawners count children as theirs)
+const SPLIT_FROM_META: StringName = &"split_from"
+
 @export var split_amount: int = 2
 @export var offset_radius: float = 15.0
 @export var emerge_time: float = 0.9
@@ -14,6 +17,7 @@ func activate_ability(_enemy: Enemy) -> void:
 	for i: int in split_amount:
 		var new_enemy: Enemy = scene.instantiate()
 		new_enemy.set_data(_enemy.stats)
+		new_enemy.set_meta(SPLIT_FROM_META, _enemy.get_instance_id())
 		new_enemy.stats = new_enemy.stats.duplicate()
 		new_enemy.stats.can_split = false
 		var jitter: float = randf_range(-angle_step * 0.25, angle_step * 0.25)

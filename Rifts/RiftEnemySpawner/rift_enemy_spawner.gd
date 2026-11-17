@@ -16,8 +16,7 @@ signal enemy_spawned(enemy: Enemy)
 @export var late_plans: Array[SpawnPlan] = []
 
 @export_group("Limits")
-## The guarded reward chunk at the end of a side path spawns the current target plus this many,
-## whatever is already alive.
+## The guarded reward chunk at the end of a side path tops up to the current target plus this many.
 @export var reward_chunk_extra: int = 1
 ## Safety cap: never more spawned enemies alive than this.
 @export var max_alive: int = 6
@@ -28,8 +27,15 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var is_suspended: bool = false
 ## Rolled but not spawned yet (the 1s gap between spawns)
 var _queued: int = 0
-## Spawned by this spawner; counted while valid and not dead (a death animation doesn't count)
+## Spawned by this spawner (or split from one); counted while valid and not dead
+## (a death animation doesn't count)
 var _spawned: Array[Enemy] = []
+## Instance ids of everything this spawner owns, kept after death so split children can be claimed
+var _owned_ids: Dictionary[int, bool] = {}
+
+
+func _ready() -> void:
+	EventBus.enemy_summoned.connect(_on_event_bus_enemy_summoned)
 var _plan: SpawnPlan
 var _plan_level: int = -1
 
@@ -40,12 +46,14 @@ func spawn_enemy(level: int, progress: float, is_reward_chunk: bool) -> void:
 	if level != _plan_level:
 		_plan_level = level
 		_plan = _pick_plan(level)
+		_owned_ids.clear()
 	if _plan == null:
 		return
 	var target: int = _plan.target_at(progress)
 	var alive: int = get_alive_count()
-	var count: int = target + reward_chunk_extra if is_reward_chunk else target - alive
-	count = mini(count, max_alive - alive)
+	if is_reward_chunk:
+		target += reward_chunk_extra
+	var count: int = mini(target, max_alive) - alive
 	if count <= 0:
 		return
 	var entries: Array[EnemyEntry] = roll_enemies(count, level)
@@ -89,10 +97,22 @@ func _do_spawn(entries: Array[EnemyEntry]) -> void:
 		)
 		_queued -= 1
 		if new_enemy:
-			_spawned.append(new_enemy)
+			_own(new_enemy)
 			enemy_spawned.emit(new_enemy)
 		if i < entries.size() - 1:
 			await get_tree().create_timer(time_between_spawns, false).timeout
+
+
+func _own(enemy: Enemy) -> void:
+	_spawned.append(enemy)
+	_owned_ids[enemy.get_instance_id()] = true
+
+
+## An apple this spawner owns split: its children count toward the target too.
+func _on_event_bus_enemy_summoned(enemy: Enemy) -> void:
+	if enemy and enemy.has_meta(EnemySplit.SPLIT_FROM_META) \
+			and _owned_ids.has(enemy.get_meta(EnemySplit.SPLIT_FROM_META)):
+		_own(enemy)
 
 
 ## count enemies for this rift level, weighted, with at most one heavy.
