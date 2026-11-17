@@ -1,5 +1,3 @@
-golden apple: give it 60 seconds (currently 40, chase_duration on GoldenAppleEvent.tscn) and make it vulnerable to sword hits as well (not checked yet)
-
 getting hurt during swinging cause a visual bug where the sword and its effect are visible despite not swinging, pretty rare bug.
 
 vases drop too much gold as well as chests, unbalanced compared to the how much the upgrades cost - my issue is i think things should cost less and resources should be less plentiful because each run you have to break like 100+ objects which is too grindy

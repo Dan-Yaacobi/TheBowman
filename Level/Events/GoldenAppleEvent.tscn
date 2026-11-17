@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://c06t2awg17dkp"
 [node name="GoldenAppleEvent" type="Node2D" unique_id=207856871 node_paths=PackedStringArray("golden_apple")]
 script = ExtResource("1_event")
 golden_apple = NodePath("GoldenApple")
-chase_duration = 40.0
+chase_duration = 60.0
 rewards = Array[ExtResource("7_event_reward")]([SubResource("Resource_kill_gold"), SubResource("Resource_kill_gear")])
 
 [node name="Islands" type="Node2D" parent="." unique_id=181850228]
