@@ -2,6 +2,33 @@
 
 [ext_resource type="PackedScene" uid="uid://dq8jw2t0m3aks" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/BirdBullet.tscn" id="1_base"]
 [ext_resource type="PackedScene" uid="uid://bftpdwkjw3s0r" path="res://Enemies/WizardBoss/FireWizard/BurningIslandEffect.tscn" id="2_burn"]
+[ext_resource type="PackedScene" path="res://Enemies/EnemyAbilities/EnemyBullets/BirdBullets/ScorchImpact.tscn" id="3_impact"]
+
+[sub_resource type="Gradient" id="Gradient_flame"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 0.95, 0.65, 1, 1, 0.6, 0.15, 1, 0.8, 0.18, 0.06, 0.8, 0.3, 0.06, 0.04, 0)
+
+[sub_resource type="Curve" id="Curve_flame_size"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="HellBirdEgg" instance=ExtResource("1_base")]
 island_burn_scene = ExtResource("2_burn")
+impact_scene = ExtResource("3_impact")
+
+[node name="FlameTrail" type="CPUParticles2D" parent="." index="1"]
+z_index = -1
+amount = 30
+lifetime = 0.3
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_flame_size")
+color_ramp = SubResource("Gradient_flame")

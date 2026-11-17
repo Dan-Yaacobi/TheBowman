@@ -85,8 +85,14 @@ class OrbitRing extends Node:
 				arrow.queue_free()
 		_arrows.clear()
 
+	## Drops arrows that were freed or are about to be (e.g. one that hit a barrel).
+	## A typed loop: filter() returns an untyped Array, and a typed lambda param can't take a freed object.
 	func _prune() -> void:
-		_arrows = _arrows.filter(func(a: Arrow) -> bool: return is_instance_valid(a) and not a.is_queued_for_deletion())
+		var kept: Array[Arrow] = []
+		for arrow: Variant in _arrows:
+			if is_instance_valid(arrow) and not (arrow as Arrow).is_queued_for_deletion():
+				kept.append(arrow)
+		_arrows = kept
 
 	func _physics_process(delta: float) -> void:
 		_prune()

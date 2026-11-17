@@ -37,6 +37,13 @@ func _physics_process(delta: float) -> void:
 		_tick_timer = 0.0
 		_retrigger()
 
+## Burns for at least `seconds` more from now, without regrowing (a re-scorch extends it).
+## If it was already dying down, it flares back to full.
+func keep_burning(seconds: float) -> void:
+	if field_lifetime <= 0.0:
+		return
+	field_lifetime = maxf(field_lifetime, _life + seconds)
+
 func _update_burn_amount() -> void:
 	var amount: float = 1.0
 	if grow_time > 0.0:
