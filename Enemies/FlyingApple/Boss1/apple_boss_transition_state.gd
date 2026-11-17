@@ -12,8 +12,8 @@ func init() -> void:
 	summon_timer.timeout.connect(_spawn_apple)
 
 func Enter() -> void:
-	enemy.set_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
-	enemy.debuff_immune = true
+	# Hardened while summoning: 1 damage per hit, no debuffs or stuns
+	enemy.hardened = true
 	enemy.debuff_handler.reset_debuffs()
 	amount_summoned = 0
 	enemy.velocity = Vector2.ZERO
@@ -23,8 +23,7 @@ func Enter() -> void:
 func Exit() -> void:
 	enemy.modulate.a = 1.0
 	summon_timer.stop()
-	enemy.remove_damage_taken_multiplier(-0.9,Stat.buff_type.MULTIPLICATIVE)
-	enemy.debuff_immune = false
+	enemy.hardened = false
 
 
 func Process(_delta: float) -> EnemyState:
