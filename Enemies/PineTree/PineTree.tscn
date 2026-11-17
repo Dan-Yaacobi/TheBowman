@@ -1,0 +1,244 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/PineTree/pine_tree.gd" id="1_pine"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/PineTree/pine_tree.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="3_sm"]
+[ext_resource type="Script" path="res://Enemies/PineTree/States/pine_dormant_state.gd" id="4_dormant"]
+[ext_resource type="Script" path="res://Enemies/PineTree/States/pine_wake_state.gd" id="5_wake"]
+[ext_resource type="Script" path="res://Enemies/PineTree/States/pine_attack_state.gd" id="6_attack"]
+[ext_resource type="Script" path="res://Enemies/PineTree/States/pine_swipe_state.gd" id="7_swipe"]
+[ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="8_dead"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="9_debuff"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="10_hurt"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="11_hit"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="12_hitscript"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="13_hp"]
+
+[sub_resource type="Animation" id="Animation_dormant"]
+resource_name = "Dormant"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arms:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wake"]
+resource_name = "Wake"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arms:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "Idle"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arms:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arms:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_throw"]
+resource_name = "Throw"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arms:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arms:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.5, 0.3]
+}
+
+[sub_resource type="Animation" id="Animation_swipe"]
+resource_name = "Swipe"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arms:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arms:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.6, 0.8, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pine"]
+_data = {
+&"Dormant": SubResource("Animation_dormant"),
+&"Idle": SubResource("Animation_idle"),
+&"Swipe": SubResource("Animation_swipe"),
+&"Throw": SubResource("Animation_throw"),
+&"Wake": SubResource("Animation_wake")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(14, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swipe"]
+size = Vector2(28, 24)
+
+[node name="PineTree" type="CharacterBody2D" node_paths=PackedStringArray("dead_state")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_pine")
+dead_state = NodePath("EnemyStateMachine/Dead")
+stats = ExtResource("2_data")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+offset = Vector2(0, -20)
+
+[node name="Arms" type="Node2D" parent="Sprite2D"]
+position = Vector2(0, -24)
+scale = Vector2(0, 0)
+
+[node name="LeftArm" type="ColorRect" parent="Sprite2D/Arms"]
+offset_left = -16.0
+offset_top = -2.0
+offset_right = -6.0
+offset_bottom = 2.0
+color = Color(0.29, 0.2, 0.12, 1)
+
+[node name="RightArm" type="ColorRect" parent="Sprite2D/Arms"]
+offset_left = 6.0
+offset_top = -2.0
+offset_right = 16.0
+offset_bottom = 2.0
+color = Color(0.29, 0.2, 0.12, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries/ = SubResource("AnimationLibrary_pine")
+
+[node name="ThrowPoint" type="Marker2D" parent="."]
+position = Vector2(0, -36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("3_sm")
+
+[node name="Dormant" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("wake_state")]
+script = ExtResource("4_dormant")
+wake_state = NodePath("../Wake")
+
+[node name="Wake" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("5_wake")
+next_state = NodePath("../Attack")
+
+[node name="Attack" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("swipe_state", "sleep_state")]
+script = ExtResource("6_attack")
+swipe_state = NodePath("../Swipe")
+sleep_state = NodePath("../Dormant")
+
+[node name="Swipe" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("7_swipe")
+attack_state = NodePath("../Attack")
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("8_dead")
+
+[node name="DebuffHandler" parent="." instance=ExtResource("9_debuff")]
+
+[node name="HurtBox" parent="." instance=ExtResource("10_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="SwipeHurtBox" parent="." instance=ExtResource("10_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeHurtBox"]
+position = Vector2(16, -12)
+shape = SubResource("RectangleShape2D_swipe")
+debug_color = Color(0.9, 0.45, 0.1, 0.42)
+
+[node name="HitBox" parent="." instance=ExtResource("11_hit")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("12_hitscript")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("13_hp")]
+offset_left = -8.0
+offset_top = -50.0

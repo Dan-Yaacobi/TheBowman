@@ -16,7 +16,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 ## M
 - [x] Apple rams: line telegraph that tracks, then locks before the charge.
 - [x] Flaming skull: 3-ram chain (buffed apple ram, same-length lines), dizzy ~1.5s after; hits and perfect shots don't interrupt.
-- [ ] Pine tree (sets up the rooted-turret pattern).
+- [x] Pine tree (sets up the rooted-turret pattern). Placeholder art.
 - [ ] Obsidian spire (reuses the turret pattern).
 - [ ] Snowflake swarm.
 - [ ] Difficulty ramp, on two levels:
