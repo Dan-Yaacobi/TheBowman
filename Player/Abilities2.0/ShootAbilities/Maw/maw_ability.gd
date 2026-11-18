@@ -332,93 +332,36 @@ class SoulTrail extends ArrowEffect:
 		trail.color = Color(0.85, 0.45, 1.0, 0.8)
 		_arrow.add_child(trail)
 
-## The bite: the Maw's fleshy jaws gape over the victim and snap shut.
-## Drawn in code to echo the bow: crimson gums, bone fangs, near-black outline.
-class MawBite extends Node2D:
-	const OPEN_TIME: float = 0.09
-	const SNAP_TIME: float = 0.07
-	const HOLD_TIME: float = 0.12
-	const FADE_TIME: float = 0.18
-	const WIDTH: float = 22.0
-	const OUTLINE: Color = Color(0.08, 0.03, 0.04)
-	const GUM: Color = Color(0.55, 0.1, 0.16)
-	const GUM_LIGHT: Color = Color(0.8, 0.25, 0.3)
-	const FANG: Color = Color(0.95, 0.9, 0.78)
-	const FANG_SHADE: Color = Color(0.7, 0.62, 0.52)
-	## Devour bites are bigger and splash harder.
+## The bite: the Maw's fleshy jaws gape over the victim and snap shut (sprite sheet, plays once).
+class MawBite extends Sprite2D:
+	const SHEET_PATH: String = "res://Player/Abilities2.0/ShootAbilities/Maw/Sprites/MawBite.png"
+	const COLUMNS: int = 4
+	const ROWS: int = 4
+	const FRAME_COUNT: int = 14
+	const FRAME_TIME: float = 0.05
+	## Frame where the jaws close: the screen shakes on it.
+	const SNAP_FRAME: int = 4
+	## The bite's centre in the frame (the export's anchor).
+	const ANCHOR: Vector2 = Vector2(25, 30)
+	const BASE_SCALE: float = 0.5
+	## Devour bites are bigger and shake harder.
 	var devour: bool = false
-	## 0 = closed, 1 = fully open
-	var gape: float = 0.0
 
 	func _ready() -> void:
+		texture = load(SHEET_PATH)
+		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		hframes = COLUMNS
+		vframes = ROWS
+		centered = false
+		offset = -ANCHOR
 		z_index = 6
-		scale = Vector2.ONE * (1.35 if devour else 1.0)
+		scale = Vector2.ONE * BASE_SCALE * (1.35 if devour else 1.0)
 		var tween: Tween = create_tween()
-		tween.tween_property(self, "gape", 1.0, OPEN_TIME).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-		tween.tween_property(self, "gape", 0.0, SNAP_TIME).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-		tween.tween_callback(_on_snap)
-		tween.tween_interval(HOLD_TIME)
-		tween.tween_property(self, "modulate:a", 0.0, FADE_TIME)
+		tween.tween_method(_show_frame, 0, FRAME_COUNT - 1, FRAME_TIME * (FRAME_COUNT - 1))
+		tween.tween_interval(FRAME_TIME)
 		tween.tween_callback(queue_free)
 
-	func _process(_delta: float) -> void:
-		queue_redraw()
-
-	func _on_snap() -> void:
-		EventBus.camera_shake.emit(1.5 if devour else 0.8, 10.0)
-		var splash: CPUParticles2D = CPUParticles2D.new()
-		splash.one_shot = true
-		splash.explosiveness = 1.0
-		splash.amount = 18 if devour else 10
-		splash.lifetime = 0.4
-		splash.spread = 180.0
-		splash.gravity = Vector2(0, 260)
-		splash.initial_velocity_min = 40.0
-		splash.initial_velocity_max = 90.0
-		splash.scale_amount_min = 1.0
-		splash.scale_amount_max = 2.5
-		splash.color = GUM_LIGHT
-		splash.emitting = true
-		add_child(splash)
-		var pop: Tween = create_tween()
-		pop.tween_property(self, "scale", scale * 1.2, 0.04)
-		pop.tween_property(self, "scale", scale, 0.08)
-
-	func _draw() -> void:
-		var open: float = 4.0 + gape * 12.0
-		_draw_jaw(-open, 1.0)
-		_draw_jaw(open, -1.0)
-
-	## One jaw: a curved gum with fangs pointing toward the middle.
-	## side = 1 for the upper jaw (fangs point down), -1 for the lower.
-	func _draw_jaw(y: float, side: float) -> void:
-		var half: float = WIDTH / 2.0
-		var curve: float = 5.0 * side
-		var gum: PackedVector2Array = PackedVector2Array([
-			Vector2(-half - 3.0, y - curve * 0.2),
-			Vector2(-half * 0.5, y - curve * 0.9 - 4.0 * side),
-			Vector2(half * 0.5, y - curve * 0.9 - 4.0 * side),
-			Vector2(half + 3.0, y - curve * 0.2),
-			Vector2(half * 0.5, y + 1.0 * side),
-			Vector2(-half * 0.5, y + 1.0 * side),
-		])
-		var outline: PackedVector2Array = gum.duplicate()
-		outline.append(gum[0])
-		draw_colored_polygon(gum, GUM)
-		draw_line(Vector2(-half * 0.6, y - curve * 0.6 - 1.5 * side), Vector2(half * 0.6, y - curve * 0.6 - 1.5 * side), GUM_LIGHT, 1.5)
-		var fang_count: int = 5
-		for i: int in fang_count:
-			var t: float = (float(i) + 0.5) / float(fang_count)
-			var x: float = lerpf(-half, half, t)
-			var length: float = 7.0 if i == 0 or i == fang_count - 1 else 5.0
-			var fang: PackedVector2Array = PackedVector2Array([
-				Vector2(x - 2.0, y + 0.5 * side),
-				Vector2(x + 2.0, y + 0.5 * side),
-				Vector2(x, y + length * side),
-			])
-			draw_colored_polygon(fang, FANG)
-			draw_line(Vector2(x + 1.0, y + 0.5 * side), Vector2(x, y + length * side), FANG_SHADE, 1.0)
-			var fang_outline: PackedVector2Array = fang.duplicate()
-			fang_outline.append(fang[0])
-			draw_polyline(fang_outline, OUTLINE, 1.0)
-		draw_polyline(outline, OUTLINE, 1.0)
+	func _show_frame(index: int) -> void:
+		if index == SNAP_FRAME and frame != SNAP_FRAME:
+			EventBus.camera_shake.emit(1.5 if devour else 0.8, 10.0)
+		frame = index

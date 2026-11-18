@@ -23,8 +23,8 @@ Tick items off as they're approved and wired in. Ask before any batch (more than
 - [ ] Tower tiles and hazards/traps (design still **[OPEN]** in the GDD).
 
 ## Effects
-- [ ] **The Maw's bite**: jaws that gape and snap shut on the bitten enemy, styled after the Maw bow (crimson gums, bone fangs). Needs its own sprite sheet (open, snap, hold). Code: `MawBite` in `Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd`.
-- [ ] **Projectile shatter**: the sword cutting an enemy projectile apart (Parry). Needs its own sprite sheet (slash flash, burst, shards). Code: `Player/Abilities2.0/MilestoneAbilities/Sword/projectile_shatter.gd`.
+- [x] **The Maw's bite**: `Player/Abilities2.0/ShootAbilities/Maw/Sprites/MawBite.png` (PixelLab effect 'Maw Bite'). Code: `MawBite` in `Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd`.
+- [x] **Projectile shatter**: `Player/Abilities2.0/MilestoneAbilities/Sword/Sprites/ProjectileShatter.png` (PixelLab effect 'Projectile Shatter'). Code: `Player/Abilities2.0/MilestoneAbilities/Sword/projectile_shatter.gd`.
 - [ ] (optional) **Portal pointer arrow**: the off-screen arrow to the rift exit portal, drawn in code (`Objects/Portal/portal_pointer.gd`).
 
 ## Items
