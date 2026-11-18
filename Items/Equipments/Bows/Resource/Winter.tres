@@ -48,9 +48,9 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_jvfa1"]
 script = ExtResource("6_jq77s")
-stat_name = "move_speed"
-min_value = 20.0
-max_value = 40.0
+stat_name = "perfect_shot_bonus"
+min_value = 33.0
+max_value = 67.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_75s1r"]

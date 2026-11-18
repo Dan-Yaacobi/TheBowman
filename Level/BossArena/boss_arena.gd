@@ -8,7 +8,6 @@ class_name BossArena extends GameWorld
 @onready var player_spawn: PlayerSpawn = $PlayerSpawn
 @onready var portal: Portal = $Portal
 @onready var loot_manager: LootManager = $LootManager
-@onready var boss_incoming_label: Label = $BossIncomingLabel
 @onready var falling_death: FallingDeath = $FallingDeath
 
 func _ready() -> void:
@@ -40,7 +39,6 @@ func on_world_ready() -> void:
 	_start_fight()
 
 func _play_intro() -> void:
-	boss_incoming_label.modulate.a = 0.0
 	var banner: BossIntroBanner = BossIntroBanner.new()
 	banner.boss_title = boss.get_title() if is_instance_valid(boss) else "Boss"
 	add_child(banner)

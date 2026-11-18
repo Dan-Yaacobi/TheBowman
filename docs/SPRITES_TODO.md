@@ -11,7 +11,7 @@ Tick items off as they're approved and wired in. Ask before any batch (more than
 - [ ] **Magma golem** (hell): rock golem reskin, cosmetic fire.
 - [ ] **Obsidian spire** (hell): jagged black crystal with lava cracks; asleep, charging glow, burst; shard projectile. Folder: `Enemies/ObsidianSpire/` (no sprites yet).
 - [ ] **Imp** (hell): rush, wind-up glow, lunge, grab/hold on the archer's head. Folder: `Enemies/Imp/` (no sprites yet).
-- [ ] **Flaming skull** (hell): has `Enemies/Sprites/FlamingSkull.png` frames; confirm it's final or redo (ram, dizzy).
+- [ ] **Flaming skull** (hell): current `Enemies/Sprites/FlamingSkull.png` is a placeholder. Needs ram (x3) and dizzy animations.
 
 ## Bosses
 - [ ] **Final wizard boss**: body, two elemental portals, chaos portal.
@@ -22,11 +22,10 @@ Tick items off as they're approved and wired in. Ask before any batch (more than
 ## Tower
 - [ ] Tower tiles and hazards/traps (design still **[OPEN]** in the GDD).
 
-## Effects drawn in code for now (optional sprite upgrades)
-These work without art; a sprite sheet would just make them nicer.
-- [ ] **The Maw's bite**: jaws that gape and snap shut on the bitten enemy, styled after the Maw bow (crimson gums, bone fangs). Now drawn in `MawBite` (`Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd`). A 4–6 frame open/snap sheet would replace `_draw()`.
-- [ ] **Portal pointer arrow**: the off-screen arrow to the rift exit portal (`Objects/Portal/portal_pointer.gd`).
-- [ ] **Projectile shatter**: sword cutting a projectile (Parry) (`Player/Abilities2.0/MilestoneAbilities/Sword/projectile_shatter.gd`).
+## Effects
+- [ ] **The Maw's bite**: jaws that gape and snap shut on the bitten enemy, styled after the Maw bow (crimson gums, bone fangs). Needs its own sprite sheet (open, snap, hold). Code: `MawBite` in `Player/Abilities2.0/ShootAbilities/Maw/maw_ability.gd`.
+- [ ] **Projectile shatter**: the sword cutting an enemy projectile apart (Parry). Needs its own sprite sheet (slash flash, burst, shards). Code: `Player/Abilities2.0/MilestoneAbilities/Sword/projectile_shatter.gd`.
+- [ ] (optional) **Portal pointer arrow**: the off-screen arrow to the rift exit portal, drawn in code (`Objects/Portal/portal_pointer.gd`).
 
 ## Items
 - [ ] Remaining placeholder items (see `docs/FINISH_PLAN.md`).

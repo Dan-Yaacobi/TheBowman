@@ -8,6 +8,15 @@ const HIT_DAMAGE_LABEL: String = "Hit Damage"
 const CHARACTER_AREA: String = "Control/CenterContainer/Window/VBox/Columns/CharacterPanel/CharacterArea/"
 const TOOLTIP_GAP: float = 12.0
 const ITEM_ICON_SIZE: float = 28.0
+## Native abilities are tinted toward the color of the altar track they come from.
+const NATIVE_SOURCE_TINTS: Dictionary[String, Color] = {
+	"Power": Color(1.0, 0.62, 0.35),
+	"Sword": Color(0.7, 0.8, 0.95),
+	"Health": Color(1.0, 0.5, 0.55),
+	"Mobility": Color(0.5, 0.95, 0.7),
+	"Other": Color(0.85, 0.8, 0.7),
+}
+const NATIVE_TINT_STRENGTH: float = 0.35
 const COLOR_HIGHLIGHT: Color = Color("ffcf5a")
 const COLOR_ROW_STRIPE: Color = Color(1.0, 1.0, 1.0, 0.05)
 const COLOR_ROW_HIGHLIGHT: Color = Color(1.0, 0.81, 0.35, 0.12)
@@ -352,10 +361,51 @@ func _build_abilities() -> void:
 
 	_add_section_header("Native")
 	var native: Array[PlayerAbility] = _get_native_abilities(from_items)
+	# Grouped by where they come from (altar track, or Other), each group lightly tinted.
+	var groups: Dictionary[String, Array] = {}
 	for ability: PlayerAbility in native:
-		abilities_list.add_child(_make_ability_label(ability))
+		var source: String = _ability_source(ability)
+		if not groups.has(source):
+			groups[source] = []
+		groups[source].append(ability)
+	for source: String in _ordered_sources(groups.keys()):
+		var tint: Color = NATIVE_SOURCE_TINTS.get(source, NATIVE_SOURCE_TINTS["Other"])
+		abilities_list.add_child(_make_source_header(source, tint))
+		for ability: PlayerAbility in groups[source]:
+			var line: Label = _make_ability_label(ability)
+			line.add_theme_color_override("font_color", ability.get_tooltip_color().lerp(tint, NATIVE_TINT_STRENGTH))
+			abilities_list.add_child(line)
 	if native.is_empty():
 		abilities_list.add_child(_make_dim_label("None"))
+
+
+## Altar track a native ability was picked from ("Power", "Sword", "Health", "Mobility"),
+## matched by script since the player holds its own copy. Anything else is "Other".
+func _ability_source(ability: PlayerAbility) -> String:
+	var script: Script = ability.get_script()
+	for track: UpgradeTrack in MetaProgress.tracks:
+		for reward: MilestoneReward in track.milestone_pool:
+			if reward and reward.ability and reward.ability.get_script() == script:
+				return track.display_name
+	return "Other"
+
+
+func _ordered_sources(sources: Array) -> Array[String]:
+	var ordered: Array[String] = []
+	for track: UpgradeTrack in MetaProgress.tracks:
+		if sources.has(track.display_name):
+			ordered.append(track.display_name)
+	for source: String in sources:
+		if not ordered.has(source):
+			ordered.append(source)
+	return ordered
+
+
+func _make_source_header(source: String, tint: Color) -> Label:
+	var header: Label = _make_label(source.to_upper())
+	header.theme_type_variation = &"DimLabel"
+	header.add_theme_color_override("font_color", tint)
+	return header
 
 
 func _get_item_abilities(item: EquipmentData) -> Array[PlayerAbility]:

@@ -25,3 +25,8 @@ func get_tooltip_color() -> Color:
 func draw_ended() -> void:
 	if is_instance_valid(breath):
 		breath.queue_free()
+	breath = null
+
+## Dying or swapping the bow mid-breath must not leave the breath on the archer.
+func on_unequipped() -> void:
+	draw_ended()

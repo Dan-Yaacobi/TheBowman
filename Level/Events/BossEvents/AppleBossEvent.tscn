@@ -37,15 +37,6 @@ position = Vector2(1, -40)
 [node name="EventPortal" parent="." unique_id=1166811293 instance=ExtResource("3_c6qoj")]
 position = Vector2(14, 190)
 
-[node name="BossIncomingLabel" type="Label" parent="." unique_id=1530353532]
-offset_left = -87.0
-offset_top = -111.0
-offset_right = 489.0
-offset_bottom = 14.0
-scale = Vector2(0.3, 0.3)
-theme_override_font_sizes/font_size = 100
-text = "Boss Incoming"
-
 [node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("5_ndsc0")]
 position = Vector2(2, 560)
 

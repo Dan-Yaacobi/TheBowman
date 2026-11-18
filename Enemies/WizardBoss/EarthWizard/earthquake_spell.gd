@@ -114,7 +114,7 @@ func _knock_player() -> void:
 	var side: float = signf(player.global_position.x - island.global_position.x)
 	if side == 0.0:
 		side = 1.0 if randf() < 0.5 else -1.0
-	EventBus.apply_player_knockback.emit(Vector2(side, -knockback_lift), knockback_force, false)
+	EventBus.apply_player_knockback.emit(Vector2(side, -knockback_lift), knockback_force * PlayerManager.player.enemy_knockback_mult, false)
 
 func _island_under(player: Player) -> Island:
 	for i: int in player.get_slide_collision_count():

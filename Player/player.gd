@@ -48,6 +48,13 @@ signal sword_swung
 ## On landing, this share of the sideways knockback is kept, so air momentum doesn't carry
 ## the archer straight off the far edge.
 @export var landing_knockback_keep: float = 0.35
+## Knockback from enemy hits (and enemy shoves like the earthquake) is multiplied by this,
+## making up for the stronger ground grip so hits still threaten the edge.
+@export var enemy_knockback_mult: float = 1.5
+@export_group("Movement")
+## Move speed never goes above base x this, however many speed bonuses stack.
+## Slows still apply in full.
+@export var max_move_speed_mult: float = 1.25
 @export_group("")
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
@@ -496,7 +503,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 			start_invincibilty()
 			dmg_taken = _hurt_box.damage
 			var knockback_mult: float = 1.0 if is_on_floor() else air_knockback_taken
-			apply_knockback(_hurt_box.knockback_dir, _hurt_box.knockback_power * knockback_mult)
+			apply_knockback(_hurt_box.knockback_dir, _hurt_box.knockback_power * knockback_mult * enemy_knockback_mult)
 			dmg_color = _hurt_box.combat_text_color
 		else:
 			dmg_taken = raw_damage
@@ -665,10 +672,11 @@ var C: int = 200 ## controls how fast you upgrade movement speed via agility
 ## asymptotic increase towards max speed
 
 func get_move_speed() -> float:
+	var speed: float = minf(stats.move_speed.value(), stats.move_speed.base_value * max_move_speed_mult)
 	if main_hand.is_overcharging():
-		return stats.move_speed.value() * main_hand.overcharge_move_mult
-	return stats.move_speed.value()
-	
+		return speed * main_hand.overcharge_move_mult
+	return speed
+
 ## Pull speed after diminishing returns (see PlayerMainHand.pull_speed_bonus_exponent).
 func get_pull_speed() -> float:
 	return main_hand.effective_pull_speed(stats.pull_speed.value())

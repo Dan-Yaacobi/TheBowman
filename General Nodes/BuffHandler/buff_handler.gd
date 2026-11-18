@@ -29,3 +29,10 @@ func remove_buff(_id: int) -> void:
 
 func has_buff(_id: int) -> bool:
 	return buffs.has(_id)
+
+## Ends every buff (death): each one undoes its own effect on the way out.
+func reset_buffs() -> void:
+	for buff: Buff in buffs.values().duplicate():
+		if is_instance_valid(buff):
+			buff.buff_end()
+	buffs.clear()

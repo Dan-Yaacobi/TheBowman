@@ -11,10 +11,19 @@ class_name DisenchantStatBonus extends DisenchantBonus
 func get_description() -> String:
 	if display_text != "":
 		return display_text
-	var stat_label: String = String(stat_name).capitalize().to_lower()
+	return _describe(amount)
+
+## Adds the stacks up into one number ("+3 arrow damage"); a custom display_text gets "x3".
+func get_stacked_description(stacks: int) -> String:
+	if display_text != "" or stacks <= 1:
+		return super(stacks)
+	return _describe(amount * stacks)
+
+func _describe(total: float) -> String:
+	var stat_label: String = PlayerStats.display_name(String(stat_name)).to_lower()
 	if type == Stat.buff_type.MULTIPLICATIVE:
-		return "+%s%% %s" % [format_number(amount * 100.0), stat_label]
-	return "+%s %s" % [format_number(amount), stat_label]
+		return "+%s%% %s" % [format_number(total * 100.0), stat_label]
+	return "+%s %s" % [format_number(total), stat_label]
 
 func apply_to_stats(stats: PlayerStats, buff_id: int) -> void:
 	var stat: Stat = _get_stat(stats)

@@ -159,6 +159,7 @@ static var STAT_UNITS: Dictionary[String, StatUnit] = {
 	"perfect_shot_bonus": StatUnit.PERCENT,
 	"arrow_size": StatUnit.PERCENT,
 	"arrow_speed": StatUnit.PERCENT,
+	"move_speed": StatUnit.PERCENT,
 	"stun_duration": StatUnit.PERCENT,
 	"burn_duration": StatUnit.PERCENT,
 	"bleed_duration": StatUnit.PERCENT,

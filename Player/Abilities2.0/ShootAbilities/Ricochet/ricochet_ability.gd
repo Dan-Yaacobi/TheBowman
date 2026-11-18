@@ -1,6 +1,6 @@
 class_name RicochetAbility extends PlayerAbility
-## Ricochet Quiver: every arrow hit bounces once toward the nearest other enemy for a share of the
-## hit's damage. With no enemy in range, it bounces off in a random direction. Bounces never bounce
+## Ricochet Quiver: when an arrow stops in an enemy (its last pierce), it bounces once toward the
+## nearest other enemy for a share of the hit's damage. Hits it pierces through don't bounce. With no enemy in range, it bounces off in a random direction. Bounces never bounce
 ## again. The damage share scales with the quiver's color level.
 
 const BOUNCED_META: StringName = &"ricochet_bounce"
@@ -15,6 +15,10 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	var hurt_box: HurtBox = _activator as HurtBox
 	var arrow: Arrow = MinorHitHelpers.arrow_of(hurt_box)
 	if enemy == null or arrow == null or arrow.has_meta(BOUNCED_META) or not enemy.is_inside_tree():
+		return
+	# The arrow counts this hit before after-hit effects run; still under its pierce limit means
+	# it flies on, so the bounce waits for the hit that stops it.
+	if arrow.pierce_count < arrow.possible_pierce:
 		return
 	var origin: Vector2 = enemy.global_position
 	var direction: Vector2 = Vector2.RIGHT.rotated(randf() * TAU)
@@ -41,7 +45,7 @@ func _nearest_other(from: Enemy) -> Enemy:
 	return best
 
 func get_tooltip() -> String:
-	return "Every hit bounces to the nearest enemy for %d%% damage" % roundi(damage_share * power() * 100.0)
+	return "Arrows bounce to the nearest enemy when they stop in one, for %d%% damage" % roundi(damage_share * power() * 100.0)
 
 func get_tooltip_color() -> Color:
 	return Color.KHAKI

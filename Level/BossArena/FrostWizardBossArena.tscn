@@ -28,15 +28,6 @@ sleep_duration = 1.0
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("4_5d562")]
 
-[node name="BossIncomingLabel" type="Label" parent="." unique_id=1530353532]
-offset_left = -78.0
-offset_top = 27.0
-offset_right = 498.0
-offset_bottom = 152.0
-scale = Vector2(0.3, 0.3)
-theme_override_font_sizes/font_size = 100
-text = "Boss Incoming"
-
 [node name="FallingDeath" parent="." unique_id=931662378 instance=ExtResource("5_diqrl")]
 position = Vector2(2, 560)
 

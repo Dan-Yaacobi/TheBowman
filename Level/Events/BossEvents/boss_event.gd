@@ -8,7 +8,6 @@ class_name BossEvent extends Event
 @export var fight_start_delay: float = 0.5
 
 @onready var exit_portal: EventPortal = $EventPortal
-@onready var boss_incoming_label: Label = $BossIncomingLabel
 @onready var falling_death: FallingDeath = $FallingDeath
 
 var _world: GameWorld = null
@@ -18,7 +17,6 @@ var _zoomed_out: bool = false
 func _ready() -> void:
 	_set_boss_dormant(true)
 	_set_exit_portal_active(false)
-	boss_incoming_label.modulate.a = 0.0
 
 func on_event_entered() -> void:
 	# Falling inside the event should respawn here, not back in the rift
@@ -46,7 +44,6 @@ func on_event_exited() -> void:
 	EventBus.hide_boss_health_bar.emit()
 
 func _play_intro() -> void:
-	boss_incoming_label.modulate.a = 0.0
 	var banner: BossIntroBanner = BossIntroBanner.new()
 	banner.boss_title = boss.get_title() if is_instance_valid(boss) else "Boss"
 	add_child(banner)

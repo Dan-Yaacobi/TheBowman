@@ -109,6 +109,10 @@ func reset() -> void:
 	if current_arrow:
 		current_arrow.queue_free()
 	current_arrow = null
+	# A reset (death, respawn) ends the draw without a release; let draw effects clean up.
+	for ability: PlayerAbility in PlayerManager.player.get_abilities(PlayerAbility.TriggerType.DRAW):
+		if ability.has_method("draw_ended"):
+			ability.draw_ended()
 
 func arrow_setup() -> void:
 	set_hand_direction()

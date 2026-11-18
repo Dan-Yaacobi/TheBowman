@@ -11,6 +11,7 @@ radius = 59.3043
 script = ExtResource("1_twdkf")
 id = &"altar"
 display_name = "Upgrade Altar"
+description = "Spend resources on permanent upgrades to power, health, mobility and your sword. Every few levels, a Skyshard milestone unlocks a new ability. Upgrades carry over into every run."
 cost = Dictionary[int, int]({
 0: 10,
 3: 10

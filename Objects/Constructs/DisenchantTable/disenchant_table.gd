@@ -60,6 +60,9 @@ var _milestone_text: String = ""
 
 func extra_ready_functions() -> void:
 	info_label.modulate.a = 0.0
+	# Extra lines (earned bonuses) grow the label upward, away from the table.
+	info_label.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_build_runes()
 	EventBus.disenchant_milestone_reached.connect(_on_event_bus_disenchant_milestone_reached)
 
@@ -185,13 +188,28 @@ func _show_info(text: String, duration: float) -> void:
 	_info_tween.tween_property(info_label, "modulate:a", 1.0, 0.15)
 	_info_tween.tween_property(info_label, "modulate:a", 0.0, 0.3).set_delay(duration)
 
-## e.g. "Disenchanted 23 / 25\nNext: +5% Skyshard chance from legendaries".
+## e.g. "Disenchanted 23 / 25\nNext: +5% Skyshard chance\nYour bonuses: +2 arrow damage".
 func _progress_text() -> String:
 	var lifetime: int = Disenchanting.lifetime_disenchanted
 	var next: DisenchantMilestone = Disenchanting.get_next_milestone()
+	var text: String
 	if next == null:
-		return "Disenchanted %d\nAll milestones reached" % lifetime
-	return "Disenchanted %d / %d\nNext: %s" % [lifetime, Disenchanting.get_next_threshold(), next.get_description()]
+		text = "Disenchanted %d\nAll milestones reached" % lifetime
+	else:
+		text = "Disenchanted %d / %d\nNext: %s" % [lifetime, Disenchanting.get_next_threshold(), next.get_description()]
+	var earned: PackedStringArray = _earned_bonuses(lifetime)
+	if not earned.is_empty():
+		text += "\nYour bonuses: " + ", ".join(earned)
+	return text
+
+## Every bonus reached so far, stacks added up.
+func _earned_bonuses(lifetime: int) -> PackedStringArray:
+	var lines: PackedStringArray = PackedStringArray()
+	for milestone: DisenchantMilestone in Disenchanting.get_milestones():
+		var stacks: int = milestone.get_stacks(lifetime)
+		if stacks > 0 and milestone.bonus:
+			lines.append(milestone.bonus.get_stacked_description(stacks))
+	return lines
 
 func _on_event_bus_disenchant_milestone_reached(_level: int, milestone: DisenchantMilestone) -> void:
 	_milestone_text = "Milestone reached!\n%s" % milestone.get_description()

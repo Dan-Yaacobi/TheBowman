@@ -6,6 +6,12 @@ class_name DisenchantBonus extends Resource
 func get_description() -> String:
 	return ""
 
+## The bonus as it stands after stacking, e.g. "+3 arrow damage". Default: "<text> x3".
+func get_stacked_description(stacks: int) -> String:
+	if stacks <= 1:
+		return get_description()
+	return "%s x%d" % [get_description(), stacks]
+
 ## 5.0 → "5", 2.5 → "2.5".
 static func format_number(value: float) -> String:
 	if is_equal_approx(value, roundf(value)):

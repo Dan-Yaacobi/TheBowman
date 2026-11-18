@@ -4,8 +4,9 @@ class_name MawAbility extends PlayerAbility
 ##   Starving: weaker arrows.
 ##   Fed: perfect kills bite the nearest enemy.
 ##   Gorged: stronger arrows that trail souls; every perfect hit bites, kill or not.
-##   Awakened: strongest arrows; bites devour enemies below the HP threshold
-##             (bosses take a double bite instead).
+##   Awakened: strongest arrows; a perfect hit on an enemy below the HP threshold bites
+##             that enemy itself; bites devour enemies below the threshold (bosses take a
+##             double bite instead). Every heal_every_kills kills heal the archer.
 ## Precision scrolls scale the positive stage bonuses and the bite, not the Starving penalty.
 
 enum Stage { STARVING, FED, GORGED, AWAKENED }
@@ -29,9 +30,14 @@ const STAGE_COLORS: Array[Color] = [Color(0.6, 0.6, 0.65), Color(0.75, 0.55, 1.0
 @export var bite_on_hit_stage: Stage = Stage.GORGED
 ## Devour: enemies below this share of their HP are devoured by a bite (Awakened).
 @export var devour_threshold: float = 0.2
+## Awakened: kills needed per heal, and how much each heal restores.
+@export var heal_every_kills: int = 10
+@export var kill_heal_amount: int = 1
 @export_group("")
 
 var souls: int = 0
+## Awakened kills since the last heal.
+var _kills_toward_heal: int = 0
 var _stage: Stage = Stage.STARVING
 var _buff_id: int = "maw/stage_damage".hash()
 var _counter: SoulCounter
@@ -105,6 +111,18 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 	_update_counter()
 	if is_instance_valid(_counter):
 		_counter.pulse()
+	_count_kill_for_heal()
+
+func _count_kill_for_heal() -> void:
+	if _stage != Stage.AWAKENED or heal_every_kills <= 0:
+		return
+	_kills_toward_heal += 1
+	if _kills_toward_heal < heal_every_kills:
+		return
+	_kills_toward_heal = 0
+	var player: Player = PlayerManager.player
+	if player.heal(kill_heal_amount):
+		CombatTextSpawner.spawn(player.global_position + Vector2(0, -40), "The Maw feeds", STAGE_COLORS[Stage.AWAKENED])
 
 ## Bite: a perfect kill (from Gorged on, any perfect hit) lashes the nearest other enemy.
 ## Awakened bites devour anything under the HP threshold; bosses take a double bite instead.
@@ -116,7 +134,13 @@ func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -
 	if not is_instance_valid(arrow) or not target.is_inside_tree():
 		return
 	var bite: int = maxi(1, roundi(arrow.hurt_box.damage * bite_share * power()))
-	for victim: Enemy in _nearest_others(target, 1):
+	# Awakened: a weakened survivor gets bitten itself, even with no one else around.
+	var victims: Array[Enemy] = []
+	if _stage == Stage.AWAKENED and not target.is_dead and _can_devour(target):
+		victims.append(target)
+	else:
+		victims = _nearest_others(target, 1)
+	for victim: Enemy in victims:
 		var color: Color = STAGE_COLORS[_stage]
 		var damage: int = bite
 		if _stage == Stage.AWAKENED and _can_devour(victim):
@@ -129,12 +153,13 @@ func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -
 		jaws.global_position = victim.global_position + Vector2(0, -8)
 		jaws.devour = damage > bite
 		EventBus.summon_effect.emit(jaws)
-		var link: ContagionBandAbility.ContagionLink = ContagionBandAbility.ContagionLink.new()
-		link.from = target.global_position
-		link.to = victim.global_position
-		link.color = Color(color, 0.6)
-		link.thickness = 2.0
-		EventBus.summon_effect.emit(link)
+		if victim != target:
+			var link: ContagionBandAbility.ContagionLink = ContagionBandAbility.ContagionLink.new()
+			link.from = target.global_position
+			link.to = victim.global_position
+			link.color = Color(color, 0.6)
+			link.thickness = 2.0
+			EventBus.summon_effect.emit(link)
 		victim.take_damage(null, damage, null, color)
 
 func _can_devour(victim: Enemy) -> bool:
@@ -210,7 +235,8 @@ func _stage_parts(stage_index: int) -> PackedStringArray:
 	if stage_index == bite_on_hit_stage and stage_index > Stage.FED:
 		parts.append("every perfect hit bites, kill or not")
 	if stage_index == Stage.AWAKENED:
-		parts.append("bites devour enemies under %d%% HP (bosses take a double bite)" % roundi(devour_threshold * 100.0))
+		parts.append("perfect hits on enemies under %d%% HP bite them, and bites devour them (bosses take a double bite)" % roundi(devour_threshold * 100.0))
+		parts.append("every %d kills heal you for %d" % [heal_every_kills, kill_heal_amount])
 	return parts
 
 func get_tooltip_color() -> Color:
