@@ -297,10 +297,7 @@ func _make_stat_label(text: String) -> Label:
 
 
 func _get_stat_display_name(prop: String) -> String:
-	for entry: Array in PlayerStats.DISPLAY_STATS:
-		if entry[2] == prop:
-			return entry[1]
-	return prop.capitalize()
+	return PlayerStats.display_name(prop)
 
 
 ## Total in the stat's display units (percent of base for percent stats).

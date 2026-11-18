@@ -5,8 +5,10 @@ class_name RiftbowAbility extends PlayerAbility
 
 ## How far from the enemy the portal opens.
 @export var portal_distance: float = 45.0
-## Portal hit damage, as a multiplier of the arrow's damage.
-@export var damage_mult: float = 0.8
+## Portal hit damage per roll, as a multiplier of the arrow's damage.
+## The fireball also burns, so its hit is light; the fist is mostly knockback.
+@export var fireball_damage_mult: float = 0.35
+@export var fist_damage_mult: float = 0.1
 @export var fist_knockback: float = 500.0
 
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
@@ -22,7 +24,8 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	portal.target_position = enemy.global_position
 	portal.roll = RiftPortal.Roll.values().pick_random()
 	# The arrow's damage already includes the bow's color level; scaling again would count it twice.
-	portal.damage = maxi(1, roundi(hurt_box.damage * damage_mult))
+	portal.fireball_damage = maxi(1, roundi(hurt_box.damage * fireball_damage_mult))
+	portal.fist_damage = maxi(1, roundi(hurt_box.damage * fist_damage_mult))
 	portal.knockback = hurt_box.knockback_power
 	portal.fist_knockback = fist_knockback * power()
 	# Open above-ish the enemy, on a random side, so the shot comes in at an angle.

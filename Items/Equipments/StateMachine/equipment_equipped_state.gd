@@ -5,6 +5,7 @@ func init() -> void:
 	pass
 	
 func Enter() -> void:
+	equipment.set_ground_glow(false)
 	equipment.equip_to_player()
 	_update_equipment_ui()
 	equipment.hide()

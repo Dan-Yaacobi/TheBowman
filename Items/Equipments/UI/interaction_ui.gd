@@ -105,7 +105,7 @@ func set_items(new_equip: Equipment) -> void:
 		var new_amount: float = new_mod[0].amount if new_mod.size() > 0 else 0.0
 		var cur_amount: float = cur_mod[0].amount if cur_mod.size() > 0 else 0.0
 		var delta = new_amount - cur_amount
-		var display_name = stat_names_dict.get(stat_name, stat_name)
+		var display_name: String = stat_names_dict.get(stat_name, PlayerStats.display_name(stat_name))
 		var label: StatLabel
 		if current_equip == null:
 			label = _make_label(display_name, new_amount)

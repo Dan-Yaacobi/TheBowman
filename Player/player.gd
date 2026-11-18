@@ -41,6 +41,14 @@ signal sword_swung
 
 @export var stats: PlayerStats
 @export var fall_animation_threshold: float = 20.0
+@export_group("Grip")
+## Knockback and recoil fade this fast (px/s per second) while standing, scaled by ground
+## traction, so a push doesn't slide the archer off the island. Air uses KNOCKBACK_FRICTION.
+@export var ground_knockback_friction: float = 600.0
+## On landing, this share of the sideways knockback is kept, so air momentum doesn't carry
+## the archer straight off the far edge.
+@export var landing_knockback_keep: float = 0.35
+@export_group("")
 @export_subgroup("Buffs")
 @export var hit_effects: Dictionary[OnHitEffect,int] = {}
 @export var perfect_shot_effects: Dictionary[OnPerfectShotEffect,int] = {}
@@ -82,7 +90,8 @@ var can_dash: int = 0
 var equipment_interacted: Equipment = null
 
 var knockback: Vector2 = Vector2.ZERO
-const KNOCKBACK_FRICTION: float = 300.0 
+const KNOCKBACK_FRICTION: float = 300.0
+var _was_on_floor: bool = false
 
 
 var equipped_nodes: Dictionary = {
@@ -139,6 +148,9 @@ func _ready() -> void:
 	main_hand.release.connect(_on_main_hand_released)
 	off_hand.rest(body.off_hand_shoulder)
 	main_hand.set_anchor(body.main_hand_shoulder)
+	# One-shot: a repeating cooldown kept unlocking the sword every few seconds, pushing
+	# can_swing below zero so locks stacked on it (the No Sword curse) did nothing.
+	swing_cooldown.one_shot = true
 	swing_cooldown.timeout.connect(_on_swing_cooldown_timeout)
 	jump_action.jumped.connect(_on_jumped)
 	jump_action.landed.connect(_on_landed)
@@ -289,11 +301,16 @@ func reset_hands() -> void:
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
-	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
+	var on_floor: bool = is_on_floor()
+	if on_floor and not _was_on_floor:
+		knockback.x *= landing_knockback_keep
+	var friction: float = ground_knockback_friction * get_ground_traction() if on_floor else KNOCKBACK_FRICTION
+	knockback = knockback.move_toward(Vector2.ZERO, maxf(friction, KNOCKBACK_FRICTION) * delta)
 	var drag: Vector2 = _get_grab_drag()
 	velocity += knockback + drag
 	move_and_slide()
 	velocity -= knockback + drag
+	_was_on_floor = is_on_floor()
 	_check_island_contact()
 
 ## Reports each island the first time the player stands on it (run tally).

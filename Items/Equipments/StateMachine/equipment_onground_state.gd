@@ -38,7 +38,7 @@ func Physics(_delta: float) -> EquipmentState:
 func _apply_glow() -> void:
 	rarity_sparkle.color = CustomVariables.rarity_color(equipment.data.rarity)
 	rarity_sparkle.emitting = true
-	pass
+	equipment.set_ground_glow(true)
 
 func _on_player_entered(body: Node2D) -> void:
 	if body is Player:

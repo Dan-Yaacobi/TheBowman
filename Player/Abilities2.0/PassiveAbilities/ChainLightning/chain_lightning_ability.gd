@@ -3,6 +3,9 @@ class_name ChainLightningAbility extends PlayerGaugeAbility
 const LIGHTNING_CHAIN = preload("uid://bf4okr84ysm2p")
 const LIGHTNING = preload("uid://v43hqxcynju5")
 
+## How far from the player the first bolt can reach.
+@export var target_radius: float = 100.0
+
 var _hit_enemy: Enemy = null
 var _hit_position: Vector2 = Vector2.ZERO
 
@@ -30,7 +33,8 @@ func find_target() -> bool:
 	_hit_enemy = null
 	var player_pos: Vector2 = PlayerManager.player.global_position
 	var closest_dist_sq: float = INF
-	for enemy: Enemy in PlayerManager.player.get_nearby_enemies():
+	# Searched by hitbox, not body: wizard bosses' bodies aren't on the Enemies layer.
+	for enemy: Enemy in MinorHitHelpers.enemies_in_radius(PlayerManager.player.get_world_2d(), player_pos, target_radius):
 		var dist_sq: float = player_pos.distance_squared_to(enemy.global_position)
 		if dist_sq < closest_dist_sq:
 			closest_dist_sq = dist_sq
@@ -51,7 +55,7 @@ func activate_gauge_ability(_amount: int) -> void:
 	chain.setup(_hit_position, _hit_enemy, chain.max_chains, [])
 
 func get_tooltip() -> String:
-	return "Perfect shots and apply stuns fill the gauge. When full, your next perfect shot chains lightning."
+	return "Perfect shots and stuns fill the gauge.\n%s strike the nearest enemy with lightning that chains and stuns." % ACTIVATE_HINT
 
 func get_tooltip_color() -> Color:
 	return Color.YELLOW

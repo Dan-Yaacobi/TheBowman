@@ -9,6 +9,7 @@ class_name Equipment extends RigidBody2D
 
 var data: EquipmentData
 var is_landed: bool = false
+var _ground_glow: ItemGlow
 
 func _ready() -> void:
 	lock_rotation = true
@@ -62,3 +63,17 @@ func equip_directly() -> void:
 
 func become_unequipped() -> void:
 	state_machine.ChangeState(un_equipped_state)
+
+## Color-type glow while the item lies on the ground.
+func set_ground_glow(enabled: bool) -> void:
+	if not enabled:
+		if is_instance_valid(_ground_glow):
+			_ground_glow.queue_free()
+		_ground_glow = null
+		return
+	if is_instance_valid(_ground_glow) or data == null:
+		return
+	_ground_glow = ItemGlow.new()
+	_ground_glow.color = CustomVariables.item_color_tint(data.color)
+	_ground_glow.target_sprite = sprite
+	add_child(_ground_glow)

@@ -40,10 +40,11 @@ func on_world_ready() -> void:
 	_start_fight()
 
 func _play_intro() -> void:
-	boss_incoming_label.modulate.a = 1.0
-	var tween: Tween = create_tween()
-	tween.tween_property(boss_incoming_label, "modulate:a", 0.0, intro_fade_duration)
-	await tween.finished
+	boss_incoming_label.modulate.a = 0.0
+	var banner: BossIntroBanner = BossIntroBanner.new()
+	banner.boss_title = boss.get_title() if is_instance_valid(boss) else "Boss"
+	add_child(banner)
+	await banner.finished
 
 func _start_fight() -> void:
 	if not is_instance_valid(boss):

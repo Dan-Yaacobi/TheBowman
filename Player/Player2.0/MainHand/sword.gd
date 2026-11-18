@@ -51,7 +51,16 @@ func clear_effects(_bool) -> void:
 	slash_hurt_box.clear_effects()
 
 func sword_hit(_hurt_box: HurtBox, _hit_box: Area2D, _result: DamageResult) -> void:
+	if destroys_projectiles and _hit_box.get_collision_layer_value(PROJECTILES_LAYER):
+		_show_projectile_shatter(_hit_box)
 	EventBus.sword_hit.emit(_hit_box.get_parent())
+
+func _show_projectile_shatter(projectile_hit_box: Area2D) -> void:
+	var shatter: ProjectileShatter = ProjectileShatter.new()
+	shatter.global_position = projectile_hit_box.global_position
+	var away: Vector2 = projectile_hit_box.global_position - global_position
+	shatter.cut_direction = away.normalized() if away != Vector2.ZERO else Vector2.RIGHT
+	EventBus.summon_effect.emit(shatter)
 
 func set_bleed_chance(_amount: int) -> void:
 	stats.bleed_chance = _amount

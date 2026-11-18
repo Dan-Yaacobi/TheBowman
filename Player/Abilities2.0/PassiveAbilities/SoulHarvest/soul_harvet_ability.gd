@@ -40,7 +40,7 @@ func summon_soul(_enemy: Enemy ) -> void:
 	EventBus.summon_effect.emit(new_soul)
 
 func get_tooltip() -> String:
-	return "Collect enemy souls, unleash them with your Perfect Shot"
+	return "Slain enemies leave souls; collect them to fill the gauge.\n%s unleash a soul explosion around you." % ACTIVATE_HINT
 
 func get_tooltip_color() -> Color:
 	return Color.PALE_TURQUOISE

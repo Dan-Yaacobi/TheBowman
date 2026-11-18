@@ -23,7 +23,8 @@ var target: Enemy
 ## Where to fire if the target is dead or gone; follows the target while it lives.
 var target_position: Vector2
 var roll: Roll = Roll.FIREBALL
-var damage: int = 1
+var fireball_damage: int = 1
+var fist_damage: int = 1
 var knockback: float = 200.0
 var fist_knockback: float = 500.0
 var _last_target_position: Vector2
@@ -78,7 +79,7 @@ func _fire() -> void:
 	match roll:
 		Roll.FIREBALL:
 			var fire_ball: FireBall = load(FIREBALL_PATH).instantiate()
-			fire_ball.damage = damage
+			fire_ball.damage = fireball_damage
 			fire_ball.knockback = knockback
 			fire_ball.can_burn = true
 			fire_ball.enemy_owned = false
@@ -87,7 +88,7 @@ func _fire() -> void:
 			EventBus.summon_effect.emit(fire_ball)
 		Roll.FIST:
 			var fist: RiftFist = RiftFist.new()
-			fist.damage = damage
+			fist.damage = fist_damage
 			fist.knockback = fist_knockback
 			fist.direction = to_target
 			fist.global_position = global_position

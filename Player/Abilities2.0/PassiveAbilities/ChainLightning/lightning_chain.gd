@@ -74,15 +74,15 @@ func _try_chain() -> void:
 	if chains_left <= 0:
 		queue_free()
 		return
-	var bodies: Array[Node2D] = search_area.get_overlapping_bodies()
 	var next_target: Enemy = null
 	var closest_distance: float = INF
-	for body: Node2D in bodies:
-		if body is Enemy and not _already_hit.has(body):
-			var dist: float = global_position.distance_to(body.global_position)
+	# Searched by hitbox, not body: wizard bosses' bodies aren't on the Enemies layer.
+	for enemy: Enemy in MinorHitHelpers.enemies_in_radius(get_world_2d(), global_position, _search_radius()):
+		if not _already_hit.has(enemy):
+			var dist: float = global_position.distance_to(enemy.global_position)
 			if dist < closest_distance:
 				closest_distance = dist
-				next_target = body
+				next_target = enemy
 	if not next_target:
 		queue_free()
 		return
@@ -91,3 +91,9 @@ func _try_chain() -> void:
 	next_chain.damage = damage
 	EventBus.summon_effect.emit(next_chain)
 	queue_free()
+
+## The SearchArea's circle sets the jump range, so tuning stays in the scene.
+func _search_radius() -> float:
+	var shape: CollisionShape2D = search_area.get_child(0) as CollisionShape2D
+	var circle: CircleShape2D = shape.shape as CircleShape2D if shape else null
+	return circle.radius * absf(search_area.global_scale.x) if circle else chain_radius

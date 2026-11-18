@@ -151,7 +151,7 @@ func _find_modifier(data: EquipmentData, stat_name: String) -> EquipmentData.Sta
 	return null
 
 func _display_name(stat_name: String) -> String:
-	return stat_names_dict.get(stat_name, stat_name)
+	return stat_names_dict.get(stat_name, PlayerStats.display_name(stat_name))
 
 func _slot_name(slot: EquipmentData.slots) -> String:
 	return str(EquipmentData.slots.keys()[slot]).capitalize()

@@ -43,7 +43,7 @@ func poison_fill() -> void:
 	fill_gauge()
 	
 func get_tooltip() -> String:
-	return "Fills with poison, release a big gas cloud when full. Also perfect shots inflict poison."
+	return "Perfect shots poison, and poison damage fills the gauge.\n%s release a big poison cloud around you." % ACTIVATE_HINT
 
 func get_tooltip_color() -> Color:
 	return Color.LIME_GREEN

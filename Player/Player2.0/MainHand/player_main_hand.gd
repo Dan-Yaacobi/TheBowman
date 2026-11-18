@@ -52,8 +52,8 @@ const CHARGED_ARROW_TINT: Color = Color(1.6, 1.35, 0.6)
 @export var fire_recoil: float = 50.0
 ## Bows drawing this fast or faster have no recoil (Hanzo). Recoil grows linearly above it.
 @export var recoil_free_draw_time: float = 0.25
-## Recoil never exceeds fire_recoil x this.
-@export var max_recoil_mult: float = 2.5
+## Recoil never exceeds fire_recoil x this (heavy bows).
+@export var max_recoil_mult: float = 1.4
 @export_group("")
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
 @onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles

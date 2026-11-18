@@ -197,6 +197,13 @@ static func apply_scale(stat_name: String) -> float:
 		_:
 			return 1.0
 
+## Player-facing name of a stat property ("arrow_size" -> "Arrow Size").
+static func display_name(stat_name: String) -> String:
+	for entry: Array in DISPLAY_STATS:
+		if entry[2] == stat_name:
+			return entry[1]
+	return stat_name.capitalize()
+
 static func unit_suffix(stat_name: String) -> String:
 	return "" if unit_of(stat_name) == StatUnit.FLAT else "%"
 

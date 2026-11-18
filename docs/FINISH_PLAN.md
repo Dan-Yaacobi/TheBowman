@@ -27,7 +27,7 @@ Everything left before the game counts as finished (see GDD §5 Definition of Fi
 ## L
 - [x] Imp (grab and drag, single enemy). Placeholder art.
 - [ ] Tower scene: hand-built ascending climb with hazards and traps, ending at the final room.
-- [ ] Art batch: sprites and animations for the hail cloud (art fix only), frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch.
+- [ ] Art batch: sprites and animations for the hail cloud (art fix only), frost golem, magma golem, pine tree, snowflake, flaming skull, obsidian spire, imp, Tower tiles and hazards, plus the remaining placeholder items. Spread across sessions; ask before each batch. Full list: `docs/SPRITES_TODO.md`.
 
 ## XL
 - [ ] Final wizard boss: rotates between two elemental portals reusing earlier wizards' abilities; each phase change uses a chaos portal that pulls everything in and rebuilds the islands in a new, smaller layout. Arena, phases, sprite.

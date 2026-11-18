@@ -39,6 +39,8 @@ var _proximity: float = 0.0
 var _phase: float = 0.0
 var _fx_tween: Tween
 var _is_blocked_look: bool = false
+## Rift exit portals: set once the player has seen it; then an edge arrow points to it.
+var _pointer: PortalPointer
 
 func _ready() -> void:
 	_update_flip()
@@ -55,10 +57,22 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	_update_blocked_look()
+	_check_found()
 	_phase = fmod(_phase + delta * lerpf(idle_speed, near_speed, _proximity), 1000.0)
 	var mat: ShaderMaterial = sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter(&"phase", _phase)
+
+## The first time a rift exit portal shows up on screen, it gets an off-screen pointer.
+func _check_found() -> void:
+	if _pointer != null or not is_rift_portal or not is_visible_in_tree():
+		return
+	if not get_viewport().get_visible_rect().has_point(get_global_transform_with_canvas().origin):
+		return
+	_pointer = PortalPointer.new()
+	_pointer.portal = self
+	_pointer.color = Color(0.75, 0.5, 1.0) if color == Color.WHITE else color
+	add_child(_pointer)
 
 func disable() -> void:
 	area_2d.monitoring = false

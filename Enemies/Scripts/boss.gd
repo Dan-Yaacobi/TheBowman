@@ -8,6 +8,21 @@ const HIT_FLASH_DURATION: float = 0.15
 var arena: BossArena
 var _hit_flash_tween: Tween
 
+## Name shown in the boss intro: the data's display name, else one built from the scene name
+## ("WizardFireBoss" -> "The Fire Wizard").
+func get_title() -> String:
+	if stats and not stats.display_name.is_empty():
+		return stats.display_name
+	var source: String = scene_file_path if not scene_file_path.is_empty() else String(name)
+	var words: PackedStringArray = source.get_file().get_basename().capitalize().split(" ", false)
+	var kept: PackedStringArray = PackedStringArray()
+	for word: String in words:
+		if word != "Boss" and not word.is_valid_int():
+			kept.append(word)
+	if kept.size() == 2 and kept[0] == "Wizard":
+		return "The %s Wizard" % kept[1]
+	return " ".join(kept) if not kept.is_empty() else "Boss"
+
 func begin_fight(_arena: BossArena) -> void:
 	arena = _arena
 	EventBus.boss_fight_started.emit(self)

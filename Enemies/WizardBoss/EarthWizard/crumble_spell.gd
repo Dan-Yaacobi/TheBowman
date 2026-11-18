@@ -1,6 +1,7 @@
 class_name CrumbleSpell extends WizardSpellState
 ## Shakes the island the player is on, then crumbles it: it stops being solid and only a
-## faint ghost stays. It returns at the start of his next Crumble, a full spell cycle later.
+## faint ghost stays. Up to max_crumbled islands stay down at once; when another one starts
+## crumbling past that, the oldest one comes back.
 
 @export var dust_scene: PackedScene
 @export var crumble_scene: PackedScene
@@ -10,6 +11,8 @@ class_name CrumbleSpell extends WizardSpellState
 @export var recovery_time: float = 0.4
 ## Island sprite jitter in pixels right before it crumbles (it builds up from 0)
 @export var max_shake: float = 2.0
+## Islands that can be crumbled at the same time
+@export var max_crumbled: int = 3
 ## Opacity of the crumbled island's ghost, so the player can see where it will return
 @export var ghost_alpha: float = 0.15
 ## Seconds for a crumbled island to fade back in
@@ -21,15 +24,17 @@ class_name CrumbleSpell extends WizardSpellState
 @export var dust_offset_y: float = 8.0
 
 var _target: Island
-var _crumbled: Island
+## Crumbled islands, oldest first
+var _crumbled: Array[Island] = []
 var _sprite_base: Vector2
 var _dust: LingeringEffect
 var _fell: bool = false
 
 func on_cast_start() -> void:
 	_fell = false
-	_restore(_crumbled)
-	_crumbled = null
+	_crumbled = _crumbled.filter(func(island: Island) -> bool: return is_instance_valid(island))
+	while _crumbled.size() >= max_crumbled:
+		_restore(_crumbled.pop_front())
 	_target = _pick_target()
 	if _target == null:
 		return
@@ -62,7 +67,7 @@ func is_finished() -> bool:
 
 func _crumble() -> void:
 	_fell = true
-	_crumbled = _target
+	_crumbled.append(_target)
 	_target.sprite.position = _sprite_base
 	_target.sprite.modulate.a = ghost_alpha
 	_target.disable()
@@ -82,10 +87,11 @@ func _restore(island: Island) -> void:
 
 # If the boss dies (or the arena closes) while an island is crumbled, put it back
 func _exit_tree() -> void:
-	if is_instance_valid(_crumbled) and _crumbled.is_inside_tree():
-		_crumbled.enable()
-		_crumbled.sprite.modulate.a = 1.0
-	_crumbled = null
+	for island: Island in _crumbled:
+		if is_instance_valid(island) and island.is_inside_tree():
+			island.enable()
+			island.sprite.modulate.a = 1.0
+	_crumbled.clear()
 
 func _stop_dust() -> void:
 	if is_instance_valid(_dust):

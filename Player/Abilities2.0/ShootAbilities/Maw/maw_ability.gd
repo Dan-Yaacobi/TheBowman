@@ -3,9 +3,9 @@ class_name MawAbility extends PlayerAbility
 ## Souls live on this ability (one per rolled bow), so unequipping and re-equipping keeps them.
 ##   Starving: weaker arrows.
 ##   Fed: perfect kills bite the nearest enemy.
-##   Gorged: stronger arrows that trail souls; bites hit the 2 nearest enemies.
-##   Awakened: strongest arrows; perfect hits devour enemies below the HP threshold
-##             (bosses take double damage from that hit instead).
+##   Gorged: stronger arrows that trail souls; every perfect hit bites, kill or not.
+##   Awakened: strongest arrows; bites devour enemies below the HP threshold
+##             (bosses take a double bite instead).
 ## Precision scrolls scale the positive stage bonuses and the bite, not the Starving penalty.
 
 enum Stage { STARVING, FED, GORGED, AWAKENED }
@@ -18,15 +18,16 @@ const STAGE_COLORS: Array[Color] = [Color(0.6, 0.6, 0.65), Color(0.75, 0.55, 1.0
 @export var souls_per_enemy: int = 1
 @export var souls_per_elite: int = 5
 @export var souls_per_boss: int = 15
+@export var souls_per_golem: int = 3
 @export_group("Effects")
 ## Arrow damage change per stage (0.25 = +25%).
 @export var stage_damage: Array[float] = [-0.3, 0.0, 0.25, 0.5]
 ## Bite: share of the killing hit dealt to the nearest enemy.
 @export var bite_share: float = 0.5
 @export var bite_radius: float = 200.0
-## Enemies one bite hits, per stage (Starving, Fed, Gorged, Awakened).
-@export var bite_targets: Array[int] = [0, 1, 2, 2]
-## Devour: enemies below this share of their HP are devoured by a perfect hit (Awakened).
+## First stage where any perfect hit bites, not only perfect kills.
+@export var bite_on_hit_stage: Stage = Stage.GORGED
+## Devour: enemies below this share of their HP are devoured by a bite (Awakened).
 @export var devour_threshold: float = 0.2
 @export_group("")
 
@@ -76,23 +77,9 @@ func refresh_power() -> void:
 func stage() -> Stage:
 	return _stage
 
-## Devour runs before the hit lands, while the enemy's HP is still the old value.
+## Kept for the BEFORE_HIT registration; everything happens on arrow_enemy_hit.
 func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result: DamageResult = null) -> void:
-	if _stage != Stage.AWAKENED:
-		return
-	var enemy: Enemy = _target as Enemy
-	var hurt_box: HurtBox = _activator as HurtBox
-	var arrow: Arrow = MinorHitHelpers.arrow_of(hurt_box)
-	if enemy == null or arrow == null or not arrow.perfect_shot or enemy.is_dead:
-		return
-	if float(enemy.current_hp) > float(enemy.stats.max_hp) * devour_threshold:
-		return
-	if enemy is Boss:
-		MinorHitHelpers.add_damage_for_hit(hurt_box, 1.0)
-		return
-	# Enough to finish anything below the threshold.
-	MinorHitHelpers.add_damage_for_hit(hurt_box, 1000.0)
-	CombatTextSpawner.spawn(enemy.global_position + Vector2(0, -16), "Devoured", STAGE_COLORS[Stage.AWAKENED])
+	pass
 
 func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 	if not is_instance_valid(enemy) or enemy is FlyingTarget or enemy is GoldenApple:
@@ -101,6 +88,8 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 	var boss: Boss = enemy as Boss
 	if boss:
 		gain = souls_per_boss if boss.arena != null else souls_per_elite
+	elif enemy is RockGolem:
+		gain = souls_per_golem
 	souls += gain
 	var new_stage: Stage = _stage_for(souls)
 	if new_stage != _stage:
@@ -117,22 +106,39 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 	if is_instance_valid(_counter):
 		_counter.pulse()
 
-## Bite: a perfect kill lashes the nearest other enemy.
+## Bite: a perfect kill (from Gorged on, any perfect hit) lashes the nearest other enemy.
+## Awakened bites devour anything under the HP threshold; bosses take a double bite instead.
 func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -> void:
-	if _stage < Stage.FED or not perfect or not is_instance_valid(target) or not target.is_dead:
+	if _stage < Stage.FED or not perfect or not is_instance_valid(target):
+		return
+	if not target.is_dead and _stage < bite_on_hit_stage:
 		return
 	if not is_instance_valid(arrow) or not target.is_inside_tree():
 		return
-	var count: int = bite_targets[mini(_stage, bite_targets.size() - 1)]
 	var bite: int = maxi(1, roundi(arrow.hurt_box.damage * bite_share * power()))
-	for victim: Enemy in _nearest_others(target, count):
-		victim.take_damage(null, bite, null, STAGE_COLORS[_stage])
+	for victim: Enemy in _nearest_others(target, 1):
+		var color: Color = STAGE_COLORS[_stage]
+		var damage: int = bite
+		if _stage == Stage.AWAKENED and _can_devour(victim):
+			if victim is Boss:
+				damage *= 2
+			else:
+				damage = victim.current_hp + 1000
+				CombatTextSpawner.spawn(victim.global_position + Vector2(0, -16), "Devoured", color)
+		var jaws: MawBite = MawBite.new()
+		jaws.global_position = victim.global_position + Vector2(0, -8)
+		jaws.devour = damage > bite
+		EventBus.summon_effect.emit(jaws)
 		var link: ContagionBandAbility.ContagionLink = ContagionBandAbility.ContagionLink.new()
 		link.from = target.global_position
 		link.to = victim.global_position
-		link.color = STAGE_COLORS[_stage]
-		link.thickness = 3.5
+		link.color = Color(color, 0.6)
+		link.thickness = 2.0
 		EventBus.summon_effect.emit(link)
+		victim.take_damage(null, damage, null, color)
+
+func _can_devour(victim: Enemy) -> bool:
+	return float(victim.current_hp) <= float(victim.stats.max_hp) * devour_threshold
 
 ## Up to count living enemies near from, closest first.
 func _nearest_others(from: Enemy, count: int) -> Array[Enemy]:
@@ -168,14 +174,23 @@ func _update_counter() -> void:
 	_counter.show_souls(STAGE_NAMES[_stage], souls, floor_souls, next_souls, STAGE_COLORS[_stage])
 
 func get_tooltip() -> String:
-	var next: String = ""
-	if _stage < Stage.AWAKENED:
-		next = ", next stage at %d" % stage_thresholds[_stage]
 	var lines: PackedStringArray = PackedStringArray()
-	lines.append("Devours souls of the slain and grows stronger. %s (%d souls%s)" % [STAGE_NAMES[_stage], souls, next])
+	lines.append("Devours the souls of the slain and grows stronger.")
+	lines.append("")
+	lines.append("~ %s ~" % STAGE_NAMES[_stage].to_upper())
+	if _stage < Stage.AWAKENED:
+		lines.append("%d / %d souls to %s" % [souls, stage_thresholds[_stage], STAGE_NAMES[_stage + 1]])
+	else:
+		lines.append("%d souls, fully awakened" % souls)
 	for stage_index: int in Stage.size():
-		var marker: String = "> " if stage_index == _stage else "   "
-		lines.append("%s%s (%d): %s" % [marker, STAGE_NAMES[stage_index], _stage_threshold(stage_index), _stage_text(stage_index)])
+		lines.append("")
+		var marker: String = "> " if stage_index == _stage else ""
+		var heading: String = "%s%s" % [marker, STAGE_NAMES[stage_index]]
+		if stage_index > 0:
+			heading += " (%d souls)" % _stage_threshold(stage_index)
+		lines.append(heading)
+		for part: String in _stage_parts(stage_index):
+			lines.append("   - " + part)
 	return "\n".join(lines)
 
 ## Souls needed to reach a stage (Starving = 0).
@@ -184,21 +199,19 @@ func _stage_threshold(stage_index: int) -> int:
 
 ## What a stage adds over the one before, with the current numbers
 ## (positive bonuses scaled like the ability itself).
-func _stage_text(stage_index: int) -> String:
+func _stage_parts(stage_index: int) -> PackedStringArray:
 	var damage: float = stage_damage[mini(stage_index, stage_damage.size() - 1)]
 	if damage > 0.0:
 		damage *= power()
 	var parts: PackedStringArray = PackedStringArray()
 	parts.append("%+d%% damage" % roundi(damage * 100.0) if not is_zero_approx(damage) else "normal damage")
-	var bites: int = bite_targets[mini(stage_index, bite_targets.size() - 1)]
-	var bites_before: int = 0 if stage_index == 0 else bite_targets[mini(stage_index - 1, bite_targets.size() - 1)]
-	if bites > 0 and bites_before == 0:
+	if stage_index == Stage.FED:
 		parts.append("perfect kills bite the nearest enemy for %d%% of the hit" % roundi(bite_share * power() * 100.0))
-	elif bites > bites_before:
-		parts.append("bites hit %d enemies" % bites)
+	if stage_index == bite_on_hit_stage and stage_index > Stage.FED:
+		parts.append("every perfect hit bites, kill or not")
 	if stage_index == Stage.AWAKENED:
-		parts.append("perfect hits devour enemies under %d%% HP" % roundi(devour_threshold * 100.0))
-	return ", ".join(parts)
+		parts.append("bites devour enemies under %d%% HP (bosses take a double bite)" % roundi(devour_threshold * 100.0))
+	return parts
 
 func get_tooltip_color() -> Color:
 	return STAGE_COLORS[_stage]
@@ -292,3 +305,94 @@ class SoulTrail extends ArrowEffect:
 		trail.scale_amount_max = 2.0
 		trail.color = Color(0.85, 0.45, 1.0, 0.8)
 		_arrow.add_child(trail)
+
+## The bite: the Maw's fleshy jaws gape over the victim and snap shut.
+## Drawn in code to echo the bow: crimson gums, bone fangs, near-black outline.
+class MawBite extends Node2D:
+	const OPEN_TIME: float = 0.09
+	const SNAP_TIME: float = 0.07
+	const HOLD_TIME: float = 0.12
+	const FADE_TIME: float = 0.18
+	const WIDTH: float = 22.0
+	const OUTLINE: Color = Color(0.08, 0.03, 0.04)
+	const GUM: Color = Color(0.55, 0.1, 0.16)
+	const GUM_LIGHT: Color = Color(0.8, 0.25, 0.3)
+	const FANG: Color = Color(0.95, 0.9, 0.78)
+	const FANG_SHADE: Color = Color(0.7, 0.62, 0.52)
+	## Devour bites are bigger and splash harder.
+	var devour: bool = false
+	## 0 = closed, 1 = fully open
+	var gape: float = 0.0
+
+	func _ready() -> void:
+		z_index = 6
+		scale = Vector2.ONE * (1.35 if devour else 1.0)
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "gape", 1.0, OPEN_TIME).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		tween.tween_property(self, "gape", 0.0, SNAP_TIME).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+		tween.tween_callback(_on_snap)
+		tween.tween_interval(HOLD_TIME)
+		tween.tween_property(self, "modulate:a", 0.0, FADE_TIME)
+		tween.tween_callback(queue_free)
+
+	func _process(_delta: float) -> void:
+		queue_redraw()
+
+	func _on_snap() -> void:
+		EventBus.camera_shake.emit(1.5 if devour else 0.8, 10.0)
+		var splash: CPUParticles2D = CPUParticles2D.new()
+		splash.one_shot = true
+		splash.explosiveness = 1.0
+		splash.amount = 18 if devour else 10
+		splash.lifetime = 0.4
+		splash.spread = 180.0
+		splash.gravity = Vector2(0, 260)
+		splash.initial_velocity_min = 40.0
+		splash.initial_velocity_max = 90.0
+		splash.scale_amount_min = 1.0
+		splash.scale_amount_max = 2.5
+		splash.color = GUM_LIGHT
+		splash.emitting = true
+		add_child(splash)
+		var pop: Tween = create_tween()
+		pop.tween_property(self, "scale", scale * 1.2, 0.04)
+		pop.tween_property(self, "scale", scale, 0.08)
+
+	func _draw() -> void:
+		var open: float = 4.0 + gape * 12.0
+		_draw_jaw(-open, 1.0)
+		_draw_jaw(open, -1.0)
+
+	## One jaw: a curved gum with fangs pointing toward the middle.
+	## side = 1 for the upper jaw (fangs point down), -1 for the lower.
+	func _draw_jaw(y: float, side: float) -> void:
+		var half: float = WIDTH / 2.0
+		var curve: float = 5.0 * side
+		var gum: PackedVector2Array = PackedVector2Array([
+			Vector2(-half - 3.0, y - curve * 0.2),
+			Vector2(-half * 0.5, y - curve * 0.9 - 4.0 * side),
+			Vector2(half * 0.5, y - curve * 0.9 - 4.0 * side),
+			Vector2(half + 3.0, y - curve * 0.2),
+			Vector2(half * 0.5, y + 1.0 * side),
+			Vector2(-half * 0.5, y + 1.0 * side),
+		])
+		var outline: PackedVector2Array = gum.duplicate()
+		outline.append(gum[0])
+		draw_colored_polygon(gum, GUM)
+		draw_line(Vector2(-half * 0.6, y - curve * 0.6 - 1.5 * side), Vector2(half * 0.6, y - curve * 0.6 - 1.5 * side), GUM_LIGHT, 1.5)
+		var fang_count: int = 5
+		for i: int in fang_count:
+			var t: float = (float(i) + 0.5) / float(fang_count)
+			var x: float = lerpf(-half, half, t)
+			var length: float = 7.0 if i == 0 or i == fang_count - 1 else 5.0
+			var fang: PackedVector2Array = PackedVector2Array([
+				Vector2(x - 2.0, y + 0.5 * side),
+				Vector2(x + 2.0, y + 0.5 * side),
+				Vector2(x, y + length * side),
+			])
+			draw_colored_polygon(fang, FANG)
+			draw_line(Vector2(x + 1.0, y + 0.5 * side), Vector2(x, y + length * side), FANG_SHADE, 1.0)
+			var fang_outline: PackedVector2Array = fang.duplicate()
+			fang_outline.append(fang[0])
+			draw_polyline(fang_outline, OUTLINE, 1.0)
+		draw_polyline(outline, OUTLINE, 1.0)

@@ -1,5 +1,8 @@
 class_name PlayerGaugeAbility extends PlayerPassiveAbility
 
+## Every gauge is spent the same way; tooltips end with this so it's never in doubt.
+const ACTIVATE_HINT: String = "When full, press Middle Mouse to"
+
 @export var charge_color: Color
 @export var charge_type: PlayerBody.Charges
 

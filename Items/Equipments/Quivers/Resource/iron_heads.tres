@@ -21,9 +21,9 @@ metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0r1"]
 script = ExtResource("3_roll")
-stat_name = "arrow_speed"
-min_value = 10.0
-max_value = 30.0
+stat_name = "pushback_power"
+min_value = 20.0
+max_value = 40.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t0"]
@@ -33,9 +33,9 @@ metadata/_custom_type_script = "uid://cvcq1wjubwojl"
 
 [sub_resource type="Resource" id="Resource_t1r0"]
 script = ExtResource("3_roll")
-stat_name = "arrow_speed"
-min_value = 10.0
-max_value = 30.0
+stat_name = "pushback_power"
+min_value = 20.0
+max_value = 40.0
 metadata/_custom_type_script = "uid://d1uvjppj7yfvc"
 
 [sub_resource type="Resource" id="Resource_t1"]
