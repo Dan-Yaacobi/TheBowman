@@ -166,6 +166,5 @@ func respawn() -> void:
 	get_tree().create_timer(0.15, false).timeout.connect(_show_respawn_effect)
 
 func _show_respawn_effect() -> void:
-	var player: Player = PlayerManager.player
-	if is_inside_tree() and is_instance_valid(player):
-		EffectSprite.attach(&"player_respawn", player, player.to_local(player.feet_position()))
+	if is_inside_tree() and is_instance_valid(PlayerManager.player):
+		EffectSprite.attach_over_player(&"player_respawn")

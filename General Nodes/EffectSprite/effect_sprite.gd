@@ -8,12 +8,28 @@ class_name EffectSprite extends Sprite2D
 static var enabled: bool = true
 
 const SHEET_DIR: String = "res://General Nodes/EffectSprite/Resource/"
+## Draw order for effects that play over the archer (body parts use small z values).
+const OVER_PLAYER_Z: int = 20
+const OVER_PLAYER_END_ALPHA: float = 0.7
 
 var sheet: EffectSheet
 ## Extra size on top of the sheet's world scale (e.g. fitting the ice block to an enemy).
 var size_mult: float = 1.0
 var mirrored: bool = false
+## Alpha the effect eases down to by its last frame (1 = no fade).
+var end_alpha: float = 1.0
 var _time: float = 0.0
+
+## In front of the archer (z above the body) with a slight fade over its life.
+static func attach_over_player(sheet_name: StringName, tint: Color = Color.WHITE) -> EffectSprite:
+	var player: Player = PlayerManager.player
+	if player == null:
+		return null
+	var effect: EffectSprite = attach(sheet_name, player, player.to_local(player.feet_position()), tint)
+	if effect:
+		effect.z_index = OVER_PLAYER_Z
+		effect.end_alpha = OVER_PLAYER_END_ALPHA
+	return effect
 
 static func load_sheet(sheet_name: StringName) -> EffectSheet:
 	return load(SHEET_DIR + String(sheet_name) + ".tres") as EffectSheet
@@ -72,6 +88,9 @@ func _process(delta: float) -> void:
 			return
 		index %= sheet.frame_count
 	frame = index
+	if end_alpha < 1.0:
+		var progress: float = clampf(_time * sheet.fps / float(maxi(sheet.frame_count - 1, 1)), 0.0, 1.0)
+		modulate.a = lerpf(1.0, end_alpha, progress)
 
 ## Undo the parent's scale so the effect is always sheet.world_scale big in the world.
 func _keep_world_size() -> void:

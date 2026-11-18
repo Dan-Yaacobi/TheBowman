@@ -74,7 +74,8 @@ func add_before_ability(ability: PlayerAbility) -> void:
 func hit(_hurt_box,_hit_box, _result) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
-		EffectSprite.spawn(&"perfect_hit" if perfect_shot else &"arrow_hit", global_position)
+		# The hurt box sits on the arrowhead; the arrow's own origin is its tail.
+		EffectSprite.spawn(&"perfect_hit" if perfect_shot else &"arrow_hit", hurt_box.global_position)
 		if regular_shot:
 			succesfuly_hit = true
 			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
