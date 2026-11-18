@@ -37,6 +37,7 @@ func Enter() -> void:
 	started_on_floor = player.is_on_floor()
 	player.dashes_spent += 1
 	dash_direction = get_dash_direction() # Change this to calculate_direction_to_cursor() for 360 cursor dash
+	EffectSprite.spawn(&"dash_burst", player.global_position, dash_direction.angle())
 	force_up = false
 	dust.emitting = true
 

@@ -65,3 +65,9 @@ func apply_poison_visual(t: float) -> void:
 	poisoned_effect.color = low_color.lerp(high_color, t)
 	poisoned_effect.emission_rect_extents.x = lerpf(low_width, high_width, t)
 	poisoned_effect.gravity.y = -lerpf(low_rise, high_rise, t)
+
+func status_sheet_name() -> StringName:
+	return &"status_poison"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.CENTER

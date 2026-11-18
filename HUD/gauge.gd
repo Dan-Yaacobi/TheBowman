@@ -51,6 +51,7 @@ func fill(_amount: float) -> void:
 	value = min(value + _amount, max_value)
 	if not was_full and value >= max_value:
 		_set_glow(1.0)
+		EventBus.gauge_filled.emit(charge_color)
 
 func drain(_only_full: bool = true) -> void:
 	var _amount: int = int(value)

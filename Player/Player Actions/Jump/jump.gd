@@ -96,8 +96,11 @@ func try_jump() -> void:
 	if buffer_timer <= 0:
 		return
 	if jumps > 0 and can_jump and not player.is_grabbed():
+		var air_jump: bool = not player.is_on_floor() and coyote_timer <= 0.0
 		jump()
 		handle_jumps()
+		if air_jump:
+			EffectSprite.spawn(&"air_jump_ring", player.feet_position())
 		for ability in player.stats.jump_abilities:
 			ability.activate_ability(player)
 		buffer_timer = 0.0

@@ -51,6 +51,8 @@ signal sword_swung
 ## Knockback from enemy hits (and enemy shoves like the earthquake) is multiplied by this,
 ## making up for the stronger ground grip so hits still threaten the edge.
 @export var enemy_knockback_mult: float = 1.5
+## Landing faster than this (px/s) kicks up dust.
+@export var landing_dust_min_speed: float = 140.0
 @export_group("Movement")
 ## Move speed never goes above base x this, however many speed bonuses stack.
 ## Slows still apply in full.
@@ -99,6 +101,8 @@ var equipment_interacted: Equipment = null
 var knockback: Vector2 = Vector2.ZERO
 const KNOCKBACK_FRICTION: float = 300.0
 var _was_on_floor: bool = false
+## Vertical speed on the last airborne frame, for landing dust.
+var _fall_speed: float = 0.0
 
 
 var equipped_nodes: Dictionary = {
@@ -159,6 +163,7 @@ func _ready() -> void:
 	# can_swing below zero so locks stacked on it (the No Sword curse) did nothing.
 	swing_cooldown.one_shot = true
 	swing_cooldown.timeout.connect(_on_swing_cooldown_timeout)
+	EventBus.gauge_filled.connect(_on_event_bus_gauge_filled)
 	jump_action.jumped.connect(_on_jumped)
 	jump_action.landed.connect(_on_landed)
 	body.animation_player.animation_finished.connect(_on_body_animation_finished)
@@ -311,6 +316,8 @@ func _physics_process(delta: float) -> void:
 	var on_floor: bool = is_on_floor()
 	if on_floor and not _was_on_floor:
 		knockback.x *= landing_knockback_keep
+		if _fall_speed >= landing_dust_min_speed:
+			EffectSprite.spawn(&"landing_dust", feet_position())
 	var friction: float = ground_knockback_friction * get_ground_traction() if on_floor else KNOCKBACK_FRICTION
 	knockback = knockback.move_toward(Vector2.ZERO, maxf(friction, KNOCKBACK_FRICTION) * delta)
 	var drag: Vector2 = _get_grab_drag()
@@ -318,6 +325,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	velocity -= knockback + drag
 	_was_on_floor = is_on_floor()
+	if not _was_on_floor:
+		_fall_speed = velocity.y
 	_check_island_contact()
 
 ## Reports each island the first time the player stands on it (run tally).
@@ -486,11 +495,13 @@ func emit_crit() -> void:
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	if not invincible and dodge_chance > 0.0 and randf() < dodge_chance:
 		_dodge()
+		EffectSprite.spawn(&"dodge_poof", global_position)
 		dodged.emit()
 		return
 	if not invincible and hit_shields > 0:
 		hit_shields -= 1
 		_dodge()
+		EffectSprite.attach(&"shield_break", self)
 		shield_blocked.emit()
 		return
 	if not invincible:
@@ -581,6 +592,8 @@ func heal(amount: int, _flash: bool = true) -> bool:
 		if _flash:
 			EventBus.healed_flash.emit()
 			show_damage(amount_healed, Color.GREEN)
+			if amount_healed > 0:
+				EffectSprite.attach(&"heal", self, to_local(feet_position()))
 		return true
 	return false
 	
@@ -670,6 +683,16 @@ var max_speed: float = 1.0 ## 1.0 means maximum is double speed
 var C: int = 200 ## controls how fast you upgrade movement speed via agility
 
 ## asymptotic increase towards max speed
+
+## A full gauge flashes on the archer, so it's clear middle mouse is ready.
+func _on_event_bus_gauge_filled(color: Color) -> void:
+	EffectSprite.attach(&"gauge_ready", self, Vector2.ZERO, color.lightened(0.3))
+
+## Bottom middle of the body's collision box, in world space.
+func feet_position() -> Vector2:
+	var box: RectangleShape2D = collision_shape.shape as RectangleShape2D
+	var half_height: float = box.size.y / 2.0 if box else 20.0
+	return collision_shape.global_position + Vector2(0.0, half_height * absf(collision_shape.global_scale.y))
 
 func get_move_speed() -> float:
 	var speed: float = minf(stats.move_speed.value(), stats.move_speed.base_value * max_move_speed_mult)

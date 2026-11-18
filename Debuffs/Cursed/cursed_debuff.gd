@@ -15,3 +15,9 @@ func extra_end_debuff_methods() -> void:
 	entity.modulate = Color(1.0, 1.0, 1.0)
 	entity.remove_damage_dealt_multiplier(1.0,Stat.buff_type.MULTIPLICATIVE)
 	entity.remove_damage_taken_multiplier(damage_taken_bonus,Stat.buff_type.MULTIPLICATIVE)
+
+func status_sheet_name() -> StringName:
+	return &"status_curse"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.CENTER

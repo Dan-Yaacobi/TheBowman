@@ -150,6 +150,8 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	final_dmg *= stats.damage_taken_multiplier.value()
 	if hardened:
 		final_dmg = 1
+		if _hurt_box:
+			_show_deflect(_hurt_box)
 	current_hp -= roundi(final_dmg)
 	EventBus.enemy_damaged.emit(self, final_dmg)
 	frostbitten_hit()
@@ -157,6 +159,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	show_damage(final_dmg,dmg_color)
 	if current_hp <= 0:
 		is_dead = true
+		_show_death_effect()
 		activate_death_ability()
 		enemy_died()
 		drop_item()
@@ -164,6 +167,24 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 			_result.killed = true
 	elif _causes_flinch(_hurt_box):
 		enter_damaged_state()
+
+## Grey guard where a hit glanced off a hardened enemy, facing the hit.
+func _show_deflect(source: HurtBox) -> void:
+	var from_left: bool = source.global_position.x < global_position.x
+	var at: Vector2 = global_position + Vector2(-8.0 if from_left else 8.0, 0.0)
+	EffectSprite.spawn(&"hardened_deflect", at, 0.0, Color.WHITE, from_left)
+
+## Smoke poof on death; bosses go out in a chain of blasts instead.
+func _show_death_effect() -> void:
+	if not self is Boss:
+		EffectSprite.spawn(&"enemy_death", global_position)
+		return
+	var spread: float = 24.0
+	for i: int in 4:
+		var at: Vector2 = global_position + Vector2(randf_range(-spread, spread), randf_range(-spread, spread)) * (0.0 if i == 0 else 1.0)
+		get_tree().create_timer(0.18 * i, false).timeout.connect(func() -> void:
+			EffectSprite.spawn(&"boss_death_blast", at)
+			EventBus.camera_shake.emit(4.0, 10.0))
 
 ## Only hits that push the enemy flinch it. DoT ticks and zero-knockback hits (e.g. Hanzo) don't,
 ## and neither does anything while the current state blocks flinching (e.g. the skull's ram chain).

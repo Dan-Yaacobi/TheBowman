@@ -64,6 +64,7 @@ func apply_scroll(color: CustomVariables.ItemColor) -> void:
 	_levels[color] = get_level(color) + 1
 	_apply_secondary(color)
 	EventBus.color_level_changed.emit(color, _levels[color])
+	EffectSprite.attach(&"color_level_up", player, player.to_local(player.feet_position()), CustomVariables.item_color_tint(color))
 	scrolls_collected += 1
 	if scrolls_per_heart > 0 and scrolls_collected % scrolls_per_heart == 0:
 		player.increase_max_hp(true)

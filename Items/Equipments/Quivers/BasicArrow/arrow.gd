@@ -74,6 +74,7 @@ func add_before_ability(ability: PlayerAbility) -> void:
 func hit(_hurt_box,_hit_box, _result) -> void:
 	if _hit_box is EnemyHitBox:
 		var body = _hit_box.enemy
+		EffectSprite.spawn(&"perfect_hit" if perfect_shot else &"arrow_hit", global_position)
 		if regular_shot:
 			succesfuly_hit = true
 			EventBus.arrow_enemy_hit.emit(perfect_shot, self, body)
@@ -147,6 +148,7 @@ func enable_arrow(_enable: bool = true) -> void:
 func hit_wall(_val1, _val2, _val3, _val4) -> void:
 	if fired and _val2 is Island and not can_pass_walls:
 		EventBus.arrow_hit_wall_sound.emit()
+		EffectSprite.spawn(&"arrow_wall_hit", global_position)
 		sprite.call_deferred("reparent", _val2)
 		sprite.hit = true
 		if regular_shot and not succesfuly_hit:

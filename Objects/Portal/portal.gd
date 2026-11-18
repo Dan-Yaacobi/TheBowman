@@ -41,6 +41,8 @@ var _fx_tween: Tween
 var _is_blocked_look: bool = false
 ## Rift exit portals: set once the player has seen it; then an edge arrow points to it.
 var _pointer: PortalPointer
+## The animated vortex in the arch's opening (new effects only).
+var _swirl: EffectSprite
 
 func _ready() -> void:
 	_update_flip()
@@ -52,6 +54,9 @@ func _ready() -> void:
 	for p: CPUParticles2D in near_particles:
 		p.emitting = false
 	_apply_proximity(0.0)
+	_swirl = EffectSprite.attach(&"rift_portal_swirl", sprite)
+	if _swirl:
+		_swirl.size_mult = 0.85
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -121,6 +126,8 @@ func _update_blocked_look() -> void:
 	_is_blocked_look = blocked
 	var tint: Color = blocked_tint if blocked else Color.WHITE
 	sprite.self_modulate = tint
+	if _swirl:
+		_swirl.self_modulate = tint
 	# Particles are children of the sprite; self_modulate doesn't reach them.
 	for child: Node in sprite.get_children():
 		if child is CPUParticles2D:

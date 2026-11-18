@@ -92,6 +92,7 @@ func _collect() -> void:
 	play_collected_sound()
 	_player.collect_item(item_type, 1)
 	CombatTextSpawner.spawn(global_position, text, color)
+	EffectSprite.spawn(&"pickup_pop", global_position)
 	queue_free()
 
 func initiate_despawn() -> void:

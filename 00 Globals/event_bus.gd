@@ -93,6 +93,8 @@ signal setup_gauge(_max_value: int, _texture: Texture, _tint: Color)
 signal disable_gauge
 signal charge_gauge()
 signal gauge_charge_used
+## The HUD gauge just filled up (its glow colour).
+signal gauge_filled(color: Color)
 signal sword_hit(_target: Node2D)
 
 signal enemy_stunned(_enemy: Enemy)

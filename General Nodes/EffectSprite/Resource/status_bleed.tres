@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EffectSheet" format=3]
+
+[ext_resource type="Script" path="res://General Nodes/EffectSprite/effect_sheet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://General Nodes/EffectSprite/Sprites/StatusBleed.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_script")
+texture = ExtResource("2_texture")
+columns = 5
+rows = 5
+frame_count = 24
+fps = 12.0
+loop = true
+anchor = Vector2(11, 3)
+world_scale = 0.7

@@ -162,3 +162,10 @@ func set_respawn_pos(_position: Vector2) -> void:
 func respawn() -> void:
 	EventBus.relocate_player.emit(respawn_position)
 	PlayerManager.player.start_invincibilty()
+	# After the relocate has placed the archer.
+	get_tree().create_timer(0.15, false).timeout.connect(_show_respawn_effect)
+
+func _show_respawn_effect() -> void:
+	var player: Player = PlayerManager.player
+	if is_inside_tree() and is_instance_valid(player):
+		EffectSprite.attach(&"player_respawn", player, player.to_local(player.feet_position()))

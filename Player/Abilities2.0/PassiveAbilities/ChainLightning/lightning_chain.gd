@@ -31,6 +31,7 @@ func _ready() -> void:
 	_target.take_damage(null, damage)
 	_target.show_damage(damage, Color.YELLOW)
 	_target.take_hit_effect()
+	EffectSprite.spawn(&"lightning_strike", _target.global_position)
 	_draw_lightning(_from_position, _target.global_position)
 	chain_timer.start()
 

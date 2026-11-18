@@ -29,6 +29,7 @@ func destroyed() -> void:
 	cpu_particles_2d.emitting = false
 	animation_player.play("Destroyed")
 	audio_stream_player.play()
+	EffectSprite.spawn(&"chest_open_burst", global_position)
 	drop_loot()
 	await audio_stream_player.finished
 	queue_free()

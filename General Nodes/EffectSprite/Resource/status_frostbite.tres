@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EffectSheet" format=3]
+
+[ext_resource type="Script" path="res://General Nodes/EffectSprite/effect_sheet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://General Nodes/EffectSprite/Sprites/StatusFrostbite.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_script")
+texture = ExtResource("2_texture")
+columns = 4
+rows = 4
+frame_count = 16
+fps = 12.0
+loop = true
+anchor = Vector2(16, 16)
+world_scale = 0.6

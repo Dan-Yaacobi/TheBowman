@@ -13,3 +13,9 @@ func apply_debuff_effect() -> void:
 	
 func extra_end_debuff_methods() -> void:
 	entity.end_stun()
+
+func status_sheet_name() -> StringName:
+	return &"status_stun"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.HEAD

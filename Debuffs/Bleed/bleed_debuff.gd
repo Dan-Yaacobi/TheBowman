@@ -20,3 +20,9 @@ func merge(incoming: Debuff, incoming_ticks: int) -> void:
 		return
 	stacks += 1
 	bleed_damage += (incoming as BleedDebuff).bleed_damage
+
+func status_sheet_name() -> StringName:
+	return &"status_bleed"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.CENTER

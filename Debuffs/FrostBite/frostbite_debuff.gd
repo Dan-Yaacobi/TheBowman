@@ -19,3 +19,9 @@ func apply_debuff_effect() -> void:
 func extra_end_debuff_methods() -> void:
 	var entity_speed: Stat = entity.stats.move_speed
 	entity_speed.remove_buff_stack(ID,Stat.buff_type.MULTIPLICATIVE)
+
+func status_sheet_name() -> StringName:
+	return &"status_frostbite"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.CENTER

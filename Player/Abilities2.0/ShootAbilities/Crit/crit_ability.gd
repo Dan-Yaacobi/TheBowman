@@ -20,3 +20,4 @@ func crit_effect(_body: Enemy) -> void:
 	var _crit_effect = CRIT.instantiate()
 	_crit_effect.global_position = _body.global_position
 	EventBus.summon_effect.emit(_crit_effect)
+	EffectSprite.spawn(&"crit_hit", _body.global_position)

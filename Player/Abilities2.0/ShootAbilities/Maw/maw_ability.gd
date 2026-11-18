@@ -108,6 +108,7 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 		burst.color = STAGE_COLORS[_stage]
 		burst.global_position = player.global_position + Vector2(0, -12)
 		EventBus.summon_effect.emit(burst)
+		EffectSprite.attach(&"maw_stage_up", player, player.to_local(player.feet_position()))
 	_update_counter()
 	if is_instance_valid(_counter):
 		_counter.pulse()

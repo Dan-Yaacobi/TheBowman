@@ -182,6 +182,7 @@ func release_arrow() -> void:
 				if recoil > 0.0:
 					EventBus.apply_player_knockback.emit(-hand_direction, recoil)
 				perfect_release_particles.emitting = true
+				EffectSprite.spawn(&"perfect_release", current_arrow.global_position, hand_direction.angle())
 			fire_arrow()
 	current_arrow = null
 	release.emit()

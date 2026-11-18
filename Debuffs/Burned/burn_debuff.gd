@@ -18,3 +18,9 @@ func merge(incoming: Debuff, incoming_ticks: int) -> void:
 	ticks = incoming_ticks
 	max_ticks = incoming_ticks
 	fire_damage = maxi(fire_damage, (incoming as BurnDebuff).fire_damage)
+
+func status_sheet_name() -> StringName:
+	return &"status_burn"
+
+func status_spot() -> StatusSpot:
+	return StatusSpot.BEHIND_FEET

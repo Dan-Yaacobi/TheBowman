@@ -74,6 +74,7 @@ func spawn_on_island(enemy_factory: Callable) -> Enemy:
 	if enemy_node == null:
 		return null
 	enemy_node.global_position = island.claim_object_spot()
+	EffectSprite.spawn(&"enemy_spawn_in", enemy_node.global_position)
 	return enemy_node
 
 func _pick_spawn_island() -> Island:

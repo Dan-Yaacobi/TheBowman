@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EffectSheet" format=3]
+
+[ext_resource type="Script" path="res://General Nodes/EffectSprite/effect_sheet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://General Nodes/EffectSprite/Sprites/PerfectRelease.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_script")
+texture = ExtResource("2_texture")
+columns = 3
+rows = 2
+frame_count = 4
+fps = 15.0
+loop = false
+anchor = Vector2(3, 10)
+world_scale = 0.5
