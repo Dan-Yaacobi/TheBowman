@@ -20,6 +20,7 @@ func activate_ability(_target: Node2D = null, _activator: Node2D = null, _result
 	effect.global_position = enemy.global_position
 	EventBus.summon_effect.emit(effect)
 	EffectSprite.spawn(&"crit_hit", enemy.global_position)
+	EventBus.camera_punch.emit(0.04)
 
 func get_tooltip() -> String:
 	return "Hits on stunned or frozen enemies always crit"

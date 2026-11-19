@@ -105,6 +105,10 @@ func calculate_distance_to_player() -> float:
 	return PlayerManager.player.global_position.distance_to(global_position)
 	
 func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
+	if _hurt_box:
+		Squash.along(sprite, _hurt_box.knockback_dir, 0.22)
+		if self is Boss:
+			EventBus.camera_punch.emit(0.025)
 	take_damage(_hurt_box,0, _result)
 	extra_hit_functions(_hurt_box)
 	knockback(_hurt_box, null, _result)
@@ -184,7 +188,8 @@ func _show_death_effect() -> void:
 		var at: Vector2 = global_position + Vector2(randf_range(-spread, spread), randf_range(-spread, spread)) * (0.0 if i == 0 else 1.0)
 		get_tree().create_timer(0.18 * i, false).timeout.connect(func() -> void:
 			EffectSprite.spawn(&"boss_death_blast", at)
-			EventBus.camera_shake.emit(4.0, 10.0))
+			EventBus.camera_shake.emit(4.0, 10.0)
+			EventBus.camera_punch.emit(0.08))
 
 ## Only hits that push the enemy flinch it. DoT ticks and zero-knockback hits (e.g. Hanzo) don't,
 ## and neither does anything while the current state blocks flinching (e.g. the skull's ram chain).

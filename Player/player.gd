@@ -318,6 +318,10 @@ func _physics_process(delta: float) -> void:
 		knockback.x *= landing_knockback_keep
 		if _fall_speed >= landing_dust_min_speed:
 			EffectSprite.spawn(&"landing_dust", feet_position())
+		# Harder landings squash flatter.
+		var impact: float = clampf(_fall_speed / 600.0, 0.0, 1.0)
+		if impact > 0.15:
+			Squash.play(body, Vector2(1.0 + 0.35 * impact, 1.0 - 0.3 * impact), 0.22)
 	var friction: float = ground_knockback_friction * get_ground_traction() if on_floor else KNOCKBACK_FRICTION
 	knockback = knockback.move_toward(Vector2.ZERO, maxf(friction, KNOCKBACK_FRICTION) * delta)
 	var drag: Vector2 = _get_grab_drag()

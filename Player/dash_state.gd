@@ -38,6 +38,8 @@ func Enter() -> void:
 	player.dashes_spent += 1
 	dash_direction = get_dash_direction() # Change this to calculate_direction_to_cursor() for 360 cursor dash
 	EffectSprite.spawn(&"dash_burst", player.global_position, dash_direction.angle())
+	# Stretched along the dash.
+	Squash.along(player.body, dash_direction, -0.25, 0.3)
 	force_up = false
 	dust.emitting = true
 

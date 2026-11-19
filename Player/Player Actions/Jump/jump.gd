@@ -108,5 +108,6 @@ func try_jump() -> void:
 func jump() -> void:
 	coyote_timer = 0.0
 	player.velocity.y = -player.stats.jump_height.value()
+	Squash.play(player.body, Vector2(0.8, 1.25), 0.25)
 	jumped.emit()
 	EventBus.jump_sound.emit()

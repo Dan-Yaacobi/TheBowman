@@ -150,6 +150,7 @@ func _on_event_bus_arrow_enemy_hit(perfect: bool, arrow: Arrow, target: Enemy) -
 			else:
 				damage = victim.current_hp + 1000
 				CombatTextSpawner.spawn(victim.global_position + Vector2(0, -16), "Devoured", color)
+				EventBus.camera_punch.emit(0.05)
 		var jaws: MawBite = MawBite.new()
 		jaws.global_position = victim.global_position + Vector2(0, -8)
 		jaws.devour = damage > bite
