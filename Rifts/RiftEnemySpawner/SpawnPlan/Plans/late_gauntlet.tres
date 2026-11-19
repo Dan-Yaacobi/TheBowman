@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="SpawnPlan" format=3]
+[gd_resource type="Resource" script_class="SpawnPlan" format=3 uid="uid://2qheyjgx10rx"]
 
-[ext_resource type="Script" path="res://Rifts/RiftEnemySpawner/SpawnPlan/spawn_plan.gd" id="1_plan"]
+[ext_resource type="Script" uid="uid://c61pyl5mv1nvx" path="res://Rifts/RiftEnemySpawner/SpawnPlan/spawn_plan.gd" id="1_plan"]
 
 [sub_resource type="Curve" id="Curve_plan"]
 _limits = [0.0, 6.0, 0.0, 1.0]

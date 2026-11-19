@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crc138ov0go7v"
-path="res://.godot/imported/Green Apple.png-7ef5415bfdffcfc3225fe37a27026986.ctex"
+path="res://.godot/imported/green apple.png-b285c7757dd93a55ef29cac0128b9dec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/Sprites/Green Apple.png"
-dest_files=["res://.godot/imported/Green Apple.png-7ef5415bfdffcfc3225fe37a27026986.ctex"]
+source_file="res://Enemies/Sprites/green apple.png"
+dest_files=["res://.godot/imported/green apple.png-b285c7757dd93a55ef29cac0128b9dec.ctex"]
 
 [params]
 

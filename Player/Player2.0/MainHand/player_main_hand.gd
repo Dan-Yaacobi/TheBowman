@@ -56,7 +56,6 @@ const CHARGED_ARROW_TINT: Color = Color(1.6, 1.35, 0.6)
 @export var max_recoil_mult: float = 1.4
 @export_group("")
 @onready var idle: IdleMainHandState = $MainHandStateMachine/Idle
-@onready var perfect_release_particles: CPUParticles2D = $PerfectReleaseParticles
 
 var current_arrow: Arrow = null
 var hand_direction: Vector2
@@ -181,7 +180,6 @@ func release_arrow() -> void:
 				var recoil: float = get_fire_recoil()
 				if recoil > 0.0:
 					EventBus.apply_player_knockback.emit(-hand_direction, recoil)
-				perfect_release_particles.emitting = true
 				EffectSprite.spawn(&"perfect_release", current_arrow.global_position, hand_direction.angle())
 			fire_arrow()
 	current_arrow = null

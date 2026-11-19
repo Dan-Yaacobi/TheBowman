@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://s71ogiu7cg18" path="res://Enemies/EnemyHitEffects/enemy_hit_effect.gd" id="5_ejyg6"]
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="6_h0ci4"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="7_nc3mk"]
-[ext_resource type="Texture2D" uid="uid://dbbmfr6ee2chc" path="res://Enemies/Sprites/Pink Apple.png" id="8_5uf8j"]
+[ext_resource type="Texture2D" uid="uid://dbbmfr6ee2chc" path="res://Enemies/Sprites/pink apple.png" id="8_5uf8j"]
 
 [sub_resource type="Resource" id="Resource_3u2p4"]
 script = ExtResource("4_ans7y")
