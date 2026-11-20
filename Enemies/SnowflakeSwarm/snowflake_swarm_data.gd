@@ -14,6 +14,8 @@ class_name SnowflakeSwarmData extends EnemyData
 @export var orbit_radius: float = 22.0
 ## Radians per second
 @export var orbit_speed: float = 2.5
+## Seconds after a flake shatters on its own before a new one forms on the circle
+@export var respawn_delay: float = 1.5
 
 @export_subgroup("Ram")
 ## Seconds between one flake's ram ending and the next one starting

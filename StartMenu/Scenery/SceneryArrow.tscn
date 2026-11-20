@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://StartMenu/MenuArrow/MenuArrow.tscn" id="1_arrow"]
+
+[node name="SceneryArrow" instance=ExtResource("1_arrow")]
+afterimages = false
+sink_depth = 3.0
+ring_radius = 12.0
+
+[node name="Splinters" parent="." index="0"]
+amount = 8
+gravity = Vector2(0, 380)
+initial_velocity_min = 45.0
+initial_velocity_max = 120.0
+scale_amount_min = 1.0
+scale_amount_max = 1.0

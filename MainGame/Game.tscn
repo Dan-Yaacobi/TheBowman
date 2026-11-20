@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" path="res://MainGame/Music/PreparingForBattle.ogg" id="15_eventmusic"]
 [ext_resource type="Script" path="res://MainGame/DistantIslands/distant_islands.gd" id="13_distisl"]
 [ext_resource type="Texture2D" path="res://MainGame/DistantIslands/Sprites/DistantIslands.png" id="14_distisltex"]
+[ext_resource type="Texture2D" path="res://MainGame/DistantIslands/Sprites/FinalTower.png" id="16_finaltower"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835gg"]
 shader = ExtResource("4_jcge4")
@@ -35,7 +36,7 @@ bus = &"Music"
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=281466749]
-layer = -1
+layer = -2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=400133803]
 z_index = -10
@@ -52,6 +53,7 @@ script = ExtResource("13_distisl")
 island_textures = Array[Texture2D]([ExtResource("14_distisltex")])
 island_hframes = 4
 island_vframes = 4
+tower_texture = ExtResource("16_finaltower")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1989653480]
 color = Color(0.95468724, 0.95468724, 0.95468724, 1)

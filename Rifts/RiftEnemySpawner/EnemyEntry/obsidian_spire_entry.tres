@@ -10,4 +10,4 @@ scene = ExtResource("2_scene")
 data = ExtResource("3_data")
 cost = 2
 biomes = 4
-spawn_zone = 5
+spawn_zone = 6

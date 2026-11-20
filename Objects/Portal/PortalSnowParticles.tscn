@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[sub_resource type="Gradient" id="Gradient_snow"]
+offsets = PackedFloat32Array(0, 0.1, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.9, 0.96, 1, 0.95, 0.9, 0.96, 1, 0)
+
+[node name="PortalSnowParticles" type="CPUParticles2D"]
+position = Vector2(0, 9)
+amount = 30
+lifetime = 2.4
+preprocess = 2.4
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(9, 16)
+spread = 180.0
+gravity = Vector2(0, 4)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+radial_accel_min = 4.0
+radial_accel_max = 10.0
+damping_min = 3.0
+damping_max = 5.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_snow")

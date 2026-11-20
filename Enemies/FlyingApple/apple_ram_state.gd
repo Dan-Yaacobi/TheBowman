@@ -10,6 +10,8 @@ class_name AppleRamState extends EnemyState
 enum Phase { WINDUP, CHARGE, RECOIL, DIZZY }
 
 const ATTACK_ANIMATION: StringName = &"Attack"
+## Played while dizzy when the enemy has it; otherwise the sprite wobbles (placeholder).
+const DIZZY_ANIMATION: StringName = &"Dizzy"
 const PLAYER_COLLISION_LAYER: int = 1
 
 @export var trigger_distance: float = 80.0
@@ -27,8 +29,9 @@ const PLAYER_COLLISION_LAYER: int = 1
 @export var charge_speed: float = 220.0
 ## Charge stops after this long if it misses.
 @export var max_charge_time: float = 0.5
-@export var recoil_speed: float = 160.0
-@export var recoil_time: float = 0.35
+## Bounce-back after a hit: about speed * time / 2 pixels.
+@export var recoil_speed: float = 240.0
+@export var recoil_time: float = 0.45
 ## Time after a ram ends before the next one can start.
 @export var cooldown: float = 1.5
 @export_group("Chain")
@@ -38,7 +41,7 @@ const PLAYER_COLLISION_LAYER: int = 1
 @export var dizzy_time: float = 0.0
 ## Off: hits still deal damage but don't flinch the enemy out of the chain.
 @export var interruptible: bool = true
-## Placeholder dizzy look until there's art: the sprite wobbles side to side.
+## Dizzy look for enemies without a "Dizzy" animation: the sprite wobbles side to side.
 @export var dizzy_wobble_angle: float = 0.35
 @export var dizzy_wobble_speed: float = 12.0
 @export_group("")
@@ -119,7 +122,8 @@ func Physics(delta: float) -> EnemyState:
 				return _end_ram()
 		Phase.DIZZY:
 			_apply_knockback(delta)
-			enemy.sprite.rotation = sin(_phase_time_left * dizzy_wobble_speed) * dizzy_wobble_angle
+			if not enemy.animation_player.has_animation(DIZZY_ANIMATION):
+				enemy.sprite.rotation = sin(_phase_time_left * dizzy_wobble_speed) * dizzy_wobble_angle
 			if _phase_time_left <= 0.0:
 				return seek
 	return null
@@ -141,6 +145,8 @@ func _end_ram() -> EnemyState:
 	if dizzy_time > 0.0:
 		enemy.velocity = Vector2.ZERO
 		_set_phase(Phase.DIZZY, dizzy_time)
+		if enemy.animation_player.has_animation(DIZZY_ANIMATION):
+			enemy.animation_player.play(DIZZY_ANIMATION)
 		return null
 	return seek
 

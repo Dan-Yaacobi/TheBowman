@@ -205,7 +205,7 @@ Bows also have a fixed **draw time** now (light 0.45s, standard 0.55s, heavy 0.8
 | **Equinox** | Elemental | 0.55s | Arrows alternate fire and frost (the bow's color shows which is next). Frost on a burning enemy, or fire on a frostbitten one, sets off a thermal shock burst. *(on hold: a debuff-combo system to revisit later)* |
 
 #### The Maw: stages
-Souls per kill: normal enemy 1, elite 5, boss 15. A soul counter shows above the archer; each kill flashes a "devour" on the bow; the bow sprite changes per stage (4 sprites).
+Souls per kill: normal enemy 1, elite 5, boss 15. A soul meter shows in the HUD under the color levels; each kill flashes a "devour" on the bow; the bow sprite changes per stage (4 sprites).
 
 | Stage | Souls | Effect |
 |---|---|---|
@@ -228,7 +228,7 @@ Precision scrolls scale the stage bonuses and the bite. **Thresholds are placeho
 ### Rings
 | Item | Color | Ability |
 |---|---|---|
-| **Hourglass Band** | Precision | 3 perfect hits in a row slow time to half speed for 1s. Cut in round 1; back for a feel test first (global time scale, key-triggered prototype). |
+| ~~**Hourglass Band**~~ | Precision | **Removed** (didn't make sense, not fun). Was: 3 perfect hits in a row slow time to half speed for 1s. |
 | **Contagion Band** | Elemental | When an enemy with an elemental debuff dies, its debuffs jump to the nearest enemy. |
 
 ### Cut in Nov 2026 rounds

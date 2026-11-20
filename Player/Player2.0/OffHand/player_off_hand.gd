@@ -44,7 +44,11 @@ var _ready_flash: float = 0.0
 const TENSION_GLOW: Color = Color(1.3, 1.2, 1.05)
 const PERFECT_GLOW: Color = Color(1.7, 1.45, 0.75)
 const PERFECT_PULSE_SPEED: float = 14.0
+## Getting tired drains the draw: the bow dulls toward this instead of un-brightening.
+const TIRED_GLOW: Color = Color(0.72, 0.7, 0.76)
 var _was_perfect: bool = false
+## Highest shot power this draw, so draining after tiring doesn't replay the build-up backwards.
+var _peak_power: float = 0.0
 
 var position_target: Node2D = null
 var rotation_target: Node2D = null
@@ -149,14 +153,18 @@ func _update_charged_glow(delta: float) -> void:
 func _update_tension_glow(player: Player, delta: float) -> void:
 	var drawing: bool = player != null and player.main_hand.is_drawing() and bow_sprite.visible
 	var power: float = player.main_hand.shot_power if drawing else 0.0
+	_peak_power = maxf(_peak_power, power) if drawing else 0.0
 	var perfect: bool = drawing and power >= 1.0
 	if perfect and not _was_perfect:
 		_ready_flash = READY_FLASH_TIME
 		_ready_burst.restart()
 	_was_perfect = perfect
-	var glow: Color = Color.WHITE.lerp(TENSION_GLOW, ease(clampf(power, 0.0, 1.0), 2.2))
+	var glow: Color = Color.WHITE.lerp(TENSION_GLOW, ease(clampf(_peak_power, 0.0, 1.0), 2.2))
 	if perfect:
 		glow = TENSION_GLOW.lerp(PERFECT_GLOW, 0.5 + 0.5 * sin(_time * PERFECT_PULSE_SPEED))
+	elif power < _peak_power:
+		var drained: float = (_peak_power - power) / maxf(_peak_power - player.main_hand.min_shot_power, 0.01)
+		glow = glow.lerp(TIRED_GLOW, clampf(drained, 0.0, 1.0))
 	if _ready_flash > 0.0:
 		_ready_flash = maxf(_ready_flash - delta, 0.0)
 		glow = glow.lerp(READY_FLASH_COLOR, _ready_flash / READY_FLASH_TIME)

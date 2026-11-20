@@ -65,9 +65,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if not is_open:
 		return
+	if _is_enter_pressed(event):
+		get_viewport().set_input_as_handled()
+		_on_equip_button_pressed()
+		return
 	if event.is_action_pressed("Interact") or event.is_action_pressed("ui_cancel"):
 		close()
 		get_viewport().set_input_as_handled()
+
+## The Enter key itself (not ui_accept, which also fires on Space).
+func _is_enter_pressed(event: InputEvent) -> bool:
+	var key: InputEventKey = event as InputEventKey
+	return key != null and key.pressed and not key.echo and (key.keycode == KEY_ENTER or key.keycode == KEY_KP_ENTER)
 
 func _on_equip_button_pressed() -> void:
 	close()

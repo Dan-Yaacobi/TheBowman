@@ -1,0 +1,383 @@
+[gd_scene load_steps=44 format=3]
+
+[ext_resource type="Script" path="res://StartMenu/Scenery/menu_scenery.gd" id="1_scenery"]
+[ext_resource type="Shader" path="res://StartMenu/Scenery/sharp_pixels.gdshader" id="2_sharp"]
+[ext_resource type="PackedScene" path="res://StartMenu/Scenery/SceneryArrow.tscn" id="3_arrow"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/menu_layer.gd" id="4_layer"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/Targets/menu_island.gd" id="5_island"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/Targets/menu_portal_island.gd" id="6_portal"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/Targets/menu_coin.gd" id="7_coin"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/Targets/menu_cloud.gd" id="8_cloud"]
+[ext_resource type="PackedScene" path="res://StartMenu/Scenery/Targets/MenuApple.tscn" id="9_apple"]
+[ext_resource type="PackedScene" path="res://StartMenu/Scenery/Targets/MenuArcher.tscn" id="10_archer"]
+[ext_resource type="Shader" path="res://Objects/Portal/Sprites/portal_swirl.gdshader" id="11_swirl"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/sky.png" id="12_sky"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/distant_tower.png" id="13_tower"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_wisp_0.png" id="14_wisp0"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_wisp_1.png" id="15_wisp1"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_wisp_2.png" id="16_wisp2"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_wisp_3.png" id="17_wisp3"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_puff_0.png" id="18_puff0"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_puff_1.png" id="19_puff1"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_puff_2.png" id="20_puff2"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/cloud_puff_3.png" id="21_puff3"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_far_a.png" id="22_far_a"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_far_b.png" id="23_far_b"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_far_c.png" id="24_far_c"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_far_d.png" id="25_far_d"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/portal_island.png" id="26_portal"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_coin_left.png" id="27_coin_left"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_coin_mid.png" id="28_coin_mid"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_twin_coins.png" id="29_twin"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_rock_right.png" id="30_rock_right"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_low_mid.png" id="31_low_mid"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/island_low_right.png" id="32_low_right"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/hero_island.png" id="33_hero"]
+[ext_resource type="Texture2D" path="res://StartMenu/Scenery/Sprites/coin.png" id="34_coin"]
+[ext_resource type="AudioStream" path="res://Audio/Player/ArrowHit.mp3" id="35_island_sound"]
+[ext_resource type="AudioStream" path="res://Audio/Items/coin_pickup.ogg" id="36_coin_sound"]
+[ext_resource type="AudioStream" path="res://Audio/Objects/portal_enter.ogg" id="37_portal_sound"]
+[ext_resource type="Script" path="res://StartMenu/Scenery/menu_tower.gd" id="38_tower"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_halo"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 0.6, 1, 1, 0.75, 0.3, 1, 0.55, 0.5, 0.15, 0.8, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_halo"]
+gradient = SubResource("Gradient_halo")
+width = 80
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sharp"]
+shader = ExtResource("2_sharp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swirl"]
+shader = ExtResource("11_swirl")
+shader_parameter/center = Vector2(0.5, 0.229)
+shader_parameter/speed = 1.2
+shader_parameter/arms = 3.0
+shader_parameter/twist = 14.0
+shader_parameter/pixel_grid = 100.0
+shader_parameter/color_steps = 4
+shader_parameter/deep_color = Color(0.02, 0.12, 0.75, 1)
+shader_parameter/mid_color = Color(0.05, 0.35, 0.95, 1)
+shader_parameter/bright_color = Color(0.3, 0.85, 1, 1)
+shader_parameter/star_density = 0.025
+shader_parameter/star_twinkle_speed = 3.0
+shader_parameter/blue_threshold = 0.25
+
+[node name="MenuScenery" type="SubViewportContainer"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_sharp")
+offset_right = 1344.0
+offset_bottom = 756.0
+mouse_filter = 2
+script = ExtResource("1_scenery")
+arrow_scene = ExtResource("3_arrow")
+
+[node name="View" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+size = Vector2i(1344, 756)
+render_target_update_mode = 4
+
+[node name="World" type="Node2D" parent="View"]
+position = Vector2(-16, -6)
+scale = Vector2(2, 2)
+
+[node name="Sky" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+depth = 0.0
+parallax = 0.08
+
+[node name="SkyPlate" type="Sprite2D" parent="View/World/Sky"]
+texture = ExtResource("12_sky")
+centered = false
+
+[node name="Wisp0" type="Sprite2D" parent="View/World/Sky"]
+position = Vector2(118, 60)
+texture = ExtResource("14_wisp0")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 1.6
+wrap_range = Vector2(-60, 750)
+
+[node name="Wisp1" type="Sprite2D" parent="View/World/Sky"]
+position = Vector2(300, 88)
+texture = ExtResource("15_wisp1")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 2.2
+wrap_range = Vector2(-60, 750)
+
+[node name="Wisp2" type="Sprite2D" parent="View/World/Sky"]
+position = Vector2(518, 158)
+texture = ExtResource("16_wisp2")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 1.2
+wrap_range = Vector2(-60, 750)
+
+[node name="Wisp3" type="Sprite2D" parent="View/World/Sky"]
+position = Vector2(640, 40)
+texture = ExtResource("17_wisp3")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 1.9
+wrap_range = Vector2(-60, 750)
+
+[node name="Tower" type="Sprite2D" parent="View/World/Sky"]
+position = Vector2(306, 232)
+texture = ExtResource("13_tower")
+script = ExtResource("38_tower")
+
+[node name="Halo" type="Sprite2D" parent="View/World/Sky/Tower"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_add")
+position = Vector2(-1.5, -24)
+texture = SubResource("GradientTexture2D_halo")
+
+[node name="Far" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+depth = 0.15
+parallax = 0.2
+
+[node name="FarIslandA" type="Sprite2D" parent="View/World/Far"]
+position = Vector2(167, 127)
+texture = ExtResource("22_far_a")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -14.0
+bob_height = 1.0
+bob_speed = 0.5
+dip_depth = 1.5
+
+[node name="FarIslandB" type="Sprite2D" parent="View/World/Far"]
+position = Vector2(520.5, 162.5)
+texture = ExtResource("23_far_b")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -14.0
+bob_height = 1.0
+bob_speed = 0.45
+dip_depth = 1.5
+
+[node name="FarIslandC" type="Sprite2D" parent="View/World/Far"]
+position = Vector2(271.5, 225)
+texture = ExtResource("24_far_c")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -14.0
+bob_height = 1.0
+bob_speed = 0.4
+dip_depth = 1.5
+
+[node name="FarIslandD" type="Sprite2D" parent="View/World/Far"]
+position = Vector2(579, 117)
+texture = ExtResource("25_far_d")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -14.0
+bob_height = 1.0
+bob_speed = 0.55
+dip_depth = 1.5
+
+[node name="CloudSea" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+depth = 0.25
+parallax = 0.3
+
+[node name="Puff1" type="Sprite2D" parent="View/World/CloudSea"]
+position = Vector2(252, 284)
+texture = ExtResource("19_puff1")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 3.0
+wrap_range = Vector2(-60, 750)
+
+[node name="TowerMist" type="Sprite2D" parent="View/World/CloudSea"]
+position = Vector2(306, 269)
+texture = ExtResource("19_puff1")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 0.0
+
+[node name="Puff3" type="Sprite2D" parent="View/World/CloudSea"]
+position = Vector2(520, 286)
+texture = ExtResource("21_puff3")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 2.6
+wrap_range = Vector2(-60, 750)
+
+[node name="Mid" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+parallax = 0.5
+
+[node name="PortalIsland" type="Sprite2D" parent="View/World/Mid"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_swirl")
+position = Vector2(430, 141.5)
+texture = ExtResource("26_portal")
+script = ExtResource("6_portal")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+portal_rect = Rect2(-12, -45, 24, 35)
+portal_sound = ExtResource("37_portal_sound")
+
+[node name="IslandCoinLeft" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(89, 196.5)
+texture = ExtResource("27_coin_left")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.7
+
+[node name="Coin" type="Sprite2D" parent="View/World/Mid/IslandCoinLeft"]
+position = Vector2(-0.5, -23)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="IslandCoinMid" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(307.5, 159.5)
+texture = ExtResource("28_coin_mid")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.55
+
+[node name="Coin" type="Sprite2D" parent="View/World/Mid/IslandCoinMid"]
+position = Vector2(-3, -21)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="IslandTwinCoins" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(492.5, 229.5)
+texture = ExtResource("29_twin")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.65
+
+[node name="CoinA" type="Sprite2D" parent="View/World/Mid/IslandTwinCoins"]
+position = Vector2(-8, -21)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="CoinB" type="Sprite2D" parent="View/World/Mid/IslandTwinCoins"]
+position = Vector2(12, -21)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="IslandRockRight" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(622, 202.5)
+texture = ExtResource("30_rock_right")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.5
+
+[node name="Coin" type="Sprite2D" parent="View/World/Mid/IslandRockRight"]
+position = Vector2(-25, -34)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="IslandLowMid" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(366, 321.5)
+texture = ExtResource("31_low_mid")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.6
+
+[node name="IslandLowRight" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(589.5, 328.5)
+texture = ExtResource("32_low_right")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -10.0
+bob_speed = 0.45
+
+[node name="FloatingCoin" type="Sprite2D" parent="View/World/Mid"]
+position = Vector2(533, 274)
+texture = ExtResource("34_coin")
+script = ExtResource("7_coin")
+hit_sound = ExtResource("36_coin_sound")
+hit_sound_db = -8.0
+
+[node name="AppleA" parent="View/World/Mid" instance=ExtResource("9_apple")]
+position = Vector2(54, 156)
+
+[node name="AppleB" parent="View/World/Mid" instance=ExtResource("9_apple")]
+position = Vector2(226, 181)
+
+[node name="AppleC" parent="View/World/Mid" instance=ExtResource("9_apple")]
+position = Vector2(505, 108)
+flip_h = true
+
+[node name="AppleD" parent="View/World/Mid" instance=ExtResource("9_apple")]
+position = Vector2(579, 259)
+flip_h = true
+
+[node name="AppleE" parent="View/World/Mid" instance=ExtResource("9_apple")]
+position = Vector2(422, 282)
+
+[node name="NearClouds" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+depth = 0.7
+parallax = 0.75
+
+[node name="Puff0" type="Sprite2D" parent="View/World/NearClouds"]
+position = Vector2(18, 362)
+texture = ExtResource("18_puff0")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 5.0
+wrap_range = Vector2(-60, 750)
+
+[node name="Puff2" type="Sprite2D" parent="View/World/NearClouds"]
+position = Vector2(648, 366)
+texture = ExtResource("20_puff2")
+script = ExtResource("8_cloud")
+stops_arrow = false
+drift_speed = 6.0
+wrap_range = Vector2(-60, 750)
+
+[node name="Hero" type="Node2D" parent="View/World"]
+script = ExtResource("4_layer")
+depth = 1.0
+parallax = 1.0
+
+[node name="HeroIsland" type="Sprite2D" parent="View/World/Hero"]
+position = Vector2(151, 321.5)
+texture = ExtResource("33_hero")
+script = ExtResource("5_island")
+hit_sound = ExtResource("35_island_sound")
+hit_sound_db = -6.0
+bob_height = 1.0
+bob_speed = 0.35
+dip_depth = 2.0
+
+[node name="Archer" parent="View/World/Hero/HeroIsland" instance=ExtResource("10_archer")]
+position = Vector2(31, -37.5)
+
+[node name="Shots" type="Node2D" parent="View/World"]
+unique_name_in_owner = true

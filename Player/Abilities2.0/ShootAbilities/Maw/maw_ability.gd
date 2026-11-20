@@ -40,7 +40,6 @@ var souls: int = 0
 var _kills_toward_heal: int = 0
 var _stage: Stage = Stage.STARVING
 var _buff_id: int = "maw/stage_damage".hash()
-var _counter: SoulCounter
 var _trail: SoulTrail
 var _equipped: bool = false
 
@@ -51,9 +50,6 @@ func on_equipped() -> void:
 		EventBus.enemy_died.connect(_on_event_bus_enemy_died)
 	if not EventBus.arrow_enemy_hit.is_connected(_on_event_bus_arrow_enemy_hit):
 		EventBus.arrow_enemy_hit.connect(_on_event_bus_arrow_enemy_hit)
-	if not is_instance_valid(_counter):
-		_counter = SoulCounter.new()
-		player.add_child(_counter)
 	if _trail == null:
 		_trail = SoulTrail.new()
 		_trail.ability = self
@@ -72,9 +68,7 @@ func on_unequipped() -> void:
 		EventBus.arrow_enemy_hit.disconnect(_on_event_bus_arrow_enemy_hit)
 	player.stats.arrow_damage.remove_buff_completly(_buff_id, Stat.buff_type.MULTIPLICATIVE)
 	player.stats.arrow_visual_effects.erase(_trail)
-	if is_instance_valid(_counter):
-		_counter.queue_free()
-	_counter = null
+	EventBus.maw_unequipped.emit()
 
 func refresh_power() -> void:
 	if _equipped:
@@ -109,9 +103,7 @@ func _on_event_bus_enemy_died(enemy: Enemy) -> void:
 		burst.global_position = player.global_position + Vector2(0, -12)
 		EventBus.summon_effect.emit(burst)
 		EffectSprite.attach(&"maw_stage_up", player, player.to_local(player.feet_position()))
-	_update_counter()
-	if is_instance_valid(_counter):
-		_counter.pulse()
+	_update_counter(true)
 	_count_kill_for_heal()
 
 func _count_kill_for_heal() -> void:
@@ -193,12 +185,13 @@ func _apply_stage_buff() -> void:
 	if not is_zero_approx(amount):
 		stat.add_buff(_buff_id, amount, Stat.buff_type.MULTIPLICATIVE)
 
-func _update_counter() -> void:
-	if not is_instance_valid(_counter):
+## Updates the HUD soul meter (MawMeter).
+func _update_counter(ate_soul: bool = false) -> void:
+	if not _equipped:
 		return
 	var floor_souls: int = 0 if _stage == Stage.STARVING else stage_thresholds[_stage - 1]
 	var next_souls: int = stage_thresholds[_stage] if _stage < Stage.AWAKENED else -1
-	_counter.show_souls(STAGE_NAMES[_stage], souls, floor_souls, next_souls, STAGE_COLORS[_stage])
+	EventBus.maw_souls_changed.emit(STAGE_NAMES[_stage], souls, floor_souls, next_souls, STAGE_COLORS[_stage], ate_soul)
 
 func get_tooltip() -> String:
 	var lines: PackedStringArray = PackedStringArray()
@@ -246,51 +239,6 @@ func get_tooltip_color() -> Color:
 
 func get_type() -> TriggerType:
 	return TriggerType.BEFORE_HIT
-
-## Stage name, soul count toward the next stage and a progress bar, above the archer.
-class SoulCounter extends Node2D:
-	const BAR_SIZE: Vector2 = Vector2(40, 4)
-	var _label: Label
-	var _fill: float = 0.0
-	var _color: Color = Color.WHITE
-	var _pulse: float = 0.0
-
-	func _ready() -> void:
-		position = Vector2(0, -50)
-		z_index = 5
-		_label = Label.new()
-		_label.position = Vector2(-40, -16)
-		_label.size = Vector2(80, 14)
-		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_label.add_theme_font_size_override("font_size", 11)
-		_label.add_theme_constant_override("outline_size", 4)
-		_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
-		add_child(_label)
-
-	func show_souls(stage_name: String, count: int, floor_souls: int, next_souls: int, color: Color) -> void:
-		_color = color
-		_label.add_theme_color_override("font_color", color)
-		if next_souls < 0:
-			_label.text = "%s  %d" % [stage_name, count]
-			_fill = 1.0
-		else:
-			_label.text = "%s  %d/%d" % [stage_name, count, next_souls]
-			_fill = clampf(float(count - floor_souls) / float(maxi(next_souls - floor_souls, 1)), 0.0, 1.0)
-		queue_redraw()
-
-	## A quick bump when a soul is eaten.
-	func pulse() -> void:
-		_pulse = 1.0
-
-	func _process(delta: float) -> void:
-		if _pulse > 0.0:
-			_pulse = maxf(_pulse - delta * 4.0, 0.0)
-			scale = Vector2.ONE * (1.0 + 0.25 * _pulse)
-
-	func _draw() -> void:
-		var rect: Rect2 = Rect2(-BAR_SIZE / 2.0, BAR_SIZE)
-		draw_rect(rect.grow(1.0), Color(0, 0, 0, 0.8))
-		draw_rect(Rect2(rect.position, Vector2(BAR_SIZE.x * _fill, BAR_SIZE.y)), _color)
 
 ## A one-shot ring of soul particles for a stage-up.
 class SoulBurst extends CPUParticles2D:

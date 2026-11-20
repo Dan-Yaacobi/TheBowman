@@ -1,12 +1,13 @@
 class_name Tutorial extends GameWorld
 ## New-game tutorial. The world spirit walks the player through one skill at a time:
-## jump, dash, falling, sword, bow (hit, then perfect shot), the stats screen and the menu.
-## Each step plays the spirit's lines (Interact advances), then shows a goal until it is met.
+## jump, dash, falling, sword, bow (hit, then perfect shot) and the stats screen.
+## Each step plays the spirit's lines (Interact advances, the player is held in place),
+## then shows a goal until it is met.
 ## Falls return the player to the last island they stood on. Dying rebuilds this world
 ## at the step the player had reached. Finishing or skipping refills hearts, writes the
 ## first save (so the next launch goes straight to the hub) and sends the player to the hub.
 
-enum Step { INTRO, JUMP, DASH, FALL, SWORD, BOW, BOW_HIT, PERFECT_SHOT, STATS, MENU, OUTRO, DONE }
+enum Step { INTRO, JUMP, DASH, FALL, SWORD, BOW, BOW_HIT, PERFECT_SHOT, STATS, OUTRO, DONE }
 
 ## Survives the world being rebuilt after a death, so the player resumes where they were.
 static var _resume_step: Step = Step.INTRO
@@ -37,7 +38,6 @@ static var _resume_step: Step = Step.INTRO
 @export var bow_hit_lines: Array[String] = []
 @export var perfect_shot_lines: Array[String] = []
 @export var stats_lines: Array[String] = []
-@export var menu_lines: Array[String] = []
 @export var outro_lines: Array[String] = []
 @export_group("Goals")
 @export var jump_goal: String = ""
@@ -48,7 +48,6 @@ static var _resume_step: Step = Step.INTRO
 @export var bow_hit_goal: String = ""
 @export var perfect_shot_goal: String = ""
 @export var stats_goal: String = ""
-@export var menu_goal: String = ""
 @export_group("")
 
 @onready var spirit: WorldSpirit = $WorldSpirit
@@ -72,7 +71,6 @@ var _has_fallen: bool = false
 var _target_hit: bool = false
 var _perfect_hit: bool = false
 var _opened_stats: bool = false
-var _opened_menu: bool = false
 var _spirit_tween: Tween
 
 func extra_set_world_functions() -> void:
@@ -87,6 +85,7 @@ func extra_set_world_functions() -> void:
 	# The spirit only talks when the tutorial tells it to; no hub menu here.
 	spirit.npc_state_machine.process_mode = Node.PROCESS_MODE_DISABLED
 	spirit.keyboard_press_helper.hide()
+	spirit.shows_turn_ins = false
 	spirit.global_position = _checkpoint_for(_step).global_position + spirit_offset
 	goal_label.hide()
 	skip_button.pressed.connect(_on_skip_button_pressed)
@@ -94,6 +93,8 @@ func extra_set_world_functions() -> void:
 	EventBus.arrow_enemy_hit.connect(_on_event_bus_arrow_enemy_hit)
 
 func extra_exit_world_functions() -> void:
+	# Leaving mid-line (death, skip) never reaches the unlock in _say.
+	PlayerManager.player.movement_locked = false
 	loot_manager.unset_up()
 	EventBus.player_fell.disconnect(_on_event_bus_player_fell)
 	EventBus.arrow_enemy_hit.disconnect(_on_event_bus_arrow_enemy_hit)
@@ -157,10 +158,6 @@ func _play_step(step: Step) -> void:
 			await _say(stats_lines)
 			_opened_stats = false
 			await _goal(stats_goal, func() -> bool: return _opened_stats and not get_tree().paused)
-		Step.MENU:
-			await _say(menu_lines)
-			_opened_menu = false
-			await _goal(menu_goal, func() -> bool: return _opened_menu and not get_tree().paused)
 		Step.OUTRO:
 			await _say(outro_lines)
 
@@ -237,12 +234,15 @@ func _move_spirit_to(checkpoint: Marker2D) -> void:
 # --- Dialogue and goals ------------------------------------------------------------
 
 ## Plays lines in the spirit's chat box; Interact advances. Returns once the last line is read.
+## The player stands still while the spirit talks and is let go once there's a goal to do.
 func _say(lines: Array[String]) -> void:
 	if lines.is_empty() or not is_inside_tree():
 		return
 	_talking = true
+	PlayerManager.player.movement_locked = true
 	await spirit.say(lines)
 	_talking = false
+	PlayerManager.player.movement_locked = false
 	if is_inside_tree():
 		spirit.chat_box.close()
 
@@ -266,12 +266,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		chat.advance()
 	get_viewport().set_input_as_handled()
 
-## Sees TAB / ESC before the menus open and pause the tree.
+## Sees TAB before the menu opens and pauses the tree.
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("EquipmentMenu"):
 		_opened_stats = true
-	elif event.is_action_pressed("ui_cancel"):
-		_opened_menu = true
 
 func _on_event_bus_player_fell(_heart_lost: bool) -> void:
 	_has_fallen = true

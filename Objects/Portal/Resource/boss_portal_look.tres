@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PortalLook" format=3]
+
+[ext_resource type="Script" path="res://Objects/Portal/portal_look.gd" id="1_look"]
+[ext_resource type="Texture2D" path="res://Objects/Portal/Sprites/PortalBoss.png" id="2_tex"]
+
+
+[resource]
+script = ExtResource("1_look")
+texture = ExtResource("2_tex")
+deep_color = Color(0.22, 0.0, 0.03, 1)
+mid_color = Color(0.58, 0.05, 0.08, 1)
+bright_color = Color(0.95, 0.32, 0.25, 1)
+star_color = Color(1, 0.75, 0.7, 1)
+particle_tint = Color(1, 0.45, 0.45, 1)
+

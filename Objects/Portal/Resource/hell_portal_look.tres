@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PortalLook" format=3]
+
+[ext_resource type="Script" path="res://Objects/Portal/portal_look.gd" id="1_look"]
+[ext_resource type="Texture2D" path="res://Objects/Portal/Sprites/PortalHell.png" id="2_tex"]
+[ext_resource type="PackedScene" path="res://Objects/Portal/PortalLavaParticles.tscn" id="3_fx"]
+
+[resource]
+script = ExtResource("1_look")
+texture = ExtResource("2_tex")
+deep_color = Color(0.3, 0.04, 0.02, 1)
+mid_color = Color(0.78, 0.28, 0.07, 1)
+bright_color = Color(1, 0.68, 0.25, 1)
+star_color = Color(1, 0.88, 0.55, 1)
+particle_tint = Color(1, 0.55, 0.35, 1)
+emitter_scene = ExtResource("3_fx")

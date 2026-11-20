@@ -5,26 +5,44 @@ class_name SpiritMenu extends CanvasLayer
 signal option_chosen(entry: SpiritMenuEntry)
 
 @export var button_font_size: int = 22
+## Turn-ins (what lit the spirit's "!") wear the same gold "!" and pulse, so the player knows to pick them.
+@export var turn_in_color: Color = Color(1, 0.85, 0.2, 1)
+@export var turn_in_prefix: String = "! "
+@export var turn_in_pulse_speed: float = 4.0
 
 @onready var panel: PanelContainer = $Control/Panel
 @onready var entries_box: VBoxContainer = $Control/Panel/Entries
 
 var _buttons: Array[Button] = []
+var _turn_in_buttons: Array[Button] = []
+var _time: float = 0.0
 
 func _ready() -> void:
 	panel.visible = false
+
+func _process(delta: float) -> void:
+	if _turn_in_buttons.is_empty():
+		return
+	_time += delta
+	var brightness: float = 1.0 + 0.35 * (0.5 + 0.5 * sin(_time * turn_in_pulse_speed))
+	for button: Button in _turn_in_buttons:
+		button.modulate = Color(brightness, brightness, brightness)
 
 func open(entries: Array[SpiritMenuEntry]) -> void:
 	_clear()
 	for entry: SpiritMenuEntry in entries:
 		var button: Button = Button.new()
-		button.text = entry.label
+		button.text = (turn_in_prefix + entry.label) if entry.is_turn_in else entry.label
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", button_font_size)
 		button.pressed.connect(_on_entry_button_pressed.bind(entry))
 		button.mouse_entered.connect(button.grab_focus)
 		entries_box.add_child(button)
 		_buttons.append(button)
+		if entry.is_turn_in:
+			for color_name: StringName in [&"font_color", &"font_hover_color", &"font_focus_color", &"font_pressed_color"]:
+				button.add_theme_color_override(color_name, turn_in_color)
+			_turn_in_buttons.append(button)
 	if _buttons.is_empty():
 		return
 	# Wrap focus top <-> bottom.
@@ -57,6 +75,7 @@ func _clear() -> void:
 		entries_box.remove_child(button)
 		button.queue_free()
 	_buttons.clear()
+	_turn_in_buttons.clear()
 
 func _on_entry_button_pressed(entry: SpiritMenuEntry) -> void:
 	if not panel.visible:

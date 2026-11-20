@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d1uvjppj7yfvc" path="res://Items/LootManager/stat_roll_def.gd" id="3_roll"]
 [ext_resource type="Resource" uid="uid://bgld2uy7yoyj5" path="res://Player/Abilities2.0/MinorAbilities/minor_abilities.tres" id="4_minor"]
 [ext_resource type="PackedScene" uid="uid://djxch32a87fle" path="res://Items/Equipments/Equipment.tscn" id="5_scene"]
-[ext_resource type="Texture2D" uid="uid://c68vjy5xv1xrt" path="res://Items/Equipments/Bows/Sprites/HuntersMark.png" id="6_tex"]
+[ext_resource type="Texture2D" uid="uid://todjeoes4cx7" path="res://Items/Equipments/Bows/Sprites/Orrery.png" id="6_tex"]
 [ext_resource type="Script" uid="uid://didp8aaqnjyxt" path="res://Player/Abilities2.0/ShootAbilities/Orrery/orrery_ability.gd" id="7_ability"]
 
 [sub_resource type="Resource" id="Resource_ability"]

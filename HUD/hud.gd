@@ -1,5 +1,8 @@
 class_name HUD extends CanvasLayer
 
+## Peak strength of the red edge glow when the player is hit.
+const DAMAGED_GLOW_ALPHA: float = 0.55
+
 @onready var rift_level_label: Label = $RiftLevel
 @onready var damaged_flash: ColorRect = $DamagedFlash
 @onready var heal_flash: ColorRect = $HealFlash
@@ -15,6 +18,7 @@ class_name HUD extends CanvasLayer
 
 var current_view_item: Equipment
 var flash_tween: Tween
+var damage_glow_tween: Tween
 
 func _ready() -> void:
 	PlayerManager.player.item_amount_changed.connect(update_currency)
@@ -26,18 +30,27 @@ func _ready() -> void:
 	EventBus.damaged_flash.connect(apply_damage_flash)
 	EventBus.healed_flash.connect(apply_heal_flash)
 	damaged_flash.modulate.a = 0.0
+	_setup_damaged_glow()
 	heal_flash.modulate.a = 0.0
 	boss_health_bar.hide()
 	EventBus.boss_fight_started.connect(_on_boss_fight_started)
 	EventBus.hide_boss_health_bar.connect(hide_boss_health_bar)
 	pause_menu.setup(equipment_menu)
 	
+## The damage flash is a red vignette (edges glow, middle barely tinted), faded by modulate alpha.
+func _setup_damaged_glow() -> void:
+	var material: ShaderMaterial = ShaderMaterial.new()
+	material.shader = load("res://HUD/damaged_glow.gdshader")
+	damaged_flash.material = material
+	damaged_flash.show()
+
+## Quick swell in, slower fade out.
 func apply_damage_flash() -> void:
-	if flash_tween:
-		flash_tween.kill()
-	damaged_flash.modulate = Color(1, 0, 0, 0.3)
-	flash_tween = create_tween()
-	flash_tween.tween_property(damaged_flash, "modulate", Color(1, 0, 0, 0.0), 0.3)
+	if damage_glow_tween:
+		damage_glow_tween.kill()
+	damage_glow_tween = create_tween()
+	damage_glow_tween.tween_property(damaged_flash, "modulate:a", DAMAGED_GLOW_ALPHA, 0.05)
+	damage_glow_tween.tween_property(damaged_flash, "modulate:a", 0.0, 0.45).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 
 
 func apply_heal_flash() -> void:

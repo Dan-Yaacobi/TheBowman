@@ -11,6 +11,8 @@ enum Kind { STAT, HEART, ITEM }
 @export var icon: Texture2D
 @export var kind: Kind = Kind.STAT
 @export var title_color: Color = Color.WHITE
+## What the spirit says once this boon is picked. Empty = BoonOption's fallback line.
+@export_multiline var blessing_line: String = ""
 
 @export_group("Stat")
 ## A Stat on PlayerStats, e.g. arrow_damage.

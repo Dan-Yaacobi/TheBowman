@@ -55,6 +55,8 @@ var chosen_boon: StringName = &""
 var run_deaths: int = 0
 ## How many of the spirit's tips the player has heard, in order.
 var tips_heard: int = 0
+## The spirit has sent the player off on their first journey (its call on the first hub visit).
+var journey_heard: bool = false
 ## The boon applied to the run in progress (not saved).
 var _applied_boon: SpiritBoon = null
 var _boon_buff_id: int = "meta/boon".hash()
@@ -325,6 +327,12 @@ func mark_tip_heard() -> void:
 	SaveService.save_game()
 	boon_state_changed.emit()
 
+## The spirit's first-visit call was read to the end.
+func mark_journey_heard() -> void:
+	journey_heard = true
+	SaveService.save_game()
+	boon_state_changed.emit()
+
 func _on_event_bus_player_died(death_screen: bool) -> void:
 	_remove_applied_boon()
 	# No death screen = practice death (tutorial), which doesn't count as a run.
@@ -362,6 +370,11 @@ func _notification(what: int) -> void:
 
 ## Back in the hub after a run that didn't end in death (won, or left through a portal).
 func _on_event_bus_in_main_menu() -> void:
+	leave_run()
+
+## Ends the run in progress without a death (back in the hub, or Save & Exit from the pause
+## menu): the blessing is lifted and a new offer waits at the spirit.
+func leave_run() -> void:
 	_remove_applied_boon()
 	if _run_in_progress:
 		_offer_boon()
@@ -392,6 +405,7 @@ func _save() -> Dictionary:
 		"chosen_boon": String(chosen_boon),
 		"run_deaths": run_deaths,
 		"tips_heard": tips_heard,
+		"journey_heard": journey_heard,
 	}
 
 func _load(data: Dictionary) -> void:
@@ -412,6 +426,8 @@ func _load(data: Dictionary) -> void:
 	chosen_boon = StringName(str(data.get("chosen_boon", "")))
 	run_deaths = int(data.get("run_deaths", 0))
 	tips_heard = int(data.get("tips_heard", 0))
+	# Saves from before the call existed: anyone who already ran a rift has heard it in spirit.
+	journey_heard = bool(data.get("journey_heard", run_deaths > 0 or not levels.is_empty()))
 	boon_state_changed.emit()
 	# Backfills milestones reached before rewards existed, or whose reward was deleted.
 	for track: UpgradeTrack in tracks:

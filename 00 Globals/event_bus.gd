@@ -154,6 +154,12 @@ signal poison_damage_dealt
 
 signal change_sky_color(sky_colors: SkyColors)
 
+## The Maw's soul meter (HUD): stage name, souls, souls at this stage's start and at the next
+## (-1 when fully awakened), stage color. ate_soul = a kill just fed it (the meter pulses).
+signal maw_souls_changed(stage_name: String, souls: int, floor_souls: int, next_souls: int, color: Color, ate_soul: bool)
+## The Maw was unequipped; the meter hides.
+signal maw_unequipped
+
 signal color_level_changed(color: CustomVariables.ItemColor, level: int)
 signal color_scroll_collected
 

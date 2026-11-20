@@ -19,10 +19,8 @@ enum Screen { MAIN, SLOTS, SETTINGS, CREDITS }
 @export var focus_time: float = 0.12
 @export var shake_strength: float = 8.0
 @export var shake_time: float = 0.16
-## How far the background drifts with the mouse, in pixels.
+## How far the title drifts with the mouse, in pixels.
 @export var parallax_strength: float = 22.0
-## Where the background zooms in when a game starts (the portal), as a fraction of the image.
-@export var portal_point: Vector2 = Vector2(0.625, 0.37)
 @export var intro_time: float = 1.3
 ## How far from the screen's middle (min, max) arrows are launched, on the side away from the target.
 @export var launch_spread: Vector2 = Vector2(220.0, 520.0)
@@ -30,8 +28,7 @@ enum Screen { MAIN, SLOTS, SETTINGS, CREDITS }
 
 # --- Backdrop ---
 @onready var backdrop: Control = %Backdrop
-@onready var parallax: Control = %Parallax
-@onready var background: TextureRect = %Background
+@onready var scenery: MenuScenery = %Scenery
 # --- UI ---
 @onready var ui_root: Control = %UIRoot
 @onready var title_root: Control = %TitleRoot
@@ -92,6 +89,8 @@ var _last_focus: Control
 var _title_drift: Vector2 = Vector2.ZERO
 var _consent_closing: bool = false
 var _changing_screen: bool = false
+## Set once the menu is starting the game or quitting: the scenery stops taking shots.
+var _leaving: bool = false
 
 func _ready() -> void:
 	_screens = {
@@ -123,6 +122,7 @@ func _ready() -> void:
 	for toggle: CheckButton in [fullscreen_toggle, music_toggle, sfx_toggle, data_toggle]:
 		toggle.pressed.connect(_flourish.bind(toggle))
 
+	scenery.arrow_landed.connect(_on_scenery_arrow_landed)
 	consent.hide_on_answer = false
 	consent.answered.connect(_on_consent_answered)
 	consent.yes_button.pressed.connect(_flourish.bind(consent.yes_button))
@@ -197,14 +197,13 @@ func _play_intro() -> void:
 	await get_tree().process_frame
 	if not is_inside_tree():
 		return
-	background.pivot_offset = background.size * 0.5
 	title_label.pivot_offset = title_label.size * 0.5
-	background.scale = Vector2.ONE * 1.18
+	scenery.zoom = 1.18
 	title_label.scale = Vector2.ONE * 1.6
 
 	_intro_tween = create_tween().set_parallel()
 	_intro_tween.tween_property(backdrop, "modulate", Color.WHITE, intro_time * 0.6)
-	_intro_tween.tween_property(background, "scale", Vector2.ONE, intro_time).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	_intro_tween.tween_property(scenery, "zoom", 1.0, intro_time).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	_intro_tween.tween_property(title_label, "modulate:a", 1.0, 0.3).set_delay(0.25)
 	_intro_tween.tween_property(title_label, "scale", Vector2.ONE, 0.55).set_delay(0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_intro_tween.tween_property(tagline, "modulate:a", 1.0, 0.4).set_delay(0.6)
@@ -296,6 +295,7 @@ func _on_quit_button_pressed() -> void:
 	var arrow: MenuArrow = await _choose(quit_button)
 	if not arrow:
 		return
+	_leaving = true
 	var tween: Tween = create_tween().set_parallel()
 	tween.tween_property(self, "modulate", Color.BLACK, 0.35)
 	tween.tween_property(menu_music, "volume_db", -40.0, 0.35)
@@ -341,7 +341,8 @@ func _close_erase_dialog() -> void:
 	tween.tween_property(erase_panel, "scale", Vector2.ONE * 0.9, 0.16)
 	await tween.finished
 	erase_dialog.hide()
-	_clear_arrows(erase_dialog)
+	# Yes/No arrows are reparented onto the panel.
+	_clear_arrows(erase_panel)
 
 func _on_erase_yes_button_pressed() -> void:
 	var arrow: MenuArrow = await _choose(erase_yes_button)
@@ -480,15 +481,16 @@ func _trap_focus(buttons: Array[Button]) -> void:
 
 func _start_game(slot: int, arrow: MenuArrow) -> void:
 	_busy = true
+	_leaving = true
 	SaveService.select_slot(slot)
 	var screen: Control = _screens[_screen]
 	arrow.reparent(screen)
-	background.pivot_offset = background.size * portal_point
+	scenery.zoom_focus = scenery.get_portal_point()
 	# Keeps running while the tree is paused for the scene change.
 	var tween: Tween = create_tween().set_parallel().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(ui_root, "modulate:a", 0.0, 0.3).set_delay(0.08)
 	tween.tween_property(focus_cursor, "modulate:a", 0.0, 0.1)
-	tween.tween_property(background, "scale", Vector2.ONE * 2.4, 0.75).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(scenery, "zoom", 2.4, 0.75).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_property(menu_music, "volume_db", -40.0, 0.7)
 	await get_tree().create_timer(0.5).timeout
 	get_tree().paused = true
@@ -552,6 +554,7 @@ func _shoot_at(target: Control, aim: Vector2) -> MenuArrow:
 	twang_sound.play()
 	_shake()
 	_squash(target)
+	_crack(target, hit_global)
 	return arrow
 
 func _shake() -> void:
@@ -578,10 +581,21 @@ func _squash(target: Control) -> void:
 	flash.tween_property(node, "self_modulate", Color(1.7, 1.6, 1.4), 0.04)
 	flash.tween_property(node, "self_modulate", base_modulate, 0.2)
 
+## Cracks splinter out of the button where the arrow hit. They stay until the screen changes.
+func _crack(target: Control, at: Vector2) -> void:
+	var crack: ButtonCrack = ButtonCrack.new()
+	crack.radius = minf(target.size.y * 0.55, 34.0)
+	target.add_child(crack)
+	crack.global_position = at
+
+## Frees the stuck arrows on `parent` and the cracks anywhere under it.
 func _clear_arrows(parent: Node) -> void:
 	for child: Node in parent.get_children():
 		if child is MenuArrow:
 			child.queue_free()
+	for crack: Node in get_tree().get_nodes_in_group(ButtonCrack.GROUP):
+		if parent.is_ancestor_of(crack):
+			crack.queue_free()
 
 func _screen_of(node: Node) -> Node:
 	var current: Node = node
@@ -655,11 +669,28 @@ func _update_focus_cursor(delta: float) -> void:
 
 # --- Backdrop -------------------------------------------------------------
 
+## A click that no button or panel took: shoot it into the scenery.
+func _gui_input(event: InputEvent) -> void:
+	if _intro_playing or _leaving:
+		return
+	var click: InputEventMouseButton = event as InputEventMouseButton
+	if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
+		whoosh_sound.pitch_scale = randf_range(0.95, 1.1)
+		whoosh_sound.play()
+		scenery.shoot(click.global_position)
+		accept_event()
+
+func _on_scenery_arrow_landed(target: MenuTarget) -> void:
+	if target == null:
+		return
+	thunk_sound.pitch_scale = randf_range(0.9, 1.05)
+	thunk_sound.play()
+
+## The title drifts with the mouse (the scenery handles its own parallax).
 func _update_parallax(delta: float) -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var mouse: Vector2 = get_viewport().get_mouse_position() / viewport_size - Vector2(0.5, 0.5)
 	mouse = mouse.clamp(Vector2(-0.5, -0.5), Vector2(0.5, 0.5))
 	var weight: float = 1.0 - exp(-3.0 * delta)
-	parallax.position = parallax.position.lerp(-mouse * parallax_strength, weight)
 	_title_drift = _title_drift.lerp(mouse * parallax_strength * 0.35, weight)
 	title_root.position = _title_drift + Vector2(0.0, sin(_time * 1.3) * 5.0)

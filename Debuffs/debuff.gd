@@ -11,8 +11,8 @@ var ticks: int = 0
 var one_shot: bool = false
 var entity: GameEntity
 
-## Where a status effect sits on the host sprite. BEHIND_FEET draws behind it (burn).
-enum StatusSpot { CENTER, FEET, HEAD, BEHIND_FEET }
+## Where a status effect sits on the host sprite. UPPER sits between the centre and the head (burn).
+enum StatusSpot { CENTER, FEET, HEAD, UPPER }
 
 var _status_sprite: EffectSprite
 
@@ -39,13 +39,16 @@ func _attach_status_sprite() -> void:
 	var rect: Rect2 = host_rect()
 	var at: Vector2 = rect.get_center()
 	match status_spot():
-		StatusSpot.FEET, StatusSpot.BEHIND_FEET:
+		StatusSpot.FEET:
 			at.y = rect.end.y
 		StatusSpot.HEAD:
 			at.y = rect.position.y
+		StatusSpot.UPPER:
+			at.y = lerpf(rect.get_center().y, rect.position.y, 0.4)
 	_status_sprite = EffectSprite.attach(sheet_name, self, at)
-	if _status_sprite and status_spot() == StatusSpot.BEHIND_FEET:
-		_status_sprite.z_index = -1
+	# Above the host's own children (bows, wings) so it reads as on top of the body
+	if _status_sprite:
+		_status_sprite.z_index = 1
 
 ## The host sprite's visible body in its own coordinates, trimmed in from the frame edges
 ## (sprites have empty padding around the creature).

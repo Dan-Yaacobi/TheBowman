@@ -76,11 +76,6 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Artifacts"
 
-[node name="HowToPlayButton" type="Button" parent="Control/MainPanel/VBox" unique_id=1538382147]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-text = "How To Play"
-
 [node name="SettingsButton" type="Button" parent="Control/MainPanel/VBox" unique_id=366728644]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
@@ -92,59 +87,10 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Restart"
 
-[node name="HowToPlayPanel" type="Control" parent="Control" unique_id=994840626]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="Control/HowToPlayPanel" unique_id=1287175403]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = -2.0
-offset_bottom = 192.0
-grow_horizontal = 2
-size_flags_vertical = 3
-
-[node name="VBox" type="VBoxContainer" parent="Control/HowToPlayPanel" unique_id=1651227741]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 12
-
-[node name="Label" type="Label" parent="Control/HowToPlayPanel/VBox" unique_id=969421844]
+[node name="ExitButton" type="Button" parent="Control/MainPanel/VBox"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "HOW TO PLAY"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/HowToPlayPanel/VBox" unique_id=904114436]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-bbcode_enabled = true
-text = "[W / A / D]        Move
-[Space]            Jump (hold longer = higher)
-[Shift]            Dash toward cursor
-[E]				Interact/Pick up items
-[F]				Use Active Ability
-[Left Click]       Hold to charge, release to fire
-                   Full charge = perfect shot 
-[Right Click]      Sword swing
-[Tab]              Equipment
-[Esc]              Pause"
-fit_content = true
-scroll_active = false
-
-[node name="BackButton" type="Button" parent="Control/HowToPlayPanel/VBox" unique_id=2121562900]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-text = "Back"
+text = "Save & Exit"
 
 [node name="SettingsPanel" type="Control" parent="Control" unique_id=859489630]
 custom_minimum_size = Vector2(300, 0)

@@ -26,6 +26,8 @@ class_name EnemyData extends Resource
 @export var damage_dealt_multiplier: Stat
 @export var size: float = 1.0
 @export var can_split: bool = false
+## Hits make it shudder instead of squash and stretch (stone, crystal)
+@export var stiff_on_hit: bool = false
 
 @export_subgroup("Abilities")
 @export var death_ability: Array[EnemyAbility]

@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" path="res://Items/Other/Schematic/Sprites/schematic_scroll.png" id="32_ds_schem"]
 [ext_resource type="Texture2D" path="res://Objects/Sprites/GrandChest.png" id="33_ds_chest"]
 [ext_resource type="PackedScene" path="res://HUD/BoonPicker/BoonPicker.tscn" id="34_boonpick"]
+[ext_resource type="Script" path="res://HUD/MawMeter/maw_meter.gd" id="35_mawmeter"]
 
 [sub_resource type="Gradient" id="Gradient_ds_vignette"]
 offsets = PackedFloat32Array(0.45, 1)
@@ -122,6 +123,16 @@ layout_mode = 0
 offset_left = 44.0
 offset_top = 100.0
 scale = Vector2(2, 2)
+
+[node name="MawMeter" type="Control" parent="Control"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 156.0
+offset_right = 132.0
+offset_bottom = 178.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+script = ExtResource("35_mawmeter")
 
 [node name="HealthHearts" parent="Control" unique_id=1572092662 instance=ExtResource("2_65vjf")]
 layout_mode = 1

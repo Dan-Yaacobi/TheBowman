@@ -22,7 +22,7 @@ func init() -> void:
 func Enter() -> void:
 	var tween := create_tween()
 	tween.tween_property(sprite.material, "shader_parameter/charge", 0.0, 0.5)
-	sprite.frame = 0
+	enemy.update_animation("Idle")
 	wander_timer.wait_time = randf_range(2,4)
 	wander_timer.start()
 	moving_up = [true,false].pick_random()

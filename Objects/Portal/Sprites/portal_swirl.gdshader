@@ -20,6 +20,7 @@ uniform vec4 bright_color : source_color = vec4(0.30, 0.85, 1.0, 1.0);
 // Twinkling stars
 uniform float star_density : hint_range(0.0, 0.1) = 0.025;
 uniform float star_twinkle_speed : hint_range(0.0, 10.0) = 3.0;
+uniform vec4 star_color : source_color = vec4(0.75, 0.95, 1.0, 1.0);
 
 // How much bluer than red a pixel must be to count as "portal"
 uniform float blue_threshold : hint_range(0.0, 1.0) = 0.25;
@@ -72,7 +73,7 @@ void fragment() {
 		float h = hash(star_cell);
 		float twinkle = sin(TIME * star_twinkle_speed + h * 6.2831) * 0.5 + 0.5;
 		if (h < star_density && twinkle > 0.4) {
-			col = mix(col, vec3(0.75, 0.95, 1.0), twinkle);
+			col = mix(col, star_color.rgb, twinkle);
 		}
 
 		COLOR = vec4(col, src.a);

@@ -36,6 +36,7 @@ func face_the_player() -> void:
 		var left: bool = PlayerManager.player.global_position.x < global_position.x
 		sprite.flip_h = left
 		_swipe_shape.position.x = absf(_swipe_shape.position.x) * (-1.0 if left else 1.0)
+		throw_point.position.x = absf(throw_point.position.x) * (-1.0 if left else 1.0)
 
 
 func is_player_in_swipe_range() -> bool:

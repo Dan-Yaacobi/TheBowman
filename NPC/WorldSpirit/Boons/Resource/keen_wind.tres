@@ -9,5 +9,6 @@ title = "Keen Wind"
 description = "+15% arrow damage for your next run."
 kind = 0
 title_color = Color(1, 0.85, 0.45, 1)
+blessing_line = "The wind will lean into your arrows now. Let them bite."
 stat_name = &"arrow_damage"
 amount = 0.15

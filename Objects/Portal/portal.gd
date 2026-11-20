@@ -25,6 +25,17 @@ class_name Portal extends Node2D
 		else:
 			_update_flip()
 
+## What decides this portal's look. FIXED keeps the scene's own look.
+enum Route { FIXED, RIFT_EXIT, BOSS_EXIT }
+@export var route: Route = Route.FIXED
+
+@export_group("Looks")
+## Rift exit on a biome's last rift (leads to the boss).
+@export var boss_look: PortalLook
+## Indexed by biome the portal leads into; null keeps the scene's look (dirt).
+## Biome after the last one is the tower.
+@export var biome_looks: Array[PortalLook] = []
+
 @export_group("Effects")
 ## Particles that only run while the player is near (e.g. the inward pull).
 @export var near_particles: Array[CPUParticles2D] = []
@@ -47,6 +58,7 @@ func _ready() -> void:
 	_update_color()
 	if Engine.is_editor_hint():
 		return
+	_apply_look(_pick_look())
 	proximity_area.body_entered.connect(_on_proximity_entered)
 	proximity_area.body_exited.connect(_on_proximity_exited)
 	for p: CPUParticles2D in near_particles:
@@ -62,6 +74,42 @@ func _process(delta: float) -> void:
 	var mat: ShaderMaterial = sprite.material as ShaderMaterial
 	if mat:
 		mat.set_shader_parameter(&"phase", _phase)
+
+## Rift exits look like where they lead: the boss on a biome's last rift, otherwise the
+## current biome. Boss exits lead into the next biome (the tower after the last one).
+func _pick_look() -> PortalLook:
+	if route == Route.FIXED or PlayerManager.player == null:
+		return null
+	var level: int = PlayerManager.player.stats.rift_level
+	var biome: int = CustomVariables.biome_index(level)
+	if route == Route.BOSS_EXIT:
+		return _biome_look(biome + 1)
+	if CustomVariables.rift_in_biome(level) == CustomVariables.RIFTS_PER_TYPE:
+		return boss_look
+	return _biome_look(biome)
+
+func _biome_look(biome: int) -> PortalLook:
+	if biome < 0 or biome >= biome_looks.size():
+		return null
+	return biome_looks[biome]
+
+func _apply_look(look: PortalLook) -> void:
+	if look == null:
+		return
+	sprite.texture = look.texture
+	# The material is shared by every portal; this one gets its own colours
+	var mat: ShaderMaterial = (sprite.material as ShaderMaterial).duplicate()
+	mat.set_shader_parameter(&"center", look.swirl_center)
+	mat.set_shader_parameter(&"deep_color", look.deep_color)
+	mat.set_shader_parameter(&"mid_color", look.mid_color)
+	mat.set_shader_parameter(&"bright_color", look.bright_color)
+	mat.set_shader_parameter(&"star_color", look.star_color)
+	sprite.material = mat
+	for child: Node in sprite.get_children():
+		if child is CPUParticles2D:
+			(child as CPUParticles2D).modulate = look.particle_tint
+	if look.emitter_scene:
+		sprite.add_child(look.emitter_scene.instantiate())
 
 ## The first time a rift exit portal shows up on screen, it gets an off-screen pointer.
 func _check_found() -> void:

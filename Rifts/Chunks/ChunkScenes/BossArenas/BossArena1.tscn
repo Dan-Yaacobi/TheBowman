@@ -27,6 +27,7 @@ z_index = 0
 position = Vector2(-123, -40)
 destination = 3
 is_rift_portal = true
+route = 2
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("7_3m2tr")]
 rarity_bias = 2.0

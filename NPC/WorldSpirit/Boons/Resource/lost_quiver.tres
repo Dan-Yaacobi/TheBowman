@@ -9,4 +9,5 @@ title = "Lost Quiver"
 description = "The world gives back a quiver it kept. It waits at your feet when your next run begins."
 kind = 2
 title_color = Color(0.55, 0.95, 0.75, 1)
+blessing_line = "A quiver drifted home to me. It will wait at your feet when you go."
 item_slot = 1

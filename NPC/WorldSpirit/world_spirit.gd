@@ -5,11 +5,22 @@ class_name WorldSpirit extends NPC
 @export var turn_in_marker: CanvasItem
 ## Shown in the chat box while the options menu is open.
 @export var greeting_line: String = ""
+## Off: never shows the "!" or the waiting glow (the tutorial's spirit has no menu).
+@export var shows_turn_ins: bool = true:
+	set(value):
+		shows_turn_ins = value
+		if is_node_ready():
+			_on_option_entries_changed()
 @export_group("Waiting glow")
 ## Seconds to fade the glow in or out.
 @export var glow_fade: float = 0.6
 @export var marker_bob_height: float = 3.0
 @export var marker_bob_speed: float = 4.0
+@export_group("Flare")
+## Seconds to brighten to full glow when flaring (see flare()).
+@export var flare_rise: float = 0.15
+## Seconds the flare stays at full glow before fading back.
+@export var flare_hold: float = 0.5
 @export_group("")
 
 @onready var menu: SpiritMenu = $SpiritMenu
@@ -73,7 +84,7 @@ func say(lines: Array[String]) -> bool:
 	return completed
 
 func _on_option_entries_changed() -> void:
-	var waiting: bool = has_turn_in()
+	var waiting: bool = shows_turn_ins and has_turn_in()
 	if turn_in_marker:
 		turn_in_marker.visible = waiting
 	_fade_glow(1.0 if waiting else 0.0)
@@ -87,6 +98,22 @@ func _fade_glow(target: float) -> void:
 		_glow_tween.kill()
 	_glow_tween = create_tween()
 	_glow_tween.tween_method(_set_glow.bind(mat), _glow_strength, target, glow_fade)
+
+## A short burst of glow in `color` (e.g. a blessing given), then back to the waiting glow.
+func flare(color: Color) -> void:
+	var mat: ShaderMaterial = sprite.material as ShaderMaterial if sprite else null
+	if mat == null:
+		return
+	var base_color: Variant = mat.get_shader_parameter(&"glow_color")
+	if _glow_tween:
+		_glow_tween.kill()
+	mat.set_shader_parameter(&"glow_color", color)
+	_glow_tween = create_tween()
+	_glow_tween.tween_method(_set_glow.bind(mat), _glow_strength, 1.0, flare_rise)
+	_glow_tween.tween_interval(flare_hold)
+	_glow_tween.tween_method(_set_glow.bind(mat), 1.0, 1.0 if has_turn_in() else 0.0, glow_fade)
+	# Null (never set) clears the override back to the shader default.
+	_glow_tween.tween_callback(mat.set_shader_parameter.bind(&"glow_color", base_color))
 
 func _set_glow(value: float, mat: ShaderMaterial) -> void:
 	_glow_strength = value

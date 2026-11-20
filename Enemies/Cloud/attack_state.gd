@@ -14,8 +14,8 @@ func init() -> void:
 #what happens when the player enters this state
 func Enter() -> void:
 	attack_timer.stop()
-	sprite.frame = 5
-	#attack_timer.stop()
+	enemy.animation_player.clear_queue()
+	enemy.update_animation("Telegraph")
 	enemy.velocity = Vector2.ZERO
 	var target_pos = PlayerManager.player.global_position + Vector2(0,16)
 	var tween := create_tween()
@@ -57,4 +57,6 @@ func summon_rain_drop() -> void:
 	enemy.tag_attack(new_raindrop)
 	new_raindrop.global_position = enemy.global_position + Vector2(randi_range(-10,10),10)
 	enemy.get_parent().add_child(new_raindrop)
+	enemy.update_animation("Hail")
+	enemy.animation_player.queue("Idle")
 	attack_timer.wait_time = randf_range(0.5,1.5)

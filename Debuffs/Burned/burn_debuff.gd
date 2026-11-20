@@ -23,4 +23,4 @@ func status_sheet_name() -> StringName:
 	return &"status_burn"
 
 func status_spot() -> StatusSpot:
-	return StatusSpot.BEHIND_FEET
+	return StatusSpot.UPPER

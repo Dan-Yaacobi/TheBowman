@@ -3,12 +3,17 @@
 [ext_resource type="Script" uid="uid://cp6i17b4tlslg" path="res://Objects/Portal/portal.gd" id="1_goeoo"]
 [ext_resource type="Shader" uid="uid://b20bpcv8j15n2" path="res://Objects/Portal/Sprites/portal_swirl.gdshader" id="2_444u7"]
 [ext_resource type="Texture2D" uid="uid://i1x6khx31p25" path="res://Objects/Portal/Sprites/RoundParticle.png" id="2_ucj1u"]
-[ext_resource type="Texture2D" uid="uid://lgg54b17xi3r" path="res://Objects/Portal/Sprites/Pixel Art Blue Stone Portal.png" id="3_gtw83"]
 [ext_resource type="Texture2D" uid="uid://blnt0yu63hgv3" path="res://Particles/star.png" id="4_mc0vw"]
+[ext_resource type="Texture2D" path="res://Objects/Portal/Sprites/PortalStone.png" id="5_stone"]
+[ext_resource type="Script" path="res://Objects/Portal/portal_look.gd" id="6_look"]
+[ext_resource type="Resource" path="res://Objects/Portal/Resource/boss_portal_look.tres" id="7_boss"]
+[ext_resource type="Resource" path="res://Objects/Portal/Resource/snow_portal_look.tres" id="8_snow"]
+[ext_resource type="Resource" path="res://Objects/Portal/Resource/hell_portal_look.tres" id="9_hell"]
+[ext_resource type="Resource" path="res://Objects/Portal/Resource/tower_portal_look.tres" id="10_tower"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ac65c"]
 shader = ExtResource("2_444u7")
-shader_parameter/center = Vector2(0.51, 0.5)
+shader_parameter/center = Vector2(0.5, 0.62)
 shader_parameter/speed = 1.2
 shader_parameter/arms = 3.0
 shader_parameter/twist = 14.0
@@ -50,13 +55,18 @@ z_index = -3
 scale = Vector2(0.04, 0.04)
 script = ExtResource("1_goeoo")
 destination = 0
+boss_look = ExtResource("7_boss")
+biome_looks = Array[ExtResource("6_look")]([null, ExtResource("8_snow"), ExtResource("9_hell"), ExtResource("10_tower")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1879241335]
 material = SubResource("ShaderMaterial_ac65c")
-texture = ExtResource("3_gtw83")
+position = Vector2(0, -187.5)
+scale = Vector2(20, 20)
+texture = ExtResource("5_stone")
 
 [node name="Spiral" type="CPUParticles2D" parent="Sprite2D" unique_id=61276510]
-position = Vector2(0, 1)
+position = Vector2(0, 9.425)
+scale = Vector2(0.05, 0.05)
 emitting = false
 amount = 350
 texture = ExtResource("2_ucj1u")
@@ -75,7 +85,8 @@ scale_amount_curve = SubResource("Curve_w7i7w")
 color_ramp = SubResource("Gradient_4m5hj")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D" unique_id=1033927585]
-position = Vector2(19, 2)
+position = Vector2(0.95, 9.475)
+scale = Vector2(0.05, 0.05)
 amount = 10
 texture = ExtResource("4_mc0vw")
 lifetime = 0.75

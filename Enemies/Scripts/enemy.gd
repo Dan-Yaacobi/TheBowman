@@ -106,7 +106,10 @@ func calculate_distance_to_player() -> float:
 	
 func hit(_hurt_box: HurtBox, _result: DamageResult) -> void:
 	if _hurt_box:
-		Squash.along(sprite, _hurt_box.knockback_dir, 0.22)
+		if stats.stiff_on_hit:
+			Squash.shudder(sprite)
+		else:
+			Squash.along(sprite, _hurt_box.knockback_dir, 0.22)
 		if self is Boss:
 			EventBus.camera_punch.emit(0.025)
 	take_damage(_hurt_box,0, _result)

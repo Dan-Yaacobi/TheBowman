@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://b7o15ganjg35m" path="res://Player/Body/Archer.png" id="22_ustk3"]
 [ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="22_x70vp"]
 [ext_resource type="Script" uid="uid://dh6oejforol0n" path="res://Player/Player2.0/MainHand/sword.gd" id="23_kveqs"]
-[ext_resource type="Texture2D" uid="uid://fg0ptg4am2vs" path="res://Particles/droplet.png" id="23_wo5nf"]
 [ext_resource type="Script" uid="uid://bymwdo1ku6acd" path="res://Items/Equipments/Swords/sword_stats.gd" id="24_d3djb"]
 [ext_resource type="Script" uid="uid://b4s4fndrtcgwn" path="res://General Nodes/HurtBox/hurt_box.gd" id="25_lre2g"]
 [ext_resource type="Script" uid="uid://bi7hdioloyj1f" path="res://Player/buff_tooltip_control.gd" id="26_8kdbo"]
@@ -2423,19 +2422,6 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0d0"]
 size = Vector2(26, 40)
 
-[sub_resource type="Curve" id="Curve_croik"]
-_limits = [0.0, 20.0, 0.0, 1.0]
-_data = [Vector2(0, 6.138935), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_wqenp"]
-_limits = [0.0, 0.3, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.51923084, 0.17399032), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_u4yfg"]
-colors = PackedColorArray(0.48, 0, 0, 1, 1, 0, 0, 0.64705884)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1b5h"]
 size = Vector2(367, 28)
 
@@ -2776,22 +2762,6 @@ shape = SubResource("RectangleShape2D_4o0d0")
 debug_color = Color(0.96965665, 0, 0.46305597, 0.41960785)
 
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=513053942]
-
-[node name="DamagedParticles" type="CPUParticles2D" parent="." unique_id=1150190285]
-emitting = false
-amount = 3
-texture = ExtResource("23_wo5nf")
-lifetime = 0.7
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-emission_shape = 1
-emission_sphere_radius = 6.0
-gravity = Vector2(0, 50)
-radial_accel_max = 20.0
-radial_accel_curve = SubResource("Curve_croik")
-scale_amount_curve = SubResource("Curve_wqenp")
-color_ramp = SubResource("Gradient_u4yfg")
 
 [node name="DeathAnimationTimer" type="Timer" parent="." unique_id=1957289314]
 one_shot = true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PortalLook" format=3]
+
+[ext_resource type="Script" path="res://Objects/Portal/portal_look.gd" id="1_look"]
+[ext_resource type="Texture2D" path="res://Objects/Portal/Sprites/PortalSnow.png" id="2_tex"]
+[ext_resource type="PackedScene" path="res://Objects/Portal/PortalSnowParticles.tscn" id="3_fx"]
+
+[resource]
+script = ExtResource("1_look")
+texture = ExtResource("2_tex")
+deep_color = Color(0.12, 0.32, 0.68, 1)
+mid_color = Color(0.42, 0.68, 0.95, 1)
+bright_color = Color(0.85, 0.95, 1, 1)
+star_color = Color(1, 1, 1, 1)
+particle_tint = Color(1, 1, 1, 1)
+emitter_scene = ExtResource("3_fx")

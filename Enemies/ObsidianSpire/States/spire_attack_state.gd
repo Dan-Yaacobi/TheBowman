@@ -14,6 +14,8 @@ func init() -> void:
 
 
 func Enter() -> void:
+	if spire.animation_player:
+		spire.animation_player.play(&"Idle")
 	# Waking starts with a charge, so the glow is also the wake-up telegraph
 	_start_charge()
 

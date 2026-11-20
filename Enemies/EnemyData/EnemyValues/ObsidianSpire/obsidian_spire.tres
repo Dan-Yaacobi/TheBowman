@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_stat"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="4_abil"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_death"]
+[ext_resource type="Texture2D" uid="uid://ddpngo88q0nav" path="res://Enemies/ObsidianSpire/Sprites/ObsidianSpire.png" id="6_skin"]
 
 [sub_resource type="Resource" id="Resource_death"]
 script = ExtResource("5_death")
@@ -13,24 +14,16 @@ script = ExtResource("5_death")
 [sub_resource type="Resource" id="Stat_speed"]
 script = ExtResource("3_stat")
 
-[sub_resource type="Gradient" id="Gradient_spire"]
-offsets = PackedFloat32Array(0, 0.45, 0.5, 0.55, 1)
-colors = PackedColorArray(0.1, 0.08, 0.13, 1, 0.16, 0.12, 0.2, 1, 0.95, 0.42, 0.12, 1, 0.16, 0.12, 0.2, 1, 0.1, 0.08, 0.13, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_spire"]
-gradient = SubResource("Gradient_spire")
-width = 14
-height = 34
-
 [resource]
 script = ExtResource("1_data")
 shard_scene = ExtResource("2_shard")
 display_name = "Obsidian Spire"
 max_hp = 250
 move_speed = SubResource("Stat_speed")
-skin = SubResource("GradientTexture2D_spire")
+skin = ExtResource("6_skin")
 avg_coins_dropped = 4
 can_be_knockedback = false
 capture_immune = true
+stiff_on_hit = true
 death_ability = Array[ExtResource("4_abil")]([SubResource("Resource_death")])
 drop_chance = 50.0

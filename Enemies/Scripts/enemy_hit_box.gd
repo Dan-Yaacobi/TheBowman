@@ -10,10 +10,7 @@ func set_enemy(_enemy: Enemy) -> void:
 
 func TakeDamage(hurt_box: HurtBox, _result: DamageResult = null) -> void:
 	Damaged.emit(hurt_box, _result)
-	if enemy:
-		enemy_hit_effect.hit()
-		change_effect_color(hurt_box.effect_color)
-		
+
 func change_effect_color(_color: Color) -> void:
 	if _color:
 		enemy_hit_effect.set_effect_color(_color)

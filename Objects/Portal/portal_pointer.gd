@@ -23,9 +23,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_time += delta
-	var off_screen: bool = is_instance_valid(portal) and portal.is_visible_in_tree() and not _portal_on_screen()
+	var off_screen: bool = is_instance_valid(portal) and portal.is_visible_in_tree() \
+		and not _in_event() and not _portal_on_screen()
 	_fade = move_toward(_fade, 1.0 if off_screen else 0.0, delta * 5.0)
 	_marker.queue_redraw()
+
+## Events live far away in the same world, so the pointer would aim across the map.
+func _in_event() -> bool:
+	var node: Node = portal.get_parent()
+	while node != null and not node is GameWorld:
+		node = node.get_parent()
+	return node != null and (node as GameWorld).current_event != null
 
 func _portal_screen_position() -> Vector2:
 	return portal.get_global_transform_with_canvas().origin

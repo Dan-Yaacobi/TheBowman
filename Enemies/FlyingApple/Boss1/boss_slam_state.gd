@@ -4,7 +4,9 @@ class_name BossSlamState extends EnemyState
 @onready var roam: BossRoamState = $"../Roam"
 @onready var visible_on_screen_notifier: VisibleOnScreenNotifier2D = $"../../VisibleOnScreenNotifier2D"
 @onready var slam_particles: CPUParticles2D = $"../../SlamParticles"
-@onready var slam_hit_particles: CPUParticles2D = $"../../SlamHitParticles"
+
+## Where the landing dust sits, local to the boss (the bottom of its ground detector).
+const SLAM_EFFECT_OFFSET: Vector2 = Vector2(0, 5)
 
 var slam_speed_modifier: int = 8
 var slam_done: bool = false
@@ -43,9 +45,13 @@ func Physics(_delta: float) -> EnemyState:
 func tp_back() -> void:
 	slam_done = true
 	
+## Ground contact only counts as a landing while this slam is running (the detector also
+## touches islands the boss just flies past).
 func finished(_v1,_v2,_v3,_v4) -> void:
+	if state_machine.curr_state != self or slam_done:
+		return
 	slam_done = true
-	slam_hit_particles.emitting = true
+	EffectSprite.spawn(&"elite_apple_slam", enemy.to_global(SLAM_EFFECT_OFFSET))
 	enemy.player.camera.apply_shake()
 	
 func hit(b) -> void:

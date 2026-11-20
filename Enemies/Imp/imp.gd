@@ -8,6 +8,10 @@ class_name Imp extends Enemy
 
 enum Mode { RUSH, WINDUP, LUNGE, LATCHED, RECOVER }
 
+const HOVER_ANIMATION: StringName = &"Hover"
+## Plays once and holds its last frame (claws out) through the lunge and the whole grab.
+const LUNGE_ANIMATION: StringName = &"Lunge"
+
 var imp_data: ImpData
 var _mode: Mode = Mode.RUSH
 var _latch_offset: Vector2 = Vector2.ZERO
@@ -20,6 +24,7 @@ var _respawn_grace_left: float = 0.0
 
 func extra_ready_functions() -> void:
 	imp_data = stats as ImpData
+	animation_player = $Sprite2D/AnimationPlayer
 	EventBus.player_fell.connect(_on_event_bus_player_fell)
 
 
@@ -77,6 +82,14 @@ func _physics_process(delta: float) -> void:
 			_time_left -= delta
 			if _time_left <= 0.0:
 				_mode = Mode.RUSH
+	_update_animation()
+
+
+## assigned_animation (not current_animation) so a finished lunge holds instead of replaying.
+func _update_animation() -> void:
+	var wanted: StringName = LUNGE_ANIMATION if _mode == Mode.LUNGE or _mode == Mode.LATCHED else HOVER_ANIMATION
+	if animation_player.assigned_animation != wanted:
+		animation_player.play(wanted)
 
 
 func _start_windup() -> void:

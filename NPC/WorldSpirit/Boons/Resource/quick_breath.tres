@@ -9,5 +9,6 @@ title = "Quick Breath"
 description = "+15% pull speed for your next run."
 kind = 0
 title_color = Color(0.65, 0.85, 1, 1)
+blessing_line = "Breathe. Your draw will come quicker for it."
 stat_name = &"pull_speed"
 amount = 0.15

@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_script")
 texture = ExtResource("2_texture")
-columns = 4
+columns = 3
 rows = 3
-frame_count = 12
+frame_count = 8
 fps = 12.0
 loop = true
-anchor = Vector2(18, 29)
-world_scale = 0.6
+anchor = Vector2(15, 22)
+world_scale = 0.7

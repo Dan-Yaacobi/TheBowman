@@ -21,7 +21,6 @@ signal sword_swung
 @onready var off_hand: PlayerOffHand = $PlayerOffHand
 @onready var main_hand: PlayerMainHand = $PlayerMainHand
 
-@onready var damaged_particles: CPUParticles2D = $DamagedParticles
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var active_ability_cooldown: Timer = $ActiveAbilityCooldown
 
@@ -126,6 +125,9 @@ var _traction_sources: Dictionary[Node, float] = {}
 var _grab_sources: Dictionary[Node, float] = {}
 ## Side the grab drag pulls toward (-1 left, 1 right); picked when the first grab latches on.
 var _grab_drag_dir: float = 1.0
+## Set while a cutscene or dialogue holds the player in place (e.g. the tutorial spirit talking).
+## Blocks walking, jumping and dashing like a grab, without the drag.
+var movement_locked: bool = false
 var in_jump: bool = false
 var fall_after_jump: bool = false
 
@@ -204,12 +206,25 @@ func kill(_death_screen: bool = true) -> void:
 			SaveService.save_game()
 		player_state_machine.ChangeState(dead)
 
+## Strips everything a run gave the player (gear, buffs, debuffs, run-only hearts, colour
+## levels, the active ability) and refills hearts. Used by death and by leaving to the menu.
+func reset_run() -> void:
+	reset_equipment()
+	debuff_handler.reset_debuffs()
+	buff_handler.reset_buffs()
+	MetaProgress.apply_to(stats)
+	# Run-only heart containers (cleric, color scrolls) don't carry into the next run.
+	stats.extra_hp = 0
+	color_levels.reset()
+	refresh_max_hp()
+	dead.reset_active_ability()
+
 func activate_passive_abilities() -> void:
 	for ability in get_abilities(PlayerAbility.TriggerType.PASSIVE):
 		ability.on_equipped()
 	
 func _process(_delta: float) -> void:
-	if stats.hp > 0 and not is_dead() and not is_grabbed():
+	if stats.hp > 0 and not is_dead() and not is_grabbed() and not movement_locked:
 		direction = Input.get_axis("Left","Right")
 	else:
 		direction = 0
@@ -496,6 +511,12 @@ func set_arrow_scene() -> void:
 func emit_crit() -> void:
 	critical_hit.emit()
 
+## Red impact star over the archer's body when a hit lands.
+func _show_hurt_effect() -> void:
+	var effect: EffectSprite = EffectSprite.attach(&"player_hurt", self)
+	if effect:
+		effect.z_index = EffectSprite.OVER_PLAYER_Z
+
 func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult = null, _alter_dmg_color: Color = Color.RED) -> void:
 	if not invincible and dodge_chance > 0.0 and randf() < dodge_chance:
 		_dodge()
@@ -511,7 +532,7 @@ func _handle_take_damage(_hurt_box: HurtBox, raw_damage, _result: DamageResult =
 	if not invincible:
 		took_hit.emit()
 		EventBus.damaged_flash.emit()
-		damaged_particles.emitting = true
+		_show_hurt_effect()
 		var dmg_taken: int = 0
 		var dmg_color = _alter_dmg_color
 		if _hurt_box:
@@ -536,7 +557,7 @@ func _dodge() -> void:
 	invincibility_timer.start()
 
 func can_start_dash() -> bool:
-	return can_dash <= 0 and dashes_spent < stats.max_dashes and not is_grabbed()
+	return can_dash <= 0 and dashes_spent < stats.max_dashes and not is_grabbed() and not movement_locked
 
 ## Spends a free fall if there is one. Returns true if the fall costs no heart.
 func use_free_fall() -> bool:

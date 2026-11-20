@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsesww0tvvo33"]
 
 [ext_resource type="Script" uid="uid://bayac3vjejf8n" path="res://StartMenu/start_menu.gd" id="1_d5kqr"]
-[ext_resource type="Texture2D" uid="uid://dgtlu5xnvsvap" path="res://StartMenu/StartScreenBG_3.png" id="2_7tu02"]
+[ext_resource type="PackedScene" path="res://StartMenu/Scenery/MenuScenery.tscn" id="2_scenery"]
 [ext_resource type="AudioStream" uid="uid://bo7g2kx7bqnd7" path="res://MainGame/Music/APlaceICallHome.ogg" id="3_menumusic"]
 [ext_resource type="PackedScene" path="res://StartMenu/DataConsent/DataConsent.tscn" id="4_consent"]
 [ext_resource type="FontFile" path="res://Fonts/alagard.ttf" id="5_alagard"]
@@ -55,32 +55,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Parallax" type="Control" parent="Backdrop"]
+[node name="Scenery" parent="Backdrop" instance=ExtResource("2_scenery")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -24.0
-offset_right = 40.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Background" type="TextureRect" parent="Backdrop/Parallax"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("2_7tu02")
-expand_mode = 1
-stretch_mode = 6
+layout_mode = 0
 
 [node name="Motes" type="CPUParticles2D" parent="Backdrop"]
 position = Vector2(800, 960)

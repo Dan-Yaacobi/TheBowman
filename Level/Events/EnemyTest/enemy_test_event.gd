@@ -37,6 +37,14 @@ func spawn_entry(entry: EnemyEntry) -> void:
 
 func _spawn_position(entry: EnemyEntry) -> Vector2:
 	var player: Node2D = PlayerManager.player
+	if entry.spawn_zone == SpawnHandler.Zone.ISLAND_CENTER:
+		var islands: Array[Node] = spawn_islands.get_children()
+		islands.shuffle()
+		for node: Node in islands:
+			var island: Island = node as Island
+			if island and island.has_free_center_spot():
+				return island.claim_center_spot()
+		return (islands[0] as Island).get_top_center()
 	if entry.spawn_zone == SpawnHandler.Zone.ISLAND:
 		var islands: Array[Node] = spawn_islands.get_children()
 		islands.shuffle()

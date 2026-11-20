@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://kxsprfrlwgfb" path="res://StatClass/stat.gd" id="3_stat"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="4_abil"]
 [ext_resource type="Script" uid="uid://du1epmdpcfmpv" path="res://Enemies/EnemyAbilities/DeathAbility/enemy_death.gd" id="5_death"]
+[ext_resource type="Texture2D" uid="uid://c5nclblnajway" path="res://Enemies/SnowflakeSwarm/Sprites/Snowflake.png" id="6_skin"]
 
 [sub_resource type="Resource" id="Resource_death"]
 script = ExtResource("5_death")
@@ -12,25 +13,13 @@ script = ExtResource("5_death")
 [sub_resource type="Resource" id="Stat_speed"]
 script = ExtResource("3_stat")
 
-[sub_resource type="Gradient" id="Gradient_flake"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.65, 0.85, 1, 1, 0.5, 0.75, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_flake"]
-gradient = SubResource("Gradient_flake")
-width = 10
-height = 10
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
 [resource]
 script = ExtResource("1_data")
 display_name = "Snowflake"
 max_hp = 1
 move_speed = SubResource("Stat_speed")
 knockback = 120
-skin = SubResource("GradientTexture2D_flake")
+skin = ExtResource("6_skin")
 avg_coins_dropped = 1
 touch_damage = 2
 can_be_knockedback = false

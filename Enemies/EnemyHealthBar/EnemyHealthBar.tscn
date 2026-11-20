@@ -4,12 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://bxubmxoxqclqy" path="res://Player/HealthBar/Healthbar.png" id="2_xc0hd"]
 [ext_resource type="Script" uid="uid://c8l1j5cecdysy" path="res://Enemies/EnemyHealthBar/enemy_health_bar.gd" id="3_e87ki"]
 [ext_resource type="Texture2D" uid="uid://dtxw5aas0w7fa" path="res://Player/HealthBar/Healthbar Ghost.png" id="4_xc0hd"]
+[ext_resource type="Shader" path="res://Enemies/EnemyHealthBar/health_bar_glow.gdshader" id="5_glow"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glow"]
+shader = ExtResource("5_glow")
+shader_parameter/glow_color = Color(1, 0.95, 0.8, 0.55)
+shader_parameter/rect_size = Vector2(88, 34)
+shader_parameter/glow_size = 12.0
 
 [node name="EnemyHealthBarContainer" type="Control" unique_id=1981683837]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+z_index = 2
 mouse_filter = 2
 
 [node name="EnemyGhostBar" type="TextureProgressBar" parent="." unique_id=795413263]
@@ -23,3 +31,13 @@ texture_progress = ExtResource("4_xc0hd")
 layout_mode = 0
 texture_progress = ExtResource("2_xc0hd")
 script = ExtResource("3_e87ki")
+
+[node name="Glow" type="ColorRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_glow")
+layout_mode = 0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 76.0
+offset_bottom = 22.0
+mouse_filter = 2

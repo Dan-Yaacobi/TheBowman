@@ -47,6 +47,7 @@ fixed_frame_index = 4
 
 [node name="TargetDummySite" parent="Islands/Island" unique_id=507476458 instance=ExtResource("17_5lv0r")]
 position = Vector2(-1, -18)
+description = "A target dummy."
 
 [node name="Island3" parent="Islands" unique_id=1847265216 instance=ExtResource("14_7t2hb")]
 position = Vector2(534, 105)
@@ -139,6 +140,7 @@ fixed_frame_index = 4
 
 [node name="AltarSite" parent="Islands" unique_id=345220663 instance=ExtResource("17_guwyo")]
 position = Vector2(109, 211)
+description = "Spend resources on permanent upgrades."
 
 [node name="LootManager" parent="." unique_id=897363174 instance=ExtResource("13_7t2hb")]
 
@@ -151,6 +153,7 @@ position = Vector2(386, 68)
 
 [node name="DisenchantTableSite" parent="." unique_id=140269765 instance=ExtResource("21_disenchant")]
 position = Vector2(469, 151)
+description = "Break down the gear you find in into resources. "
 
 [node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("16_5lv0r")]
 position = Vector2(248, 86)

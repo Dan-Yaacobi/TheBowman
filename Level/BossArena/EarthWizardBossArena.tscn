@@ -21,6 +21,7 @@ z_index = 0
 position = Vector2(243, 189)
 destination = 3
 is_rift_portal = true
+route = 2
 idle_speed = 0.5
 near_speed = 1.4
 wake_duration = 0.3

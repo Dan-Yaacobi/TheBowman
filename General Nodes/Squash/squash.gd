@@ -6,6 +6,8 @@ class_name Squash extends RefCounted
 
 const BASE_META: StringName = &"squash_base"
 const TWEEN_META: StringName = &"squash_tween"
+const SHUDDER_BASE_META: StringName = &"shudder_base"
+const SHUDDER_TWEEN_META: StringName = &"shudder_tween"
 
 static func play(target: Node2D, shape: Vector2, duration: float = 0.22) -> void:
 	if not is_instance_valid(target) or not target.is_inside_tree():
@@ -26,6 +28,22 @@ static func play(target: Node2D, shape: Vector2, duration: float = 0.22) -> void
 	var tween: Tween = target.create_tween()
 	tween.tween_method(apply, 1.0, 0.0, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	target.set_meta(TWEEN_META, tween)
+
+## A stiff alternative to squashing (stone, crystal): a quick sideways shudder that keeps its shape.
+static func shudder(target: Node2D, strength: float = 1.5, duration: float = 0.15) -> void:
+	if not is_instance_valid(target) or not target.is_inside_tree():
+		return
+	if not target.has_meta(SHUDDER_BASE_META):
+		target.set_meta(SHUDDER_BASE_META, target.position)
+	var base: Vector2 = target.get_meta(SHUDDER_BASE_META)
+	var previous: Tween = target.get_meta(SHUDDER_TWEEN_META) if target.has_meta(SHUDDER_TWEEN_META) else null
+	if previous and previous.is_valid():
+		previous.kill()
+	var tween: Tween = target.create_tween()
+	var step: float = duration / 4.0
+	for x: float in [strength, -strength, strength * 0.5, 0.0]:
+		tween.tween_property(target, ^"position", base + Vector2(x, 0.0), step)
+	target.set_meta(SHUDDER_TWEEN_META, tween)
 
 ## Squash along a direction: thin along it, wide across it (a hit or a dash).
 static func along(target: Node2D, direction: Vector2, amount: float = 0.25, duration: float = 0.22) -> void:

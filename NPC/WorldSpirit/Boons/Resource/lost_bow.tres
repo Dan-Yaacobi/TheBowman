@@ -9,4 +9,5 @@ title = "Lost Bow"
 description = "The world gives back a bow it kept. It waits at your feet when your next run begins."
 kind = 2
 title_color = Color(0.55, 0.95, 0.75, 1)
+blessing_line = "One of your people's bows drifted home to me. It will wait at your feet when you go."
 item_slot = 0

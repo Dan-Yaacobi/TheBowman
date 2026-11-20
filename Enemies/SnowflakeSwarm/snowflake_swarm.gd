@@ -1,6 +1,7 @@
 class_name SnowflakeSwarm extends Enemy
 ## Invisible centre of a snowflake swarm. Spawns 4-6 flakes that orbit it, follows the player at a
-## distance, and sends one flake at a time to ram. Frees itself once every flake is gone.
+## distance, and sends one flake at a time to ram. Flakes that shatter after a ram reform on the
+## circle after respawn_delay. Frees itself once every flake has been killed by the player.
 
 var swarm_data: SnowflakeSwarmData
 ## Current orbit rotation; flakes read it to find their spot.
@@ -8,6 +9,8 @@ var orbit_angle: float = 0.0
 var _flakes: Array[Snowflake] = []
 var _ram_wait: float = 0.0
 var _spawned_flakes: bool = false
+## Seconds left on each pending flake respawn
+var _respawns: Array[float] = []
 
 
 func extra_ready_functions() -> void:
@@ -20,12 +23,18 @@ func _physics_process(delta: float) -> void:
 		_spawn_flakes()
 		return
 	_prune_flakes()
-	if _flakes.is_empty():
+	_update_respawns(delta)
+	if _flakes.is_empty() and _respawns.is_empty():
 		queue_free()
 		return
 	_follow_player(delta)
 	orbit_angle = wrapf(orbit_angle + swarm_data.orbit_speed * delta, 0.0, TAU)
 	_update_ram(delta)
+
+
+## Called by a flake that shattered on its own (not killed): a new one forms after respawn_delay.
+func queue_respawn() -> void:
+	_respawns.append(swarm_data.respawn_delay)
 
 
 ## Spot of an orbiting flake: evenly spaced around the centre, skipping flakes that left to ram.
@@ -40,12 +49,27 @@ func _spawn_flakes() -> void:
 	_spawned_flakes = true
 	var count: int = randi_range(swarm_data.min_flakes, swarm_data.max_flakes)
 	for i: int in count:
-		var flake: Snowflake = swarm_data.flake_scene.instantiate()
-		flake.set_data(swarm_data.flake_data)
-		flake.swarm = self
-		flake.global_position = global_position + Vector2.RIGHT.rotated(TAU * i / count) * swarm_data.orbit_radius
-		_flakes.append(flake)
-		EventBus.enemy_summoned.emit(flake)
+		_spawn_flake(global_position + Vector2.RIGHT.rotated(TAU * i / count) * swarm_data.orbit_radius)
+
+
+func _spawn_flake(at: Vector2) -> Snowflake:
+	var flake: Snowflake = swarm_data.flake_scene.instantiate()
+	flake.set_data(swarm_data.flake_data)
+	flake.swarm = self
+	flake.global_position = at
+	_flakes.append(flake)
+	EventBus.enemy_summoned.emit(flake)
+	return flake
+
+
+func _update_respawns(delta: float) -> void:
+	for i: int in range(_respawns.size() - 1, -1, -1):
+		_respawns[i] -= delta
+		if _respawns[i] > 0.0:
+			continue
+		_respawns.remove_at(i)
+		var flake: Snowflake = _spawn_flake(global_position + Vector2.RIGHT.rotated(orbit_angle) * swarm_data.orbit_radius)
+		flake.reforming = true
 
 
 func _prune_flakes() -> void:

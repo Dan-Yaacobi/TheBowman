@@ -10,7 +10,8 @@ var left: CollisionShape2D
 var bottom: CollisionShape2D
 var right: CollisionShape2D
 ## ISLAND = ground enemies placed on a free object spot of a nearby island
-enum Zone { ANY, TOP, LEFT, BOTTOM, RIGHT, ISLAND }
+## ISLAND_CENTER = same, but only on an island's middle object spot
+enum Zone { ANY, TOP, LEFT, BOTTOM, RIGHT, ISLAND, ISLAND_CENTER }
 
 @export_group("Island Spawns")
 ## Islands closer than this to the player are skipped, so the enemy isn't spawned on top of them
@@ -36,6 +37,7 @@ func spawn_from_zone(enemy_factory: Callable, zone: Zone) -> Enemy:
 		Zone.BOTTOM: return spawn_from_bottom(enemy_factory)
 		Zone.RIGHT: return spawn_from_right(enemy_factory)
 		Zone.ISLAND: return spawn_on_island(enemy_factory)
+		Zone.ISLAND_CENTER: return spawn_on_island(enemy_factory, true)
 		_: return spawn_from_any(enemy_factory)
 		
 func _spawn_at(enemy_factory: Callable, shape: CollisionShape2D) -> Enemy:
@@ -65,24 +67,26 @@ func spawn_from_right(enemy_factory: Callable) -> Enemy:
 func spawn_from_any(enemy_factory: Callable) -> Enemy:
 	return _spawn_at(enemy_factory, all.pick_random())
 
-## Returns null when no island in range has a free object spot.
-func spawn_on_island(enemy_factory: Callable) -> Enemy:
-	var island: Island = _pick_spawn_island()
+## Returns null when no island in range has a free object spot (the middle one when center_only).
+func spawn_on_island(enemy_factory: Callable, center_only: bool = false) -> Enemy:
+	var island: Island = _pick_spawn_island(center_only)
 	if island == null:
 		return null
 	var enemy_node: Enemy = enemy_factory.call()
 	if enemy_node == null:
 		return null
-	enemy_node.global_position = island.claim_object_spot()
+	enemy_node.global_position = island.claim_center_spot() if center_only else island.claim_object_spot()
 	EffectSprite.spawn(&"enemy_spawn_in", enemy_node.global_position)
 	return enemy_node
 
-func _pick_spawn_island() -> Island:
+func _pick_spawn_island(center_only: bool) -> Island:
 	var player_pos: Vector2 = PlayerManager.player.global_position
 	var candidates: Array[Island] = []
 	for node: Node in get_tree().get_nodes_in_group(Island.GROUP):
 		var island: Island = node as Island
-		if island == null or not island.is_solid() or not island.has_free_object_spot():
+		if island == null or not island.is_solid():
+			continue
+		if not (island.has_free_center_spot() if center_only else island.has_free_object_spot()):
 			continue
 		var distance: float = island.global_position.distance_to(player_pos)
 		if distance >= island_min_distance and distance <= island_max_distance:

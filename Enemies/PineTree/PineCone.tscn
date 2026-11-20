@@ -1,6 +1,21 @@
 [gd_scene format=3]
 
 [ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="1_seed"]
+[ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="2_data"]
+[ext_resource type="Texture2D" path="res://Enemies/PineTree/Sprites/PineCone.png" id="3_tex"]
+
+[sub_resource type="Resource" id="Resource_cone"]
+script = ExtResource("2_data")
+texture = ExtResource("3_tex")
+damage = 1
+knockback = 50
+fire_cooldown = 2.0
+move_speed = 45
 
 [node name="PineCone" instance=ExtResource("1_seed")]
+data = SubResource("Resource_cone")
 arc_height = 30.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_tex")

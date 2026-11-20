@@ -22,17 +22,9 @@ func Enter() -> void:
 
 func Exit() -> void:
 	player.enable_jump()
-	player.reset_equipment()
-	player.debuff_handler.reset_debuffs()
-	player.buff_handler.reset_buffs()
-	MetaProgress.apply_to(player.stats)
-	# Run-only heart containers (cleric, color scrolls) don't carry into the next run.
-	player.stats.extra_hp = 0
-	player.color_levels.reset()
-	player.refresh_max_hp()
+	player.reset_run()
 	EventBus.changed_scene.emit(return_world)
 	EventBus.player_died.emit(display_death_screen)
-	reset_active_ability()
 
 func reset_active_ability() -> void:
 	var ability: ActiveAbility = PlayerManager.player.stats.active_ability

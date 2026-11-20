@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2ag7d2j5mctf"]
 
 [ext_resource type="Script" uid="uid://7ira1qek0c3v" path="res://Enemies/Cloud/cloud_enemy.gd" id="1_1hdfk"]
-[ext_resource type="Texture2D" uid="uid://bp8epu764ng7s" path="res://Enemies/Sprites/Cloud Enemy.png" id="1_07fyk"]
+[ext_resource type="Texture2D" path="res://Enemies/Cloud/Sprites/HailCloud.png" id="1_07fyk"]
 [ext_resource type="PackedScene" uid="uid://he5b02nm11v5" path="res://Enemies/Cloud/RainDrop.tscn" id="2_g87bp"]
 [ext_resource type="Script" uid="uid://bb28acei3himk" path="res://Enemies/EnemyData/enemy_ability.gd" id="2_ws7tv"]
 [ext_resource type="Script" uid="uid://rlvenynllobd" path="res://Enemies/EnemyData/enemy_data.gd" id="3_aq55l"]
@@ -34,8 +34,8 @@ bullet = ExtResource("2_g87bp")
 metadata/_custom_type_script = "uid://rlvenynllobd"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nts66"]
-radius = 8.0
-height = 20.0
+radius = 11.0
+height = 28.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jo2yr"]
 resource_local_to_scene = true
@@ -59,18 +59,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(5.912981, 5.912981, 5.912981, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 0]
 }
 
 [sub_resource type="Animation" id="Animation_ig0ik"]
@@ -107,9 +95,9 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_jj0fl"]
-resource_name = "Move"
-length = 0.5
-loop_mode = 2
+resource_name = "Idle"
+length = 0.9
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -118,10 +106,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 3]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -163,9 +151,45 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_hail1"]
+resource_name = "Hail"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_tele1"]
+resource_name = "Telegraph"
+length = 1.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.55, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nbmpm"]
 _data = {
-&"Move": SubResource("Animation_jj0fl"),
+&"Hail": SubResource("Animation_hail1"),
+&"Idle": SubResource("Animation_jj0fl"),
+&"Telegraph": SubResource("Animation_tele1"),
 &"RESET": SubResource("Animation_vs4ks")
 }
 
@@ -206,10 +230,10 @@ shape = SubResource("CapsuleShape2D_nts66")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=825346320]
 material = SubResource("ShaderMaterial_jo2yr")
-position = Vector2(1, -8)
+position = Vector2(0, 2)
 texture = ExtResource("1_07fyk")
-hframes = 4
-vframes = 2
+hframes = 6
+vframes = 3
 
 [node name="DamagedAnimation" type="AnimationPlayer" parent="Sprite2D" unique_id=934303259]
 libraries/ = SubResource("AnimationLibrary_82i05")
@@ -298,7 +322,7 @@ stream = ExtResource("16_nbmpm")
 
 [node name="EnemyHealthBar" parent="." unique_id=1295720209 instance=ExtResource("19_jo2yr")]
 offset_left = -8.0
-offset_top = -16.0
+offset_top = -20.0
 offset_right = 56.0
-offset_bottom = 16.0
+offset_bottom = 12.0
 scale = Vector2(0.25, 0.25)
