@@ -153,6 +153,10 @@ func _on_event_enter_requested(event_scene: PackedScene, return_position: Vector
 	EventBus.event_entered.emit()
 
 func _on_event_exit_requested() -> void:
+	# An event played as a run node: its exit leads on to the next crossroads.
+	if _route != null and curr_world is EventNode:
+		_on_route_exit_portal_entered()
+		return
 	if _is_transitioning or not curr_world or not curr_world.current_event:
 		return
 	_is_transitioning = true
@@ -188,9 +192,16 @@ func _on_node_portal_entered(node: RunNodeData) -> void:
 	if node.scene == null:
 		push_error("Run node '%s' has no scene" % node.display_name)
 		return
+	var world: GameWorld = node.scene.instantiate() as GameWorld
+	if world == null:
+		push_error("Run node '%s' scene root is not a GameWorld" % node.display_name)
+		return
 	_route.enter_node(node)
+	# Set before the world is built: islands and portals read their biome from it.
 	PlayerManager.player.stats.rift_level = _route.get_equivalent_rift_level()
-	change_to_scene(node.scene)
+	if world is RunNodeWorld:
+		(world as RunNodeWorld).set_route(_route)
+	await _transition_to(world)
 
 ## A node's or a boss arena's exit portal (both are rift portals).
 func _on_route_exit_portal_entered() -> void:

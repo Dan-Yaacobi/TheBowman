@@ -9,6 +9,14 @@ var act_index: int = 0
 var nodes_done_in_act: int = 0
 ## The node being played; null while at a crossroads or in a boss arena.
 var current_node: RunNodeData = null
+## Every node entered this run, in order.
+var history: Array[RunNodeData] = []
+## The portals of the crossroads being visited. Rolled once per visit, so a reload shows the same gate.
+var current_gate: Array[RunNodeData] = []
+## Gates rolled this run.
+var gates_rolled: int = 0
+## Times each event was picked this run (event repeat penalty).
+var event_picks: Dictionary[EventEntry, int] = {}
 
 
 func _init(_nodes_per_act: int) -> void:
@@ -17,6 +25,8 @@ func _init(_nodes_per_act: int) -> void:
 
 func enter_node(node: RunNodeData) -> void:
 	current_node = node
+	history.append(node)
+	current_gate.clear()
 
 
 func complete_node() -> void:
@@ -37,6 +47,7 @@ func finish_act() -> void:
 	act_index += 1
 	nodes_done_in_act = 0
 	current_node = null
+	current_gate.clear()
 
 
 func is_run_finished() -> bool:
@@ -45,6 +56,17 @@ func is_run_finished() -> bool:
 
 func get_biome() -> Rift.Type:
 	return clampi(act_index, 0, Rift.Type.size() - 1) as Rift.Type
+
+
+## Non-combat nodes (events, rests) taken in a row, most recent first.
+func non_combat_streak() -> int:
+	var streak: int = 0
+	for i: int in range(history.size() - 1, -1, -1):
+		var type: RunNodeData.Type = history[i].type
+		if type == RunNodeData.Type.COMBAT or type == RunNodeData.Type.ELITE:
+			break
+		streak += 1
+	return streak
 
 
 ## The procedural-rift rift_level matching the next (or current) node, so systems that read

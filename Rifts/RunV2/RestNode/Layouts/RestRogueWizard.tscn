@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Rifts/RunV2/RestNode/rest_node.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://General Nodes/PlayerSpawn.tscn" id="2_spawn"]
+[ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="3_island"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_death"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/dirt_sky.tres" id="5_dirt"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/snow_sky.tres" id="6_snow"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/hell_sky.tres" id="7_hell"]
+[ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="8_skyscript"]
+[ext_resource type="PackedScene" path="res://Objects/Portal/Portal.tscn" id="9_portal"]
+[ext_resource type="PackedScene" path="res://Items/LootManager/LootManager.tscn" id="10_loot"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/ChunkScenes/Reward/RogueWizardIsland.tscn" id="11_npc"]
+
+[node name="RestRogueWizard" type="Node2D"]
+script = ExtResource("1_script")
+sky_colors = Array[ExtResource("8_skyscript")]([ExtResource("5_dirt"), ExtResource("6_snow"), ExtResource("7_hell")])
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("2_spawn")]
+position = Vector2(0, 122)
+
+[node name="LootManager" parent="." instance=ExtResource("10_loot")]
+
+[node name="FallingDeath" parent="." instance=ExtResource("4_death")]
+position = Vector2(70, 560)
+
+[node name="Islands" type="Node2D" parent="."]
+
+[node name="SpawnIsland" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(0, 160)
+start_island = true
+
+[node name="ExitIsland" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(140, 160)
+
+[node name="RogueWizardIsland" parent="." instance=ExtResource("11_npc")]
+position = Vector2(70, 160)
+
+[node name="ExitPortal" parent="." instance=ExtResource("9_portal")]
+z_index = 0
+position = Vector2(140, 134)
+destination = 3
+is_rift_portal = true

@@ -11,7 +11,3 @@ func extra_node_set_functions() -> void:
 
 func extra_node_exit_functions() -> void:
 	loot_manager.unset_up()
-
-
-func _on_world_ready() -> void:
-	EventBus.entered_rift.emit()

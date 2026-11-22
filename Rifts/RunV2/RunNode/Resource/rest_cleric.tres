@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RunNodeData" format=3]
+
+[ext_resource type="Script" path="res://Rifts/RunV2/RunNode/run_node_data.gd" id="1_node"]
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/RestNode/Layouts/RestCleric.tscn" id="2_scene"]
+
+[resource]
+script = ExtResource("1_node")
+display_name = "Cleric"
+type = 3
+scene = ExtResource("2_scene")
+danger = 0
+icon_text = "+"
+portal_color = Color(0.6, 1, 0.7, 1)

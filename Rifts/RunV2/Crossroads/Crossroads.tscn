@@ -11,11 +11,18 @@
 [ext_resource type="PackedScene" path="res://Rifts/RunV2/NodePortal/NodePortal.tscn" id="9_portal"]
 [ext_resource type="Script" path="res://Rifts/RunV2/RunNode/run_node_data.gd" id="10_nodescript"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/RunNode/Resource/combat_placeholder.tres" id="11_combat"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/RunNode/Resource/event.tres" id="12_event"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/RunNode/Resource/rest_cleric.tres" id="13_cleric"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/RunNode/Resource/rest_rogue_wizard.tres" id="14_wizard"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/RunNode/Resource/rest_pirate.tres" id="15_pirate"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/GateRules/default_gate_rules.tres" id="16_rules"]
 
 [node name="Crossroads" type="Node2D"]
 script = ExtResource("1_script")
 node_portal_scene = ExtResource("9_portal")
-node_pool = Array[ExtResource("10_nodescript")]([ExtResource("11_combat")])
+gate_rules = ExtResource("16_rules")
+node_pool = Array[ExtResource("10_nodescript")]([ExtResource("11_combat"), ExtResource("12_event"), ExtResource("13_cleric"), ExtResource("14_wizard"), ExtResource("15_pirate")])
+counts_as_node = false
 sky_colors = Array[ExtResource("8_skyscript")]([ExtResource("5_dirt"), ExtResource("6_snow"), ExtResource("7_hell")])
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("2_spawn")]
