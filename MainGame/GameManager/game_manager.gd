@@ -19,6 +19,8 @@ var hud: HUD
 var _is_transitioning: bool = false
 ## The current v2 run; null outside one (hub, tutorial, procedural rifts).
 var _route: RunRoute = null
+## The run as saved at the last crossroads (SaveService section "run"). Empty = no saved run.
+var _run_save: Dictionary = {}
 
 
 func _ready() -> void:
@@ -29,6 +31,11 @@ func _ready() -> void:
 	EventBus.relocate_player.connect(_place_player_and_resume)
 	EventBus.boss_portal_entered.connect(func() -> void: change_to_scene(_draw_boss()))
 	EventBus.node_portal_entered.connect(_on_node_portal_entered)
+	EventBus.player_died.connect(_on_event_bus_player_died)
+	SaveService.register(SaveService.RUN_SECTION, _save_run, _load_run)
+
+func _exit_tree() -> void:
+	SaveService.unregister(SaveService.RUN_SECTION)
 	
 func _on_portal_entered() -> void:
 	if _route != null:
@@ -119,6 +126,7 @@ func _transition_to(next_world: GameWorld) -> void:
 	if next_world is MainMenu:
 		PlayerManager.player.stats.rift_level = 0
 		_route = null
+		_clear_run_save()
 
 	prev_world = curr_world
 	curr_world = next_world
@@ -173,7 +181,9 @@ func _start_route() -> void:
 	_route = RunRoute.new(nodes_per_act)
 	_go_to_crossroads()
 
-func _go_to_crossroads() -> void:
+## Crossroads are the run's save points: arriving writes the run save. A resume passes the
+## saved run, which is put back on the player once they're in the crossroads.
+func _go_to_crossroads(resumed: Dictionary = {}) -> void:
 	if _is_transitioning:
 		return
 	var scene: PackedScene = load(CROSSROADS_SCENE_PATH)
@@ -185,6 +195,9 @@ func _go_to_crossroads() -> void:
 	PlayerManager.player.stats.rift_level = _route.get_equivalent_rift_level()
 	crossroads.set_route(_route)
 	await _transition_to(crossroads)
+	if not resumed.is_empty():
+		_restore_run(resumed)
+	_write_run_save()
 
 func _on_node_portal_entered(node: RunNodeData) -> void:
 	if _is_transitioning or _route == null or node == null:
@@ -220,3 +233,58 @@ func _on_route_exit_portal_entered() -> void:
 		change_to_scene(_draw_boss())
 	else:
 		_go_to_crossroads()
+
+# --- Run save (crossroads) ---
+
+func has_saved_run() -> bool:
+	return not _run_save.is_empty()
+
+## Continues the run saved at the last crossroads: same crossroads, same gate, same gear.
+func resume_saved_run() -> void:
+	var saved: Dictionary = _run_save
+	_route = RunRoute.from_save(saved.get("route", {}))
+	if _route == null:
+		push_warning("Saved run is unreadable; starting in the hub")
+		_clear_run_save()
+		change_game_world(GameWorlds.worlds.Main_Menu)
+		return
+	await _go_to_crossroads(saved)
+
+func _restore_run(saved: Dictionary) -> void:
+	var player: Player = PlayerManager.player
+	player.reset_run()
+	player.restore_run_state(saved.get("player", {}))
+	Crafting.crafted_this_run = bool(saved.get("forge_locked", false))
+	MetaProgress.resume_run(StringName(str(saved.get("boon", ""))))
+	RunTracker.restore_run_state(saved.get("tracker", {}))
+
+func _write_run_save() -> void:
+	if _route == null:
+		return
+	_run_save = {
+		"route": _route.to_save(),
+		"player": PlayerManager.player.get_run_state(),
+		"boon": String(MetaProgress.get_applied_boon_id()),
+		"forge_locked": Crafting.crafted_this_run,
+		"tracker": RunTracker.get_run_state(),
+	}
+	SaveService.save_game()
+
+## The run is over (death, win, back to the hub): nothing to resume any more.
+func _clear_run_save() -> void:
+	if _run_save.is_empty():
+		return
+	_run_save = {}
+	SaveService.save_game()
+
+func _save_run() -> Dictionary:
+	# Dying saves before the death is announced; a dead run is never resumable.
+	if PlayerManager.player and PlayerManager.player.stats.hp <= 0:
+		return {}
+	return _run_save
+
+func _load_run(data: Dictionary) -> void:
+	_run_save = data
+
+func _on_event_bus_player_died(_death_screen: bool) -> void:
+	_clear_run_save()

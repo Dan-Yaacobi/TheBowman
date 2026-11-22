@@ -22,6 +22,8 @@ const LEGACY_PATH: String = "user://save.json"
 const SLOTS_CONFIG_PATH: String = "user://save_slots.cfg"
 ## Bump this whenever the saved format changes, and add a step to _migrate().
 const SAVE_VERSION: int = 1
+## Run Structure v2: the run saved at the last crossroads (written by GameManager).
+const RUN_SECTION: StringName = &"run"
 
 var active_slot: int = 0
 
@@ -179,6 +181,12 @@ func load_game() -> void:
 
 func has_save() -> bool:
 	return slot_exists(active_slot)
+
+## True when the active slot holds a run saved at a crossroads that can be resumed.
+## Reflects the last save or load, so quitting mid-node still counts the run as saved.
+func has_saved_run() -> bool:
+	var run: Variant = _sections.get(String(RUN_SECTION), {})
+	return run is Dictionary and not (run as Dictionary).is_empty()
 
 ## Deletes the active slot's save and tells every registered system to reset.
 ## Each setter receives an empty Dictionary and should fall back to defaults.

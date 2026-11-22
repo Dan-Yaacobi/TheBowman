@@ -179,6 +179,49 @@ func _load_resources(data: Dictionary) -> void:
 	for key: String in data:
 		if CustomVariables.items.has(key):
 			stats.items[CustomVariables.items[key]] = int(data[key])
+## What the crossroads run save keeps of the player: gear (with its rolls), hearts, color
+## levels and the active ability. See restore_run_state().
+func get_run_state() -> Dictionary:
+	var gear: Array = []
+	for item: EquipmentData in [stats.bow, stats.arrow, stats.ring]:
+		if item:
+			gear.append(item.to_save())
+	return {
+		"hp": stats.hp,
+		"max_hp": stats.max_hp,
+		"extra_hp": stats.extra_hp,
+		"colors": color_levels.to_save(),
+		"active_ability": stats.active_ability.resource_path if stats.active_ability else "",
+		"gear": gear,
+	}
+
+## Puts a saved run's player state back. Expects a player fresh from reset_run().
+func restore_run_state(data: Dictionary) -> void:
+	for raw: Variant in data.get("gear", []):
+		var item: EquipmentData = EquipmentData.from_save(raw as Dictionary)
+		if item == null or item.equipment_scene == null:
+			continue
+		var equip: Equipment = item.equipment_scene.instantiate()
+		equip.data = item
+		add_child(equip)
+		equip.equip_directly()
+	color_levels.restore(data.get("colors", {}))
+	var ability_path: String = str(data.get("active_ability", ""))
+	if ability_path != "" and ResourceLoader.exists(ability_path):
+		var ability: ActiveAbility = load(ability_path) as ActiveAbility
+		if ability:
+			stats.active_ability = ability
+			ability.on_equipped(self)
+			EventBus.active_ability_equipped.emit(ability)
+	stats.extra_hp = int(data.get("extra_hp", stats.extra_hp))
+	stats.max_hp = int(data.get("max_hp", stats.max_hp))
+	health_bar.init_health(max_hp_value())
+	var hp: int = clampi(int(data.get("hp", max_hp_value())), 1, max_hp_value())
+	stats.hp = max_hp_value()
+	if hp < stats.hp:
+		health_bar.reduce_health(stats.hp - hp)
+		stats.hp = hp
+
 func count_enemy_death(_enemy: Enemy) -> void:
 	enemies_killed+=1
 

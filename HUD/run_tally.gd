@@ -174,3 +174,58 @@ func _on_event_bus_rift_event_finished(event: Event, success: bool) -> void:
 	if event_label.is_empty():
 		event_label = pretty_name(event.scene_file_path if not event.scene_file_path.is_empty() else String(event.name))
 	_add(events_completed if success else events_failed, event_label)
+
+
+# --- Run save (crossroads) ------------------------------------------------------
+
+func to_save() -> Dictionary:
+	var res: Dictionary = {}
+	for item: CustomVariables.items in resources:
+		res[CustomVariables.items.keys()[item]] = resources[item]
+	var by_rarity: Dictionary = {}
+	for rarity: int in equipment_by_rarity:
+		by_rarity[str(rarity)] = equipment_by_rarity[rarity]
+	return {
+		"enemies": enemies.duplicate(),
+		"elites": elites.duplicate(),
+		"bosses": bosses.duplicate(),
+		"resources": res,
+		"equipment_by_rarity": by_rarity,
+		"best_equipment": best_equipment.to_save() if best_equipment else {},
+		"objects": objects.duplicate(),
+		"events_completed": events_completed.duplicate(),
+		"events_failed": events_failed.duplicate(),
+		"islands": islands,
+		"chests": chests,
+		"schematics": schematics,
+		"seconds": get_run_seconds(),
+	}
+
+## Continues a saved run's counts; the run timer picks up where it was saved.
+func restore(data: Dictionary) -> void:
+	reset()
+	_in_run = true
+	_fill(enemies, data.get("enemies", {}))
+	_fill(elites, data.get("elites", {}))
+	_fill(bosses, data.get("bosses", {}))
+	_fill(objects, data.get("objects", {}))
+	_fill(events_completed, data.get("events_completed", {}))
+	_fill(events_failed, data.get("events_failed", {}))
+	var res: Dictionary = data.get("resources", {})
+	for key: String in res:
+		if CustomVariables.items.has(key):
+			resources[CustomVariables.items[key]] = int(res[key])
+	var by_rarity: Dictionary = data.get("equipment_by_rarity", {})
+	for key: String in by_rarity:
+		equipment_by_rarity[int(key)] = int(by_rarity[key])
+	var best: Dictionary = data.get("best_equipment", {})
+	if not best.is_empty():
+		best_equipment = EquipmentData.from_save(best)
+	islands = int(data.get("islands", 0))
+	chests = int(data.get("chests", 0))
+	schematics = int(data.get("schematics", 0))
+	_start_msec = Time.get_ticks_msec() - int(data.get("seconds", 0)) * 1000
+
+static func _fill(target: Dictionary[String, int], source: Dictionary) -> void:
+	for key: Variant in source:
+		target[str(key)] = int(source[key])

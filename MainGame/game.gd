@@ -43,7 +43,11 @@ func _ready() -> void:
 	game_manager.set_game(self)
 	# A new game (no save yet) starts in the tutorial.
 	var first_world: GameWorlds.worlds = GameWorlds.worlds.Main_Menu if SaveService.has_save() else GameWorlds.worlds.Tutorial
-	game_manager.change_game_world(first_world)
+	if game_manager.has_saved_run():
+		# A run saved at a crossroads picks up there.
+		game_manager.resume_saved_run()
+	else:
+		game_manager.change_game_world(first_world)
 	PlayerManager.player.health_bar = hud.get_health_bar()
 	cloud_timer.timeout.connect(summon_cloud)
 	cloud_timer.start()

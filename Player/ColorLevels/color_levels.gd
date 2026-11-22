@@ -80,6 +80,26 @@ func reset() -> void:
 		_apply_secondary(color)
 		EventBus.color_level_changed.emit(color, 0)
 
+## Levels and scroll count as JSON-safe data, for the crossroads run save.
+func to_save() -> Dictionary:
+	var levels: Dictionary = {}
+	for color: CustomVariables.ItemColor in _levels:
+		levels[CustomVariables.ItemColor.keys()[color]] = _levels[color]
+	return {"levels": levels, "scrolls": scrolls_collected}
+
+## Puts saved levels back without the level-up effects or scroll hearts (those are in the save).
+func restore(data: Dictionary) -> void:
+	reset()
+	var levels: Dictionary = data.get("levels", {})
+	for key: String in levels:
+		if not CustomVariables.ItemColor.has(key):
+			continue
+		var color: CustomVariables.ItemColor = CustomVariables.ItemColor[key]
+		_levels[color] = int(levels[key])
+		_apply_secondary(color)
+		EventBus.color_level_changed.emit(color, _levels[color])
+	scrolls_collected = int(data.get("scrolls", 0))
+
 ## The color's secondary bonus for one level, for the scroll picker.
 func bonus_text(color: CustomVariables.ItemColor) -> String:
 	match color:

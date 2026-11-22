@@ -364,9 +364,27 @@ func _on_event_bus_entered_rift() -> void:
 ## Closing the game mid-run counts as a finished run: the blessing waits on the next launch.
 ## (The pause menu's Restart kills the player, so it's already covered as a death.)
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST and _run_in_progress:
+	# A run saved at a crossroads is resumed later, blessing and all.
+	if what == NOTIFICATION_WM_CLOSE_REQUEST and _run_in_progress and not SaveService.has_saved_run():
 		_offer_boon()
 		SaveService.save_game()
+
+## The blessing applied to the run in progress, for the crossroads run save. Empty if none.
+func get_applied_boon_id() -> StringName:
+	return _applied_boon.id if _applied_boon else &""
+
+## A saved run resumed: it's in progress again and its stat blessing goes back on. Heart and
+## item blessings come back through the run save itself (hearts and gear).
+func resume_run(boon_id: StringName) -> void:
+	_run_in_progress = true
+	if boon_id == &"" or _applied_boon != null:
+		return
+	var boon: SpiritBoon = find_boon(boon_id)
+	if boon == null:
+		return
+	if boon.kind == SpiritBoon.Kind.STAT and PlayerManager.player:
+		boon.apply(PlayerManager.player, _boon_buff_id)
+	_applied_boon = boon
 
 ## Back in the hub after a run that didn't end in death (won, or left through a portal).
 func _on_event_bus_in_main_menu() -> void:

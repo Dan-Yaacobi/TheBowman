@@ -92,7 +92,7 @@ The player chooses how hard their run is through the world, not through menus or
 
 #### The crossroads
 - A small, calm island holding 2–3 portals, rolled from a pool under pacing rules. Not the same room every time.
-- **Save point:** the run is saved on entering a crossroads. Quitting the game and loading resumes at the last crossroads visited.
+- **Save point:** the run is saved on entering a crossroads (gate, gear with its rolls, hearts, scrolls, blessing, run stats). Quitting and loading resumes at the last crossroads visited, with the same portals; anything gained or lost since that crossroads is undone. A quit with a saved run doesn't end the run.
 - Fiction: the wizard's fracture spreads like cracks in glass; portals cluster where cracks meet. The world spirit stabilizes each convergence with an anchor stone (a piece of itself), which is why it's safe and why the spirit can comment there.
 - Crossroads decay as the act goes on (broken islands, cracking sky, a straining anchor). The wizard's tower in the background grows closer each crossroads, showing the distance to the boss.
 

@@ -78,3 +78,56 @@ func get_equivalent_rift_level() -> int:
 	@warning_ignore("integer_division")
 	var step: int = mini(node_index * per_biome / nodes_per_act, per_biome - 1)
 	return mini(act_index, CustomVariables.BIOME_COUNT - 1) * per_biome + 1 + step
+
+
+# --- Save ---
+
+func to_save() -> Dictionary:
+	var picks: Dictionary = {}
+	for entry: EventEntry in event_picks:
+		if entry.resource_path != "":
+			picks[entry.resource_path] = event_picks[entry]
+	return {
+		"nodes_per_act": nodes_per_act,
+		"act": act_index,
+		"done": nodes_done_in_act,
+		"history": _paths(history),
+		"gate": _paths(current_gate),
+		"gates_rolled": gates_rolled,
+		"event_picks": picks,
+	}
+
+## Null if the data is empty. Nodes or events that no longer exist are skipped.
+static func from_save(data: Dictionary) -> RunRoute:
+	if data.is_empty():
+		return null
+	var route: RunRoute = RunRoute.new(int(data.get("nodes_per_act", 5)))
+	route.act_index = int(data.get("act", 0))
+	route.nodes_done_in_act = int(data.get("done", 0))
+	route.gates_rolled = int(data.get("gates_rolled", 0))
+	route.history = _load_nodes(data.get("history", []))
+	route.current_gate = _load_nodes(data.get("gate", []))
+	var picks: Dictionary = data.get("event_picks", {})
+	for path: String in picks:
+		if ResourceLoader.exists(path):
+			var entry: EventEntry = load(path) as EventEntry
+			if entry:
+				route.event_picks[entry] = int(picks[path])
+	return route
+
+static func _paths(nodes: Array[RunNodeData]) -> Array:
+	var out: Array = []
+	for node: RunNodeData in nodes:
+		if node and node.resource_path != "":
+			out.append(node.resource_path)
+	return out
+
+static func _load_nodes(paths: Array) -> Array[RunNodeData]:
+	var out: Array[RunNodeData] = []
+	for raw: Variant in paths:
+		var path: String = str(raw)
+		if ResourceLoader.exists(path):
+			var node: RunNodeData = load(path) as RunNodeData
+			if node:
+				out.append(node)
+	return out

@@ -169,6 +169,7 @@ func roll_distinct_items(count: int, forced_rarity: int = -1) -> Array[Equipment
 
 func _roll_from_template(template: EquipmentData, forced_rarity: int = -1) -> EquipmentData:
 	var data: EquipmentData = template.duplicate()
+	data.template_path = template.get_template_path()
 	if data.ability:
 		data.ability = data.ability.duplicate()
 	data.equipment_scene = template.equipment_scene
@@ -182,6 +183,7 @@ func drop_specific(template: EquipmentData, _position: Vector2, forced_rarity: i
 ## Builds a rolled copy of a template without dropping it.
 func create_specific(template: EquipmentData, forced_rarity: int = 0) -> EquipmentData:
 	var item: EquipmentData = template.duplicate()
+	item.template_path = template.get_template_path()
 	if item.ability:
 		item.ability = item.ability.duplicate()
 	item.equipment_scene = template.equipment_scene

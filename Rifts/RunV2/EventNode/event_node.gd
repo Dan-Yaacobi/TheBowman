@@ -5,16 +5,24 @@ class_name EventNode extends RunNodeWorld
 ## Events this node can roll, by weight and repeat penalty (see EventEntry).
 @export var event_entries: Array[EventEntry] = []
 
+@onready var loot_manager: LootManager = $LootManager
+
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func extra_node_set_functions() -> void:
+	# Event rewards and item blessings drop through the world's loot manager.
+	loot_manager.set_up()
 	var scene: PackedScene = _roll_event_scene()
 	if scene == null:
 		push_error("EventNode: no eligible event")
 		return
 	current_event = scene.instantiate()
 	add_child(current_event)
+
+
+func extra_node_exit_functions() -> void:
+	loot_manager.unset_up()
 
 
 func spawn_position() -> Vector2:

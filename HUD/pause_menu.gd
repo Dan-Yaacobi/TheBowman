@@ -34,6 +34,7 @@ const COPIED_TEXT_SEC: float = 1.5
 const START_MENU_SCENE: String = "res://StartMenu/StartMenu.tscn"
 const RESTART_CONFIRM_TEXT: String = "Your current run will end."
 const EXIT_CONFIRM_TEXT: String = "Your current run will end. Everything you keep between runs is saved."
+const EXIT_SAVED_RUN_CONFIRM_TEXT: String = "Your run continues from the last crossroads."
 
 enum PauseState { CLOSED, MAIN, SETTINGS, RESTART_CONFIRM, JOURNAL }
 
@@ -152,7 +153,8 @@ func _on_restart_confirmed() -> void:
 ## Mid-run, leaving ends the run, so it asks first like Restart.
 func _on_exit_button_pressed() -> void:
 	if _is_in_run():
-		_ask_confirm(_exit_to_start_menu, EXIT_CONFIRM_TEXT)
+		var text: String = EXIT_SAVED_RUN_CONFIRM_TEXT if SaveService.has_saved_run() else EXIT_CONFIRM_TEXT
+		_ask_confirm(_exit_to_start_menu, text)
 	else:
 		_exit_to_start_menu()
 
@@ -177,7 +179,11 @@ func _exit_to_start_menu() -> void:
 	var world: GameWorld = player.get_parent() as GameWorld
 	# The tutorial writes the first save when it's finished; saving early would skip it next launch.
 	var should_save: bool = not world is Tutorial
-	MetaProgress.leave_run()
+	# A run saved at a crossroads stays open: it resumes there on Continue.
+	if SaveService.has_saved_run():
+		RunTracker.suspend_run()
+	else:
+		MetaProgress.leave_run()
 	if world:
 		world.exit_world()
 	player.reset_run()

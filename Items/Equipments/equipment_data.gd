@@ -55,6 +55,8 @@ enum StringStyle { PLAIN, GLOW, PULSE, CRACKLE }
 
 
 # --- Rolled instance data (filled in by LootManager.roll_item on a duplicate) ---
+## Template this item was rolled from. Duplicates lose resource_path, so the run save keeps this.
+@export_storage var template_path: String = ""
 var rarity: float
 var modifiers: Array[StatModifier] = []                      # StatModifier list, rolled from guaranteed_stats
 var bonus_abilities: Array[MinorAbility] = []    # minor abilities picked from possible_modifiers
@@ -63,6 +65,63 @@ var tallied: bool = false
 
 func add_modifier(stat_name: String, amount: float, _type: Stat.buff_type) -> void:
 	modifiers.append(StatModifier.new(amount, stat_name, _type))
+
+## The template's path: the one it was rolled from, or its own for an unrolled template.
+func get_template_path() -> String:
+	return template_path if template_path != "" else resource_path
+
+## The rolled item as JSON-safe data (template, rarity, stat rolls, minor rolls). See from_save().
+func to_save() -> Dictionary:
+	var mods: Array = []
+	for mod: StatModifier in modifiers:
+		mods.append([mod.stat_name, mod.amount, int(mod.stat_type)])
+	var minors: Array = []
+	for minor: MinorAbility in bonus_abilities:
+		if minor and minor.get_script():
+			minors.append({"script": minor.get_script().resource_path, "value": minor.value})
+	return {"template": get_template_path(), "rarity": rarity, "mods": mods, "minors": minors}
+
+## Rebuilds a rolled item from to_save() data. Null if its template no longer exists.
+## A minor whose ability was removed from the template's tiers is skipped.
+static func from_save(data: Dictionary) -> EquipmentData:
+	var path: String = str(data.get("template", ""))
+	if path == "" or not ResourceLoader.exists(path):
+		push_warning("EquipmentData: saved item template '%s' is missing" % path)
+		return null
+	var template: EquipmentData = load(path) as EquipmentData
+	if template == null:
+		return null
+	var item: EquipmentData = template.duplicate()
+	item.template_path = path
+	if item.ability:
+		item.ability = item.ability.duplicate()
+	item.equipment_scene = template.equipment_scene
+	item.rarity = float(data.get("rarity", 0.0))
+	item.modifiers = []
+	item.bonus_abilities = []
+	for raw: Variant in data.get("mods", []):
+		var mod: Array = raw as Array
+		if mod.size() >= 3:
+			item.add_modifier(str(mod[0]), float(mod[1]), int(mod[2]) as Stat.buff_type)
+	for raw: Variant in data.get("minors", []):
+		var saved: Dictionary = raw as Dictionary
+		var source: MinorAbility = _find_minor(template, str(saved.get("script", "")))
+		if source == null:
+			push_warning("EquipmentData: saved minor '%s' not found on %s" % [saved.get("script", ""), path])
+			continue
+		var minor: MinorAbility = source.duplicate()
+		minor.value = int(saved.get("value", minor.value))
+		item.bonus_abilities.append(minor)
+	return item
+
+static func _find_minor(template: EquipmentData, script_path: String) -> MinorAbility:
+	for tier: RarityTier in template.tiers:
+		if tier == null or tier.minor_abilities == null:
+			continue
+		for minor: MinorAbility in tier.minor_abilities.get_abilities():
+			if minor and minor.get_script() and minor.get_script().resource_path == script_path:
+				return minor
+	return null
 
 ## Multiplier from this item's color level (color scrolls). Only scrolls of the same color raise it.
 ## Used for the color label; abilities and the bow hit read the same level elsewhere.

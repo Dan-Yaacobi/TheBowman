@@ -95,7 +95,8 @@ func _process(delta: float) -> void:
 		_active_sec += delta
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST and _in_run:
+	# A run saved at a crossroads isn't over: it continues the same record when resumed.
+	if what == NOTIFICATION_WM_CLOSE_REQUEST and _in_run and not SaveService.has_saved_run():
 		end_run(RESULT_QUIT)
 
 func is_in_run() -> bool:
@@ -484,3 +485,77 @@ func _current_world() -> Node:
 func _game_version() -> String:
 	var version: String = str(ProjectSettings.get_setting("application/config/version", ""))
 	return version if not version.is_empty() else "unversioned"
+
+
+# --- Run save (crossroads) ------------------------------------------------------
+
+## Everything needed to continue this run's record after a reload. Empty outside a run.
+func get_run_state() -> Dictionary:
+	if not _in_run:
+		return {}
+	return {
+		"run_id": _run_id,
+		"started_unix": _started_unix,
+		"elapsed_sec": maxi(Time.get_ticks_msec() - _start_msec, 0) / 1000,
+		"active_sec": _active_sec,
+		"combat": _combat.duplicate(),
+		"movement": _movement.duplicate(),
+		"start_gear": _start_gear.duplicate(true),
+		"gear": _gear.duplicate(true),
+		"gear_changes": _gear_changes.duplicate(true),
+		"crafted_item": _crafted_item,
+		"meta_levels": _meta_levels.duplicate(true),
+		"color_levels": _color_levels.duplicate(),
+		"active_ability": _active_ability,
+		"active_ability_uses": _active_ability_uses,
+		"lore_found": _lore_found,
+		"lowest_hp": _lowest_hp,
+		"max_hp_start": _max_hp_start,
+		"damage_sources": _damage_sources.duplicate(),
+		"rifts": _rifts.duplicate(true),
+		"bosses": _bosses.duplicate(true),
+		"tally": tally.to_save(),
+	}
+
+## Continues a run saved by get_run_state(): same run id, counters and timers.
+func restore_run_state(data: Dictionary) -> void:
+	if data.is_empty():
+		return
+	_in_run = true
+	_run_id = str(data.get("run_id", ""))
+	_started_unix = int(data.get("started_unix", Time.get_unix_time_from_system()))
+	_start_msec = Time.get_ticks_msec() - int(data.get("elapsed_sec", 0)) * 1000
+	_active_sec = float(data.get("active_sec", 0.0))
+	_fill_counts(_combat, data.get("combat", {}))
+	_fill_counts(_movement, data.get("movement", {}))
+	_start_gear = data.get("start_gear", {})
+	_gear = data.get("gear", {})
+	_gear_changes.assign(data.get("gear_changes", []))
+	_crafted_item = str(data.get("crafted_item", ""))
+	_meta_levels = data.get("meta_levels", {})
+	_fill_counts(_color_levels, data.get("color_levels", {}))
+	_active_ability = str(data.get("active_ability", ""))
+	_active_ability_uses = int(data.get("active_ability_uses", 0))
+	_lore_found = int(data.get("lore_found", 0))
+	_lowest_hp = int(data.get("lowest_hp", 0))
+	_max_hp_start = int(data.get("max_hp_start", 0))
+	_fill_counts(_damage_sources, data.get("damage_sources", {}))
+	_rifts.assign(data.get("rifts", []))
+	_bosses.assign(data.get("bosses", []))
+	_current_rift = {}
+	_current_boss = {}
+	_current_boss_node = null
+	_death_cause = ""
+	tally.restore(data.get("tally", {}))
+
+## Leaving to the start menu with the run saved: stop recording without ending the record.
+func suspend_run() -> void:
+	_in_run = false
+	_current_rift = {}
+	_current_boss = {}
+	_current_boss_node = null
+
+static func _fill_counts(target: Dictionary[String, int], source: Dictionary) -> void:
+	target.clear()
+	for key: Variant in source:
+		target[str(key)] = int(source[key])
