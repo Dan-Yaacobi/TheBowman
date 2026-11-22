@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://ciyfsjtykyhg3"]
+
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/CombatRift/CombatRiftBase.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_island"]
+[ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="3_marker"]
+[ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="4_chest"]
+[ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="5_pedestal"]
+
+[node name="CombatTestLayout" unique_id=460234249 instance=ExtResource("1_base")]
+
+[node name="PlayerSpawn" parent="." index="0"]
+position = Vector2(0, 102)
+
+[node name="Entry" parent="Islands" index="0" unique_id=628947041 instance=ExtResource("2_island")]
+position = Vector2(0, 140)
+start_island = true
+
+[node name="Island" parent="Islands" index="1" unique_id=1847265216 instance=ExtResource("2_island")]
+position = Vector2(71, 147)
+start_island = true
+
+[node name="Island2" parent="Islands" index="2" unique_id=1923922975 instance=ExtResource("2_island")]
+position = Vector2(139, 149)
+start_island = true
+
+[node name="Island3" parent="Islands" index="3" unique_id=1122778232 instance=ExtResource("2_island")]
+position = Vector2(123, 89)
+start_island = true
+
+[node name="Island4" parent="Islands" index="4" unique_id=1213471424 instance=ExtResource("2_island")]
+position = Vector2(176, 41)
+start_island = true
+
+[node name="Island5" parent="Islands" index="5" unique_id=254113254 instance=ExtResource("2_island")]
+position = Vector2(124, -1)
+start_island = true
+
+[node name="Island6" parent="Islands" index="6" unique_id=1960377480 instance=ExtResource("2_island")]
+position = Vector2(77, -42)
+start_island = true
+
+[node name="Island7" parent="Islands" index="7" unique_id=1368249539 instance=ExtResource("2_island")]
+position = Vector2(182, -67)
+start_island = true
+
+[node name="Step" parent="Islands" index="8" unique_id=1894845689 instance=ExtResource("2_island")]
+position = Vector2(300, 158)
+
+[node name="HomeLeft" parent="Islands" index="9" unique_id=1012732594 instance=ExtResource("2_island")]
+position = Vector2(360, 158)
+
+[node name="HomeRight" parent="Islands" index="10" unique_id=1481381887 instance=ExtResource("2_island")]
+position = Vector2(403, 158)
+
+[node name="Perch" parent="Islands" index="11" unique_id=1361650147 instance=ExtResource("2_island")]
+position = Vector2(381, 105)
+
+[node name="Far" parent="Islands" index="12" unique_id=1158758651 instance=ExtResource("2_island")]
+position = Vector2(470, 148)
+
+[node name="Chest" parent="Islands/Far" index="5" unique_id=1530636100 instance=ExtResource("4_chest")]
+position = Vector2(-1, -10)
+
+[node name="Exit" parent="Islands" index="13" unique_id=1728348544 instance=ExtResource("2_island")]
+position = Vector2(545, 133)
+
+[node name="ScrollPedestal" parent="Islands/Exit" index="5" unique_id=1565658134 instance=ExtResource("5_pedestal")]
+position = Vector2(-14, -17)
+
+[node name="GroundHomeLeft" parent="SpawnMarkers" index="0" unique_id=194357600 instance=ExtResource("3_marker")]
+position = Vector2(360, 143)
+
+[node name="GroundHomeRight" parent="SpawnMarkers" index="1" unique_id=1540985724 instance=ExtResource("3_marker")]
+position = Vector2(403, 143)
+
+[node name="GroundFar" parent="SpawnMarkers" index="2" unique_id=2075846388 instance=ExtResource("3_marker")]
+position = Vector2(470, 133)
+
+[node name="AirLeft" parent="SpawnMarkers" index="3" unique_id=1541673261 instance=ExtResource("3_marker")]
+position = Vector2(34, -91)
+zone = 1
+
+[node name="AirMid" parent="SpawnMarkers" index="4" unique_id=437354899 instance=ExtResource("3_marker")]
+position = Vector2(425, 53)
+zone = 1
+
+[node name="AirRight" parent="SpawnMarkers" index="5" unique_id=721314088 instance=ExtResource("3_marker")]
+position = Vector2(515, 73)
+zone = 1
+
+[node name="ExitPortal" parent="." index="6"]
+position = Vector2(545, 107)
