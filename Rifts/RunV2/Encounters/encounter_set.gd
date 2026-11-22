@@ -1,6 +1,6 @@
 class_name EncounterSet extends Resource
-## A hand-picked group of enemies for a combat rift, spawned wave by wave
-## (e.g. "red apples only", "green + pink apples").
+## A hand-picked group of enemies for a combat rift (e.g. "red apples only", "green + pink
+## apples"). They're placed on the layout's spawn markers and wait there for the player.
 
 enum Stage { ANY, EARLY, LATE }
 
@@ -10,8 +10,8 @@ enum Stage { ANY, EARLY, LATE }
 ## EARLY: first half of an act. LATE: second half.
 @export var stage: Stage = Stage.ANY
 @export var weight: float = 10.0
-## Spawned in order; the next wave starts once the current one is nearly cleared.
-@export var waves: Array[ChallengeWave] = []
+## Enemy entry -> how many.
+@export var enemies: Dictionary[EnemyEntry, int] = {}
 
 
 func fits(biome: int, late: bool) -> bool:
@@ -20,3 +20,13 @@ func fits(biome: int, late: bool) -> bool:
 	if stage == Stage.EARLY and late:
 		return false
 	return not (stage == Stage.LATE and not late)
+
+
+func get_spawn_list() -> Array[EnemyEntry]:
+	var list: Array[EnemyEntry] = []
+	for entry: EnemyEntry in enemies:
+		if entry == null:
+			continue
+		for i: int in enemies[entry]:
+			list.append(entry)
+	return list

@@ -1,49 +1,63 @@
 class_name EncounterDirector extends Node
-## Runs one combat rift's fight: rolls an encounter set and spawns its waves from the layout's
-## SpawnMarkers. A wave starts once the previous one is down to next_wave_at_alive enemies;
-## encounter_cleared fires when the last wave is dead. Finite: nothing spawns after that.
+## Runs one combat rift's fight. Before the player arrives it rolls an encounter set and puts
+## one enemy on each spawn marker (ground enemies on GROUND markers, flyers on AIR).
+## Flyers sleep on their spot until the player comes within their wake radius or damages them.
+## Ground enemies (golems, rooted enemies) land on the island below and use their own dormant
+## state, so they keep riding moving islands and keep their own wake / re-sleep rules.
+## encounter_cleared fires once every placed enemy (and anything split from one) is dead.
 
-signal wave_started(index: int, count: int)
 signal encounter_cleared
 
 @export var pool: EncounterPool
-## The next wave starts once this many (or fewer) enemies are still alive.
-@export var next_wave_at_alive: int = 1
-@export var time_between_spawns: float = 0.35
-## Seconds after the player arrives before the first wave.
-@export var first_wave_delay: float = 1.0
-## Markers closer than this to the player are skipped while others are free.
-@export var min_player_distance: float = 60.0
+## A flyer wakes when the player gets this close. A marker's own wake_radius overrides it.
+@export var wake_radius: float = 120.0
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var encounter: EncounterSet = null
 
-var _markers: Array[SpawnMarker] = []
 var _alive: Array[Enemy] = []
-## Ids of every enemy this director spawned, kept after death so split children can be claimed.
+## Ids of every enemy this director placed, kept after death so split children can be claimed.
 var _owned_ids: Dictionary[int, bool] = {}
-var _wave_index: int = -1
-var _spawning: bool = false
+## Sleeping enemy -> its wake radius.
+var _sleepers: Dictionary[Enemy, float] = {}
+## Collision objects of sleeping enemies -> their disable mode before sleeping.
+var _kept_active: Dictionary[Enemy, Dictionary] = {}
 var _running: bool = false
 
 
 func _ready() -> void:
-	set_process(false)
 	EventBus.enemy_summoned.connect(_on_event_bus_enemy_summoned)
+	EventBus.enemy_damaged.connect(_on_event_bus_enemy_damaged)
 
 
-func start(markers: Array[SpawnMarker], biome: int, late: bool) -> void:
-	_markers = markers
+## Rolls the encounter and places it. Call before the player arrives.
+func populate(markers: Array[SpawnMarker], biome: int, late: bool) -> void:
 	encounter = pool.roll(biome, late, rng) if pool else null
-	if encounter == null or encounter.waves.is_empty() or _markers.is_empty():
+	var entries: Array[EnemyEntry] = []
+	if encounter:
+		entries = encounter.get_spawn_list()
+	if entries.is_empty() or markers.is_empty():
 		push_warning("EncounterDirector: no encounter or no spawn markers; the rift counts as cleared")
-		encounter_cleared.emit()
 		return
 	_running = true
-	await get_tree().create_timer(first_wave_delay, false).timeout
-	if not is_inside_tree():
+	var free: Dictionary[SpawnMarker.Zone, Array] = {}
+	for entry: EnemyEntry in entries:
+		var marker: SpawnMarker = _take_marker(_zone_for(entry), markers, free)
+		_place(entry, marker)
+
+
+## True once the fight is over (or there never was one).
+func is_cleared() -> bool:
+	return not _running
+
+
+func _process(_delta: float) -> void:
+	if not _running:
 		return
-	set_process(true)
+	_wake_near_player()
+	if get_alive_count() == 0:
+		_running = false
+		encounter_cleared.emit()
 
 
 func get_alive_count() -> int:
@@ -55,43 +69,38 @@ func get_alive_count() -> int:
 	return _alive.size()
 
 
-func _process(_delta: float) -> void:
-	if not _running or _spawning:
-		return
-	var alive: int = get_alive_count()
-	var last_wave: bool = _wave_index >= encounter.waves.size() - 1
-	if last_wave:
-		if alive == 0:
-			_running = false
-			set_process(false)
-			encounter_cleared.emit()
-	elif _wave_index < 0 or alive <= next_wave_at_alive:
-		_spawn_wave(_wave_index + 1)
+# --- Placing ---
 
-
-func _spawn_wave(index: int) -> void:
-	_wave_index = index
-	_spawning = true
-	var entries: Array[EnemyEntry] = encounter.waves[index].get_spawn_list()
-	wave_started.emit(index, entries.size())
-	for i: int in entries.size():
-		if not is_inside_tree():
-			return
-		_spawn(entries[i])
-		if i < entries.size() - 1:
-			await get_tree().create_timer(time_between_spawns, false).timeout
-	_spawning = false
-
-
-func _spawn(entry: EnemyEntry) -> void:
-	var marker: SpawnMarker = _pick_marker(_zone_for(entry))
-	if marker == null:
-		push_warning("EncounterDirector: no spawn marker for %s" % entry.resource_path.get_file())
-		return
+func _place(entry: EnemyEntry, marker: SpawnMarker) -> void:
 	var enemy: Enemy = entry.get_factory().call()
 	enemy.global_position = marker.global_position
+	var radius: float = marker.wake_radius if marker.wake_radius > 0.0 else wake_radius
 	_own(enemy)
+	# Ground enemies have their own dormant state; only flyers are put to sleep here.
+	if _zone_for(entry) == SpawnMarker.Zone.AIR:
+		enemy.ready.connect(_on_flyer_ready.bind(enemy, radius), CONNECT_ONE_SHOT)
 	EventBus.enemy_summoned.emit(enemy)
+
+
+func _on_flyer_ready(enemy: Enemy, radius: float) -> void:
+	_sleepers[enemy] = radius
+	_sleep(enemy)
+
+
+## One marker per enemy, picked without replacement within the zone. When a zone runs out it
+## starts over (markers get shared); a zone the layout lacks borrows from every marker.
+func _take_marker(zone: SpawnMarker.Zone, markers: Array[SpawnMarker],
+		free: Dictionary[SpawnMarker.Zone, Array]) -> SpawnMarker:
+	var bag: Array = free.get(zone, [])
+	if bag.is_empty():
+		for marker: SpawnMarker in markers:
+			if marker.zone == zone:
+				bag.append(marker)
+		if bag.is_empty():
+			bag = markers.duplicate()
+		bag.shuffle()
+		free[zone] = bag
+	return bag.pop_back()
 
 
 ## Ground enemies use island spawn zones; everything else flies.
@@ -101,27 +110,56 @@ func _zone_for(entry: EnemyEntry) -> SpawnMarker.Zone:
 	return SpawnMarker.Zone.AIR
 
 
-## A random marker of the zone, away from the player when possible. Falls back to any marker
-## if the layout has none of that zone.
-func _pick_marker(zone: SpawnMarker.Zone) -> SpawnMarker:
-	var of_zone: Array[SpawnMarker] = []
-	for marker: SpawnMarker in _markers:
-		if marker.zone == zone:
-			of_zone.append(marker)
-	if of_zone.is_empty():
-		of_zone = _markers.duplicate()
-	var player_pos: Vector2 = PlayerManager.player.global_position if PlayerManager.player else Vector2.INF
-	var far: Array[SpawnMarker] = []
-	for marker: SpawnMarker in of_zone:
-		if marker.global_position.distance_to(player_pos) >= min_player_distance:
-			far.append(marker)
-	var choices: Array[SpawnMarker] = far if not far.is_empty() else of_zone
-	return choices[rng.randi_range(0, choices.size() - 1)]
-
-
 func _own(enemy: Enemy) -> void:
 	_alive.append(enemy)
 	_owned_ids[enemy.get_instance_id()] = true
+
+
+# --- Sleeping ---
+
+## Stops everything the enemy does (AI, timers, movement, animation) but keeps its collision
+## active, so it can be shot while it waits.
+func _sleep(enemy: Enemy) -> void:
+	var modes: Dictionary = {}
+	for node: Node in _collision_objects(enemy):
+		var body: CollisionObject2D = node as CollisionObject2D
+		modes[body] = body.disable_mode
+		body.disable_mode = CollisionObject2D.DISABLE_MODE_KEEP_ACTIVE
+	_kept_active[enemy] = modes
+	enemy.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _wake(enemy: Enemy) -> void:
+	_sleepers.erase(enemy)
+	if not is_instance_valid(enemy):
+		return
+	enemy.process_mode = Node.PROCESS_MODE_INHERIT
+	var modes: Dictionary = _kept_active.get(enemy, {})
+	for body: Variant in modes:
+		if is_instance_valid(body):
+			(body as CollisionObject2D).disable_mode = modes[body]
+	_kept_active.erase(enemy)
+
+
+func _wake_near_player() -> void:
+	if _sleepers.is_empty() or PlayerManager.player == null:
+		return
+	var player_pos: Vector2 = PlayerManager.player.global_position
+	for enemy: Enemy in _sleepers.keys():
+		if not is_instance_valid(enemy) or enemy.is_dead:
+			_sleepers.erase(enemy)
+			continue
+		if enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
+			_wake(enemy)
+
+
+func _collision_objects(root: Node) -> Array[Node]:
+	var found: Array[Node] = []
+	if root is CollisionObject2D:
+		found.append(root)
+	for child: Node in root.get_children():
+		found.append_array(_collision_objects(child))
+	return found
 
 
 ## A splitter this director owns split: its children have to die too.
@@ -130,3 +168,9 @@ func _on_event_bus_enemy_summoned(enemy: Enemy) -> void:
 		return
 	if enemy.has_meta(EnemySplit.SPLIT_FROM_META) and _owned_ids.has(enemy.get_meta(EnemySplit.SPLIT_FROM_META)):
 		_own(enemy)
+
+
+## Getting hit wakes a sleeper.
+func _on_event_bus_enemy_damaged(enemy: Enemy, _amount: int) -> void:
+	if _sleepers.has(enemy):
+		_wake(enemy)
