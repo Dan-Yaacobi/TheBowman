@@ -1,16 +1,16 @@
 class_name EncounterDirector extends Node
 ## Runs one combat rift's fight. Before the player arrives it rolls an encounter set and puts
-## one enemy on each spawn marker (ground enemies on GROUND markers, flyers on AIR). Each enemy
-## sleeps on its spot until the player comes within its wake radius or damages it.
+## one enemy on each spawn marker (ground enemies on GROUND markers, flyers on AIR).
+## Flyers sleep on their spot until the player comes within their wake radius or damages them.
+## Ground enemies (golems, rooted enemies) land on the island below and use their own dormant
+## state, so they keep riding moving islands and keep their own wake / re-sleep rules.
 ## encounter_cleared fires once every placed enemy (and anything split from one) is dead.
 
 signal encounter_cleared
 
 @export var pool: EncounterPool
-## An enemy wakes when the player gets this close. A marker's own wake_radius overrides it.
+## A flyer wakes when the player gets this close. A marker's own wake_radius overrides it.
 @export var wake_radius: float = 120.0
-## Ground enemies fall asleep once they land, or after this long at the latest.
-@export var max_settle_time: float = 1.0
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var encounter: EncounterSet = null
@@ -20,8 +20,6 @@ var _alive: Array[Enemy] = []
 var _owned_ids: Dictionary[int, bool] = {}
 ## Sleeping enemy -> its wake radius.
 var _sleepers: Dictionary[Enemy, float] = {}
-## Ground enemies still landing -> seconds left before they're put to sleep anyway.
-var _settling: Dictionary[Enemy, float] = {}
 ## Collision objects of sleeping enemies -> their disable mode before sleeping.
 var _kept_active: Dictionary[Enemy, Dictionary] = {}
 var _running: bool = false
@@ -53,10 +51,9 @@ func is_cleared() -> bool:
 	return not _running
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not _running:
 		return
-	_update_settling(delta)
 	_wake_near_player()
 	if get_alive_count() == 0:
 		_running = false
@@ -79,32 +76,15 @@ func _place(entry: EnemyEntry, marker: SpawnMarker) -> void:
 	enemy.global_position = marker.global_position
 	var radius: float = marker.wake_radius if marker.wake_radius > 0.0 else wake_radius
 	_own(enemy)
-	enemy.ready.connect(_on_enemy_ready.bind(enemy, radius, marker.zone), CONNECT_ONE_SHOT)
+	# Ground enemies have their own dormant state; only flyers are put to sleep here.
+	if _zone_for(entry) == SpawnMarker.Zone.AIR:
+		enemy.ready.connect(_on_flyer_ready.bind(enemy, radius), CONNECT_ONE_SHOT)
 	EventBus.enemy_summoned.emit(enemy)
 
 
-func _on_enemy_ready(enemy: Enemy, radius: float, zone: SpawnMarker.Zone) -> void:
-	if zone == SpawnMarker.Zone.GROUND:
-		# Let it land on its island first; it sleeps once grounded.
-		_settling[enemy] = max_settle_time
-		_sleepers[enemy] = radius
-	else:
-		_sleepers[enemy] = radius
-		_sleep(enemy)
-
-
-func _update_settling(delta: float) -> void:
-	for enemy: Enemy in _settling.keys():
-		if not is_instance_valid(enemy) or enemy.is_dead:
-			_settling.erase(enemy)
-			continue
-		_settling[enemy] -= delta
-		var body: CharacterBody2D = enemy as CharacterBody2D
-		var landed: bool = body == null or body.is_on_floor()
-		if landed or _settling[enemy] <= 0.0:
-			_settling.erase(enemy)
-			if _sleepers.has(enemy):
-				_sleep(enemy)
+func _on_flyer_ready(enemy: Enemy, radius: float) -> void:
+	_sleepers[enemy] = radius
+	_sleep(enemy)
 
 
 ## One marker per enemy, picked without replacement within the zone. When a zone runs out it
@@ -151,7 +131,6 @@ func _sleep(enemy: Enemy) -> void:
 
 func _wake(enemy: Enemy) -> void:
 	_sleepers.erase(enemy)
-	_settling.erase(enemy)
 	if not is_instance_valid(enemy):
 		return
 	enemy.process_mode = Node.PROCESS_MODE_INHERIT
@@ -169,8 +148,6 @@ func _wake_near_player() -> void:
 	for enemy: Enemy in _sleepers.keys():
 		if not is_instance_valid(enemy) or enemy.is_dead:
 			_sleepers.erase(enemy)
-			continue
-		if _settling.has(enemy):
 			continue
 		if enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
 			_wake(enemy)
