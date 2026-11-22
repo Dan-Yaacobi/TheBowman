@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EncounterSet" format=3]
+
+[ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_set.gd" id="1_set"]
+[ext_resource type="Script" path="res://Level/Events/ChallengeStone/challenge_wave.gd" id="2_wave"]
+[ext_resource type="Script" path="res://Rifts/RiftEnemySpawner/EnemyEntry/enemy_entry.gd" id="3_entry"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/red_apple_entry.tres" id="4_red"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/green_apple_entry.tres" id="5_green"]
+[ext_resource type="Resource" path="res://Rifts/RiftEnemySpawner/EnemyEntry/rock_golem_entry.tres" id="6_golem"]
+
+[sub_resource type="Resource" id="Resource_wave1"]
+script = ExtResource("2_wave")
+enemies = Dictionary[ExtResource("3_entry"), int]({
+ExtResource("4_red"): 2
+})
+
+[sub_resource type="Resource" id="Resource_wave2"]
+script = ExtResource("2_wave")
+enemies = Dictionary[ExtResource("3_entry"), int]({
+ExtResource("5_green"): 1,
+ExtResource("6_golem"): 1
+})
+
+[resource]
+script = ExtResource("1_set")
+display_name = "Apples and a golem (test)"
+biomes = 1
+waves = Array[ExtResource("2_wave")]([SubResource("Resource_wave1"), SubResource("Resource_wave2")])

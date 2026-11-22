@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EncounterPool" format=3]
+
+[ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_pool.gd" id="1_pool"]
+[ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_set.gd" id="2_set"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Encounters/Resource/dirt_apples_and_golem.tres" id="3_dirt"]
+
+[resource]
+script = ExtResource("1_pool")
+sets = Array[ExtResource("2_set")]([ExtResource("3_dirt")])

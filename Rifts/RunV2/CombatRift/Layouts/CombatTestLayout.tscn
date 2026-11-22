@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/CombatRift/CombatRiftBase.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="2_island"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="3_marker"]
+[ext_resource type="PackedScene" path="res://Objects/Scenes/Chest.tscn" id="4_chest"]
+[ext_resource type="PackedScene" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="5_pedestal"]
+
+[node name="CombatTestLayout" instance=ExtResource("1_base")]
+
+[node name="PlayerSpawn" parent="."]
+position = Vector2(0, 102)
+
+[node name="ExitPortal" parent="."]
+position = Vector2(300, 114)
+
+[node name="Entry" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(0, 140)
+start_island = true
+
+[node name="Step" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(55, 165)
+
+[node name="HomeLeft" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(115, 165)
+
+[node name="HomeRight" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(158, 165)
+
+[node name="Perch" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(136, 112)
+
+[node name="Far" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(225, 155)
+
+[node name="Exit" parent="Islands" instance=ExtResource("2_island")]
+position = Vector2(300, 140)
+
+[node name="Chest" parent="Islands/Far" instance=ExtResource("4_chest")]
+position = Vector2(-1, -10)
+
+[node name="ScrollPedestal" parent="Islands/Exit" instance=ExtResource("5_pedestal")]
+position = Vector2(-14, -17)
+
+[node name="GroundHomeLeft" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(115, 150)
+
+[node name="GroundHomeRight" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(158, 150)
+
+[node name="GroundFar" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(225, 140)
+
+[node name="AirLeft" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(60, 70)
+zone = 1
+
+[node name="AirMid" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(180, 60)
+zone = 1
+
+[node name="AirRight" parent="SpawnMarkers" instance=ExtResource("3_marker")]
+position = Vector2(270, 80)
+zone = 1

@@ -21,6 +21,7 @@ var _is_transitioning: bool = false
 var _route: RunRoute = null
 ## The run as saved at the last crossroads (SaveService section "run"). Empty = no saved run.
 var _run_save: Dictionary = {}
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
@@ -202,10 +203,11 @@ func _go_to_crossroads(resumed: Dictionary = {}) -> void:
 func _on_node_portal_entered(node: RunNodeData) -> void:
 	if _is_transitioning or _route == null or node == null:
 		return
-	if node.scene == null:
-		push_error("Run node '%s' has no scene" % node.display_name)
+	var scene: PackedScene = node.pick_scene(_rng)
+	if scene == null:
+		push_error("Run node '%s' has no scene or layouts" % node.display_name)
 		return
-	var world: GameWorld = node.scene.instantiate() as GameWorld
+	var world: GameWorld = scene.instantiate() as GameWorld
 	if world == null:
 		push_error("Run node '%s' scene root is not a GameWorld" % node.display_name)
 		return

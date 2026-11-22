@@ -1,62 +1,55 @@
-class_name NodePortal extends Portal
-## A crossroads portal: leads into the node it carries. Telegraphs danger through size and
-## particle density (never color alone) and its reward type through an icon above it.
+class_name NodePortal extends EventPortal
+## A crossroads portal: leads into the node it carries. Uses the event portal sprite, tinted
+## per node type. Danger also shows through size (never color alone), the reward type through
+## an icon/name above it.
 
 ## Portal size added per danger level.
 @export var size_per_danger: float = 0.15
-## Particle amount and speed added per danger level.
-@export var particles_per_danger: float = 0.5
-## World pixels above the portal's base where the icon and name sit.
-@export var telegraph_height: float = 44.0
+## World pixels above the portal's center where the icon and name sit.
+@export var telegraph_height: float = 30.0
 
 var node_data: RunNodeData
 
 
 func setup(_node_data: RunNodeData) -> void:
 	node_data = _node_data
-	if node_data:
-		color = node_data.portal_color
 
 
 func _ready() -> void:
 	super._ready()
 	if node_data == null:
 		return
+	animated_sprite_2d.self_modulate = node_data.portal_color
 	scale *= 1.0 + size_per_danger * node_data.danger
-	_scale_particles(1.0 + particles_per_danger * node_data.danger)
 	_add_telegraph()
 
 
-func enter() -> void:
+func teleport_player() -> void:
 	if node_data == null:
 		return
-	if not _has_bow_and_quiver():
-		CombatTextSpawner.spawn(global_position, _missing_gear_message(), Color.WHITE)
+	var missing: String = _missing_gear_message()
+	if missing != "":
+		CombatTextSpawner.spawn(global_position, missing, Color.WHITE)
 		return
 	EventBus.portal_entered_sound.emit()
 	EventBus.node_portal_entered.emit(node_data)
 
 
-func _leads_into_rift() -> bool:
-	return node_data != null
-
-
-## Crossroads portals look like the biome they're in.
-func _pick_look() -> PortalLook:
+## Empty when the player can enter (bow and quiver equipped).
+func _missing_gear_message() -> String:
 	if PlayerManager.player == null:
-		return null
-	return _biome_look(CustomVariables.biome_index(PlayerManager.player.stats.rift_level))
+		return ""
+	var stats: PlayerStats = PlayerManager.player.stats
+	if stats.bow == null and stats.arrow == null:
+		return "Equip a bow and quiver first"
+	if stats.bow == null:
+		return "Equip a bow first"
+	if stats.arrow == null:
+		return "Equip a quiver first"
+	return ""
 
 
-func _scale_particles(factor: float) -> void:
-	for child: Node in sprite.get_children():
-		var particles: CPUParticles2D = child as CPUParticles2D
-		if particles:
-			particles.amount = maxi(roundi(particles.amount * factor), 1)
-			particles.speed_scale *= factor
-
-
-## Icon + name, kept at world scale (the portal root is scaled way down).
+## Icon + name, kept at world scale.
 func _add_telegraph() -> void:
 	var holder: Node2D = Node2D.new()
 	holder.scale = Vector2.ONE / scale

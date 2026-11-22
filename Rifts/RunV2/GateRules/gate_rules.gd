@@ -62,7 +62,7 @@ func roll_gate(route: RunRoute, pool: Array[RunNodeData], rng: RandomNumberGener
 func _group_by_type(pool: Array[RunNodeData], biome: int) -> Dictionary[RunNodeData.Type, Array]:
 	var by_type: Dictionary[RunNodeData.Type, Array] = {}
 	for node: RunNodeData in pool:
-		if node == null or node.scene == null or not node.appears_in(biome):
+		if node == null or not node.has_scene() or not node.appears_in(biome):
 			continue
 		if not by_type.has(node.type):
 			by_type[node.type] = []
