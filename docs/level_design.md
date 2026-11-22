@@ -27,24 +27,31 @@ what i want to test the player?
  -  repositioning during combat carefully
  - percision in movement
  - understanding puzzles maybe?
- 
+
 Ideas:
-    - moving islands between spots / elevator
-        - we can have an entire combat scene that is one island moving while enemies spawn at you!
+- moving islands between spots / elevator
+    - we can have an entire combat scene that is one island moving while enemies spawn at you!
 
-    - crumbling islands
-        - we could have a chase where some islands will crumble and some are safe spots
-    - bouncing objects
-    - tilting plaforms
-    - rotating platforms
-    - sliding platforms
-    - sinking platforms
-    - hidden platforms
-    - switch controlled platforms
+- crumbling islands
+    - we could have a chase where some islands will crumble and some are safe spots
+- bouncing objects
+- tilting plaforms
+- rotating platforms
+- sliding platforms
+- sinking platforms
+- hidden platforms
+- switch controlled platforms
 
-    - disappearing platforms (periodicly)
-    - something to hit with a difficulty perfect shot 
-    - a place that is difficult to reach and can only be activated with your sword hit
-    - pushing an enemy unto something to continue (maybe an enemy which cannot actually be killed - giving puzzly theme as well)
-    - 
+- disappearing platforms (periodicly)
+- something to hit with a difficulty perfect shot 
+- a place that is difficult to reach and can only be activated with your sword hit
+- pushing an enemy unto something to continue (maybe an enemy which cannot actually be killed - giving puzzly theme as well)
+ - golem gauntlent 
+ - 
     
+
+
+extra things i need:
+- a stationary shooter for earth biome
+- lore pieces appear randomaly via combat portals (sometimes there's an extra portal inside leading up to the artifacts.)
+- show in advanced the next power 5th upgrade you can get.
