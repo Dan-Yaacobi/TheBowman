@@ -5,14 +5,14 @@
 [ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="3_marker"]
 [ext_resource type="PackedScene" path="res://Objects/Scenes/Chest.tscn" id="4_chest"]
 [ext_resource type="PackedScene" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="5_pedestal"]
+[ext_resource type="PackedScene" path="res://Objects/Portal/Portal.tscn" id="6_exit_portal"]
 
-[node name="CombatTestLayout" instance=ExtResource("1_base")]
+[node name="CombatTestLayout" node_paths=PackedStringArray("exit_portal") instance=ExtResource("1_base")]
+exit_portal = NodePath("Islands/Exit/ExitPortal")
 
 [node name="PlayerSpawn" parent="."]
 position = Vector2(0, 102)
 
-[node name="ExitPortal" parent="."]
-position = Vector2(300, 114)
 
 [node name="Entry" parent="Islands" instance=ExtResource("2_island")]
 position = Vector2(0, 140)
@@ -62,3 +62,9 @@ zone = 1
 [node name="AirRight" parent="SpawnMarkers" instance=ExtResource("3_marker")]
 position = Vector2(270, 80)
 zone = 1
+
+[node name="ExitPortal" parent="Islands/Exit" instance=ExtResource("6_exit_portal")]
+z_index = 0
+position = Vector2(0, -26)
+destination = 3
+is_rift_portal = true
