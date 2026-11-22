@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Rifts/RunV2/CombatRift/combat_rift.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://General Nodes/PlayerSpawn.tscn" id="2_spawn"]
+[ext_resource type="PackedScene" path="res://Level/Islands/Island.tscn" id="3_island"]
+[ext_resource type="PackedScene" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="4_death"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/dirt_sky.tres" id="5_dirt"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/snow_sky.tres" id="6_snow"]
+[ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/hell_sky.tres" id="7_hell"]
+[ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="8_skyscript"]
+[ext_resource type="PackedScene" path="res://Objects/Portal/Portal.tscn" id="9_portal"]
+[ext_resource type="PackedScene" path="res://Items/LootManager/LootManager.tscn" id="10_loot"]
+
+[node name="CombatPlaceholder" type="Node2D"]
+script = ExtResource("1_script")
+sky_colors = Array[ExtResource("8_skyscript")]([ExtResource("5_dirt"), ExtResource("6_snow"), ExtResource("7_hell")])
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("2_spawn")]
+position = Vector2(0, 122)
+
+[node name="LootManager" parent="." instance=ExtResource("10_loot")]
+
+[node name="FallingDeath" parent="." instance=ExtResource("4_death")]
+position = Vector2(120, 560)
+
+[node name="Islands" type="Node2D" parent="."]
+
+[node name="Island1" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(0, 160)
+start_island = true
+
+[node name="Island2" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(60, 170)
+
+[node name="Island3" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(120, 150)
+
+[node name="Island4" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(180, 160)
+
+[node name="Island5" parent="Islands" instance=ExtResource("3_island")]
+position = Vector2(240, 150)
+
+[node name="ExitPortal" parent="." instance=ExtResource("9_portal")]
+z_index = 0
+position = Vector2(240, 124)
+destination = 3
+is_rift_portal = true

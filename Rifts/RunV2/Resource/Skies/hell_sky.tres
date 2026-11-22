@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkyColors" format=3]
+
+[ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="1_sky"]
+
+[resource]
+script = ExtResource("1_sky")
+top_color = Color(0.16, 0.04, 0.06, 1)
+bottom_color = Color(0.72, 0.26, 0.1, 1)
+show_clouds = false

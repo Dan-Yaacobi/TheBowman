@@ -63,6 +63,8 @@ signal add_arrow_effect(_effect: Effect)
 
 #signals that you went to the next rift level
 signal entered_rift_portal
+## Run Structure v2: a crossroads portal was entered.
+signal node_portal_entered(node: RunNodeData)
 
 signal try_drop(position: Vector2, _chance: float, forced_rarity: int)
 signal drop_item(item: CustomVariables.items, position: Vector2, _chance: float, _amount: int)

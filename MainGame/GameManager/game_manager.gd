@@ -3,6 +3,13 @@ class_name GameManager extends Node2D
 ## Boss arena entered after the last rift of each biome.
 @export var biome_bosses: Dictionary[Rift.Type, PackedScene] = {}
 
+@export_group("Run Structure v2")
+## The hub portal starts a crossroads run instead of a procedural rift.
+@export var use_run_v2: bool = true
+@export var nodes_per_act: int = 5
+
+const CROSSROADS_SCENE_PATH: String = "res://Rifts/RunV2/Crossroads/Crossroads.tscn"
+
 var curr_world: GameWorld
 var prev_world: GameWorld
 
@@ -10,6 +17,8 @@ var game: Game
 var hud: HUD
 
 var _is_transitioning: bool = false
+## The current v2 run; null outside one (hub, tutorial, procedural rifts).
+var _route: RunRoute = null
 
 
 func _ready() -> void:
@@ -19,8 +28,12 @@ func _ready() -> void:
 	EventBus.event_exit_requested.connect(_on_event_exit_requested)
 	EventBus.relocate_player.connect(_place_player_and_resume)
 	EventBus.boss_portal_entered.connect(func() -> void: change_to_scene(_draw_boss()))
+	EventBus.node_portal_entered.connect(_on_node_portal_entered)
 	
 func _on_portal_entered() -> void:
+	if _route != null:
+		_on_route_exit_portal_entered()
+		return
 	var rift_level: int = PlayerManager.player.stats.rift_level
 	if rift_level % CustomVariables.RIFTS_PER_TYPE == 0 and not curr_world is BossArena:
 		change_to_scene(_draw_boss())
@@ -31,7 +44,9 @@ func _on_portal_entered() -> void:
 func _draw_boss() -> PackedScene:
 	var biome: Rift.Type = Rift.Type.DIRT
 	var rift: Rift = curr_world as Rift
-	if rift:
+	if _route != null:
+		biome = _route.get_biome()
+	elif rift:
 		biome = rift.get_rift_type()
 	if not biome_bosses.has(biome):
 		push_error("No boss assigned for biome %s" % Rift.Type.keys()[biome])
@@ -80,6 +95,9 @@ func _place_player_and_resume(_pos: Vector2) -> void:
 func change_game_world(_new: GameWorlds.worlds) -> void:
 	if _is_transitioning:
 		return
+	if use_run_v2 and _new == GameWorlds.worlds.Rift_1 and curr_world is MainMenu:
+		_start_route()
+		return
 	var next_world: GameWorld = GameWorlds.get_world(_new)
 	if next_world == null:
 		return
@@ -100,6 +118,7 @@ func _transition_to(next_world: GameWorld) -> void:
 
 	if next_world is MainMenu:
 		PlayerManager.player.stats.rift_level = 0
+		_route = null
 
 	prev_world = curr_world
 	curr_world = next_world
@@ -142,3 +161,51 @@ func _on_event_exit_requested() -> void:
 	await _place_player_and_resume(return_position)
 	_is_transitioning = false
 	EventBus.event_exited.emit()
+
+
+# --- Run Structure v2 ---
+
+func _start_route() -> void:
+	_route = RunRoute.new(nodes_per_act)
+	_go_to_crossroads()
+
+func _go_to_crossroads() -> void:
+	if _is_transitioning:
+		return
+	var scene: PackedScene = load(CROSSROADS_SCENE_PATH)
+	var crossroads: Crossroads = scene.instantiate() as Crossroads if scene else null
+	if crossroads == null:
+		push_error("Crossroads scene missing or not a Crossroads: %s" % CROSSROADS_SCENE_PATH)
+		return
+	# Set before the world is built: islands and portals read their biome from it.
+	PlayerManager.player.stats.rift_level = _route.get_equivalent_rift_level()
+	crossroads.set_route(_route)
+	await _transition_to(crossroads)
+
+func _on_node_portal_entered(node: RunNodeData) -> void:
+	if _is_transitioning or _route == null or node == null:
+		return
+	if node.scene == null:
+		push_error("Run node '%s' has no scene" % node.display_name)
+		return
+	_route.enter_node(node)
+	PlayerManager.player.stats.rift_level = _route.get_equivalent_rift_level()
+	change_to_scene(node.scene)
+
+## A node's or a boss arena's exit portal (both are rift portals).
+func _on_route_exit_portal_entered() -> void:
+	if _is_transitioning:
+		return
+	if curr_world is BossArena:
+		_route.finish_act()
+		if _route.is_run_finished():
+			# The hell boss exit leads to the Tower once it exists; back to the hub until then.
+			change_game_world(GameWorlds.worlds.Main_Menu)
+			return
+		_go_to_crossroads()
+		return
+	_route.complete_node()
+	if _route.is_act_finished():
+		change_to_scene(_draw_boss())
+	else:
+		_go_to_crossroads()
