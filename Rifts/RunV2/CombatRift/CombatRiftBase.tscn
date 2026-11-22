@@ -7,7 +7,6 @@
 [ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/snow_sky.tres" id="6_snow"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/hell_sky.tres" id="7_hell"]
 [ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="8_skyscript"]
-[ext_resource type="PackedScene" path="res://Objects/Portal/Portal.tscn" id="9_portal"]
 [ext_resource type="PackedScene" path="res://Items/LootManager/LootManager.tscn" id="10_loot"]
 [ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_director.gd" id="11_director"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/Encounters/Resource/encounter_pool.tres" id="12_pool"]
@@ -31,9 +30,3 @@ position = Vector2(0, 560)
 [node name="Islands" type="Node2D" parent="."]
 
 [node name="SpawnMarkers" type="Node2D" parent="."]
-
-[node name="ExitPortal" parent="." instance=ExtResource("9_portal")]
-z_index = 0
-position = Vector2(120, 124)
-destination = 3
-is_rift_portal = true
