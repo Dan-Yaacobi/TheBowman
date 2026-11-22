@@ -52,7 +52,7 @@ position = Vector2(158, 150)
 position = Vector2(225, 140)
 
 [node name="AirLeft" parent="SpawnMarkers" instance=ExtResource("3_marker")]
-position = Vector2(60, 70)
+position = Vector2(120, 45)
 zone = 1
 
 [node name="AirMid" parent="SpawnMarkers" instance=ExtResource("3_marker")]
