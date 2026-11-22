@@ -72,10 +72,62 @@ Movement is a first-class system, not travel between fights.
 Read threats → reposition → draw → release at the right moment. When something gets too close: sword swing for knockback → back to drawing. Dash to escape or reposition. Constantly aware of the edge.
 
 ### Run (one attempt)
-Start in the hub → enter a rift → traverse islands, fight, find chests and an event portal → reach the exit portal → next rift.
-- **3 biomes** (dirt, snow, hell), **3 rifts each**, a wizard boss at the end of each biome (Earth, Frost, Fire).
-- After the hell boss: **the Tower**, a hand-built climb (not a biome) up to the final wizard's room.
+Start in the hub → **crossroads** → walk into one of its portals → play that **node** → its exit leads to the next crossroads → … → the biome's wizard boss.
+- Slay the Spire's map logic, built out of portals. No full map: choices are tactical, one crossroads at a time (like Hades' doors).
+- **3 biomes = 3 acts** (dirt, snow, hell), roughly 5–6 nodes each **[OPEN: exact count]**, a wizard boss at the end of each act (Earth, Frost, Fire).
+- After the hell boss: **the Tower**, a hand-built climb (not a biome) up to the final wizard's room. **[OPEN]** whether it also uses crossroads.
 - **Killing the final wizard wins the run.** Winning is the finish line: win screen, credits, back to the hub. Nothing unlocks for now.
+
+Full design and reasoning: `docs/Run Structure v2 — Crossroads & Portal Rifts.md`. Summary of the rules below.
+
+#### Player agency over difficulty
+The player chooses how hard their run is through the world, not through menus or settings.
+1. Every portal's danger and reward type is readable before entering.
+2. Difficulty only rises when the player deliberately picks something.
+3. Reward scales with risk, and the scale is readable.
+4. The safe route exists and is viable: lean, not a trap.
+5. Harder means more fighting or more fall risk, not stat modifiers.
+6. You choose by walking into a portal. No menus.
+7. The biome boss doesn't change. Agency is about *when* you pay.
+
+#### The crossroads
+- A small, calm island holding 2–3 portals, rolled from a pool under pacing rules. Not the same room every time.
+- **Save point:** the run is saved on entering a crossroads. Quitting the game and loading resumes at the last crossroads visited.
+- Fiction: the wizard's fracture spreads like cracks in glass; portals cluster where cracks meet. The world spirit stabilizes each convergence with an anchor stone (a piece of itself), which is why it's safe and why the spirit can comment there.
+- Crossroads decay as the act goes on (broken islands, cracking sky, a straining anchor). The wizard's tower in the background grows closer each crossroads, showing the distance to the boss.
+
+#### Node types
+| Portal | What it is |
+|---|---|
+| **Combat** | Small hand-made rift layout (a few islands, loops not corridors). An encounter set rolled from a pool spawns in waves from placed spawn markers. The exit stays locked until the fight is cleared. A chest at the end is the main payout. |
+| **Elite** | Small arena, almost no exploration. A mini-boss / elite fight; the exit stays locked until it dies. Reward: pick one of two pedestals, **new gear** (higher rarity) or an **enchant orb** (adds one modifier to an equipped item). |
+| **Event** | Hand-made events (challenge shrines, Golden Apple, …) with their own existing rules. |
+| **Rest** | Cleric (heal), rogue wizard (upgrade one item), or pirate (gamble for an item; the player picks bow, quiver or ring, once). |
+
+- **Encounters:** hand-picked enemy sets (e.g. red apples only; green + pink apples) rolled from early and late pools per biome. Variety = encounter set × island layout. Gap width and island size are the difficulty dial.
+- **Scrolls** drop at the end of every combat and elite node. [DRAFT, may change after testing]
+- **Enchants** are capped (1–2 extra modifiers per item) and lost when the item is swapped.
+
+#### Pacing and gate rules
+- A gate has 2 or 3 portals. Sometimes all are the same type, including **forced combat gates**: the game is about combat.
+- Event and rest nodes can't chain forever; each act guarantees enough combat.
+- Candidates (to tune): the first crossroads of the first biome is calm; a rest portal appears before the boss; at most one elite per gate; an occasional hidden "?" portal.
+- **Telegraphing:** danger = portal color + particle intensity/size (never color alone). Reward type = icon above the portal.
+
+#### The rift meter
+- **Rises** when picking dangerous portals, **lowers** at rest portals.
+- Raises enemy pressure in combat nodes **and** improves their rewards, so a high meter is a choice, not just punishment.
+- **Resets per biome** when the wizard dies.
+- Shown in the world first (crossroads decay, sky cracks), HUD pips as backup. Every level must be noticeable.
+
+#### Lookahead
+- Always shown: how many nodes remain before the boss (tower in the parallax, plus a pause-menu backup).
+- Learned: predictable gate rules let players plan their greed.
+- Unlockable: deeper lookahead (e.g. seeing the next crossroads' portals) **[OPEN]**.
+
+#### Healing and economy
+- Healing is scarce: cleric, every 3rd scroll (+1 heart container and heal), rare vampire builds. No potions.
+- Most reward value comes from the node type; loot inside combat nodes is a bonus. Never make full-clearing every corner mandatory.
 
 ### Meta (across runs)
 Resources collected during runs are kept, even on death → spent in the hub on buildings, stat upgrades and crafting → future runs start stronger and with more options.
@@ -83,7 +135,7 @@ Resources collected during runs are kept, even on death → spent in the hub on 
 
 ### Crafting
 Lets the player start a run with one chosen item, without replacing what the run finds.
-1. **Schematics drop in rifts.** Enemies and chests have a small chance (one global base value, optional per-enemy/per-chest override). They're picked up **unidentified** and kept even on death.
+1. **Schematics drop in rifts** (combat and elite nodes). Enemies and chests have a small chance (one global base value, optional per-enemy/per-chest override). They're picked up **unidentified** and kept even on death.
 2. **The spirit reveals them.** The spirit shows a "!" while schematics are waiting. Talking to it reveals each one into a permanently known recipe. Schematics only ever reveal recipes you don't know yet; once every recipe is known, they stop dropping.
 3. **The blacksmith crafts.** A hub building (forge station, no NPC). Its menu lists known recipes. Crafting is mouse-only (Design Rule 9).
 - **Cost:** 1 Skyshard + a slot material: bows → wood, quivers → gold, rings → essence. The amount differs slightly per item.
@@ -101,20 +153,23 @@ Hard constraints. Every new feature must respect these unless the rule itself is
 2. **Falling never ends a run by itself.** It costs a heart container. (Exception: challenge shrines, where a fall is an instant fail of *that challenge only*.)
 3. **Every gauge fills through combat interaction** (hits, kills, damage taken, debuffs applied), never through something the player can do alone.
 4. **Every item has an ability.** No stat-only items.
-5. **Enemies drop essence, not gear.** Equipment comes from chests, NPCs, events and bosses. (Schematics are not gear: they only become a recipe in the hub.)
-6. **One event per rift**, entered through a portal into its own contained scene.
+5. **Enemies drop essence, not gear.** Equipment comes from chests, NPCs, events, elites and bosses. (Schematics are not gear: they only become a recipe in the hub.)
+6. **Events are nodes.** An event is chosen at a crossroads like any other node and plays in its own contained scene. Nothing is optional-but-hidden inside combat nodes beyond small bonus loot.
 7. **No refunds, no loadouts.** Meta choices are permanent and always active. The game is about enjoying what you got, not min-maxing.
 8. **DoTs (bleed, burn, poison) share one model.** Same tick, damage and duration rules. They differ in flavour and source, not mechanics. Modifiers are unified ("increase DoT damage"), not per element.
 9. **Paying for something important is deliberate.** Hub purchases are mouse-click only; the interact key never spends.
+10. **Difficulty is chosen in the world.** Danger only rises when the player walks into a portal that visibly said so. No difficulty menus, no hidden scaling.
+11. **Combat node exits stay locked until the fight is cleared.** No dodge-loot-leave. (Elites: until the elite dies.)
 
 ---
 
 ## 5. Definition of Finished
 
-The goal is a game that is **finished enough**: a complete, winnable loop. Anything not on this list is post-finish. Equipment and meta progression are already complete: **no new items**.
+The goal is a game that is **finished enough**: a complete, winnable loop. Anything not on this list is post-finish. Equipment and meta progression are already complete: **no new items**. (The elite enchant orb is a modifier system on existing items, not new items.)
 
 **The game is finished when:**
-- **A full run is winnable.** 3 biomes × 3 rifts, a wizard boss per biome, then the Tower climb and the final wizard. Killing him triggers the win.
+- **A full run is winnable.** 3 acts of crossroads and nodes (combat, elite, event, rest), a wizard boss per biome, then the Tower climb and the final wizard. Killing him triggers the win.
+- **Run structure v2 works:** crossroads with rolled gates, readable portal telegraphs, combat nodes (enough hand-made layouts and encounter sets per biome), elite nodes with reward pedestals and enchant orbs, the rift meter, and crossroads save/resume.
 - **The Tower:** a hand-built ascending scene. A jumping challenge with hazards and traps rather than enemies, with a cleric offering healing and an extra heart for a price, ending in the final boss room. No extra reward. Full design **[OPEN]**.
 - **Final boss:** the final wizard (see `Content to build.txt`). Ending: right before he dies, he portals out.
 - **Full enemy roster per biome** (Section 9): every enemy designed, working and sprited.
@@ -130,7 +185,8 @@ The goal is a game that is **finished enough**: a complete, winnable loop. Anyth
 
 What the game currently fails at, so new work can aim at it.
 
-- **Rifts are mostly traversal.** Between fights there's little to do or decide.
+- **Rifts are mostly traversal.** Between fights there's little to do or decide. Run structure v2 (§3) is the answer: small fight-first nodes and decisions at every crossroads.
+- **Combat has to carry v2.** Most nodes are fights; the structure amplifies good combat but can't fix weak combat. Elites must feel different from combat, not just harder numbers.
 - **No in-run engine beyond items.** Runs don't build momentum the way a Dead Cells or StS run does. A choose-3 from chests, events and rift completion is planned, at a set pacing rather than after every fight.
 - **Fall danger depends heavily on traversal skill.** Weaker players fall constantly; a strong player almost never does. The edge threat needs to stay relevant for good players without crushing new ones.
 - **The game is hard to describe in one sentence.** See Pitch.
@@ -156,6 +212,7 @@ Every core mechanic has a fictional reason. New mechanics should fit this table 
 | Rings | Magical rings forged by the wizards, lost across the world. |
 | Elements | All elemental magic comes from wizards. |
 | Rifts and portals | The world has been divided by portals since the rupture. |
+| Crossroads | Where the wizard's cracks meet, portals cluster. The spirit anchors each one with a piece of itself, so it's safe. The rift meter is the world reacting to the player's greed. |
 | Enemies | Survivors (e.g. birds), mutated creatures (e.g. winged apples), and arrivals from other dimensions. Some are hostile, some helpful. |
 | Bosses | Wizards of the cult, one per element. |
 | Hub guide | The spirit of the world, released by the rupture. Wants the world repaired; doesn't know your past. |
@@ -240,7 +297,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - Equipment: slots, bows, quivers, rings, rarity, minor abilities, element identities
 - Enemies: ground vs. flying, elites
 - Bosses and arenas
-- World: rift generation, biomes, chunks, side paths
+- World: crossroads variants, combat node layouts, elite arenas (structure is in §3)
 - Events: framework, challenge shrine, others (Golden Apple is in section 8)
 - Hub and meta progression: buildings, guide NPC, upgrade altar tracks and milestones, quest board (crafting is covered under Core Loops → Crafting)
 - Economy: wood, essence, gold, Skyshard; sources and sinks
