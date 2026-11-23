@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="24_skycolors"]
 [ext_resource type="Script" uid="uid://dhpyh1v7lmoxw" path="res://General Nodes/DebugOnly/debug_only.gd" id="25_debugonly"]
 [ext_resource type="PackedScene" path="res://Level/Events/EnemyTest/EnemyTestEvent.tscn" id="26_enemytest"]
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/LayoutTest/LayoutTestPortal.tscn" id="27_layouttest"]
 
 [sub_resource type="Resource" id="Resource_hubsky"]
 script = ExtResource("24_skycolors")
@@ -167,3 +168,6 @@ modulate = Color(1, 0.55, 0.55, 1)
 position = Vector2(287, 91)
 event_scene = ExtResource("26_enemytest")
 one_shot = false
+
+[node name="LayoutTestPortal" parent="DebugOnly" instance=ExtResource("27_layouttest")]
+position = Vector2(340, 58)
