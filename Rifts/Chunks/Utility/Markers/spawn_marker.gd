@@ -10,7 +10,7 @@ class_name SpawnMarker extends Marker2D
 
 enum Zone { GROUND, AIR }
 
-const WAKE_COLOR: Color = Color(0.35, 0.75, 1.0, 0.8)
+const WAKE_COLOR: Color = Color(0.47, 0.47, 0.47, 0.8)
 const LINK_COLOR: Color = Color(1.0, 0.6, 0.2, 0.8)
 const CIRCLE_WIDTH: float = 1.0
 

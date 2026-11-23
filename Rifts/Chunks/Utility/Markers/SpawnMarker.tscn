@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://sjjba0xc1dtt"]
+[gd_scene format=3 uid="uid://sjjba0xc1dtt"]
 
 [ext_resource type="Script" uid="uid://bf3pp5cfghaxr" path="res://Rifts/Chunks/Utility/Markers/spawn_marker.gd" id="1_wellx"]
 
-[node name="SpawnMarker" type="Marker2D"]
+[node name="SpawnMarker" type="Marker2D" unique_id=313635067]
 script = ExtResource("1_wellx")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=499376938]
 offset_left = -10.000001
 offset_top = -12.000001
 offset_right = 399.0
