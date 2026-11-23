@@ -1,6 +1,9 @@
 class_name EncounterDirector extends Node
-## Runs one combat rift's fight. Before the player arrives it rolls an encounter set and puts
-## one enemy on each spawn marker (ground enemies on GROUND markers, flyers on AIR).
+## Runs one combat rift's fight. Before the player arrives it rolls an encounter set and places
+## it on the layout's spawn markers, one enemy per marker (ground enemies on GROUND markers,
+## flyers on AIR). Always-fill markers are filled first, from the set or with an extra enemy of
+## the set's types; the rest of the set goes on random other markers. So the fight is the set's
+## size, or the number of always-fill markers if that's more.
 ## Flyers sleep on their spot until the player comes within their wake radius or damages them.
 ## Ground enemies (golems, rooted enemies) land on the island below and use their own dormant
 ## state, so they keep riding moving islands and keep their own wake / re-sleep rules.
@@ -44,10 +47,21 @@ func populate(markers: Array[SpawnMarker], biome: int, late: bool,
 		push_warning("EncounterDirector: no encounter or no spawn markers; the rift counts as cleared")
 		return
 	_running = true
+	entries.shuffle()
+	var optional: Array[SpawnMarker] = []
+	for marker: SpawnMarker in markers:
+		if not marker.always_fill:
+			optional.append(marker)
+	for marker: SpawnMarker in markers:
+		if marker.always_fill:
+			var entry: EnemyEntry = _take_entry_for_zone(entries, marker.zone)
+			if entry == null:
+				entry = _extra_entry_for_zone(marker.zone)
+			if entry:
+				_place(entry, marker)
 	var free: Dictionary[SpawnMarker.Zone, Array] = {}
 	for entry: EnemyEntry in entries:
-		var marker: SpawnMarker = _take_marker(_zone_for(entry), markers, free)
-		_place(entry, marker)
+		_place(entry, _take_marker(_zone_for(entry), optional, markers, free))
 
 
 ## True once the fight is over (or there never was one).
@@ -91,17 +105,50 @@ func _on_flyer_ready(enemy: Enemy, radius: float) -> void:
 	_sleep(enemy)
 
 
-## One marker per enemy, picked without replacement within the zone. When a zone runs out it
-## starts over (markers get shared); a zone the layout lacks borrows from every marker.
-func _take_marker(zone: SpawnMarker.Zone, markers: Array[SpawnMarker],
+## Removes and returns the first entry of the zone from the list; null if there's none.
+func _take_entry_for_zone(entries: Array[EnemyEntry], zone: SpawnMarker.Zone) -> EnemyEntry:
+	for i: int in entries.size():
+		if _zone_for(entries[i]) == zone:
+			return entries.pop_at(i)
+	return null
+
+
+## An extra enemy for an always-fill marker once the set has none of its zone left: one of the
+## set's types of that zone (weighted by count), or of any zone if the set has none.
+func _extra_entry_for_zone(zone: SpawnMarker.Zone) -> EnemyEntry:
+	var options: Array[EnemyEntry] = []
+	var weights: PackedFloat32Array = PackedFloat32Array()
+	for pass_index: int in 2:
+		for entry: EnemyEntry in encounter.enemies:
+			if entry == null or encounter.enemies[entry] <= 0:
+				continue
+			if pass_index == 0 and _zone_for(entry) != zone:
+				continue
+			options.append(entry)
+			weights.append(float(encounter.enemies[entry]))
+		if not options.is_empty():
+			break
+	if options.is_empty():
+		return null
+	return options[rng.rand_weighted(weights)]
+
+
+## A marker for one of the set's remaining enemies: a free non-always-fill marker of its zone,
+## picked without replacement. When those run out they get reused; with none of the zone it
+## uses always-fill markers of the zone, and a zone the layout lacks borrows from every marker.
+func _take_marker(zone: SpawnMarker.Zone, optional: Array[SpawnMarker], all: Array[SpawnMarker],
 		free: Dictionary[SpawnMarker.Zone, Array]) -> SpawnMarker:
 	var bag: Array = free.get(zone, [])
 	if bag.is_empty():
-		for marker: SpawnMarker in markers:
+		for marker: SpawnMarker in optional:
 			if marker.zone == zone:
 				bag.append(marker)
 		if bag.is_empty():
-			bag = markers.duplicate()
+			for marker: SpawnMarker in all:
+				if marker.zone == zone:
+					bag.append(marker)
+		if bag.is_empty():
+			bag = all.duplicate()
 		bag.shuffle()
 		free[zone] = bag
 	return bag.pop_back()
