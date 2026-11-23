@@ -62,7 +62,7 @@ position = Vector2(714, 72)
 position = Vector2(790, 114)
 
 [node name="ScrollPedestal" parent="Islands/HomeRight" index="5" unique_id=1565658134 instance=ExtResource("5_pedestal")]
-position = Vector2(1, -11)
+position = Vector2(0, -17)
 
 [node name="Perch" parent="Islands" index="11" unique_id=1361650147 instance=ExtResource("2_island")]
 position = Vector2(652, 26)
@@ -74,14 +74,7 @@ position = Vector2(796, 14)
 position = Vector2(-5.9604645e-08, -9)
 equipment_drop_chance = 100.0
 
-[node name="Far2" parent="Islands" index="13" unique_id=1851672430 instance=ExtResource("2_island")]
-position = Vector2(311, 268)
-
-[node name="Chest" parent="Islands/Far2" index="5" unique_id=84532828 instance=ExtResource("4_chest")]
-position = Vector2(-5.9604645e-08, -9)
-equipment_drop_chance = 0.0
-
-[node name="Exit" parent="Islands" index="14" unique_id=1728348544 instance=ExtResource("2_island")]
+[node name="Exit" parent="Islands" index="13" unique_id=1728348544 instance=ExtResource("2_island")]
 position = Vector2(859, 83)
 
 [node name="ExitPortal" parent="Islands/Exit" index="5" unique_id=675100811 instance=ExtResource("6_exit_portal")]
@@ -97,17 +90,41 @@ position = Vector2(55, -147)
 position = Vector2(653, 7)
 
 [node name="AirLeft" parent="SpawnMarkers" index="1" unique_id=1541673261 instance=ExtResource("3_marker")]
-position = Vector2(123, -1)
+position = Vector2(112, -36)
 zone = 1
 
-[node name="AirLeft2" parent="SpawnMarkers" index="2" unique_id=1012326892 instance=ExtResource("3_marker")]
-position = Vector2(307, 46)
+[node name="AirLeft3" parent="SpawnMarkers" index="2" unique_id=1096285228 instance=ExtResource("3_marker")]
+position = Vector2(144, -28)
 zone = 1
 
-[node name="AirMid" parent="SpawnMarkers" index="3" unique_id=437354899 instance=ExtResource("3_marker")]
+[node name="AirLeft4" parent="SpawnMarkers" index="3" unique_id=15163688 instance=ExtResource("3_marker")]
+position = Vector2(325, 28)
+zone = 1
+
+[node name="AirLeft5" parent="SpawnMarkers" index="4" unique_id=430694488 instance=ExtResource("3_marker")]
+position = Vector2(299, -66)
+zone = 1
+
+[node name="AirLeft2" parent="SpawnMarkers" index="5" unique_id=1012326892 instance=ExtResource("3_marker")]
+position = Vector2(303, 38)
+zone = 1
+
+[node name="AirLeft6" parent="SpawnMarkers" index="6" unique_id=2034138994 instance=ExtResource("3_marker")]
+position = Vector2(198, 145)
+zone = 1
+
+[node name="AirMid" parent="SpawnMarkers" index="7" unique_id=437354899 instance=ExtResource("3_marker")]
 position = Vector2(419, -62)
 zone = 1
 
-[node name="AirRight" parent="SpawnMarkers" index="4" unique_id=721314088 instance=ExtResource("3_marker")]
-position = Vector2(568, -59)
+[node name="AirRight" parent="SpawnMarkers" index="8" unique_id=721314088 instance=ExtResource("3_marker")]
+position = Vector2(443, -64)
+zone = 1
+
+[node name="AirMid2" parent="SpawnMarkers" index="9" unique_id=316922934 instance=ExtResource("3_marker")]
+position = Vector2(569, -54)
+zone = 1
+
+[node name="AirRight2" parent="SpawnMarkers" index="10" unique_id=1245308600 instance=ExtResource("3_marker")]
+position = Vector2(593, -56)
 zone = 1
