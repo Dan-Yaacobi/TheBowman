@@ -120,6 +120,8 @@ signal active_ability_cleared
 signal reduce_active_ability_cooldown(_amount: float)
 
 signal rift_respawn_position(position: Vector2)
+## The player landed on this island: falls respawn on it, wherever it has moved to.
+signal rift_respawn_island(island: Island)
 signal respawn_player
 signal event_enter_requested(event_scene: PackedScene, return_position: Vector2)
 signal event_exit_requested()

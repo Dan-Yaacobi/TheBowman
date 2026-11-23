@@ -243,7 +243,7 @@ func _on_player_interact() -> void:
 	dip()
 	var world = PlayerManager.player.get_parent()
 	if world is GameWorld and world.has_respawns:
-		EventBus.rift_respawn_position.emit(get_respawn_position())
+		EventBus.rift_respawn_island.emit(self)
 		
 ## Sinks a little and springs back, e.g. when something lands on it. depth in pixels.
 ## Never rises above its resting height (no overshoot), so it can't push up into a body on it.
@@ -318,7 +318,8 @@ func reform(fade_time: float = 0.4) -> void:
 ## The player respawns on the last island they stood on; never leave that over a hole.
 func _move_respawn_off() -> void:
 	var world: GameWorld = PlayerManager.player.get_parent() as GameWorld if PlayerManager.player else null
-	if world == null or not world.respawn_position.is_equal_approx(get_respawn_position()):
+	if world == null or (world.get_respawn_island() != self \
+			and not world.respawn_position.is_equal_approx(get_respawn_position())):
 		return
 	var best: Island = null
 	var best_distance: float = INF
@@ -331,4 +332,4 @@ func _move_respawn_off() -> void:
 			best_distance = distance
 			best = other
 	if best:
-		EventBus.rift_respawn_position.emit(best.get_respawn_position())
+		EventBus.rift_respawn_island.emit(best)

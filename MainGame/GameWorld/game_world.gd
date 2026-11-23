@@ -5,7 +5,19 @@ class_name GameWorld extends Node2D
 var effects: Array[Node2D] = []
 var current_enemies: Array[Enemy] = []
 var has_respawns: bool = false
-var respawn_position: Vector2
+## Where a fall puts the player back. While they last landed on an island (still solid),
+## it's that island's respawn spot right now, so a moving island takes it along.
+## Setting a position directly forgets the island.
+var respawn_position: Vector2:
+	get:
+		if is_instance_valid(_respawn_island) and _respawn_island.is_solid():
+			return _respawn_island.get_respawn_position()
+		return _respawn_position
+	set(value):
+		_respawn_position = value
+		_respawn_island = null
+var _respawn_position: Vector2
+var _respawn_island: Island = null
 var current_event: Event = null
 var suspended_enemies: Array[Enemy] = []
 var _event_return_position: Vector2 = Vector2.ZERO
@@ -21,6 +33,7 @@ func set_world() -> void:
 	EventBus.equipment_dropped.connect(drop_equipment)
 	EventBus.world_ready.connect(_on_world_ready, CONNECT_ONE_SHOT)
 	EventBus.rift_respawn_position.connect(set_respawn_pos)
+	EventBus.rift_respawn_island.connect(set_respawn_island)
 	EventBus.respawn_player.connect(respawn)
 
 	extra_set_world_functions()
@@ -34,6 +47,7 @@ func exit_world() -> void:
 	EventBus.equipment_dropped.disconnect(drop_equipment)
 	EventBus.respawn_player.disconnect(respawn)
 	EventBus.rift_respawn_position.disconnect(set_respawn_pos)
+	EventBus.rift_respawn_island.disconnect(set_respawn_island)
 	
 	remove_effects()
 	_clear_event()
@@ -158,6 +172,14 @@ func _clear_event() -> void:
 
 func set_respawn_pos(_position: Vector2) -> void:
 	respawn_position = _position
+
+## Respawns follow this island while it stays solid.
+func set_respawn_island(island: Island) -> void:
+	_respawn_island = island
+	_respawn_position = island.get_respawn_position()
+
+func get_respawn_island() -> Island:
+	return _respawn_island if is_instance_valid(_respawn_island) else null
 	
 func respawn() -> void:
 	EventBus.relocate_player.emit(respawn_position)
