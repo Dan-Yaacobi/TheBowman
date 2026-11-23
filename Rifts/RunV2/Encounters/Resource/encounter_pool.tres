@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="EncounterPool" format=3]
+[gd_resource type="Resource" script_class="EncounterPool" format=3 uid="uid://i85u2a1g81uo"]
 
-[ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_pool.gd" id="1_pool"]
-[ext_resource type="Script" path="res://Rifts/RunV2/Encounters/encounter_set.gd" id="2_set"]
-[ext_resource type="Resource" path="res://Rifts/RunV2/Encounters/Resource/dirt_apples_and_golem.tres" id="3_dirt"]
+[ext_resource type="Script" uid="uid://ciqrttk6bqqwf" path="res://Rifts/RunV2/Encounters/encounter_pool.gd" id="1_pool"]
+[ext_resource type="Script" uid="uid://djdn5ixu2gavx" path="res://Rifts/RunV2/Encounters/encounter_set.gd" id="2_set"]
+[ext_resource type="Resource" uid="uid://dfw2quidbakvp" path="res://Rifts/RunV2/Encounters/Resource/dirt_apples_and_golem.tres" id="3_dirt"]
 
 [resource]
 script = ExtResource("1_pool")
