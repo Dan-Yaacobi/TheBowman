@@ -47,8 +47,8 @@ func drop_items() -> void:
 	var burst: EffectSprite = EffectSprite.attach(&"chest_open_burst", self)
 	if burst:
 		burst.z_index = -1
-	EventBus.drop_item.emit(CustomVariables.items.COIN, global_position, 100, avg_coin_drop)
-	EventBus.try_drop.emit(global_position, 100)
+	EventBus.drop_item.emit(item_drop, global_position, 100, avg_coin_drop)
+	EventBus.try_drop.emit(global_position, equipment_drop_chance)
 	Crafting.try_drop_schematic(global_position, schematic_chance_override)
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
