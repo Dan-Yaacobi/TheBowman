@@ -31,8 +31,12 @@ func _ready() -> void:
 
 
 ## Rolls the encounter and places it. Call before the player arrives.
-func populate(markers: Array[SpawnMarker], biome: int, late: bool) -> void:
-	encounter = pool.roll(biome, late, rng) if pool else null
+## forced skips the roll (layout test); empty places nothing.
+func populate(markers: Array[SpawnMarker], biome: int, late: bool,
+		forced: EncounterSet = null, empty: bool = false) -> void:
+	if empty:
+		return
+	encounter = forced if forced else (pool.roll(biome, late, rng) if pool else null)
 	var entries: Array[EnemyEntry] = []
 	if encounter:
 		entries = encounter.get_spawn_list()

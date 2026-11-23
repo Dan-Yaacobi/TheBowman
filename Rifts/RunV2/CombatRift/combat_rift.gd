@@ -14,9 +14,27 @@ signal rift_cleared
 
 var is_cleared: bool = false
 
+## Layout test (debug hub portal): no run state, free falls, a chosen or empty encounter.
+var _test_mode: bool = false
+var _test_encounter: EncounterSet = null
+var _test_empty: bool = false
+
+
+## Called by GameManager before the layout enters the tree.
+func setup_test(encounter: EncounterSet, empty: bool) -> void:
+	_test_mode = true
+	_test_encounter = encounter
+	_test_empty = empty
+	# Not a run: no tracker record or blessing use, and dying doesn't save or show the summary.
+	counts_as_node = false
+	counts_as_run = false
+
 
 func extra_node_set_functions() -> void:
 	loot_manager.set_up()
+	if _test_mode:
+		($FallingDeath as FallingDeath).costs_heart = false
+		add_child(LayoutTestSpawnPanel.new())
 	if exit_portal == null:
 		push_error("%s: assign Exit Portal in the inspector" % name)
 	else:
@@ -35,7 +53,7 @@ func _place_encounter() -> void:
 		return
 	encounter_director.encounter_cleared.connect(_on_encounter_director_encounter_cleared, CONNECT_ONE_SHOT)
 	var biome: int = CustomVariables.biome_index(PlayerManager.player.stats.rift_level)
-	encounter_director.populate(_find_spawn_markers(self), biome, _is_late_in_act())
+	encounter_director.populate(_find_spawn_markers(self), biome, _is_late_in_act(), _test_encounter, _test_empty)
 	if encounter_director.is_cleared():
 		_on_encounter_director_encounter_cleared()
 

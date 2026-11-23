@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://Objects/Portal/EventPortal.tscn" id="1_portal"]
+[ext_resource type="Script" path="res://Rifts/RunV2/LayoutTest/layout_test_portal.gd" id="2_script"]
+
+[node name="LayoutTestPortal" instance=ExtResource("1_portal")]
+modulate = Color(0.55, 1, 0.6, 1)
+script = ExtResource("2_script")
+one_shot = false

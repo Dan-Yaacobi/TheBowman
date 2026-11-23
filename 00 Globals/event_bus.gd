@@ -65,6 +65,8 @@ signal add_arrow_effect(_effect: Effect)
 signal entered_rift_portal
 ## Run Structure v2: a crossroads portal was entered.
 signal node_portal_entered(node: RunNodeData)
+## Debug: play one combat layout from the hub. encounter null + not empty = roll as usual.
+signal layout_test_requested(layout: PackedScene, encounter: EncounterSet, empty: bool, biome: int)
 
 signal try_drop(position: Vector2, _chance: float, forced_rarity: int)
 signal drop_item(item: CustomVariables.items, position: Vector2, _chance: float, _amount: int)

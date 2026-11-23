@@ -22,6 +22,8 @@ var _route: RunRoute = null
 ## The run as saved at the last crossroads (SaveService section "run"). Empty = no saved run.
 var _run_save: Dictionary = {}
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+## True while a debug layout test is being played: its exit returns to the hub.
+var _layout_test: bool = false
 
 
 func _ready() -> void:
@@ -32,6 +34,7 @@ func _ready() -> void:
 	EventBus.relocate_player.connect(_place_player_and_resume)
 	EventBus.boss_portal_entered.connect(func() -> void: change_to_scene(_draw_boss()))
 	EventBus.node_portal_entered.connect(_on_node_portal_entered)
+	EventBus.layout_test_requested.connect(_on_layout_test_requested)
 	EventBus.player_died.connect(_on_event_bus_player_died)
 	SaveService.register(SaveService.RUN_SECTION, _save_run, _load_run)
 
@@ -39,6 +42,9 @@ func _exit_tree() -> void:
 	SaveService.unregister(SaveService.RUN_SECTION)
 	
 func _on_portal_entered() -> void:
+	if _layout_test:
+		change_game_world(GameWorlds.worlds.Main_Menu)
+		return
 	if _route != null:
 		_on_route_exit_portal_entered()
 		return
@@ -127,6 +133,7 @@ func _transition_to(next_world: GameWorld) -> void:
 	if next_world is MainMenu:
 		PlayerManager.player.stats.rift_level = 0
 		_route = null
+		_layout_test = false
 		_clear_run_save()
 
 	prev_world = curr_world
@@ -290,3 +297,19 @@ func _load_run(data: Dictionary) -> void:
 
 func _on_event_bus_player_died(_death_screen: bool) -> void:
 	_clear_run_save()
+
+
+# --- Layout test (debug) ---
+
+func _on_layout_test_requested(layout: PackedScene, encounter: EncounterSet, empty: bool, biome: int) -> void:
+	if _is_transitioning or layout == null or not curr_world is MainMenu:
+		return
+	var world: CombatRift = layout.instantiate() as CombatRift
+	if world == null:
+		push_error("Layout test: %s is not a combat layout" % layout.resource_path)
+		return
+	world.setup_test(encounter, empty)
+	# Islands and the encounter read the biome from it.
+	PlayerManager.player.stats.rift_level = clampi(biome, 0, CustomVariables.BIOME_COUNT - 1) * CustomVariables.RIFTS_PER_TYPE + 1
+	_layout_test = true
+	await _transition_to(world)
