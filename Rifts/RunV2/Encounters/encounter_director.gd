@@ -27,18 +27,20 @@ var encounter: EncounterSet = null
 var _alive: Array[Enemy] = []
 ## Ids of every enemy this director placed, kept after death so split children can be claimed.
 var _owned_ids: Dictionary[int, bool] = {}
+## Enemy-keyed dictionaries are untyped on purpose: typed ones refuse to erase a key whose
+## enemy was freed (fell, died), which is exactly when entries need removing.
 ## Sleeping enemy -> its wake radius.
-var _sleepers: Dictionary[Enemy, float] = {}
+var _sleepers: Dictionary = {}
 ## Ground enemy not yet activated -> its marker's wake radius.
-var _ground_watch: Dictionary[Enemy, float] = {}
+var _ground_watch: Dictionary = {}
 var _last_alive_count: int = -1
 ## Placed enemy -> the marker it was placed on.
-var _marker_of: Dictionary[Enemy, SpawnMarker] = {}
+var _marker_of: Dictionary = {}
 ## Every marker in the layout, for link chains.
 var _markers: Array[SpawnMarker] = []
 var _activated: Dictionary[SpawnMarker, bool] = {}
 ## Collision objects of sleeping enemies -> their disable mode before sleeping.
-var _kept_active: Dictionary[Enemy, Dictionary] = {}
+var _kept_active: Dictionary = {}
 var _running: bool = false
 
 
@@ -76,7 +78,13 @@ func populate(markers: Array[SpawnMarker], biome: int, late: bool,
 				_place(entry, marker)
 	var free: Dictionary[SpawnMarker.Zone, Array] = {}
 	for entry: EnemyEntry in entries:
-		_place(entry, _take_marker(_zone_for(entry), optional, markers, free))
+		var marker: SpawnMarker = _take_marker(_zone_for(entry), optional, markers, free)
+		if marker == null:
+			push_warning("EncounterDirector: %s has no %s spawn marker; %s skipped" % [
+				owner.name if owner else "layout", SpawnMarker.Zone.keys()[_zone_for(entry)],
+				entry.resource_path.get_file()])
+			continue
+		_place(entry, marker)
 
 
 ## True once the fight is over (or there never was one).
@@ -99,7 +107,9 @@ func _process(_delta: float) -> void:
 
 func get_alive_count() -> int:
 	var still: Array[Enemy] = []
-	for enemy: Enemy in _alive:
+	# Untyped: the list can hold enemies that were freed (fell, died), and assigning a freed
+	# instance to a typed variable errors before is_instance_valid runs.
+	for enemy in _alive:
 		if is_instance_valid(enemy) and not enemy.is_dead:
 			still.append(enemy)
 	_alive = still
@@ -136,20 +146,16 @@ func _take_entry_for_zone(entries: Array[EnemyEntry], zone: SpawnMarker.Zone) ->
 
 
 ## An extra enemy for an always-fill marker once the set has none of its zone left: one of the
-## set's types of that zone (weighted by count), or of any zone if the set has none.
+## set's types of that zone, weighted by count. Null if the set has no type of that zone
+## (the marker then stays empty: a ground enemy never goes on an air marker or the reverse).
 func _extra_entry_for_zone(zone: SpawnMarker.Zone) -> EnemyEntry:
 	var options: Array[EnemyEntry] = []
 	var weights: PackedFloat32Array = PackedFloat32Array()
-	for pass_index: int in 2:
-		for entry: EnemyEntry in encounter.enemies:
-			if entry == null or encounter.enemies[entry] <= 0:
-				continue
-			if pass_index == 0 and _zone_for(entry) != zone:
-				continue
-			options.append(entry)
-			weights.append(float(encounter.enemies[entry]))
-		if not options.is_empty():
-			break
+	for entry: EnemyEntry in encounter.enemies:
+		if entry == null or encounter.enemies[entry] <= 0 or _zone_for(entry) != zone:
+			continue
+		options.append(entry)
+		weights.append(float(encounter.enemies[entry]))
 	if options.is_empty():
 		return null
 	return options[rng.rand_weighted(weights)]
@@ -157,7 +163,7 @@ func _extra_entry_for_zone(zone: SpawnMarker.Zone) -> EnemyEntry:
 
 ## A marker for one of the set's remaining enemies: a free non-always-fill marker of its zone,
 ## picked without replacement. When those run out they get reused; with none of the zone it
-## uses always-fill markers of the zone, and a zone the layout lacks borrows from every marker.
+## uses always-fill markers of the zone. Null if the layout has no marker of that zone.
 func _take_marker(zone: SpawnMarker.Zone, optional: Array[SpawnMarker], all: Array[SpawnMarker],
 		free: Dictionary[SpawnMarker.Zone, Array]) -> SpawnMarker:
 	var bag: Array = free.get(zone, [])
@@ -170,7 +176,7 @@ func _take_marker(zone: SpawnMarker.Zone, optional: Array[SpawnMarker], all: Arr
 				if marker.zone == zone:
 					bag.append(marker)
 		if bag.is_empty():
-			bag = all.duplicate()
+			return null
 		bag.shuffle()
 		free[zone] = bag
 	return bag.pop_back()
@@ -227,13 +233,14 @@ func _wake_near_player() -> void:
 	if (_sleepers.is_empty() and _ground_watch.is_empty()) or PlayerManager.player == null:
 		return
 	var player_pos: Vector2 = PlayerManager.player.global_position
-	for enemy: Enemy in _sleepers.keys():
+	# Untyped loop variables: entries can be freed enemies (see get_alive_count).
+	for enemy in _sleepers.keys():
 		if not is_instance_valid(enemy) or enemy.is_dead:
 			_sleepers.erase(enemy)
 			continue
 		if _sleepers.has(enemy) and enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
 			_activate_enemy(enemy)
-	for enemy: Enemy in _ground_watch.keys():
+	for enemy in _ground_watch.keys():
 		if not is_instance_valid(enemy) or enemy.is_dead:
 			_ground_watch.erase(enemy)
 		elif _ground_watch.has(enemy) and enemy.global_position.distance_to(player_pos) <= _ground_watch[enemy]:
@@ -257,8 +264,8 @@ func _activate_marker(start: SpawnMarker) -> void:
 		if _activated.has(marker) or not is_instance_valid(marker):
 			continue
 		_activated[marker] = true
-		for enemy: Enemy in _marker_of.keys():
-			if _marker_of[enemy] != marker or not is_instance_valid(enemy):
+		for enemy in _marker_of.keys():
+			if not is_instance_valid(enemy) or _marker_of[enemy] != marker:
 				continue
 			if _sleepers.has(enemy):
 				_wake(enemy)
