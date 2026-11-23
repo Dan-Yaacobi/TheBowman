@@ -50,6 +50,9 @@ var _proximity: float = 0.0
 var _phase: float = 0.0
 var _fx_tween: Tween
 var _is_blocked_look: bool = false
+## Locked (e.g. a combat rift's exit until the fight is cleared): can't be entered, greyed,
+## swirl stopped. See set_locked().
+var _locked: bool = false
 ## Rift exit portals: set once the player has seen it; then an edge arrow points to it.
 var _pointer: PortalPointer
 
@@ -70,6 +73,8 @@ func _process(delta: float) -> void:
 		return
 	_update_blocked_look()
 	_check_found()
+	if _locked:
+		return
 	_phase = fmod(_phase + delta * lerpf(idle_speed, near_speed, _proximity), 1000.0)
 	var mat: ShaderMaterial = sprite.material as ShaderMaterial
 	if mat:
@@ -162,8 +167,16 @@ func enter() -> void:
 	else:
 		EventBus.changed_scene.emit(destination)
 
+## Locks or unlocks the portal: locked it can't be entered, is greyed out and its swirl stops.
+func set_locked(locked: bool) -> void:
+	_locked = locked
+	if locked:
+		disable()
+	else:
+		enable()
+
 func _update_blocked_look() -> void:
-	var blocked: bool = _leads_into_rift() and not _has_bow_and_quiver()
+	var blocked: bool = _locked or (_leads_into_rift() and not _has_bow_and_quiver())
 	if blocked == _is_blocked_look:
 		return
 	_is_blocked_look = blocked

@@ -24,11 +24,15 @@ func Physics(delta: float) -> EnemyState:
 	golem.punch_cooldown_left = maxf(golem.punch_cooldown_left - delta, 0.0)
 	if not golem.is_on_floor():
 		return null
+	var player_island: Island = golem.get_player_island()
+	# While the player is in the air, keep the last answer (jumping around shouldn't reset it)
+	if player_island != null:
+		golem.player_unreachable = player_island != golem.current_island \
+			and golem.get_next_island(player_island) == null
 	if golem.punch_cooldown_left <= 0.0 and golem.is_player_in_punch_range():
 		return punch_state
 	if golem.wants_to_throw():
 		return throw_state
-	var player_island: Island = golem.get_player_island()
 	if player_island == null:
 		return null
 	if player_island == golem.current_island:

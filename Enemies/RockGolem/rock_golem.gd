@@ -35,6 +35,10 @@ var punch_cooldown_left: float = 0.0
 var is_leaping: bool = false
 ## Seconds awake since its last landed punch or throw; at throw_delay it throws a boulder
 var time_without_hit: float = 0.0
+## Seconds since its last throw (unreachable throws use their own cooldown)
+var time_since_throw: float = 0.0
+## Set by the idle state: the player stands on an island it has no jump path to
+var player_unreachable: bool = false
 ## Visual scale of the held boulder once it's back in the world
 var _boulder_world_scale: Vector2 = Vector2.ONE
 var _last_floor_y: float = 0.0
@@ -85,9 +89,11 @@ func _on_punch_hurt_box_successful_hit(_hurt_box: HurtBox, _hit_box: Area2D, _re
 
 
 func wants_to_throw() -> bool:
-	return golem_data.boulder_scene != null \
-		and time_without_hit >= golem_data.throw_delay \
-		and calculate_distance_to_player() <= golem_data.throw_range
+	if golem_data.boulder_scene == null or calculate_distance_to_player() > golem_data.throw_range:
+		return false
+	if player_unreachable and time_since_throw >= golem_data.unreachable_throw_cooldown:
+		return true
+	return time_without_hit >= golem_data.throw_delay
 
 
 ## Puts a real boulder in its hands. It rides BoulderHold (behind the sprite, so the
@@ -118,6 +124,7 @@ func _boulder_visual_scale(boulder: Boulder) -> Vector2:
 ## where the player is standing (or straight at them over the void).
 func throw_boulder(boulder: Boulder) -> void:
 	time_without_hit = 0.0
+	time_since_throw = 0.0
 	if not is_instance_valid(boulder):
 		return
 	var start: Vector2 = boulder.global_position
@@ -145,6 +152,7 @@ func is_player_in_punch_range() -> bool:
 func _physics_process(delta: float) -> void:
 	if not is_dormant:
 		time_without_hit += delta
+		time_since_throw += delta
 	if is_leaping:
 		return
 	velocity.y += gravity * delta
@@ -283,3 +291,9 @@ func set_dormant(_dormant: bool) -> void:
 	hardened = _dormant
 	# A dormant rock doesn't hurt on touch
 	hurt_box.set_deferred("monitoring", not _dormant)
+
+
+## Combat rifts: wakes it as if it was hit (its spawn marker activated).
+func request_wake() -> void:
+	if is_dormant:
+		was_hit_while_dormant = true

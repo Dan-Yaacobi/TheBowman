@@ -5,6 +5,8 @@ class_name RootedEnemy extends Enemy
 @export var gravity: float = 600.0
 
 var rooted_data: RootedEnemyData
+## Set by request_wake(); the dormant state wakes on it.
+var wake_requested: bool = false
 var _away_time: float = 0.0
 
 
@@ -45,3 +47,8 @@ func should_sleep(delta: float) -> bool:
 
 func reset_sleep_timer() -> void:
 	_away_time = 0.0
+
+
+## Combat rifts: its spawn marker activated.
+func request_wake() -> void:
+	wake_requested = true

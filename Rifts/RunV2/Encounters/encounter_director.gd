@@ -4,15 +4,18 @@ class_name EncounterDirector extends Node
 ## flyers on AIR). Always-fill markers are filled first, from the set or with an extra enemy of
 ## the set's types; the rest of the set goes on random other markers. So the fight is the set's
 ## size, or the number of always-fill markers if that's more.
-## A marker activates when its flyer's wake radius reaches the player or its enemy is hit, and
-## activates every marker within its link radius in turn (a chain). Activating wakes the
-## sleeping flyers on those markers.
+## A marker activates when the player comes within its wake radius (measured from its enemy)
+## or its enemy is hit, and activates every marker within its link radius in turn (a chain).
+## Activating wakes the enemies on those markers: sleeping flyers here, ground enemies through
+## their own sleep (Enemy.request_wake). Sleeping flyers keep playing their move animation.
 ## Flyers sleep on their spot until the player comes within their wake radius or damages them.
 ## Ground enemies (golems, rooted enemies) land on the island below and use their own dormant
 ## state, so they keep riding moving islands and keep their own wake / re-sleep rules.
 ## encounter_cleared fires once every placed enemy (and anything split from one) is dead.
 
 signal encounter_cleared
+## Placed enemies (and their split pieces) still alive changed.
+signal alive_count_changed(count: int)
 
 @export var pool: EncounterPool
 ## Fallback for markers whose wake_radius is 0.
@@ -26,6 +29,9 @@ var _alive: Array[Enemy] = []
 var _owned_ids: Dictionary[int, bool] = {}
 ## Sleeping enemy -> its wake radius.
 var _sleepers: Dictionary[Enemy, float] = {}
+## Ground enemy not yet activated -> its marker's wake radius.
+var _ground_watch: Dictionary[Enemy, float] = {}
+var _last_alive_count: int = -1
 ## Placed enemy -> the marker it was placed on.
 var _marker_of: Dictionary[Enemy, SpawnMarker] = {}
 ## Every marker in the layout, for link chains.
@@ -82,7 +88,11 @@ func _process(_delta: float) -> void:
 	if not _running:
 		return
 	_wake_near_player()
-	if get_alive_count() == 0:
+	var alive: int = get_alive_count()
+	if alive != _last_alive_count:
+		_last_alive_count = alive
+		alive_count_changed.emit(alive)
+	if alive == 0:
 		_running = false
 		encounter_cleared.emit()
 
@@ -107,6 +117,8 @@ func _place(entry: EnemyEntry, marker: SpawnMarker) -> void:
 	# Ground enemies have their own dormant state; only flyers are put to sleep here.
 	if _zone_for(entry) == SpawnMarker.Zone.AIR:
 		enemy.ready.connect(_on_flyer_ready.bind(enemy, radius), CONNECT_ONE_SHOT)
+	else:
+		_ground_watch[enemy] = radius
 	EventBus.enemy_summoned.emit(enemy)
 
 
@@ -188,6 +200,13 @@ func _sleep(enemy: Enemy) -> void:
 		body.disable_mode = CollisionObject2D.DISABLE_MODE_KEEP_ACTIVE
 	_kept_active[enemy] = modes
 	enemy.process_mode = Node.PROCESS_MODE_DISABLED
+	# Asleep but alive: the move animation keeps playing in place.
+	var player: AnimationPlayer = enemy.animation_player
+	if player:
+		player.process_mode = Node.PROCESS_MODE_PAUSABLE
+		var move: String = enemy.stats.move_animation if enemy.stats else ""
+		if move != "" and player.has_animation(move):
+			player.play(move)
 
 
 func _wake(enemy: Enemy) -> void:
@@ -195,6 +214,8 @@ func _wake(enemy: Enemy) -> void:
 	if not is_instance_valid(enemy):
 		return
 	enemy.process_mode = Node.PROCESS_MODE_INHERIT
+	if enemy.animation_player:
+		enemy.animation_player.process_mode = Node.PROCESS_MODE_INHERIT
 	var modes: Dictionary = _kept_active.get(enemy, {})
 	for body: Variant in modes:
 		if is_instance_valid(body):
@@ -203,7 +224,7 @@ func _wake(enemy: Enemy) -> void:
 
 
 func _wake_near_player() -> void:
-	if _sleepers.is_empty() or PlayerManager.player == null:
+	if (_sleepers.is_empty() and _ground_watch.is_empty()) or PlayerManager.player == null:
 		return
 	var player_pos: Vector2 = PlayerManager.player.global_position
 	for enemy: Enemy in _sleepers.keys():
@@ -211,6 +232,11 @@ func _wake_near_player() -> void:
 			_sleepers.erase(enemy)
 			continue
 		if _sleepers.has(enemy) and enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
+			_activate_enemy(enemy)
+	for enemy: Enemy in _ground_watch.keys():
+		if not is_instance_valid(enemy) or enemy.is_dead:
+			_ground_watch.erase(enemy)
+		elif _ground_watch.has(enemy) and enemy.global_position.distance_to(player_pos) <= _ground_watch[enemy]:
 			_activate_enemy(enemy)
 
 
@@ -231,9 +257,14 @@ func _activate_marker(start: SpawnMarker) -> void:
 		if _activated.has(marker) or not is_instance_valid(marker):
 			continue
 		_activated[marker] = true
-		for enemy: Enemy in _sleepers.keys():
-			if _marker_of.get(enemy) == marker:
+		for enemy: Enemy in _marker_of.keys():
+			if _marker_of[enemy] != marker or not is_instance_valid(enemy):
+				continue
+			if _sleepers.has(enemy):
 				_wake(enemy)
+			elif _ground_watch.has(enemy):
+				_ground_watch.erase(enemy)
+				enemy.request_wake()
 		if marker.link_radius <= 0.0:
 			continue
 		for other: SpawnMarker in _markers:

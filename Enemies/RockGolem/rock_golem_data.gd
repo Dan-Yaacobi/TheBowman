@@ -67,6 +67,8 @@ class_name RockGolemData extends EnemyData
 @export var throw_delay: float = 10.0
 ## Only throws when the player is this close
 @export var throw_range: float = 300.0
+## While it can't reach the player (no island path to them) it throws this often instead
+@export var unreachable_throw_cooldown: float = 3.0
 ## Boulder scene (the earth wizard's boulder)
 @export var boulder_scene: PackedScene
 @export var boulder_damage: int = 3

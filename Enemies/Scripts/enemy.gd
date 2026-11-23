@@ -242,6 +242,10 @@ func drop_item() -> void:
 func disable_drops() -> void:
 	no_drops = true
 	
+## Combat rifts: its spawn marker activated. Enemies with their own sleep wake up; others ignore it.
+func request_wake() -> void:
+	pass
+
 func update_animation(_animation: String, _position: float = 0.0) -> void:
 	if animation_player != null and _animation != "":
 		animation_player.play_section(_animation, _position)

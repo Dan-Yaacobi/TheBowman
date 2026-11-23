@@ -9,10 +9,13 @@ signal rift_cleared
 
 ## The layout's own exit (Portal.tscn, Is Rift Portal on). Locked until the fight is cleared.
 @export var exit_portal: Portal
+## Where the "enemies left" counter sits, relative to the exit portal's position.
+@export var exit_counter_offset: Vector2 = Vector2(0, -48)
 @onready var loot_manager: LootManager = $LootManager
 @onready var encounter_director: EncounterDirector = $EncounterDirector
 
 var is_cleared: bool = false
+var _exit_counter: ExitLockCounter
 
 ## Layout test (debug hub portal): no run state, free falls, a chosen or empty encounter.
 var _test_mode: bool = false
@@ -38,7 +41,12 @@ func extra_node_set_functions() -> void:
 	if exit_portal == null:
 		push_error("%s: assign Exit Portal in the inspector" % name)
 	else:
-		exit_portal.disable()
+		exit_portal.set_locked(true)
+		# A sibling of the portal, so it rides the same island.
+		_exit_counter = ExitLockCounter.new()
+		_exit_counter.position = exit_portal.position + exit_counter_offset
+		exit_portal.get_parent().add_child.call_deferred(_exit_counter)
+		encounter_director.alive_count_changed.connect(_on_encounter_director_alive_count_changed)
 	# Deferred: the previous world is still connected to enemy_summoned until it exits later
 	# this frame, and would claim the enemies. Still placed before the fade-in.
 	_place_encounter.call_deferred()
@@ -78,7 +86,14 @@ func _on_encounter_director_encounter_cleared() -> void:
 	if is_cleared:
 		return
 	is_cleared = true
+	if is_instance_valid(_exit_counter):
+		_exit_counter.queue_free()
 	if exit_portal:
-		exit_portal.enable()
+		exit_portal.set_locked(false)
 		CombatTextSpawner.spawn(exit_portal.global_position + Vector2(0, -30), "Cleared", Color.WHITE)
 	rift_cleared.emit()
+
+
+func _on_encounter_director_alive_count_changed(count: int) -> void:
+	if is_instance_valid(_exit_counter):
+		_exit_counter.set_count(count)
