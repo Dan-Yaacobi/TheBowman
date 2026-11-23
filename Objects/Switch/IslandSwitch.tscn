@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Objects/Switch/island_switch.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Objects/Sprites/LightPost.png" id="2_tex"]
+[ext_resource type="Script" path="res://General Nodes/HitBox/hit_box.gd" id="3_hitbox"]
+[ext_resource type="PackedScene" path="res://General Nodes/KeyPressHelper/Keyboard Press Helper.tscn" id="4_keyhp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(10, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(36, 32)
+
+[node name="IslandSwitch" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_tex")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="KeyboardPressHelper" parent="." instance=ExtResource("4_keyhp")]
+offset_left = -8.0
+offset_top = -44.0
+offset_right = -8.0
+offset_bottom = -44.0
+scale = Vector2(0.5, 0.5)

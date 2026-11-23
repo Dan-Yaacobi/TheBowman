@@ -69,51 +69,26 @@ func _crumble() -> void:
 	_fell = true
 	_crumbled.append(_target)
 	_target.sprite.position = _sprite_base
-	_target.sprite.modulate.a = ghost_alpha
-	_target.disable()
 	_stop_dust()
-	if crumble_scene:
-		var fx: LingeringEffect = crumble_scene.instantiate()
-		_target.add_child(fx)
+	_target.crumble(ghost_alpha, crumble_scene)
 	EventBus.camera_shake.emit(crumble_camera_shake, 10.0)
-	_move_respawn_off(_target)
 
 func _restore(island: Island) -> void:
 	if not is_instance_valid(island):
 		return
-	island.enable()
-	var tween: Tween = island.create_tween()
-	tween.tween_property(island.sprite, "modulate:a", 1.0, reform_time)
+	island.reform(reform_time)
 
 # If the boss dies (or the arena closes) while an island is crumbled, put it back
 func _exit_tree() -> void:
 	for island: Island in _crumbled:
 		if is_instance_valid(island) and island.is_inside_tree():
-			island.enable()
-			island.sprite.modulate.a = 1.0
+			island.reform(0.0)
 	_crumbled.clear()
 
 func _stop_dust() -> void:
 	if is_instance_valid(_dust):
 		_dust.stop()
 	_dust = null
-
-# The player respawns on the last island they stood on; never leave that over a hole
-func _move_respawn_off(island: Island) -> void:
-	var world: BossArena = wizard.arena
-	if world == null or not world.respawn_position.is_equal_approx(island.get_respawn_position()):
-		return
-	var best: Island = null
-	var best_dist: float = INF
-	for other: Island in wizard.get_islands():
-		if other == island or not _is_solid(other):
-			continue
-		var dist: float = other.global_position.distance_squared_to(island.global_position)
-		if dist < best_dist:
-			best_dist = dist
-			best = other
-	if best:
-		EventBus.rift_respawn_position.emit(best.get_respawn_position())
 
 # The island the player stands on, else the one below them, else the nearest one
 func _pick_target() -> Island:
