@@ -4,6 +4,9 @@ class_name EncounterDirector extends Node
 ## flyers on AIR). Always-fill markers are filled first, from the set or with an extra enemy of
 ## the set's types; the rest of the set goes on random other markers. So the fight is the set's
 ## size, or the number of always-fill markers if that's more.
+## A marker activates when its flyer's wake radius reaches the player or its enemy is hit, and
+## activates every marker within its link radius in turn (a chain). Activating wakes the
+## sleeping flyers on those markers.
 ## Flyers sleep on their spot until the player comes within their wake radius or damages them.
 ## Ground enemies (golems, rooted enemies) land on the island below and use their own dormant
 ## state, so they keep riding moving islands and keep their own wake / re-sleep rules.
@@ -12,7 +15,7 @@ class_name EncounterDirector extends Node
 signal encounter_cleared
 
 @export var pool: EncounterPool
-## A flyer wakes when the player gets this close. A marker's own wake_radius overrides it.
+## Fallback for markers whose wake_radius is 0.
 @export var wake_radius: float = 120.0
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -23,6 +26,11 @@ var _alive: Array[Enemy] = []
 var _owned_ids: Dictionary[int, bool] = {}
 ## Sleeping enemy -> its wake radius.
 var _sleepers: Dictionary[Enemy, float] = {}
+## Placed enemy -> the marker it was placed on.
+var _marker_of: Dictionary[Enemy, SpawnMarker] = {}
+## Every marker in the layout, for link chains.
+var _markers: Array[SpawnMarker] = []
+var _activated: Dictionary[SpawnMarker, bool] = {}
 ## Collision objects of sleeping enemies -> their disable mode before sleeping.
 var _kept_active: Dictionary[Enemy, Dictionary] = {}
 var _running: bool = false
@@ -47,6 +55,7 @@ func populate(markers: Array[SpawnMarker], biome: int, late: bool,
 		push_warning("EncounterDirector: no encounter or no spawn markers; the rift counts as cleared")
 		return
 	_running = true
+	_markers = markers
 	entries.shuffle()
 	var optional: Array[SpawnMarker] = []
 	for marker: SpawnMarker in markers:
@@ -94,6 +103,7 @@ func _place(entry: EnemyEntry, marker: SpawnMarker) -> void:
 	enemy.global_position = marker.global_position
 	var radius: float = marker.wake_radius if marker.wake_radius > 0.0 else wake_radius
 	_own(enemy)
+	_marker_of[enemy] = marker
 	# Ground enemies have their own dormant state; only flyers are put to sleep here.
 	if _zone_for(entry) == SpawnMarker.Zone.AIR:
 		enemy.ready.connect(_on_flyer_ready.bind(enemy, radius), CONNECT_ONE_SHOT)
@@ -200,8 +210,36 @@ func _wake_near_player() -> void:
 		if not is_instance_valid(enemy) or enemy.is_dead:
 			_sleepers.erase(enemy)
 			continue
-		if enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
-			_wake(enemy)
+		if _sleepers.has(enemy) and enemy.global_position.distance_to(player_pos) <= _sleepers[enemy]:
+			_activate_enemy(enemy)
+
+
+## Wakes the enemy and activates its marker (and the marker's link chain).
+func _activate_enemy(enemy: Enemy) -> void:
+	if _sleepers.has(enemy):
+		_wake(enemy)
+	var marker: SpawnMarker = _marker_of.get(enemy)
+	if marker:
+		_activate_marker(marker)
+
+
+## Wakes the flyers sleeping on this marker, then every marker within its link radius in turn.
+func _activate_marker(start: SpawnMarker) -> void:
+	var queue: Array[SpawnMarker] = [start]
+	while not queue.is_empty():
+		var marker: SpawnMarker = queue.pop_back()
+		if _activated.has(marker) or not is_instance_valid(marker):
+			continue
+		_activated[marker] = true
+		for enemy: Enemy in _sleepers.keys():
+			if _marker_of.get(enemy) == marker:
+				_wake(enemy)
+		if marker.link_radius <= 0.0:
+			continue
+		for other: SpawnMarker in _markers:
+			if other != marker and not _activated.has(other) and is_instance_valid(other) \
+					and other.global_position.distance_to(marker.global_position) <= marker.link_radius:
+				queue.append(other)
 
 
 func _collision_objects(root: Node) -> Array[Node]:
@@ -221,7 +259,8 @@ func _on_event_bus_enemy_summoned(enemy: Enemy) -> void:
 		_own(enemy)
 
 
-## Getting hit wakes a sleeper.
+## Getting hit activates the enemy's marker: it wakes (if it's a sleeping flyer) and so do
+## the linked markers' flyers. Ground enemies handle their own waking.
 func _on_event_bus_enemy_damaged(enemy: Enemy, _amount: int) -> void:
-	if _sleepers.has(enemy):
-		_wake(enemy)
+	if _marker_of.has(enemy):
+		_activate_enemy(enemy)
