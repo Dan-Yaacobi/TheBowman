@@ -5,93 +5,109 @@
 [ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="3_marker"]
 [ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="4_chest"]
 [ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="5_pedestal"]
-[ext_resource type="PackedScene" path="res://Objects/Portal/Portal.tscn" id="6_exit_portal"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="6_exit_portal"]
 
 [node name="CombatTestLayout" unique_id=460234249 node_paths=PackedStringArray("exit_portal") instance=ExtResource("1_base")]
 exit_portal = NodePath("Islands/Exit/ExitPortal")
 
 [node name="PlayerSpawn" parent="." index="0"]
-position = Vector2(0, 102)
+position = Vector2(55, -45)
+
+[node name="LootManager" parent="." index="1"]
+position = Vector2(55, -147)
+
+[node name="FallingDeath" parent="." index="3"]
+position = Vector2(55, 413)
+
+[node name="Islands" parent="." index="4"]
+position = Vector2(55, -147)
 
 [node name="Entry" parent="Islands" index="0" unique_id=628947041 instance=ExtResource("2_island")]
 position = Vector2(0, 140)
 start_island = true
 
 [node name="Island" parent="Islands" index="1" unique_id=1847265216 instance=ExtResource("2_island")]
-position = Vector2(71, 147)
+position = Vector2(63, 111)
 start_island = true
 
 [node name="Island2" parent="Islands" index="2" unique_id=1923922975 instance=ExtResource("2_island")]
-position = Vector2(139, 149)
+position = Vector2(399, 7)
 start_island = true
 
 [node name="Island3" parent="Islands" index="3" unique_id=1122778232 instance=ExtResource("2_island")]
-position = Vector2(123, 89)
+position = Vector2(127, 76)
 start_island = true
 
 [node name="Island4" parent="Islands" index="4" unique_id=1213471424 instance=ExtResource("2_island")]
 position = Vector2(176, 41)
 start_island = true
 
-[node name="Island5" parent="Islands" index="5" unique_id=254113254 instance=ExtResource("2_island")]
-position = Vector2(124, -1)
+[node name="Island5" parent="Islands" index="5" unique_id=344704781 instance=ExtResource("2_island")]
+position = Vector2(236, 9)
 start_island = true
 
-[node name="Island6" parent="Islands" index="6" unique_id=1960377480 instance=ExtResource("2_island")]
-position = Vector2(77, -42)
-start_island = true
+[node name="Step" parent="Islands" index="6" unique_id=1894845689 instance=ExtResource("2_island")]
+position = Vector2(464, 3)
 
-[node name="Island7" parent="Islands" index="7" unique_id=1368249539 instance=ExtResource("2_island")]
-position = Vector2(182, -67)
-start_island = true
+[node name="Step2" parent="Islands" index="7" unique_id=426006805 instance=ExtResource("2_island")]
+position = Vector2(519, 15)
 
-[node name="Step" parent="Islands" index="8" unique_id=1894845689 instance=ExtResource("2_island")]
-position = Vector2(300, 158)
+[node name="Step3" parent="Islands" index="8" unique_id=1427773806 instance=ExtResource("2_island")]
+position = Vector2(580, 5)
 
 [node name="HomeLeft" parent="Islands" index="9" unique_id=1012732594 instance=ExtResource("2_island")]
-position = Vector2(360, 158)
+position = Vector2(714, 72)
 
 [node name="HomeRight" parent="Islands" index="10" unique_id=1481381887 instance=ExtResource("2_island")]
-position = Vector2(403, 158)
+position = Vector2(790, 114)
+
+[node name="ScrollPedestal" parent="Islands/HomeRight" index="5" unique_id=1565658134 instance=ExtResource("5_pedestal")]
+position = Vector2(1, -11)
 
 [node name="Perch" parent="Islands" index="11" unique_id=1361650147 instance=ExtResource("2_island")]
-position = Vector2(381, 105)
+position = Vector2(652, 26)
 
 [node name="Far" parent="Islands" index="12" unique_id=1158758651 instance=ExtResource("2_island")]
-position = Vector2(470, 148)
+position = Vector2(796, 14)
 
 [node name="Chest" parent="Islands/Far" index="5" unique_id=1530636100 instance=ExtResource("4_chest")]
-position = Vector2(-1, -10)
+position = Vector2(-5.9604645e-08, -9)
+equipment_drop_chance = 100.0
 
-[node name="Exit" parent="Islands" index="13" unique_id=1728348544 instance=ExtResource("2_island")]
-position = Vector2(545, 133)
+[node name="Far2" parent="Islands" index="13" unique_id=1851672430 instance=ExtResource("2_island")]
+position = Vector2(311, 268)
 
-[node name="ScrollPedestal" parent="Islands/Exit" index="5" unique_id=1565658134 instance=ExtResource("5_pedestal")]
-position = Vector2(-14, -17)
+[node name="Chest" parent="Islands/Far2" index="5" unique_id=84532828 instance=ExtResource("4_chest")]
+position = Vector2(-5.9604645e-08, -9)
+equipment_drop_chance = 0.0
 
-[node name="GroundHomeLeft" parent="SpawnMarkers" index="0" unique_id=194357600 instance=ExtResource("3_marker")]
-position = Vector2(360, 143)
+[node name="Exit" parent="Islands" index="14" unique_id=1728348544 instance=ExtResource("2_island")]
+position = Vector2(859, 83)
 
-[node name="GroundHomeRight" parent="SpawnMarkers" index="1" unique_id=1540985724 instance=ExtResource("3_marker")]
-position = Vector2(403, 143)
-
-[node name="GroundFar" parent="SpawnMarkers" index="2" unique_id=2075846388 instance=ExtResource("3_marker")]
-position = Vector2(470, 133)
-
-[node name="AirLeft" parent="SpawnMarkers" index="3" unique_id=1541673261 instance=ExtResource("3_marker")]
-position = Vector2(34, -91)
-zone = 1
-
-[node name="AirMid" parent="SpawnMarkers" index="4" unique_id=437354899 instance=ExtResource("3_marker")]
-position = Vector2(425, 53)
-zone = 1
-
-[node name="AirRight" parent="SpawnMarkers" index="5" unique_id=721314088 instance=ExtResource("3_marker")]
-position = Vector2(515, 73)
-zone = 1
-
-[node name="ExitPortal" parent="Islands/Exit" instance=ExtResource("6_exit_portal")]
+[node name="ExitPortal" parent="Islands/Exit" index="5" unique_id=675100811 instance=ExtResource("6_exit_portal")]
 z_index = 0
-position = Vector2(0, -26)
+position = Vector2(0, -25)
 destination = 3
 is_rift_portal = true
+
+[node name="SpawnMarkers" parent="." index="5"]
+position = Vector2(55, -147)
+
+[node name="GroundFar" parent="SpawnMarkers" index="0" unique_id=2075846388 instance=ExtResource("3_marker")]
+position = Vector2(653, 7)
+
+[node name="AirLeft" parent="SpawnMarkers" index="1" unique_id=1541673261 instance=ExtResource("3_marker")]
+position = Vector2(123, -1)
+zone = 1
+
+[node name="AirLeft2" parent="SpawnMarkers" index="2" unique_id=1012326892 instance=ExtResource("3_marker")]
+position = Vector2(307, 46)
+zone = 1
+
+[node name="AirMid" parent="SpawnMarkers" index="3" unique_id=437354899 instance=ExtResource("3_marker")]
+position = Vector2(419, -62)
+zone = 1
+
+[node name="AirRight" parent="SpawnMarkers" index="4" unique_id=721314088 instance=ExtResource("3_marker")]
+position = Vector2(568, -59)
+zone = 1

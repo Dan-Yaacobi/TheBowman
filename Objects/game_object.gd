@@ -9,7 +9,7 @@ class_name GameObject extends Node2D
 @export var display_name: String = ""
 @export var avg_coin_drop: int = 0
 @export var item_drop: CustomVariables.items
-@export_range(0.0,100.0,0.1,"suffix:%") var item_drop_chance
+@export_range(0.0,100.0,0.1,"suffix:%") var equipment_drop_chance
 
 @export_category("Textures")
 @export var use_fixed_frame: bool = false
@@ -61,7 +61,7 @@ func drop_items() -> void:
 	var amount: int = 1
 	if item_drop == CustomVariables.items.COIN and avg_coin_drop > 0:
 		amount = avg_coin_drop
-	EventBus.drop_item.emit(item_drop, global_position, item_drop_chance,amount)
+	EventBus.drop_item.emit(item_drop, global_position, equipment_drop_chance,amount)
 
 func setup(rift_type: Rift.Type) -> void:
 	var matching: TextureData = _get_texture_data_for_type(rift_type)
