@@ -2,14 +2,18 @@
 class_name SpawnMarker extends Marker2D
 ## Where an enemy can appear. Combat rifts (EncounterDirector) place the rolled encounter on
 ## these before the player arrives.
-## GROUND markers take ground enemies: they drop onto the island below and use their own sleep.
+## GROUND markers take walking ground enemies (golems): they drop onto the island below and use
+## their own sleep.
 ## AIR markers take flyers, which sleep on the spot until their marker activates.
+## ROOTED markers take rooted shooters (venom bloom, pine tree, obsidian spire): they drop onto
+## the island below like ground enemies and never move from there.
 ## A marker activates when the player comes within its wake radius or its enemy is hit; it
 ## wakes its enemy (ground enemies through their own sleep) and activates every marker within
 ## its link radius (which pass it on through theirs).
 ## In the editor: blue circle = wake radius, orange circle = link radius.
 
-enum Zone { GROUND, AIR }
+## New zones go at the end: layouts save the zone as its number.
+enum Zone { GROUND, AIR, ROOTED }
 
 const WAKE_COLOR: Color = Color(0.47, 0.47, 0.47, 0.8)
 const LINK_COLOR: Color = Color(1.0, 0.6, 0.2, 0.8)
@@ -19,8 +23,9 @@ const CIRCLE_WIDTH: float = 1.0
 	set(value):
 		zone = value
 		queue_redraw()
-## The enemy here wakes when the player gets this close. Ground enemies also still wake by
-## their own range (golem 80, rooted 150) if that's bigger.
+## The enemy here wakes when the player gets this close (measured from the enemy). For ground
+## and rooted enemies it replaces their own wake range, also for waking again after they fall
+## back asleep.
 @export var wake_radius: float = 120.0:
 	set(value):
 		wake_radius = maxf(value, 0.0)

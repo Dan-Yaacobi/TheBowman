@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://b35crep84od1i" path="res://Enemies/EnemyAbilities/EnemyBullets/RedBullet.tscn" id="1_seed"]
+[ext_resource type="Script" path="res://Enemies/ObsidianSpire/obsidian_shard.gd" id="2_straight"]
+[ext_resource type="Script" uid="uid://bors7rkc0xbkd" path="res://Enemies/EnemyAbilities/EnemyBullets/enemy_bullet_data.gd" id="3_data"]
+[ext_resource type="Texture2D" path="res://Enemies/VenomBloom/Sprites/PoisonSting.png" id="4_tex"]
+
+[sub_resource type="Resource" id="Resource_sting"]
+script = ExtResource("3_data")
+texture = ExtResource("4_tex")
+damage = 1
+knockback = 50
+fire_cooldown = 2.0
+move_speed = 45
+
+[node name="PoisonSting" instance=ExtResource("1_seed")]
+script = ExtResource("2_straight")
+data = SubResource("Resource_sting")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_tex")

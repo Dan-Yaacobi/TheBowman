@@ -41,7 +41,9 @@ func apply_debuff_effect() -> void:
 	elapsed_ticks += 1
 	update_poison_visual()
 	entity.take_damage(null, dmg, null, Color.LAWN_GREEN)
-	EventBus.poison_damage_dealt.emit()
+	# Only the player's poison counts (gauges, run stats), not an enemy poisoning the player
+	if entity is Enemy:
+		EventBus.poison_damage_dealt.emit()
 
 func merge(incoming: Debuff, incoming_ticks: int) -> void:
 	ticks += incoming_ticks

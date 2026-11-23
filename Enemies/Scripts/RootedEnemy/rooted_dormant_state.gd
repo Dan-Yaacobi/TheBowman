@@ -25,6 +25,11 @@ func Exit() -> void:
 	rooted.on_dormant_changed(false)
 
 
+## Hits don't play a hurt animation while it's asleep (it would show the awake pose).
+func blocks_flinch() -> bool:
+	return true
+
+
 func Physics(_delta: float) -> EnemyState:
 	if rooted.wake_requested:
 		rooted.wake_requested = false

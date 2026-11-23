@@ -31,6 +31,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+## Turns toward the player; rooted enemies that don't face a side keep this empty.
+func face_the_player() -> void:
+	pass
+
+
 ## Called by RootedDormantState when it falls asleep (true) or wakes (false).
 func on_dormant_changed(_dormant: bool) -> void:
 	pass

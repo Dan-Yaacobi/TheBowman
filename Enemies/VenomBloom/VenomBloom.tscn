@@ -1,0 +1,237 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Enemies/VenomBloom/venom_bloom.gd" id="1_bloom"]
+[ext_resource type="Resource" path="res://Enemies/EnemyData/EnemyValues/VenomBloom/venom_bloom.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://bxpqmg6oqsxsu" path="res://Enemies/Scripts/enemy_state_machine.gd" id="3_sm"]
+[ext_resource type="Script" path="res://Enemies/Scripts/RootedEnemy/rooted_dormant_state.gd" id="4_dormant"]
+[ext_resource type="Script" path="res://Enemies/Scripts/RootedEnemy/rooted_wake_state.gd" id="5_wake"]
+[ext_resource type="Script" path="res://Enemies/VenomBloom/States/venom_attack_state.gd" id="6_attack"]
+[ext_resource type="Script" path="res://Enemies/VenomBloom/States/venom_bite_state.gd" id="7_bite"]
+[ext_resource type="Script" uid="uid://baxh6ix1g81b" path="res://Enemies/EvilBird/enemy_damaged_state.gd" id="8_hurt"]
+[ext_resource type="Script" uid="uid://d0m3bbanvrwp3" path="res://Enemies/EvilBird/enemy_dead_state.gd" id="9_dead"]
+[ext_resource type="PackedScene" uid="uid://e6ki53roj2tq" path="res://General Nodes/DebuffHandler/DebuffHandler.tscn" id="10_debuff"]
+[ext_resource type="PackedScene" uid="uid://ck8i7ukrq5afx" path="res://General Nodes/HurtBox/HurtBox.tscn" id="11_hurt"]
+[ext_resource type="PackedScene" uid="uid://gx0ttrql3dsf" path="res://General Nodes/HitBox/Hitbox.tscn" id="12_hit"]
+[ext_resource type="Script" uid="uid://buwajsaukfabu" path="res://Enemies/Scripts/enemy_hit_box.gd" id="13_hitscript"]
+[ext_resource type="PackedScene" uid="uid://dmxr8ttkjpdba" path="res://Enemies/EnemyHealthBar/EnemyHealthBar.tscn" id="14_hp"]
+
+[sub_resource type="Animation" id="Animation_dormant"]
+resource_name = "Dormant"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_wake"]
+resource_name = "Wake"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "Idle"
+length = 1.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.45, 0.6, 0.75, 0.85, 0.95, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_spit"]
+resource_name = "Spit"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_bite"]
+resource_name = "Bite"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 36, 37]
+}
+
+[sub_resource type="Animation" id="Animation_hurt"]
+resource_name = "Hurt"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.45, 0.45, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bloom"]
+_data = {
+&"Bite": SubResource("Animation_bite"),
+&"Dormant": SubResource("Animation_dormant"),
+&"Hurt": SubResource("Animation_hurt"),
+&"Idle": SubResource("Animation_idle"),
+&"Spit": SubResource("Animation_spit"),
+&"Wake": SubResource("Animation_wake")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(14, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(24, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bite"]
+size = Vector2(20, 22)
+
+[node name="VenomBloom" type="CharacterBody2D" node_paths=PackedStringArray("dead_state", "damaged_state")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_bloom")
+dead_state = NodePath("EnemyStateMachine/Dead")
+damaged_state = NodePath("EnemyStateMachine/Hurt")
+stats = ExtResource("2_data")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+offset = Vector2(0, -19)
+hframes = 10
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries/ = SubResource("AnimationLibrary_bloom")
+
+[node name="StingPoint" type="Marker2D" parent="."]
+position = Vector2(12, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="EnemyStateMachine" type="Node2D" parent="."]
+script = ExtResource("3_sm")
+
+[node name="Dormant" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("wake_state")]
+script = ExtResource("4_dormant")
+wake_state = NodePath("../Wake")
+
+[node name="Wake" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("5_wake")
+next_state = NodePath("../Attack")
+
+[node name="Attack" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("bite_state", "sleep_state")]
+script = ExtResource("6_attack")
+bite_state = NodePath("../Bite")
+sleep_state = NodePath("../Dormant")
+
+[node name="Bite" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("7_bite")
+attack_state = NodePath("../Attack")
+
+[node name="Hurt" type="Node2D" parent="EnemyStateMachine" node_paths=PackedStringArray("fallback_state")]
+script = ExtResource("8_hurt")
+fallback_state = NodePath("../Attack")
+animation_name = &"Hurt"
+
+[node name="Dead" type="Node2D" parent="EnemyStateMachine"]
+script = ExtResource("9_dead")
+
+[node name="DebuffHandler" parent="." instance=ExtResource("10_debuff")]
+
+[node name="HurtBox" parent="." instance=ExtResource("11_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="BiteHurtBox" parent="." instance=ExtResource("11_hurt")]
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteHurtBox"]
+position = Vector2(18, -14)
+shape = SubResource("RectangleShape2D_bite")
+debug_color = Color(0.9, 0.45, 0.1, 0.42)
+
+[node name="HitBox" parent="." instance=ExtResource("12_hit")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("13_hitscript")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("14_hp")]
+offset_left = -8.0
+offset_top = -40.0
+offset_right = 56.0
+offset_bottom = -8.0
+scale = Vector2(0.25, 0.25)

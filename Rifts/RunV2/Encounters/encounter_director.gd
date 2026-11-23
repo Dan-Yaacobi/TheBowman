@@ -1,7 +1,7 @@
 class_name EncounterDirector extends Node
 ## Runs one combat rift's fight. Before the player arrives it rolls an encounter set and places
-## it on the layout's spawn markers, one enemy per marker (ground enemies on GROUND markers,
-## flyers on AIR). Always-fill markers are filled first, from the set or with an extra enemy of
+## it on the layout's spawn markers, one enemy per marker (walking ground enemies on GROUND
+## markers, rooted shooters on ROOTED, flyers on AIR). Always-fill markers are filled first, from the set or with an extra enemy of
 ## the set's types; the rest of the set goes on random other markers. So the fight is the set's
 ## size, or the number of always-fill markers if that's more.
 ## A marker activates when the player comes within its wake radius (measured from its enemy)
@@ -76,6 +76,10 @@ func populate(markers: Array[SpawnMarker], biome: int, late: bool,
 				entry = _extra_entry_for_zone(marker.zone)
 			if entry:
 				_place(entry, marker)
+			else:
+				push_warning("EncounterDirector: always-fill %s marker %s stays empty; encounter '%s' has no %s enemy" % [
+					SpawnMarker.Zone.keys()[marker.zone], marker.name, encounter.display_name,
+					SpawnMarker.Zone.keys()[marker.zone]])
 	var free: Dictionary[SpawnMarker.Zone, Array] = {}
 	for entry: EnemyEntry in entries:
 		var marker: SpawnMarker = _take_marker(_zone_for(entry), optional, markers, free)
@@ -129,7 +133,20 @@ func _place(entry: EnemyEntry, marker: SpawnMarker) -> void:
 		enemy.ready.connect(_on_flyer_ready.bind(enemy, radius), CONNECT_ONE_SHOT)
 	else:
 		_ground_watch[enemy] = radius
+		_use_marker_wake_range(enemy, radius)
 	EventBus.enemy_summoned.emit(enemy)
+
+
+## Ground enemies wake by their own range too (also after falling back asleep); the marker's
+## radius replaces it so the layout decides when they wake. stats is this enemy's own copy.
+func _use_marker_wake_range(enemy: Enemy, radius: float) -> void:
+	if enemy.stats is RootedEnemyData:
+		var rooted: RootedEnemyData = enemy.stats as RootedEnemyData
+		# Keep the same gap between waking and falling back asleep
+		rooted.sleep_range = maxf(rooted.sleep_range, radius + rooted.sleep_range - rooted.wake_range)
+		rooted.wake_range = radius
+	elif enemy.stats is RockGolemData:
+		(enemy.stats as RockGolemData).wake_range = radius
 
 
 func _on_flyer_ready(enemy: Enemy, radius: float) -> void:
@@ -147,7 +164,7 @@ func _take_entry_for_zone(entries: Array[EnemyEntry], zone: SpawnMarker.Zone) ->
 
 ## An extra enemy for an always-fill marker once the set has none of its zone left: one of the
 ## set's types of that zone, weighted by count. Null if the set has no type of that zone
-## (the marker then stays empty: a ground enemy never goes on an air marker or the reverse).
+## (the marker then stays empty: an enemy never goes on another zone's marker).
 func _extra_entry_for_zone(zone: SpawnMarker.Zone) -> EnemyEntry:
 	var options: Array[EnemyEntry] = []
 	var weights: PackedFloat32Array = PackedFloat32Array()
@@ -182,9 +199,12 @@ func _take_marker(zone: SpawnMarker.Zone, optional: Array[SpawnMarker], all: Arr
 	return bag.pop_back()
 
 
-## Ground enemies use island spawn zones; everything else flies.
+## Ground enemies use island spawn zones; rooted ones (RootedEnemyData) get their own markers;
+## everything else flies.
 func _zone_for(entry: EnemyEntry) -> SpawnMarker.Zone:
 	if entry.spawn_zone == SpawnHandler.Zone.ISLAND or entry.spawn_zone == SpawnHandler.Zone.ISLAND_CENTER:
+		if entry.data is RootedEnemyData:
+			return SpawnMarker.Zone.ROOTED
 		return SpawnMarker.Zone.GROUND
 	return SpawnMarker.Zone.AIR
 

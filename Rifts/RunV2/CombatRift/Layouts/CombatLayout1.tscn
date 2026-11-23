@@ -164,51 +164,58 @@ position = Vector2(219, 121)
 zone = 1
 always_fill = true
 
-[node name="AirMid" parent="SpawnMarkers" index="7" unique_id=437354899 instance=ExtResource("3_marker")]
+[node name="AirLeft7" parent="SpawnMarkers" index="7" unique_id=313635067 instance=ExtResource("3_marker")]
+position = Vector2(158, 147)
+zone = 2
+always_fill = true
+
+[node name="AirMid" parent="SpawnMarkers" index="8" unique_id=437354899 instance=ExtResource("3_marker")]
 position = Vector2(419, -62)
 zone = 1
 always_fill = true
 
-[node name="AirRight" parent="SpawnMarkers" index="8" unique_id=721314088 instance=ExtResource("3_marker")]
+[node name="AirRight" parent="SpawnMarkers" index="9" unique_id=721314088 instance=ExtResource("3_marker")]
 position = Vector2(443, -64)
 zone = 1
 always_fill = true
 
-[node name="AirMid2" parent="SpawnMarkers" index="9" unique_id=316922934 instance=ExtResource("3_marker")]
+[node name="AirMid2" parent="SpawnMarkers" index="10" unique_id=316922934 instance=ExtResource("3_marker")]
 position = Vector2(569, -54)
 zone = 1
 always_fill = true
 
-[node name="AirRight2" parent="SpawnMarkers" index="10" unique_id=1245308600 instance=ExtResource("3_marker")]
+[node name="AirRight2" parent="SpawnMarkers" index="11" unique_id=1245308600 instance=ExtResource("3_marker")]
 position = Vector2(593, -56)
 zone = 1
 always_fill = true
 
-[node name="AirRight3" parent="SpawnMarkers" index="11" unique_id=1435048542 instance=ExtResource("3_marker")]
+[node name="AirRight3" parent="SpawnMarkers" index="12" unique_id=1435048542 instance=ExtResource("3_marker")]
 position = Vector2(825, 99)
 zone = 1
 wake_radius = 100.0
 always_fill = true
 
-[node name="AirRight4" parent="SpawnMarkers" index="12" unique_id=1993381389 instance=ExtResource("3_marker")]
+[node name="AirRight4" parent="SpawnMarkers" index="13" unique_id=1993381389 instance=ExtResource("3_marker")]
 position = Vector2(726, 170)
 zone = 1
 wake_radius = 60.0
 always_fill = true
 
-[node name="AirRight5" parent="SpawnMarkers" index="13" unique_id=922606469 instance=ExtResource("3_marker")]
+[node name="AirRight5" parent="SpawnMarkers" index="14" unique_id=922606469 instance=ExtResource("3_marker")]
 position = Vector2(435, -238)
 zone = 1
 wake_radius = 80.0
+link_radius = 80.0
 always_fill = true
 
-[node name="AirRight6" parent="SpawnMarkers" index="14" unique_id=1720475487 instance=ExtResource("3_marker")]
+[node name="AirRight6" parent="SpawnMarkers" index="15" unique_id=1720475487 instance=ExtResource("3_marker")]
 position = Vector2(330, -237)
 zone = 1
 wake_radius = 80.0
+link_radius = 80.0
 always_fill = true
 
-[node name="AirRight7" parent="SpawnMarkers" index="15" unique_id=446920215 instance=ExtResource("3_marker")]
+[node name="AirRight7" parent="SpawnMarkers" index="16" unique_id=446920215 instance=ExtResource("3_marker")]
 position = Vector2(383, -283)
 zone = 1
 wake_radius = 80.0

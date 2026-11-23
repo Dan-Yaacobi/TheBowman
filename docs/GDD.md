@@ -273,6 +273,7 @@ Each biome has the same five roles where possible. Exported values are placehold
 - **Shooter apple:** shoots at you.
 - **Rammer apple:** rams you. A line shows the charge path: it tracks you, then locks just before the charge.
 - **Splitter apple:** rams like the rammer but weaker, splits on death.
+- **Venom bloom:** a carnivorous plant rooted on an island (the dirt counterpart of the pine tree and obsidian spire). Asleep and hardened until you come close. Spits a fan of 3 poison stings aimed at you (a head rear-back telegraphs each spit), and bites with strong knockback if you come right up to it. Falls asleep again when you leave. (in progress)
 
 ### Snow
 - **Frost orb:** mobile aimed shooter, protected by icicle shields that must be broken first. (exists)

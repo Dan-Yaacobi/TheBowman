@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://r7yi7b2ik7io"]
+
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/CombatRift/CombatRiftBase.tscn" id="1_p6l12"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_osqlv"]
+[ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="3_23we0"]
+[ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="4_6qs3e"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="5_sxfcw"]
+[ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="6_0xe8a"]
+
+[node name="CombatTestLayout" unique_id=966750017 node_paths=PackedStringArray("exit_portal") instance=ExtResource("1_p6l12")]
+exit_portal = NodePath("Islands/Exit/ExitPortal")
+
+[node name="PlayerSpawn" parent="." index="0"]
+position = Vector2(-30, 103)
+
+[node name="Entry" parent="Islands" index="0" unique_id=818789597 instance=ExtResource("2_osqlv")]
+position = Vector2(-30, 141)
+start_island = true
+
+[node name="Step" parent="Islands" index="1" unique_id=166958640 instance=ExtResource("2_osqlv")]
+position = Vector2(73, 143)
+moving_island = true
+move_offset = Vector2(300, 0)
+move_trigger = 1
+
+[node name="HomeLeft" parent="Islands" index="2" unique_id=1060664578 instance=ExtResource("2_osqlv")]
+position = Vector2(409, 140)
+
+[node name="HomeRight" parent="Islands" index="3" unique_id=775649383 instance=ExtResource("2_osqlv")]
+position = Vector2(469, 127)
+
+[node name="Perch" parent="Islands" index="4" unique_id=905769312 instance=ExtResource("2_osqlv")]
+position = Vector2(203, 80)
+
+[node name="ScrollPedestal" parent="Islands/Perch" index="5" unique_id=1838108478 instance=ExtResource("3_23we0")]
+position = Vector2(-1, -16)
+
+[node name="Far" parent="Islands" index="5" unique_id=1276684216 instance=ExtResource("2_osqlv")]
+position = Vector2(536, 117)
+
+[node name="Chest" parent="Islands/Far" index="5" unique_id=594844449 instance=ExtResource("4_6qs3e")]
+position = Vector2(-1, -10)
+equipment_drop_chance = 100.0
+
+[node name="Exit" parent="Islands" index="6" unique_id=125257607 instance=ExtResource("2_osqlv")]
+position = Vector2(611, 102)
+
+[node name="ExitPortal" parent="Islands/Exit" index="5" unique_id=571333141 instance=ExtResource("5_sxfcw")]
+z_index = 0
+position = Vector2(0, -26)
+destination = 3
+is_rift_portal = true
+
+[node name="AirRight" parent="SpawnMarkers" index="0" unique_id=194896965 instance=ExtResource("6_0xe8a")]
+position = Vector2(226, 23)
+zone = 1
+wake_radius = 80.0
+
+[node name="Rooted" parent="SpawnMarkers" index="1" unique_id=313635067 instance=ExtResource("6_0xe8a")]
+position = Vector2(73, 135)
+zone = 2
+wake_radius = 50.0
+always_fill = true
+
+[node name="AirRight3" parent="SpawnMarkers" index="2" unique_id=778104248 instance=ExtResource("6_0xe8a")]
+position = Vector2(461, 39)
+zone = 1
+wake_radius = 80.0
+
+[node name="AirRight2" parent="SpawnMarkers" index="3" unique_id=838092124 instance=ExtResource("6_0xe8a")]
+position = Vector2(192, 26)
+zone = 1
+wake_radius = 80.0

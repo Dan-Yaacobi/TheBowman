@@ -92,3 +92,6 @@ shape = SubResource("CircleShape2D_imp")
 [node name="EnemyHealthBar" parent="." instance=ExtResource("8_hp")]
 offset_left = -8.0
 offset_top = -18.0
+offset_right = 56.0
+offset_bottom = 14.0
+scale = Vector2(0.25, 0.25)
