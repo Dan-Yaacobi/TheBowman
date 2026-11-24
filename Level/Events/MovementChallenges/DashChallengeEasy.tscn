@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c0xori8c2rs0y" path="res://Level/Events/event.gd" id="1_c47rq"]
 [ext_resource type="PackedScene" uid="uid://cchd8nts0ia0l" path="res://Rifts/LevelPieces/Pieces/SinglePiece.tscn" id="2_2wxm6"]
 [ext_resource type="PackedScene" uid="uid://dre264ek5xw44" path="res://Rifts/Chunks/Utility/FallingDeath/FallingDeath.tscn" id="3_2vntm"]
+[ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="3_pubr2"]
 [ext_resource type="PackedScene" uid="uid://b1r3nwmmcstvm" path="res://Objects/Portal/EventPortal.tscn" id="3_yw3nh"]
 
 [node name="EasyDashChallenge" type="Node2D" unique_id=163591846]
@@ -31,20 +32,38 @@ position = Vector2(771, 0)
 [node name="LevelPiece7" parent="Islands" unique_id=988065153 instance=ExtResource("2_2wxm6")]
 position = Vector2(803, -88)
 
+[node name="LevelPiece13" parent="Islands" unique_id=1353443980 instance=ExtResource("2_2wxm6")]
+position = Vector2(726, -132)
+
+[node name="LevelPiece14" parent="Islands" unique_id=756342664 instance=ExtResource("2_2wxm6")]
+position = Vector2(726, -220)
+
+[node name="LevelPiece16" parent="Islands" unique_id=935320500 instance=ExtResource("2_2wxm6")]
+position = Vector2(605, -253)
+
+[node name="LevelPiece17" parent="Islands" unique_id=1834438649 instance=ExtResource("2_2wxm6")]
+position = Vector2(528, -297)
+
+[node name="LevelPiece18" parent="Islands" unique_id=1799211638 instance=ExtResource("2_2wxm6")]
+position = Vector2(375, -297)
+
+[node name="ScrollPedestal" parent="Islands/LevelPiece18" unique_id=2067462309 instance=ExtResource("3_pubr2")]
+position = Vector2(0, -17)
+
 [node name="LevelPiece8" parent="Islands" unique_id=1727877937 instance=ExtResource("2_2wxm6")]
-position = Vector2(989, -88)
+position = Vector2(957, -88)
 
 [node name="LevelPiece9" parent="Islands" unique_id=97989422 instance=ExtResource("2_2wxm6")]
-position = Vector2(1128, -56)
+position = Vector2(1096, -56)
 
 [node name="LevelPiece10" parent="Islands" unique_id=745270713 instance=ExtResource("2_2wxm6")]
-position = Vector2(1267, -24)
+position = Vector2(1235, -24)
 
 [node name="LevelPiece11" parent="Islands" unique_id=1351210880 instance=ExtResource("2_2wxm6")]
-position = Vector2(1485, -24)
+position = Vector2(1421, -24)
 
 [node name="LevelPiece12" parent="Islands" unique_id=1077284479 instance=ExtResource("2_2wxm6")]
-position = Vector2(1573, -24)
+position = Vector2(1542, -24)
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1426876668]
 position = Vector2(0, -71)
@@ -53,4 +72,4 @@ position = Vector2(0, -71)
 position = Vector2(6, 404)
 
 [node name="EventPortal" parent="." unique_id=620797059 instance=ExtResource("3_yw3nh")]
-position = Vector2(1575, -62)
+position = Vector2(1550.0001, -62)

@@ -784,7 +784,7 @@ func get_weapon_size() -> float:
 
 
 func get_sword_cd() -> float:
-	return max(stats.base_sword_cooldown.value(),0.5)
+	return stats.base_sword_cooldown.value() #max(stats.base_sword_cooldown.value(),0.5)
 
 func get_sword_size() -> float:
 	return stats.sword_size.value()

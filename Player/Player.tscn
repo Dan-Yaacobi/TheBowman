@@ -141,7 +141,7 @@ metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_7w4lt"]
 script = ExtResource("4_yf47d")
-base_value = 950.0
+base_value = 1100.0
 metadata/_custom_type_script = "uid://kxsprfrlwgfb"
 
 [sub_resource type="Resource" id="Resource_e03cv"]
@@ -2590,6 +2590,7 @@ hframes = 3
 vframes = 3
 
 [node name="SwingCooldown" type="Timer" parent="PlayerBody" unique_id=846500799]
+wait_time = 0.1
 
 [node name="PlayerMainHand" type="Node2D" parent="." unique_id=1504331006]
 position = Vector2(-8, 8)
