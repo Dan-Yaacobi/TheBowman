@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cchd8nts0ia0l"]
+
+[ext_resource type="Script" uid="uid://c0g0shiqjsfs0" path="res://Rifts/LevelPieces/level_piece.gd" id="1_trldu"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_7gl5e"]
+[ext_resource type="PackedScene" path="res://Rifts/LevelPieces/ConnectorMarker.tscn" id="3_drwk8"]
+
+[node name="LevelPiece" type="Node2D" unique_id=392526761]
+script = ExtResource("1_trldu")
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("2_7gl5e")]
+
+[node name="ConnectorMarker" parent="." unique_id=1898038580 instance=ExtResource("3_drwk8")]
+position = Vector2(44, 0)
+
+[node name="ConnectorMarker2" parent="." unique_id=1934071137 instance=ExtResource("3_drwk8")]
+position = Vector2(30, 32)
+
+[node name="ConnectorMarker3" parent="." unique_id=1446651009 instance=ExtResource("3_drwk8")]
+position = Vector2(30, -32)
+
+[node name="ConnectorMarker4" parent="." unique_id=1858329564 instance=ExtResource("3_drwk8")]
+position = Vector2(0, -44)
+
+[node name="ConnectorMarker9" parent="." unique_id=1687863791 instance=ExtResource("3_drwk8")]
+position = Vector2(0, -77)
+
+[node name="ConnectorMarker10" parent="." unique_id=1621329947 instance=ExtResource("3_drwk8")]
+position = Vector2(0, 77)
+
+[node name="ConnectorMarker15" parent="." unique_id=961540758 instance=ExtResource("3_drwk8")]
+position = Vector2(0, 109)
+
+[node name="ConnectorMarker11" parent="." unique_id=1429211746 instance=ExtResource("3_drwk8")]
+position = Vector2(77, 0)
+
+[node name="ConnectorMarker13" parent="." unique_id=562746802 instance=ExtResource("3_drwk8")]
+position = Vector2(109, 0)
+
+[node name="ConnectorMarker14" parent="." unique_id=48579002 instance=ExtResource("3_drwk8")]
+position = Vector2(-109, 0)
+
+[node name="ConnectorMarker12" parent="." unique_id=1362637916 instance=ExtResource("3_drwk8")]
+position = Vector2(-77, 0)
+
+[node name="ConnectorMarker5" parent="." unique_id=1914291588 instance=ExtResource("3_drwk8")]
+position = Vector2(-30, -32)
+
+[node name="ConnectorMarker6" parent="." unique_id=1133544916 instance=ExtResource("3_drwk8")]
+position = Vector2(-44, 0)
+
+[node name="ConnectorMarker7" parent="." unique_id=1468863064 instance=ExtResource("3_drwk8")]
+position = Vector2(-30, 32)
+
+[node name="ConnectorMarker8" parent="." unique_id=1164415837 instance=ExtResource("3_drwk8")]
+position = Vector2(0, 44)

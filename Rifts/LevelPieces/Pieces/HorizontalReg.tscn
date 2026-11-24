@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dlg1rl5d3hvfb"]
+
+[ext_resource type="Script" uid="uid://c0g0shiqjsfs0" path="res://Rifts/LevelPieces/level_piece.gd" id="1_piece"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_1gjto"]
+[ext_resource type="PackedScene" path="res://Rifts/LevelPieces/ConnectorMarker.tscn" id="3_2goar"]
+
+[node name="LevelPiece" type="Node2D" unique_id=905860611]
+script = ExtResource("1_piece")
+
+[node name="Island" parent="." unique_id=1847265216 instance=ExtResource("2_1gjto")]
+position = Vector2(-33, 0)
+
+[node name="Island2" parent="." unique_id=1955889283 instance=ExtResource("2_1gjto")]
+position = Vector2(33, 0)
+
+[node name="ConnectorMarker" parent="." unique_id=1445324711 instance=ExtResource("3_2goar")]
+position = Vector2(-66, 0)
+
+[node name="ConnectorMarker2" parent="." unique_id=1258125886 instance=ExtResource("3_2goar")]
+position = Vector2(66, 0)
