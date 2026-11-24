@@ -1,19 +1,27 @@
 class_name LayoutTestPicker extends CanvasLayer
-## Debug panel for testing a combat layout: pick a layout (every scene in LAYOUT_DIR), its
-## enemies (Random roll, Empty, or one encounter set from ENCOUNTER_DIR) and the biome.
+## Debug panel. LAYOUT mode: pick a combat layout (every scene in LAYOUT_DIR), its enemies
+## (Random roll, Empty, or one encounter set from ENCOUNTER_DIR) and the biome.
+## EVENT mode: pick one of the event node's events (EVENT_NODE_PATH) and the biome.
 ## Pauses the game while open.
+
+enum Mode { LAYOUT, EVENT }
 
 const LAYOUT_DIR: String = "res://Rifts/RunV2/CombatRift/Layouts/"
 const ENCOUNTER_DIR: String = "res://Rifts/RunV2/Encounters/Resource/"
 const BIOMES: Array[String] = ["Dirt", "Snow", "Hell"]
 const RANDOM_LABEL: String = "Random"
 const EMPTY_LABEL: String = "Empty (no enemies)"
+const EVENT_NODE_PATH: String = "res://Rifts/RunV2/EventNode/EventNode.tscn"
+
+var mode: Mode = Mode.LAYOUT
 
 var _layouts: Array[String] = []
 var _encounters: Array[EncounterSet] = []
 var _layout_list: ItemList
 var _encounter_list: ItemList
 var _biome_list: ItemList
+var _event_entries: Array[EventEntry] = []
+var _event_list: ItemList
 
 
 func _ready() -> void:
@@ -36,10 +44,51 @@ func _build() -> void:
 	var column: VBoxContainer = VBoxContainer.new()
 	panel.add_child(column)
 	var title: Label = Label.new()
-	title.text = "Layout test"
+	title.text = "Event test" if mode == Mode.EVENT else "Layout test"
 	column.add_child(title)
 	var row: HBoxContainer = HBoxContainer.new()
 	column.add_child(row)
+	if mode == Mode.EVENT:
+		_build_event_list(row)
+	else:
+		_build_layout_lists(row)
+	_biome_list = _add_list(row, "Biome", Vector2(60, 160))
+	for biome: String in BIOMES:
+		_biome_list.add_item(biome)
+	_biome_list.select(0)
+	var buttons: HBoxContainer = HBoxContainer.new()
+	column.add_child(buttons)
+	var go: Button = Button.new()
+	go.text = "Play"
+	go.pressed.connect(_on_go_pressed)
+	buttons.add_child(go)
+	var cancel: Button = Button.new()
+	cancel.text = "Cancel"
+	cancel.pressed.connect(_close)
+	buttons.add_child(cancel)
+
+
+## The event node's own entries, so the list always matches what runs can roll.
+func _build_event_list(row: HBoxContainer) -> void:
+	_event_list = _add_list(row, "Event", Vector2(180, 160))
+	var host: EventNode = (load(EVENT_NODE_PATH) as PackedScene).instantiate() as EventNode
+	if host:
+		for entry: EventEntry in host.event_entries:
+			if entry == null:
+				continue
+			_event_entries.append(entry)
+			if entry.artifact_catalog:
+				_event_list.add_item("Artifact (next missing)")
+			elif entry.scene:
+				_event_list.add_item(entry.scene.resource_path.get_file().trim_suffix(".tscn"))
+			else:
+				_event_list.add_item(entry.resource_path.get_file())
+		host.free()
+	if _event_list.item_count > 0:
+		_event_list.select(0)
+
+
+func _build_layout_lists(row: HBoxContainer) -> void:
 	_layout_list = _add_list(row, "Layout", Vector2(140, 160))
 	for path: String in _scan(LAYOUT_DIR, ".tscn"):
 		_layouts.append(path)
@@ -52,23 +101,9 @@ func _build() -> void:
 		if encounter:
 			_encounters.append(encounter)
 			_encounter_list.add_item(encounter.display_name if encounter.display_name != "" else path.get_file())
-	_biome_list = _add_list(row, "Biome", Vector2(60, 160))
-	for biome: String in BIOMES:
-		_biome_list.add_item(biome)
 	if _layout_list.item_count > 0:
 		_layout_list.select(0)
 	_encounter_list.select(0)
-	_biome_list.select(0)
-	var buttons: HBoxContainer = HBoxContainer.new()
-	column.add_child(buttons)
-	var go: Button = Button.new()
-	go.text = "Play"
-	go.pressed.connect(_on_go_pressed)
-	buttons.add_child(go)
-	var cancel: Button = Button.new()
-	cancel.text = "Cancel"
-	cancel.pressed.connect(_close)
-	buttons.add_child(cancel)
 
 
 func _add_list(parent: Control, heading: String, min_size: Vector2) -> ItemList:
@@ -97,6 +132,9 @@ func _scan(dir: String, extension: String) -> Array[String]:
 
 
 func _on_go_pressed() -> void:
+	if mode == Mode.EVENT:
+		_play_event()
+		return
 	var layout_index: int = _first_selected(_layout_list)
 	if layout_index < 0:
 		return
@@ -107,6 +145,19 @@ func _on_go_pressed() -> void:
 	var biome: int = maxi(_first_selected(_biome_list), 0)
 	_close()
 	EventBus.layout_test_requested.emit(layout, encounter, empty, biome)
+
+
+func _play_event() -> void:
+	var index: int = _first_selected(_event_list)
+	if index < 0:
+		return
+	var scene: PackedScene = _event_entries[index].get_scene(RandomNumberGenerator.new())
+	if scene == null:
+		CombatTextSpawner.spawn(PlayerManager.player.global_position, "No event left to roll", Color.WHITE)
+		return
+	var biome: int = maxi(_first_selected(_biome_list), 0)
+	_close()
+	EventBus.event_test_requested.emit(scene, biome)
 
 
 func _first_selected(list: ItemList) -> int:

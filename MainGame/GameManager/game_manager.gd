@@ -9,6 +9,7 @@ class_name GameManager extends Node2D
 @export var nodes_per_act: int = 5
 
 const CROSSROADS_SCENE_PATH: String = "res://Rifts/RunV2/Crossroads/Crossroads.tscn"
+const EVENT_NODE_SCENE_PATH: String = "res://Rifts/RunV2/EventNode/EventNode.tscn"
 
 var curr_world: GameWorld
 var prev_world: GameWorld
@@ -35,6 +36,7 @@ func _ready() -> void:
 	EventBus.boss_portal_entered.connect(func() -> void: change_to_scene(_draw_boss()))
 	EventBus.node_portal_entered.connect(_on_node_portal_entered)
 	EventBus.layout_test_requested.connect(_on_layout_test_requested)
+	EventBus.event_test_requested.connect(_on_event_test_requested)
 	EventBus.player_died.connect(_on_event_bus_player_died)
 	SaveService.register(SaveService.RUN_SECTION, _save_run, _load_run)
 
@@ -173,6 +175,10 @@ func _on_event_exit_requested() -> void:
 	if _route != null and curr_world is EventNode:
 		_on_route_exit_portal_entered()
 		return
+	# A debug event test: back to the hub.
+	if _layout_test and curr_world is EventNode:
+		change_game_world(GameWorlds.worlds.Main_Menu)
+		return
 	if _is_transitioning or not curr_world or not curr_world.current_event:
 		return
 	_is_transitioning = true
@@ -310,6 +316,18 @@ func _on_layout_test_requested(layout: PackedScene, encounter: EncounterSet, emp
 		return
 	world.setup_test(encounter, empty)
 	# Islands and the encounter read the biome from it.
+	PlayerManager.player.stats.rift_level = clampi(biome, 0, CustomVariables.BIOME_COUNT - 1) * CustomVariables.RIFTS_PER_TYPE + 1
+	_layout_test = true
+	await _transition_to(world)
+
+func _on_event_test_requested(event_scene: PackedScene, biome: int) -> void:
+	if _is_transitioning or event_scene == null or not curr_world is MainMenu:
+		return
+	var world: EventNode = (load(EVENT_NODE_SCENE_PATH) as PackedScene).instantiate() as EventNode
+	if world == null:
+		push_error("Event test: %s is not an EventNode" % EVENT_NODE_SCENE_PATH)
+		return
+	world.setup_test(event_scene)
 	PlayerManager.player.stats.rift_level = clampi(biome, 0, CustomVariables.BIOME_COUNT - 1) * CustomVariables.RIFTS_PER_TYPE + 1
 	_layout_test = true
 	await _transition_to(world)

@@ -171,3 +171,8 @@ one_shot = false
 
 [node name="LayoutTestPortal" parent="DebugOnly" instance=ExtResource("27_layouttest")]
 position = Vector2(340, 58)
+
+[node name="EventTestPortal" parent="DebugOnly" instance=ExtResource("27_layouttest")]
+modulate = Color(0.55, 0.75, 1, 1)
+position = Vector2(348, 125)
+mode = 1

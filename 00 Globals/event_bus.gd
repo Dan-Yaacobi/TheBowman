@@ -67,6 +67,8 @@ signal entered_rift_portal
 signal node_portal_entered(node: RunNodeData)
 ## Debug: play one combat layout from the hub. encounter null + not empty = roll as usual.
 signal layout_test_requested(layout: PackedScene, encounter: EncounterSet, empty: bool, biome: int)
+## Debug: play one event as an event node from the hub.
+signal event_test_requested(event_scene: PackedScene, biome: int)
 
 signal try_drop(position: Vector2, _chance: float, forced_rarity: int)
 signal drop_item(item: CustomVariables.items, position: Vector2, _chance: float, _amount: int)

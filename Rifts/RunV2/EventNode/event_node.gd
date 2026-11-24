@@ -8,17 +8,30 @@ class_name EventNode extends RunNodeWorld
 @onready var loot_manager: LootManager = $LootManager
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+## Event test (debug hub portal): this event instead of a roll, free falls, no run state.
+var _test_scene: PackedScene = null
+
+
+## Called by GameManager before the node enters the tree.
+func setup_test(event_scene: PackedScene) -> void:
+	_test_scene = event_scene
+	counts_as_node = false
+	counts_as_run = false
 
 
 func extra_node_set_functions() -> void:
 	# Event rewards and item blessings drop through the world's loot manager.
 	loot_manager.set_up()
-	var scene: PackedScene = _roll_event_scene()
+	var scene: PackedScene = _test_scene if _test_scene else _roll_event_scene()
 	if scene == null:
 		push_error("EventNode: no eligible event")
 		return
 	current_event = scene.instantiate()
 	add_child(current_event)
+	if _test_scene:
+		for node: Node in current_event.find_children("*", "Area2D", true, false):
+			if node is FallingDeath:
+				(node as FallingDeath).costs_heart = false
 
 
 func extra_node_exit_functions() -> void:
