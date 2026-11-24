@@ -6,7 +6,7 @@ class_name ConnectorMarker extends Marker2D
 ## In the editor: green circle = snap radius. Hidden in game.
 
 const GROUP: StringName = &"level_connector"
-const RADIUS_COLOR: Color = Color(0.3, 1.0, 0.5, 0.8)
+const RADIUS_COLOR: Color = Color(0.213, 0.71, 0.354, 0.306)
 const POINT_COLOR: Color = Color(0.3, 1.0, 0.5, 1.0)
 const CIRCLE_WIDTH: float = 1.0
 const POINT_RADIUS: float = 1.5

@@ -6,12 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="4_chest"]
 [ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="5_pedestal"]
 [ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="6_exit_portal"]
+[ext_resource type="PackedScene" uid="uid://cchd8nts0ia0l" path="res://Rifts/LevelPieces/Pieces/SinglePiece.tscn" id="7_15nfm"]
 
 [node name="CombatTestLayout" unique_id=966750017 node_paths=PackedStringArray("exit_portal") instance=ExtResource("1_base")]
 exit_portal = NodePath("Islands/Exit/ExitPortal")
 
 [node name="PlayerSpawn" parent="." index="0"]
-position = Vector2(0, 102)
+position = Vector2(-147, -14)
 
 [node name="Entry" parent="Islands" index="0" unique_id=818789597 instance=ExtResource("2_island")]
 position = Vector2(0, 140)
@@ -53,3 +54,39 @@ position = Vector2(225, 140)
 [node name="AirRight" parent="SpawnMarkers" index="1" unique_id=194896965 instance=ExtResource("3_marker")]
 position = Vector2(270, 80)
 zone = 1
+
+[node name="LevelPiece" parent="." index="6" unique_id=392526761 instance=ExtResource("7_15nfm")]
+position = Vector2(-225, 61)
+
+[node name="LevelPiece3" parent="." index="7" unique_id=727690790 instance=ExtResource("7_15nfm")]
+position = Vector2(-307, 49)
+
+[node name="LevelPiece7" parent="." index="8" unique_id=1683857371 instance=ExtResource("7_15nfm")]
+position = Vector2(-460, 49)
+
+[node name="LevelPiece12" parent="." index="9" unique_id=350624153 instance=ExtResource("7_15nfm")]
+position = Vector2(-646, 49)
+
+[node name="LevelPiece6" parent="." index="10" unique_id=396984745 instance=ExtResource("7_15nfm")]
+position = Vector2(-228, 138)
+
+[node name="LevelPiece4" parent="." index="11" unique_id=1718372342 instance=ExtResource("7_15nfm")]
+position = Vector2(-260, 17)
+
+[node name="LevelPiece8" parent="." index="12" unique_id=649645096 instance=ExtResource("7_15nfm")]
+position = Vector2(-260, -71)
+
+[node name="LevelPiece2" parent="." index="13" unique_id=1452335984 instance=ExtResource("7_15nfm")]
+position = Vector2(-151, 29)
+
+[node name="LevelPiece5" parent="." index="14" unique_id=1188449378 instance=ExtResource("7_15nfm")]
+position = Vector2(-104, -3)
+
+[node name="LevelPiece9" parent="." index="15" unique_id=1289814835 instance=ExtResource("7_15nfm")]
+position = Vector2(-42, 17)
+
+[node name="LevelPiece10" parent="." index="16" unique_id=851181566 instance=ExtResource("7_15nfm")]
+position = Vector2(-12, -59)
+
+[node name="LevelPiece11" parent="." index="17" unique_id=348819842 instance=ExtResource("7_15nfm")]
+position = Vector2(18, -168)
