@@ -5,6 +5,8 @@ const GROUP: StringName = &"islands"
 
 ## What makes a moving island move.
 enum MoveTrigger { ALWAYS, PLAYER_ON_IT, SWITCHES }
+## The shape of a moving island's path.
+enum MovePath { LINE, CIRCLE }
 ## What makes a crumbling island crumble.
 enum CrumbleTrigger { LANDINGS, SWITCHES }
 
@@ -19,13 +21,22 @@ const CRUMBLE_EFFECT_PATH: String = "res://Enemies/WizardBoss/EarthWizard/Crumbl
 @export var textures: Array[TextureData]
 
 @export_group("Moving")
-## Moves back and forth between where it's placed and move_offset from there.
+## Turns the motion on/off. The path is set by move_path.
 @export var moving_island: bool = false
-## The far end of the path, relative to where the island is placed.
+## LINE: back and forth between where it's placed and move_offset from there.
+## CIRCLE: round circle_center at circle_radius.
+@export var move_path: MovePath = MovePath.LINE
+## LINE: the far end of the path, relative to where the island is placed.
 @export var move_offset: Vector2 = Vector2(80, 0)
+## Pixels per second, along the line or around the circle.
 @export var move_speed: float = 40.0
-## Seconds it waits at each end.
+## LINE: seconds it waits at each end.
 @export var move_end_pause: float = 0.5
+## CIRCLE: the center, relative to where the island is placed. The island starts on the
+## circle in the direction it's placed from the center, so place it on the circle.
+@export var circle_center: Vector2 = Vector2(0, 40)
+@export var circle_radius: float = 40.0
+@export var circle_clockwise: bool = true
 ## ALWAYS: moves from the start. PLAYER_ON_IT: only while the player stands on it.
 ## SWITCHES: only while every switch is on. Otherwise it waits where it is.
 @export var move_trigger: MoveTrigger = MoveTrigger.ALWAYS
@@ -68,6 +79,9 @@ var _rest_position: Vector2
 ## Heading to the far end (start_point + move_offset) or back to start_point.
 var _moving_out: bool = true
 var _move_wait: float = 0.0
+## CIRCLE: the center in global coords and the island's current angle around it (radians).
+var _circle_center_global: Vector2
+var _circle_angle: float = 0.0
 var _landings: int = 0
 var _crumble_tween: Tween
 
@@ -80,6 +94,8 @@ func _ready() -> void:
 	if moving_island:
 		floating = false
 		_path_position = global_position
+		if move_path == MovePath.CIRCLE:
+			_start_circle()
 	for island_switch: IslandSwitch in switches:
 		if island_switch:
 			island_switch.switched.connect(_on_island_switch_switched)
@@ -123,6 +139,9 @@ func _is_move_active() -> bool:
 	return true
 
 func _advance_path(delta: float) -> void:
+	if move_path == MovePath.CIRCLE:
+		_advance_circle(delta)
+		return
 	if _move_wait > 0.0:
 		_move_wait -= delta
 		return
@@ -131,6 +150,22 @@ func _advance_path(delta: float) -> void:
 	if _path_position.is_equal_approx(target):
 		_moving_out = not _moving_out
 		_move_wait = move_end_pause
+
+func _start_circle() -> void:
+	_circle_center_global = start_point + circle_center
+	var from_center: Vector2 = start_point - _circle_center_global
+	_circle_angle = from_center.angle() if not from_center.is_zero_approx() else 0.0
+	_path_position = _get_circle_point()
+
+func _advance_circle(delta: float) -> void:
+	if circle_radius <= 0.0:
+		return
+	var direction: float = 1.0 if circle_clockwise else -1.0
+	_circle_angle = wrapf(_circle_angle + direction * move_speed / circle_radius * delta, -PI, PI)
+	_path_position = _get_circle_point()
+
+func _get_circle_point() -> Vector2:
+	return _circle_center_global + Vector2.from_angle(_circle_angle) * circle_radius
 
 ## The player is standing on this island right now.
 func is_player_on_it() -> bool:
