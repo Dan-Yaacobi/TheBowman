@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EventEntry" format=3 uid="uid://dw382npcr6q0a"]
+
+[ext_resource type="PackedScene" uid="uid://bfcdcdn6807yi" path="res://Level/Events/MovementChallenges/DashChallengeEasy.tscn" id="1_3tl7v"]
+[ext_resource type="Script" uid="uid://dlgy2cii5o354" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_ggvfo"]
+
+[resource]
+script = ExtResource("1_ggvfo")
+scene = ExtResource("1_3tl7v")
+metadata/_custom_type_script = "uid://dlgy2cii5o354"

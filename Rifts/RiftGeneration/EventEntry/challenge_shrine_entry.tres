@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="EventEntry" format=3]
+[gd_resource type="Resource" script_class="EventEntry" format=3 uid="uid://bt026qgu1bpcc"]
 
-[ext_resource type="Script" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_entry"]
-[ext_resource type="PackedScene" path="res://Level/Events/ChallengeStone/ChallengeShrineEvent.tscn" id="2_event"]
+[ext_resource type="Script" uid="uid://dlgy2cii5o354" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_entry"]
+[ext_resource type="PackedScene" uid="uid://dwoo7pueeenah" path="res://Level/Events/ChallengeStone/ChallengeShrineEvent.tscn" id="2_event"]
 
 [resource]
 script = ExtResource("1_entry")
 scene = ExtResource("2_event")
-min_level = 1

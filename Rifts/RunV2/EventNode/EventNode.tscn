@@ -1,23 +1,24 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dh8wdbktsdbum"]
 
-[ext_resource type="Script" path="res://Rifts/RunV2/EventNode/event_node.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bhbxtyis2ve1w" path="res://Rifts/RunV2/EventNode/event_node.gd" id="1_script"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/dirt_sky.tres" id="5_dirt"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/snow_sky.tres" id="6_snow"]
 [ext_resource type="Resource" path="res://Rifts/RunV2/Resource/Skies/hell_sky.tres" id="7_hell"]
-[ext_resource type="Script" path="res://MainGame/sky_colors.gd" id="8_skyscript"]
-[ext_resource type="Script" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="9_entry"]
-[ext_resource type="PackedScene" path="res://Items/LootManager/LootManager.tscn" id="17_loot"]
-[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/challenge_shrine_entry.tres" id="10_shrine"]
+[ext_resource type="Script" uid="uid://viwygaov6sfn" path="res://MainGame/sky_colors.gd" id="8_skyscript"]
+[ext_resource type="Script" uid="uid://dlgy2cii5o354" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="9_entry"]
+[ext_resource type="Resource" uid="uid://bt026qgu1bpcc" path="res://Rifts/RiftGeneration/EventEntry/challenge_shrine_entry.tres" id="10_shrine"]
+[ext_resource type="Resource" uid="uid://dw382npcr6q0a" path="res://Rifts/RiftGeneration/EventEntry/easy_dash_entry.tres" id="10_w8dpy"]
 [ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/moving_targets_entry.tres" id="11_targets"]
 [ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/apple_boss_entry.tres" id="12_apple"]
 [ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/bird_boss_entry.tres" id="13_bird"]
 [ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/golden_apple_entry.tres" id="14_golden"]
 [ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/sacrificial_altar_entry.tres" id="15_altar"]
-[ext_resource type="Resource" path="res://Rifts/RiftGeneration/EventEntry/artifact_entry.tres" id="16_artifact"]
+[ext_resource type="Resource" uid="uid://dvcpn6ispas0o" path="res://Rifts/RiftGeneration/EventEntry/artifact_entry.tres" id="16_artifact"]
+[ext_resource type="PackedScene" uid="uid://brk4k1xmci30m" path="res://Items/LootManager/LootManager.tscn" id="17_loot"]
 
-[node name="EventNode" type="Node2D"]
+[node name="EventNode" type="Node2D" unique_id=598063226]
 script = ExtResource("1_script")
-event_entries = Array[ExtResource("9_entry")]([ExtResource("10_shrine"), ExtResource("11_targets"), ExtResource("12_apple"), ExtResource("13_bird"), ExtResource("14_golden"), ExtResource("15_altar"), ExtResource("16_artifact")])
+event_entries = Array[ExtResource("9_entry")]([ExtResource("10_shrine"), ExtResource("11_targets"), ExtResource("12_apple"), ExtResource("13_bird"), ExtResource("14_golden"), ExtResource("15_altar"), ExtResource("16_artifact"), ExtResource("10_w8dpy")])
 sky_colors = Array[ExtResource("8_skyscript")]([ExtResource("5_dirt"), ExtResource("6_snow"), ExtResource("7_hell")])
 
-[node name="LootManager" parent="." instance=ExtResource("17_loot")]
+[node name="LootManager" parent="." unique_id=465960961 instance=ExtResource("17_loot")]

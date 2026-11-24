@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="EventEntry" format=3]
+[gd_resource type="Resource" script_class="EventEntry" format=3 uid="uid://dvcpn6ispas0o"]
 
-[ext_resource type="Script" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_entry"]
-[ext_resource type="Resource" path="res://Level/Events/Artifacts/Resource/artifact_catalog.tres" id="2_event"]
+[ext_resource type="Script" uid="uid://dlgy2cii5o354" path="res://Rifts/RiftGeneration/EventEntry/event_entry.gd" id="1_entry"]
+[ext_resource type="Resource" uid="uid://h4be8xpbgb7f" path="res://Level/Events/Artifacts/Resource/artifact_catalog.tres" id="2_event"]
 
 [resource]
 script = ExtResource("1_entry")
 artifact_catalog = ExtResource("2_event")
-min_level = 1
