@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dor7ft8oslyck"]
+
+[ext_resource type="PackedScene" path="res://Rifts/RunV2/CombatRift/CombatRiftBase.tscn" id="1_8cgut"]
+[ext_resource type="PackedScene" uid="uid://bnq5ivogfkh6w" path="res://Level/Islands/Island.tscn" id="2_3m82i"]
+[ext_resource type="PackedScene" uid="uid://bgi3uvlfliee1" path="res://NPC/Pedestal/ScrollPedestal.tscn" id="3_5nv72"]
+[ext_resource type="PackedScene" uid="uid://bi4in2t4m7gip" path="res://Objects/Scenes/Chest.tscn" id="4_pa0sn"]
+[ext_resource type="PackedScene" uid="uid://dn4wbtuany6er" path="res://Objects/Portal/Portal.tscn" id="5_mk8kx"]
+[ext_resource type="PackedScene" uid="uid://sjjba0xc1dtt" path="res://Rifts/Chunks/Utility/Markers/SpawnMarker.tscn" id="6_2hcpy"]
+[ext_resource type="PackedScene" uid="uid://cchd8nts0ia0l" path="res://Rifts/LevelPieces/Pieces/SinglePiece.tscn" id="7_k8y0t"]
+
+[node name="CombatTestLayout" unique_id=966750017 node_paths=PackedStringArray("exit_portal") instance=ExtResource("1_8cgut")]
+exit_portal = NodePath("Islands/Exit/ExitPortal")
+kills_required = 50.0
+
+[node name="PlayerSpawn" parent="." index="0"]
+position = Vector2(-335, 29)
+
+[node name="FallingDeath" parent="." index="3"]
+position = Vector2(0, 686)
+
+[node name="Perch" parent="Islands" index="0" unique_id=905769312 instance=ExtResource("2_3m82i")]
+position = Vector2(-754, -76)
+
+[node name="ScrollPedestal" parent="Islands/Perch" index="5" unique_id=1838108478 instance=ExtResource("3_5nv72")]
+position = Vector2(-1, -16)
+
+[node name="Far" parent="Islands" index="1" unique_id=1276684216 instance=ExtResource("2_3m82i")]
+position = Vector2(43, -155)
+
+[node name="Chest" parent="Islands/Far" index="5" unique_id=594844449 instance=ExtResource("4_pa0sn")]
+position = Vector2(-1, -10)
+
+[node name="Exit" parent="Islands" index="2" unique_id=125257607 instance=ExtResource("2_3m82i")]
+position = Vector2(-513, 373)
+
+[node name="ExitPortal" parent="Islands/Exit" index="5" unique_id=571333141 instance=ExtResource("5_mk8kx")]
+z_index = 0
+position = Vector2(0, -26)
+destination = 3
+is_rift_portal = true
+
+[node name="GroundFar" parent="SpawnMarkers" index="0" unique_id=1296445143 instance=ExtResource("6_2hcpy")]
+position = Vector2(-121, 129)
+
+[node name="GroundFar2" parent="SpawnMarkers" index="1" unique_id=313635067 instance=ExtResource("6_2hcpy")]
+position = Vector2(-298, 334)
+link_radius = 60.0
+
+[node name="GroundFar3" parent="SpawnMarkers" index="2" unique_id=50872398 instance=ExtResource("6_2hcpy")]
+position = Vector2(-253, 304)
+link_radius = 60.0
+
+[node name="AirRight" parent="SpawnMarkers" index="3" unique_id=194896965 instance=ExtResource("6_2hcpy")]
+position = Vector2(-10, -206)
+zone = 1
+wake_radius = 60.0
+link_radius = 120.0
+
+[node name="AirRight4" parent="SpawnMarkers" index="4" unique_id=760378341 instance=ExtResource("6_2hcpy")]
+position = Vector2(99, -208)
+zone = 1
+wake_radius = 60.0
+link_radius = 120.0
+
+[node name="AirRight2" parent="SpawnMarkers" index="5" unique_id=879299296 instance=ExtResource("6_2hcpy")]
+position = Vector2(-472, 153)
+zone = 1
+
+[node name="AirRight3" parent="SpawnMarkers" index="6" unique_id=449464846 instance=ExtResource("6_2hcpy")]
+position = Vector2(-613, -108)
+zone = 1
+
+[node name="LevelPiece11" parent="." index="6" unique_id=348819842 instance=ExtResource("7_k8y0t")]
+position = Vector2(-336, 69)
+
+[node name="LevelPiece12" parent="." index="7" unique_id=392526761 instance=ExtResource("7_k8y0t")]
+position = Vector2(-248, 69)
+
+[node name="LevelPiece13" parent="." index="8" unique_id=201726232 instance=ExtResource("7_k8y0t")]
+position = Vector2(-141, 37)
+
+[node name="LevelPiece16" parent="." index="9" unique_id=188749614 instance=ExtResource("7_k8y0t")]
+position = Vector2(-81, -27)
+
+[node name="LevelPiece21" parent="." index="10" unique_id=941384636 instance=ExtResource("7_k8y0t")]
+position = Vector2(-7, 5)
+
+[node name="LevelPiece26" parent="." index="11" unique_id=850292143 instance=ExtResource("7_k8y0t")]
+position = Vector2(-4, -104)
+
+[node name="LevelPiece27" parent="." index="12" unique_id=703050219 instance=ExtResource("7_k8y0t")]
+position = Vector2(-434, 344)
+
+[node name="LevelPiece17" parent="." index="13" unique_id=925787252 instance=ExtResource("7_k8y0t")]
+position = Vector2(-343, 178)
+
+[node name="LevelPiece18" parent="." index="14" unique_id=1257946631 instance=ExtResource("7_k8y0t")]
+position = Vector2(-313, 223)
+
+[node name="LevelPiece19" parent="." index="15" unique_id=112519877 instance=ExtResource("7_k8y0t")]
+position = Vector2(-313, 223)
+
+[node name="LevelPiece20" parent="." index="16" unique_id=319264631 instance=ExtResource("7_k8y0t")]
+position = Vector2(-390, 267)
+
+[node name="LevelPiece22" parent="." index="17" unique_id=915434866 instance=ExtResource("7_k8y0t")]
+position = Vector2(-536, 37)
+
+[node name="LevelPiece23" parent="." index="18" unique_id=244216750 instance=ExtResource("7_k8y0t")]
+position = Vector2(-613, -7)
+
+[node name="LevelPiece24" parent="." index="19" unique_id=1891759779 instance=ExtResource("7_k8y0t")]
+position = Vector2(-643, 38)
+
+[node name="LevelPiece25" parent="." index="20" unique_id=233184291 instance=ExtResource("7_k8y0t")]
+position = Vector2(-692, -39)
+
+[node name="LevelPiece14" parent="." index="21" unique_id=610440013 instance=ExtResource("7_k8y0t")]
+position = Vector2(-387, 101)
+
+[node name="LevelPiece15" parent="." index="22" unique_id=1719851614 instance=ExtResource("7_k8y0t")]
+position = Vector2(-457, 69)

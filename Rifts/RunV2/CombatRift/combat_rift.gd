@@ -9,6 +9,8 @@ signal rift_cleared
 
 ## The layout's own exit (Portal.tscn, Is Rift Portal on). Locked until the fight is cleared.
 @export var exit_portal: Portal
+@export_range(0,100,1,"suffix:%") var kills_required: float
+
 ## Where the "enemies left" counter sits, relative to the exit portal's position.
 @export var exit_counter_offset: Vector2 = Vector2(0, -48)
 @onready var loot_manager: LootManager = $LootManager
